@@ -1,0 +1,95 @@
+import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
+import { ICategoryArrow } from "../Interfaces/ICategoryArrow";
+import { ICategoryObject } from "../Interfaces/ICategoryObject";
+import { Performer } from "../Performer";
+import { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
+import { IMeasurements } from "../Measurements/Interfaces/IMeasurements";
+import { ITimeMeasurementConsumer } from "../Measurements/Interfaces/ITimeMeasurementConsumer";
+import { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
+import { IDataRuntime } from "./Interfaces/IDataRuntime";
+
+export class DetaRuntimeConsumer implements IDataRuntime
+{
+
+    performer: Performer = new Performer();
+    constructor(dataConsumer: IDataConsumer)
+    {
+        let nm: IMeasurements[] = [];
+        this.add(dataConsumer, nm);
+        for (let i = nm.length - 1; i >= 0; i--) {
+            this.measurements.push(nm[i]);
+        }
+        if (this.performer.implementsType(dataConsumer, "IMeasurements")) {
+            this.measurements.push(dataConsumer as unknown as IMeasurements);
+        }
+
+    }
+    updateRuntime(): void
+    {
+        let n = this.measurements.length;
+        for (let i = 0; i < n; i++)
+        {
+            this.measurements[i].updateMeasurements();
+        }
+    }
+    refreshRuntime(): void {
+        throw new OwnNotImplemented();
+    }
+    startRuntime(time: number): void {
+        throw new OwnNotImplemented();
+    }
+    setTimeProvider(timeProvider: ITimeMeasurementProvider): void {
+        let n = this.measurements.length;
+        for (let i = 0; i < n; i++) {
+            let m = this.measurements[i];
+            if (this.performer.implementsType(m, "ITimeMeasurementConsumer")) {
+                let tm: ITimeMeasurementConsumer = m as unknown as ITimeMeasurementConsumer;
+                tm.setTimeMeasurement(timeProvider)
+            }
+        }
+    }
+
+    getTimeProvider(): ITimeMeasurementProvider {
+        return this.timeProvider;
+    }
+    getRumtimeObjects(): ICategoryObject[] {
+        throw new OwnNotImplemented();
+    }
+    getRunimeArrows(): ICategoryArrow[] {
+        throw new OwnNotImplemented();
+    }
+
+
+    protected timeProvider !: ITimeMeasurementProvider;
+
+    protected measurements: IMeasurements[] = [];
+
+    add(dc: IDataConsumer, measurements: IMeasurements[]): void
+    {
+        var m = dc.getAllMeasurements();
+        var n = m.length;
+        if (n != 0)
+        {
+            for (let i = 0; i < n; i++)
+            {
+                let mea = m[i];
+                if (measurements.indexOf(mea) >= 0) {
+                    continue;
+                }
+                measurements.push(mea);
+                if (!this.performer.implementsType(mea, "IDataConsumer")) {
+                    continue;
+                }
+                let c: IDataConsumer = mea as unknown as IDataConsumer;
+                this.add(c, measurements);
+
+            }
+        }
+        else
+        {
+
+        }
+    }
+}
+
+

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\AssemblyService\AssemblyService.csproj" />
+		<ProjectReference Include="..\..\Diagram\Diagram.UI\Diagram.UI.csproj" />
+		<ProjectReference Include="..\..\Wpf\Wpf.Loader\Wpf.Loader.csproj" />
+		<ProjectReference Include="..\Abstract3DConverters\Abstract3DConverters.csproj" />
+	</ItemGroup>
+
+
+</Project>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Similation": {
+      "commandName": "Executable",
+      "executablePath": "C:\\AUsers\\1MySoft\\CSharp\\src\\Applications\\BP_Simulator\\BP_Simulator.Light\\BP_Simulator.Light\\bin\\Debug\\net9.0-windows\\BP_Simulator.Light.exe"
+    }
+  }
+}
