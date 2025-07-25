@@ -6,12 +6,12 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
-    <ApplicationIcon>bin\Debug\net9.0-windows\process.ico</ApplicationIcon>
+    <ApplicationIcon>process.ico</ApplicationIcon>
 
     <!--    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>-->
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\net9.0-windows\process.ico" />
+    <Content Include="process.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\3DConverters\Collada.Converters\Collada.Converters.csproj" />
@@ -307,5 +307,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\net9.0-windows\" />
   </ItemGroup>
 </Project>
