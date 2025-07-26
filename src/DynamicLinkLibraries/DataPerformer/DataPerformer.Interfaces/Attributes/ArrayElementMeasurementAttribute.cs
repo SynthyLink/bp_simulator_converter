@@ -7,5 +7,11 @@ namespace DataPerformer.Interfaces.Attributes
     /// </summary>
     public class ArrayElementMeasurementAttribute : Attribute
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public ArrayElementMeasurementAttribute() 
+        { 
+        }
     }
 }

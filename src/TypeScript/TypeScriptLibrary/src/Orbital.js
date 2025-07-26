@@ -6,6 +6,14 @@ const Desktop_1 = require("../Library/Desktop");
 const DataLink_1 = require("../Library/Measurements/DataLink");
 const Measurement_1 = require("../Library/Measurements/Measurement");
 const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaConsumer");
+class Orbital_CategoryObject_0_Get_2 {
+    constructor(o) {
+        this.obj = o;
+    }
+    get() {
+        return this.obj.get_2();
+    }
+}
 class Orbital_CategoryObject_0_Measurement_2 extends Measurement_1.Measurement {
     constructor(o, name, type) {
         super(name, type);

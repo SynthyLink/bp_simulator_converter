@@ -2,6 +2,7 @@
 using ErrorHandler;
 using FormulaEditor;
 using FormulaEditor.Interfaces;
+using System.CodeDom;
 
 namespace DataPerformer.Formula.TypeScript
 {
@@ -165,8 +166,9 @@ namespace DataPerformer.Formula.TypeScript
                 initializers = init;
                 return code;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
+                var ex = IncludedException.Get(exception);
                 ex.HandleException();
             }
             local = null;

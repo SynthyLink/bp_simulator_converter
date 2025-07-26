@@ -7,13 +7,13 @@ class AliasName {
         this.alias = alias;
         this.name = name;
     }
+    getAlias() {
+        return this.alias;
+    }
     getAliasNameValue() {
         return this.alias.getAliasValue(this.name);
     }
     setAliasNameValue(value) {
-    }
-    getAliasBase() {
-        return this.alias;
     }
     getNameOfAliasName() {
         return this.name;

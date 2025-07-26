@@ -17,7 +17,7 @@ export class PefrormerMeasuremets {
         var n = array.getMeasurementNames().length;
         var mea: IMeasurement[] = [];
         for (var i = 0; i < n; i++) {
-            mea.push(new ArrayMeasurement(array, i);
+            mea.push(new ArrayMeasurement(array, i));
         }
         return mea;
     }

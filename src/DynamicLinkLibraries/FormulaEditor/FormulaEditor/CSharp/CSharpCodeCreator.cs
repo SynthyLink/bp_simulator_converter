@@ -218,6 +218,7 @@ namespace FormulaEditor.CSharp
             l.Add(s);
             return l;
         }
+
         /// <summary>
         /// Creates Code from tree
         /// </summary>
@@ -227,7 +228,8 @@ namespace FormulaEditor.CSharp
         /// <param name="variables">Variables</param>
         /// <param name="initializers">Initializers</param>
         /// <returns>List of code</returns>
-        public override IList<string> CreateCode(object obj, ObjectFormulaTree tree, string ret, string[] parameters, out IList<string> variables, out IList<string> initializers)
+        public override IList<string> CreateCode(object obj, ObjectFormulaTree tree, 
+            string ret, string[] parameters, out IList<string> variables, out IList<string> initializers)
         {
             IList<string> l = base.CreateCode(obj, tree, ret, parameters, out variables, out initializers);
             if (l != null)

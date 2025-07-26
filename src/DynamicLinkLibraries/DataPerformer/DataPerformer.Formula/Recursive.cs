@@ -5,29 +5,31 @@ using BaseTypes.Interfaces;
 
 using CategoryTheory;
 
-using Diagram.UI;
-using Diagram.UI.Labels;
-using Diagram.UI.Interfaces;
-using Diagram.UI.Aliases;
-using Diagram.Interfaces;
-
-using FormulaEditor;
-using FormulaEditor.Symbols;
-using FormulaEditor.Interfaces;
-
+using DataPerformer.Formula.Interfaces;
 using DataPerformer.Interfaces;
+using DataPerformer.Interfaces.Attributes;
 using DataPerformer.Portable;
 
-using DataPerformer.Formula.Interfaces;
+using Diagram.Interfaces;
+using Diagram.UI;
+using Diagram.UI.Aliases;
+using Diagram.UI.Interfaces;
+using Diagram.UI.Labels;
+
 using ErrorHandler;
+
+using FormulaEditor;
+using FormulaEditor.Interfaces;
+using FormulaEditor.Symbols;
 
 using NamedTree;
 
 namespace DataPerformer.Formula
 {
-	/// <summary>
-	/// Recurrent object
-	/// </summary>
+    /// <summary>
+    /// Recurrent object
+    /// </summary>
+    [ArrayElementMeasurement]
 	public class Recursive : CategoryObject,  IDataConsumer, IMeasurements, IStarted, IRunning, IAlias,
 		ICheckCorrectness, IStep, IRuntimeUpdate, ITimeMeasurementConsumer, 
 		IVariableDetector, ITreeCollection,	ITimeVariable, IPostSetArrow

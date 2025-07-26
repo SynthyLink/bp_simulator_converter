@@ -195,7 +195,7 @@ namespace FormulaEditor
         {
             if (types.Length < 2)
             {
-                throw new ErrorHandler.OwnException("Incomplete fraction");
+                throw new OwnException("Incomplete fraction");
             }
             for (int i = 0; i < types.Length; i++)
             {

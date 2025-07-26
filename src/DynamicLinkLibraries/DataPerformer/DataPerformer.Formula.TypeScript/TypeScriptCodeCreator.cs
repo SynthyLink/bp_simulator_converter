@@ -1,12 +1,17 @@
-﻿using BaseTypes;
+﻿using System.CodeDom;
+using System.Text;
+
+using BaseTypes;
 using BaseTypes.Interfaces;
+
 using DataPerformer.Interfaces;
 using DataPerformer.Portable.Measurements;
+
+using ErrorHandler;
+
 using FormulaEditor;
 using FormulaEditor.CodeCreators;
 using FormulaEditor.Interfaces;
-using System.Diagnostics.Metrics;
-using System.Text;
 
 namespace DataPerformer.Formula.TypeScript
 {
@@ -143,8 +148,11 @@ namespace DataPerformer.Formula.TypeScript
 
         #region Overriden Members
 
-        private List<string>                                                                                                                                                                                                            CreateTSCode(object obj, ObjectFormulaTree tree, string ret, string[] parameters,  List<string> variables, List<string> initializers)
+        private List<string> CreateTSCode(object obj, ObjectFormulaTree tree, string ret, string[] parameters, 
+            out IList<string> variables, out IList<string> initializers)
         {
+            variables = new List<string>();
+            initializers = new List<string>();
             var num = int.Parse(ret.Substring(4));
             var op = tree.Operation;
             if (op is IMeasurementHolder mh)
@@ -169,9 +177,9 @@ namespace DataPerformer.Formula.TypeScript
                 {
                     "this." + anvn + " = new AliasName(this.alias, \"" + nam +"\");"
                 };
-                initializers.AddRange(init);
-                var vari  = new List<string> { anvn + " !: IAliasName;"};
-                variables.AddRange(vari);
+                (initializers as List<string>).AddRange(init);
+                var vari = new List<string> { anvn + " !: IAliasName;" };
+                (variables as List<string>).AddRange(vari);
             }
 
             string[] sep = separatorCreator[tree];
@@ -186,7 +194,7 @@ namespace DataPerformer.Formula.TypeScript
             {
                 sep[1] = num + sep[1];
             }
-            List<string> l = new List<string>();
+            var list = new List<string>();
             string tt = TypeCreator.GetType(tree.ReturnType);
             string st = "";
             if (!tt.Equals("any"))
@@ -195,7 +203,7 @@ namespace DataPerformer.Formula.TypeScript
             }
             variables = new List<string>();
             initializers = new List<string>();
-            string s = "this.variable"; 
+            string s = "this.variable";
             int n = sep.Length;
             int m = parameters.Length;
             for (int i = 0; i < n; i++)
@@ -206,20 +214,17 @@ namespace DataPerformer.Formula.TypeScript
                     s += "this." + parameters[i];
                 }
             }
-            l.Add(s);
-            l.Add("if (this.check(this.variable)) { this.success = false; return; } ");
-            l.Add("this." + ret + " = this.convert<" + tt + ">(this.variable);");
+            list.Add(s);
+            list.Add("if (this.check(this.variable)) { this.success = false; return; } ");
+            list.Add("this." + ret + " = this.convert<" + tt + ">(this.variable);");
             if (s.Contains("this.measurement"))
             {
-         //       variables.Add("measurement" + num + " != IMeasurement");
+                //       variables.Add("measurement" + num + " != IMeasurement");
             }
-            return l;
+            return list;
         }
 
 
-
-
- 
 
 
         /// <summary>
@@ -231,17 +236,15 @@ namespace DataPerformer.Formula.TypeScript
         /// <param name="variables">Variables</param>
         /// <param name="initializers">Initializers</param>
         /// <returns>List of code</returns>
-        public override IList<string> CreateCode(object obj, ObjectFormulaTree tree, string ret, string[] parameters, out IList<string> variables, out IList<string> initializers)
+        public override IList<string> CreateCode(object obj, ObjectFormulaTree tree,
+            string ret, string[] parameters, out IList<string> variables, out IList<string> initializers)
         {
-            variables = new List<string>();
-            initializers = new List<string>();
-            IList<string> l = CreateTSCode(obj, tree, ret, parameters,  variables as List<string>,  initializers as List<string>);
+            IList<string> l = CreateTSCode(obj, tree, ret, parameters, out variables, out initializers);
             if (l != null)
             {
                 return l;
             }
-            /*
-            l = CreateArraySingleCode(tree, ret, parameters,  variables, initializers);
+            l = CreateArraySingleCode(tree, ret, parameters, out variables, out initializers);
             if (l != null)
             {
                 return l;
@@ -261,9 +264,10 @@ namespace DataPerformer.Formula.TypeScript
             if (ret.Length > 0)
             {
                 return CreateTreeCode(tree, ret, parameters, out variables, out initializers);
-            }*/
+            }
             return null;
         }
+
 
 
 
@@ -364,38 +368,47 @@ namespace DataPerformer.Formula.TypeScript
         public static IList<string> CreateCode(object obj, ObjectFormulaTree[] trees, ICodeCreator creator, out ICodeCreator local,
              out IList<string> variables, out IList<string> initializers, out List<string> classes, string current)
         {
-            local = null;
-            IList<string> l = StaticCodeCreatorTypeScript.CreateCode(obj, trees, creator, out local,
-                out variables, out initializers, out classes, current);
-            ObjectFormulaTree[] lt = local.Trees;
-            foreach (ObjectFormulaTree tree in lt)
+            Exception ex;
+            try
             {
-                var s = "";
-                object ret = tree.ReturnType;
-                if (ret.IsEmpty())
+                local = null;
+                IList<string> l = StaticCodeCreatorTypeScript.CreateCode(obj, trees, creator, out local,
+                    out variables, out initializers, out classes, current);
+                ObjectFormulaTree[] lt = local.Trees;
+                foreach (ObjectFormulaTree tree in lt)
                 {
-                    continue;
-                }
-                var t = typeCreator.GetType(ret) + " ";
-                var id = local[tree];
-                string cv = creator.GetConstValue(tree);
-                string def = "";
-                if (cv == null)
-                {
-                    def = typeCreator.GetDefaultValue(ret) + "";
-                    if (def.Length > 0)
+                    var s = "";
+                    object ret = tree.ReturnType;
+                    if (ret.IsEmpty())
                     {
-                        s = id + " : " + t + " = " + def;
+                        continue;
                     }
+                    var t = typeCreator.GetType(ret) + " ";
+                    var id = local[tree];
+                    string cv = creator.GetConstValue(tree);
+                    string def = "";
+                    if (cv == null)
+                    {
+                        def = typeCreator.GetDefaultValue(ret) + "";
+                        if (def.Length > 0)
+                        {
+                            s = id + " : " + t + " = " + def;
+                        }
+                    }
+                    else
+                    {
+                        s = id + " : " + t + " = " + cv;
+                    }
+                    s += ";";
+                    variables.Add(s);
                 }
-                else
-                {
-                    s = id + " : " + t + " = " + cv;
-                }
-                s += ";";
-                variables.Add(s);
+                return l;
             }
-            return l;
+            catch (Exception e)
+            {
+                ex = IncludedException.Get(e);
+            }
+            throw ex;
         }
 
         private static string GuidClass
@@ -591,39 +604,47 @@ namespace DataPerformer.Formula.TypeScript
         /// <param name="initializers">Initializers</param>
         /// <returns>List of code strings</returns>
         protected IList<string> CreateArraySingleCode(ObjectFormulaTree tree, string ret, string[] parameters,
-            List<string> variables, List<string> initializers)
+           out IList<string> variables, out IList<string> initializers)
         {
-          //  variables = new List<string>();
-           // initializers = new List<string>();
-            IObjectOperation op = tree.Operation;
-            if (!(op is ArraySingleOperation))
+            variables = new List<string>();
+            initializers = new List<string>();
+            try
             {
-                return null;
+                IObjectOperation op = tree.Operation;
+                if (!(op is ArraySingleOperation))
+                {
+                    return null;
+                }
+                ArraySingleOperation ars = op as ArraySingleOperation;
+                string ops = (ars.Type == ArraySingleOperationType.Sum) ? " + " : " * ";
+                ObjectFormulaTree t = tree[0];
+                ArrayReturnType art = t.ReturnType as ArrayReturnType;
+                int n = art.Dimension[0];
+                string sp = "";
+                if (art.IsObjectType)
+                {
+                    sp = "(double)";
+                }
+                StringBuilder sb = new StringBuilder();
+                sb.Append(ret);
+                sb.Append(" = ");
+                string par = sp + parameters[0] + "[";
+                sb.Append(par + "0]");
+                par = ops + par;
+                for (int i = 1; i < n; i++)
+                {
+                    sb.Append(par);
+                    sb.Append(i);
+                    sb.Append("]");
+                }
+                sb.Append(";");
+                return new List<string> { { sb.ToString() } };
             }
-            ArraySingleOperation ars = op as ArraySingleOperation;
-            string ops = (ars.Type == ArraySingleOperationType.Sum) ? " + " : " * ";
-            ObjectFormulaTree t = tree[0];
-            ArrayReturnType art = t.ReturnType as ArrayReturnType;
-            int n = art.Dimension[0];
-            string sp = "";
-            if (art.IsObjectType)
+            catch (Exception ex)
             {
-                sp = "(double)";
+                ex.HandleException();
             }
-            StringBuilder sb = new StringBuilder();
-            sb.Append(ret);
-            sb.Append(" = ");
-            string par = sp + parameters[0] + "[";
-            sb.Append(par + "0]");
-            par = ops + par;
-            for (int i = 1; i < n; i++)
-            {
-                sb.Append(par);
-                sb.Append(i);
-                sb.Append("]");
-            }
-            sb.Append(";");
-            return new List<string> { { sb.ToString() } };
+            return null;
         }
 
 

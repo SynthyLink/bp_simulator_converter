@@ -15,12 +15,12 @@ namespace DataPerformer.Formula.TypeScript
         static ITreeCollectionCodeCreator treeCollectionCodeCreator = new TSTreeCollectionCodeCreator();
 
         static FormulaEditor.Performer formulaPerformer = new FormulaEditor.Performer();
-        
-
-        static Diagram.TypeScript.Performer performer = new ();
 
 
-   
+        static Diagram.TypeScript.Performer performer = new();
+
+
+
         #region Ctor
         internal TSCodeCreator()
         {
@@ -50,14 +50,53 @@ namespace DataPerformer.Formula.TypeScript
 
         static List<string> CreateRecursive(string preffix, object obj)
         {
-            List<string> l = new List<string>();
-            var s = performer.ClassString(preffix, "Recursive");
-            l.Add(s);
-            l.Add("{");
-            performer.AddObjectConstructor(l);
-            l.Add("\t}");
-            l.Add("}");
-            return l;
+            {
+                bool check = true;
+                var v = obj as Recursive;
+                var dpf = new DataPerformerFormula(v);
+                var mea = dpf.Output;
+                ITreeCollection tc = v;
+                ITreeCollectionCodeCreator treeCollectionCodeCreator = new TSTreeCollectionCodeCreator();
+                var lt = treeCollectionCodeCreator.CreateCode(v, tc.Trees, preffix, "internal ",
+                check);
+                var add = treeCollectionCodeCreator as IAdditionalClassCodeCreator;
+                List<string> l = new List<string>();
+                var classes = add.AdditionalCode;
+                if (classes.Count > 0)
+                {
+                    l.Add("");
+                    l.Add("");
+                    formulaPerformer.Add(l, classes, 0);
+                    l.Add("");
+                    l.Add("");
+                }
+                var cs = performer.ClassString(preffix, "Recursive");
+                l.Add(cs);
+                l.Add("{");
+                performer.AddObjectConstructor(l);
+                var la = performer.CreateTSAliasList("map", v);
+                formulaPerformer.Add(l, la, 2);
+                l.Add("\t\tthis.performer.setAliasMap(map, this);");
+                bool beg = true;
+              ////  var feed = v.Feedback;
+              //  la = performer.CreateMap<int>("feed", feed, "number");
+              //  formulaPerformer.Add(l, la, 2);
+              //  l.Add("\t\tthis.performer.copyMap(feed, this.feedback);");
+
+      //          int dim = v.Dimension;
+       //         var args = performer.CreateList("this.arguments", v.Arguments);
+        //        formulaPerformer.Add(l, args, 2);
+                //     l.Add("\t\tthis.performer.copyArray<string>(args, this.arguments);");
+        //        la = performer.CreateMap<int>("ops", v.OperationNames, "number");
+              //  formulaPerformer.Add(l, la, 2);
+                l.Add("\t\tthis.performer.copyMap(ops, this.operationNames);");
+                l.Add("\t}");
+                l.Add("");
+                formulaPerformer.Add(l, lt, 1);
+                AddPost(l);
+                l.Add("}");
+                return l;
+            }
         }
 
         static void AddPost(List<string> l)
@@ -106,7 +145,7 @@ namespace DataPerformer.Formula.TypeScript
             int dim = v.Dimension;
             var args = performer.CreateList("this.arguments", v.Arguments);
             formulaPerformer.Add(l, args, 2);
-       //     l.Add("\t\tthis.performer.copyArray<string>(args, this.arguments);");
+            //     l.Add("\t\tthis.performer.copyArray<string>(args, this.arguments);");
             la = performer.CreateMap<int>("ops", v.OperationNames, "number");
             formulaPerformer.Add(l, la, 2);
             l.Add("\t\tthis.performer.copyMap(ops, this.operationNames);");

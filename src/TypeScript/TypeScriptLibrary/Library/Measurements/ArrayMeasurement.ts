@@ -5,7 +5,7 @@ export class ArrayMeasurement implements IMeasurement {
     array !: [];
     name: string = "";
     type !: any;
-    n: number 0;
+    n: number = 0;
 
     constructor(arrElement: IArrayElementMeasurement, n: number) {
         this.n = n;
