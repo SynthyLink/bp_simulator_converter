@@ -7,6 +7,9 @@ class Recursive extends DataConsumerMeasurements_1.DataConsumerMeasurements {
     constructor(desktop, name) {
         super(desktop, name);
         this.inputs = [];
+        this.feedback = new Map();
+        this.arguments = [];
+        this.operationNames = new Map();
         this.typeName = "Recursive";
         this.types.push("ISarted");
         this.types.push("IPostSetArrow");

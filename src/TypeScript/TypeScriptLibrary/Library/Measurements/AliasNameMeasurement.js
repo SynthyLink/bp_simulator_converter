@@ -7,11 +7,11 @@ class AliasNameMeasurement {
         this.alias = alias;
         this.type = alias.getAliasType(name);
     }
-    getName() {
+    getMeasurementName() {
         return this.name;
     }
-    getType() {
-        return this.getType();
+    getMeasurementType() {
+        return this.type;
     }
     getMeasurementValue() {
         return this.alias.getAliasValue(this.name);

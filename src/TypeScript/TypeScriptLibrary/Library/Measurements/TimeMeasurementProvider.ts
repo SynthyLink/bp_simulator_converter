@@ -2,6 +2,12 @@ import { IMeasurement } from "./Interfaces/IMeasurement";
 import { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProvider";
 
 export class TimeMeasurementProvider implements ITimeMeasurementProvider, IMeasurement {
+    getMeasurementName(): string {
+        return "Time";;
+    }
+    getMeasurementType() {
+        return 0;
+    }
     getMeasurementValue() {
         return this.time;
     }
@@ -16,12 +22,6 @@ export class TimeMeasurementProvider implements ITimeMeasurementProvider, IMeasu
         return 0;
     }
     setStep(time: number): void {
-    }
-    getName(): string {
-        return "Time";
-    }
-    getType() {
-        return 0;
     }
 
     getTime() : any

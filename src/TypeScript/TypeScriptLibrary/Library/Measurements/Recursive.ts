@@ -6,8 +6,15 @@ import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import { IStarted } from "./Interfaces/IStarted";
 
 
-export class Recursive extends DataConsumerMeasurements implements IStarted, IPostSetArrow {
+export class Recursive extends DataConsumerMeasurements implements IStarted, IPostSetArrow
+{
     protected inputs: IMeasurements[] = [];
+
+    protected feedback: Map<number, string> = new Map();
+
+    protected arguments: string[] = [];
+
+    protected operationNames: Map<number, string> = new Map();
 
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name);

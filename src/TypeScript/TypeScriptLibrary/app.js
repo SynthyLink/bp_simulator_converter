@@ -33,9 +33,8 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-const Performer_1 = require("./Library/Performer");
-const OrbitAct_1 = require("./OrbitAct");
-const Orbital_1 = require("./src/Orbital");
+// { OrbitAct } from "./OrbitAct";
+//import { Orbital } from "./src/Orbital";
 const readline = __importStar(require("readline"));
 actT();
 const rl = readline.createInterface({
@@ -57,13 +56,14 @@ rl.question('Is this example useful? [y/n] ', (answer) => {
 });
 function load() {
     try {
-        let orb = new Orbital_1.Orbital();
-        let objs = orb.getObjects();
-        let p = new Performer_1.Performer();
-        var al = p.select(objs, "IAlias");
-        var ln = p.select(objs, "DataLink");
-        var dl = p.select(objs, "ICategoryArrow");
-        let i = 0;
+        /*
+                let orb = new Orbital();
+                let objs = orb.getObjects();
+                let p = new Performer();
+                var al = p.select<ICategoryObject>(objs, "IAlias");
+                var ln = p.select<ICategoryArrow>(objs, "DataLink");
+                var dl = p.select<DataLink>(objs, "ICategoryArrow");
+                let i = 0;*/
     }
     catch (e) {
         let ii = 0;
@@ -72,8 +72,8 @@ function load() {
 }
 function actT() {
     try {
-        var o = new OrbitAct_1.OrbitAct();
-        o.test();
+        //       var o = new OrbitAct();
+        //      o.test();
     }
     catch (e) {
         var i = 0;

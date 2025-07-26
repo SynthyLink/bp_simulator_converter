@@ -9,13 +9,14 @@ export class AliasNameMeasurement implements IMeasurement
         this.alias = alias;
         this.type = alias.getAliasType(name);
     }
-
-    getName(): string {
+    getMeasurementName(): string {
         return this.name;
     }
-    getType() : any {
-        return this.getType();
+    getMeasurementType() {
+        return this.type;
     }
+
+   
     getMeasurementValue() : any {
         return this.alias.getAliasValue(this.name)
     }

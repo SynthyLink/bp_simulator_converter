@@ -3,8 +3,8 @@ import { ICategoryArrow } from "./Library/Interfaces/ICategoryArrow";
 import { ICategoryObject } from "./Library/Interfaces/ICategoryObject";
 import { DataLink } from "./Library/Measurements/DataLink";
 import { Performer } from "./Library/Performer";
-import { OrbitAct } from "./OrbitAct";
-import { Orbital } from "./src/Orbital";
+// { OrbitAct } from "./OrbitAct";
+//import { Orbital } from "./src/Orbital";
 import * as readline from 'readline';
 actT();
 
@@ -28,14 +28,14 @@ rl.question('Is this example useful? [y/n] ', (answer) => {
 });
 function load() {
     try {
-
+/*
         let orb = new Orbital();
         let objs = orb.getObjects();
         let p = new Performer();
         var al = p.select<ICategoryObject>(objs, "IAlias");
         var ln = p.select<ICategoryArrow>(objs, "DataLink");
         var dl = p.select<DataLink>(objs, "ICategoryArrow");
-        let i = 0;
+        let i = 0;*/
     }
     catch (e: any) {
         let ii = 0;
@@ -48,8 +48,8 @@ function load() {
 
 function actT() {
     try {
-        var o = new OrbitAct();
-        o.test();
+ //       var o = new OrbitAct();
+  //      o.test();
     }
     catch (e: any)
     {

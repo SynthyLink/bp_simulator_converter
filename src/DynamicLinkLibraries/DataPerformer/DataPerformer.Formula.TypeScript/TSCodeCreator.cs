@@ -89,7 +89,7 @@ namespace DataPerformer.Formula.TypeScript
                 //     l.Add("\t\tthis.performer.copyArray<string>(args, this.arguments);");
         //        la = performer.CreateMap<int>("ops", v.OperationNames, "number");
               //  formulaPerformer.Add(l, la, 2);
-                l.Add("\t\tthis.performer.copyMap(ops, this.operationNames);");
+               // l.Add("\t\tthis.performer.copyMap(ops, this.operationNames);");
                 l.Add("\t}");
                 l.Add("");
                 formulaPerformer.Add(l, lt, 1);
@@ -148,7 +148,7 @@ namespace DataPerformer.Formula.TypeScript
             //     l.Add("\t\tthis.performer.copyArray<string>(args, this.arguments);");
             la = performer.CreateMap<int>("ops", v.OperationNames, "number");
             formulaPerformer.Add(l, la, 2);
-            l.Add("\t\tthis.performer.copyMap(ops, this.operationNames);");
+          //  l.Add("\t\tthis.performer.copyMap(ops, this.operationNames);");
             l.Add("\t}");
             l.Add("");
             formulaPerformer.Add(l, lt, 1);

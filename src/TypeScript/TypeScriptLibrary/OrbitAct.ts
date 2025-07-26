@@ -3,8 +3,8 @@ import { IDataConsumer } from "./Library/Measurements/Interfaces/IDataConsumer";
 import { PefrormerMeasuremets } from "./Library/Measurements/PefrormerMeasuremets";
 import { DetaRuntimeConsumer } from "./Library/Runtime/DetaRuntimeConsumer";
 import { IDataRuntime } from "./Library/Runtime/Interfaces/IDataRuntime";
-import { Orbital } from "./src/Orbital";
-
+//import { Orbital } from "./src/Orbital";
+/*
 export class OrbitAct extends Orbital implements IAction {
     dc !: IDataConsumer;
     constructor() {
@@ -24,4 +24,4 @@ export class OrbitAct extends Orbital implements IAction {
         var p: PefrormerMeasuremets = new PefrormerMeasuremets();
         p.peformFixedStepCalculation(runtime, 0, 1, 10, this);
     }
-}
+}*/

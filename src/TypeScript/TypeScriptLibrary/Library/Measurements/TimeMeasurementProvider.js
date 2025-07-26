@@ -5,6 +5,13 @@ class TimeMeasurementProvider {
     constructor() {
         this.time = 0;
     }
+    getMeasurementName() {
+        return "Time";
+        ;
+    }
+    getMeasurementType() {
+        return 0;
+    }
     getMeasurementValue() {
         return this.time;
     }
@@ -18,12 +25,6 @@ class TimeMeasurementProvider {
         return 0;
     }
     setStep(time) {
-    }
-    getName() {
-        return "Time";
-    }
-    getType() {
-        return 0;
     }
     getTime() {
         return this.time;

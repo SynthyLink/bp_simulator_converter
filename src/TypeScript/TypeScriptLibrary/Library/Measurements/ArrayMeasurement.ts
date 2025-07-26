@@ -13,13 +13,15 @@ export class ArrayMeasurement implements IMeasurement {
         this.type = arrElement.getMeasurementTypes()[n];
         this.array = arrElement.getMeasurementValues();
     }
-    getName(): string {
+
+    getMeasurementName(): string {
         return this.name;
     }
-    getType() {
+    getMeasurementType() : any {
         return this.type;
     }
-    getMeasurementValue() {
+    getMeasurementValue() : any {
         return this.array[this.n];
     }
 }
+

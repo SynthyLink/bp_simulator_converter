@@ -10,10 +10,10 @@ class ArrayMeasurement {
         this.type = arrElement.getMeasurementTypes()[n];
         this.array = arrElement.getMeasurementValues();
     }
-    getName() {
+    getMeasurementName() {
         return this.name;
     }
-    getType() {
+    getMeasurementType() {
         return this.type;
     }
     getMeasurementValue() {
