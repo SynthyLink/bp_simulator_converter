@@ -86,7 +86,7 @@ namespace DataPerformer.Formula.TypeScript
                 }
                 foreach (var k in output)
                 {
-                    ll.Add("this.setAliasValue(\"" + k.Key + "\", this.get_" + k.Value.Item2 + "());");
+                    ll.Add("\this.setAliasValue(\"" + k.Key + "\", this.get_" + k.Value.Item2 + "());");
                 }
                 ll.Add("}");
                 l.AddRange(ll);

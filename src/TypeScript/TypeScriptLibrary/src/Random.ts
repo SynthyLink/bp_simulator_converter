@@ -7,6 +7,7 @@ import { AliasNameMeasurement } from "../Library/Measurements/AliasNameMeasureme
 import { DataConsumer } from "../Library/Measurements/DataConsumer";
 import { DataLink } from "../Library/Measurements/DataLink";
 import { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement";
+import { Measurement } from "../Library/Measurements/Measurement";
 import { RandomGenerator } from "../Library/Measurements/RandomGenerator";
 import { Recursive } from "../Library/Measurements/Recursive";
 import { VectorFormulaConsumer } from "../Library/Measurements/VectorFormulaConsumer";
@@ -26,6 +27,22 @@ class Random_CategoryObject_1 extends RandomGenerator
 		super(desktop, name);
 	}
 }
+
+
+
+class Random_CategoryObject_2_Measurement_11 extends Measurement {
+	obj !: Random_CategoryObject_2;
+	constructor(o:  Random_CategoryObject_2, name: string, type: any) {
+		super(name, type);
+		this.obj = o;
+	}
+
+	getMeasurementValue() {
+		return this.obj.get_11();
+	}
+}
+
+
 
 class Random_CategoryObject_2 extends VectorFormulaConsumer
 {
@@ -79,7 +96,7 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer
 	
 	init() : void
 	{
-		this.addMeasurement(new AliasNameMeasurement(this, "Formula_1"));
+		this.addMeasurement(new Random_CategoryObject_2_Measurement_11(this, "Formula_1" ,0));
 		this.measurement0 = this.dataConsumer.getAllMeasurements()[0].getMeasurement(0);
 		this.measurement3 = this.dataConsumer.getAllMeasurements()[1].getMeasurement(0);
 		this.aliasName10 = new AliasName(this.alias, "f");
@@ -160,9 +177,6 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer
 		return this.success ? this.var_11 : undefined;
 	}
 	
-postSetArrow() : void {
-	this.init();
-}
 }
 
 class Random_CategoryObject_3 extends Recursive
@@ -260,12 +274,9 @@ class Random_CategoryObject_3 extends Recursive
 		return this.success ? this.var_6 : undefined;
 	}
 	save() : void {
-	this.setAliasValue("a", this.get_0());
+		this.setAliasValue("a", this.get_0());
 	}
 	
-postSetArrow() : void {
-	this.init();
-}
 }
 
 class Random_CategoryObject_4 extends DataConsumer

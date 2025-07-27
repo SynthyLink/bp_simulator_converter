@@ -1,4 +1,3 @@
-import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
 import { IDesktop } from "../Interfaces/IDesktop";
 import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import { DataConsumerMeasurements } from "./DataConsumerMeasurements";
@@ -26,13 +25,13 @@ export class VectorFormulaConsumer extends DataConsumerMeasurements implements I
     calculateTree(): void {
     }
 
+    init(): void {
+
+    }
 
 
     postSetArrow(): void {
-        try {
-            throw new OwnNotImplemented();
-        }
-        catch (e: any) { }
+        this.init();
     }
 
 

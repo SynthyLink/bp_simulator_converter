@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Recursive = void 0;
-const OwnNotImplemented_1 = require("../ErrorHandler/OwnNotImplemented");
 const DataConsumerMeasurements_1 = require("./DataConsumerMeasurements");
 class Recursive extends DataConsumerMeasurements_1.DataConsumerMeasurements {
     constructor(desktop, name) {
@@ -9,6 +8,7 @@ class Recursive extends DataConsumerMeasurements_1.DataConsumerMeasurements {
         this.inputs = [];
         this.feedback = new Map();
         this.arguments = [];
+        this.initial = new Map();
         this.operationNames = new Map();
         this.typeName = "Recursive";
         this.types.push("ISarted");
@@ -17,10 +17,18 @@ class Recursive extends DataConsumerMeasurements_1.DataConsumerMeasurements {
         this.alias = this;
     }
     startedStart(start) {
-        throw new OwnNotImplemented_1.OwnNotImplemented();
+        var keys = this.initial.keys();
+        for (var key of keys) {
+            this.setAliasValue(key, this.initial.get(key));
+        }
+    }
+    setIniitial() {
+        var names = this.getAliasNames();
+        for (var name of names) {
+            this.initial.set(name, this.getAliasValue(name));
+        }
     }
     postSetArrow() {
-        throw new OwnNotImplemented_1.OwnNotImplemented();
     }
     getAllMeasurements() {
         return this.inputs;

@@ -41,8 +41,8 @@ class Orbital_CategoryObject_0 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["b", 1 ],
-			["a", 5 ]
+			["a", 5 ],
+			["b", 1 ]
 		]);
 		this.performer.setAliasMap(map, this);
 		let feed = new Map<number, string>(
@@ -153,9 +153,6 @@ class Orbital_CategoryObject_0 extends VectorFormulaConsumer
 		return this.success ? this.var_9 : undefined;
 	}
 	
-postSetArrow() : void {
-	this.init();
-}
 }
 
 
@@ -205,8 +202,8 @@ class Orbital_CategoryObject_1 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["b", 8 ],
-			["a", 7 ]
+			["a", 7 ],
+			["b", 8 ]
 		]);
 		this.performer.setAliasMap(map, this);
 		let feed = new Map<number, string>(
@@ -304,9 +301,6 @@ class Orbital_CategoryObject_1 extends VectorFormulaConsumer
 		return this.success ? this.var_7 : undefined;
 	}
 	
-postSetArrow() : void {
-	this.init();
-}
 }
 
 class Orbital_CategoryArrow_0 extends DataLink

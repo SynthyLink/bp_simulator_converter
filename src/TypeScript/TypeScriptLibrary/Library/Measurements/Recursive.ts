@@ -1,4 +1,4 @@
-import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
+
 import { IDesktop } from "../Interfaces/IDesktop";
 import { DataConsumerMeasurements } from "./DataConsumerMeasurements";
 import { IMeasurements } from "./Interfaces/IMeasurements";
@@ -30,6 +30,7 @@ export class Recursive extends DataConsumerMeasurements implements IStarted, IPo
         this.alias = this;
 
     }
+
     startedStart(start: number): void {
         var keys = this.initial.keys();
         for (var key of keys) {
@@ -37,14 +38,21 @@ export class Recursive extends DataConsumerMeasurements implements IStarted, IPo
         }
     }
 
-    void Set Inial
+    setIniitial(): void {
+        var names = this.getAliasNames();
+        for (var name of names) {
+            this.initial.set(name, this.getAliasValue(name));
+        }
+    }
+
+   
     postSetArrow(): void {
-        
     }
 
     getAllMeasurements(): IMeasurements[] {
         return this.inputs;
     }
+
     addMeasurements(item: IMeasurements): void {
         this.inputs.push(item);
     }
@@ -65,7 +73,4 @@ export class Recursive extends DataConsumerMeasurements implements IStarted, IPo
         this.calculateTree();
         this.save();
     }
-
-    
-
 }

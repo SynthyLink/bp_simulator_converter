@@ -38,8 +38,8 @@ class Orbital_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaCons
         this.var_8 = 0;
         this.var_9 = 0;
         let map = new Map([
-            ["b", 1],
-            ["a", 5]
+            ["a", 5],
+            ["b", 1]
         ]);
         this.performer.setAliasMap(map, this);
         let feed = new Map([]);
@@ -130,9 +130,6 @@ class Orbital_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaCons
     get_9() {
         return this.success ? this.var_9 : undefined;
     }
-    postSetArrow() {
-        this.init();
-    }
 }
 class Orbital_CategoryObject_1_Measurement_2 extends Measurement_1.Measurement {
     constructor(o, name, type) {
@@ -173,8 +170,8 @@ class Orbital_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormulaCons
         this.var_6 = 0;
         this.var_7 = 0;
         let map = new Map([
-            ["b", 8],
-            ["a", 7]
+            ["a", 7],
+            ["b", 8]
         ]);
         this.performer.setAliasMap(map, this);
         let feed = new Map([]);
@@ -253,9 +250,6 @@ class Orbital_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormulaCons
     }
     get_7() {
         return this.success ? this.var_7 : undefined;
-    }
-    postSetArrow() {
-        this.init();
     }
 }
 class Orbital_CategoryArrow_0 extends DataLink_1.DataLink {

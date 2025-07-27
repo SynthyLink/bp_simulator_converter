@@ -21,4 +21,6 @@ export interface IDesktop
 
     setCheck(check: Check): void;
 
+    getCategoryObject(name: string): ICategoryObject;
+
 }

@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VectorFormulaConsumer = void 0;
-const OwnNotImplemented_1 = require("../ErrorHandler/OwnNotImplemented");
 const DataConsumerMeasurements_1 = require("./DataConsumerMeasurements");
 class VectorFormulaConsumer extends DataConsumerMeasurements_1.DataConsumerMeasurements {
     constructor(desktop, name) {
@@ -18,11 +17,10 @@ class VectorFormulaConsumer extends DataConsumerMeasurements_1.DataConsumerMeasu
     }
     calculateTree() {
     }
+    init() {
+    }
     postSetArrow() {
-        try {
-            throw new OwnNotImplemented_1.OwnNotImplemented();
-        }
-        catch (e) { }
+        this.init();
     }
 }
 exports.VectorFormulaConsumer = VectorFormulaConsumer;

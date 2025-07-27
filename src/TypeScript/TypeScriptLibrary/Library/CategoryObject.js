@@ -16,6 +16,9 @@ class CategoryObject {
         this.types.push("ICategoryObject");
         this.types.push("CategoryObject");
     }
+    getName() {
+        return this.name;
+    }
     getClassName() {
         return this.typeName;
     }
@@ -34,7 +37,7 @@ class CategoryObject {
     setObject(obj) {
         this.obj = obj;
     }
-    getName() {
+    getCategoryObjectName() {
         return this.name;
     }
     check(x) {

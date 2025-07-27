@@ -110,7 +110,7 @@ namespace DataPerformer.Formula.TypeScript
              //           var s = GetMeasurementName(current, item.Value.Item1);
                         //       init.Add("this.addMeasurement(new Measurement(" + mname + ", " + mt + ", " + mf + "));");
                         init.Add("this.addMeasurement(new AliasNameMeasurement(this, " + mname + "));");
-                        var lc = GetMeasurement(current, item.Value.Item1);
+                    //    var lc = GetMeasurement(current, item.Value.Item1);
  
                     }
                 }
@@ -118,13 +118,15 @@ namespace DataPerformer.Formula.TypeScript
                 {
                     foreach (var item in Output)
                     {
-                        var mname = item.Key;
+
+                        var mname = "\"" + item.Key + "\"";
                         var mt = item.Value.Item2 + "";
                         var mf = "this.get_" + item.Value.Item1;
                         var s = GetMeasurementName(current, item.Value.Item1);
                         //       init.Add("this.addMeasurement(new Measurement(" + mname + ", " + mt + ", " + mf + "));");
-                        init.Add("this.addMeasurement(new AliasNameMeasurement(this, \"" + mname + "\"));");
-  
+                        init.Add("this.addMeasurement(new " + s + "(this, " + mname + " ," + item.Value.Item2 + "));");
+                        var lc = GetMeasurement(current, item.Value.Item1);
+                        classes.AddRange(lc);
                     }
 
                 }

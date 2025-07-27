@@ -71,7 +71,7 @@ export class Performer
             return t as unknown as S; // Force the type assertion (VERY UNSAFE)
         }
 
-        if (typeof t === "boolean" && (null as any as S) instanceof Boolean) {  //VERY LIMITED AND UNSAFE EXAMPLE.
+        if (typeof t === "boolean") {  //VERY LIMITED AND UNSAFE EXAMPLE.
             return t as any as S; // Force the type assertion (VERY UNSAFE)
         }
 

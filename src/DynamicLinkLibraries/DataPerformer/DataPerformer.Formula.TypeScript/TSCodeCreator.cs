@@ -103,11 +103,11 @@ namespace DataPerformer.Formula.TypeScript
 
         static void AddPost(List<string> l)
         {
-            l.Add("postSetArrow() : void {");
+          /*  l.Add("postSetArrow() : void {");
             l.Add("\tthis.init();");
             
             l.Add("}");
-
+          */
         }
 
 

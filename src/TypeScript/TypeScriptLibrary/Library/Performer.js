@@ -52,7 +52,7 @@ class Performer {
         if (typeof t === "number") { // } && (t as unknown as S) instanceof Number) {  //VERY LIMITED AND UNSAFE EXAMPLE.
             return t; // Force the type assertion (VERY UNSAFE)
         }
-        if (typeof t === "boolean" && null instanceof Boolean) { //VERY LIMITED AND UNSAFE EXAMPLE.
+        if (typeof t === "boolean") { //VERY LIMITED AND UNSAFE EXAMPLE.
             return t; // Force the type assertion (VERY UNSAFE)
         }
         //This is better, but assumes S is a string or number

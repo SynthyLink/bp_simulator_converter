@@ -47,15 +47,19 @@ export class DetaRuntimeConsumer implements IDataRuntime {
     getStarted(): IStarted[] {
         return this.started;
     }
-    updateRuntime(): void {
+    updateRuntime(): void
+    {
         let n = this.measurements.length;
-        for (let i = 0; i < n; i++) {
+        for (let i = 0; i < n; i++)
+        {
             this.measurements[i].updateMeasurements();
         }
     }
+
     refreshRuntime(): void {
         throw new OwnNotImplemented();
     }
+
     startRuntime(time: number): void {
         for (let st of this.started) {
             st.startedStart(time);

@@ -6,8 +6,9 @@ import { Performer } from "./Library/Performer";
 import { OrbitAct } from "./OrbitAct";
 //import { Orbital } from "./src/Orbital";
 import * as readline from 'readline';
-actT();
-
+import { RandomAct } from "./RandomAcr";
+//actOrbit();
+actRandom();
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -26,6 +27,7 @@ rl.question('Is this example useful? [y/n] ', (answer) => {
     }
     rl.close();
 });
+
 function load() {
     try {
 /*
@@ -44,9 +46,31 @@ function load() {
     }
 }
 
+function actRandom() {
+    try {
+        var o = new RandomAct();
+        o.test();
+    }
+    catch (e: any) {
+        console.log(e);
+        rl.question('Is this example useful? [y/n] ', (answer) => {
+            switch (answer.toLowerCase()) {
+                case 'y':
+                    console.log('Super!');
+                    break;
+                case 'n':
+                    console.log('Sorry! :(');
+                    break;
+                default:
+                    console.log('Invalid answer!');
+            }
+            rl.close();
+        });
+    }
 
+}
 
-function actT() {
+function actOrbit() {
     try {
         var o = new OrbitAct();
         o.test();

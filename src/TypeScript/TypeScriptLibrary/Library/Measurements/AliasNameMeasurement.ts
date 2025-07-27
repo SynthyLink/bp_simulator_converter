@@ -1,5 +1,4 @@
 import { IAlias } from "../Interfaces/IAlias";
-import { IAliasName } from "../Interfaces/IAliasName";
 import { IMeasurement } from "./Interfaces/IMeasurement";
 
 export class AliasNameMeasurement implements IMeasurement

@@ -32,6 +32,9 @@ export class CategoryObject implements ICategoryObject, IObject
         this.types.push("ICategoryObject");
         this.types.push("CategoryObject");
     }
+    getName(): string {
+        return this.name;
+    }
 
     getClassName(): string {
         return this.typeName;
@@ -54,7 +57,8 @@ export class CategoryObject implements ICategoryObject, IObject
     setObject(obj: Object): void {
         this.obj = obj;
     }
-    getName(): string {
+
+    getCategoryObjectName(): string {
         return this.name;
     }
 

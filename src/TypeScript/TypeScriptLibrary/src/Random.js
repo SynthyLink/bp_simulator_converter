@@ -6,6 +6,7 @@ const Desktop_1 = require("../Library/Desktop");
 const AliasNameMeasurement_1 = require("../Library/Measurements/AliasNameMeasurement");
 const DataConsumer_1 = require("../Library/Measurements/DataConsumer");
 const DataLink_1 = require("../Library/Measurements/DataLink");
+const Measurement_1 = require("../Library/Measurements/Measurement");
 const RandomGenerator_1 = require("../Library/Measurements/RandomGenerator");
 const Recursive_1 = require("../Library/Measurements/Recursive");
 const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaConsumer");
@@ -17,6 +18,15 @@ class Random_CategoryObject_0 extends RandomGenerator_1.RandomGenerator {
 class Random_CategoryObject_1 extends RandomGenerator_1.RandomGenerator {
     constructor(desktop, name) {
         super(desktop, name);
+    }
+}
+class Random_CategoryObject_2_Measurement_11 extends Measurement_1.Measurement {
+    constructor(o, name, type) {
+        super(name, type);
+        this.obj = o;
+    }
+    getMeasurementValue() {
+        return this.obj.get_11();
     }
 }
 class Random_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
@@ -96,7 +106,7 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaConsu
         this.var_11 = this.convert(this.variable);
     }
     init() {
-        this.addMeasurement(new AliasNameMeasurement_1.AliasNameMeasurement(this, "Formula_1"));
+        this.addMeasurement(new Random_CategoryObject_2_Measurement_11(this, "Formula_1", 0));
         this.measurement0 = this.dataConsumer.getAllMeasurements()[0].getMeasurement(0);
         this.measurement3 = this.dataConsumer.getAllMeasurements()[1].getMeasurement(0);
         this.aliasName10 = new AliasName_1.AliasName(this.alias, "f");
@@ -136,9 +146,6 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaConsu
     }
     get_11() {
         return this.success ? this.var_11 : undefined;
-    }
-    postSetArrow() {
-        this.init();
     }
 }
 class Random_CategoryObject_3 extends Recursive_1.Recursive {
@@ -233,9 +240,6 @@ class Random_CategoryObject_3 extends Recursive_1.Recursive {
     }
     save() {
         this.setAliasValue("a", this.get_0());
-    }
-    postSetArrow() {
-        this.init();
     }
 }
 class Random_CategoryObject_4 extends DataConsumer_1.DataConsumer {

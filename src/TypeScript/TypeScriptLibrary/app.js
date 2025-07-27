@@ -36,7 +36,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const OrbitAct_1 = require("./OrbitAct");
 //import { Orbital } from "./src/Orbital";
 const readline = __importStar(require("readline"));
-actT();
+const RandomAcr_1 = require("./RandomAcr");
+//actOrbit();
+actRandom();
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -70,7 +72,29 @@ function load() {
         ii++;
     }
 }
-function actT() {
+function actRandom() {
+    try {
+        var o = new RandomAcr_1.RandomAct();
+        o.test();
+    }
+    catch (e) {
+        console.log(e);
+        rl.question('Is this example useful? [y/n] ', (answer) => {
+            switch (answer.toLowerCase()) {
+                case 'y':
+                    console.log('Super!');
+                    break;
+                case 'n':
+                    console.log('Sorry! :(');
+                    break;
+                default:
+                    console.log('Invalid answer!');
+            }
+            rl.close();
+        });
+    }
+}
+function actOrbit() {
     try {
         var o = new OrbitAct_1.OrbitAct();
         o.test();
