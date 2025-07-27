@@ -1,17 +1,15 @@
-﻿using System.CodeDom;
-using System.Text;
-
-using BaseTypes;
+﻿using BaseTypes;
 using BaseTypes.Interfaces;
-
 using DataPerformer.Interfaces;
+using DataPerformer.Interfaces.Attributes;
 using DataPerformer.Portable.Measurements;
-
+using Diagram.Interfaces;
 using ErrorHandler;
-
 using FormulaEditor;
 using FormulaEditor.CodeCreators;
 using FormulaEditor.Interfaces;
+using System.CodeDom;
+using System.Text;
 
 namespace DataPerformer.Formula.TypeScript
 {
@@ -19,6 +17,9 @@ namespace DataPerformer.Formula.TypeScript
     {
         #region Fields
 
+        static DataPerformer.Interfaces.Performer performer = new();
+
+   
         DataPerformerFormula formula = new(null);
 
         private object obj;
@@ -148,7 +149,7 @@ namespace DataPerformer.Formula.TypeScript
 
         #region Overriden Members
 
-        private List<string> CreateTSCode(object obj, ObjectFormulaTree tree, string ret, string[] parameters, 
+        private List<string> CreateTSCode(object obj, ObjectFormulaTree tree, string ret, string[] parameters,
             out IList<string> variables, out IList<string> initializers)
         {
             variables = new List<string>();
@@ -181,7 +182,21 @@ namespace DataPerformer.Formula.TypeScript
                 var vari = new List<string> { anvn + " !: IAliasName;" };
                 (variables as List<string>).AddRange(vari);
             }
-
+            else if (op is IAliasNameHolder anh)
+            {
+                var an = anh.AliasName;
+                var nam = an.Name;
+                var anvn = "aliasName" + num;
+                var lan = new List<string>();
+                lan.Add("this.variable = " + anvn + ".getAliasNameValue()");
+                var init = new List<string>()
+                {
+                    "this." + anvn + " = new AliasName(this.alias, \"" + nam +"\");"
+                };
+                (initializers as List<string>).AddRange(init);
+                var vari = new List<string> { anvn + " !: IAliasName;" };
+                (variables as List<string>).AddRange(vari);
+            }
             string[] sep = separatorCreator[tree];
             if (sep == null)
             {
@@ -201,8 +216,14 @@ namespace DataPerformer.Formula.TypeScript
             {
                 st = "this.check<" + tt + ">(";
             }
-            variables = new List<string>();
-            initializers = new List<string>();
+            if (variables == null)
+            {
+                variables = new List<string>();
+            }
+            if (initializers == null)
+            {
+                initializers = new List<string>();
+            }
             string s = "this.variable";
             int n = sep.Length;
             int m = parameters.Length;
@@ -268,7 +289,11 @@ namespace DataPerformer.Formula.TypeScript
             return null;
         }
 
-
+        internal static Dictionary<string, Tuple<int, object>> Output
+        {
+            get;
+            set;
+        }
 
 
         /// <summary>
@@ -375,6 +400,7 @@ namespace DataPerformer.Formula.TypeScript
                 IList<string> l = StaticCodeCreatorTypeScript.CreateCode(obj, trees, creator, out local,
                     out variables, out initializers, out classes, current);
                 ObjectFormulaTree[] lt = local.Trees;
+                Output = StaticCodeCreatorTypeScript.Output;
                 foreach (ObjectFormulaTree tree in lt)
                 {
                     var s = "";
@@ -469,13 +495,17 @@ namespace DataPerformer.Formula.TypeScript
 
         private string[] GetMultiSeparator(IObjectOperation op)
         {
-            if (op is VariableMeasurement)
-            {
-                return [" = this.measurement", ".getMeasurementValue();"];
-            }
             if (op is AliasNameVariable)
             {
                 return [" = this.aliasName", ".getAliasNameValue();"];
+            }
+            if (op is IAliasNameHolder)
+            {
+                return [" = this.aliasName", ".getAliasNameValue();"];
+            }
+            if (op is IMeasurementHolder mh)
+            {
+                return [" = this.measurement", ".getMeasurementValue();"];
             }
             if (op is OptionalOperation)
             {

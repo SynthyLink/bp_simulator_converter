@@ -1,5 +1,6 @@
-﻿using System.Text;
-
+﻿using System.Diagnostics.Metrics;
+using System.Text;
+using DataPerformer.Interfaces;
 using Diagram.Interfaces;
 
 using FormulaEditor;
@@ -18,6 +19,9 @@ namespace DataPerformer.Formula.TypeScript
 
 
         Diagram.TypeScript.Performer performer = new();
+
+        DataPerformer.Interfaces.Performer nPerformer = new();
+
         protected Dictionary<string, int> Output
         {
             get;
@@ -64,11 +68,29 @@ namespace DataPerformer.Formula.TypeScript
             List<string> l = new List<string>();
             //          l.Add(" : FormulaEditor.Interfaces.ITreeCollectionProxy");
             //        local = null;
-            var lt = PreCreateCode(obj, out local, out variables, out initializers, out classes, className);
+           var lt = PreCreateCode(obj, out local, out variables, out initializers, out classes, className);
            List<string> ltt = PostCreateCode(local, lt, variables, initializers,
                         constructorModifier + " " + className,
                         checkValue);
             formulaPerformer.Add(l, ltt, 0);
+            if (nPerformer.IsAliasMeasurements(obj))
+            {
+                var output = StaticCodeCreatorTypeScript.Output;
+                var ll = new List<string>();
+                ll.Add("save() : void {");
+                var mea = obj as IMeasurements;
+                for (var i = 0; i < mea.Count; i++)
+                {
+                    var m = mea[i];
+
+                }
+                foreach (var k in output)
+                {
+                    ll.Add("this.setAliasValue(\"" + k.Key + "\", this.get_" + k.Value.Item2 + "());");
+                }
+                ll.Add("}");
+                l.AddRange(ll);
+            }
             l.Add("");
             return l;
         }

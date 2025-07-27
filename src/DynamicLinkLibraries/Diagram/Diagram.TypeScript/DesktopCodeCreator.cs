@@ -13,12 +13,7 @@ namespace Diagram.TypeScript
     internal class DesktopCodeCreator : IDesktopCodeCreator
     {
         Diagram.UI.Performer performer = new Diagram.UI.Performer();
-        string Global
-        {
-            get;
-            set;
-        }
-
+ 
         
         Performer p = new();
 
@@ -41,7 +36,6 @@ namespace Diagram.TypeScript
         /// <returns>The code</returns>
         List<string> IDesktopCodeCreator.CreateCode(IDesktop desktop, string namespacE, string className, bool staticClass)
         {
-            Global = className;
             List<ICategoryObject> categoryObjects;
             List<ICategoryArrow> categoryArrows;
             Dictionary<ICategoryObject, int> objects;

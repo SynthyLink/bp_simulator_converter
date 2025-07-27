@@ -29,7 +29,7 @@ namespace DataPerformer.Formula
     /// <summary>
     /// Recurrent object
     /// </summary>
-    [ArrayElementMeasurement]
+    [AliasMeasurements]
 	public class Recursive : CategoryObject,  IDataConsumer, IMeasurements, IStarted, IRunning, IAlias,
 		ICheckCorrectness, IStep, IRuntimeUpdate, ITimeMeasurementConsumer, 
 		IVariableDetector, ITreeCollection,	ITimeVariable, IPostSetArrow
@@ -1092,10 +1092,17 @@ namespace DataPerformer.Formula
         /// <summary>
         /// Auxiliary class for measurement providinf
         /// </summary>
-        class Variable : IObjectOperation, IPowered, IOperationAcceptor, IMeasurement, IMeasurementHolder
+        class Variable : IObjectOperation, IPowered, IOperationAcceptor, IMeasurement, 
+			IMeasurementHolder, IAliasNameHolder, ITreeAssociated
 		{
 
 			#region Fields
+
+			protected ObjectFormulaTree Tree
+			{
+				get;
+				set;
+			}
 
 			/// <summary>
 			/// Measure key
@@ -1133,7 +1140,7 @@ namespace DataPerformer.Formula
 			private Variable(char key, Recursive r)
 			{
 				this.key = key;
-				this.Recursive = r;
+				Recursive = r;
 				name = key + "";
 				type = r.GetType(name);
 			}
@@ -1183,11 +1190,16 @@ namespace DataPerformer.Formula
 
 			IMeasurement IMeasurementHolder.Measurement => this;
 
-			#endregion
+            IAliasName IAliasNameHolder.AliasName => new AliasName(Recursive, name);
 
-			#region IOperationAcceptor Members
+            ObjectFormulaTree ITreeAssociated.ObjectFormulaTree { get => Tree; set => Tree = value; }
 
-			IObjectOperation IOperationAcceptor.Accept(object type)
+
+            #endregion
+
+            #region IOperationAcceptor Members
+
+            IObjectOperation IOperationAcceptor.Accept(object type)
 			{
 				return this;
 			}

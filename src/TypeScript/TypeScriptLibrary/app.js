@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-// { OrbitAct } from "./OrbitAct";
+const OrbitAct_1 = require("./OrbitAct");
 //import { Orbital } from "./src/Orbital";
 const readline = __importStar(require("readline"));
 actT();
@@ -72,8 +72,8 @@ function load() {
 }
 function actT() {
     try {
-        //       var o = new OrbitAct();
-        //      o.test();
+        var o = new OrbitAct_1.OrbitAct();
+        o.test();
     }
     catch (e) {
         var i = 0;

@@ -14,6 +14,8 @@ namespace DataPerformer.Formula.TypeScript
     {
         static ITreeCollectionCodeCreator treeCollectionCodeCreator = new TSTreeCollectionCodeCreator();
 
+        static DataPerformer.Interfaces.Performer nPerformer = new();
+
         static FormulaEditor.Performer formulaPerformer = new FormulaEditor.Performer();
 
 
@@ -62,7 +64,7 @@ namespace DataPerformer.Formula.TypeScript
                 var add = treeCollectionCodeCreator as IAdditionalClassCodeCreator;
                 List<string> l = new List<string>();
                 var classes = add.AdditionalCode;
-                if (classes.Count > 0)
+                if (classes != null && classes.Count > 0)
                 {
                     l.Add("");
                     l.Add("");
@@ -78,18 +80,18 @@ namespace DataPerformer.Formula.TypeScript
                 formulaPerformer.Add(l, la, 2);
                 l.Add("\t\tthis.performer.setAliasMap(map, this);");
                 bool beg = true;
-              ////  var feed = v.Feedback;
-              //  la = performer.CreateMap<int>("feed", feed, "number");
-              //  formulaPerformer.Add(l, la, 2);
-              //  l.Add("\t\tthis.performer.copyMap(feed, this.feedback);");
+                ////  var feed = v.Feedback;
+                //  la = performer.CreateMap<int>("feed", feed, "number");
+                //  formulaPerformer.Add(l, la, 2);
+                //  l.Add("\t\tthis.performer.copyMap(feed, this.feedback);");
 
-      //          int dim = v.Dimension;
-       //         var args = performer.CreateList("this.arguments", v.Arguments);
-        //        formulaPerformer.Add(l, args, 2);
+                //          int dim = v.Dimension;
+                //         var args = performer.CreateList("this.arguments", v.Arguments);
+                //        formulaPerformer.Add(l, args, 2);
                 //     l.Add("\t\tthis.performer.copyArray<string>(args, this.arguments);");
-        //        la = performer.CreateMap<int>("ops", v.OperationNames, "number");
-              //  formulaPerformer.Add(l, la, 2);
-               // l.Add("\t\tthis.performer.copyMap(ops, this.operationNames);");
+                //        la = performer.CreateMap<int>("ops", v.OperationNames, "number");
+                //  formulaPerformer.Add(l, la, 2);
+                // l.Add("\t\tthis.performer.copyMap(ops, this.operationNames);");
                 l.Add("\t}");
                 l.Add("");
                 formulaPerformer.Add(l, lt, 1);
@@ -103,6 +105,7 @@ namespace DataPerformer.Formula.TypeScript
         {
             l.Add("postSetArrow() : void {");
             l.Add("\tthis.init();");
+            
             l.Add("}");
 
         }
@@ -148,7 +151,7 @@ namespace DataPerformer.Formula.TypeScript
             //     l.Add("\t\tthis.performer.copyArray<string>(args, this.arguments);");
             la = performer.CreateMap<int>("ops", v.OperationNames, "number");
             formulaPerformer.Add(l, la, 2);
-          //  l.Add("\t\tthis.performer.copyMap(ops, this.operationNames);");
+            //  l.Add("\t\tthis.performer.copyMap(ops, this.operationNames);");
             l.Add("\t}");
             l.Add("");
             formulaPerformer.Add(l, lt, 1);

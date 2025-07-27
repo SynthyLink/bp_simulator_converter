@@ -1,13 +1,17 @@
 ﻿using DataPerformer.Interfaces;
+
 using ErrorHandler;
+
 using FormulaEditor;
 using FormulaEditor.Interfaces;
-using System.CodeDom;
+
 
 namespace DataPerformer.Formula.TypeScript
 {
     internal static  class StaticCodeCreatorTypeScript
     {
+
+        static DataPerformer.Interfaces.Performer performer = new ();
 
         #region Public Members
 
@@ -16,13 +20,12 @@ namespace DataPerformer.Formula.TypeScript
             get;
             set;
         }
-
-            public static string GetMeasurementName(string current, int n)
-            {
-                string st = current;
-                st += "_Measurement_" + n;
-                return st;
-            }
+        public static string GetMeasurementName(string current, int n)
+        {
+            string st = current;
+            st += "_Measurement_" + n;
+            return st;
+        }
 
         public static List<string> GetMeasurement(string current, int n)
         {
@@ -43,13 +46,6 @@ namespace DataPerformer.Formula.TypeScript
             l.Add("");
             return l;
         }
-
-
-
-
-
-
-
 
         /// <summary>
         /// Gets number of tree
@@ -97,22 +93,39 @@ namespace DataPerformer.Formula.TypeScript
             List<string> vari = new List<string>();
             List<string> init = new List<string>();
 
-            classes = new List<string>();   
+            var b = performer.IsAliasMeasurements(obj);
+            classes = b ? null : new List<string>();
             try
             {
                 local = creator.Create(obj, trees);
                 IList<ObjectFormulaTree> lt = local.Trees;
                 Output = DataPerformerFormula.GetOutput(obj as IMeasurements, lt.ToArray());
-                foreach (var item in Output)
+                if (b)
                 {
-                    var mname = "\"" + item.Key + "\"";
-                    var mt = item.Value.Item2 + "";
-                    var mf = "this.get_" + item.Value.Item1;
-                    var s = GetMeasurementName(current, item.Value.Item1);
-             //       init.Add("this.addMeasurement(new Measurement(" + mname + ", " + mt + ", " + mf + "));");
-                    init.Add("this.addMeasurement(new " + s +"(this, " + mname + " ," + item.Value.Item2 +"));");
-                    var lc = GetMeasurement(current, item.Value.Item1);
-                    classes.AddRange(lc);
+                    foreach (var item in Output)
+                    {
+                        var mname = "\"" + item.Key + "\"";
+                        var mt = item.Value.Item2 + "";
+                        var mf = "this.get_" + item.Value.Item1;
+             //           var s = GetMeasurementName(current, item.Value.Item1);
+                        //       init.Add("this.addMeasurement(new Measurement(" + mname + ", " + mt + ", " + mf + "));");
+                        init.Add("this.addMeasurement(new AliasNameMeasurement(this, " + mname + "));");
+                        var lc = GetMeasurement(current, item.Value.Item1);
+ 
+                    }
+                }
+                else
+                {
+                    foreach (var item in Output)
+                    {
+                        var mname = item.Key;
+                        var mt = item.Value.Item2 + "";
+                        var mf = "this.get_" + item.Value.Item1;
+                        var s = GetMeasurementName(current, item.Value.Item1);
+                        //       init.Add("this.addMeasurement(new Measurement(" + mname + ", " + mt + ", " + mf + "));");
+                        init.Add("this.addMeasurement(new AliasNameMeasurement(this, \"" + mname + "\"));");
+  
+                    }
 
                 }
                 var ct = DataPerformerFormula.Get(obj as IDataConsumer, lt.ToArray());
@@ -147,7 +160,14 @@ namespace DataPerformer.Formula.TypeScript
                         out lv, out lp);
                     if (lv != null)
                     {
-                        vari.AddRange(lv);
+                        if (lv.Count > 0)
+                        {
+                            vari.AddRange(lv);
+                        }
+                        else
+                        {
+
+                        }
                     }
                     if (lp != null)
                     {

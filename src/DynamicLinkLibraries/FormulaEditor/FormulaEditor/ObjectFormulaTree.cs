@@ -74,6 +74,10 @@ namespace FormulaEditor
 		/// <param name="children">Children trees</param>
 		public ObjectFormulaTree(IObjectOperation operation, List<ObjectFormulaTree> children) 
 		{
+            if (operation is ITreeAssociated associated)
+            {
+                associated.ObjectFormulaTree = this;
+            }
          	if (operation is ICloneable)
 			{
 				ICloneable c = operation as ICloneable;
@@ -162,6 +166,10 @@ namespace FormulaEditor
         {
             ObjectFormulaTree tree = new ObjectFormulaTree(formula, creator);
             IObjectOperation op = tree.Operation;
+            if (op is ITreeAssociated treeAssociated)
+            {
+                treeAssociated.ObjectFormulaTree = tree;
+            }
             if (op is ITreeCreator)
             {
                 ITreeCreator tc = op as ITreeCreator;

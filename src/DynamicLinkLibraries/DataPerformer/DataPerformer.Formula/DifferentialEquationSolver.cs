@@ -17,9 +17,10 @@ using FormulaEditor.Symbols;
 
 using DataPerformer.Interfaces;
 using DataPerformer.Portable;
-
 using DataPerformer.Formula.Interfaces;
+
 using ErrorHandler;
+
 using NamedTree;
 
 namespace DataPerformer.Formula

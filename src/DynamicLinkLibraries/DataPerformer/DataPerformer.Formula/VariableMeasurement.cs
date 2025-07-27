@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 using BaseTypes.Interfaces;
@@ -8,6 +7,7 @@ using FormulaEditor.Interfaces;
 
 using DataPerformer.Interfaces;
 using DataPerformer.Portable;
+
 using ErrorHandler;
 
 

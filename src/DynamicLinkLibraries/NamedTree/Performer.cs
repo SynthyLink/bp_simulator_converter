@@ -9,8 +9,6 @@ namespace NamedTree
     public class Performer
     {
 
-        
-
         public Performer()
         {
         }
@@ -253,8 +251,6 @@ namespace NamedTree
                 }
             }
         }
-
-
 
         public void AddChildNode<T>(INode<T> parent, INode<T> child, bool change = true) where T : class
         {

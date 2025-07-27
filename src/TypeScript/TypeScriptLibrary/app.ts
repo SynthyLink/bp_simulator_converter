@@ -3,7 +3,7 @@ import { ICategoryArrow } from "./Library/Interfaces/ICategoryArrow";
 import { ICategoryObject } from "./Library/Interfaces/ICategoryObject";
 import { DataLink } from "./Library/Measurements/DataLink";
 import { Performer } from "./Library/Performer";
-// { OrbitAct } from "./OrbitAct";
+import { OrbitAct } from "./OrbitAct";
 //import { Orbital } from "./src/Orbital";
 import * as readline from 'readline';
 actT();
@@ -48,8 +48,8 @@ function load() {
 
 function actT() {
     try {
- //       var o = new OrbitAct();
-  //      o.test();
+        var o = new OrbitAct();
+        o.test();
     }
     catch (e: any)
     {

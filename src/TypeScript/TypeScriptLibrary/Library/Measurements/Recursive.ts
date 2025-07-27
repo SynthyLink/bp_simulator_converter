@@ -4,6 +4,7 @@ import { DataConsumerMeasurements } from "./DataConsumerMeasurements";
 import { IMeasurements } from "./Interfaces/IMeasurements";
 import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import { IStarted } from "./Interfaces/IStarted";
+import { IAlias } from "../Interfaces/IAlias";
 
 
 export class Recursive extends DataConsumerMeasurements implements IStarted, IPostSetArrow
@@ -14,7 +15,11 @@ export class Recursive extends DataConsumerMeasurements implements IStarted, IPo
 
     protected arguments: string[] = [];
 
+    protected initial: Map<string, any> = new Map();
+
     protected operationNames: Map<number, string> = new Map();
+
+    protected alias !: IAlias;
 
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name);
@@ -22,13 +27,19 @@ export class Recursive extends DataConsumerMeasurements implements IStarted, IPo
         this.types.push("ISarted");
         this.types.push("IPostSetArrow");
         this.types.push("Recursive");
+        this.alias = this;
 
     }
     startedStart(start: number): void {
-        throw new OwnNotImplemented();
+        var keys = this.initial.keys();
+        for (var key of keys) {
+            this.setAliasValue(key, this.initial.get(key));
+        }
     }
+
+    void Set Inial
     postSetArrow(): void {
-        throw new OwnNotImplemented();
+        
     }
 
     getAllMeasurements(): IMeasurements[] {
@@ -37,5 +48,24 @@ export class Recursive extends DataConsumerMeasurements implements IStarted, IPo
     addMeasurements(item: IMeasurements): void {
         this.inputs.push(item);
     }
+
+    calculateTree(): void
+    {
+
+    }
+
+    save(): void
+    {
+
+    }
+
+
+    updateMeasurements(): void
+    {
+        this.calculateTree();
+        this.save();
+    }
+
+    
 
 }

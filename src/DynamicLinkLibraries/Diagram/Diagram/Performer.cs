@@ -17,9 +17,12 @@ using NamedTree;
 
 namespace Diagram.UI
 {
+    /// <summary>
+    /// Peformer of basic operations
+    /// </summary>
     public class Performer
     {
-
+ 
 
         /// <summary>
         /// Gets relative name

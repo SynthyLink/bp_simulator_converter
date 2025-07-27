@@ -14,6 +14,7 @@ class Recursive extends DataConsumerMeasurements_1.DataConsumerMeasurements {
         this.types.push("ISarted");
         this.types.push("IPostSetArrow");
         this.types.push("Recursive");
+        this.alias = this;
     }
     startedStart(start) {
         throw new OwnNotImplemented_1.OwnNotImplemented();
@@ -26,6 +27,14 @@ class Recursive extends DataConsumerMeasurements_1.DataConsumerMeasurements {
     }
     addMeasurements(item) {
         this.inputs.push(item);
+    }
+    calculateTree() {
+    }
+    save() {
+    }
+    updateMeasurements() {
+        this.calculateTree();
+        this.save();
     }
 }
 exports.Recursive = Recursive;

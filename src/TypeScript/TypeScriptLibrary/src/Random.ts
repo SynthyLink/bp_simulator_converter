@@ -1,15 +1,17 @@
+import { AliasName } from "../Library/AliasName";
 import { Desktop } from "../Library/Desktop";
+import { IAliasName } from "../Library/Interfaces/IAliasName";
 import { IDesktop } from "../Library/Interfaces/IDesktop";
 import { IPostSetArrow } from "../Library/Interfaces/IPostSetArrow";
+import { AliasNameMeasurement } from "../Library/Measurements/AliasNameMeasurement";
 import { DataConsumer } from "../Library/Measurements/DataConsumer";
 import { DataLink } from "../Library/Measurements/DataLink";
 import { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement";
-import { Measurement } from "../Library/Measurements/Measurement";
 import { RandomGenerator } from "../Library/Measurements/RandomGenerator";
 import { Recursive } from "../Library/Measurements/Recursive";
 import { VectorFormulaConsumer } from "../Library/Measurements/VectorFormulaConsumer";
 
-class T_CategoryObject_0 extends RandomGenerator
+class Random_CategoryObject_0 extends RandomGenerator
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -17,7 +19,7 @@ class T_CategoryObject_0 extends RandomGenerator
 	}
 }
 
-class T_CategoryObject_1 extends RandomGenerator
+class Random_CategoryObject_1 extends RandomGenerator
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -25,23 +27,7 @@ class T_CategoryObject_1 extends RandomGenerator
 	}
 }
 
-
-
-class T_CategoryObject_2_Measurement_11 extends Measurement {
-	obj !: T_CategoryObject_2;
-	constructor(o:  T_CategoryObject_2, name: string, type: any) {
-		super(name, type);
-		this.obj = o;
-	}
-
-	getMeasurementValue() {
-		return this.obj.get_11();
-	}
-}
-
-
-
-class T_CategoryObject_2 extends VectorFormulaConsumer
+class Random_CategoryObject_2 extends VectorFormulaConsumer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -60,7 +46,6 @@ class T_CategoryObject_2 extends VectorFormulaConsumer
 		let ops = new Map<number, string>(
 		[
 		]);
-		this.performer.copyMap(ops, this.operationNames);
 	}
 
 		calculateTree() : void
@@ -94,12 +79,14 @@ class T_CategoryObject_2 extends VectorFormulaConsumer
 	
 	init() : void
 	{
-		this.addMeasurement(new T_CategoryObject_2_Measurement_11(this, "Formula_1" ,0));
+		this.addMeasurement(new AliasNameMeasurement(this, "Formula_1"));
 		this.measurement0 = this.dataConsumer.getAllMeasurements()[0].getMeasurement(0);
 		this.measurement3 = this.dataConsumer.getAllMeasurements()[1].getMeasurement(0);
+		this.aliasName10 = new AliasName(this.alias, "f");
 	}
 	measurement0 !: IMeasurement;
 	measurement3 !: IMeasurement;
+	aliasName10 !: IAliasName;
 	var_0 : number  = 0;
 	var_1 : number  = 2;
 	var_2 : number  = 0;
@@ -178,7 +165,7 @@ postSetArrow() : void {
 }
 }
 
-class T_CategoryObject_3 extends Recursive
+class Random_CategoryObject_3 extends Recursive
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -190,15 +177,14 @@ class T_CategoryObject_3 extends Recursive
 			["a", 0 ]
 		]);
 		this.performer.setAliasMap(map, this);
-		this.performer.copyMap(ops, this.operationNames);
 	}
 
 		calculateTree() : void
 		{
 			this.success = true;
-			variable =  trees[0].Calculate();
-			if (checkValue(variable)) { success = false; return; }
-			var_0 = (number)variable;
+			this.variable = this.aliasName0.getAliasNameValue();
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_0 = this.convert<number>(this.variable);
 			this.variable = this.measurement1.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_1 = this.convert<number>(this.variable);
@@ -221,9 +207,16 @@ class T_CategoryObject_3 extends Recursive
 	
 	init() : void
 	{
+		this.addMeasurement(new AliasNameMeasurement(this, "a"));
 		this.measurement1 = this.dataConsumer.getAllMeasurements()[0].getMeasurement(0);
+		this.aliasName0 = new AliasName(this.alias, "a");
+		this.aliasName3 = new AliasName(this.alias, "c");
+		this.aliasName5 = new AliasName(this.alias, "d");
 	}
 	measurement1 !: IMeasurement;
+	aliasName0 !: IAliasName;
+	aliasName3 !: IAliasName;
+	aliasName5 !: IAliasName;
 	var_0 : number  = 0;
 	var_1 : number  = 0;
 	var_2 : number  = 0;
@@ -266,13 +259,16 @@ class T_CategoryObject_3 extends Recursive
 	{
 		return this.success ? this.var_6 : undefined;
 	}
+	save() : void {
+	this.setAliasValue("a", this.get_0());
+	}
 	
 postSetArrow() : void {
 	this.init();
 }
 }
 
-class T_CategoryObject_4 extends DataConsumer
+class Random_CategoryObject_4 extends DataConsumer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -280,7 +276,7 @@ class T_CategoryObject_4 extends DataConsumer
 	}
 }
 
-class T_CategoryArrow_0 extends DataLink
+class Random_CategoryArrow_0 extends DataLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -288,7 +284,7 @@ class T_CategoryArrow_0 extends DataLink
 	}
 }
 
-class T_CategoryArrow_1 extends DataLink
+class Random_CategoryArrow_1 extends DataLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -296,7 +292,7 @@ class T_CategoryArrow_1 extends DataLink
 	}
 }
 
-class T_CategoryArrow_2 extends DataLink
+class Random_CategoryArrow_2 extends DataLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -304,7 +300,7 @@ class T_CategoryArrow_2 extends DataLink
 	}
 }
 
-class T_CategoryArrow_3 extends DataLink
+class Random_CategoryArrow_3 extends DataLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -314,23 +310,23 @@ class T_CategoryArrow_3 extends DataLink
 
 
 
-export class T extends Desktop
+export class Random extends Desktop
 {
 	constructor()
 	{
 		super();
 
-		this.name = "T";
+		this.name = "Random";
 
-		new T_CategoryObject_0(this, "X");
-		new T_CategoryObject_1(this, "Y");
-		new T_CategoryObject_2(this, "Data");
-		new T_CategoryObject_3(this, "Recursive");
-		new T_CategoryObject_4(this, "Chart");
-		new T_CategoryArrow_0(this, "2");
-		new T_CategoryArrow_1(this, "1");
-		new T_CategoryArrow_2(this, "3");
-		new T_CategoryArrow_3(this, "4");
+		new Random_CategoryObject_0(this, "X");
+		new Random_CategoryObject_1(this, "Y");
+		new Random_CategoryObject_2(this, "Data");
+		new Random_CategoryObject_3(this, "Recursive");
+		new Random_CategoryObject_4(this, "Chart");
+		new Random_CategoryArrow_0(this, "2");
+		new Random_CategoryArrow_1(this, "1");
+		new Random_CategoryArrow_2(this, "3");
+		new Random_CategoryArrow_3(this, "4");
 
 		let objects = this.getCategoryObjects();
 		let arrows = this.getCategoryArrows();

@@ -387,7 +387,11 @@ namespace DataPerformer.Formula
             }
         }
 
-        ObjectFormulaTree ITreeAssociated.ObjectFormulaTree => Tree;
+        ObjectFormulaTree ITreeAssociated.ObjectFormulaTree
+        {
+            get => Tree;
+            set { }
+        }
 
         /// <summary>
         /// Empty check of object
