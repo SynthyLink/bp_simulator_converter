@@ -16,8 +16,7 @@ export class RandomAct  extends Random
     action(): void {
         var k = this.dc.getAllMeasurements()[0];
         var a = k.getMeasurement(0).getMeasurementValue();
-        var b = k.getMeasurement(1).getMeasurementValue();
-        console.log(a, b);
+        console.log(a);
     }
 
     public test(): void {

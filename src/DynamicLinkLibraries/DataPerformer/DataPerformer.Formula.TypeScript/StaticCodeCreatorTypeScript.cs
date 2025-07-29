@@ -3,8 +3,7 @@
 using ErrorHandler;
 
 using FormulaEditor;
-using FormulaEditor.Interfaces;
-
+using FormulaEditor.CodeCreators.Interfaces;
 
 namespace DataPerformer.Formula.TypeScript
 {
@@ -26,7 +25,7 @@ namespace DataPerformer.Formula.TypeScript
             st += "_Measurement_" + n;
             return st;
         }
-
+/*
         public static List<string> GetMeasurement(string current, int n)
         {
             var nn = "class " + GetMeasurementName(current, n);
@@ -46,7 +45,7 @@ namespace DataPerformer.Formula.TypeScript
             l.Add("");
             return l;
         }
-
+*/
         /// <summary>
         /// Gets number of tree
         /// </summary>
@@ -86,50 +85,17 @@ namespace DataPerformer.Formula.TypeScript
         public static IList<string> CreateCode(object obj, ObjectFormulaTree[] trees, ICodeCreator creator,
             out ICodeCreator local,
              out IList<string> variables,
-             out IList<string> initializers, 
-             out List<string> classes, string current )
+             out IList<string> initializers, string current )
         {
             List<string> code = new List<string>();
             List<string> vari = new List<string>();
             List<string> init = new List<string>();
 
-            var b = performer.IsAliasMeasurements(obj);
-            classes = b ? null : new List<string>();
             try
             {
                 local = creator.Create(obj, trees);
                 IList<ObjectFormulaTree> lt = local.Trees;
                 Output = DataPerformerFormula.GetOutput(obj as IMeasurements, lt.ToArray());
-                if (b)
-                {
-                    foreach (var item in Output)
-                    {
-                        var mname = "\"" + item.Key + "\"";
-                        var mt = item.Value.Item2 + "";
-                        var mf = "this.get_" + item.Value.Item1;
-             //           var s = GetMeasurementName(current, item.Value.Item1);
-                        //       init.Add("this.addMeasurement(new Measurement(" + mname + ", " + mt + ", " + mf + "));");
-                        init.Add("this.addMeasurement(new AliasNameMeasurement(this, " + mname + "));");
-                    //    var lc = GetMeasurement(current, item.Value.Item1);
- 
-                    }
-                }
-                else
-                {
-                    foreach (var item in Output)
-                    {
-
-                        var mname = "\"" + item.Key + "\"";
-                        var mt = item.Value.Item2 + "";
-                        var mf = "this.get_" + item.Value.Item1;
-                        var s = GetMeasurementName(current, item.Value.Item1);
-                        //       init.Add("this.addMeasurement(new Measurement(" + mname + ", " + mt + ", " + mf + "));");
-                        init.Add("this.addMeasurement(new " + s + "(this, " + mname + " ," + item.Value.Item2 + "));");
-                        var lc = GetMeasurement(current, item.Value.Item1);
-                        classes.AddRange(lc);
-                    }
-
-                }
                 var ct = DataPerformerFormula.Get(obj as IDataConsumer, lt.ToArray());
                 foreach (var ii in ct)
                 {
@@ -158,9 +124,9 @@ namespace DataPerformer.Formula.TypeScript
                     }
                     IList<string> lv;
                     IList<string> lp;
-                    IList<string> c = local.CreateCode(obj, t, ret, par.ToArray<string>(),
-                        out lv, out lp);
-                    if (lv != null)
+                    var c = local.CreateCode(obj, t, ret, par.ToArray<string>());
+                    lv = c["variables"];
+                        if (lv != null)
                     {
                         if (lv.Count > 0)
                         {
@@ -171,17 +137,18 @@ namespace DataPerformer.Formula.TypeScript
 
                         }
                     }
+                    lp = c["initializers"];
                     if (lp != null)
                     {
                         init.AddRange(lp);
                     }
                     if (creator.GetConstValue(t) == null)
                     {
-                        code.AddRange(c);
+                        code.AddRange(c["code"]);
                     }
                     else if (creator.GetConstValue(t).Equals("\"\""))
                     {
-                        code.AddRange(c);
+                        code.AddRange(c["code"]);
                     }
                 }
                 variables = vari;
@@ -250,19 +217,20 @@ namespace DataPerformer.Formula.TypeScript
                     if (!conds.Contains(cond))
                     {
                         conds.Add(cond);
-                        IList<string> cc = creator.CreateCode(obj, cond, rc, par.ToArray(),
-                            out lvc, out lpc);
+                       var  cc = creator.CreateCode(obj, cond, rc, par.ToArray());
+                        lvc = cc["variables"];
                         if (lvc != null)
                         {
                             vari.AddRange(lvc);
                         }
+                        lpc = cc["initializers"];
                         if (lpc != null)
                         {
                             init.AddRange(lpc);
                         }
                         if (creator.GetConstValue(cond) == null)
                         {
-                            code.AddRange(cc);
+                            code.AddRange(cc["code"]);
                         }
                     }
                     code.Add("if (" + rc + ")");
@@ -289,19 +257,20 @@ namespace DataPerformer.Formula.TypeScript
                                     p.Add(creator[chc]);
                                 }
                             }
-                            IList<string> cr = creator.CreateCode(obj, tt, rr, p.ToArray<string>(),
-                              out lvr, out lpr);
+                            var cr = creator.CreateCode(obj, tt, rr, p.ToArray<string>());
+                            lvr = cr["variables"];
                             if (lvr != null)
                             {
                                 vari.AddRange(lvr);
                             }
+                            lpr = cr["initializers"];
                             if (lpr != null)
                             {
                                 init.AddRange(lpr);
                             }
                             if (creator.GetConstValue(t) == null)
                             {
-                                code.AddRange(cr);
+                                code.AddRange(cr["code"]);
                             }
                         }
                         else
@@ -333,19 +302,20 @@ namespace DataPerformer.Formula.TypeScript
                 }
                 IList<string> lv;
                 IList<string> lp;
-                IList<string> c = creator.CreateCode(obj, t, ret, par.ToArray<string>(),
-                    out lv, out lp);
+                var c = creator.CreateCode(obj, t, ret, par.ToArray<string>());
+                lv = c["variables"];
                 if (lv != null)
                 {
                     vari.AddRange(lv);
                 }
+                lp = c["initializers"];
                 if (lp != null)
                 {
                     init.AddRange(lp);
                 }
                 if (creator.GetConstValue(t) == null)
                 {
-                    code.AddRange(c);
+                    code.AddRange(c["code"]);
                 }
             }
             List<string> lvar = new List<string>();
@@ -382,7 +352,8 @@ namespace DataPerformer.Formula.TypeScript
             }
         }
 
-        private static IList<string> CreateCode(object obj, ICodeCreator creator, ObjectFormulaTree tree, List<ObjectFormulaTree> busy)
+        private static IList<string> CreateCode(object obj, ICodeCreator creator,
+            ObjectFormulaTree tree, List<ObjectFormulaTree> busy)
         {
             List<ObjectFormulaTree> l = new List<ObjectFormulaTree>();
             GetList(tree, l, busy);
@@ -403,7 +374,8 @@ namespace DataPerformer.Formula.TypeScript
                     }
                     p.Add(creator[chc]);
                 }
-                cc.AddRange(creator.CreateCode(obj, tr, rr, p.ToArray(), out lvr, out lpr));
+                var c = creator.CreateCode(obj, tr, rr, p.ToArray());
+                cc.AddRange(c["code"]);
             }
             return cc;
         }

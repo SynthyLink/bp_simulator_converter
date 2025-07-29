@@ -13,7 +13,7 @@ namespace DataPerformer.Formula.TypeScript
         /// </summary>
         static StaticExtensionDataPerformerFormulaTypeScript()
         {
-            new TSCodeCreator();
+            new TSClassCodeCreator();
         }
 
         /// <summary>

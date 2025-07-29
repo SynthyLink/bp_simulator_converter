@@ -3,11 +3,9 @@ import { Desktop } from "../Library/Desktop";
 import { IAliasName } from "../Library/Interfaces/IAliasName";
 import { IDesktop } from "../Library/Interfaces/IDesktop";
 import { IPostSetArrow } from "../Library/Interfaces/IPostSetArrow";
-import { AliasNameMeasurement } from "../Library/Measurements/AliasNameMeasurement";
 import { DataConsumer } from "../Library/Measurements/DataConsumer";
 import { DataLink } from "../Library/Measurements/DataLink";
 import { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement";
-import { Measurement } from "../Library/Measurements/Measurement";
 import { RandomGenerator } from "../Library/Measurements/RandomGenerator";
 import { Recursive } from "../Library/Measurements/Recursive";
 import { VectorFormulaConsumer } from "../Library/Measurements/VectorFormulaConsumer";
@@ -28,22 +26,6 @@ class Random_CategoryObject_1 extends RandomGenerator
 	}
 }
 
-
-
-class Random_CategoryObject_2_Measurement_11 extends Measurement {
-	obj !: Random_CategoryObject_2;
-	constructor(o:  Random_CategoryObject_2, name: string, type: any) {
-		super(name, type);
-		this.obj = o;
-	}
-
-	getMeasurementValue() {
-		return this.obj.get_11();
-	}
-}
-
-
-
 class Random_CategoryObject_2 extends VectorFormulaConsumer
 {
 	constructor(desktop: IDesktop, name: string)
@@ -54,15 +36,7 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer
 			["f", 0.0040000000000000001 ]
 		]);
 		this.performer.setAliasMap(map, this);
-		let feed = new Map<number, string>(
-		[
-		]);
-		this.performer.copyMap(feed, this.feedback);
-		this.arguments.push("x = Y.Random");
-		this.arguments.push("y = X.Random");
-		let ops = new Map<number, string>(
-		[
-		]);
+		this.addVariable(this.pMeasurements.createVariable("Formula_1", 0, 0, this));
 	}
 
 		calculateTree() : void
@@ -96,7 +70,6 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer
 	
 	init() : void
 	{
-		this.addMeasurement(new Random_CategoryObject_2_Measurement_11(this, "Formula_1" ,0));
 		this.measurement0 = this.dataConsumer.getAllMeasurements()[0].getMeasurement(0);
 		this.measurement3 = this.dataConsumer.getAllMeasurements()[1].getMeasurement(0);
 		this.aliasName10 = new AliasName(this.alias, "f");
@@ -176,6 +149,11 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer
 	{
 		return this.success ? this.var_11 : undefined;
 	}
+	save() : void {
+		var v = this.variables;
+		var x0 = v.get("Formula_1");
+		x0?.setValue(this.get_11());
+	}
 	
 }
 
@@ -191,6 +169,8 @@ class Random_CategoryObject_3 extends Recursive
 			["a", 0 ]
 		]);
 		this.performer.setAliasMap(map, this);
+		this.addVariable(this.pMeasurements.createVariable("a", 0, 0, this));
+		this.initial.set("a", 0);
 	}
 
 		calculateTree() : void
@@ -205,39 +185,18 @@ class Random_CategoryObject_3 extends Recursive
 			this.variable = (this.var_0) + (this.var_1);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_2 = this.convert<number>(this.variable);
-			this.variable = this.aliasName3.getAliasNameValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_3 = this.convert<number>(this.variable);
-			this.variable = (this.var_2) + (this.var_3);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_4 = this.convert<number>(this.variable);
-			this.variable = this.aliasName5.getAliasNameValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_5 = this.convert<number>(this.variable);
-			this.variable = (this.var_4) + (this.var_5);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_6 = this.convert<number>(this.variable);
 		}
 	
 	init() : void
 	{
-		this.addMeasurement(new AliasNameMeasurement(this, "a"));
 		this.measurement1 = this.dataConsumer.getAllMeasurements()[0].getMeasurement(0);
 		this.aliasName0 = new AliasName(this.alias, "a");
-		this.aliasName3 = new AliasName(this.alias, "c");
-		this.aliasName5 = new AliasName(this.alias, "d");
 	}
 	measurement1 !: IMeasurement;
 	aliasName0 !: IAliasName;
-	aliasName3 !: IAliasName;
-	aliasName5 !: IAliasName;
 	var_0 : number  = 0;
 	var_1 : number  = 0;
 	var_2 : number  = 0;
-	var_3 : number  = 0;
-	var_4 : number  = 0;
-	var_5 : number  = 0;
-	var_6 : number  = 0;
 	
 	get_0() : any
 	{
@@ -253,28 +212,10 @@ class Random_CategoryObject_3 extends Recursive
 	{
 		return this.success ? this.var_2 : undefined;
 	}
-	
-	get_3() : any
-	{
-		return this.success ? this.var_3 : undefined;
-	}
-	
-	get_4() : any
-	{
-		return this.success ? this.var_4 : undefined;
-	}
-	
-	get_5() : any
-	{
-		return this.success ? this.var_5 : undefined;
-	}
-	
-	get_6() : any
-	{
-		return this.success ? this.var_6 : undefined;
-	}
 	save() : void {
-		this.setAliasValue("a", this.get_0());
+		var v = this.variables;
+		var x0 = v.get("a");
+		x0?.setValue(this.get_2());
 	}
 	
 }

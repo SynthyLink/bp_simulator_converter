@@ -13,8 +13,7 @@ class RandomAct extends Random_1.Random {
     action() {
         var k = this.dc.getAllMeasurements()[0];
         var a = k.getMeasurement(0).getMeasurementValue();
-        var b = k.getMeasurement(1).getMeasurementValue();
-        console.log(a, b);
+        console.log(a);
     }
     test() {
         var runtime = new DetaRuntimeConsumer_1.DetaRuntimeConsumer(this.dc);

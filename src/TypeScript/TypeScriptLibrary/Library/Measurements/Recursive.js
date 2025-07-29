@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Recursive = void 0;
-const DataConsumerMeasurements_1 = require("./DataConsumerMeasurements");
-class Recursive extends DataConsumerMeasurements_1.DataConsumerMeasurements {
+const DataConsumerVariableMeasurements_1 = require("./DataConsumerVariableMeasurements");
+class Recursive extends DataConsumerVariableMeasurements_1.DataConsumerVariadbleMeasurements {
     constructor(desktop, name) {
         super(desktop, name);
         this.inputs = [];
@@ -18,8 +18,10 @@ class Recursive extends DataConsumerMeasurements_1.DataConsumerMeasurements {
     }
     startedStart(start) {
         var keys = this.initial.keys();
+        var vari = this.variables;
         for (var key of keys) {
-            this.setAliasValue(key, this.initial.get(key));
+            var v = vari.get(key);
+            v === null || v === void 0 ? void 0 : v.setValue(this.initial.get(key));
         }
     }
     setIniitial() {
@@ -28,7 +30,10 @@ class Recursive extends DataConsumerMeasurements_1.DataConsumerMeasurements {
             this.initial.set(name, this.getAliasValue(name));
         }
     }
+    init() {
+    }
     postSetArrow() {
+        this.init();
     }
     getAllMeasurements() {
         return this.inputs;

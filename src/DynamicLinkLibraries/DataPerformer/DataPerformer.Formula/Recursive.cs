@@ -7,7 +7,6 @@ using CategoryTheory;
 
 using DataPerformer.Formula.Interfaces;
 using DataPerformer.Interfaces;
-using DataPerformer.Interfaces.Attributes;
 using DataPerformer.Portable;
 
 using Diagram.Interfaces;
@@ -29,13 +28,16 @@ namespace DataPerformer.Formula
     /// <summary>
     /// Recurrent object
     /// </summary>
-    [AliasMeasurements]
 	public class Recursive : CategoryObject,  IDataConsumer, IMeasurements, IStarted, IRunning, IAlias,
 		ICheckCorrectness, IStep, IRuntimeUpdate, ITimeMeasurementConsumer, 
-		IVariableDetector, ITreeCollection,	ITimeVariable, IPostSetArrow
+		IVariableDetector, ITreeCollection,	ITimeVariable, IInitialDictionary, 
+		IStringTreeDictionary,
+		IPostSetArrow
 	{
 
         #region Fields
+
+		Dictionary<string, ObjectFormulaTree> td = new ();
 
  
         /// <summary>
@@ -911,6 +913,7 @@ namespace DataPerformer.Formula
                     proh += c;
                 }
             }
+			td.Clear();
             foreach (char c in varc)
             {
                 object[] os = vars[c] as object[];
@@ -933,6 +936,7 @@ namespace DataPerformer.Formula
                 }
                 ol[1] = tree;
                 tt.Add(tree);
+				td[c + ""] = tree;
             }
             trees = tt.ToArray();
         }
@@ -950,10 +954,29 @@ namespace DataPerformer.Formula
 
         IEnumerable<IMeasurements> IChildren<IMeasurements>.Children => measurements;
 
-    
+        Dictionary<string, object> IInitialDictionary.Dictionary => Initial;
+
+
         #endregion
 
         #region Private Members
+
+		protected Dictionary<string, object> Initial
+		{
+			get
+			{
+				var d = new Dictionary<string, object>();
+				foreach (var c in vars)
+				{
+					var k = c.Key;
+					var val = c.Value as object[];
+					d[c.Key + ""] = val[2];
+				}
+				return d;
+			}
+		}
+
+		Dictionary<string, ObjectFormulaTree> IStringTreeDictionary.Dictionary => td;
 
         void Start(bool stated)
 		{

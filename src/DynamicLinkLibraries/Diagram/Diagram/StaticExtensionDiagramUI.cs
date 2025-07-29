@@ -11,6 +11,8 @@ using AssemblyService;
 using CategoryTheory;
 
 using Diagram.Attributes;
+using Diagram.CodeCreators;
+using Diagram.CodeCreators.Interfaces;
 using Diagram.Interfaces;
 using Diagram.UI.Attributes;
 using Diagram.UI.Interfaces;

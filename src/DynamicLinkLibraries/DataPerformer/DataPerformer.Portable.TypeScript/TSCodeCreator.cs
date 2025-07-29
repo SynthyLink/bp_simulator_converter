@@ -51,6 +51,7 @@ namespace DataPerformer.Portable.TypeScript
             return null;
         }
 
+
         static List<string> CreateDataConsumer(string preffix, object obj)
         {
             List<string> l = new List<string>();

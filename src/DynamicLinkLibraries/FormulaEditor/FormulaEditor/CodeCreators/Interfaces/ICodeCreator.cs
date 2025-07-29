@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FormulaEditor.Interfaces
+namespace FormulaEditor.CodeCreators.Interfaces
 {
     /// <summary>
     /// Creator of code from tree
@@ -16,8 +16,8 @@ namespace FormulaEditor.Interfaces
         /// <param name="variables">Variables</param>
         /// <param name="initializers">Initializers</param>
         /// <returns>List of code</returns>
-        IList<string> CreateCode(object obj, ObjectFormulaTree tree, string ret, string[] parameters,
-            out IList<string> variables, out IList<string> initializers);
+       Dictionary<string, List<string>> CreateCode(object obj, ObjectFormulaTree tree, string ret, 
+          params string[] parameters);
 
         /// <summary>
         /// Identifier of tree
@@ -64,6 +64,11 @@ namespace FormulaEditor.Interfaces
         /// <param name="tree">The tree</param>
         /// <returns>The number</returns>
         int GetNumber(ObjectFormulaTree tree);
+
+        /// <summary>
+        /// Associated object
+        /// </summary>
+        object Object { get; set; }
      
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CategoryTheory;
 
 using Diagram.Attributes;
+using Diagram.CodeCreators.Interfaces;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;

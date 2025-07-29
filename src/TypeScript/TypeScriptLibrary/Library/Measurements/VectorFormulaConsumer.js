@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VectorFormulaConsumer = void 0;
-const DataConsumerMeasurements_1 = require("./DataConsumerMeasurements");
-class VectorFormulaConsumer extends DataConsumerMeasurements_1.DataConsumerMeasurements {
+const DataConsumerVariableMeasurements_1 = require("./DataConsumerVariableMeasurements");
+class VectorFormulaConsumer extends DataConsumerVariableMeasurements_1.DataConsumerVariadbleMeasurements {
     constructor(desktop, name) {
         super(desktop, name);
         this.feedback = new Map();
@@ -14,10 +14,13 @@ class VectorFormulaConsumer extends DataConsumerMeasurements_1.DataConsumerMeasu
     }
     updateMeasurements() {
         this.calculateTree();
+        this.save();
     }
     calculateTree() {
     }
     init() {
+    }
+    save() {
     }
     postSetArrow() {
         this.init();

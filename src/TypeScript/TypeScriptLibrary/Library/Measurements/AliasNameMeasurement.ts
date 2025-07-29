@@ -1,25 +1,23 @@
 import { IAlias } from "../Interfaces/IAlias";
 import { IMeasurement } from "./Interfaces/IMeasurement";
+import { Variable } from "./Variable";
 
-export class AliasNameMeasurement implements IMeasurement
+export class AliasNameMeasurement extends Variable
 {
     constructor(alias: IAlias, name: string) {
-        this.name = name;
+        super(name, undefined, undefined);
         this.alias = alias;
         this.type = alias.getAliasType(name);
     }
-    getMeasurementName(): string {
-        return this.name;
-    }
-    getMeasurementType() {
-        return this.type;
-    }
-
+ 
    
-    getMeasurementValue() : any {
+    getMeasurementValue(): any {
         return this.alias.getAliasValue(this.name)
     }
-    name !: string;
-    type !: any;
+
+    public setValue(value: any): void {
+        this.alias.setAliasValue(this.name, value);
+    }
+
     alias !: IAlias;
 }

@@ -1,21 +1,22 @@
-﻿using System.Diagnostics.Metrics;
-using System.Text;
+﻿using System.Text;
 using DataPerformer.Interfaces;
-using Diagram.Interfaces;
 
+using FormulaEditor.Interfaces;
 using FormulaEditor;
 using FormulaEditor.CodeCreators;
 using FormulaEditor.CSharp;
-using FormulaEditor.Interfaces;
+using FormulaEditor.CodeCreators.Interfaces;
 
 namespace DataPerformer.Formula.TypeScript
 {
-    internal class TSTreeCollectionCodeCreator : ITreeCollectionCodeCreator, IAdditionalClassCodeCreator
+    internal class TSTreeCollectionCodeCreator : ITreeCollectionCodeCreator
     {
+
+     
 
         #region Fields
 
-    static FormulaEditor.Performer  formulaPerformer = new FormulaEditor.Performer();
+        static FormulaEditor.Performer  formulaPerformer = new FormulaEditor.Performer();
 
 
         Diagram.TypeScript.Performer performer = new();
@@ -47,8 +48,6 @@ namespace DataPerformer.Formula.TypeScript
 
         protected Func<object, bool> checkValue;
 
-        List<string> classes;
-
 
         protected string code;
 
@@ -68,31 +67,43 @@ namespace DataPerformer.Formula.TypeScript
             List<string> l = new List<string>();
             //          l.Add(" : FormulaEditor.Interfaces.ITreeCollectionProxy");
             //        local = null;
-           var lt = PreCreateCode(obj, out local, out variables, out initializers, out classes, className);
-           List<string> ltt = PostCreateCode(local, lt, variables, initializers,
-                        constructorModifier + " " + className,
-                        checkValue);
+            var lt = PreCreateCode(obj, out local, out variables, out initializers,  className);
+            List<string> ltt = PostCreateCode(local, lt, variables, initializers,
+                         constructorModifier + " " + className,
+                         checkValue);
+            var ltr = local.Trees;
             formulaPerformer.Add(l, ltt, 0);
-            if (nPerformer.IsAliasMeasurements(obj))
+            var output = StaticCodeCreatorTypeScript.Output;
+            if (obj is IMeasurements mm)
             {
-                var output = StaticCodeCreatorTypeScript.Output;
-                var ll = new List<string>();
-                ll.Add("save() : void {");
-                var mea = obj as IMeasurements;
-                for (var i = 0; i < mea.Count; i++)
-                {
-                    var m = mea[i];
-
-                }
-                foreach (var k in output)
-                {
-                    ll.Add("\this.setAliasValue(\"" + k.Key + "\", this.get_" + k.Value.Item2 + "());");
-                }
-                ll.Add("}");
-                l.AddRange(ll);
+                output = DataPerformerFormula.GetOutput(mm, ltr);
             }
+            if (obj is IStringTreeDictionary dictionary)
+            {
+                output = DataPerformerFormula.GetOutput(dictionary, ltr);
+            }
+            var ll = new List<string>();
+            ll.Add("save() : void {");
+            ll.Add("\tvar v = this.variables;");
+            var mea = obj as IMeasurements;
+            var kk = 0;
+            foreach (var k in output)
+            {
+                var st = "x" + kk;
+                ++kk;
+                ll.Add("\tvar " + st + " = v.get(" + "\"" + k.Key + "\");");
+                ll.Add("\t" + st + "?.setValue(this.get_" + k.Value.Item1 + "());");
+            }
+            ll.Add("}");
+            l.AddRange(ll);
             l.Add("");
             return l;
+            /*
+             * 	var v = this.variables;
+		var x1 = v.get("F");
+		x1?.setValue(this.get_4());
+
+             */
         }
 
         #endregion
@@ -122,9 +133,7 @@ namespace DataPerformer.Formula.TypeScript
         /// Proxy
         /// </summary>
         public object IAliasName { get; private set; }
-
-        List<string> IAdditionalClassCodeCreator.AdditionalCode => classes;
-
+  
         #endregion
 
         #region Private Members
@@ -182,10 +191,10 @@ namespace DataPerformer.Formula.TypeScript
         }
 
         private List<string> PreCreateCode(object obj, out ICodeCreator local,
-             out IList<string> variables, out IList<string> initializers, out List<string> classes, string current)
+             out IList<string> variables, out IList<string> initializers,  string current)
         {
             var lcode = TypeScriptCodeCreator.CreateCode(obj, trees, codeCreator,
-                out local, out variables, out initializers, out classes, current);
+                out local, out variables, out initializers,  current);
             ObjectFormulaTree[] tr = local.Trees;
             foreach (ObjectFormulaTree tree in tr)
             {
@@ -211,7 +220,7 @@ namespace DataPerformer.Formula.TypeScript
             l.Add(CSharpCodeCreator.StandardHeader);
             l.Add(CSharpCodeCreator.GetGuidClass(new Type[] { typeof(ITreeCollectionProxy) }));
             local = null;
-            IList<string> lt = PreCreateCode(obj, out local, out variables, out initializers, out classes, current);
+            IList<string> lt = PreCreateCode(obj, out local, out variables, out initializers,  current);
             l.Add("\t\t");
             List<string> ltt = PostCreateCode(local, lt, variables, initializers, "public Calculate", checkValue != null);
             StringBuilder sb = new StringBuilder();

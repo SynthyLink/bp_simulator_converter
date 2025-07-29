@@ -6,6 +6,7 @@ using BaseTypes;
 
 using FormulaEditor.Interfaces;
 using FormulaEditor.CodeCreators;
+using FormulaEditor.CodeCreators.Interfaces;
 
 namespace FormulaEditor.CSharp
 {

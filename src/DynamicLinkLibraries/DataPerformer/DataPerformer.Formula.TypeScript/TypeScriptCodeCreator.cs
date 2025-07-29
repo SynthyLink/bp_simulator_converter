@@ -1,14 +1,14 @@
 ﻿using BaseTypes;
+using BaseTypes.CodeCreator.Interfaces;
 using BaseTypes.Interfaces;
 using DataPerformer.Interfaces;
-using DataPerformer.Interfaces.Attributes;
 using DataPerformer.Portable.Measurements;
 using Diagram.Interfaces;
 using ErrorHandler;
 using FormulaEditor;
 using FormulaEditor.CodeCreators;
+using FormulaEditor.CodeCreators.Interfaces;
 using FormulaEditor.Interfaces;
-using System.CodeDom;
 using System.Text;
 
 namespace DataPerformer.Formula.TypeScript
@@ -18,9 +18,6 @@ namespace DataPerformer.Formula.TypeScript
         #region Fields
 
         static DataPerformer.Interfaces.Performer performer = new();
-
-   
-        DataPerformerFormula formula = new(null);
 
         private object obj;
 
@@ -125,6 +122,13 @@ namespace DataPerformer.Formula.TypeScript
 
         private static string[] equals = new string[] { " = (", ").Equals(", ");" };
 
+
+        protected Dictionary<string, Tuple<int, object>> Output
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region Ctor
@@ -143,6 +147,11 @@ namespace DataPerformer.Formula.TypeScript
         {
             separatorCreator = this;
             Object = obj;
+            var trr = this.Trees;
+            if (obj is IMeasurements m)
+            {
+               Output =   DataPerformerFormula.GetOutput(m, trr);
+            }
         }
 
         #endregion
@@ -257,25 +266,47 @@ namespace DataPerformer.Formula.TypeScript
         /// <param name="variables">Variables</param>
         /// <param name="initializers">Initializers</param>
         /// <returns>List of code</returns>
-        public override IList<string> CreateCode(object obj, ObjectFormulaTree tree,
-            string ret, string[] parameters, out IList<string> variables, out IList<string> initializers)
+        protected override Dictionary<string, List<string>> CreateCode(object obj, ObjectFormulaTree tree,
+            string ret, string[] parameters)
         {
+            IList<string> variables;
+            IList<string> initializers;
+
             IList<string> l = CreateTSCode(obj, tree, ret, parameters, out variables, out initializers);
             if (l != null)
             {
-                return l;
+                var d = new Dictionary<string, List<string>>()
+                {
+                    { "initializers", initializers as List<string> },
+                    { "variables", variables  as List<string>},
+                    { "code", l  as List<string>}
+                };
+
+                return d;
             }
             l = CreateArraySingleCode(tree, ret, parameters, out variables, out initializers);
             if (l != null)
             {
-                return l;
+                var d = new Dictionary<string, List<string>>()
+                {
+              { "initializers", initializers as List<string> },
+                    { "variables", variables  as List<string>},
+                    { "code", l  as List<string>}
+                    };
+                return d;
             }
             try
             {
                 l = CreateArrayCode(obj, tree, ret, parameters, out variables, out initializers);
                 if (l != null)
                 {
-                    return l;
+                 var    d = new Dictionary<string, List<string>>()
+                {
+                  { "initializers", initializers as List<string> },
+                    { "variables", variables  as List<string>},
+                    { "code", l  as List<string>}
+                  };
+                    return d;
                 }
             }
             catch (Exception exception)
@@ -284,17 +315,20 @@ namespace DataPerformer.Formula.TypeScript
             }
             if (ret.Length > 0)
             {
-                return CreateTreeCode(tree, ret, parameters, out variables, out initializers);
+                var ll = CreateTreeCode(tree, ret, parameters, out variables, out initializers);
+                var d = new Dictionary<string, List<string>>()
+                {
+                  { "initializers", initializers as List<string> },
+                    { "variables", variables  as List<string>},
+                    { "code", l  as List<string>}
+                  };
+                return d;
+
             }
             return null;
         }
 
-        internal static Dictionary<string, Tuple<int, object>> Output
-        {
-            get;
-            set;
-        }
-
+    
 
         /// <summary>
         /// Gets constant string representation of value of tree 
@@ -391,17 +425,16 @@ namespace DataPerformer.Formula.TypeScript
         /// <param name="initializers">Initializers</param>
         /// <returns>List of code strings</returns>
         public static IList<string> CreateCode(object obj, ObjectFormulaTree[] trees, ICodeCreator creator, out ICodeCreator local,
-             out IList<string> variables, out IList<string> initializers, out List<string> classes, string current)
+             out IList<string> variables, out IList<string> initializers,  string current)
         {
             Exception ex;
             try
             {
                 local = null;
                 IList<string> l = StaticCodeCreatorTypeScript.CreateCode(obj, trees, creator, out local,
-                    out variables, out initializers, out classes, current);
+                    out variables, out initializers,  current);
                 ObjectFormulaTree[] lt = local.Trees;
-                Output = StaticCodeCreatorTypeScript.Output;
-                foreach (ObjectFormulaTree tree in lt)
+                 foreach (ObjectFormulaTree tree in lt)
                 {
                     var s = "";
                     object ret = tree.ReturnType;
@@ -824,12 +857,16 @@ namespace DataPerformer.Formula.TypeScript
                 }
                 IList<string> vari;
                 IList<string> init;
-                IList<string> l = CreateCode(obj, childTree, ret, par, out vari, out init);
-                success = (l != null);
+                var ld = CreateCode(obj, childTree, ret, par);
+                success = (ld != null);
                 if (!success)
                 {
                     return;
                 }
+                var l = ld["code"];
+                vari = ld["variables"];
+                init = ld["iniializers"];
+
                 foreach (string s in l)
                 {
                     list.Add("\t" + s);
@@ -871,17 +908,19 @@ namespace DataPerformer.Formula.TypeScript
                     }
                     IList<string> vari;
                     IList<string> init;
-                    IList<string> l = CreateCode(obj, childTree, retLocal, par, out vari, out init);
+                    var  l = CreateCode(obj, childTree, retLocal, par);
                     success = (l != null);
                     if (!success)
                     {
                         return;
                     }
-                    list.AddRange(l);
+                    list.AddRange(l["code"]);
+                    vari = l["variables"];
                     if (vari != null)
                     {
                         variables.AddRange(vari);
                     }
+                    init = l["initializers"];
                     if (init != null)
                     {
                         initializers.AddRange(init);
@@ -970,17 +1009,19 @@ namespace DataPerformer.Formula.TypeScript
                     }
                     IList<string> vari;
                     IList<string> init;
-                    IList<string> l = CreateCode(Object, childTree, retLocal, par, out vari, out init);
+                    var l = CreateCode(Object, childTree, retLocal, par);
                     success = (l != null);
                     if (!success)
                     {
                         return;
                     }
-                    list.AddRange(l);
+                    list.AddRange(l["code"]);
+                    vari = l["variables"];
                     if (vari != null)
                     {
                         variables.AddRange(vari);
                     }
+                    init = l["initializers"];
                     if (init != null)
                     {
                         initializers.AddRange(init);

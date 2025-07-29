@@ -1,8 +1,8 @@
 import { IDesktop } from "../Interfaces/IDesktop";
 import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
-import { DataConsumerMeasurements } from "./DataConsumerMeasurements";
+import { DataConsumerVariadbleMeasurements } from "./DataConsumerVariableMeasurements";
 
-export class VectorFormulaConsumer extends DataConsumerMeasurements implements IPostSetArrow
+export class VectorFormulaConsumer extends DataConsumerVariadbleMeasurements implements IPostSetArrow
 {
     protected feedback: Map<number, string> = new Map();
 
@@ -20,12 +20,17 @@ export class VectorFormulaConsumer extends DataConsumerMeasurements implements I
 
     updateMeasurements(): void {
         this.calculateTree();
+        this.save();
     }
 
     calculateTree(): void {
     }
 
     init(): void {
+
+    }
+
+    save(): void {
 
     }
 

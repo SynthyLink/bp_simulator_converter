@@ -1,13 +1,13 @@
 
 import { IDesktop } from "../Interfaces/IDesktop";
-import { DataConsumerMeasurements } from "./DataConsumerMeasurements";
 import { IMeasurements } from "./Interfaces/IMeasurements";
 import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import { IStarted } from "./Interfaces/IStarted";
 import { IAlias } from "../Interfaces/IAlias";
+import { DataConsumerVariadbleMeasurements } from "./DataConsumerVariableMeasurements";
 
 
-export class Recursive extends DataConsumerMeasurements implements IStarted, IPostSetArrow
+export class Recursive extends DataConsumerVariadbleMeasurements implements IStarted, IPostSetArrow
 {
     protected inputs: IMeasurements[] = [];
 
@@ -31,10 +31,14 @@ export class Recursive extends DataConsumerMeasurements implements IStarted, IPo
 
     }
 
-    startedStart(start: number): void {
+    startedStart(start: number): void
+    {
         var keys = this.initial.keys();
-        for (var key of keys) {
-            this.setAliasValue(key, this.initial.get(key));
+        var vari = this.variables;
+        for (var key of keys)
+        {
+            var v = vari.get(key);
+            v?.setValue(this.initial.get(key));
         }
     }
 
@@ -45,8 +49,12 @@ export class Recursive extends DataConsumerMeasurements implements IStarted, IPo
         }
     }
 
+    init(): void {
+    }
+
    
     postSetArrow(): void {
+        this.init();
     }
 
     getAllMeasurements(): IMeasurements[] {

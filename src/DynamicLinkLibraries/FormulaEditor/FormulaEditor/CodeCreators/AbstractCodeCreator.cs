@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-
-using FormulaEditor.Interfaces;
-using BaseTypes.Interfaces;
+using BaseTypes.CodeCreator.Interfaces;
+using FormulaEditor.CodeCreators.Interfaces;
 
 namespace FormulaEditor.CodeCreators
 {
@@ -15,6 +13,8 @@ namespace FormulaEditor.CodeCreators
     public abstract class AbstractCodeCreator : ICodeCreator
     {
         #region Fields
+
+        
 
         /// <summary>
         /// Trees
@@ -84,22 +84,17 @@ namespace FormulaEditor.CodeCreators
         /// <param name="tree">The tree</param>
         /// <param name="ret">Return value</param>
         /// <param name="parameters">Parameters</param>
-        /// <param name="variables">Variables</param>
-        /// <param name="initializers">Initializers</param>
         /// <returns>List of code</returns>
-        public virtual IList<string> CreateCode(object obj, ObjectFormulaTree tree, string ret,
-            string[] parameters, out IList<string> variables,
-            out IList<string> initializers)
+        protected virtual Dictionary<string, List<string>> CreateCode(object obj, ObjectFormulaTree tree, string ret,
+            string[] parameters)
         {
-            variables = null;
-            initializers = null;
             if (creators == null)
             {
                 return null;
             }
             foreach (ICodeCreator cc in creators)
             {
-                IList<string> l = cc.CreateCode(obj, tree, ret, parameters, out variables, out initializers);
+                var l = cc.CreateCode(obj, tree, ret, parameters);
                 if (l != null)
                 {
                     return l;
@@ -146,12 +141,19 @@ namespace FormulaEditor.CodeCreators
 
         #region Abstract Members
 
+        protected virtual object Object { get; set; }
+
         /// <summary>
         /// Gets constant string representation of value of tree 
         /// </summary>
         /// <param name="tree">The tree</param>
         /// <returns>String representation</returns>
         public abstract string GetConstValue(ObjectFormulaTree tree);
+
+        Dictionary<string, List<string>> ICodeCreator.CreateCode(object obj, ObjectFormulaTree tree, string ret, params string[] parameters)
+        {
+            return CreateCode(obj, tree, ret, parameters);
+        }
 
         /// <summary>
         /// Type creator
@@ -160,6 +162,7 @@ namespace FormulaEditor.CodeCreators
         {
             get;
         }
+        object ICodeCreator.Object { get => Object; set => Object = value; }
 
         #endregion
 

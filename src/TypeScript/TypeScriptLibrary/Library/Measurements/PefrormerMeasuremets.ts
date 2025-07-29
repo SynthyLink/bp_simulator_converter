@@ -8,10 +8,24 @@ import { Performer } from "../Performer";
 import { IArrayElementMeasurement } from "./Interfaces/IArrayElemetMeasurements";
 import { IMeasurement } from "./Interfaces/IMeasurement";
 import { ArrayMeasurement } from "./ArrayMeasurement";
+import { IAlias } from "../Interfaces/IAlias";
+import { Variable } from "./Variable";
+import { AliasNameMeasurement } from "./AliasNameMeasurement";
 
 export class PefrormerMeasuremets {
 
     performer: Performer = new Performer();
+
+    public createVariable(name: string, type: any, value: any, alias: IAlias): Variable {
+        var nms = alias.getAliasNames();
+        for (var n of nms) {
+            if (n == name) {
+                return new AliasNameMeasurement(alias, name);
+            }
+        }
+        return new Variable(name, type, value);
+    }
+
 
     public getArrayMeasurements(array: IArrayElementMeasurement): IMeasurement[] {
         var n = array.getMeasurementNames().length;

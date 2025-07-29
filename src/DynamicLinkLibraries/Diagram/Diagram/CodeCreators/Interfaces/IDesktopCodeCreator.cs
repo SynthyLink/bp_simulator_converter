@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Diagram.UI.Interfaces;
+using System.Collections.Generic;
 
-namespace Diagram.UI.Interfaces
+namespace Diagram.CodeCreators.Interfaces
 {
     /// <summary>
     /// Creates code for desktop

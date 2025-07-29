@@ -4,9 +4,20 @@ exports.PefrormerMeasuremets = void 0;
 const TimeMeasurementProvider_1 = require("./TimeMeasurementProvider");
 const Performer_1 = require("../Performer");
 const ArrayMeasurement_1 = require("./ArrayMeasurement");
+const Variable_1 = require("./Variable");
+const AliasNameMeasurement_1 = require("./AliasNameMeasurement");
 class PefrormerMeasuremets {
     constructor() {
         this.performer = new Performer_1.Performer();
+    }
+    createVariable(name, type, value, alias) {
+        var nms = alias.getAliasNames();
+        for (var n of nms) {
+            if (n == name) {
+                return new AliasNameMeasurement_1.AliasNameMeasurement(alias, name);
+            }
+        }
+        return new Variable_1.Variable(name, type, value);
     }
     getArrayMeasurements(array) {
         var n = array.getMeasurementNames().length;

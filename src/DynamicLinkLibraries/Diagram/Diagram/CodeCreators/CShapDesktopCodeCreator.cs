@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-
 using Diagram.Attributes;
+using Diagram.CodeCreators.Interfaces;
+using Diagram.UI;
 using Diagram.UI.Interfaces;
 
-namespace Diagram.UI
+namespace Diagram.CodeCreators
 {
     [Language("C#", ".cs")]
     internal class CShapDesktopCodeCreator : IDesktopCodeCreator

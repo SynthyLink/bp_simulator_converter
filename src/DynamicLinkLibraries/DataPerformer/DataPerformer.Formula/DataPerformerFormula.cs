@@ -77,6 +77,22 @@ namespace DataPerformer.Formula
             }
         }
 
+        static public Dictionary<string, Tuple<int, object>> GetOutput(IStringTreeDictionary d, IEnumerable< ObjectFormulaTree> t)
+        {
+            var l = t.ToList();
+            var output = new Dictionary<string, Tuple<int, object>>();
+            var dict = d.Dictionary;
+            foreach (var k in dict)
+            {
+                var i = l.IndexOf(k.Value);
+                if (i >= 0)
+                {
+                    output[k.Key] = new Tuple<int, object>(i, k.Value.ReturnType);
+                }
+            }
+            return output;
+        }
+
         static public Dictionary<string, Tuple<int, object>> GetOutput(IMeasurements m, ObjectFormulaTree[] t)
         {
             var l = t.ToList();
@@ -100,7 +116,6 @@ namespace DataPerformer.Formula
 
         void CreateOutput()
         {
-            
             output = new Dictionary<string, int>();
             IMeasurements measurements = treeCollection as IMeasurements;
             var trees = treeCollection.Trees.ToList();
@@ -318,7 +333,6 @@ namespace DataPerformer.Formula
 
         #endregion
 
-
         #region Classes
 
 
@@ -365,8 +379,6 @@ namespace DataPerformer.Formula
 
 
         #endregion
-
-
 
 
     }

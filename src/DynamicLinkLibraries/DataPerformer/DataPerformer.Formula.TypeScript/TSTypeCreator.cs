@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 using BaseTypes;
-using BaseTypes.Interfaces;
+using BaseTypes.CodeCreator.Interfaces;
 
 namespace DataPerformer.Formula.TypeScript
 {

@@ -1,4 +1,4 @@
-﻿namespace BaseTypes.Interfaces
+﻿namespace BaseTypes.CodeCreator.Interfaces
 {
     /// <summary>
     /// Creator of types

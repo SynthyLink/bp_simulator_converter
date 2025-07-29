@@ -1,11 +1,14 @@
-﻿using Diagram.UI.Interfaces;
+﻿using BaseTypes.Interfaces;
+
+using DataPerformer.Interfaces;
+
+using Diagram.UI.Interfaces;
 
 namespace Diagram.TypeScript
 {
  
     public class Performer 
     {
-
         public void AddObjectConstructor(List<string> l)
         {
             l.Add("\tconstructor(desktop: IDesktop, name: string)");
@@ -102,8 +105,7 @@ namespace Diagram.TypeScript
             }
             return l;
         }
-
-
+         
         public List<string> CreateTSAliasList(string id,  IAlias alias)
         {
             List<string> l = new List<string>();

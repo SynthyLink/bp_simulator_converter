@@ -27,14 +27,5 @@ namespace DataPerformer.Interfaces
             return () => k * f();
         }
 
-        public bool IsAliasMeasurements(object obj)
-        {
-            if (obj is IMeasurements m)
-            {
-                return performer.GetAttribute<AliasMeasurementsAttribute>(m) != null;
-            }
-            return false;
-        }
-
     }
 }
