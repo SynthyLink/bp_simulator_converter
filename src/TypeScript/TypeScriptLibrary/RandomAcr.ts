@@ -1,6 +1,6 @@
 import { IDataConsumer } from "./Library/Measurements/Interfaces/IDataConsumer";
 import { PefrormerMeasuremets } from "./Library/Measurements/PefrormerMeasuremets";
-import { DetaRuntimeConsumer } from "./Library/Runtime/DetaRuntimeConsumer";
+import { DataRuntimeConsumer } from "./Library/Runtime/DataRuntimeConsumer";
 import { IDataRuntime } from "./Library/Runtime/Interfaces/IDataRuntime";
 import { Random } from "./src/Random";
 
@@ -20,7 +20,7 @@ export class RandomAct  extends Random
     }
 
     public test(): void {
-        var runtime: IDataRuntime = new DetaRuntimeConsumer(this.dc);
+        var runtime: IDataRuntime = new DataRuntimeConsumer(this.dc);
         var p: PefrormerMeasuremets = new PefrormerMeasuremets();
         p.peformFixedStepCalculation(runtime, 0, 1, 1000, this);
     }

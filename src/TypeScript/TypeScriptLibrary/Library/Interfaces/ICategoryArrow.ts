@@ -11,7 +11,7 @@ export interface ICategoryArrow
 
     setTarget(target: ICategoryObject): void;
 
-    getName(): string;
+    getArrowName(): string;
 
     getDesktop(): IDesktop;
 

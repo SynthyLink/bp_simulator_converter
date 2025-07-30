@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RandomAct = void 0;
 const PefrormerMeasuremets_1 = require("./Library/Measurements/PefrormerMeasuremets");
-const DetaRuntimeConsumer_1 = require("./Library/Runtime/DetaRuntimeConsumer");
+const DataRuntimeConsumer_1 = require("./Library/Runtime/DataRuntimeConsumer");
 const Random_1 = require("./src/Random");
 class RandomAct extends Random_1.Random {
     constructor() {
@@ -16,7 +16,7 @@ class RandomAct extends Random_1.Random {
         console.log(a);
     }
     test() {
-        var runtime = new DetaRuntimeConsumer_1.DetaRuntimeConsumer(this.dc);
+        var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc);
         var p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
         p.peformFixedStepCalculation(runtime, 0, 1, 1000, this);
     }

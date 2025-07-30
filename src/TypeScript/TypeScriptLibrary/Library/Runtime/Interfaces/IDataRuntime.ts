@@ -18,12 +18,18 @@ export interface IDataRuntime {
     /// <param name="time">Start time</param>
     startRuntime(time: number): void;
 
+    addCategoryObjectToRuntime(object: ICategoryObject): void;
+
+
+    getRumtimeObject(name: string): ICategoryObject;
+
 
     setTimeProvider(timeProvider: ITimeMeasurementProvider): void;
 
     getTimeProvider(): ITimeMeasurementProvider;
 
     getRumtimeObjects(): ICategoryObject[];
+
 
     getRunimeArrows(): ICategoryArrow[];
 

@@ -1,13 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DetaRuntimeConsumer = void 0;
+exports.DataRuntimeConsumer = void 0;
 const OwnNotImplemented_1 = require("../ErrorHandler/OwnNotImplemented");
 const Performer_1 = require("../Performer");
-class DetaRuntimeConsumer {
+class DataRuntimeConsumer {
     constructor(dataConsumer) {
         this.performer = new Performer_1.Performer();
         this.measurements = [];
         this.categoryObjects = [];
+        this.categoryObjectsMap = new Map();
         this.cotegoryArrows = [];
         this.started = [];
         let nm = [];
@@ -16,7 +17,7 @@ class DetaRuntimeConsumer {
             var n = nm[i];
             this.measurements.push(nm[i]);
             if (this.performer.implementsType(n, "ICategoryObject")) {
-                this.categoryObjects.push(n);
+                this.addCategoryObjectToRuntime(n);
             }
             if (this.performer.implementsType(n, "IStarted")) {
                 this.started.push(n);
@@ -25,6 +26,14 @@ class DetaRuntimeConsumer {
         if (this.performer.implementsType(dataConsumer, "IMeasurements")) {
             this.measurements.push(dataConsumer);
         }
+    }
+    addCategoryObjectToRuntime(object) {
+        this.categoryObjects.push(object);
+        var n = object.getCategoryObjectName();
+        this.categoryObjectsMap.set(n, object);
+    }
+    getRumtimeObject(name) {
+        return this.categoryObjectsMap.get(name);
     }
     getStarted() {
         return this.started;
@@ -82,5 +91,5 @@ class DetaRuntimeConsumer {
         }
     }
 }
-exports.DetaRuntimeConsumer = DetaRuntimeConsumer;
-//# sourceMappingURL=DetaRuntimeConsumer.js.map
+exports.DataRuntimeConsumer = DataRuntimeConsumer;
+//# sourceMappingURL=DataRuntimeConsumer.js.map

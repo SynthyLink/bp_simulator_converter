@@ -9,7 +9,8 @@ import { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasur
 import { IDataRuntime } from "./Interfaces/IDataRuntime";
 import { IStarted } from "../Measurements/Interfaces/IStarted";
 
-export class DetaRuntimeConsumer implements IDataRuntime {
+export class DataRuntimeConsumer implements IDataRuntime
+{
 
     performer: Performer = new Performer();
 
@@ -18,6 +19,9 @@ export class DetaRuntimeConsumer implements IDataRuntime {
     protected measurements: IMeasurements[] = [];
 
     protected categoryObjects: ICategoryObject[] = [];
+
+    protected categoryObjectsMap: Map<string, ICategoryObject> = new Map();
+
 
     protected cotegoryArrows: ICategoryArrow[] = [];
 
@@ -30,8 +34,9 @@ export class DetaRuntimeConsumer implements IDataRuntime {
         for (let i = nm.length - 1; i >= 0; i--) {
             var n = nm[i];
             this.measurements.push(nm[i]);
-            if (this.performer.implementsType(n, "ICategoryObject")) {
-                this.categoryObjects.push(n as unknown as ICategoryObject);
+            if (this.performer.implementsType(n, "ICategoryObject"))
+            {
+                this.addCategoryObjectToRuntime(n as unknown as ICategoryObject);
             }
             if (this.performer.implementsType(n, "IStarted")) {
                 this.started.push(n as unknown as IStarted);
@@ -44,6 +49,16 @@ export class DetaRuntimeConsumer implements IDataRuntime {
 
 
     }
+    addCategoryObjectToRuntime(object: ICategoryObject): void {
+        this.categoryObjects.push(object);
+        var n = object.getCategoryObjectName();
+        this.categoryObjectsMap.set(n, object);
+    }
+    getRumtimeObject(name: string): ICategoryObject
+    {
+        return this.categoryObjectsMap.get(name) as ICategoryObject;
+    }
+
     getStarted(): IStarted[] {
         return this.started;
     }

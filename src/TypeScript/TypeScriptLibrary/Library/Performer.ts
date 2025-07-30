@@ -13,6 +13,41 @@ export class Performer
 
     protected s: string = "";
 
+    public converArray<T, S>(objects: T[], type: string): S[]
+    {
+
+        let s : S[] = [];
+        for (var i = 0; i < objects.length; i++)
+        {
+            let o: IObject = objects[i] as IObject;
+            if (o.imlplementsType(type))
+            {
+                s.push(o as unknown as S);
+            }
+        }
+        return s;
+    }
+
+    public convertMap<T, S, R>(objects: Map<T, S>, type: string): Map<T, R>
+    {
+        let map: Map<T, R> = new Map();
+        var ent = objects.entries();
+        for (const [key, val] of ent)
+        {
+            let o: IObject = val as IObject;
+            if (o.imlplementsType(type))
+            {
+                map.set(key, o as R);
+            }
+
+        }
+        return map;
+    }
+
+
+
+    
+
     public select<T>(objects: IObject[], type: string): T[] {
 
         let t: T[] = [];

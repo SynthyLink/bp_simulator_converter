@@ -1,14 +1,11 @@
-import { read } from "fs";
-import { ICategoryArrow } from "./Library/Interfaces/ICategoryArrow";
-import { ICategoryObject } from "./Library/Interfaces/ICategoryObject";
-import { DataLink } from "./Library/Measurements/DataLink";
-import { Performer } from "./Library/Performer";
 import { OrbitAct } from "./OrbitAct";
 //import { Orbital } from "./src/Orbital";
 import * as readline from 'readline';
 import { RandomAct } from "./RandomAcr";
+import { TwoAct } from "./TwoAct";
 //actOrbit();
-actRandom();
+//actRandom();
+actTwo();
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -43,6 +40,29 @@ function load() {
         let ii = 0;
         ii++;
 
+    }
+}
+
+function actTwo() {
+    try {
+        var o = new TwoAct();
+        o.test();
+    }
+    catch (e: any) {
+        console.log(e);
+        rl.question('Is this example useful? [y/n] ', (answer) => {
+            switch (answer.toLowerCase()) {
+                case 'y':
+                    console.log('Super!');
+                    break;
+                case 'n':
+                    console.log('Sorry! :(');
+                    break;
+                default:
+                    console.log('Invalid answer!');
+            }
+            rl.close();
+        });
     }
 }
 

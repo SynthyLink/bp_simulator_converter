@@ -17,6 +17,7 @@ export interface IDesktop
 
     getObjects(): IObject[];
 
+
     getCheck(): Check;
 
     setCheck(check: Check): void;

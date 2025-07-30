@@ -8,6 +8,27 @@ class Performer {
         this.b = false;
         this.s = "";
     }
+    converArray(objects, type) {
+        let s = [];
+        for (var i = 0; i < objects.length; i++) {
+            let o = objects[i];
+            if (o.imlplementsType(type)) {
+                s.push(o);
+            }
+        }
+        return s;
+    }
+    convertMap(objects, type) {
+        let map = new Map();
+        var ent = objects.entries();
+        for (const [key, val] of ent) {
+            let o = val;
+            if (o.imlplementsType(type)) {
+                map.set(key, o);
+            }
+        }
+        return map;
+    }
     select(objects, type) {
         let t = [];
         for (var i = 0; i < objects.length; i++) {
