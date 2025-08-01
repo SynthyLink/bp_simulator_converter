@@ -129,9 +129,18 @@ namespace DataPerformer.Portable.Runtime
         /// <param name="reason">reason</param>
         /// <param name="priority">priority</param>
         public DataConsumerRuntime(IDataRuntimeFactory factory, IDataConsumer consumer, string reason,
-            int priority = 0)
+            int priority = 0,
+            IAsynchronousCalculation realtimeStep = null,
+            ITimeMeasurementProvider realtime = null)
         {
-            provider = new TimeMeasurementProvider(consumer);
+            if (realtime == null)
+            {
+                provider = new TimeMeasurementProvider(consumer);
+            }
+            else
+            {
+                provider = realtime;
+            }
             this.reason = reason;
             this.factory = factory;
             this.consumer = consumer;

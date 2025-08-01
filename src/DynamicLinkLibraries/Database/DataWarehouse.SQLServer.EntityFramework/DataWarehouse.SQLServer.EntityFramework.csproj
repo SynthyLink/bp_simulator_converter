@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ErrorHandler\ErrorHandler.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="DataWarehouse.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DataWarehouse.cs</LastGenOutput>

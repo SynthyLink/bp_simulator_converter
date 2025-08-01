@@ -2925,7 +2925,6 @@ Func<bool> stop)
             {
                 File.Delete(fileText);
             }
-
             if (Path.GetExtension(fileText).ToLower() == ".json")
             {
                 string jsonString = JsonSerializer.Serialize(lists);

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
@@ -14,6 +12,10 @@ using Diagram.UI.Interfaces;
 using Diagram.UI.Utils;
 
 using BaseTypes.Interfaces;
+using BaseTypes;
+using ErrorHandler;
+using NamedTree;
+
 
 using AssemblyService.Attributes;
 
@@ -21,17 +23,13 @@ using DataPerformer.Portable;
 using DataPerformer.Interfaces;
 
 using DataPerformer.UI.Interfaces;
+using DataPerformer.UI.Labels;
 
 using Chart;
 using Chart.Drawing.Series;
 using Chart.Drawing.Interfaces;
 using Chart.Drawing.Painters;
-using DataPerformer.UI.UserControls;
 using Chart.Objects;
-using DataPerformer.UI.Labels;
-using BaseTypes;
-using ErrorHandler;
-using NamedTree;
 
 
 namespace DataPerformer.UI

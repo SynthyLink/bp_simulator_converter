@@ -5,12 +5,21 @@ import { IObject } from "./Interfaces/IObject";
 
 export class CategoryArrow implements ICategoryArrow, IObject
 {
-    constructor(desktop: IDesktop, name: string) {
+    constructor(desktop: IDesktop, name: string)
+    {
         this.desktop = desktop;
         this.name = name;
         desktop.addCategoryArrow(this);
-        desktop.addObject(this);
     }
+    getName(): string {
+        throw new Error("Method not implemented.");
+    }
+
+    getCategoryArrowName(): string
+    {
+        return this.name;
+    }
+
     getClassName(): string {
         return this.typeName;
     }
@@ -24,10 +33,6 @@ export class CategoryArrow implements ICategoryArrow, IObject
 
     getDesktop(): IDesktop {
         return this.desktop;
-    }
-
-    getName(): string {
-        return this.name;
     }
 
     source!: ICategoryObject;
