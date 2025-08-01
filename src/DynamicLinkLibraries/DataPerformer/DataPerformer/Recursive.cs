@@ -146,7 +146,7 @@ namespace DataPerformer
 		/// <summary>
 		/// The operation that performs after arrows setting
 		/// </summary>
-		public override void PostSetArrow()
+		protected override void PostSetArrow()
 		{
 			ConvertInvert();
 			base.PostSetArrow();

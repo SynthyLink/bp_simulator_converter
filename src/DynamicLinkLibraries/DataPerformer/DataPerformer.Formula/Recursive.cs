@@ -28,16 +28,19 @@ namespace DataPerformer.Formula
     /// <summary>
     /// Recurrent object
     /// </summary>
-	public class Recursive : CategoryObject,  IDataConsumer, IMeasurements, IStarted, IRunning, IAlias,
+	public class Recursive : CategoryObject,  IDataConsumer, IMeasurements, IStarted, 
+		IRunning, IAlias,
 		ICheckCorrectness, IStep, IRuntimeUpdate, ITimeMeasurementConsumer, 
 		IVariableDetector, ITreeCollection,	ITimeVariable, IInitialDictionary, 
 		IStringTreeDictionary,
 		IPostSetArrow
 	{
 
-        #region Fields
+		#region Fields
 
-		Dictionary<string, ObjectFormulaTree> td = new ();
+		Portable.Wrappers.Performer performer = new();
+
+        Dictionary<string, ObjectFormulaTree> td = new ();
 
  
         /// <summary>
@@ -53,10 +56,10 @@ namespace DataPerformer.Formula
 		/// <summary>
 		/// Internal variables
 		/// </summary>
-		protected Dictionary<object,object> VariablesL
+		protected Dictionary<string,object> VariablesL
 		{
 			get;
-		} = new Dictionary<object, object>();
+		} = new Dictionary<string, object>();
 
 		/// <summary>
 		/// Aliases
@@ -86,7 +89,7 @@ namespace DataPerformer.Formula
 		/// <summary>
 		/// External aliases
 		/// </summary>
-		private Dictionary<object, object> externalAliases = new Dictionary<object, object>();
+		private Dictionary<string, IAliasName> externalAliases = new ();
 
 		/// <summary>
 		/// The "is updated" sign
@@ -270,22 +273,32 @@ namespace DataPerformer.Formula
 			}
 			try
 			{
-				foreach (char c in externalAliases.Keys)
+				foreach (var c in externalAliases)
 				{
-					object[] o = externalAliases[c] as object[];
-					IAlias al = o[0] as IAlias;
-					string key = o[1] as string;
-					object[] ob = VariablesL[c] as object[];
-					al[key] = ob[0];
+					object[] ob = VariablesL[c.Key] as object[];
+					var x = ob[0];
+					c.Value.Value = x;
 				}
 				UpdateChildrenData();
 				Update();
 				foreach (char c in varc)
 				{
-					object[] o = VariablesL[c] as object[];
+					object[] o = VariablesL[c + ""] as object[];
 					o[0] = o[3];
 				}
-				isUpdated = true;
+  /*              foreach (char c in externalAliases.Keys)
+                {
+                    object[] o = externalAliases[c] as object[];
+                    IAlias al = o[0] as IAlias;
+                    string key = o[1] as string;
+                    object[] ob = VariablesL[c] as object[];
+                    var x = ob[0];
+                    if (x != null)
+                    {
+                        al[key] = x;
+                    }
+                }*/
+					isUpdated = true;
 			}
 			catch (Exception e)
 			{
@@ -574,14 +587,19 @@ namespace DataPerformer.Formula
 			set { }
 		}
 
-		#endregion
+        #endregion
 
-		#region IPostSetArrow Members
+        #region IPostSetArrow Members
 
-		/// <summary>
-		/// The operation that performs after arrows setting
-		/// </summary>
-		public virtual void PostSetArrow()
+        void IPostSetArrow.PostSetArrow()
+		{
+			PostSetArrow();
+		}
+
+        /// <summary>
+        /// The operation that performs after arrows setting
+        /// </summary>
+        protected virtual void PostSetArrow()
 		{
 			if (varc.Count == 0)
 			{
@@ -591,7 +609,9 @@ namespace DataPerformer.Formula
 			AcceptFormulas();
 			ExternalAliases = externalAls;
 			CreateProxyInternal();
-		}
+			SetAllVariables();
+        }
+
 		#endregion
 
 		#region Specific Members
@@ -823,8 +843,8 @@ namespace DataPerformer.Formula
 				foreach (char c in externalAls.Keys)
 				{
 					string s = externalAls[c] as string;
-					object[] o = this.FindAlias(s);
-					externalAliases[c] = o;
+					var al = performer.FindAliasName(this, s);
+					externalAliases[c + ""] = al;
 				}
 			}
 		}
@@ -883,7 +903,9 @@ namespace DataPerformer.Formula
             VariablesL.Clear();
             foreach (char c in varc)
             {
-                VariablesL[c] = new object[4];
+				var s = c + "";
+				var k = vars[c];
+				VariablesL[s] = new object[4];
             }
             IList<string> an = AliasNames;
             List<ObjectFormulaTree> tt = new List<ObjectFormulaTree>();
@@ -926,7 +948,7 @@ namespace DataPerformer.Formula
                 {
                     t = os[2];
                 }
-                object[] ol = VariablesL[c] as object[];
+                object[] ol = VariablesL[c + ""] as object[];
                 string f = os[1] as string;
                 MathFormula form = MathFormula.FromString(MathSymbolFactory.Sizes, f);
                 ObjectFormulaTree tree = ObjectFormulaTree.CreateTree(form.FullTransform(proh), creator);
@@ -978,23 +1000,30 @@ namespace DataPerformer.Formula
 
 		Dictionary<string, ObjectFormulaTree> IStringTreeDictionary.Dictionary => td;
 
-        void Start(bool stated)
+		void SetAllVariables()
 		{
-			if (stated)
+            foreach (char c in varc)
+            {
+                object[] o0 = vars[c] as object[];
+                object[] o = VariablesL[c + ""] as object[];
+                o[0] = o0[2];
+            }
+            oldStep = step;
+            tempAliases.Clear();
+            foreach (var alias in aliases.Keys)
+            {
+                tempAliases[alias] = aliases[alias];
+            }
+
+        }
+
+        protected virtual void Start(bool started)
+		{
+			isRunning = started;
+			if (started)
 			{
-				foreach (char c in varc)
-				{
-					object[] o0 = vars[c] as object[];
-					object[] o = VariablesL[c] as object[];
-					o[0] = o0[2];
-				}
-				oldStep = step;
-				tempAliases.Clear();
-				foreach (var alias in aliases.Keys)
-				{
-					tempAliases[alias] = aliases[alias];
-				}
-				return;
+				SetAllVariables();
+                return;
 			}
             foreach (var alias in tempAliases.Keys)
             {
@@ -1008,7 +1037,7 @@ namespace DataPerformer.Formula
 		{
 			foreach (char c in varc)
 			{
-				object[] o = VariablesL[c] as object[];
+				object[] o = VariablesL[c + ""] as object[];
 				ObjectFormulaTree tree = o[1] as ObjectFormulaTree;
 				o[3] = tree.Result;
 			}
@@ -1027,7 +1056,7 @@ namespace DataPerformer.Formula
 				AssociatedAddition aa = new AssociatedAddition(this, null);
 				foreach (char c in varc)
 				{
-					object[] o = VariablesL[c] as object[];
+					object[] o = VariablesL[c + ""] as object[];
 					ObjectFormulaTree tree = o[1] as ObjectFormulaTree;
 					FormulaMeasurement fm = FormulaMeasurement.Create(tree, 0, c + "", aa, this);
 					dictF[c] = fm;
@@ -1053,7 +1082,7 @@ namespace DataPerformer.Formula
 			proxy.Update();
 			foreach (char c in varc)
 			{
-				object[] o = VariablesL[c] as object[];
+				object[] o = VariablesL[c + ""] as object[];
 				IMeasurement m = dictF[c];
 				o[3] = m.Parameter();
 			}
@@ -1130,7 +1159,7 @@ namespace DataPerformer.Formula
 			/// <summary>
 			/// Measure key
 			/// </summary>
-			private char key;
+			private string key;
 
 			/// <summary>
 			/// Parent
@@ -1162,7 +1191,7 @@ namespace DataPerformer.Formula
 			/// <param name="r">Parent</param>
 			private Variable(char key, Recursive r)
 			{
-				this.key = key;
+				this.key = key + "";
 				Recursive = r;
 				name = key + "";
 				type = r.GetType(name);
@@ -1193,7 +1222,7 @@ namespace DataPerformer.Formula
 
 			object[] IObjectOperation.InputTypes
 			{
-				get { return new object[0]; }
+				get { return []; }
 			}
 
 			object IObjectOperation.this[object[] x]
@@ -1255,7 +1284,7 @@ namespace DataPerformer.Formula
 			/// <returns></returns>
 			private object getValue()
 			{
-				object[] o = Recursive.VariablesL[key] as object[];
+				object[] o = Recursive.VariablesL[key + ""] as object[];
 				return o[0];
 			}
 
