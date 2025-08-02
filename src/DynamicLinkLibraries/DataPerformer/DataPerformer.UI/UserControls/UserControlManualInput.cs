@@ -1,11 +1,9 @@
-﻿using System;
+﻿using DataPerformer.Portable.Objects;
+using Diagram.UI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
-
-using DataPerformer.Portable.Objects;
-
-using Diagram.UI;
 
 namespace DataPerformer.UI.UserControls
 {

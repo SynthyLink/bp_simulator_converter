@@ -26,15 +26,6 @@ export class PefrormerMeasuremets {
         return new Variable(name, type, value);
     }
 
-    public updateChildrenDats(data: IDataConsumer): void
-    {
-        var mea = data.getAllMeasurements();
-        for (var m of mea)
-        {
-            m.updateMeasurements();
-        }
-    }
-
 
     public getArrayMeasurements(array: IArrayElementMeasurement): IMeasurement[] {
         var n = array.getMeasurementNames().length;

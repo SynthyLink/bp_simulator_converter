@@ -129,10 +129,6 @@ namespace Motion6D.Portable.Runtime
             List<object> l = new ();
             IEnumerable<ICategoryObject> ob = comp.ClearDoubleObjects();
             l.AddRange(ob);
-            if (!l.Contains(consumer))
-            {
-                l.Add(consumer);
-            }
             return new ComponentCollection(l, (consumer as ICategoryObject).GetRootDesktop());
         }
 

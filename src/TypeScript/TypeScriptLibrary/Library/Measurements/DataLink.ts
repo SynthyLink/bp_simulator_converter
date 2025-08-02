@@ -4,13 +4,16 @@ import { IDesktop } from "../Interfaces/IDesktop";
 import { IDataConsumer } from "./Interfaces/IDataConsumer";
 import { IMeasurements } from "./Interfaces/IMeasurements";
 
-export class DataLink extends CategoryArrow {
-    constructor(desktop: IDesktop, name: string) {
+export class DataLink extends  CategoryArrow
+{
+    constructor(desktop: IDesktop, name: string)
+    {
         super(desktop, name)
         this.typeName = "DataLink";
         this.types.push("DataLink");
     }
 
+    name!: string;
     getSource(): ICategoryObject {
         return this.consumer as unknown as ICategoryObject;
     }
@@ -24,8 +27,12 @@ export class DataLink extends CategoryArrow {
         this.measurements = target as unknown as IMeasurements;
         this.consumer.addMeasurements(this.measurements);
     }
-
+    getName(): string {
+        return this.name;
+    }
     consumer!: IDataConsumer;
 
     measurements!: IMeasurements;
+
+
 }

@@ -21,7 +21,6 @@ namespace DataPerformer.Portable
         /// </summary>
         public ObjectTransformerLink()
         {
-
         }
 
  

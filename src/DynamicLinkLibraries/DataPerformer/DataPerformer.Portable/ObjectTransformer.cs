@@ -297,6 +297,7 @@ namespace DataPerformer.Portable
 
         #endregion
 
+
         #region Specific Members
 
         /// <summary>

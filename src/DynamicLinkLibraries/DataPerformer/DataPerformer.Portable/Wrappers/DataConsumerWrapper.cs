@@ -4,6 +4,9 @@ using System.Xml;
 using System.Reflection;
 using System.Threading;
 
+
+using CategoryTheory;
+
 using Diagram.Interfaces;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
@@ -13,7 +16,6 @@ using DataPerformer.Interfaces;
 using DataPerformer.Interfaces.Attributes;
 
 using ErrorHandler;
-
 using NamedTree;
 
 
@@ -242,40 +244,40 @@ namespace DataPerformer.Portable.Wrappers
             }
             try
             {
-                using var backup = new TimeProviderBackup(Consumer, provider, processor, reason, priority);
-                var diffProcessor = backup.Processor;
-                provider.Time = start;
-                IDataRuntime runtime = backup.Runtime;
-                var cc = backup.ComponentCollection;
-                backup.SetTimeProvider(cc, provider);
-                runtime.StartAll(start);
-                diffProcessor.TimeProvider = provider;
-                runtime.TimeProvider = provider;
-                IStep st = null;
-                if (runtime is IStep)
+                using (var backup = new TimeProviderBackup(Consumer, provider, processor, reason, priority))
                 {
-                    st = runtime as IStep;
-                }
-                provider.Time = start;
-                double t = start;
-                double last = t;
-                Action<double, double, long>
-                    act = runtime.Step(diffProcessor,
-                    (time) =>
+                    var p = backup.Processor;
+                    provider.Time = start;
+                    IDataRuntime runtime = backup.Runtime;
+                    runtime.TimeProvider = provider;
+                    runtime.StartAll(start);
+                    p.TimeProvider = provider;
+                    IStep st = null;
+                    if (runtime is IStep)
                     {
-                        provider.Time = time;
+                        st = runtime as IStep;
                     }
-                    , reason, asynchronousCalculation);
+                    provider.Time = start;
+                    double t = start;
+                    double last = t;
+                    Action<double, double, long>
+                        act = runtime.Step(p,
+                        (time) =>
+                        {
+                            provider.Time = time;
+                        }
+                        , reason, asynchronousCalculation);
                     for (int i = 0; i < count; i++)
                     {
                         if (stp())
                         {
                             break;
                         }
-                    t = start + i * step;
-                    act(last, t, i);
-                    last = t;
-                    acts?.Invoke();
+                        t = start + i * step;
+                        act(last, t, i);
+                        last = t;
+                        acts?.Invoke();
+                    }
                 }
             }
             catch (Exception ex)
@@ -659,7 +661,6 @@ namespace DataPerformer.Portable.Wrappers
         }
 
         #endregion
-
 
         #region Public members
 

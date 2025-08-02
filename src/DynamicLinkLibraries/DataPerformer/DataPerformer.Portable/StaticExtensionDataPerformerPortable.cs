@@ -1734,7 +1734,7 @@ namespace DataPerformer.Portable
         /// <param name="alias">Name of alias</param>
         /// <param name="allowNulls">The "allow nulls" sign</param>
         /// <returns>The AliasName object</returns>
-        public static AliasName FindAliasName(this IDataConsumer consumer, string alias, bool allowNulls = false)
+        public static AliasName FindAliasName(this IDataConsumer consumer, string alias, bool allowNulls)
         {
             if (alias == null)
             {

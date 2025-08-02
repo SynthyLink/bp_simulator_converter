@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Text;
+using System.Threading.Tasks;
 using CategoryTheory;
-
 using DataPerformer.Interfaces;
 
 using Diagram.UI;
 using Diagram.UI.Interfaces;
-
 using NamedTree;
 
 namespace DataPerformer.Portable
@@ -25,8 +24,7 @@ namespace DataPerformer.Portable
 
         IDataConsumer consumer;
 
-        IComponentCollection collection;
-
+ 
         IDataRuntime runtime;
 
         IDifferentialEquationProcessor processor;
@@ -57,12 +55,12 @@ namespace DataPerformer.Portable
            int priority, string reason) : this() 
 
         {
-            this.collection = collection;
+            Collection = collection;
             CreateMeasurements(priority, reason);
             runtime = StaticExtensionDataPerformerPortable.Factory.Create(collection, priority, reason);
-            SetTimeProvider(collection, provider, dictionary);
+            dictionary.Clear();
+            SetTimeProvider(collection, provider);
         }
-
 
         /// <summary>
         /// Constructor
@@ -76,11 +74,12 @@ namespace DataPerformer.Portable
             IDifferentialEquationProcessor processor, string reason, int priority) : this() 
         {
             this.consumer = consumer;
-            collection = consumer.GetDependentCollection(priority);
-            runtime = consumer.CreateRuntime(reason, priority);
-            SetTimeProvider(collection, provider, dictionary);
+            Collection = consumer.GetDependentCollection(priority);
+            dictionary.Clear();
+            SetTimeProvider(Collection, provider);
             CreateMeasurements(priority, null);
-            Set(processor, collection);
+            runtime = consumer.CreateRuntime(reason, priority);
+            Set(processor, Collection);
         }
 
         /// <summary>
@@ -94,9 +93,10 @@ namespace DataPerformer.Portable
         public TimeProviderBackup(IComponentCollection collection, ITimeMeasurementProvider provider,
             IDifferentialEquationProcessor processor, int priority, string reason) : this()
         {
-            this.collection = collection;
+            Collection = collection;
             CreateMeasurements(priority, reason);
             runtime = StaticExtensionDataPerformerPortable.Factory.Create(collection, priority);
+            dictionary.Clear();
             SetTimeProvider(collection, provider);
             Set(processor, collection);
         }
@@ -109,20 +109,28 @@ namespace DataPerformer.Portable
         /// <param name="reason">Reason</param>
         public TimeProviderBackup(IComponentCollection collection, int priority, string reason) : this()
         {
-            this.collection = collection;
+            Collection = collection;
             CreateMeasurements(priority, reason);
             runtime = StaticExtensionDataPerformerPortable.Factory.Create(collection, priority);
-            SetTimeProvider(collection, runtime.TimeProvider);
+            dictionary.Clear();
+            SetTimeProvider(collection, StaticExtensionDataPerformerPortable.Factory.TimeProvider);
             Set(DifferentialEquationProcessors.DifferentialEquationProcessor.Processor, collection);
         }
 
         #endregion
 
+        #region IDisposable Members
+
+        void IDisposable.Dispose()
+        {
+            Dispose();
+        }
+
         protected virtual void Dispose()
         {
-            if (collection != null)
+            if (Collection != null)
             {
-                collection.ForEach((IStopped stop) => { stop.Stop(); });
+                Collection.ForEach((IStopped stop) => { stop.Stop(); });
                 ResetTime();
                 dictionary.Clear();
                 return;
@@ -138,23 +146,19 @@ namespace DataPerformer.Portable
             {
                 processor.Clear();
             }
-        }
 
-        #region IDisposable Members
-
-        void IDisposable.Dispose()
-        {
-            Dispose();
         }
 
         #endregion
 
         #region Members
 
-        /// <summary>
-        /// Component collection
-        /// </summary>
-        public IComponentCollection ComponentCollection => collection;
+        public IComponentCollection Collection
+        {
+            get;
+            set;
+        }
+
 
         /// <summary>
         /// Processor
@@ -183,53 +187,25 @@ namespace DataPerformer.Portable
             }
         }
 
-        public void SetTimeProvider(IComponentCollection collection, ITimeMeasurementProvider provider)
-        {
-            collection.ForEach((ITimeMeasurementConsumer c) =>
-            {
-                SetTimeProvider(c, provider);
-            }
-            );
-        }
-
-
-        public void SetTimeProvider(IEnumerable<object> enu, ITimeMeasurementProvider provider)
-        {
-            foreach (var o in enu)
-            {
-                SetTimeProvider(o, provider);
-            }
-        }
         void SetTimeProvider(ITimeMeasurementConsumer tc, ITimeMeasurementProvider provider)
         {
             SetTimeProvider(tc, provider, dictionary);
         }
 
-        void SetTimeProvider(object o, ITimeMeasurementProvider provider)
-        {
-            if (o is ITimeMeasurementConsumer tc)
-            {
-                SetTimeProvider(tc, provider, dictionary);
-            }
-        }
-
         static void SetTimeProvider(ITimeMeasurementConsumer tc, ITimeMeasurementProvider provider,
             IDictionary<ITimeMeasurementConsumer, IMeasurement> dictionary)
         {
-            var tct = tc.Time;
-            var pt = provider.TimeMeasurement; 
-            if (tct == pt)
-            {
-                return;
-            }
             if (dictionary.ContainsKey(tc))
             {
-                tc.Time = pt;
+                if (tc.Time != provider.TimeMeasurement)
+                {
+                    dictionary[tc] = tc.Time;
+                    tc.Time = provider.TimeMeasurement;
+                }
             }
             else
             {
-                dictionary[tc] = tct;
-                tc.Time = pt;
+                tc.Time = provider.TimeMeasurement;
             }
             IChildren<IAssociatedObject> co = tc.GetLabelObject<IChildren<IAssociatedObject>>();
             if (co != null)
@@ -239,10 +215,8 @@ namespace DataPerformer.Portable
                 {
                     foreach (object ob in ch)
                     {
-                        if (ob is ITimeMeasurementConsumer c)
-                        {
-                            SetTimeProvider(c, provider, dictionary);
-                        }
+                        if (ob is ITimeMeasurementConsumer ttc)
+                        SetTimeProvider(ttc, provider, dictionary);
                     }
                 }
             }
@@ -257,6 +231,15 @@ namespace DataPerformer.Portable
             }
 
         }
+
+        public void  SetTimeProvider(IComponentCollection collection,
+            ITimeMeasurementProvider provider)
+        {
+            SetTimeProvider(collection, provider, dictionary);
+        }
+
+
+
 
         private static void SetTimeProvider(IComponentCollection collection,
             ITimeMeasurementProvider provider, IDictionary<ITimeMeasurementConsumer, IMeasurement> dictionary)
@@ -425,7 +408,7 @@ namespace DataPerformer.Portable
         private void CreateMeasurements(int priority, string reason)
         {
             List<IMeasurements> l = new List<IMeasurements>();
-            collection.ForEach((IDataConsumer c) =>
+            Collection.ForEach((IDataConsumer c) =>
             {
                 if (c.SatisfiesReason(reason))
                 {
@@ -439,7 +422,7 @@ namespace DataPerformer.Portable
                     }
                 }
             });
-            collection.ForEach((IMeasurements m) =>
+            Collection.ForEach((IMeasurements m) =>
             {
 
                 if (priority == 0)

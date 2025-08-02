@@ -20,9 +20,9 @@ namespace DataPerformer.Portable.Helpers
 
         private object obj;
 
-        private static int count = 0;
+        static int count = 0;
 
-        private int n;
+        int n;
 
         #endregion
 

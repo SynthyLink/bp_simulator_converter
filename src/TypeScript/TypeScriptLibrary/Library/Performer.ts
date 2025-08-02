@@ -13,9 +13,7 @@ export class Performer
 
     protected s: string = "";
 
-   
-
-    public convertArray<T, S>(objects: T[], type: string): S[]
+    public converArray<T, S>(objects: T[], type: string): S[]
     {
 
         let s : S[] = [];
@@ -64,28 +62,6 @@ export class Performer
         return t;
     }
 
-
-    resizeArray<T>(arr: T[], newSize: number, defaultValue?: T): T[]
-    {
-        const newArray: T[] = new Array(newSize);
-
-        // Copy elements from the original array, up to the smaller of the two sizes.
-        const copyLength = Math.min(arr.length, newSize);
-        for (let i = 0; i < copyLength; i++)
-        {
-            newArray[i] = arr[i];
-        }
-
-        // Pad the array with the default value if the new size is larger.
-        if (newSize > arr.length) {
-            const paddingValue = defaultValue !== undefined ? defaultValue : undefined;
-            for (let i = arr.length; i < newSize; i++) {
-                newArray[i] = paddingValue as T; // Type assertion to avoid 'undefined' being an issue in generic arrays.
-            }
-        }
-
-        return newArray;
-    }
  
     /*
      public getAnyTimeOperation(consumer: ITimeMeasurementConsumer): Operation<any> {

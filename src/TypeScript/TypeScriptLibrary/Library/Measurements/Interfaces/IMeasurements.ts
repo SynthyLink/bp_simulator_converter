@@ -6,4 +6,5 @@ export interface IMeasurements
     getMeasurement(i: number): IMeasurement;
     updateMeasurements(): void;
     addMeasurement(measurement: IMeasurement): void;
+
 }

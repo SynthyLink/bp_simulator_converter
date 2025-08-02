@@ -52,9 +52,6 @@ namespace BP_Simulator.Light
 
         static void TestType()
         {
-            var t = typeof(Test.Calculation.Forms.Seriaizable.ObjectTransformer);
-            string st = t.FullName + "," + t.Assembly;
-            return;
             var obj = new Internet.Meteo.Wrapper.Serializable.Sensor("all");
 
             if (!(obj is Internet.Meteo.Wrapper.Sensor sensor))
