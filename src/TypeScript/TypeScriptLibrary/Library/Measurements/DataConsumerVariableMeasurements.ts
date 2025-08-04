@@ -5,7 +5,7 @@ import { DataConsumer } from "./DataConsumer";
 import { IMeasurement } from "./Interfaces/IMeasurement";
 import { IMeasurements } from "./Interfaces/IMeasurements";
 import { PefrormerMeasuremets } from "./PefrormerMeasuremets";
-import { Variable } from "./Variable";
+import { Variable } from "./Variables/Variable";
 
 export class DataConsumerVariadbleMeasurements extends DataConsumer implements IMeasurements, IAlias {
     constructor(desktop: IDesktop, name: string) {

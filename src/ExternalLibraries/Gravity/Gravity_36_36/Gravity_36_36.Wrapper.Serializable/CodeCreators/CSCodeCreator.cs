@@ -1,10 +1,11 @@
-﻿using Diagram.Attributes;
+﻿using System;
+using System.Collections.Generic;
+
+using Diagram.UI.Attributes;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
+
 using ErrorHandler;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 
 namespace Gravity_36_36.Wrapper.CodeCreators

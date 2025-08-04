@@ -1,11 +1,9 @@
-﻿using Diagram.Attributes;
+﻿using System;
+using System.Collections.Generic;
+
+using Diagram.UI.Attributes;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataPerformer.Portable.TypeScript
 {
@@ -28,18 +26,18 @@ namespace DataPerformer.Portable.TypeScript
         static readonly Dictionary<Func<object, bool>, Func<string, object, List<string>>> dictionary =
          new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
-                   { (object o) => { return o is DataLink; } ,CreateDataLink},
+                      { (object o) => { return o is ObjectTransformer; } , CreateObjectTransformer },
+              { (object o) => { return o is DataLink; } ,CreateDataLink},
                    { (object o) => { return o is RandomGenerator; } , CreateRandomGenerator},
-             //    { (object o) => { return o is Recursive; } , CreateRecursive },
          };
 
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
         {
-            foreach (Func<object, bool> key in dictionary.Keys)
+            foreach (var val in dictionary)
             {
-                if (key(obj))
+                if (val.Key(obj))
                 {
-                    return dictionary[key](preffix, obj);
+                    return val.Value(preffix, obj);
                 }
             }
             string th = obj.GetType().Name;
@@ -49,6 +47,19 @@ namespace DataPerformer.Portable.TypeScript
                 return CreateDataConsumer(preffix, obj);
             }
             return null;
+        }
+
+
+        static List<string> CreateObjectTransformer(string preffix, object obj)
+        {
+            List<string> l = new List<string>();
+            var s = performer.ClassString(preffix, "ObjectTransformer");
+            l.Add(s);
+            l.Add("{");
+            performer.AddObjectConstructor(l);
+            l.Add("\t}");
+            l.Add("}");
+            return l;
         }
 
 

@@ -10,8 +10,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\DynamicLinkLibraries\CategoryTheory\CategoryTheory\CategoryTheory\CategoryTheory.csproj" />
     <ProjectReference Include="..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable\DataPerformer.Portable.csproj" />
+    <ProjectReference Include="..\..\DynamicLinkLibraries\Diagram\Diagram.TypeScript\Diagram.TypeScript.csproj" />
     <ProjectReference Include="..\..\DynamicLinkLibraries\Diagram\Diagram.UI.Forms\Diagram.UI.Forms.csproj" />
     <ProjectReference Include="..\..\DynamicLinkLibraries\Diagram\Diagram.UI\Diagram.UI.csproj" />
+    <ProjectReference Include="..\..\DynamicLinkLibraries\Diagram\Diagram\Diagram.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Runtime.Serialization.Formatters" Version="9.0.0" />

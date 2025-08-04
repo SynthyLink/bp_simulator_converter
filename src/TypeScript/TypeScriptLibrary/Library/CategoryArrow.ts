@@ -11,6 +11,9 @@ export class CategoryArrow implements ICategoryArrow, IObject
         desktop.addCategoryArrow(this);
         desktop.addObject(this);
     }
+    getArrowName(): string {
+        return this.name;
+    }
     getClassName(): string {
         return this.typeName;
     }

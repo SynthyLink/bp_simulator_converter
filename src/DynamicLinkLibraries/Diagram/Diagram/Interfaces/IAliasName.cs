@@ -29,6 +29,14 @@
         {
             get;
         }
+
+        /// <summary>
+        /// Full name
+        /// </summary>
+        string FullName
+        {
+            get;
+        }
             
     }
 }

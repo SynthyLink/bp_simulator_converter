@@ -1,15 +1,19 @@
-﻿using BaseTypes;
+﻿using System.Text;
+
+using BaseTypes;
 using BaseTypes.CodeCreator.Interfaces;
 using BaseTypes.Interfaces;
+
 using DataPerformer.Interfaces;
 using DataPerformer.Portable.Measurements;
-using Diagram.Interfaces;
+using Diagram.UI.Interfaces;
+
 using ErrorHandler;
+
 using FormulaEditor;
 using FormulaEditor.CodeCreators;
 using FormulaEditor.CodeCreators.Interfaces;
 using FormulaEditor.Interfaces;
-using System.Text;
 
 namespace DataPerformer.Formula.TypeScript
 {

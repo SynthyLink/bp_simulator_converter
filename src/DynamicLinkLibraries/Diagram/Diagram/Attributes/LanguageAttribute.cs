@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Diagram.Attributes
+namespace Diagram.UI.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class LanguageAttribute : Attribute

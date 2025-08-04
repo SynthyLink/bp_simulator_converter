@@ -14,6 +14,8 @@ namespace Diagram.UI.Aliases
     {
         #region Fields
 
+       
+
         /// <summary>
         /// Alias
         /// </summary>
@@ -28,6 +30,8 @@ namespace Diagram.UI.Aliases
         /// Number of component
         /// </summary>
         protected int number;
+
+        protected Diagram.UI.Performer performer = new Diagram.UI.Performer();
 
         #endregion
 
@@ -44,6 +48,8 @@ namespace Diagram.UI.Aliases
             this.alias = alias;
             this.name = name;
             this.number = number;
+            var rt = performer.GetRootName(alias);
+            FullName = (rt == null) ? name : rt + "." + name;
         }
 
         #endregion
@@ -72,6 +78,14 @@ namespace Diagram.UI.Aliases
             get { return name + "[" + number + "]"; }
         }
 
+        string IAliasName.FullName => FullName;
+
         #endregion
+
+        protected virtual string FullName
+        {
+            get;
+            set;
+        }
     }
 }

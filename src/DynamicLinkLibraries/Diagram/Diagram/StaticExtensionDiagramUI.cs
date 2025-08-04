@@ -10,12 +10,10 @@ using AssemblyService;
 
 using CategoryTheory;
 
-using Diagram.Attributes;
-using Diagram.CodeCreators;
-using Diagram.CodeCreators.Interfaces;
-using Diagram.Interfaces;
-using Diagram.UI.Attributes;
+using Diagram.UI.CodeCreators;
+using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
+using Diagram.UI.Attributes;
 using Diagram.UI.Labels;
 
 using ErrorHandler;

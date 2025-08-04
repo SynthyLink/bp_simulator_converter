@@ -1,10 +1,11 @@
 ﻿using BaseTypes.CodeCreator.Interfaces;
-using DataPerformer.Formula.Interfaces;
+ 
 using DataPerformer.Interfaces;
-using Diagram.Attributes;
-using Diagram.Interfaces;
+
+using Diagram.UI.Attributes;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
+
 using FormulaEditor.Interfaces;
 
 namespace DataPerformer.Formula.TypeScript
@@ -38,7 +39,7 @@ namespace DataPerformer.Formula.TypeScript
                    { (object o) => { return o is VectorFormulaConsumer; } , CreateVectorConsumer },
              //    { (object o) => { return o is DifferentialEquationSolver; } , CreateDiffrerentialSolver },
                  { (object o) => { return o is Recursive; } , CreateRecursive },
-         };
+          };
 
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
         {

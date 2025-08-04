@@ -5,9 +5,7 @@ using System.Reflection;
 using System.Threading;
 
 
-using CategoryTheory;
 
-using Diagram.Interfaces;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;

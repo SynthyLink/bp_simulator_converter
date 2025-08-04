@@ -1,12 +1,11 @@
+using DataPerformer.Portable.Measurements;
+using Diagram.UI;
+using ErrorHandler;
+using FormulaEditor;
 using System;
-using System.Runtime.Serialization;
 using System.Collections;
 using System.Collections.Generic;
-
-using Diagram.UI;
-
-using FormulaEditor;
-using ErrorHandler;
+using System.Runtime.Serialization;
 
 namespace DataPerformer
 {
@@ -175,7 +174,8 @@ namespace DataPerformer
 			{
 				Copy(aliases, aliasesH);
 			}
-			if (externalAls.Count > 0)
+            externalAlsH.Clear();
+            if (externalAls.Count > 0)
 			{
 				Copy(externalAls, externalAlsH);
 			}

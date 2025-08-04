@@ -8,8 +8,6 @@ using CategoryTheory;
 using DataPerformer.Formula.Interfaces;
 using DataPerformer.Interfaces;
 using DataPerformer.Portable;
-
-using Diagram.Interfaces;
 using Diagram.UI;
 using Diagram.UI.Aliases;
 using Diagram.UI.Interfaces;
@@ -37,11 +35,7 @@ namespace DataPerformer.Formula
 
         #region Fields
 
-		List<IMeasurement> Output
-		{
-			get;
-			set;
-		}
+		Portable.Performer performer = new Portable.Performer();
 
 		Dictionary<string, ObjectFormulaTree> td = new ();
 
@@ -150,7 +144,11 @@ namespace DataPerformer.Formula
 		/// <summary>
 		/// Proxy
 		/// </summary>
-		protected ITreeCollectionProxy proxy;
+		internal ITreeCollectionProxy Proxy
+		{
+			get;
+			set;
+		}
 
 		/// <summary>
 		/// Proxy factory
@@ -264,7 +262,7 @@ namespace DataPerformer.Formula
 		{
 			get
 			{
-				return Output[n];
+				return output[n];
 			}
 		}
 
@@ -276,24 +274,39 @@ namespace DataPerformer.Formula
 			}
 			try
 			{
-				foreach (char c in externalAliases.Keys)
+				foreach (var ea in feedbackAliases)
 				{
-					object[] o = externalAliases[c] as object[];
-					IAlias al = o[0] as IAlias;
-					string key = o[1] as string;
-					object[] ob = VariablesL[c] as object[];
-					var k = ob[0];
-					if (k != null)
+					ea.Set();
+				}
+				if (false)
+				{
+					foreach (char c in externalAliases.Keys)
 					{
-						al[key] = k;
+						object[] o = externalAliases[c] as object[];
+						IAlias al = o[0] as IAlias;
+						string key = o[1] as string;
+						object[] ob = VariablesL[c] as object[];
+						var k = ob[0];
+						if (k != null)
+						{
+							al[key] = k;
+						}
 					}
 				}
+		//		performer.SetFeedBackAlias(this);
 				UpdateChildrenData();
 				Update();
-				foreach (char c in varc)
+				/*		foreach (char c in varc)
+						{
+							object[] o = VariablesL[c] as object[];
+							o[0] = o[3];
+						}*/
+				foreach (var x in output)
 				{
-					object[] o = VariablesL[c] as object[];
-					o[0] = o[3];
+					if (x is IUpdateItself updateItself)
+					{
+						updateItself.UpdateItself();
+					}
 				}
 				isUpdated = true;
 			}
@@ -325,7 +338,7 @@ namespace DataPerformer.Formula
 		{
 			get
 			{
-				return Output.Count;
+				return output.Count;
 			}
 		}
 
@@ -561,7 +574,7 @@ namespace DataPerformer.Formula
 		{
 			get
 			{
-				return proxy != null;
+				return Proxy != null;
 			}
 		}
 
@@ -598,15 +611,22 @@ namespace DataPerformer.Formula
 		/// </summary>
 		protected virtual void PostSetArrow()
 		{
-			if (varc.Count == 0)
+			try
 			{
-				Order();
+				if (varc.Count == 0)
+				{
+					Order();
+				}
+				acceptParameters();
+				AcceptFormulas();
+				ExternalAliases = externalAls;
+				CreateProxyInternal();
+				Finish();
 			}
-			acceptParameters();
-			AcceptFormulas();
-			ExternalAliases = externalAls;
-			CreateProxyInternal();
-			Finish();
+			catch (Exception ex)
+			{
+				ex.HandleException();
+			}
 		}
 		#endregion
 
@@ -973,12 +993,37 @@ namespace DataPerformer.Formula
                 return d;
             }
         }
+		List<IInitialValue> initialValues = new List<IInitialValue>();
 
-        void Finish()
-        {
-            Output = output;
-        }
+		List<IFeedbackAlias> feedbackAliases = new List<IFeedbackAlias>();
 
+
+		void Finish()
+		{
+			initialValues.Clear();
+			feedbackAliases.Clear();
+			IAlias al = this;
+			foreach (var measurement in output)
+			{
+				var name = measurement.Name;
+				var iv = measurement as IValue;
+				var inia = new AliasName(this, name);
+				initialValues.Add(new AliasInit(inia, iv));
+				object o = null;
+				var c = name[0];
+				if (externalAliases.ContainsKey(c))
+				{
+
+					var x = externalAliases[c] as object[];
+					var alias = x[0] as IAlias;
+					var n = x[1] + "";
+					IAliasName an = new AliasName(alias, n);
+					var feed = new FeedbackAliasValue(iv, an);
+					feedbackAliases.Add(feed);
+				}
+
+			}
+		}
 
 
         #endregion
@@ -989,7 +1034,7 @@ namespace DataPerformer.Formula
 
 		internal Dictionary<object, object> Pars => pars;
 
-        IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => Output;
+        IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => output;
 
         IEnumerable<IMeasurements> IChildren<IMeasurements>.Children => measurements;
 
@@ -1008,11 +1053,15 @@ namespace DataPerformer.Formula
 		{
 			if (stated)
 			{
+				foreach (var iv in initialValues)
+				{
+					iv.Set();
+				}
+			//	performer.InitValued(this);
+				return;
+				
 				foreach (char c in varc)
 				{
-					object[] o0 = vars[c] as object[];
-					object[] o = VariablesL[c] as object[];
-					o[0] = o0[2];
 				}
 				oldStep = step;
 				tempAliases.Clear();
@@ -1026,8 +1075,6 @@ namespace DataPerformer.Formula
             {
                 aliases[alias] = tempAliases[alias];
             }
-
-
         }
 
         private void UpdateFormulas()
@@ -1040,14 +1087,21 @@ namespace DataPerformer.Formula
 			}
 		}
 
+		internal Dictionary<char, ObjectFormulaTree> OutDic
+		{
+			get;
+		} = new Dictionary<char, ObjectFormulaTree>();
+
 		private void CreateProxyInternal()
 		{
 			try
 			{
+				OutDic.Clear();
+				
 				List<IMeasurement> outNew = new List<IMeasurement>();
 				Update = UpdateFormulas;
-				proxy = null;
-				proxy = proxyFactory.CreateProxy(this, StaticExtensionFormulaEditor.CheckValue);
+				Proxy = null;
+				Proxy = proxyFactory.CreateProxy(this, StaticExtensionFormulaEditor.CheckValue);
                 //int k = 0;
                 dictF = new Dictionary<char, FormulaMeasurement>();
 				AssociatedAddition aa = new AssociatedAddition(this, null);
@@ -1055,6 +1109,7 @@ namespace DataPerformer.Formula
 				{
 					object[] o = VariablesL[c] as object[];
 					ObjectFormulaTree tree = o[1] as ObjectFormulaTree;
+					OutDic.Add(c, tree);
 					FormulaMeasurement fm = FormulaMeasurement.Create(tree, 0, c + "", aa, this);
 					dictF[c] = fm;
 					outNew.Add(fm);
@@ -1064,7 +1119,7 @@ namespace DataPerformer.Formula
 				{
 					lm.Add(mm);
 				}
-				FormulaMeasurement.Set(lm, proxy);
+				FormulaMeasurement.Set(lm, Proxy);
 				Update = UpdateProxy;
 				Finish();
 			// !!! VERY BAD	output = outNew;
@@ -1077,7 +1132,7 @@ namespace DataPerformer.Formula
 
 		private void UpdateProxy()
 		{
-			proxy.Update();
+			Proxy.Update();
 			foreach (char c in varc)
 			{
 				object[] o = VariablesL[c] as object[];
@@ -1136,34 +1191,60 @@ namespace DataPerformer.Formula
 			output.Remove(child);
         }
 
-        #endregion
+		#endregion
 
-        #region Variable
+		#region Variable
 
         /// <summary>
-        /// Auxiliary class for measurement providinf
+        /// Auxiliary class for measurement
         /// </summary>
-        class Variable : IObjectOperation, IPowered, IOperationAcceptor, IMeasurement, 
-			IMeasurementHolder, IAliasNameHolder, ITreeAssociated
+        internal class Variable : IObjectOperation, IPowered, IOperationAcceptor, IMeasurement, 
+			IMeasurementHolder, IAliasNameHolder, ITreeAssociated, IValue, IUpdateItself, IOutputTree
 		{
 
 			#region Fields
 
-			protected ObjectFormulaTree Tree
+			ObjectFormulaTree tree;
+
+
+   
+
+
+            protected Portable.Performer performer = new Portable.Performer();
+
+			protected Func<object> formulaGet;
+
+	
+			object GetInitial()
+			{
+				IOutputTree output = this;
+				var t = output.Tree;
+				if (Recursive.Proxy == null | t == null)
+				{
+					return null;
+				}
+				var g = Recursive.Proxy[t];
+				formulaGet = g;
+				var a = formulaGet();
+				return a;
+            }
+
+            protected virtual ObjectFormulaTree Tree
 			{
 				get;
 				set;
 			}
 
+
 			/// <summary>
 			/// Measure key
 			/// </summary>
-			private char key;
+			protected char key;
 
 			/// <summary>
 			/// Parent
 			/// </summary>
-			private Recursive Recursive
+			protected Recursive Recursive
 			{
 				get;
 				set;
@@ -1179,30 +1260,35 @@ namespace DataPerformer.Formula
 			/// </summary>
 			private string name;
 
-			#endregion
+		
+            #endregion
 
-			#region Ctor
+            #region Ctor
 
-			/// <summary>
-			/// Constructor
-			/// </summary>
-			/// <param name="key">Measure key</param>
-			/// <param name="r">Parent</param>
-			private Variable(char key, Recursive r)
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="key">Measure key</param>
+            /// <param name="r">Parent</param>
+            protected Variable(char key, Recursive r)
 			{
 				this.key = key;
 				Recursive = r;
 				name = key + "";
 				type = r.GetType(name);
+				formulaGet = GetInitial;
+				tree = new ObjectFormulaTree(this, new List<ObjectFormulaTree>());
 			}
 
 			#endregion
+
+	
 
 			#region IMeasurement Members
 
 			Func<object> IMeasurement.Parameter
 			{
-				get { return getValue; }
+				get { return GetValue; }
 			}
 
 			string IMeasurement.Name
@@ -1226,7 +1312,7 @@ namespace DataPerformer.Formula
 
 			object IObjectOperation.this[object[] x]
 			{
-				get { return getValue(); }
+				get { return GetValue(); }
 			}
 
 			object IObjectOperation.ReturnType
@@ -1244,6 +1330,31 @@ namespace DataPerformer.Formula
             IAliasName IAliasNameHolder.AliasName => new AliasName(Recursive, name);
 
             ObjectFormulaTree ITreeAssociated.ObjectFormulaTree { get => Tree; set => Tree = value; }
+            object IValue.Value 
+			{
+				get => GetValue();
+				set => SetValue(value); 
+			}
+
+            ObjectFormulaTree outTree;
+
+
+            ObjectFormulaTree IOutputTree.Tree
+			{
+				get
+				{
+					if (outTree == null)
+					{
+						var d = Recursive.OutDic;
+						if (d.ContainsKey(key))
+						{
+							outTree = d[key];
+						}
+					}
+					return outTree;
+				}
+
+			}
 
 
             #endregion
@@ -1277,11 +1388,18 @@ namespace DataPerformer.Formula
 				return v;
 			}
 
-			/// <summary>
-			/// Gets value of measurement
-			/// </summary>
-			/// <returns></returns>
-			private object getValue()
+			protected void SetValue(object value)
+			{
+                object[] o = Recursive.VariablesL[key] as object[];
+				o[0] = value;
+            }
+
+
+            /// <summary>
+            /// Gets value of measurement
+            /// </summary>
+            /// <returns></returns>
+            protected object GetValue()
 			{
 				object[] o = Recursive.VariablesL[key] as object[];
 				return o[0];
@@ -1297,10 +1415,20 @@ namespace DataPerformer.Formula
 				return a;
 			}
 
+            void IUpdateItself.UpdateItself()
+            {
+				var x = formulaGet();
+                if (x != null)
+                {
+					SetValue(x);
+                }
+            }
 
-			#endregion
 
-		}
+
+            #endregion
+
+        }
 
 		#endregion
 

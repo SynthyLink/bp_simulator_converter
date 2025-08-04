@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Event.Portable
 {
-    [Diagram.Attributes.Language("C#")]
+    [Diagram.UI.Attributes.Language("C#")]
 
     class CSCodeCreator : IClassCodeCreator
     {

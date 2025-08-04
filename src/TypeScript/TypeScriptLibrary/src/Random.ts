@@ -3,8 +3,8 @@ import { Desktop } from "../Library/Desktop";
 import { IAliasName } from "../Library/Interfaces/IAliasName";
 import { IDesktop } from "../Library/Interfaces/IDesktop";
 import { IPostSetArrow } from "../Library/Interfaces/IPostSetArrow";
+import { DataLink } from "../Library/Measurements/Arrows/DataLink";
 import { DataConsumer } from "../Library/Measurements/DataConsumer";
-import { DataLink } from "../Library/Measurements/DataLink";
 import { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement";
 import { RandomGenerator } from "../Library/Measurements/RandomGenerator";
 import { Recursive } from "../Library/Measurements/Recursive";
@@ -152,7 +152,6 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer
 	save() : void {
 		var v = this.variables;
 		var x0 = v.get("Formula_1");
-		x0?.setValue(this.get_11());
 	}
 	
 }
@@ -213,9 +212,6 @@ class Random_CategoryObject_3 extends Recursive
 		return this.success ? this.var_2 : undefined;
 	}
 	save() : void {
-		var v = this.variables;
-		var x0 = v.get("a");
-		x0?.setValue(this.get_2());
 	}
 	
 }

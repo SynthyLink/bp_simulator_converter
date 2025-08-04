@@ -29,7 +29,7 @@ namespace Test.Calculation.Forms
             var d = (double)input[3];
             output[0] = Coefficient * (a + b);
             output[1] = Coefficient * b * c;
-            output[2] = Coefficient * (c + Math.Sign(d));
+            output[2] = Coefficient * (c + Math.Sin(d));
         }
 
         object IObjectTransformer.GetInputType(int i)

@@ -67,12 +67,21 @@ namespace FormulaEditor
         {
         }
 
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		/// <param name="operation">Tree operation</param>
-		/// <param name="children">Children trees</param>
-		public ObjectFormulaTree(IObjectOperation operation, List<ObjectFormulaTree> children) 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="operation">Tree operation</param>
+        public ObjectFormulaTree(IObjectOperation operation) : this(operation, new List<ObjectFormulaTree>())
+        {
+
+        }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="operation">Tree operation</param>
+        /// <param name="children">Children trees</param>
+        public ObjectFormulaTree(IObjectOperation operation, List<ObjectFormulaTree> children) 
 		{
             if (operation is ITreeAssociated associated)
             {

@@ -1,13 +1,14 @@
 ﻿using AssemblyService.Attributes;
+
 using BaseTypes;
-using Diagram.Attributes;
-using Diagram.Interfaces;
+
 using Diagram.UI;
+using Diagram.UI.Attributes;
 using Diagram.UI.Interfaces;
+
 using Motion6D.Interfaces;
 using Motion6D.Portable;
 using Motion6D.Portable.Interfaces;
-using static Motion6D.EmptyCode.StaticExtensionMotion6DEmptyCode;
 
 namespace Motion6D.EmptyCode
 {

@@ -142,7 +142,7 @@ export class ObjectTransformer extends CategoryObject implements IObjectTransfor
         {
             this.outO = new Array(sl);
             const arr: [] = [];
-            var a = this.performer.resizeArray(arr, sl);
+            //var a = this.performer.resizeArray(arr, sl);
         }
       //  outMea = new IMeasurement[outO.Length];
         //inMea = new IMeasurement[transformer.Input.Length];

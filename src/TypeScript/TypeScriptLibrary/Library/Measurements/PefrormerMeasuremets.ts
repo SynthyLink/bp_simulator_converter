@@ -1,16 +1,16 @@
 import { IAction } from "../Interfaces/IAction";
+import { IAlias } from "../Interfaces/IAlias";
+import { Performer } from "../Performer";
+import { IDataRuntime } from "../Runtime/Interfaces/IDataRuntime";
+import { AliasNameMeasurement } from "./AliasNameMeasurement";
+import { ArrayMeasurement } from "./ArrayMeasurement";
+import { IArrayElementMeasurement } from "./Interfaces/IArrayElemetMeasurements";
 import { IDataConsumer } from "./Interfaces/IDataConsumer";
+import { IMeasurement } from "./Interfaces/IMeasurement";
 import { IMeasurements } from "./Interfaces/IMeasurements";
 import { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProvider";
-import { IDataRuntime } from "../Runtime/Interfaces/IDataRuntime";
 import { TimeMeasurementProvider } from "./TimeMeasurementProvider";
-import { Performer } from "../Performer";
-import { IArrayElementMeasurement } from "./Interfaces/IArrayElemetMeasurements";
-import { IMeasurement } from "./Interfaces/IMeasurement";
-import { ArrayMeasurement } from "./ArrayMeasurement";
-import { IAlias } from "../Interfaces/IAlias";
-import { Variable } from "./Variable";
-import { AliasNameMeasurement } from "./AliasNameMeasurement";
+import { Variable } from "./Variables/Variable";
 
 export class PefrormerMeasuremets {
 
@@ -31,7 +31,7 @@ export class PefrormerMeasuremets {
         var n = array.getMeasurementNames().length;
         var mea: IMeasurement[] = [];
         for (var i = 0; i < n; i++) {
-            mea.push(new ArrayMeasurement(array, i));
+          //  mea.push(new ArrayMeasurement(array, i));
         }
         return mea;
     }

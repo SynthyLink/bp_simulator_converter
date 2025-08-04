@@ -15,7 +15,6 @@ using System.Linq;
 
 using CategoryTheory;
 
-using Diagram.Interfaces;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Utils;

@@ -19,7 +19,8 @@ namespace DataPerformer.Portable
     /// Transformer of objects
     /// </summary>
     public class ObjectTransformer : CategoryObject, 
-        IDataConsumer, IMeasurements, IPostSetArrow, IObjectTransformerConsumer
+        IDataConsumer, IMeasurements, IPostSetArrow, 
+        IObjectTransformerConsumer
     {
 
         #region Fields

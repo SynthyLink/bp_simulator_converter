@@ -1,10 +1,5 @@
 ﻿using AssemblyService.Attributes;
-using Diagram.UI.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Test.Calculation.Forms.CodeCreators;
 using Test.Calculation.Forms.Factory;
 
 namespace Test.Calculation.Forms
@@ -23,6 +18,8 @@ namespace Test.Calculation.Forms
         static StaticExtensionTestCalculationForms()
         {
             new UIFactory();
+            new CSCodeCreator();
+            new TSCodeCreator();
         }
 
     }

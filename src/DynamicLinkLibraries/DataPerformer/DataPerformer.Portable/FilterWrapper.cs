@@ -1,7 +1,7 @@
 ﻿using CategoryTheory;
 using DataPerformer.Interfaces;
 using DataPerformer.Portable.Filters;
-using Diagram.Interfaces;
+using Diagram.UI.Interfaces;
 using NamedTree;
 using System;
 using System.Collections.Generic;

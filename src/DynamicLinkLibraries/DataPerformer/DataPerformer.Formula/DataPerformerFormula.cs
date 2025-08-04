@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Diagram.UI.Interfaces;
 using Diagram.UI;
@@ -14,7 +15,6 @@ using FormulaEditor;
 using FormulaEditor.Interfaces;
 
 using NamedTree;
-using System.Linq;
 
 namespace DataPerformer.Formula
 {

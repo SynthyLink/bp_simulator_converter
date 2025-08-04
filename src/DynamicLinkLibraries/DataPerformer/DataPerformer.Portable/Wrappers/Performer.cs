@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using BaseTypes.Interfaces;
 using DataPerformer.Interfaces;
 using DataPerformer.Portable.Interfaces;
 
@@ -45,7 +45,7 @@ namespace DataPerformer.Portable.Wrappers
         /// Sets initial value
         /// </summary>
         /// <param name="measurements"></param>
-        public void SetInitialValue(IMeasurements measurements)
+        public void SetInitialValue1(IMeasurements measurements)
         {
             var n = measurements.Count;
             for (int i = 0; i < n; i++)

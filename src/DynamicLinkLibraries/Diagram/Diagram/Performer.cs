@@ -252,9 +252,22 @@ namespace Diagram.UI
         }
 
 
+        /// <summary>
+        /// Gets root  name of an object
+        /// </summary>
+        /// <param name="obj">The object</param>
+        /// <returns>The name</returns>
+        public string GetRootName(object obj)
+        {
+            if (obj is IAssociatedObject ao)
+            {
+                return GetRootName(ao);
+            }
+            return null;
+        }
 
         /// <summary>
-        /// Gets root  name of associated object
+        /// Gets root  name of an associated object
         /// </summary>
         /// <param name="associatedObject">The object</param>
         /// <returns>The name</returns>

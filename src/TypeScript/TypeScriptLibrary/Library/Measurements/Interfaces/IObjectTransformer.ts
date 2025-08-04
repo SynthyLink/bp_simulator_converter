@@ -2,10 +2,10 @@ export interface IObjectTransformer
 {
     getInput(): string[];
     getOutput(): string[];
-    getInputType(i: number): unknown;
-    getOutputType(i: number): unknown;
+    getInputType(i: number): any;
+    getOutputType(i: number): any;
 
-    calculate(input: [], output: []): void;
+    calculate(input: any[], output: any[]): void;
 
 
 }

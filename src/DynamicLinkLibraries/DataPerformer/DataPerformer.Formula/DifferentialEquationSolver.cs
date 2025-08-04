@@ -1423,6 +1423,11 @@ namespace DataPerformer.Formula
             PostSetArrowProtected();
         }
 
+        protected override void CreateFeedback()
+        {
+            throw new OwnNotImplemented();
+        }
+
         #endregion
 
         #region Protected Members

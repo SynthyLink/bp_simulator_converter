@@ -1,3 +1,4 @@
+import { IAlias } from "../Interfaces/IAlias";
 import { AliasNameMeasurement } from "./AliasNameMeasurement";
 import { IInitalValue } from "./Interfaces/IInitialValue";
 

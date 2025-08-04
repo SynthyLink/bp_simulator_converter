@@ -809,6 +809,11 @@ namespace DataPerformer.Formula
             SetUnaryTrees(t);
         }
 
+        protected override void CreateFeedback()
+        {
+            throw new OwnNotImplemented();
+        }
+
         /// <summary>
         /// Table of operations
         /// </summary>

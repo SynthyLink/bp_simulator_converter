@@ -20,6 +20,10 @@ namespace Diagram.UI.Aliases
         /// </summary>
         private string name;
 
+
+        protected Performer performer = new Performer();
+
+
         #endregion
 
         #region Ctor
@@ -33,6 +37,8 @@ namespace Diagram.UI.Aliases
         {
             this.alias = alias;
             this.name = name;
+            var rt = performer.GetRootName(alias);
+            FullName = (rt == null) ? name : rt + "." + name;
         }
 
         #endregion
@@ -61,9 +67,21 @@ namespace Diagram.UI.Aliases
             get { return name; }
         }
 
+        string IAliasName.FullName => FullName;
+
+
         #endregion
 
         #region Members
+
+
+        protected virtual string FullName
+        {
+            get;
+            set;
+        }
+
+
 
         /// <summary>
         /// Sets value to alias

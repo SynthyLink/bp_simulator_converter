@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-using Diagram.Attributes;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
+using Diagram.UI.Attributes;
 
 namespace DataPerformer.Portable
 {

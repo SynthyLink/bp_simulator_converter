@@ -3,7 +3,7 @@ import { Desktop } from "../Library/Desktop";
 import { IAliasName } from "../Library/Interfaces/IAliasName";
 import { IDesktop } from "../Library/Interfaces/IDesktop";
 import { IPostSetArrow } from "../Library/Interfaces/IPostSetArrow";
-import { DataLink } from "../Library/Measurements/DataLink";
+import { DataLink } from "../Library/Measurements/Arrows/DataLink";
 import { VectorFormulaConsumer } from "../Library/Measurements/VectorFormulaConsumer";
 
 class Two_CategoryObject_0 extends VectorFormulaConsumer
@@ -117,11 +117,6 @@ class Two_CategoryObject_0 extends VectorFormulaConsumer
 		return this.success ? this.var_9 : undefined;
 	}
 	save() : void {
-		var v = this.variables;
-		var x0 = v.get("Formula_1");
-		x0?.setValue(this.get_2());
-		var x1 = v.get("Formula_2");
-		x1?.setValue(this.get_9());
 	}
 	
 }
@@ -226,12 +221,7 @@ class Two_CategoryObject_1 extends VectorFormulaConsumer
 	save() : void {
 		var v = this.variables;
 		var x0 = v.get("Formula_1");
-		x0?.setValue(this.get_2());
-		var x1 = v.get("Formula_2");
-		x1?.setValue(this.get_4());
-		var x2 = v.get("Formula_3");
-		x2?.setValue(this.get_7());
-	}
+		}
 	
 }
 
