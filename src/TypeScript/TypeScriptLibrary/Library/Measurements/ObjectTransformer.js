@@ -98,7 +98,7 @@ class ObjectTransformer extends CategoryObject_1.CategoryObject {
         if (this.outO.length != sl) {
             this.outO = new Array(sl);
             const arr = [];
-            var a = this.performer.resizeArray(arr, sl);
+            //var a = this.performer.resizeArray(arr, sl);
         }
         //  outMea = new IMeasurement[outO.Length];
         //inMea = new IMeasurement[transformer.Input.Length];

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Two = void 0;
 const AliasName_1 = require("../Library/AliasName");
 const Desktop_1 = require("../Library/Desktop");
-const DataLink_1 = require("../Library/Measurements/DataLink");
+const DataLink_1 = require("../Library/Measurements/Arrows/DataLink");
 const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaConsumer");
 class Two_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
@@ -108,11 +108,6 @@ class Two_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaConsumer
         return this.success ? this.var_9 : undefined;
     }
     save() {
-        var v = this.variables;
-        var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setValue(this.get_2());
-        var x1 = v.get("Formula_2");
-        x1 === null || x1 === void 0 ? void 0 : x1.setValue(this.get_9());
     }
 }
 class Two_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
@@ -207,11 +202,6 @@ class Two_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormulaConsumer
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setValue(this.get_2());
-        var x1 = v.get("Formula_2");
-        x1 === null || x1 === void 0 ? void 0 : x1.setValue(this.get_4());
-        var x2 = v.get("Formula_3");
-        x2 === null || x2 === void 0 ? void 0 : x2.setValue(this.get_7());
     }
 }
 class Two_CategoryArrow_0 extends DataLink_1.DataLink {

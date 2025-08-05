@@ -1,4 +1,6 @@
-﻿import { FictiveAlias } from "../FictiveAlias";
+﻿import { FeedbackAliasCollection } from "../FeedbackAliasCollection";
+import { FictiveAlias } from "../Fiction/FictiveAlias";
+import { FictiveFeedbackAliasCollection } from "../Fiction/FictiveFeedbackAliasCollection";
 import { IAlias } from "../Interfaces/IAlias";
 import { IDesktop } from "../Interfaces/IDesktop";
 import { IFeedbackAlias } from "../Interfaces/IFeedbackAlias";
@@ -60,7 +62,7 @@ export class DataConsumerMeasurements extends DataConsumer
 
     protected feedbackAliases: IFeedbackAlias[] = [];
    
-    
+    protected feedbackAliasCollection : IFeedbackAliasCollection = new FictiveFeedbackAliasCollection();
 
  
     getMeasurementsCount(): number {
@@ -101,4 +103,10 @@ export class DataConsumerMeasurements extends DataConsumer
         this.aliasValues.set(name, value);
     }
 
+
+    setExternalAliases(map: Map<string, string>): void
+    {
+        this.feedbackAliasCollection = new FeedbackAliasCollection(this, this, map);
+
+    }
 }

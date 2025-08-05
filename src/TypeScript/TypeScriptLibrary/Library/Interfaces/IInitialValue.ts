@@ -1,4 +1,4 @@
-export interface IInitValue
+export interface IInitialValue
 {
 
     getInitValue(): any;

@@ -1,10 +1,6 @@
-﻿using BaseTypes.Interfaces;
+﻿using Diagram.UI.Interfaces;
 
-using DataPerformer.Interfaces;
-
-using Diagram.UI.Interfaces;
-
-namespace Diagram.TypeScript
+namespace Diagram.UI.TypeScript
 {
  
     public class Performer 

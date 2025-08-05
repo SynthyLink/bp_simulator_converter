@@ -1,8 +1,11 @@
 import { IAliasName } from "./IAliasName";
 
-export interface IFeedbackAlias {
+export interface IFeedbackAlias
+{
 
     getFeedBackAlias(): IAliasName;
 
     setFeedBackAlias(): void;
+
+    
 }

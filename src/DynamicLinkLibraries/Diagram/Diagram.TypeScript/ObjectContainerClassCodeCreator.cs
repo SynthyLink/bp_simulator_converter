@@ -1,10 +1,9 @@
-﻿using Diagram.UI;
-using Diagram.UI.Interfaces;
+﻿using Diagram.UI.Interfaces;
 using Diagram.UI.Attributes;
 
 using ErrorHandler;
 
-namespace Diagram.TypeScript
+namespace Diagram.UI.TypeScript
 {
     [Language("TS")]
     internal class ObjectContainerClassCodeCreator : IClassCodeCreator

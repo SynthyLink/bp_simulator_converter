@@ -22,7 +22,7 @@ namespace DataPerformer.Formula.TypeScript
         static FormulaEditor.Performer formulaPerformer = new FormulaEditor.Performer();
 
 
-        static Diagram.TypeScript.Performer performer = new();
+        static Diagram.UI.TypeScript.Performer performer = new();
 
 
 

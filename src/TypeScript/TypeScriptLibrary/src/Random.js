@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Random = void 0;
 const AliasName_1 = require("../Library/AliasName");
 const Desktop_1 = require("../Library/Desktop");
+const DataLink_1 = require("../Library/Measurements/Arrows/DataLink");
 const DataConsumer_1 = require("../Library/Measurements/DataConsumer");
-const DataLink_1 = require("../Library/Measurements/DataLink");
 const RandomGenerator_1 = require("../Library/Measurements/RandomGenerator");
 const Recursive_1 = require("../Library/Measurements/Recursive");
 const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaConsumer");
@@ -134,7 +134,6 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaConsu
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setValue(this.get_11());
     }
 }
 class Random_CategoryObject_3 extends Recursive_1.Recursive {
@@ -187,9 +186,6 @@ class Random_CategoryObject_3 extends Recursive_1.Recursive {
         return this.success ? this.var_2 : undefined;
     }
     save() {
-        var v = this.variables;
-        var x0 = v.get("a");
-        x0 === null || x0 === void 0 ? void 0 : x0.setValue(this.get_2());
     }
 }
 class Random_CategoryObject_4 extends DataConsumer_1.DataConsumer {

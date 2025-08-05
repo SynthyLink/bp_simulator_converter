@@ -9,7 +9,7 @@ namespace Test.Calculation.Forms.CodeCreators
     {
 
         
-        static Diagram.TypeScript.Performer performer = new Diagram.TypeScript.Performer();
+        static Diagram.UI.TypeScript.Performer performer = new ();
 
         internal TSCodeCreator()
         {

@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PefrormerMeasuremets = void 0;
-const TimeMeasurementProvider_1 = require("./TimeMeasurementProvider");
 const Performer_1 = require("../Performer");
-const ArrayMeasurement_1 = require("./ArrayMeasurement");
-const Variable_1 = require("./Variable");
 const AliasNameMeasurement_1 = require("./AliasNameMeasurement");
+const TimeMeasurementProvider_1 = require("./TimeMeasurementProvider");
+const Variable_1 = require("./Variables/Variable");
 class PefrormerMeasuremets {
     constructor() {
         this.performer = new Performer_1.Performer();
@@ -23,7 +22,7 @@ class PefrormerMeasuremets {
         var n = array.getMeasurementNames().length;
         var mea = [];
         for (var i = 0; i < n; i++) {
-            mea.push(new ArrayMeasurement_1.ArrayMeasurement(array, i));
+            //  mea.push(new ArrayMeasurement(array, i));
         }
         return mea;
     }

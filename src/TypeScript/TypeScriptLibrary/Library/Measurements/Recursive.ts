@@ -38,7 +38,7 @@ export class Recursive extends DataConsumerVariadbleMeasurements implements ISta
         for (var key of keys)
         {
             var v = vari.get(key);
-            v?.setValue(this.initial.get(key));
+            v?.setIValue(this.initial.get(key));
         }
     }
 

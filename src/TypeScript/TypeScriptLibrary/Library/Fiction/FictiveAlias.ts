@@ -1,5 +1,5 @@
-import { OwnNotImplemented } from "./ErrorHandler/OwnNotImplemented";
-import { IAlias } from "./Interfaces/IAlias";
+import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
+import { IAlias } from "../Interfaces/IAlias";
 
 export class FictiveAlias implements IAlias {
     getAliasNames(): string[] {

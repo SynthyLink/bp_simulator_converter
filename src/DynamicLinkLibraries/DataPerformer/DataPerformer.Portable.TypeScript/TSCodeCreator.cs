@@ -13,7 +13,7 @@ namespace DataPerformer.Portable.TypeScript
     [Language("TS")]
     internal class TSCodeCreator : IClassCodeCreator
     {
-        static Diagram.TypeScript.Performer performer = new Diagram.TypeScript.Performer();
+        static Diagram.UI.TypeScript.Performer performer = new Diagram.UI.TypeScript.Performer();
 
 
         #region Ctor

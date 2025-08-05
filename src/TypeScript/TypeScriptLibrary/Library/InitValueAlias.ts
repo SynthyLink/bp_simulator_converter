@@ -1,11 +1,8 @@
-import { IANAZone } from "luxon";
-import { FictiveAlias } from "./FictiveAlias";
-import { FictiveAliasName } from "./FictiveAliasName";
-import { FictiveValue } from "./FictiveValue";
+import { FictiveAliasName } from "./Fiction/FictiveAliasName";
+import { FictiveValue } from "./Fiction/FictiveValue";
 import { IAliasName } from "./Interfaces/IAliasName";
-import { IValue } from "./Interfaces/IValue";
 import { IFeedbackAlias } from "./Interfaces/IFeedbackAlias";
-import { AliasName } from "./AliasName";
+import { IValue } from "./Interfaces/IValue";
 
 export class InitValueAlias implements IFeedbackAlias {
 

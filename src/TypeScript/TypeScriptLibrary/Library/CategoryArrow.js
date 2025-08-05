@@ -10,6 +10,9 @@ class CategoryArrow {
         desktop.addCategoryArrow(this);
         desktop.addObject(this);
     }
+    getArrowName() {
+        return this.name;
+    }
     getClassName() {
         return this.typeName;
     }

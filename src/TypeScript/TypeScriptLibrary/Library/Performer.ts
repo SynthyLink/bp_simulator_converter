@@ -13,7 +13,17 @@ export class Performer
 
     protected s: string = "";
 
-    public converArray<T, S>(objects: T[], type: string): S[]
+    public convertTS<S, T>(s: S, type: string) : T
+    {
+        if (this.implementsType(s, type))
+        {
+            throw new OwnError("Illegal type", "Illegal type: " + type, undefined);
+        }
+        return s as undefined as T;
+    }
+
+
+    public convertArray<T, S>(objects: T[], type: string): S[]
     {
 
         let s : S[] = [];
@@ -49,7 +59,6 @@ export class Performer
         var t: T[] = [];
         if (ob.imlplementsType(type))
         {
-
             var x = s as unknown as IObject as T;
             t.push(x);
         }

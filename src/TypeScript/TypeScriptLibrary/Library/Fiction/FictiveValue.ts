@@ -1,5 +1,5 @@
-import { OwnNotImplemented } from "./ErrorHandler/OwnNotImplemented";
-import { IValue } from "./Interfaces/IValue";
+import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
+import { IValue } from "../Interfaces/IValue";
 
 export class FictiveValue implements IValue {
     getIValue() {

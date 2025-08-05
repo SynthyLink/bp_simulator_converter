@@ -21,7 +21,7 @@ class Recursive extends DataConsumerVariableMeasurements_1.DataConsumerVariadble
         var vari = this.variables;
         for (var key of keys) {
             var v = vari.get(key);
-            v === null || v === void 0 ? void 0 : v.setValue(this.initial.get(key));
+            v === null || v === void 0 ? void 0 : v.setIValue(this.initial.get(key));
         }
     }
     setIniitial() {

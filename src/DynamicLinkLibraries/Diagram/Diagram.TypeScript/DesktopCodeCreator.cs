@@ -8,7 +8,7 @@ using Diagram.UI.Labels;
 
 using NamedTree;
 
-namespace Diagram.TypeScript
+namespace Diagram.UI.TypeScript
 {
     [Language("TS", ".ts")]
     internal class DesktopCodeCreator : IDesktopCodeCreator

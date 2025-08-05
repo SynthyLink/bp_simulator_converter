@@ -8,7 +8,13 @@ class Performer {
         this.b = false;
         this.s = "";
     }
-    converArray(objects, type) {
+    convertTS(s, type) {
+        if (this.implementsType(s, type)) {
+            throw new OwnError_1.OwnError("Illegal type", "Illegal type: " + type, undefined);
+        }
+        return s;
+    }
+    convertArray(objects, type) {
         let s = [];
         for (var i = 0; i < objects.length; i++) {
             let o = objects[i];
@@ -28,6 +34,15 @@ class Performer {
             }
         }
         return map;
+    }
+    convertObject(s, type) {
+        let ob = s;
+        var t = [];
+        if (ob.imlplementsType(type)) {
+            var x = s;
+            t.push(x);
+        }
+        return t;
     }
     select(objects, type) {
         let t = [];

@@ -1,6 +1,6 @@
-import { OwnNotImplemented } from "./ErrorHandler/OwnNotImplemented";
-import { IAlias } from "./Interfaces/IAlias";
-import { IAliasName } from "./Interfaces/IAliasName";
+import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
+import { IAlias } from "../Interfaces/IAlias";
+import { IAliasName } from "../Interfaces/IAliasName";
 
 export class FictiveAliasName implements IAliasName {
     getAliasNameValue() {
