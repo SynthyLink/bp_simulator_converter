@@ -1,18 +1,17 @@
-
 import { IObject } from "../../Interfaces/IObject";
+import { IValue } from "../../Interfaces/IValue";
 import { Performer } from "../../Performer";
 import { IMeasurement } from "../Interfaces/IMeasurement";
-import { ISetValue } from "../../Interfaces/ISetValue";
 
-export class Variable implements IMeasurement, IObject, ISetValue
-{
-    value !: any;
-    type !: any;
-    name !: string;
 
-    className: string = "";
+export class Variable implements IMeasurement, IObject, IValue {
+    value: any = new Object();;
+    type: any = new Object();
+    name: string = "";
 
-    types: string[] = ["Variable", "IMeasurement", "IObject", "ISetValue"];
+    className: string = "Variable";
+
+    types: string[] = ["Variable", "IMeasurement", "IObject", "IValue"];
 
     performer: Performer = new Performer();
 
@@ -20,11 +19,16 @@ export class Variable implements IMeasurement, IObject, ISetValue
         this.name = name;
         this.type = type;
         this.value = value;
-        
+
     }
-    setOwnValue(value: any): void {
+    getIValue() {
+        return this.value;
+    }
+    setIValue(value: any): void {
         this.value = value;
     }
+
+
     getClassName(): string {
         return this.className;
     }

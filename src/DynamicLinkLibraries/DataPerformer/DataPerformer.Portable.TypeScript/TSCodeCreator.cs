@@ -29,6 +29,7 @@ namespace DataPerformer.Portable.TypeScript
                       { (object o) => { return o is ObjectTransformer; } , CreateObjectTransformer },
               { (object o) => { return o is DataLink; } ,CreateDataLink},
                    { (object o) => { return o is RandomGenerator; } , CreateRandomGenerator},
+               { (object o) => { return o is ObjectTransformerLink; } , CreateObjectTransformeLink},
          };
 
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
@@ -93,6 +94,19 @@ namespace DataPerformer.Portable.TypeScript
         {
             var o = (object)obj;
             return (S)o;
+        }
+
+        static List<string> CreateObjectTransformeLink(string preffix, object obj)
+        {
+
+            List<string> l = new List<string>();
+            var s = performer.ClassString(preffix, "ObjectTransformeLink");
+            l.Add(s);
+            l.Add("{");
+            performer.AddObjectConstructor(l);
+            l.Add("\t}");
+            l.Add("}");
+            return l;
         }
 
 

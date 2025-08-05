@@ -100,9 +100,9 @@ namespace DataPerformer.Formula
             for (int i = 0; i < m.Count; i++)
             {
                 var mea = m[i];
-                if (mea is ITreeAssociated mh)
+                if (mea is IOutputTree mh)
                 {
-                    var h = mh.ObjectFormulaTree;
+                    var h = mh.Tree;
                     var n = l.IndexOf(h);
                     if (n >= 0)
                     {
@@ -122,9 +122,9 @@ namespace DataPerformer.Formula
             for (int i = 0; i < measurements.Count; i++)
             {
                 var m = measurements[i];
-                if (m is ITreeAssociated mh)
+                if (m is IOutputTree mh)
                 {
-                    var h = mh.ObjectFormulaTree;
+                    var h = mh.Tree;
                     var n = trees.IndexOf(h);
                     if (n >= 0)
                     {

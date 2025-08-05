@@ -100,9 +100,10 @@ namespace DataPerformer.Formula.TypeScript
                 foreach (var ii in ct)
                 {
                     var mtt = "measurement" + ii[0];
-                    vari.Add(mtt + " !: " + "IMeasurement;");
+                    vari.Add(mtt + " : " + "IMeasurement = new FictiveMeasurement();");
                     init.Add("this." + mtt + " = this.dataConsumer.getAllMeasurements()[" + ii[1] +
                         "].getMeasurement(" + ii[2] + ");");
+                    // !!! ALIAS !!!
                 }
                 if (local.Optional.Count > 0)
                 {

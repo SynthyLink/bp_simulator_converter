@@ -25,7 +25,7 @@ namespace DataPerformer.Formula
     /// <summary>
     /// Formula measure
     /// </summary>
-    public class FormulaMeasurement : IMeasurement, IAssociatedObject, ITreeAssociated, IValue
+    public class FormulaMeasurement : IMeasurement, IAssociatedObject, IOutputTree, IValue
     {
 
         #region Fields
@@ -376,10 +376,9 @@ namespace DataPerformer.Formula
             }
         }
 
-        ObjectFormulaTree ITreeAssociated.ObjectFormulaTree
+        ObjectFormulaTree IOutputTree.Tree
         {
             get => Tree;
-            set { }
         }
 
 

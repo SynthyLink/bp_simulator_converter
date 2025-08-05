@@ -1,34 +1,105 @@
 ﻿using System.Collections.Generic;
+
 using BaseTypes.Interfaces;
+
 using DataPerformer.Interfaces;
-using DataPerformer.Portable.Interfaces;
 
 using Diagram.UI;
 using Diagram.UI.Aliases;
+using Diagram.UI.Attributes;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;
 
-using ErrorHandler;
-
 using NamedTree;
+
+using ErrorHandler;
 
 
 namespace DataPerformer.Portable
 {
     public class Performer
     {
+        NamedTree.Performer performer = new NamedTree.Performer();
 
-        public void InitValued1(IMeasurements measurements)
+        public void Set(IFeedbackAliasCollection collection)
         {
-            for (int i = 0; i < measurements.Count; i++)
+            var c = collection.Aliases;
+            foreach (var alias in c)
             {
-                var m = measurements[i];
-                if (m is IInitialValue iv)
-                {
-                    iv.Set();
-                }
+                alias.Set();
             }
         }
+
+        public void Fill(IFeedbackAliasCollection collection, IDataConsumer consumer)
+        {
+            if (consumer is IMeasurements measurements)
+            {
+                var d = collection.Dictionary;
+                for (var i = 0; i < measurements.Count; i++)
+                {
+                    var m = measurements[i];
+                    var name = m.Name;
+                    if (!d.ContainsKey(name))
+                    {
+                        continue;
+                    }
+                    if (m is IValue value)
+                    {
+                        var v = d[name];
+                        var an = FindAliasName(consumer, v);
+                        var f = new FeedbackAliasValue(value, an);
+                        collection.Add(f);
+                    }
+                    else
+                    {
+                        throw new OwnNotImplemented(" Set(IFeedbackAliasCollection collection)");
+                    }
+
+                }
+
+            }
+            else
+            {
+                throw new OwnNotImplemented(" Set(IFeedbackAliasCollection collection)");
+            }
+        }
+
+
+        public void Fill(IFeedbackAliasCollection collection)
+        {
+            if (collection is IDataConsumer consumer)
+            {
+                Fill(collection, consumer);
+            }
+            else
+            {
+                throw new OwnNotImplemented(" Set(IFeedbackAliasCollection collection)");
+            }
+        }
+
+        /// <summary>
+        /// Initial value
+        /// </summary>
+        /// <param name="alias">Alias</param>
+        /// <param name="measurement">Mesurement</param>
+        /// <returns>Initial value</returns>
+        public IInitialValue InitialValue(IAlias alias, IMeasurement measurement)
+        {
+            if (measurement is  IValue measurementValue)
+            {
+                var attr = performer.GetAttribute<CodeCreatorAttribute>(measurement);
+                if (attr != null)
+                {
+                    if (attr.AliasInitialState)
+                    {
+                        var an = new AliasName(alias, measurement.Name);
+                        return new AliasInit(an, measurementValue);
+                    }
+                }
+            }
+            return null;
+        }
+
 
         public void SetFeedBackAlias(IMeasurements measurements)
         {

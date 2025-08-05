@@ -1,8 +1,7 @@
-export interface IInitValue {
+export interface IInitValue
+{
 
     getInitValue(): any;
 
     resetInitValue(): void;
-
-
 }

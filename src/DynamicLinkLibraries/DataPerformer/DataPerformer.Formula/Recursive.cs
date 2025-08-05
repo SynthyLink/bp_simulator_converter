@@ -8,16 +8,18 @@ using CategoryTheory;
 using DataPerformer.Formula.Interfaces;
 using DataPerformer.Interfaces;
 using DataPerformer.Portable;
+
 using Diagram.UI;
 using Diagram.UI.Aliases;
+using Diagram.UI.Attributes;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;
-
-using ErrorHandler;
 
 using FormulaEditor;
 using FormulaEditor.Interfaces;
 using FormulaEditor.Symbols;
+
+using ErrorHandler;
 
 using NamedTree;
 
@@ -26,24 +28,26 @@ namespace DataPerformer.Formula
     /// <summary>
     /// Recurrent object
     /// </summary>
-	public class Recursive : CategoryObject,  IDataConsumer, IMeasurements, IStarted, IRunning, IAlias,
-		ICheckCorrectness, IStep, IRuntimeUpdate, ITimeMeasurementConsumer, 
-		IVariableDetector, ITreeCollection,	ITimeVariable, IInitialDictionary, 
+    [CodeCreator(AliasInitialState = true)]
+    public class Recursive : CategoryObject, IDataConsumer, IMeasurements, IStarted, IRunning, IAlias,
+		ICheckCorrectness, IStep, IRuntimeUpdate, ITimeMeasurementConsumer,
+		IVariableDetector, ITreeCollection, ITimeVariable, IInitialDictionary,
 		IStringTreeDictionary,
-		IPostSetArrow
+        IPostSetArrow
 	{
 
-        #region Fields
+		#region Fields
 
 		Portable.Performer performer = new Portable.Performer();
 
-		Dictionary<string, ObjectFormulaTree> td = new ();
+		Dictionary<string, ObjectFormulaTree> td = new();
 
- 
-        /// <summary>
-        /// Ordered variables
-        /// </summary>
-        protected List<char> varc = new List<char>();
+
+
+		/// <summary>
+		/// Ordered variables
+		/// </summary>
+		protected List<char> varc = new List<char>();
 
 		/// <summary>
 		/// The "is running" sign
@@ -53,7 +57,7 @@ namespace DataPerformer.Formula
 		/// <summary>
 		/// Internal variables
 		/// </summary>
-		protected Dictionary<object,object> VariablesL
+		protected Dictionary<object, object> VariablesL
 		{
 			get;
 		} = new Dictionary<object, object>();
@@ -68,10 +72,10 @@ namespace DataPerformer.Formula
 		/// </summary>
 		protected Dictionary<object, object> tempAliases = new Dictionary<object, object>();
 
-        /// <summary>
-        /// String representation of internal variables
-        /// </summary>
-        protected Dictionary<object, object> vars = new Dictionary<object, object>();
+		/// <summary>
+		/// String representation of internal variables
+		/// </summary>
+		protected Dictionary<object, object> vars = new Dictionary<object, object>();
 
 		/// <summary>
 		/// String representation of external parameters
@@ -130,7 +134,7 @@ namespace DataPerformer.Formula
 		/// Trees
 		/// </summary>
 		private ObjectFormulaTree[] trees;
-		
+
 		/// <summary>
 		/// Time variable
 		/// </summary>
@@ -150,10 +154,13 @@ namespace DataPerformer.Formula
 			set;
 		}
 
-		/// <summary>
-		/// Proxy factory
-		/// </summary>
-		protected ITreeCollectionProxyFactory proxyFactory = null;
+        protected IFeedbackAliasCollection fc;
+
+
+        /// <summary>
+        /// Proxy factory
+        /// </summary>
+        protected ITreeCollectionProxyFactory proxyFactory = null;
 
 		/// <summary>
 		/// Update
@@ -183,29 +190,30 @@ namespace DataPerformer.Formula
 		/// </summary>
 		public Recursive()
 		{
-			proxyFactory = StaticExtensionDataPerformerFormula.CreatorFactory(this);
-            Update = UpdateFormulas;
+			feedbackAliasCollection = new (this, FeedBack);
+			fc = feedbackAliasCollection;
+            proxyFactory = StaticExtensionDataPerformerFormula.CreatorFactory(this);
+			Update = UpdateFormulas;
 		}
 
-        #endregion
+		#endregion
 
-        #region IDataConsumer Members
+		#region IDataConsumer Members
 
-        /// <summary>
-        /// Adds measurements provider 
-        /// </summary>
-        /// <param name="m">Provider to add</param>
-        void IChildren<IMeasurements>.AddChild(IMeasurements m)
+		/// <summary>
+		/// Adds measurements provider 
+		/// </summary>
+		/// <param name="m">Provider to add</param>
+		void IChildren<IMeasurements>.AddChild(IMeasurements m)
 		{
 			measurements.Add(m);
 		}
 
-
-        /// <summary>
-        /// Removes measurements provider
-        /// </summary>
-        /// <param name="m">Provider to remove</param>
-        void IChildren<IMeasurements>.RemoveChild(IMeasurements m)
+		/// <summary>
+		/// Removes measurements provider
+		/// </summary>
+		/// <param name="m">Provider to remove</param>
+		void IChildren<IMeasurements>.RemoveChild(IMeasurements m)
 		{
 			measurements.Remove(m);
 		}
@@ -266,6 +274,7 @@ namespace DataPerformer.Formula
 			}
 		}
 
+
 		void IMeasurements.UpdateMeasurements()
 		{
 			if (IsUpdated)
@@ -274,33 +283,9 @@ namespace DataPerformer.Formula
 			}
 			try
 			{
-				foreach (var ea in feedbackAliases)
-				{
-					ea.Set();
-				}
-				if (false)
-				{
-					foreach (char c in externalAliases.Keys)
-					{
-						object[] o = externalAliases[c] as object[];
-						IAlias al = o[0] as IAlias;
-						string key = o[1] as string;
-						object[] ob = VariablesL[c] as object[];
-						var k = ob[0];
-						if (k != null)
-						{
-							al[key] = k;
-						}
-					}
-				}
-		//		performer.SetFeedBackAlias(this);
+				fc.Set();
 				UpdateChildrenData();
 				Update();
-				/*		foreach (char c in varc)
-						{
-							object[] o = VariablesL[c] as object[];
-							o[0] = o[3];
-						}*/
 				foreach (var x in output)
 				{
 					if (x is IUpdateItself updateItself)
@@ -351,19 +336,19 @@ namespace DataPerformer.Formula
         /// </summary>
         /// <param name="time">Start time</param>
         void IStarted.Start(double time)
-        {
-            Start(true);
-        }
+		{
+			Start(true);
+		}
 
-        #endregion
+		#endregion
 
-        #region IRunning Members
+		#region IRunning Members
 
-        /// <summary>
+		/// <summary>
 		/// The "is running" sign
 		/// </summary>
-        bool IRunning.IsRunning
-        {
+		bool IRunning.IsRunning
+		{
 			get => isRunning;
 			set
 			{
@@ -371,32 +356,32 @@ namespace DataPerformer.Formula
 				Start(value);
 				running?.Invoke(this, value);
 			}
-        }
+		}
 
-        Action<IRunning, bool> running;
+		Action<IRunning, bool> running;
 
-        event Action<IRunning, bool> IRunning.Running
-        {
-            add
-            {
-                running += value;
-            }
+		event Action<IRunning, bool> IRunning.Running
+		{
+			add
+			{
+				running += value;
+			}
 
-            remove
-            {
-                running -= value;
-            }
-        }
+			remove
+			{
+				running -= value;
+			}
+		}
 
 
-        #endregion
+		#endregion
 
-        #region IAlias Members
+		#region IAlias Members
 
-        /// <summary>
-        /// List of alias names
-        /// </summary>
-        public IList<string> AliasNames
+		/// <summary>
+		/// List of alias names
+		/// </summary>
+		public IList<string> AliasNames
 		{
 			get
 			{
@@ -453,58 +438,58 @@ namespace DataPerformer.Formula
 			remove { onChange -= value; }
 		}
 
-        event Action<IMeasurement> IChildren<IMeasurement>.OnAdd
-        {
-            add
-            {
-            }
+		event Action<IMeasurement> IChildren<IMeasurement>.OnAdd
+		{
+			add
+			{
+			}
 
-            remove
-            {
-            }
-        }
+			remove
+			{
+			}
+		}
 
-        event Action<IMeasurement> IChildren<IMeasurement>.OnRemove
-        {
-            add
-            {
-            }
+		event Action<IMeasurement> IChildren<IMeasurement>.OnRemove
+		{
+			add
+			{
+			}
 
-            remove
-            {
-            }
-        }
+			remove
+			{
+			}
+		}
 
-        event Action<IMeasurements> IChildren<IMeasurements>.OnAdd
-        {
-            add
-            {
-            }
+		event Action<IMeasurements> IChildren<IMeasurements>.OnAdd
+		{
+			add
+			{
+			}
 
-            remove
-            {
-            }
-        }
+			remove
+			{
+			}
+		}
 
-        event Action<IMeasurements> IChildren<IMeasurements>.OnRemove
-        {
-            add
-            {
-            }
+		event Action<IMeasurements> IChildren<IMeasurements>.OnRemove
+		{
+			add
+			{
+			}
 
-            remove
-            {
-            }
-        }
+			remove
+			{
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region ICheckCorrectness Members
+		#region ICheckCorrectness Members
 
-        /// <summary>
-        /// Checks its correctenss
-        /// </summary>
-        public void CheckCorrectness()
+		/// <summary>
+		/// Checks its correctenss
+		/// </summary>
+		public void CheckCorrectness()
 		{
 			try
 			{
@@ -597,14 +582,14 @@ namespace DataPerformer.Formula
 			set { }
 		}
 
-        #endregion
+		#endregion
 
-        #region IPostSetArrow Members
+		#region IPostSetArrow Members
 
-        void IPostSetArrow.PostSetArrow()
-        {
+		void IPostSetArrow.PostSetArrow()
+		{
 			PostSetArrow();
-        }
+		}
 
 		/// <summary>
 		/// The operation that performs after arrows setting
@@ -856,9 +841,12 @@ namespace DataPerformer.Formula
 			{
 				externalAls = value;
 				externalAliases.Clear();
+				FeedBack.Clear();
 				foreach (char c in externalAls.Keys)
 				{
 					string s = externalAls[c] as string;
+					FeedBack[c + ""] = s;
+
 					object[] o = this.FindAlias(s);
 					externalAliases[c] = o;
 				}
@@ -870,196 +858,178 @@ namespace DataPerformer.Formula
 
         #region Protected Members
 
-		/// <summary>
-		/// Orders variables
-		/// </summary>
-		protected void Order()
+   
+        protected virtual Dictionary<string, string>  FeedBack
+		{
+			get;
+		} = new Dictionary<string, string>();
+
+        /// <summary>
+        /// Orders variables
+        /// </summary>
+        protected void Order()
 		{
 			varc.Clear();
-			foreach(char c in vars.Keys)
+			foreach (char c in vars.Keys)
 			{
 				varc.Add(c);
 			}
 			varc.Sort();
 		}
 
-        /// <summary>
-        /// Accepts formulas
-        /// </summary>
-        protected void AcceptFormulas()
-        {
-            output.Clear();
-            acc.Clear();
-            foreach (char c in varc)
-            {
-                Variable v;
-                output.Add(Variable.GetMeasurement(c, this, out v));
-                acc[c + ""] = v;
-            }
-            foreach (char c in parameters.Keys)
-            {
-                IMeasurement m = parameters[c] as IMeasurement;
-                VariableMeasurement v = c.Create(m, this, this);
-                acc[c + ""] = v;
-            }
-            foreach (char c in aliases.Keys)
-            {
-                AliasNameVariable v = new AliasNameVariable(c, this);
-                acc[c + ""] = v;
-                object[] o = aliases[c] as object[];
-            }
-            IAlias al = this;
-            IList<string> l = al.AliasNames;
-            foreach (string n in l)
-            {
-                if (n.Length == 1)
-                {
-                }
-            }
-            IFormulaObjectCreator creator = VariableDetector.GetCreator(this);
-            VariablesL.Clear();
-            foreach (char c in varc)
-            {
-                VariablesL[c] = new object[4];
-            }
-            IList<string> an = AliasNames;
-            List<ObjectFormulaTree> tt = new List<ObjectFormulaTree>();
-            string proh = "\u03B4";
-            foreach (char c in parameters.Keys)
-            {
-                IMeasurement m = parameters[c];
-                if (m.Type is IOneVariableFunction)
-                {
-                    proh += c;
-                }
-            }
-            foreach (char c in varc)
-            {
-                object t = null;
-                object[] os = vars[c] as object[];
-                if (an.Contains(c + ""))
-                {
-                    t = GetType(c + "");
-                }
-                else
-                {
-                    t = os[2];
-                }
-                if (t is IOneVariableFunction)
-                {
-                    proh += c;
-                }
-            }
+		/// <summary>
+		/// Accepts formulas
+		/// </summary>
+		protected void AcceptFormulas()
+		{
+			output.Clear();
+			acc.Clear();
+			foreach (char c in varc)
+			{
+				Variable v;
+				output.Add(Variable.GetMeasurement(c, this, out v));
+				acc[c + ""] = v;
+			}
+			foreach (char c in parameters.Keys)
+			{
+				IMeasurement m = parameters[c] as IMeasurement;
+				VariableMeasurement v = c.Create(m, this, this);
+				acc[c + ""] = v;
+			}
+			foreach (char c in aliases.Keys)
+			{
+				AliasNameVariable v = new AliasNameVariable(c, this);
+				acc[c + ""] = v;
+				object[] o = aliases[c] as object[];
+			}
+			IAlias al = this;
+			IList<string> l = al.AliasNames;
+			foreach (string n in l)
+			{
+				if (n.Length == 1)
+				{
+				}
+			}
+			IFormulaObjectCreator creator = VariableDetector.GetCreator(this);
+			VariablesL.Clear();
+			foreach (char c in varc)
+			{
+				VariablesL[c] = new object[4];
+			}
+			IList<string> an = AliasNames;
+			List<ObjectFormulaTree> tt = new List<ObjectFormulaTree>();
+			string proh = "\u03B4";
+			foreach (char c in parameters.Keys)
+			{
+				IMeasurement m = parameters[c];
+				if (m.Type is IOneVariableFunction)
+				{
+					proh += c;
+				}
+			}
+			foreach (char c in varc)
+			{
+				object t = null;
+				object[] os = vars[c] as object[];
+				if (an.Contains(c + ""))
+				{
+					t = GetType(c + "");
+				}
+				else
+				{
+					t = os[2];
+				}
+				if (t is IOneVariableFunction)
+				{
+					proh += c;
+				}
+			}
 			td.Clear();
-            foreach (char c in varc)
-            {
-                object[] os = vars[c] as object[];
-                object t = null;
-                if (an.Contains(c + ""))
-                {
-                    t = GetType(c + "");
-                }
-                else
-                {
-                    t = os[2];
-                }
-                object[] ol = VariablesL[c] as object[];
-                string f = os[1] as string;
-                MathFormula form = MathFormula.FromString(MathSymbolFactory.Sizes, f);
-                ObjectFormulaTree tree = ObjectFormulaTree.CreateTree(form.FullTransform(proh), creator);
-                if (!t.Equals(tree.ReturnType))
-                {
-                    throw new OwnException("Illegal return type");
-                }
-                ol[1] = tree;
-                tt.Add(tree);
+			foreach (char c in varc)
+			{
+				object[] os = vars[c] as object[];
+				object t = null;
+				if (an.Contains(c + ""))
+				{
+					t = GetType(c + "");
+				}
+				else
+				{
+					t = os[2];
+				}
+				object[] ol = VariablesL[c] as object[];
+				string f = os[1] as string;
+				MathFormula form = MathFormula.FromString(MathSymbolFactory.Sizes, f);
+				ObjectFormulaTree tree = ObjectFormulaTree.CreateTree(form.FullTransform(proh), creator);
+				if (!t.Equals(tree.ReturnType))
+				{
+					throw new OwnException("Illegal return type");
+				}
+				ol[1] = tree;
+				tt.Add(tree);
 				td[c + ""] = tree;
-            }
-            trees = tt.ToArray();
+			}
+			trees = tt.ToArray();
 			Finish();
-        }
+		}
 
-        protected Dictionary<string, object> Initial
-        {
-            get
-            {
-                var d = new Dictionary<string, object>();
-                foreach (var c in vars)
-                {
-                    var k = c.Key;
-                    var val = c.Value as object[];
-                    d[c.Key + ""] = val[2];
-                }
-                return d;
-            }
-        }
-		List<IInitialValue> initialValues = new List<IInitialValue>();
+		protected Dictionary<string, object> Initial
+		{
+			get
+			{
+				var d = new Dictionary<string, object>();
+				foreach (var c in vars)
+				{
+					var k = c.Key;
+					var val = c.Value as object[];
+					d[c.Key + ""] = val[2];
+				}
+				return d;
+			}
+		}
+	
 
-		List<IFeedbackAlias> feedbackAliases = new List<IFeedbackAlias>();
+		protected  Portable.FeedbackAliasCollection feedbackAliasCollection;
 
+		protected IInitialValueCollection initial;
 
 		void Finish()
 		{
-			initialValues.Clear();
-			feedbackAliases.Clear();
 			IAlias al = this;
-			foreach (var measurement in output)
-			{
-				var name = measurement.Name;
-				var iv = measurement as IValue;
-				var inia = new AliasName(this, name);
-				initialValues.Add(new AliasInit(inia, iv));
-				object o = null;
-				var c = name[0];
-				if (externalAliases.ContainsKey(c))
-				{
-
-					var x = externalAliases[c] as object[];
-					var alias = x[0] as IAlias;
-					var n = x[1] + "";
-					IAliasName an = new AliasName(alias, n);
-					var feed = new FeedbackAliasValue(iv, an);
-					feedbackAliases.Add(feed);
-				}
-
-			}
+			feedbackAliasCollection.Fill();
+			initial = new AliasInitialValueConnection(this, this);
 		}
 
+		#endregion
 
-        #endregion
+		#region Internal Members
 
-        #region Internal Members
-
-        internal Dictionary<object, object> Aliases => aliases;
+		internal Dictionary<object, object> Aliases => aliases;
 
 		internal Dictionary<object, object> Pars => pars;
 
-        IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => output;
+		IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => output;
 
-        IEnumerable<IMeasurements> IChildren<IMeasurements>.Children => measurements;
+		IEnumerable<IMeasurements> IChildren<IMeasurements>.Children => measurements;
 
-        Dictionary<string, object> IInitialDictionary.Dictionary => Initial;
+		Dictionary<string, object> IInitialDictionary.Dictionary => Initial;
 
 
-        #endregion
+		#endregion
 
-        #region Private Members
+		#region Private Members
 
-    
 
-        Dictionary<string, ObjectFormulaTree> IStringTreeDictionary.Dictionary => td;
 
-        void Start(bool stated)
+		Dictionary<string, ObjectFormulaTree> IStringTreeDictionary.Dictionary => td;
+
+		void Start(bool stated)
 		{
 			if (stated)
 			{
-				foreach (var iv in initialValues)
-				{
-					iv.Set();
-				}
-			//	performer.InitValued(this);
+				initial.Set();
 				return;
-				
+
 				foreach (char c in varc)
 				{
 				}
@@ -1071,13 +1041,13 @@ namespace DataPerformer.Formula
 				}
 				return;
 			}
-            foreach (var alias in tempAliases.Keys)
-            {
-                aliases[alias] = tempAliases[alias];
-            }
-        }
+			foreach (var alias in tempAliases.Keys)
+			{
+				aliases[alias] = tempAliases[alias];
+			}
+		}
 
-        private void UpdateFormulas()
+		private void UpdateFormulas()
 		{
 			foreach (char c in varc)
 			{
@@ -1097,13 +1067,13 @@ namespace DataPerformer.Formula
 			try
 			{
 				OutDic.Clear();
-				
+
 				List<IMeasurement> outNew = new List<IMeasurement>();
 				Update = UpdateFormulas;
 				Proxy = null;
 				Proxy = proxyFactory.CreateProxy(this, StaticExtensionFormulaEditor.CheckValue);
-                //int k = 0;
-                dictF = new Dictionary<char, FormulaMeasurement>();
+				//int k = 0;
+				dictF = new Dictionary<char, FormulaMeasurement>();
 				AssociatedAddition aa = new AssociatedAddition(this, null);
 				foreach (char c in varc)
 				{
@@ -1122,7 +1092,7 @@ namespace DataPerformer.Formula
 				FormulaMeasurement.Set(lm, Proxy);
 				Update = UpdateProxy;
 				Finish();
-			// !!! VERY BAD	output = outNew;
+				// !!! VERY BAD	output = outNew;
 			}
 			catch (Exception ex)
 			{
@@ -1179,37 +1149,35 @@ namespace DataPerformer.Formula
 			Finish();
 		}
 
-        void IChildren<IMeasurement>.AddChild(IMeasurement child)
-        {
+		void IChildren<IMeasurement>.AddChild(IMeasurement child)
+		{
 			output.Add(child);
-            throw new ErrorHandler.OwnException();
+			throw new ErrorHandler.OwnException();
 
-        }
+		}
 
-        void IChildren<IMeasurement>.RemoveChild(IMeasurement child)
-        {
+		void IChildren<IMeasurement>.RemoveChild(IMeasurement child)
+		{
 			output.Remove(child);
-        }
+		}
 
 		#endregion
 
 		#region Variable
 
-        /// <summary>
-        /// Auxiliary class for measurement
-        /// </summary>
+		/// <summary>
+		/// Auxiliary class for measurement
+		/// </summary>
+		[CodeCreator(AliasInitialState = true)]
         internal class Variable : IObjectOperation, IPowered, IOperationAcceptor, IMeasurement, 
-			IMeasurementHolder, IAliasNameHolder, ITreeAssociated, IValue, IUpdateItself, IOutputTree
+			IMeasurementHolder, IAliasNameHolder, ITreeAssociated, IValue, IUpdateItself, 
+			IOutputTree, ITreeCreator
 		{
 
 			#region Fields
 
 			ObjectFormulaTree tree;
-
-
-   
-
-
+	
             protected Portable.Performer performer = new Portable.Performer();
 
 			protected Func<object> formulaGet;
@@ -1277,7 +1245,7 @@ namespace DataPerformer.Formula
 				name = key + "";
 				type = r.GetType(name);
 				formulaGet = GetInitial;
-				tree = new ObjectFormulaTree(this, new List<ObjectFormulaTree>());
+				tree = new ObjectFormulaTree(this);
 			}
 
 			#endregion
@@ -1355,6 +1323,8 @@ namespace DataPerformer.Formula
 				}
 
 			}
+
+            ObjectFormulaTree ITreeCreator.Tree => tree;
 
 
             #endregion

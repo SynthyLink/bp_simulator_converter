@@ -2,31 +2,40 @@
 using System.Collections.Generic;
 
 using BaseTypes.Interfaces;
+
 using CategoryTheory;
+
 using DataPerformer.Interfaces;
-using DataPerformer.Portable.Measurements;
+
 using Diagram.UI.Interfaces;
 using Diagram.UI;
 using Diagram.UI.Aliases;
 using Diagram.UI.Labels;
+
 using ErrorHandler;
+
 using Event.Interfaces;
+
 using NamedTree;
 
 namespace DataPerformer.Portable
 {
-
+ 
     /// <summary>
     /// Data consumer + measurements
     /// </summary>
     public abstract class DataConsumerMeasurements : DataConsumer,
-        IMeasurements, IAlias, ICheckCorrectness
-      {
+        IMeasurements, IAlias,  ICheckCorrectness
+    {
 
         #region Fields
 
-        protected virtual List<IFeedbackAlias> FeedbackAliases { get; } = new List<IFeedbackAlias>();
+        protected FeedbackAliasCollection feedbackAliasCollection;
 
+ 
+        protected Performer performer = new Performer();
+
+    
         /// <summary>
         /// String representation of formulas
         /// </summary>
@@ -53,6 +62,7 @@ namespace DataPerformer.Portable
         /// </summary>
         protected object[,] result;
 
+    
 
         /// <summary>
         /// Input parameter
@@ -166,13 +176,19 @@ namespace DataPerformer.Portable
 
         #region Ctor
 
+        protected virtual Dictionary<string, string> FeedBack
+        {
+            get;
+            set;
+        } = new Dictionary<string, string>();
+
         /// <summary>
         /// Constructor
         /// </summary>
         protected DataConsumerMeasurements()
                 : base(39)
         {
-            
+            feedbackAliasCollection = new FeedbackAliasCollection(this, FeedBack);
         }
 
 
@@ -289,6 +305,8 @@ namespace DataPerformer.Portable
         /// </summary>
         IMeasurement IMeasurements.this[int n] => GetMeasurement(n);
 
+        IFeedbackAliasCollection fc => feedbackAliasCollection;
+
         protected virtual void UpdateMeasurements()
         {
             if (IsUpdated)
@@ -306,10 +324,9 @@ namespace DataPerformer.Portable
                     throw new OwnException("Formulas are not accepted");
                 }
                 update();
-                foreach (var f in FeedbackAliases)
-                {
-                    f.Set();
-                }
+                fc.Set();
+               
+                
                 /*!!!
                 foreach (int i in feedAliases.Keys)
                 {
@@ -640,24 +657,35 @@ namespace DataPerformer.Portable
 
         IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => Children;
 
-        protected void SetFeedback()
+        protected virtual void SetFeedback()
         {
-            FeedbackAliases.Clear();
-
-            var d = new Dictionary<string, IMeasurement>();
+            FeedBack.Clear();
             var keys = feedback.Keys;
             for (int i = 0; i < measurements.Length; i++)
             {
                 if (keys.Contains(i))
                 {
                     var m = measurements[i];
-                    var alias = this.FindAliasName(feedback[i], false);
-                    var feed = new FeedbackAliasValue(m as IValue, alias);
-                    FeedbackAliases.Add(feed);
-
+                    FeedBack[m.Name] = feedback[i];
                 }
 
             }
+            feedbackAliasCollection.Fill();
+            
+      /*               var d = new Dictionary<string, IMeasurement>();
+                     var keys = feedback.Keys;
+                     for (int i = 0; i < measurements.Length; i++)
+                     {
+                         if (keys.Contains(i))
+                         {
+                             var m = measurements[i];
+                             var alias = this.FindAliasName(feedback[i], false);
+                             var feed = new FeedbackAliasValue(m as IValue, alias);
+                             FeedbackAliases.Add(feed);
+
+                         }
+
+        }*/
  
         }
 

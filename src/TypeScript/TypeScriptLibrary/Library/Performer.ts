@@ -44,7 +44,17 @@ export class Performer
         return map;
     }
 
+    public convertObject<T, S>(s: S, type: string): T[] {
+        let ob = s as unknown as IObject;
+        var t: T[] = [];
+        if (ob.imlplementsType(type))
+        {
 
+            var x = s as unknown as IObject as T;
+            t.push(x);
+        }
+        return t;
+    }
 
     
 

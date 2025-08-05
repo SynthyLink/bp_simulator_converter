@@ -175,18 +175,23 @@ namespace FormulaEditor
         {
             ObjectFormulaTree tree = new ObjectFormulaTree(formula, creator);
             IObjectOperation op = tree.Operation;
-            if (op is ITreeAssociated treeAssociated)
-            {
-                treeAssociated.ObjectFormulaTree = tree;
-            }
             if (op is ITreeCreator)
             {
                 ITreeCreator tc = op as ITreeCreator;
                 ObjectFormulaTree tp = tc.Tree;
                 if (tp != null)
                 {
+
+                    if (op is ITreeAssociated treeAss)
+                    {
+                        treeAss.ObjectFormulaTree = tree;
+                    }
                     return tp;
                 }
+            }
+            if (op is ITreeAssociated treeAssociated)
+            {
+                treeAssociated.ObjectFormulaTree = tree;
             }
             if (op == null)
             {

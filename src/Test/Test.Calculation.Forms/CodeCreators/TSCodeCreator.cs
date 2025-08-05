@@ -1,4 +1,5 @@
-﻿using Diagram.UI.Attributes;
+﻿using Diagram.UI;
+using Diagram.UI.Attributes;
 using Diagram.UI.Interfaces;
 
 namespace Test.Calculation.Forms.CodeCreators
@@ -6,14 +7,21 @@ namespace Test.Calculation.Forms.CodeCreators
     [Language("TS")]
     internal class TSCodeCreator : IClassCodeCreator
     {
+
+        
         static Diagram.TypeScript.Performer performer = new Diagram.TypeScript.Performer();
+
+        internal TSCodeCreator()
+        {
+            this.AddCodeCreator();
+        }
 
 
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
         {
             if (obj is ObjectTransformer ot)
             {
-                var l = new List<string>();
+                var l = CreateObjectTransformer(preffix, ot);
                 return l;
             }
             return null;

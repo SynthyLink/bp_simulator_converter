@@ -1,3 +1,4 @@
-export interface IFeedbackAlias {
+export interface IFeedbackAlias
+{
     setFeedbackAlias(): void;
 }
