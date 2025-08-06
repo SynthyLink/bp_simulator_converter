@@ -59,7 +59,6 @@ namespace FormulaEditor.CodeCreators
             string[] sep = separatorCreator[tree];
             if (sep == null)
             {
-                var ss = separatorCreator[tree]; // DELETE AFTER !!!
                 return null;
             }
             List<string> l = new List<string>();
@@ -71,7 +70,6 @@ namespace FormulaEditor.CodeCreators
             }
             string sp = ret.Substring(4);
             int k = int.Parse(sp);
-
             if (sep.Length == 2)
             {
                 string[] ss =  new string[] { " = measurement", ".Parameter();" };

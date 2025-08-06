@@ -38,9 +38,8 @@ namespace DataPerformer.Formula
 
 		#region Fields
 
-		Portable.Performer performer = new Portable.Performer();
 
-		Dictionary<string, ObjectFormulaTree> td = new();
+		Dictionary<string, ObjectFormulaTree> td1 = new();
 
         protected IFeedbackAliasCollection feedbackAliasCollection;
 
@@ -899,9 +898,16 @@ namespace DataPerformer.Formula
 			}
 			foreach (char c in aliases.Keys)
 			{
-				AliasNameVariable v = new AliasNameVariable(c, this);
-				acc[c + ""] = v;
-				object[] o = aliases[c] as object[];
+				if (!vars.ContainsKey(c))
+				{
+					AliasNameVariable v = new AliasNameVariable(c, this);
+					acc[c + ""] = v;
+					object[] o = aliases[c] as object[];
+				}
+				else
+				{
+
+				}
 			}
 			IAlias al = this;
 			IList<string> l = al.AliasNames;
@@ -1012,14 +1018,15 @@ namespace DataPerformer.Formula
 
 		Dictionary<string, object> IInitialDictionary.Dictionary => Initial;
 
+        Dictionary<string, ObjectFormulaTree> td = new Dictionary<string, ObjectFormulaTree>();
 
-		#endregion
+        #endregion
 
-		#region Private Members
+        #region Private Members
 
 
 
-		Dictionary<string, ObjectFormulaTree> IStringTreeDictionary.Dictionary => td;
+        Dictionary<string, ObjectFormulaTree> IStringTreeDictionary.Dictionary => td;
 
 		void Start(bool stated)
 		{
@@ -1313,15 +1320,15 @@ namespace DataPerformer.Formula
 				{
 					if (outTree == null)
 					{
-						var d = Recursive.OutDic;
-						if (d.ContainsKey(key))
+                        IStringTreeDictionary dc = Recursive;
+						var d = dc.Dictionary;
+						if (d.ContainsKey(name))
 						{
-							outTree = d[key];
+							outTree = d[name];
 						}
 					}
 					return outTree;
 				}
-
 			}
 
             ObjectFormulaTree ITreeCreator.Tree => tree;

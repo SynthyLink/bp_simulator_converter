@@ -71,6 +71,7 @@ namespace DataPerformer.Formula
         public AliasNameVariable(char symbol, IAlias alias, string name)
             : this(symbol + "", alias, name)
         {
+
         }
 
         /// <summary>
@@ -81,6 +82,7 @@ namespace DataPerformer.Formula
         public AliasNameVariable(char symbol, IAlias alias)
             : this(symbol + "", alias, symbol + "")
         {
+
         }
 
         #endregion

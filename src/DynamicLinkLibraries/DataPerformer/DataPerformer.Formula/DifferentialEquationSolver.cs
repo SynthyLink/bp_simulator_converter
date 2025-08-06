@@ -359,7 +359,7 @@ namespace DataPerformer.Formula
                             goto m;
                         }
                     }
-                    throw new Exception(DataConsumer.VariablesShortage + " : " + c);
+                    throw new OwnException(DataConsumer.VariablesShortage + " : " + c);
                 m:
                     b = !b;
                 }
@@ -1008,9 +1008,6 @@ namespace DataPerformer.Formula
                 {
                     if (pars[c] != null)
                     {
-                        /*!!!   this.Throw(new Exception(PureDesktop.GetResourceString(VectorFormulaConsumer.ExternalParameter_) +
-                               c + PureDesktop.GetResourceString(VectorFormulaConsumer._IsNotDefined)));
-                       */
                     }
                 }
             }
@@ -1590,7 +1587,7 @@ namespace DataPerformer.Formula
                         {
                             throw ex;
                         }
-                        throw new Exception("Formula " + (i + 1) + " : " + ex.Message);
+                        throw new OwnException("Formula " + (i + 1) + " : " + ex.Message);
                     }
                 }
                 try

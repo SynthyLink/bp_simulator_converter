@@ -88,7 +88,7 @@ namespace DataPerformer.Formula.TypeScript
                 var name = "\"" + m.Name + "\"";
                 var type = m.Type;
                 var v = typeCreator.GetDefaultValue(type);
-                l.Add("this.addVariable(this.pMeasurements.createVariable(" + name + ", " + v + ", " + v + ", this));");
+                l.Add("this.addVariable(new Variable(" + name + ", " + v + ", " + v + "));");
 
             }
             return l;

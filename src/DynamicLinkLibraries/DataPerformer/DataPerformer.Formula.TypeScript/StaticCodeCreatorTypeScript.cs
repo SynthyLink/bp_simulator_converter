@@ -1,5 +1,7 @@
-﻿using DataPerformer.Interfaces;
-
+﻿using BaseTypes;
+using BaseTypes.Interfaces;
+using DataPerformer.Interfaces;
+using Diagram.UI.Attributes;
 using ErrorHandler;
 
 using FormulaEditor;
@@ -12,13 +14,10 @@ namespace DataPerformer.Formula.TypeScript
 
         static DataPerformer.Interfaces.Performer performer = new ();
 
+        static NamedTree.Performer perf = new NamedTree.Performer ();
+
         #region Public Members
 
-        internal static Dictionary<string, Tuple<int, object>> Output
-        {
-            get;
-            set;
-        }
         public static string GetMeasurementName(string current, int n)
         {
             string st = current;
@@ -72,6 +71,17 @@ namespace DataPerformer.Formula.TypeScript
             }
         }
 
+        static bool GetState(object obj)
+        {
+            bool b = false;
+            var attr = perf.GetAttribute<CodeCreatorAttribute>(obj);
+            if (attr != null)
+            {
+                b = attr.AliasInitialState;
+            }
+            return b;
+        }
+
 
         /// <summary>
         /// Creates code from trees
@@ -90,20 +100,51 @@ namespace DataPerformer.Formula.TypeScript
             List<string> code = new List<string>();
             List<string> vari = new List<string>();
             List<string> init = new List<string>();
-
+            var measurements = obj as IMeasurements;
             try
             {
                 local = creator.Create(obj, trees);
                 IList<ObjectFormulaTree> lt = local.Trees;
-                Output = DataPerformerFormula.GetOutput(obj as IMeasurements, lt.ToArray());
+               // Output = DataPerformerFormula.GetOutput(obj as IMeasurements, lt.ToArray());
                 var ct = DataPerformerFormula.Get(obj as IDataConsumer, lt.ToArray());
-                foreach (var ii in ct)
+                bool state = GetState(obj);
+
+                for (int i = 0; i < lt.Count; i++)
                 {
-                    var mtt = "measurement" + ii[0];
-                    vari.Add(mtt + " : " + "IMeasurement = new FictiveMeasurement();");
-                    init.Add("this." + mtt + " = this.dataConsumer.getAllMeasurements()[" + ii[1] +
-                        "].getMeasurement(" + ii[2] + ");");
-                    // !!! ALIAS !!!
+                    var tree = lt[i];
+                    var op = tree.Operation;
+                    foreach (var ii in ct)
+                    {
+                        if (ii[0] == i)
+                        {
+                            var mtt = "measurement" + ii[0];
+                            vari.Add(mtt + " : " + "IMeasurement = new FictiveMeasurement();");
+                            init.Add("this." + mtt + " = all[" + ii[1] +
+                                "].getMeasurement(" + ii[2] + ");");
+                            goto m;
+                        }
+                    }
+                    if (state & (measurements != null))
+                    {
+                        if (!GetState(op))
+                        {
+                            continue;
+                        }
+                        if (op is IValue iv)
+                        {
+                            for (var j = 0; j < measurements.Count; j++)
+                            {
+                                var m = measurements[j];
+                                if (m == op)
+                                {
+                                    var mtt = "value" + i;
+                                    vari.Add(mtt + " : IValue = new FictiveValue();");
+                                    init.Add("this." + mtt + " = this.output[" + j + "];");
+                                }
+                            }
+                        }
+                    }
+                    m: continue;
                 }
                 if (local.Optional.Count > 0)
                 {

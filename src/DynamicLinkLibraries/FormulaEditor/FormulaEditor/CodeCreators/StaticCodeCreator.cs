@@ -25,18 +25,10 @@ namespace FormulaEditor.CodeCreators
             try
             {
                 return creator.GetNumber(tree);
-                /*  ObjectFormulaTree[] trees = creator.Trees;
-                  for (int i = 0; i < trees.Length; i++)
-                  {
-                      if (trees[i] == tree)
-                      {
-                          return i;
-                      }
-                  }*/
             }
             catch (Exception)
             {
-                throw new Exception("Tree not found");
+                throw new OwnException("Tree not found");
             }
         }
 

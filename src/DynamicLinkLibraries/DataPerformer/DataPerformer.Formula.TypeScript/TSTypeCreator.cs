@@ -1,15 +1,18 @@
-﻿using System.Reflection;
-
-using BaseTypes;
+﻿using BaseTypes;
 using BaseTypes.CodeCreator.Interfaces;
+using System.ComponentModel;
+using System.Reflection;
+using static DataPerformer.Formula.TypeScript.StaticExtensionDataPerformerFormulaTypeScript;
 
 namespace DataPerformer.Formula.TypeScript
 {
+    
+
     internal class TSTypeCreator : ITypeCreator
     {
         #region Fields
 
-        static private readonly Dictionary<Type, string> dictionary =
+        static public readonly Dictionary<Type, string> Dictionary =
             new Dictionary<Type, string>()
             {
                { typeof(double), "number" },
@@ -63,9 +66,9 @@ namespace DataPerformer.Formula.TypeScript
                 return st;
             }
             Type type = o.GetType();
-            if (dictionary.ContainsKey(type))
+            if (Dictionary.ContainsKey(type))
             {
-                return dictionary[type];
+                return Dictionary[type];
             }
             if (o is Type)
             {

@@ -1,19 +1,19 @@
-﻿using System.Text;
-
-using BaseTypes;
+﻿using BaseTypes;
 using BaseTypes.CodeCreator.Interfaces;
 using BaseTypes.Interfaces;
-
+using BaseTypes.Utils;
 using DataPerformer.Interfaces;
 using DataPerformer.Portable.Measurements;
+using Diagram.UI.Attributes;
 using Diagram.UI.Interfaces;
-
 using ErrorHandler;
-
 using FormulaEditor;
 using FormulaEditor.CodeCreators;
 using FormulaEditor.CodeCreators.Interfaces;
 using FormulaEditor.Interfaces;
+using System.Reflection.Emit;
+using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DataPerformer.Formula.TypeScript
 {
@@ -168,7 +168,40 @@ namespace DataPerformer.Formula.TypeScript
             variables = new List<string>();
             initializers = new List<string>();
             var num = int.Parse(ret.Substring(4));
+            var state = GetState(obj);          
             var op = tree.Operation;
+            if (state & GetState(op))
+            {
+                if (op is IValue)
+                {
+                    var anvn = "this.value" + num;
+                    var lan = new List<string>();
+                    lan.Add("this.variable = " + anvn + ".getIValue();");
+                    lan.Add("if (this.check(this.variable)) { this.success = false; return; }");
+                    lan.Add(tree.ToType(num));
+                    return lan;
+
+                }
+
+            }
+            if (op is AliasNameVariable anv)
+            {
+                var an = anv.AliasName;
+                var nam = an.Name;
+                var anvn = "aliasName" + num;
+                var lan = new List<string>();
+                lan.Add("this.variable = this." + anvn + ".getAliasNameValue()");
+                lan.Add("if (this.check(this.variable)) { this.success = false; return; }");
+                lan.Add(tree.ToType(num));
+                var init = new List<string>()
+                {
+                    "this." + anvn + " = new AliasName(this.alias, \"" + nam +"\");"
+                };
+                (initializers as List<string>).AddRange(init);
+                var vari = new List<string> { anvn + " : IAliasName =  new FictiveAliasName();" };
+                (variables as List<string>).AddRange(vari);
+                return lan;
+            }
             if (op is IMeasurementHolder mh)
             {
                 var mea = mh.Measurement;
@@ -179,21 +212,7 @@ namespace DataPerformer.Formula.TypeScript
                         "this." + ret + " = this.getInternalTime();"
                     };
                 }
-            }
-            if (op is AliasNameVariable anv)
-            {
-                var an = anv.AliasName;
-                var nam = an.Name;
-                var anvn = "aliasName" + num;
-                var lan = new List<string>();
-                lan.Add("this.variable = " + anvn + ".getAliasNameValue()");
-                var init = new List<string>()
-                {
-                    "this." + anvn + " = new AliasName(this.alias, \"" + nam +"\");"
-                };
-                (initializers as List<string>).AddRange(init);
-                var vari = new List<string> { anvn + " !: IAliasName;" };
-                (variables as List<string>).AddRange(vari);
+                goto Label;
             }
             else if (op is IAliasNameHolder anh)
             {
@@ -201,15 +220,16 @@ namespace DataPerformer.Formula.TypeScript
                 var nam = an.Name;
                 var anvn = "aliasName" + num;
                 var lan = new List<string>();
-                lan.Add("this.variable = " + anvn + ".getAliasNameValue()");
+                lan.Add("this.variable = " + anvn + ".getAliasNameValue();");
                 var init = new List<string>()
                 {
                     "this." + anvn + " = new AliasName(this.alias, \"" + nam +"\");"
                 };
                 (initializers as List<string>).AddRange(init);
-                var vari = new List<string> { anvn + " !: IAliasName;" };
+                var vari = new List<string> () { anvn + " : IAliasName = new FictiveAliasName();" };
                 (variables as List<string>).AddRange(vari);
             }
+        Label:
             string[] sep = separatorCreator[tree];
             if (sep == null)
             {
@@ -250,7 +270,7 @@ namespace DataPerformer.Formula.TypeScript
             }
             list.Add(s);
             list.Add("if (this.check(this.variable)) { this.success = false; return; } ");
-            list.Add("this." + ret + " = this.convert<" + tt + ">(this.variable);");
+            list.Add(tree.ToType(num));
             if (s.Contains("this.measurement"))
             {
                 //       variables.Add("measurement" + num + " != IMeasurement");
@@ -258,6 +278,19 @@ namespace DataPerformer.Formula.TypeScript
             return list;
         }
 
+        static NamedTree.Performer perf = new NamedTree.Performer();
+
+        static bool GetState(object obj)
+        {
+            bool b = false;
+            var attr = perf.GetAttribute<CodeCreatorAttribute>(obj);
+            if (attr != null)
+            {
+                b = attr.AliasInitialState;
+            }
+            return b;
+
+        }
 
 
 

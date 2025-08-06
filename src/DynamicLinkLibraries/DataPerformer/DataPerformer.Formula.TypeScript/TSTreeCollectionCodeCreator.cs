@@ -68,19 +68,19 @@ namespace DataPerformer.Formula.TypeScript
             //          l.Add(" : FormulaEditor.Interfaces.ITreeCollectionProxy");
             //        local = null;
             var lt = PreCreateCode(obj, out local, out variables, out initializers,  className);
-            List<string> ltt = PostCreateCode(local, lt, variables, initializers,
+            List<string> ltt = PostCreateCode(local, obj, lt, variables, initializers,
                          constructorModifier + " " + className,
                          checkValue);
             var ltr = local.Trees;
             formulaPerformer.Add(l, ltt, 0);
-            var output = StaticCodeCreatorTypeScript.Output;
-            if (obj is IMeasurements mm)
-            {
-                output = DataPerformerFormula.GetOutput(mm, ltr);
-            }
+            var output = new Dictionary<string, Tuple<int, object>>();
             if (obj is IStringTreeDictionary dictionary)
             {
                 output = DataPerformerFormula.GetOutput(dictionary, ltr);
+            }
+            else if (obj is IMeasurements mm)
+            {
+                output = DataPerformerFormula.GetOutput(mm, ltr);
             }
             var ll = new List<string>();
             ll.Add("save() : void {");
@@ -92,18 +92,12 @@ namespace DataPerformer.Formula.TypeScript
                 var st = "x" + kk;
                 ++kk;
                 ll.Add("\tvar " + st + " = v.get(" + "\"" + k.Key + "\");");
-                ll.Add("\t" + st + "?.setValue(this.get_" + k.Value.Item1 + "());");
+                ll.Add("\t" + st + "?.setIValue(this.get_" + k.Value.Item1 + "());");
             }
             ll.Add("}");
             l.AddRange(ll);
             l.Add("");
             return l;
-            /*
-             * 	var v = this.variables;
-		var x1 = v.get("F");
-		x1?.setValue(this.get_4());
-
-             */
         }
 
         #endregion
@@ -138,30 +132,15 @@ namespace DataPerformer.Formula.TypeScript
 
         #region Private Members
 
-        private List<string> PostCreateCode(ICodeCreator local, IList<string> lcode,
+        private List<string> PostCreateCode(ICodeCreator local, object ob, IList<string> lcode,
            IList<string> variables, IList<string> initializers, string consturctor, bool checkValue = true)
         {
             List<string> l = new();
             formulaPerformer.Add(l, lcode as List<string>, 1);
             int nTree = local.Trees.Length;
-            if (checkValue)
-            {
-                /*    for (int i = 0; i < nTree; i++)
-                    {
-                        l.Add("\tcheckValue(var_" + i + ");");
-                    */
-            }
-       //     l.Add("}");
             l.Add("");
             if (checkValue)
             {
-              /*  l.Add(consturctor + "(FormulaEditor.ObjectFormulaTree[] trees, Func<object, bool> checkValue, DataPerformer.Formula.DataPerformerFormula dataPerformerFormula)");
-                l.Add("{");
-                l.Add("\tsuccess = true;");
-                l.Add("\tthis.trees = trees;");
-                l.Add("\tthis.checkValue = checkValue;");
-                l.Add("\tthis.dataPerformerFormula = dataPerformerFormula;");
-              */
             }
             else
             {
@@ -171,6 +150,10 @@ namespace DataPerformer.Formula.TypeScript
             }
             l.Add("init() : void");
             l.Add("{");
+            if (ob is IMeasurements)
+            {
+                l.Add("\tvar all = this.getAllMeasurements();");
+            }
             formulaPerformer.Add(l, initializers as List<string>, 1);
             l.Add("}");
       /*      l.Add("");
@@ -222,7 +205,7 @@ namespace DataPerformer.Formula.TypeScript
             local = null;
             IList<string> lt = PreCreateCode(obj, out local, out variables, out initializers,  current);
             l.Add("\t\t");
-            List<string> ltt = PostCreateCode(local, lt, variables, initializers, "public Calculate", checkValue != null);
+            List<string> ltt = PostCreateCode(local, obj, lt, variables, initializers, "public Calculate", checkValue != null);
             StringBuilder sb = new StringBuilder();
             foreach (string s in ltt)
             {
