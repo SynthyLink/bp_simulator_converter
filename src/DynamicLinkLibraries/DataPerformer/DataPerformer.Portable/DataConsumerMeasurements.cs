@@ -25,12 +25,12 @@ namespace DataPerformer.Portable
     /// Data consumer + measurements
     /// </summary>
     public abstract class DataConsumerMeasurements : DataConsumer,
-        IMeasurements, IAlias,  ICheckCorrectness
+        IMeasurements, IAlias, IFeedbackAliasCollectionHolder,  ICheckCorrectness
     {
 
         #region Fields
 
-        protected FeedbackAliasCollection feedbackAliasCollection;
+        protected IFeedbackAliasCollection feedbackAliasCollection;
 
  
         protected Performer performer = new Performer();
@@ -188,7 +188,7 @@ namespace DataPerformer.Portable
         protected DataConsumerMeasurements()
                 : base(39)
         {
-            feedbackAliasCollection = new FeedbackAliasCollection(this, FeedBack);
+            feedbackAliasCollection = new FeedbackAliasCollection(this, this, FeedBack);
         }
 
 
@@ -656,6 +656,8 @@ namespace DataPerformer.Portable
         protected virtual IEnumerable<IMeasurement> Children => measurements;
 
         IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => Children;
+
+        IFeedbackAliasCollection IFeedbackAliasCollectionHolder.Feedback => feedbackAliasCollection;
 
         protected virtual void SetFeedback()
         {

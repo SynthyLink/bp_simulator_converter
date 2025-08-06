@@ -32,7 +32,7 @@ namespace DataPerformer.Formula
     public class Recursive : CategoryObject, IDataConsumer, IMeasurements, IStarted, IRunning, IAlias,
 		ICheckCorrectness, IStep, IRuntimeUpdate, ITimeMeasurementConsumer,
 		IVariableDetector, ITreeCollection, ITimeVariable, IInitialDictionary,
-		IStringTreeDictionary,
+		IStringTreeDictionary, IFeedbackAliasCollectionHolder,
         IPostSetArrow
 	{
 
@@ -42,12 +42,15 @@ namespace DataPerformer.Formula
 
 		Dictionary<string, ObjectFormulaTree> td = new();
 
+        protected IFeedbackAliasCollection feedbackAliasCollection;
+
+        protected IInitialValueCollection initial;
 
 
-		/// <summary>
-		/// Ordered variables
-		/// </summary>
-		protected List<char> varc = new List<char>();
+        /// <summary>
+        /// Ordered variables
+        /// </summary>
+        protected List<char> varc = new List<char>();
 
 		/// <summary>
 		/// The "is running" sign
@@ -154,8 +157,7 @@ namespace DataPerformer.Formula
 			set;
 		}
 
-        protected IFeedbackAliasCollection fc;
-
+   
 
         /// <summary>
         /// Proxy factory
@@ -190,8 +192,7 @@ namespace DataPerformer.Formula
 		/// </summary>
 		public Recursive()
 		{
-			feedbackAliasCollection = new (this, FeedBack);
-			fc = feedbackAliasCollection;
+			feedbackAliasCollection = new  FeedbackAliasCollection(this, this, FeedBack);
             proxyFactory = StaticExtensionDataPerformerFormula.CreatorFactory(this);
 			Update = UpdateFormulas;
 		}
@@ -283,7 +284,7 @@ namespace DataPerformer.Formula
 			}
 			try
 			{
-				fc.Set();
+                feedbackAliasCollection.Set();
 				UpdateChildrenData();
 				Update();
 				foreach (var x in output)
@@ -989,9 +990,6 @@ namespace DataPerformer.Formula
 		}
 	
 
-		protected  Portable.FeedbackAliasCollection feedbackAliasCollection;
-
-		protected IInitialValueCollection initial;
 
 		void Finish()
 		{
@@ -1062,7 +1060,9 @@ namespace DataPerformer.Formula
 			get;
 		} = new Dictionary<char, ObjectFormulaTree>();
 
-		private void CreateProxyInternal()
+        IFeedbackAliasCollection IFeedbackAliasCollectionHolder.Feedback => feedbackAliasCollection;
+
+        private void CreateProxyInternal()
 		{
 			try
 			{

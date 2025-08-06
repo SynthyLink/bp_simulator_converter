@@ -1,3 +1,0 @@
-class RealMatrix {
-    constructor() { }
-}

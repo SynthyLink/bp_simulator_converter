@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-
-using BaseTypes.Interfaces;
-
+﻿using BaseTypes.Interfaces;
 using CategoryTheory;
-
-using Diagram.UI;
-using Diagram.UI.Aliases;
-using Diagram.UI.Labels;
-
 using DataPerformer.Formula.Interfaces;
 using DataPerformer.Interfaces;
 using DataPerformer.Portable;
-
+using Diagram.UI;
+using Diagram.UI.Aliases;
+using Diagram.UI.Interfaces;
+using Diagram.UI.Labels;
+using ErrorHandler;
 using FormulaEditor;
 using FormulaEditor.Interfaces;
 using FormulaEditor.Symbols;
-
-using ErrorHandler;
-
 using NamedTree;
+using System;
+using System.Collections.Generic;
 
 namespace DataPerformer.Formula
 {
@@ -28,7 +22,7 @@ namespace DataPerformer.Formula
     /// </summary>
     public class VectorFormulaConsumer :
        DataConsumerMeasurements,   IVariableDetector,
-       IStarted, IRuntimeUpdate, ITreeCollection, ITimeVariable,
+       IStarted, IRuntimeUpdate, ITreeCollection, ITimeVariable, IFeedbackAliasCollectionHolder,
         IReplaceMeasurements, IPostSetArrow
     {
 
@@ -844,6 +838,8 @@ namespace DataPerformer.Formula
                 return t;
             }
         }
+
+        IFeedbackAliasCollection IFeedbackAliasCollectionHolder.Feedback => feedbackAliasCollection;
 
 
         #endregion

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using BaseTypes.Interfaces;
 
@@ -32,32 +33,38 @@ namespace DataPerformer.Portable
 
         public void Fill(IFeedbackAliasCollection collection, IDataConsumer consumer)
         {
-            if (consumer is IMeasurements measurements)
+            if (collection == null)
             {
-                var d = collection.Dictionary;
-                for (var i = 0; i < measurements.Count; i++)
-                {
-                    var m = measurements[i];
-                    var name = m.Name;
-                    if (!d.ContainsKey(name))
-                    {
-                        continue;
-                    }
-                    if (m is IValue value)
-                    {
-                        var v = d[name];
-                        var an = FindAliasName(consumer, v);
-                        var f = new FeedbackAliasValue(value, an);
-                        collection.Add(f);
-                    }
-                    else
-                    {
-                        throw new OwnNotImplemented(" Set(IFeedbackAliasCollection collection)");
-                    }
-
-                }
 
             }
+            if (consumer is IMeasurements measurements)
+            {
+                try
+                {
+                    var d = collection.Dictionary;
+                    for (var i = 0; i < measurements.Count; i++)
+                    {
+                        var m = measurements[i];
+                        var name = m.Name;
+                        if (!d.ContainsKey(name))
+                        {
+                            continue;
+                        }
+                        if (m is IValue value)
+                        {
+                            var v = d[name];
+                            var an = FindAliasName(consumer, v);
+                            var f = new FeedbackAliasValue(value, an);
+                            collection.Add(f);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.HandleException();
+                }
+            }
+
             else
             {
                 throw new OwnNotImplemented(" Set(IFeedbackAliasCollection collection)");
@@ -67,7 +74,8 @@ namespace DataPerformer.Portable
 
         public void Fill(IFeedbackAliasCollection collection)
         {
-            if (collection is IDataConsumer consumer)
+            var holder = collection.Holder;
+            if (holder is IDataConsumer consumer)
             {
                 Fill(collection, consumer);
             }
