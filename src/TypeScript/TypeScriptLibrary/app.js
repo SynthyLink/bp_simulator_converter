@@ -33,15 +33,17 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-const OrbitAct_1 = require("./OrbitAct");
 const readline = __importStar(require("readline"));
-const RandomAcr_1 = require("./RandomAcr");
-const TwoAct_1 = require("./TwoAct");
-const SimpleFeedAct_1 = require("./SimpleFeedAct");
+const OrbitAct_1 = require("./Tests/Wrappees/OrbitAct");
+const RandomAcr_1 = require("./Tests/Wrappees/RandomAcr");
+const SimpleFeedAct_1 = require("./Tests/Wrappees/SimpleFeedAct");
+const TwoAct_1 = require("./Tests/Wrappees/TwoAct");
+const TestObjectTransformerSimpleAct_1 = require("./Tests/Wrappees/TestObjectTransformerSimpleAct");
 //actOrbit();
 //actRandom();
 //actTwo();
-actSimpleFeed();
+//actSimpleFeed();
+actTestObjectTransformerSimple();
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -73,6 +75,28 @@ function load() {
     catch (e) {
         let ii = 0;
         ii++;
+    }
+}
+function actTestObjectTransformerSimple() {
+    try {
+        var o = new TestObjectTransformerSimpleAct_1.TestObjectTransformerSimpleAct();
+        o.test();
+    }
+    catch (e) {
+        console.log(e);
+        rl.question('Is this example useful? [y/n] ', (answer) => {
+            switch (answer.toLowerCase()) {
+                case 'y':
+                    console.log('Super!');
+                    break;
+                case 'n':
+                    console.log('Sorry! :(');
+                    break;
+                default:
+                    console.log('Invalid answer!');
+            }
+            rl.close();
+        });
     }
 }
 function actSimpleFeed() {

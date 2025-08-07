@@ -1,11 +1,11 @@
-import { IAction } from "./Library/Interfaces/IAction";
-import { IDataConsumer } from "./Library/Measurements/Interfaces/IDataConsumer";
-import { PefrormerMeasuremets } from "./Library/Measurements/PefrormerMeasuremets";
-import { DataRuntimeConsumer } from "./Library/Runtime/DataRuntimeConsumer";
-import { IDataRuntime } from "./Library/Runtime/Interfaces/IDataRuntime";
-import { Orbital } from "./src/Orbital";
+import { IAction } from "../../Library/Interfaces/IAction";
+import { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
+import { PefrormerMeasuremets } from "../../Library/Measurements/PefrormerMeasuremets";
+import { DataRuntimeConsumer } from "../../Library/Runtime/DataRuntimeConsumer";
+import { IDataRuntime } from "../../Library/Runtime/Interfaces/IDataRuntime";
+import { Two } from "../Two";
 
-export class OrbitAct extends Orbital implements IAction {
+export class TwoAct extends Two implements IAction {
     dc !: IDataConsumer;
     constructor() {
         super();

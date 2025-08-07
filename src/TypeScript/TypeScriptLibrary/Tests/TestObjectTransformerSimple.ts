@@ -1,3 +1,4 @@
+import { TestObjectTransformer } from "../ExternalObjects/Test_Obects/TestObjectTransformer";
 import { AliasName } from "../Library/AliasName";
 import { Desktop } from "../Library/Desktop";
 import { FeedbackAliasCollection } from "../Library/FeedbackAliasCollection";
@@ -9,6 +10,7 @@ import { IDesktop } from "../Library/Interfaces/IDesktop";
 import { IPostSetArrow } from "../Library/Interfaces/IPostSetArrow";
 import { IValue } from "../Library/Interfaces/IValue";
 import { DataLink } from "../Library/Measurements/Arrows/DataLink";
+import { ObjectTransformerLink } from "../Library/Measurements/Arrows/ObjectTransformerLink";
 import { DataConsumer } from "../Library/Measurements/DataConsumer";
 import { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement";
 import { ObjectTransformer } from "../Library/Measurements/ObjectTransformer";
@@ -16,17 +18,17 @@ import { Recursive } from "../Library/Measurements/Recursive";
 import { Variable } from "../Library/Measurements/Variables/Variable";
 import { VectorFormulaConsumer } from "../Library/Measurements/VectorFormulaConsumer";
 
-class TestObjectTransformer_CategoryObject_0 extends VectorFormulaConsumer
+class TestObjectTransformerSimple_CategoryObject_0 extends VectorFormulaConsumer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["a", 0.19288703216830552 ],
-			["d", 9 ],
-			["b", 0.0021040127874554378 ],
-			["c", 0.52807755064538875 ]
+			["c", 0.52807755063743145 ],
+			["a", 0.19288702860157331 ],
+			["b", 0.0021040127652205607 ],
+			["d", 9 ]
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariable(new Variable("Formula_1", 0, 0));
@@ -110,23 +112,32 @@ class TestObjectTransformer_CategoryObject_0 extends VectorFormulaConsumer
 	}
 }
 
-class TestObjectTransformer_CategoryObject_1 extends ObjectTransformer
+class TestObjectTransformerSimple_CategoryObject_1 extends TestObjectTransformer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
+		this.coefficient = 0.24;
 	}
 }
 
-class TestObjectTransformer_CategoryObject_2 extends ObjectTransformer
+class TestObjectTransformerSimple_CategoryObject_2 extends ObjectTransformer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
+	let map = new Map<string, string>(
+	[
+		["a", "Vector.Formula_1" ],
+		["b", "Vector.Formula_2" ],
+		["c", "Vector.Formula_3" ],
+		["d", "Vector.Formula_4" ]
+	]);
+		this.setLinks(map);
 	}
 }
 
-class TestObjectTransformer_CategoryObject_3 extends Recursive
+class TestObjectTransformerSimple_CategoryObject_3 extends Recursive
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -357,7 +368,7 @@ class TestObjectTransformer_CategoryObject_3 extends Recursive
 	}
 }
 
-class TestObjectTransformer_CategoryObject_4 extends DataConsumer
+class TestObjectTransformerSimple_CategoryObject_4 extends DataConsumer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -365,7 +376,7 @@ class TestObjectTransformer_CategoryObject_4 extends DataConsumer
 	}
 }
 
-class TestObjectTransformer_CategoryArrow_0 extends ObjectTransformeLink
+class TestObjectTransformerSimple_CategoryArrow_0 extends ObjectTransformerLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -373,7 +384,7 @@ class TestObjectTransformer_CategoryArrow_0 extends ObjectTransformeLink
 	}
 }
 
-class TestObjectTransformer_CategoryArrow_1 extends DataLink
+class TestObjectTransformerSimple_CategoryArrow_1 extends DataLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -381,7 +392,7 @@ class TestObjectTransformer_CategoryArrow_1 extends DataLink
 	}
 }
 
-class TestObjectTransformer_CategoryArrow_2 extends DataLink
+class TestObjectTransformerSimple_CategoryArrow_2 extends DataLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -389,7 +400,7 @@ class TestObjectTransformer_CategoryArrow_2 extends DataLink
 	}
 }
 
-class TestObjectTransformer_CategoryArrow_3 extends DataLink
+class TestObjectTransformerSimple_CategoryArrow_3 extends DataLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -397,7 +408,7 @@ class TestObjectTransformer_CategoryArrow_3 extends DataLink
 	}
 }
 
-class TestObjectTransformer_CategoryArrow_4 extends DataLink
+class TestObjectTransformerSimple_CategoryArrow_4 extends DataLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -405,7 +416,7 @@ class TestObjectTransformer_CategoryArrow_4 extends DataLink
 	}
 }
 
-class TestObjectTransformer_CategoryArrow_5 extends DataLink
+class TestObjectTransformerSimple_CategoryArrow_5 extends DataLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -415,25 +426,25 @@ class TestObjectTransformer_CategoryArrow_5 extends DataLink
 
 
 
-export class TestObjectTransformer extends Desktop
+export class TestObjectTransformerSimple extends Desktop
 {
 	constructor()
 	{
 		super();
 
-		this.name = "TestObjectTransformer";
+		this.name = "TestObjectTransformerSimple";
 
-		new TestObjectTransformer_CategoryObject_0(this, "Vector");
-		new TestObjectTransformer_CategoryObject_1(this, "Source");
-		new TestObjectTransformer_CategoryObject_2(this, "Transformer");
-		new TestObjectTransformer_CategoryObject_3(this, "Recursive");
-		new TestObjectTransformer_CategoryObject_4(this, "Chart");
-		new TestObjectTransformer_CategoryArrow_0(this, "");
-		new TestObjectTransformer_CategoryArrow_1(this, "");
-		new TestObjectTransformer_CategoryArrow_2(this, "");
-		new TestObjectTransformer_CategoryArrow_3(this, "");
-		new TestObjectTransformer_CategoryArrow_4(this, "");
-		new TestObjectTransformer_CategoryArrow_5(this, "");
+		new TestObjectTransformerSimple_CategoryObject_0(this, "Vector");
+		new TestObjectTransformerSimple_CategoryObject_1(this, "Source");
+		new TestObjectTransformerSimple_CategoryObject_2(this, "Transformer");
+		new TestObjectTransformerSimple_CategoryObject_3(this, "Recursive");
+		new TestObjectTransformerSimple_CategoryObject_4(this, "Chart");
+		new TestObjectTransformerSimple_CategoryArrow_0(this, "");
+		new TestObjectTransformerSimple_CategoryArrow_1(this, "");
+		new TestObjectTransformerSimple_CategoryArrow_2(this, "");
+		new TestObjectTransformerSimple_CategoryArrow_3(this, "");
+		new TestObjectTransformerSimple_CategoryArrow_4(this, "");
+		new TestObjectTransformerSimple_CategoryArrow_5(this, "");
 
 		let objects = this.getCategoryObjects();
 		let arrows = this.getCategoryArrows();

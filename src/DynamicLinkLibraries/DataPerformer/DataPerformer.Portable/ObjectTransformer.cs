@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using CategoryTheory;
 
 using Diagram.UI;
@@ -10,7 +8,9 @@ using Diagram.UI;
 using BaseTypes;
 
 using DataPerformer.Interfaces;
+
 using ErrorHandler;
+
 using NamedTree;
 
 namespace DataPerformer.Portable
@@ -92,8 +92,6 @@ namespace DataPerformer.Portable
 
         private Action act;
 
-        private IDataConsumer cons;
-
         private ArrayReturnType art;
 
         /// <summary>
@@ -111,7 +109,6 @@ namespace DataPerformer.Portable
         /// </summary>
         public ObjectTransformer()
         {
-            cons = this;
             act = () =>
             {
                 transformer.Calculate(inO, outO);
@@ -297,7 +294,6 @@ namespace DataPerformer.Portable
         }
 
         #endregion
-
 
         #region Specific Members
 

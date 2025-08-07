@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ObjectTransformer = void 0;
 const CategoryObject_1 = require("../CategoryObject");
 const OwnError_1 = require("../ErrorHandler/OwnError");
-const OwnNotImplemented_1 = require("../ErrorHandler/OwnNotImplemented");
+const FictiveDataConsumer_1 = require("../Fiction/FictiveDataConsumer");
 const Performer_1 = require("../Performer");
 class ObjectTransformer extends CategoryObject_1.CategoryObject {
     constructor(desktop, name) {
@@ -56,6 +56,7 @@ class ObjectTransformer extends CategoryObject_1.CategoryObject {
         /// Providers of measurements
         /// </summary>
         this.providers = [];
+        this.cons = new FictiveDataConsumer_1.FictiveDataConsumer();
         this.transformers = [];
         this.typeName = "ObjectTransformer";
         this.types.push("ObjectTransformer");
@@ -66,7 +67,7 @@ class ObjectTransformer extends CategoryObject_1.CategoryObject {
         this.cons = this;
     }
     postSetArrow() {
-        throw new OwnNotImplemented_1.OwnNotImplemented();
+        this.initTransformer();
     }
     getMeasurementsCount() {
         return this.outMea.length;
@@ -75,7 +76,12 @@ class ObjectTransformer extends CategoryObject_1.CategoryObject {
         return this.outMea[i];
     }
     updateMeasurements() {
-        throw new OwnNotImplemented_1.OwnNotImplemented();
+        this.performer.updateChildrenData(this);
+        for (var i = 0; i < this.inO.length; i++) {
+            var m = this.inMea[i];
+            this.inO[i] = m.getMeasurementValue();
+        }
+        this.transformer.calculate(this.inO, this.outO);
     }
     addMeasurement(measurement) {
         this.outMea.push(measurement);
@@ -91,37 +97,48 @@ class ObjectTransformer extends CategoryObject_1.CategoryObject {
             throw new OwnError_1.OwnError("", "", "");
         }
         this.transformer = transformer;
-        this.initTransformer();
     }
     initTransformer() {
-        var sl = this.outS.length;
-        if (this.outO.length != sl) {
-            this.outO = new Array(sl);
-            const arr = [];
-            //var a = this.performer.resizeArray(arr, sl);
-        }
-        //  outMea = new IMeasurement[outO.Length];
-        //inMea = new IMeasurement[transformer.Input.Length];
-        //inO = new object[inMea.Length];
+        var inp = this.transformer.getInput();
+        var out = this.transformer.getOutput();
+        this.inO = new Array(inp.length);
+        this.outO = new Array(out.length);
         this.createOutput();
     }
     createOutput() {
+        this.inMea = [];
         var outS = this.transformer.getOutput();
         for (var i = 0; i < outS.length; i++) {
             var name = outS[i];
             var type = this.getOutputType(i);
             this.outMea.push(new TransMeasurement(i, this.outO, name, type));
         }
+        var mm = this.performer.getMeasurementsDCMap(this);
+        var ent = this.links.entries();
+        for (var [s, t] of ent) {
+            var mt = mm.get(t);
+            if (mt != undefined) {
+                this.inMea.push(mt);
+            }
+        }
     }
     getOutputType(i) {
         return this.transformer.getOutputType(i);
     }
+    setLinks(map) {
+        this.performer.copyMap(map, this.links);
+    }
 }
 exports.ObjectTransformer = ObjectTransformer;
 class TransMeasurement {
+    setLinks(links) {
+        this.performer.copyMap(links, this.links);
+    }
     constructor(n, outO, name, type) {
         this.outO = [];
         this.name = "";
+        this.links = new Map();
+        this.performer = new Performer_1.Performer();
         this.n = n;
         this.outO = outO;
         this.name = name;

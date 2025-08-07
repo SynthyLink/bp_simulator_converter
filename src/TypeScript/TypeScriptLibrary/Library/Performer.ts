@@ -1,8 +1,10 @@
 import { AliasName } from "./AliasName";
 import { OwnError } from "./ErrorHandler/OwnError";
 import { FictiveAlias } from "./Fiction/FictiveAlias";
+import { FictiveMeasurements } from "./Fiction/FictiveMeasurements";
 import { IAlias } from "./Interfaces/IAlias";
 import { IAliasName } from "./Interfaces/IAliasName";
+import { ICategoryObject } from "./Interfaces/ICategoryObject";
 import { IDesktop } from "./Interfaces/IDesktop";
 import { IObject } from "./Interfaces/IObject";
 import { IDataConsumer } from "./Measurements/Interfaces/IDataConsumer";
@@ -27,6 +29,21 @@ export class Performer
         return s as undefined as T;
     }
 
+
+    public updateChildrenData(dataConsumer: IDataConsumer): void
+    {
+        var children = dataConsumer.getAllMeasurements();
+        for (var child of children)
+        {
+            var o = child as unknown as IObject;
+            if (this.implementsType(o, "IDataConsumer"))
+            {
+                var dc = child as unknown as IDataConsumer;
+                this.updateChildrenData(dc);
+            }
+            child.updateMeasurements();
+        }
+    }
 
     public convertArray<T, S>(objects: T[], type: string): S[]
     {
@@ -89,23 +106,7 @@ export class Performer
     }
 
  
-    /*
-     public getAnyTimeOperation(consumer: ITimeMeasurementConsumer): Operation<any> {
-        var m = consumer.getTimeMeasutement();
-        return () => { m.getOperation()(); }
-    }
 
-    public getNumberTimeOperation(consumer: ITimeMeasurementConsumer): Operation<number> {
-        return () => {
-            var m = consumer.getTimeMeasutement();
-            var v = m.getOperation();
-            var value = v();
-            if (typeof value === 'number') {
-                return value; 
-            }
-            return 0;
-        }
-    }*/
 
     public convertFromAny<T>(t: any): T
     {
@@ -246,6 +247,39 @@ export class Performer
         return map;
     }
 
+
+ 
+
+    public getMeasurementsDCMap(consumer: IDataConsumer): Map<string, IMeasurement>
+    {
+        var map: Map<string, IMeasurement> = new Map();
+        var mm = consumer.getAllMeasurements();
+        for (var mea of mm)
+        {
+            var co = mea as unknown as ICategoryObject;
+            var nm = co.getCategoryObjectName();
+            nm += ".";
+            var n = mea.getMeasurementsCount();
+            for (let i = 0; i < n; i++)
+            {
+                var m = mea.getMeasurement(i);
+                var name = nm + m.getMeasurementName();
+                map.set(name, m);
+            }
+            
+        }
+        return map;
+    }
+
+    public getMeasurements(desktop: IDesktop, name: string): IMeasurements
+    {
+        var a = desktop.getCategoryObject(name);
+        if (this.implementsType(a, "IMeasurements")) {
+            var al = a as unknown as IMeasurements;
+            return al;
+        }
+        return new FictiveMeasurements();
+    }
     
 
     public getAlias(desktop: IDesktop, name: string): IAlias

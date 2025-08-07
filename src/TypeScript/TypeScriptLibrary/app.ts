@@ -1,12 +1,15 @@
-import { OrbitAct } from "./OrbitAct";
 import * as readline from 'readline';
-import { RandomAct } from "./RandomAcr";
-import { TwoAct } from "./TwoAct";
-import { SimpleFeedAct } from "./SimpleFeedAct";
+import { OrbitAct } from './Tests/Wrappees/OrbitAct';
+import { RandomAct } from './Tests/Wrappees/RandomAcr';
+import { SimpleFeedAct } from './Tests/Wrappees/SimpleFeedAct';
+import { TwoAct } from './Tests/Wrappees/TwoAct';
+import { TestObjectTransformerSimpleAct } from './Tests/Wrappees/TestObjectTransformerSimpleAct';
 //actOrbit();
 //actRandom();
 //actTwo();
-actSimpleFeed();
+//actSimpleFeed();
+actTestObjectTransformerSimple();
+
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -41,6 +44,29 @@ function load() {
         let ii = 0;
         ii++;
 
+    }
+}
+
+function actTestObjectTransformerSimple() {
+    try {
+        var o = new TestObjectTransformerSimpleAct();
+        o.test();
+    }
+    catch (e: any) {
+        console.log(e);
+        rl.question('Is this example useful? [y/n] ', (answer) => {
+            switch (answer.toLowerCase()) {
+                case 'y':
+                    console.log('Super!');
+                    break;
+                case 'n':
+                    console.log('Sorry! :(');
+                    break;
+                default:
+                    console.log('Invalid answer!');
+            }
+            rl.close();
+        });
     }
 }
 

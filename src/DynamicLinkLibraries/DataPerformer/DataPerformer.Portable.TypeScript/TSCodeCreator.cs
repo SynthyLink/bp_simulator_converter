@@ -29,7 +29,7 @@ namespace DataPerformer.Portable.TypeScript
                       { (object o) => { return o is ObjectTransformer; } , CreateObjectTransformer },
               { (object o) => { return o is DataLink; } ,CreateDataLink},
                    { (object o) => { return o is RandomGenerator; } , CreateRandomGenerator},
-               { (object o) => { return o is ObjectTransformerLink; } , CreateObjectTransformeLink},
+               { (object o) => { return o is ObjectTransformerLink; } , CreateObjectTransformerLink},
          };
 
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
@@ -49,15 +49,19 @@ namespace DataPerformer.Portable.TypeScript
             }
             return null;
         }
-
+        static NamedTree.Performer dp = new ();
 
         static List<string> CreateObjectTransformer(string preffix, object obj)
         {
             List<string> l = new List<string>();
+           var ot = obj as ObjectTransformer;
             var s = performer.ClassString(preffix, "ObjectTransformer");
+            var ll = performer.CreateStringDictionary("map", ot.Links);
             l.Add(s);
             l.Add("{");
             performer.AddObjectConstructor(l);
+            dp.Add(l, ll, 1);
+            l.Add("\t\tthis.setLinks(map);");
             l.Add("\t}");
             l.Add("}");
             return l;
@@ -96,11 +100,11 @@ namespace DataPerformer.Portable.TypeScript
             return (S)o;
         }
 
-        static List<string> CreateObjectTransformeLink(string preffix, object obj)
+        static List<string> CreateObjectTransformerLink(string preffix, object obj)
         {
 
             List<string> l = new List<string>();
-            var s = performer.ClassString(preffix, "ObjectTransformeLink");
+            var s = performer.ClassString(preffix, "ObjectTransformerLink");
             l.Add(s);
             l.Add("{");
             performer.AddObjectConstructor(l);

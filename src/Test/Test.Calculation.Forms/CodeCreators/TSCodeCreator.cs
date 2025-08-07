@@ -35,6 +35,7 @@ namespace Test.Calculation.Forms.CodeCreators
             l.Add(s);
             l.Add("{");
             performer.AddObjectConstructor(l);
+            l.Add("\t\tthis.coefficient = " + ot.Coefficient + ";");
             l.Add("\t}");
             l.Add("}");
             return l;

@@ -4,6 +4,7 @@ exports.Performer = void 0;
 const AliasName_1 = require("./AliasName");
 const OwnError_1 = require("./ErrorHandler/OwnError");
 const FictiveAlias_1 = require("./Fiction/FictiveAlias");
+const FictiveMeasurements_1 = require("./Fiction/FictiveMeasurements");
 class Performer {
     constructor() {
         this.a = 0;
@@ -15,6 +16,17 @@ class Performer {
             throw new OwnError_1.OwnError("Illegal type", "Illegal type: " + type, undefined);
         }
         return s;
+    }
+    updateChildrenData(dataConsumer) {
+        var children = dataConsumer.getAllMeasurements();
+        for (var child of children) {
+            var o = child;
+            if (this.implementsType(o, "IDataConsumer")) {
+                var dc = child;
+                this.updateChildrenData(dc);
+            }
+            child.updateMeasurements();
+        }
     }
     convertArray(objects, type) {
         let s = [];
@@ -56,23 +68,6 @@ class Performer {
         }
         return t;
     }
-    /*
-     public getAnyTimeOperation(consumer: ITimeMeasurementConsumer): Operation<any> {
-        var m = consumer.getTimeMeasutement();
-        return () => { m.getOperation()(); }
-    }
-
-    public getNumberTimeOperation(consumer: ITimeMeasurementConsumer): Operation<number> {
-        return () => {
-            var m = consumer.getTimeMeasutement();
-            var v = m.getOperation();
-            var value = v();
-            if (typeof value === 'number') {
-                return value;
-            }
-            return 0;
-        }
-    }*/
     convertFromAny(t) {
         return this.convert(t);
     }
@@ -177,6 +172,30 @@ class Performer {
             map.set(nn, m);
         }
         return map;
+    }
+    getMeasurementsDCMap(consumer) {
+        var map = new Map();
+        var mm = consumer.getAllMeasurements();
+        for (var mea of mm) {
+            var co = mea;
+            var nm = co.getCategoryObjectName();
+            nm += ".";
+            var n = mea.getMeasurementsCount();
+            for (let i = 0; i < n; i++) {
+                var m = mea.getMeasurement(i);
+                var name = nm + m.getMeasurementName();
+                map.set(name, m);
+            }
+        }
+        return map;
+    }
+    getMeasurements(desktop, name) {
+        var a = desktop.getCategoryObject(name);
+        if (this.implementsType(a, "IMeasurements")) {
+            var al = a;
+            return al;
+        }
+        return new FictiveMeasurements_1.FictiveMeasurements();
     }
     getAlias(desktop, name) {
         var a = desktop.getCategoryObject(name);

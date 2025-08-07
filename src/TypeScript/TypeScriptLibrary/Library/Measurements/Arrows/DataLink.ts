@@ -4,7 +4,7 @@ import { IDesktop } from "../../Interfaces/IDesktop";
 import { IDataConsumer } from "../Interfaces/IDataConsumer";
 import { IMeasurements } from "../Interfaces/IMeasurements";
 
-export class DataLink extends  CategoryArrow
+export class DataLink extends CategoryArrow 
 {
     constructor(desktop: IDesktop, name: string)
     {

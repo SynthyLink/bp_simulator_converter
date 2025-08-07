@@ -1,10 +1,10 @@
-import { FictiveDataConsumer } from "./Library/Fiction/FictiveDataConsumer";
-import { IAction } from "./Library/Interfaces/IAction";
-import { IDataConsumer } from "./Library/Measurements/Interfaces/IDataConsumer";
-import { PefrormerMeasuremets } from "./Library/Measurements/PefrormerMeasuremets";
-import { DataRuntimeConsumer } from "./Library/Runtime/DataRuntimeConsumer";
-import { IDataRuntime } from "./Library/Runtime/Interfaces/IDataRuntime";
-import { Random } from "./src/Random";
+import { FictiveDataConsumer } from "../../Library/Fiction/FictiveDataConsumer";
+import { IAction } from "../../Library/Interfaces/IAction";
+import { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
+import { PefrormerMeasuremets } from "../../Library/Measurements/PefrormerMeasuremets";
+import { DataRuntimeConsumer } from "../../Library/Runtime/DataRuntimeConsumer";
+import { IDataRuntime } from "../../Library/Runtime/Interfaces/IDataRuntime";
+import { Random } from "../Random";
 
 export class RandomAct extends Random implements IAction
 {

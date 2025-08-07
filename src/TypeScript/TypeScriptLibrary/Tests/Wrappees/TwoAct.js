@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrbitAct = void 0;
-const PefrormerMeasuremets_1 = require("./Library/Measurements/PefrormerMeasuremets");
-const DataRuntimeConsumer_1 = require("./Library/Runtime/DataRuntimeConsumer");
-const Orbital_1 = require("./src/Orbital");
-class OrbitAct extends Orbital_1.Orbital {
+exports.TwoAct = void 0;
+const PefrormerMeasuremets_1 = require("../../Library/Measurements/PefrormerMeasuremets");
+const DataRuntimeConsumer_1 = require("../../Library/Runtime/DataRuntimeConsumer");
+const Two_1 = require("../Two");
+class TwoAct extends Two_1.Two {
     constructor() {
         super();
         this.dc = this.getCategoryObjects()[1];
@@ -21,5 +21,5 @@ class OrbitAct extends Orbital_1.Orbital {
         p.peformFixedStepCalculation(runtime, 0, 1, 10, this);
     }
 }
-exports.OrbitAct = OrbitAct;
-//# sourceMappingURL=OrbitAct.js.map
+exports.TwoAct = TwoAct;
+//# sourceMappingURL=TwoAct.js.map

@@ -1,6 +1,8 @@
+import { SrvRecord } from "dns";
 import { CategoryObject } from "../CategoryObject";
 import { OwnError } from "../ErrorHandler/OwnError";
 import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
+import { FictiveDataConsumer } from "../Fiction/FictiveDataConsumer";
 import { IDesktop } from "../Interfaces/IDesktop";
 import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import { Performer } from "../Performer";
@@ -86,7 +88,7 @@ export class ObjectTransformer extends CategoryObject implements IObjectTransfor
     /// </summary>
     providers: IMeasurements[] = [];
 
-    cons !: IDataConsumer;
+    cons: IDataConsumer = new FictiveDataConsumer();
 
     transformers: IObjectTransformer[] = [];
 
@@ -103,24 +105,40 @@ export class ObjectTransformer extends CategoryObject implements IObjectTransfor
         this.types.push("IPostSetArrow");
         this.cons = this;
     }
-    postSetArrow(): void {
-        throw new OwnNotImplemented();
+    postSetArrow(): void
+    {
+        this.initTransformer();
     }
-    getMeasurementsCount(): number {
+    getMeasurementsCount(): number
+    {
         return this.outMea.length;
     }
-    getMeasurement(i: number): IMeasurement {
+    getMeasurement(i: number): IMeasurement
+    {
         return this.outMea[i];
     }
-    updateMeasurements(): void {
-        throw new OwnNotImplemented();
+
+    updateMeasurements(): void
+    {
+        this.performer.updateChildrenData(this);
+        for (var i = 0; i < this.inO.length; i++)
+        {
+            var m = this.inMea[i];
+            this.inO[i] = m.getMeasurementValue();
+        }
+        this.transformer.calculate(this.inO, this.outO);
     }
-    addMeasurement(measurement: IMeasurement): void {
+
+    addMeasurement(measurement: IMeasurement): void
+    {
         this.outMea.push(measurement as TransMeasurement);
     }
-    getAllMeasurements(): IMeasurements[] {
+
+    getAllMeasurements(): IMeasurements[]
+    {
         return this.measurements;
     }
+
     addMeasurements(item: IMeasurements): void {
         this.measurements.push(item);
     }
@@ -133,32 +151,36 @@ export class ObjectTransformer extends CategoryObject implements IObjectTransfor
             throw new OwnError("", "", "");
         }
         this.transformer = transformer;
-        this.initTransformer();
     }
 
     initTransformer(): void {
-        var sl = this.outS.length;
-        if (this.outO.length != sl)
-        {
-            this.outO = new Array(sl);
-            const arr: [] = [];
-            //var a = this.performer.resizeArray(arr, sl);
-        }
-      //  outMea = new IMeasurement[outO.Length];
-        //inMea = new IMeasurement[transformer.Input.Length];
-        //inO = new object[inMea.Length];
+        var inp = this.transformer.getInput();
+        var out = this.transformer.getOutput();
+        this.inO = new Array(inp.length)
+        this.outO = new Array(out.length)
         this.createOutput();
     }
 
 
     createOutput() : void
     {
+        this.inMea = [];
         var outS = this.transformer.getOutput();
         for (var i: number = 0; i < outS.length; i++)
         {
             var name = outS[i];
             var type = this.getOutputType(i);
             this.outMea.push(new TransMeasurement(i, this.outO, name, type));
+        }
+        var mm = this.performer.getMeasurementsDCMap(this);
+        var ent = this.links.entries();
+        for (var [s, t] of ent)
+        {
+            var mt = mm.get(t);
+            if (mt != undefined)
+            {
+                this.inMea.push(mt);
+            }
         }
     }
 
@@ -167,6 +189,10 @@ export class ObjectTransformer extends CategoryObject implements IObjectTransfor
         return this.transformer.getOutputType(i);
     }
 
+    protected setLinks(map: Map<string, string>): void
+    {
+        this.performer.copyMap(map, this.links);
+    }
 
  }
 
@@ -178,7 +204,16 @@ class TransMeasurement implements IMeasurement
 
     name: string = "";
 
-    type! : any;
+    type!: any;
+
+    links: Map<string, string> = new Map();
+
+    performer: Performer = new Performer();
+
+    protected setLinks(links: Map<string, string>): void
+    {
+        this.performer.copyMap(links, this.links);
+    }
 
 
 
@@ -190,15 +225,16 @@ class TransMeasurement implements IMeasurement
         this.name = name;
         this.type = type;
     }
-    getMeasurementName(): string {
+    getMeasurementName(): string
+    {
         return this.name;
     }
-    getMeasurementType(): any {
+    getMeasurementType(): any
+    {
         return this.type;
     }
-    getMeasurementValue() : any {
+    getMeasurementValue(): any
+    {
         return this.outO[this.n];
     }
-
-
 }
