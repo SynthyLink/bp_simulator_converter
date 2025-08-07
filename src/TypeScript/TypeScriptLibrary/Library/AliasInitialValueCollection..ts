@@ -14,7 +14,8 @@ export class AliasInitialValueConnection extends InitialValueCollection
     {
         super();
         var n = measurements.getMeasurementsCount();
-        for (let i = 0; i < n; i++) {
+        for (let i = 0; i < n; i++)
+        {
             var m = measurements.getMeasurement(i);
             var name = m.getMeasurementName();
             var iv = this.performer.convertObject<IValue, IMeasurement>(m, "IValue");

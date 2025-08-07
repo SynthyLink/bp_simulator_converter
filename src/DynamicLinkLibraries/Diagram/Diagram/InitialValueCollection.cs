@@ -10,7 +10,7 @@ namespace Diagram.UI
 
         IEnumerable<IInitialValue> IInitialValueCollection.Values => values;
 
-        protected IInitialValueCollection initial;
+       protected IInitialValueCollection initial;
 
         public InitialValueCollection()
         {

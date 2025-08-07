@@ -1,18 +1,23 @@
 import { IInitialValue } from "./Interfaces/IInitialValue";
 import { IInitialValueCollection } from "./Interfaces/IInitialValueCollection";
 
-export class InitialValueCollection implements IInitialValueCollection {
+export class InitialValueCollection implements IInitialValueCollection
+{
 
-    addInitilalValue(value: IInitialValue): void {
+    addInitilalValue(value: IInitialValue): void
+    {
         this.values.push(value);
     }
 
-    getInitialValues(): IInitialValue[] {
+    getInitialValues(): IInitialValue[]
+    {
         return this.values;
     }
 
-    resetInitialValues(): void {
-        for (var item of this.values) {
+    resetInitialValues(): void
+    {
+        for (var item of this.values)
+        {
             item.resetInitValue();
         }
     }

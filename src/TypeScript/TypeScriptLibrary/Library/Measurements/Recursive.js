@@ -2,39 +2,37 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Recursive = void 0;
 const DataConsumerVariableMeasurements_1 = require("./DataConsumerVariableMeasurements");
+const FictiveAlias_1 = require("../Fiction/FictiveAlias");
+const FictionInitialValueCollection_1 = require("../Fiction/FictionInitialValueCollection");
+const AliasInitialValueCollection_1 = require("../AliasInitialValueCollection.");
 class Recursive extends DataConsumerVariableMeasurements_1.DataConsumerVariadbleMeasurements {
     constructor(desktop, name) {
         super(desktop, name);
         this.inputs = [];
         this.arguments = [];
-        this.initial = new Map();
+        //  protected initial: Map<string, any> = new Map();
         this.operationNames = new Map();
+        this.alias = new FictiveAlias_1.FictiveAlias();
+        this.initial = new FictionInitialValueCollection_1.FictionInitialValueCollection();
         this.typeName = "Recursive";
-        this.types.push("ISarted");
+        this.types.push("IStarted");
         this.types.push("IPostSetArrow");
         this.types.push("IFeedbackAliasCollectionHolder");
         this.types.push("Recursive");
         this.alias = this;
     }
     startedStart(start) {
-        var keys = this.initial.keys();
-        var vari = this.variables;
-        for (var key of keys) {
-            var v = vari.get(key);
-            v === null || v === void 0 ? void 0 : v.setIValue(this.initial.get(key));
-        }
+        this.initial.resetInitialValues();
     }
     setIniitial() {
-        var names = this.getAliasNames();
-        for (var name of names) {
-            this.initial.set(name, this.getAliasValue(name));
-        }
+        this.initial = new AliasInitialValueCollection_1.AliasInitialValueConnection(this, this);
     }
     init() {
     }
     postSetArrow() {
         this.init();
         this.setFeedback();
+        this.setIniitial();
     }
     getAllMeasurements() {
         return this.inputs;
@@ -48,6 +46,7 @@ class Recursive extends DataConsumerVariableMeasurements_1.DataConsumerVariadble
     }
     updateMeasurements() {
         this.feedback.setFeedBackAliases();
+        //        this.performer.updateChildrenData(this);
         this.calculateTree();
         this.save();
     }

@@ -140,7 +140,7 @@ namespace DataPerformer.Formula.TypeScript
                 foreach (var k in dic)
                 {
                     var iname = "\"" + k.Key + "\"";
-                    l.Add("\t\tthis.initial.set(" + iname + ", " + k.Value + ");");
+                 // !!!!   l.Add("\t\tthis.initial.set(" + iname + ", " + k.Value + ");");
                 }
             }
             l.Add("\t}");

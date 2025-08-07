@@ -5,13 +5,18 @@ import { IValue } from "./Interfaces/IValue";
 import { FictiveVariable } from "./Measurements/Variables/FictiveVariable";
 
 
-export class AliasInitialValue implements IInitialValue {
-    getInitValue() {
+export class AliasInitialValue implements IInitialValue
+{
+    getInitValue()
+    {
         return this.value.getIValue();
     }
-    resetInitValue(): void {
+
+    resetInitValue(): void
+    {
         let x = this.alias.getAliasNameValue();
-        if (x != undefined) {
+        if (x != undefined)
+        {
             this.value.setIValue(x)
         }
     }

@@ -22,7 +22,11 @@ class TestObjectTransformerSimpleAct extends TestObjectTransformerSimple_1.TestO
     test() {
         var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc);
         var p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
-        p.peformFixedStepCalculation(runtime, 0, 1, 20, this);
+        p.peformFixedStepCalculation(runtime, 0, 1, 60, this);
+        console.log("+++++++++++++");
+        runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc);
+        p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
+        p.peformFixedStepCalculation(runtime, 0, 1, 60, this);
     }
 }
 exports.TestObjectTransformerSimpleAct = TestObjectTransformerSimpleAct;

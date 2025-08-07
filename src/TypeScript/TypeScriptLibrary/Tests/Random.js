@@ -163,7 +163,6 @@ class Random_CategoryObject_3 extends Recursive_1.Recursive {
         ]);
         this.performer.setAliasMap(map, this);
         this.addVariable(new Variable_1.Variable("a", 0, 0));
-        this.initial.set("a", 0);
     }
     calculateTree() {
         this.success = true;

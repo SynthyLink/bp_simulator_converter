@@ -6,6 +6,10 @@ import { IStarted } from "./Interfaces/IStarted";
 import { IAlias } from "../Interfaces/IAlias";
 import { DataConsumerVariadbleMeasurements } from "./DataConsumerVariableMeasurements";
 import { IFeedbackAliasCollectionHolder } from "../Interfaces/IFeedbackAliasCollectionHolder";
+import { FictiveAlias } from "../Fiction/FictiveAlias";
+import { FictionInitialValueCollection } from "../Fiction/FictionInitialValueCollection";
+import { IInitialValueCollection } from "../Interfaces/IInitialValueCollection";
+import { AliasInitialValueConnection } from "../AliasInitialValueCollection.";
 
 
 export class Recursive extends DataConsumerVariadbleMeasurements implements IStarted,
@@ -16,16 +20,18 @@ export class Recursive extends DataConsumerVariadbleMeasurements implements ISta
 
     protected arguments: string[] = [];
 
-    protected initial: Map<string, any> = new Map();
+  //  protected initial: Map<string, any> = new Map();
 
     protected operationNames: Map<number, string> = new Map();
 
-    protected alias !: IAlias;
+    protected alias: IAlias = new FictiveAlias();
+
+    protected initial: IInitialValueCollection = new FictionInitialValueCollection();
 
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name);
         this.typeName = "Recursive";
-        this.types.push("ISarted");
+        this.types.push("IStarted");
         this.types.push("IPostSetArrow");
         this.types.push("IFeedbackAliasCollectionHolder");
         this.types.push("Recursive");
@@ -35,29 +41,25 @@ export class Recursive extends DataConsumerVariadbleMeasurements implements ISta
 
     startedStart(start: number): void
     {
-        var keys = this.initial.keys();
-        var vari = this.variables;
-        for (var key of keys)
-        {
-            var v = vari.get(key);
-            v?.setIValue(this.initial.get(key));
-        }
+        this.initial.resetInitialValues();
     }
 
-    setIniitial(): void {
-        var names = this.getAliasNames();
-        for (var name of names) {
-            this.initial.set(name, this.getAliasValue(name));
-        }
+    setIniitial(): void
+    {
+        this.initial = new AliasInitialValueConnection(this, this);
     }
 
-    init(): void {
+    init(): void
+    {
+
     }
 
    
-    postSetArrow(): void {
+    postSetArrow(): void
+    {
         this.init();
         this.setFeedback();
+        this.setIniitial();
     }
 
     getAllMeasurements(): IMeasurements[] {
@@ -82,6 +84,7 @@ export class Recursive extends DataConsumerVariadbleMeasurements implements ISta
     updateMeasurements(): void
     {
         this.feedback.setFeedBackAliases();
+//        this.performer.updateChildrenData(this);
         this.calculateTree();
         this.save();
     }

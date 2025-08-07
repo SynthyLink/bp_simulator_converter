@@ -26,6 +26,11 @@ export class TestObjectTransformerSimpleAct extends TestObjectTransformerSimple 
     public test(): void {
         var runtime: IDataRuntime = new DataRuntimeConsumer(this.dc);
         var p: PefrormerMeasuremets = new PefrormerMeasuremets();
-        p.peformFixedStepCalculation(runtime, 0, 1, 20, this);
+        p.peformFixedStepCalculation(runtime, 0, 1, 60, this);
+        console.log("+++++++++++++");
+        runtime = new DataRuntimeConsumer(this.dc);
+        p = new PefrormerMeasuremets();
+        p.peformFixedStepCalculation(runtime, 0, 1, 60, this);
+
     }
 }

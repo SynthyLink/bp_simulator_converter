@@ -39,7 +39,6 @@ namespace DataPerformer.Formula
 		#region Fields
 
 
-		Dictionary<string, ObjectFormulaTree> td1 = new();
 
         protected IFeedbackAliasCollection feedbackAliasCollection;
 
@@ -1001,7 +1000,7 @@ namespace DataPerformer.Formula
 		{
 			IAlias al = this;
 			feedbackAliasCollection.Fill();
-			initial = new AliasInitialValueConnection(this, this);
+			initial = new AliasInitialValueCollection(this, this);
 		}
 
 		#endregion

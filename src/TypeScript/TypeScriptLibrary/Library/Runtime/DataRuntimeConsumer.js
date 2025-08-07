@@ -65,7 +65,6 @@ class DataRuntimeConsumer {
     }
     getRumtimeObjects() {
         return this.categoryObjects;
-        ;
     }
     getRunimeArrows() {
         return this.cotegoryArrows;

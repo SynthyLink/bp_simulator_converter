@@ -27,10 +27,10 @@ class TestObjectTransformerSimple_CategoryObject_0 extends VectorFormulaConsumer
         this.var_2 = 0;
         this.var_3 = 0;
         let map = new Map([
-            ["c", 0.52807755063743145],
-            ["a", 0.19288702860157331],
-            ["b", 0.0021040127652205607],
-            ["d", 9]
+            ["d", 9],
+            ["a", 0.19288702860085777],
+            ["b", 0.0021040127652174824],
+            ["c", 0.52807755063743045]
         ]);
         this.performer.setAliasMap(map, this);
         this.addVariable(new Variable_1.Variable("Formula_1", 0, 0));
@@ -162,11 +162,6 @@ class TestObjectTransformerSimple_CategoryObject_3 extends Recursive_1.Recursive
         this.addVariable(new Variable_1.Variable("c", 0, 0));
         this.addVariable(new Variable_1.Variable("d", 0, 0));
         this.addVariable(new Variable_1.Variable("f", 0, 0));
-        this.initial.set("d", 4);
-        this.initial.set("f", 1);
-        this.initial.set("a", 1);
-        this.initial.set("c", 5);
-        this.initial.set("b", 3);
     }
     calculateTree() {
         this.success = true;

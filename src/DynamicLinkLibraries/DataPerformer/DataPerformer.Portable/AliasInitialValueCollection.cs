@@ -6,12 +6,12 @@ using Diagram.UI.Interfaces;
 
 namespace DataPerformer.Portable
 {
-    public class AliasInitialValueConnection : InitialValueCollection
+    public class AliasInitialValueCollection : InitialValueCollection
     {
         NamedTree.Performer performer = new NamedTree.Performer();
 
         Performer pr = new Performer();
-        public AliasInitialValueConnection(IAlias alias, IMeasurements measurememts)
+        public AliasInitialValueCollection(IAlias alias, IMeasurements measurememts)
         {
           var attr = performer.GetAttribute<CodeCreatorAttribute>(measurememts);
             if (attr != null && attr.AliasInitialState)
