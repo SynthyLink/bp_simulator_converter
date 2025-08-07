@@ -8,7 +8,8 @@ import { DataConsumerVariadbleMeasurements } from "./DataConsumerVariableMeasure
 import { IFeedbackAliasCollectionHolder } from "../Interfaces/IFeedbackAliasCollectionHolder";
 
 
-export class Recursive extends DataConsumerVariadbleMeasurements implements IStarted, IFeedbackAliasCollectionHolder, IPostSetArrow
+export class Recursive extends DataConsumerVariadbleMeasurements implements IStarted,
+    IFeedbackAliasCollectionHolder, IPostSetArrow
 {
     protected inputs: IMeasurements[] = [];
 
@@ -56,6 +57,7 @@ export class Recursive extends DataConsumerVariadbleMeasurements implements ISta
    
     postSetArrow(): void {
         this.init();
+        this.setFeedback();
     }
 
     getAllMeasurements(): IMeasurements[] {
@@ -79,6 +81,7 @@ export class Recursive extends DataConsumerVariadbleMeasurements implements ISta
 
     updateMeasurements(): void
     {
+        this.feedback.setFeedBackAliases();
         this.calculateTree();
         this.save();
     }

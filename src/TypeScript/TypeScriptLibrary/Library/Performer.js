@@ -1,7 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Performer = void 0;
+const AliasName_1 = require("./AliasName");
 const OwnError_1 = require("./ErrorHandler/OwnError");
+const FictiveAlias_1 = require("./Fiction/FictiveAlias");
 class Performer {
     constructor() {
         this.a = 0;
@@ -165,6 +167,32 @@ class Performer {
     implementsType(o, type) {
         let obj = o;
         return obj.imlplementsType(type);
+    }
+    getMeasurementsMap(measurements) {
+        let map = new Map();
+        var n = measurements.getMeasurementsCount();
+        for (let i = 0; i < n; i++) {
+            let m = measurements.getMeasurement(i);
+            var nn = m.getMeasurementName();
+            map.set(nn, m);
+        }
+        return map;
+    }
+    getAlias(desktop, name) {
+        var a = desktop.getCategoryObject(name);
+        if (this.implementsType(a, "IAlias")) {
+            var al = a;
+            return al;
+        }
+        return new FictiveAlias_1.FictiveAlias();
+    }
+    getAliasName(desktop, name) {
+        var l = name.length;
+        var n = name.lastIndexOf('.');
+        var s = name.substring(n + 1, l);
+        var t = name.substring(0, n);
+        var al = this.getAlias(desktop, t);
+        return new AliasName_1.AliasName(al, s);
     }
 }
 exports.Performer = Performer;

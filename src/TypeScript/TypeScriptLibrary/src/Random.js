@@ -144,6 +144,9 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaConsu
         var x0 = v.get("Formula_1");
         x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_11());
     }
+    setFeedback() {
+        let map = new Map([]);
+    }
 }
 class Random_CategoryObject_3 extends Recursive_1.Recursive {
     constructor(desktop, name) {
@@ -201,6 +204,9 @@ class Random_CategoryObject_3 extends Recursive_1.Recursive {
         var v = this.variables;
         var x0 = v.get("a");
         x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_2());
+    }
+    setFeedback() {
+        let map = new Map([]);
     }
 }
 class Random_CategoryObject_4 extends DataConsumer_1.DataConsumer {

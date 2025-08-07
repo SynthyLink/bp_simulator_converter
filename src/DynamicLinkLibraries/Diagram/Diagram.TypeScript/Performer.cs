@@ -1,10 +1,14 @@
-﻿using Diagram.UI.Interfaces;
+﻿using DataPerformer.Interfaces;
+using Diagram.UI.Interfaces;
+using System.ComponentModel;
 
 namespace Diagram.UI.TypeScript
 {
  
     public class Performer 
     {
+
+        NamedTree.Performer performer = new NamedTree.Performer();
         public void AddObjectConstructor(List<string> l)
         {
             l.Add("\tconstructor(desktop: IDesktop, name: string)");
@@ -101,7 +105,59 @@ namespace Diagram.UI.TypeScript
             }
             return l;
         }
-         
+
+        public List<string> CreateFeedback(Dictionary<string, string> dictionary)
+        {
+            var l = new List<string>();
+            l.Add("setFeedback(): void {");
+            var ll = CreateStringDictionary("map", dictionary);
+            return l;
+        }
+
+
+        public List<string> Create(IFeedbackAliasCollectionHolder holder)
+        {
+            var l = new List<string>();
+            l.Add("setFeedback(): void {");
+            var ll = CreateStringDictionary("map", holder.Feedback.Dictionary);
+            ll.Add("this.feedback = new FeedbackAliasCollection(map, this, this);");
+            ll.Add("this.feedback.fillFeedBackAliases();");
+            performer.Add(l, ll, 1);
+            l.Add("}");
+            return l;
+        }  
+        
+        public List<string> CreateStringDictionary(string id, Dictionary<string, string> dictionary)
+        {
+            List<string> l = new List<string>();
+            var keys = new List<string>(dictionary.Keys);
+            l.Add("let " + id + " = new Map<string, string>(");
+            int n = keys.Count;
+            l.Add("[");
+            if (n == 0)
+            {
+                l.Add("]);");
+            }
+            else
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    string s = keys[i];
+                    s = "\t[\"" + s + "\", \"" + dictionary[s] + "\" ]";
+                    if (i < (n - 1))
+                    {
+                        s += ',';
+                    }
+                    l.Add(s);
+                }
+                l.Add("]);");
+            }
+            return l;
+        }
+
+
+
+
         public List<string> CreateTSAliasList(string id,  IAlias alias)
         {
             List<string> l = new List<string>();

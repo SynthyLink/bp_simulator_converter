@@ -161,6 +161,11 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer
 		x0?.setIValue(this.get_11());
 	}
 	
+	setFeedback(): void {
+		let map = new Map<string, string>(
+		[
+		]);
+	}
 }
 
 class Random_CategoryObject_3 extends Recursive
@@ -225,6 +230,11 @@ class Random_CategoryObject_3 extends Recursive
 		x0?.setIValue(this.get_2());
 	}
 	
+	setFeedback(): void {
+		let map = new Map<string, string>(
+		[
+		]);
+	}
 }
 
 class Random_CategoryObject_4 extends DataConsumer

@@ -16,7 +16,7 @@ namespace DataPerformer.Formula.TypeScript
 
         #region Fields
 
-        static FormulaEditor.Performer  formulaPerformer = new FormulaEditor.Performer();
+        static NamedTree.Performer  formulaPerformer = new ();
 
 
         Diagram.UI.TypeScript.Performer performer = new();
@@ -156,12 +156,7 @@ namespace DataPerformer.Formula.TypeScript
             }
             formulaPerformer.Add(l, initializers as List<string>, 1);
             l.Add("}");
-      /*      l.Add("");
-            l.Add("public Func<object> this[FormulaEditor.ObjectFormulaTree tree]");
-            l.Add("{ get { return dictionary[tree]; }}");
             l.Add("");
-            l.Add("Dictionary<FormulaEditor.ObjectFormulaTree, Func<object> > dictionary = new Dictionary<FormulaEditor.ObjectFormulaTree, Func<object> >();");
-            l.Add("");*/
             foreach (string s in variables)
             {
                 l.Add("" + s);
@@ -169,7 +164,6 @@ namespace DataPerformer.Formula.TypeScript
             if (checkValue)
             {
             }
-            // l.Add("\t}");
             return l;
         }
 

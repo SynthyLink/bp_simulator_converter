@@ -1,5 +1,4 @@
 import { IAction } from "../Interfaces/IAction";
-import { IAlias } from "../Interfaces/IAlias";
 import { Performer } from "../Performer";
 import { IDataRuntime } from "../Runtime/Interfaces/IDataRuntime";
 import { IArrayElementMeasurement } from "./Interfaces/IArrayElemetMeasurements";
@@ -8,9 +7,9 @@ import { IMeasurement } from "./Interfaces/IMeasurement";
 import { IMeasurements } from "./Interfaces/IMeasurements";
 import { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProvider";
 import { TimeMeasurementProvider } from "./TimeMeasurementProvider";
-import { Variable } from "./Variables/Variable";
 
-export class PefrormerMeasuremets {
+export class PefrormerMeasuremets
+{
 
     performer: Performer = new Performer();
 

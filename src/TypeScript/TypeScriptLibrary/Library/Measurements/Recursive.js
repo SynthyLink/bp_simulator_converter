@@ -34,6 +34,7 @@ class Recursive extends DataConsumerVariableMeasurements_1.DataConsumerVariadble
     }
     postSetArrow() {
         this.init();
+        this.setFeedback();
     }
     getAllMeasurements() {
         return this.inputs;
@@ -46,6 +47,7 @@ class Recursive extends DataConsumerVariableMeasurements_1.DataConsumerVariadble
     save() {
     }
     updateMeasurements() {
+        this.feedback.setFeedBackAliases();
         this.calculateTree();
         this.save();
     }

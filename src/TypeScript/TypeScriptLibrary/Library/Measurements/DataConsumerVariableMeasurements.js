@@ -42,7 +42,12 @@ class DataConsumerVariadbleMeasurements extends DataConsumer_1.DataConsumer {
         return this.aliasValues.get(name);
     }
     setAliasValue(name, value) {
-        this.performer.setAliasType(name, value, this.aliasTypes, this.aliasNames);
+        if (!this.aliasTypes.has(name)) {
+            this.performer.setAliasType(name, value, this.aliasTypes, this.aliasNames);
+        }
+        else {
+            var i = 0;
+        }
         this.aliasValues.set(name, value);
     }
     addVariable(variable) {
@@ -50,8 +55,9 @@ class DataConsumerVariadbleMeasurements extends DataConsumer_1.DataConsumer {
         this.variables.set(variable.getMeasurementName(), variable);
     }
     getFeedbackAliasCollection() {
-        throw new Error("Method not implemented.");
+        return this.feedback;
     }
+    setFeedback() { }
 }
 exports.DataConsumerVariadbleMeasurements = DataConsumerVariadbleMeasurements;
 //# sourceMappingURL=DataConsumerVariableMeasurements.js.map

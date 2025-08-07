@@ -17,7 +17,9 @@ export class VectorFormulaConsumer extends DataConsumerVariadbleMeasurements imp
         this.types.push("IPostSetArrow");
     }
 
-    updateMeasurements(): void {
+    updateMeasurements(): void
+    {
+        this.feedback.setFeedBackAliases();
         this.calculateTree();
         this.save();
     }
@@ -33,9 +35,13 @@ export class VectorFormulaConsumer extends DataConsumerVariadbleMeasurements imp
 
     }
 
+    setFeedback(): void { }
+
+
 
     postSetArrow(): void {
         this.init();
+        this.setFeedback();
     }
 
 

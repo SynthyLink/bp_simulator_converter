@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DataConsumerMeasurements = void 0;
-const FeedbackAliasCollection_1 = require("../FeedbackAliasCollection");
 const FictiveAlias_1 = require("../Fiction/FictiveAlias");
+const FictiveFeedbackAliasCollection_1 = require("../Fiction/FictiveFeedbackAliasCollection");
 const Performer_1 = require("../Performer");
 const DataConsumer_1 = require("./DataConsumer");
 class DataConsumerMeasurements extends DataConsumer_1.DataConsumer {
@@ -16,7 +16,7 @@ class DataConsumerMeasurements extends DataConsumer_1.DataConsumer {
         this.alias = new FictiveAlias_1.FictiveAlias();
         this.external = new Map();
         this.feedbackAliases = [];
-        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection();
+        this.feedback = new FictiveFeedbackAliasCollection_1.FictiveFeedbackAliasCollection();
         this.alias = this;
         this.typeName = "DataConsumerMeasurements";
         this.types.push("DataConsumerMeasurements");

@@ -1,5 +1,6 @@
 ﻿import { FeedbackAliasCollection } from "../FeedbackAliasCollection";
 import { FictiveAlias } from "../Fiction/FictiveAlias";
+import { FictiveFeedbackAliasCollection } from "../Fiction/FictiveFeedbackAliasCollection";
 import { IAlias } from "../Interfaces/IAlias";
 import { IDesktop } from "../Interfaces/IDesktop";
 import { IFeedbackAlias } from "../Interfaces/IFeedbackAlias";
@@ -65,7 +66,7 @@ export class DataConsumerMeasurements extends DataConsumer
 
     protected feedbackAliases: IFeedbackAlias[] = [];
 
-    protected feedback: IFeedbackAliasCollection = new FeedbackAliasCollection();
+    protected feedback: IFeedbackAliasCollection = new FictiveFeedbackAliasCollection();
 
  
     getMeasurementsCount(): number {

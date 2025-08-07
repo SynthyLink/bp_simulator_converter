@@ -1,10 +1,11 @@
+import { FictiveAlias } from "./Fiction/FictiveAlias";
 import { IAlias } from "./Interfaces/IAlias";
 import { IAliasName } from "./Interfaces/IAliasName";
 
 export class AliasName implements IAliasName
 {
 
-    alias !: IAlias;
+    alias: IAlias = new FictiveAlias();
 
     name: string = "";
 
@@ -21,7 +22,12 @@ export class AliasName implements IAliasName
     }
 
 
-    setAliasNameValue(value: any): void {
+    setAliasNameValue(value: any): void
+    {
+        if (value != undefined)
+        {
+            this.alias.setAliasValue(this.name, value);
+        }
     }
 
     getNameOfAliasName(): string {

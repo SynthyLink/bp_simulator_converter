@@ -12,6 +12,7 @@ class VectorFormulaConsumer extends DataConsumerVariableMeasurements_1.DataConsu
         this.types.push("IPostSetArrow");
     }
     updateMeasurements() {
+        this.feedback.setFeedBackAliases();
         this.calculateTree();
         this.save();
     }
@@ -21,8 +22,10 @@ class VectorFormulaConsumer extends DataConsumerVariableMeasurements_1.DataConsu
     }
     save() {
     }
+    setFeedback() { }
     postSetArrow() {
         this.init();
+        this.setFeedback();
     }
 }
 exports.VectorFormulaConsumer = VectorFormulaConsumer;

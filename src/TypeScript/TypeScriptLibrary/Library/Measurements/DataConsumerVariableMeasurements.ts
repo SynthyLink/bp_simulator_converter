@@ -43,7 +43,7 @@ export class DataConsumerVariadbleMeasurements extends DataConsumer implements I
 
     protected pMeasurements : PefrormerMeasuremets = new PefrormerMeasuremets();
 
-    feedback: IFeedbackAliasCollection = new FictiveFeedbackAliasCollection();
+    protected feedback: IFeedbackAliasCollection = new FictiveFeedbackAliasCollection();
 
     getMeasurementsCount(): number {
         return this.output.length;
@@ -53,7 +53,7 @@ export class DataConsumerVariadbleMeasurements extends DataConsumer implements I
         return this.output[i];
     }
 
-
+  
 
     
 
@@ -80,8 +80,16 @@ export class DataConsumerVariadbleMeasurements extends DataConsumer implements I
         return this.aliasValues.get(name);
     }
 
-    setAliasValue(name: string, value: any) {
-        this.performer.setAliasType(name, value, this.aliasTypes, this.aliasNames);
+    setAliasValue(name: string, value: any)
+    {
+        if (!this.aliasTypes.has(name))
+        {
+            this.performer.setAliasType(name, value, this.aliasTypes, this.aliasNames);
+        }
+        else
+        {
+            var i = 0;
+        }
         this.aliasValues.set(name, value);
     }
 
@@ -91,9 +99,12 @@ export class DataConsumerVariadbleMeasurements extends DataConsumer implements I
         this.variables.set(variable.getMeasurementName(), variable);
     }
 
-    getFeedbackAliasCollection(): IFeedbackAliasCollection {
-        throw new Error("Method not implemented.");
+    getFeedbackAliasCollection(): IFeedbackAliasCollection
+    {
+        return this.feedback;
     }
+
+    setFeedback(): void { }
 
 
 }

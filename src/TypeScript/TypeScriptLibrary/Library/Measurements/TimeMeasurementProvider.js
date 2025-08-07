@@ -7,7 +7,6 @@ class TimeMeasurementProvider {
     }
     getMeasurementName() {
         return "Time";
-        ;
     }
     getMeasurementType() {
         return 0;

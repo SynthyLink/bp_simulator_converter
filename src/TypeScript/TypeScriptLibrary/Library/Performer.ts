@@ -1,8 +1,13 @@
+import { AliasName } from "./AliasName";
 import { OwnError } from "./ErrorHandler/OwnError";
+import { FictiveAlias } from "./Fiction/FictiveAlias";
 import { IAlias } from "./Interfaces/IAlias";
+import { IAliasName } from "./Interfaces/IAliasName";
+import { IDesktop } from "./Interfaces/IDesktop";
 import { IObject } from "./Interfaces/IObject";
 import { IDataConsumer } from "./Measurements/Interfaces/IDataConsumer";
 import { IMeasurement } from "./Measurements/Interfaces/IMeasurement";
+import { IMeasurements } from "./Measurements/Interfaces/IMeasurements";
 
 export class Performer
 {
@@ -37,6 +42,8 @@ export class Performer
         }
         return s;
     }
+
+  
 
     public convertMap<T, S, R>(objects: Map<T, S>, type: string): Map<T, R>
     {
@@ -184,7 +191,8 @@ export class Performer
     }
 
     public setAliasType(name: string, value: any, map: Map<string, any>, names: string[]): boolean {
-        if (map.has(name)) {
+        if (map.has(name))
+        {
             return false;
         }
         names.push(name);
@@ -225,5 +233,40 @@ export class Performer
         return obj.imlplementsType(type);
     }
 
+    public getMeasurementsMap(measurements: IMeasurements): Map<string, IMeasurement> {
+
+        let map: Map<string, IMeasurement> = new Map();
+        var n = measurements.getMeasurementsCount();
+        for (let i = 0; i < n; i++)
+        {
+            let m = measurements.getMeasurement(i);
+            var nn = m.getMeasurementName();
+            map.set(nn, m);
+        }
+        return map;
+    }
+
+    
+
+    public getAlias(desktop: IDesktop, name: string): IAlias
+    {
+        var a = desktop.getCategoryObject(name);
+        if (this.implementsType(a, "IAlias"))
+        {
+            var al = a as unknown as IAlias;
+            return al;
+        }
+        return new FictiveAlias();
+    }
+
+    public getAliasName(desktop: IDesktop, name: string): IAliasName {
+
+        var l = name.length;
+        var n = name.lastIndexOf('.');
+        var s = name.substring(n + 1, l);
+        var t = name.substring(0, n);
+        var al = this.getAlias(desktop, t);
+        return new AliasName(al, s);
+    }
 
 }

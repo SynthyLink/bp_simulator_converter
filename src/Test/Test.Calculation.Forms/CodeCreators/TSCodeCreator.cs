@@ -31,7 +31,7 @@ namespace Test.Calculation.Forms.CodeCreators
         static List<string> CreateObjectTransformer(string preffix, ObjectTransformer ot)
         {
             List<string> l = new List<string>();
-            var s = performer.ClassString(preffix, "ObjectTransformer");
+            var s = performer.ClassString(preffix, "TestObjectTransformer");
             l.Add(s);
             l.Add("{");
             performer.AddObjectConstructor(l);

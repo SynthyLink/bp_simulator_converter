@@ -19,7 +19,7 @@ namespace DataPerformer.Formula.TypeScript
 
         static DataPerformer.Interfaces.Performer nPerformer = new();
 
-        static FormulaEditor.Performer formulaPerformer = new FormulaEditor.Performer();
+        static NamedTree.Performer formulaPerformer = new ();
 
 
         static Diagram.UI.TypeScript.Performer performer = new();
@@ -124,16 +124,18 @@ namespace DataPerformer.Formula.TypeScript
             {
                 var la = performer.CreateTSAliasList("map", ali);
                 formulaPerformer.Add(l, la, 2);
+                l.Add("\t\tthis.performer.setAliasMap(map, this);");
             }
-            l.Add("\t\tthis.performer.setAliasMap(map, this);");
             if (obj is IMeasurements m)
             {
                 var la = CreateTSVariableList(m);
                 formulaPerformer.Add(l, la, 2);
             }
 
-            if (obj is IInitialDictionary d)
+
+            if (obj is IInitialDictionary d) // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             {
+
                 var dic = d.Dictionary;
                 foreach (var k in dic)
                 {
@@ -145,6 +147,12 @@ namespace DataPerformer.Formula.TypeScript
             l.Add("");
             formulaPerformer.Add(l, lt, 1);
             AddPost(l);
+            if (obj is IFeedbackAliasCollectionHolder feedback)
+            {
+                var ll = performer.Create(feedback);
+                formulaPerformer.Add(l, ll, 1);
+            }
+
             l.Add("}");
             return l;
         }

@@ -18,7 +18,8 @@ export class FeedbackAlias implements IFeedbackAlias
     setFeedBackAlias(): void
     {
         var x = this.value.getIValue();
-        if (x != undefined) {
+        if (x != undefined)
+        {
             this.alias.setAliasNameValue(x);
         }
     }
