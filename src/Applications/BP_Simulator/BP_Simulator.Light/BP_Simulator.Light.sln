@@ -482,6 +482,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Library.Forms", "..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Library.Serializable", "..\..\..\ExternalLibraries\Trading\Trading.Library.Serializable\Trading.Library.Serializable.csproj", "{97B76AEC-4F2C-A403-36AE-2EAC39F7317D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Database.SqlServer", "..\..\..\ExternalLibraries\Trading\Trading.Database.SqlServer\Trading.Database.SqlServer.csproj", "{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -4910,6 +4912,26 @@ Global
 		{97B76AEC-4F2C-A403-36AE-2EAC39F7317D}.Release|x64.Build.0 = Release|Any CPU
 		{97B76AEC-4F2C-A403-36AE-2EAC39F7317D}.Release|x86.ActiveCfg = Release|Any CPU
 		{97B76AEC-4F2C-A403-36AE-2EAC39F7317D}.Release|x86.Build.0 = Release|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Debug|Win32.Build.0 = Debug|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Debug|x64.Build.0 = Debug|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Debug|x86.Build.0 = Debug|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Release|Win32.ActiveCfg = Release|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Release|Win32.Build.0 = Release|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Release|x64.ActiveCfg = Release|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Release|x64.Build.0 = Release|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Release|x86.ActiveCfg = Release|Any CPU
+		{DA1E6CDB-DD65-9E77-1E42-3FEB7EFF1083}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

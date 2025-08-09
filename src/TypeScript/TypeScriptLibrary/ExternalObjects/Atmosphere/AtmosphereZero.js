@@ -1,22 +1,32 @@
 "use strict";
-/*
-class AtmospherePortable implements ICategoryObject
-{
-
-    protected obj!: Object;
-
-    protected name!: string;
-
-    getObject(): Object {
-        return this.obj;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AtmosphereZero = void 0;
+const CategoryObject_1 = require("../../Library/CategoryObject");
+class AtmosphereZero extends CategoryObject_1.CategoryObject {
+    constructor(desktop, name) {
+        super(desktop, name);
+        this.inp = ["t", "x", "y", "z"];
+        this.ooutp = ["Density"];
+        this.a = 0;
+        this.types.push("IObjectTransformer");
+        this.types.push("AtmosphereZero");
+        this.typeName = "AtmosphereZero";
     }
-    setObject(obj: Object): void {
-        this.obj = obj;
+    getInput() {
+        return this.ino;
     }
-    getName(): string {
-        return this.name;
+    getOutput() {
+        return this.ooutp;
     }
-
+    getInputType(i) {
+        return a;
+    }
+    getOutputType(i) {
+        return a;
+    }
+    calculate(input, output) {
+        output[0] = 0;
+    }
 }
-*/
-//# sourceMappingURL=AtmospherePotrable.js.map
+exports.AtmosphereZero = AtmosphereZero;
+//# sourceMappingURL=AtmosphereZero.js.map

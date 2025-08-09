@@ -5,6 +5,7 @@ using Diagram.UI.Interfaces;
 using DataPerformer.Interfaces.Attributes;
 using Trading.Library.Enums;
 using NamedTree;
+using ErrorHandler;
 
 namespace Trading.Library.Objects
 {
@@ -148,12 +149,12 @@ namespace Trading.Library.Objects
         {
             add
             {
-                throw new NotImplementedException();
+                throw new OwnNotImplemented();
             }
 
             remove
             {
-                throw new NotImplementedException();
+                throw new OwnNotImplemented();
             }
         }
 
@@ -161,12 +162,12 @@ namespace Trading.Library.Objects
         {
             add
             {
-                throw new NotImplementedException();
+                throw new OwnNotImplemented();
             }
 
             remove
             {
-                throw new NotImplementedException();
+                throw new OwnNotImplemented();
             }
         }
 
@@ -335,7 +336,7 @@ namespace Trading.Library.Objects
             private set; 
         } = 0;
 
-        IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => throw new NotImplementedException();
+        IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => throw new OwnNotImplemented();
 
         void Update()
         {
@@ -400,12 +401,12 @@ namespace Trading.Library.Objects
 
         void IChildren<IMeasurement>.AddChild(IMeasurement child)
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
 
         void IChildren<IMeasurement>.RemoveChild(IMeasurement child)
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
 
 

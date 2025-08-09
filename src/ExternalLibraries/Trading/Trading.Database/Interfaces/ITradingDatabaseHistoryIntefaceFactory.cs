@@ -2,6 +2,6 @@
 {
     public interface ITradingDatabaseHistoryIntefaceFactory
     {
-        ITradingDatabaseHistoryInteface Create(string url);
+        ITradingDatabaseHistoryInteface Create(string connectionString);
     }
 }

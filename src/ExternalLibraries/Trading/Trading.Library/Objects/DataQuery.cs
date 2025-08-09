@@ -3,11 +3,12 @@
 using CategoryTheory;
 
 using DataPerformer.Interfaces;
-
+using ErrorHandler;
 using IBApi;
 using IBApi.messages;
 
 using NamedTree;
+
 using Trading.Database.Interfaces;
 
 namespace Trading.Library.Objects
@@ -15,7 +16,14 @@ namespace Trading.Library.Objects
     public class DataQuery : CategoryObject, IIterator, IMeasurements
     {
 
+
         #region Fields
+
+        ITradingDatabaseHistoryInteface TradingDatabaseHistoryInteface
+        {
+            get;
+            set;
+        }
 
 
         IMeasurement[] measurements;
@@ -85,9 +93,9 @@ namespace Trading.Library.Objects
 
         public DataQuery()
         {
-            Database = Factrory.Create("");
-        
-            measurements =
+            TradingDatabaseHistoryInteface = Trading.Database.StaticExtensionTradingDatabase.Connect();
+
+             measurements =
                 [
                 new RealTimeMeasurement(this),
                     new LowMeasurement(this),
@@ -107,12 +115,12 @@ namespace Trading.Library.Objects
         {
             add
             {
-                throw new NotImplementedException();
+                throw new OwnNotImplemented();
             }
 
             remove
             {
-                throw new NotImplementedException();
+                throw new OwnNotImplemented();
             }
         }
 
@@ -120,12 +128,12 @@ namespace Trading.Library.Objects
         {
             add
             {
-                throw new NotImplementedException();
+                throw new OwnNotImplemented();
             }
 
             remove
             {
-                throw new NotImplementedException();
+                throw new OwnNotImplemented();
             }
         }
 
@@ -139,7 +147,7 @@ namespace Trading.Library.Objects
 
         bool IMeasurements.IsUpdated { get => isUpdated; set => isUpdated = value; }
 
-        IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => throw new NotImplementedException();
+        IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => throw new OwnNotImplemented();
 
         void IMeasurements.UpdateMeasurements()
         {
@@ -202,12 +210,12 @@ namespace Trading.Library.Objects
 
         void IChildren<IMeasurement>.AddChild(IMeasurement child)
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
 
         void IChildren<IMeasurement>.RemoveChild(IMeasurement child)
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
 
         #endregion

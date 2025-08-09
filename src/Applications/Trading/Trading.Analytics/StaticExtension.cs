@@ -25,8 +25,10 @@ using Chart.DataPerformer.Interfaces;
 using Chart.DataPerformer;
 using Chart.Drawing.TextPainters;
 
-using Trading.Charts;
+using NamedTree;
+using IBApi;
 using Trading.Library.Objects;
+using Trading.Charts;
 
 
 
@@ -34,7 +36,7 @@ namespace Trading.Analytics
 {
     internal static class StaticExtension
     {
-        class SeriesFactory : ISeriesPainterFactory, ICoordinateFunctionsCreator,
+ /*       class SeriesFactory : ISeriesPainterFactory, ICoordinateFunctionsCreator,
             IAttachedToPointFactory, IChartPerformerPreparation
         {
             Brush sellBrush = new SolidBrush(Color.Red);
@@ -50,9 +52,8 @@ namespace Trading.Analytics
                     if (value is IAssociatedObject)
                     {
                         var o = (value as IAssociatedObject).Object;
-                        if (o is Order)
+                        if (o is Library.Serializable.Objects.Order p)
                         {
-                            var p = o as Order;
                             var pos = p.PositionDirection;
                             return pos;
                         }
@@ -83,7 +84,7 @@ namespace Trading.Analytics
 
             }
 
-            void DrawTriangleO(Brush brush, int[] n, Graphics graphics, int k, Order order)
+            void DrawTriangleO(Brush brush, int[] n, Graphics graphics, int k, Library.Objects.Order order)
             {
                 var p = order.PositionDirection == Library.Enums.PositionDirection.Opened;
                 DrawTriangle(brush, n, p, graphics, k);
@@ -149,7 +150,7 @@ namespace Trading.Analytics
                         var type = t.Item4.GetType();
                         var fn = type.FullName;
                         FilterWrapper filterWrapper = null;
-                        Order order = null;
+                        Library.Objects.Order order = null;
                         if (t.Item4 is IAssociatedObject)
                         {
                             var of = (t.Item4 as IAssociatedObject).Object;
@@ -161,9 +162,9 @@ namespace Trading.Analytics
                                     return new StepSeriesPainter(t.Item2);
                                 }
                             }
-                            if (of is Order)
+                            if (of is Trading.Library.Objects or)
                             {
-                                order = (Order)of;
+                                order = or; ;
                                 if (fn.Equals("Trading.Library.Objects.Order+IncomeMeasurement"))
                                 {
                                     return new StepSeriesPainter(t.Item2);
@@ -199,7 +200,7 @@ namespace Trading.Analytics
                                        DrawTriangle(buyBrush, n,  g,  k, order);
 
                                      };*/
-                            buyP.PaintPoint += (n, g, o) =>
+  /*                          buyP.PaintPoint += (n, g, o) =>
                             {
                                 var op = OpenPosition(o);
                                 DrawTriangle(buyBrush, n, op, g, k);
@@ -268,64 +269,65 @@ namespace Trading.Analytics
             string caption, Icon icon, TextWriter logWriter,
             TestCategory.Interfaces.ITestInterface testInterface)
         {
-            var tabs = new string[] { "Trading", "Filters", "General", "Statistics", "Database", "Events", "Arrows" };
-            ButtonWrapper[][] but = new ButtonWrapper[tabs.Length][];
-            int i = 0;
-            var trading = new List<ButtonWrapper>();
-            trading.AddRange(Library.Forms.StaticExtensionTradingLibraryForms.ObjectsButtons);
-            but[i] = trading.ToArray();
-            ++i;
-            var filters = new List<ButtonWrapper>();
-            filters.AddRange(DataPerformer.UI.Factory.StaticFactory.FilterButtons);
-            but[i] = filters.ToArray();
-            ++i;
-            List<ButtonWrapper> gen = new List<ButtonWrapper>();
-            gen.AddRange(DataPerformer.UI.Factory.StaticFactory.GeneralObjectsButtons);
-            gen.AddRange(addButtons);
-            but[i] = gen.ToArray();
-            ++i;
-            List<ButtonWrapper> stat = new List<ButtonWrapper>();
-            stat.AddRange(EngineeringUIFactory.StatisticalObjectsButtons);
-            but[i] = stat.ToArray();
-            ++i;
-            but[i] = Database.UI.Factory.DatabaseFactory.ObjectButtons;
-            ++i;
-            List<ButtonWrapper> events = new List<ButtonWrapper>();
-            events.AddRange(Event.UI.Factory.UIFactory.ObjectButtons);
-            but[i] = events.ToArray();
-            ++i;
-            List<ButtonWrapper> arr = new List<ButtonWrapper>();
-            arr.AddRange(EngineeringUIFactory.ArrowButtons);
-            arr.Add(EngineeringUIFactory.DataExchangeArrowButtons[0]);
-            arr.AddRange(Event.UI.Factory.UIFactory.ArrowButtons);
-            arr.AddRange(Database.UI.Factory.DatabaseFactory.ArrowButtons);
-            but[i] = arr.ToArray();
-            LightDictionary<string, ButtonWrapper[]> buttons = new LightDictionary<string, ButtonWrapper[]>();
-            buttons.Add(tabs, but);
-             Dictionary<string, object> dm = new Dictionary<string, object>();
+            /*    var tabs = new string[] { "Trading", "Filters", "General", "Statistics", "Database", "Events", "Arrows" };
+                ButtonWrapper[][] but = new ButtonWrapper[tabs.Length][];
+                int i = 0;
+                var trading = new List<ButtonWrapper>();
+                trading.AddRange(Library.Forms.StaticExtensionTradingLibraryForms.ObjectsButtons);
+                but[i] = trading.ToArray();
+                ++i;
+                var filters = new List<ButtonWrapper>();
+                filters.AddRange(DataPerformer.UI.Factory.StaticFactory.FilterButtons);
+                but[i] = filters.ToArray();
+                ++i;
+                List<ButtonWrapper> gen = new List<ButtonWrapper>();
+                gen.AddRange(DataPerformer.UI.Factory.StaticFactory.GeneralObjectsButtons);
+                gen.AddRange(addButtons);
+                but[i] = gen.ToArray();
+                ++i;
+                List<ButtonWrapper> stat = new List<ButtonWrapper>();
+                stat.AddRange(EngineeringUIFactory.StatisticalObjectsButtons);
+                but[i] = stat.ToArray();
+                ++i;
+                but[i] = Database.UI.Factory.DatabaseFactory.ObjectButtons;
+                ++i;
+                List<ButtonWrapper> events = new List<ButtonWrapper>();
+                events.AddRange(Event.UI.Factory.UIFactory.ObjectButtons);
+                but[i] = events.ToArray();
+                ++i;
+                List<ButtonWrapper> arr = new List<ButtonWrapper>();
+                arr.AddRange(EngineeringUIFactory.ArrowButtons);
+                arr.Add(EngineeringUIFactory.DataExchangeArrowButtons[0]);
+                arr.AddRange(Event.UI.Factory.UIFactory.ArrowButtons);
+                arr.AddRange(Database.UI.Factory.DatabaseFactory.ArrowButtons);
+                but[i] = arr.ToArray();
+                LightDictionary<string, ButtonWrapper[]> buttons = new LightDictionary<string, ButtonWrapper[]>();
+                buttons.Add(tabs, but);
+                 Dictionary<string, object> dm = new Dictionary<string, object>();
 
-      IUIFactory[] facts =
-                      [
-                    // !!!REMOVED        SoundService.UI.Factory.SoundUIFactrory.Singleton,
-                    Event.UI.Factory.UIFactory.Factory,
-                    Database.UI.Factory.DatabaseFactory.Object
-                      ];
+          IUIFactory[] facts =
+                          [
+                        // !!!REMOVED        SoundService.UI.Factory.SoundUIFactrory.Singleton,
+                        Event.UI.Factory.UIFactory.Factory,
+                        Database.UI.Factory.DatabaseFactory.Object
+                          ];
 
-            IApplicationInitializer[] init =
-                                  [
-                          DataSetService.Initialization.DatabaseInitializer.GetInitializer(
-                           DataSetService.DllDataSetFactoryChooser.BaseDirectoryFactory)
-                                  ];   
+                IApplicationInitializer[] init =
+                                      [
+                              DataSetService.Initialization.DatabaseInitializer.GetInitializer(
+                               DataSetService.DllDataSetFactoryChooser.BaseDirectoryFactory)
+                                      ];   
 
-            FormMain form = BasicEngineering.UI.Factory.Advanced.DefaultApplicationCreator.CreateForm(
-                database, holder, OrdinaryDifferentialEquations.Runge4Solver.Singleton,
-                RungeProcessor.Processor, init,
-                facts, false, buttons, icon,
-                filename, [], caption,
-                ".cft",
-                "Trading configuration files |*.cft", null, null);
-            return form;
-        }
+                FormMain form = BasicEngineering.UI.Factory.Advanced.DefaultApplicationCreator.CreateForm(
+                    database, holder, OrdinaryDifferentialEquations.Runge4Solver.Singleton,
+                    RungeProcessor.Processor, init,
+                    facts, false, buttons, icon,
+                    filename, [], caption,
+                    ".cft",
+                    "Trading configuration files |*.cft", null, null);
+                return form;
+            return null;
+        }*/
   
     }
 }

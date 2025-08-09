@@ -4,6 +4,7 @@ namespace Trading.Library
 {
     public static class StaticExtensionTradingLibrary
     {
+ 
         public static PositionType ToPositionType(this double? position)
         {
             if (position == null)
