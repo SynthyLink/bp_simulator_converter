@@ -286,6 +286,9 @@
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Internet.Meteo\Internet.Meteo\Internet.Meteo.Wrapper\Internet.Meteo.Wrapper.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Internet.Meteo\Internet.Meteo\Internet.Meteo\Internet.Meteo.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\SunPosition\SunPosition.csproj" />
+    <ProjectReference Include="..\..\..\..\ExternalLibraries\Trading\Trading.Database\Trading.Database.csproj" />
+    <ProjectReference Include="..\..\..\..\ExternalLibraries\Trading\Trading.Library.Forms\Trading.Library.Forms.csproj" />
+    <ProjectReference Include="..\..\..\..\ExternalLibraries\Trading\Trading.Library\Trading.Library.csproj" />
     <ProjectReference Include="..\..\..\..\Test\Test.Calculation.Forms\Test.Calculation.Forms.csproj" />
     <ProjectReference Include="..\..\..\..\ThirdParty\OfficePickers\OfficePickers.csproj">
     </ProjectReference>

@@ -1,6 +1,7 @@
 import { AliasName } from "./AliasName";
 import { OwnError } from "./ErrorHandler/OwnError";
 import { FictiveAlias } from "./Fiction/FictiveAlias";
+import { FictiveMeasurement } from "./Fiction/FictiveMeasurement";
 import { FictiveMeasurements } from "./Fiction/FictiveMeasurements";
 import { IAlias } from "./Interfaces/IAlias";
 import { IAliasName } from "./Interfaces/IAliasName";
@@ -246,6 +247,28 @@ export class Performer
         }
         return map;
     }
+
+    public getMeasurementDC(consumer: IDataConsumer, name: string): IMeasurement {
+
+        var mm = consumer.getAllMeasurements();
+        for (var mea of mm)
+        {
+            var co = mea as unknown as ICategoryObject;
+            var nm = co.getCategoryObjectName();
+            nm += ".";
+            var n = mea.getMeasurementsCount();
+            for (let i = 0; i < n; i++)
+            {
+                var m = mea.getMeasurement(i);
+                var nam = nm + m.getMeasurementName();
+                if (nam == name) {
+                    return m;
+                }
+            }
+
+        }
+        return new FictiveMeasurement();
+     }
 
 
  

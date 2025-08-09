@@ -4,6 +4,7 @@ exports.Performer = void 0;
 const AliasName_1 = require("./AliasName");
 const OwnError_1 = require("./ErrorHandler/OwnError");
 const FictiveAlias_1 = require("./Fiction/FictiveAlias");
+const FictiveMeasurement_1 = require("./Fiction/FictiveMeasurement");
 const FictiveMeasurements_1 = require("./Fiction/FictiveMeasurements");
 class Performer {
     constructor() {
@@ -172,6 +173,23 @@ class Performer {
             map.set(nn, m);
         }
         return map;
+    }
+    getMeasurementDC(consumer, name) {
+        var mm = consumer.getAllMeasurements();
+        for (var mea of mm) {
+            var co = mea;
+            var nm = co.getCategoryObjectName();
+            nm += ".";
+            var n = mea.getMeasurementsCount();
+            for (let i = 0; i < n; i++) {
+                var m = mea.getMeasurement(i);
+                var nam = nm + m.getMeasurementName();
+                if (nam == name) {
+                    return m;
+                }
+            }
+        }
+        return new FictiveMeasurement_1.FictiveMeasurement();
     }
     getMeasurementsDCMap(consumer) {
         var map = new Map();

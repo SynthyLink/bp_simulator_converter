@@ -34,16 +34,18 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const readline = __importStar(require("readline"));
-const OrbitAct_1 = require("./Tests/Wrappees/OrbitAct");
-const RandomAcr_1 = require("./Tests/Wrappees/RandomAcr");
-const SimpleFeedAct_1 = require("./Tests/Wrappees/SimpleFeedAct");
-const TwoAct_1 = require("./Tests/Wrappees/TwoAct");
-const TestObjectTransformerSimpleAct_1 = require("./Tests/Wrappees/TestObjectTransformerSimpleAct");
+const OrbitAct_1 = require("./Tests/Wrappers/OrbitAct");
+const RandomAcr_1 = require("./Tests/Wrappers/RandomAcr");
+const SimpleFeedAct_1 = require("./Tests/Wrappers/SimpleFeedAct");
+const TwoAct_1 = require("./Tests/Wrappers/TwoAct");
+const TestObjectTransformerSimpleAct_1 = require("./Tests/Wrappers/TestObjectTransformerSimpleAct");
+const ConditionTestAct_1 = require("./Tests/Wrappers/ConditionTestAct");
 //actOrbit();
 //actRandom();
 //actTwo();
 //actSimpleFeed();
-actTestObjectTransformerSimple();
+//actTestObjectTransformerSimple();
+actCondition();
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -75,6 +77,31 @@ function load() {
     catch (e) {
         let ii = 0;
         ii++;
+    }
+}
+function finish(e) {
+    console.log(e);
+    rl.question('Is this example useful? [y/n] ', (answer) => {
+        switch (answer.toLowerCase()) {
+            case 'y':
+                console.log('Super!');
+                break;
+            case 'n':
+                console.log('Sorry! :(');
+                break;
+            default:
+                console.log('Invalid answer!');
+        }
+        rl.close();
+    });
+}
+function actCondition() {
+    try {
+        var o = new ConditionTestAct_1.ConditionTestAct();
+        o.test();
+    }
+    catch (e) {
+        finish(e);
     }
 }
 function actTestObjectTransformerSimple() {

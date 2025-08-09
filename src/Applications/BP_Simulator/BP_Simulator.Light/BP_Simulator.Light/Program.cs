@@ -1,9 +1,10 @@
-﻿using BP_Simulator.UI;
-using BasicEngineering.UI.Factory;
+﻿using BasicEngineering.UI.Factory;
+using BP_Simulator.UI;
 using CommonService;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
 using ErrorHandler;
+using Trading.Library.Forms;
 using ControlSystemLib = ControlSystems;
 
 
@@ -160,14 +161,18 @@ namespace BP_Simulator.Light
             {
                 f = Motion6D.Portable.PositionObjectFactory.BaseFactory;
             }
-            var tabs = new string[] { "General", "Statistics", "Database", "6D Motion", "Image", "Events", "Arrows" };
+            var tabs = new string[] { "Trading", "General", "Statistics", "Database",  "6D Motion", "Image", "Events", "Arrows" };
             var soundFactory = SoundService.StaticExtensionSoundService.SoundFactory;
             if (soundFactory != null)
             {
-                tabs = [ "General", "Statistics", "Database", "6D Motion", "Image", "Sound", "Events", "Arrows" ];
+                tabs = ["Trading", "General", "Statistics", "Database", "6D Motion", "Image", "Sound", "Events", "Arrows" ];
             }
             var but = new ButtonWrapper[tabs.Length][];
             int i = 0;
+            var trading = new List<ButtonWrapper>();
+            trading.AddRange(StaticExtensionTradingLibraryForms.ObjectsButtons);
+            but[i] = trading.ToArray();
+            ++i;
             var gen = new List<ButtonWrapper>();
             gen.AddRange(DataPerformer.UI.Factory.StaticFactory.GeneralObjectsButtons);
             gen.AddRange(ControlSystems.Data.UI.Factory.ControlSystemsFactory.ObjectButtons);
@@ -178,6 +183,7 @@ namespace BP_Simulator.Light
             ++i;
             but[i] = Database.UI.Factory.DatabaseFactory.ObjectButtons;
             ++i;
+            
             var geom = new List<ButtonWrapper>();
             geom.AddRange(Motion6D.UI.Factory.MotionFactory.ObjectButtons);
             geom.AddRange(Motion6D.UI.Factory.VisibleFactory.GetVisualObjectButtons(f));

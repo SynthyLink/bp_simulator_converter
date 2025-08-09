@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PefrormerMeasuremets = void 0;
 const Performer_1 = require("../Performer");
+const DataConsumerBoolFunc_1 = require("./DataConsumerBoolFunc");
 const TimeMeasurementProvider_1 = require("./TimeMeasurementProvider");
 class PefrormerMeasuremets {
     constructor() {
@@ -33,6 +34,24 @@ class PefrormerMeasuremets {
                 let dc = mea;
                 //     if (dc instanceof IDataConsumer)
             }
+        }
+    }
+    peformCondDCFixedStepCalculation(runtime, dataConsumer, conditionName, start, step, steps, act) {
+        var cond = new DataConsumerBoolFunc_1.DataConsumerBoolFunc(dataConsumer, conditionName);
+        this.peformCondFixedStepCalculation(runtime, cond, start, step, steps, act);
+    }
+    peformCondFixedStepCalculation(runtime, condition, start, step, steps, act) {
+        var tm = new TimeMeasurementProvider_1.TimeMeasurementProvider();
+        runtime.setTimeProvider(tm);
+        runtime.startRuntime(start);
+        var st = start;
+        for (var i = 0; i < steps; i++) {
+            tm.setTime(st);
+            runtime.updateRuntime();
+            if (condition.func()) {
+                act.action();
+            }
+            st += step;
         }
     }
     peformFixedStepCalculation(runtime, start, step, steps, act) {

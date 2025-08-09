@@ -1,14 +1,17 @@
 import * as readline from 'readline';
-import { OrbitAct } from './Tests/Wrappees/OrbitAct';
-import { RandomAct } from './Tests/Wrappees/RandomAcr';
-import { SimpleFeedAct } from './Tests/Wrappees/SimpleFeedAct';
-import { TwoAct } from './Tests/Wrappees/TwoAct';
-import { TestObjectTransformerSimpleAct } from './Tests/Wrappees/TestObjectTransformerSimpleAct';
+import { OrbitAct } from './Tests/Wrappers/OrbitAct';
+import { RandomAct } from './Tests/Wrappers/RandomAcr';
+import { SimpleFeedAct } from './Tests/Wrappers/SimpleFeedAct';
+import { TwoAct } from './Tests/Wrappers/TwoAct';
+import { TestObjectTransformerSimpleAct } from './Tests/Wrappers/TestObjectTransformerSimpleAct';
+import { ConditionTestAct } from './Tests/Wrappers/ConditionTestAct';
 //actOrbit();
 //actRandom();
 //actTwo();
 //actSimpleFeed();
-actTestObjectTransformerSimple();
+//actTestObjectTransformerSimple();
+
+actCondition();
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -44,6 +47,36 @@ function load() {
         let ii = 0;
         ii++;
 
+    }
+}
+
+function finish(e: any) {
+    console.log(e);
+    rl.question('Is this example useful? [y/n] ', (answer) => {
+        switch (answer.toLowerCase()) {
+            case 'y':
+                console.log('Super!');
+                break;
+            case 'n':
+                console.log('Sorry! :(');
+                break;
+            default:
+                console.log('Invalid answer!');
+        }
+        rl.close();
+    });
+
+}
+
+function actCondition()
+{
+    try
+    {
+        var o = new ConditionTestAct();
+        o.test();
+    }
+    catch (e: any) {
+        finish(e);
     }
 }
 

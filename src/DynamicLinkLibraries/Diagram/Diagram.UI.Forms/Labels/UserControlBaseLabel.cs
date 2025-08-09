@@ -4,10 +4,15 @@ using System.Drawing;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Windows.Forms;
+
 using CategoryTheory;
-using Diagram.UI.Forms.Interfaces;
+
 using Diagram.UI.Interfaces;
+
+using Diagram.UI.Forms.Interfaces;
+
 using ErrorHandler;
+
 using NamedTree;
 
 namespace Diagram.UI.Labels
