@@ -25,13 +25,24 @@ namespace Trading.Library.Forms.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));
             }
             set {
                 this["ConnectionString"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection LastConnections {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["LastConnections"]));
+            }
+            set {
+                this["LastConnections"] = value;
             }
         }
     }

@@ -4,7 +4,9 @@ using CategoryTheory;
 
 using DataPerformer.Interfaces;
 using ErrorHandler;
+
 using IBApi;
+
 using IBApi.messages;
 
 using NamedTree;

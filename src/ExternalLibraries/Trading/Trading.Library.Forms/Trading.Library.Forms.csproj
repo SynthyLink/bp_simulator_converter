@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\DynamicLinkLibraries\Chart\Chart.DataPerformer\Chart.DataPerformer.csproj" />
+    <ProjectReference Include="..\..\..\DynamicLinkLibraries\Database\Databse.UI.Windows\Databse.UI.Windows.csproj" />
     <ProjectReference Include="..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Interfaces\DataPerformer.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable\DataPerformer.Portable.csproj" />
     <ProjectReference Include="..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.UI\DataPerformer.UI.csproj" />

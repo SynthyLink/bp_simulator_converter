@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\DynamicLinkLibraries\Database\Database.UI.Intrerfaces\Database.UI.Intrerfaces.csproj" />
     <ProjectReference Include="..\CSharpAPI\CSharpAPI.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 using AssemblyService.Attributes;
@@ -14,6 +15,8 @@ using Chart.Drawing.TextPainters;
 using DataPerformer.Base.Filters;
 using DataPerformer.UI.UserControls;
 
+using Database.UI.Windows;
+
 using Diagram.UI;
 
 using NamedTree;
@@ -21,6 +24,8 @@ using NamedTree;
 using Trading.Charts;
 using Trading.Library.Forms.Factory;
 using Trading.Library.Objects;
+using System.Linq.Expressions;
+using ErrorHandler;
 
 namespace Trading.Library.Forms
 {
@@ -34,14 +39,44 @@ namespace Trading.Library.Forms
             new UIFactory();
             new SeriesFactory();
             Database.StaticExtensionTradingDatabase.ConnectionString = Properties.Settings.Default.ConnectionString;
-            Database.StaticExtensionTradingDatabase.GetConnectionSring = Get;
-        }
+            Database.StaticExtensionTradingDatabase.@interface = new ConnectionStringEditor(new List<string>());
+            Database.StaticExtensionTradingDatabase.OnSuccess += (s, b) =>
+            {
+                try
+                {
+                    if (b)
+                    {
+                        if (Properties.Settings.Default.ConnectionString == s)
+                        {
+                            return;
+                        }
+                        Properties.Settings.Default.ConnectionString = s;
+                        if (!Properties.Settings.Default.LastConnections.Contains(s))
+                        {
+                            Properties.Settings.Default.LastConnections.Add(s);
+                        }
 
-        static string Get(string s, object obj)
-        {
-            Properties.Settings.Default.ConnectionString = a;
-            Properties.Settings.Default.Save();
-            return a;
+                    }
+                    else
+                    {
+                        if (Properties.Settings.Default.LastConnections.Contains(s))
+                        {
+                            Properties.Settings.Default.LastConnections.Remove(s);
+                        }
+                        if (Properties.Settings.Default.ConnectionString == s)
+                        {
+                            Properties.Settings.Default.ConnectionString = "";
+                        }
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    e.HandleException();
+                }
+                    Properties.Settings.Default.Save();
+            };
+
         }
                 
 

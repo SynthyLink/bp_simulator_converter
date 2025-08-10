@@ -3,6 +3,8 @@ using System.Reflection;
 
 using Trading.Database.Interfaces;
 
+using Database.UI.Intrerfaces;
+
 namespace Trading.Database
 {
     public static class StaticExtensionTradingDatabase
@@ -11,7 +13,7 @@ namespace Trading.Database
 
         static List<ITradingDatabaseHistoryIntefaceFactory> list = new();
 
-        static public IUserInterface @interface { get; set; }
+        static public IConnectionStringEditor @interface { get; set; }
 
         static public ITradingDatabaseHistoryIntefaceFactory Trading
         {
@@ -25,10 +27,19 @@ namespace Trading.Database
             set;
         } = string.Empty;
 
-        public static Func<string, object, string> GetConnectionSring
+        static event Action<string, bool> onSuccess;
+
+
+        public static event Action<string, bool> OnSuccess
         {
-            get;
-            set;
+            add
+            {
+                onSuccess += value;
+            }
+            remove
+            {
+                onSuccess -= value;
+            }
         }
 
         static public ITradingDatabaseHistoryInteface Connect()
@@ -38,14 +49,16 @@ namespace Trading.Database
                 var conn = Trading.Create(ConnectionString);
                 if (conn != null)
                 {
+                    onSuccess?.Invoke(ConnectionString, true);
                     @interface.Close();
                     return conn;
                 }
+                onSuccess?.Invoke(ConnectionString, false);
                 if (@interface == null)
                 {
                     return null;
                 }
-                ConnectionString = @interface.Connect(ConnectionString);
+                ConnectionString = @interface.ConnectionStrig(ConnectionString);
 
             }
             return null;
@@ -96,6 +109,7 @@ namespace Trading.Database
                 {
                     return;
                 }
+                strings.Add(d);
             }
             catch
             {

@@ -5,7 +5,6 @@ using System.Windows.Forms;
 
 using IBApi;
 
-using Trading.Database;
 using Trading.Library.Objects;
 using System.ComponentModel;
 

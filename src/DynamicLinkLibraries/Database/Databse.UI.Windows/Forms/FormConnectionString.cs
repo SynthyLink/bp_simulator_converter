@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
 
-namespace DataWarehouse.Forms
+namespace Database.UI.Windows
 {
     /// <summary>
     /// Form for connection string
@@ -23,8 +21,6 @@ namespace DataWarehouse.Forms
         public FormConnectionString(List<string> conns, string conn)
         {
             InitializeComponent();
-            ResourceService.Resources.LoadControlResources(this,
-                DataWarehouse.Utils.ControlUtilites.Resources);
             foreach (string s in conns)
             {
                 comboBoxCS.Items.Add(s);
@@ -43,12 +39,13 @@ namespace DataWarehouse.Forms
                 cs = comboBoxCS.Text;
             }
             DialogResult = DialogResult.OK;
-            Close();
+            
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+            cs = "";
             Close();
         }
 
@@ -61,6 +58,13 @@ namespace DataWarehouse.Forms
             {
                 return cs;
             }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public CancellationTokenSource Token
+        {
+            get;
+            set;
         }
 
     }

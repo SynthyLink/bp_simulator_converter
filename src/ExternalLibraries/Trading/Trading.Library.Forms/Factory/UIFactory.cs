@@ -6,6 +6,9 @@ using Diagram.UI.Factory;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Interfaces.Labels;
 
+using Trading.Database;
+using Trading.Database.Interfaces;
+
 namespace Trading.Library.Forms.Factory
 {
     internal class UIFactory : EmptyUIFactory
@@ -20,6 +23,7 @@ namespace Trading.Library.Forms.Factory
             return CreateObjectLabel(button.ReflectionType, button.Kind, button.ButtonImage as Image);
         }
 
+     
         IObjectLabelUI CreateObjectLabel(Type type, string kind, Image image)
         {
             if (type.Equals(typeof(Serializable.Objects.DataQuery)))

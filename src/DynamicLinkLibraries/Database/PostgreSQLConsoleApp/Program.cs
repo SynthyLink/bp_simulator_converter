@@ -1,7 +1,13 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using DataWarehouse.Classes;
 using DataWarehouse.Interfaces;
+using DataWarehouse.Interfaces.Async;
 using PostgreSQLWarehouse.Models;
+using System.Threading.Tasks;
+//var t = CopyToFile();
+//await t;
+
+return;
 
 PostgreSQLConsoleApp.A.TestA();
 
@@ -12,6 +18,45 @@ PostgreSQLConsoleApp.A.TestA();
  WHERE "Id" <> "ParentId";
 */
 return;
+
+async Task CopyToFile()
+{
+    try
+    {
+
+        var c = new DatabaseCoordinatorCollection(false);
+        c.LoadDirectory();
+
+        IDatabaseCoordinator coord = c;
+        
+
+        var to = coord["Host=127.0.0.1;Database=PostgreSQL_Warehouse;Username=postgres;Password=GREM0nP0"];
+        if (to is IDatabaseInterfaceAsync async)
+        {
+
+            var rt = async.GetRoots([".cfa"]);
+            await rt;
+            var dr = rt.Result[0] as IDirectory;
+            var dir = new DirectoryInfo(@"c:\0\dir");
+            var tasks = new List<Task>();
+            var p = new DataWarehouse.Performer();
+            var t = p.Copy(dr, dir, tasks);
+            tasks.Add(t);
+            await t;
+            Task.WaitAll(tasks);
+        }
+
+
+    }
+    catch (Exception ex)
+    {
+
+    }
+
+    //  IDatabaseCoordinator coord = c;
+
+}
+
 var c = new DatabaseCoordinatorCollection(false);
 
 IDatabaseCoordinator coord = c;

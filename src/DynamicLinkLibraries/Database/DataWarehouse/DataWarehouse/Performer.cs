@@ -1,9 +1,14 @@
-﻿using System;
-
-using DataWarehouse.Classes;
+﻿using DataWarehouse.Classes;
 using DataWarehouse.Interfaces;
+using DataWarehouse.Interfaces.Async;
 using ErrorHandler;
 using NamedTree;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
 
 namespace DataWarehouse
 {
@@ -21,7 +26,6 @@ namespace DataWarehouse
         }
 
         #endregion
-
 
         #region Fields
 
@@ -77,6 +81,50 @@ namespace DataWarehouse
         #region Public Members
 
         #region Copy
+
+        public async Task Copy(IDirectory dir, DirectoryInfo directoryInfo, List<Task> l)
+        {
+            if (dir is IDirectoryAsync async)
+            {
+                var t = async.LoadLeaves();
+                l.Add(t);
+                await t;
+                IChildren<ILeaf> leaves = dir;
+                var children = leaves.Children;
+                foreach (var item in children)
+                {
+                    var name = item.Name;
+                    var descrpition = item.Description;
+                    var fn = Path.Combine(directoryInfo.FullName, name);
+                    using var writer = new StreamWriter(fn + ".txt");
+                    writer.WriteLine(descrpition);
+                    if (item is IDataAsync datasync)
+                    {
+                        var tad = datasync.GetDataAsync();
+                        l.Add(tad);
+                        await tad;
+                        var bt = tad.Result;
+                        using var stream = File.OpenWrite(fn);
+                        stream.Write(bt);
+                    }
+                 }
+                var td = async.LoadChildren();
+                l.Add(td);
+                await td;
+                IChildren<IDirectory> dirs  = dir;
+                var dchildren = dirs.Children;
+                foreach (var dr in dchildren)
+                {
+                    var name = dr.Name;
+                    var descrpition = dr.Description;
+                    var fn = Path.Combine(directoryInfo.FullName, name);
+                    using var writer = new StreamWriter(fn + ".description.txt");
+                    writer.WriteLine(descrpition);
+                    var di = directoryInfo.CreateSubdirectory(name);
+                    var tcc = Copy(dr, di, l);
+                }
+            }
+        }
 
         /// <summary>
         /// Copy
