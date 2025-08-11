@@ -1,12 +1,18 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using DataWarehouse;
 using DataWarehouse.Classes;
 using DataWarehouse.Interfaces;
 using DataWarehouse.Interfaces.Async;
+using PostgreSQLWarehouse;
 using PostgreSQLWarehouse.Models;
 using System.Threading.Tasks;
-//var t = CopyToFile();
-//await t;
-
+//BA(); Console.WriteLine("Finish"); return;
+//var t = CopyToDatabse();
+var t = CopyToFile();
+await t;
+Task.WaitAll(t.Result);
+Console.WriteLine("Press key");
+Console.ReadLine();
 return;
 
 PostgreSQLConsoleApp.A.TestA();
@@ -19,71 +25,108 @@ PostgreSQLConsoleApp.A.TestA();
 */
 return;
 
-async Task CopyToFile()
+async Task<List<Task>> CopyToDatabse()
 {
+    var tasks = new List<Task>();
+
     try
     {
-
-        var c = new DatabaseCoordinatorCollection(false);
-        c.LoadDirectory();
-
-        IDatabaseCoordinator coord = c;
-        
-
-        var to = coord["Host=127.0.0.1;Database=PostgreSQL_Warehouse;Username=postgres;Password=GREM0nP0"];
-        if (to is IDatabaseInterfaceAsync async)
-        {
-
-            var rt = async.GetRoots([".cfa"]);
-            await rt;
-            var dr = rt.Result[0] as IDirectory;
-            var dir = new DirectoryInfo(@"c:\0\dir");
-            var tasks = new List<Task>();
-            var p = new DataWarehouse.Performer();
-            var t = p.Copy(dr, dir, tasks);
-            tasks.Add(t);
-            await t;
-            Task.WaitAll(tasks);
-        }
-
-
+        var p = new Performer();
+        var cs = "Host=127.0.0.1;Database=BusinessAnalisys;Username=postgres;Password=GREM0nP0";
+        var ext = ".cfa";
+        var extp = ".business_analisys";
+        var dir = @"c:\0\dir";
+        var t = p.Copy(cs, dir, ext, extp, tasks);
+        await t;
+        tasks.Add(t);
     }
-    catch (Exception ex)
+    catch (Exception e)
     {
 
     }
-
-    //  IDatabaseCoordinator coord = c;
+    return tasks;
 
 }
 
-var c = new DatabaseCoordinatorCollection(false);
+void BA()
+{
+    var connection = "Host=127.0.0.1;Database=BusinessAnalisys;Username=postgres;Password=GREM0nP0";
+    var c = new PostgreSQLWarehouseInterface(connection);
+    c.CreateRootsPublic();
+}
 
-IDatabaseCoordinator coord = c;
+    async Task<List<Task>> CopyToFile()
+    {
+        var tasks = new List<Task>();
+        try
+        {
+            var p = new Performer();
+            var cs = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Trading_Analytics;Integrated Security=True;Encrypt=False";
+            var dir = @"c:\0\dir";
+            var ext = ".cft";
+            var t = p.Copy(cs, dir, ext, tasks);
+            await t;
+            tasks.Add(t);
 
-c.LoadDirectory();
+        }
+        catch (Exception e)
+        {
 
-var from = coord[@"Data Source=IVANKOV\SQLEXPRESS;Initial Catalog=AstronomyExpress;Integrated Security=True;Encrypt=False"];
-var to = coord["Host=127.0.0.1;Database=PostgreSQL_Warehouse;Username=postgres;Password=GREM0nP0"];
-//var to = coord["Dsn=MySQL"];
-var p = new DataWarehouse.Performer();
+        }
+        return tasks;
+    }
 
-p.Copy(from, to);
 
+    async Task<List<Task>> CopyToFile1()
+    {
+        var tasks = new List<Task>();
+        try
+        {
+            var p = new Performer();
+            var cs = "Host=127.0.0.1;Database=PostgreSQL_Warehouse;Username=postgres;Password=GREM0nP0";
+            var dir = @"c:\0\dir";
+            var ext = ".cfa";
+            var t = p.Copy(cs, dir, ext, tasks);
+            await t;
+            tasks.Add(t);
+
+        }
+        catch (Exception e)
+        {
+
+        }
+        return tasks;
+    }
+
+    void Test()
+    {
+        var c = new DatabaseCoordinatorCollection(false);
+
+        IDatabaseCoordinator coord = c;
+
+        c.LoadDirectory();
+
+        var from = coord[@"Data Source=IVANKOV\SQLEXPRESS;Initial Catalog=AstronomyExpress;Integrated Security=True;Encrypt=False"];
+        var to = coord["Host=127.0.0.1;Database=PostgreSQL_Warehouse;Username=postgres;Password=GREM0nP0"];
+        //var to = coord["Dsn=MySQL"];
+        var p = new DataWarehouse.Performer();
+
+        p.Copy(from, to);
+    }
 
 
 int Test3()
-{
- var cs = "Server=localhost;User ID=root;Password=SQj0Myhnks!12;Database=mysqlwarehouse";
- using var conn = new MySqlConnector.MySqlConnection(cs);
- conn.Open();
- using var command = conn.CreateCommand();
- command.CommandType = System.Data.CommandType.StoredProcedure;
- //command.CommandText = "fiction";
- command.CommandText = $"`mysqlwarehouse`.`fiction`";
- var ll = command.ExecuteNonQuery();
- return ll;
-}
+    {
+        var cs = "Server=localhost;User ID=root;Password=SQj0Myhnks!12;Database=mysqlwarehouse";
+        using var conn = new MySqlConnector.MySqlConnection(cs);
+        conn.Open();
+        using var command = conn.CreateCommand();
+        command.CommandType = System.Data.CommandType.StoredProcedure;
+        //command.CommandText = "fiction";
+        command.CommandText = $"`mysqlwarehouse`.`fiction`";
+        var ll = command.ExecuteNonQuery();
+        return ll;
+    }
 
 
 
@@ -113,7 +156,7 @@ void Test2()
  int i = 0;
 }
 
-void Test()
+void Test4()
 {
 
  var adapter = new PostgreSqlWarehouseContext();

@@ -735,11 +735,19 @@ namespace DataWarehouse.Classes.Abstract
             Names.Add(n);
             if (named is ILeaf leaf)
             {
+                if (leaves == null)
+                {
+                    leaves = new List<ILeaf>();
+                }
                 leaves.Add(leaf);
                 leaf.Parent = this;
             }
             else if (named is IDirectory directory)
             {
+                if (directories == null)
+                {
+                    directories = new List<IDirectory>();
+                }
                 directories.Add(directory);
                 directory.Parent = this;
             }

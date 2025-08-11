@@ -1,13 +1,16 @@
-﻿using DataWarehouse.Classes;
-using DataWarehouse.Interfaces;
-using DataWarehouse.Interfaces.Async;
-using ErrorHandler;
-using NamedTree;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters;
 using System.Threading.Tasks;
-using System.Xml.Linq;
+
+using DataWarehouse.Classes;
+using DataWarehouse.Interfaces;
+using DataWarehouse.Interfaces.Async;
+
+using ErrorHandler;
+
+using NamedTree;
 
 
 namespace DataWarehouse
@@ -82,7 +85,147 @@ namespace DataWarehouse
 
         #region Copy
 
-        public async Task Copy(IDirectory dir, DirectoryInfo directoryInfo, List<Task> l)
+
+
+        public async Task Copy(string connecrionString, string directory, string ext, string extout, List<Task> tasks)
+        {
+            var c = new DatabaseCoordinatorCollection(false);
+            c.LoadDirectory();
+            IDatabaseCoordinator coord = c;
+            var to = coord[connecrionString];
+            if (to == null)
+            {
+
+            }
+            if (to is IDatabaseInterfaceAsync async)
+            {
+                var rt = async.GetRoots([ext]);
+                await rt;
+                var dr = rt.Result[0] as IDirectory;
+                var dir = new DirectoryInfo(directory);
+                var t = Copy(dr, dir, tasks, ext, extout);
+                tasks.Add(t);
+                await t;
+            }
+        }
+
+
+        public async Task Copy(string connecrionString, string directory, string ext, List<Task> tasks)
+        {
+            var c = new DatabaseCoordinatorCollection(false);
+            c.LoadDirectory();
+            IDatabaseCoordinator coord = c;
+            var to = coord[connecrionString];
+            if (to is IDatabaseInterfaceAsync async)
+            {
+
+                var rt = async.GetRoots([ext]);
+                await rt;
+                var dr = rt.Result[0] as IDirectory;
+                var dir = new DirectoryInfo(directory);
+                var t = Copy(dr, dir, tasks, ext);
+                tasks.Add(t);
+                await t;
+            }
+            else
+            {
+                Copy(to, directory, ext);
+            }
+        }
+
+        void Copy(IDatabaseInterface dt, string directory, string ext)
+        {
+            var r = dt.GetRoots();
+            Copy(r[0], directory, ext);
+        }
+
+        void Copy(IDirectory dir, DirectoryInfo directoryInfo, string ext)
+        {
+            IChildren<ILeaf> leaves = dir;
+            var children = leaves.Children;
+            foreach (var item in children)
+            {
+
+                var name = item.Name;
+                var descrpition = item.Description;
+                var fn = Path.Combine(directoryInfo.FullName, name);
+                using var writer = new StreamWriter(fn + ".txt");
+                writer.WriteLine(descrpition);
+
+                if (item is IData data)
+                {
+                    var bt = data.Data;
+                    if (bt.Length == 0)
+                    {
+
+                    }
+                    using var stream = File.OpenWrite(fn + ext);
+                    stream.Write(bt);
+                }
+            }
+            IChildren<IDirectory> dirs = dir;
+            var dchildren = dirs.Children;
+            foreach (var dr in dchildren)
+            {
+                var name = dr.Name;
+                var descrpition = dr.Description;
+                var fn = Path.Combine(directoryInfo.FullName, name);
+                using var writer = new StreamWriter(fn + ".description");
+                writer.WriteLine(descrpition);
+                var di = directoryInfo.CreateSubdirectory(name);
+                Copy(dr, di, ext);
+            }
+        }
+
+
+
+
+        public async Task Copy(IDirectory dir, DirectoryInfo directoryInfo, List<Task> l, string ext, string extOut)
+        {
+            IDirectoryAsync async = dir as IDirectoryAsync;
+            var dn = directoryInfo.FullName;
+            var files = directoryInfo.GetFiles("*" + ext);
+            foreach (var f in files)
+            {
+                var fd = Path.GetFileNameWithoutExtension(f.FullName);
+                var name = fd;
+                var r = Path.Combine(dn, fd);
+                using var reader = new StreamReader(r + ".txt");
+                var description = reader.ReadToEnd();
+                using var stream = File.OpenRead(f.FullName);
+                var len = stream.Length;
+                var bt = new byte[len];
+                if (len == 0)
+                {
+                    continue;
+                }
+                stream.Read(bt);
+                var leaf = new Leaf(null, name, description, extOut, bt);
+                var t = async.AddAsync(leaf);
+                l.Add(t);
+                await t;
+            }
+            var directories = directoryInfo.GetDirectories();
+            foreach (var d in directories)
+            {
+                var name = d.Name;
+                using var reader = new StreamReader(d.FullName + ".description");
+                var description = reader.ReadToEnd();
+                var direct = new Classes.Directory(null, name, description, extOut, true);
+                var td = async.AddAsync(direct);
+                l.Add(td);
+                await td;
+                var tc = Copy(td.Result as IDirectory, d, l, ext, extOut);
+                l.Add(tc);
+                await tc;
+
+            }
+        }
+
+
+
+
+        public async Task Copy(IDirectory dir, DirectoryInfo directoryInfo, List<Task> l, string ext)
         {
             if (dir is IDirectoryAsync async)
             {
@@ -104,24 +247,28 @@ namespace DataWarehouse
                         l.Add(tad);
                         await tad;
                         var bt = tad.Result;
-                        using var stream = File.OpenWrite(fn);
+                        if (bt.Length == 0)
+                        {
+
+                        }
+                        using var stream = File.OpenWrite(fn + ext);
                         stream.Write(bt);
                     }
-                 }
+                }
                 var td = async.LoadChildren();
                 l.Add(td);
                 await td;
-                IChildren<IDirectory> dirs  = dir;
+                IChildren<IDirectory> dirs = dir;
                 var dchildren = dirs.Children;
                 foreach (var dr in dchildren)
                 {
                     var name = dr.Name;
                     var descrpition = dr.Description;
                     var fn = Path.Combine(directoryInfo.FullName, name);
-                    using var writer = new StreamWriter(fn + ".description.txt");
+                    using var writer = new StreamWriter(fn + ".description");
                     writer.WriteLine(descrpition);
                     var di = directoryInfo.CreateSubdirectory(name);
-                    var tcc = Copy(dr, di, l);
+                    var tcc = Copy(dr, di, l, ext);
                 }
             }
         }
@@ -213,7 +360,7 @@ namespace DataWarehouse
         /// <summary>
         /// Exception event
         /// </summary>
-        public  event Action<Exception> OnError
+        public event Action<Exception> OnError
         {
             add
             {
@@ -290,16 +437,16 @@ namespace DataWarehouse
         /// Finder of database
         /// </summary>
         public IDatabaseCoordinator Coordinator
-        { 
-            get; 
-            set; 
+        {
+            get;
+            set;
         }
 
         /// <summary>
         /// Saves node
         /// </summary>
         /// <param name="node">Node to save</param>
-        public  void Save(INode node)
+        public void Save(INode node)
         {
             Saver.Save(node);
         }

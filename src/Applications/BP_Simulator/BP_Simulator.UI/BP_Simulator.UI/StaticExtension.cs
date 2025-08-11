@@ -71,7 +71,7 @@ namespace BP_Simulator.UI
             filename,
             dictionary,
             caption,
-            ".cfa", "BP configuration files |*.cfa;*.cont", logWriter, testInterface);
+            ".business_analisys", "BP configuration files |*.business_analisys;*.cont", logWriter, testInterface);
             return form;
         }
 

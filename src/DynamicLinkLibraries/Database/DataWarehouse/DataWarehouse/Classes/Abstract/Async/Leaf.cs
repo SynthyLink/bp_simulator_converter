@@ -1,10 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 using DataWarehouse.Interfaces;
 using DataWarehouse.Interfaces.Async;
+
 using ErrorHandler;
+
 using NamedTree;
 
 namespace DataWarehouse.Classes.Abstract.Async
@@ -14,9 +15,6 @@ namespace DataWarehouse.Classes.Abstract.Async
         protected virtual event Action<object> OnUpdateData;
 
         ILeafAsync Async => this;
-
-  
-
 
         event Action<object> ILeafAsync.OnUpdateData
         {

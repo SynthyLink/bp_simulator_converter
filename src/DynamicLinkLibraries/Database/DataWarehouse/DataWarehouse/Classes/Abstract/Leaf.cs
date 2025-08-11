@@ -64,9 +64,6 @@ namespace DataWarehouse.Classes.Abstract
             return AcceptUpdate(name);
         }
 
-
-
-
         protected Leaf(object id, string name,  string description, string extension,
          byte[] data) : this()
         {

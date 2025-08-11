@@ -18,7 +18,7 @@ namespace Trading.Database.SqlServer
 
         Task ITradingDatabaseHistoryInteface.DeleteBySymbol(string symbol)
         {
-          
+            throw new NotImplementedException();
         }
 
         Task ITradingDatabaseHistoryInteface.FillHisrory(string name, List<HistoricalDataMessageDateTime> data)
