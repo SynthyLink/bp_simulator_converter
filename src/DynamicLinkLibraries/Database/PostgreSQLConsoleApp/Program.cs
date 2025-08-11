@@ -2,13 +2,11 @@
 using DataWarehouse;
 using DataWarehouse.Classes;
 using DataWarehouse.Interfaces;
-using DataWarehouse.Interfaces.Async;
 using PostgreSQLWarehouse;
 using PostgreSQLWarehouse.Models;
-using System.Threading.Tasks;
 //BA(); Console.WriteLine("Finish"); return;
-//var t = CopyToDatabse();
-var t = CopyToFile();
+var t = CopyToDatabse1();
+//var t = CopyToFile();
 await t;
 Task.WaitAll(t.Result);
 Console.WriteLine("Press key");
@@ -34,6 +32,31 @@ async Task<List<Task>> CopyToDatabse()
         var p = new Performer();
         var cs = "Host=127.0.0.1;Database=BusinessAnalisys;Username=postgres;Password=GREM0nP0";
         var ext = ".cfa";
+        var extp = ".business_analisys";
+        var dir = @"c:\0\dir1";
+        var t = p.Copy(cs, dir, ext, extp, tasks);
+        await t;
+        tasks.Add(t);
+    }
+    catch (Exception e)
+    {
+
+    }
+    return tasks;
+
+}
+
+
+
+async Task<List<Task>> CopyToDatabse1()
+{
+    var tasks = new List<Task>();
+
+    try
+    {
+        var p = new Performer();
+        var cs = "Host=127.0.0.1;Database=BusinessAnalisys;Username=postgres;Password=GREM0nP0";
+        var ext = ".cft";
         var extp = ".business_analisys";
         var dir = @"c:\0\dir";
         var t = p.Copy(cs, dir, ext, extp, tasks);
@@ -84,7 +107,7 @@ void BA()
         {
             var p = new Performer();
             var cs = "Host=127.0.0.1;Database=PostgreSQL_Warehouse;Username=postgres;Password=GREM0nP0";
-            var dir = @"c:\0\dir";
+            var dir = @"c:\0\dir1";
             var ext = ".cfa";
             var t = p.Copy(cs, dir, ext, tasks);
             await t;

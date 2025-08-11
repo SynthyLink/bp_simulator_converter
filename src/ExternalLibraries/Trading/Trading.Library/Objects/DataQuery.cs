@@ -21,11 +21,13 @@ namespace Trading.Library.Objects
 
         #region Fields
 
-        ITradingDatabaseHistoryInteface TradingDatabaseHistoryInteface
+         ITradingDatabaseHistoryInteface TradingDatabaseHistoryInteface
         {
             get;
             set;
         }
+
+        public Dictionary<string, Guid> Symbols { get; protected set; }
 
 
         IMeasurement[] measurements;
@@ -63,12 +65,9 @@ namespace Trading.Library.Objects
 
         public string Period { get; set; } = "1 day";
 
-        public Dictionary<string, Guid> Symbols
-        {
-            get;
-            protected set;
-        }
+        object o = new object();
 
+   
         public  int ToIndex(Guid guid)
         {
             int i = 0;
@@ -84,10 +83,6 @@ namespace Trading.Library.Objects
             return -1;
         }
 
-
-
-
-
         #endregion
 
         #region Ctor
@@ -96,7 +91,7 @@ namespace Trading.Library.Objects
         public DataQuery()
         {
             TradingDatabaseHistoryInteface = Trading.Database.StaticExtensionTradingDatabase.Connect();
-
+            Symbols = TradingDatabaseHistoryInteface.Symbols;
              measurements =
                 [
                 new RealTimeMeasurement(this),
@@ -109,9 +104,14 @@ namespace Trading.Library.Objects
                     new DateTimeMeasurement(this),
                     new FullTimeMeasurement(this)
                 ];
-
-
+            
         }
+
+  
+  
+        
+
+        
 
         event Action<IMeasurement> IChildren<IMeasurement>.OnAdd
         {
@@ -149,7 +149,7 @@ namespace Trading.Library.Objects
 
         bool IMeasurements.IsUpdated { get => isUpdated; set => isUpdated = value; }
 
-        IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => throw new OwnNotImplemented();
+        IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => measurements;
 
         void IMeasurements.UpdateMeasurements()
         {
@@ -166,7 +166,8 @@ namespace Trading.Library.Objects
             step = 0;
             messages.Clear();
             var bs = Period.ToBarSize();
-            var t = Database.GetHistoricalDataMessageDateTimes(Guid, Begin, End);
+            var ct = new CancellationToken();
+            var t = Database.GetHistoricalDataMessageDateTimes(Guid, Begin, End, ct);
             var dt = t.Result;
             enu = dt.Convert(bs);
             enumerator = enu.GetEnumerator();

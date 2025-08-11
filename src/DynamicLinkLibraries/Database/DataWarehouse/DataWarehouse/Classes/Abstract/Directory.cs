@@ -676,10 +676,7 @@ namespace DataWarehouse.Classes.Abstract
 
         }
 
-
         static List<ILeaf> st = new List<ILeaf>();
-
- 
 
         #region Absract
         protected abstract bool SetDatabaseName(string name);

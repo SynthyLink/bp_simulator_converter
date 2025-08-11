@@ -135,8 +135,9 @@ namespace DataWarehouse
 
         void Copy(IDatabaseInterface dt, string directory, string ext)
         {
-            var r = dt.GetRoots();
-            Copy(r[0], directory, ext);
+            var r = dt.GetRoots([ext]);
+            var dir = new DirectoryInfo(directory);
+            Copy(r[0], dir, ext);
         }
 
         void Copy(IDirectory dir, DirectoryInfo directoryInfo, string ext)

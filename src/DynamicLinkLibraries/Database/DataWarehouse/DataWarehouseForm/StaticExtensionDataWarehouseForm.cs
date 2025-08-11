@@ -145,8 +145,8 @@ namespace DataWarehouse
                 {
                     var t = directoryAsync.LoadChildren();
                     await t;
-                        var tl = directoryAsync.LoadLeaves();
-                        await tl;
+                    var tl = directoryAsync.LoadLeaves();
+                    await tl;
 
                 }
             }

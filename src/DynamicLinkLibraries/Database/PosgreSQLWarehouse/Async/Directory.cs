@@ -28,12 +28,21 @@ namespace PostgreSQLWarehouse.Async
 
         public Directory(IDataRecord record, PostgreSQLWarehouseInterface postgreSQLWarehouse, bool b) : base(b)
         {
-           WarehouseInterface = postgreSQLWarehouse;
-            Id = record[0];
-            var p = record[1];
-            name = record.GetString(2);
-            description = record.GetString(3);
-            Extension = record.GetString(4);
+            try
+            {
+                WarehouseInterface = postgreSQLWarehouse;
+                Id = record[0];
+                var p = record[1];
+                name = record.GetString(2);
+                description = record.GetString(3);
+                Extension = record.GetString(4);
+            }
+            catch (Exception ex)
+            {
+                ex.HandleException();
+            }
+
+
         }
 
         public Directory(IDirectory directory, object id, PostgreSQLWarehouseInterface postgreSQLWarehouse, bool b) : base(b)
