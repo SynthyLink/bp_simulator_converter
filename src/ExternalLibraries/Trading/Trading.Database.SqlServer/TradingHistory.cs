@@ -1,6 +1,8 @@
-﻿using IBApi.messages;
+﻿using Azure.Core;
+using IBApi.messages;
 using Microsoft.EntityFrameworkCore;
 using Trading.Database.Interfaces;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Trading.Database.SqlServer.Overriden
 {
@@ -43,7 +45,7 @@ namespace Trading.Database.SqlServer.Overriden
             throw new NotImplementedException();
         }
 
-        Task<List<HistoricalDataMessageDateTime>> ITradingDatabaseHistoryInteface.GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end, CancellationToken token)
+        Task<List<HistoricalDataMessageDateTime>> ITradingDatabaseHistoryInteface.GetHistoricalDataMessageDateTimes(Guid id, DateTime begin, DateTime end, CancellationToken token)
         {
             throw new NotImplementedException();
         }
@@ -63,9 +65,9 @@ namespace Trading.Database.SqlServer.Overriden
             throw new NotImplementedException();
         }
 
-        List<HistoricalDataMessageDateTime> ITradingDatabaseHistoryInteface.GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end)
+        List<HistoricalDataMessageDateTime> ITradingDatabaseHistoryInteface.GetHistoricalDataMessageDateTimes(Guid id, DateTime begin, DateTime end)
         {
-            throw new NotImplementedException();
+            return HistoricalDataMessageDateTimes(id, begin, end);
         }
 
         Dictionary<string, Guid> ITradingDatabaseHistoryInteface.Symbols => Symbols;
@@ -73,8 +75,38 @@ namespace Trading.Database.SqlServer.Overriden
 
         #endregion
 
+        protected virtual List<HistoricalDataMessageDateTime> HistoricalDataMessageDateTimes(Guid id, DateTime begin, DateTime end)
+        {
+            var r = SelectHistoryByDate(id, begin, end);
+            return Convert(r);
 
-        protected virtual async Task<List<HistoricalDataMessageDateTime>> GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end, CancellationToken token)
+        }
+
+        protected virtual List<HistoricalDataMessageDateTime> Convert(List<SelectHistoryByDateReturnModel> items)
+        {
+            return (from hist in items select Convert(hist)).ToList();
+        }
+
+        protected virtual HistoricalDataMessageDateTime Convert(SelectHistoryByDateReturnModel item)
+        {
+            return new HistoricalDataMessageDateTime
+            {
+                RequestId = item.RequestId,
+                Date = item.Date,
+                Open = item.OpenF,
+                High = item.High,
+                Low = item.Low,
+                Close = item.CloseF,
+                Volume = item.Volume,
+                Count = item.Count,
+                Wap = item.Wap,
+                HasGaps = item.HasGaps
+
+            };
+            
+        }
+
+                protected virtual async Task<List<HistoricalDataMessageDateTime>> GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end, CancellationToken token)
         {
             var g = (Guid)id;
             var t = SelectHistoryByDateAsync(g, begin, end, token);

@@ -37,6 +37,7 @@ namespace Gravity_36_36.Wrapper.Serializable
         static StaticExtensionGravity_36_36_WrapperSerializable()
         {
             new CodeCreators.CSCodeCreator();
+            new Binder();
         }
 
         #endregion

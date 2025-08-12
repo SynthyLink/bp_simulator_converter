@@ -1967,7 +1967,7 @@ namespace Diagram.UI
                 }
                 catch (Exception exception)
                 {
-                    exception.HandleException(1); ;
+                    exception.HandleException(1);
                 }
                 ControlPanel.LoadControls(this, stream, null, k);
             }

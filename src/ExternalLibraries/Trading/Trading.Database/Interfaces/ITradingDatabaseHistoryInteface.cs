@@ -33,11 +33,11 @@ namespace Trading.Database.Interfaces
         /// <param name="begin">Begin</param>
         /// <param name="end">End</param>
         /// <returns>The messages</returns>
-        Task<List<HistoricalDataMessageDateTime>> GetHistoricalDataMessageDateTimes(object id,
+        Task<List<HistoricalDataMessageDateTime>> GetHistoricalDataMessageDateTimes(Guid id,
             DateTime begin, DateTime end, CancellationToken token);
 
-        List<HistoricalDataMessageDateTime> GetHistoricalDataMessageDateTimes(object id,
-       DateTime begin, DateTime end);
+        List<HistoricalDataMessageDateTime> GetHistoricalDataMessageDateTimes(Guid id,
+            DateTime begin, DateTime end);
 
 
 

@@ -21,12 +21,6 @@ namespace Trading.Library.Objects
 
         #region Fields
 
-         ITradingDatabaseHistoryInteface TradingDatabaseHistoryInteface
-        {
-            get;
-            set;
-        }
-
         public Dictionary<string, Guid> Symbols { get; protected set; }
 
 
@@ -90,11 +84,11 @@ namespace Trading.Library.Objects
 
         public DataQuery()
         {
-            TradingDatabaseHistoryInteface = Trading.Database.StaticExtensionTradingDatabase.Connect();
-            Symbols = TradingDatabaseHistoryInteface.Symbols;
-             measurements =
-                [
-                new RealTimeMeasurement(this),
+            Database = Trading.Database.StaticExtensionTradingDatabase.Connect();
+            Symbols = Database.Symbols;
+            measurements =
+               [
+               new RealTimeMeasurement(this),
                     new LowMeasurement(this),
                     new HighMeasurement(this),
                     new OpenMeasurement(this),
@@ -103,14 +97,9 @@ namespace Trading.Library.Objects
                     new IntegerTimeMeasurement(this),
                     new DateTimeMeasurement(this),
                     new FullTimeMeasurement(this)
-                ];
-            
+               ];
+
         }
-
-  
-  
-        
-
         
 
         event Action<IMeasurement> IChildren<IMeasurement>.OnAdd
@@ -163,18 +152,27 @@ namespace Trading.Library.Objects
 
         void IIterator.Reset()
         {
-            step = 0;
-            messages.Clear();
-            var bs = Period.ToBarSize();
-            var ct = new CancellationToken();
-            var t = Database.GetHistoricalDataMessageDateTimes(Guid, Begin, End, ct);
-            var dt = t.Result;
-            enu = dt.Convert(bs);
-            enumerator = enu.GetEnumerator();
-            enumerator.MoveNext();
-            message = enumerator.Current;
-            messages[step] = message;
-            Set();
+            Exception exceptopn;
+            try
+            {
+                step = 0;
+                messages.Clear();
+                var bs = Period.ToBarSize();
+                var ct = new CancellationToken();
+                var dt = Database.GetHistoricalDataMessageDateTimes(Guid, Begin, End);
+                enu = dt.Convert(bs);
+                enumerator = enu.GetEnumerator();
+                enumerator.MoveNext();
+                message = enumerator.Current;
+                messages[step] = message;
+                Set();
+                return;
+            }
+            catch (Exception ex)
+            {
+                exceptopn = IncludedException.Get(ex);
+            }
+            throw exceptopn;
         }
 
         bool IIterator.Next()
