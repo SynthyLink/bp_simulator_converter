@@ -1,4 +1,5 @@
 import { CategoryObject } from "../../Library/CategoryObject";
+import { IDesktop } from "../../Library/Interfaces/IDesktop";
 import { IObjectTransformer } from "../../Library/Measurements/Interfaces/IObjectTransformer";
 
 
@@ -13,16 +14,16 @@ export class AtmosphereZero extends CategoryObject implements IObjectTransformer
 
 
     getInput(): string[] {
-        return this.ino;
+        return this.inp;
     }
     getOutput(): string[] {
         return this.ooutp;
     }
     getInputType(i: number) {
-        return a;
+        return this.a;
     }
     getOutputType(i: number) {
-        return a;
+        return this.a;
     }
     calculate(input: any[], output: any[]): void {
         output[0] = 0;

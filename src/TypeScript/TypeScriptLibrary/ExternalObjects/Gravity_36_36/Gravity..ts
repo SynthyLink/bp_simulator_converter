@@ -1,4 +1,4 @@
-import { Performer } from "../../Library/Performer"
+import { Performer } from "../../Library/Performer";
 
 export class Gravity {
 

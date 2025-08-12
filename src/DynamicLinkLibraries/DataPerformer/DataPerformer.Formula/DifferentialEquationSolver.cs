@@ -1,33 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+
+using BaseTypes.Interfaces;
 
 using CategoryTheory;
 
-using Diagram.UI;
-using Diagram.UI.Labels;
-using Diagram.UI.Interfaces;
-using Diagram.UI.Aliases;
+using DataPerformer.Formula.Interfaces;
+using DataPerformer.Interfaces;
+using DataPerformer.Portable;
 
-using BaseTypes.Interfaces;
+using Diagram.UI;
+using Diagram.UI.Aliases;
+using Diagram.UI.Attributes;
+using Diagram.UI.Interfaces;
+using Diagram.UI.Labels;
+
+using ErrorHandler;
 
 using FormulaEditor;
 using FormulaEditor.Interfaces;
 using FormulaEditor.Symbols;
 
-using DataPerformer.Interfaces;
-using DataPerformer.Portable;
-using DataPerformer.Formula.Interfaces;
-
-using ErrorHandler;
-
 using NamedTree;
+
 
 namespace DataPerformer.Formula
 {
     /// <summary>
     /// Solver of ordinary differential equations system
     /// </summary>
+    [CodeCreator(AliasInitialState = true, IsSysemOfDifferentialEquations = true)]
     public class DifferentialEquationSolver : DataConsumerMeasurements, 
         IDifferentialEquationSolver, 
         IStarted,  ICheckCorrectness, IVariableDetector,

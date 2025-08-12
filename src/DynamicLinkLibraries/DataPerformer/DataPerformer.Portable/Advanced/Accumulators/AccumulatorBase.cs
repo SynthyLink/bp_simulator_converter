@@ -512,7 +512,7 @@ namespace DataPerformer.Portable.Advanced.Accumulators
                 this.accumulator = accumulator;
             }
 
-            public override void UpdateMeasurements()
+            protected override void UpdateMeasurements()
             {
                 if (Dim > 0)
                 {

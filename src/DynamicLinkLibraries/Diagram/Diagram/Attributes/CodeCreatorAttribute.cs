@@ -17,5 +17,14 @@ namespace Diagram.UI.Attributes
             set;
         } = false;
 
+        /// <summary>
+        /// The is sysem of differential equations sign
+        /// </summary>
+        public bool IsSysemOfDifferentialEquations
+        {
+            get;
+            set;
+        } = false;
+
     }
 }

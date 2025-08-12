@@ -1,19 +1,27 @@
 import { IObject } from "../../Interfaces/IObject";
 import { IValue } from "../../Interfaces/IValue";
 import { Performer } from "../../Performer";
+import { IDerivation } from "../Interfaces/IDerivation";
 import { IMeasurement } from "../Interfaces/IMeasurement";
 
 
-export class Variable implements IMeasurement, IObject, IValue {
-    value: any = new Object();;
+export class Variable implements IMeasurement, IObject, IValue, IDerivation
+{
+    value: any = new Object();
+
     type: any = new Object();
+
     name: string = "";
 
     className: string = "Variable";
 
-    types: string[] = ["Variable", "IMeasurement", "IObject", "IValue"];
+    types: string[] = ["Variable", "IMeasurement", "IObject", "IValue", "IDerivation"];
 
     performer: Performer = new Performer();
+
+    measurement !: IMeasurement;
+
+    derivation ! : Variable;
 
     constructor(name: string, type: any, value: any) {
         this.name = name;
@@ -21,7 +29,8 @@ export class Variable implements IMeasurement, IObject, IValue {
         this.value = value;
 
     }
-    getIValue() {
+    getIValue()
+    {
         return this.value;
     }
     setIValue(value: any): void {
@@ -51,6 +60,15 @@ export class Variable implements IMeasurement, IObject, IValue {
         return this.value;
     }
 
+    getDerivation(): IMeasurement {
+        return this.measurement;
+    }
+    setDerivation(derivation: IMeasurement): void {
+        this.measurement = derivation;
+    }
+    setDerivationVarible(variable: Variable): void {
+        this.derivation = variable;
+    }
 
 
 }

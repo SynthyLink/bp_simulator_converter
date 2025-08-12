@@ -58,7 +58,7 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
         /// </summary>
         /// <param name="t0">Step start</param>
         /// <param name="t1">Step finish</param>
-        public override void Step(double t0, double t1)
+        protected override void Step(double t0, double t1)
         {
             isBusy = true;
             if (Dim == 0)
@@ -186,7 +186,7 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
         /// </summary>
         /// <param name="collection">Consumers</param>
         /// <returns>Lists of parameters</returns>
-        public override void Set(object collection)
+        protected override void Set(object collection)
         {
             base.Set(collection);
             UpdateDimension();
@@ -195,7 +195,7 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
         /// <summary>
         /// Updates dimension
         /// </summary>
-        public override void UpdateDimension()
+        protected override void UpdateDimension()
         {
             int n = Dim;
             w = new double[n];
@@ -207,7 +207,7 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
         /// <summary>
         /// Creates new processor
         /// </summary>
-        public override IDifferentialEquationProcessor New
+        protected override IDifferentialEquationProcessor New
         {
             get
             {

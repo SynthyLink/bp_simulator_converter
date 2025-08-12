@@ -69,6 +69,24 @@ class Performer {
         }
         return t;
     }
+    getDerivation(derivation) {
+        let m = derivation.getDerivation();
+        let x = m.getMeasurementValue();
+        return this.convertFromAny(x);
+    }
+    getDerivationMeasuremet(measurement) {
+        let d = measurement;
+        return this.getDerivation(d);
+    }
+    setDerivationValue(derivation, value) {
+        let m = derivation.getDerivation();
+        let iv = m;
+        iv.setIValue(value);
+    }
+    setDerivationMeasuremtValue(measurement, value) {
+        let d = measurement;
+        this.setDerivationValue(d, value);
+    }
     convertFromAny(t) {
         return this.convert(t);
     }

@@ -4,7 +4,8 @@ import { IAliasName } from "./Interfaces/IAliasName";
 import { IFeedbackAlias } from "./Interfaces/IFeedbackAlias";
 import { IValue } from "./Interfaces/IValue";
 
-export class InitValueAlias implements IFeedbackAlias {
+export class InitValueAlias implements IFeedbackAlias
+{
 
     value: IValue = new FictiveValue();
     alias: IAliasName = new FictiveAliasName();

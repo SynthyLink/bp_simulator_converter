@@ -13,16 +13,16 @@ class AtmosphereZero extends CategoryObject_1.CategoryObject {
         this.typeName = "AtmosphereZero";
     }
     getInput() {
-        return this.ino;
+        return this.inp;
     }
     getOutput() {
         return this.ooutp;
     }
     getInputType(i) {
-        return a;
+        return this.a;
     }
     getOutputType(i) {
-        return a;
+        return this.a;
     }
     calculate(input, output) {
         output[0] = 0;
