@@ -35,7 +35,11 @@ export class DifferentialEquationProcessor implements IDifferentialEquationProce
 
     updateDimension(): void
     {
-        throw new OwnNotImplemented();
+        this.dimension = 0;
+        for (var m of this.measurements)
+        {
+            this.dimension += m.getMeasurementsCount();
+        }
     }
 
     getDifferentialEquationsTimeProvider(): ITimeMeasurementProvider {

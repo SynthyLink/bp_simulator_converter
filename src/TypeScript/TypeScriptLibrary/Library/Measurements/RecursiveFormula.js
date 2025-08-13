@@ -1,0 +1,40 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RecursiveFormula = void 0;
+const DataConsumerVariadbleMeasurementsStarted_1 = require("./DataConsumerVariadbleMeasurementsStarted");
+class RecursiveFormula extends DataConsumerVariadbleMeasurementsStarted_1.DataConsumerVariadbleMeasurementsStarted {
+    constructor(desktop, name) {
+        super(desktop, name);
+        this.inputs = [];
+        this.arguments = [];
+        //  protected initial: Map<string, any> = new Map();
+        this.operationNames = new Map();
+        this.typeName = "RecursiveFormula";
+        this.types.push("IPostSetArrow");
+        this.types.push("RecursiveFormula");
+    }
+    init() {
+    }
+    postSetArrow() {
+        this.init();
+        this.setInitial();
+        this.setFeedback();
+    }
+    getAllMeasurements() {
+        return this.inputs;
+    }
+    addMeasurements(item) {
+        this.inputs.push(item);
+    }
+    calculateTree() {
+    }
+    save() {
+    }
+    updateMeasurements() {
+        this.feedback.setFeedBackAliases();
+        this.calculateTree();
+        this.save();
+    }
+}
+exports.RecursiveFormula = RecursiveFormula;
+//# sourceMappingURL=RecursiveFormula.js.map

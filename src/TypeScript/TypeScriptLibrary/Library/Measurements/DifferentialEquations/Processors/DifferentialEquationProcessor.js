@@ -56,7 +56,10 @@ class DifferentialEquationProcessor {
         throw new OwnNotImplemented_1.OwnNotImplemented();
     }
     updateDimension() {
-        throw new OwnNotImplemented_1.OwnNotImplemented();
+        this.dimension = 0;
+        for (var m of this.measurements) {
+            this.dimension += m.getMeasurementsCount();
+        }
     }
     getDifferentialEquationsTimeProvider() {
         return this.timeProvider;

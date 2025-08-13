@@ -44,8 +44,8 @@ const ConditionTestAct_1 = require("./Tests/Wrappers/ConditionTestAct");
 //actRandom();
 //actTwo();
 //actSimpleFeed();
-//actTestObjectTransformerSimple();
-actCondition();
+actTestObjectTransformerSimple();
+//actCondition();
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout

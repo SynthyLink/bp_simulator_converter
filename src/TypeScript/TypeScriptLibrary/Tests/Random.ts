@@ -1,5 +1,6 @@
 import { AliasName } from "../Library/AliasName";
 import { Desktop } from "../Library/Desktop";
+import { FeedbackAliasCollection } from "../Library/FeedbackAliasCollection";
 import { FictiveAliasName } from "../Library/Fiction/FictiveAliasName";
 import { FictiveMeasurement } from "../Library/Fiction/FictiveMeasurement";
 import { FictiveValue } from "../Library/Fiction/FictiveValue";
@@ -11,7 +12,7 @@ import { DataLink } from "../Library/Measurements/Arrows/DataLink";
 import { DataConsumer } from "../Library/Measurements/DataConsumer";
 import { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement";
 import { RandomGenerator } from "../Library/Measurements/RandomGenerator";
-import { Recursive } from "../Library/Measurements/Recursive";
+import { RecursiveFormula } from "../Library/Measurements/RecursiveFormula";
 import { Variable } from "../Library/Measurements/Variables/Variable";
 import { VectorFormulaConsumer } from "../Library/Measurements/VectorFormulaConsumer";
 
@@ -80,6 +81,7 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer
 		this.measurement3 = all[1].getMeasurement(0);
 		this.aliasName10 = new AliasName(this.alias, "f");
 	}
+	
 	measurement0 : IMeasurement = new FictiveMeasurement();
 	measurement3 : IMeasurement = new FictiveMeasurement();
 	aliasName10 : IAliasName =  new FictiveAliasName();
@@ -165,10 +167,12 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer
 		let map = new Map<string, string>(
 		[
 		]);
+		this.feedback = new FeedbackAliasCollection(map, this, this);
+		this.feedback.fillFeedBackAliases();
 	}
 }
 
-class Random_CategoryObject_3 extends Recursive
+class Random_CategoryObject_3 extends RecursiveFormula
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -203,6 +207,7 @@ class Random_CategoryObject_3 extends Recursive
 		this.value0 = this.output[0];
 		this.measurement1 = all[0].getMeasurement(0);
 	}
+	
 	value0 : IValue = new FictiveValue();
 	measurement1 : IMeasurement = new FictiveMeasurement();
 	var_0 : number  = 0;
@@ -233,6 +238,8 @@ class Random_CategoryObject_3 extends Recursive
 		let map = new Map<string, string>(
 		[
 		]);
+		this.feedback = new FeedbackAliasCollection(map, this, this);
+		this.feedback.fillFeedBackAliases();
 	}
 }
 

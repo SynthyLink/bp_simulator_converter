@@ -6,6 +6,7 @@ using FormulaEditor;
 using FormulaEditor.CodeCreators;
 using FormulaEditor.CSharp;
 using FormulaEditor.CodeCreators.Interfaces;
+using Diagram.UI.Attributes;
 
 namespace DataPerformer.Formula.TypeScript
 {
@@ -84,7 +85,16 @@ namespace DataPerformer.Formula.TypeScript
             }
             var ll = new List<string>();
             ll.Add("save() : void {");
-            ll.Add("\tvar v = this.variables;");
+            var s = "\tvar v = this.variables;";
+            var attr = formulaPerformer.GetAttribute<CodeCreatorAttribute>(obj);
+            if (attr != null)
+            {
+                if (attr.IsSysemOfDifferentialEquations)
+                {
+                    s = "\tvar v = this.derivations;";
+                }
+            }
+            ll.Add(s);
             var mea = obj as IMeasurements;
             var kk = 0;
             foreach (var k in output)

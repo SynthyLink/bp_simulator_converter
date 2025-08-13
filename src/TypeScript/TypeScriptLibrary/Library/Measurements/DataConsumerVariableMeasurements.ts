@@ -11,19 +11,22 @@ import { PefrormerMeasuremets } from "./PefrormerMeasuremets";
 import { Variable } from "./Variables/Variable";
 
 
-export class DataConsumerVariadbleMeasurements extends DataConsumer implements IMeasurements, IAlias, IFeedbackAliasCollectionHolder {
+export class DataConsumerVariadbleMeasurements extends DataConsumer implements IMeasurements, IAlias, IFeedbackAliasCollectionHolder
+{
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name);
         this.alias = this;
         this.typeName = "DataConsumerVariadbleMeasurements";
         this.types.push("DataConsumerVariadbleMeasurements");
         this.types.push("IMeasurements");
+        this.types.push("IFeedbackAliasCollectionHolder");
         this.types.push("IAlias");
     }
     
  
   
     protected output: Variable[] = [];
+
 
 
     protected variables: Map<string, Variable> = new Map();
@@ -35,8 +38,6 @@ export class DataConsumerVariadbleMeasurements extends DataConsumer implements I
 
     protected aliasNames: string[] = [];
 
-    protected performer: Performer = new Performer();
-
     protected variable: any;
 
     protected alias !: IAlias;
@@ -44,6 +45,8 @@ export class DataConsumerVariadbleMeasurements extends DataConsumer implements I
     protected pMeasurements : PefrormerMeasuremets = new PefrormerMeasuremets();
 
     protected feedback: IFeedbackAliasCollection = new FictiveFeedbackAliasCollection();
+
+
 
     getMeasurementsCount(): number {
         return this.output.length;
@@ -91,6 +94,14 @@ export class DataConsumerVariadbleMeasurements extends DataConsumer implements I
             var i = 0;
         }
         this.aliasValues.set(name, value);
+    }
+
+
+
+    protected addVariableValue(name: string, type: any, value: any): void
+    {
+        let variable = new Variable(name, type, value);
+        this.addVariable(variable);
     }
 
     protected addVariable(variable: Variable): void

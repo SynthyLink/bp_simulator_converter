@@ -3,13 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Random = void 0;
 const AliasName_1 = require("../Library/AliasName");
 const Desktop_1 = require("../Library/Desktop");
+const FeedbackAliasCollection_1 = require("../Library/FeedbackAliasCollection");
 const FictiveAliasName_1 = require("../Library/Fiction/FictiveAliasName");
 const FictiveMeasurement_1 = require("../Library/Fiction/FictiveMeasurement");
 const FictiveValue_1 = require("../Library/Fiction/FictiveValue");
 const DataLink_1 = require("../Library/Measurements/Arrows/DataLink");
 const DataConsumer_1 = require("../Library/Measurements/DataConsumer");
 const RandomGenerator_1 = require("../Library/Measurements/RandomGenerator");
-const Recursive_1 = require("../Library/Measurements/Recursive");
+const RecursiveFormula_1 = require("../Library/Measurements/RecursiveFormula");
 const Variable_1 = require("../Library/Measurements/Variables/Variable");
 const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaConsumer");
 class Random_CategoryObject_0 extends RandomGenerator_1.RandomGenerator {
@@ -146,9 +147,11 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaConsu
     }
     setFeedback() {
         let map = new Map([]);
+        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
+        this.feedback.fillFeedBackAliases();
     }
 }
-class Random_CategoryObject_3 extends Recursive_1.Recursive {
+class Random_CategoryObject_3 extends RecursiveFormula_1.RecursiveFormula {
     constructor(desktop, name) {
         super(desktop, name);
         this.value0 = new FictiveValue_1.FictiveValue();
@@ -206,6 +209,8 @@ class Random_CategoryObject_3 extends Recursive_1.Recursive {
     }
     setFeedback() {
         let map = new Map([]);
+        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
+        this.feedback.fillFeedBackAliases();
     }
 }
 class Random_CategoryObject_4 extends DataConsumer_1.DataConsumer {

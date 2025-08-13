@@ -12,8 +12,7 @@ const DataLink_1 = require("../Library/Measurements/Arrows/DataLink");
 const ObjectTransformerLink_1 = require("../Library/Measurements/Arrows/ObjectTransformerLink");
 const DataConsumer_1 = require("../Library/Measurements/DataConsumer");
 const ObjectTransformer_1 = require("../Library/Measurements/ObjectTransformer");
-const Recursive_1 = require("../Library/Measurements/Recursive");
-const Variable_1 = require("../Library/Measurements/Variables/Variable");
+const RecursiveFormula_1 = require("../Library/Measurements/RecursiveFormula");
 const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaConsumer");
 class TestObjectTransformerSimple_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
@@ -27,16 +26,16 @@ class TestObjectTransformerSimple_CategoryObject_0 extends VectorFormulaConsumer
         this.var_2 = 0;
         this.var_3 = 0;
         let map = new Map([
+            ["a", 0.19288702860157331],
+            ["c", 0.52807755063743145],
             ["d", 9],
-            ["a", 0.19288702860085777],
-            ["b", 0.0021040127652174824],
-            ["c", 0.52807755063743045]
+            ["b", 0.0021040127652205607]
         ]);
         this.performer.setAliasMap(map, this);
-        this.addVariable(new Variable_1.Variable("Formula_1", 0, 0));
-        this.addVariable(new Variable_1.Variable("Formula_2", 0, 0));
-        this.addVariable(new Variable_1.Variable("Formula_3", 0, 0));
-        this.addVariable(new Variable_1.Variable("Formula_4", 0, 0));
+        this.addVariableValue("Formula_1", 0, 0);
+        this.addVariableValue("Formula_2", 0, 0);
+        this.addVariableValue("Formula_3", 0, 0);
+        this.addVariableValue("Formula_4", 0, 0);
     }
     calculateTree() {
         this.success = true;
@@ -119,7 +118,7 @@ class TestObjectTransformerSimple_CategoryObject_2 extends ObjectTransformer_1.O
         this.setLinks(map);
     }
 }
-class TestObjectTransformerSimple_CategoryObject_3 extends Recursive_1.Recursive {
+class TestObjectTransformerSimple_CategoryObject_3 extends RecursiveFormula_1.RecursiveFormula {
     constructor(desktop, name) {
         super(desktop, name);
         this.measurement1 = new FictiveMeasurement_1.FictiveMeasurement();
@@ -157,11 +156,11 @@ class TestObjectTransformerSimple_CategoryObject_3 extends Recursive_1.Recursive
             ["f", 1]
         ]);
         this.performer.setAliasMap(map, this);
-        this.addVariable(new Variable_1.Variable("a", 0, 0));
-        this.addVariable(new Variable_1.Variable("b", 0, 0));
-        this.addVariable(new Variable_1.Variable("c", 0, 0));
-        this.addVariable(new Variable_1.Variable("d", 0, 0));
-        this.addVariable(new Variable_1.Variable("f", 0, 0));
+        this.addVariableValue("a", 0, 0);
+        this.addVariableValue("b", 0, 0);
+        this.addVariableValue("c", 0, 0);
+        this.addVariableValue("d", 0, 0);
+        this.addVariableValue("f", 0, 0);
     }
     calculateTree() {
         this.success = true;

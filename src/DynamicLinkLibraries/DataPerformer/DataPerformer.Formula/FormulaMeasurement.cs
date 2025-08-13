@@ -346,13 +346,13 @@ namespace DataPerformer.Formula
                 }
                 catch (Exception exc)
                 {
-                    exc.HandleException(10);
+                    throw IncludedException.Get(exc);
                 }
                 return fm;
             }
             catch (Exception exception)
             {
-                exception.HandleExceptionDouble("FormulaMeasurement.Tree");
+                throw IncludedException.Get(exception);
             }
             return null;
         }

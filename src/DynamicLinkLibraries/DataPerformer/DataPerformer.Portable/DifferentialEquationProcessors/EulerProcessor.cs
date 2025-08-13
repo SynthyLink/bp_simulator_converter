@@ -83,8 +83,7 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
         /// </summary>
         protected override void UpdateDimension()
         {
-            int n = Dim;
-            w = new double[n];
+
         }
 
         /// <summary>

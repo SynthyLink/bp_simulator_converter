@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using BaseTypes.Interfaces;
+using ErrorHandler;
 
 namespace FormulaEditor
 {
@@ -115,63 +116,72 @@ namespace FormulaEditor
         /// <returns>True if contains and false otherwise</returns>
         static bool CheckDelta(ObjectFormulaTree tree)
         {
-            int count = 0;
-            if (tree == null)
+            Exception exception;
+            try
             {
-                return false;
-            }
-            if (tree.Operation is IDistribution)
-            {
-                return true;
-            }
-            bool b = false;
-            for (int i = 0; i < tree.Count; i++)
-            {
-                ObjectFormulaTree t = tree[i];
-                if (t == null)
+                int count = 0;
+                if (tree == null)
                 {
-                    continue;
+                    return false;
                 }
-                b |= CheckDelta(t);
-                if (t.Operation is IDistribution)
+                if (tree.Operation is IDistribution)
                 {
-                    ++count;
+                    return true;
                 }
-            }
-            IObjectOperation op = tree.Operation;
-            if (b)
-            {
-                if (op.InputTypes.Length == 2)
+                bool b = false;
+                for (int i = 0; i < tree.Count; i++)
                 {
-                    if (op is ElementaryBinaryOperation)
+                    ObjectFormulaTree t = tree[i];
+                    if (t == null)
                     {
-                        ElementaryBinaryOperation bop = op as ElementaryBinaryOperation;
-                        char s = bop.Symbol;
-                        if (s != '+' & s != '-' & s != '*')
-                        {
-                            throwError(); 
-                        }
-                        if (count > 1 & s == '*')
-                        {
-                            throwError();   
-                        }
+                        continue;
                     }
-                    else if (op is ElementaryFunctionOperation)
+                    b |= CheckDelta(t);
+                    if (t.Operation is IDistribution)
                     {
-                        ElementaryFunctionOperation eop = op as ElementaryFunctionOperation;
-                        char c = eop.Symbol;
-                        if (c != '!' & c != '-')
+                        ++count;
+                    }
+                }
+                IObjectOperation op = tree.Operation;
+                if (b)
+                {
+                    if (op.InputTypes.Length == 2)
+                    {
+                        if (op is ElementaryBinaryOperation)
+                        {
+                            ElementaryBinaryOperation bop = op as ElementaryBinaryOperation;
+                            char s = bop.Symbol;
+                            if (s != '+' & s != '-' & s != '*')
+                            {
+                                throwError();
+                            }
+                            if (count > 1 & s == '*')
+                            {
+                                throwError();
+                            }
+                        }
+                        else if (op is ElementaryFunctionOperation)
+                        {
+                            ElementaryFunctionOperation eop = op as ElementaryFunctionOperation;
+                            char c = eop.Symbol;
+                            if (c != '!' & c != '-')
+                            {
+                                throwError();
+                            }
+                        }
+                        else
                         {
                             throwError();
                         }
                     }
-                    else
-                    {
-                        throwError();
-                    }
                 }
+                return b | count > 0;
             }
-            return b | count > 0;
+            catch (Exception ex)
+            {
+                exception = IncludedException.Get(ex);
+            }
+            throw exception;
         }
 
         /// <summary>

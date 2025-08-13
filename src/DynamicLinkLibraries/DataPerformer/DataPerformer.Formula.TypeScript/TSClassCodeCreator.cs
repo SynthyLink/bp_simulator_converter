@@ -37,7 +37,7 @@ namespace DataPerformer.Formula.TypeScript
          new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
                    { (object o) => { return o is VectorFormulaConsumer; } , CreateVectorConsumer },
-             //    { (object o) => { return o is DifferentialEquationSolver; } , CreateDiffrerentialSolver },
+                 { (object o) => { return o is DifferentialEquationSolver; } , CreateDiffrerentialSolver },
                  { (object o) => { return o is Recursive; } , CreateRecursive },
           };
 
@@ -61,10 +61,13 @@ namespace DataPerformer.Formula.TypeScript
             switch (obj)
             {
                 case Recursive:
-                    extends = "Recursive";
+                    extends = "RecursiveFormula";
                     break;
                 case VectorFormulaConsumer:
                     extends = "VectorFormulaConsumer";
+                    break;
+                case DifferentialEquationSolver:
+                    extends = "DifferentrialEquationSolverFormula";
                     break;
                 default:
                     throw new ErrorHandler.OwnNotImplemented();
@@ -78,17 +81,17 @@ namespace DataPerformer.Formula.TypeScript
 
         static ITypeCreator typeCreator = new TSTypeCreator();
 
-        public static List<string> CreateTSVariableList(IMeasurements maeasuremebts)
+        public static List<string> CreateTSVariableList(IMeasurements maeasurements)
         {
             var l = new List<string>();
-            var n = maeasuremebts.Count;
+            var n = maeasurements.Count;
             for (int i = 0; i < n; i++)
             {
-                var m = maeasuremebts[i];
+                var m = maeasurements[i];
                 var name = "\"" + m.Name + "\"";
                 var type = m.Type;
                 var v = typeCreator.GetDefaultValue(type);
-                l.Add("this.addVariable(new Variable(" + name + ", " + v + ", " + v + "));");
+                l.Add("this.addVariableValue(" + name + ", " + v + ", " + v + ");");
 
             }
             return l;
@@ -161,6 +164,16 @@ namespace DataPerformer.Formula.TypeScript
         {
             return CreateTreeCollection(preffix, obj as ITreeCollection);
         }
+
+
+        static List<string> CreateDiffrerentialSolver(string preffix, object obj)
+        {
+            return CreateTreeCollection(preffix, obj as ITreeCollection);
+        }
+
+
+
+        
 
         static void AddPost(List<string> l)
         {

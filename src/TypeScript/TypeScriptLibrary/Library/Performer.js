@@ -74,7 +74,7 @@ class Performer {
         let x = m.getMeasurementValue();
         return this.convertFromAny(x);
     }
-    getDerivationMeasuremet(measurement) {
+    getDerivationMeasurement(measurement) {
         let d = measurement;
         return this.getDerivation(d);
     }

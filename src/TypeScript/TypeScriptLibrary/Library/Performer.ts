@@ -103,7 +103,7 @@ export class Performer
         return this.convertFromAny<number>(x);
     }
 
-    public getDerivationMeasuremet(measurement: IMeasurement): number {
+    public getDerivationMeasurement(measurement: IMeasurement): number {
         let d = measurement as unknown as IDerivation;
         return this.getDerivation(d);
     }

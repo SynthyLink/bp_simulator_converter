@@ -9,30 +9,23 @@ export class EulerProcessor extends DifferentialEquationProcessor
 
     w: number[] = [];
 
+ 
+
     stepDifferentialEquations(start: number, finish: number): void
     {
-    /*    isBusy = true;
-        if (Dim == 0) {
-            return;
-        }
-            double dt = t1 - t0;
-            int i = 0;
-            */
         let dt = finish - start;
         let i = 0;
         for (let m of this.measurements)
         {
+            m.updateMeasurements();
             for (let j = 0; j < m.getMeasurementsCount(); j++)
             {
                 var mea = m.getMeasurement(j);
-                var v = mea.getMeasurementValue();
+                var x = mea.getMeasurementValue();
                 this.w[i] = this.performer.convertFromAny<number>(x);
                 ++i;
             }
         }
-     //   StaticExtensionDataPerformerPortable.Time = t;
-     //   StaticExtensionDataPerformerPortable.Desktop.ResetUpdatedMeasurements();
-     //   UpdateMeasurements();
         i = 0;
         for (let s of this.equations)
         {
@@ -42,18 +35,20 @@ export class EulerProcessor extends DifferentialEquationProcessor
             for (var j = 0; j < count; j++)
             {
                 var mea = m.getMeasurement(j);
-                var x = this.performer.getDerivationMeasuremet(mea);
-                w[i] += w[i] + x * dt;
+                var v = this.performer.getDerivationMeasurement(mea);
+                var y = this.performer.convertFromAny<number>(v);
+                this.w[i] += this.w[i] + y * dt;
                 ++i;
             }
-            s.copyVariablesToSolver(i - count, w);
+            s.copyVariablesToSolver(i - count, this.w);
         }
 
     }
 
     updateDimension(): void
     {
-       
+        super.updateDimension();
+        this.w = new Array(this.dimension);
     }
 
     newDifferentialEquations(): IDifferentialEquationProcessor
@@ -61,6 +56,5 @@ export class EulerProcessor extends DifferentialEquationProcessor
         return new EulerProcessor();
     }
 
-    w: number[] = [];
 
 }

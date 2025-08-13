@@ -9,9 +9,9 @@ import { ConditionTestAct } from './Tests/Wrappers/ConditionTestAct';
 //actRandom();
 //actTwo();
 //actSimpleFeed();
-//actTestObjectTransformerSimple();
+actTestObjectTransformerSimple();
 
-actCondition();
+//actCondition();
 
 const rl = readline.createInterface({
     input: process.stdin,
