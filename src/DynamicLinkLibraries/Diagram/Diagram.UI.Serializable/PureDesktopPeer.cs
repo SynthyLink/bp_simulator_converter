@@ -985,7 +985,7 @@ namespace Diagram.UI
             }
             catch (Exception ex)
             {
-                ex.HandleException();
+                ex.HandleException(10);
                 if (exceptions != null)
                 {
                     exceptions.Add(ex);

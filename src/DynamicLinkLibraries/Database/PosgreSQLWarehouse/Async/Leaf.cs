@@ -2,7 +2,9 @@
 
 using DataWarehouse.Interfaces;
 using DataWarehouse.Interfaces.Async;
+
 using ErrorHandler;
+
 using NamedTree;
 
 namespace PostgreSQLWarehouse.Async
@@ -111,7 +113,7 @@ namespace PostgreSQLWarehouse.Async
 
         protected override async Task<byte[]> UpdateDataAcync(byte[] data)
         {
-            var t =WarehouseInterface.UpdateDataAcync(data, this);
+            var t = WarehouseInterface.UpdateDataAcync(data, this);
             await t;
             return t.Result;
         }
@@ -123,7 +125,7 @@ namespace PostgreSQLWarehouse.Async
 
         protected override async Task<string> UpdateNameAsync(string name)
         {
-            var t =WarehouseInterface.UpdateLeafNameAsync(name, this);
+            var t = WarehouseInterface.UpdateLeafNameAsync(name, this);
             await t;
             return t.Result;
         }

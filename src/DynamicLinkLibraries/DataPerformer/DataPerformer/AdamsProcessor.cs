@@ -6,6 +6,7 @@ using AnalyticPolynom;
 using DataPerformer.Interfaces;
 using DataPerformer.Portable;
 using DataPerformer.Portable.DifferentialEquationProcessors;
+using DataPerformer.Portable.Measurements;
 
 namespace DataPerformer
 {
@@ -65,8 +66,6 @@ namespace DataPerformer
         /// </summary>
         private int order;
 
-        IDifferentialEquationProcessor IRunge => runge;
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -89,8 +88,9 @@ namespace DataPerformer
         /// Sets root data consumers
         /// </summary>
         /// <param name="consumers">Consumers to set</param>
-        protected override void Set(List<IDataConsumer> consumers)
+        public override void Set(List<IDataConsumer> consumers)
         {
+            base.Set(consumers);
             int n = Dim;
             stepCount = 0;
             prevStep = new double[n];
@@ -118,13 +118,13 @@ namespace DataPerformer
                 prCoeff[i] = pNom[(double)(1)];
                 aqCoeff[i] = -pNom[(double)(-1)];
             }
-            IRunge.Set(consumers);
+            runge.Set(consumers);
         }
 
         /// <summary>
         /// Updates dimension
         /// </summary>
-        protected override void UpdateDimension()
+        public override void UpdateDimension()
         {
             throw new ErrorHandler.OwnException("The method or operation is not implemented.");
         }
@@ -132,7 +132,7 @@ namespace DataPerformer
         /// <summary>
         /// Creates new processor
         /// </summary>
-        protected override IDifferentialEquationProcessor New
+        public override IDifferentialEquationProcessor New
         {
             get
             {
@@ -146,16 +146,16 @@ namespace DataPerformer
         /// </summary>
         /// <param name="t0">Step start</param>
         /// <param name="t1">Step finish</param>
-        protected override void Step(double t0, double t1)
+        public override void Step(double t0, double t1)
         {
             isBusy = true;
             paramCount = 0;
             if (stepCount < order)
             {
-                IRunge.Step(t0, t1);
+                runge.Step(t0, t1);
                 foreach (IMeasurements m in equations)
                 {
-                    IRunge.Step(t0, t1);
+                    runge.Step(t0, t1);
                     IDifferentialEquationSolver s = m as IDifferentialEquationSolver;
                     s.CalculateDerivations();
                     for (int j = 0; j < m.Count; j++)

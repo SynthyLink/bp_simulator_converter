@@ -593,7 +593,7 @@ namespace DataWarehouse.Forms
                 return;
             }
             byte[] b = (Selected as IData).Data;
-            saveFileDialogData.Filter = "|*.cfa"; // !!! + ext;
+            saveFileDialogData.Filter = "|*." + ext[0]; // !!! + ext;
             /*!!!         try
                      {
                          saveFileDialogData.FileName = selected.Name;

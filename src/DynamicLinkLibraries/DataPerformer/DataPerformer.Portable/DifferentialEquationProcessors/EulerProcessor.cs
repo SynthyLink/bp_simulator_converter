@@ -1,4 +1,10 @@
-﻿using DataPerformer.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DataPerformer.Interfaces;
+using DataPerformer.Portable.Measurements;
 
 namespace DataPerformer.Portable.DifferentialEquationProcessors
 {
@@ -22,15 +28,16 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
         /// </summary>
         private EulerProcessor()
         {
-
         }
+
+
 
         /// <summary>
         /// Performs step of integration
         /// </summary>
         /// <param name="t0">Step start</param>
         /// <param name="t1">Step finish</param>
-        protected override void Step(double t0, double t1)
+        public override void Step(double t0, double t1)
         {
             isBusy = true;
             if (Dim == 0)
@@ -72,7 +79,7 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
         /// </summary>
         /// <param name="collection">Consumers</param>
         /// <returns>Lists of parameters</returns>
-        protected override void Set(object collection)
+        public override void Set(object collection)
         {
             base.Set(collection);
             UpdateDimension();
@@ -81,15 +88,16 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
         /// <summary>
         /// Updates dimension
         /// </summary>
-        protected override void UpdateDimension()
+        public override void UpdateDimension()
         {
-
+            int n = Dim;
+            w = new double[n];
         }
 
         /// <summary>
         /// Creates new processor
         /// </summary>
-        protected override IDifferentialEquationProcessor New
+        public override IDifferentialEquationProcessor New
         {
             get
             {

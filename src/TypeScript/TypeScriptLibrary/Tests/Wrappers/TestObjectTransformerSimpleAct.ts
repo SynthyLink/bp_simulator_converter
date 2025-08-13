@@ -4,9 +4,8 @@ import { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsum
 import { PefrormerMeasuremets } from "../../Library/Measurements/PefrormerMeasuremets";
 import { DataRuntimeConsumer } from "../../Library/Runtime/DataRuntimeConsumer";
 import { IDataRuntime } from "../../Library/Runtime/Interfaces/IDataRuntime";
-import { TestObjectTransformerSimple } from "../TestObjectTransformerSimple";
 
-export class TestObjectTransformerSimpleAct extends TestObjectTransformerSimple implements IAction
+export class TestObjectTransformerSimpleAct { /*extends TestObjectTransformerSimple implements IAction
 {
     dc: IDataConsumer = new FictiveDataConsumer();
     constructor() {
@@ -32,5 +31,5 @@ export class TestObjectTransformerSimpleAct extends TestObjectTransformerSimple 
         p = new PefrormerMeasuremets();
         p.peformFixedStepCalculation(runtime, 0, 1, 60, this);
 
-    }
+    }*/
 }

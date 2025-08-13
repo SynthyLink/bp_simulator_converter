@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Collections;
-using System.Text;
 
 using BaseTypes.Interfaces;
 
 using FormulaEditor.Interfaces;
 using FormulaEditor.Symbols;
+
 using ErrorHandler;
 
 namespace FormulaEditor

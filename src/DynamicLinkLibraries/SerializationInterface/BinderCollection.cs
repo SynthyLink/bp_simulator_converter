@@ -90,6 +90,7 @@ namespace SerializationInterface
 
         #endregion
 
+
         #region Public Members
 
         /// <summary>

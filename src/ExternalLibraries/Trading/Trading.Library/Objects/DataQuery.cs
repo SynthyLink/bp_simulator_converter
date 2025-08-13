@@ -21,7 +21,11 @@ namespace Trading.Library.Objects
 
         #region Fields
 
-        public Dictionary<string, Guid> Symbols { get; protected set; }
+        ITradingDatabaseHistoryInteface TradingDatabaseHistoryInteface
+        {
+            get;
+            set;
+        }
 
 
         IMeasurement[] measurements;
@@ -59,9 +63,12 @@ namespace Trading.Library.Objects
 
         public string Period { get; set; } = "1 day";
 
-        object o = new object();
+        public Dictionary<string, Guid> Symbols
+        {
+            get;
+            protected set;
+        }
 
-   
         public  int ToIndex(Guid guid)
         {
             int i = 0;
@@ -77,6 +84,10 @@ namespace Trading.Library.Objects
             return -1;
         }
 
+
+
+
+
         #endregion
 
         #region Ctor
@@ -84,11 +95,11 @@ namespace Trading.Library.Objects
 
         public DataQuery()
         {
-            Database = Trading.Database.StaticExtensionTradingDatabase.Connect();
-            Symbols = Database.Symbols;
-            measurements =
-               [
-               new RealTimeMeasurement(this),
+            TradingDatabaseHistoryInteface = Trading.Database.StaticExtensionTradingDatabase.Connect();
+
+             measurements =
+                [
+                new RealTimeMeasurement(this),
                     new LowMeasurement(this),
                     new HighMeasurement(this),
                     new OpenMeasurement(this),
@@ -97,10 +108,10 @@ namespace Trading.Library.Objects
                     new IntegerTimeMeasurement(this),
                     new DateTimeMeasurement(this),
                     new FullTimeMeasurement(this)
-               ];
+                ];
+
 
         }
-        
 
         event Action<IMeasurement> IChildren<IMeasurement>.OnAdd
         {
@@ -138,7 +149,7 @@ namespace Trading.Library.Objects
 
         bool IMeasurements.IsUpdated { get => isUpdated; set => isUpdated = value; }
 
-        IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => measurements;
+        IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => throw new OwnNotImplemented();
 
         void IMeasurements.UpdateMeasurements()
         {
@@ -152,27 +163,17 @@ namespace Trading.Library.Objects
 
         void IIterator.Reset()
         {
-            Exception exceptopn;
-            try
-            {
-                step = 0;
-                messages.Clear();
-                var bs = Period.ToBarSize();
-                var ct = new CancellationToken();
-                var dt = Database.GetHistoricalDataMessageDateTimes(Guid, Begin, End);
-                enu = dt.Convert(bs);
-                enumerator = enu.GetEnumerator();
-                enumerator.MoveNext();
-                message = enumerator.Current;
-                messages[step] = message;
-                Set();
-                return;
-            }
-            catch (Exception ex)
-            {
-                exceptopn = IncludedException.Get(ex);
-            }
-            throw exceptopn;
+            step = 0;
+            messages.Clear();
+            var bs = Period.ToBarSize();
+            var t = Database.GetHistoricalDataMessageDateTimes(Guid, Begin, End);
+            var dt = t.Result;
+            enu = dt.Convert(bs);
+            enumerator = enu.GetEnumerator();
+            enumerator.MoveNext();
+            message = enumerator.Current;
+            messages[step] = message;
+            Set();
         }
 
         bool IIterator.Next()

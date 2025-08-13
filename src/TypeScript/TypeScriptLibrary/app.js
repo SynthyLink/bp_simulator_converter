@@ -38,14 +38,13 @@ const OrbitAct_1 = require("./Tests/Wrappers/OrbitAct");
 const RandomAcr_1 = require("./Tests/Wrappers/RandomAcr");
 const SimpleFeedAct_1 = require("./Tests/Wrappers/SimpleFeedAct");
 const TwoAct_1 = require("./Tests/Wrappers/TwoAct");
-const TestObjectTransformerSimpleAct_1 = require("./Tests/Wrappers/TestObjectTransformerSimpleAct");
 const ConditionTestAct_1 = require("./Tests/Wrappers/ConditionTestAct");
 //actOrbit();
 //actRandom();
 //actTwo();
 //actSimpleFeed();
-actTestObjectTransformerSimple();
-//actCondition();
+//actTestObjectTransformerSimple();
+actCondition();
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -106,24 +105,11 @@ function actCondition() {
 }
 function actTestObjectTransformerSimple() {
     try {
-        var o = new TestObjectTransformerSimpleAct_1.TestObjectTransformerSimpleAct();
-        o.test();
+        /*  var o = new TestObjectTransformerSimpleAct();
+          o.test();*/
     }
     catch (e) {
-        console.log(e);
-        rl.question('Is this example useful? [y/n] ', (answer) => {
-            switch (answer.toLowerCase()) {
-                case 'y':
-                    console.log('Super!');
-                    break;
-                case 'n':
-                    console.log('Sorry! :(');
-                    break;
-                default:
-                    console.log('Invalid answer!');
-            }
-            rl.close();
-        });
+        finish(e);
     }
 }
 function actSimpleFeed() {
@@ -133,19 +119,6 @@ function actSimpleFeed() {
     }
     catch (e) {
         console.log(e);
-        rl.question('Is this example useful? [y/n] ', (answer) => {
-            switch (answer.toLowerCase()) {
-                case 'y':
-                    console.log('Super!');
-                    break;
-                case 'n':
-                    console.log('Sorry! :(');
-                    break;
-                default:
-                    console.log('Invalid answer!');
-            }
-            rl.close();
-        });
     }
 }
 function actTwo() {

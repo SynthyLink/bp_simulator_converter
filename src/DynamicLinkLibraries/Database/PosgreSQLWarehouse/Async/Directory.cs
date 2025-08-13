@@ -109,7 +109,7 @@ namespace PostgreSQLWarehouse.Async
 
         protected override async Task<ILeafAsync> AddAsync(ILeaf leaf)
         {
-            var t =WarehouseInterface.Add(this, leaf as ILeafData);
+            var t = WarehouseInterface.Add(this, leaf as ILeafData);
             if (SyncMode == DataWarehouse.Classes.SyncMode.Synchronous)
             {
                 if (!t.IsCompleted)

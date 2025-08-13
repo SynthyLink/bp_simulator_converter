@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 
 using BaseTypes.Interfaces;
-using ErrorHandler;
 
 namespace FormulaEditor
 {
@@ -116,72 +115,63 @@ namespace FormulaEditor
         /// <returns>True if contains and false otherwise</returns>
         static bool CheckDelta(ObjectFormulaTree tree)
         {
-            Exception exception;
-            try
+            int count = 0;
+            if (tree == null)
             {
-                int count = 0;
-                if (tree == null)
+                return false;
+            }
+            if (tree.Operation is IDistribution)
+            {
+                return true;
+            }
+            bool b = false;
+            for (int i = 0; i < tree.Count; i++)
+            {
+                ObjectFormulaTree t = tree[i];
+                if (t == null)
                 {
-                    return false;
+                    continue;
                 }
-                if (tree.Operation is IDistribution)
+                b |= CheckDelta(t);
+                if (t.Operation is IDistribution)
                 {
-                    return true;
+                    ++count;
                 }
-                bool b = false;
-                for (int i = 0; i < tree.Count; i++)
+            }
+            IObjectOperation op = tree.Operation;
+            if (b)
+            {
+                if (op.InputTypes.Length == 2)
                 {
-                    ObjectFormulaTree t = tree[i];
-                    if (t == null)
+                    if (op is ElementaryBinaryOperation)
                     {
-                        continue;
-                    }
-                    b |= CheckDelta(t);
-                    if (t.Operation is IDistribution)
-                    {
-                        ++count;
-                    }
-                }
-                IObjectOperation op = tree.Operation;
-                if (b)
-                {
-                    if (op.InputTypes.Length == 2)
-                    {
-                        if (op is ElementaryBinaryOperation)
+                        ElementaryBinaryOperation bop = op as ElementaryBinaryOperation;
+                        char s = bop.Symbol;
+                        if (s != '+' & s != '-' & s != '*')
                         {
-                            ElementaryBinaryOperation bop = op as ElementaryBinaryOperation;
-                            char s = bop.Symbol;
-                            if (s != '+' & s != '-' & s != '*')
-                            {
-                                throwError();
-                            }
-                            if (count > 1 & s == '*')
-                            {
-                                throwError();
-                            }
+                            throwError(); 
                         }
-                        else if (op is ElementaryFunctionOperation)
+                        if (count > 1 & s == '*')
                         {
-                            ElementaryFunctionOperation eop = op as ElementaryFunctionOperation;
-                            char c = eop.Symbol;
-                            if (c != '!' & c != '-')
-                            {
-                                throwError();
-                            }
+                            throwError();   
                         }
-                        else
+                    }
+                    else if (op is ElementaryFunctionOperation)
+                    {
+                        ElementaryFunctionOperation eop = op as ElementaryFunctionOperation;
+                        char c = eop.Symbol;
+                        if (c != '!' & c != '-')
                         {
                             throwError();
                         }
                     }
+                    else
+                    {
+                        throwError();
+                    }
                 }
-                return b | count > 0;
             }
-            catch (Exception ex)
-            {
-                exception = IncludedException.Get(ex);
-            }
-            throw exception;
+            return b | count > 0;
         }
 
         /// <summary>

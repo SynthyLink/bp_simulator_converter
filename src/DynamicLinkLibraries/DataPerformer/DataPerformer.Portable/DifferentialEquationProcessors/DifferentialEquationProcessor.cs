@@ -8,7 +8,6 @@ using Diagram.UI.Interfaces;
 using DataPerformer.Interfaces;
 using ErrorHandler;
 
-
 namespace DataPerformer.Portable.DifferentialEquationProcessors
 {
 
@@ -17,9 +16,7 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
     /// </summary>
     public abstract class DifferentialEquationProcessor : IDifferentialEquationProcessor
     {
-
-        #region Fields
-
+ 
         /// <summary>
         /// The is busy sign
         /// </summary>
@@ -67,10 +64,6 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
         /// </summary>
         protected List<string[]> variables = new List<string[]>();
 
-        #endregion
-
-        #region Ctor
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -79,62 +72,12 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
 
         }
 
-
-        #endregion
-
-
-        #region IDifferentialEquationProcessor Members
-
-        ICollection<IDifferentialEquationSolver> IDifferentialEquationProcessor.Equations => Equations;
-
-        ITimeMeasurementProvider IDifferentialEquationProcessor.TimeProvider
-        {
-            get => TimeProvider;
-            set => TimeProvider = value;
-        }
-
-        IDifferentialEquationProcessor IDifferentialEquationProcessor.New => New;
-
-        void IDifferentialEquationProcessor.AddRange(ICollection<IDifferentialEquationSolver> equations)
-        {
-            AddRange(equations);
-        }
-
-        void IDifferentialEquationProcessor.Clear()
-        {
-            Clear();
-        }
-
-        void IDifferentialEquationProcessor.Set(object collection)
-        {
-            Set(collection);
-        }
-
-        void IDifferentialEquationProcessor.Step(double tStart, double tFinish)
-        {
-            Step(tStart, tFinish);
-        }
-
-        void IDifferentialEquationProcessor.UpdateDimension()
-        {
-            UpdateDimension();
-        }
-
-        void IDifferentialEquationProcessor.UpdateMeasurements()
-        {
-            UpdateMeasurements();
-        }
-
-        #endregion
-
-        #region Protected Members
-
         /// <summary>
         /// Sets consumers
         /// </summary>
         /// <param name="collection">Consumers</param>
         /// <returns>Lists of parameters</returns>
-        protected virtual void Set(object collection)
+        public virtual void Set(object collection)
         {
             IComponentCollection cc = collection as IComponentCollection;
             IDataRuntime rt = StaticExtensionDataPerformerPortable.Factory.Create(cc, 0);
@@ -181,7 +124,7 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
         /// Adds solver
         /// </summary>
         /// <param name="solver">Solver to add</param>
-        protected virtual void Add(IDifferentialEquationSolver solver)
+        public void Add(IDifferentialEquationSolver solver)
         {
             if (equations.Contains(solver))
             {
@@ -198,7 +141,7 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
         /// Adds collection of solvers
         /// </summary>
         /// <param name="collection">Collection to add</param>
-        protected virtual void AddRange(ICollection<IDifferentialEquationSolver> collection)
+        public void AddRange(ICollection<IDifferentialEquationSolver> collection)
         {
             foreach (IDifferentialEquationSolver s in collection)
             {
@@ -216,7 +159,7 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
         /// <summary>
         /// Equations
         /// </summary>
-        protected virtual ICollection<IDifferentialEquationSolver> Equations
+        public ICollection<IDifferentialEquationSolver> Equations
         {
             get
             {
@@ -226,21 +169,72 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
             }
         }
 
+
+        void Add(INormalizable n)
+        {
+            if (!norm.Contains(n))
+            {
+                norm.Add(n);
+            }
+        }
+
+        /// <summary>
+        /// Count of equations system
+        /// </summary>
+        public int Count
+        {
+            get
+            {
+                return equations.Count;
+            }
+        }
+
+        /// <summary>
+        /// Access to i - th equations sistem
+        /// </summary>
+        public IDifferentialEquationSolver this[int i]
+        {
+            get
+            {
+                return equations[i];
+            }
+        }
+
+
+        /// <summary>
+        /// Resets "is updated" sign
+        /// </summary>
+        public void Reset()
+        {
+            foreach (IMeasurements m in measurements)
+            {
+                m.IsUpdated = false;
+            }
+        }
+
+        /// <summary>
+        /// Sets root data consumer
+        /// </summary>
+        /// <param name="consumer">The consumer to set</param>
+        public void Set(IDataConsumer consumer)
+        {
+            List<IDataConsumer> l = new List<IDataConsumer>();
+            l.Add(consumer);
+            Set(l);
+        }
+
         /// <summary>
         /// Sets root data consumers
         /// </summary>
         /// <param name="consumers">Consumers to set</param>
-        protected virtual void Set(List<IDataConsumer> consumers)
+        public virtual void Set(List<IDataConsumer> consumers)
         {
-
         }
-
-
 
         /// <summary>
         /// Dimension of state vector
         /// </summary>
-        protected virtual int Dim
+        public int Dim
         {
             get
             {
@@ -253,12 +247,10 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
             }
         }
 
-
-
         /// <summary>
         /// Updates measurements
         /// </summary>
-        protected virtual void UpdateMeasurements()
+        public virtual void UpdateMeasurements()
         {
             if (Dim > 0)
             {
@@ -284,7 +276,7 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
         /// <summary>
         /// Time provider
         /// </summary>
-        protected virtual ITimeMeasurementProvider TimeProvider
+        public ITimeMeasurementProvider TimeProvider
         {
             get
             {
@@ -301,17 +293,17 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
         /// </summary>
         /// <param name="t0">Step start</param>
         /// <param name="t2">Step finish</param>
-        abstract protected void Step(double t0, double t2);
+        abstract public void Step(double t0, double t2);
 
         /// <summary>
         /// Updates dimension
         /// </summary>
-        abstract protected void UpdateDimension();
+        abstract public void UpdateDimension();
 
         /// <summary>
         /// Creates new processor
         /// </summary>
-        protected abstract IDifferentialEquationProcessor New
+        public abstract IDifferentialEquationProcessor New
         {
             get;
         }
@@ -320,70 +312,13 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
         /// <summary>
         /// Clears itself
         /// </summary>
-        protected virtual void Clear()
+        public void Clear()
         {
             equations.Clear();
             measurements.Clear();
             norm.Clear();
         }
 
-        #endregion
-
-
-        void Add(INormalizable n)
-        {
-            if (!norm.Contains(n))
-            {
-                norm.Add(n);
-            }
-        }
-        /* !!! DELETE AFTER CHECK
-                /// <summary>
-                /// Count of equations system
-                /// </summary>
-                public int Count
-                {
-                    get
-                    {
-                        return equations.Count;
-                    }
-                }
-
-                /// <summary>
-                /// Access to i - th equations sistem
-                /// </summary>
-                public IDifferentialEquationSolver this[int i]
-                {
-                    get
-                    {
-                        return equations[i];
-                    }
-                }
-
-
-                /// <summary>
-                /// Resets "is updated" sign
-                /// </summary>
-                public void Reset()
-                {
-                    foreach (IMeasurements m in measurements)
-                    {
-                        m.IsUpdated = false;
-                    }
-                }
-
-                /// <summary>
-                /// Sets root data consumer
-                /// </summary>
-                /// <param name="consumer">The consumer to set</param>
-                public void Set(IDataConsumer consumer)
-                {
-                    List<IDataConsumer> l = new List<IDataConsumer>();
-                    l.Add(consumer);
-                    Set(l);
-                }
-
- 
 
         /// <summary>
         /// The "is busy" sign
@@ -394,7 +329,7 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
             {
                 return isBusy;
             }
-        }*/
+        }
 
 
     }

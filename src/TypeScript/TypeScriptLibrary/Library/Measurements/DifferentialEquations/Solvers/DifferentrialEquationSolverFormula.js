@@ -30,7 +30,7 @@ class DifferentrialEquationSolverFormula extends DataConsumerVariadbleMeasuremen
         let variable = new Variable_1.Variable(name, type, value);
         let derivation = new Variable_1.Variable("D" + name, 0, 0);
         variable.setDerivation(derivation);
-        this.derivations.push(derivation);
+        this.derivations.set(name, derivation);
         this.addVariable(variable);
     }
     postSetArrow() {

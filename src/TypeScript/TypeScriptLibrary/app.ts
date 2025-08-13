@@ -9,9 +9,9 @@ import { ConditionTestAct } from './Tests/Wrappers/ConditionTestAct';
 //actRandom();
 //actTwo();
 //actSimpleFeed();
-actTestObjectTransformerSimple();
+//actTestObjectTransformerSimple();
 
-//actCondition();
+actCondition();
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -82,26 +82,14 @@ function actCondition()
 
 function actTestObjectTransformerSimple() {
     try {
-        var o = new TestObjectTransformerSimpleAct();
-        o.test();
+      /*  var o = new TestObjectTransformerSimpleAct();
+        o.test();*/
     }
     catch (e: any) {
-        console.log(e);
-        rl.question('Is this example useful? [y/n] ', (answer) => {
-            switch (answer.toLowerCase()) {
-                case 'y':
-                    console.log('Super!');
-                    break;
-                case 'n':
-                    console.log('Sorry! :(');
-                    break;
-                default:
-                    console.log('Invalid answer!');
-            }
-            rl.close();
-        });
+            finish(e);
+        }
     }
-}
+
 
 function actSimpleFeed() {
     try {
@@ -110,20 +98,6 @@ function actSimpleFeed() {
     }
     catch (e: any) {
         console.log(e);
-        rl.question('Is this example useful? [y/n] ', (answer) =>
-        {
-            switch (answer.toLowerCase()) {
-                case 'y':
-                    console.log('Super!');
-                    break;
-                case 'n':
-                    console.log('Sorry! :(');
-                    break;
-                default:
-                    console.log('Invalid answer!');
-            }
-            rl.close();
-        });
     }
 }
 function actTwo() {

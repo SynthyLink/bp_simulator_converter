@@ -13,8 +13,7 @@ namespace DataPerformer.Formula
     /// <summary>
     /// Variable linked to alias
     /// </summary>
-    public class AliasNameVariable : IObjectOperation, IPowered, IOperationAcceptor, IDerivationOperation, 
-        ITreeCreator
+    public class AliasNameVariable : IObjectOperation, IPowered, IOperationAcceptor, IDerivationOperation, ITreeCreator
     {
         #region Fields
 
@@ -48,22 +47,13 @@ namespace DataPerformer.Formula
 
         #region Ctor
 
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        protected AliasNameVariable()
-        {
-            !
-        }
-
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="symbol">Formula symbol</param>
         /// <param name="alias">Alias object</param>
         /// <param name="name">Alias name</param>
-        public AliasNameVariable(string symbol, IAlias alias, string name) : this()
+        public AliasNameVariable(string symbol, IAlias alias, string name)
         {
             this.alias = alias;
             this.name = name;

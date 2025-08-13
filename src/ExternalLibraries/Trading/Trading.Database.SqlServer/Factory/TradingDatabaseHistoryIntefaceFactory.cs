@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.Data.SqlClient;
-
 using Trading.Database.Interfaces;
 
 namespace Trading.Database.SqlServer.Factory
@@ -13,7 +12,7 @@ namespace Trading.Database.SqlServer.Factory
     {
         List<string> l = new List<string>();
 
-        public TradingDatabaseHistoryIntefaceFactory()
+        public TradingDatabaseHistoryIntefaceFactory() 
         {
 
         }
@@ -33,7 +32,9 @@ namespace Trading.Database.SqlServer.Factory
                 }
             }
             l.Add(connectionString);
-            return new Overriden.TradingHistory(connectionString);
+            return new TradingDatabaseInterface(connectionString);
         }
     }
+
+    
 }

@@ -1,27 +1,26 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Runtime.Serialization;
-using BaseTypes.Interfaces;
+using System.Collections;
 
 using CategoryTheory;
 
-using DataPerformer.Formula.Interfaces;
-using DataPerformer.Interfaces;
-using DataPerformer.Portable;
-
 using Diagram.UI;
+using Diagram.UI.Labels;
+using Diagram.UI.Interfaces;
 using Diagram.UI.Aliases;
 using Diagram.UI.Attributes;
-using Diagram.UI.Interfaces;
-using Diagram.UI.Labels;
 
-using ErrorHandler;
+using BaseTypes.Interfaces;
 
 using FormulaEditor;
 using FormulaEditor.Interfaces;
 using FormulaEditor.Symbols;
+
+using DataPerformer.Interfaces;
+using DataPerformer.Portable;
+using DataPerformer.Formula.Interfaces;
+
+using ErrorHandler;
 
 using NamedTree;
 
@@ -1493,155 +1492,149 @@ namespace DataPerformer.Formula
         {
             set
             {
-                try
+                par = value;
+                proxy = null;
+                if (!isSerialized)
                 {
-                    par = value;
-                    proxy = null;
-                    if (!isSerialized)
+                    acc.Clear();
+                    foreach (char c in par.Variables)
                     {
-                        acc.Clear();
-                        foreach (char c in par.Variables)
+                        string key = c + "";
+                        if (!acc.ContainsKey(key))
                         {
-                            string key = c + "";
-                            if (!acc.ContainsKey(key))
-                            {
-                                VariableMeasurement v = c.Create(par[c], this, this);
-                                acc[key] = v;
-                            }
+                            VariableMeasurement v = c.Create(par[c], this, this);
+                            acc[key] = v;
                         }
                     }
-                    int n = VariablesCount;
-                    measurements = new FormulaMeasurement[n];
-                    result = new object[n, 2];
-                    if (!isSerialized)
+                }
+                int n = VariablesCount;
+                measurements = new FormulaMeasurement[n];
+                result = new object[n, 2];
+                if (!isSerialized)
+                {
+                    arguments.Clear();
+                }
+                object ops = InternalOperationTable;
+                if (!isSerialized)
+                {
+                    ops = opTable;
+                }
+                isSerialized = false;
+                Dictionary<char, object> table = new Dictionary<char, object>();
+                string var = par.Variables;
+                Double a = 0;
+                if (allVariables == null)
+                {
+                    allVariables = AllVariables;
+                }
+                foreach (char c in allVariables)
+                {
+                    table[c] = a;
+                }
+                string proh = "";
+                foreach (char c in var)
+                {
+                    IMeasurement m = par[c];
+                    object t = m.Type;
+                    if (t is IOneVariableFunction | t is Table2D | t is Table3D)
                     {
-                        arguments.Clear();
+                        proh += c;
+                        table[c] = m.Parameter();
                     }
-                    object ops = InternalOperationTable;
-                    if (!isSerialized)
+                    else
                     {
-                        ops = opTable;
+                        table[c] = t;
                     }
-                    isSerialized = false;
-                    Dictionary<char, object> table = new Dictionary<char, object>();
-                    string var = par.Variables;
-                    Double a = 0;
-                    if (allVariables == null)
+                }
+                foreach (var s in parameters.Keys)
+                {
+                    object o = parameters[s];
+                    table[s] = AliasTypeDetector.Detector.DetectType(o);
+                    if (!acc.ContainsKey(s + ""))
                     {
-                        allVariables = AllVariables;
+                        acc[s + ""] = new AliasNameVariable(s + "", this, s + "");
                     }
-                    foreach (char c in allVariables)
+                }
+                AssociatedAddition aa = new AssociatedAddition(this, null);
+                var l = new List<object>(variables.Keys);
+                l.Sort();
+                for (int i = 0; i < n; i++)
+                {
+                    var c = l[i];
+                    object[] oo = variables[c] as object[];
+                    MathFormula f = (variables[c] as object[])[1] as MathFormula;
+                    Dictionary<int, IOperationAcceptor> dop = new Dictionary<int, IOperationAcceptor>();
+                    if (ops is Dictionary<int, IOperationAcceptor>)
                     {
-                        table[c] = a;
+                        dop = ops as Dictionary<int, IOperationAcceptor>;
                     }
-                    string proh = "";
-                    foreach (char c in var)
-                    {
-                        IMeasurement m = par[c];
-                        object t = m.Type;
-                        if (t is IOneVariableFunction | t is Table2D | t is Table3D)
-                        {
-                            proh += c;
-                            table[c] = m.Parameter();
-                        }
-                        else
-                        {
-                            table[c] = t;
-                        }
-                    }
-                    foreach (var s in parameters.Keys)
-                    {
-                        object o = parameters[s];
-                        table[s] = AliasTypeDetector.Detector.DetectType(o);
-                        if (!acc.ContainsKey(s + ""))
-                        {
-                            acc[s + ""] = new AliasNameVariable(s + "", this, s + "");
-                        }
-                    }
-                    AssociatedAddition aa = new AssociatedAddition(this, null);
-                    var l = new List<object>(variables.Keys);
-                    l.Sort();
-                    for (int i = 0; i < n; i++)
-                    {
-                        var c = l[i];
-                        object[] oo = variables[c] as object[];
-                        if (oo[1] == null)
-                        {
-                            oo[1] = MathFormula.FromString(MathSymbolFactory.Sizes, oo[0].ToString());
-                        }
-                        MathFormula f = oo[1] as MathFormula;
-                        Dictionary<int, IOperationAcceptor> dop = new Dictionary<int, IOperationAcceptor>();
-                        if (ops is Dictionary<int, IOperationAcceptor>)
-                        {
-                            dop = ops as Dictionary<int, IOperationAcceptor>;
-                        }
-                        SeriesSymbol.SetOperations(f, dop);
-                        try
-                        {
-                            if (creator == null)
-                            {
-                                creator = VariableDetector.GetCreator(this);
-                            }
-                            ObjectFormulaTree t = oo[2] as ObjectFormulaTree;
-                            if (t == null)
-                            {
-                                t = ObjectFormulaTree.CreateTree(f, creator);
-                                oo[2] = t;
-                            }
-                            measurements[i] = FormulaMeasurement.Create(t, deriOrder, Formula_ + (i + 1), aa, this);
-                        }
-                        catch (Exception ex)
-                        {
-                            throw IncludedException.Get(ex);
-                        }
-                    }
+                    SeriesSymbol.SetOperations(f, dop);
                     try
                     {
-                        proxy = null;
-                        proxy = proxyFactory.CreateProxy(this, StaticExtensionFormulaEditor.CheckValue);
-                        update = proxy.Update;
-                        FormulaMeasurement.Set(measurements, proxy);
-                        foreach (string key in replacement.Keys)
+                        if (creator == null)
                         {
-                            string varp = key[0] + "";
-                            if (!acc.ContainsKey(varp))
-                            {
-                                continue;
-                            }
-                            object o = acc[varp];
-                            if (!(o is VariableMeasurement))
-                            {
-                                continue;
-                            }
-                            VariableMeasurement vm = o as VariableMeasurement;
-                            string name = key.Substring(4);
-                            foreach (IMeasurements mea in measurementsData)
-                            {
-                                string sn = this.GetRelativeName(mea as IAssociatedObject);
-                                for (int i = 0; i < mea.Count; i++)
-                                {
-                                    IMeasurement mm = mea[i];
-                                    string snn = sn + "." + mm.Name;
-                                    if (snn.Equals(name))
-                                    {
-                                        vm.SetMeasurement(mm);
-                                        goto me;
-                                    }
-                                }
-                            }
-                        me:
-                            continue;
+                            creator = VariableDetector.GetCreator(this);
                         }
-                        SetFeedback();
+                        ObjectFormulaTree t = oo[2] as ObjectFormulaTree;
+                        if (t == null)
+                        {
+                            t = ObjectFormulaTree.CreateTree(f, creator);
+                            oo[2] = t;
+                        }
+                        measurements[i] = FormulaMeasurement.Create(t, deriOrder, Formula_ + (i + 1), aa, this);
                     }
                     catch (Exception ex)
                     {
-                        throw IncludedException.Get(ex);
+                        ex.HandleException(10);
+                        if (ex.Message.Equals("VariableMeasure.Derivation"))
+                        {
+                            throw ex;
+                        }
+                        throw new OwnException("Formula " + (i + 1) + " : " + ex.Message);
                     }
                 }
-                catch (Exception exception)
+                try
                 {
-                    throw IncludedException.Get(exception);
+                    proxy = null;
+                    proxy = proxyFactory.CreateProxy(this, StaticExtensionFormulaEditor.CheckValue);
+                    update = proxy.Update;
+                    FormulaMeasurement.Set(measurements, proxy);
+                    foreach (string key in replacement.Keys)
+                    {
+                        string varp = key[0] + "";
+                        if (!acc.ContainsKey(varp))
+                        {
+                            continue;
+                        }
+                        object o = acc[varp];
+                        if (!(o is VariableMeasurement))
+                        {
+                            continue;
+                        }
+                        VariableMeasurement vm = o as VariableMeasurement;
+                        string name = key.Substring(4);
+                        foreach (IMeasurements mea in measurementsData)
+                        {
+                            string sn = this.GetRelativeName(mea as IAssociatedObject);
+                            for (int i = 0; i < mea.Count; i++)
+                            {
+                                IMeasurement mm = mea[i];
+                                string snn = sn + "." + mm.Name;
+                                if (snn.Equals(name))
+                                {
+                                    vm.SetMeasurement(mm);
+                                    goto me;
+                                }
+                            }
+                        }
+                    me:
+                        continue;
+                    }
+                    SetFeedback();
+                }
+                catch (Exception ex)
+                {
+                    ex.HandleException(-1);
                 }
             }
         }

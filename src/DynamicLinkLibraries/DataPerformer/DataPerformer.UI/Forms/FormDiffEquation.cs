@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
 
 
 
 using Diagram.UI;
 using Diagram.UI.Labels;
+using Diagram.UI.Utils;
 using Diagram.UI.Interfaces;
 
 
@@ -369,7 +372,7 @@ namespace DataPerformer.UI.Forms
             }
             catch (Exception ex)
             {
-                ex.HandleException();
+                ex.HandleException(10);
             }
         }
 
