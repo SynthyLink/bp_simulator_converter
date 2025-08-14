@@ -1,18 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using IBApi.messages;
+using Microsoft.EntityFrameworkCore;
+using Trading.Database.Interfaces;
 
 namespace Trading.Database.SqlServer.Overriden
 {
-    public class TradingHistory : Trading.Database.SqlServer.TradingHistory
+
+    public class TradingHistory : Trading.Database.SqlServer.TradingHistory, 
+        ITradingDatabaseHistoryInteface
     {
         string connectionSrting;
+
+        protected virtual Dictionary<string, object> Symbols { get; set; } = new Dictionary<string, object>();
+
         public TradingHistory(string connectionSrting)
         {
             this.connectionSrting = connectionSrting;
+            var d = Database;
+            var t = SelectSymbols();
+            foreach (var symbol in t)
+            {
+                Symbols[symbol.Name] = symbol.Id;
+            }
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -22,6 +30,124 @@ namespace Trading.Database.SqlServer.Overriden
                 optionsBuilder.UseSqlServer(connectionSrting);
             }
 
+        }
+
+        #region ITradingDatabaseHistoryInteface
+
+        Task ITradingDatabaseHistoryInteface.DeleteBySymbol(string symbol, CancellationToken token)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task ITradingDatabaseHistoryInteface.FillHisrory(string name, List<HistoricalDataMessageDateTime> data, CancellationToken token)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        Task<Dictionary<string, object>> ITradingDatabaseHistoryInteface.GetSymbols(CancellationToken token)
+        {
+            return GetSymbols(token);
+        }
+
+        void ITradingDatabaseHistoryInteface.DeleteBySymbol(string symbol)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ITradingDatabaseHistoryInteface.FillHisrory(string name, List<HistoricalDataMessageDateTime> data)
+        {
+            throw new NotImplementedException();
+        }
+
+    
+        Dictionary<string, object> ITradingDatabaseHistoryInteface.Symbols => Symbols;
+
+
+        #endregion
+
+
+        protected virtual async Task<List<HistoricalDataMessageDateTime>> GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end, CancellationToken token)
+        {
+            var g = (Guid)id;
+            var t = SelectHistoryByDateAsync(g, begin, end, token);
+            await t;
+            var r = t.Result;
+            var l = new List<HistoricalDataMessageDateTime>();
+            foreach (var item in r)
+            {
+                var h = new HistoricalDataMessageDateTime
+                {
+                    RequestId = item.RequestId,
+                    Date = item.Date,
+                    Open = item.OpenF,
+                    High = item.High,
+                    Low = item.Low,
+                    Close = item.CloseF,
+                    Volume = item.Volume,
+                    Count = item.Count,
+                    Wap = item.Wap,
+                    HasGaps = item.HasGaps
+
+                };
+
+                l.Add(h);
+
+            }
+            return l;
+        }
+
+        public class HistoricalDataMessageDateTime1
+        {
+            protected int count;
+            protected decimal wap;
+            protected bool hasGaps;
+        }
+
+
+        protected virtual async Task<Dictionary<string, object>> GetSymbols(CancellationToken token)
+        {
+            var t = SelectSymbolsAsync(token);
+            await t;
+            var r = t.Result;
+            var d = new Dictionary<string,object>();
+            foreach (var j in r)
+            {
+                d[j.Name] = j.Id;
+            }
+            return d;
+        }
+
+        Task<List<HistoricalDataMessageDateTime>> ITradingDatabaseHistoryInteface.GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end, CancellationToken token)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<HistoricalDataMessageDateTime> ITradingDatabaseHistoryInteface.GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end)
+        {
+            var r = SelectHistoryByDate((Guid)id, begin, end);
+            var l = new List<HistoricalDataMessageDateTime>();
+            foreach (var item in r)
+            {
+                var h = new HistoricalDataMessageDateTime
+                {
+                    RequestId = item.RequestId,
+                    Date = item.Date,
+                    Open = item.OpenF,
+                    High = item.High,
+                    Low = item.Low,
+                    Close = item.CloseF,
+                    Volume = item.Volume,
+                    Count = item.Count,
+                    Wap = item.Wap,
+                    HasGaps = item.HasGaps
+
+                };
+
+                l.Add(h);
+
+            }
+            return l;
         }
     }
 }

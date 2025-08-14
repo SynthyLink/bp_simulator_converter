@@ -1660,7 +1660,7 @@ namespace DataPerformer.Formula
 
         Dictionary<string, ObjectFormulaTree> std = new Dictionary<string, ObjectFormulaTree>();
 
-        Dictionary<string, ObjectFormulaTree> IStringTreeDictionary.Dictionary => std; !
+        Dictionary<string, ObjectFormulaTree> IStringTreeDictionary.Dictionary => std;
 
 
 
@@ -1919,7 +1919,7 @@ namespace DataPerformer.Formula
                 {
                     owntree = new ObjectFormulaTree(this);
                     IStringTreeDictionary d = equationSolver;
-                    d.Dictionary[symbol] = tree;
+                    d.Dictionary[symbol] = owntree;
                 }
                 return owntree;
             }

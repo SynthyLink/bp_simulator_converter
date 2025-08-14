@@ -21,11 +21,7 @@ namespace Trading.Library.Objects
 
         #region Fields
 
-        ITradingDatabaseHistoryInteface TradingDatabaseHistoryInteface
-        {
-            get;
-            set;
-        }
+        public Dictionary<string, object> Symbols { get; protected set; }
 
 
         IMeasurement[] measurements;
@@ -55,7 +51,7 @@ namespace Trading.Library.Objects
 
         public ITradingDatabaseHistoryInteface Database { get; init; }
 
-        public Guid Guid { get; set; } = Guid.NewGuid();
+        public object Object { get; set; } = new object();
 
         public DateTime Begin { get; set; } = DateTime.Now;
 
@@ -63,13 +59,10 @@ namespace Trading.Library.Objects
 
         public string Period { get; set; } = "1 day";
 
-        public Dictionary<string, Guid> Symbols
-        {
-            get;
-            protected set;
-        }
+        object o = new object();
 
-        public  int ToIndex(Guid guid)
+   
+        public  int ToIndex(object guid)
         {
             int i = 0;
             foreach (var symbol in Symbols.Keys)
@@ -84,10 +77,6 @@ namespace Trading.Library.Objects
             return -1;
         }
 
-
-
-
-
         #endregion
 
         #region Ctor
@@ -95,11 +84,11 @@ namespace Trading.Library.Objects
 
         public DataQuery()
         {
-            TradingDatabaseHistoryInteface = Trading.Database.StaticExtensionTradingDatabase.Connect();
-
-             measurements =
-                [
-                new RealTimeMeasurement(this),
+            Database = Trading.Database.StaticExtensionTradingDatabase.Connect();
+            Symbols = Database.Symbols;
+            measurements =
+               [
+               new RealTimeMeasurement(this),
                     new LowMeasurement(this),
                     new HighMeasurement(this),
                     new OpenMeasurement(this),
@@ -108,10 +97,10 @@ namespace Trading.Library.Objects
                     new IntegerTimeMeasurement(this),
                     new DateTimeMeasurement(this),
                     new FullTimeMeasurement(this)
-                ];
-
+               ];
 
         }
+        
 
         event Action<IMeasurement> IChildren<IMeasurement>.OnAdd
         {
@@ -149,7 +138,7 @@ namespace Trading.Library.Objects
 
         bool IMeasurements.IsUpdated { get => isUpdated; set => isUpdated = value; }
 
-        IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => throw new OwnNotImplemented();
+        IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => measurements;
 
         void IMeasurements.UpdateMeasurements()
         {
@@ -163,17 +152,27 @@ namespace Trading.Library.Objects
 
         void IIterator.Reset()
         {
-            step = 0;
-            messages.Clear();
-            var bs = Period.ToBarSize();
-            var t = Database.GetHistoricalDataMessageDateTimes(Guid, Begin, End);
-            var dt = t.Result;
-            enu = dt.Convert(bs);
-            enumerator = enu.GetEnumerator();
-            enumerator.MoveNext();
-            message = enumerator.Current;
-            messages[step] = message;
-            Set();
+            Exception exceptopn;
+            try
+            {
+                step = 0;
+                messages.Clear();
+                var bs = Period.ToBarSize();
+                var ct = new CancellationToken();
+                var dt = Database.GetHistoricalDataMessageDateTimes(Object, Begin, End);
+                enu = dt.Convert(bs);
+                enumerator = enu.GetEnumerator();
+                enumerator.MoveNext();
+                message = enumerator.Current;
+                messages[step] = message;
+                Set();
+                return;
+            }
+            catch (Exception ex)
+            {
+                exceptopn = IncludedException.Get(ex);
+            }
+            throw exceptopn;
         }
 
         bool IIterator.Next()
@@ -359,11 +358,10 @@ namespace Trading.Library.Objects
 
         #endregion
 
-        public  Guid ToGuid(string symbol)
+        public  object ToGuid(string symbol)
         {
             return Symbols[symbol];
         }
-
 
     }
 }

@@ -29,12 +29,13 @@ async Task<List<Task>> CopyToDatabse()
 
     try
     {
+        var ct = new CancellationToken();
         var p = new Performer();
         var cs = "Host=127.0.0.1;Database=BusinessAnalisys;Username=postgres;Password=GREM0nP0";
         var ext = ".cfa";
         var extp = ".business_analisys";
         var dir = @"c:\0\dir1";
-        var t = p.Copy(cs, dir, ext, extp, tasks);
+        var t = p.Copy(cs, dir, ext, extp, tasks, ct);
         await t;
         tasks.Add(t);
     }
@@ -54,12 +55,13 @@ async Task<List<Task>> CopyToDatabse1()
 
     try
     {
+        var ct = new CancellationToken();
         var p = new Performer();
         var cs = "Host=127.0.0.1;Database=BusinessAnalisys;Username=postgres;Password=GREM0nP0";
         var ext = ".cft";
         var extp = ".business_analisys";
         var dir = @"c:\0\dir";
-        var t = p.Copy(cs, dir, ext, extp, tasks);
+        var t = p.Copy(cs, dir, ext, extp, tasks, ct);
         await t;
         tasks.Add(t);
     }
@@ -79,37 +81,38 @@ void BA()
 }
 
     async Task<List<Task>> CopyToFile()
+{
+    var tasks = new List<Task>();
+    try
     {
-        var tasks = new List<Task>();
-        try
-        {
-            var p = new Performer();
-            var cs = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Trading_Analytics;Integrated Security=True;Encrypt=False";
-            var dir = @"c:\0\dir";
-            var ext = ".cft";
-            var t = p.Copy(cs, dir, ext, tasks);
-            await t;
-            tasks.Add(t);
+        var ct = new CancellationToken();
+        var p = new Performer();
+        var cs = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Trading_Analytics;Integrated Security=True;Encrypt=False";
+        var dir = @"c:\0\dir";
+        var ext = ".cft";
+        var t = p.Copy(cs, dir, ext, tasks, ct);
+        await t;
+        tasks.Add(t);
 
-        }
-        catch (Exception e)
-        {
-
-        }
-        return tasks;
     }
+    catch (Exception e)
+    {
 
+    }
+    return tasks;
+}
 
     async Task<List<Task>> CopyToFile1()
     {
         var tasks = new List<Task>();
         try
         {
-            var p = new Performer();
+        var ct = new CancellationToken();
+        var p = new Performer();
             var cs = "Host=127.0.0.1;Database=PostgreSQL_Warehouse;Username=postgres;Password=GREM0nP0";
             var dir = @"c:\0\dir1";
             var ext = ".cfa";
-            var t = p.Copy(cs, dir, ext, tasks);
+            var t = p.Copy(cs, dir, ext, tasks, ct);
             await t;
             tasks.Add(t);
 

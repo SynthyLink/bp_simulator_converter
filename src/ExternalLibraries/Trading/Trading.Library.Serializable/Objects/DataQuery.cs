@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace Trading.Library.Serializable.Objects
 {
@@ -16,15 +11,26 @@ namespace Trading.Library.Serializable.Objects
             Period = info.GetString("Period");
             Begin = (DateTime)info.GetValue("Begin", typeof(DateTime));
             End = (DateTime)info.GetValue("End", typeof(DateTime));
-            Guid = (Guid)info.GetValue("Guid", typeof(Guid));
+            try
+            {
+                Object = info.GetValue("Guid", typeof(Guid));
+            }
+            catch
+            {
+                Object = info.GetValue("Guid", typeof(Object));
+            }
         }
-        public DataQuery() { }
+        public DataQuery() 
+        { 
+        
+        }
+
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Period", Period);
             info.AddValue("Begin", Begin, typeof(DateTime));
             info.AddValue("End", End, typeof(DateTime));
-            info.AddValue("Guid", Guid, typeof(Guid));
+            info.AddValue("Guid", Object, typeof(object));
         }
     }
 }

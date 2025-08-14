@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.7" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,17 +21,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="DataWarehouse.cs">
+    <Compile Update="Database.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>DataWarehouse.tt</DependentUpon>
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Update="DataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataSet.xsd</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="DataWarehouse.tt">
+    <None Update="Database.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DataWarehouse.cs</LastGenOutput>
+      <LastGenOutput>Database.cs</LastGenOutput>
+    </None>
+    <None Update="DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

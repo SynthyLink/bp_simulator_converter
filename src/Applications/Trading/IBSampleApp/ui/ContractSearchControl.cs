@@ -70,6 +70,7 @@ namespace IBSampleApp.ui
         }
 
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IBClient IBClient { get; set; }
     }
 }

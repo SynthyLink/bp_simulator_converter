@@ -15,7 +15,7 @@ namespace Trading.Library.Forms.UserControls
         private DataQuery dataQuery;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Dictionary<string, Guid> Symbols
+        public Dictionary<string, object> Symbols
         {
             get;
             set;
@@ -60,8 +60,8 @@ namespace Trading.Library.Forms.UserControls
                 }
                 dataQuery = value;
                 Fill(dataQuery);
-                var g = dataQuery.Guid;
-                comboBoxSymbol.SelectedIndex = dataQuery.ToIndex(dataQuery.Guid); 
+                var g = dataQuery.Object;
+                comboBoxSymbol.SelectedIndex = dataQuery.ToIndex(dataQuery.Object); 
                 comboBoxInterval.SelectedIndex = dataQuery.Period.ToIndex();
                 dateTimePickerBegin.Value = dataQuery.Begin;
                 dateTimePickerEnd.Value = dataQuery.End;
@@ -99,7 +99,7 @@ namespace Trading.Library.Forms.UserControls
             if (o != null)
             {
                 var s = o as string;
-                dataQuery.Guid = dataQuery.ToGuid(s);
+                dataQuery.Object = dataQuery.ToGuid(s);
             }
         }
     }

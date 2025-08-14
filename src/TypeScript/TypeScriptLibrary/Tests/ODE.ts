@@ -116,9 +116,9 @@ class ODE_CategoryObject_1 extends DifferentrialEquationSolverFormula
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["a", 1 ],
+			["y", 1 ],
 			["x", 0 ],
-			["y", 1 ]
+			["a", 1 ]
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("x", 0, 0);
@@ -217,8 +217,10 @@ class ODE_CategoryObject_1 extends DifferentrialEquationSolverFormula
 	}
 	save() : void {
 		var v = this.derivations;
-		var x0 = v.get("x");
-		x0?.setIValue(this.get_3());
+		var x0 = v.get("y");
+		x0?.setIValue(this.get_2());
+		var x1 = v.get("x");
+		x1?.setIValue(this.get_4());
 	}
 	
 	setFeedback(): void {

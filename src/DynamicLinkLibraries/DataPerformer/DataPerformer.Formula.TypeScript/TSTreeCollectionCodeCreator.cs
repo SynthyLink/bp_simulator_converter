@@ -1,4 +1,7 @@
 ﻿using System.Text;
+
+using Diagram.UI.Attributes;
+
 using DataPerformer.Interfaces;
 
 using FormulaEditor.Interfaces;
@@ -6,7 +9,6 @@ using FormulaEditor;
 using FormulaEditor.CodeCreators;
 using FormulaEditor.CSharp;
 using FormulaEditor.CodeCreators.Interfaces;
-using Diagram.UI.Attributes;
 
 namespace DataPerformer.Formula.TypeScript
 {

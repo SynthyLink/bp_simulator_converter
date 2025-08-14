@@ -3,7 +3,8 @@ import { ICategoryObject } from "../../Interfaces/ICategoryObject";
 import { IStarted } from "../../Measurements/Interfaces/IStarted";
 import { ITimeMeasurementProvider } from "../../Measurements/Interfaces/ITimeMeasurementProvider";
 
-export interface IDataRuntime {
+export interface IDataRuntime
+{
 
     updateRuntime(): void;
 
@@ -18,6 +19,7 @@ export interface IDataRuntime {
     /// <param name="time">Start time</param>
     startRuntime(time: number): void;
 
+    
     addCategoryObjectToRuntime(object: ICategoryObject): void;
 
 

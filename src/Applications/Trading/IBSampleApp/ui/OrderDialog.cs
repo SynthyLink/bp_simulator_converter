@@ -8,6 +8,7 @@ using IBApi;
 using IBSampleApp.ui;
 using IBApi.messages;
 using IBApi.types;
+using System.ComponentModel;
 
 namespace IBSampleApp
 {
@@ -74,6 +75,7 @@ namespace IBSampleApp
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Order CurrentOrder
         {
             set { SetOrder(value); }

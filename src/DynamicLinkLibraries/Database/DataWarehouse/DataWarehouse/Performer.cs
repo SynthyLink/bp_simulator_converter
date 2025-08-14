@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters;
+using System.Threading;
 using System.Threading.Tasks;
 
 using DataWarehouse.Classes;
@@ -28,10 +29,18 @@ namespace DataWarehouse
 
         }
 
+        public Performer(CancellationToken cancellationToken)
+        {
+            this.cancellationToken = cancellationToken; 
+        }
+
         #endregion
 
         #region Fields
 
+        CancellationToken cancellationToken;
+
+  
         /// <summary>
         /// Type of error
         /// </summary>
@@ -87,7 +96,8 @@ namespace DataWarehouse
 
 
 
-        public async Task Copy(string connecrionString, string directory, string ext, string extout, List<Task> tasks)
+        public async Task Copy(string connecrionString, string directory, string ext,
+            string extout, List<Task> tasks, CancellationToken cancellationToken)
         {
             var c = new DatabaseCoordinatorCollection(false);
             c.LoadDirectory();
@@ -99,18 +109,19 @@ namespace DataWarehouse
             }
             if (to is IDatabaseInterfaceAsync async)
             {
-                var rt = async.GetRoots([ext]);
+                var rt = async.GetRoots([ext], cancellationToken);
                 await rt;
                 var dr = rt.Result[0] as IDirectory;
                 var dir = new DirectoryInfo(directory);
-                var t = Copy(dr, dir, tasks, ext, extout);
+                var t = Copy(dr, dir, tasks, ext, extout, cancellationToken);
                 tasks.Add(t);
                 await t;
             }
         }
 
 
-        public async Task Copy(string connecrionString, string directory, string ext, List<Task> tasks)
+        public async Task Copy(string connecrionString, 
+            string directory, string ext, List<Task> tasks, CancellationToken cancellationToken)
         {
             var c = new DatabaseCoordinatorCollection(false);
             c.LoadDirectory();
@@ -119,11 +130,11 @@ namespace DataWarehouse
             if (to is IDatabaseInterfaceAsync async)
             {
 
-                var rt = async.GetRoots([ext]);
+                var rt = async.GetRoots([ext], cancellationToken);
                 await rt;
                 var dr = rt.Result[0] as IDirectory;
                 var dir = new DirectoryInfo(directory);
-                var t = Copy(dr, dir, tasks, ext);
+                var t = Copy(dr, dir, tasks, ext, cancellationToken);
                 tasks.Add(t);
                 await t;
             }
@@ -181,7 +192,8 @@ namespace DataWarehouse
 
 
 
-        public async Task Copy(IDirectory dir, DirectoryInfo directoryInfo, List<Task> l, string ext, string extOut)
+        public async Task Copy(IDirectory dir, DirectoryInfo directoryInfo, List<Task> l, 
+            string ext, string extOut, CancellationToken cancellationToken)
         {
             IDirectoryAsync async = dir as IDirectoryAsync;
             var dn = directoryInfo.FullName;
@@ -202,7 +214,7 @@ namespace DataWarehouse
                 }
                 stream.Read(bt);
                 var leaf = new Leaf(null, name, description, extOut, bt);
-                var t = async.AddAsync(leaf);
+                var t = async.AddAsync(leaf, cancellationToken);
                 l.Add(t);
                 await t;
             }
@@ -213,10 +225,10 @@ namespace DataWarehouse
                 using var reader = new StreamReader(d.FullName + ".description");
                 var description = reader.ReadToEnd();
                 var direct = new Classes.Directory(null, name, description, extOut, true);
-                var td = async.AddAsync(direct);
+                var td = async.AddAsync(direct, cancellationToken);
                 l.Add(td);
                 await td;
-                var tc = Copy(td.Result as IDirectory, d, l, ext, extOut);
+                var tc = Copy(td.Result as IDirectory, d, l, ext, extOut, cancellationToken);
                 l.Add(tc);
                 await tc;
 
@@ -226,11 +238,12 @@ namespace DataWarehouse
 
 
 
-        public async Task Copy(IDirectory dir, DirectoryInfo directoryInfo, List<Task> l, string ext)
+        public async Task Copy(IDirectory dir, DirectoryInfo directoryInfo, List<Task> l, string ext, 
+            CancellationToken cancellationToken)
         {
             if (dir is IDirectoryAsync async)
             {
-                var t = async.LoadLeaves();
+                var t = async.LoadLeaves(cancellationToken);
                 l.Add(t);
                 await t;
                 IChildren<ILeaf> leaves = dir;
@@ -244,7 +257,7 @@ namespace DataWarehouse
                     writer.WriteLine(descrpition);
                     if (item is IDataAsync datasync)
                     {
-                        var tad = datasync.GetDataAsync();
+                        var tad = datasync.GetDataAsync(cancellationToken);
                         l.Add(tad);
                         await tad;
                         var bt = tad.Result;
@@ -256,7 +269,7 @@ namespace DataWarehouse
                         stream.Write(bt);
                     }
                 }
-                var td = async.LoadChildren();
+                var td = async.LoadChildren(cancellationToken);
                 l.Add(td);
                 await td;
                 IChildren<IDirectory> dirs = dir;
@@ -269,7 +282,7 @@ namespace DataWarehouse
                     using var writer = new StreamWriter(fn + ".description");
                     writer.WriteLine(descrpition);
                     var di = directoryInfo.CreateSubdirectory(name);
-                    var tcc = Copy(dr, di, l, ext);
+                    var tcc = Copy(dr, di, l, ext, cancellationToken);
                 }
             }
         }
