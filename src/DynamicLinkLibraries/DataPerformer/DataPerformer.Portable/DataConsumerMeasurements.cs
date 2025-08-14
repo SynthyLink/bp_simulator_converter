@@ -281,25 +281,6 @@ namespace DataPerformer.Portable
             }
         }
 
-        protected virtual IMeasurement GetMeasurement(int n)
-        {
-            if (measurements == null)
-            {
-                this.Throw(new OwnException("Undefined measurements"));
-            }
-            if (measurements.Length <= n)
-            {
-                this.Throw(new OwnException("Shortage of measuremens"));
-            }
-            IMeasurement measurement = measurements[n];
-            if (measurement == null)
-            {
-                this.Throw(new OwnException("Undefined measure"));
-            }
-            return measurement;
-
-        }
-
         /// <summary>
         /// Access to n - th measurement
         /// </summary>
@@ -325,18 +306,6 @@ namespace DataPerformer.Portable
                 }
                 update();
                 fc.Set();
-               
-                
-                /*!!!
-                foreach (int i in feedAliases.Keys)
-                {
-                    IMeasurement m = Measurements[i];
-                    object r = m.Parameter();
-                    if (r != null)
-                    {
-                        feedAliases[i].SetValue(r);
-                    }
-                }*/
                 isUpdated = true;
             }
             catch (Exception exception)
@@ -645,6 +614,24 @@ namespace DataPerformer.Portable
 
         #region Protected Members
 
+        protected virtual IMeasurement GetMeasurement(int n)
+        {
+            if (measurements == null)
+            {
+                this.Throw(new OwnException("Undefined measurements"));
+            }
+            if (measurements.Length <= n)
+            {
+                this.Throw(new OwnException("Shortage of measuremens"));
+            }
+            IMeasurement measurement = measurements[n];
+            if (measurement == null)
+            {
+                this.Throw(new OwnException("Undefined measure"));
+            }
+            return measurement;
+        }
+
         /// <summary>
         /// The count of measurements
         /// </summary>
@@ -673,32 +660,17 @@ namespace DataPerformer.Portable
 
             }
             feedbackAliasCollection.Fill();
-            
-      /*               var d = new Dictionary<string, IMeasurement>();
-                     var keys = feedback.Keys;
-                     for (int i = 0; i < measurements.Length; i++)
-                     {
-                         if (keys.Contains(i))
-                         {
-                             var m = measurements[i];
-                             var alias = this.FindAliasName(feedback[i], false);
-                             var feed = new FeedbackAliasValue(m as IValue, alias);
-                             FeedbackAliases.Add(feed);
-
-                         }
-
-        }*/
- 
         }
 
         void IChildren<IMeasurement>.AddChild(IMeasurement child)
         {
-            throw new ErrorHandler.OwnException();
+            throw new OwnException();
 
         }
 
         void IChildren<IMeasurement>.RemoveChild(IMeasurement child)
         {
+            throw new OwnException();
         }
 
 

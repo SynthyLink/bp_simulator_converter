@@ -173,7 +173,6 @@ namespace DataWarehouse.Classes.Abstract.Async
             var ii = new Issue(s, ErrorType.None, OperationType.UpdateLeafData);
             this.data = r;
             OnUpdateDataAct(ii);
-
             return t.Result;
 
         }

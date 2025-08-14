@@ -45,7 +45,7 @@ export class CategoryArrow implements ICategoryArrow, IObject
     getSource(): ICategoryObject {
         return this.source;
     }
-    getTagret(): ICategoryObject {
+    getTarget(): ICategoryObject {
         return this.target;
     }
     setSource(source: ICategoryObject): void {
