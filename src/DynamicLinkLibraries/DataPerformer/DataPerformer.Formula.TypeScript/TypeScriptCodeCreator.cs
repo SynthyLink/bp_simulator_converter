@@ -162,6 +162,12 @@ namespace DataPerformer.Formula.TypeScript
 
         #region Overriden Members
 
+        internal List<int> Values
+        {
+            get;
+            set;
+        }
+
         private List<string> CreateTSCode(object obj, ObjectFormulaTree tree, string ret, string[] parameters,
             out IList<string> variables, out IList<string> initializers)
         {

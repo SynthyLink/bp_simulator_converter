@@ -23,6 +23,7 @@ using DataPerformer.Formula.Interfaces;
 using ErrorHandler;
 
 using NamedTree;
+using System.Linq.Expressions;
 
 
 namespace DataPerformer.Formula
@@ -35,7 +36,7 @@ namespace DataPerformer.Formula
         IDifferentialEquationSolver, 
         IStarted,  ICheckCorrectness, IVariableDetector,
         IDynamical, ITreeCollection, ITimeVariable, IStack, 
-        IRuntimeUpdate, IPostSetArrow
+        IRuntimeUpdate, IPostSetArrow, IStringTreeDictionary
     {
 
         #region Fields
@@ -1657,15 +1658,21 @@ namespace DataPerformer.Formula
 
         internal Dictionary<object, object> VariableValues => vars;
 
+        Dictionary<string, ObjectFormulaTree> std = new Dictionary<string, ObjectFormulaTree>();
+
+        Dictionary<string, ObjectFormulaTree> IStringTreeDictionary.Dictionary => std; !
+
 
 
         #endregion
 
         #region Classes & Delegates
 
+        [CodeCreator(AliasInitialState = true)]
         class Variable : IObjectOperation, 
             IPowered, IOperationAcceptor, IMeasurement, IDerivation, 
-            IDerivationOperation, IStack, IMeasurementHolder, IAssociatedObject
+            IDerivationOperation, IStack, IMeasurementHolder, IAssociatedObject, IValue, 
+            ITreeCreator
         {
 
             #region Fields
@@ -1891,6 +1898,34 @@ namespace DataPerformer.Formula
             #region IMeasurementHolder Members
 
             IMeasurement IMeasurementHolder.Measurement => this;
+
+            #endregion
+
+            #region IValue Members
+
+            object IValue.Value
+            {
+                get => GetValue();
+                set { }
+            }
+
+
+            ObjectFormulaTree owntree;
+
+
+            ObjectFormulaTree CreateTree()
+            {
+                if (owntree == null)
+                {
+                    owntree = new ObjectFormulaTree(this);
+                    IStringTreeDictionary d = equationSolver;
+                    d.Dictionary[symbol] = tree;
+                }
+                return owntree;
+            }
+
+
+            ObjectFormulaTree ITreeCreator.Tree => CreateTree();
 
             #endregion
 

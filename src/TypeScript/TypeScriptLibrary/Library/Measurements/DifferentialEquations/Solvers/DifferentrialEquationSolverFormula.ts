@@ -44,6 +44,7 @@ export class DifferentrialEquationSolverFormula extends DataConsumerVariadbleMea
         variable.setDerivation(derivation);
         this.derivations.set(name, derivation);
         this.addVariable(variable);
+        this.deri.push(derivation);
     }
 
 
@@ -56,6 +57,9 @@ export class DifferentrialEquationSolverFormula extends DataConsumerVariadbleMea
     }
 
     protected derivations: Map<string, IValue> = new Map();
+
+    protected deri: IValue[] = [];
+    
 
    
 }

@@ -286,7 +286,7 @@ namespace DataPerformer.Portable
         /// </summary>
         IMeasurement IMeasurements.this[int n] => GetMeasurement(n);
 
-        IFeedbackAliasCollection fc => feedbackAliasCollection;
+        
 
         protected virtual void UpdateMeasurements()
         {
@@ -305,7 +305,7 @@ namespace DataPerformer.Portable
                     throw new OwnException("Formulas are not accepted");
                 }
                 update();
-                fc.Set();
+                feedbackAliasCollection.Set();
                 isUpdated = true;
             }
             catch (Exception exception)

@@ -6,6 +6,7 @@ using ErrorHandler;
 
 using FormulaEditor;
 using FormulaEditor.CodeCreators.Interfaces;
+using System.Linq.Expressions;
 
 namespace DataPerformer.Formula.TypeScript
 {
@@ -103,12 +104,11 @@ namespace DataPerformer.Formula.TypeScript
             var measurements = obj as IMeasurements;
             try
             {
+                var values = new List<int>();
                 local = creator.Create(obj, trees);
                 IList<ObjectFormulaTree> lt = local.Trees;
-               // Output = DataPerformerFormula.GetOutput(obj as IMeasurements, lt.ToArray());
                 var ct = DataPerformerFormula.Get(obj as IDataConsumer, lt.ToArray());
                 bool state = GetState(obj);
-
                 for (int i = 0; i < lt.Count; i++)
                 {
                     var tree = lt[i];
@@ -130,8 +130,9 @@ namespace DataPerformer.Formula.TypeScript
                         {
                             continue;
                         }
-                        if (op is IValue iv)
+                        if (op is IDerivation der)
                         {
+                            var d = der.Derivation;
                             for (var j = 0; j < measurements.Count; j++)
                             {
                                 var m = measurements[j];
@@ -140,12 +141,15 @@ namespace DataPerformer.Formula.TypeScript
                                     var mtt = "value" + i;
                                     vari.Add(mtt + " : IValue = new FictiveValue();");
                                     init.Add("this." + mtt + " = this.output[" + j + "];");
+                                    values.Add(i);
                                 }
                             }
                         }
                     }
                     m: continue;
                 }
+                var loc = local as TypeScriptCodeCreator;
+                loc.Values = values;
                 if (local.Optional.Count > 0)
                 {
                     return CreateOptionalCode(obj, local, out variables, out initializers);

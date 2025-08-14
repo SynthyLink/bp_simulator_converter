@@ -545,7 +545,14 @@ namespace DataPerformer.Formula
             get;
             set;
         }
-        object IValue.Value { get  { value = Get(); return value; } set { } }
+        object IValue.Value { 
+            get  
+            { 
+                value = Get(); 
+                return value; 
+            } 
+            set { } 
+        }
 
         #endregion
 
