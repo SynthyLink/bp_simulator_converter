@@ -1,12 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EulerProcessor = void 0;
-const Performer_1 = require("../../../Performer");
 const DifferentialEquationProcessor_1 = require("./DifferentialEquationProcessor");
 class EulerProcessor extends DifferentialEquationProcessor_1.DifferentialEquationProcessor {
     constructor() {
         super(...arguments);
-        this.performer = new Performer_1.Performer();
         this.w = [];
     }
     stepDifferentialEquations(start, finish) {

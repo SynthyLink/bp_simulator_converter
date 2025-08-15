@@ -19,6 +19,10 @@ class DataRuntimeConsumerODE extends DataRuntimeConsumer_1.DataRuntimeConsumer {
         this.processor.addRangeDifferentialEquations(equations);
         this.processor.updateDimension();
     }
+    setTimeProvider(timeProvider) {
+        super.setTimeProvider(timeProvider);
+        this.processor.setDifferentialEquationsTimeProvider(timeProvider);
+    }
     stepRuntime(begin, end) {
         this.processor.stepDifferentialEquations(begin, end);
     }

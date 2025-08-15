@@ -86,7 +86,6 @@ export class PefrormerMeasuremets
             }
             st = s;
         }
-
     }
 
     public peformFixedStepCalculation(runtime: IDataRuntime, start: number, step: number, steps: number, act: IAction): void

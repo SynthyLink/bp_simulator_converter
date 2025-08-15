@@ -1,4 +1,4 @@
-package conversion.category_theory.interfaces;
+package category_theory.interfaces;
 
 public interface ICategoryObject
 {

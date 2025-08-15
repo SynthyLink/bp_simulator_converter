@@ -1,8 +1,6 @@
 ﻿using BaseTypes;
 using BaseTypes.CodeCreator.Interfaces;
-using System.ComponentModel;
 using System.Reflection;
-using static DataPerformer.Formula.TypeScript.StaticExtensionDataPerformerFormulaTypeScript;
 
 namespace DataPerformer.Formula.TypeScript
 {

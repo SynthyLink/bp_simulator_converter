@@ -3,8 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DifferentialEquationProcessor = void 0;
 const OwnNotImplemented_1 = require("../../../ErrorHandler/OwnNotImplemented");
 const FictiveTimeMeasurementProvider_1 = require("../../../Fiction/FictiveTimeMeasurementProvider");
+const Performer_1 = require("../../../Performer");
 class DifferentialEquationProcessor {
     constructor() {
+        this.performer = new Performer_1.Performer();
         this.dimension = 0;
         this.equations = [];
         this.norm = [];

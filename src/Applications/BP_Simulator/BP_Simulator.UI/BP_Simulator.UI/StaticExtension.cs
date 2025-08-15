@@ -144,7 +144,7 @@ namespace BP_Simulator.UI
             FormMain form =
                 Motion6D.UI.Avanced.Initialization.MotionApplicationCreator.CreateForm(database, holder,
                OrdinaryDifferentialEquations.Runge4Solver.Singleton,
-            DataPerformer.Portable.DifferentialEquationProcessors.RungeProcessor.Processor, 
+            RungeProcessor.Processor, 
             init, facts, throwsDoubleInit, buttons,
             icon,
             null,

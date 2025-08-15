@@ -1,3 +1,5 @@
+import { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
+
 export interface IDifferentialEquationSolver
 {
     /// <summary>
@@ -11,6 +13,15 @@ export interface IDifferentialEquationSolver
     /// <param name="offset">Offset</param>
     /// <param name="variables">Vector of all desktop differential equations variables</param>
     copyVariablesToSolver(offset: number, variables: number[]): void;
+
+    ///
+    /// Sets time provider
+    ///
+    setDifferentialEquationSolverTimePovider(time: ITimeMeasurementProvider)  : void;
+
+    //gets timer provider
+    getDifferentialEquationSolverTimePovider(): ITimeMeasurementProvider;
+
 
 }
 

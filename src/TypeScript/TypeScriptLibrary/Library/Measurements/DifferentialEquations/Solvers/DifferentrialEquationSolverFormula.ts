@@ -2,6 +2,7 @@ import { IDesktop } from "../../../Interfaces/IDesktop";
 import { IPostSetArrow } from "../../../Interfaces/IPostSetArrow";
 import { IValue } from "../../../Interfaces/IValue";
 import { DataConsumerVariadbleMeasurementsStarted } from "../../DataConsumerVariadbleMeasurementsStarted";
+import { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
 import { Variable } from "../../Variables/Variable";
 import { IDifferentialEquationSolver } from "../Interfaces/IDifferentialEquationSolver";
 
@@ -15,6 +16,12 @@ export class DifferentrialEquationSolverFormula extends DataConsumerVariadbleMea
         this.types.push("IDifferentialEquationSolver");
         this.types.push("IPostSetArrow");
         this.types.push("DifferentrialEquationSolverFormula");
+    }
+    setDifferentialEquationSolverTimePovider(time: ITimeMeasurementProvider): void {
+        throw new Error("Method not implemented.");
+    }
+    getDifferentialEquationSolverTimePovider(): ITimeMeasurementProvider {
+        throw new Error("Method not implemented.");
     }
 
 
@@ -72,7 +79,7 @@ export class DifferentrialEquationSolverFormula extends DataConsumerVariadbleMea
     protected derivations: Map<string, IValue> = new Map();
 
     protected deri: IValue[] = [];
-    
+
 
    
 }

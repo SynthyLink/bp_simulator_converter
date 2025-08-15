@@ -469,11 +469,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Library", "..\..\..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Charts", "..\..\..\ExternalLibraries\Trading\Trading.Charts\Trading.Charts.csproj", "{1E6EF611-6743-DE2B-5DEF-026D23F07060}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\ExternalLibraries\Trading\Trading.Database\Trading.Database.csproj = ..\..\..\ExternalLibraries\Trading\Trading.Database\Trading.Database.csproj
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Database", "..\..\..\ExternalLibraries\Trading\Trading.Database\Trading.Database.csproj", "{8C3B1BC6-1F5A-0F9C-F787-8C85C34269AA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Library.Forms", "..\..\..\ExternalLibraries\Trading\Trading.Library.Forms\Trading.Library.Forms.csproj", "{2328E692-3308-C82B-CD60-4F33F25136F2}"
@@ -485,6 +480,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Databse.UI.Windows", "..\..\..\DynamicLinkLibraries\Database\Databse.UI.Windows\Databse.UI.Windows.csproj", "{027561C1-DC0A-4B97-A1C5-8843A504C2F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.UI.Intrerfaces", "..\..\..\DynamicLinkLibraries\Database\Database.UI.Intrerfaces\Database.UI.Intrerfaces.csproj", "{0E74B2F6-BC5A-4A3D-93F2-63F0CEB461D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diagram.Java", "..\..\..\DynamicLinkLibraries\Diagram\Diagram.Java\Diagram.Java.csproj", "{73463872-C0FC-4794-834E-82FA794FFE4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPerformer.Formula.Java", "..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Formula.Java\DataPerformer.Formula.Java.csproj", "{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPerformer.Portable.Java", "..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable.Java\DataPerformer.Portable.Java.csproj", "{94A07D30-9CA1-4DED-8564-66D381BE05CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -4954,6 +4955,66 @@ Global
 		{0E74B2F6-BC5A-4A3D-93F2-63F0CEB461D4}.Release|x64.Build.0 = Release|Any CPU
 		{0E74B2F6-BC5A-4A3D-93F2-63F0CEB461D4}.Release|x86.ActiveCfg = Release|Any CPU
 		{0E74B2F6-BC5A-4A3D-93F2-63F0CEB461D4}.Release|x86.Build.0 = Release|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Debug|Win32.Build.0 = Debug|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Debug|x64.Build.0 = Debug|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Debug|x86.Build.0 = Debug|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Release|Win32.ActiveCfg = Release|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Release|Win32.Build.0 = Release|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Release|x64.ActiveCfg = Release|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Release|x64.Build.0 = Release|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Release|x86.ActiveCfg = Release|Any CPU
+		{73463872-C0FC-4794-834E-82FA794FFE4D}.Release|x86.Build.0 = Release|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Debug|Win32.Build.0 = Debug|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Debug|x64.Build.0 = Debug|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Debug|x86.Build.0 = Debug|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Release|Any CPU.Build.0 = Release|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Release|Win32.ActiveCfg = Release|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Release|Win32.Build.0 = Release|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Release|x64.ActiveCfg = Release|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Release|x64.Build.0 = Release|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Release|x86.ActiveCfg = Release|Any CPU
+		{549B6724-BC8D-4DF8-BFD6-A218D9F2E160}.Release|x86.Build.0 = Release|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Debug|Win32.Build.0 = Debug|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Debug|x64.Build.0 = Debug|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Debug|x86.Build.0 = Debug|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Release|Win32.ActiveCfg = Release|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Release|Win32.Build.0 = Release|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Release|x64.ActiveCfg = Release|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Release|x64.Build.0 = Release|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Release|x86.ActiveCfg = Release|Any CPU
+		{94A07D30-9CA1-4DED-8564-66D381BE05CC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

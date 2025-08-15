@@ -1,8 +1,9 @@
-package conversion.category_theory;
+package category_theory;
 
-import conversion.category_theory.interfaces.ICategoryArrow;
-import conversion.category_theory.interfaces.ICategoryObject;
-import conversion.category_theory.interfaces.IDesktop;
+import category_theory.interfaces.ICategoryArrow;
+import category_theory.interfaces.ICategoryObject;
+import category_theory.interfaces.IDesktop;
+import general_service.interfaces.IPostSetArrow;
 
 import java.util.*;
 
@@ -68,6 +69,28 @@ arrowMap.put(arrow.getArrowName(), arrow);
     public ICategoryArrow getCategoryArrow(String name) {
        ICategoryArrow a = arrowMap.get(name);
        return a;
+    }
+
+    protected void pastSet()
+    {
+        for (int i = 0; i < arrows.size(); i++)
+        {
+            var a = arrows.get(i);
+            if (a instanceof IPostSetArrow postSetArrow)
+            {
+                postSetArrow.postSetArrow();
+            }
+        }
+
+        for (int i = 0; i < objects.size(); i++)
+        {
+            var o = objects.get(i);
+            if (o instanceof IPostSetArrow postSetArrow)
+            {
+                postSetArrow.postSetArrow();
+            }
+        }
+
     }
 }
 

@@ -1,7 +1,6 @@
 ﻿using BaseTypes;
 using BaseTypes.CodeCreator.Interfaces;
 using BaseTypes.Interfaces;
-using BaseTypes.Utils;
 using DataPerformer.Interfaces;
 using DataPerformer.Portable.Measurements;
 using Diagram.UI.Attributes;
@@ -11,9 +10,7 @@ using FormulaEditor;
 using FormulaEditor.CodeCreators;
 using FormulaEditor.CodeCreators.Interfaces;
 using FormulaEditor.Interfaces;
-using System.Reflection.Emit;
 using System.Text;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DataPerformer.Formula.TypeScript
 {

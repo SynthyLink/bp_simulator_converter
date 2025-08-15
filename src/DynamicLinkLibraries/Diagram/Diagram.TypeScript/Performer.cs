@@ -1,6 +1,4 @@
-﻿using DataPerformer.Interfaces;
-using Diagram.UI.Interfaces;
-using System.ComponentModel;
+﻿using Diagram.UI.Interfaces;
 
 namespace Diagram.UI.TypeScript
 {

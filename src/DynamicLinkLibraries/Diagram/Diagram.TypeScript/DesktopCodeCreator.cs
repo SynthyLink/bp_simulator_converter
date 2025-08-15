@@ -2,7 +2,6 @@
 
 using Diagram.UI.Attributes;
 using Diagram.UI.CodeCreators.Interfaces;
-using Diagram.UI;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;
 
@@ -13,7 +12,7 @@ namespace Diagram.UI.TypeScript
     [Language("TS", ".ts")]
     internal class DesktopCodeCreator : IDesktopCodeCreator
     {
-        Diagram.UI.Performer performer = new Diagram.UI.Performer();
+        UI.Performer performer = new ();
  
         
         Performer p = new();

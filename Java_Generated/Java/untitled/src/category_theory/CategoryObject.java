@@ -1,10 +1,7 @@
-package conversion.category_theory;
+package category_theory;
 
-import conversion.category_theory.interfaces.ICategoryObject;
-import conversion.category_theory.interfaces.IDesktop;
-
-import java.util.HashMap;
-import java.util.Objects;
+import category_theory.interfaces.ICategoryObject;
+import category_theory.interfaces.IDesktop;
 
 /**
  *

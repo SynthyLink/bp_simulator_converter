@@ -1,11 +1,11 @@
-package conversion.category_theory.interfaces;
+package category_theory.interfaces;
 
 
 public interface ICategoryArrow
 {
     ICategoryObject getSource();
 
-    ICategoryObject getTagret();
+    ICategoryObject getTarget();
 
     void setSource(ICategoryObject source);
 

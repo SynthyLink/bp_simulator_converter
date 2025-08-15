@@ -1,6 +1,5 @@
 ﻿using AssemblyService.Attributes;
 using FormulaEditor;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DataPerformer.Formula.TypeScript
 {

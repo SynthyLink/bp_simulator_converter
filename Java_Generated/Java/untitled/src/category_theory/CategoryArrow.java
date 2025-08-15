@@ -1,8 +1,8 @@
-package conversion.category_theory;
+package category_theory;
 
-import conversion.category_theory.interfaces.ICategoryArrow;
-import conversion.category_theory.interfaces.ICategoryObject;
-import conversion.category_theory.interfaces.IDesktop;
+import category_theory.interfaces.ICategoryArrow;
+import category_theory.interfaces.ICategoryObject;
+import category_theory.interfaces.IDesktop;
 
 public class CategoryArrow implements ICategoryArrow {
 
@@ -37,7 +37,7 @@ public class CategoryArrow implements ICategoryArrow {
      * @return
      */
     @Override
-    public ICategoryObject getTagret() {
+    public ICategoryObject getTarget() {
         return target;
     }
 
@@ -54,7 +54,7 @@ this.source = source;
      */
     @Override
     public void setTarget(ICategoryObject target) {
-
+        this.target = target;
     }
 
     /**

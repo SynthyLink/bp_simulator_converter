@@ -1,5 +1,5 @@
 import { FictiveDataConsumer } from "../../Library/Fiction/FictiveDataConsumer";
-import { EulerProcessor } from "../../Library/Measurements/DifferentialEquations/Processors/EulerProcessor";
+import { RungeProcessor } from "../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor";
 import { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
 import { PefrormerMeasuremets } from "../../Library/Measurements/PefrormerMeasuremets";
 import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
@@ -27,10 +27,10 @@ export class ODEAct extends ODE
     public test(): void
     {
         try {
-            let processor = new EulerProcessor();
+            let processor = new RungeProcessor();
             var runtime = new DataRuntimeConsumerODE(this.dc, processor);
             var p = new PefrormerMeasuremets();
-            p.peformFixedStepCalculation(runtime, 0, 0.01, 40, this);
+            p.peformFixedStepCalculation(runtime, 0, 0.01, 45, this);
         }
         catch (e: any)
         {

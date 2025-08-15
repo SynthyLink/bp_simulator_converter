@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ODEAct = void 0;
 const FictiveDataConsumer_1 = require("../../Library/Fiction/FictiveDataConsumer");
-const EulerProcessor_1 = require("../../Library/Measurements/DifferentialEquations/Processors/EulerProcessor");
+const RungeProcessor_1 = require("../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor");
 const PefrormerMeasuremets_1 = require("../../Library/Measurements/PefrormerMeasuremets");
 const DataRuntimeConsumerODE_1 = require("../../Library/Runtime/DataRuntimeConsumerODE");
 const ODE_1 = require("../ODE");
@@ -21,10 +21,10 @@ class ODEAct extends ODE_1.ODE {
     }
     test() {
         try {
-            let processor = new EulerProcessor_1.EulerProcessor();
+            let processor = new RungeProcessor_1.RungeProcessor();
             var runtime = new DataRuntimeConsumerODE_1.DataRuntimeConsumerODE(this.dc, processor);
             var p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
-            p.peformFixedStepCalculation(runtime, 0, 0.01, 40, this);
+            p.peformFixedStepCalculation(runtime, 0, 0.01, 45, this);
         }
         catch (e) {
             let i = 0;

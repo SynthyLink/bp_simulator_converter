@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\AssemblyService\AssemblyService.csproj" />
+    <ProjectReference Include="..\..\Diagram\Diagram\Diagram.csproj" />
+    <ProjectReference Include="..\DataPerformer.Formula\DataPerformer.Formula.csproj" />
+    <ProjectReference Include="..\DataPerformer.Interfaces\DataPerformer.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>
