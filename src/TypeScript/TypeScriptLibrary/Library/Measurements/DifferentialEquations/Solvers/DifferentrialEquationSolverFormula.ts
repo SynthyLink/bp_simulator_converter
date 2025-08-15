@@ -1,3 +1,4 @@
+import { IDesktop } from "../../../Interfaces/IDesktop";
 import { IPostSetArrow } from "../../../Interfaces/IPostSetArrow";
 import { IValue } from "../../../Interfaces/IValue";
 import { DataConsumerVariadbleMeasurementsStarted } from "../../DataConsumerVariadbleMeasurementsStarted";
@@ -5,8 +6,18 @@ import { Variable } from "../../Variables/Variable";
 import { IDifferentialEquationSolver } from "../Interfaces/IDifferentialEquationSolver";
 
 export class DifferentrialEquationSolverFormula extends DataConsumerVariadbleMeasurementsStarted
-    implements IDifferentialEquationSolver, IPostSetArrow
-{
+    implements IDifferentialEquationSolver, IPostSetArrow {
+
+    constructor(desktop: IDesktop, name: string)
+    {
+        super(desktop, name);
+        this.typeName = "DifferentrialEquationSolverFormula";
+        this.types.push("IDifferentialEquationSolver");
+        this.types.push("IPostSetArrow");
+        this.types.push("DifferentrialEquationSolverFormula");
+    }
+
+
     calculateDerivations(): void
     {
         this.feedback.setFeedBackAliases();
@@ -15,9 +26,11 @@ export class DifferentrialEquationSolverFormula extends DataConsumerVariadbleMea
         this.save();
     }
 
-    copyVariablesToSolver(offset: number, variables: number[]): void {
+    copyVariablesToSolver(offset: number, variables: number[]): void
+    {
         let n = this.output.length;
-        for (var i = 0; i < n; i++) {
+        for (var i = 0; i < n; i++)
+        {
             this.output[i].setIValue(variables[i + offset]);
         }
     }

@@ -1,11 +1,9 @@
-import { Performer } from "../../../Performer";
 import { IMeasurements } from "../../Interfaces/IMeasurements";
 import { IDifferentialEquationProcessor } from "../Interfaces/IDifferentialEquationProcessor ";
 import { DifferentialEquationProcessor } from "./DifferentialEquationProcessor";
 
 export class EulerProcessor extends DifferentialEquationProcessor
 {
-    performer: Performer = new Performer();
 
     w: number[] = [];
 
@@ -37,7 +35,7 @@ export class EulerProcessor extends DifferentialEquationProcessor
                 var mea = m.getMeasurement(j);
                 var v = this.performer.getDerivationMeasurement(mea);
                 var y = this.performer.convertFromAny<number>(v);
-                this.w[i] += this.w[i] + y * dt;
+                this.w[i] +=  y * dt;
                 ++i;
             }
             s.copyVariablesToSolver(i - count, this.w);
@@ -55,6 +53,5 @@ export class EulerProcessor extends DifferentialEquationProcessor
     {
         return new EulerProcessor();
     }
-
 
 }

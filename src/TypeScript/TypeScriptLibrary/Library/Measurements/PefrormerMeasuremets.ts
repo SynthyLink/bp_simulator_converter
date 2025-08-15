@@ -42,7 +42,8 @@ export class PefrormerMeasuremets
             if (measurements.find(mea => true) === undefined) {
 
             }
-            else {
+            else
+            {
                 measurements.push(mea);
                 let dc = mea as unknown as IDataConsumer;
                 //     if (dc instanceof IDataConsumer)
@@ -78,20 +79,31 @@ export class PefrormerMeasuremets
             {
                 act.action();
             }
-            st += step;
+            let s = st + step;
+            if (i > 0)
+            {
+                runtime.stepRuntime(st, s);
+            }
+            st = s;
         }
 
     }
 
     public peformFixedStepCalculation(runtime: IDataRuntime, start: number, step: number, steps: number, act: IAction): void
     {
-        var tm: ITimeMeasurementProvider = new TimeMeasurementProvider();
+        let tm = new TimeMeasurementProvider();
         runtime.setTimeProvider(tm);
         runtime.startRuntime(start);
         var st = start;
+        var curr = start;
         for (var i = 0; i < steps; i++)
         {
             tm.setTime(st);
+            if (i > 0)
+            {
+                runtime.stepRuntime(curr, st);
+                curr = st;
+            }
             runtime.updateRuntime();
             act.action();
             st += step;

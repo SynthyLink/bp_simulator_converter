@@ -12,7 +12,7 @@ import { IStarted } from "../Measurements/Interfaces/IStarted";
 export class DataRuntimeConsumer implements IDataRuntime
 {
 
-    performer: Performer = new Performer();
+    protected performer: Performer = new Performer();
 
     protected timeProvider !: ITimeMeasurementProvider;
 
@@ -31,7 +31,7 @@ export class DataRuntimeConsumer implements IDataRuntime
     constructor(dataConsumer: IDataConsumer)
     {
         let nm: IMeasurements[] = [];
-        this.add(dataConsumer, nm);
+        this.addDataConsuner(dataConsumer, nm);
         for (let i = nm.length - 1; i >= 0; i--)
         {
             var n = nm[i];
@@ -50,8 +50,8 @@ export class DataRuntimeConsumer implements IDataRuntime
             this.measurements.push(dataConsumer as unknown as IMeasurements);
         }
 
-
     }
+
     addCategoryObjectToRuntime(object: ICategoryObject): void {
         this.categoryObjects.push(object);
         var n = object.getCategoryObjectName();
@@ -74,6 +74,11 @@ export class DataRuntimeConsumer implements IDataRuntime
         {
             this.measurements[i].updateMeasurements();
         }
+    }
+
+    stepRuntime(begin: number, end: number): void
+    {
+
     }
 
     refreshRuntime(): void {
@@ -117,7 +122,7 @@ export class DataRuntimeConsumer implements IDataRuntime
 
 
  
-    add(dc: IDataConsumer, measurements: IMeasurements[]): void
+    addDataConsuner(dc: IDataConsumer, measurements: IMeasurements[]): void
     {
         var m = dc.getAllMeasurements();
         var n = m.length;
@@ -134,7 +139,7 @@ export class DataRuntimeConsumer implements IDataRuntime
                     continue;
                 }
                 let c: IDataConsumer = mea as unknown as IDataConsumer;
-                this.add(c, measurements);
+                this.addDataConsuner(c, measurements);
 
             }
         }

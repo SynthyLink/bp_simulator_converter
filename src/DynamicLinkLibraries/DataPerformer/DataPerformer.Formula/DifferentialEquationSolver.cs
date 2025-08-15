@@ -23,7 +23,6 @@ using DataPerformer.Formula.Interfaces;
 using ErrorHandler;
 
 using NamedTree;
-using System.Linq.Expressions;
 
 
 namespace DataPerformer.Formula
@@ -1658,11 +1657,20 @@ namespace DataPerformer.Formula
 
         internal Dictionary<object, object> VariableValues => vars;
 
-        Dictionary<string, ObjectFormulaTree> std = new Dictionary<string, ObjectFormulaTree>();
 
-        Dictionary<string, ObjectFormulaTree> IStringTreeDictionary.Dictionary => std;
+        Dictionary<string, ObjectFormulaTree> IStringTreeDictionary.Dictionary => GetDic();
 
-
+        Dictionary<string, ObjectFormulaTree> GetDic()
+        {
+            var d = new Dictionary<string, ObjectFormulaTree>();
+            foreach (var v in variables)
+            {
+                var o = v.Value as object[];
+                var t = o[2] as ObjectFormulaTree;
+                d[v.Key + ""] = t;
+            }
+            return d;
+        }
 
         #endregion
 
@@ -1918,8 +1926,8 @@ namespace DataPerformer.Formula
                 if (owntree == null)
                 {
                     owntree = new ObjectFormulaTree(this);
-                    IStringTreeDictionary d = equationSolver;
-                    d.Dictionary[symbol] = owntree;
+          //          IStringTreeDictionary d = equationSolver;
+          //          d.Dictionary[symbol] = owntree;
                 }
                 return owntree;
             }

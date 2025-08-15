@@ -21,8 +21,8 @@ class ODE_CategoryObject_0 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["a", 1 ],
-			["b", 1 ]
+			["b", 1 ],
+			["a", 1 ]
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", 0, 0);
@@ -116,9 +116,9 @@ class ODE_CategoryObject_1 extends DifferentrialEquationSolverFormula
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
+			["a", 1 ],
 			["y", 1 ],
-			["x", 0 ],
-			["a", 1 ]
+			["x", 0 ]
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("x", 0, 0);
@@ -218,9 +218,9 @@ class ODE_CategoryObject_1 extends DifferentrialEquationSolverFormula
 	save() : void {
 		var v = this.derivations;
 		var x0 = v.get("y");
-		x0?.setIValue(this.get_2());
+		x0?.setIValue(this.get_7());
 		var x1 = v.get("x");
-		x1?.setIValue(this.get_4());
+		x1?.setIValue(this.get_3());
 	}
 	
 	setFeedback(): void {

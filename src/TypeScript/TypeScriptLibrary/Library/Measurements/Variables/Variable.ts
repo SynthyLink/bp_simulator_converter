@@ -33,18 +33,24 @@ export class Variable implements IMeasurement, IObject, IValue, IDerivation
     {
         return this.value;
     }
-    setIValue(value: any): void {
+    setIValue(value: any): void
+    {
         this.value = value;
     }
 
 
-    getClassName(): string {
+    getClassName(): string
+    {
         return this.className;
     }
-    imlplementsType(type: string): boolean {
+
+    imlplementsType(type: string): boolean
+    {
         return this.types.indexOf(type) >= 0;
     }
-    getName(): string {
+
+    getName(): string
+    {
         return this.name;
     }
 
@@ -52,21 +58,27 @@ export class Variable implements IMeasurement, IObject, IValue, IDerivation
         return this.name;
     }
 
-    getMeasurementType() {
+    getMeasurementType()
+    {
         return this.type;
     }
 
-    getMeasurementValue() {
+    getMeasurementValue()
+    {
         return this.value;
     }
 
-    getDerivation(): IMeasurement {
+    getDerivation(): IMeasurement
+    {
         return this.measurement;
     }
-    setDerivation(derivation: IMeasurement): void {
+
+    setDerivation(derivation: IMeasurement): void
+    {
         this.measurement = derivation;
     }
-    setDerivationVarible(variable: Variable): void {
+    setDerivationVarible(variable: Variable): void
+    {
         this.derivation = variable;
     }
 

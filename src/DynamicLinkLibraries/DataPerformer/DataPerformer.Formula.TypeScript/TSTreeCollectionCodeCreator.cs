@@ -21,11 +21,7 @@ namespace DataPerformer.Formula.TypeScript
 
         static NamedTree.Performer  formulaPerformer = new ();
 
-
-        Diagram.UI.TypeScript.Performer performer = new();
-
-        DataPerformer.Interfaces.Performer nPerformer = new();
-
+    
         protected Dictionary<string, int> Output
         {
             get;

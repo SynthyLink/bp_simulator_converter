@@ -5,13 +5,16 @@ import { SimpleFeedAct } from './Tests/Wrappers/SimpleFeedAct';
 import { TwoAct } from './Tests/Wrappers/TwoAct';
 import { TestObjectTransformerSimpleAct } from './Tests/Wrappers/TestObjectTransformerSimpleAct';
 import { ConditionTestAct } from './Tests/Wrappers/ConditionTestAct';
+import { ODEAct } from './Tests/Wrappers/ODEAct';
 //actOrbit();
 //actRandom();
 //actTwo();
 //actSimpleFeed();
 //actTestObjectTransformerSimple();
 
-actCondition();
+//actCondition();
+
+actODE();
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -66,6 +69,17 @@ function finish(e: any) {
         rl.close();
     });
 
+}
+
+function actODE() {
+    try
+    {
+        var o = new ODEAct();
+        o.test();
+    }
+    catch (e: any) {
+        finish(e);
+    }
 }
 
 function actCondition()

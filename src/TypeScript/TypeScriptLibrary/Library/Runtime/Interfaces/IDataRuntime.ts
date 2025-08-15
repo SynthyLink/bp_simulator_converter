@@ -19,6 +19,8 @@ export interface IDataRuntime
     /// <param name="time">Start time</param>
     startRuntime(time: number): void;
 
+    stepRuntime(begin: number, end: number): void;
+
     
     addCategoryObjectToRuntime(object: ICategoryObject): void;
 
