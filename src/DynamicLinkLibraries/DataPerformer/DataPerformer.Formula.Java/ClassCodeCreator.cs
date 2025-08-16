@@ -1,12 +1,5 @@
 ﻿using Diagram.UI;
 using Diagram.UI.Attributes;
-using Diagram.UI.Interfaces;
-using FormulaEditor.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataPerformer.Formula.Java
 {
@@ -14,17 +7,11 @@ namespace DataPerformer.Formula.Java
     /// Creator of TS code
     /// </summary>
     [Language("Java")]
-    internal class ClassCodeCreator : IClassCodeCreator
+    internal class ClassCodeCreator : Portable.Java.ClassCodeCreator
     {
-        public ClassCodeCreator()
+        public ClassCodeCreator() : base(false)
         {
             this.AddCodeCreator();
-        }
-
-        static DataPerformer.Interfaces.Performer nPerformer = new();
-
-        static NamedTree.Performer formulaPerformer = new();
-        static readonly Dictionary<Func<object, bool>, Func<string, object, List<string>>>
             dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
                    { (object o) => { return o is VectorFormulaConsumer; } , CreateVectorConsumer }
@@ -32,23 +19,19 @@ namespace DataPerformer.Formula.Java
            //      { (object o) => { return o is Recursive; } , CreateRecursive },
           };
 
-
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
-        {
-            foreach (Func<object, bool> key in dictionary.Keys)
+            classes = new Dictionary<string, string>()
             {
-                if (key(obj))
-                {
-                    return dictionary[key](preffix, obj);
-                }
-            }
-            return null;
-        }
-        static List<string> CreateVectorConsumer(string preffix, object obj)
-        {
-            return null;// return CreateTreeCollection(preffix, obj as ITreeCollection);
+                {"VectorFormulaConsumer", "measurements.DataConsumerMeasurements" }
+            };
         }
 
+
+
+
+        List<string> CreateVectorConsumer(string preffix, object obj)
+        {
+            return new List<string>(){"}"} ;
+        }
 
     }
 }

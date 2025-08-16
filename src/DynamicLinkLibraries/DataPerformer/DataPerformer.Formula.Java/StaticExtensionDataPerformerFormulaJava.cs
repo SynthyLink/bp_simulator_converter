@@ -10,9 +10,8 @@ namespace DataPerformer.Formula.Java
     {
         static  StaticExtensionDataPerformerFormulaJava()
         {
-
+            new ClassCodeCreator();
         }
-
 
         /// <summary>
         /// Initialize itself

@@ -10,6 +10,7 @@ import java.util.*;
 public class Desktop  implements IDesktop
 {
     protected List<ICategoryObject> objects = new ArrayList<>();
+
     protected List<ICategoryArrow> arrows = new ArrayList<>();
 
     protected Map<String, ICategoryObject> objectMap = new TreeMap<>();
@@ -71,7 +72,7 @@ arrowMap.put(arrow.getArrowName(), arrow);
        return a;
     }
 
-    protected void pastSet()
+    protected void postSet()
     {
         for (int i = 0; i < arrows.size(); i++)
         {

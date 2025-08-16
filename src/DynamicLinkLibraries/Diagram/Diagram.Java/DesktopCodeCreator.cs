@@ -21,7 +21,10 @@ namespace Diagram.UI.Java
             l.Add("");
             l.Add("import category_theory.Desktop;");
             l.Add("");
-            l.Add("public class " + className + " extends Desktop {");
+            l.Add("import category_theory.interfaces.IDesktop;");
+            l.Add("");
+            l.Add("public class " + className + " extends Desktop");
+            l.Add("{");
             l.Add("");
             List<ICategoryObject> categoryObjects;
             List<ICategoryArrow> categoryArrows;
@@ -32,7 +35,7 @@ namespace Diagram.UI.Java
             for (int i = 0; i < categoryObjects.Count; i++)
             {
                 var categoryObject = categoryObjects[i];
-                var pr = className + "." + "CategoryObject" + i;
+                var pr = "CategoryObject" + i;
                 var c = classCodeCreator.CreateCode(pr, categoryObject);
                 tPerformrer.Add(l, c, 2);
                 l.Add("");
@@ -47,21 +50,25 @@ namespace Diagram.UI.Java
             }
             l.Add("\tpublic " + className + "() {");
             l.Add("");
-            for (int i = 0; i < objects.Count; i++)
+            for (int i = 0; i < categoryObjects.Count; i++)
             {
-                l.Add("\t\tnew CategoryObject_" + i + "();");
+                var o = categoryObjects[i];
+                var r = performer.GetRootName(o);
+                l.Add("\t\tnew " + className + ".CategoryObject" + i + 
+                    "(\"" + r  + "\", this);");
             }
-            for (int i = 0; i < arrows.Count; i++)
+            for (int i = 0; i < categoryArrows.Count; i++)
             {
-                l.Add("\t\tnew CategoryArrow" + i + "();");
+                l.Add("\t\tnew " + className + ".CategoryArrow" + i +
+                    "(\"" + performer.GetRootName(categoryArrows[i]) + "\", this);");
             }
             for (int i = 0; i < categoryArrows.Count; i++)
             {
                 var categoryArrow = categoryArrows[i];
                 var sn = objects[categoryArrow.Source];
                 var tn = objects[categoryArrow.Target];
-                l.Add("\t\tarrows[" + i + "].setSource(objects[" + sn + "]);");
-                l.Add("\t\tarrows[" + i + "].setTarget(objects[" + tn + "]);");
+                l.Add("\t\tarrows.get(" + i + ").setSource(objects.get(" + sn + "));");
+                l.Add("\t\tarrows.get(" + i + ").setTarget(objects.get(" + tn + "));");
             }
             l.Add("\t\tpostSet();");
             l.Add("\t}");

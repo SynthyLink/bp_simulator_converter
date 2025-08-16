@@ -28,7 +28,7 @@ public class DataLink extends CategoryArrow {
     @Override
     public void setTarget(ICategoryObject target) {
         super.setTarget(target);
-        measurements = (Measurements) target;
+        measurements = (IMeasurements) target;
         dataConsumer.addMeasurements(measurements);
     }
 

@@ -24,8 +24,6 @@ namespace DataPerformer.Formula.TypeScript
 
         static Diagram.UI.TypeScript.Performer performer = new();
 
-
-
         #region Ctor
         internal TSClassCodeCreator()
         {

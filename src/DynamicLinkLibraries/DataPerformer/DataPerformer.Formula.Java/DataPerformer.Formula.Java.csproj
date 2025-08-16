@@ -11,6 +11,7 @@
     <ProjectReference Include="..\..\Diagram\Diagram\Diagram.csproj" />
     <ProjectReference Include="..\DataPerformer.Formula\DataPerformer.Formula.csproj" />
     <ProjectReference Include="..\DataPerformer.Interfaces\DataPerformer.Interfaces.csproj" />
+    <ProjectReference Include="..\DataPerformer.Portable.Java\DataPerformer.Portable.Java.csproj" />
   </ItemGroup>
 
 </Project>

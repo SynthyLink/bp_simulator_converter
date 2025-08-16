@@ -37,7 +37,7 @@ public class TestDesktop extends Desktop {
         arrows.get(0).setSource(objects.get(0));
         arrows.get(0).setTarget(objects.get(1));
 
-        pastSet();
+        postSet();
     }
 
 

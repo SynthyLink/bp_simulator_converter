@@ -1,0 +1,45 @@
+package generated;
+
+import category_theory.Desktop;
+
+import category_theory.interfaces.IDesktop;
+
+public class ODE extends Desktop
+{
+
+		protected class CategoryObject0 extends measurements.DataConsumerMeasurements
+		{
+			public CategoryObject0(String name, IDesktop desktop) {
+				super(name,  desktop);
+				}
+		}
+		
+
+		protected class CategoryObject1 extends measurements.DataConsumerMeasurements
+		{
+			public CategoryObject1(String name, IDesktop desktop) {
+				super(name,  desktop);
+				}
+		}
+		
+
+		protected class CategoryArrow0 extends measurements.arrows.DataLink
+		{
+			public CategoryArrow0(String name, IDesktop desktop) {
+				super(name,  desktop);
+				}
+		}
+		
+
+	public ODE() {
+
+		new ODE.CategoryObject0("input", this);
+		new ODE.CategoryObject1("Output", this);
+		new ODE.CategoryArrow0("22", this);
+		arrows.get(0).setSource(objects.get(1));
+		arrows.get(0).setTarget(objects.get(0));
+		postSet();
+	}
+
+
+}
