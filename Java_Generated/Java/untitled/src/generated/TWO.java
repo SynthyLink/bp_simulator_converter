@@ -4,7 +4,7 @@ import category_theory.Desktop;
 
 import category_theory.interfaces.IDesktop;
 
-public class ODE extends Desktop
+public class TWO extends Desktop
 {
 
 	protected class CategoryObject0 extends measurements.DataConsumerMeasurements
@@ -31,11 +31,11 @@ public class ODE extends Desktop
 	}
 	
 
-	public ODE() {
+	public TWO() {
 
-		new ODE.CategoryObject0("input", this);
-		new ODE.CategoryObject1("Output", this);
-		new ODE.CategoryArrow0("22", this);
+		new TWO.CategoryObject0("input", this);
+		new TWO.CategoryObject1("Output", this);
+		new TWO.CategoryArrow0("22", this);
 		arrows.get(0).setSource(objects.get(1));
 		arrows.get(0).setTarget(objects.get(0));
 		postSet();

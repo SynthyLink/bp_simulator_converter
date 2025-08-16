@@ -37,7 +37,7 @@ namespace Diagram.UI.Java
                 var categoryObject = categoryObjects[i];
                 var pr = "CategoryObject" + i;
                 var c = classCodeCreator.CreateCode(pr, categoryObject);
-                tPerformrer.Add(l, c, 2);
+                tPerformrer.Add(l, c, 1);
                 l.Add("");
             }
             for (int i = 0; i < categoryArrows.Count; i++)
@@ -45,7 +45,7 @@ namespace Diagram.UI.Java
                 var categoryArrow = categoryArrows[i];
                 var pr = "CategoryArrow" + i;
                 var c = classCodeCreator.CreateCode(pr, categoryArrow);
-                tPerformrer.Add(l, c, 2);
+                tPerformrer.Add(l, c, 1);
                 l.Add("");
             }
             l.Add("\tpublic " + className + "() {");

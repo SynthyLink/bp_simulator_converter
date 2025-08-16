@@ -141,7 +141,7 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
                 {
                     IDerivation der = m[j] as IDerivation;
                     z[i] = ToDouble(der.Derivation);
-                    k[3, i] = z[i] * 0.5 * dt;
+                    k[3, i] = z[i] * dt;
                     ++i;
                 }
             }
@@ -151,8 +151,7 @@ namespace DataPerformer.Portable.DifferentialEquationProcessors
                 IDifferentialEquationSolver s = m as IDifferentialEquationSolver;
                 for (int j = 0; j < s.GetVariablesCount(); j++)
                 {
-                    var c = (k[0, i] + 2 * k[1, i] + 2 * k[2, i] + k[3, i]) / 6;
-                    f[i] += c;
+                    f[i] += (k[0, i] + 2 * k[1, i] + 2 * k[2, i] + k[3, i]) / 6;
                     ++i;
                 }
                 s.CopyVariablesToSolver(i - s.GetVariablesCount(), f);

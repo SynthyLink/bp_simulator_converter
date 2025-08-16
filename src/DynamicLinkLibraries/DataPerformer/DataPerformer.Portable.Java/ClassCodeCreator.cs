@@ -61,10 +61,6 @@ namespace DataPerformer.Portable.Java
             l.Add("\t\tsuper(name,  desktop);");
             return l;
         }
-        /*
-      public CategoryArrow0(String name, IDesktop desktop) {
-            super(name, desktop);
-          */
 
 
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
@@ -79,7 +75,7 @@ namespace DataPerformer.Portable.Java
                 if (key(obj))
                 {
                     var l = CreateExt(preffix, obj);
-                    var ll =   dictionary[key](preffix, obj);
+                    var ll = dictionary[key](preffix, obj);
                     formulaPerformer.Add(l, ll, 2);
                     l.Add("}");
                     l.Add("");

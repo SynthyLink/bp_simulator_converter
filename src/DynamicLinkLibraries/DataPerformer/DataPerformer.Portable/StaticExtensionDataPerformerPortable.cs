@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
-using System.Threading;
-
-using AssemblyService.Attributes;
-
-using BaseTypes;
-using BaseTypes.Attributes;
-using BaseTypes.Interfaces;
 
 using CategoryTheory;
 
@@ -15,6 +8,12 @@ using Diagram.UI;
 using Diagram.UI.Aliases;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;
+
+using AssemblyService.Attributes;
+
+using BaseTypes;
+using BaseTypes.Attributes;
+using BaseTypes.Interfaces;
 
 using DataPerformer.Attributes;
 using DataPerformer.Interfaces;
@@ -24,9 +23,9 @@ using DataPerformer.Portable.Measurements;
 using DataPerformer.Portable.Wrappers;
 
 using Event.Interfaces;
-
+using System.Drawing;
 using ErrorHandler;
-
+using System.Threading;
 using NamedTree;
 
 namespace DataPerformer.Portable
