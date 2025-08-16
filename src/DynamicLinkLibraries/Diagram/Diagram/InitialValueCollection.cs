@@ -29,5 +29,10 @@ namespace Diagram.UI
                 value.Set();
             }
         }
+
+        void IInitialValueCollection.Clear()
+        {
+            values.Clear();
+        }
     }
 }

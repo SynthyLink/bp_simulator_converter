@@ -22,5 +22,10 @@ namespace BaseTypes.Interfaces
         /// Sets all
         /// </summary>
         void Set();
+
+        /// <summary>
+        /// Clears itself
+        /// </summary>
+        void Clear();
     }
 }

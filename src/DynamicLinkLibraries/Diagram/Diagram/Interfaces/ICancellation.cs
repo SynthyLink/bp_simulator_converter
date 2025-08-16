@@ -13,7 +13,7 @@ namespace Diagram.UI.Interfaces
         CancellationToken CancellationToken { get; }
 
         /// <summary>
-        /// Creates tokem
+        /// Creates token
         /// </summary>
         /// <returns></returns>
         CancellationToken CreateCancellationToken();

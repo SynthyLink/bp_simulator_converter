@@ -23,6 +23,7 @@ using DataPerformer.Formula.Interfaces;
 using ErrorHandler;
 
 using NamedTree;
+using System.Linq.Expressions;
 
 
 namespace DataPerformer.Formula
@@ -55,18 +56,29 @@ namespace DataPerformer.Formula
         /// <summary>
         /// Table of variables of equations. Table contains initial values and derivations of variables
         /// </summary>
-        protected Dictionary<object, object> variables = new ();
+        internal Dictionary<object, object> variables = new ();
 
         /// <summary>
         /// Table representation of input parameters
         /// </summary>
         new private Dictionary<char, VariableMeasurement> parameters = new ();
 
+        private Variable[] output;
+
+
 
         /// <summary>
         /// Output parameters
         /// </summary>
-        private Variable[] output;
+        private Variable[] Output
+        {
+            get => output;
+            set
+            {
+                output = value;
+                Initial = new EnumerableInitialVaueCollection<Variable>(value);
+            }
+        }
 
         /// <summary>
         /// The time
@@ -165,6 +177,12 @@ namespace DataPerformer.Formula
 
         ITreeCollectionProxy proxy;
 
+        protected IInitialValueCollection Initial
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region Constructors
@@ -181,6 +199,7 @@ namespace DataPerformer.Formula
             pars = new Dictionary<object, object>();
             aliases = new Dictionary<object, object>();
             creator = VariableDetector.GetCreator(this);
+
         }
 
 
@@ -232,7 +251,7 @@ namespace DataPerformer.Formula
         void IDifferentialEquationSolver.CopyVariablesToSolver(int offset, double[] variables)
         {
             int i = offset;
-            foreach (Variable v in output)
+            foreach (Variable v in Output)
             {
                 v.Value = variables[i];
                 ++i;
@@ -476,7 +495,7 @@ namespace DataPerformer.Formula
             }
             List<object> l = new List<object>(variables.Keys);
             l.Sort();
-            output = new Variable[l.Count];
+            Output = new Variable[l.Count];
             variabelstr.Clear();
             AssociatedAddition aa = new AssociatedAddition(this, null);
             for (int i = 0; i < l.Count; i++)
@@ -497,7 +516,7 @@ namespace DataPerformer.Formula
                 o[2] = t;
                 string vn = c + "";
                 Variable v = acc[vn] as Variable;
-                output[i] = v;
+                Output[i] = v;
                 bool ne = deriOrder > 0;
                 if (deriOrders.ContainsKey(vn))
                 {
@@ -821,7 +840,7 @@ namespace DataPerformer.Formula
             }
             List<object> l = new List<object>(variables.Keys);
             l.Sort();
-            output = new Variable[l.Count];
+            Output = new Variable[l.Count];
             for (int i = 0; i < l.Count; i++)
             {
                 char c = (char)l[i];
@@ -839,7 +858,7 @@ namespace DataPerformer.Formula
                 o[2] = t;
                 string vn = c + "";
                 Variable v = acc[vn] as Variable;
-                output[i] = v;
+                Output[i] = v;
                 bool ne = deriOrder > 0;
                 int dor = deriOrder;
                 if (deriOrders.ContainsKey(vn))
@@ -1026,7 +1045,7 @@ namespace DataPerformer.Formula
             prepareStart = () => { };
             update = () =>
             {
-                foreach (Variable v in output)
+                foreach (Variable v in Output)
                 {
                     v.Update();
                 }
@@ -1083,9 +1102,9 @@ namespace DataPerformer.Formula
                 {
                     next = false;
                 }
-                for (int k = 0; k < output.Length; k++)
+                for (int k = 0; k < Output.Length; k++)
                 {
-                    Variable lv = output[k];
+                    Variable lv = Output[k];
                     string symb = lv.String;
                     bool ne = next;
                     bool cont = j < deriOrder;
@@ -1143,7 +1162,7 @@ namespace DataPerformer.Formula
         #region IMeasurements Members
 
 
-        protected override IEnumerable<IMeasurement> Children => output;
+        protected override IEnumerable<IMeasurement> Children => Output;
 
         /// <summary>
         /// Updates measurements data
@@ -1172,18 +1191,18 @@ namespace DataPerformer.Formula
         {
             get
             {
-                if (output == null)
+                if (Output == null)
                 {
                     return 0;
                 }
-                return output.Length;
+                return Output.Length;
             }
 
         }
 
         protected override IMeasurement GetMeasurement(int n)
         {
-            return output[n];
+            return Output[n];
         }
   
 
@@ -1302,8 +1321,8 @@ namespace DataPerformer.Formula
 
         void IStack.Push()
         {
-            if (output == null) return;
-            foreach (IStack s in output)
+            if (Output == null) return;
+            foreach (IStack s in Output)
             {
                 s.Push();
             }
@@ -1311,8 +1330,8 @@ namespace DataPerformer.Formula
 
         void IStack.Pop()
         {
-            if (output == null) return;
-            foreach (IStack s in output)
+            if (Output == null) return;
+            foreach (IStack s in Output)
             {
                 s.Pop();
             }
@@ -1333,14 +1352,14 @@ namespace DataPerformer.Formula
             {
                 if (outputD == null)
                 {
-                    outputD = new double[output.Length];
+                    outputD = new double[Output.Length];
                 }
-                else if (outputD.Length != output.Length)
+                else if (outputD.Length != Output.Length)
                 {
                     outputD = new double[outputD.Length];
                 }
                 int i = 0;
-                foreach (IMeasurement m in output)
+                foreach (IMeasurement m in Output)
                 {
                     outputD[i] = (double)m.Parameter();
                     ++i;
@@ -1350,7 +1369,7 @@ namespace DataPerformer.Formula
             set
             {
                 int i = 0;
-                foreach (Variable v in output)
+                foreach (Variable v in Output)
                 {
                     double x = value[i];
                     v.Value = x;
@@ -1365,7 +1384,7 @@ namespace DataPerformer.Formula
         void IStateDoubleVariables.Set(double[] input, int offset, int length)
         {
             int i = offset;
-            foreach (Variable v in output)
+            foreach (Variable v in Output)
             {
                 double x = input[i];
                 v.Value = x;
@@ -1387,12 +1406,14 @@ namespace DataPerformer.Formula
             try
             {
                 timeOld = time;
-                foreach (Variable v in output)
+           /*     foreach (Variable v in Output)
                 {
+                    break;
                     char c = v.Symbol;
                     object[] o = variables[c] as object[];
                     v.Value = (double)o[4];
-                }
+                }*/
+                Initial.Set();
                 prepareStart = () =>
                 {
                     UpdateChildrenData();
@@ -1431,6 +1452,9 @@ namespace DataPerformer.Formula
         #endregion
 
         #region Protected Members
+
+
+
 
         /// <summary>
         /// Time measure
@@ -1680,7 +1704,7 @@ namespace DataPerformer.Formula
         class Variable : IObjectOperation, 
             IPowered, IOperationAcceptor, IMeasurement, IDerivation, 
             IDerivationOperation, IStack, IMeasurementHolder, IAssociatedObject, IValue, 
-            ITreeCreator
+            ITreeCreator, IInitialValue
         {
 
             #region Fields
@@ -1932,8 +1956,22 @@ namespace DataPerformer.Formula
                 return owntree;
             }
 
-
+   
             ObjectFormulaTree ITreeCreator.Tree => CreateTree();
+
+            #endregion
+
+            #region
+
+            object IInitialValue.Value { get => GetValue(); set { } }
+
+            void IInitialValue.Set()
+            {
+                char c = Symbol;
+                object[] o = equationSolver.variables[c] as object[];
+                value = (double)o[4];
+            }
+
 
             #endregion
 

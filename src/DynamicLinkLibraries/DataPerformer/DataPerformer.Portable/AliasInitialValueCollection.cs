@@ -16,6 +16,7 @@ namespace DataPerformer.Portable
           var attr = performer.GetAttribute<CodeCreatorAttribute>(measurememts);
             if (attr != null && attr.AliasInitialState)
             {
+                initial.Clear();
                 for (int i = 0; i < measurememts.Count; i++)
                 {
                     var al = pr.InitialValue(alias, measurememts[i]);

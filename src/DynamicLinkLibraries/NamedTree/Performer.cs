@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using System.Security.Cryptography;
+﻿using System.Reflection;
+
 using System.Xml;
+
 using ErrorHandler;
 
 namespace NamedTree
@@ -30,6 +30,12 @@ namespace NamedTree
             {
                 list.Add(s + item);
             }
+        }
+
+        public IEnumerable<T> Convert<T, S>(IEnumerable<S> values) where T : class where S : class
+        {
+          return from value in values where value is T select value as T;
+
         }
 
 

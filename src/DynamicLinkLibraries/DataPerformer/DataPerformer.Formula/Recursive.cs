@@ -1045,6 +1045,7 @@ namespace DataPerformer.Formula
 				}
 				return;
 			}
+			return;
 			foreach (var alias in tempAliases.Keys)
 			{
 				aliases[alias] = tempAliases[alias];
