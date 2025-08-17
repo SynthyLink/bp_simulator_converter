@@ -14,7 +14,7 @@ namespace DataPerformer.Portable
         public AliasInitialValueCollection(IAlias alias, IMeasurements measurememts)
         {
           var attr = performer.GetAttribute<CodeCreatorAttribute>(measurememts);
-            if (attr != null && attr.AliasInitialState)
+            if (attr != null && attr.InitialState)
             {
                 initial.Clear();
                 for (int i = 0; i < measurememts.Count; i++)

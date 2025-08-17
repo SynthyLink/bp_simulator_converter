@@ -3,16 +3,17 @@
     /// <summary>
     /// Feedback alias
     /// </summary>
-    public interface IFeedbackAlias
+    public interface IFeedback
     {
         /// <summary>
         /// Sets itself
         /// </summary>
         void Set();
+    }
 
-        /// <summary>
-        /// Alias name
-        /// </summary>
+
+    public interface IFeedbackAlias : IFeedback
+    {
         IAliasName AliasName { get; }
     }
 }

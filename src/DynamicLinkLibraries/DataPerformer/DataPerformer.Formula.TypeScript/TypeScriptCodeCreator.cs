@@ -289,7 +289,7 @@ namespace DataPerformer.Formula.TypeScript
             var attr = perf.GetAttribute<CodeCreatorAttribute>(obj);
             if (attr != null)
             {
-                b = attr.AliasInitialState;
+                b = attr.InitialState;
             }
             return b;
 

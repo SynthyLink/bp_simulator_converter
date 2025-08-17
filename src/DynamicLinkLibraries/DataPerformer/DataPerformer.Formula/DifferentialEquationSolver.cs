@@ -23,7 +23,6 @@ using DataPerformer.Formula.Interfaces;
 using ErrorHandler;
 
 using NamedTree;
-using System.Linq.Expressions;
 
 
 namespace DataPerformer.Formula
@@ -31,7 +30,7 @@ namespace DataPerformer.Formula
     /// <summary>
     /// Solver of ordinary differential equations system
     /// </summary>
-    [CodeCreator(AliasInitialState = true, IsSysemOfDifferentialEquations = true)]
+    [CodeCreator(InitialState = true, IsSysemOfDifferentialEquations = true)]
     public class DifferentialEquationSolver : DataConsumerMeasurements, 
         IDifferentialEquationSolver, 
         IStarted,  ICheckCorrectness, IVariableDetector,
@@ -47,11 +46,6 @@ namespace DataPerformer.Formula
         internal Dictionary<object, object> Haliases;
 
         DataPerformerFormula dataPerformerFormula;
-
-        /// <summary>
-        /// Input dynamical parameter
-        /// </summary>
-    //    private Formula.DynamicalParameter par;
 
         /// <summary>
         /// Table of variables of equations. Table contains initial values and derivations of variables
@@ -109,11 +103,29 @@ namespace DataPerformer.Formula
         /// Table of aliases
         /// </summary>
         protected Dictionary<object, object> aliases = new ();
+        
+        
+        protected Dictionary<object, object> dic = new ();
 
         /// <summary>
         /// Table of aliases names
         /// </summary>
-        protected Dictionary<object, object> aliasNames = new ();
+        protected Dictionary<object, object> AliasNamesDictionary
+        {
+            get => dic;
+            set
+            {
+                dic.Clear();
+                if (value != null)
+                {
+                    foreach (var kvp in value)
+                    {
+                        dic[kvp.Key] = kvp.Value;
+                    }
+                }
+                feedbackCollection = new FeedbackAliasCollection(this, this, dic);
+            }
+        }
 
         /// <summary>
         /// Table of external aliases
@@ -199,7 +211,7 @@ namespace DataPerformer.Formula
             pars = new Dictionary<object, object>();
             aliases = new Dictionary<object, object>();
             creator = VariableDetector.GetCreator(this);
-
+            feedbackCollection = new FeedbackAliasCollection(this, this, new Dictionary<object, object>());
         }
 
 
@@ -267,6 +279,7 @@ namespace DataPerformer.Formula
             {
                 foreach (Variable v in externalAliases.Keys)
                 {
+                    break;
                     AliasName an = externalAliases[v];
                     IMeasurement m = v;
                     var p = m.Parameter;
@@ -277,6 +290,7 @@ namespace DataPerformer.Formula
                     }
                     an.SetValue(value);
                 }
+                feedbackCollection.Set();
                 foreach (IMeasurements m in Dependent)
                 {
                     m.IsUpdated = false;
@@ -295,13 +309,10 @@ namespace DataPerformer.Formula
         /// </summary>
         public Dictionary<object, object> ExternalAliases
         {
-            get
-            {
-                return aliasNames;
-            }
+            get => AliasNamesDictionary;
             set
             {
-                aliasNames = value;
+                AliasNamesDictionary = value;
                 postSetAlias();
             }
         }
@@ -1079,13 +1090,14 @@ namespace DataPerformer.Formula
         private void postSetAlias()
         {
             externalAliases.Clear();
-            if (aliasNames == null)
+            if (AliasNamesDictionary == null)
             {
                 return;
             }
-            foreach (char c in aliasNames.Keys)
+            var avd = AliasNamesDictionary;
+            foreach (char c in avd.Keys)
             {
-                string s = aliasNames[c] as string;
+                string s = avd[c] as string;
                 Variable v = acc[c + ""] as Variable;
                 externalAliases[v] = this.FindAliasName(s, false);
             }
@@ -1406,13 +1418,7 @@ namespace DataPerformer.Formula
             try
             {
                 timeOld = time;
-           /*     foreach (Variable v in Output)
-                {
-                    break;
-                    char c = v.Symbol;
-                    object[] o = variables[c] as object[];
-                    v.Value = (double)o[4];
-                }*/
+                feedbackCollection.Fill();
                 Initial.Set();
                 prepareStart = () =>
                 {
@@ -1700,7 +1706,10 @@ namespace DataPerformer.Formula
 
         #region Classes & Delegates
 
-        [CodeCreator(AliasInitialState = true)]
+
+        #region Variable 
+
+        [CodeCreator(InitialState = true)]
         class Variable : IObjectOperation, 
             IPowered, IOperationAcceptor, IMeasurement, IDerivation, 
             IDerivationOperation, IStack, IMeasurementHolder, IAssociatedObject, IValue, 
@@ -1950,8 +1959,6 @@ namespace DataPerformer.Formula
                 if (owntree == null)
                 {
                     owntree = new ObjectFormulaTree(this);
-          //          IStringTreeDictionary d = equationSolver;
-          //          d.Dictionary[symbol] = owntree;
                 }
                 return owntree;
             }
@@ -1979,5 +1986,36 @@ namespace DataPerformer.Formula
 
         #endregion
 
+        #region
+
+        class FeedbackAliasCollection : Portable.FeedbackAliasCollection
+        {
+
+            Dictionary<object, object> dict;
+            internal FeedbackAliasCollection(IDataConsumer dataConsumer, IFeedbackCollectionHolder holder, 
+                Dictionary<object, object> dictionary) : base(dataConsumer, holder)
+            {
+                dict = dictionary;
+                this.Dictionary = new Dictionary<string, string>();
+                
+            }
+
+            protected override void Fill()
+            {
+                var d = Dictionary;
+                d.Clear();
+                foreach (var item in dict)
+                {
+                    d[item.Key + ""] = item.Value + "";
+                }
+                base.Fill();
+            }
+        }
+
+
+        #endregion
+
+        #endregion
+
     }
-}
+    }

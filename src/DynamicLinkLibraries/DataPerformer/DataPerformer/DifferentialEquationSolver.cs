@@ -205,6 +205,7 @@ namespace DataPerformer
             Copy(pars, parsH);
             Copy(aliases, aliasesH);
             Copy(arguments, argsH);
+            var aliasNames = AliasNamesDictionary;
             Copy(aliasNames, aliasNamesH);
         }
 
@@ -214,7 +215,9 @@ namespace DataPerformer
             Copy(parsH, pars);
             Copy(aliasesH, aliases);
             Copy(argsH, arguments);
+            var aliasNames = new Dictionary<object, object>();
             Copy(aliasNamesH, aliasNames);
+            AliasNamesDictionary = aliasNames;
         }
 
         #endregion

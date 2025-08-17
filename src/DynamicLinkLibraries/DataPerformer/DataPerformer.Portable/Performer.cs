@@ -31,7 +31,7 @@ namespace DataPerformer.Portable
             }
         }
 
-        public void Fill(IFeedbackAliasCollection collection, IDataConsumer consumer)
+        public void Fill(IFeedbackCollectionDictionary collection, IDataConsumer consumer)
         {
             if (collection == null)
             {
@@ -98,7 +98,7 @@ namespace DataPerformer.Portable
                 var attr = performer.GetAttribute<CodeCreatorAttribute>(measurement);
                 if (attr != null)
                 {
-                    if (attr.AliasInitialState)
+                    if (attr.InitialState)
                     {
                         var an = new AliasName(alias, measurement.Name);
                         return new AliasInit(an, measurementValue);
@@ -109,12 +109,12 @@ namespace DataPerformer.Portable
         }
 
 
-        public void SetFeedBackAlias(IMeasurements measurements)
+        public void SetFeedBack(IMeasurements measurements)
         {
             for (int i = 0; i < measurements.Count; i++)
             {
                 var m = measurements[i];
-                if (m is IFeedbackAlias iv)
+                if (m is IFeedback iv)
                 {
                     iv.Set();
                 }

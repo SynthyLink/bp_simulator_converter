@@ -1,0 +1,49 @@
+﻿using System.Linq;
+using System.Collections.Generic;
+
+using Diagram.UI.Interfaces;
+
+namespace Diagram.UI
+{
+    public class EnumerableFeedbackCollecton<T> : IFeedbackCollection where T : class
+    {
+        protected IEnumerable<T> Feedback { get; set; }
+
+        protected virtual IFeedbackCollectionHolder Holder { get; set; }
+
+        public EnumerableFeedbackCollecton(IEnumerable<T> feedback, IFeedbackCollectionHolder holder)
+        {  
+            Feedback = feedback; 
+            Holder = holder;
+        }
+
+        IEnumerable<IFeedback> IFeedbackCollection.Feedbacks => [];
+
+        IFeedbackCollectionHolder IFeedbackCollection.Holder => Holder;
+
+        void IFeedbackCollection.Add(IFeedback feedback)
+        {
+        }
+
+        void IFeedbackCollection.Fill()
+        {
+        }
+
+        void IFeedbackCollection.Set()
+        {
+            var l = performer.Convert<IFeedback, T>(Feedback);
+            var p = from value in l select Get(value);
+            p.ToArray();
+        }
+
+        NamedTree.Performer performer = new NamedTree.Performer();
+
+
+        IFeedback Get(IFeedback feedback)
+        {
+            feedback.Set();
+            return feedback;
+        }
+    }
+
+}

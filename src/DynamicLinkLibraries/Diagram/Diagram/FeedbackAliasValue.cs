@@ -18,7 +18,7 @@ namespace Diagram.UI
 
         IAliasName IFeedbackAlias.AliasName => aliasName;
 
-        void IFeedbackAlias.Set()
+        void IFeedback.Set()
         {
             var val = value.Value;
             if (val != null)

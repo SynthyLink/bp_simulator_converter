@@ -25,12 +25,12 @@ namespace DataPerformer.Portable
     /// Data consumer + measurements
     /// </summary>
     public abstract class DataConsumerMeasurements : DataConsumer,
-        IMeasurements, IAlias, IFeedbackAliasCollectionHolder,  ICheckCorrectness
+        IMeasurements, IAlias, IFeedbackCollectionHolder,  ICheckCorrectness
     {
 
         #region Fields
 
-        protected IFeedbackAliasCollection feedbackAliasCollection;
+        protected IFeedbackCollection feedbackCollection;
 
  
         protected Performer performer = new Performer();
@@ -188,7 +188,6 @@ namespace DataPerformer.Portable
         protected DataConsumerMeasurements()
                 : base(39)
         {
-            feedbackAliasCollection = new FeedbackAliasCollection(this, this, FeedBack);
         }
 
 
@@ -305,7 +304,7 @@ namespace DataPerformer.Portable
                     throw new OwnException("Formulas are not accepted");
                 }
                 update();
-                feedbackAliasCollection.Set();
+                feedbackCollection.Set();
                 isUpdated = true;
             }
             catch (Exception exception)
@@ -644,7 +643,7 @@ namespace DataPerformer.Portable
 
         IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => Children;
 
-        IFeedbackAliasCollection IFeedbackAliasCollectionHolder.Feedback => feedbackAliasCollection;
+        IFeedbackCollection IFeedbackCollectionHolder.Feedback => feedbackCollection;
 
         protected virtual void SetFeedback()
         {
@@ -659,7 +658,7 @@ namespace DataPerformer.Portable
                 }
 
             }
-            feedbackAliasCollection.Fill();
+            feedbackCollection.Fill();
         }
 
         void IChildren<IMeasurement>.AddChild(IMeasurement child)

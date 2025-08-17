@@ -11,7 +11,7 @@ namespace Diagram.UI.Attributes
         /// <summary>
         /// Allows initial alias state
         /// </summary>
-        public bool AliasInitialState
+        public bool InitialState
         {
             get;
             set;

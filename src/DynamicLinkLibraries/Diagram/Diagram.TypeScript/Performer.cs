@@ -113,17 +113,21 @@ namespace Diagram.UI.TypeScript
         }
 
 
-        public List<string> Create(IFeedbackAliasCollectionHolder holder)
+        public List<string> Create(IFeedbackCollectionHolder holder)
         {
+            var f = holder.Feedback;
             var l = new List<string>();
-            l.Add("setFeedback(): void {");
-            var ll = CreateStringDictionary("map", holder.Feedback.Dictionary);
-            ll.Add("this.feedback = new FeedbackAliasCollection(map, this, this);");
-            ll.Add("this.feedback.fillFeedBackAliases();");
-            performer.Add(l, ll, 1);
-            l.Add("}");
+            if (f is IFeedbackAliasCollection fa)
+            {
+                l.Add("setFeedback(): void {");
+                var ll = CreateStringDictionary("map", fa.Dictionary);
+                ll.Add("this.feedback = new FeedbackAliasCollection(map, this, this);");
+                ll.Add("this.feedback.fillFeedBackAliases();");
+                performer.Add(l, ll, 1);
+                l.Add("}");
+            }
             return l;
-        }  
+        }
         
         public List<string> CreateStringDictionary(string id, Dictionary<string, string> dictionary)
         {

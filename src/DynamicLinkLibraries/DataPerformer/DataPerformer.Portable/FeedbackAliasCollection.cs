@@ -11,47 +11,64 @@ namespace DataPerformer.Portable
     {
         Performer performer = new Performer();
 
-        IDataConsumer dataConsumer; 
+        IDataConsumer dataConsumer;
 
-
-        List<IFeedbackAlias> aliases = new List<IFeedbackAlias>();
-
-        public FeedbackAliasCollection(IDataConsumer dataConsumer, IFeedbackAliasCollectionHolder holder,  Dictionary<string, string> dictionary) 
+        protected FeedbackAliasCollection(IDataConsumer dataConsumer, IFeedbackCollectionHolder holder)
         {
-            this.Dictionary = dictionary;
             this.dataConsumer = dataConsumer;
             Holder = holder;
         }
 
-        void IFeedbackAliasCollection.Fill()
+
+
+        public FeedbackAliasCollection(IDataConsumer dataConsumer, IFeedbackCollectionHolder holder,
+            Dictionary<string, string> dictionary) : this(dataConsumer, holder)
         {
-            aliases.Clear();
-            performer.Fill(this, dataConsumer);
+            this.Dictionary = dictionary;
+        }
+
+        void IFeedbackCollection.Fill()
+        {
+            Fill();
         }
         protected virtual Dictionary<string, string> Dictionary { get; set; }
 
-        protected virtual IFeedbackAliasCollectionHolder Holder { get; set; }
+        protected virtual IFeedbackCollectionHolder Holder { get; set; }
 
         protected virtual List<IFeedbackAlias> FeedbackAliases { get; set; } = new();
 
-        Dictionary<string, string> IFeedbackAliasCollection.Dictionary => Dictionary;
+        Dictionary<string, string> IFeedbackCollectionDictionary.Dictionary => Dictionary;
 
         IEnumerable<IFeedbackAlias> IFeedbackAliasCollection.Aliases => FeedbackAliases;
 
-        IFeedbackAliasCollectionHolder IFeedbackAliasCollection.Holder => Holder;
+        IFeedbackCollectionHolder IFeedbackCollection.Holder => Holder;
 
-        void IFeedbackAliasCollection.Add(IFeedbackAlias alias)
+        Dictionary<string, string> IFeedbackAliasCollection.Dictionary => Dictionary;
+
+        IEnumerable<IFeedback> IFeedbackCollection.Feedbacks => FeedbackAliases;
+
+        void IFeedbackCollection.Add(IFeedback alias)
         {
-            FeedbackAliases.Add(alias);
+            FeedbackAliases.Add(alias as IFeedbackAlias);
         }
 
-        void IFeedbackAliasCollection.Set()
+        void IFeedbackCollection.Set()
         {
-            var f = FeedbackAliases;
-            foreach (var alias in f)
+            if (Dictionary.Count > 0)
             {
-                alias.Set();
+                var f = FeedbackAliases;
+                foreach (var alias in f)
+                {
+                    alias.Set();
+                }
             }
         }
+
+        protected virtual void Fill()
+        {
+            FeedbackAliases.Clear();
+            performer.Fill(this, dataConsumer);
+        }
+
     }
 }

@@ -150,7 +150,7 @@ namespace DataPerformer.Formula.TypeScript
             l.Add("");
             formulaPerformer.Add(l, lt, 1);
             AddPost(l);
-            if (obj is IFeedbackAliasCollectionHolder feedback)
+            if (obj is IFeedbackCollectionHolder feedback)
             {
                 var ll = performer.Create(feedback);
                 formulaPerformer.Add(l, ll, 1);

@@ -28,11 +28,11 @@ namespace DataPerformer.Formula
     /// <summary>
     /// Recurrent object
     /// </summary>
-    [CodeCreator(AliasInitialState = true)]
+    [CodeCreator(InitialState = true)]
     public class Recursive : CategoryObject, IDataConsumer, IMeasurements, IStarted, IRunning, IAlias,
 		ICheckCorrectness, IStep, IRuntimeUpdate, ITimeMeasurementConsumer,
 		IVariableDetector, ITreeCollection, ITimeVariable, IInitialDictionary,
-		IStringTreeDictionary, IFeedbackAliasCollectionHolder,
+		IStringTreeDictionary, IFeedbackCollectionHolder,
         IPostSetArrow
 	{
 
@@ -1067,7 +1067,7 @@ namespace DataPerformer.Formula
 			get;
 		} = new Dictionary<char, ObjectFormulaTree>();
 
-        IFeedbackAliasCollection IFeedbackAliasCollectionHolder.Feedback => feedbackAliasCollection;
+        IFeedbackCollection IFeedbackCollectionHolder.Feedback => feedbackAliasCollection;
 
         private void CreateProxyInternal()
 		{
@@ -1175,7 +1175,7 @@ namespace DataPerformer.Formula
 		/// <summary>
 		/// Auxiliary class for measurement
 		/// </summary>
-		[CodeCreator(AliasInitialState = true)]
+		[CodeCreator(InitialState = true)]
         internal class Variable : IObjectOperation, IPowered, IOperationAcceptor, IMeasurement, 
 			IMeasurementHolder, IAliasNameHolder, ITreeAssociated, IValue, IUpdateItself, 
 			IOutputTree, ITreeCreator
