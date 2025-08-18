@@ -57,23 +57,13 @@ namespace DataPerformer.Formula
         /// </summary>
         new private Dictionary<char, VariableMeasurement> parameters = new ();
 
-        private Variable[] output;
-
-
-
         /// <summary>
         /// Output parameters
         /// </summary>
-        private Variable[] Output
-        {
-            get => output;
-            set
-            {
-                output = value;
-                Initial = new EnumerableInitialVaueCollection<Variable>(value);
-            }
-        }
+        private Variable[] output;
 
+
+  
         /// <summary>
         /// The time
         /// </summary>
@@ -215,10 +205,11 @@ namespace DataPerformer.Formula
         }
 
 
-
         #endregion
 
         #region Members
+
+
 
         #region Public Memmbers
 
@@ -252,55 +243,6 @@ namespace DataPerformer.Formula
             {
                 object[] o = variables[c] as object[];
                 return o[0] as string;
-            }
-        }
-
-        /// <summary>
-        /// Copies variables from processor to solver 
-        /// </summary>
-        /// <param name="offset">Offset</param>
-        /// <param name="variables">Vector of all desktop differential equations variables</param>
-        void IDifferentialEquationSolver.CopyVariablesToSolver(int offset, double[] variables)
-        {
-            int i = offset;
-            foreach (Variable v in Output)
-            {
-                v.Value = variables[i];
-                ++i;
-            }
-        }
-
-        /// <summary>
-        /// Calculates derivations
-        /// </summary>
-        void IDifferentialEquationSolver.CalculateDerivations()
-        {
-            try
-            {
-                foreach (Variable v in externalAliases.Keys)
-                {
-                    break;
-                    AliasName an = externalAliases[v];
-                    IMeasurement m = v;
-                    var p = m.Parameter;
-                    var value = p();
-                    if (value == null)
-                    {
-
-                    }
-                    an.SetValue(value);
-                }
-                feedbackCollection.Set();
-                foreach (IMeasurements m in Dependent)
-                {
-                    m.IsUpdated = false;
-                    m.UpdateMeasurements();
-                }
-                update();
-            }
-            catch (Exception e)
-            {
-                e.HandleException();
             }
         }
 
@@ -907,10 +849,24 @@ namespace DataPerformer.Formula
             }
         }
 
- 
+
         #endregion
 
         #region Private Members
+
+        /// <summary>
+        /// Output parameters
+        /// </summary>
+        private Variable[] Output
+        {
+            get => output;
+            set
+            {
+                output = value;
+                Initial = new EnumerableInitialVaueCollection<Variable>(value);
+            }
+        }
+
 
         int VariablesCount
         {
@@ -1457,9 +1413,50 @@ namespace DataPerformer.Formula
 
         #endregion
 
+
+        #region IDifferentialEquationSolver Members
+
+        /// <summary>
+        /// Copies variables from processor to solver 
+        /// </summary>
+        /// <param name="offset">Offset</param>
+        /// <param name="variables">Vector of all desktop differential equations variables</param>
+        void IDifferentialEquationSolver.CopyVariablesToSolver(int offset, double[] variables)
+        {
+            int i = offset;
+            foreach (Variable v in Output)
+            {
+                v.Value = variables[i];
+                ++i;
+            }
+        }
+
+        /// <summary>
+        /// Calculates derivations
+        /// </summary>
+        void IDifferentialEquationSolver.CalculateDerivations()
+        {
+            try
+            {
+                feedbackCollection.Set();
+                foreach (IMeasurements m in Dependent)
+                {
+                    m.IsUpdated = false;
+                    m.UpdateMeasurements();
+                }
+                update();
+            }
+            catch (Exception e)
+            {
+                e.HandleException();
+            }
+        }
+
+        #endregion
+
+
+
         #region Protected Members
-
-
 
 
         /// <summary>

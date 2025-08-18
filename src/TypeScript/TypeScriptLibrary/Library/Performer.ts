@@ -32,11 +32,14 @@ export class Performer
     }
 
 
-    public updateChildrenData(dataConsumer: IDataConsumer): void {
+    public updateChildrenData(dataConsumer: IDataConsumer): void
+    {
         var children = dataConsumer.getAllMeasurements();
-        for (var child of children) {
+        for (var child of children)
+        {
             var o = child as unknown as IObject;
-            if (this.implementsType(o, "IDataConsumer")) {
+            if (this.implementsType(o, "IDataConsumer"))
+            {
                 var dc = child as unknown as IDataConsumer;
                 this.updateChildrenData(dc);
             }

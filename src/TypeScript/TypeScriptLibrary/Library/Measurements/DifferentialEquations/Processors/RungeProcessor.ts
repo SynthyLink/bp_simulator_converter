@@ -46,7 +46,7 @@ export class RungeProcessor extends DifferentialEquationProcessor
                 var mea = m.getMeasurement(j);
                 this.z[i] = this.performer.getDerivationMeasurement(mea);
                 this.k[0][i] = this.z[i] * dt;
-                this.w[i] += this.f[i] * 0.5 * this.k[0][i];
+                this.w[i] = this.f[i] + 0.5 * this.k[0][i];
                 ++i;
             }
             s.copyVariablesToSolver(i - count, this.w);
@@ -54,7 +54,8 @@ export class RungeProcessor extends DifferentialEquationProcessor
         t = t0 + 0.5 * dt;
         this.timeProvider.setTime(t);
         i = 0;
-        for (let s of this.equations) {
+        for (let s of this.equations)
+        {
             s.calculateDerivations();
             let m = s as unknown as IMeasurements;
             let count = m.getMeasurementsCount();
@@ -63,7 +64,7 @@ export class RungeProcessor extends DifferentialEquationProcessor
                 var mea = m.getMeasurement(j);
                 this.z[i] = this.performer.getDerivationMeasurement(mea);
                 this.k[1][i] = this.z[i] * dt;
-                this.w[i] += this.f[i] * 0.5 * this.k[1][i];
+                this.w[i] = this.f[i] + 0.5 * this.k[1][i];
                 ++i;
             }
             s.copyVariablesToSolver(i - count, this.w);
@@ -81,7 +82,7 @@ export class RungeProcessor extends DifferentialEquationProcessor
                 var mea = m.getMeasurement(j);
                 this.z[i] = this.performer.getDerivationMeasurement(mea);
                 this.k[2][i] = this.z[i] * dt;
-                this.w[i] += this.f[i] * this.k[2][i];
+                this.w[i] = this.f[i] + this.k[2][i];
                 ++i;
             }
             s.copyVariablesToSolver(i - count, this.w);
@@ -98,7 +99,7 @@ export class RungeProcessor extends DifferentialEquationProcessor
             {
                 var mea = m.getMeasurement(j);
                 this.z[i] = this.performer.getDerivationMeasurement(mea);
-                this.k[3][i] = this.z[i] * 0.5 * dt;
+                this.k[3][i] = this.z[i] * dt;
                 ++i;
             }
             s.copyVariablesToSolver(i - count, this.w);
