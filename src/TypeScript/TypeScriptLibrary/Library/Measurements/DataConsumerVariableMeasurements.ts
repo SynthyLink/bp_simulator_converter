@@ -1,9 +1,8 @@
-import { FictiveFeedbackAliasCollection } from "../Fiction/FictiveFeedbackAliasCollection";
+import { FictiveFeedbackCollection } from "../Fiction/FictiveFeedbackCollection";
 import { IAlias } from "../Interfaces/IAlias";
 import { IDesktop } from "../Interfaces/IDesktop";
-import { IFeedbackAliasCollection } from "../Interfaces/IFeedbackAliasCollection";
-import { IFeedbackAliasCollectionHolder } from "../Interfaces/IFeedbackAliasCollectionHolder";
-import { Performer } from "../Performer";
+import { IFeedbackCollection } from "../Interfaces/IFeedbackCollection";
+import { ISetFeedback } from "../Interfaces/ISetFeedback";
 import { DataConsumer } from "./DataConsumer";
 import { IMeasurement } from "./Interfaces/IMeasurement";
 import { IMeasurements } from "./Interfaces/IMeasurements";
@@ -11,23 +10,22 @@ import { PefrormerMeasuremets } from "./PefrormerMeasuremets";
 import { Variable } from "./Variables/Variable";
 
 
-export class DataConsumerVariadbleMeasurements extends DataConsumer implements IMeasurements, IAlias, IFeedbackAliasCollectionHolder
+export class DataConsumerVariadbleMeasurements extends DataConsumer implements
+    IMeasurements, IAlias, ISetFeedback
 {
-    constructor(desktop: IDesktop, name: string) {
+    constructor(desktop: IDesktop, name: string)
+    {
         super(desktop, name);
         this.alias = this;
         this.typeName = "DataConsumerVariadbleMeasurements";
         this.types.push("DataConsumerVariadbleMeasurements");
         this.types.push("IMeasurements");
-        this.types.push("IFeedbackAliasCollectionHolder");
         this.types.push("IAlias");
+        this.types.push("ISetFeedback");
     }
     
- 
   
     protected output: Variable[] = [];
-
-
 
     protected variables: Map<string, Variable> = new Map();
 
@@ -44,11 +42,12 @@ export class DataConsumerVariadbleMeasurements extends DataConsumer implements I
 
     protected pMeasurements : PefrormerMeasuremets = new PefrormerMeasuremets();
 
-    protected feedback: IFeedbackAliasCollection = new FictiveFeedbackAliasCollection();
+    protected feedback: IFeedbackCollection = new FictiveFeedbackCollection();
 
 
 
-    getMeasurementsCount(): number {
+    getMeasurementsCount(): number
+    {
         return this.output.length;
     }
 
@@ -108,11 +107,6 @@ export class DataConsumerVariadbleMeasurements extends DataConsumer implements I
     {
         this.output.push(variable);
         this.variables.set(variable.getMeasurementName(), variable);
-    }
-
-    getFeedbackAliasCollection(): IFeedbackAliasCollection
-    {
-        return this.feedback;
     }
 
     setFeedback(): void { }

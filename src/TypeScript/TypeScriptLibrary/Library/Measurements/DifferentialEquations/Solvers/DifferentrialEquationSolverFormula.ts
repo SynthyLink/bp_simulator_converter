@@ -27,7 +27,7 @@ export class DifferentrialEquationSolverFormula extends DataConsumerVariadbleMea
 
     calculateDerivations(): void
     {
-        this.feedback.setFeedBackAliases();
+        this.feedback.setFeedbacks();
         this.performer.updateChildrenData(this);
         this.calculateTree();
         this.save();

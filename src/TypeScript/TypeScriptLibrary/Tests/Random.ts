@@ -168,7 +168,6 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer
 		[
 		]);
 		this.feedback = new FeedbackAliasCollection(map, this, this);
-		this.feedback.fillFeedBackAliases();
 	}
 }
 
@@ -239,7 +238,6 @@ class Random_CategoryObject_3 extends RecursiveFormula
 		[
 		]);
 		this.feedback = new FeedbackAliasCollection(map, this, this);
-		this.feedback.fillFeedBackAliases();
 	}
 }
 

@@ -148,7 +148,6 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaConsu
     setFeedback() {
         let map = new Map([]);
         this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
-        this.feedback.fillFeedBackAliases();
     }
 }
 class Random_CategoryObject_3 extends RecursiveFormula_1.RecursiveFormula {
@@ -210,7 +209,6 @@ class Random_CategoryObject_3 extends RecursiveFormula_1.RecursiveFormula {
     setFeedback() {
         let map = new Map([]);
         this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
-        this.feedback.fillFeedBackAliases();
     }
 }
 class Random_CategoryObject_4 extends DataConsumer_1.DataConsumer {

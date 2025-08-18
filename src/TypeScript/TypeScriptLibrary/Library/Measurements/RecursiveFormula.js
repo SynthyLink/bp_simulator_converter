@@ -31,7 +31,7 @@ class RecursiveFormula extends DataConsumerVariadbleMeasurementsStarted_1.DataCo
     save() {
     }
     updateMeasurements() {
-        this.feedback.setFeedBackAliases();
+        this.feedback.setFeedbacks();
         this.calculateTree();
         this.save();
     }

@@ -1,27 +1,30 @@
 import { FictiveAliasName } from "./Fiction/FictiveAliasName";
 import { FictiveValue } from "./Fiction/FictiveValue";
 import { IAliasName } from "./Interfaces/IAliasName";
+import { IFeedback } from "./Interfaces/IFeedback";
 import { IFeedbackAlias } from "./Interfaces/IFeedbackAlias";
 import { IValue } from "./Interfaces/IValue";
 
-export class FeedbackAlias implements IFeedbackAlias
+export class FeedbackAlias implements IFeedback, IFeedbackAlias
 {
-    constructor(alias: IAliasName, value: IValue) {
+    constructor(alias: IAliasName, value: IValue)
+    {
         this.alias = alias;
         this.value = value;
     }
 
-    getFeedBackAlias(): IAliasName
-    {
-        return this.alias;
-    }
-    setFeedBackAlias(): void
+    setFeedback(): void
     {
         var x = this.value.getIValue();
         if (x != undefined)
         {
             this.alias.setAliasNameValue(x);
         }
+    }
+
+    getFeedBackAlias(): IAliasName
+    {
+        return this.alias;
     }
 
     protected value: IValue = new FictiveValue();

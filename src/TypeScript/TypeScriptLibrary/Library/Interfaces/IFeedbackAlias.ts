@@ -4,8 +4,5 @@ export interface IFeedbackAlias
 {
 
     getFeedBackAlias(): IAliasName;
-
-    setFeedBackAlias(): void;
-
     
 }

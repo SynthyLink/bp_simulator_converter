@@ -103,7 +103,7 @@ namespace Diagram.UI.TypeScript
             }
             return l;
         }
-
+/* !!! DELETE AFTER !!!
         public List<string> CreateFeedback(Dictionary<string, string> dictionary)
         {
             var l = new List<string>();
@@ -111,20 +111,24 @@ namespace Diagram.UI.TypeScript
             var ll = CreateStringDictionary("map", dictionary);
             return l;
         }
-
+*/
 
         public List<string> Create(IFeedbackCollectionHolder holder)
         {
-            var f = holder.Feedback;
+            var feedback = holder.Feedback;
             var l = new List<string>();
-            if (f is IFeedbackAliasCollection fa)
+            if (feedback is IFeedbackAliasCollection fa)
             {
-                l.Add("setFeedback(): void {");
-                var ll = CreateStringDictionary("map", fa.Dictionary);
-                ll.Add("this.feedback = new FeedbackAliasCollection(map, this, this);");
-                ll.Add("this.feedback.fillFeedBackAliases();");
-                performer.Add(l, ll, 1);
-                l.Add("}");
+                feedback.Fill();
+                var d = fa.Dictionary;
+                if (d.Count > 0)
+                {
+                    l.Add("setFeedback(): void {");
+                    var ll = CreateStringDictionary("map", fa.Dictionary);
+                    ll.Add("this.feedback = new FeedbackAliasCollection(map, this, this);");
+                    performer.Add(l, ll, 1);
+                    l.Add("}");
+                }
             }
             return l;
         }

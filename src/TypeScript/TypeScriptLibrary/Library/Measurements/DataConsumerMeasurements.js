@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DataConsumerMeasurements = void 0;
 const FictiveAlias_1 = require("../Fiction/FictiveAlias");
-const FictiveFeedbackAliasCollection_1 = require("../Fiction/FictiveFeedbackAliasCollection");
 const Performer_1 = require("../Performer");
 const DataConsumer_1 = require("./DataConsumer");
 class DataConsumerMeasurements extends DataConsumer_1.DataConsumer {
@@ -15,34 +14,11 @@ class DataConsumerMeasurements extends DataConsumer_1.DataConsumer {
         this.performer = new Performer_1.Performer();
         this.alias = new FictiveAlias_1.FictiveAlias();
         this.external = new Map();
-        this.feedbackAliases = [];
-        this.feedback = new FictiveFeedbackAliasCollection_1.FictiveFeedbackAliasCollection();
         this.alias = this;
         this.typeName = "DataConsumerMeasurements";
         this.types.push("DataConsumerMeasurements");
         this.types.push("IMeasurements");
         this.types.push("IAlias");
-        this.types.push("IExternalAliasDictionary");
-    }
-    getFeedbackAliasCollection() {
-        return this.feedback;
-    }
-    addFeedbackAlias(feedbackAlias) {
-        this.feedbackAliases.push(feedbackAlias);
-    }
-    updateFeedbackAliasCollection() {
-        for (let r of this.feedbackAliases) {
-            r.setFeedBackAlias();
-        }
-    }
-    getExternalAliasDictionary() {
-        return this.external;
-    }
-    getExternalAlias(name) {
-        return this.external.get(name);
-    }
-    addExternalAlias(name, value) {
-        this.external.set(name, value);
     }
     getAliasValue(name) {
         return this.aliasValues.get(name);

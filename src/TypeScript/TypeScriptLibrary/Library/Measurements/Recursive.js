@@ -45,7 +45,7 @@ class Recursive extends DataConsumerVariableMeasurements_1.DataConsumerVariadble
     save() {
     }
     updateMeasurements() {
-        this.feedback.setFeedBackAliases();
+        this.feedback.setFeedbacks();
         //        this.performer.updateChildrenData(this);
         this.calculateTree();
         this.save();

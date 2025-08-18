@@ -10,14 +10,14 @@ class FeedbackAlias {
         this.alias = alias;
         this.value = value;
     }
-    getFeedBackAlias() {
-        return this.alias;
-    }
-    setFeedBackAlias() {
+    setFeedback() {
         var x = this.value.getIValue();
         if (x != undefined) {
             this.alias.setAliasNameValue(x);
         }
+    }
+    getFeedBackAlias() {
+        return this.alias;
     }
 }
 exports.FeedbackAlias = FeedbackAlias;

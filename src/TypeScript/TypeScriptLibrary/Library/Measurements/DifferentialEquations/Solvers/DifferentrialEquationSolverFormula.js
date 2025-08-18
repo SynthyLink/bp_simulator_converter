@@ -20,7 +20,7 @@ class DifferentrialEquationSolverFormula extends DataConsumerVariadbleMeasuremen
         throw new Error("Method not implemented.");
     }
     calculateDerivations() {
-        this.feedback.setFeedBackAliases();
+        this.feedback.setFeedbacks();
         this.performer.updateChildrenData(this);
         this.calculateTree();
         this.save();

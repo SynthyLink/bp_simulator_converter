@@ -107,7 +107,6 @@ class SimpleFeed_CategoryObject_0 extends VectorFormulaConsumer
 		[
 		]);
 		this.feedback = new FeedbackAliasCollection(map, this, this);
-		this.feedback.fillFeedBackAliases();
 	}
 }
 
@@ -195,7 +194,6 @@ class SimpleFeed_CategoryObject_1 extends VectorFormulaConsumer
 			["Formula_1", "A.a" ]
 		]);
 		this.feedback = new FeedbackAliasCollection(map, this, this);
-		this.feedback.fillFeedBackAliases();
 	}
 }
 

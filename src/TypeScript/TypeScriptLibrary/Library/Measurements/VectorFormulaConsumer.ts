@@ -19,12 +19,13 @@ export class VectorFormulaConsumer extends DataConsumerVariadbleMeasurements imp
 
     updateMeasurements(): void
     {
-        this.feedback.setFeedBackAliases();
+        this.feedback.setFeedbacks();
         this.calculateTree();
         this.save();
     }
 
-    calculateTree(): void {
+    calculateTree(): void
+    {
     }
 
     init(): void {
@@ -35,11 +36,11 @@ export class VectorFormulaConsumer extends DataConsumerVariadbleMeasurements imp
 
     }
 
-    setFeedback(): void { }
+  
 
 
-
-    postSetArrow(): void {
+    postSetArrow(): void
+    {
         this.init();
         this.setFeedback();
     }

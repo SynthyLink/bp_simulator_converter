@@ -100,7 +100,6 @@ class SimpleFeed_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaC
     setFeedback() {
         let map = new Map([]);
         this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
-        this.feedback.fillFeedBackAliases();
     }
 }
 class SimpleFeed_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
@@ -180,7 +179,6 @@ class SimpleFeed_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormulaC
             ["Formula_1", "A.a"]
         ]);
         this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
-        this.feedback.fillFeedBackAliases();
     }
 }
 class SimpleFeed_CategoryObject_2 extends DataConsumer_1.DataConsumer {

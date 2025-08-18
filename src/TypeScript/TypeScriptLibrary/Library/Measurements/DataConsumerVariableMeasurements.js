@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DataConsumerVariadbleMeasurements = void 0;
-const FictiveFeedbackAliasCollection_1 = require("../Fiction/FictiveFeedbackAliasCollection");
+const FictiveFeedbackCollection_1 = require("../Fiction/FictiveFeedbackCollection");
 const DataConsumer_1 = require("./DataConsumer");
 const PefrormerMeasuremets_1 = require("./PefrormerMeasuremets");
 const Variable_1 = require("./Variables/Variable");
@@ -14,13 +14,13 @@ class DataConsumerVariadbleMeasurements extends DataConsumer_1.DataConsumer {
         this.aliasValues = new Map();
         this.aliasNames = [];
         this.pMeasurements = new PefrormerMeasuremets_1.PefrormerMeasuremets();
-        this.feedback = new FictiveFeedbackAliasCollection_1.FictiveFeedbackAliasCollection();
+        this.feedback = new FictiveFeedbackCollection_1.FictiveFeedbackCollection();
         this.alias = this;
         this.typeName = "DataConsumerVariadbleMeasurements";
         this.types.push("DataConsumerVariadbleMeasurements");
         this.types.push("IMeasurements");
-        this.types.push("IFeedbackAliasCollectionHolder");
         this.types.push("IAlias");
+        this.types.push("ISetFeedback");
     }
     getMeasurementsCount() {
         return this.output.length;
@@ -57,9 +57,6 @@ class DataConsumerVariadbleMeasurements extends DataConsumer_1.DataConsumer {
     addVariable(variable) {
         this.output.push(variable);
         this.variables.set(variable.getMeasurementName(), variable);
-    }
-    getFeedbackAliasCollection() {
-        return this.feedback;
     }
     setFeedback() { }
 }

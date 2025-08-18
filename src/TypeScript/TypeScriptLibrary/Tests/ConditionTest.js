@@ -46,7 +46,6 @@ class ConditionTest_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormu
     setFeedback() {
         let map = new Map([]);
         this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
-        this.feedback.fillFeedBackAliases();
     }
 }
 class ConditionTest_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
@@ -106,7 +105,6 @@ class ConditionTest_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormu
     setFeedback() {
         let map = new Map([]);
         this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
-        this.feedback.fillFeedBackAliases();
     }
 }
 class ConditionTest_CategoryObject_2 extends DataConsumer_1.DataConsumer {

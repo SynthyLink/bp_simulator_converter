@@ -61,7 +61,7 @@ export class RecursiveFormula extends DataConsumerVariadbleMeasurementsStarted i
 
     updateMeasurements(): void
     {
-        this.feedback.setFeedBackAliases();
+        this.feedback.setFeedbacks();
         this.calculateTree();
         this.save();
     }
