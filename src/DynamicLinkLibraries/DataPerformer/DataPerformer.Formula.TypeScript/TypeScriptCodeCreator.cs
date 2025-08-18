@@ -44,7 +44,7 @@ namespace DataPerformer.Formula.TypeScript
         /// <summary>
         /// Singleton
         /// </summary>
-        public static readonly ICodeCreator CodeCreator = new TypeScriptCodeCreator();
+        public static readonly ITreeCodeCreator CodeCreator = new TypeScriptCodeCreator();
 
     
         private static bool cycle = false;
@@ -431,7 +431,7 @@ namespace DataPerformer.Formula.TypeScript
         /// </summary>
         /// <param name="trees">Trees</param>
         /// <returns>Creator</returns>
-        public override ICodeCreator Create(object obj, ObjectFormulaTree[] trees)
+        public override ITreeCodeCreator Create(object obj, ObjectFormulaTree[] trees)
         {
             return new TypeScriptCodeCreator(obj, trees);
         }
@@ -464,7 +464,8 @@ namespace DataPerformer.Formula.TypeScript
         /// <param name="variables">Variables</param>
         /// <param name="initializers">Initializers</param>
         /// <returns>List of code strings</returns>
-        public static IList<string> CreateCode(object obj, ObjectFormulaTree[] trees, ICodeCreator creator, out ICodeCreator local,
+        public static IList<string> CreateCode(object obj, ObjectFormulaTree[] trees, ITreeCodeCreator creator, 
+            out ITreeCodeCreator local,
              out IList<string> variables, out IList<string> initializers,  string current)
         {
             Exception ex;

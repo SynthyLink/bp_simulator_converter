@@ -208,12 +208,12 @@ namespace PostgreSQLWarehouse.Async
 
         protected override List<ILeaf> GetLeavesFormDatabase()
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
 
         protected override List<IDirectory> GetDirectoriesFormDatabase()
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
     }
 }

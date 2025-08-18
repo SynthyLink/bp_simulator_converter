@@ -1,13 +1,15 @@
-﻿using Diagram.UI;
+﻿using System;
+using System.Collections.Generic;
+
+using BaseTypes.Attributes;
+using Diagram.UI;
 using Diagram.UI.Interfaces;
 using Event.Interfaces;
 using Event.Portable.Arrows;
-using System;
-using System.Collections.Generic;
 
 namespace Event.Portable
 {
-    [Diagram.UI.Attributes.Language("C#")]
+    [Language("C#")]
 
     class CSCodeCreator : IClassCodeCreator
     {

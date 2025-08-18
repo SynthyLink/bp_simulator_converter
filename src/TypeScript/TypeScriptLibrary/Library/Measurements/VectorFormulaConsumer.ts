@@ -36,7 +36,6 @@ export class VectorFormulaConsumer extends DataConsumerVariadbleMeasurements imp
 
     }
 
-  
 
 
     postSetArrow(): void
@@ -48,4 +47,3 @@ export class VectorFormulaConsumer extends DataConsumerVariadbleMeasurements imp
 
 }
 
-//export default VectorFormulaConsumer;

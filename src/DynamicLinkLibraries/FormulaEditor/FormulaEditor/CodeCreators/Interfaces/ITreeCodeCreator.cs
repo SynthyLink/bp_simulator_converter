@@ -5,7 +5,7 @@ namespace FormulaEditor.CodeCreators.Interfaces
     /// <summary>
     /// Creator of code from tree
     /// </summary>
-    public interface ICodeCreator
+    public interface ITreeCodeCreator
     {
         /// <summary>
         /// Creates Code from tree
@@ -13,8 +13,6 @@ namespace FormulaEditor.CodeCreators.Interfaces
         /// <param name="tree">The tree</param>
         /// <param name="ret">Return value</param>
         /// <param name="parameters">Parameters</param>
-        /// <param name="variables">Variables</param>
-        /// <param name="initializers">Initializers</param>
         /// <returns>List of code</returns>
        Dictionary<string, List<string>> CreateCode(object obj, ObjectFormulaTree tree, string ret, 
           params string[] parameters);
@@ -32,7 +30,7 @@ namespace FormulaEditor.CodeCreators.Interfaces
         /// </summary>
         /// <param name="trees">Trees</param>
         /// <returns>Creator</returns>
-        ICodeCreator Create(object obj, ObjectFormulaTree[] trees);
+        ITreeCodeCreator Create(object obj, ObjectFormulaTree[] trees);
 
 
         /// <summary>

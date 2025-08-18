@@ -32,11 +32,11 @@ class ODE_Feedback_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormul
         this.var_10 = 0;
         this.var_11 = 0;
         let map = new Map([
+            ["k", 2],
+            ["d", -0.17015052092374328],
+            ["c", 0.31314560830292659],
             ["a", 1],
             ["b", 1],
-            ["c", 0.31314560830292659],
-            ["k", 2],
-            ["d", -0.17015052092374328]
         ]);
         this.performer.setAliasMap(map, this);
         this.addVariableValue("Formula_1", 0, 0);
@@ -188,7 +188,7 @@ class ODE_Feedback_CategoryObject_1 extends DifferentrialEquationSolverFormula_1
         let map = new Map([
             ["x", 0],
             ["a", 1],
-            ["y", 1]
+            ["y", 1],
         ]);
         this.performer.setAliasMap(map, this);
         this.addVariableValue("x", 0, 0);

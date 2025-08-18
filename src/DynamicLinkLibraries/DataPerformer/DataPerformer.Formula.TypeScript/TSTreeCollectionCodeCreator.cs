@@ -34,12 +34,12 @@ namespace DataPerformer.Formula.TypeScript
             set;
         }
 
-        private static ICodeCreator codeCreator = TypeScriptCodeCreator.CodeCreator;
+        private static ITreeCodeCreator codeCreator = TypeScriptCodeCreator.CodeCreator;
 
         /// <summary>
         /// Local code creator
         /// </summary>
-        protected ICodeCreator local;
+        protected ITreeCodeCreator local;
 
         protected ITreeCollection collection = null;
 
@@ -115,7 +115,7 @@ namespace DataPerformer.Formula.TypeScript
         /// <summary>
         /// Creator of code
         /// </summary>
-        public static ICodeCreator CodeCreator
+        public static ITreeCodeCreator CodeCreator
         {
             get
             {
@@ -140,7 +140,7 @@ namespace DataPerformer.Formula.TypeScript
 
         #region Private Members
 
-        private List<string> PostCreateCode(ICodeCreator local, object ob, IList<string> lcode,
+        private List<string> PostCreateCode(ITreeCodeCreator local, object ob, IList<string> lcode,
            IList<string> variables, IList<string> initializers, string consturctor, bool checkValue = true)
         {
             List<string> l = new();
@@ -175,7 +175,7 @@ namespace DataPerformer.Formula.TypeScript
             return l;
         }
 
-        private List<string> PreCreateCode(object obj, out ICodeCreator local,
+        private List<string> PreCreateCode(object obj, out ITreeCodeCreator local,
              out IList<string> variables, out IList<string> initializers,  string current)
         {
             var lcode = TypeScriptCodeCreator.CreateCode(obj, trees, codeCreator,

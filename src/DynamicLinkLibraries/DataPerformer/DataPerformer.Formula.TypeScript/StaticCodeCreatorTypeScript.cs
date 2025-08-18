@@ -52,7 +52,7 @@ namespace DataPerformer.Formula.TypeScript
         /// <param name="creator">Creator of code</param>
         /// <param name="tree">The tree</param>
         /// <returns>Number of tree</returns>
-        public static int GetNumber(ICodeCreator creator, ObjectFormulaTree tree)
+        public static int GetNumber(ITreeCodeCreator creator, ObjectFormulaTree tree)
         {
             try
             {
@@ -93,8 +93,8 @@ namespace DataPerformer.Formula.TypeScript
         /// <param name="variables">Strings of variables</param>
         /// <param name="initializers">Strings of initializers</param>
         /// <returns>Strings of code</returns>
-        public static IList<string> CreateCode(object obj, ObjectFormulaTree[] trees, ICodeCreator creator,
-            out ICodeCreator local,
+        public static IList<string> CreateCode(object obj, ObjectFormulaTree[] trees, ITreeCodeCreator creator,
+            out ITreeCodeCreator local,
              out IList<string> variables,
              out IList<string> initializers, string current )
         {
@@ -216,7 +216,7 @@ namespace DataPerformer.Formula.TypeScript
 
         #region Private Members
 
-        static IList<string> CreateOptionalCode(object obj, ICodeCreator creator, out IList<string> variables, out IList<string> initializers)
+        static IList<string> CreateOptionalCode(object obj, ITreeCodeCreator creator, out IList<string> variables, out IList<string> initializers)
         {
             List<string> code = new List<string>();
             List<string> vari = new List<string>();
@@ -398,7 +398,7 @@ namespace DataPerformer.Formula.TypeScript
             }
         }
 
-        private static IList<string> CreateCode(object obj, ICodeCreator creator,
+        private static IList<string> CreateCode(object obj, ITreeCodeCreator creator,
             ObjectFormulaTree tree, List<ObjectFormulaTree> busy)
         {
             List<ObjectFormulaTree> l = new List<ObjectFormulaTree>();

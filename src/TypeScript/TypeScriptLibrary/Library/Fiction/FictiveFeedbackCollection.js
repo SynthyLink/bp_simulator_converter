@@ -13,7 +13,6 @@ class FictiveFeedbackCollection {
         throw new OwnNotImplemented_1.OwnNotImplemented();
     }
     setFeedbacks() {
-        throw new OwnNotImplemented_1.OwnNotImplemented();
     }
 }
 exports.FictiveFeedbackCollection = FictiveFeedbackCollection;

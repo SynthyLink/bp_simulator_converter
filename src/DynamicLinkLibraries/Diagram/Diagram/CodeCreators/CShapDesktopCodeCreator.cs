@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Diagram.UI.Attributes;
+
+using BaseTypes.Attributes;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 

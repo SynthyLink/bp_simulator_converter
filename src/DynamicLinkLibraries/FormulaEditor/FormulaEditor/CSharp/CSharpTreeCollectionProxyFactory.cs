@@ -19,12 +19,12 @@ namespace FormulaEditor.CSharp
 
         #region Fields
 
-        private static ICodeCreator codeCreator;
+        private static ITreeCodeCreator codeCreator;
 
         /// <summary>
         /// Local code creator
         /// </summary>
-        protected ICodeCreator local;
+        protected ITreeCodeCreator local;
 
         protected ITreeCollection collection = null;
 
@@ -105,7 +105,7 @@ namespace FormulaEditor.CSharp
         /// <summary>
         /// Creator of code
         /// </summary>
-        public static ICodeCreator CodeCreator
+        public static ITreeCodeCreator CodeCreator
         {
             get
             {
@@ -136,7 +136,7 @@ namespace FormulaEditor.CSharp
 
         #region Private Members
 
-        private List<string> PostCreateCode(ICodeCreator local, IList<string> lcode,
+        private List<string> PostCreateCode(ITreeCodeCreator local, IList<string> lcode,
            IList<string> variables, IList<string> initializers, string consturctor, bool checkValue = true)
         {
             List<string> l = new()
@@ -205,7 +205,7 @@ namespace FormulaEditor.CSharp
             return l;
         }
 
-        private IList<string> PreCreateCode(object obj, out ICodeCreator local,
+        private IList<string> PreCreateCode(object obj, out ITreeCodeCreator local,
              out IList<string> variables, out IList<string> initializers)
         {
             IList<string> lcode = CSharpCodeCreator.CreateCode(obj, trees, codeCreator, 

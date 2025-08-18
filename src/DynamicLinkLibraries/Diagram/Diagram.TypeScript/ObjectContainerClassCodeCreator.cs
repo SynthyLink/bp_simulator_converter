@@ -1,5 +1,5 @@
-﻿using Diagram.UI.Interfaces;
-using Diagram.UI.Attributes;
+﻿using BaseTypes.Attributes;
+using Diagram.UI.Interfaces;
 
 using ErrorHandler;
 

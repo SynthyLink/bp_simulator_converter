@@ -1,6 +1,7 @@
-﻿using CategoryTheory;
+﻿using BaseTypes.Attributes;
 
-using Diagram.UI.Attributes;
+using CategoryTheory;
+
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 

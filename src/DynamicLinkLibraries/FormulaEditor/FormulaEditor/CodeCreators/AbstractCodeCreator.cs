@@ -10,7 +10,7 @@ namespace FormulaEditor.CodeCreators
     /// <summary>
     /// Abstract creator of code
     /// </summary>
-    public abstract class AbstractCodeCreator : ICodeCreator
+    public abstract class AbstractCodeCreator : ITreeCodeCreator
     {
         #region Fields
 
@@ -30,12 +30,12 @@ namespace FormulaEditor.CodeCreators
         /// <summary>
         /// Creators
         /// </summary>
-        protected ICodeCreator[] creators;
+        protected ITreeCodeCreator[] creators;
 
         /// <summary>
         /// Creator
         /// </summary>
-        protected ICodeCreator codeCreator;
+        protected ITreeCodeCreator codeCreator;
 
         /// <summary>
         /// Optional operations
@@ -92,7 +92,7 @@ namespace FormulaEditor.CodeCreators
             {
                 return null;
             }
-            foreach (ICodeCreator cc in creators)
+            foreach (var cc in creators)
             {
                 var l = cc.CreateCode(obj, tree, ret, parameters);
                 if (l != null)
@@ -116,7 +116,7 @@ namespace FormulaEditor.CodeCreators
         /// </summary>
         /// <param name="trees">Trees</param>
         /// <returns>Creator</returns>
-        public abstract ICodeCreator Create(object obj, ObjectFormulaTree[] trees);
+        public abstract ITreeCodeCreator Create(object obj, ObjectFormulaTree[] trees);
 
         /// <summary>
         /// Trees
@@ -126,7 +126,7 @@ namespace FormulaEditor.CodeCreators
             get { return trees; }
         }
 
-        int ICodeCreator.GetNumber(ObjectFormulaTree tree)
+        int ITreeCodeCreator.GetNumber(ObjectFormulaTree tree)
         {
             return dictionary[tree];
         }
@@ -150,7 +150,7 @@ namespace FormulaEditor.CodeCreators
         /// <returns>String representation</returns>
         public abstract string GetConstValue(ObjectFormulaTree tree);
 
-        Dictionary<string, List<string>> ICodeCreator.CreateCode(object obj, ObjectFormulaTree tree, string ret, params string[] parameters)
+        Dictionary<string, List<string>> ITreeCodeCreator.CreateCode(object obj, ObjectFormulaTree tree, string ret, params string[] parameters)
         {
             return CreateCode(obj, tree, ret, parameters);
         }
@@ -162,7 +162,7 @@ namespace FormulaEditor.CodeCreators
         {
             get;
         }
-        object ICodeCreator.Object { get => Object; set => Object = value; }
+        object ITreeCodeCreator.Object { get => Object; set => Object = value; }
 
         #endregion
 

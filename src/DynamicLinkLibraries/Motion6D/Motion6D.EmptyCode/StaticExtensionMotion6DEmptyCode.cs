@@ -1,9 +1,8 @@
 ﻿using AssemblyService.Attributes;
 
 using BaseTypes;
-
+using BaseTypes.Attributes;
 using Diagram.UI;
-using Diagram.UI.Attributes;
 using Diagram.UI.Interfaces;
 
 using Motion6D.Interfaces;

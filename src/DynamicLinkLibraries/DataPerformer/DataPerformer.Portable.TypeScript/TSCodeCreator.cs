@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Diagram.UI.Attributes;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
+using BaseTypes.Attributes;
 
 namespace DataPerformer.Portable.TypeScript
 {

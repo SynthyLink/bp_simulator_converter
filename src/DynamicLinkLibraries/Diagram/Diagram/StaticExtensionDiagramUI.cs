@@ -8,6 +8,8 @@ using System.Xml.Linq;
 
 using AssemblyService;
 
+using BaseTypes.Attributes;
+
 using CategoryTheory;
 
 using Diagram.UI.CodeCreators;

@@ -1,8 +1,8 @@
-﻿using BaseTypes.CodeCreator.Interfaces;
+﻿using BaseTypes.Attributes;
+using BaseTypes.CodeCreator.Interfaces;
  
 using DataPerformer.Interfaces;
 
-using Diagram.UI.Attributes;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
 
@@ -14,7 +14,10 @@ namespace DataPerformer.Formula.TypeScript
     /// Creator of TS code
     /// </summary>
     [Language("TS")]
-    internal class TSClassCodeCreator : IClassCodeCreator
+    internal class TSClassCodeCreator : IClassCodeCreator, 
+        IFeedbackCollectionCodeCreator, IDictionaryCodeCreator<string, string>,
+        IDictionaryCodeCreator<string, object>,
+        IAliasCodeCreator
     {
 
         static DataPerformer.Interfaces.Performer nPerformer = new();
@@ -31,8 +34,8 @@ namespace DataPerformer.Formula.TypeScript
         }
         #endregion
 
-        static readonly Dictionary<Func<object, bool>, Func<string, object, List<string>>> dictionary =
-         new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
+        static readonly Dictionary<Func<object, bool>, Func<string, object, IClassCodeCreator, List<string>>> dictionary =
+         new Dictionary<Func<object, bool>, Func<string, object, IClassCodeCreator, List<string>>>()
          {
                    { (object o) => { return o is VectorFormulaConsumer; } , CreateVectorConsumer },
                  { (object o) => { return o is DifferentialEquationSolver; } , CreateDiffrerentialSolver },
@@ -45,7 +48,7 @@ namespace DataPerformer.Formula.TypeScript
             {
                 if (key(obj))
                 {
-                    return dictionary[key](preffix, obj);
+                    return dictionary[key](preffix, obj, this);
                 }
             }
             return null;
@@ -98,9 +101,7 @@ namespace DataPerformer.Formula.TypeScript
         }
 
 
-
-
-        static List<string> CreateTreeCollection(string preffix, ITreeCollection obj)
+        static List<string> CreateTreeCollection(string preffix, ITreeCollection obj, IClassCodeCreator creator)
         {
             var l = new List<string>();
             bool check = true;
@@ -125,8 +126,12 @@ namespace DataPerformer.Formula.TypeScript
             performer.AddObjectConstructor(l);
             if (obj is IAlias ali)
             {
-                var la = performer.CreateTSAliasList("map", ali);
-                formulaPerformer.Add(l, la, 2);
+                var cc = creator as IAliasCodeCreator;
+                var la = cc.Create("map", ali).Values.ToArray()[0];
+                if (la.Count > 0)
+                {
+                    formulaPerformer.Add(l, la, 2);
+                }
                 l.Add("\t\tthis.performer.setAliasMap(map, this);");
             }
             if (obj is IMeasurements m)
@@ -152,7 +157,9 @@ namespace DataPerformer.Formula.TypeScript
             AddPost(l);
             if (obj is IFeedbackCollectionHolder feedback)
             {
-                var ll = performer.Create(feedback);
+
+                var dcc = creator as IFeedbackCollectionCodeCreator;
+                var ll = dcc.Create(feedback).Values.ToArray()[0];
                 formulaPerformer.Add(l, ll, 1);
             }
 
@@ -160,15 +167,15 @@ namespace DataPerformer.Formula.TypeScript
             return l;
         }
 
-        static List<string> CreateRecursive(string preffix, object obj)
+        static List<string> CreateRecursive(string preffix, object obj, IClassCodeCreator cc)
         {
-            return CreateTreeCollection(preffix, obj as ITreeCollection);
+            return CreateTreeCollection(preffix, obj as ITreeCollection, cc);
         }
 
 
-        static List<string> CreateDiffrerentialSolver(string preffix, object obj)
+        static List<string> CreateDiffrerentialSolver(string preffix, object obj, IClassCodeCreator cc)
         {
-            return CreateTreeCollection(preffix, obj as ITreeCollection);
+            return CreateTreeCollection(preffix, obj as ITreeCollection, cc);
         }
 
 
@@ -185,9 +192,123 @@ namespace DataPerformer.Formula.TypeScript
         }
 
 
-        static List<string> CreateVectorConsumer(string preffix, object obj)
+        static List<string> CreateVectorConsumer(string preffix, object obj, IClassCodeCreator cc)
         {
-            return CreateTreeCollection(preffix, obj as ITreeCollection);
+            return CreateTreeCollection(preffix, obj as ITreeCollection, cc);
+        }
+
+        Dictionary<string, List<string>> IFeedbackCollectionCodeCreator.Create(IFeedbackCollectionHolder holder)
+        {
+            var d = new Dictionary<string, List<string>>();
+            d["code"] = Create(holder);
+            return d;
+        }
+
+        IDictionaryCodeCreator<string, string> dcc => this;
+
+ 
+        private List<string> Create(IFeedbackCollectionHolder holder)
+        {
+            var feedback = holder.Feedback;
+            var l = new List<string>();
+            if (feedback is IFeedbackAliasCollection fa)
+            {
+                feedback.Fill();
+                var d = fa.Dictionary;
+                if (d.Count > 0)
+                {
+                    l.Add("setFeedback(): void {");
+                    var ll = dcc.Create("map", fa.Dictionary).Values.ToArray()[0];
+                    ll.Add("this.feedback = new FeedbackAliasCollection(map, this, this);");
+                    formulaPerformer.Add(l, ll, 1);
+                    l.Add("}");
+                }
+            }
+            return l;
+        }
+
+        public static Dictionary<string, List<string>> Create(string id, Dictionary<string, string> dictionary)
+        {
+            var l = new List<string>();
+            l.Add("let " + id + " = new Map<string, string>(");
+            int n = dictionary.Count;
+            int i = 0;
+            l.Add("[");
+            if (n == 0)
+            {
+                l.Add("]);");
+            }
+            else
+            {
+                foreach (var t in dictionary)
+                {
+                    var s = "\t[\"" + t.Key + "\", \"" + t.Value + "\" ]";
+                    if (i < (n - 1))
+                    {
+                        s += ',';
+                    }
+                    l.Add(s);
+                    ++i;
+                }
+                l.Add("]);");
+            }
+
+
+            var d = new Dictionary<string, List<string>>();
+            d["code"] = l;
+            return d;
+        }
+
+        Dictionary<string, List<string>> IDictionaryCodeCreator<string, string>.Create(string id, Dictionary<string, string> dictionary)
+        {
+            return Create(id, dictionary);
+        }
+
+        Dictionary<string, List<string>> IAliasCodeCreator.Create(string id, IAlias alias)
+        {
+            return Create(id, alias);
+
+        }
+
+
+
+        Dictionary<string, List<string>> Create(string id, IAlias alias)
+        {
+            Diagram.UI.Performer p = new Diagram.UI.Performer();
+            IDictionaryCodeCreator<string, object> d = this;
+            var dp = p.FromAlias(alias);
+            var cd = d.Create("map", dp);
+            return cd;
+        }
+
+        Dictionary<string, List<string>> IDictionaryCodeCreator<string, object>.Create(string id, Dictionary<string, object> dictionary)
+        {
+            List<string> l = new List<string>();
+            l.Add("let " + id + " = new Map<string, any>(");
+            int n = dictionary.Count;
+            l.Add("[");
+            if (n == 0)
+            {
+                l.Add("]);");
+            }
+            else
+            {
+                int i = 0;
+                foreach (var item in dictionary)
+                {
+                    string s = item.Key;
+                    s = "\t[\"" + s + "\", " + performer.StringValue(item.Value) + " ]";
+                    if (i < (n - 1))
+                    {
+                        s += ',';
+                    }
+                    l.Add(s);
+                }
+                l.Add("]);");
+            }
+            Dictionary<string, List<string>> d = new();
+            d["code"] = l;
+            return d;
         }
     }
 }

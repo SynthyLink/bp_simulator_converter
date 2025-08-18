@@ -7,7 +7,8 @@ using Diagram.UI;
 using FormulaEditor;
 
 using DataPerformer.Portable;
-using Diagram.UI.Attributes;
+
+using BaseTypes.Attributes;
 
 namespace DataPerformer.Formula.CodeCreators
 {

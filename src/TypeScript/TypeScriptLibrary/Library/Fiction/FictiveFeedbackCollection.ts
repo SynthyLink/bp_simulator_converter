@@ -15,10 +15,11 @@ export class FictiveFeedbackCollection implements IFeedbackCollection
     getFeedbacks(): IFeedback[]
     {
         throw new OwnNotImplemented();
-     }
+    }
+
     setFeedbacks(): void
     {
-        throw new OwnNotImplemented();
-     }
+
+    }
 
 }

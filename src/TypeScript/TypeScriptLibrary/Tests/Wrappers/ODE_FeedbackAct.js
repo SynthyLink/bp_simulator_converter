@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ODE_FeedbackAct = void 0;
+const OwnNotImplemented_1 = require("../../Library/ErrorHandler/OwnNotImplemented");
 const FictiveDataConsumer_1 = require("../../Library/Fiction/FictiveDataConsumer");
 const RungeProcessor_1 = require("../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor");
 const PefrormerMeasuremets_1 = require("../../Library/Measurements/PefrormerMeasuremets");
@@ -27,7 +28,7 @@ class ODE_FeedbackAct extends ODE_Feedback_1.ODE_Feedback {
             p.peformFixedStepCalculation(runtime, 0, 0.4, 45, this);
         }
         catch (e) {
-            throw new OwnException();
+            throw new OwnNotImplemented_1.OwnNotImplemented();
         }
     }
 }

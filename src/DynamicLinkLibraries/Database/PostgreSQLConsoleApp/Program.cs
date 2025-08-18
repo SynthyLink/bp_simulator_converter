@@ -6,6 +6,9 @@ using PostgreSQLWarehouse;
 using PostgreSQLWarehouse.Models;
 //BA(); Console.WriteLine("Finish"); return;
 //var t = CopyToDatabse1();
+
+
+
 var t = CopyToFile();
 await t;
 Task.WaitAll(t.Result);
@@ -22,6 +25,11 @@ PostgreSQLConsoleApp.A.TestA();
  WHERE "Id" <> "ParentId";
 */
 return;
+
+async Task EntityDebug()
+{
+   var x = new  DataWarehouse.SQLServer.EntityFramework.DataWarehouse()
+}
 
 async Task<List<Task>> CopyToDatabse()
 {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
-using Diagram.UI.Attributes;
+using BaseTypes.Attributes;
+
 using Diagram.UI;
 using Diagram.UI.Interfaces;
 using Motion6D.Interfaces;
@@ -9,7 +10,6 @@ using Motion6D.Portable.Aggregates;
 namespace Motion6D.Portable.CoreCreators
 {
     [Language("C#")]
-
     class CSCodeCreator : IClassCodeCreator
     {
 

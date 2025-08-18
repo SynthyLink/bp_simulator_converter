@@ -1,8 +1,9 @@
-﻿using Diagram.UI.Attributes;
+﻿using System.Collections.Generic;
+
 using Diagram.UI;
 using Diagram.UI.Interfaces;
 
-using System.Collections.Generic;
+using BaseTypes.Attributes;
 
 namespace SoundService.CodeCreators
 {

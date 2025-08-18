@@ -26,7 +26,7 @@ namespace FormulaEditor.CSharp
         /// <summary>
         /// Singleton
         /// </summary>
-        public static readonly ICodeCreator CodeCreator = new CSharpCodeCreator();
+        public static readonly ITreeCodeCreator CodeCreator = new CSharpCodeCreator();
 
         /// <summary>
         /// Standard header of calculation class
@@ -342,7 +342,7 @@ namespace FormulaEditor.CSharp
         /// </summary>
         /// <param name="trees">Trees</param>
         /// <returns>Creator</returns>
-        public override ICodeCreator Create(object obj, ObjectFormulaTree[] trees)
+        public override ITreeCodeCreator Create(object obj, ObjectFormulaTree[] trees)
         {
             return new CSharpCodeCreator(trees);
         }
@@ -376,7 +376,7 @@ namespace FormulaEditor.CSharp
         /// <param name="initializers">Initializers</param>
         /// <returns>List of code strings</returns>
         public static IList<string> CreateCode(object obj, ObjectFormulaTree[] trees,
-            ICodeCreator creator, out ICodeCreator local,
+            ITreeCodeCreator creator, out ITreeCodeCreator local,
              out IList<string> variables, out IList<string> initializers)
         {
             local = null;

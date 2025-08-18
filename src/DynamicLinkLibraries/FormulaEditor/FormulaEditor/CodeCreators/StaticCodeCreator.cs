@@ -20,7 +20,7 @@ namespace FormulaEditor.CodeCreators
         /// <param name="creator">Creator of code</param>
         /// <param name="tree">The tree</param>
         /// <returns>Number of tree</returns>
-        public static int GetNumber(ICodeCreator creator, ObjectFormulaTree tree)
+        public static int GetNumber(ITreeCodeCreator creator, ObjectFormulaTree tree)
         {
             try
             {
@@ -42,8 +42,8 @@ namespace FormulaEditor.CodeCreators
         /// <param name="initializers">Strings of initializers</param>
         /// <returns>Strings of code</returns>
         public static Dictionary<string, List<string>> CreateCode(object obj, 
-            ObjectFormulaTree[] trees, ICodeCreator creator,
-            out ICodeCreator local)
+            ObjectFormulaTree[] trees, ITreeCodeCreator creator,
+            out ITreeCodeCreator local)
         {
             List<string> code = new List<string>();
             List<string> vari = new List<string>();
@@ -109,7 +109,7 @@ namespace FormulaEditor.CodeCreators
 
         #region Private Members
 
-        static Dictionary<string, List<string>> CreateOptionalCode(object obj, ICodeCreator creator)
+        static Dictionary<string, List<string>> CreateOptionalCode(object obj, ITreeCodeCreator creator)
         {
             List<string> code = new List<string>();
             List<string> vari = new List<string>();
@@ -269,7 +269,7 @@ namespace FormulaEditor.CodeCreators
             }
         }
 
-        private static Dictionary<string, List<string>> CreateCode(object obj, ICodeCreator creator, 
+        private static Dictionary<string, List<string>> CreateCode(object obj, ITreeCodeCreator creator, 
             ObjectFormulaTree tree, List<ObjectFormulaTree> busy)
         {
             List<ObjectFormulaTree> l = new List<ObjectFormulaTree>();

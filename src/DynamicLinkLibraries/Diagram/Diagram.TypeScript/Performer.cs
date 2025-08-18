@@ -113,25 +113,6 @@ namespace Diagram.UI.TypeScript
         }
 */
 
-        public List<string> Create(IFeedbackCollectionHolder holder)
-        {
-            var feedback = holder.Feedback;
-            var l = new List<string>();
-            if (feedback is IFeedbackAliasCollection fa)
-            {
-                feedback.Fill();
-                var d = fa.Dictionary;
-                if (d.Count > 0)
-                {
-                    l.Add("setFeedback(): void {");
-                    var ll = CreateStringDictionary("map", fa.Dictionary);
-                    ll.Add("this.feedback = new FeedbackAliasCollection(map, this, this);");
-                    performer.Add(l, ll, 1);
-                    l.Add("}");
-                }
-            }
-            return l;
-        }
         
         public List<string> CreateStringDictionary(string id, Dictionary<string, string> dictionary)
         {

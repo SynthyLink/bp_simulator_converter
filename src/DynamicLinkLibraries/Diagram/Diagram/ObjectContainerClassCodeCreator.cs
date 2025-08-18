@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Diagram.UI.Portable;
 using Diagram.UI.Interfaces;
-using Diagram.UI.Attributes;
+using BaseTypes.Attributes;
 
 
 namespace Diagram.UI

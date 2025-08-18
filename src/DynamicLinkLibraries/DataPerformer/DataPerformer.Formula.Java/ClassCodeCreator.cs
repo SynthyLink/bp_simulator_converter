@@ -1,5 +1,5 @@
-﻿using Diagram.UI;
-using Diagram.UI.Attributes;
+﻿using BaseTypes.Attributes;
+using Diagram.UI;
 
 namespace DataPerformer.Formula.Java
 {

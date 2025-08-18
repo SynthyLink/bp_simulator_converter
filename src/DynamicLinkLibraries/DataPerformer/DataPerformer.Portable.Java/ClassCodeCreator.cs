@@ -1,8 +1,8 @@
-﻿using BaseTypes.CodeCreator.Interfaces;
+﻿using BaseTypes.Attributes;
+using BaseTypes.CodeCreator.Interfaces;
 
 using Diagram.UI;
 
-using Diagram.UI.Attributes;
 
 using Diagram.UI.Interfaces;
 

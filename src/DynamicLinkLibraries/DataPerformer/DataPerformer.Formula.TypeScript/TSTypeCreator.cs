@@ -1,5 +1,6 @@
 ﻿using BaseTypes;
 using BaseTypes.CodeCreator.Interfaces;
+using ErrorHandler;
 using System.Reflection;
 
 namespace DataPerformer.Formula.TypeScript
@@ -145,6 +146,11 @@ namespace DataPerformer.Formula.TypeScript
                 return "";
             }
             return s;
+        }
+
+        string ITypeCreator.GetStringValue(object o)
+        {
+            return (o is string) ? "\"" + o + "\"" : "" + o;
         }
 
         #endregion

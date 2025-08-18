@@ -28,5 +28,4 @@ class VectorFormulaConsumer extends DataConsumerVariableMeasurements_1.DataConsu
     }
 }
 exports.VectorFormulaConsumer = VectorFormulaConsumer;
-//export default VectorFormulaConsumer;
 //# sourceMappingURL=VectorFormulaConsumer.js.map

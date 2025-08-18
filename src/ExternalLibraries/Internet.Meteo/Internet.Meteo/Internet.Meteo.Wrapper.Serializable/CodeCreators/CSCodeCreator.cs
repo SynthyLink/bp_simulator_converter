@@ -1,6 +1,6 @@
-﻿using Diagram.UI.Attributes;
-using Diagram.UI;
+﻿using Diagram.UI;
 using Diagram.UI.Interfaces;
+using BaseTypes.Attributes;
 
 namespace Internet.Meteo.Wrapper.Serializable.CodeCreators
 {

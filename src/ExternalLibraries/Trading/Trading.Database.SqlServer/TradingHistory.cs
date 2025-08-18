@@ -1,4 +1,5 @@
-﻿using IBApi.messages;
+﻿using ErrorHandler;
+using IBApi.messages;
 using Microsoft.EntityFrameworkCore;
 using Trading.Database.Interfaces;
 
@@ -36,12 +37,12 @@ namespace Trading.Database.SqlServer.Overriden
 
         Task ITradingDatabaseHistoryInteface.DeleteBySymbol(string symbol, CancellationToken token)
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
 
         Task ITradingDatabaseHistoryInteface.FillHisrory(string name, List<HistoricalDataMessageDateTime> data, CancellationToken token)
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
 
 
@@ -52,12 +53,12 @@ namespace Trading.Database.SqlServer.Overriden
 
         void ITradingDatabaseHistoryInteface.DeleteBySymbol(string symbol)
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
 
         void ITradingDatabaseHistoryInteface.FillHisrory(string name, List<HistoricalDataMessageDateTime> data)
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
 
     
@@ -120,7 +121,7 @@ namespace Trading.Database.SqlServer.Overriden
 
         Task<List<HistoricalDataMessageDateTime>> ITradingDatabaseHistoryInteface.GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end, CancellationToken token)
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
 
         List<HistoricalDataMessageDateTime> ITradingDatabaseHistoryInteface.GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end)

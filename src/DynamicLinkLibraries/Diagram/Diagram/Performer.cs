@@ -22,6 +22,22 @@ namespace Diagram.UI
     /// </summary>
     public class Performer
     {
+
+        /// <summary>
+        /// Dictionary from alias
+        /// </summary>
+        /// <param name="alias">the alias</param>
+        /// <returns>Thr dictionary</returns>
+        public Dictionary<string, object> FromAlias(IAlias alias)
+        {
+            
+            var d = new Dictionary<string, object>();
+            foreach (var name in alias.AliasNames)
+            {
+                d.Add(name, alias[name]);
+            }
+            return d;
+        }
  
 
         /// <summary>
