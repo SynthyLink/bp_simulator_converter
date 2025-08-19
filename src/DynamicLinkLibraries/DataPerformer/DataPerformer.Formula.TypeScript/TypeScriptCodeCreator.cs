@@ -51,7 +51,7 @@ namespace DataPerformer.Formula.TypeScript
 
 
         private static readonly ITypeCreator typeCreator =
-            new TSTypeCreator();
+            new CodeCreator();
 
 
         private static readonly Dictionary<string, string[]> elementary =

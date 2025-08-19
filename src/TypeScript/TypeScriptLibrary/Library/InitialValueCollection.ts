@@ -4,7 +4,7 @@ import { IInitialValueCollection } from "./Interfaces/IInitialValueCollection";
 export class InitialValueCollection implements IInitialValueCollection
 {
 
-    addInitilalValue(value: IInitialValue): void
+    addInitialValue(value: IInitialValue): void
     {
         this.values.push(value);
     }

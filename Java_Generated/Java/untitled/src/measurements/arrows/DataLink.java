@@ -2,8 +2,7 @@ package measurements.arrows;
 
 import category_theory.CategoryArrow;
 import category_theory.interfaces.ICategoryObject;
-import category_theory.interfaces.IDesktop;
-import measurements.Measurements;
+import diagram.interfaces.IDesktop;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IMeasurements;
 

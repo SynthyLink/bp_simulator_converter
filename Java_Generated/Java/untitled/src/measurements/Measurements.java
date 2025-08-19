@@ -1,7 +1,7 @@
 package measurements;
 
 import category_theory.CategoryObject;
-import category_theory.interfaces.IDesktop;
+import diagram.interfaces.IDesktop;
 import measurements.interfaces.IMeasurement;
 import measurements.interfaces.IMeasurements;
 

@@ -75,7 +75,7 @@ namespace FormulaEditor.CSharp
 
         #region ITreeCalculatorCodeCreator Members
 
-        List<string> ITreeCollectionCodeCreator.CreateCode(object obj, ObjectFormulaTree[] trees, 
+        Dictionary<string, List<string>> ITreeCollectionCodeCreator.CreateCode(object obj, ObjectFormulaTree[] trees, 
             string className, string constructorModifier, bool checkValue)
         {
             this.trees = trees;
@@ -95,7 +95,9 @@ namespace FormulaEditor.CSharp
             }
             l.Add("");
             l.Add("}");
-            return l;
+            var d = new Dictionary<string, List<string>>();
+            d["code"] = l;
+            return d;
        }
 
         #endregion

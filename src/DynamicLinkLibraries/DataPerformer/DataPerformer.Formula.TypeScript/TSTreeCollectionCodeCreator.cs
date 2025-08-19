@@ -56,7 +56,7 @@ namespace DataPerformer.Formula.TypeScript
 
         #region ITreeCalculatorCodeCreator Members
 
-        List<string> ITreeCollectionCodeCreator.CreateCode(object obj, ObjectFormulaTree[] trees,
+        Dictionary<string, List<string>> ITreeCollectionCodeCreator.CreateCode(object obj, ObjectFormulaTree[] trees,
             string className, string constructorModifier, bool checkValue)
         {
             Object = obj;
@@ -105,7 +105,9 @@ namespace DataPerformer.Formula.TypeScript
             ll.Add("}");
             l.AddRange(ll);
             l.Add("");
-            return l;
+            var d = new Dictionary<string, List<string>>();
+            d["code"] = l;
+            return d;
         }
 
         #endregion
@@ -115,7 +117,7 @@ namespace DataPerformer.Formula.TypeScript
         /// <summary>
         /// Creator of code
         /// </summary>
-        public static ITreeCodeCreator CodeCreator
+        public static ITreeCodeCreator TreeCodeCreator
         {
             get
             {

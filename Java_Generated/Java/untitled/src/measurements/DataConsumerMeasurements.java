@@ -1,6 +1,6 @@
 package measurements;
 
-import category_theory.interfaces.IDesktop;
+import diagram.interfaces.IDesktop;
 import measurements.interfaces.IMeasurement;
 import measurements.interfaces.IMeasurements;
 
@@ -34,4 +34,11 @@ public class DataConsumerMeasurements  extends  DataConsumer implements IMeasure
     public void addMeasurement(IMeasurement measurement) {
         measurementsData.add(measurement);
     }
+
+    public  double  getInternalTime()
+    {
+
+        return timeMeasurement.getTime();
+    }
+
 }

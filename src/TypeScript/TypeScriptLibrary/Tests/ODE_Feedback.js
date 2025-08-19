@@ -33,10 +33,10 @@ class ODE_Feedback_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormul
         this.var_11 = 0;
         let map = new Map([
             ["k", 2],
+            ["b", 1],
+            ["a", 1],
             ["d", -0.17015052092374328],
             ["c", 0.31314560830292659],
-            ["a", 1],
-            ["b", 1],
         ]);
         this.performer.setAliasMap(map, this);
         this.addVariableValue("Formula_1", 0, 0);

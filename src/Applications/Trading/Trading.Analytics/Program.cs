@@ -1,6 +1,7 @@
 using CategoryTheory;
 using DataSetService;
 using Diagram.UI;
+using NamedTree;
 using System.Diagnostics.Metrics;
 
 namespace Trading.Analytics
@@ -24,8 +25,8 @@ namespace Trading.Analytics
 
 
             ApplicationConfiguration.Initialize();
-            var form = StaticExtension.CreateForm("");
-            Application.Run(form);
+           // var form = StaticExtension.CreateForm("");
+           // Application.Run(form);
         }
 
         static int counter = 0;

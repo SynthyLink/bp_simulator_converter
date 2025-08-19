@@ -20,9 +20,9 @@ namespace Diagram.UI.Java
            var l = new List<string>();
             l.Add("package generated;");
             l.Add("");
-            l.Add("import category_theory.Desktop;");
+            l.Add("import diagram.Desktop;");
             l.Add("");
-            l.Add("import category_theory.interfaces.IDesktop;");
+            l.Add("import diagram.interfaces.IDesktop;");
             l.Add("");
             l.Add("public class " + className + " extends Desktop");
             l.Add("{");

@@ -5,7 +5,7 @@ class InitialValueCollection {
     constructor() {
         this.values = [];
     }
-    addInitilalValue(value) {
+    addInitialValue(value) {
         this.values.push(value);
     }
     getInitialValues() {

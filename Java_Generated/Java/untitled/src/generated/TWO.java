@@ -1,8 +1,8 @@
 package generated;
 
-import category_theory.Desktop;
+import diagram.Desktop;
 
-import category_theory.interfaces.IDesktop;
+import diagram.interfaces.IDesktop;
 
 public class TWO extends Desktop
 {

@@ -1,15 +1,24 @@
-﻿using BaseTypes;
+﻿using System.Reflection;
+
+using BaseTypes;
 using BaseTypes.CodeCreator.Interfaces;
-using ErrorHandler;
-using System.Reflection;
 
-namespace DataPerformer.Formula.TypeScript
+using Diagram.UI.Interfaces;
+
+namespace Diagram.TypeScript
 {
-    
+    public class CodeCreator : ITypeCreator, IDictionaryCodeCreator<string, string>,
+        IDictionaryCodeCreator<string, object>, IAliasCodeCreator, IFeedbackCollectionCodeCreator
 
-    internal class TSTypeCreator : ITypeCreator
     {
         #region Fields
+
+
+        static protected UI.TypeScript.Performer performer = new();
+
+        static  protected NamedTree.Performer formulaPerformer = new();
+
+
 
         static public readonly Dictionary<Type, string> Dictionary =
             new Dictionary<Type, string>()
@@ -154,6 +163,121 @@ namespace DataPerformer.Formula.TypeScript
         }
 
         #endregion
+        Dictionary<string, List<string>> IDictionaryCodeCreator<string, object>.Create(string id, Dictionary<string, object> dictionary)
+        {
+            List<string> l = new List<string>();
+            l.Add("let " + id + " = new Map<string, any>(");
+            int n = dictionary.Count;
+            l.Add("[");
+            if (n == 0)
+            {
+                l.Add("]);");
+            }
+            else
+            {
+                int i = 0;
+                foreach (var item in dictionary)
+                {
+                    string s = item.Key;
+                    s = "\t[\"" + s + "\", " + performer.StringValue(item.Value) + " ]";
+                    if (i < (n - 1))
+                    {
+                        s += ',';
+                    }
+                    l.Add(s);
+                }
+                l.Add("]);");
+            }
+            Dictionary<string, List<string>> d = new();
+            d["code"] = l;
+            return d;
+        }
+
+        Dictionary<string, List<string>> IDictionaryCodeCreator<string, string>.Create(string id, Dictionary<string, string> dictionary)
+        {
+            return Create(id, dictionary);
+        }
+
+
+        public static Dictionary<string, List<string>> Create(string id, Dictionary<string, string> dictionary)
+        {
+            var l = new List<string>();
+            l.Add("let " + id + " = new Map<string, string>(");
+            int n = dictionary.Count;
+            int i = 0;
+            l.Add("[");
+            if (n == 0)
+            {
+                l.Add("]);");
+            }
+            else
+            {
+                foreach (var t in dictionary)
+                {
+                    var s = "\t[\"" + t.Key + "\", \"" + t.Value + "\" ]";
+                    if (i < (n - 1))
+                    {
+                        s += ',';
+                    }
+                    l.Add(s);
+                    ++i;
+                }
+                l.Add("]);");
+            }
+
+
+            var d = new Dictionary<string, List<string>>();
+            d["code"] = l;
+            return d;
+        }
+
+        Dictionary<string, List<string>> IFeedbackCollectionCodeCreator.Create(IFeedbackCollectionHolder holder)
+        {
+            var d = new Dictionary<string, List<string>>();
+            d["code"] = Create(holder);
+            return d;
+        }
+
+        Dictionary<string, List<string>> Create(string id, IAlias alias)
+        {
+            Diagram.UI.Performer p = new Diagram.UI.Performer();
+            IDictionaryCodeCreator<string, object> d = this;
+            var dp = p.FromAlias(alias);
+            var cd = d.Create("map", dp);
+            return cd;
+        }
+
+        Dictionary<string, List<string>> IAliasCodeCreator.Create(string id, IAlias alias)
+        {
+            return Create(id, alias);
+
+        }
+
+        IDictionaryCodeCreator<string, string> dcc => this;
+
+
+
+        private List<string> Create(IFeedbackCollectionHolder holder)
+        {
+            var feedback = holder.Feedback;
+            var l = new List<string>();
+            if (feedback is IFeedbackAliasCollection fa)
+            {
+                feedback.Fill();
+                var d = fa.Dictionary;
+                if (d.Count > 0)
+                {
+                    l.Add("setFeedback(): void {");
+                    var ll = dcc.Create("map", fa.Dictionary).Values.ToArray()[0];
+                    ll.Add("this.feedback = new FeedbackAliasCollection(map, this, this);");
+                    formulaPerformer.Add(l, ll, 1);
+                    l.Add("}");
+                }
+            }
+            return l;
+        }
+
+
 
     }
 }

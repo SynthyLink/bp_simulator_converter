@@ -9,6 +9,7 @@ using FormulaEditor;
 using DataPerformer.Portable;
 
 using BaseTypes.Attributes;
+using System.Linq;
 
 namespace DataPerformer.Formula.CodeCreators
 {
@@ -141,7 +142,7 @@ namespace DataPerformer.Formula.CodeCreators
             l.Add("");
             FormulaEditor.Interfaces.ITreeCollection tc = v;
             lt = StaticExtensionFormulaEditor.TreeCollectionCodeCreator.CreateCode(v, tc.Trees, "Calculation", "internal ",
-                check);
+                check).Values.ToList()[0];
             l.Add("\tinternal class Calculation" + lt[0]);
             for (int i = 1; i < lt.Count; i++)
             {
@@ -303,7 +304,7 @@ namespace DataPerformer.Formula.CodeCreators
             List<string> lt = 
                 StaticExtensionFormulaEditor.TreeCollectionCodeCreator.CreateCode(obj, tc.Trees, 
                 "Calculation", "internal ",
-                check);
+                check).Values.ToList()[0];
             l.Add("\tinternal class Calculation" + lt[0]);
             for (int i = 1; i < lt.Count; i++)
             {
@@ -434,7 +435,7 @@ namespace DataPerformer.Formula.CodeCreators
             List<string> lt =
                 StaticExtensionFormulaEditor.TreeCollectionCodeCreator.CreateCode(obj, tc.Trees,
                 "Calculation", "internal ",
-                check);
+                check).Values.ToList()[0];
             l.Add("\tinternal class Calculation" + lt[0]);
             for (int i = 1; i < lt.Count; i++)
             {

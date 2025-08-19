@@ -1,15 +1,31 @@
 package measurements;
 
 import category_theory.CategoryObject;
-import category_theory.interfaces.IDesktop;
+import diagram.interfaces.IDesktop;
 import general_service.interfaces.IPostSetArrow;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IMeasurements;
+import measurements.interfaces.ITimeMeasurementConsumer;
+import measurements.interfaces.ITimeMeasurementProvider;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow {
+public class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow,
+        ITimeMeasurementConsumer
+{
+
+    protected  Performer performer = new Performer();
+
+    ITimeMeasurementConsumer tms;
+
+    ITimeMeasurementProvider timeMeasurement;
+
+    boolean success = true;
+
+    protected IDataConsumer dataConsumer;
+
+
 
     protected List<IMeasurements> measurements = new ArrayList<>();
 
@@ -34,5 +50,20 @@ public class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     @Override
     public void postSetArrow() {
 
+    }
+
+    @Override
+    public ITimeMeasurementProvider getTimeMeasutement() {
+        return timeMeasurement;
+    }
+
+    @Override
+    public void setTimeMeasurement(ITimeMeasurementProvider provider) {
+timeMeasurement = provider;
+    }
+
+    @Override
+    public double getInternalTime() {
+        return 0;
     }
 }

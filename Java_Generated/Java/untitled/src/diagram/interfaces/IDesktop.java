@@ -1,4 +1,7 @@
-package category_theory.interfaces;
+package diagram.interfaces;
+
+import category_theory.interfaces.ICategoryArrow;
+import category_theory.interfaces.ICategoryObject;
 
 import java.util.List;
 

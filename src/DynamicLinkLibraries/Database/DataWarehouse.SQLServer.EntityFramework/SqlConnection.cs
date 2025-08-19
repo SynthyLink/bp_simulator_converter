@@ -12,9 +12,9 @@ namespace Database.SqlServer.Extension
 
         System.Data.SqlClient.SqlConnection connection;
 
-        async Task FillAsync<T>(object t, CancellationToken cancellationToken)  where T : class 
+        async Task FillAsync<T>(System.Data.DataTable t, CancellationToken cancellationToken)  where T : System.Data.DataRow 
         {
-            if (t is System.Data.TypedTableBase<T> s)
+           if (t is  System.Data.TypedTableBase<T> s)
             {
                 }
             await Task.Delay(1);

@@ -1,7 +1,7 @@
 package category_theory;
 
 import category_theory.interfaces.ICategoryObject;
-import category_theory.interfaces.IDesktop;
+import diagram.interfaces.IDesktop;
 
 /**
  *

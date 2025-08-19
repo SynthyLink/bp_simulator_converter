@@ -9,7 +9,7 @@ class FictionInitialValueCollection {
     resetInitialValues() {
         throw new OwnNotImplemented_1.OwnNotImplemented();
     }
-    addInitilalValue(value) {
+    addInitialValue(value) {
         throw new OwnNotImplemented_1.OwnNotImplemented();
     }
 }

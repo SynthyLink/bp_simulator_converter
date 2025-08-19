@@ -9,7 +9,7 @@ export class FictionInitialValueCollection implements IInitialValueCollection {
     resetInitialValues(): void {
         throw new OwnNotImplemented();
     }
-    addInitilalValue(value: IInitialValue): void {
+    addInitialValue(value: IInitialValue): void {
         throw new OwnNotImplemented();
     }
 

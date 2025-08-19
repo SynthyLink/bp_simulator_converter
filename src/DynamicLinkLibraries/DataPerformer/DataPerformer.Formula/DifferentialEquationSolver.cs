@@ -92,7 +92,7 @@ namespace DataPerformer.Formula
         /// <summary>
         /// Table of aliases
         /// </summary>
-        protected Dictionary<object, object> aliases = new ();
+        protected Dictionary<object, object> aliasNames = new ();
         
         
         protected Dictionary<object, object> dic = new ();
@@ -199,7 +199,7 @@ namespace DataPerformer.Formula
             init();
             vars = new Dictionary<object, object>();
             pars = new Dictionary<object, object>();
-            aliases = new Dictionary<object, object>();
+            aliasNames = new Dictionary<object, object>();
             creator = VariableDetector.GetCreator(this);
             feedbackCollection = new FeedbackAliasCollection(this, this, new Dictionary<object, object>());
         }
@@ -323,7 +323,7 @@ namespace DataPerformer.Formula
                 string sc = ConstantNames;
                 foreach (char c in str)
                 {
-                    if (aliases.ContainsKey(c + ""))
+                    if (aliasNames.ContainsKey(c + ""))
                     {
                         continue;
                     }
@@ -530,7 +530,7 @@ namespace DataPerformer.Formula
                 string all = AllVariables;
                 foreach (char c in all)
                 {
-                    if (aliases.ContainsKey("" + c) | variables.ContainsKey(c))
+                    if (aliasNames.ContainsKey("" + c) | variables.ContainsKey(c))
                     {
                         continue;
                     }
@@ -567,7 +567,7 @@ namespace DataPerformer.Formula
         /// </summary>
         public void ResetAliases()
         {
-            aliases.Clear();
+            aliasNames.Clear();
             acc.Clear();
             foreach (char c in vars.Keys)
             {
@@ -582,7 +582,7 @@ namespace DataPerformer.Formula
         public void AddAlias(string alias)
         {
             double a = 0;
-            aliases[alias] = a;
+            aliasNames[alias] = a;
         }
 
         /// <summary>
@@ -686,7 +686,7 @@ namespace DataPerformer.Formula
         protected virtual void postDeserialize()
         {
             Hpars = new Dictionary<object, object>(pars);
-            Haliases = new Dictionary<object, object>(aliases);
+            Haliases = new Dictionary<object, object>(aliasNames);
             //      Harguments = new Dictionary<object, object>(arguments);
             foreach (string s in args)
             {
@@ -721,7 +721,7 @@ namespace DataPerformer.Formula
                     str += c;
                 }
             }
-            foreach (string s in aliases.Keys)
+            foreach (string s in aliasNames.Keys)
             {
                 if (!str.Contains(s))
                 {
@@ -774,7 +774,7 @@ namespace DataPerformer.Formula
                 }
             }
             AssociatedAddition aa = new AssociatedAddition(this, null);
-            foreach (string s in aliases.Keys)
+            foreach (string s in aliasNames.Keys)
             {
                 if (variables.ContainsKey(s[0]))
                 {
@@ -1180,6 +1180,8 @@ namespace DataPerformer.Formula
 
         #region IAlias Members
 
+
+
         /// <summary>
         /// Names of aliases
         /// </summary>
@@ -1188,7 +1190,7 @@ namespace DataPerformer.Formula
             get
             {
                 List<string> s = new List<string>();
-                foreach (string str in aliases.Keys)
+                foreach (string str in aliasNames.Keys)
                 {
                     s.Add(str);
                 }
@@ -1203,12 +1205,12 @@ namespace DataPerformer.Formula
         {
             get
             {
-                return aliases[alias];
+                return aliasNames[alias];
             }
             set
             {
                 char c = alias[0];
-                aliases[alias] = value;
+                aliasNames[alias] = value;
                 if (variables.ContainsKey(c))
                 {
                     SetValue(c, value);

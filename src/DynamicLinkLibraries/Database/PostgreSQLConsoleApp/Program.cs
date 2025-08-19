@@ -28,7 +28,7 @@ return;
 
 async Task EntityDebug()
 {
-   var x = new  DataWarehouse.SQLServer.EntityFramework.DataWarehouse()
+    var x = new DataWarehouse.SQLServer.EntityFramework.DataWarehouse();
 }
 
 async Task<List<Task>> CopyToDatabse()

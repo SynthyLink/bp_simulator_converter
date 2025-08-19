@@ -1,7 +1,7 @@
 package generated;
 
-import category_theory.Desktop;
-import category_theory.interfaces.IDesktop;
+import diagram.Desktop;
+import diagram.interfaces.IDesktop;
 
 public class TestDesktop extends Desktop {
 

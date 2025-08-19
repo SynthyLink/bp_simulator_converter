@@ -23,7 +23,7 @@ export class AliasInitialValueConnection extends InitialValueCollection
             if (iv.length == 1)
             {
                 var init = new AliasInitialValue(an, iv[0]);
-                this.addInitilalValue(init);
+                this.addInitialValue(init);
             }
         }
 

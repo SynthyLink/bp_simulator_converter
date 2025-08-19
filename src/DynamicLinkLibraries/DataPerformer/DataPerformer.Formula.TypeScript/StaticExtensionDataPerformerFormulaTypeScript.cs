@@ -14,7 +14,7 @@ namespace DataPerformer.Formula.TypeScript
         /// </summary>
         static StaticExtensionDataPerformerFormulaTypeScript()
         {
-            new TSClassCodeCreator();
+            new ClassCodeCreator();
         }
 
         /// <summary>
@@ -28,9 +28,9 @@ namespace DataPerformer.Formula.TypeScript
         public static string ToType(this object obj)
         {
             var t = obj.GetType();
-            if (TSTypeCreator.Dictionary.ContainsKey(t))
+            if (Diagram.TypeScript.CodeCreator.Dictionary.ContainsKey(t))
             {
-                return TSTypeCreator.Dictionary[t];
+                return Diagram.TypeScript.CodeCreator.Dictionary[t];
             }
 
             return null;

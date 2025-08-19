@@ -17,7 +17,7 @@ class AliasInitialValueConnection extends InitialValueCollection_1.InitialValueC
             var an = new AliasName_1.AliasName(alias, name);
             if (iv.length == 1) {
                 var init = new AliasInitialValue_1.AliasInitialValue(an, iv[0]);
-                this.addInitilalValue(init);
+                this.addInitialValue(init);
             }
         }
     }

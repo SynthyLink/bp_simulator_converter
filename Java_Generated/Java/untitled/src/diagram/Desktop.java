@@ -1,8 +1,8 @@
-package category_theory;
+package diagram;
 
 import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
-import category_theory.interfaces.IDesktop;
+import diagram.interfaces.IDesktop;
 import general_service.interfaces.IPostSetArrow;
 
 import java.util.*;
