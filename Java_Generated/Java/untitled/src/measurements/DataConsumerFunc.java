@@ -1,5 +1,6 @@
 package measurements;
 
+import general_service.Performer;
 import general_service.interfaces.IFunc;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IMeasurement;

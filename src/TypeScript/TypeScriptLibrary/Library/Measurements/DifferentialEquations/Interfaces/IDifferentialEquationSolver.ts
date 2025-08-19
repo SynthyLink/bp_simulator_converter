@@ -17,10 +17,10 @@ export interface IDifferentialEquationSolver
     ///
     /// Sets time provider
     ///
-    setDifferentialEquationSolverTimePovider(time: ITimeMeasurementProvider)  : void;
+    setDifferentialEquationSolverTimeProvider(time: ITimeMeasurementProvider)  : void;
 
     //gets timer provider
-    getDifferentialEquationSolverTimePovider(): ITimeMeasurementProvider;
+    getDifferentialEquationSolverTimeProvider(): ITimeMeasurementProvider;
 
 
 }

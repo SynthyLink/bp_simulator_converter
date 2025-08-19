@@ -1,6 +1,5 @@
 import { AliasName } from "../Library/AliasName";
 import { Desktop } from "../Library/Desktop";
-import { FeedbackAliasCollection } from "../Library/FeedbackAliasCollection";
 import { FictiveAliasName } from "../Library/Fiction/FictiveAliasName";
 import { FictiveMeasurement } from "../Library/Fiction/FictiveMeasurement";
 import { FictiveValue } from "../Library/Fiction/FictiveValue";
@@ -21,11 +20,11 @@ class ODE_Feedback_CategoryObject_0 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
+			["c", 0.31314560830292659 ],
+			["d", -0.17015052092374328 ],
 			["k", 2 ],
 			["b", 1 ],
 			["a", 1 ],
-			["d", -0.17015052092374328 ],
-			["c", 0.31314560830292659 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", 0, 0);
@@ -181,9 +180,9 @@ class ODE_Feedback_CategoryObject_1 extends DifferentrialEquationSolverFormula
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
+			["y", 1 ],
 			["x", 0 ],
 			["a", 1 ],
-			["y", 1 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("x", 0, 0);
@@ -288,14 +287,6 @@ class ODE_Feedback_CategoryObject_1 extends DifferentrialEquationSolverFormula
 		x1?.setIValue(this.get_3());
 	}
 	
-	setFeedback(): void {
-		let map = new Map<string, string>(
-		[
-			["y", "Init.d" ],
-			["x", "Init.c" ]
-		]);
-		this.feedback = new FeedbackAliasCollection(map, this, this);
-	}
 }
 
 class ODE_Feedback_CategoryObject_2 extends DataConsumer

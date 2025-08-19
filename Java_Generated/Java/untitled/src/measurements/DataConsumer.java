@@ -2,6 +2,7 @@ package measurements;
 
 import category_theory.CategoryObject;
 import diagram.interfaces.IDesktop;
+import general_service.Performer;
 import general_service.interfaces.IPostSetArrow;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IMeasurements;
@@ -15,7 +16,7 @@ public class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         ITimeMeasurementConsumer
 {
 
-    protected  Performer performer = new Performer();
+    protected Performer performer = new Performer();
 
     ITimeMeasurementConsumer tms;
 

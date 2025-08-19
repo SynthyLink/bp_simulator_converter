@@ -13,9 +13,6 @@ class DifferentialEquationProcessor {
         this.measurements = [];
         this.timeProvider = new FictiveTimeMeasurementProvider_1.FictiveTimeMeasurementProvider();
     }
-    setDifferentialEquationProcessor(collection) {
-        throw new Error("Method not implemented.");
-    }
     getDifferentialEquations() {
         return this.equations;
     }

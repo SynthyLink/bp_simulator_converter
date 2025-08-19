@@ -1,0 +1,22 @@
+package measurements.differential_equations.interfaces;
+
+import measurements.interfaces.ITimeMeasurementProvider;
+
+public interface IDifferentialEquationProcessor {
+
+    IDifferentialEquationSolver[] getDifferentialEquations();
+
+    void addRangeDifferentialEquations(IDifferentialEquationSolver[] equations);
+
+    void stepDifferentialEquations(double start, double finish);
+
+    void updateDimension();
+
+    ITimeMeasurementProvider getDifferentialEquationsTimeProvider();
+
+    void setDifferentialEquationsTimeProvider(ITimeMeasurementProvider timeProvider);
+
+    void clearDifferentialEquations();
+
+    IDifferentialEquationProcessor newDifferentialEquations();
+}

@@ -1,4 +1,4 @@
-package measurements;
+package general_service;
 
 import category_theory.interfaces.ICategoryObject;
 import general_service.interfaces.IAliasName;

@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ODE_Feedback = void 0;
 const AliasName_1 = require("../Library/AliasName");
 const Desktop_1 = require("../Library/Desktop");
-const FeedbackAliasCollection_1 = require("../Library/FeedbackAliasCollection");
 const FictiveAliasName_1 = require("../Library/Fiction/FictiveAliasName");
 const FictiveMeasurement_1 = require("../Library/Fiction/FictiveMeasurement");
 const FictiveValue_1 = require("../Library/Fiction/FictiveValue");
@@ -32,11 +31,11 @@ class ODE_Feedback_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormul
         this.var_10 = 0;
         this.var_11 = 0;
         let map = new Map([
+            ["c", 0.31314560830292659],
+            ["d", -0.17015052092374328],
             ["k", 2],
             ["b", 1],
             ["a", 1],
-            ["d", -0.17015052092374328],
-            ["c", 0.31314560830292659],
         ]);
         this.performer.setAliasMap(map, this);
         this.addVariableValue("Formula_1", 0, 0);
@@ -186,9 +185,9 @@ class ODE_Feedback_CategoryObject_1 extends DifferentrialEquationSolverFormula_1
         this.var_6 = 0;
         this.var_7 = 0;
         let map = new Map([
+            ["y", 1],
             ["x", 0],
             ["a", 1],
-            ["y", 1],
         ]);
         this.performer.setAliasMap(map, this);
         this.addVariableValue("x", 0, 0);
@@ -282,13 +281,6 @@ class ODE_Feedback_CategoryObject_1 extends DifferentrialEquationSolverFormula_1
         x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_7());
         var x1 = v.get("x");
         x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_3());
-    }
-    setFeedback() {
-        let map = new Map([
-            ["y", "Init.d"],
-            ["x", "Init.c"]
-        ]);
-        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
     }
 }
 class ODE_Feedback_CategoryObject_2 extends DataConsumer_1.DataConsumer {

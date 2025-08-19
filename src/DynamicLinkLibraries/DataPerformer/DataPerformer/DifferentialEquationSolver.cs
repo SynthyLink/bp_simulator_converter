@@ -203,9 +203,8 @@ namespace DataPerformer
             }
             Copy(vars, varsH);
             Copy(pars, parsH);
-            Copy(this.aliasNames, aliasesH);
+            Copy(aliases, aliasesH);
             Copy(arguments, argsH);
-            var aliasNames = AliasNamesDictionary;
             Copy(aliasNames, aliasNamesH);
         }
 
@@ -213,11 +212,9 @@ namespace DataPerformer
         {
             Copy(varsH, vars);
             Copy(parsH, pars);
-            Copy(aliasesH, this.aliasNames);
+            Copy(aliasesH, aliases);
             Copy(argsH, arguments);
-            var aliasNames = new Dictionary<object, object>();
             Copy(aliasNamesH, aliasNames);
-            AliasNamesDictionary = aliasNames;
         }
 
         #endregion

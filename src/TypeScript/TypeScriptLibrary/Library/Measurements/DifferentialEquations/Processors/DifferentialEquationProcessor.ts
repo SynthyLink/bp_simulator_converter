@@ -10,14 +10,8 @@ import { IDifferentialEquationSolver } from "../Interfaces/IDifferentialEquation
 
 export class DifferentialEquationProcessor implements IDifferentialEquationProcessor
 {
-    protected performer: Performer = new Performer();
-
-    protected dimension: number = 0;
-    
-    setDifferentialEquationProcessor(collection: any): void
-    {
-        throw new Error("Method not implemented.");
-    }
+     
+   
     getDifferentialEquations(): IDifferentialEquationSolver[] {
         return this.equations;
     }
@@ -73,7 +67,10 @@ export class DifferentialEquationProcessor implements IDifferentialEquationProce
         
     }
 
-  
+    protected performer: Performer = new Performer();
+
+    protected dimension: number = 0;
+
 
     protected equations: IDifferentialEquationSolver[] = [];
 

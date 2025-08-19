@@ -17,10 +17,10 @@ export class DifferentrialEquationSolverFormula extends DataConsumerVariadbleMea
         this.types.push("IPostSetArrow");
         this.types.push("DifferentrialEquationSolverFormula");
     }
-    setDifferentialEquationSolverTimePovider(time: ITimeMeasurementProvider): void {
+    setDifferentialEquationSolverTimeProvider(time: ITimeMeasurementProvider): void {
         throw new Error("Method not implemented.");
     }
-    getDifferentialEquationSolverTimePovider(): ITimeMeasurementProvider {
+    getDifferentialEquationSolverTimeProvider(): ITimeMeasurementProvider {
         throw new Error("Method not implemented.");
     }
 

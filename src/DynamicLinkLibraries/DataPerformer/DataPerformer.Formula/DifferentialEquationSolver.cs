@@ -48,22 +48,26 @@ namespace DataPerformer.Formula
         DataPerformerFormula dataPerformerFormula;
 
         /// <summary>
+        /// Input dynamical parameter
+        /// </summary>
+    //    private Formula.DynamicalParameter par;
+
+        /// <summary>
         /// Table of variables of equations. Table contains initial values and derivations of variables
         /// </summary>
-        internal Dictionary<object, object> variables = new ();
+        protected Dictionary<object, object> variables = new ();
 
         /// <summary>
         /// Table representation of input parameters
         /// </summary>
         new private Dictionary<char, VariableMeasurement> parameters = new ();
 
+
         /// <summary>
         /// Output parameters
         /// </summary>
         private Variable[] output;
 
-
-  
         /// <summary>
         /// The time
         /// </summary>
@@ -92,30 +96,12 @@ namespace DataPerformer.Formula
         /// <summary>
         /// Table of aliases
         /// </summary>
-        protected Dictionary<object, object> aliasNames = new ();
-        
-        
-        protected Dictionary<object, object> dic = new ();
+        protected Dictionary<object, object> aliases;// = new ();
 
         /// <summary>
         /// Table of aliases names
         /// </summary>
-        protected Dictionary<object, object> AliasNamesDictionary
-        {
-            get => dic;
-            set
-            {
-                dic.Clear();
-                if (value != null)
-                {
-                    foreach (var kvp in value)
-                    {
-                        dic[kvp.Key] = kvp.Value;
-                    }
-                }
-                feedbackCollection = new FeedbackAliasCollection(this, this, dic);
-            }
-        }
+        protected Dictionary<object, object> aliasNames = new ();
 
         /// <summary>
         /// Table of external aliases
@@ -129,6 +115,12 @@ namespace DataPerformer.Formula
 
 
         protected List<string> variabelstr = new ();
+
+        Dictionary<object, object> Aliases
+        {
+            get;
+            set;
+        }
 
 
 
@@ -179,18 +171,16 @@ namespace DataPerformer.Formula
 
         ITreeCollectionProxy proxy;
 
-        protected IInitialValueCollection Initial
-        {
-            get;
-            set;
-        }
+        protected IFeedbackCollection feedbackCollection;
+
+
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Consructor
+        /// Constructor
         /// </summary>
         public DifferentialEquationSolver()
         {
@@ -199,17 +189,14 @@ namespace DataPerformer.Formula
             init();
             vars = new Dictionary<object, object>();
             pars = new Dictionary<object, object>();
-            aliasNames = new Dictionary<object, object>();
-            creator = VariableDetector.GetCreator(this);
-            feedbackCollection = new FeedbackAliasCollection(this, this, new Dictionary<object, object>());
+            aliases = new Dictionary<object, object>();
         }
+
 
 
         #endregion
 
         #region Members
-
-
 
         #region Public Memmbers
 
@@ -247,14 +234,68 @@ namespace DataPerformer.Formula
         }
 
         /// <summary>
+        /// Copies variables from processor to solver 
+        /// </summary>
+        /// <param name="offset">Offset</param>
+        /// <param name="variables">Vector of all desktop differential equations variables</param>
+        void IDifferentialEquationSolver.CopyVariablesToSolver(int offset, double[] variables)
+        {
+            int i = offset;
+            foreach (Variable v in output)
+            {
+                v.Value = variables[i];
+                ++i;
+            }
+        }
+
+        /// <summary>
+        /// Calculates derivations
+        /// </summary>
+        void IDifferentialEquationSolver.CalculateDerivations()
+        {
+            try
+            {
+                
+                foreach (Variable v in externalAliases.Keys)
+                {
+                    break;
+                    AliasName an = externalAliases[v];
+                    IMeasurement m = v;
+                    var p = m.Parameter;
+                    var value = p();
+                    if (value == null)
+                    {
+
+                    }
+                    an.SetValue(value);
+                }
+                feedbackCollection.Set();
+                foreach (IMeasurements m in Dependent)
+                {
+                    m.IsUpdated = false;
+                    m.UpdateMeasurements();
+                }
+                update();
+            }
+            catch (Exception e)
+            {
+                e.HandleException();
+            }
+        }
+
+        /// <summary>
         /// Table of external aliases
         /// </summary>
         public Dictionary<object, object> ExternalAliases
         {
-            get => AliasNamesDictionary;
+            get
+            {
+                return aliasNames;
+            }
             set
             {
-                AliasNamesDictionary = value;
+                aliasNames = value;
+                feedbackCollection = new FeedbackAliasCollection(this, this, aliasNames);
                 postSetAlias();
             }
         }
@@ -323,7 +364,7 @@ namespace DataPerformer.Formula
                 string sc = ConstantNames;
                 foreach (char c in str)
                 {
-                    if (aliasNames.ContainsKey(c + ""))
+                    if (aliases.ContainsKey(c + ""))
                     {
                         continue;
                     }
@@ -395,7 +436,7 @@ namespace DataPerformer.Formula
         }
 
         /// <summary>
-        /// All variabeles in formulas
+        /// All variables in formulas
         /// </summary>
         public override string AllVariables
         {
@@ -448,7 +489,7 @@ namespace DataPerformer.Formula
             }
             List<object> l = new List<object>(variables.Keys);
             l.Sort();
-            Output = new Variable[l.Count];
+            output = new Variable[l.Count];
             variabelstr.Clear();
             AssociatedAddition aa = new AssociatedAddition(this, null);
             for (int i = 0; i < l.Count; i++)
@@ -469,7 +510,7 @@ namespace DataPerformer.Formula
                 o[2] = t;
                 string vn = c + "";
                 Variable v = acc[vn] as Variable;
-                Output[i] = v;
+                output[i] = v;
                 bool ne = deriOrder > 0;
                 if (deriOrders.ContainsKey(vn))
                 {
@@ -530,7 +571,7 @@ namespace DataPerformer.Formula
                 string all = AllVariables;
                 foreach (char c in all)
                 {
-                    if (aliasNames.ContainsKey("" + c) | variables.ContainsKey(c))
+                    if (aliases.ContainsKey("" + c) | variables.ContainsKey(c))
                     {
                         continue;
                     }
@@ -567,7 +608,7 @@ namespace DataPerformer.Formula
         /// </summary>
         public void ResetAliases()
         {
-            aliasNames.Clear();
+            aliases.Clear();
             acc.Clear();
             foreach (char c in vars.Keys)
             {
@@ -582,7 +623,7 @@ namespace DataPerformer.Formula
         public void AddAlias(string alias)
         {
             double a = 0;
-            aliasNames[alias] = a;
+            aliases[alias] = a;
         }
 
         /// <summary>
@@ -676,6 +717,7 @@ namespace DataPerformer.Formula
                     }
                 }
                 isSerialized = false;
+                feedbackCollection = new FeedbackAliasCollection(this, this, aliasNames);
             }
 
         }
@@ -686,7 +728,7 @@ namespace DataPerformer.Formula
         protected virtual void postDeserialize()
         {
             Hpars = new Dictionary<object, object>(pars);
-            Haliases = new Dictionary<object, object>(aliasNames);
+            Haliases = new Dictionary<object, object>(aliases);
             //      Harguments = new Dictionary<object, object>(arguments);
             foreach (string s in args)
             {
@@ -721,7 +763,7 @@ namespace DataPerformer.Formula
                     str += c;
                 }
             }
-            foreach (string s in aliasNames.Keys)
+            foreach (string s in aliases.Keys)
             {
                 if (!str.Contains(s))
                 {
@@ -774,7 +816,7 @@ namespace DataPerformer.Formula
                 }
             }
             AssociatedAddition aa = new AssociatedAddition(this, null);
-            foreach (string s in aliasNames.Keys)
+            foreach (string s in aliases.Keys)
             {
                 if (variables.ContainsKey(s[0]))
                 {
@@ -793,7 +835,7 @@ namespace DataPerformer.Formula
             }
             List<object> l = new List<object>(variables.Keys);
             l.Sort();
-            Output = new Variable[l.Count];
+            output = new Variable[l.Count];
             for (int i = 0; i < l.Count; i++)
             {
                 char c = (char)l[i];
@@ -811,7 +853,7 @@ namespace DataPerformer.Formula
                 o[2] = t;
                 string vn = c + "";
                 Variable v = acc[vn] as Variable;
-                Output[i] = v;
+                output[i] = v;
                 bool ne = deriOrder > 0;
                 int dor = deriOrder;
                 if (deriOrders.ContainsKey(vn))
@@ -849,24 +891,10 @@ namespace DataPerformer.Formula
             }
         }
 
-
+ 
         #endregion
 
         #region Private Members
-
-        /// <summary>
-        /// Output parameters
-        /// </summary>
-        private Variable[] Output
-        {
-            get => output;
-            set
-            {
-                output = value;
-                Initial = new EnumerableInitialVaueCollection<Variable>(value);
-            }
-        }
-
 
         int VariablesCount
         {
@@ -1012,7 +1040,7 @@ namespace DataPerformer.Formula
             prepareStart = () => { };
             update = () =>
             {
-                foreach (Variable v in Output)
+                foreach (Variable v in output)
                 {
                     v.Update();
                 }
@@ -1046,14 +1074,13 @@ namespace DataPerformer.Formula
         private void postSetAlias()
         {
             externalAliases.Clear();
-            if (AliasNamesDictionary == null)
+            if (aliasNames == null)
             {
                 return;
             }
-            var avd = AliasNamesDictionary;
-            foreach (char c in avd.Keys)
+            foreach (char c in aliasNames.Keys)
             {
-                string s = avd[c] as string;
+                string s = aliasNames[c] as string;
                 Variable v = acc[c + ""] as Variable;
                 externalAliases[v] = this.FindAliasName(s, false);
             }
@@ -1070,9 +1097,9 @@ namespace DataPerformer.Formula
                 {
                     next = false;
                 }
-                for (int k = 0; k < Output.Length; k++)
+                for (int k = 0; k < output.Length; k++)
                 {
-                    Variable lv = Output[k];
+                    Variable lv = output[k];
                     string symb = lv.String;
                     bool ne = next;
                     bool cont = j < deriOrder;
@@ -1130,7 +1157,7 @@ namespace DataPerformer.Formula
         #region IMeasurements Members
 
 
-        protected override IEnumerable<IMeasurement> Children => Output;
+        protected override IEnumerable<IMeasurement> Children => output;
 
         /// <summary>
         /// Updates measurements data
@@ -1159,18 +1186,18 @@ namespace DataPerformer.Formula
         {
             get
             {
-                if (Output == null)
+                if (output == null)
                 {
                     return 0;
                 }
-                return Output.Length;
+                return output.Length;
             }
 
         }
 
         protected override IMeasurement GetMeasurement(int n)
         {
-            return Output[n];
+            return output[n];
         }
   
 
@@ -1180,8 +1207,6 @@ namespace DataPerformer.Formula
 
         #region IAlias Members
 
-
-
         /// <summary>
         /// Names of aliases
         /// </summary>
@@ -1190,7 +1215,7 @@ namespace DataPerformer.Formula
             get
             {
                 List<string> s = new List<string>();
-                foreach (string str in aliasNames.Keys)
+                foreach (string str in aliases.Keys)
                 {
                     s.Add(str);
                 }
@@ -1205,12 +1230,12 @@ namespace DataPerformer.Formula
         {
             get
             {
-                return aliasNames[alias];
+                return aliases[alias];
             }
             set
             {
                 char c = alias[0];
-                aliasNames[alias] = value;
+                aliases[alias] = value;
                 if (variables.ContainsKey(c))
                 {
                     SetValue(c, value);
@@ -1291,8 +1316,8 @@ namespace DataPerformer.Formula
 
         void IStack.Push()
         {
-            if (Output == null) return;
-            foreach (IStack s in Output)
+            if (output == null) return;
+            foreach (IStack s in output)
             {
                 s.Push();
             }
@@ -1300,8 +1325,8 @@ namespace DataPerformer.Formula
 
         void IStack.Pop()
         {
-            if (Output == null) return;
-            foreach (IStack s in Output)
+            if (output == null) return;
+            foreach (IStack s in output)
             {
                 s.Pop();
             }
@@ -1322,14 +1347,14 @@ namespace DataPerformer.Formula
             {
                 if (outputD == null)
                 {
-                    outputD = new double[Output.Length];
+                    outputD = new double[output.Length];
                 }
-                else if (outputD.Length != Output.Length)
+                else if (outputD.Length != output.Length)
                 {
                     outputD = new double[outputD.Length];
                 }
                 int i = 0;
-                foreach (IMeasurement m in Output)
+                foreach (IMeasurement m in output)
                 {
                     outputD[i] = (double)m.Parameter();
                     ++i;
@@ -1339,7 +1364,7 @@ namespace DataPerformer.Formula
             set
             {
                 int i = 0;
-                foreach (Variable v in Output)
+                foreach (Variable v in output)
                 {
                     double x = value[i];
                     v.Value = x;
@@ -1354,7 +1379,7 @@ namespace DataPerformer.Formula
         void IStateDoubleVariables.Set(double[] input, int offset, int length)
         {
             int i = offset;
-            foreach (Variable v in Output)
+            foreach (Variable v in output)
             {
                 double x = input[i];
                 v.Value = x;
@@ -1375,9 +1400,14 @@ namespace DataPerformer.Formula
         {
             try
             {
-                timeOld = time;
                 feedbackCollection.Fill();
-                Initial.Set();
+                timeOld = time;
+                foreach (Variable v in output)
+                {
+                    char c = v.Symbol;
+                    object[] o = variables[c] as object[];
+                    v.Value = (double)o[4];
+                }
                 prepareStart = () =>
                 {
                     UpdateChildrenData();
@@ -1415,51 +1445,7 @@ namespace DataPerformer.Formula
 
         #endregion
 
-
-        #region IDifferentialEquationSolver Members
-
-        /// <summary>
-        /// Copies variables from processor to solver 
-        /// </summary>
-        /// <param name="offset">Offset</param>
-        /// <param name="variables">Vector of all desktop differential equations variables</param>
-        void IDifferentialEquationSolver.CopyVariablesToSolver(int offset, double[] variables)
-        {
-            int i = offset;
-            foreach (Variable v in Output)
-            {
-                v.Value = variables[i];
-                ++i;
-            }
-        }
-
-        /// <summary>
-        /// Calculates derivations
-        /// </summary>
-        void IDifferentialEquationSolver.CalculateDerivations()
-        {
-            try
-            {
-                feedbackCollection.Set();
-                foreach (IMeasurements m in Dependent)
-                {
-                    m.IsUpdated = false;
-                    m.UpdateMeasurements();
-                }
-                update();
-            }
-            catch (Exception e)
-            {
-                e.HandleException();
-            }
-        }
-
-        #endregion
-
-
-
         #region Protected Members
-
 
         /// <summary>
         /// Time measure
@@ -1703,15 +1689,16 @@ namespace DataPerformer.Formula
 
         #endregion
 
+
         #region Classes & Delegates
 
 
         #region Variable 
 
         [CodeCreator(InitialState = true)]
-        class Variable : IObjectOperation, 
-            IPowered, IOperationAcceptor, IMeasurement, IDerivation, 
-            IDerivationOperation, IStack, IMeasurementHolder, IAssociatedObject, IValue, 
+        class Variable : IObjectOperation,
+            IPowered, IOperationAcceptor, IMeasurement, IDerivation,
+            IDerivationOperation, IStack, IMeasurementHolder, IAssociatedObject, IValue,
             ITreeCreator, IInitialValue
         {
 
@@ -1841,7 +1828,7 @@ namespace DataPerformer.Formula
 
             public override string ToString()
             {
-                return equationSolver.ToString() +  base.ToString();
+                return equationSolver.ToString() + base.ToString();
             }
 
 
@@ -1962,7 +1949,7 @@ namespace DataPerformer.Formula
                 return owntree;
             }
 
-   
+
             ObjectFormulaTree ITreeCreator.Tree => CreateTree();
 
             #endregion
@@ -1991,12 +1978,12 @@ namespace DataPerformer.Formula
         {
 
             Dictionary<object, object> dict;
-            internal FeedbackAliasCollection(IDataConsumer dataConsumer, IFeedbackCollectionHolder holder, 
+            internal FeedbackAliasCollection(IDataConsumer dataConsumer, IFeedbackCollectionHolder holder,
                 Dictionary<object, object> dictionary) : base(dataConsumer, holder)
             {
                 dict = dictionary;
                 this.Dictionary = new Dictionary<string, string>();
-                
+
             }
 
             protected override void Fill()
@@ -2016,5 +2003,6 @@ namespace DataPerformer.Formula
 
         #endregion
 
+
     }
-    }
+}
