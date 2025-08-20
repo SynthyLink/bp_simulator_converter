@@ -19,7 +19,7 @@ class DataConsumerVariadbleMeasurementsStarted extends DataConsumerVariableMeasu
         this.initial.resetInitialValues();
     }
     setInitial() {
-        this.initial = new AliasInitialValueCollection_1.AliasInitialValueConnection(this, this);
+        this.initial = new AliasInitialValueCollection_1.AliasInitialValueCollection(this, this);
     }
 }
 exports.DataConsumerVariadbleMeasurementsStarted = DataConsumerVariadbleMeasurementsStarted;

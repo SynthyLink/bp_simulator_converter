@@ -2,11 +2,11 @@ package diagram.interfaces;
 
 import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
+import error_handler.interfaces.ICheck;
 
 import java.util.List;
 
-public interface IDesktop
-{
+public interface IDesktop {
     List<ICategoryObject> getCategoryObjects();
 
     List<ICategoryArrow> getCategoryArrows();
@@ -19,6 +19,9 @@ public interface IDesktop
 
     ICategoryArrow getCategoryArrow(String name);
 
+    void setCheck(ICheck check);
 
+    ICheck getCheck();
 
+    void init();
 }

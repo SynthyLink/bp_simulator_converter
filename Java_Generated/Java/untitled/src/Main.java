@@ -9,7 +9,8 @@ import generated.TestDesktop;
 public class Main {
     public static void main(String[] args) {
 
-        Test1();
+        Test2();
+    //    Test1();
         var s = new IValue[5];
 
         var t = new IValue[7];
@@ -30,6 +31,10 @@ public class Main {
         }
     }
 
+    static  void  Test2()
+    {
+        new generated.Two();
+    }
     static void Test1()
     {
         var n = 3;

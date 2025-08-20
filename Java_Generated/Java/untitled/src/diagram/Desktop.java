@@ -3,6 +3,7 @@ package diagram;
 import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
+import error_handler.interfaces.ICheck;
 import general_service.interfaces.IPostSetArrow;
 
 import java.util.*;
@@ -15,6 +16,17 @@ public class Desktop  implements IDesktop
 
     protected Map<String, ICategoryObject> objectMap = new TreeMap<>();
     protected Map<String, ICategoryArrow> arrowMap = new TreeMap<>();
+
+    public Desktop(ICheck check)
+    {
+        this.check = check;
+        init();
+    }
+
+    public  Desktop()
+    {
+        init();
+    }
 
 
     /**
@@ -38,9 +50,8 @@ public class Desktop  implements IDesktop
      */
     @Override
     public void addCategoryObject(ICategoryObject obj) {
-objects.add(obj);
-objectMap.put(obj.getCategoryObjectName(), obj);
-
+        objects.add(obj);
+        objectMap.put(obj.getCategoryObjectName(), obj);
     }
 
     /**
@@ -72,6 +83,22 @@ arrowMap.put(arrow.getArrowName(), arrow);
        return a;
     }
 
+    @Override
+    public void setCheck(ICheck check) {
+        this.check = check;
+
+    }
+
+    @Override
+    public ICheck getCheck() {
+        return check;
+    }
+
+    @Override
+    public void init() {
+
+    }
+
     protected void postSet()
     {
         for (int i = 0; i < arrows.size(); i++)
@@ -93,5 +120,7 @@ arrowMap.put(arrow.getArrowName(), arrow);
         }
 
     }
+
+    ICheck check;
 }
 

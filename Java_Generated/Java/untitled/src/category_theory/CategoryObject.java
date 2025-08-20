@@ -2,6 +2,7 @@ package category_theory;
 
 import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
+import error_handler.interfaces.ICheck;
 
 /**
  *
@@ -21,6 +22,7 @@ public class CategoryObject implements ICategoryObject {
         if (desktop != null)
         {
             desktop.addCategoryObject(this);
+            checker = desktop.getCheck();
         }
 
     }
@@ -40,4 +42,16 @@ public class CategoryObject implements ICategoryObject {
     public IDesktop getDesktop() {
         return desktop;
     }
+
+    protected boolean check(Object o)
+    {
+        if (checker == null)
+        {
+            return true;
+        }
+        return checker.check(o);
+    }
+
+    protected ICheck checker;
+
 }

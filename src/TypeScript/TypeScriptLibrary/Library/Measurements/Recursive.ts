@@ -50,7 +50,7 @@ export class Recursive extends DataConsumerVariadbleMeasurements implements ISta
 
     setIniitial(): void
     {
-        this.initial = new AliasInitialValueConnection(this, this);
+        this.initial = new AliasInitialValueCollection(this, this);
     }
 
     init(): void

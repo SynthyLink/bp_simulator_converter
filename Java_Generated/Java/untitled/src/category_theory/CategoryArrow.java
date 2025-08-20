@@ -3,6 +3,7 @@ package category_theory;
 import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
+import error_handler.interfaces.ICheck;
 
 public class CategoryArrow implements ICategoryArrow {
 
@@ -21,9 +22,21 @@ public class CategoryArrow implements ICategoryArrow {
         if (desktop != null)
         {
             desktop.addCategoryArrow(this);
+            checker = desktop.getCheck();
         }
 
     }
+
+    protected boolean check(Object o)
+    {
+        if (checker == null)
+        {
+            return true;
+        }
+        return checker.check(o);
+    }
+
+    protected ICheck checker;
 
     /**
      * @return

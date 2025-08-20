@@ -4,7 +4,9 @@ import diagram.Desktop;
 
 import diagram.interfaces.IDesktop;
 
-public class TWO extends Desktop
+import error_handler.interfaces.ICheck;
+
+public class Two extends Desktop
 {
 
 	protected class CategoryObject0 extends measurements.DataConsumerMeasurements
@@ -31,11 +33,21 @@ public class TWO extends Desktop
 	}
 	
 
-	public TWO() {
+	public Two() {
+		super();
+	}
 
-		new TWO.CategoryObject0("input", this);
-		new TWO.CategoryObject1("Output", this);
-		new TWO.CategoryArrow0("22", this);
+	public Two(ICheck check) {
+		super(check);
+	}
+
+
+	@Override
+	public void init()
+	{
+		new Two.CategoryObject0("input", this);
+		new Two.CategoryObject1("Output", this);
+		new Two.CategoryArrow0("22", this);
 		arrows.get(0).setSource(objects.get(1));
 		arrows.get(0).setTarget(objects.get(0));
 		postSet();

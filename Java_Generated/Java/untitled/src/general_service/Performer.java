@@ -1,11 +1,13 @@
 package general_service;
 
 import java.lang.reflect.Array;
+import java.util.Map;
 
 import category_theory.CategoryArrow;
 import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
+import error_handler.interfaces.IErrorHandler;
 import general_service.interfaces.IAliasName;
 import general_service.interfaces.IVariableSetter;
 import measurements.interfaces.IDataConsumer;
@@ -14,7 +16,32 @@ import measurements.interfaces.IMeasurement;
 
 
 
-public class Performer {
+public class Performer
+{
+
+    static IErrorHandler errorHandler;
+
+    static void set(IErrorHandler errorHandler)
+    {
+        Performer.errorHandler = errorHandler;
+    }
+
+    public void handle(Throwable exception)
+    {
+        errorHandler.handle(exception);
+    }
+
+    public  void show(String message)
+    {
+        errorHandler.show(message);
+    }
+
+    public  <T, S> void copyMap(Map<T, S> from, Map<T,S> to) {
+        var e = from.entrySet();
+        for (var item : e) {
+            to.put(item.getKey(), item.getValue());
+        }
+   }
 
     public IMeasurement getMeasurement(IDataConsumer dataConsumer, String name) {
 

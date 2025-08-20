@@ -28,7 +28,7 @@ class Recursive extends DataConsumerVariableMeasurements_1.DataConsumerVariadble
         this.initial.resetInitialValues();
     }
     setIniitial() {
-        this.initial = new AliasInitialValueCollection_1.AliasInitialValueConnection(this, this);
+        this.initial = new AliasInitialValueCollection_1.AliasInitialValueCollection(this, this);
     }
     init() {
     }

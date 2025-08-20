@@ -1,7 +1,5 @@
-import { SrvRecord } from "dns";
 import { CategoryObject } from "../CategoryObject";
 import { OwnError } from "../ErrorHandler/OwnError";
-import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
 import { FictiveDataConsumer } from "../Fiction/FictiveDataConsumer";
 import { IDesktop } from "../Interfaces/IDesktop";
 import { IPostSetArrow } from "../Interfaces/IPostSetArrow";

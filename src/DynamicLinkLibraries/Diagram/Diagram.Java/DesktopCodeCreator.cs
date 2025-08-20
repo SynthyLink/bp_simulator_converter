@@ -24,6 +24,8 @@ namespace Diagram.UI.Java
             l.Add("");
             l.Add("import diagram.interfaces.IDesktop;");
             l.Add("");
+            l.Add("import error_handler.interfaces.ICheck;");
+            l.Add("");
             l.Add("public class " + className + " extends Desktop");
             l.Add("{");
             l.Add("");
@@ -49,8 +51,21 @@ namespace Diagram.UI.Java
                 tPerformrer.Add(l, c, 1);
                 l.Add("");
             }
+           
             l.Add("\tpublic " + className + "() {");
+            l.Add("\t\tsuper();");
+            l.Add("\t}");
             l.Add("");
+
+            l.Add("\tpublic " + className + "(ICheck check) {");
+            l.Add("\t\tsuper(check);");
+            l.Add("\t}");
+            l.Add("");
+
+            l.Add("");
+            l.Add("\t@Override");
+            l.Add("\tpublic void init()");
+            l.Add("\t{");
             for (int i = 0; i < categoryObjects.Count; i++)
             {
                 var o = categoryObjects[i];
