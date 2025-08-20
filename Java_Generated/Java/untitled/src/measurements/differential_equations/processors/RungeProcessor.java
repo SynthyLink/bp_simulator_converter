@@ -22,7 +22,7 @@ public class RungeProcessor extends  DifferentialEquationProcessor {
             var m = (IMeasurements) s;
             int n = m.getMeasurementsCount();
             for (int j = 0; j < n; j++) {
-                w[i] = performer.gedDouble(m.getMeasurement(j));
+                w[i] = performer.getDouble(m.getMeasurement(j));
                 f[i] = w[i];
                 ++i;
             }
@@ -110,7 +110,7 @@ public class RungeProcessor extends  DifferentialEquationProcessor {
     }
 
     @Override
-     public void updateDimension() {
+    public void updateDimension() {
         super.updateDimension();
         w = new double[dimension];
         z = new double[dimension];
@@ -119,4 +119,4 @@ public class RungeProcessor extends  DifferentialEquationProcessor {
             k[i] = new double[dimension];
         }
     }
-    }
+}

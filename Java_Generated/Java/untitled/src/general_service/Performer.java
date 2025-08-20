@@ -1,8 +1,13 @@
 package general_service;
 
 import java.lang.reflect.Array;
+
+import category_theory.CategoryArrow;
+import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
+import diagram.interfaces.IDesktop;
 import general_service.interfaces.IAliasName;
+import general_service.interfaces.IVariableSetter;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IDerivation;
 import measurements.interfaces.IMeasurement;
@@ -68,8 +73,48 @@ public class Performer {
         return r;
     }
 
+    public <T> T get(IDesktop desktop, String name)
+    {
+        var o = desktop.getCategoryObject(name);
+        if (o != null)
+        {
+            return (T)o;
+        }
+        T categoryArrow = (T) desktop.getCategoryArrow(name);
+        return categoryArrow;
+    }
 
-    public double gedDouble(IMeasurement measurement)
+    public <T> T get(ICategoryObject object, String name)
+    {
+        var desktop = object.getDesktop();
+        return  get(desktop, name);
+     }
+
+    public <T> T get(ICategoryArrow arrow, String name)
+    {
+        var desktop = arrow.getDesktop();
+        return  get(desktop, name);
+    }
+
+
+    public <T> T get(Object object, String name)
+    {
+        return switch (object)
+        {
+            case IDesktop desktop -> get(desktop, name);
+            case ICategoryObject categoryObject -> get(categoryObject, name);
+            case ICategoryArrow categoryArrow -> get(categoryArrow, name);
+            default -> null;
+        };
+    }
+
+   public IVariableSetter getSetter(Object o)
+   {
+       return null;
+   }
+
+
+    public double getDouble(IMeasurement measurement)
     {
         Object o = measurement.getMeasurementValue();
         return getDouble(o);
