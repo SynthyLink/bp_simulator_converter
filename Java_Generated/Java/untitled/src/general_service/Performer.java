@@ -1,9 +1,13 @@
 package general_service;
 
+import java.lang.reflect.Array;
 import category_theory.interfaces.ICategoryObject;
 import general_service.interfaces.IAliasName;
 import measurements.interfaces.IDataConsumer;
+import measurements.interfaces.IDerivation;
 import measurements.interfaces.IMeasurement;
+
+
 
 public class Performer {
 
@@ -42,6 +46,29 @@ public class Performer {
     }
 
 
+    public  <T>  T[] extend (T[] t, T s)
+    {
+        var n = t.length;
+        var type = s.getClass();
+        var ct = type.componentType();
+        var r = (T[]) Array.newInstance(ct, n + 1);
+        System.arraycopy(t, 0, r, 0, t.length);
+        r[n] = s;
+        return  r;
+    }
+
+    public  <T>  T[] extend (T[] t, T[] s)
+    {
+        var n = t.length + s.length;
+        var type = s.getClass();
+        var ct = type.componentType();
+        var r = (T[]) Array.newInstance(ct, n);
+        System.arraycopy(t, 0, r, 0, t.length);
+        System.arraycopy(s, 0, r, t.length, s.length);
+        return r;
+    }
+
+
     public double gedDouble(IMeasurement measurement)
     {
         Object o = measurement.getMeasurementValue();
@@ -52,5 +79,10 @@ public class Performer {
     {
         Object o = an.getAliasNameValue();
         return getDouble(o);
+    }
+
+    public  double getDouble(IDerivation derivation)
+    {
+        return  getDouble(derivation.getDerivation());
     }
 }

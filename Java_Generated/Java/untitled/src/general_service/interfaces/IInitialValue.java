@@ -5,7 +5,4 @@ public interface IInitialValue {
 
     void resetInitValue();
 
-    void addInitialValue(IInitialValue value);
-
-
 }

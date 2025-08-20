@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AliasInitialValueConnection = void 0;
+exports.AliasInitialValueCollection = void 0;
 const AliasInitialValue_1 = require("./AliasInitialValue");
 const AliasName_1 = require("./AliasName");
 const InitialValueCollection_1 = require("./InitialValueCollection");
 const Performer_1 = require("./Performer");
-class AliasInitialValueConnection extends InitialValueCollection_1.InitialValueCollection {
+class AliasInitialValueCollection extends InitialValueCollection_1.InitialValueCollection {
     constructor(alias, measurements) {
         super();
         this.performer = new Performer_1.Performer();
@@ -22,5 +22,5 @@ class AliasInitialValueConnection extends InitialValueCollection_1.InitialValueC
         }
     }
 }
-exports.AliasInitialValueConnection = AliasInitialValueConnection;
+exports.AliasInitialValueCollection = AliasInitialValueCollection;
 //# sourceMappingURL=AliasInitialValueCollection..js.map

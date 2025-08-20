@@ -9,7 +9,7 @@ import { IFeedbackAliasCollectionHolder } from "../Interfaces/IFeedbackAliasColl
 import { FictiveAlias } from "../Fiction/FictiveAlias";
 import { FictionInitialValueCollection } from "../Fiction/FictionInitialValueCollection";
 import { IInitialValueCollection } from "../Interfaces/IInitialValueCollection";
-import { AliasInitialValueConnection } from "../AliasInitialValueCollection.";
+import { AliasInitialValueCollection } from "../AliasInitialValueCollection.";
 import { IFeedbackAliasCollection } from "../Interfaces/IFeedbackAliasCollection";
 
 

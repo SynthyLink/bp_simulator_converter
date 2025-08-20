@@ -1,4 +1,4 @@
-import { AliasInitialValueConnection } from "../AliasInitialValueCollection.";
+import { AliasInitialValueCollection } from "../AliasInitialValueCollection.";
 import { FictionInitialValueCollection } from "../Fiction/FictionInitialValueCollection";
 import { FictiveAlias } from "../Fiction/FictiveAlias";
 import { IAlias } from "../Interfaces/IAlias";
@@ -31,7 +31,7 @@ export class DataConsumerVariadbleMeasurementsStarted extends DataConsumerVariad
 
 
     setInitial(): void {
-        this.initial = new AliasInitialValueConnection(this, this);
+        this.initial = new AliasInitialValueCollection(this, this);
     }
 
 }

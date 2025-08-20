@@ -7,7 +7,7 @@ import { IMeasurement } from "./Measurements/Interfaces/IMeasurement";
 import { IMeasurements } from "./Measurements/Interfaces/IMeasurements";
 import { Performer } from "./Performer";
 
-export class AliasInitialValueConnection extends InitialValueCollection
+export class AliasInitialValueCollection extends InitialValueCollection
 {
     performer : Performer = new Performer();
     constructor(alias: IAlias, measurements: IMeasurements)
