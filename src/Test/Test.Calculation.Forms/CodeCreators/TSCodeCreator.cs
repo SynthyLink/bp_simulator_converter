@@ -1,5 +1,6 @@
 ﻿using BaseTypes.Attributes;
 using Diagram.UI;
+using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 
 namespace Test.Calculation.Forms.CodeCreators
@@ -14,6 +15,15 @@ namespace Test.Calculation.Forms.CodeCreators
         internal TSCodeCreator()
         {
             this.AddCodeCreator();
+        }
+
+
+        protected IDesktopCodeCreator DesktopCodeCreator
+        { get; set; }
+
+        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
+        {
+            get => DesktopCodeCreator; set => DesktopCodeCreator = value;
         }
 
 

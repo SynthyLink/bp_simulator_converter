@@ -4,6 +4,7 @@ using BaseTypes.CodeCreator.Interfaces;
 using DataPerformer.Interfaces;
 
 using Diagram.UI;
+using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 
 using FormulaEditor.Interfaces;
@@ -46,6 +47,17 @@ namespace DataPerformer.Formula.TypeScript
                  { (object o) => { return o is DifferentialEquationSolver; } , CreateDiffrerentialSolver },
                  { (object o) => { return o is Recursive; } , CreateRecursive },
           };
+
+
+        protected IDesktopCodeCreator DesktopCodeCreator
+        { get; set; }
+
+        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
+        {
+            get => DesktopCodeCreator; set => DesktopCodeCreator = value;
+        }
+
+
 
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
         {

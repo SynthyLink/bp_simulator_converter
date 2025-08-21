@@ -22,7 +22,7 @@ class SimpleFeedAct extends SimpleFeed_1.SimpleFeed {
     test() {
         var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc);
         var p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
-        p.peformFixedStepCalculation(runtime, 0, 0.001, 1000, this);
+        p.performFixedStepCalculation(runtime, 0, 0.001, 1000, this);
     }
 }
 exports.SimpleFeedAct = SimpleFeedAct;

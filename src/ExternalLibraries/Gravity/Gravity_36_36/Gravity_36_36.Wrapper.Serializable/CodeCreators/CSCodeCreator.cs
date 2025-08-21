@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
-using BaseTypes.Attributes;
-
+﻿using BaseTypes.Attributes;
 using Diagram.UI;
+using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
-
 using ErrorHandler;
+using System;
+using System.Collections.Generic;
 
 
 namespace Gravity_36_36.Wrapper.CodeCreators
@@ -22,6 +20,17 @@ namespace Gravity_36_36.Wrapper.CodeCreators
 
 
         #region IClassCodeCreator Members
+
+
+        protected IDesktopCodeCreator DesktopCodeCreator
+        { get; set; }
+
+        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
+        {
+            get => DesktopCodeCreator; set => DesktopCodeCreator = value;
+        }
+
+
 
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
         {

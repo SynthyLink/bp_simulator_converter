@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using Diagram.UI.Portable;
+﻿using BaseTypes.Attributes;
+using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
-using BaseTypes.Attributes;
+using Diagram.UI.Portable;
+using System.Collections.Generic;
 
 
 namespace Diagram.UI
@@ -14,6 +15,15 @@ namespace Diagram.UI
         {
             this.AddCodeCreator(); ;
         }
+
+        protected IDesktopCodeCreator DesktopCodeCreator
+        { get; set; }
+
+        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
+        {
+            get => DesktopCodeCreator; set => DesktopCodeCreator = value;
+        }
+
 
 
         #region IClassCodeCreator Members

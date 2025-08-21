@@ -22,7 +22,7 @@ class TransformerRecursveAct extends TransformerRecursive_1.TransformerRecursive
     test() {
         var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc);
         var p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
-        p.peformFixedStepCalculation(runtime, 0, 1, 60, this);
+        p.performFixedStepCalculation(runtime, 0, 1, 60, this);
     }
 }
 exports.TransformerRecursveAct = TransformerRecursveAct;

@@ -1,4 +1,5 @@
 ﻿using BaseTypes.Attributes;
+using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 
 using ErrorHandler;
@@ -12,6 +13,16 @@ namespace Diagram.UI.TypeScript
         {
             this.AddCodeCreator();
         }
+
+        protected IDesktopCodeCreator DesktopCodeCreator
+        { get; set; }
+
+        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
+        {
+            get => DesktopCodeCreator; set => DesktopCodeCreator = value;
+        }
+
+
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
         {
             return null;

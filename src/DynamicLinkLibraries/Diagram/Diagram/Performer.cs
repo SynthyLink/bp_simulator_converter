@@ -1290,9 +1290,32 @@ namespace Diagram.UI
             return l;
         }
 
+        /// <summary>
+        /// Enumerates component collection
+        /// </summary>
+        /// <param name="collection">TThe collection</param>
+        /// <returns>The enumeration</returns>
 
-
-
+        public Tuple<Dictionary<ICategoryObject, int>, Dictionary<ICategoryArrow, int>> Enumerate(IComponentCollection collection)
+        {
+            var dob = new Dictionary<ICategoryObject, int>();
+            int i = 0;
+            var acto = (ICategoryObject ob) =>
+            {
+                dob[ob] = i;
+                ++i;
+            };
+            ForAll(collection, acto);
+            var doa = new Dictionary<ICategoryArrow, int>();
+            i = 0;
+            var acta = (ICategoryArrow ar) =>
+            {
+                doa[ar] = i;
+                ++i;
+            };
+          ForAll(collection, acta);
+            return new Tuple<Dictionary<ICategoryObject, int>, Dictionary<ICategoryArrow, int>>(dob, doa);
+        }
 
         /// <summary>
         /// Performs action for each collection objects

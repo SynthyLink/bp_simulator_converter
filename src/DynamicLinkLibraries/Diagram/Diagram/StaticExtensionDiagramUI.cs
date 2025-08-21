@@ -639,7 +639,7 @@ namespace Diagram.UI
         /// <param name="className">Class name</param>
         /// <param name="staticClass">Flag of static class</param>
         /// <returns>The code</returns>
-        public static List<string> CreateInitDesktopCSharpCode(this IDesktop desktop, string namespacE, 
+        public static List<string> CreateInitDesktopCSharpCode(this IComponentCollection desktop, string namespacE, 
             string className, bool staticClass = true)
         {
             Exception ex;

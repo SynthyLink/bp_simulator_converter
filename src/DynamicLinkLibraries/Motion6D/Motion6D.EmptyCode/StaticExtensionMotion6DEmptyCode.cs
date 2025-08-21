@@ -3,6 +3,7 @@
 using BaseTypes;
 using BaseTypes.Attributes;
 using Diagram.UI;
+using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 
 using Motion6D.Interfaces;
@@ -72,6 +73,17 @@ namespace Motion6D.EmptyCode
             {
                 this.AddCodeCreator();
             }
+
+
+            protected IDesktopCodeCreator DesktopCodeCreator
+            { get; set; }
+
+            IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
+            {
+                get => DesktopCodeCreator; set => DesktopCodeCreator = value;
+            }
+
+
 
             List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
             {

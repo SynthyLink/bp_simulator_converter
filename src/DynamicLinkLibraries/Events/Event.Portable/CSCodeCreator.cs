@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-
-using BaseTypes.Attributes;
+﻿using BaseTypes.Attributes;
 using Diagram.UI;
+using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 using Event.Interfaces;
 using Event.Portable.Arrows;
+using System;
+using System.Collections.Generic;
 
 namespace Event.Portable
 {
@@ -21,6 +21,17 @@ namespace Event.Portable
 
 
         #region IClassCodeCreator Members
+
+
+        protected IDesktopCodeCreator DesktopCodeCreator
+        { get; set; }
+
+        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
+        {
+            get => DesktopCodeCreator; set => DesktopCodeCreator = value;
+        }
+
+
 
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
         {

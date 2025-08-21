@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
+﻿using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 using ErrorHandler;
+using System.Collections.Generic;
 
 namespace Diagram.UI
 {
@@ -16,6 +16,23 @@ namespace Diagram.UI
         }
 
         protected virtual string Language { get; set; }
+
+        protected  IDesktopCodeCreator DesktopCodeCreator
+        { get; set; }
+        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
+        {
+            get => DesktopCodeCreator;
+
+            set
+            {
+                DesktopCodeCreator = value;
+                foreach (IClassCodeCreator creator in list)
+                {
+
+                    creator.DesktopCodeCreator = value;
+                }
+            }
+        }
 
 
 

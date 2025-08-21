@@ -1,6 +1,7 @@
-﻿using Diagram.UI;
+﻿using BaseTypes.Attributes;
+using Diagram.UI;
+using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
-using BaseTypes.Attributes;
 
 namespace Internet.Meteo.Wrapper.Serializable.CodeCreators
 {
@@ -15,6 +16,16 @@ namespace Internet.Meteo.Wrapper.Serializable.CodeCreators
         {
             this.AddCodeCreator();
         }
+
+
+        protected IDesktopCodeCreator DesktopCodeCreator
+        { get; set; }
+
+        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
+        {
+            get => DesktopCodeCreator; set => DesktopCodeCreator = value;
+        }
+
 
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
         {

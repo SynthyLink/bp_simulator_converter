@@ -18,7 +18,7 @@ class OrbitAct extends Orbital_1.Orbital {
     test() {
         var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc);
         var p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
-        p.peformFixedStepCalculation(runtime, 0, 1, 10, this);
+        p.performFixedStepCalculation(runtime, 0, 1, 10, this);
     }
 }
 exports.OrbitAct = OrbitAct;

@@ -25,7 +25,7 @@ class ODE_FeedbackAct extends ODE_Feedback_1.ODE_Feedback {
             let processor = new RungeProcessor_1.RungeProcessor();
             var runtime = new DataRuntimeConsumerODE_1.DataRuntimeConsumerODE(this.dc, processor);
             var p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
-            p.peformFixedStepCalculation(runtime, 0, 0.4, 45, this);
+            p.performFixedStepCalculation(runtime, 0, 0.4, 45, this);
         }
         catch (e) {
             throw new OwnNotImplemented_1.OwnNotImplemented();

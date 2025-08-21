@@ -23,6 +23,14 @@ namespace Diagram.UI.TypeScript
             set;
         }
 
+        IComponentCollection collection;
+
+        Tuple<Dictionary<ICategoryObject, int>, Dictionary<ICategoryArrow, int>> dictionary;
+
+        IComponentCollection IDesktopCodeCreator.ComponentCollection => collection;
+
+        Tuple<Dictionary<ICategoryObject, int>, Dictionary<ICategoryArrow, int>> IDesktopCodeCreator.Enumeration => dictionary;
+
         public DesktopCodeCreator() { this.AddCodeCreator(); }
 
 
@@ -34,11 +42,13 @@ namespace Diagram.UI.TypeScript
         /// <param name="className">Name of desktop class</param>
         /// <param name="staticClass">The "static class" sign</param>
         /// <returns>The code</returns>
-        List<string> IDesktopCodeCreator.CreateCode(IDesktop desktop, string namespacE, string className, bool staticClass)
+        List<string> IDesktopCodeCreator.CreateCode(IComponentCollection desktop, string namespacE, string className, bool staticClass)
         {
             Exception ex;
             try
             {
+                this.collection = desktop;
+                dictionary = performer.Enumerate(desktop);
                 List<ICategoryObject> categoryObjects;
                 List<ICategoryArrow> categoryArrows;
                 Dictionary<ICategoryObject, int> objects;

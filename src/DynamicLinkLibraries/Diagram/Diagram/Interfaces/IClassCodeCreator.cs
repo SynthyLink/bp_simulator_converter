@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Diagram.UI.CodeCreators.Interfaces;
+using System.Collections.Generic;
 
 namespace Diagram.UI.Interfaces
 {
@@ -10,10 +11,15 @@ namespace Diagram.UI.Interfaces
         /// <summary>
         /// Creates code
         /// </summary>
-        /// <param name="preffix">Preffix</param>
+        /// <param name="preffix">Prefix</param>
         /// <param name="obj">Prototype object</param>
         /// <returns>Code</returns>
         List<string> CreateCode(string preffix, object obj);
+
+        /// <summary>
+        /// Desktop code creator
+        /// </summary>
+        IDesktopCodeCreator DesktopCodeCreator { get; set; }
 
     }
 }

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Diagram.UI.Interfaces;
-using Diagram.UI;
-
-using FormulaEditor;
-
+﻿using BaseTypes.Attributes;
 using DataPerformer.Portable;
-
-using BaseTypes.Attributes;
+using Diagram.UI;
+using Diagram.UI.CodeCreators.Interfaces;
+using Diagram.UI.Interfaces;
+using FormulaEditor;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DataPerformer.Formula.CodeCreators
@@ -32,6 +29,15 @@ namespace DataPerformer.Formula.CodeCreators
         }
 
         #region IClassCodeCreator Members
+
+        protected IDesktopCodeCreator DesktopCodeCreator
+        { get; set; }
+
+        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
+        {
+            get => DesktopCodeCreator; set => DesktopCodeCreator = value;
+        }
+
 
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
         {

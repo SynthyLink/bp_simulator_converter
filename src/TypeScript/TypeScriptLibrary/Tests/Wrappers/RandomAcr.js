@@ -20,7 +20,7 @@ class RandomAct extends Random_1.Random {
     test() {
         var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc);
         var p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
-        p.peformFixedStepCalculation(runtime, 0, 1, 1000, this);
+        p.performFixedStepCalculation(runtime, 0, 1, 1000, this);
     }
 }
 exports.RandomAct = RandomAct;

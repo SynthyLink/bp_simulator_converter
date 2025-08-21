@@ -19,10 +19,20 @@ namespace Diagram.UI.Java
         {
             l.Add("\t@Override");
         }
-        
 
-        List<string> IDesktopCodeCreator.CreateCode(IDesktop desktop, string namespacE, string className, bool staticClass)
+
+        IComponentCollection collection;
+
+        Tuple<Dictionary<ICategoryObject, int>, Dictionary<ICategoryArrow, int>> dictionary;
+
+        IComponentCollection IDesktopCodeCreator.ComponentCollection => collection;
+
+        Tuple<Dictionary<ICategoryObject, int>, Dictionary<ICategoryArrow, int>> IDesktopCodeCreator.Enumeration => dictionary;
+
+        List<string> IDesktopCodeCreator.CreateCode(IComponentCollection desktop, string namespacE, string className, bool staticClass)
         {
+            collection = desktop;
+            dictionary = performer.Enumerate(collection);
            var l = new List<string>();
             l.Add("package generated;");
             l.Add("");

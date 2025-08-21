@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-
-using AssemblyService.Attributes;
-
+﻿using AssemblyService.Attributes;
 using BaseTypes.Attributes;
-
 using Diagram.UI;
+using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
+using System.Collections.Generic;
 
 namespace Regression.Portable
 {
@@ -44,6 +42,15 @@ namespace Regression.Portable
         [Language("C#")]
         class CSCodeCreator : IClassCodeCreator
         {
+
+            protected IDesktopCodeCreator DesktopCodeCreator
+            { get; set; }
+
+            IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
+            {
+                get => DesktopCodeCreator; set => DesktopCodeCreator = value;
+            }
+
 
             internal CSCodeCreator()
             {

@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-
-using BaseTypes.Attributes;
-
+﻿using BaseTypes.Attributes;
 using Diagram.UI;
+using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 using Motion6D.Interfaces;
 using Motion6D.Portable.Aggregates;
+using System.Collections.Generic;
 
 namespace Motion6D.Portable.CoreCreators
 {
@@ -19,6 +18,17 @@ namespace Motion6D.Portable.CoreCreators
         }
 
         #region IClassCodeCreator Members
+
+
+        protected IDesktopCodeCreator DesktopCodeCreator
+        { get; set; }
+
+        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
+        {
+            get => DesktopCodeCreator; set => DesktopCodeCreator = value;
+        }
+
+
 
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
         {
