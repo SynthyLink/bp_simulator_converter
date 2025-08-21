@@ -1,11 +1,10 @@
 package measurements.differential_equations.processors;
 
-import fiction.FictiveTimeMeasurementProvider;
 import general_service.Performer;
 import measurements.differential_equations.interfaces.IDifferentialEquationProcessor;
 import measurements.differential_equations.interfaces.IDifferentialEquationSolver;
 import measurements.interfaces.IMeasurements;
-import measurements.interfaces.ITimeMeasurementProvider;
+import measurements.time.interfaces.ITimeMeasurementProvider;
 
 public class DifferentialEquationProcessor implements IDifferentialEquationProcessor {
 
@@ -18,7 +17,7 @@ public class DifferentialEquationProcessor implements IDifferentialEquationProce
     protected IDifferentialEquationSolver[] equations = new IDifferentialEquationSolver[0];
 
 
-    protected  ITimeMeasurementProvider timeProvider;
+    protected ITimeMeasurementProvider timeProvider;
 
     @Override
     public IDifferentialEquationSolver[] getDifferentialEquations() {

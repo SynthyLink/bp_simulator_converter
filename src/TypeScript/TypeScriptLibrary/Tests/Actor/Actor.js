@@ -42,6 +42,7 @@ const RandomAcr_1 = require("../Wrappers/RandomAcr");
 const SimpleFeedAct_1 = require("../Wrappers/SimpleFeedAct");
 const TwoAct_1 = require("../Wrappers/TwoAct");
 const ODE_FeedbackAct_1 = require("../Wrappers/ODE_FeedbackAct");
+const TransformerRecursveAct_1 = require("../Wrappers/TransformerRecursveAct");
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -66,6 +67,15 @@ class Actor {
     actODEFeedback() {
         try {
             var o = new ODE_FeedbackAct_1.ODE_FeedbackAct();
+            o.test();
+        }
+        catch (e) {
+            finish(e);
+        }
+    }
+    actTransformerFeedback() {
+        try {
+            var o = new TransformerRecursveAct_1.TransformerRecursveAct();
             o.test();
         }
         catch (e) {

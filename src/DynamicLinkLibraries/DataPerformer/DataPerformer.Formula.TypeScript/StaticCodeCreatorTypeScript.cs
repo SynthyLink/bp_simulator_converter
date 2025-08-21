@@ -1,6 +1,7 @@
 ﻿using BaseTypes;
 using BaseTypes.Interfaces;
 using DataPerformer.Interfaces;
+using DataPerformer.Interfaces.Attributes;
 using Diagram.UI.Attributes;
 using ErrorHandler;
 
@@ -117,10 +118,19 @@ namespace DataPerformer.Formula.TypeScript
                     {
                         if (ii[0] == i)
                         {
-                            var mtt = "measurement" + ii[0];
-                            vari.Add(mtt + " : " + "IMeasurement = new FictiveMeasurement();");
-                            init.Add("this." + mtt + " = all[" + ii[1] +
-                                "].getMeasurement(" + ii[2] + ");");
+                            var att = perf.GetAttribute<InternalVariableAttribute>(op);
+                            if (att == null)
+                            {
+                                var mtt = "measurement" + ii[0];
+                                vari.Add(mtt + " : " + "IMeasurement = new FictiveMeasurement();");
+                                init.Add("this." + mtt + " = all[" + ii[1] +
+                                    "].getMeasurement(" + ii[2] + ");");
+                            }
+                            else if (att.IsDerivation)
+                            {
+                                var vtt = "value" + ii[0];
+                                vari.Add(vtt + " : IValue = new FictiveValue();");
+                            }
                             goto m;
                         }
                     }
@@ -130,19 +140,41 @@ namespace DataPerformer.Formula.TypeScript
                         {
                             continue;
                         }
-                        if (op is IDerivation der)
+                        var att = perf.GetAttribute<InternalVariableAttribute>(op);
+
+                        if (att != null)
                         {
-                            var d = der.Derivation;
-                            for (var j = 0; j < measurements.Count; j++)
+                            if (att.IsDerivation)
                             {
-                                var m = measurements[j];
-                                if (m == op)
+                                if (op is IDerivation der)
                                 {
-                                    var mtt = "value" + i;
-                                    vari.Add(mtt + " : IValue = new FictiveValue();");
-                                    init.Add("this." + mtt + " = this.output[" + j + "];");
-                                    values.Add(i);
+                                    var d = der.Derivation;
+                                    for (var j = 0; j < measurements.Count; j++)
+                                    {
+                                        var m = measurements[j];
+                                        if (m == op)
+                                        {
+                                            var mtt = "value" + i;
+                                            vari.Add(mtt + " : IValue = new FictiveValue();");
+                                            init.Add("this." + mtt + " = this.output[" + j + "];");
+                                            values.Add(i);
+                                        }
+                                    }
                                 }
+                            }
+                            else
+                            {
+                                for (var j = 0; j < measurements.Count; j++)
+                                {
+                                    var m = measurements[j];
+                                    if (m == op)
+                                    {
+                                        var mtt = "value" + i;
+                                        init.Add("this." + mtt + " = this.output[" + j + "];");
+                                        values.Add(i);
+                                    }
+                                }
+
                             }
                         }
                     }

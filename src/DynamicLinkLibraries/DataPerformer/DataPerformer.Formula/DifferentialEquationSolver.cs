@@ -23,6 +23,7 @@ using DataPerformer.Formula.Interfaces;
 using ErrorHandler;
 
 using NamedTree;
+using DataPerformer.Interfaces.Attributes;
 
 
 namespace DataPerformer.Formula
@@ -1696,6 +1697,7 @@ namespace DataPerformer.Formula
         #region Variable 
 
         [CodeCreator(InitialState = true)]
+        [InternalVariable(IsDerivation=true)]
         class Variable : IObjectOperation,
             IPowered, IOperationAcceptor, IMeasurement, IDerivation,
             IDerivationOperation, IStack, IMeasurementHolder, IAssociatedObject, IValue,

@@ -8,12 +8,18 @@ using Diagram.UI.Interfaces;
 namespace Diagram.UI.Java
 {
     [Language("Java", ".java")]
-    internal class DesktopCodeCreator : IDesktopCodeCreator
+    public class DesktopCodeCreator : IDesktopCodeCreator
     {
         UI.Performer performer = new UI.Performer();
 
         NamedTree.Performer tPerformrer = new NamedTree.Performer();
         public DesktopCodeCreator() { this.AddCodeCreator(); }
+
+        public static void AddOverride(List<string> l)
+        {
+            l.Add("\t@Override");
+        }
+        
 
         List<string> IDesktopCodeCreator.CreateCode(IDesktop desktop, string namespacE, string className, bool staticClass)
         {
@@ -25,6 +31,8 @@ namespace Diagram.UI.Java
             l.Add("import diagram.interfaces.IDesktop;");
             l.Add("");
             l.Add("import error_handler.interfaces.ICheck;");
+            l.Add("");
+            l.Add("import error_handler.interfaces.IErrorHandler;");
             l.Add("");
             l.Add("public class " + className + " extends Desktop");
             l.Add("{");
@@ -57,13 +65,13 @@ namespace Diagram.UI.Java
             l.Add("\t}");
             l.Add("");
 
-            l.Add("\tpublic " + className + "(ICheck check) {");
-            l.Add("\t\tsuper(check);");
+            l.Add("\tpublic " + className + "(ICheck check, IErrorHandler errorHandler) {");
+            l.Add("\t\tsuper(check, errorHandler);");
             l.Add("\t}");
             l.Add("");
 
             l.Add("");
-            l.Add("\t@Override");
+            AddOverride(l);
             l.Add("\tpublic void init()");
             l.Add("\t{");
             for (int i = 0; i < categoryObjects.Count; i++)

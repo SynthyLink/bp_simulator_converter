@@ -17,7 +17,7 @@ export class RandomGenerator extends Measurements implements IMeasurement
         this.measurements.push(this);
     }
     getMeasurementName(): string {
-        return "";
+        return "Random";
     }
     getMeasurementType() : any {
         return this.a;

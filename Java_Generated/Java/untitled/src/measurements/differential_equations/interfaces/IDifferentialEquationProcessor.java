@@ -1,6 +1,6 @@
 package measurements.differential_equations.interfaces;
 
-import measurements.interfaces.ITimeMeasurementProvider;
+import measurements.time.interfaces.ITimeMeasurementProvider;
 
 public interface IDifferentialEquationProcessor {
 

@@ -31,14 +31,14 @@ class ODE_Feedback_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormul
         this.var_10 = 0;
         this.var_11 = 0;
         let map = new Map([
-            ["c", 0.31314560830292659],
-            ["d", -0.17015052092374328],
-            ["k", 2],
-            ["b", 1],
             ["a", 1],
+            ["k", 2],
+            ["d", -0.17015052092374328],
+            ["b", 1],
+            ["c", 0.31314560830292659],
         ]);
         this.performer.setAliasMap(map, this);
-        this.addVariableValue("Formula_1", 0, 0);
+        this.addVariableValue("Formula_1", 0, 0.017747760535215762);
         this.addVariableValue("Formula_2", 0, 0.31314560830292659);
         this.addVariableValue("Formula_3", 0, -0.17015052092374328);
         this.addVariableValue("Formula_4", 0, 2);
@@ -185,13 +185,13 @@ class ODE_Feedback_CategoryObject_1 extends DifferentrialEquationSolverFormula_1
         this.var_6 = 0;
         this.var_7 = 0;
         let map = new Map([
+            ["a", 1],
             ["y", 1],
             ["x", 0],
-            ["a", 1],
         ]);
         this.performer.setAliasMap(map, this);
         this.addVariableValue("x", 0, 0);
-        this.addVariableValue("y", 0, 0);
+        this.addVariableValue("y", 0, 1);
     }
     calculateTree() {
         this.success = true;

@@ -58,7 +58,7 @@ class PefrormerMeasuremets {
             st = s;
         }
     }
-    peformFixedStepCalculation(runtime, start, step, steps, act) {
+    performFixedStepCalculation(runtime, start, step, steps, act) {
         let tm = new TimeMeasurementProvider_1.TimeMeasurementProvider();
         runtime.setTimeProvider(tm);
         runtime.startRuntime(start);

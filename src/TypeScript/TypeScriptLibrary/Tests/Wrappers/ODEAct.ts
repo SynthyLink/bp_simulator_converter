@@ -30,7 +30,7 @@ export class ODEAct extends ODE
             let processor = new RungeProcessor();
             var runtime = new DataRuntimeConsumerODE(this.dc, processor);
             var p = new PefrormerMeasuremets();
-            p.peformFixedStepCalculation(runtime, 0, 0.4, 45, this);
+            p.performFixedStepCalculation(runtime, 0, 0.4, 45, this);
         }
         catch (e: any)
         {

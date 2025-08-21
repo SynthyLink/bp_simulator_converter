@@ -20,6 +20,7 @@ namespace Test.Calculation.Forms
             new UIFactory();
             new CSCodeCreator();
             new TSCodeCreator();
+            new JavaCodeCreator();
         }
 
     }

@@ -7,6 +7,7 @@ using Diagram.UI;
 using Diagram.UI.Interfaces;
 
 using FormulaEditor.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataPerformer.Formula.TypeScript
 {
@@ -86,13 +87,17 @@ namespace DataPerformer.Formula.TypeScript
 
         static ITypeCreator typeCreator;
 
-        public static List<string> CreateTSVariableList(IMeasurements maeasurements)
+        public static List<string> CreateTSVariableList(IMeasurements measurements)
         {
             var l = new List<string>();
-            var n = maeasurements.Count;
+            if (measurements is IStarted start)
+            {
+                start.Start(0);
+            }
+            var n = measurements.Count;
             for (int i = 0; i < n; i++)
             {
-                var m = maeasurements[i];
+                var m = measurements[i];
                 var name = "\"" + m.Name + "\"";
                 var type = m.Type;
                 var v = typeCreator.GetDefaultValue(type);

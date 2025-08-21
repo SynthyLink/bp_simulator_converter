@@ -24,18 +24,18 @@ namespace Diagram.UI.TypeScript
             return s;
         }
 
-        public string DoubleToString(double a)
-        {
-            return a.ToString("G17", System.Globalization.CultureInfo.InvariantCulture);
-        }
-
+     
         public string StringValue(object o)
         {
+            if (o == null)
+            {
+
+            }
             Type t = o.GetType();
             if (t.Equals(typeof(double)))
             {
                 double a = (double)o;
-                return DoubleToString(a);
+                return performer.DoubleToString(a);
             }
             if (t.Equals(typeof(bool)))
             {

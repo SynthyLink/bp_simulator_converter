@@ -7,7 +7,7 @@ namespace DataPerformer.Formula.Java
     /// Creator of TS code
     /// </summary>
     [Language("Java")]
-    internal class ClassCodeCreator : Portable.Java.ClassCodeCreator
+    internal class ClassCodeCreator : Diagram.Java.ClassCodeCreator
     {
         public ClassCodeCreator() : base(false)
         {

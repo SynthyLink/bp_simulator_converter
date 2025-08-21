@@ -1,0 +1,155 @@
+package runtime;
+
+import category_theory.interfaces.ICategoryArrow;
+import category_theory.interfaces.ICategoryObject;
+import general_service.Performer;
+import measurements.interfaces.*;
+import measurements.time.interfaces.ITimeMeasurementConsumer;
+import measurements.time.interfaces.ITimeMeasurementProvider;
+
+import java.util.*;
+
+public class DataRuntimeConsumer implements IDataRuntime {
+
+    public DataRuntimeConsumer(IDataConsumer dataConsumer) {
+        List<IMeasurements> list = new ArrayList<>();
+        this.addDataConsumer(dataConsumer, list);
+        var count = list.size();
+
+        for (int i = count - 1; i >= 0; i--) {
+            var n = list.get(i);
+            measurements = performer.extend(measurements, n);
+            if (n instanceof ICategoryObject co) {
+                addCategoryObjectToRuntime(co);
+            }
+            if (n instanceof IStarted st) {
+                started = performer.extend(started, st);
+            }
+
+        }
+        if (dataConsumer instanceof IMeasurements mm) {
+            measurements = performer.extend(measurements, mm);
+        }
+    }
+
+    @Override
+    public void updateRuntime() {
+        for (var m : measurements)
+        {
+            m.updateMeasurements();
+        }
+
+    }
+
+    /// <summary>
+    /// Refreshes itself
+    /// </summary>
+    @Override
+    public void refreshRuntime() {
+
+    }
+
+    /// <summary>
+    /// Starts all components
+    /// </summary>
+    /// <param name="time">Start time</param>
+    @Override
+    public void startRuntime(double time) {
+        for (var s : started) {
+            s.startedStart(time);
+        }
+    }
+
+    @Override
+    public void stepRuntime(double begin, double end) {
+
+    }
+
+    @Override
+    public   void addCategoryObjectToRuntime(ICategoryObject object){
+        categoryObjects = performer.extend(categoryObjects, object);
+        var n = object.getCategoryObjectName();
+        categoryObjectsMap.put(n, object);
+    }
+
+    @Override
+    public ICategoryObject getRuntimeObject(String name) {
+        return categoryObjectsMap.get(name);
+    }
+
+    @Override
+    public void setTimeProvider(ITimeMeasurementProvider provider) {
+        timeProvider = provider;
+        for (var c : categoryObjects)
+        {
+            if (c instanceof ITimeMeasurementConsumer co)
+            {
+                co.setTimeMeasurement(provider);
+            }
+        }
+    }
+
+    @Override
+    public ITimeMeasurementProvider getTimeProvider() {
+        return timeProvider;
+    }
+
+    @Override
+    public ICategoryObject[] getRuntimeObjects() {
+        return categoryObjects;
+    }
+
+    @Override
+    public ICategoryArrow[] getRuntimeArrows() {
+        return categoryArrows;
+    }
+
+    @Override
+    public IStarted[] getStarted() {
+        return  started;
+    }
+
+    protected   void  addDataConsumer(IDataConsumer dc, List<IMeasurements> list)
+    {
+         var m = dc.getAllMeasurements();
+        var n = m.length;
+        if (n != 0)
+        {
+            for (var i = 0; i < n; i++)
+            {
+                var mea = m[i];
+                if (list.lastIndexOf(mea) >= 0) {
+                    continue;
+                }
+                list.add(mea);
+                if (mea instanceof  IDataConsumer c)
+                {
+                    addDataConsumer(c, list);
+                }
+
+            }
+        }
+        else
+        {
+
+        }
+}
+
+
+
+
+    ICategoryArrow[] categoryArrows = new ICategoryArrow[0];
+    IStarted[] started  = new IStarted[0];
+
+    ICategoryObject[] categoryObjects = new ICategoryObject[0];
+
+    ITimeMeasurementProvider timeProvider;
+
+    protected  IMeasurements[] measurements = new IMeasurements[0];
+
+    protected Performer performer = new Performer();
+
+    protected Map<String, ICategoryObject> categoryObjectsMap = new HashMap<>();
+
+
+}

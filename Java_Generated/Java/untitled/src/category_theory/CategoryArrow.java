@@ -4,6 +4,7 @@ import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
 import error_handler.interfaces.ICheck;
+import error_handler.interfaces.IErrorHandler;
 
 public class CategoryArrow implements ICategoryArrow {
 
@@ -14,6 +15,10 @@ public class CategoryArrow implements ICategoryArrow {
     protected String name;
 
     protected  IDesktop desktop;
+    protected IErrorHandler errorHandler;
+
+
+    protected ICheck checker;
 
     public CategoryArrow(String name, IDesktop desktop)
     {
@@ -23,20 +28,26 @@ public class CategoryArrow implements ICategoryArrow {
         {
             desktop.addCategoryArrow(this);
             checker = desktop.getCheck();
+            errorHandler = desktop.getErrorHandler();
         }
 
     }
 
     protected boolean check(Object o)
     {
-        if (checker == null)
-        {
-            return true;
-        }
         return checker.check(o);
     }
 
-    protected ICheck checker;
+    protected void show(String message)
+    {
+        errorHandler.show(message);
+    }
+
+    protected void handle(Throwable throwable)
+    {
+        errorHandler.handle(throwable);
+    }
+
 
     /**
      * @return
@@ -59,7 +70,7 @@ public class CategoryArrow implements ICategoryArrow {
      */
     @Override
     public void setSource(ICategoryObject source) {
-this.source = source;
+        this.source = source;
     }
 
     /**

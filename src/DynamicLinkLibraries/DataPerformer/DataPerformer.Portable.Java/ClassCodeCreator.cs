@@ -1,91 +1,46 @@
 ﻿using BaseTypes.Attributes;
 using BaseTypes.CodeCreator.Interfaces;
-
+using DataPerformer.Interfaces;
 using Diagram.UI;
 
 
 using Diagram.UI.Interfaces;
+using System.Runtime.CompilerServices;
 
 namespace DataPerformer.Portable.Java
 {
     [Language("Java")]
-    public class ClassCodeCreator : IClassCodeCreator
+    public class ClassCodeCreator : Diagram.Java.ClassCodeCreator
     {
 
-        protected DataPerformer.Interfaces.Performer nPerformer = new();
 
-        protected NamedTree.Performer formulaPerformer = new();
-
-        protected ITypeCreator TypeCreator { get; } = new TypeCreator();
-
-        protected Dictionary<Func<object, bool>, Func<string, object, List<string>>> dictionary;
-
-        protected Dictionary<string, string> classes;
-
-        protected ClassCodeCreator(bool b)
-        {
-
-        }
-
-        public ClassCodeCreator() 
+        public ClassCodeCreator() : base(false)
         {
             classes = new Dictionary<string, string>()
             {
-                {"DataLink", "measurements.arrows.DataLink" }
-            };
+                {"DataLink", "measurements.arrows.DataLink" },
+                   {"ObjectTransformerLink", "measurements.arrows.ObjectTransformerLink" },
+                { "DataConsumer", "measurements.DataConsumer"},
+                { "RandomGenerator", "measurements.RandomGenerator"},
+               { "ObjectTransformer", "measurements.ObjectTransformer"},
+         };
 
             dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
                    { (object o) => { return DetectType(o, "DataConsumer"); } , CreateDataConsumer },
-                   { (object o) => { return o is DataLink; } , CreateDataLink }
-       //          { (object o) => { return o is DifferentialEquationSolver; } , CreateDiffrerentialSolver },
-           //      { (object o) => { return o is Recursive; } , CreateRecursive },
+                   { (object o) => { return o is DataLink; } , CreateDataLink },
+                   { (object o) => { return o is ObjectTransformerLink; } , CreateObjectTransformerLink },
+                 { (object o) => { return o is RandomGenerator; } , CreateRandom },
+                 { (object o) => { return o is ObjectTransformer; } , CreateObjectTransformer },
           };
             this.AddCodeCreator(); 
         
         }
 
-        bool DetectType(object o, string type)
-        {
-            return o.GetType().Name == type;
-        }
 
-        protected List<string> CreateExt(string preffix, object ob)
-        {
-            var l = new List<string>();
-            var t = ob.GetType().Name;
-            var s =  classes[t];
-            l.Add("protected class " + preffix + " extends " + s);
-            l.Add("{");
-            l.Add("\tpublic " + preffix + "(String name, IDesktop desktop) {");
-            l.Add("\t\tsuper(name,  desktop);");
-            return l;
-        }
+  
 
-
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
-        {
-            return CreateCode(preffix, obj);
-        }
-
-        protected virtual List<string> CreateCode(string preffix, object obj)
-        {
-            foreach (Func<object, bool> key in dictionary.Keys)
-            {
-                if (key(obj))
-                {
-                    var l = CreateExt(preffix, obj);
-                    var ll = dictionary[key](preffix, obj);
-                    formulaPerformer.Add(l, ll, 2);
-                    l.Add("}");
-                    l.Add("");
-                    return l;
-                }
-            }
-            return null;
-        }
-
-
+    
 
         static List<string> CreateDataLink(string preffix, object obj)
         {
@@ -93,10 +48,34 @@ namespace DataPerformer.Portable.Java
         }
 
 
+        static List<string> CreateObjectTransformerLink(string preffix, object obj)
+        {
+            return new List<string>() { "}" };
+        }
+        static List<string> CreateObjectTransformer(string preffix, object obj)
+        {
+            var ot = obj as ObjectTransformer;
+            var dl = ot.Links;
+            var d = dcc.Create("map", dl);
+            var l = d.Values.ToArray()[0];
+            l.Add("setLinks(map);");
+            l.Add("}");
+            return l;
+        }
+
+
+
         static List<string> CreateDataConsumer(string preffix, object obj)
         {
-            return new List<string>();
+            return new List<string>() { "}" };
         }
+
+
+        static List<string> CreateRandom(string preffix, object obj)
+        {
+            return new List<string>() { "}" };
+        }
+
 
     }
 }

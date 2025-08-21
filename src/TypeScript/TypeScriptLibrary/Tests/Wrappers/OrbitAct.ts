@@ -22,6 +22,6 @@ export class OrbitAct extends Orbital implements IAction {
     public test(): void {
         var runtime: IDataRuntime = new DataRuntimeConsumer(this.dc);
         var p: PefrormerMeasuremets = new PefrormerMeasuremets();
-        p.peformFixedStepCalculation(runtime, 0, 1, 10, this);
+        p.performFixedStepCalculation(runtime, 0, 1, 10, this);
     }
 }

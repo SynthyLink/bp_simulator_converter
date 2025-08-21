@@ -3,9 +3,7 @@ package measurements.differential_equations.processors;
 import measurements.differential_equations.interfaces.IDifferentialEquationProcessor;
 import measurements.differential_equations.interfaces.IDifferentialEquationSolver;
 import measurements.interfaces.IDerivation;
-import measurements.interfaces.IMeasurement;
 import measurements.interfaces.IMeasurements;
-import measurements.interfaces.ITimeMeasurementProvider;
 
 public class RungeProcessor extends  DifferentialEquationProcessor {
 

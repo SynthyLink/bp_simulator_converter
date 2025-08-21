@@ -18,7 +18,7 @@ using NamedTree;
 namespace Diagram.UI
 {
     /// <summary>
-    /// Peformer of basic operations
+    /// Performer of basic operations
     /// </summary>
     public class Performer
     {
@@ -1607,7 +1607,7 @@ namespace Diagram.UI
         /// </summary>
         /// <param name="a">Double value</param>
         /// <returns>String</returns>
-        public  string DoubleToString(double a)
+        public string DoubleToString(double a)
         {
             return a.ToString("G17", System.Globalization.CultureInfo.InvariantCulture);
         }

@@ -88,7 +88,7 @@ export class PefrormerMeasuremets
         }
     }
 
-    public peformFixedStepCalculation(runtime: IDataRuntime, start: number, step: number, steps: number, act: IAction): void
+    public performFixedStepCalculation(runtime: IDataRuntime, start: number, step: number, steps: number, act: IAction): void
     {
         let tm = new TimeMeasurementProvider();
         runtime.setTimeProvider(tm);

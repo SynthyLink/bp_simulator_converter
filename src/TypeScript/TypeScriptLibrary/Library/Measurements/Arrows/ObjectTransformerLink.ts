@@ -4,8 +4,6 @@ import { FictiveObjectTransformer } from "../../Fiction/FictiveObjectTransformer
 import { FictiveObjectTransformerConsumer } from "../../Fiction/FictiveObjectTransformerConsumer";
 import { ICategoryObject } from "../../Interfaces/ICategoryObject";
 import { IDesktop } from "../../Interfaces/IDesktop";
-import { IDataConsumer } from "../Interfaces/IDataConsumer";
-import { IMeasurements } from "../Interfaces/IMeasurements";
 import { IObjectTransformer } from "../Interfaces/IObjectTransformer";
 import { IObjectTransformerConsumer } from "../Interfaces/IObjectTransformerConsumer";
 

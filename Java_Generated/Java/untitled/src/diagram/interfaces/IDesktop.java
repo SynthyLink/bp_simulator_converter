@@ -3,6 +3,7 @@ package diagram.interfaces;
 import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
 import error_handler.interfaces.ICheck;
+import error_handler.interfaces.IErrorHandler;
 
 import java.util.List;
 
@@ -22,6 +23,10 @@ public interface IDesktop {
     void setCheck(ICheck check);
 
     ICheck getCheck();
+
+    void setErrorHandler(IErrorHandler errorHandler);
+
+    IErrorHandler getErrorHandler();
 
     void init();
 }

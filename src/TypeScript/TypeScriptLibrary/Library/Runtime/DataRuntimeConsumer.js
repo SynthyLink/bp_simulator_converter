@@ -9,10 +9,10 @@ class DataRuntimeConsumer {
         this.measurements = [];
         this.categoryObjects = [];
         this.categoryObjectsMap = new Map();
-        this.cotegoryArrows = [];
+        this.categoryArrows = [];
         this.started = [];
         let nm = [];
-        this.addDataConsuner(dataConsumer, nm);
+        this.addDataConsumer(dataConsumer, nm);
         for (let i = nm.length - 1; i >= 0; i--) {
             var n = nm[i];
             this.measurements.push(nm[i]);
@@ -32,7 +32,7 @@ class DataRuntimeConsumer {
         var n = object.getCategoryObjectName();
         this.categoryObjectsMap.set(n, object);
     }
-    getRumtimeObject(name) {
+    getRuntimeObject(name) {
         return this.categoryObjectsMap.get(name);
     }
     getStarted() {
@@ -65,13 +65,13 @@ class DataRuntimeConsumer {
     getTimeProvider() {
         return this.timeProvider;
     }
-    getRumtimeObjects() {
+    getRuntimeObjects() {
         return this.categoryObjects;
     }
-    getRunimeArrows() {
-        return this.cotegoryArrows;
+    getRuntimeArrows() {
+        return this.categoryArrows;
     }
-    addDataConsuner(dc, measurements) {
+    addDataConsumer(dc, measurements) {
         var m = dc.getAllMeasurements();
         var n = m.length;
         if (n != 0) {
@@ -85,7 +85,7 @@ class DataRuntimeConsumer {
                     continue;
                 }
                 let c = mea;
-                this.addDataConsuner(c, measurements);
+                this.addDataConsumer(c, measurements);
             }
         }
         else {

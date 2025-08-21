@@ -6,8 +6,8 @@ import general_service.Performer;
 import general_service.interfaces.IPostSetArrow;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IMeasurements;
-import measurements.interfaces.ITimeMeasurementConsumer;
-import measurements.interfaces.ITimeMeasurementProvider;
+import measurements.time.interfaces.ITimeMeasurementConsumer;
+import measurements.time.interfaces.ITimeMeasurementProvider;
 
 import java.util.ArrayList;
 import java.util.List;

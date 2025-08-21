@@ -1,7 +1,9 @@
-﻿using BaseTypes;
+﻿using System.Text;
+using BaseTypes;
 using BaseTypes.CodeCreator.Interfaces;
 using BaseTypes.Interfaces;
 using DataPerformer.Interfaces;
+using DataPerformer.Interfaces.Attributes;
 using DataPerformer.Portable.Measurements;
 using Diagram.UI.Attributes;
 using Diagram.UI.Interfaces;
@@ -10,7 +12,6 @@ using FormulaEditor;
 using FormulaEditor.CodeCreators;
 using FormulaEditor.CodeCreators.Interfaces;
 using FormulaEditor.Interfaces;
-using System.Text;
 
 namespace DataPerformer.Formula.TypeScript
 {
@@ -173,19 +174,31 @@ namespace DataPerformer.Formula.TypeScript
             var num = int.Parse(ret.Substring(4));
             var state = GetState(obj);          
             var op = tree.Operation;
-            if (state & GetState(op))
+            var att = perf.GetAttribute<InternalVariableAttribute>(op);
+            if (att != null)
             {
-                if (op is IValue)
+                if (true)
                 {
-                    var anvn = "this.value" + num;
-                    var lan = new List<string>();
-                    lan.Add("this.variable = " + anvn + ".getIValue();");
-                    lan.Add("if (this.check(this.variable)) { this.success = false; return; }");
-                    lan.Add(tree.ToType(num));
-                    return lan;
+                    if (state & GetState(op))
+                    {
+                        if (op is IValue)
+                        {
+                            var anvn = "this.value" + num;
+                            var lan = new List<string>();
+                            lan.Add("this.variable = " + anvn + ".getIValue();");
+                            lan.Add("if (this.check(this.variable)) { this.success = false; return; }");
+                            if (!att.IsDerivation)
+                            {
+                                var ss = "value" + num + " : IValue = new FictiveValue();";
+                                variables.Add(ss);
+                            }
+                            lan.Add(tree.ToType(num));
+                            return lan;
 
+                        }
+
+                    }
                 }
-
             }
             if (op is AliasNameVariable anv)
             {

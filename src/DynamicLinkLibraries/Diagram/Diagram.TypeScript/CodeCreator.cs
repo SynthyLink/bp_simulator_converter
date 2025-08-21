@@ -240,7 +240,7 @@ namespace Diagram.TypeScript
 
         Dictionary<string, List<string>> Create(string id, IAlias alias)
         {
-            Diagram.UI.Performer p = new Diagram.UI.Performer();
+            UI.Performer p = new UI.Performer();
             IDictionaryCodeCreator<string, object> d = this;
             var dp = p.FromAlias(alias);
             var cd = d.Create("map", dp);

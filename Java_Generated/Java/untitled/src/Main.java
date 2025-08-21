@@ -3,21 +3,16 @@ import diagram.interfaces.IDesktop;
 import general_service.Performer;
 import general_service.interfaces.IValue;
 import generated.TestDesktop;
+import tests.Actor;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
-        Test2();
-    //    Test1();
-        var s = new IValue[5];
-
-        var t = new IValue[7];
-
-        var p = new Performer();
-
-        s = p.extend(t, s);
+    var a = new Actor();
+   // a.testRandomTwo();
+        a.testRandomFour();
 
     //    new generated.ODE_Feedback();
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text

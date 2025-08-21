@@ -25,17 +25,17 @@ export interface IDataRuntime
     addCategoryObjectToRuntime(object: ICategoryObject): void;
 
 
-    getRumtimeObject(name: string): ICategoryObject;
+    getRuntimeObject(name: string): ICategoryObject;
 
 
     setTimeProvider(timeProvider: ITimeMeasurementProvider): void;
 
     getTimeProvider(): ITimeMeasurementProvider;
 
-    getRumtimeObjects(): ICategoryObject[];
+    getRuntimeObjects(): ICategoryObject[];
 
 
-    getRunimeArrows(): ICategoryArrow[];
+    getRuntimeArrows(): ICategoryArrow[];
 
     getStarted(): IStarted[];
 

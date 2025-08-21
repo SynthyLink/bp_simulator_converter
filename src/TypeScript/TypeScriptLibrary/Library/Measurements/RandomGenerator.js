@@ -13,7 +13,7 @@ class RandomGenerator extends Measurements_1.Measurements {
         this.measurements.push(this);
     }
     getMeasurementName() {
-        return "";
+        return "Random";
     }
     getMeasurementType() {
         return this.a;

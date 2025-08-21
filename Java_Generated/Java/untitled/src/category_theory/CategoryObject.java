@@ -3,6 +3,8 @@ package category_theory;
 import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
 import error_handler.interfaces.ICheck;
+import error_handler.interfaces.IErrorHandler;
+import general_service.Performer;
 
 /**
  *
@@ -23,6 +25,7 @@ public class CategoryObject implements ICategoryObject {
         {
             desktop.addCategoryObject(this);
             checker = desktop.getCheck();
+            errorHandler = desktop.getErrorHandler();
         }
 
     }
@@ -45,13 +48,22 @@ public class CategoryObject implements ICategoryObject {
 
     protected boolean check(Object o)
     {
-        if (checker == null)
-        {
-            return true;
-        }
         return checker.check(o);
     }
+    protected void show(String message)
+    {
+        errorHandler.show(message);
+    }
+
+    protected void handle(Throwable throwable)
+    {
+        errorHandler.handle(throwable);
+    }
+
+    IErrorHandler errorHandler;
 
     protected ICheck checker;
+
+    protected Performer performer = new Performer();
 
 }

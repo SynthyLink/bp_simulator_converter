@@ -9,7 +9,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\DynamicLinkLibraries\CategoryTheory\CategoryTheory\CategoryTheory\CategoryTheory.csproj" />
+    <ProjectReference Include="..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable.Java\DataPerformer.Portable.Java.csproj" />
     <ProjectReference Include="..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable\DataPerformer.Portable.csproj" />
+    <ProjectReference Include="..\..\DynamicLinkLibraries\Diagram\Diagram.Java\Diagram.Java.csproj" />
     <ProjectReference Include="..\..\DynamicLinkLibraries\Diagram\Diagram.TypeScript\Diagram.TypeScript.csproj" />
     <ProjectReference Include="..\..\DynamicLinkLibraries\Diagram\Diagram.UI.Forms\Diagram.UI.Forms.csproj" />
     <ProjectReference Include="..\..\DynamicLinkLibraries\Diagram\Diagram.UI\Diagram.UI.csproj" />

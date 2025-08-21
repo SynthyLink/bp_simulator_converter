@@ -1,7 +1,7 @@
-package measurements.interfaces;
+package measurements.time.interfaces;
 
 public interface ITimeMeasurementConsumer {
-   ITimeMeasurementProvider  getTimeMeasutement();
+   ITimeMeasurementProvider getTimeMeasutement();
 
    void  setTimeMeasurement(ITimeMeasurementProvider provider);
 

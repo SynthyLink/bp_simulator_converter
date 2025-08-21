@@ -51,21 +51,28 @@ namespace BP_Simulator.Light
             /*     WpfInterface.StaticExtensionWebInterfaceUI.Init();*/
         }
 
+
+
         static void TestType()
         {
-            var obj = new Internet.Meteo.Wrapper.Serializable.Sensor("all");
+            var obj = new Test.Calculation.Forms.Seriaizable.ObjectTransformer();
+            var t = obj.GetType();
+            string st = t.FullName + "," + t.Assembly;
+          //  "Test.Calculation.Forms.Seriaizable.ObjectTransformer,Test.Calculation.Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";           var ss = ""
+            st = null;
+            /*   var obj = new Internet.Meteo.Wrapper.Serializable.Sensor("all");
 
-            if (!(obj is Internet.Meteo.Wrapper.Sensor sensor))
-            {
-                
-            }
-            else
-            {
-                sensor = null;
-            }
+               if (!(obj is Internet.Meteo.Wrapper.Sensor sensor))
+               {
 
-            /*  Type t = typeof(object);
-              string st = t.FullName + "," + t.Assembly; //*/
+               }
+               else
+               {
+                   sensor = null;
+               }
+
+               /*  Type t = typeof(object);
+                 string st = t.FullName + "," + t.Assembly; //*/
             /*     new Gravity_36_36.Gravity();
                  var gv = new Gravity_36_36.Wrapper.Serializable.Gravity();
                  var b = gv is Gravity_36_36.Wrapper.Gravity;

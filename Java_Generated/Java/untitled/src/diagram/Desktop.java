@@ -4,11 +4,13 @@ import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
 import error_handler.interfaces.ICheck;
+import error_handler.interfaces.IErrorHandler;
 import general_service.interfaces.IPostSetArrow;
+
 
 import java.util.*;
 
-public class Desktop  implements IDesktop
+public class Desktop  implements IDesktop, ICheck, IErrorHandler
 {
     protected List<ICategoryObject> objects = new ArrayList<>();
 
@@ -17,14 +19,17 @@ public class Desktop  implements IDesktop
     protected Map<String, ICategoryObject> objectMap = new TreeMap<>();
     protected Map<String, ICategoryArrow> arrowMap = new TreeMap<>();
 
-    public Desktop(ICheck check)
+    public Desktop(ICheck check, IErrorHandler errorHandler)
     {
         this.check = check;
+        this.errorHandler = errorHandler;
         init();
     }
 
     public  Desktop()
     {
+        this.check = this;
+        this.errorHandler = this;
         init();
     }
 
@@ -95,6 +100,16 @@ arrowMap.put(arrow.getArrowName(), arrow);
     }
 
     @Override
+    public void setErrorHandler(IErrorHandler errorHandler) {
+        this.errorHandler = errorHandler;
+    }
+
+    @Override
+    public IErrorHandler getErrorHandler() {
+        return errorHandler;
+    }
+
+    @Override
     public void init() {
 
     }
@@ -121,6 +136,24 @@ arrowMap.put(arrow.getArrowName(), arrow);
 
     }
 
+
+    @Override
+    public boolean check(Object obj) {
+        return false;
+    }
+
+    @Override
+    public void handle(Throwable exception) {
+
+    }
+
+    @Override
+    public void show(String message) {
+
+    }
+
     ICheck check;
+
+    IErrorHandler errorHandler;
 }
 

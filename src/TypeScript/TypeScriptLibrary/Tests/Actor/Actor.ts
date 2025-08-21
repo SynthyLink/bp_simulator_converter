@@ -7,6 +7,7 @@ import { RandomAct } from '../Wrappers/RandomAcr';
 import { SimpleFeedAct } from '../Wrappers/SimpleFeedAct';
 import { TwoAct } from '../Wrappers/TwoAct';
 import { ODE_FeedbackAct } from '../Wrappers/ODE_FeedbackAct';
+import { TransformerRecursveAct } from '../Wrappers/TransformerRecursveAct';
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -44,6 +45,19 @@ export class Actor
         }
 
     }
+
+
+    actTransformerFeedback(): void {
+        try {
+            var o = new TransformerRecursveAct();
+            o.test();
+        }
+        catch (e: any) {
+            finish(e);
+        }
+
+    }
+
 
     actODE(): void
     {

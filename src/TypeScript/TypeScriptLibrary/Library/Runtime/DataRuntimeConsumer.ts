@@ -23,7 +23,7 @@ export class DataRuntimeConsumer implements IDataRuntime
     protected categoryObjectsMap: Map<string, ICategoryObject> = new Map();
 
 
-    protected cotegoryArrows: ICategoryArrow[] = [];
+    protected categoryArrows: ICategoryArrow[] = [];
 
     protected started: IStarted[] = [];
 
@@ -31,7 +31,7 @@ export class DataRuntimeConsumer implements IDataRuntime
     constructor(dataConsumer: IDataConsumer)
     {
         let nm: IMeasurements[] = [];
-        this.addDataConsuner(dataConsumer, nm);
+        this.addDataConsumer(dataConsumer, nm);
         for (let i = nm.length - 1; i >= 0; i--)
         {
             var n = nm[i];
@@ -57,7 +57,9 @@ export class DataRuntimeConsumer implements IDataRuntime
         var n = object.getCategoryObjectName();
         this.categoryObjectsMap.set(n, object);
     }
-    getRumtimeObject(name: string): ICategoryObject
+
+
+    getRuntimeObject(name: string): ICategoryObject
     {
         return this.categoryObjectsMap.get(name) as ICategoryObject;
     }
@@ -110,19 +112,19 @@ export class DataRuntimeConsumer implements IDataRuntime
         return this.timeProvider;
     }
 
-    getRumtimeObjects(): ICategoryObject[]
+    getRuntimeObjects(): ICategoryObject[]
     {
         return this.categoryObjects;
     }
 
-    getRunimeArrows(): ICategoryArrow[]
+    getRuntimeArrows(): ICategoryArrow[]
     {
-        return this.cotegoryArrows;
+        return this.categoryArrows;
     }
 
 
  
-    addDataConsuner(dc: IDataConsumer, measurements: IMeasurements[]): void
+    addDataConsumer(dc: IDataConsumer, measurements: IMeasurements[]): void
     {
         var m = dc.getAllMeasurements();
         var n = m.length;
@@ -139,7 +141,7 @@ export class DataRuntimeConsumer implements IDataRuntime
                     continue;
                 }
                 let c: IDataConsumer = mea as unknown as IDataConsumer;
-                this.addDataConsuner(c, measurements);
+                this.addDataConsumer(c, measurements);
 
             }
         }

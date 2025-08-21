@@ -7,6 +7,8 @@ import general_service.Performer;
 import general_service.interfaces.IPostSetArrow;
 import measurements.interfaces.*;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,33 +21,43 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
 
     @Override
     public void postSetArrow() {
-
+        initTransformer();
     }
 
     @Override
     public IMeasurements[] getAllMeasurements() {
-        return new IMeasurements[0];
+        return measurements;
     }
 
     @Override
     public void addMeasurements(IMeasurements item) {
-
+        measurements = performer.extend(measurements, item);
     }
 
     @Override
     public int getMeasurementsCount() {
-        return OutMea.length;
+        return outMea.length;
     }
 
     @Override
     public IMeasurement getMeasurement(int i) {
-        return OutMea[i];
+        return outMea[i];
     }
 
     @Override
-    public void updateMeasurements() {
+    public void updateMeasurements()
+    {
+        performer.updateChildrenData(this);
+        for (var i = 0; i < inO.length; i++)
+        {
+            var m = inMea[i];
+            inO[i] = m.getMeasurementValue();
+        }
+        transformer.calculate(this.inO, this.outO);
 
     }
+
+
 
     @Override
     public void addMeasurement(IMeasurement measurement) {
@@ -55,7 +67,7 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
     @Override
     public void addTransfotmer(IObjectTransformer transformer) {
         if (this.transformer != null) {
-            performer.show("Transformer already exists");
+            show("Transformer already exists");
             return;
         }
         this.transformer = transformer;
@@ -66,7 +78,6 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
     /// </summary>
     IObjectTransformer transformer;
 
-    Performer performer = new Performer();
 
     /// <summary>
     /// Input
@@ -76,12 +87,12 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
     /// <summary>
     /// Output measurements
     /// </summary>
-    protected TransMeasurement[]  OutMea = new TransMeasurement[0];
+    protected TransMeasurement[]  outMea = new TransMeasurement[0];
 
     /// <summary>
     /// Input measurements
     /// </summary>
-    protected  IMeasurement[] ImMea = new IMeasurement[0];
+    protected  IMeasurement[] inMea = new IMeasurement[0];
 
 
     /// <summary>
@@ -128,6 +139,45 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
 
     IDataConsumer consumer;
 
+    protected void  createOutput()
+    {
+        this.inMea = new IMeasurement[0];
+        var outS = this.transformer.getOutput();
+        for (var i = 0; i < outS.length; i++)
+        {
+            var name = outS[i];
+            var type = transformer.getOutputType(i);
+            outMea = performer.extend(outMea, new TransMeasurement(i, this.outO, name, type));
+        }
+        var mm = this.performer.getMeasurementMap(this);
+        var ent = links.entrySet();
+        for (var item : ent)
+        {
+            var mt = mm.get(item.getKey());
+            if (mt != null)
+            {
+                inMea = performer.extend(inMea, mt);
+            }
+        }
+    }
+
+   void initTransformer()
+   {
+        var inp = this.transformer.getInput();
+        var out = this.transformer.getOutput();
+        inO = new Object[inp.length];
+        outO = new Object[out.length];
+        createOutput();
+    }
+
+
+    protected void setLinks(Map<String, String> map)
+    {
+        this.performer.copyMap(map, this.links);
+    }
+
+
+
 
     class  TransMeasurement implements  IMeasurement {
         public TransMeasurement(int n, Object[] outO, String name, Object type) {
@@ -151,6 +201,19 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
         public Object getMeasurementValue() {
             return outO[n];
         }
+        @Override
+        public String toString() {
+            var s = super.toString();
+            var k = outO[n];
+            if (k instanceof double[] d)
+            {
+                if (d.length == 1)
+                {
+                    return d[0] + "";
+                }
+            }
+            return s;
+        }
 
         protected void setLinks(Map<String, String> links) {
             performer.copyMap(links, this.links);
@@ -166,5 +229,5 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
 
         Map<String, String> links = new HashMap<>();
 
-        Performer performer;
+        Performer performer = new Performer();
     }}

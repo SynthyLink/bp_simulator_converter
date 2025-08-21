@@ -22,6 +22,7 @@ using FormulaEditor.Symbols;
 using ErrorHandler;
 
 using NamedTree;
+using DataPerformer.Interfaces.Attributes;
 
 namespace DataPerformer.Formula
 {
@@ -1176,6 +1177,7 @@ namespace DataPerformer.Formula
 		/// Auxiliary class for measurement
 		/// </summary>
 		[CodeCreator(InitialState = true)]
+		[InternalVariable]
         internal class Variable : IObjectOperation, IPowered, IOperationAcceptor, IMeasurement, 
 			IMeasurementHolder, IAliasNameHolder, ITreeAssociated, IValue, IUpdateItself, 
 			IOutputTree, ITreeCreator
@@ -1257,8 +1259,6 @@ namespace DataPerformer.Formula
 
 			#endregion
 
-	
-
 			#region IMeasurement Members
 
 			Func<object> IMeasurement.Parameter
@@ -1305,6 +1305,7 @@ namespace DataPerformer.Formula
             IAliasName IAliasNameHolder.AliasName => new AliasName(Recursive, name);
 
             ObjectFormulaTree ITreeAssociated.ObjectFormulaTree { get => Tree; set => Tree = value; }
+
             object IValue.Value 
 			{
 				get => GetValue();
