@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataPerformer.Portable.TypeScript
+namespace FormulaEditor.Collections
 {
-    public class CodeCreator : Diagram.TypeScript.CodeCreator
+    internal class TreeCodeCreatorCollection
     {
     }
 }

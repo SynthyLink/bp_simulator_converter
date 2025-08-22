@@ -54,7 +54,8 @@ namespace Diagram.UI.TypeScript
                 Dictionary<ICategoryObject, int> objects;
                 Dictionary<ICategoryArrow, int> arrows;
                 performer.Get(desktop, out categoryObjects, out categoryArrows, out objects, out arrows);
-                IClassCodeCreator classCodeCreator = StaticExtensionDiagramUI.Creators["TS"];
+                IClassCodeCreator classCodeCreator = performer.GetLaguageObject<IClassCodeCreator>(this);
+                    // StaticExtensionDiagramUI.Creators["TS"]
                 var l = new List<string>();
                 for (int i = 0; i < categoryObjects.Count; i++)
                 {

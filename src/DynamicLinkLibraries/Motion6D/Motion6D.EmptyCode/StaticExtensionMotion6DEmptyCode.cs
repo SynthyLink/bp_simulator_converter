@@ -78,11 +78,6 @@ namespace Motion6D.EmptyCode
             protected IDesktopCodeCreator DesktopCodeCreator
             { get; set; }
 
-            IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
-            {
-                get => DesktopCodeCreator; set => DesktopCodeCreator = value;
-            }
-
 
 
             List<string> IClassCodeCreator.CreateCode(string preffix, object obj)

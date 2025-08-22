@@ -23,13 +23,7 @@ namespace Motion6D.Portable.CoreCreators
         protected IDesktopCodeCreator DesktopCodeCreator
         { get; set; }
 
-        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
-        {
-            get => DesktopCodeCreator; set => DesktopCodeCreator = value;
-        }
-
-
-
+   
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
         {
             List<string> l = new List<string>();

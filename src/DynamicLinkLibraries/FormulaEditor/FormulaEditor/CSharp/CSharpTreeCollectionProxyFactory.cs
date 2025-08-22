@@ -121,7 +121,6 @@ namespace FormulaEditor.CSharp
 
         #endregion
 
-
         #region Protected Members
 
         /// <summary>
@@ -134,7 +133,6 @@ namespace FormulaEditor.CSharp
         public object IAliasName { get; private set; }
 
         #endregion
-
 
         #region Private Members
 

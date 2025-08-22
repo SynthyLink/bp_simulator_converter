@@ -10,7 +10,6 @@ using BaseTypes.Interfaces;
 using FormulaEditor.Collections;
 using FormulaEditor.Interfaces;
 using FormulaEditor.Symbols;
-using NamedTree;
 
 
 namespace FormulaEditor

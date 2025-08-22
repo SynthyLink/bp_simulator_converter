@@ -1,4 +1,5 @@
 ﻿using AssemblyService.Attributes;
+using Diagram.Java;
 
 namespace Diagram.UI.Java
 {
@@ -8,6 +9,7 @@ namespace Diagram.UI.Java
         static  StaticrExtensionDiagramJava()
         {
             new DesktopCodeCreator();
+            new TypeCreator();
         }
 
 

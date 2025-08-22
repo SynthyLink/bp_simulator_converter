@@ -8,21 +8,16 @@ using System.Collections.Generic;
 namespace Diagram.UI
 {
     [Language("C#")]
-    class ObjectContainerClassCodeCreator : IClassCodeCreator
+    class ObjectContainerClassCodeCreator : Diagram.UI.Interfaces.IClassCodeCreator
     {
 
         internal ObjectContainerClassCodeCreator()
         {
-            this.AddCodeCreator(); ;
+            StaticExtensionDiagramUI.AddCodeCreator(this as IClassCodeCreator);
         }
 
         protected IDesktopCodeCreator DesktopCodeCreator
         { get; set; }
-
-        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
-        {
-            get => DesktopCodeCreator; set => DesktopCodeCreator = value;
-        }
 
 
 

@@ -17,6 +17,7 @@ using DataPerformer.Formula.Interfaces;
 using DataPerformer.Interfaces;
 
 using NamedTree;
+using ErrorHandler;
 
 namespace DataPerformer.Formula
 {
@@ -28,10 +29,16 @@ namespace DataPerformer.Formula
     {
         #region Fields
 
+        static Diagram.UI.Performer performer = new Diagram.UI.Performer();
+
         static readonly DataPerformerFormula dataPerformerFormula = new(null);
 
-        #endregion
+        public static Dictionary<string, ITreeCollectionCodeCreator> TreeCodeCreators
+        {
+            get; set;
+        } = new Dictionary<string, ITreeCollectionCodeCreator>();
 
+        #endregion
 
         #region Public Members
 
@@ -168,6 +175,20 @@ namespace DataPerformer.Formula
 
         #region Ctor
 
+        public static void AddTreeCollectionCodeCreator(this ITreeCollectionCodeCreator collection)
+        {
+            var lang = performer.GetLanguage(collection);
+            if (lang == null)
+            {
+                throw new OwnNotImplemented();
+            }
+            if (TreeCodeCreators.ContainsKey(lang))
+            {
+                throw new OwnNotImplemented();
+            }
+            TreeCodeCreators[lang] = collection;
+        }
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -176,6 +197,7 @@ namespace DataPerformer.Formula
             new CSCodeCreator();
             (new DataPerformerSeparator()).Add();
         }
+        #endregion
 
         class DataPerformerSeparator : IOperationSeparator
         {
@@ -196,7 +218,6 @@ namespace DataPerformer.Formula
             }
         }
 
-        #endregion
-
+ 
     }
 }

@@ -21,6 +21,7 @@ using Diagram.UI.Labels;
 using ErrorHandler;
 
 using NamedTree;
+using BaseTypes.CodeCreator.Interfaces;
 
 
 namespace Diagram.UI
@@ -33,13 +34,16 @@ namespace Diagram.UI
 
         #region Fields
 
+        static Performer performer = new Performer();
+
 
         private static ExtensionObject extension = new ExtensionObject();
         
 
-        static Performer performer = new Performer();
-
         static NamedTree.Performer namedPerformer = new NamedTree.Performer();
+
+        static public Dictionary<string, ITypeCreator> TypeCreators
+            { get;  } = new Dictionary<string, ITypeCreator>();
 
 
         static public Dictionary<string, CombinedCodeCreator> Creators
@@ -53,8 +57,6 @@ namespace Diagram.UI
             get;
         }
         = new Dictionary<string, IDesktopCodeCreator>();
-
-
 
 
         /// <summary>
@@ -102,19 +104,33 @@ namespace Diagram.UI
 
         #region Public Memberes
 
+
+        static public void AddTypeCreator(this ITypeCreator typeCreator)
+        {
+            var lang = performer.GetLanguage(creator);
+            if (lang == null)
+            {
+                throw new OwnNotImplemented();
+            }
+            if (TypeCreators.ContainsKey(lang))
+            {
+                throw new OwnNotImplemented();
+            }
+            TypeCreators[lang] = typeCreator;
+
+        }
+
         /// <summary>
         /// Adds code creator
         /// </summary>
         /// <param name="creator"></param>
-        public static void AddCodeCreator(this IClassCodeCreator creator)
+        static void AddClassCodeCreator(this IClassCodeCreator creator)
         {
-            var att = namedPerformer.GetAttribute<LanguageAttribute>(creator);
-            if (att == null)
+            var lang = performer.GetLanguage(creator);
+            if (lang == null)
             {
-                throw new OwnNotImplemented("LanguageAttribute");
+                throw new OwnNotImplemented();
             }
-            var lang = att.Language;
-            CombinedCodeCreator c = null;
             if (Creators.ContainsKey(lang))
             {
                 c = Creators[lang];

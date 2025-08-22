@@ -1,8 +1,9 @@
-﻿using BaseTypes.Attributes;
+﻿using System.Collections.Generic;
+
+using BaseTypes.Attributes;
 using Diagram.UI;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
-using System.Collections.Generic;
 
 namespace SoundService.CodeCreators
 {
@@ -21,10 +22,6 @@ namespace SoundService.CodeCreators
         protected IDesktopCodeCreator DesktopCodeCreator
         { get; set; }
 
-        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator
-        {
-            get => DesktopCodeCreator; set => DesktopCodeCreator = value;
-        }
 
 
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj)

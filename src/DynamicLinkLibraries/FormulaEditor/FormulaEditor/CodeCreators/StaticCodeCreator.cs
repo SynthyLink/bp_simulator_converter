@@ -7,7 +7,7 @@ using FormulaEditor.CodeCreators.Interfaces;
 namespace FormulaEditor.CodeCreators
 {
     /// <summary>
-    /// Statioc class for creation of code
+    /// Static class for creation of code
     /// </summary>
     public static class StaticCodeCreator
     {

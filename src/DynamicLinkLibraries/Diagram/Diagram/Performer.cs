@@ -1,19 +1,17 @@
-﻿using System;
+﻿using BaseTypes.Attributes;
+using BaseTypes.CodeCreator.Interfaces;
+using CategoryTheory;
+using Diagram.UI.Attributes;
+using Diagram.UI.Interfaces;
+using Diagram.UI.Labels;
+using ErrorHandler;
+using NamedTree;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
-
-using CategoryTheory;
-
-using Diagram.UI.Attributes;
-using Diagram.UI.Interfaces;
-using Diagram.UI.Labels;
-
-using ErrorHandler;
-
-using NamedTree;
 
 namespace Diagram.UI
 {
@@ -22,6 +20,7 @@ namespace Diagram.UI
     /// </summary>
     public class Performer
     {
+        NamedTree.Performer performer = new NamedTree.Performer();
 
         /// <summary>
         /// Dictionary from alias
@@ -38,7 +37,52 @@ namespace Diagram.UI
             }
             return d;
         }
- 
+
+
+        readonly Type tclasscc = typeof(IClassCodeCreator);
+
+        readonly Type tcreatort = typeof(ITypeCreator);
+
+
+        public virtual T GetLaguageObject<T>(object o) where T : class
+        {
+
+            var s = GetLanguage(o);
+            if (s == null)
+            {
+                throw new OwnNotImplemented();
+            }
+            var t = typeof(T);
+            if (t == tclasscc)
+            {
+                return StaticExtensionDiagramUI.Creators[s] as T;
+            }
+            if (t == tcreatort)
+            {
+                return StaticExtensionDiagramUI.TypeCreators[s] as T;
+            }
+
+            return null;
+        }
+
+        
+        /// <summary>
+        /// Gets language of object
+        /// </summary>
+        /// <param name="o">The object</param>
+        /// <returns>The language</returns>
+        public string GetLanguage(object o)
+        {
+            var att = performer.GetAttribute<LanguageAttribute>(o);
+            if (att == null)
+            {
+                return null;
+            }
+            return att.Language;
+        }
+
+
+
 
         /// <summary>
         /// Gets relative name
