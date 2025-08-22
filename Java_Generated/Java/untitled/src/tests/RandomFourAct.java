@@ -1,11 +1,12 @@
 package tests;
 
-import general_service.Performer;
 import general_service.interfaces.IAction;
 import generated.RandomFour;
+import measurements.Performer;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IMeasurements;
 import runtime.DataRuntimeConsumer;
+
 
 public class RandomFourAct extends RandomFour implements IAction {
     public RandomFourAct()
@@ -18,14 +19,12 @@ public class RandomFourAct extends RandomFour implements IAction {
 
     @Override
     public void action() {
-        for (var m : measurements)
-        {
-            System.out.println("+++++");
-            var n  = m.getMeasurementsCount();
-            for (var i = 0; i < n; i++)
-            {
+        for (var m : measurements) {
+            System.out.println("\n+++++");
+            var n = m.getMeasurementsCount();
+            for (var i = 0; i < n; i++) {
                 var o = m.getMeasurement(i);
-                System.out.print(o);
+                System.out.print(o + " ");
             }
         }
     }

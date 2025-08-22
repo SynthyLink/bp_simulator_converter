@@ -1,6 +1,4 @@
 package measurements.variables;
-
-import general_service.Performer;
 import general_service.interfaces.IValue;
 import measurements.interfaces.IDerivation;
 import measurements.interfaces.IMeasurement;
@@ -12,9 +10,11 @@ public class Variable implements IMeasurement,  IValue, IDerivation {
     public Variable(Object type, String name) {
         this.type = type;
         this.name = name;
-        setter = performer.getSetter(type);
+        setter = mPerformer.getSetter(type);
         value = setter.getDefaultValue();
     }
+
+
 
     @Override
     public Object getIValue() {
@@ -62,6 +62,6 @@ public class Variable implements IMeasurement,  IValue, IDerivation {
     IMeasurement derivation;
 
     IVariableSetter setter;
-    Performer performer = new Performer();
+    measurements.Performer mPerformer = new measurements.Performer();
 }
 

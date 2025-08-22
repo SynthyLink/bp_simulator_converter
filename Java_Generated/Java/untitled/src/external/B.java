@@ -1,4 +1,4 @@
 package external;
 
-public class A {
+public class B {
 }

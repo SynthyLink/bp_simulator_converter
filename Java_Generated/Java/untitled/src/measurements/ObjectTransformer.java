@@ -48,7 +48,7 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
     @Override
     public void updateMeasurements()
     {
-        performer.updateChildrenData(this);
+        mPerformer.updateChildrenData(this);
         for (var i = 0; i < inO.length; i++)
         {
             var m = inMea[i];
@@ -142,6 +142,7 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
 
     IDataConsumer consumer;
 
+
     protected void setArray()
     {
         var n = array.size();
@@ -176,7 +177,7 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
             var type = transformer.getOutputType(i);
             outMea = performer.extend(outMea, new TransMeasurement(i, this.outO, name, type));
         }
-        var mm = this.performer.getMeasurementMap(this);
+        var mm = mPerformer.getMeasurementMap(this);
         var ent = links.entrySet();
         for (var item : ent)
         {
@@ -258,5 +259,5 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
 
         Map<String, String> links = new HashMap<>();
 
-        Performer performer = new Performer();
+        measurements.Performer mPerformer = new measurements.Performer();
     }}

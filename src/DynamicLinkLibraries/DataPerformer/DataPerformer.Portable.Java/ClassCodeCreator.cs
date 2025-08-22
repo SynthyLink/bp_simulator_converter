@@ -2,15 +2,27 @@
 using BaseTypes.CodeCreator.Interfaces;
 using DataPerformer.Interfaces;
 using Diagram.UI;
+using Diagram.UI.Interfaces;
+using ErrorHandler;
 
 
 
 namespace DataPerformer.Portable.Java
 {
     [Language("Java")]
-    public class ClassCodeCreator : Diagram.Java.ClassCodeCreator
+    public class ClassCodeCreator : Diagram.Java.ClassCodeCreator, ITypeCreator, IAliasCodeCreator
     {
         protected static Performer mPerformer = new Performer();
+
+        protected static ITypeCreator typeCreator;
+
+        protected static IAliasCodeCreator aliasCodeCreator;
+
+        protected void InitPortable()
+        {
+            typeCreator = this;
+            aliasCodeCreator = this;
+        }
 
         public ClassCodeCreator() : base(false)
         {
@@ -76,6 +88,38 @@ namespace DataPerformer.Portable.Java
             return new List<string>() { "}" };
         }
 
+        string ITypeCreator.GetType(object o)
+        {
+            throw new OwnNotImplemented();
+        }
 
+        string ITypeCreator.GetDefaultValue(object o)
+        {
+            throw new OwnNotImplemented();
+        }
+
+        string ITypeCreator.GetStringValue(object o)
+        {
+            throw new OwnNotImplemented();
+        }
+
+        Dictionary<string, List<string>> IAliasCodeCreator.Create(string id, IAlias alias)
+        {
+           var d = new Dictionary<string, List<string>>();
+            var l = new List<string>();
+            l.Add("java.util.Map< String, general_service.Enrty< Object, Object >> " + id + " = new HashMap<>();");
+            var names = alias.AliasNames;
+            foreach (var name in names)
+            {
+                var type =  typeCreator.GetType(alias.GetType(name));
+                var val = typeCreator.GetStringValue(alias[name]);
+                var s = id + ".put(\"" + name + "new general_service.Enrty<Object, Object>(";
+                s += type + ", " + val + "));";
+                l.Add(s);
+            }
+            l.Add("setMap(" + id + ");");
+            d["code"] = l;
+            return d;
+        }
     }
 }

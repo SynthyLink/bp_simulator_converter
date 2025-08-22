@@ -4,7 +4,7 @@ namespace Diagram.UI.Interfaces
     public interface IFeedbackCollectionHolder
     {
         /// <summary>
-        /// The feadback
+        /// The feedback
         /// </summary>
         IFeedbackCollection Feedback { get; }
 

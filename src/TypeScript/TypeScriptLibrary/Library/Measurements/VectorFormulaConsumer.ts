@@ -5,9 +5,9 @@ import { DataConsumerVariadbleMeasurements } from "./DataConsumerVariableMeasure
 export class VectorFormulaConsumer extends DataConsumerVariadbleMeasurements implements IPostSetArrow
 {
 
-    protected arguments: string[] = [];
+  //  protected arguments: string[] = [];
 
-    protected operationNames: Map<number, string> = new Map();
+ //   protected operationNames: Map<number, string> = new Map();
 
     constructor(desktop: IDesktop, name: string)
     {

@@ -1,13 +1,12 @@
 package measurements;
 
-import general_service.Performer;
 import general_service.interfaces.IFunc;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IMeasurement;
 
 public class DataConsumerFunc implements IFunc {
 
-    Performer performer = new Performer();
+    Performer mPerformer = new Performer();
     IDataConsumer dataConsumer;
 
     String name;
@@ -18,7 +17,7 @@ public class DataConsumerFunc implements IFunc {
     {
         dataConsumer = consumer;
         this.name = name;
-        measurement = performer.getMeasurement(consumer, name);
+        measurement = mPerformer.getMeasurement(consumer, name);
     }
 
     @Override

@@ -1,16 +1,23 @@
 ﻿using BaseTypes.Attributes;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
+using ErrorHandler;
 
 namespace Diagram.Java
 {
     [Language("Java")]
     public class ClassCodeCreator : IClassCodeCreator, IDictionaryCodeCreator<string, string>,
-        IEnumerableCodeCreator<int[]>
+        IEnumerableCodeCreator<int[]>, 
+        IEnumerableCodeCreator<Tuple<int, string>>, IFeedbackCollectionCodeCreator
     {
         protected static IDictionaryCodeCreator<string, string> dictionaryStringStringCodeCreator;
 
         protected static IEnumerableCodeCreator<int[]> enumerableIntCodeCreator;
+        
+        protected static IEnumerableCodeCreator<Tuple<int, string>> enumerableIntStringCodeCreator;
+
+        private static IFeedbackCollectionCodeCreator feedbackCollectionCodeCreator;
+
 
         protected NamedTree.Performer formulaPerformer = new();
 
@@ -23,6 +30,9 @@ namespace Diagram.Java
         {
             dictionaryStringStringCodeCreator = this;
             enumerableIntCodeCreator = this;
+            enumerableIntStringCodeCreator = this;
+            feedbackCollectionCodeCreator = this;
+
         }
 
         protected ClassCodeCreator(bool b)
@@ -161,6 +171,25 @@ namespace Diagram.Java
             d["code"] = l;
             return d;
         }
+
+        Dictionary<string, List<string>> IEnumerableCodeCreator<Tuple<int, string>>.Create(string id, IEnumerable<Tuple<int, string>> values)
+        {
+            var d = new Dictionary<string, List<string>>();
+            var l = new List<string>();
+            l.Add("var " + id + "array = new java.util.ArrayList<general_service.Enrty<int[], String>>();");
+            foreach (var x in values)
+            {
+                l.Add(id + ".add(new general_service.Enrty<>(new int[]{" + x.Item1 + "}, \"" + x.Item2 + "\"));");
+            }
+            d["code"] = l;
+            return d;
+        }
+
+        Dictionary<string, List<string>> IFeedbackCollectionCodeCreator.Create(IFeedbackCollectionHolder holder)
+        {
+            throw new OwnNotImplemented();
+        }
+
 
         #endregion
 

@@ -11,6 +11,7 @@ public class RungeProcessor extends  DifferentialEquationProcessor {
     double[] z = new double[0];
     double[] f = new double[0];
     double[][] k = new double[4][];
+    measurements.Performer mPerformer = new measurements.Performer();
 
     @Override
     public void stepDifferentialEquations(double t0, double t1) {
@@ -20,7 +21,7 @@ public class RungeProcessor extends  DifferentialEquationProcessor {
             var m = (IMeasurements) s;
             int n = m.getMeasurementsCount();
             for (int j = 0; j < n; j++) {
-                w[i] = performer.getDouble(m.getMeasurement(j));
+                w[i] = mPerformer.getDouble(m.getMeasurement(j));
                 f[i] = w[i];
                 ++i;
             }
@@ -35,7 +36,7 @@ public class RungeProcessor extends  DifferentialEquationProcessor {
             var p = m.getMeasurementsCount();
             for (int l = 0; l < p; l++) {
                 IDerivation der = (IDerivation) m.getMeasurement(l);
-                z[i] = performer.getDouble(der);
+                z[i] = mPerformer.getDouble(der);
                 k[0][i] = z[i] * dt;
                 w[i] = f[i] + 0.5 * k[0][i];
                 ++i;
@@ -51,7 +52,7 @@ public class RungeProcessor extends  DifferentialEquationProcessor {
             var p = m.getMeasurementsCount();
             for (int l = 0; l < p; l++) {
                 IDerivation der = (IDerivation) m.getMeasurement(l);
-                z[i] = performer.getDouble(der);
+                z[i] = mPerformer.getDouble(der);
                 k[1][i] = z[i] * dt;
                 w[i] = f[i] + 0.5 * k[1][i];
                 ++i;
@@ -68,7 +69,7 @@ public class RungeProcessor extends  DifferentialEquationProcessor {
             var p = m.getMeasurementsCount();
             for (int l = 0; l < p; l++) {
                 IDerivation der = (IDerivation) m.getMeasurement(l);
-                z[i] = performer.getDouble(der);
+                z[i] = mPerformer.getDouble(der);
                 k[2][i] = z[i] * dt;
                 w[i] = f[i] + k[2][i];
                 ++i;
@@ -84,7 +85,7 @@ public class RungeProcessor extends  DifferentialEquationProcessor {
             var p = m.getMeasurementsCount();
             for (int l = 0; l < p; l++) {
                 IDerivation der = (IDerivation) m.getMeasurement(l);
-                z[i] = performer.getDouble(der);
+                z[i] = mPerformer.getDouble(der);
                 k[3][i] = z[i] * dt;
                 ++i;
             }

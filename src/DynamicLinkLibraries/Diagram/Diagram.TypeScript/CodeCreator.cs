@@ -8,7 +8,9 @@ using Diagram.UI.Interfaces;
 namespace Diagram.TypeScript
 {
     public class CodeCreator : ITypeCreator, IDictionaryCodeCreator<string, string>,
-        IDictionaryCodeCreator<string, object>, IEnumerableCodeCreator<string>, IAliasCodeCreator, IFeedbackCollectionCodeCreator
+        IDictionaryCodeCreator<string, object>, 
+        IEnumerableCodeCreator<string>, IAliasCodeCreator, 
+        IFeedbackCollectionCodeCreator
 
     {
         #region Fields

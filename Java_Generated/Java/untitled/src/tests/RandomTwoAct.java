@@ -1,9 +1,8 @@
 package tests;
 
-import category_theory.interfaces.ICategoryArrow;
-import general_service.Performer;
 import general_service.interfaces.IAction;
 import generated.RandomTwo;
+import measurements.Performer;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IMeasurements;
 import runtime.DataRuntimeConsumer;

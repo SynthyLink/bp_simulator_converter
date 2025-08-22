@@ -8,7 +8,6 @@ using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 
 using FormulaEditor.Interfaces;
-using System.ComponentModel.DataAnnotations;
 
 namespace DataPerformer.Formula.TypeScript
 {

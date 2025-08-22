@@ -23,6 +23,7 @@ export class DataConsumerMeasurements extends DataConsumer
     {
         return this.aliasValues.get(name);
     }
+
     protected output: IMeasurement[] = [];
 
     protected aliasTypes: Map<string, any> = new Map();

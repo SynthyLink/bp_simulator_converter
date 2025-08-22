@@ -1911,7 +1911,7 @@
 
         public void Init(GeneratedTextTransformation textTransformation)
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
 
         public void StartHeader()
@@ -15134,7 +15134,7 @@ WHERE type = 'trigger'";
 
         public override void ReadStoredProcReturnObjects(List<StoredProcedure> procs)
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
 
         public override void Init()
@@ -18393,32 +18393,32 @@ using {{this}};{{#newline}}
 {{#newline}}
     public DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}
 {{#newline}}
     public DbEntityEntry Entry(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}
 {{#newline}}
     public IEnumerable<DbEntityValidationResult> GetValidationErrors(){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}
 {{#newline}}
     public DbSet Set(Type entityType){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}
 {{#newline}}
     public DbSet<TEntity> Set<TEntity>() where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}
 {{#newline}}
     public override string ToString(){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}
 
 
@@ -19686,160 +19686,160 @@ using {{this}};{{#newline}}
 
     public DbSet<TEntity> Set<TEntity>() where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public override string ToString(){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry Add(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry<TEntity> Add<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual Task AddRangeAsync(params object[] entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual async Task AddRangeAsync(IEnumerable<object> entities, CancellationToken cancellationToken = default){{#newline}}
     {{{#newline}}
         await Task.CompletedTask;{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual async ValueTask<EntityEntry<TEntity>> AddAsync<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : class{{#newline}}
     {{{#newline}}
         await Task.CompletedTask;{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual async ValueTask<EntityEntry> AddAsync(object entity, CancellationToken cancellationToken = default){{#newline}}
     {{{#newline}}
         await Task.CompletedTask;{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void AddRange(IEnumerable<object> entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void AddRange(params object[] entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry Attach(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry<TEntity> Attach<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void AttachRange(IEnumerable<object> entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void AttachRange(params object[] entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry Entry(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual TEntity Find<TEntity>(params object[] keyValues) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual ValueTask<TEntity> FindAsync<TEntity>(object[] keyValues, CancellationToken cancellationToken) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual ValueTask<TEntity> FindAsync<TEntity>(params object[] keyValues) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual ValueTask<object> FindAsync(Type entityType, object[] keyValues, CancellationToken cancellationToken){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual ValueTask<object> FindAsync(Type entityType, params object[] keyValues){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual object Find(Type entityType, params object[] keyValues){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry Remove(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry<TEntity> Remove<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void RemoveRange(IEnumerable<object> entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void RemoveRange(params object[] entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry Update(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry<TEntity> Update<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void UpdateRange(IEnumerable<object> entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void UpdateRange(params object[] entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual IQueryable<TResult> FromExpression<TResult> (Expression<Func<IQueryable<TResult>>> expression){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
 {{#if hasStoredProcs}}
@@ -21340,160 +21340,160 @@ using {{this}};{{#newline}}
 
     public DbSet<TEntity> Set<TEntity>() where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public override string ToString(){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry Add(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry<TEntity> Add<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual Task AddRangeAsync(params object[] entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual async Task AddRangeAsync(IEnumerable<object> entities, CancellationToken cancellationToken = default){{#newline}}
     {{{#newline}}
         await Task.CompletedTask;{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual async ValueTask<EntityEntry<TEntity>> AddAsync<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : class{{#newline}}
     {{{#newline}}
         await Task.CompletedTask;{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual async ValueTask<EntityEntry> AddAsync(object entity, CancellationToken cancellationToken = default){{#newline}}
     {{{#newline}}
         await Task.CompletedTask;{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void AddRange(IEnumerable<object> entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void AddRange(params object[] entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry Attach(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry<TEntity> Attach<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void AttachRange(IEnumerable<object> entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void AttachRange(params object[] entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry Entry(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual TEntity Find<TEntity>(params object[] keyValues) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual ValueTask<TEntity> FindAsync<TEntity>(object[] keyValues, CancellationToken cancellationToken) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual ValueTask<TEntity> FindAsync<TEntity>(params object[] keyValues) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual ValueTask<object> FindAsync(Type entityType, object[] keyValues, CancellationToken cancellationToken){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual ValueTask<object> FindAsync(Type entityType, params object[] keyValues){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual object Find(Type entityType, params object[] keyValues){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry Remove(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry<TEntity> Remove<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void RemoveRange(IEnumerable<object> entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void RemoveRange(params object[] entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry Update(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry<TEntity> Update<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void UpdateRange(IEnumerable<object> entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void UpdateRange(params object[] entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual IQueryable<TResult> FromExpression<TResult> (Expression<Func<IQueryable<TResult>>> expression){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
 {{#if hasStoredProcs}}
@@ -22994,160 +22994,160 @@ using {{this}};{{#newline}}
 
     public DbSet<TEntity> Set<TEntity>() where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public override string ToString(){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry Add(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry<TEntity> Add<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual Task AddRangeAsync(params object[] entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual async Task AddRangeAsync(IEnumerable<object> entities, CancellationToken cancellationToken = default){{#newline}}
     {{{#newline}}
         await Task.CompletedTask;{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual async ValueTask<EntityEntry<TEntity>> AddAsync<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : class{{#newline}}
     {{{#newline}}
         await Task.CompletedTask;{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual async ValueTask<EntityEntry> AddAsync(object entity, CancellationToken cancellationToken = default){{#newline}}
     {{{#newline}}
         await Task.CompletedTask;{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void AddRange(IEnumerable<object> entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void AddRange(params object[] entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry Attach(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry<TEntity> Attach<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void AttachRange(IEnumerable<object> entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void AttachRange(params object[] entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry Entry(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual TEntity Find<TEntity>(params object[] keyValues) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual ValueTask<TEntity> FindAsync<TEntity>(object[] keyValues, CancellationToken cancellationToken) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual ValueTask<TEntity> FindAsync<TEntity>(params object[] keyValues) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual ValueTask<object> FindAsync(Type entityType, object[] keyValues, CancellationToken cancellationToken){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual ValueTask<object> FindAsync(Type entityType, params object[] keyValues){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual object Find(Type entityType, params object[] keyValues){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry Remove(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry<TEntity> Remove<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void RemoveRange(IEnumerable<object> entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void RemoveRange(params object[] entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry Update(object entity){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual EntityEntry<TEntity> Update<TEntity>(TEntity entity) where TEntity : class{{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void UpdateRange(IEnumerable<object> entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual void UpdateRange(params object[] entities){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
     public virtual IQueryable<TResult> FromExpression<TResult> (Expression<Func<IQueryable<TResult>>> expression){{#newline}}
     {{{#newline}}
-        throw new NotImplementedException();{{#newline}}
+        throw new OwnNotImplemented();{{#newline}}
     }{{#newline}}{{#newline}}
 
 {{#if hasStoredProcs}}
