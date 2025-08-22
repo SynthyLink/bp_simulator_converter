@@ -56,15 +56,29 @@ public class RandomFour extends Desktop
 	{
 		public CategoryObject5(String name, IDesktop desktop) {
 			super(name,  desktop);
-			var map = new java.util.HashMap<String, String>() {
-				{
-					put("a", "1.Random");
-					put("b", "2.Random");
-					put("c", "3.Random");
-					put("d", "4.Random");
-				}
+			int[] x = null;
+			java.util.ArrayList<int[]> array = new java.util.ArrayList<>();
+			x = new int[]{
+			0,
+			0
 			};
-			setLinks(map);
+			array.add(x);
+			x = new int[]{
+			1,
+			0
+			};
+			array.add(x);
+			x = new int[]{
+			2,
+			0
+			};
+			array.add(x);
+			x = new int[]{
+			3,
+			0
+			};
+			array.add(x);
+			this.array = array;
 			}
 	}
 	

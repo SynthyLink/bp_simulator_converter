@@ -8,6 +8,7 @@ import general_service.interfaces.IPostSetArrow;
 import measurements.interfaces.*;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,8 +57,6 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
         transformer.calculate(this.inO, this.outO);
 
     }
-
-
 
     @Override
     public void addMeasurement(IMeasurement measurement) {
@@ -119,6 +118,10 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
     /// </summary>
     protected  boolean isUpdated = false;
 
+    protected ArrayList<int[]> array;
+
+    protected measurements.Performer mPerformer = new measurements.Performer();
+
     /// <summary>
     /// External measurements
     /// </summary>
@@ -139,8 +142,32 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
 
     IDataConsumer consumer;
 
+    protected void setArray()
+    {
+        var n = array.size();
+        inMea = new IMeasurement[n];
+        for (int i = 0; i < n; i++)
+        {
+            inMea[i] = mPerformer.get(this, array.get(i));
+        }
+        var outS = this.transformer.getOutput();
+        n = outS.length;
+        for (var i = 0; i < n; i++)
+        {
+            var name = outS[i];
+            var type = transformer.getOutputType(i);
+            outMea = performer.extend(outMea, new TransMeasurement(i, this.outO, name, type));
+        }
+
+    }
+
     protected void  createOutput()
     {
+        if (array != null)
+        {
+            setArray();
+            return;
+        }
         this.inMea = new IMeasurement[0];
         var outS = this.transformer.getOutput();
         for (var i = 0; i < outS.length; i++)
@@ -163,6 +190,8 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
 
    void initTransformer()
    {
+       ArrayList<int[]> l = new ArrayList<>();
+       l.add(new int[]{1});
         var inp = this.transformer.getInput();
         var out = this.transformer.getOutput();
         inO = new Object[inp.length];

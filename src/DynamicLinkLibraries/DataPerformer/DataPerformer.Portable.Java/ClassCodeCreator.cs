@@ -4,15 +4,13 @@ using DataPerformer.Interfaces;
 using Diagram.UI;
 
 
-using Diagram.UI.Interfaces;
-using System.Runtime.CompilerServices;
 
 namespace DataPerformer.Portable.Java
 {
     [Language("Java")]
     public class ClassCodeCreator : Diagram.Java.ClassCodeCreator
     {
-
+        protected static Performer mPerformer = new Performer();
 
         public ClassCodeCreator() : base(false)
         {
@@ -52,13 +50,15 @@ namespace DataPerformer.Portable.Java
         {
             return new List<string>() { "}" };
         }
+
         static List<string> CreateObjectTransformer(string preffix, object obj)
         {
             var ot = obj as ObjectTransformer;
+            var io = ot.InputOutput;
             var dl = ot.Links;
-            var d = dcc.Create("map", dl);
+            var d = enumerableIntCodeCreator.Create("array", io);
             var l = d.Values.ToArray()[0];
-            l.Add("setLinks(map);");
+            l.Add("this.array = array;");
             l.Add("}");
             return l;
         }

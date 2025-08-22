@@ -31,6 +31,41 @@ namespace DataPerformer.Portable
             }
         }
 
+
+        public int GetNumber(IDataConsumer dataConsumer, IMeasurements measurements)
+        {
+            var n = dataConsumer.Count;
+            for (var i = 0; i < n; i++)
+            {
+                if (dataConsumer[i] == measurements)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+
+        public int[] GetNumber(IDataConsumer dataConsumer, IMeasurement measurement)
+        {
+            var n = dataConsumer.Count;
+            for (var i = 0; i < n; i++)
+            {
+                var measurements = dataConsumer[i];
+                var m = measurements.Count;
+                for (int j = 0; j < m; j++)
+                {
+                    if (measurements[j] == measurement)
+                    {
+                        return new int[] { i, j };
+                    }
+                }
+            }
+            return null; 
+        }
+
+
+
         public void Fill(IFeedbackCollectionDictionary collection, IDataConsumer consumer)
         {
             if (collection == null)

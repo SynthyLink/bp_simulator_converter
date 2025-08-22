@@ -25,6 +25,8 @@ namespace DataPerformer.Portable
 
         #region Fields
 
+        Performer performer = new Performer();
+
         /// <summary>
         /// Change input event
         /// </summary>
@@ -296,6 +298,20 @@ namespace DataPerformer.Portable
         #endregion
 
         #region Specific Members
+
+        public List<int[]> InputOutput
+        {
+            get
+            {
+                var list = new List<int[]>();
+                for (int i = 0; i < inMea.Length; i++)
+                {
+                    list.Add(performer.GetNumber(this, inMea[i]));
+                }
+                return list;
+            }
+
+        }
 
         /// <summary>
         /// Child transformer

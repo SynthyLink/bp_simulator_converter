@@ -5,9 +5,12 @@ using Diagram.UI.Interfaces;
 namespace Diagram.Java
 {
     [Language("Java")]
-    public class ClassCodeCreator : IClassCodeCreator, IDictionaryCodeCreator<string, string>
+    public class ClassCodeCreator : IClassCodeCreator, IDictionaryCodeCreator<string, string>,
+        IEnumerableCodeCreator<int[]>
     {
-        protected static IDictionaryCodeCreator<string, string> dcc;
+        protected static IDictionaryCodeCreator<string, string> dictionaryStringStringCodeCreator;
+
+        protected static IEnumerableCodeCreator<int[]> enumerableIntCodeCreator;
 
         protected NamedTree.Performer formulaPerformer = new();
 
@@ -18,7 +21,8 @@ namespace Diagram.Java
 
         void Init()
         {
-            dcc = this;
+            dictionaryStringStringCodeCreator = this;
+            enumerableIntCodeCreator = this;
         }
 
         protected ClassCodeCreator(bool b)
@@ -126,6 +130,33 @@ namespace Diagram.Java
             }
             l.Add("\t}");
             l.Add("};");
+            var d = new Dictionary<string, List<string>>();
+            d["code"] = l;
+            return d;
+        }
+
+        Dictionary<string, List<string>> IEnumerableCodeCreator<int[]>.Create(string id, IEnumerable<int[]> values)
+        {
+            var l = new List<string>();
+            l.Add("int[] x = null;");
+            l.Add("java.util.ArrayList<int[]> " + id + " = new java.util.ArrayList<>();");
+            foreach (var x in values)
+            {
+                l.Add("x = new int[]{");
+                var n = x.Length;
+                for (int i = 0; i < n; i++)
+                {
+                    var s = x[i] + "";
+                    if (i < n - 1)
+                    {
+                        s += ",";
+                    }
+                    l.Add(s);
+                }
+                l.Add("};");
+                l.Add(id + ".add(x);");
+
+            }
             var d = new Dictionary<string, List<string>>();
             d["code"] = l;
             return d;
