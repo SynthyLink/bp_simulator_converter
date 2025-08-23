@@ -7,6 +7,9 @@ namespace Diagram.UI
 {
     public class EnumerableFeedbackCollecton<T> : IFeedbackCollection where T : class
     {
+        NamedTree.Performer performer = new NamedTree.Performer();
+
+
         protected IEnumerable<T> Feedback { get; set; }
 
         protected virtual IFeedbackCollectionHolder Holder { get; set; }
@@ -36,9 +39,7 @@ namespace Diagram.UI
             p.ToArray();
         }
 
-        NamedTree.Performer performer = new NamedTree.Performer();
-
-
+  
         IFeedback Get(IFeedback feedback)
         {
             feedback.Set();

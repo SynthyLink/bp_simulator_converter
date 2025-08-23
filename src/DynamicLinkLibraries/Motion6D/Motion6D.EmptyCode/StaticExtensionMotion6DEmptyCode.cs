@@ -71,7 +71,7 @@ namespace Motion6D.EmptyCode
 
             private CodeCreator()
             {
-                this.AddCodeCreator();
+               this.AddClassCodeCreator();
             }
 
 

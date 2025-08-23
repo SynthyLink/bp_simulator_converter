@@ -19,7 +19,7 @@ namespace DataPerformer.Portable.TypeScript
         #region Ctor
         internal ClassCodeCreator()
         {
-            this.AddCodeCreator();
+           this.AddClassCodeCreator();
         }
         #endregion
 
@@ -56,7 +56,6 @@ namespace DataPerformer.Portable.TypeScript
             }
             return null;
         }
-        static NamedTree.Performer dp = new ();
 
         static List<string> CreateObjectTransformer(string preffix, object obj)
         {
@@ -67,7 +66,7 @@ namespace DataPerformer.Portable.TypeScript
             l.Add(s);
             l.Add("{");
             performer.AddObjectConstructor(l);
-            dp.Add(l, ll, 1);
+            performer.Add(l, ll, 1);
             l.Add("\t\tthis.setLinks(map);");
             l.Add("\t}");
             l.Add("}");

@@ -11,12 +11,12 @@ namespace DataPerformer.Formula.TypeScript
 {
 
 
-    public class CodeCreator : Portable.TypeScript.CodeCreator, ITreeCollectionCodeCreator
+    public class CodeCreator : Diagram.TypeScript.CodeCreator, ITreeCollectionCodeCreator
     {
 
 
         #region Fields
-        static NamedTree.Performer formulaPerformer = new();
+        static Diagram.UI.TypeScript.Performer formulaPerformer = new();
 
 
         protected Dictionary<string, int> Output

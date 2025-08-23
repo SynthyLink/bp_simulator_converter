@@ -42,7 +42,6 @@ namespace Diagram.UI
 
         #region Fields
 
-        NamedTree.Performer performer = new NamedTree.Performer();
 
         Diagram.UI.Performer p = new Diagram.UI.Performer();
 

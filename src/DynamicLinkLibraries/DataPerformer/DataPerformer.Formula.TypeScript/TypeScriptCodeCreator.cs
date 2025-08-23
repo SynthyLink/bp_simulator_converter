@@ -174,7 +174,7 @@ namespace DataPerformer.Formula.TypeScript
             var num = int.Parse(ret.Substring(4));
             var state = GetState(obj);          
             var op = tree.Operation;
-            var att = perf.GetAttribute<InternalVariableAttribute>(op);
+            var att = performer.GetAttribute<InternalVariableAttribute>(op);
             if (att != null)
             {
                 if (true)
@@ -294,12 +294,10 @@ namespace DataPerformer.Formula.TypeScript
             return list;
         }
 
-        static NamedTree.Performer perf = new NamedTree.Performer();
-
         static bool GetState(object obj)
         {
             bool b = false;
-            var attr = perf.GetAttribute<CodeCreatorAttribute>(obj);
+            var attr = performer.GetAttribute<CodeCreatorAttribute>(obj);
             if (attr != null)
             {
                 b = attr.InitialState;

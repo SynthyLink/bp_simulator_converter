@@ -10,7 +10,7 @@ namespace Test.Calculation.Forms.CodeCreators
     {
         internal CSCodeCreator()
         {
-            this.AddCodeCreator();
+           this.AddClassCodeCreator();
         }
 
 

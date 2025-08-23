@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Formatters;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,9 +16,9 @@ using NamedTree;
 namespace DataWarehouse
 {
     /// <summary>
-    /// Pefrormer of operations
+    /// Performer of operations
     /// </summary>
-    public class Performer
+    public class Performer : NamedTree.Performer
     {
 
         #region Ctor
@@ -29,7 +28,8 @@ namespace DataWarehouse
 
         }
 
-        public Performer(CancellationToken cancellationToken)
+    
+        public Performer(CancellationToken cancellationToken) 
         {
             this.cancellationToken = cancellationToken; 
         }

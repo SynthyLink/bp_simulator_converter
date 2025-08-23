@@ -11,7 +11,7 @@ namespace Diagram.UI.TypeScript
     {
         public ObjectContainerClassCodeCreator()
         {
-            this.AddCodeCreator();
+            this.AddClassCodeCreator();
         }
 
         protected IDesktopCodeCreator DesktopCodeCreator

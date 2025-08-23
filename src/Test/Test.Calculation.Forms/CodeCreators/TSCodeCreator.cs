@@ -14,7 +14,7 @@ namespace Test.Calculation.Forms.CodeCreators
 
         internal TSCodeCreator()
         {
-            this.AddCodeCreator();
+           this.AddClassCodeCreator();
         }
 
 

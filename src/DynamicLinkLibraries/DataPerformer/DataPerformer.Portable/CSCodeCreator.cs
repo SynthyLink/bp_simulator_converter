@@ -12,7 +12,7 @@ namespace DataPerformer.Portable
 
         internal CSCodeCreator()
         {
-            this.AddCodeCreator();
+            this.AddClassCodeCreator();
         }
 
 

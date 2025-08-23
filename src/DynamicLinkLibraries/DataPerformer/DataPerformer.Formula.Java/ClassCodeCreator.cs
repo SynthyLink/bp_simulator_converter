@@ -17,7 +17,7 @@ namespace DataPerformer.Formula.Java
     {
         public ClassCodeCreator() : base(false)
         {
-            this.AddCodeCreator();
+           this.AddClassCodeCreator();
             dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
                    { (object o) => { return o is VectorFormulaConsumer; } , CreateVectorConsumer }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataPerformer.Formula
 {
-    public class Performer : Diagram.UI.Performer()
+    public class Performer : Diagram.UI.Performer
     {
         public Performer() { }
 

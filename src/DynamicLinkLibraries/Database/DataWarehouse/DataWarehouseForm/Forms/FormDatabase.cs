@@ -27,9 +27,8 @@ namespace DataWarehouse.Forms
 
         #region Fields
 
-        NamedTree.Performer perf = new();
-
-        DataWarehouse.Forms.Performer performer = new();
+ 
+        Performer performer = new();
 
         /// <summary>
         /// Message string
@@ -46,8 +45,7 @@ namespace DataWarehouse.Forms
         bool open;
         string[] ext;
         private TreeNode root = null;
-
-        DataWarehouse.Performer p = new();
+      
         private IDirectory SelectedNode
         {
             get;
@@ -84,7 +82,7 @@ namespace DataWarehouse.Forms
 
         void ActionIssue(Issue issue)
         {
-            var err = p.GetErrorType(issue);
+            var err = performer.GetErrorType(issue);
             if (err == ErrorType.AlreadyExecuted)
             {
                 return;

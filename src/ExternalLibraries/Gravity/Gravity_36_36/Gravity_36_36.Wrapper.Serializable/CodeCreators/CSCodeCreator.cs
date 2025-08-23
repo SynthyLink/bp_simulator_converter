@@ -15,7 +15,7 @@ namespace Gravity_36_36.Wrapper.CodeCreators
 
         internal CSCodeCreator()
         {
-            this.AddCodeCreator();
+           this.AddClassCodeCreator();
         }
 
 

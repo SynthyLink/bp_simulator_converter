@@ -18,7 +18,7 @@ using NamedTree;
 namespace Diagram.UI.Labels
 {
     /// <summary>
-    /// Base label for all labers
+    /// Base label for all labels
     /// </summary>
     [Serializable()]
     public abstract partial class UserControlBaseLabel : UserControl,
@@ -26,7 +26,7 @@ namespace Diagram.UI.Labels
     {
         #region Fields
 
-        NamedTree.Performer performer = new();
+        Performer performer = new();
 
         /// <summary>
         /// Child control

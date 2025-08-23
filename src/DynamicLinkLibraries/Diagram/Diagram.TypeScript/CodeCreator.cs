@@ -18,7 +18,6 @@ namespace Diagram.TypeScript
 
         static protected UI.TypeScript.Performer performer = new();
 
-        static  protected NamedTree.Performer formulaPerformer = new();
 
 
 
@@ -272,7 +271,7 @@ namespace Diagram.TypeScript
                     l.Add("setFeedback(): void {");
                     var ll = dcc.Create("map", fa.Dictionary).Values.ToArray()[0];
                     ll.Add("this.feedback = new FeedbackAliasCollection(map, this, this);");
-                    formulaPerformer.Add(l, ll, 1);
+                    performer.Add(l, ll, 1);
                     l.Add("}");
                 }
             }

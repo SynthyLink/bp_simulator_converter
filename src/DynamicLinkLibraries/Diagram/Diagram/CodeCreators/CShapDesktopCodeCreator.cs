@@ -15,7 +15,7 @@ namespace Diagram.UI.CodeCreators
 
         public CShapDesktopCodeCreator()
         {
-            this.AddCodeCreator();
+            this.AddDesktopCodeCreator();
         }
   
         IComponentCollection collection;

@@ -13,7 +13,7 @@ namespace Diagram.UI
 
         internal ObjectContainerClassCodeCreator()
         {
-            StaticExtensionDiagramUI.AddCodeCreator(this as IClassCodeCreator);
+            this.AddClassCodeCreator();
         }
 
         protected IDesktopCodeCreator DesktopCodeCreator

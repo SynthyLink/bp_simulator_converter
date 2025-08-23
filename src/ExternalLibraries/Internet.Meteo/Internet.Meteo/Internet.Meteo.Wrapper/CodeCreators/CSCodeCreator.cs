@@ -14,7 +14,7 @@ namespace Internet.Meteo.Wrapper.CodeCreators
 
         internal CSCodeCreator()
         {
-            this.AddCodeCreator();
+           this.AddClassCodeCreator();
         }
 
 

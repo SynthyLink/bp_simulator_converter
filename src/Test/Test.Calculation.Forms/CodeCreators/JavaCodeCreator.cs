@@ -10,7 +10,7 @@ namespace Test.Calculation.Forms.CodeCreators
         Performer performer = new Performer();
         public JavaCodeCreator() : base(false)
         {
-            this.AddCodeCreator();
+           this.AddClassCodeCreator();
             dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
                    { (object o) => { return o is ObjectTransformer; } , CreateObjectTransformer }

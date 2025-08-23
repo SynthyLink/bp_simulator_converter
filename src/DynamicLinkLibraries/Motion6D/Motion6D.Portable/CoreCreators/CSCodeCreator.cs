@@ -14,7 +14,7 @@ namespace Motion6D.Portable.CoreCreators
 
         internal CSCodeCreator()
         {
-            this.AddCodeCreator();
+           this.AddClassCodeCreator();
         }
 
         #region IClassCodeCreator Members

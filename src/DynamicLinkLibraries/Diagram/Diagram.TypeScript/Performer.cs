@@ -3,10 +3,12 @@
 namespace Diagram.UI.TypeScript
 {
  
-    public class Performer 
+    public class Performer : DataPerformer.Interfaces.Performer
     {
 
-        NamedTree.Performer performer = new NamedTree.Performer();
+        public Performer() : base() { }
+
+
         public void AddObjectConstructor(List<string> l)
         {
             l.Add("\tconstructor(desktop: IDesktop, name: string)");
@@ -35,7 +37,7 @@ namespace Diagram.UI.TypeScript
             if (t.Equals(typeof(double)))
             {
                 double a = (double)o;
-                return performer.DoubleToString(a);
+                return DoubleToString(a);
             }
             if (t.Equals(typeof(bool)))
             {

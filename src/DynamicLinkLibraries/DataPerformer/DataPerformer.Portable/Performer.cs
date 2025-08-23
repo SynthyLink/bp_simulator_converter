@@ -18,9 +18,8 @@ using ErrorHandler;
 
 namespace DataPerformer.Portable
 {
-    public class Performer
+    public class Performer : NamedTree.Performer
     {
-        NamedTree.Performer performer = new NamedTree.Performer();
 
         public void Set(IFeedbackAliasCollection collection)
         {
@@ -130,7 +129,7 @@ namespace DataPerformer.Portable
         {
             if (measurement is  IValue measurementValue)
             {
-                var attr = performer.GetAttribute<CodeCreatorAttribute>(measurement);
+                var attr = GetAttribute<CodeCreatorAttribute>(measurement);
                 if (attr != null)
                 {
                     if (attr.InitialState)

@@ -18,10 +18,11 @@ namespace Diagram.UI
     /// <summary>
     /// Performer of basic operations
     /// </summary>
-    public class Performer
+    public class Performer : NamedTree.Performer
     {
-        NamedTree.Performer performer = new NamedTree.Performer();
 
+
+   
         /// <summary>
         /// Dictionary from alias
         /// </summary>
@@ -73,7 +74,7 @@ namespace Diagram.UI
         /// <returns>The language</returns>
         public string GetLanguage(object o)
         {
-            var att = performer.GetAttribute<LanguageAttribute>(o);
+            var att = GetAttribute<LanguageAttribute>(o);
             if (att == null)
             {
                 return null;
@@ -1885,8 +1886,7 @@ namespace Diagram.UI
                 return null;
             }
             l.Add(obj);
-            var p = new NamedTree.Performer();
-            UrlAttribute attr = p.GetAttribute<UrlAttribute>(obj);
+            UrlAttribute attr = GetAttribute<UrlAttribute>(obj);
             if (attr != null)
             {
                 return attr.Url;

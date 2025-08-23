@@ -16,7 +16,7 @@ namespace Event.Portable
 
         internal CSCodeCreator()
         {
-            this.AddCodeCreator();
+           this.AddClassCodeCreator();
         }
 
 

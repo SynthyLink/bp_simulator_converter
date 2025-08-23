@@ -43,7 +43,7 @@ namespace DataPerformer.Portable.Java
                  { (object o) => { return o is RandomGenerator; } , CreateRandom },
                  { (object o) => { return o is ObjectTransformer; } , CreateObjectTransformer },
           };
-            this.AddCodeCreator(); 
+           this.AddClassCodeCreator(); 
         
         }
 

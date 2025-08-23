@@ -9,11 +9,6 @@ namespace NamedTree
     public class Performer
     {
 
-        public Performer()
-        {
-        }
-
-
         /// <summary>
         /// Converts to string
         /// </summary>

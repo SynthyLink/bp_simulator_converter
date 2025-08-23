@@ -16,8 +16,7 @@ namespace DataPerformer.Formula.TypeScript
 
         static DataPerformer.Interfaces.Performer performer = new ();
 
-        static NamedTree.Performer perf = new NamedTree.Performer ();
-
+    
         #region Public Members
 
         public static string GetMeasurementName(string current, int n)
@@ -76,7 +75,7 @@ namespace DataPerformer.Formula.TypeScript
         static bool GetState(object obj)
         {
             bool b = false;
-            var attr = perf.GetAttribute<CodeCreatorAttribute>(obj);
+            var attr = performer.GetAttribute<CodeCreatorAttribute>(obj);
             if (attr != null)
             {
                 b = attr.InitialState;
@@ -118,7 +117,7 @@ namespace DataPerformer.Formula.TypeScript
                     {
                         if (ii[0] == i)
                         {
-                            var att = perf.GetAttribute<InternalVariableAttribute>(op);
+                            var att = performer.GetAttribute<InternalVariableAttribute>(op);
                             if (att == null)
                             {
                                 var mtt = "measurement" + ii[0];
@@ -140,7 +139,7 @@ namespace DataPerformer.Formula.TypeScript
                         {
                             continue;
                         }
-                        var att = perf.GetAttribute<InternalVariableAttribute>(op);
+                        var att = performer.GetAttribute<InternalVariableAttribute>(op);
 
                         if (att != null)
                         {

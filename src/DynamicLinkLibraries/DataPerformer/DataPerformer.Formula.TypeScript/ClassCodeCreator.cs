@@ -23,17 +23,14 @@ namespace DataPerformer.Formula.TypeScript
             get;
         } = new CodeCreator();
 
-        static DataPerformer.Interfaces.Performer nPerformer = new();
-
-        static NamedTree.Performer formulaPerformer = new();
-
+  
 
         static Diagram.UI.TypeScript.Performer performer = new();
 
         #region Ctor
         internal ClassCodeCreator()
         {
-            this.AddCodeCreator();
+           this.AddClassCodeCreator();
             typeCreator = CodeCreator;
         }
 
@@ -130,7 +127,7 @@ namespace DataPerformer.Formula.TypeScript
                 {
                     l.Add("");
                     l.Add("");
-                    formulaPerformer.Add(l, classes, 0);
+                    performer.Add(l, classes, 0);
                     l.Add("");
                     l.Add("");
                 }
@@ -145,14 +142,14 @@ namespace DataPerformer.Formula.TypeScript
                 var la = cc.Create("map", ali).Values.ToArray()[0];
                 if (la.Count > 0)
                 {
-                    formulaPerformer.Add(l, la, 2);
+                    performer.Add(l, la, 2);
                 }
                 l.Add("\t\tthis.performer.setAliasMap(map, this);");
             }
             if (obj is IMeasurements m)
             {
                 var la = CreateTSVariableList(m);
-                formulaPerformer.Add(l, la, 2);
+                performer.Add(l, la, 2);
             }
 
 
@@ -168,14 +165,14 @@ namespace DataPerformer.Formula.TypeScript
             }
             l.Add("\t}");
             l.Add("");
-            formulaPerformer.Add(l, lt.Values.ToArray()[0], 1);
+            performer.Add(l, lt.Values.ToArray()[0], 1);
             AddPost(l);
             if (obj is IFeedbackCollectionHolder feedback)
             {
 
                 var dcc = creator as IFeedbackCollectionCodeCreator;
                 var ll = dcc.Create(feedback).Values.ToArray()[0];
-                formulaPerformer.Add(l, ll, 1);
+                performer.Add(l, ll, 1);
             }
 
             l.Add("}");

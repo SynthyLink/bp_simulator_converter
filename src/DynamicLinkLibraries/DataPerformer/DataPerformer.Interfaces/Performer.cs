@@ -9,12 +9,10 @@ namespace DataPerformer.Interfaces
     /// <summary>
     /// Performer of basic operations
     /// </summary>
-    public class Performer
+    public class Performer : NamedTree.Performer
     {
-        NamedTree.Performer performer = new NamedTree.Performer();
-
-        public Performer() { }
-
+ 
+  
         public Func<double> Create(ITimeMeasurementConsumer consumer, TimeType timeType = TimeType.Second)
         {
             var m = consumer.Time;

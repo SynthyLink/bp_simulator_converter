@@ -19,7 +19,7 @@ namespace Diagram.Java
         private static IFeedbackCollectionCodeCreator feedbackCollectionCodeCreator;
 
 
-        protected NamedTree.Performer formulaPerformer = new();
+        protected Diagram.UI.Performer formulaPerformer = new();
 
 
         protected Dictionary<Func<object, bool>, Func<string, object, List<string>>> dictionary;

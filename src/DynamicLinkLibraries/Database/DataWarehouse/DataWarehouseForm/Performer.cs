@@ -7,15 +7,14 @@ using NamedTree;
 
 namespace DataWarehouse.Forms
 {
-    public class Performer
+    public class Performer : DataWarehouse.Performer
     {
-        public Performer() { }
+        public Performer() : base() { }
 
         CancellationToken cancellationToken;
 
-        public Performer(CancellationToken cancellationToken)
+        public Performer(CancellationToken cancellationToken)  : base(cancellationToken) 
         {
-            this.cancellationToken = cancellationToken; 
         }
 
         public async void BeforeExpand(object sender, TreeViewCancelEventArgs e)

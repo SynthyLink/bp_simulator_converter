@@ -40,7 +40,6 @@ namespace Diagram.UI
         private static ExtensionObject extension = new ExtensionObject();
         
 
-        static NamedTree.Performer namedPerformer = new NamedTree.Performer();
 
         static public Dictionary<string, ITypeCreator> TypeCreators
             { get;  } = new Dictionary<string, ITypeCreator>();
@@ -105,7 +104,7 @@ namespace Diagram.UI
         #region Public Memberes
 
 
-        static public void AddTypeCreator(this ITypeCreator typeCreator)
+        static public void AddTypeCreator(this ITypeCreator creator)
         {
             var lang = performer.GetLanguage(creator);
             if (lang == null)
@@ -116,7 +115,7 @@ namespace Diagram.UI
             {
                 throw new OwnNotImplemented();
             }
-            TypeCreators[lang] = typeCreator;
+            TypeCreators[lang] = creator;
 
         }
 
@@ -124,13 +123,14 @@ namespace Diagram.UI
         /// Adds code creator
         /// </summary>
         /// <param name="creator"></param>
-        static void AddClassCodeCreator(this IClassCodeCreator creator)
+        static public void AddClassCodeCreator(this IClassCodeCreator creator)
         {
             var lang = performer.GetLanguage(creator);
             if (lang == null)
             {
                 throw new OwnNotImplemented();
             }
+            CombinedCodeCreator c;
             if (Creators.ContainsKey(lang))
             {
                 c = Creators[lang];
@@ -138,7 +138,7 @@ namespace Diagram.UI
             else
             {
                 c = new CombinedCodeCreator(lang);
-                Creators.Add(lang, c);
+                Creators[lang] = c;
             }
             c.Add(creator);
         }
@@ -147,14 +147,13 @@ namespace Diagram.UI
         /// Adds code creator
         /// </summary>
         /// <param name="creator"></param>
-        public static void AddCodeCreator(this IDesktopCodeCreator creator)
+        public static void AddDesktopCodeCreator(this IDesktopCodeCreator creator)
         {
-            var att = namedPerformer.GetAttribute<LanguageAttribute>(creator);
-            if (att == null)
+            var lang = performer.GetLanguage(creator);
+            if (lang == null)
             {
                 throw new OwnNotImplemented("LanguageAttribute");
             }
-            var lang = att.Language;
             DesktopCreators.Add(lang, creator);
         }
 
@@ -2694,7 +2693,7 @@ namespace Diagram.UI
                 return null;
             }
             l.Add(obj);
-            UrlAttribute attr = namedPerformer.GetAttribute<UrlAttribute>(obj);
+            UrlAttribute attr = performer.GetAttribute<UrlAttribute>(obj);
             if (attr != null)
             {
                 return attr.Url;

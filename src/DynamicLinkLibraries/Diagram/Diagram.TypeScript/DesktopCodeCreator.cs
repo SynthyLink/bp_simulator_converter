@@ -31,7 +31,7 @@ namespace Diagram.UI.TypeScript
 
         Tuple<Dictionary<ICategoryObject, int>, Dictionary<ICategoryArrow, int>> IDesktopCodeCreator.Enumeration => dictionary;
 
-        public DesktopCodeCreator() { this.AddCodeCreator(); }
+        public DesktopCodeCreator() { this.AddDesktopCodeCreator(); }
 
 
         /// <summary>

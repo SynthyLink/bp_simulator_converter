@@ -16,7 +16,7 @@ namespace SoundService.CodeCreators
 
         internal CSCodeCreator()
         {
-            this.AddCodeCreator();
+           this.AddClassCodeCreator();
         }
 
         protected IDesktopCodeCreator DesktopCodeCreator

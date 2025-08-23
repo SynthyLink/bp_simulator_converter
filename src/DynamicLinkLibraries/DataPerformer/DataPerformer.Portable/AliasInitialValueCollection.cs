@@ -8,12 +8,11 @@ namespace DataPerformer.Portable
 {
     public class AliasInitialValueCollection : InitialValueCollection
     {
-        NamedTree.Performer performer = new NamedTree.Performer();
 
         Performer pr = new Performer();
         public AliasInitialValueCollection(IAlias alias, IMeasurements measurememts)
         {
-          var attr = performer.GetAttribute<CodeCreatorAttribute>(measurememts);
+          var attr = pr.GetAttribute<CodeCreatorAttribute>(measurememts);
             if (attr != null && attr.InitialState)
             {
                 initial.Clear();

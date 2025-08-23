@@ -19,7 +19,7 @@ namespace DataPerformer.Formula.TypeScript
 
         #region Fields
 
-        static NamedTree.Performer  formulaPerformer = new ();
+        static Performer  formulaPerformer = new ();
 
     
         protected Dictionary<string, int> Output

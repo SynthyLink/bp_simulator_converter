@@ -25,7 +25,7 @@ namespace DataPerformer.Formula.CodeCreators
 
         internal CSCodeCreator()
         {
-            this.AddCodeCreator();
+           this.AddClassCodeCreator();
         }
 
         #region IClassCodeCreator Members
