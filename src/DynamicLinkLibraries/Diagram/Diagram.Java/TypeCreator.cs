@@ -1,11 +1,8 @@
 ﻿using BaseTypes.Attributes;
 using BaseTypes.CodeCreator.Interfaces;
 using Diagram.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ErrorHandler;
+
 
 namespace Diagram.Java
 {
@@ -18,17 +15,17 @@ namespace Diagram.Java
         }
         string ITypeCreator.GetDefaultValue(object o)
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
 
         string ITypeCreator.GetStringValue(object o)
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
 
         string ITypeCreator.GetType(object o)
         {
-            throw new NotImplementedException();
+            throw new OwnNotImplemented();
         }
     }
 }

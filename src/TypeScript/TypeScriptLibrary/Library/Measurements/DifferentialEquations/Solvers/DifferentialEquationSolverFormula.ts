@@ -6,13 +6,13 @@ import { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvi
 import { Variable } from "../../Variables/Variable";
 import { IDifferentialEquationSolver } from "../Interfaces/IDifferentialEquationSolver";
 
-export class DifferentrialEquationSolverFormula extends DataConsumerVariadbleMeasurementsStarted
+export class DifferentialEquationSolverFormula extends DataConsumerVariadbleMeasurementsStarted
     implements IDifferentialEquationSolver, IPostSetArrow {
 
     constructor(desktop: IDesktop, name: string)
     {
         super(desktop, name);
-        this.typeName = "DifferentrialEquationSolverFormula";
+        this.typeName = "DifferentialEquationSolverFormula";
         this.types.push("IDifferentialEquationSolver");
         this.types.push("IPostSetArrow");
         this.types.push("DifferentrialEquationSolverFormula");

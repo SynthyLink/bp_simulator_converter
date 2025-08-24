@@ -44,6 +44,14 @@ namespace Diagram.UI
         static public Dictionary<string, ITypeCreator> TypeCreators
             { get;  } = new Dictionary<string, ITypeCreator>();
 
+       static public Dictionary<string, IAliasCodeCreator> AliasCreators
+        { get; } = new Dictionary<string, IAliasCodeCreator>();
+
+        static public Dictionary<string, IFeedbackCollectionCodeCreator> FeedBackCreators
+        { get; } = new Dictionary<string, IFeedbackCollectionCodeCreator>();
+
+
+
 
         static public Dictionary<string, CombinedCodeCreator> Creators
         {
@@ -80,11 +88,7 @@ namespace Diagram.UI
         /// </summary>
         public static readonly IComparer<object> ObjectComparer = new ObjectComparerClass();
 
-        /// <summary>
-        /// C# code creator
-        /// </summary>
-   //     private static IClassCodeCreator cSharpCodeCreator = new CombinedCodeCreator();
-
+  
         /// Standard header of calculation class
         /// </summary>
         private static readonly string StandardHeader = "using System;" + Environment.NewLine +
@@ -103,6 +107,21 @@ namespace Diagram.UI
 
         #region Public Memberes
 
+        static public void AddFeedbackCreator(this IFeedbackCollectionCodeCreator creator)
+        {
+            var lang = performer.GetLanguage(creator);
+            if (lang == null)
+            {
+                throw new OwnNotImplemented();
+            }
+            if (FeedBackCreators.ContainsKey(lang))
+            {
+                throw new OwnNotImplemented();
+            }
+            FeedBackCreators[lang] = creator;
+        }
+
+
 
         static public void AddTypeCreator(this ITypeCreator creator)
         {
@@ -116,8 +135,23 @@ namespace Diagram.UI
                 throw new OwnNotImplemented();
             }
             TypeCreators[lang] = creator;
-
         }
+
+        static public void AddAliasCreator(this IAliasCodeCreator creator)
+        {
+            var lang = performer.GetLanguage(creator);
+            if (lang == null)
+            {
+                throw new OwnNotImplemented();
+            }
+            if (AliasCreators.ContainsKey(lang))
+            {
+                throw new OwnNotImplemented();
+            }
+            AliasCreators[lang] = creator;
+        }
+
+
 
         /// <summary>
         /// Adds code creator

@@ -8,7 +8,7 @@ const FictiveMeasurement_1 = require("../Library/Fiction/FictiveMeasurement");
 const FictiveValue_1 = require("../Library/Fiction/FictiveValue");
 const DataLink_1 = require("../Library/Measurements/Arrows/DataLink");
 const DataConsumer_1 = require("../Library/Measurements/DataConsumer");
-const DifferentrialEquationSolverFormula_1 = require("../Library/Measurements/DifferentialEquations/Solvers/DifferentrialEquationSolverFormula");
+const DifferentialEquationSolverFormula_1 = require("../Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula");
 const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaConsumer");
 class ODE_Feedback_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
@@ -169,7 +169,7 @@ class ODE_Feedback_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormul
         x3 === null || x3 === void 0 ? void 0 : x3.setIValue(this.get_6());
     }
 }
-class ODE_Feedback_CategoryObject_1 extends DifferentrialEquationSolverFormula_1.DifferentrialEquationSolverFormula {
+class ODE_Feedback_CategoryObject_1 extends DifferentialEquationSolverFormula_1.DifferentrialEquationSolverFormula {
     constructor(desktop, name) {
         super(desktop, name);
         this.value2 = new FictiveValue_1.FictiveValue();

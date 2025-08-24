@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DifferentrialEquationSolverFormula = void 0;
+exports.DifferentialEquationSolverFormula = void 0;
 const DataConsumerVariadbleMeasurementsStarted_1 = require("../../DataConsumerVariadbleMeasurementsStarted");
 const Variable_1 = require("../../Variables/Variable");
-class DifferentrialEquationSolverFormula extends DataConsumerVariadbleMeasurementsStarted_1.DataConsumerVariadbleMeasurementsStarted {
+class DifferentialEquationSolverFormula extends DataConsumerVariadbleMeasurementsStarted_1.DataConsumerVariadbleMeasurementsStarted {
     constructor(desktop, name) {
         super(desktop, name);
         this.derivations = new Map();
@@ -51,5 +51,5 @@ class DifferentrialEquationSolverFormula extends DataConsumerVariadbleMeasuremen
         this.setFeedback();
     }
 }
-exports.DifferentrialEquationSolverFormula = DifferentrialEquationSolverFormula;
-//# sourceMappingURL=DifferentrialEquationSolverFormula.js.map
+exports.DifferentialEquationSolverFormula = DifferentialEquationSolverFormula;
+//# sourceMappingURL=DifferentialEquationSolverFormula.js.map

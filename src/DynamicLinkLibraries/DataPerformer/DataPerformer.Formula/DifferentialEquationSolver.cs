@@ -172,8 +172,6 @@ namespace DataPerformer.Formula
 
         ITreeCollectionProxy proxy;
 
-        protected IFeedbackCollection feedbackCollection;
-
 
 
         #endregion

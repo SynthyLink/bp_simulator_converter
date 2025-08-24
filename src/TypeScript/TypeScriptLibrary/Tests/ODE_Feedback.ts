@@ -9,7 +9,7 @@ import { IPostSetArrow } from "../Library/Interfaces/IPostSetArrow";
 import { IValue } from "../Library/Interfaces/IValue";
 import { DataLink } from "../Library/Measurements/Arrows/DataLink";
 import { DataConsumer } from "../Library/Measurements/DataConsumer";
-import { DifferentrialEquationSolverFormula } from "../Library/Measurements/DifferentialEquations/Solvers/DifferentrialEquationSolverFormula";
+import { DifferentialEquationSolverFormula } from "../Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula";
 import { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement";
 import { VectorFormulaConsumer } from "../Library/Measurements/VectorFormulaConsumer";
 
@@ -173,7 +173,7 @@ class ODE_Feedback_CategoryObject_0 extends VectorFormulaConsumer
 	
 }
 
-class ODE_Feedback_CategoryObject_1 extends DifferentrialEquationSolverFormula
+class ODE_Feedback_CategoryObject_1 extends DifferentialEquationSolverFormula
 {
 	constructor(desktop: IDesktop, name: string)
 	{

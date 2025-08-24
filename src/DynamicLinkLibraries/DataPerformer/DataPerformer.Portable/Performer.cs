@@ -18,8 +18,10 @@ using ErrorHandler;
 
 namespace DataPerformer.Portable
 {
-    public class Performer : NamedTree.Performer
+    public class Performer : DataPerformer.Interfaces.Performer
     {
+
+        Type tvcc = typeof(IVariablesCodeCreator);
 
         public void Set(IFeedbackAliasCollection collection)
         {
@@ -29,6 +31,24 @@ namespace DataPerformer.Portable
                 alias.Set();
             }
         }
+
+        public override T GetLaguageObject<T>(object o) where T : class
+        {
+            var t = base.GetLaguageObject<T>(o);
+            var type = typeof(T);
+            if (t == null)
+            {
+                var s = GetLanguage(o);
+                if (type == tvcc)
+                {
+                    return StaticExtensionDataPerformerInterfaces.VariableCodeCreators[s] as T;
+                }
+
+            }
+
+            return t;
+        }
+
 
 
         public int GetNumber(IDataConsumer dataConsumer, IMeasurements measurements)

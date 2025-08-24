@@ -16,7 +16,8 @@ namespace DataPerformer.Formula.TypeScript
 
 
         #region Fields
-        static Diagram.UI.TypeScript.Performer formulaPerformer = new();
+        
+        static Diagram.UI.TypeScript.Performer performer = new();
 
 
         protected Dictionary<string, int> Output
@@ -68,7 +69,7 @@ namespace DataPerformer.Formula.TypeScript
                          constructorModifier + " " + className,
                          checkValue);
             var ltr = local.Trees;
-            formulaPerformer.Add(l, ltt, 0);
+            performer.Add(l, ltt, 0);
             var output = new Dictionary<string, Tuple<int, object>>();
             if (obj is IStringTreeDictionary dictionary)
             {
@@ -81,7 +82,7 @@ namespace DataPerformer.Formula.TypeScript
             var ll = new List<string>();
             ll.Add("save() : void {");
             var s = "\tvar v = this.variables;";
-            var attr = formulaPerformer.GetAttribute<CodeCreatorAttribute>(obj);
+            var attr = performer.GetAttribute<CodeCreatorAttribute>(obj);
             if (attr != null)
             {
                 if (attr.IsSysemOfDifferentialEquations)
@@ -143,7 +144,7 @@ namespace DataPerformer.Formula.TypeScript
            IList<string> variables, IList<string> initializers, string consturctor, bool checkValue = true)
         {
             List<string> l = new();
-            formulaPerformer.Add(l, lcode as List<string>, 1);
+            performer.Add(l, lcode as List<string>, 1);
             int nTree = local.Trees.Length;
             l.Add("");
             if (checkValue)
@@ -161,7 +162,7 @@ namespace DataPerformer.Formula.TypeScript
             {
                 l.Add("\tvar all = this.getAllMeasurements();");
             }
-            formulaPerformer.Add(l, initializers as List<string>, 1);
+            performer.Add(l, initializers as List<string>, 1);
             l.Add("}");
             l.Add("");
             foreach (string s in variables)
@@ -191,7 +192,7 @@ namespace DataPerformer.Formula.TypeScript
             l.Add("calculateTree() : void");
             l.Add("{");
             l.Add("\tthis.success = true;");
-            formulaPerformer.Add(l, lcode as List<string>, 1);
+            performer.Add(l, lcode as List<string>, 1);
             l.Add("}");
             return l;
         }

@@ -76,7 +76,7 @@ namespace DataPerformer.Formula.TypeScript
                     extends = "VectorFormulaConsumer";
                     break;
                 case DifferentialEquationSolver:
-                    extends = "DifferentrialEquationSolverFormula";
+                    extends = "DifferentialEquationSolverFormula";
                     break;
                 default:
                     throw new ErrorHandler.OwnNotImplemented();

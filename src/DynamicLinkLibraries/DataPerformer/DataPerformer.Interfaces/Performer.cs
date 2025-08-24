@@ -1,15 +1,13 @@
 ﻿using BaseTypes;
 using BaseTypes.Attributes;
-using DataPerformer.Interfaces.Attributes;
 using System;
-using System.Reflection.Metadata.Ecma335;
 
 namespace DataPerformer.Interfaces
 {
     /// <summary>
     /// Performer of basic operations
     /// </summary>
-    public class Performer : NamedTree.Performer
+    public class Performer : Diagram.UI.Performer
     {
  
   
@@ -23,6 +21,11 @@ namespace DataPerformer.Interfaces
             }
             var k = TimeType.Second.Coefficient(timeType);
             return () => k * f();
+        }
+
+        public override T GetLaguageObject<T>(object o)
+        {
+            return base.GetLaguageObject<T>(o);
         }
 
     }

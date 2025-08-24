@@ -41,6 +41,8 @@ namespace Diagram.UI.Interfaces
     public interface IFeedbackAliasCollection : IFeedbackCollectionDictionary
     {
         Dictionary<string, string> Dictionary { get; }
+
+
         IEnumerable<IFeedbackAlias> Aliases {get;}
     }
 

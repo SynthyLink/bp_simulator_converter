@@ -15,6 +15,5 @@ namespace Diagram.UI.Interfaces
         /// <returns>Code</returns>
         List<string> CreateCode(string preffix, object obj);
 
- 
     }
 }

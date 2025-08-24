@@ -2,6 +2,7 @@
 using BaseTypes.CodeCreator.Interfaces;
 using CategoryTheory;
 using Diagram.UI.Attributes;
+using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;
 using ErrorHandler;
@@ -40,9 +41,17 @@ namespace Diagram.UI
         }
 
 
+
+        readonly Type tclassdcc = typeof(IDesktopCodeCreator);
+
+
         readonly Type tclasscc = typeof(IClassCodeCreator);
 
         readonly Type tcreatort = typeof(ITypeCreator);
+
+        readonly Type tcreatora = typeof(IAliasCodeCreator);
+        
+        readonly Type tcreatfcc = typeof(IFeedbackCollectionCodeCreator);
 
 
         public virtual T GetLaguageObject<T>(object o) where T : class
@@ -54,6 +63,11 @@ namespace Diagram.UI
                 throw new OwnNotImplemented();
             }
             var t = typeof(T);
+            if (t == tclassdcc)
+            {
+                return StaticExtensionDiagramUI.DesktopCreators[s] as T;
+            }
+
             if (t == tclasscc)
             {
                 return StaticExtensionDiagramUI.Creators[s] as T;
@@ -62,7 +76,14 @@ namespace Diagram.UI
             {
                 return StaticExtensionDiagramUI.TypeCreators[s] as T;
             }
-
+            if (t == tcreatora)
+            {
+                return StaticExtensionDiagramUI.AliasCreators[s] as T;
+            }
+            if (t == tcreatfcc)
+            {
+                return StaticExtensionDiagramUI.FeedBackCreators[s] as T;
+            }
             return null;
         }
 

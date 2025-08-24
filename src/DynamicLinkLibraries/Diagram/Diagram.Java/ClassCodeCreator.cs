@@ -1,4 +1,5 @@
 ﻿using BaseTypes.Attributes;
+using Diagram.UI;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 using ErrorHandler;
@@ -16,10 +17,8 @@ namespace Diagram.Java
         
         protected static IEnumerableCodeCreator<Tuple<int, string>> enumerableIntStringCodeCreator;
 
-        private static IFeedbackCollectionCodeCreator feedbackCollectionCodeCreator;
 
-
-        protected Diagram.UI.Performer formulaPerformer = new();
+        protected UI.Performer performer = new();
 
 
         protected Dictionary<Func<object, bool>, Func<string, object, List<string>>> dictionary;
@@ -31,7 +30,7 @@ namespace Diagram.Java
             dictionaryStringStringCodeCreator = this;
             enumerableIntCodeCreator = this;
             enumerableIntStringCodeCreator = this;
-            feedbackCollectionCodeCreator = this;
+            this.AddFeedbackCreator();
 
         }
 
@@ -96,7 +95,7 @@ namespace Diagram.Java
                 {
                     var l = CreateExt(preffix, obj);
                     var ll = dictionary[key](preffix, obj);
-                    formulaPerformer.Add(l, ll, 2);
+                    performer.Add(l, ll, 2);
                     l.Add("}");
                     l.Add("");
                     return l;
@@ -180,6 +179,11 @@ namespace Diagram.Java
         }
 
         Dictionary<string, List<string>> IFeedbackCollectionCodeCreator.Create(IFeedbackCollectionHolder holder)
+        {
+            return Create(holder);
+        }
+
+        protected virtual Dictionary<string, List<string>> Create(IFeedbackCollectionHolder holder)
         {
             throw new OwnNotImplemented();
         }

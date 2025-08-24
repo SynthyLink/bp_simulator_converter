@@ -12,20 +12,15 @@ namespace DataPerformer.Portable.Java
     [Language("Java")]
     public class ClassCodeCreator : Diagram.Java.ClassCodeCreator, ITypeCreator, IAliasCodeCreator
     {
-        protected static Performer mPerformer = new Performer();
-
-        protected static ITypeCreator typeCreator;
-
-        protected static IAliasCodeCreator aliasCodeCreator;
-
         protected void InitPortable()
         {
-            typeCreator = this;
-            aliasCodeCreator = this;
+            performer = new DataPerformer.Portable.Performer();
         }
 
         public ClassCodeCreator() : base(false)
         {
+            this.AddClassCodeCreator();
+            
             classes = new Dictionary<string, string>()
             {
                 {"DataLink", "measurements.arrows.DataLink" },
@@ -105,6 +100,7 @@ namespace DataPerformer.Portable.Java
 
         Dictionary<string, List<string>> IAliasCodeCreator.Create(string id, IAlias alias)
         {
+            var typeCreator = performer.GetLaguageObject<ITypeCreator>(this);
            var d = new Dictionary<string, List<string>>();
             var l = new List<string>();
             l.Add("java.util.Map< String, general_service.Enrty< Object, Object >> " + id + " = new HashMap<>();");
