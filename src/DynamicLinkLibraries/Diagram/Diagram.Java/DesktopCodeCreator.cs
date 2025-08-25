@@ -118,7 +118,6 @@ namespace Diagram.UI.Java
             catch (Exception ex)
             {
                 exception = IncludedException.Get(ex);
-
             }
             throw exception;
         }

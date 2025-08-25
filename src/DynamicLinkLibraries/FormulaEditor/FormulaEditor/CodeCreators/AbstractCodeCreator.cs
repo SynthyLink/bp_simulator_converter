@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using BaseTypes.CodeCreator.Interfaces;
-
+using ErrorHandler;
 using FormulaEditor.CodeCreators.Interfaces;
 
 namespace FormulaEditor.CodeCreators
@@ -120,6 +121,10 @@ namespace FormulaEditor.CodeCreators
 
         int ITreeCodeCreator.GetNumber(ObjectFormulaTree tree)
         {
+            if (!dictionary.ContainsKey(tree))
+            {
+                throw new OwnNotImplemented();
+            }
             return dictionary[tree];
         }
 

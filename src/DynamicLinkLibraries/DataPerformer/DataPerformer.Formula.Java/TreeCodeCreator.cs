@@ -7,29 +7,34 @@ using FormulaEditor;
 using FormulaEditor.CodeCreators;
 using FormulaEditor.CodeCreators.Interfaces;
 using FormulaEditor.Interfaces;
-using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataPerformer.Formula.Java
 {
     [Language("Java")]
-    internal class TreeCodeCreator : AbstractCodeCreator, IOperationSeparatorCreator
+    internal class TreeCodeCreator : BaseTreeCodeCreator
+    {
+        internal TreeCodeCreator()
+            : base()
+        {
+            this.AddTreeCodeCreator();
+        }
+    }
+
+    internal class BaseTreeCodeCreator : AbstractCodeCreator, IOperationSeparatorCreator
     {
         object current;
 
-        Performer performer = new Performer();
-
+        string language = "Java";
+        IClassCodeCreator classCodeCreator;
         ITypeCreator typeCreator;
 
+        Performer performer = new Performer();
 
-        internal TreeCodeCreator()
+  
+        protected BaseTreeCodeCreator()
         {
-            this.AddTreeCodeCreator();
-            typeCreator = performer.GetLaguageObject<ITypeCreator>(this);
+            typeCreator = performer.GetLaguageObject<ITypeCreator>(language);
+            classCodeCreator = performer.GetLaguageObject<IClassCodeCreator>(language);
         }
 
 
@@ -39,7 +44,6 @@ namespace DataPerformer.Formula.Java
 
         public override ITreeCodeCreator Create(object obj, ObjectFormulaTree[] trees)
         {
-            var classCodeCreator = performer.GetLaguageObject<IClassCodeCreator>(this);
             if (classCodeCreator is ICurrentObject currentObject)
             {
                 var co = currentObject.CurrentObject;

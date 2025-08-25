@@ -19,9 +19,7 @@ namespace DataPerformer.Formula
 
         private readonly Type tcrea = typeof(ITreeCreator);
 
-
-
-        protected override T GetLaguageObject<T>(string o) where T : class
+        public override T GetLaguageObject<T>(string o) where T : class
         {
             var x = base.GetLaguageObject<T>(o);
             if (x != null)

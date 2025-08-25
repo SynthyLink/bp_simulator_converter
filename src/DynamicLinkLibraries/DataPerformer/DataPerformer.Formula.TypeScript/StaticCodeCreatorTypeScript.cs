@@ -7,12 +7,13 @@ using ErrorHandler;
 
 using FormulaEditor;
 using FormulaEditor.CodeCreators.Interfaces;
-using System.Linq.Expressions;
 
 namespace DataPerformer.Formula.TypeScript
 {
     internal static  class StaticCodeCreatorTypeScript
     {
+
+        
 
         static DataPerformer.Interfaces.Performer performer = new ();
 
@@ -89,7 +90,7 @@ namespace DataPerformer.Formula.TypeScript
         /// </summary>
         /// <param name="trees">The trees</param>
         /// <param name="creator">Code creator</param>
-        /// <param name="local">Local code reator</param>
+        /// <param name="local">Local code creator</param>
         /// <param name="variables">Strings of variables</param>
         /// <param name="initializers">Strings of initializers</param>
         /// <returns>Strings of code</returns>
@@ -416,24 +417,13 @@ namespace DataPerformer.Formula.TypeScript
             return code;
         }
 
-        private static void GetList(ObjectFormulaTree tree, List<ObjectFormulaTree> l, List<ObjectFormulaTree> busy)
-        {
-            int n = tree.Count;
-            for (int i = 0; i < n; i++)
-            {
-                GetList(tree[i], l, busy);
-            }
-            if (!busy.Contains(tree))
-            {
-                l.Add(tree);
-            }
-        }
+        static FormulaEditor.Performer formulaPerformer = new FormulaEditor.Performer();
 
         private static IList<string> CreateCode(object obj, ITreeCodeCreator creator,
             ObjectFormulaTree tree, List<ObjectFormulaTree> busy)
         {
             List<ObjectFormulaTree> l = new List<ObjectFormulaTree>();
-            GetList(tree, l, busy);
+            formulaPerformer.GetList(tree, l, busy);
             IList<string> lvr;
             IList<string> lpr;
             List<string> cc = new List<string>();

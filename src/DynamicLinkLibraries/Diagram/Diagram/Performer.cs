@@ -54,7 +54,7 @@ namespace Diagram.UI
         
         readonly Type tcreatfcc = typeof(IFeedbackCollectionCodeCreator);
 
-        protected virtual T GetLaguageObject<T>(string language) where T : class
+        public virtual T GetLaguageObject<T>(string language) where T : class
         {
             var s = language;
             if (s == null)
