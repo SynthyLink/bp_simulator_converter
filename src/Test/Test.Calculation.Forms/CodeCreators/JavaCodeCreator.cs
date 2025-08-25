@@ -14,7 +14,7 @@ namespace Test.Calculation.Forms.CodeCreators
             dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
                    { (object o) => { return o is ObjectTransformer; } , CreateObjectTransformer }
-       //          { (object o) => { return o is DifferentialEquationSolver; } , CreateDiffrerentialSolver },
+       //          { (object o) => { return o is DifferentialEquationSolver; } , CreateDifferentialSolver },
            //      { (object o) => { return o is Recursive; } , CreateRecursive },
           };
 

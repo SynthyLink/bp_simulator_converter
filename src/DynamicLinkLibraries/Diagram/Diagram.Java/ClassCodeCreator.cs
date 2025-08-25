@@ -1,4 +1,5 @@
 ﻿using BaseTypes.Attributes;
+using Diagram.Interfaces;
 using Diagram.UI;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
@@ -9,7 +10,7 @@ namespace Diagram.Java
     [Language("Java")]
     public class ClassCodeCreator : IClassCodeCreator, IDictionaryCodeCreator<string, string>,
         IEnumerableCodeCreator<int[]>, 
-        IEnumerableCodeCreator<Tuple<int, string>>, IFeedbackCollectionCodeCreator
+        IEnumerableCodeCreator<Tuple<int, string>>, IFeedbackCollectionCodeCreator, ICurrentObject
     {
         protected static IDictionaryCodeCreator<string, string> dictionaryStringStringCodeCreator;
 
@@ -18,7 +19,11 @@ namespace Diagram.Java
         protected static IEnumerableCodeCreator<Tuple<int, string>> enumerableIntStringCodeCreator;
 
 
-        protected UI.Performer performer = new();
+        protected UI.Performer Performer
+        {
+            get;
+            set;
+        } = new Performer();
 
 
         protected Dictionary<Func<object, bool>, Func<string, object, List<string>>> dictionary;
@@ -30,7 +35,6 @@ namespace Diagram.Java
             dictionaryStringStringCodeCreator = this;
             enumerableIntCodeCreator = this;
             enumerableIntStringCodeCreator = this;
-            this.AddFeedbackCreator();
 
         }
 
@@ -60,9 +64,9 @@ namespace Diagram.Java
         { get; set; }
 
    
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
+        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {
-            return CreateCode(preffix, obj);
+            return CreateCode(preffix, obj, volume);
         }
 
 
@@ -75,11 +79,22 @@ namespace Diagram.Java
             return o.GetType().Name == type;
         }
 
+  
+        protected virtual object CurrentObject
+        {
+            get;
+            set;
+        }
+
+        object ICurrentObject.CurrentObject => CurrentObject;
+
         protected List<string> CreateExt(string preffix, object ob)
         {
+            var creator = Performer.GetLaguageObject<IClassCodeCreator>(this);
+            var s = creator.CreateCode(preffix, ob, "BaseClassName")[0];
             var l = new List<string>();
-            var t = ob.GetType().Name;
-            var s = classes[t];
+           /* var t = ob.GetType().Name;
+            var s = classes[t];*/
             l.Add("protected class " + preffix + " extends " + s);
             l.Add("{");
             l.Add("\tpublic " + preffix + "(String name, IDesktop desktop) {");
@@ -87,15 +102,25 @@ namespace Diagram.Java
             return l;
         }
 
-        protected virtual List<string> CreateCode(string preffix, object obj)
+        protected virtual List<string> CreateCode(string preffix, object obj, string volume)
         {
             foreach (Func<object, bool> key in dictionary.Keys)
             {
                 if (key(obj))
                 {
+                    if (volume != null)
+                    {
+                        if (volume == "BaseClassName")
+                        {
+                            var t = obj.GetType().Name;
+                            var s = classes[t];
+                            return new List<string> { s };
+
+                        }
+                    }
                     var l = CreateExt(preffix, obj);
                     var ll = dictionary[key](preffix, obj);
-                    performer.Add(l, ll, 2);
+                    Performer.Add(l, ll, 2);
                     l.Add("}");
                     l.Add("");
                     return l;

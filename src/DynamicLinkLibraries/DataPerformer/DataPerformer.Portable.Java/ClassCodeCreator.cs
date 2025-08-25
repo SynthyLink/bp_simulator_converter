@@ -14,11 +14,12 @@ namespace DataPerformer.Portable.Java
     {
         protected void InitPortable()
         {
-            performer = new DataPerformer.Portable.Performer();
+            Performer = new DataPerformer.Portable.Performer();
         }
 
         public ClassCodeCreator() : base(false)
         {
+            InitPortable();
             this.AddClassCodeCreator();
             
             classes = new Dictionary<string, string>()
@@ -100,7 +101,7 @@ namespace DataPerformer.Portable.Java
 
         Dictionary<string, List<string>> IAliasCodeCreator.Create(string id, IAlias alias)
         {
-            var typeCreator = performer.GetLaguageObject<ITypeCreator>(this);
+            var typeCreator = Performer.GetLaguageObject<ITypeCreator>(this);
            var d = new Dictionary<string, List<string>>();
             var l = new List<string>();
             l.Add("java.util.Map< String, general_service.Enrty< Object, Object >> " + id + " = new HashMap<>();");

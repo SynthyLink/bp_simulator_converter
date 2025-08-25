@@ -8,7 +8,7 @@ class DifferentialEquationSolverFormula extends DataConsumerVariadbleMeasurement
         super(desktop, name);
         this.derivations = new Map();
         this.deri = [];
-        this.typeName = "DifferentrialEquationSolverFormula";
+        this.typeName = "DifferentialEquationSolverFormula";
         this.types.push("IDifferentialEquationSolver");
         this.types.push("IPostSetArrow");
         this.types.push("DifferentrialEquationSolverFormula");

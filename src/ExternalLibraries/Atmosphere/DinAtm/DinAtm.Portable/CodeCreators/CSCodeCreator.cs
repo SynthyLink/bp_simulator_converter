@@ -23,7 +23,14 @@ namespace DinAtm.Portable.CodeCreators
 
         #region IClassCodeCreator Members
 
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
+
+          protected virtual string BaseClassString(string prefix, object obj)
+        {
+            return obj.GetType().Name;
+        }
+
+
+        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {
             if (!(obj is Atmosphere))
             {

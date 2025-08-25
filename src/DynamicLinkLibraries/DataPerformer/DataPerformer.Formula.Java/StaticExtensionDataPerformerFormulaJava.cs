@@ -11,6 +11,8 @@ namespace DataPerformer.Formula.Java
         static  StaticExtensionDataPerformerFormulaJava()
         {
             new ClassCodeCreator();
+            new TreeCodeCreator();
+            new TreeCollectionCodeCreator();
         }
 
         /// <summary>

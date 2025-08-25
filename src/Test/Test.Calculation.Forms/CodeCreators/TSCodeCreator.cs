@@ -22,7 +22,7 @@ namespace Test.Calculation.Forms.CodeCreators
         { get; set; }
 
 
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
+        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {
             if (obj is ObjectTransformer ot)
             {
@@ -31,6 +31,11 @@ namespace Test.Calculation.Forms.CodeCreators
             }
             return null;
             
+        }
+
+        protected virtual string BaseClassString(string prefix, object obj)
+        {
+            return obj.GetType().Name;
         }
 
         static List<string> CreateObjectTransformer(string preffix, ObjectTransformer ot)

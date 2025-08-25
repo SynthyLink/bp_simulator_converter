@@ -23,10 +23,6 @@ namespace DataPerformer.Interfaces
             return () => k * f();
         }
 
-        public override T GetLaguageObject<T>(object o)
-        {
-            return base.GetLaguageObject<T>(o);
-        }
 
     }
 }

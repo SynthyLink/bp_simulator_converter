@@ -22,8 +22,14 @@ namespace Internet.Meteo.Wrapper.Serializable.CodeCreators
         { get; set; }
 
 
+   
+        protected virtual string BaseClassString(string prefix, object obj)
+        {
+            return obj.GetType().Name;
+        }
 
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
+
+        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {
             if (!(obj is Internet.Meteo.Wrapper.Sensor sensor))
             {

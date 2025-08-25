@@ -39,7 +39,7 @@ namespace DataPerformer.Portable.TypeScript
  
 
 
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
+        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {
             foreach (var val in dictionary)
             {
@@ -133,6 +133,17 @@ namespace DataPerformer.Portable.TypeScript
             return l;
         }
 
+        protected virtual string ClassString(string prefix, object obj)
+        {
+            return "";
+        }
+
+
+  
+        protected virtual string BaseClassString(string prefix, object obj)
+        {
+            return obj.GetType().Name;
+        }
     }
 }
 

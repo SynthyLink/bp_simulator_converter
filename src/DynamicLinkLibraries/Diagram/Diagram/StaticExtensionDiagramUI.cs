@@ -632,7 +632,7 @@ namespace Diagram.UI
                     l.Add("\t\t}");
                     l.Add("");
                     IClassCodeCreator cSharpCodeCreator = Creators["C#"];
-                    List<string> lt = cSharpCodeCreator.CreateCode(preffixFull + "." + cln, lab.Object);
+                    List<string> lt = cSharpCodeCreator.CreateCode(preffixFull + "." + cln, lab.Object, null);
                     l.Add("\t\tinternal class CategoryObject : " + lt[0]);
                     for (int j = 1; j < lt.Count; j++)
                     {
@@ -659,7 +659,7 @@ namespace Diagram.UI
                     l.Add("\t\t}");
                     l.Add("");
                     IClassCodeCreator cSharpCodeCreator = Creators["C#"];
-                    List<string> lt = cSharpCodeCreator.CreateCode(preffixFull, lab.Arrow);
+                    List<string> lt = cSharpCodeCreator.CreateCode(preffixFull, lab.Arrow, null);
                     l.Add("\t\tinternal class CategoryArrow : " + lt[0]);
                     for (int j = 1; j < lt.Count; j++)
                     {

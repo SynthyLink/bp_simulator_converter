@@ -19,10 +19,16 @@ namespace Diagram.UI.TypeScript
 
 
 
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
+        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {
             return null;
             throw new OwnNotImplemented();
         }
+
+        protected virtual string BaseClassString(string prefix, object obj, string volume)
+        {
+            return obj.GetType().Name;
+        }
+
     }
 }

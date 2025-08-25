@@ -23,12 +23,17 @@ namespace Event.Portable
         #region IClassCodeCreator Members
 
 
+        protected virtual string BaseClassString(string prefix, object obj)
+        {
+            return obj.GetType().Name;
+        }
+
         protected IDesktopCodeCreator DesktopCodeCreator
         { get; set; }
 
 
 
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
+        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {
             List<string> l = new List<string>();
             string str = null;

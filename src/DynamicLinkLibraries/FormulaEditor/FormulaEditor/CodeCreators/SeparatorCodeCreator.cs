@@ -18,7 +18,6 @@ namespace FormulaEditor.CodeCreators
 
         #endregion
 
-
         #region Ctor
 
         /// <summary>

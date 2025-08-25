@@ -14,7 +14,7 @@ namespace FormulaEditor.CodeCreators
     {
         #region Fields
 
-        
+
 
         /// <summary>
         /// Trees
@@ -22,7 +22,7 @@ namespace FormulaEditor.CodeCreators
         protected ObjectFormulaTree[] trees;
 
         /// <summary>
-        /// Identificators of trees
+        /// Identifiers of trees
         /// </summary>
         protected Dictionary<ObjectFormulaTree, string> ident =
             new Dictionary<ObjectFormulaTree, string>();
@@ -45,33 +45,25 @@ namespace FormulaEditor.CodeCreators
         /// <summary>
         /// Dictionary
         /// </summary>
-        protected Dictionary<ObjectFormulaTree, int> dictionary = 
+        protected Dictionary<ObjectFormulaTree, int> dictionary =
             new Dictionary<ObjectFormulaTree, int>();
 
         #endregion
 
         #region Ctor
 
+        protected AbstractCodeCreator()
+        {
+            codeCreator = this;
+        }
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="trr">Collection of trees</param>
-        protected AbstractCodeCreator(ObjectFormulaTree[] trr)
+        protected AbstractCodeCreator(ObjectFormulaTree[] trr) : this()
         {
-            codeCreator = this;
-            ObjectFormulaTree[] t = trr;
-            if (t == null)
-            {
-                t = new ObjectFormulaTree[0];
-            }
-            trees = ObjectFormulaTree.CreateList(t, optional).ToArray();
-            int i = 0;
-            foreach (ObjectFormulaTree tr in trees)
-            {
-                ident[tr] = "var_" + i;
-                dictionary[tr] = i;
-                ++i;
-            }
+            Set(trr);
         }
 
         #endregion
@@ -143,6 +135,7 @@ namespace FormulaEditor.CodeCreators
 
         protected virtual object Object { get; set; }
 
+
         /// <summary>
         /// Gets constant string representation of value of tree 
         /// </summary>
@@ -164,8 +157,28 @@ namespace FormulaEditor.CodeCreators
         }
         object ITreeCodeCreator.Object { get => Object; set => Object = value; }
 
-        #endregion
+        protected virtual void Set(ObjectFormulaTree[] trr)
+        {
+            ident.Clear();
+            dictionary.Clear();
+            ObjectFormulaTree[] t = trr;
+            if (t == null)
+            {
+                t = new ObjectFormulaTree[0];
+            }
+            trees = ObjectFormulaTree.CreateList(t, optional).ToArray();
+            int i = 0;
+            foreach (ObjectFormulaTree tr in trees)
+            {
+                ident[tr] = "var_" + i;
+                dictionary[tr] = i;
+                ++i;
 
-        #endregion
+            }
+
+            #endregion
+
+            #endregion
+        }
     }
 }

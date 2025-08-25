@@ -23,7 +23,17 @@ namespace DataPerformer.Formula.TypeScript
             get;
         } = new CodeCreator();
 
-  
+
+    
+        protected virtual string BaseClassString(string prefix, object obj)
+        {
+            return obj.GetType().Name;
+        }
+
+
+
+
+
 
         static Diagram.UI.TypeScript.Performer performer = new();
 
@@ -40,7 +50,7 @@ namespace DataPerformer.Formula.TypeScript
          new Dictionary<Func<object, bool>, Func<string, object, CodeCreator, List<string>>>()
          {
                    { (object o) => { return o is VectorFormulaConsumer; } , CreateVectorConsumer },
-                 { (object o) => { return o is DifferentialEquationSolver; } , CreateDiffrerentialSolver },
+                 { (object o) => { return o is DifferentialEquationSolver; } , CreateDifferentialSolver },
                  { (object o) => { return o is Recursive; } , CreateRecursive },
           };
 
@@ -50,7 +60,7 @@ namespace DataPerformer.Formula.TypeScript
 
 
 
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
+        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {
             foreach (Func<object, bool> key in dictionary.Keys)
             {
@@ -62,7 +72,7 @@ namespace DataPerformer.Formula.TypeScript
             return null;
         }
 
-        public static string ClassString(string preffix, object obj)
+        public static string SClassString(string preffix, object obj)
         {
 
             var s = "class " + preffix;
@@ -132,7 +142,7 @@ namespace DataPerformer.Formula.TypeScript
                     l.Add("");
                 }
             }
-            var cs = ClassString(preffix, obj);
+            var cs = SClassString(preffix, obj);
             l.Add(cs);
             l.Add("{");
             performer.AddObjectConstructor(l);
@@ -185,7 +195,7 @@ namespace DataPerformer.Formula.TypeScript
         }
 
 
-        static List<string> CreateDiffrerentialSolver(string preffix, object obj, Diagram.TypeScript.CodeCreator cc)
+        static List<string> CreateDifferentialSolver(string preffix, object obj, Diagram.TypeScript.CodeCreator cc)
         {
             return CreateTreeCollection(preffix, obj as ITreeCollection, cc);
         }

@@ -96,7 +96,7 @@ class ODE_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaConsumer
         this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
     }
 }
-class ODE_CategoryObject_1 extends DifferentialEquationSolverFormula_1.DifferentrialEquationSolverFormula {
+class ODE_CategoryObject_1 extends DifferentialEquationSolverFormula_1.DifferentialEquationSolverFormula {
     constructor(desktop, name) {
         super(desktop, name);
         this.value2 = new FictiveValue_1.FictiveValue();

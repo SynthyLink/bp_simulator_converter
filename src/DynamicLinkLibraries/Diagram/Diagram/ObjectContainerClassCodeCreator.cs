@@ -19,11 +19,18 @@ namespace Diagram.UI
         protected IDesktopCodeCreator DesktopCodeCreator
         { get; set; }
 
+ 
+        protected virtual string ClassString(string prefix, object obj)
+        {
+            return obj.GetType().Name;
+        }
+
+
 
 
         #region IClassCodeCreator Members
 
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
+        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {           
             List<string> l = new List<string>();
             string str = null;

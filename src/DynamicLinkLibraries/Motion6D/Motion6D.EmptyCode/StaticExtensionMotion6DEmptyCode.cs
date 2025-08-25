@@ -79,8 +79,13 @@ namespace Motion6D.EmptyCode
             { get; set; }
 
 
+            protected virtual string BaseClassString(string prefix, object obj, string volume)
+            {
+                return obj.GetType().Name;
+            }
 
-            List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
+
+            List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
             {
                 if (!(obj is IAllowCodeCreation))
                 {

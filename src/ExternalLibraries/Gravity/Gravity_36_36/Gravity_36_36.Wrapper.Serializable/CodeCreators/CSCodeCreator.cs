@@ -25,10 +25,16 @@ namespace Gravity_36_36.Wrapper.CodeCreators
         protected IDesktopCodeCreator DesktopCodeCreator
         { get; set; }
 
-   
 
 
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
+  
+        protected virtual string BaseClassString(string prefix, object obj)
+        {
+            return obj.GetType().Name;
+        }
+
+
+        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {
             var b = obj is Gravity_36_36.Wrapper.Gravity;
             if (!b)

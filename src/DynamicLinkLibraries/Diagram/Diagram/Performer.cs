@@ -1,6 +1,7 @@
 ﻿using BaseTypes.Attributes;
 using BaseTypes.CodeCreator.Interfaces;
 using CategoryTheory;
+using Diagram.UI;
 using Diagram.UI.Attributes;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
@@ -53,11 +54,9 @@ namespace Diagram.UI
         
         readonly Type tcreatfcc = typeof(IFeedbackCollectionCodeCreator);
 
-
-        public virtual T GetLaguageObject<T>(object o) where T : class
+        protected virtual T GetLaguageObject<T>(string language) where T : class
         {
-
-            var s = GetLanguage(o);
+            var s = language;
             if (s == null)
             {
                 throw new OwnNotImplemented();
@@ -85,6 +84,18 @@ namespace Diagram.UI
                 return StaticExtensionDiagramUI.FeedBackCreators[s] as T;
             }
             return null;
+
+        }
+
+        public T GetLaguageObject<T>(object o) where T : class
+        {
+
+            var s = GetLanguage(o);
+            if (s == null)
+            {
+                throw new OwnNotImplemented();
+            }
+            return GetLaguageObject<T>(s);
         }
 
         

@@ -62,7 +62,7 @@ namespace Diagram.UI.TypeScript
                     var categoryObject = categoryObjects[i];
                     var pr = className + "_" + "CategoryObject_" + i;
                     Current = pr;
-                    var c = classCodeCreator.CreateCode(pr, categoryObject);
+                    var c = classCodeCreator.CreateCode(pr, categoryObject, null);
                     l.AddRange(c);
                     l.Add("");
                 }
@@ -70,7 +70,7 @@ namespace Diagram.UI.TypeScript
                 {
                     var categoryArrow = categoryArrows[i];
                     var pr = className + "_" + "CategoryArrow_" + i;
-                    var c = classCodeCreator.CreateCode(pr, categoryArrow);
+                    var c = classCodeCreator.CreateCode(pr, categoryArrow, null);
                     l.AddRange(c);
                     l.Add("");
                 }

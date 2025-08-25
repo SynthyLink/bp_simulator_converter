@@ -32,7 +32,7 @@ namespace DataPerformer.Portable
             }
         }
 
-        public override T GetLaguageObject<T>(object o) where T : class
+        protected override T GetLaguageObject<T>(string o) where T : class
         {
             var t = base.GetLaguageObject<T>(o);
             var type = typeof(T);

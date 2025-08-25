@@ -10,27 +10,32 @@ using System.Threading.Tasks;
 
 namespace DataPerformer.Formula
 {
-    public class Performer : DataPerformer.Portable.Performer
+    public class Performer : Portable.Performer
     {
         public Performer() { }
 
 
-        readonly Type tcreatort = typeof(ITreeCollectionCodeCreator);
+        private readonly Type tcreatort = typeof(ITreeCollectionCodeCreator);
+
+        private readonly Type tcrea = typeof(ITreeCreator);
 
 
-        public override T GetLaguageObject<T>(object o) where T : class
+
+        protected override T GetLaguageObject<T>(string o) where T : class
         {
             var x = base.GetLaguageObject<T>(o);
             if (x != null)
             {
                 return x;
             }
-
-            var lang = GetLanguage(o);
             var t = typeof(T);
             if (t == tcreatort)
             {
-                return StaticExtensionDataPerformerFormula.TreeCodeCreators[lang] as T;
+                return StaticExtensionDataPerformerFormula.TreeCollectionCodeCreators[o] as T;
+            }
+            if (t == tcrea)
+            {
+                return  StaticExtensionDataPerformerFormula.TreeCodeCreators[o] as T;
             }
 
 

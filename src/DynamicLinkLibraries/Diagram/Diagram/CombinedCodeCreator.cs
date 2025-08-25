@@ -10,18 +10,21 @@ namespace Diagram.UI
     /// </summary>
     public class CombinedCodeCreator : IClassCodeCreator
     {
+
+        IClassCodeCreator current;
         public CombinedCodeCreator(string language)
         {
             Language = language;   
         }
 
+    
         protected virtual string Language { get; set; }
 
         protected  IDesktopCodeCreator DesktopCodeCreator
         { get; set; }
+
  
-
-
+   
         #region Fields
 
         List<IClassCodeCreator> list = new List<IClassCodeCreator>();
@@ -30,11 +33,11 @@ namespace Diagram.UI
 
         #region IClassCodeCreator Members
 
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
+        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {
             foreach (IClassCodeCreator creator in list)
             {
-                List<string> l = creator.CreateCode(preffix, obj);
+               List<string> l = creator.CreateCode(preffix, obj, volume);
                 if (l != null)
                 {
                     return l;

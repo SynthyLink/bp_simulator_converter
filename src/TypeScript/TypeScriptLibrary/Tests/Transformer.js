@@ -91,7 +91,7 @@ class Transformer_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormula
         x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_5());
     }
 }
-class Transformer_CategoryObject_1 extends DifferentialEquationSolverFormula_1.DifferentrialEquationSolverFormula {
+class Transformer_CategoryObject_1 extends DifferentialEquationSolverFormula_1.DifferentialEquationSolverFormula {
     constructor(desktop, name) {
         super(desktop, name);
         this.value2 = new FictiveValue_1.FictiveValue();

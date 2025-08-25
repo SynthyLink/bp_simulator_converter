@@ -19,7 +19,7 @@ namespace DataPerformer.Formula.CodeCreators
                 new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
                 {
                     { (o) => { return o is VectorFormulaConsumer; } , CreateVectorConsumer },
-                    { (o) => { return o is DifferentialEquationSolver; } , CreateDiffrerentialSolver },
+                    { (o) => { return o is DifferentialEquationSolver; } , CreateDifferentialSolver },
                     { (o) => { return o is Recursive; } , CreateRecursive },
                 };
 
@@ -34,8 +34,14 @@ namespace DataPerformer.Formula.CodeCreators
         { get; set; }
 
 
+   
+        protected virtual string BaseClassString(string prefix, object obj)
+        {
+            return obj.GetType().Name;
+        }
 
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
+
+        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {
             foreach (Func<object, bool> key in dictionary.Keys)
             {
@@ -154,7 +160,7 @@ namespace DataPerformer.Formula.CodeCreators
             return l;
         }
 
-        static List<string> CreateDiffrerentialSolver(string preffix, object obj)
+        static List<string> CreateDifferentialSolver(string preffix, object obj)
         {
             List<string> l = new List<string>();
             bool check = StaticExtensionFormulaEditor.ShouldCheckValueInGeneratedCode;

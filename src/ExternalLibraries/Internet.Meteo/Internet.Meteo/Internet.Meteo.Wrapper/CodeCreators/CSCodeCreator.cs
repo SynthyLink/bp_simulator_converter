@@ -23,8 +23,13 @@ namespace Internet.Meteo.Wrapper.CodeCreators
 
 
 
+        protected virtual string BaseClassString(string prefix, object obj)
+        {
+            return obj.GetType().Name;
+        }
 
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj)
+
+        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {
             var tt = typeof(Internet.Meteo.Wrapper.Sensor);
             var t = obj.GetType();

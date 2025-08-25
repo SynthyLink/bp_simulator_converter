@@ -18,6 +18,7 @@ using DataPerformer.Interfaces;
 
 using NamedTree;
 using ErrorHandler;
+using FormulaEditor.CodeCreators.Interfaces;
 
 namespace DataPerformer.Formula
 {
@@ -33,10 +34,18 @@ namespace DataPerformer.Formula
 
         static readonly DataPerformerFormula dataPerformerFormula = new(null);
 
-        public static Dictionary<string, ITreeCollectionCodeCreator> TreeCodeCreators
+        public static Dictionary<string, ITreeCollectionCodeCreator> TreeCollectionCodeCreators
         {
             get; set;
         } = new Dictionary<string, ITreeCollectionCodeCreator>();
+
+
+        public static Dictionary<string, ITreeCodeCreator> TreeCodeCreators
+        {
+            get; set;
+        } = new Dictionary<string, ITreeCodeCreator>();
+
+
 
         #endregion
 
@@ -182,12 +191,29 @@ namespace DataPerformer.Formula
             {
                 throw new OwnNotImplemented();
             }
+            if (TreeCollectionCodeCreators.ContainsKey(lang))
+            {
+                throw new OwnNotImplemented();
+            }
+            TreeCollectionCodeCreators[lang] = collection;
+        }
+
+
+        public static void AddTreeCodeCreator(this ITreeCodeCreator collection)
+        {
+            var lang = performer.GetLanguage(collection);
+            if (lang == null)
+            {
+                throw new OwnNotImplemented();
+            }
             if (TreeCodeCreators.ContainsKey(lang))
             {
                 throw new OwnNotImplemented();
             }
             TreeCodeCreators[lang] = collection;
         }
+
+
 
         /// <summary>
         /// Constructor
