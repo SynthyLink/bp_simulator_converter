@@ -1,6 +1,7 @@
 ﻿using BaseTypes.CodeCreator.Interfaces;
 using Diagram.UI;
 using ErrorHandler;
+using FormulaEditor.CodeCreators.Interfaces;
 using FormulaEditor.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace DataPerformer.Formula
 
         private readonly Type tcreatort = typeof(ITreeCollectionCodeCreator);
 
-        private readonly Type tcrea = typeof(ITreeCreator);
+        private readonly Type tcrea = typeof(ITreeCodeCreator);
 
         public override T GetLaguageObject<T>(string o) where T : class
         {

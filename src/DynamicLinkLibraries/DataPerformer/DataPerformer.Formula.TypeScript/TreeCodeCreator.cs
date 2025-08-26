@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Dynamic;
+using System.Text;
 using BaseTypes;
 using BaseTypes.CodeCreator.Interfaces;
 using BaseTypes.Interfaces;
@@ -15,7 +16,7 @@ using FormulaEditor.Interfaces;
 
 namespace DataPerformer.Formula.TypeScript
 {
-    internal class TypeScriptCodeCreator : SeparatorCodeCreator, IOperationSeparatorCreator
+    internal class TreeCodeCreator : SeparatorCodeCreator, IOperationSeparatorCreator
     {
         #region Fields
 
@@ -45,7 +46,7 @@ namespace DataPerformer.Formula.TypeScript
         /// <summary>
         /// Singleton
         /// </summary>
-        public static readonly ITreeCodeCreator CodeCreator = new TypeScriptCodeCreator();
+        public static readonly ITreeCodeCreator CodeCreator = new TreeCodeCreator();
 
     
         private static bool cycle = false;
@@ -135,7 +136,7 @@ namespace DataPerformer.Formula.TypeScript
 
         #region Ctor
 
-        private TypeScriptCodeCreator()
+        private TreeCodeCreator()
             : this(null, null)
         {
         }
@@ -144,7 +145,7 @@ namespace DataPerformer.Formula.TypeScript
         /// Constructor
         /// </summary>
         /// <param name="trees">Trees</param>
-        protected TypeScriptCodeCreator(object obj, ObjectFormulaTree[] trees)
+        protected TreeCodeCreator(object obj, ObjectFormulaTree[] trees)
             : base(trees)
         {
             separatorCreator = this;
@@ -417,26 +418,25 @@ namespace DataPerformer.Formula.TypeScript
 
         #region IOperationSeparatorCreator Members
 
+        protected virtual string[] Get(ObjectFormulaTree tree)
+        {
+            string[] ss = null;
+            IObjectOperation op = tree.Operation;
+            ss = GetMultiSeparator(op);
+            if (ss != null)
+            {
+                return ss;
+            }
+            return null;
+        }
+
         /// <summary>
         /// Separators
         /// </summary>
         /// <param name="tree">Tree</param>
         /// <returns>operation separators</returns>
-        public new virtual string[] this[ObjectFormulaTree tree]
-        {
-            get
-            {
-                string[] ss = null;
-                IObjectOperation op = tree.Operation;
-                ss = GetMultiSeparator(op);
-                if (ss != null)
-                {
-                    return ss;
-                }
-                return null;
-            }
-        }
-
+        string[] IOperationSeparatorCreator.this[ObjectFormulaTree tree] => Get(tree);
+  
         /// <summary>
         /// Creates Creator
         /// </summary>
@@ -444,7 +444,7 @@ namespace DataPerformer.Formula.TypeScript
         /// <returns>Creator</returns>
         public override ITreeCodeCreator Create(object obj, ObjectFormulaTree[] trees)
         {
-            return new TypeScriptCodeCreator(obj, trees);
+            return new TreeCodeCreator(obj, trees);
         }
 
         #endregion

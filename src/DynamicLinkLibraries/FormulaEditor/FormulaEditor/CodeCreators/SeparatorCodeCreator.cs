@@ -20,6 +20,11 @@ namespace FormulaEditor.CodeCreators
 
         #region Ctor
 
+        protected SeparatorCodeCreator() : base() 
+        {
+
+        }
+
         /// <summary>
         /// Constructor
         /// </summary>

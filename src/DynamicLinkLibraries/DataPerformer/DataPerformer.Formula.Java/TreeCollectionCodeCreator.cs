@@ -2,6 +2,7 @@
 using BaseTypes.Attributes;
 using BaseTypes.CodeCreator.Interfaces;
 using DataPerformer.Interfaces;
+using DataPerformer.Interfaces.Attributes;
 using Diagram.Interfaces;
 using Diagram.UI.Attributes;
 using Diagram.UI.Interfaces;
@@ -32,22 +33,102 @@ namespace DataPerformer.Formula.Java
         protected ITreeCollection collection = null;
 
 
+        ITreeCodeCreator local = null;
+
+        ITreeCodeCreator codeCreator;
+
+
 
         internal TreeCollectionCodeCreator()
         {
             this.AddTreeCollectionCodeCreator();
+            codeCreator = performer.GetLaguageObject<ITreeCodeCreator>(this);
+            classCodeCreator = performer.GetLaguageObject<IClassCodeCreator>(this);
+            typeCreator = performer.GetLaguageObject<ITypeCreator>(this);
 
         }
 
+        List<string> PostCreateCode(ITreeCodeCreator local, object ob, IList<string> lcode,
+           IList<string> variables, IList<string> initializers, string consturctor, bool checkValue = true)
+        {
+            List<string> l = new();
+            performer.Add(l, lcode as List<string>, 1);
+            int nTree = local.Trees.Length;
+            l.Add("");
+            if (checkValue)
+            {
+            }
+            else
+            {
+                l.Add(consturctor + "(FormulaEditor.ObjectFormulaTree[] trees)");
+                l.Add("{");
+                l.Add("\tthis.trees = trees;");
+            }
+            l.Add("init() : void");
+            l.Add("{");
+            if (ob is IMeasurements)
+            {
+                l.Add("\tvar all = this.getAllMeasurements();");
+            }
+            performer.Add(l, initializers as List<string>, 1);
+            l.Add("}");
+            l.Add("");
+            foreach (string s in variables)
+            {
+                l.Add("" + s);
+            }
+            if (checkValue)
+            {
+            }
+            return l;
+        }
+
+        private List<string> PreCreateCode(object obj, out ITreeCodeCreator local,
+     out IList<string> variables, out IList<string> initializers, string current)
+        {
+            if (codeCreator == null)
+            {
+                codeCreator = performer.GetLaguageObject<ITreeCodeCreator>(this);
+            }
+            var lcode = JaveCreateCode(obj, trees, codeCreator,
+                out local, out variables, out initializers, current);
+            ObjectFormulaTree[] tr = local.Trees;
+            foreach (ObjectFormulaTree tree in tr)
+            {
+                AddTree(tree, initializers, variables);
+            }
+            var l = new List<string>();
+            l.Add("calculateTree() : void");
+            l.Add("{");
+            l.Add("\tthis.success = true;");
+            performer.Add(l, lcode as List<string>, 1);
+            l.Add("}");
+            return l;
+        }
+
+        void AddTree(ObjectFormulaTree tree, IList<string> init, IList<string> func)
+        {
+            int n = StaticCodeCreator.GetNumber(local, tree);
+            string tid = local[tree];
+            string f = "get_" + n;
+            // init.Add("this.mapOperations.set(" + n + ", this." + f + ");");
+            func.Add("");
+            func.Add(f + "() : any");
+            func.Add("{");
+            func.Add("\treturn this.success ? this." + tid + " : undefined;");
+            func.Add("}");
+        }
+
+
+
         Dictionary<string, List<string>> ITreeCollectionCodeCreator.CreateCode(object obj, ObjectFormulaTree[] trees, string className, string constructorModifier, bool checkValue)
         {
-            typeCreator = performer.GetLaguageObject<ITypeCreator>(this);
-            classCodeCreator = performer.GetLaguageObject<IClassCodeCreator>(this);
             this.trees = trees;
             IList<string> variables;
             IList<string> initializers;
             List<string> l = new List<string>();
-            ITreeCodeCreator local = null;
+            //          l.Add(" : FormulaEditor.Interfaces.ITreeCollectionProxy");
+            //        local = null;
             var lt = PreCreateCode(obj, out local, out variables, out initializers, className);
             List<string> ltt = PostCreateCode(local, obj, lt, variables, initializers,
                          constructorModifier + " " + className,
@@ -92,144 +173,176 @@ namespace DataPerformer.Formula.Java
             return d;
         }
 
-        private List<string> PostCreateCode(ITreeCodeCreator local, object ob, IList<string> lcode,
-     IList<string> variables, IList<string> initializers, string consturctor, bool checkValue = true)
+        bool GetState(object obj)
         {
-            List<string> l = new();
-            performer.Add(l, lcode as List<string>, 1);
-            int nTree = local.Trees.Length;
-            l.Add("");
-             l.Add("init() : void");
-            l.Add("{");
-            if (ob is IMeasurements)
+            bool b = false;
+            var attr = performer.GetAttribute<CodeCreatorAttribute>(obj);
+            if (attr != null)
             {
-                l.Add("\tvar all = this.getAllMeasurements();");
+                b = attr.InitialState;
             }
-            performer.Add(l, initializers as List<string>, 1);
-            l.Add("}");
-            l.Add("");
-            foreach (string s in variables)
-            {
-                l.Add("" + s);
-            }
-            if (checkValue)
-            {
-            }
-            return l;
+            return b;
         }
 
-        private List<string> PreCreateCode(object obj, out ITreeCodeCreator local,
-             out IList<string> variables, out IList<string> initializers, string current)
+        public  IList<string> StaticJavaCreateCode(object obj, ObjectFormulaTree[] trees, ITreeCodeCreator creator,
+    out ITreeCodeCreator local,
+     out IList<string> variables,
+     out IList<string> initializers, string current)
         {
-            Exception exception;
+            List<string> code = new List<string>();
+            List<string> vari = new List<string>();
+            List<string> init = new List<string>();
+            var measurements = obj as IMeasurements;
             try
             {
-                var treeCodeCreator = performer.GetLaguageObject<ITreeCodeCreator>(this);
-                var classCodeCreator = performer.GetLaguageObject<IClassCodeCreator>(this);
-                if (classCodeCreator is ICurrentObject currentObject)
+                var values = new List<int>();
+                local = creator.Create(obj, trees);
+                IList<ObjectFormulaTree> lt = local.Trees;
+                var ct = DataPerformerFormula.Get(obj as IDataConsumer, lt.ToArray());
+                bool state = GetState(obj);
+                for (int i = 0; i < lt.Count; i++)
                 {
-                    var co = currentObject.CurrentObject;
-                    if (co != this.current)
+                    var tree = lt[i];
+                    var op = tree.Operation;
+                    foreach (var ii in ct)
                     {
-                        this.current = co;
-                        if (co is ITreeCollection collection)
+                        if (ii[0] == i)
                         {
-                            trees = collection.Trees;
+                            var att = performer.GetAttribute<InternalVariableAttribute>(op);
+                            if (att == null)
+                            {
+                                var mtt = "measurement" + ii[0];
+                                vari.Add(mtt + " : " + "IMeasurement = new FictiveMeasurement();");
+                                init.Add("this." + mtt + " = all[" + ii[1] +
+                                    "].getMeasurement(" + ii[2] + ");");
+                            }
+                            else if (att.IsDerivation)
+                            {
+                                var vtt = "value" + ii[0];
+                                vari.Add(vtt + " : IValue = new FictiveValue();");
+                            }
+                            goto m;
                         }
                     }
-                }
-
-                var lcode = CreateCode(obj, trees, treeCodeCreator,
-   out local, out variables, out initializers, current);
-                ObjectFormulaTree[] tr = local.Trees;
-                foreach (ObjectFormulaTree tree in tr)
-                {
-                    AddTree(tree, initializers, variables);
-                }
-                var l = new List<string>();
-                l.Add("calculateTree() : void");
-                l.Add("{");
-                l.Add("\tthis.success = true;");
-                performer.Add(l, lcode as List<string>, 1);
-                l.Add("}");
-                foreach (ObjectFormulaTree tree in tr)
-                {
-                    AddTree(tree, initializers, variables);
-                }
-                l.Add("void calculateTree()");
-                l.Add("{");
-                l.Add("\tthis.success = true;");
-                performer.Add(l, lcode as List<string>, 1);
-                l.Add("}");
-                return l;
-            }
-            catch (Exception e)
-            {
-                exception = IncludedException.Get(e);
-            }
-            throw exception;
-        }
-
-        IList<string> CreateCode(object obj, ITreeCodeCreator creator,
-                ObjectFormulaTree tree, List<ObjectFormulaTree> busy)
-        {
-            List<ObjectFormulaTree> l = new List<ObjectFormulaTree>();
-            GetList(tree, l, busy);
-            IList<string> lvr;
-            IList<string> lpr;
-            List<string> cc = new List<string>();
-            for (int i = 0; i < l.Count; i++)
-            {
-                ObjectFormulaTree tr = l[i];
-                List<string> p = new List<string>();
-                string rr = creator[tr];
-                for (int j = 0; j < tr.Count; j++)
-                {
-                    ObjectFormulaTree chc = tr[j];
-                    if (chc == null)
+                    if (state & (measurements != null))
                     {
-                        continue;
+                        if (!GetState(op))
+                        {
+                            continue;
+                        }
+                        var att = performer.GetAttribute<InternalVariableAttribute>(op);
+
+                        if (att != null)
+                        {
+                            if (att.IsDerivation)
+                            {
+                                if (op is IDerivation der)
+                                {
+                                    var d = der.Derivation;
+                                    for (var j = 0; j < measurements.Count; j++)
+                                    {
+                                        var m = measurements[j];
+                                        if (m == op)
+                                        {
+                                            var mtt = "value" + i;
+                                            vari.Add(mtt + " : IValue = new FictiveValue();");
+                                            init.Add("this." + mtt + " = this.output[" + j + "];");
+                                            values.Add(i);
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                for (var j = 0; j < measurements.Count; j++)
+                                {
+                                    var m = measurements[j];
+                                    if (m == op)
+                                    {
+                                        var mtt = "value" + i;
+                                        init.Add("this." + mtt + " = this.output[" + j + "];");
+                                        values.Add(i);
+                                    }
+                                }
+
+                            }
+                        }
                     }
-                    p.Add(creator[chc]);
+                m: continue;
                 }
-                var c = creator.CreateCode(obj, tr, rr, p.ToArray());
-                cc.AddRange(c["code"]);
+                var loc = local as BaseTreeCodeCreator;
+                loc.Values = values;
+                if (local.Optional.Count > 0)
+                {
+                    return CreateOptionalCode(obj, local, out variables, out initializers);
+                }
+                foreach (ObjectFormulaTree t in lt)
+                {
+                    string ret = local[t];
+                    IList<string> par = new List<string>();
+                    int n = t.Count;
+                    for (int i = 0; i < n; i++)
+                    {
+                        ObjectFormulaTree child = t[i];
+                        if (child == null)
+                        {
+                            continue;
+                        }
+                        par.Add(local[child]);
+                    }
+                    IList<string> lv;
+                    IList<string> lp;
+                    var c = local.CreateCode(obj, t, ret, par.ToArray<string>());
+                    lv = c["variables"];
+                    if (lv != null)
+                    {
+                        if (lv.Count > 0)
+                        {
+                            vari.AddRange(lv);
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    lp = c["initializers"];
+                    if (lp != null)
+                    {
+                        init.AddRange(lp);
+                    }
+                    if (creator.GetConstValue(t) == null)
+                    {
+                        code.AddRange(c["code"]);
+                    }
+                    else if (creator.GetConstValue(t).Equals("\"\""))
+                    {
+                        code.AddRange(c["code"]);
+                    }
+                }
+                variables = vari;
+                initializers = init;
+                return code;
             }
-            return cc;
+            catch (Exception exception)
+            {
+                var ex = IncludedException.Get(exception);
+                ex.HandleException();
+            }
+            local = null;
+            variables = null;
+            initializers = null;
+            return null;
         }
 
-        /// <summary>
-        /// Creates code
-        /// </summary>
-        /// <param name="trees">Trees</param>
-        /// <param name="creator">Code creator</param>
-        /// <param name="local">Local code creator</param>
-        /// <param name="variables">Variables</param>
-        /// <param name="initializers">Initializers</param>
-        /// <returns>List of code strings</returns>
-        IList<string> CreateCodeLocal(object obj, ObjectFormulaTree[] trees, ITreeCodeCreator creator, out ITreeCodeCreator local,
-
-             out IList<string> variables, out IList<string> initializers, string current)
-        {
-        }
-
-        /// <summary>
-        /// Creates code
-        /// </summary>
-        /// <param name="trees">Trees</param>
-        /// <param name="creator">Code creator</param>
-        /// <param name="variables">Variables</param>
-        /// <param name="initializers">Initializers</param>
-        /// <returns>List of code strings</returns>
-        public IList<string> CreateCode(object obj, ObjectFormulaTree[] trees, ITreeCodeCreator creator,
-            
+        IList<string> JaveCreateCode(object obj, ObjectFormulaTree[] trees, ITreeCodeCreator creator,
+            out ITreeCodeCreator local,
              out IList<string> variables, out IList<string> initializers, string current)
         {
             Exception ex;
             try
             {
-                ITreeCodeCreator local = null;
-                IList<string> l = CreateCodeLocal(obj, trees, creator, out local,
+                local = null;
+                IList<string> l = StaticJavaCreateCode(obj, trees, creator, out local,
                     out variables, out initializers, current);
                 ObjectFormulaTree[] lt = local.Trees;
                 foreach (ObjectFormulaTree tree in lt)
@@ -268,22 +381,209 @@ namespace DataPerformer.Formula.Java
             throw ex;
         }
 
-   
-
-
-
-        private void AddTree(ObjectFormulaTree tree, IList<string> init, IList<string> func)
+        IList<string> CreateOptionalCode(object obj, ITreeCodeCreator creator, out IList<string> variables, out IList<string> initializers)
         {
-            int n = StaticCodeCreator.GetNumber(local, tree);
-            string tid = local[tree];
-            string f = "get_" + n;
-            // init.Add("this.mapOperations.set(" + n + ", this." + f + ");");
-            func.Add("");
-            func.Add("object " + f + "()");
-            func.Add("{");
-            func.Add("\treturn this.success ? this." + tid + " null;");
-            func.Add("}");
+            List<string> code = new List<string>();
+            List<string> vari = new List<string>();
+            List<string> init = new List<string>();
+            IList<ObjectFormulaTree> lt = creator.Trees;
+            IList<ObjectFormulaTree> opt = creator.Optional;
+            List<ObjectFormulaTree> busy = new List<ObjectFormulaTree>();
+            List<ObjectFormulaTree> conds = new List<ObjectFormulaTree>();
+            Dictionary<ObjectFormulaTree, ObjectFormulaTree> pch = new Dictionary<ObjectFormulaTree, ObjectFormulaTree>();
+            foreach (ObjectFormulaTree t in opt)
+            {
+                for (int i = 0; i < t.Count; i++)
+                {
+                    pch[t[i]] = t;
+                }
+            }
+            foreach (ObjectFormulaTree t in lt)
+            {
+                IList<string> par = new List<string>();
+                if (busy.Contains(t))
+                {
+                    continue;
+                }
+                string ret = creator[t];
+                if (pch.ContainsKey(t))
+                {
+                    ObjectFormulaTree oft = pch[t];
+                    string rcr = creator[oft];
+                    busy.Add(oft);
+                    ObjectFormulaTree cond = oft[0];
+                    for (int i = 0; i < cond.Count; i++)
+                    {
+                        ObjectFormulaTree chc = cond[i];
+                        if (chc == null)
+                        {
+                            continue;
+                        }
+                        busy.Add(chc);
+                        par.Add(creator[chc]);
+                    }
+                    IList<string> lvc;
+                    IList<string> lpc;
+                    string rc = creator[cond];
+                    if (!conds.Contains(cond))
+                    {
+                        conds.Add(cond);
+                        var cc = creator.CreateCode(obj, cond, rc, par.ToArray());
+                        lvc = cc["variables"];
+                        if (lvc != null)
+                        {
+                            vari.AddRange(lvc);
+                        }
+                        lpc = cc["initializers"];
+                        if (lpc != null)
+                        {
+                            init.AddRange(lpc);
+                        }
+                        if (creator.GetConstValue(cond) == null)
+                        {
+                            code.AddRange(cc["code"]);
+                        }
+                    }
+                    code.Add("if (" + rc + ")");
+                    code.Add("{");
+                    for (int k = 1; k < 3; k++)
+                    {
+                        ObjectFormulaTree tt = oft[k];
+                        if (k == 0)
+                        {
+                            IList<string> lvr;
+                            IList<string> lpr;
+                            string rr = creator[tt];
+                            List<string> p = new List<string>();
+                            if (k > 0)
+                            {
+                                for (int i = 0; i < tt.Count; i++)
+                                {
+                                    ObjectFormulaTree chc = tt[i];
+                                    if (chc == null)
+                                    {
+                                        continue;
+                                    }
+                                    busy.Add(chc);
+                                    p.Add(creator[chc]);
+                                }
+                            }
+                            var cr = creator.CreateCode(obj, tt, rr, p.ToArray<string>());
+                            lvr = cr["variables"];
+                            if (lvr != null)
+                            {
+                                vari.AddRange(lvr);
+                            }
+                            lpr = cr["initializers"];
+                            if (lpr != null)
+                            {
+                                init.AddRange(lpr);
+                            }
+                            if (creator.GetConstValue(t) == null)
+                            {
+                                code.AddRange(cr["code"]);
+                            }
+                        }
+                        else
+                        {
+                            code.AddRange(CreateCode(obj, creator, tt, busy));
+                            code.Add(rcr + " = " + creator[tt] + ";");
+                        }
+                        if (k == 1)
+                        {
+                            code.Add("}");
+                            code.Add("else");
+                            code.Add("{");
+                        }
+                    }
+                    code.Add("}");
+                    continue;
+                }
+                busy.Add(t);
+                int n = t.Count;
+                for (int i = 0; i < n; i++)
+                {
+                    ObjectFormulaTree child = t[i];
+                    busy.Add(child);
+                    if (child == null)
+                    {
+                        continue;
+                    }
+                    par.Add(creator[child]);
+                }
+                IList<string> lv;
+                IList<string> lp;
+                var c = creator.CreateCode(obj, t, ret, par.ToArray<string>());
+                lv = c["variables"];
+                if (lv != null)
+                {
+                    vari.AddRange(lv);
+                }
+                lp = c["initializers"];
+                if (lp != null)
+                {
+                    init.AddRange(lp);
+                }
+                if (creator.GetConstValue(t) == null)
+                {
+                    code.AddRange(c["code"]);
+                }
+            }
+            List<string> lvar = new List<string>();
+            foreach (string s in vari)
+            {
+                if (!lvar.Contains(s))
+                {
+                    lvar.Add(s);
+                }
+            }
+            variables = lvar;
+            List<string> lini = new List<string>();
+            foreach (string s in init)
+            {
+                if (!lini.Contains(s))
+                {
+                    lini.Add(s);
+                }
+            }
+            initializers = lini;
+            return code;
         }
+
+
+        static FormulaEditor.Performer formulaPerformer = new FormulaEditor.Performer();
+
+
+
+        IList<string> CreateCode(object obj, ITreeCodeCreator creator,
+            ObjectFormulaTree tree, List<ObjectFormulaTree> busy)
+        {
+            List<ObjectFormulaTree> l = new List<ObjectFormulaTree>();
+            formulaPerformer.GetList(tree, l, busy);
+            IList<string> lvr;
+            IList<string> lpr;
+            List<string> cc = new List<string>();
+            for (int i = 0; i < l.Count; i++)
+            {
+                ObjectFormulaTree tr = l[i];
+                List<string> p = new List<string>();
+                string rr = creator[tr];
+                for (int j = 0; j < tr.Count; j++)
+                {
+                    ObjectFormulaTree chc = tr[j];
+                    if (chc == null)
+                    {
+                        continue;
+                    }
+                    p.Add(creator[chc]);
+                }
+                var c = creator.CreateCode(obj, tr, rr, p.ToArray());
+                cc.AddRange(c["code"]);
+            }
+            return cc;
+        }
+
+  
 
 
     }

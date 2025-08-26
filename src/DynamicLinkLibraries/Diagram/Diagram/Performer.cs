@@ -1702,16 +1702,6 @@ namespace Diagram.UI
             return o + "";
         }
 
-        /// <summary>
-        /// Converts to string
-        /// </summary>
-        /// <param name="a">Double value</param>
-        /// <returns>String</returns>
-        public string DoubleToString(double a)
-        {
-            return a.ToString("G17", System.Globalization.CultureInfo.InvariantCulture);
-        }
-
 
         /// <summary>
         /// Any to string

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Diagram.Interfaces;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 using ErrorHandler;
@@ -8,10 +9,10 @@ namespace Diagram.UI
     /// <summary>
     /// Combined class code creator
     /// </summary>
-    public class CombinedCodeCreator : IClassCodeCreator
+    public class CombinedCodeCreator : IClassCodeCreator, ICurrentObject
     {
 
-        IClassCodeCreator current;
+        object current;
         public CombinedCodeCreator(string language)
         {
             Language = language;   
@@ -23,8 +24,10 @@ namespace Diagram.UI
         protected  IDesktopCodeCreator DesktopCodeCreator
         { get; set; }
 
- 
-   
+        object ICurrentObject.CurrentObject => current;
+
+
+
         #region Fields
 
         List<IClassCodeCreator> list = new List<IClassCodeCreator>();
@@ -35,6 +38,7 @@ namespace Diagram.UI
 
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {
+            current = obj;
             foreach (IClassCodeCreator creator in list)
             {
                List<string> l = creator.CreateCode(preffix, obj, volume);

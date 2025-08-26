@@ -180,7 +180,7 @@ namespace DataPerformer.Formula.TypeScript
                     }
                     m: continue;
                 }
-                var loc = local as TypeScriptCodeCreator;
+                var loc = local as TreeCodeCreator;
                 loc.Values = values;
                 if (local.Optional.Count > 0)
                 {

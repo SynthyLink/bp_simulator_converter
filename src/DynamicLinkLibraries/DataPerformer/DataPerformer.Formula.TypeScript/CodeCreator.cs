@@ -32,7 +32,7 @@ namespace DataPerformer.Formula.TypeScript
             set;
         }
 
-        private static ITreeCodeCreator codeCreator = TypeScriptCodeCreator.CodeCreator;
+        private static ITreeCodeCreator codeCreator = TypeScript.TreeCodeCreator.CodeCreator;
 
         /// <summary>
         /// Local code creator
@@ -178,7 +178,7 @@ namespace DataPerformer.Formula.TypeScript
         private List<string> PreCreateCode(object obj, out ITreeCodeCreator local,
              out IList<string> variables, out IList<string> initializers, string current)
         {
-            var lcode = TypeScriptCodeCreator.CreateCode(obj, trees, codeCreator,
+            var lcode = TypeScript.TreeCodeCreator.CreateCode(obj, trees, codeCreator,
                 out local, out variables, out initializers, current);
             ObjectFormulaTree[] tr = local.Trees;
             foreach (ObjectFormulaTree tree in tr)
