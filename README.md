@@ -8,12 +8,12 @@ computer games.
 
 For them, it is possible to use general mathematics, defined by mnemonic schemes. This project is dedicated to such an environment. Like the Unity gaming environment, this development is multiplatform. The proposed environment has a clean architecture and supports the following programming languages:
 C#,
-TypeScript
+TypeScript,
+Java.
 
 The following languages are planned to be added:
 
 C++,
-Java,
 Python,
 Go,
 Rust.
