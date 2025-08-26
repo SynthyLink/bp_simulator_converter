@@ -90,11 +90,9 @@ namespace Diagram.Java
 
         protected List<string> CreateExt(string preffix, object ob)
         {
-            var creator = Performer.GetLaguageObject<IClassCodeCreator>(this);
+            var creator = Performer.GetLaguageObject<IClassCodeCreator>("Java");
             var s = creator.CreateCode(preffix, ob, "BaseClassName")[0];
             var l = new List<string>();
-           /* var t = ob.GetType().Name;
-            var s = classes[t];*/
             l.Add("protected class " + preffix + " extends " + s);
             l.Add("{");
             l.Add("\tpublic " + preffix + "(String name, IDesktop desktop) {");
@@ -102,7 +100,7 @@ namespace Diagram.Java
             return l;
         }
 
-        protected virtual List<string> CreateCode(string preffix, object obj, string volume)
+        protected virtual List<string> CreateCode(string prefix, object obj, string volume)
         {
             foreach (Func<object, bool> key in dictionary.Keys)
             {
@@ -117,11 +115,33 @@ namespace Diagram.Java
                             return new List<string> { s };
 
                         }
+                        else if (volume == "constructor")
+                        {
+                            var t = obj.GetType().Name;
+                            var s = classes[t];
+                            var lc = new List<string>();
+                         //   lc.Add(prefix + "(String name, IDesktop desktop) {");
+                         //   lc.Add("\tsuper(name, desktop);");
+                            return lc;
+                        }
+                        else if (volume == "post")
+                        {
+                            var t = obj.GetType().Name;
+                            var s = classes[t];
+                            var lc = new List<string>();
+                            //   lc.Add(prefix + "(String name, IDesktop desktop) {");
+                            //   lc.Add("\tsuper(name, desktop);");
+                            return lc;
+                        }
+                        else
+                        {
+                            throw new OwnNotImplemented();
+                        }
                     }
-                    var l = CreateExt(preffix, obj);
-                    var ll = dictionary[key](preffix, obj);
+                    var l = CreateExt(prefix, obj);
+                    var ll = dictionary[key](prefix, obj);
                     Performer.Add(l, ll, 2);
-                    l.Add("}");
+    //                l.Add("}");
                     l.Add("");
                     return l;
                 }
@@ -210,7 +230,9 @@ namespace Diagram.Java
 
         protected virtual Dictionary<string, List<string>> Create(IFeedbackCollectionHolder holder)
         {
-            throw new OwnNotImplemented();
+            var d = new Dictionary<string, List<string>>();
+            d["code"] = new List<string>();
+            return d;
         }
 
 

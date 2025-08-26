@@ -34,19 +34,17 @@ namespace DataPerformer.Portable
 
         public override T GetLaguageObject<T>(string o) where T : class
         {
-            var t = base.GetLaguageObject<T>(o);
-            var type = typeof(T);
-            if (t == null)
+            var x = base.GetLaguageObject<T>(o);
+            if (x != null)
             {
-                var s = GetLanguage(o);
-                if (type == tvcc)
-                {
-                    return StaticExtensionDataPerformerInterfaces.VariableCodeCreators[s] as T;
-                }
-
+                return x;
             }
-
-            return t;
+            var type = typeof(T);
+            if (type == tvcc)
+            {
+                return StaticExtensionDataPerformerInterfaces.VariableCodeCreators[o] as T;
+            }
+            return null;
         }
 
 

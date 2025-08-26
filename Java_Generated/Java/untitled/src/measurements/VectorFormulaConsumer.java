@@ -9,8 +9,7 @@ public class VectorFormulaConsumer extends  DataConsumerMeasurements {
     }
 
     @Override
-    public void updateMeasurements()
-    {
+    public void updateMeasurements() {
         feedback.setFeedbacks();
         calculateTree();
         save();
@@ -22,16 +21,14 @@ public class VectorFormulaConsumer extends  DataConsumerMeasurements {
         setFeedback();
     }
 
-    protected  void calculateTree()
-    {
+    protected void calculateTree() {
     }
 
-    protected  void init()
-    {
+    protected void init() {
 
     }
 
-    protected  void save()
-    {
+    protected void save() {
     }
+
 }

@@ -22,7 +22,7 @@ public class DataConsumer extends CategoryObject implements IDataConsumer, IPost
 
     ITimeMeasurementProvider timeMeasurement;
 
-    boolean success = true;
+    protected boolean success = true;
 
     protected IDataConsumer dataConsumer;
 

@@ -1,6 +1,7 @@
 package measurements;
 
 import diagram.interfaces.IDesktop;
+import general_service.Entry;
 import general_service.interfaces.IAlias;
 import general_service.interfaces.IFeedbackCollection;
 import measurements.interfaces.IMeasurement;
@@ -16,6 +17,7 @@ public class DataConsumerMeasurements  extends  DataConsumer implements IMeasure
 
 
     public DataConsumerMeasurements(String name, IDesktop desktop) {
+
         super(name, desktop);
     }
 
@@ -64,7 +66,7 @@ public class DataConsumerMeasurements  extends  DataConsumer implements IMeasure
         map.get(name).setValue(obj);
     }
 
-    protected void setMap(java.util.Map<String, general_service.Enrty<Object, Object>> map)
+    protected void setMap(java.util.Map<String, Entry<Object, Object>> map)
     {
        performer.copyMap(map, this.map);
       // map.put("nn", new general_service.Enrty<Object, Object>(null, null));
@@ -75,7 +77,7 @@ public class DataConsumerMeasurements  extends  DataConsumer implements IMeasure
 
     }
 
-    java.util.Map<String, general_service.Enrty<Object, Object>> map = new HashMap<>();
+    java.util.Map<String, Entry<Object, Object>> map = new HashMap<>();
 
     protected IFeedbackCollection feedback;
 

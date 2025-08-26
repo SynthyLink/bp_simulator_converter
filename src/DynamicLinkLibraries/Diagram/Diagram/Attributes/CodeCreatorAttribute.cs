@@ -18,7 +18,7 @@ namespace Diagram.UI.Attributes
         } = false;
 
         /// <summary>
-        /// The is sysem of differential equations sign
+        /// The is system of differential equations sign
         /// </summary>
         public bool IsSysemOfDifferentialEquations
         {

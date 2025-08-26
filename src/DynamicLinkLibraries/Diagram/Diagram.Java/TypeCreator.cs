@@ -40,7 +40,7 @@ namespace Diagram.Java
         {
             if (o.GetType() == typeof(double))
             {
-                return "new double[0]";
+                return "double[]";
             }
             throw new OwnNotImplemented();
         }

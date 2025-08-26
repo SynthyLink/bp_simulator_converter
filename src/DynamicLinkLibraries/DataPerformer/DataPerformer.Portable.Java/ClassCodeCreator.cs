@@ -12,15 +12,19 @@ namespace DataPerformer.Portable.Java
     [Language("Java")]
     public class ClassCodeCreator : Diagram.Java.ClassCodeCreator, ITypeCreator, IAliasCodeCreator
     {
-        protected void InitPortable()
+        protected virtual void InitPortable()
         {
             Performer = new DataPerformer.Portable.Performer();
+            this.AddClassCodeCreator();
+            this.AddAliasCreator();
+
         }
+
+
 
         public ClassCodeCreator() : base(false)
         {
             InitPortable();
-            this.AddClassCodeCreator();
             
             classes = new Dictionary<string, string>()
             {
@@ -42,15 +46,11 @@ namespace DataPerformer.Portable.Java
            this.AddClassCodeCreator(); 
         
         }
-
-
-  
-
     
 
         static List<string> CreateDataLink(string preffix, object obj)
         {
-            return new List<string>() { "}" };
+            return new List<string>() { "}", "}" };
         }
 
 
@@ -104,13 +104,14 @@ namespace DataPerformer.Portable.Java
             var typeCreator = Performer.GetLaguageObject<ITypeCreator>(this);
            var d = new Dictionary<string, List<string>>();
             var l = new List<string>();
-            l.Add("java.util.Map< String, general_service.Enrty< Object, Object >> " + id + " = new HashMap<>();");
+            l.Add("java.util.Map< String, general_service.Entry<Object, Object >> " + id + " = new java.util.HashMap<>();");
             var names = alias.AliasNames;
             foreach (var name in names)
             {
                 var type =  typeCreator.GetType(alias.GetType(name));
+                type = "new " +  type.Replace("[]", "[0]");
                 var val = typeCreator.GetStringValue(alias[name]);
-                var s = id + ".put(\"" + name + "new general_service.Enrty<Object, Object>(";
+                var s = id + ".put(\"" + name + "\", new general_service.Entry<Object, Object>(";
                 s += type + ", " + val + "));";
                 l.Add(s);
             }

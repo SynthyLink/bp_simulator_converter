@@ -11,6 +11,7 @@ using FormulaEditor;
 using FormulaEditor.CodeCreators;
 using FormulaEditor.CodeCreators.Interfaces;
 using FormulaEditor.Interfaces;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Threading;
 
@@ -64,7 +65,7 @@ namespace DataPerformer.Formula.Java
                 l.Add("{");
                 l.Add("\tthis.trees = trees;");
             }
-            l.Add("init() : void");
+            l.Add("public void init()");
             l.Add("{");
             if (ob is IMeasurements)
             {
@@ -98,9 +99,9 @@ namespace DataPerformer.Formula.Java
                 AddTree(tree, initializers, variables);
             }
             var l = new List<string>();
-            l.Add("calculateTree() : void");
+            l.Add("public void calculateTree()");
             l.Add("{");
-            l.Add("\tthis.success = true;");
+            l.Add("\tsuccess = true;");
             performer.Add(l, lcode as List<string>, 1);
             l.Add("}");
             return l;
@@ -113,9 +114,9 @@ namespace DataPerformer.Formula.Java
             string f = "get_" + n;
             // init.Add("this.mapOperations.set(" + n + ", this." + f + ");");
             func.Add("");
-            func.Add(f + "() : any");
+            func.Add("Object " + f + "()");
             func.Add("{");
-            func.Add("\treturn this.success ? this." + tid + " : undefined;");
+            func.Add("\treturn success ? this." + tid + " : null;");
             func.Add("}");
         }
 
@@ -144,10 +145,17 @@ namespace DataPerformer.Formula.Java
             {
                 output = DataPerformerFormula.GetOutput(mm, ltr);
             }
-            var ll = new List<string>();
-            ll.Add("save() : void {");
-            var s = "\tvar v = this.variables;";
             var attr = performer.GetAttribute<CodeCreatorAttribute>(obj);
+            if (attr == null)
+            {
+                var dict = new Dictionary<string, List<string>>();
+                dict["code"] = l;
+                return dict;
+
+            }
+            var ll = new List<string>();
+            ll.Add("void save(){");
+            var s = "\tvar v = this.variables;";
             if (attr != null)
             {
                 if (attr.IsSysemOfDifferentialEquations)
@@ -212,8 +220,9 @@ namespace DataPerformer.Formula.Java
                             if (att == null)
                             {
                                 var mtt = "measurement" + ii[0];
-                                vari.Add(mtt + " : " + "IMeasurement = new FictiveMeasurement();");
-                                init.Add("this." + mtt + " = all[" + ii[1] +
+                                var mmt = "measurements.interfaces.IMeasurement ";
+                                vari.Add(mmt + mtt + ";");
+                                init.Add(mtt + " = all[" + ii[1] +
                                     "].getMeasurement(" + ii[2] + ");");
                             }
                             else if (att.IsDerivation)
@@ -362,12 +371,12 @@ namespace DataPerformer.Formula.Java
                         def = typeCreator.GetDefaultValue(ret) + "";
                         if (def.Length > 0)
                         {
-                            s = id + " : " + t + " = " + def;
+                            s = t + " "  + id +  " = " + def;
                         }
                     }
                     else
                     {
-                        s = id + " : " + t + " = " + cv;
+                        s = t + " " + id + " = " + cv;
                     }
                     s += ";";
                     variables.Add(s);

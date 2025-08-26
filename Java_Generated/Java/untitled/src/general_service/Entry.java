@@ -3,7 +3,7 @@ package general_service;
 
 import java.util.Map;
 
-public class Enrty<T, S> implements Map.Entry<T, S> {
+public class Entry<T, S> implements Map.Entry<T, S> {
     /**
      * Returns the key corresponding to this entry.
      *
@@ -16,7 +16,7 @@ public class Enrty<T, S> implements Map.Entry<T, S> {
 
     S value;
 
-    public Enrty(T key, S value)
+    public Entry(T key, S value)
     {
         this.key = key;
         this.value = value;
