@@ -4,6 +4,7 @@ import category_theory.CategoryObject;
 import diagram.interfaces.IDesktop;
 import general_service.Performer;
 import general_service.interfaces.IPostSetArrow;
+import general_service.interfaces.IValueSetterFactory;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IMeasurements;
 import measurements.time.interfaces.ITimeMeasurementConsumer;
@@ -26,12 +27,16 @@ public class DataConsumer extends CategoryObject implements IDataConsumer, IPost
 
     protected IDataConsumer dataConsumer;
 
-
+    protected IValueSetterFactory valueSetterFactory;
 
     protected List<IMeasurements> measurements = new ArrayList<>();
 
-    public DataConsumer(String name, IDesktop desktop) {
+    protected Object variable;
+
+    public DataConsumer(String name, IDesktop desktop)
+    {
         super(name, desktop);
+        valueSetterFactory = desktop.getValueSetterFactory();
     }
 
 

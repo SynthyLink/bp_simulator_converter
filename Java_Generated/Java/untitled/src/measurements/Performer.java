@@ -3,7 +3,6 @@ package measurements;
 import category_theory.interfaces.ICategoryObject;
 import general_service.interfaces.IAction;
 import general_service.interfaces.IAliasName;
-import general_service.interfaces.IVariableSetter;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IDerivation;
 import measurements.interfaces.IMeasurement;

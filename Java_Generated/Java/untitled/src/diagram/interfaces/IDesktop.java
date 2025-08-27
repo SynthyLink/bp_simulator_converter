@@ -4,6 +4,8 @@ import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
 import error_handler.interfaces.ICheck;
 import error_handler.interfaces.IErrorHandler;
+import general_service.interfaces.IValueSetter;
+import general_service.interfaces.IValueSetterFactory;
 
 import java.util.List;
 
@@ -29,4 +31,6 @@ public interface IDesktop {
     IErrorHandler getErrorHandler();
 
     void init();
+
+    IValueSetterFactory getValueSetterFactory();
 }

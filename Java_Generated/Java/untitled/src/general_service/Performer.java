@@ -1,23 +1,12 @@
 package general_service;
 
 import java.lang.reflect.Array;
-import java.util.HashMap;
 import java.util.Map;
 
-import category_theory.CategoryArrow;
 import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
 import error_handler.interfaces.IErrorHandler;
-import general_service.interfaces.IAction;
-import general_service.interfaces.IActionT;
-import general_service.interfaces.IAliasName;
-import general_service.interfaces.IVariableSetter;
-import measurements.interfaces.IDataConsumer;
-import measurements.interfaces.IDerivation;
-import measurements.interfaces.IMeasurement;
-import measurements.time.TimeMeasurementProvider;
-import runtime.IDataRuntime;
 
 
 public class Performer {

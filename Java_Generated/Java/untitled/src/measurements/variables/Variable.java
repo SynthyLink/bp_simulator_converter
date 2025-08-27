@@ -1,16 +1,17 @@
 package measurements.variables;
 import general_service.interfaces.IValue;
+import general_service.interfaces.IValueSetter;
+import general_service.interfaces.IValueSetterFactory;
 import measurements.interfaces.IDerivation;
 import measurements.interfaces.IMeasurement;
-import general_service.interfaces.IVariableSetter;
 
 import java.lang.reflect.Array;
 
 public class Variable implements IMeasurement,  IValue, IDerivation {
-    public Variable(Object type, String name) {
+    public Variable(Object type, String name, IValueSetterFactory factory) {
         this.type = type;
         this.name = name;
-        setter = mPerformer.getSetter(type);
+        setter = factory.getValueSetter(type);
         value = setter.getDefaultValue();
     }
 
@@ -61,7 +62,7 @@ public class Variable implements IMeasurement,  IValue, IDerivation {
 
     IMeasurement derivation;
 
-    IVariableSetter setter;
+    IValueSetter setter;
     measurements.Performer mPerformer = new measurements.Performer();
 }
 

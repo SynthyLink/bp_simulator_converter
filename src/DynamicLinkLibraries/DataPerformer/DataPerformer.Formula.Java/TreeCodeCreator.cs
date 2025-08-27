@@ -51,7 +51,7 @@ new Dictionary<string, string[]> {
             {"f", new string[] {"Math.asin(", "[0])" }},
             {"g", new string[] {"Math.acos(", "[0])" }},
             {"?", new string[] { "(", ")"}},
-            {"-", new string[] {" = -(", "[0])"}},
+            {"-", new string[] {" -(", "[0])"}},
             {"A", new string[] {"Math.abs(", "[0])"}},
 };
 
@@ -301,8 +301,8 @@ new Dictionary<string, string[]> {
                         {
                             var anvn = "value" + num;
                             var lan = new List<string>();
-                            lan.Add("this.variable = " + anvn + ".getIValue();");
-                            lan.Add("if (this.check(avn)) { this.success = false; return; }");
+                            lan.Add("variable = " + anvn + ".getIValue();");
+                            lan.Add("if (check(variable)) { this.success = false; return; }");
                             if (!att.IsDerivation)
                             {
                                 var ss = "IValue value" + num + ";";
@@ -409,7 +409,7 @@ new Dictionary<string, string[]> {
                 }
             }
             list.Add(s);
-            list.Add("if (check(" + ret + ")) { success = false; return; } ");
+            list.Add("if (check(variable)) { success = false; return; } ");
             if (s.Contains("this.measurement"))
             {
                 //       variables.Add("measurement" + num + " != IMeasurement");

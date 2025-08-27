@@ -1,7 +1,6 @@
 package measurements;
 
 import diagram.interfaces.IDesktop;
-import general_service.interfaces.IPostSetArrow;
 
 public class VectorFormulaConsumer extends  DataConsumerMeasurements {
     public VectorFormulaConsumer(String name, IDesktop desktop) {

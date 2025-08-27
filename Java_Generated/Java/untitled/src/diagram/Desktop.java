@@ -6,6 +6,7 @@ import diagram.interfaces.IDesktop;
 import error_handler.interfaces.ICheck;
 import error_handler.interfaces.IErrorHandler;
 import general_service.interfaces.IPostSetArrow;
+import general_service.interfaces.IValueSetterFactory;
 
 
 import java.util.*;
@@ -114,26 +115,24 @@ arrowMap.put(arrow.getArrowName(), arrow);
 
     }
 
-    protected void postSet()
-    {
-        for (int i = 0; i < arrows.size(); i++)
-        {
-            var a = arrows.get(i);
-            if (a instanceof IPostSetArrow postSetArrow)
-            {
+    @Override
+    public IValueSetterFactory getValueSetterFactory() {
+        return valueSetterFactory;
+    }
+
+    protected IValueSetterFactory valueSetterFactory = new general_service.setters.factory.ValueSetterFactory();
+
+    protected void postSet() {
+        for (var a : arrows) {
+            if (a instanceof IPostSetArrow postSetArrow) {
                 postSetArrow.postSetArrow();
             }
         }
-
-        for (int i = 0; i < objects.size(); i++)
-        {
-            var o = objects.get(i);
-            if (o instanceof IPostSetArrow postSetArrow)
-            {
+        for (var o : objects) {
+            if (o instanceof IPostSetArrow postSetArrow) {
                 postSetArrow.postSetArrow();
             }
         }
-
     }
 
 

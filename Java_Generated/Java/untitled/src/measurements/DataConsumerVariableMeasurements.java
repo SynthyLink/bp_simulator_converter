@@ -2,6 +2,7 @@ package measurements;
 
 import diagram.interfaces.IDesktop;
 import general_service.interfaces.IAlias;
+import general_service.interfaces.IValueSetterFactory;
 import measurements.interfaces.IMeasurement;
 import measurements.interfaces.IMeasurements;
 import measurements.variables.Variable;
