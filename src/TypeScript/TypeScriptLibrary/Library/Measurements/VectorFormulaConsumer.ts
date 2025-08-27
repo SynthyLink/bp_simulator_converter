@@ -1,8 +1,8 @@
 import { IDesktop } from "../Interfaces/IDesktop";
 import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
-import { DataConsumerVariadbleMeasurements } from "./DataConsumerVariableMeasurements";
+import { DataConsumerVariableMeasurements } from "./DataConsumerVariableMeasurements";
 
-export class VectorFormulaConsumer extends DataConsumerVariadbleMeasurements implements IPostSetArrow
+export class VectorFormulaConsumer extends DataConsumerVariableMeasurements implements IPostSetArrow
 {
 
   //  protected arguments: string[] = [];

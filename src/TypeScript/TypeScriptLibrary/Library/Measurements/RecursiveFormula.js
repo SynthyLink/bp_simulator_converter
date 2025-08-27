@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RecursiveFormula = void 0;
-const DataConsumerVariadbleMeasurementsStarted_1 = require("./DataConsumerVariadbleMeasurementsStarted");
-class RecursiveFormula extends DataConsumerVariadbleMeasurementsStarted_1.DataConsumerVariadbleMeasurementsStarted {
+const DataConsumerVariableMeasurementsStarted_1 = require("./DataConsumerVariableMeasurementsStarted");
+class RecursiveFormula extends DataConsumerVariableMeasurementsStarted_1.DataConsumerVariableMeasurementsStarted {
     constructor(desktop, name) {
         super(desktop, name);
         this.inputs = [];

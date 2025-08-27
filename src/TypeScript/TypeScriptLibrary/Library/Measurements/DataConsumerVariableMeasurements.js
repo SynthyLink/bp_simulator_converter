@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DataConsumerVariadbleMeasurements = void 0;
+exports.DataConsumerVariableMeasurements = void 0;
 const FictiveFeedbackCollection_1 = require("../Fiction/FictiveFeedbackCollection");
 const DataConsumer_1 = require("./DataConsumer");
 const PefrormerMeasuremets_1 = require("./PefrormerMeasuremets");
 const Variable_1 = require("./Variables/Variable");
-class DataConsumerVariadbleMeasurements extends DataConsumer_1.DataConsumer {
+class DataConsumerVariableMeasurements extends DataConsumer_1.DataConsumer {
     constructor(desktop, name) {
         super(desktop, name);
         this.output = [];
@@ -60,5 +60,5 @@ class DataConsumerVariadbleMeasurements extends DataConsumer_1.DataConsumer {
     }
     setFeedback() { }
 }
-exports.DataConsumerVariadbleMeasurements = DataConsumerVariadbleMeasurements;
+exports.DataConsumerVariableMeasurements = DataConsumerVariableMeasurements;
 //# sourceMappingURL=DataConsumerVariableMeasurements.js.map

@@ -293,17 +293,16 @@ new Dictionary<string, string[]> {
             }
             if (att != null)
             {
-                throw new OwnNotImplemented();
                 if (true)
                 {
                     if (state & GetState(op))
                     {
                         if (op is IValue)
                         {
-                            var anvn = "this.value" + num;
+                            var anvn = "value" + num;
                             var lan = new List<string>();
                             lan.Add("this.variable = " + anvn + ".getIValue();");
-                            lan.Add("if (this.check(this.variable)) { this.success = false; return; }");
+                            lan.Add("if (this.check(avn)) { this.success = false; return; }");
                             if (!att.IsDerivation)
                             {
                                 var ss = "IValue value" + num + ";";

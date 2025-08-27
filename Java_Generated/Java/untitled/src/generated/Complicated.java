@@ -21,7 +21,7 @@ public class Complicated extends Desktop
 			setMap(map);
 				}
 			
-					public void calculateTree()
+					protected void calculateTree()
 					{
 						success = true;
 						var_0[0] = this.getInternalTime();
@@ -123,7 +123,7 @@ public class Complicated extends Desktop
 			setMap(map);
 				}
 			
-					public void calculateTree()
+					protected void calculateTree()
 					{
 						success = true;
 						var_0[0] = ((double[])aliasName0.getAliasNameValue())[0];
@@ -211,7 +211,7 @@ public class Complicated extends Desktop
 			setMap(map);
 				}
 			
-					public void calculateTree()
+					protected void calculateTree()
 					{
 						success = true;
 						var_0[0] = ((double[])measurement0.getMeasurementValue())[0];
@@ -274,7 +274,7 @@ public class Complicated extends Desktop
 			setMap(map);
 				}
 			
-					public void calculateTree()
+					protected void calculateTree()
 					{
 						success = true;
 						var_0[0] = ((double[])measurement0.getMeasurementValue())[0];

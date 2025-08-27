@@ -22,7 +22,7 @@ public class One extends Desktop
 			setMap(map);
 				}
 			
-					public void calculateTree()
+					protected void calculateTree()
 					{
 						success = true;
 						var_0[0] = ((double[])aliasName0.getAliasNameValue())[0];

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VectorFormulaConsumer = void 0;
 const DataConsumerVariableMeasurements_1 = require("./DataConsumerVariableMeasurements");
-class VectorFormulaConsumer extends DataConsumerVariableMeasurements_1.DataConsumerVariadbleMeasurements {
+class VectorFormulaConsumer extends DataConsumerVariableMeasurements_1.DataConsumerVariableMeasurements {
     //  protected arguments: string[] = [];
     //   protected operationNames: Map<number, string> = new Map();
     constructor(desktop, name) {

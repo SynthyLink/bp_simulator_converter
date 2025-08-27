@@ -10,7 +10,7 @@ import { PefrormerMeasuremets } from "./PefrormerMeasuremets";
 import { Variable } from "./Variables/Variable";
 
 
-export class DataConsumerVariadbleMeasurements extends DataConsumer implements
+export class DataConsumerVariableMeasurements extends DataConsumer implements
     IMeasurements, IAlias, ISetFeedback
 {
     constructor(desktop: IDesktop, name: string)

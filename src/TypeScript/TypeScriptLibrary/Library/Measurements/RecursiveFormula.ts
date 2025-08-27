@@ -2,10 +2,10 @@
 import { IDesktop } from "../Interfaces/IDesktop";
 import { IMeasurements } from "./Interfaces/IMeasurements";
 import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
-import { DataConsumerVariadbleMeasurementsStarted } from "./DataConsumerVariadbleMeasurementsStarted";
+import { DataConsumerVariableMeasurementsStarted } from "./DataConsumerVariableMeasurementsStarted";
 
 
-export class RecursiveFormula extends DataConsumerVariadbleMeasurementsStarted implements IPostSetArrow
+export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted implements IPostSetArrow
 {
     protected inputs: IMeasurements[] = [];
 

@@ -8,7 +8,7 @@ import error_handler.interfaces.ICheck;
 
 import error_handler.interfaces.IErrorHandler;
 
-public class SimpleFeed extends Desktop
+public class ODE_Feed extends Desktop
 {
 
 	protected class CategoryObject0 extends measurements.VectorFormulaConsumer
@@ -16,12 +16,11 @@ public class SimpleFeed extends Desktop
 		public CategoryObject0(String name, IDesktop desktop) {
 			super(name,  desktop);
 			java.util.Map< String, general_service.Entry<Object, Object >> map = new java.util.HashMap<>();
-			map.put("b", new general_service.Entry<Object, Object>(new double[0], new double[]{0.0089878549198011051}));
-			map.put("f", new general_service.Entry<Object, Object>(new double[0], new double[]{0.20000000000000001}));
-			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{0.20553585603787045}));
-			map.put("c", new general_service.Entry<Object, Object>(new double[0], new double[]{0}));
-			map.put("k", new general_service.Entry<Object, Object>(new double[0], new double[]{0.29999999999999999}));
-			map.put("g", new general_service.Entry<Object, Object>(new double[0], new double[]{0.80000000000000004}));
+			map.put("b", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
+			map.put("d", new general_service.Entry<Object, Object>(new double[0], new double[]{-0.17015052092374328}));
+			map.put("c", new general_service.Entry<Object, Object>(new double[0], new double[]{0.31314560830292659}));
+			map.put("k", new general_service.Entry<Object, Object>(new double[0], new double[]{2}));
+			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
 			setMap(map);
 				}
 			
@@ -33,25 +32,25 @@ public class SimpleFeed extends Desktop
 						if (check(var_0)) { success = false; return; }
 						var_1[0] = ((double[])aliasName1.getAliasNameValue())[0];
 						if (check(var_1)) { success = false; return; }
-						var_2[0] = ((var_0[0]) * (var_1[0]));
-						if (check(var_2)) { success = false; return; } 
-						var_3[0] = ((double[])aliasName3.getAliasNameValue())[0];
-						if (check(var_3)) { success = false; return; }
-						var_4[0] = ((double[])aliasName4.getAliasNameValue())[0];
-						if (check(var_4)) { success = false; return; }
-						var_5[0] = this.getInternalTime();
-						var_6[0] = ((var_4[0]) * (var_5[0]));
-						if (check(var_6)) { success = false; return; } 
-						var_7[0] = (Math.cos(var_6[0]));
-						if (check(var_7)) { success = false; return; } 
-						var_8[0] = ((var_3[0]) * (var_7[0]));
-						if (check(var_8)) { success = false; return; } 
-						var_9[0] = ((var_2[0]) + (var_8[0]));
+						var_2[0] = this.getInternalTime();
+						var_3[0] = ((var_1[0]) * (var_2[0]));
+						if (check(var_3)) { success = false; return; } 
+						var_4[0] = (Math.sin(var_3[0]));
+						if (check(var_4)) { success = false; return; } 
+						var_5[0] = ((var_0[0]) * (var_4[0]));
+						if (check(var_5)) { success = false; return; } 
+						var_6[0] = ((double[])aliasName6.getAliasNameValue())[0];
+						if (check(var_6)) { success = false; return; }
+						var_7[0] = ((double[])aliasName7.getAliasNameValue())[0];
+						if (check(var_7)) { success = false; return; }
+						var_8[0] = ((double[])aliasName8.getAliasNameValue())[0];
+						if (check(var_8)) { success = false; return; }
+						var_9[0] = ((var_7[0]) - (var_8[0]));
 						if (check(var_9)) { success = false; return; } 
-						var_10[0] = ((double[])aliasName10.getAliasNameValue())[0];
-						if (check(var_10)) { success = false; return; }
-						var_11[0] = ((double[])aliasName11.getAliasNameValue())[0];
-						if (check(var_11)) { success = false; return; }
+						var_10[0] = ((var_6[0]) * (var_9[0]));
+						if (check(var_10)) { success = false; return; } 
+						var_11[0] = ((var_5[0]) + (var_10[0]));
+						if (check(var_11)) { success = false; return; } 
 					}
 				
 				@Override
@@ -59,19 +58,17 @@ public class SimpleFeed extends Desktop
 				{
 					var all = this.getAllMeasurements();
 					aliasName0 = new general_service.AliasName(this, "a");
-					aliasName1 = new general_service.AliasName(this, "k");
-					aliasName3 = new general_service.AliasName(this, "f");
-					aliasName4 = new general_service.AliasName(this, "g");
-					aliasName10 = new general_service.AliasName(this, "b");
-					aliasName11 = new general_service.AliasName(this, "c");
+					aliasName1 = new general_service.AliasName(this, "b");
+					aliasName6 = new general_service.AliasName(this, "k");
+					aliasName7 = new general_service.AliasName(this, "c");
+					aliasName8 = new general_service.AliasName(this, "d");
 				}
 				
 				general_service.interfaces.IAliasName aliasName0;
 				general_service.interfaces.IAliasName aliasName1;
-				general_service.interfaces.IAliasName aliasName3;
-				general_service.interfaces.IAliasName aliasName4;
-				general_service.interfaces.IAliasName aliasName10;
-				general_service.interfaces.IAliasName aliasName11;
+				general_service.interfaces.IAliasName aliasName6;
+				general_service.interfaces.IAliasName aliasName7;
+				general_service.interfaces.IAliasName aliasName8;
 				double[]  var_0 = new double[]{0};
 				double[]  var_1 = new double[]{0};
 				double[]  var_2 = new double[]{0};
@@ -147,12 +144,14 @@ public class SimpleFeed extends Desktop
 			}
 	
 
-	protected class CategoryObject1 extends measurements.VectorFormulaConsumer
+	protected class CategoryObject1 extends measurements.differential_equations.DifferentialEquationSolverFormula
 	{
 		public CategoryObject1(String name, IDesktop desktop) {
 			super(name,  desktop);
 			java.util.Map< String, general_service.Entry<Object, Object >> map = new java.util.HashMap<>();
-			map.put("k", new general_service.Entry<Object, Object>(new double[0], new double[]{0.5}));
+			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
+			map.put("x", new general_service.Entry<Object, Object>(new double[0], new double[]{0}));
+			map.put("y", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
 			setMap(map);
 				}
 			
@@ -162,30 +161,46 @@ public class SimpleFeed extends Desktop
 						success = true;
 						var_0[0] = ((double[])aliasName0.getAliasNameValue())[0];
 						if (check(var_0)) { success = false; return; }
-						var_1[0] = this.getInternalTime();
-						var_2[0] = (Math.sin(var_1[0]));
-						if (check(var_2)) { success = false; return; } 
-						var_3[0] = ((var_0[0]) * (var_2[0]));
+						var_1[0] = ( = -(var_0[0]));
+						if (check(var_1)) { success = false; return; } 
+						this.variable = value2.getIValue();
+						if (this.check(avn)) { this.success = false; return; }
+						var_2[0] = ((double[])
+						var_3[0] = ((var_1[0]) * (var_2[0]));
 						if (check(var_3)) { success = false; return; } 
-						var_4[0] = ((double[])measurement4.getMeasurementValue())[0];
-						if (check(var_4)) { success = false; return; } 
+						this.variable = value4.getIValue();
+						if (this.check(avn)) { this.success = false; return; }
+						var_4[0] = ((double[])
+						var_5[0] = ((var_0[0]) * (var_4[0]));
+						if (check(var_5)) { success = false; return; } 
+						var_6[0] = ((double[])measurement6.getMeasurementValue())[0];
+						if (check(var_6)) { success = false; return; } 
+						var_7[0] = ((var_5[0]) + (var_6[0]));
+						if (check(var_7)) { success = false; return; } 
 					}
 				
 				@Override
-				public void init()
+				protected void init()
 				{
 					var all = this.getAllMeasurements();
-					measurement4 = all[0].getMeasurement(0);
-					aliasName0 = new general_service.AliasName(this, "k");
+					value2 = this.output[1];
+					value4 = this.output[0];
+					measurement6 = all[0].getMeasurement(0);
+					aliasName0 = new general_service.AliasName(this, "a");
 				}
 				
-				measurements.interfaces.IMeasurement measurement4;
+				general_service.interfaces.IValue  value2;
+				general_service.interfaces.IValue  value4;
+				measurements.interfaces.IMeasurement measurement6;
 				general_service.interfaces.IAliasName aliasName0;
 				double[]  var_0 = new double[]{0};
 				double[]  var_1 = new double[]{0};
 				double[]  var_2 = new double[]{0};
 				double[]  var_3 = new double[]{0};
 				double[]  var_4 = new double[]{0};
+				double[]  var_5 = new double[]{0};
+				double[]  var_6 = new double[]{0};
+				double[]  var_7 = new double[]{0};
 				
 				Object get_0()
 				{
@@ -211,10 +226,35 @@ public class SimpleFeed extends Desktop
 				{
 					return success ? this.var_4 : null;
 				}
+				
+				Object get_5()
+				{
+					return success ? this.var_5 : null;
+				}
+				
+				Object get_6()
+				{
+					return success ? this.var_6 : null;
+				}
+				
+				Object get_7()
+				{
+					return success ? this.var_7 : null;
+				}
+				@Override
+				protected void save(){
+					var v = derivations;
+					var x0 = v.get("y");
+					x0.setIValue(this.get_7());
+					var x1 = v.get("x");
+					x1.setIValue(this.get_3());
+				}
+				
 				@Override
 				protected void createFeedback() {
 					java.util.List<general_service.Entry<int[], String>> list = new java.util.ArrayList<>();
-					list.add(new general_service.Entry(new int[] {0, 0}, "a" ));
+					list.add(new general_service.Entry(new int[] {0, 0}, "c" ));
+					list.add(new general_service.Entry(new int[] {0, 1}, "d" ));
 					setFeedback(list);
 				}
 			}
@@ -244,11 +284,11 @@ public class SimpleFeed extends Desktop
 			}
 	
 
-	public SimpleFeed() {
+	public ODE_Feed() {
 		super();
 	}
 
-	public SimpleFeed(ICheck check, IErrorHandler errorHandler) {
+	public ODE_Feed(ICheck check, IErrorHandler errorHandler) {
 		super(check, errorHandler);
 	}
 
@@ -256,11 +296,11 @@ public class SimpleFeed extends Desktop
 	@Override
 	public void init()
 	{
-		new SimpleFeed.CategoryObject0("A", this);
-		new SimpleFeed.CategoryObject1("Output", this);
-		new SimpleFeed.CategoryObject2("Chart", this);
-		new SimpleFeed.CategoryArrow0("", this);
-		new SimpleFeed.CategoryArrow1("", this);
+		new ODE_Feed.CategoryObject0("Init", this);
+		new ODE_Feed.CategoryObject1("ODE", this);
+		new ODE_Feed.CategoryObject2("Chart", this);
+		new ODE_Feed.CategoryArrow0("1", this);
+		new ODE_Feed.CategoryArrow1("", this);
 		arrows.get(0).setSource(objects.get(1));
 		arrows.get(0).setTarget(objects.get(0));
 		arrows.get(1).setSource(objects.get(2));

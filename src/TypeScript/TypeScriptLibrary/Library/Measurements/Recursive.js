@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Recursive = void 0;
-const DataConsumerVariableMeasurements_1 = require("./DataConsumerVariableMeasurements");
 const FictiveAlias_1 = require("../Fiction/FictiveAlias");
 const FictionInitialValueCollection_1 = require("../Fiction/FictionInitialValueCollection");
 const AliasInitialValueCollection_1 = require("../AliasInitialValueCollection.");
-class Recursive extends DataConsumerVariableMeasurements_1.DataConsumerVariadbleMeasurements {
+const DataConsumerVariableMeasurements_1 = require("./DataConsumerVariableMeasurements");
+class Recursive extends DataConsumerVariableMeasurements_1.DataConsumerVariableMeasurements {
     constructor(desktop, name) {
         super(desktop, name);
         this.inputs = [];

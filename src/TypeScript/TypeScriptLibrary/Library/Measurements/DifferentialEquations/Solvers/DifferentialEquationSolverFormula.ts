@@ -1,12 +1,12 @@
 import { IDesktop } from "../../../Interfaces/IDesktop";
 import { IPostSetArrow } from "../../../Interfaces/IPostSetArrow";
 import { IValue } from "../../../Interfaces/IValue";
-import { DataConsumerVariadbleMeasurementsStarted } from "../../DataConsumerVariadbleMeasurementsStarted";
+import { DataConsumerVariableMeasurementsStarted } from "../../DataConsumerVariableMeasurementsStarted";
 import { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
 import { Variable } from "../../Variables/Variable";
 import { IDifferentialEquationSolver } from "../Interfaces/IDifferentialEquationSolver";
 
-export class DifferentialEquationSolverFormula extends DataConsumerVariadbleMeasurementsStarted
+export class DifferentialEquationSolverFormula extends DataConsumerVariableMeasurementsStarted
     implements IDifferentialEquationSolver, IPostSetArrow {
 
     constructor(desktop: IDesktop, name: string)

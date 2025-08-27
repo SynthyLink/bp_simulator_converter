@@ -66,7 +66,7 @@ namespace DataPerformer.Formula.Java
                 l.Add("\tthis.trees = trees;");
             }
             l.Add("@Override");
-            l.Add("public void init()");
+            l.Add("protected void init()");
             l.Add("{");
             if (ob is IMeasurements)
             {
@@ -101,7 +101,7 @@ namespace DataPerformer.Formula.Java
             }
             var l = new List<string>();
             l.Add("@Override");
-            l.Add("public void calculateTree()");
+            l.Add("protected void calculateTree()");
             l.Add("{");
             l.Add("\tsuccess = true;");
             performer.Add(l, lcode as List<string>, 1);
@@ -156,13 +156,14 @@ namespace DataPerformer.Formula.Java
 
             }
             var ll = new List<string>();
-            ll.Add("void save(){");
-            var s = "\tvar v = this.variables;";
+            l.Add("@Override");
+            ll.Add("protected void save(){");
+            var s = "\tvar v = variables;";
             if (attr != null)
             {
                 if (attr.IsSysemOfDifferentialEquations)
                 {
-                    s = "\tvar v = this.derivations;";
+                    s = "\tvar v = derivations;";
                 }
             }
             ll.Add(s);
@@ -173,7 +174,7 @@ namespace DataPerformer.Formula.Java
                 var st = "x" + kk;
                 ++kk;
                 ll.Add("\tvar " + st + " = v.get(" + "\"" + k.Key + "\");");
-                ll.Add("\t" + st + "?.setIValue(this.get_" + k.Value.Item1 + "());");
+                ll.Add("\t" + st + ".setIValue(this.get_" + k.Value.Item1 + "());");
             }
             ll.Add("}");
             l.AddRange(ll);
@@ -227,10 +228,13 @@ namespace DataPerformer.Formula.Java
                                 init.Add(mtt + " = all[" + ii[1] +
                                     "].getMeasurement(" + ii[2] + ");");
                             }
-                            else if (att.IsDerivation)
+                            else
                             {
-                                var vtt = "value" + ii[0];
-                                vari.Add(vtt + " : IValue = new FictiveValue();");
+                                if (att.IsDerivation)
+                                {
+                                    var vtt = "value" + ii[0];
+                                    vari.Add("general_service.interfaces.IValue " + vtt + ";");
+                                }
                             }
                             goto m;
                         }
@@ -256,8 +260,8 @@ namespace DataPerformer.Formula.Java
                                         if (m == op)
                                         {
                                             var mtt = "value" + i;
-                                            vari.Add(mtt + " : IValue = new FictiveValue();");
-                                            init.Add("this." + mtt + " = this.output[" + j + "];");
+                                            vari.Add("general_service.interfaces.IValue  " + mtt + ";");
+                                            init.Add(mtt + " = this.output[" + j + "];");
                                             values.Add(i);
                                         }
                                     }
@@ -353,7 +357,7 @@ namespace DataPerformer.Formula.Java
             try
             {
                 local = null;
-                IList<string> l = StaticJavaCreateCode(obj, trees, creator, out local,
+                 IList<string> l = StaticJavaCreateCode(obj, trees, creator, out local,
                     out variables, out initializers, current);
                 ObjectFormulaTree[] lt = local.Trees;
                 foreach (ObjectFormulaTree tree in lt)

@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DifferentialEquationSolverFormula = void 0;
-const DataConsumerVariadbleMeasurementsStarted_1 = require("../../DataConsumerVariadbleMeasurementsStarted");
+const DataConsumerVariableMeasurementsStarted_1 = require("../../DataConsumerVariableMeasurementsStarted");
 const Variable_1 = require("../../Variables/Variable");
-class DifferentialEquationSolverFormula extends DataConsumerVariadbleMeasurementsStarted_1.DataConsumerVariadbleMeasurementsStarted {
+class DifferentialEquationSolverFormula extends DataConsumerVariableMeasurementsStarted_1.DataConsumerVariableMeasurementsStarted {
     constructor(desktop, name) {
         super(desktop, name);
         this.derivations = new Map();

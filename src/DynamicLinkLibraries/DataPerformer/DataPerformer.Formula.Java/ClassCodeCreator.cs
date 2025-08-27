@@ -30,14 +30,16 @@ namespace DataPerformer.Formula.Java
            
             dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
-                   { (object o) => { return o is VectorFormulaConsumer; } , CreateObjectTreeObject }
-       //          { (object o) => { return o is DifferentialEquationSolver; } , CreateDifferentialSolver },
-           //      { (object o) => { return o is Recursive; } , CreateRecursive },
+                   { (object o) => { return o is VectorFormulaConsumer; } , CreateObjectTreeObject },
+                 { (object o) => { return o is DifferentialEquationSolver; } , CreateObjectTreeObject },
+                { (object o) => { return o is Recursive; } , CreateObjectTreeObject },
           };
 
             classes = new Dictionary<string, string>()
             {
-                {"VectorFormulaConsumer", "measurements.VectorFormulaConsumer" }
+                {"VectorFormulaConsumer", "measurements.VectorFormulaConsumer" },
+                {"DifferentialEquationSolver", "measurements.differential_equations.DifferentialEquationSolverFormula" },
+                {"Recursive", "measurements.Recursive" },
             };
         }
 

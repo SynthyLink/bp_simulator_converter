@@ -4,16 +4,16 @@ import { IMeasurements } from "./Interfaces/IMeasurements";
 import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import { IStarted } from "./Interfaces/IStarted";
 import { IAlias } from "../Interfaces/IAlias";
-import { DataConsumerVariadbleMeasurements } from "./DataConsumerVariableMeasurements";
 import { IFeedbackAliasCollectionHolder } from "../Interfaces/IFeedbackAliasCollectionHolder";
 import { FictiveAlias } from "../Fiction/FictiveAlias";
 import { FictionInitialValueCollection } from "../Fiction/FictionInitialValueCollection";
 import { IInitialValueCollection } from "../Interfaces/IInitialValueCollection";
 import { AliasInitialValueCollection } from "../AliasInitialValueCollection.";
 import { IFeedbackAliasCollection } from "../Interfaces/IFeedbackAliasCollection";
+import { DataConsumerVariableMeasurements } from "./DataConsumerVariableMeasurements";
 
 
-export class Recursive extends DataConsumerVariadbleMeasurements implements IStarted,
+export class Recursive extends DataConsumerVariableMeasurements implements IStarted,
     IFeedbackAliasCollectionHolder, IPostSetArrow
 {
     protected inputs: IMeasurements[] = [];

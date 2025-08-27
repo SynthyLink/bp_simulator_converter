@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DataConsumerVariadbleMeasurementsStarted = void 0;
+exports.DataConsumerVariableMeasurementsStarted = void 0;
 const AliasInitialValueCollection_1 = require("../AliasInitialValueCollection.");
 const FictionInitialValueCollection_1 = require("../Fiction/FictionInitialValueCollection");
 const FictiveAlias_1 = require("../Fiction/FictiveAlias");
 const DataConsumerVariableMeasurements_1 = require("./DataConsumerVariableMeasurements");
-class DataConsumerVariadbleMeasurementsStarted extends DataConsumerVariableMeasurements_1.DataConsumerVariadbleMeasurements {
+class DataConsumerVariableMeasurementsStarted extends DataConsumerVariableMeasurements_1.DataConsumerVariableMeasurements {
     constructor(desktop, name) {
         super(desktop, name);
         this.initial = new FictionInitialValueCollection_1.FictionInitialValueCollection();
@@ -22,5 +22,5 @@ class DataConsumerVariadbleMeasurementsStarted extends DataConsumerVariableMeasu
         this.initial = new AliasInitialValueCollection_1.AliasInitialValueCollection(this, this);
     }
 }
-exports.DataConsumerVariadbleMeasurementsStarted = DataConsumerVariadbleMeasurementsStarted;
-//# sourceMappingURL=DataConsumerVariadbleMeasurementsStarted.js.map
+exports.DataConsumerVariableMeasurementsStarted = DataConsumerVariableMeasurementsStarted;
+//# sourceMappingURL=DataConsumerVariableMeasurementsStarted.js.map
