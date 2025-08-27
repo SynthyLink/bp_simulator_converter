@@ -1,16 +1,21 @@
 import category_theory.CategoryObject;
 import diagram.interfaces.IDesktop;
+import general_service.Entry;
 import general_service.Performer;
 import general_service.interfaces.IValue;
 import generated.TestDesktop;
 import tests.Actor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-
-    var a = new Actor();
+        java.util.List<general_service.Entry<int[], String>> list = new java.util.ArrayList<>();
+        list.add(new general_service.Entry(new int[] { 1, 2}, "" ));
+        var a = new Actor();
    // a.testRandomTwo();
         a.testRandomFour();
 

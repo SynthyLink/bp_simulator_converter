@@ -1,189 +1,79 @@
 ﻿using BaseTypes;
-using BaseTypes.Attributes;
-using BaseTypes.CodeCreator.Interfaces;
+using BaseTypes.Interfaces;
 using DataPerformer.Interfaces;
 using DataPerformer.Interfaces.Attributes;
-using Diagram.Interfaces;
 using Diagram.UI.Attributes;
-using Diagram.UI.Interfaces;
 using ErrorHandler;
+
 using FormulaEditor;
-using FormulaEditor.CodeCreators;
 using FormulaEditor.CodeCreators.Interfaces;
-using FormulaEditor.Interfaces;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Threading;
 
-namespace DataPerformer.Formula.Java
+namespace DataPerformer.Formula.TypeScript
 {
-    [Language("Java")]
-    internal class TreeCollectionCodeCreator : ITreeCollectionCodeCreator
+    internal static  class StaticCodeCreatorTypeScript
     {
-        Performer performer = new Performer();
 
-        object current;
+        
 
-        ObjectFormulaTree[] trees;
+        static DataPerformer.Interfaces.Performer performer = new ();
 
-        ITypeCreator typeCreator;
+    
+        #region Public Members
 
-        IClassCodeCreator classCodeCreator;
-
-
-        protected ITreeCollection collection = null;
-
-
-        ITreeCodeCreator local = null;
-
-        ITreeCodeCreator codeCreator;
-
-
-
-        internal TreeCollectionCodeCreator()
+        public static string GetMeasurementName(string current, int n)
         {
-            this.AddTreeCollectionCodeCreator();
-            codeCreator = performer.GetLaguageObject<ITreeCodeCreator>(this);
-            classCodeCreator = performer.GetLaguageObject<IClassCodeCreator>(this);
-            typeCreator = performer.GetLaguageObject<ITypeCreator>(this);
-
+            string st = current;
+            st += "_Measurement_" + n;
+            return st;
         }
-
-        List<string> PostCreateCode(ITreeCodeCreator local, object ob, IList<string> lcode,
-           IList<string> variables, IList<string> initializers, string consturctor, bool checkValue = true)
+/*
+        public static List<string> GetMeasurement(string current, int n)
         {
-            List<string> l = new();
-            performer.Add(l, lcode as List<string>, 1);
-            int nTree = local.Trees.Length;
-            l.Add("");
-            if (checkValue)
-            {
-            }
-            else
-            {
-                l.Add(consturctor + "(FormulaEditor.ObjectFormulaTree[] trees)");
-                l.Add("{");
-                l.Add("\tthis.trees = trees;");
-            }
-            l.Add("@Override");
-            l.Add("public void init()");
-            l.Add("{");
-            if (ob is IMeasurements)
-            {
-                l.Add("\tvar all = this.getAllMeasurements();");
-            }
-            performer.Add(l, initializers as List<string>, 1);
-            l.Add("}");
-            l.Add("");
-            foreach (string s in variables)
-            {
-                l.Add("" + s);
-            }
-            if (checkValue)
-            {
-            }
-            return l;
-        }
-
-        private List<string> PreCreateCode(object obj, out ITreeCodeCreator local,
-     out IList<string> variables, out IList<string> initializers, string current)
-        {
-            if (codeCreator == null)
-            {
-                codeCreator = performer.GetLaguageObject<ITreeCodeCreator>(this);
-            }
-            var lcode = JaveCreateCode(obj, trees, codeCreator,
-                out local, out variables, out initializers, current);
-            ObjectFormulaTree[] tr = local.Trees;
-            foreach (ObjectFormulaTree tree in tr)
-            {
-                AddTree(tree, initializers, variables);
-            }
+            var nn = "class " + GetMeasurementName(current, n);
+            var s = nn + " extends Measurement {";
             var l = new List<string>();
-            l.Add("@Override");
-            l.Add("public void calculateTree()");
-            l.Add("{");
-            l.Add("\tsuccess = true;");
-            performer.Add(l, lcode as List<string>, 1);
+            l.Add(s); ;
+            l.Add("\tobj !: " + current + ";");
+            l.Add("\tconstructor(o:  " + current + ", name: string, type: any) {");
+            l.Add("\t\tsuper(name, type);");
+            l.Add("\t\tthis.obj = o;");
+            l.Add("\t}");
+            l.Add("");
+            l.Add("\tgetMeasurementValue() {");
+            l.Add("\t\treturn this.obj.get_" + n + "();");
+            l.Add("\t}");
             l.Add("}");
+            l.Add("");
             return l;
         }
-
-        void AddTree(ObjectFormulaTree tree, IList<string> init, IList<string> func)
+*/
+        /// <summary>
+        /// Gets number of tree
+        /// </summary>
+        /// <param name="creator">Creator of code</param>
+        /// <param name="tree">The tree</param>
+        /// <returns>Number of tree</returns>
+        public static int GetNumber(ITreeCodeCreator creator, ObjectFormulaTree tree)
         {
-            int n = StaticCodeCreator.GetNumber(local, tree);
-            string tid = local[tree];
-            string f = "get_" + n;
-            // init.Add("this.mapOperations.set(" + n + ", this." + f + ");");
-            func.Add("");
-            func.Add("Object " + f + "()");
-            func.Add("{");
-            func.Add("\treturn success ? this." + tid + " : null;");
-            func.Add("}");
+            try
+            {
+                return creator.GetNumber(tree);
+                /*  ObjectFormulaTree[] trees = creator.Trees;
+                  for (int i = 0; i < trees.Length; i++)
+                  {
+                      if (trees[i] == tree)
+                      {
+                          return i;
+                      }
+                  }*/
+            }
+            catch (Exception)
+            {
+                throw new Exception("Tree not found");
+            }
         }
 
-
-
-        Dictionary<string, List<string>> ITreeCollectionCodeCreator.CreateCode(object obj, ObjectFormulaTree[] trees, string className, string constructorModifier, bool checkValue)
-        {
-            this.trees = trees;
-            IList<string> variables;
-            IList<string> initializers;
-            List<string> l = new List<string>();
-            //          l.Add(" : FormulaEditor.Interfaces.ITreeCollectionProxy");
-            //        local = null;
-            var lt = PreCreateCode(obj, out local, out variables, out initializers, className);
-            List<string> ltt = PostCreateCode(local, obj, lt, variables, initializers,
-                         constructorModifier + " " + className,
-                         checkValue);
-            var ltr = local.Trees;
-            performer.Add(l, ltt, 0);
-            var output = new Dictionary<string, Tuple<int, object>>();
-            if (obj is IStringTreeDictionary dictionary)
-            {
-                output = DataPerformerFormula.GetOutput(dictionary, ltr);
-            }
-            else if (obj is IMeasurements mm)
-            {
-                output = DataPerformerFormula.GetOutput(mm, ltr);
-            }
-            var attr = performer.GetAttribute<CodeCreatorAttribute>(obj);
-            if (attr == null)
-            {
-                var dict = new Dictionary<string, List<string>>();
-                dict["code"] = l;
-                return dict;
-
-            }
-            var ll = new List<string>();
-            ll.Add("void save(){");
-            var s = "\tvar v = this.variables;";
-            if (attr != null)
-            {
-                if (attr.IsSysemOfDifferentialEquations)
-                {
-                    s = "\tvar v = this.derivations;";
-                }
-            }
-            ll.Add(s);
-            var mea = obj as IMeasurements;
-            var kk = 0;
-            foreach (var k in output)
-            {
-                var st = "x" + kk;
-                ++kk;
-                ll.Add("\tvar " + st + " = v.get(" + "\"" + k.Key + "\");");
-                ll.Add("\t" + st + "?.setIValue(this.get_" + k.Value.Item1 + "());");
-            }
-            ll.Add("}");
-            l.AddRange(ll);
-            l.Add("");
-            var d = new Dictionary<string, List<string>>();
-            d["code"] = l;
-            return d;
-        }
-
-        bool GetState(object obj)
+        static bool GetState(object obj)
         {
             bool b = false;
             var attr = performer.GetAttribute<CodeCreatorAttribute>(obj);
@@ -194,10 +84,20 @@ namespace DataPerformer.Formula.Java
             return b;
         }
 
-        public  IList<string> StaticJavaCreateCode(object obj, ObjectFormulaTree[] trees, ITreeCodeCreator creator,
-    out ITreeCodeCreator local,
-     out IList<string> variables,
-     out IList<string> initializers, string current)
+
+        /// <summary>
+        /// Creates code from trees
+        /// </summary>
+        /// <param name="trees">The trees</param>
+        /// <param name="creator">Code creator</param>
+        /// <param name="local">Local code creator</param>
+        /// <param name="variables">Strings of variables</param>
+        /// <param name="initializers">Strings of initializers</param>
+        /// <returns>Strings of code</returns>
+        public static IList<string> CreateCode(object obj, ObjectFormulaTree[] trees, ITreeCodeCreator creator,
+            out ITreeCodeCreator local,
+             out IList<string> variables,
+             out IList<string> initializers, string current )
         {
             List<string> code = new List<string>();
             List<string> vari = new List<string>();
@@ -222,9 +122,8 @@ namespace DataPerformer.Formula.Java
                             if (att == null)
                             {
                                 var mtt = "measurement" + ii[0];
-                                var mmt = "measurements.interfaces.IMeasurement ";
-                                vari.Add(mmt + mtt + ";");
-                                init.Add(mtt + " = all[" + ii[1] +
+                                vari.Add(mtt + " : " + "IMeasurement = new FictiveMeasurement();");
+                                init.Add("this." + mtt + " = all[" + ii[1] +
                                     "].getMeasurement(" + ii[2] + ");");
                             }
                             else if (att.IsDerivation)
@@ -279,9 +178,9 @@ namespace DataPerformer.Formula.Java
                             }
                         }
                     }
-                m: continue;
+                    m: continue;
                 }
-                var loc = local as BaseTreeCodeCreator;
+                var loc = local as TreeCodeCreator;
                 loc.Values = values;
                 if (local.Optional.Count > 0)
                 {
@@ -305,7 +204,7 @@ namespace DataPerformer.Formula.Java
                     IList<string> lp;
                     var c = local.CreateCode(obj, t, ret, par.ToArray<string>());
                     lv = c["variables"];
-                    if (lv != null)
+                        if (lv != null)
                     {
                         if (lv.Count > 0)
                         {
@@ -345,54 +244,11 @@ namespace DataPerformer.Formula.Java
             return null;
         }
 
-        IList<string> JaveCreateCode(object obj, ObjectFormulaTree[] trees, ITreeCodeCreator creator,
-            out ITreeCodeCreator local,
-             out IList<string> variables, out IList<string> initializers, string current)
-        {
-            Exception ex;
-            try
-            {
-                local = null;
-                IList<string> l = StaticJavaCreateCode(obj, trees, creator, out local,
-                    out variables, out initializers, current);
-                ObjectFormulaTree[] lt = local.Trees;
-                foreach (ObjectFormulaTree tree in lt)
-                {
-                    var s = "";
-                    object ret = tree.ReturnType;
-                    if (ret.IsEmpty())
-                    {
-                        continue;
-                    }
-                    var t = typeCreator.GetType(ret) + " ";
-                    var id = local[tree];
-                    string cv = creator.GetConstValue(tree);
-                    string def = "";
-                    if (cv == null)
-                    {
-                        def = typeCreator.GetDefaultValue(ret) + "";
-                        if (def.Length > 0)
-                        {
-                            s = t + " "  + id +  " = " + def;
-                        }
-                    }
-                    else
-                    {
-                        s = t + " " + id + " = " + cv;
-                    }
-                    s += ";";
-                    variables.Add(s);
-                }
-                return l;
-            }
-            catch (Exception e)
-            {
-                ex = IncludedException.Get(e);
-            }
-            throw ex;
-        }
+        #endregion
 
-        IList<string> CreateOptionalCode(object obj, ITreeCodeCreator creator, out IList<string> variables, out IList<string> initializers)
+        #region Private Members
+
+        static IList<string> CreateOptionalCode(object obj, ITreeCodeCreator creator, out IList<string> variables, out IList<string> initializers)
         {
             List<string> code = new List<string>();
             List<string> vari = new List<string>();
@@ -439,7 +295,7 @@ namespace DataPerformer.Formula.Java
                     if (!conds.Contains(cond))
                     {
                         conds.Add(cond);
-                        var cc = creator.CreateCode(obj, cond, rc, par.ToArray());
+                       var  cc = creator.CreateCode(obj, cond, rc, par.ToArray());
                         lvc = cc["variables"];
                         if (lvc != null)
                         {
@@ -561,12 +417,9 @@ namespace DataPerformer.Formula.Java
             return code;
         }
 
-
         static FormulaEditor.Performer formulaPerformer = new FormulaEditor.Performer();
 
-
-
-        IList<string> CreateCode(object obj, ITreeCodeCreator creator,
+        private static IList<string> CreateCode(object obj, ITreeCodeCreator creator,
             ObjectFormulaTree tree, List<ObjectFormulaTree> busy)
         {
             List<ObjectFormulaTree> l = new List<ObjectFormulaTree>();
@@ -594,7 +447,7 @@ namespace DataPerformer.Formula.Java
             return cc;
         }
 
-  
+        #endregion
 
 
     }

@@ -10,11 +10,11 @@ using ErrorHandler;
 namespace DataPerformer.Portable.Java
 {
     [Language("Java")]
-    public class ClassCodeCreator : Diagram.Java.ClassCodeCreator, ITypeCreator, IAliasCodeCreator
+    public class ClassCodeCreator : Diagram.Java.ClassCodeCreator, IAliasCodeCreator
     {
         protected virtual void InitPortable()
         {
-            Performer = new DataPerformer.Portable.Performer();
+            Performer = new Portable.Performer();
             this.AddClassCodeCreator();
             this.AddAliasCreator();
 
@@ -56,7 +56,7 @@ namespace DataPerformer.Portable.Java
 
         static List<string> CreateObjectTransformerLink(string preffix, object obj)
         {
-            return new List<string>() { "}" };
+            return new List<string>() { "}", "}" };
         }
 
         static List<string> CreateObjectTransformer(string preffix, object obj)
@@ -75,7 +75,7 @@ namespace DataPerformer.Portable.Java
 
         static List<string> CreateDataConsumer(string preffix, object obj)
         {
-            return new List<string>() { "}" };
+            return new List<string>() { "}", "}" };
         }
 
 
@@ -84,21 +84,7 @@ namespace DataPerformer.Portable.Java
             return new List<string>() { "}" };
         }
 
-        string ITypeCreator.GetType(object o)
-        {
-            throw new OwnNotImplemented();
-        }
-
-        string ITypeCreator.GetDefaultValue(object o)
-        {
-            throw new OwnNotImplemented();
-        }
-
-        string ITypeCreator.GetStringValue(object o)
-        {
-            throw new OwnNotImplemented();
-        }
-
+ 
         Dictionary<string, List<string>> IAliasCodeCreator.Create(string id, IAlias alias)
         {
             var typeCreator = Performer.GetLaguageObject<ITypeCreator>(this);

@@ -10,7 +10,7 @@ namespace Diagram.Java
     [Language("Java")]
     public class ClassCodeCreator : IClassCodeCreator, IDictionaryCodeCreator<string, string>,
         IEnumerableCodeCreator<int[]>, 
-        IEnumerableCodeCreator<Tuple<int, string>>, IFeedbackCollectionCodeCreator, ICurrentObject
+        IEnumerableCodeCreator<Tuple<int, string>>,  ICurrentObject
     {
         protected static IDictionaryCodeCreator<string, string> dictionaryStringStringCodeCreator;
 
@@ -223,18 +223,7 @@ namespace Diagram.Java
             return d;
         }
 
-        Dictionary<string, List<string>> IFeedbackCollectionCodeCreator.Create(IFeedbackCollectionHolder holder)
-        {
-            return Create(holder);
-        }
-
-        protected virtual Dictionary<string, List<string>> Create(IFeedbackCollectionHolder holder)
-        {
-            var d = new Dictionary<string, List<string>>();
-            d["code"] = new List<string>();
-            return d;
-        }
-
+   
 
         #endregion
 

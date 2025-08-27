@@ -18,6 +18,7 @@ namespace DataPerformer.Formula.Java
             new ClassCodeCreator();
             new TreeCodeCreator();
             new TreeCollectionCodeCreator();
+            new FeedbackCollectionCodeCreator();
         }
 
         /// <summary>

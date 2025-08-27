@@ -2,6 +2,7 @@ package general_service;
 
 import general_service.interfaces.IFeedback;
 import general_service.interfaces.IFeedbackCollection;
+import measurements.interfaces.IMeasurements;
 
 import java.util.*;
 
@@ -11,6 +12,17 @@ public class FeedbackCollection implements IFeedbackCollection {
     {
        performer.copyMap(map, this.map);
     }
+
+    public FeedbackCollection(IMeasurements measurements, List<Entry<int[], String>> list)
+    {
+        for (var l : list)
+        {
+            var k = l.getKey();
+            var f = new FeedbackAlias(measurements, k[0], k[1], l.getValue());
+            addFeedback(f);
+        }
+    }
+
     @Override
     public Map<String, String> getFeedbacksMap() {
         return map;

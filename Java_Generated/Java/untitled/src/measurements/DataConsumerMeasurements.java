@@ -2,14 +2,13 @@ package measurements;
 
 import diagram.interfaces.IDesktop;
 import general_service.Entry;
+import general_service.FeedbackCollection;
 import general_service.interfaces.IAlias;
 import general_service.interfaces.IFeedbackCollection;
 import measurements.interfaces.IMeasurement;
 import measurements.interfaces.IMeasurements;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class DataConsumerMeasurements  extends  DataConsumer implements IMeasurements, IAlias {
 
@@ -72,9 +71,18 @@ public class DataConsumerMeasurements  extends  DataConsumer implements IMeasure
       // map.put("nn", new general_service.Enrty<Object, Object>(null, null));
     }
 
-    protected void setFeedback()
-    {
+    protected void setFeedback() {
+        feedback.setFeedbacks();
+    }
 
+    protected  void createFeedback() {
+        List<Entry<int[], String>> list = new ArrayList<>();
+        setFeedback(list);
+    }
+
+    protected void setFeedback(List<Entry<int[], String>> list)
+    {
+        feedback = new FeedbackCollection(this, list);
     }
 
     java.util.Map<String, Entry<Object, Object>> map = new HashMap<>();

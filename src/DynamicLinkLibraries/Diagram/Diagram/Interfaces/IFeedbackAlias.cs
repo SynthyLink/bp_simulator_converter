@@ -1,4 +1,6 @@
-﻿namespace Diagram.UI.Interfaces
+﻿using BaseTypes.Interfaces;
+
+namespace Diagram.UI.Interfaces
 { 
     /// <summary>
     /// Feedback alias
@@ -15,5 +17,9 @@
     public interface IFeedbackAlias : IFeedback
     {
         IAliasName AliasName { get; }
+
+        IValue Value { get; }
     }
+
+
 }

@@ -10,6 +10,7 @@ import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
 import error_handler.interfaces.IErrorHandler;
 import general_service.interfaces.IAction;
+import general_service.interfaces.IActionT;
 import general_service.interfaces.IAliasName;
 import general_service.interfaces.IVariableSetter;
 import measurements.interfaces.IDataConsumer;
@@ -94,4 +95,33 @@ public class Performer {
         };
     }
 
- }
+    public static  ICategoryObject getCategoryObject(IDesktop desktop, int n)
+    {
+        return desktop.getCategoryObjects().get(n);
+    }
+
+    public static  ICategoryObject getCategoryObject(ICategoryObject object, int n)
+    {
+        var desktop = object.getDesktop();
+        return getCategoryObject(desktop, n);
+    }
+
+
+    public static  ICategoryObject getCategoryObject(ICategoryArrow arrow, int n)
+    {
+        var desktop = arrow.getDesktop();
+        return getCategoryObject(desktop, n);
+    }
+
+
+    public <T>  T getCategoryObject(Object object, int n) {
+        return switch (object) {
+            case IDesktop desktop -> (T)getCategoryObject(desktop, n);
+            case ICategoryObject categoryObject -> (T)getCategoryObject(categoryObject, n);
+            case ICategoryArrow categoryArrow -> (T)getCategoryObject(categoryArrow,n);
+            default -> null;
+        };
+    }
+
+
+}

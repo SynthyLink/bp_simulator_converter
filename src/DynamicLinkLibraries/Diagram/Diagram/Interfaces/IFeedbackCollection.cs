@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using BaseTypes.Interfaces;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 
 namespace Diagram.UI.Interfaces
 {
@@ -43,7 +45,9 @@ namespace Diagram.UI.Interfaces
         Dictionary<string, string> Dictionary { get; }
 
 
-        IEnumerable<IFeedbackAlias> Aliases {get;}
+        IEnumerable<IFeedbackAlias> Aliases { get; }
+
+        Dictionary<IValue, IFeedbackAlias> Measurements { get; }
     }
 
 

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using BaseTypes.Interfaces;
 using DataPerformer.Interfaces;
 
 using Diagram.UI.Interfaces;
@@ -33,6 +33,16 @@ namespace DataPerformer.Portable
         }
         protected virtual Dictionary<string, string> Dictionary { get; set; }
 
+       protected   Dictionary<IValue, IFeedbackAlias> Get()
+        {
+            var d = new Dictionary<IValue, IFeedbackAlias>();
+            foreach (var f in FeedbackAliases)
+            {
+                d[f.Value] = f;
+            }
+            return d;
+        }
+
         protected virtual IFeedbackCollectionHolder Holder { get; set; }
 
         protected virtual List<IFeedbackAlias> FeedbackAliases { get; set; } = new();
@@ -46,6 +56,8 @@ namespace DataPerformer.Portable
         Dictionary<string, string> IFeedbackAliasCollection.Dictionary => Dictionary;
 
         IEnumerable<IFeedback> IFeedbackCollection.Feedbacks => FeedbackAliases;
+
+        Dictionary<IValue, IFeedbackAlias> IFeedbackAliasCollection.Measurements => Get();
 
         void IFeedbackCollection.Add(IFeedback alias)
         {

@@ -41,7 +41,7 @@ namespace Diagram.UI
             current = obj;
             foreach (IClassCodeCreator creator in list)
             {
-               List<string> l = creator.CreateCode(preffix, obj, volume);
+                List<string> l = creator.CreateCode(preffix, obj, volume);
                 if (l != null)
                 {
                     return l;
