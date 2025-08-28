@@ -32,7 +32,7 @@ namespace Test.Calculation.Forms.CodeCreators
             var tr = obj as ObjectTransformer;
             return new List<string>() {
                "\tcoefficient = " + performer.DoubleToString(tr.Coefficient) + ";",
-                "}" };
+                "}", "}" };
         }
 
     }

@@ -68,6 +68,7 @@ namespace DataPerformer.Portable.Java
             var l = d.Values.ToArray()[0];
             l.Add("this.array = array;");
             l.Add("}");
+            l.Add("}");
             return l;
         }
 

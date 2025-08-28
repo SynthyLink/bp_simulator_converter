@@ -39,7 +39,7 @@ namespace DataPerformer.Formula.Java
             {
                 {"VectorFormulaConsumer", "measurements.VectorFormulaConsumer" },
                 {"DifferentialEquationSolver", "measurements.differential_equations.DifferentialEquationSolverFormula" },
-                {"Recursive", "measurements.Recursive" },
+                {"Recursive", "measurements.RecursiveFormula" },
             };
         }
 

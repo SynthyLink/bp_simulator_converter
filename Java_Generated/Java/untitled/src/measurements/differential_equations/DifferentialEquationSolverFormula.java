@@ -30,6 +30,12 @@ public class DifferentialEquationSolverFormula extends DataConsumerVariableMeasu
     /// <param name="variables">Vector of all desktop differential equations variables</param>
     @Override
     public void copyVariablesToSolver(int offset, double[] variables) {
+        let n = this.output.length;
+        for (var i = 0; i < n; i++)
+        {
+            val[0] = variables[i + offset];
+            output[i].setIValue(val[0]);
+        }
 
     }
 
@@ -55,6 +61,8 @@ this.time = time;
     {
 
     }
+
+    double[] val = new double[1];
 
 
     protected ITimeMeasurementProvider time;

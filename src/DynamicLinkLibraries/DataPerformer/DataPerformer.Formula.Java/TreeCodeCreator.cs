@@ -305,7 +305,7 @@ new Dictionary<string, string[]> {
                             lan.Add("if (check(variable)) { success = false; return; }");
                             if (!att.IsDerivation)
                             {
-                                var ss = "IValue value" + num + ";";
+                                var ss = "general_service.interfaces.IValue value" + num + ";";
                                 variables.Add(ss);
                             }
                             lan.Add(tree.ToType(num, true));
