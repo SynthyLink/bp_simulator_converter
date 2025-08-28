@@ -23,11 +23,5 @@ public class VectorFormulaConsumer extends  DataConsumerMeasurements {
     protected void calculateTree() {
     }
 
-    protected void init() {
-
-    }
-
-    protected void save() {
-    }
 
 }

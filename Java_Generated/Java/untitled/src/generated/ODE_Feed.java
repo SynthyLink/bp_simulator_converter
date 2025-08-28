@@ -16,11 +16,11 @@ public class ODE_Feed extends Desktop
 		public CategoryObject0(String name, IDesktop desktop) {
 			super(name,  desktop);
 			java.util.Map< String, general_service.Entry<Object, Object >> map = new java.util.HashMap<>();
-			map.put("k", new general_service.Entry<Object, Object>(new double[0], new double[]{2}));
-			map.put("c", new general_service.Entry<Object, Object>(new double[0], new double[]{0.31314560830292659}));
-			map.put("d", new general_service.Entry<Object, Object>(new double[0], new double[]{-0.17015052092374328}));
-			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
 			map.put("b", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
+			map.put("c", new general_service.Entry<Object, Object>(new double[0], new double[]{0.31314560830292659}));
+			map.put("k", new general_service.Entry<Object, Object>(new double[0], new double[]{2}));
+			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
+			map.put("d", new general_service.Entry<Object, Object>(new double[0], new double[]{-0.17015052092374328}));
 			setMap(map);
 				}
 			
@@ -34,11 +34,11 @@ public class ODE_Feed extends Desktop
 						if (check(var_1)) { success = false; return; }
 						var_2[0] = this.getInternalTime();
 						var_3[0] = ((var_1[0]) * (var_2[0]));
-						if (check(variable)) { success = false; return; } 
+						if (check(var_3)) { success = false; return; } 
 						var_4[0] = (Math.sin(var_3[0]));
-						if (check(variable)) { success = false; return; } 
+						if (check(var_4)) { success = false; return; } 
 						var_5[0] = ((var_0[0]) * (var_4[0]));
-						if (check(variable)) { success = false; return; } 
+						if (check(var_5)) { success = false; return; } 
 						var_6[0] = ((double[])aliasName6.getAliasNameValue())[0];
 						if (check(var_6)) { success = false; return; }
 						var_7[0] = ((double[])aliasName7.getAliasNameValue())[0];
@@ -46,11 +46,11 @@ public class ODE_Feed extends Desktop
 						var_8[0] = ((double[])aliasName8.getAliasNameValue())[0];
 						if (check(var_8)) { success = false; return; }
 						var_9[0] = ((var_7[0]) - (var_8[0]));
-						if (check(variable)) { success = false; return; } 
+						if (check(var_9)) { success = false; return; } 
 						var_10[0] = ((var_6[0]) * (var_9[0]));
-						if (check(variable)) { success = false; return; } 
+						if (check(var_10)) { success = false; return; } 
 						var_11[0] = ((var_5[0]) + (var_10[0]));
-						if (check(variable)) { success = false; return; } 
+						if (check(var_11)) { success = false; return; } 
 					}
 				
 				@Override
@@ -150,8 +150,8 @@ public class ODE_Feed extends Desktop
 			super(name,  desktop);
 			java.util.Map< String, general_service.Entry<Object, Object >> map = new java.util.HashMap<>();
 			map.put("x", new general_service.Entry<Object, Object>(new double[0], new double[]{0}));
-			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
 			map.put("y", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
+			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
 			setMap(map);
 				}
 			
@@ -162,21 +162,21 @@ public class ODE_Feed extends Desktop
 						var_0[0] = ((double[])aliasName0.getAliasNameValue())[0];
 						if (check(var_0)) { success = false; return; }
 						var_1[0] = ( -(var_0[0]));
-						if (check(variable)) { success = false; return; } 
+						if (check(var_1)) { success = false; return; } 
 						variable = value2.getIValue();
-						if (this.check(variable)) { this.success = false; return; }
-						var_2[0] = ((double[])
+						if (check(variable)) { success = false; return; }
+						var_2[0] = ((double[])variable)[0];
 						var_3[0] = ((var_1[0]) * (var_2[0]));
-						if (check(variable)) { success = false; return; } 
+						if (check(var_3)) { success = false; return; } 
 						variable = value4.getIValue();
-						if (this.check(variable)) { this.success = false; return; }
-						var_4[0] = ((double[])
+						if (check(variable)) { success = false; return; }
+						var_4[0] = ((double[])variable)[0];
 						var_5[0] = ((var_0[0]) * (var_4[0]));
-						if (check(variable)) { success = false; return; } 
+						if (check(var_5)) { success = false; return; } 
 						var_6[0] = ((double[])measurement6.getMeasurementValue())[0];
-						if (check(variable)) { success = false; return; } 
+						if (check(var_6)) { success = false; return; } 
 						var_7[0] = ((var_5[0]) + (var_6[0]));
-						if (check(variable)) { success = false; return; } 
+						if (check(var_7)) { success = false; return; } 
 					}
 				
 				@Override

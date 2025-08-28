@@ -64,12 +64,16 @@ namespace DataPerformer.Formula.Java
             return obj.ReturnType.ToType();
         }
 
-        public static string ToType(this ObjectFormulaTree obj, int num)
+        public static string ToType(this ObjectFormulaTree obj, int num, bool variable = false)
         {
-            return  "var_" + num + obj.ToType();
+            var s =  "var_" + num + obj.ToType();
+            int i = 0;
+            if (variable)
+            {
+                s += "variable)[0];";
+            }
+            return s;
         }
-
-
 
     }
 }

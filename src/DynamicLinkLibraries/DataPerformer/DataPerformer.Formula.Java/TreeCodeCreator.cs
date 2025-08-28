@@ -302,13 +302,13 @@ new Dictionary<string, string[]> {
                             var anvn = "value" + num;
                             var lan = new List<string>();
                             lan.Add("variable = " + anvn + ".getIValue();");
-                            lan.Add("if (check(variable)) { this.success = false; return; }");
+                            lan.Add("if (check(variable)) { success = false; return; }");
                             if (!att.IsDerivation)
                             {
                                 var ss = "IValue value" + num + ";";
                                 variables.Add(ss);
                             }
-                            lan.Add(tree.ToType(num));
+                            lan.Add(tree.ToType(num, true));
                             return lan;
 
                         }
@@ -409,7 +409,7 @@ new Dictionary<string, string[]> {
                 }
             }
             list.Add(s);
-            list.Add("if (check(variable)) { success = false; return; } ");
+            list.Add("if (check(" + ret + ")) { success = false; return; } ");
             if (s.Contains("this.measurement"))
             {
                 //       variables.Add("measurement" + num + " != IMeasurement");

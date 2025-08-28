@@ -39,6 +39,13 @@ public class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         valueSetterFactory = desktop.getValueSetterFactory();
     }
 
+    protected void init() {
+
+    }
+
+    protected void save() {
+    }
+
 
     @Override
     public IMeasurements[] getAllMeasurements() {
