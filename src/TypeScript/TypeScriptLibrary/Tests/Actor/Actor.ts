@@ -8,6 +8,7 @@ import { SimpleFeedAct } from '../Wrappers/SimpleFeedAct';
 import { TwoAct } from '../Wrappers/TwoAct';
 import { ODE_FeedbackAct } from '../Wrappers/ODE_FeedbackAct';
 import { TransformerRecursveAct } from '../Wrappers/TransformerRecursveAct';
+import { PIAct } from '../Wrappers/PIAct';
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -81,6 +82,17 @@ export class Actor
             finish(e);
         }
     }
+
+    actPI(): void {
+        try {
+            var o = new PIAct();
+            o.test();
+        }
+        catch (e: any) {
+            finish(e);
+        }
+    }
+
 
     actTestObjectTransformerSimple(): void {
         try {

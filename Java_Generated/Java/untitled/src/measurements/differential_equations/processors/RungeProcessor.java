@@ -1,5 +1,6 @@
 package measurements.differential_equations.processors;
 
+import diagram.interfaces.IDesktop;
 import measurements.differential_equations.interfaces.IDifferentialEquationProcessor;
 import measurements.differential_equations.interfaces.IDifferentialEquationSolver;
 import measurements.interfaces.IDerivation;
@@ -7,10 +8,16 @@ import measurements.interfaces.IMeasurements;
 
 public class RungeProcessor extends  DifferentialEquationProcessor {
 
+    public RungeProcessor(IDesktop desktop)
+    {
+        super(desktop);
+    }
+
     double[] w = new double[0];
     double[] z = new double[0];
     double[] f = new double[0];
     double[][] k = new double[4][];
+
     measurements.Performer mPerformer = new measurements.Performer();
 
     @Override
@@ -104,8 +111,8 @@ public class RungeProcessor extends  DifferentialEquationProcessor {
     }
 
     @Override
-    public IDifferentialEquationProcessor newDifferentialEquations() {
-        return new RungeProcessor();
+    public IDifferentialEquationProcessor newDifferentialEquations(IDesktop desktop) {
+        return new RungeProcessor(desktop);
     }
 
     @Override

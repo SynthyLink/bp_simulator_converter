@@ -28,10 +28,9 @@ public class RecursiveFormula extends DataConsumerVariableMeasurementsStarted {
     @Override
     public void addMeasurements(IMeasurements item)
     {
-        performer.extend(inputs, item);
+        inputs = performer.extend(inputs, item);
     }
 
-    protected Map<String , Variable> variables = new HashMap<>();
 
     protected void calculateTree()
     {
@@ -39,6 +38,10 @@ public class RecursiveFormula extends DataConsumerVariableMeasurementsStarted {
     }
 
 
+    protected void save()
+    {
+
+    }
 
     @Override
     public void  updateMeasurements()
@@ -49,7 +52,5 @@ public class RecursiveFormula extends DataConsumerVariableMeasurementsStarted {
     }
 
     protected  IMeasurements[]  inputs = new IMeasurements[0];
-
-
 
 }

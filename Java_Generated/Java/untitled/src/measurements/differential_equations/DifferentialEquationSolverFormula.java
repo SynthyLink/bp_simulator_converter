@@ -1,10 +1,15 @@
 package measurements.differential_equations;
 
 import diagram.interfaces.IDesktop;
+import general_service.interfaces.IValue;
 import measurements.DataConsumerVariableMeasurements;
 import measurements.Performer;
 import measurements.differential_equations.interfaces.IDifferentialEquationSolver;
 import measurements.time.interfaces.ITimeMeasurementProvider;
+import measurements.variables.Variable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class DifferentialEquationSolverFormula extends DataConsumerVariableMeasurements implements IDifferentialEquationSolver {
     public DifferentialEquationSolverFormula(String name, IDesktop desktop) {
@@ -30,14 +35,25 @@ public class DifferentialEquationSolverFormula extends DataConsumerVariableMeasu
     /// <param name="variables">Vector of all desktop differential equations variables</param>
     @Override
     public void copyVariablesToSolver(int offset, double[] variables) {
-        let n = this.output.length;
+        var n = this.output.length;
         for (var i = 0; i < n; i++)
         {
             val[0] = variables[i + offset];
-            output[i].setIValue(val[0]);
+            output[i].setIValue(val);
         }
+   }
 
+   @Override
+    protected void addVariableValue(String name,Object type, Object value)
+    {
+        var variable = new Variable(name, type, value);
+        var derivation = new Variable("D" + name, 0, 0);
+        variable.setDerivation(derivation);
+        this.derivations.set(name, derivation);
+        this.addVariable(variable);
+        this.deri.push(derivation);
     }
+
 
     ///
     /// Sets time provider
@@ -68,4 +84,8 @@ this.time = time;
     protected ITimeMeasurementProvider time;
 
     protected measurements.Performer mPerformer = new Performer();
+
+    protected Map<String, Variable> derivations = new HashMap<>();
+
+    IValue[] deri = new IValue[0];
 }

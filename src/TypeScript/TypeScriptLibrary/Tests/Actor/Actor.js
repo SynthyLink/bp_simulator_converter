@@ -43,6 +43,7 @@ const SimpleFeedAct_1 = require("../Wrappers/SimpleFeedAct");
 const TwoAct_1 = require("../Wrappers/TwoAct");
 const ODE_FeedbackAct_1 = require("../Wrappers/ODE_FeedbackAct");
 const TransformerRecursveAct_1 = require("../Wrappers/TransformerRecursveAct");
+const PIAct_1 = require("../Wrappers/PIAct");
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -94,6 +95,15 @@ class Actor {
     actCondition() {
         try {
             var o = new ConditionTestAct_1.ConditionTestAct();
+            o.test();
+        }
+        catch (e) {
+            finish(e);
+        }
+    }
+    actPI() {
+        try {
+            var o = new PIAct_1.PIAct();
             o.test();
         }
         catch (e) {

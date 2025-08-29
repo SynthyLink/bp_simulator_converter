@@ -22,7 +22,7 @@ namespace Diagram.Java
             },
                           { typeof(bool), new Func<object, string>[]
             { (o) =>  "boolean[]",
-                (o) =>  "new booleam[]{true}",
+                (o) =>  "new boolean[]{true}",
                  GetStringBoolValue,
 
 

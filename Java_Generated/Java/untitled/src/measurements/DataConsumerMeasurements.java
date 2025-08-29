@@ -7,12 +7,12 @@ import general_service.interfaces.IAlias;
 import general_service.interfaces.IFeedbackCollection;
 import measurements.interfaces.IMeasurement;
 import measurements.interfaces.IMeasurements;
+import measurements.variables.Variable;
 
 import java.util.*;
 
 public class DataConsumerMeasurements  extends  DataConsumer implements IMeasurements, IAlias {
 
-    protected List<IMeasurement> measurementsData = new ArrayList<>();
 
 
     public DataConsumerMeasurements(String name, IDesktop desktop) {
@@ -20,14 +20,15 @@ public class DataConsumerMeasurements  extends  DataConsumer implements IMeasure
         super(name, desktop);
     }
 
+
     @Override
     public int getMeasurementsCount() {
-        return measurementsData.size();
+        return iMeasurements.size();
     }
 
     @Override
     public IMeasurement getMeasurement(int i) {
-        return measurementsData.get(i);
+        return iMeasurements.get(i);
     }
 
     @Override
@@ -37,13 +38,15 @@ public class DataConsumerMeasurements  extends  DataConsumer implements IMeasure
 
     @Override
     public void addMeasurement(IMeasurement measurement) {
-        measurementsData.add(measurement);
+        iMeasurements.add(measurement);
     }
 
     public double getInternalTime() {
 
         return timeMeasurement.getTime();
     }
+
+    List<IMeasurement> iMeasurements = new ArrayList<>();
 
     @Override
     public String[] getAliasNames() {
@@ -68,7 +71,6 @@ public class DataConsumerMeasurements  extends  DataConsumer implements IMeasure
     protected void setMap(java.util.Map<String, Entry<Object, Object>> map)
     {
        performer.copyMap(map, this.map);
-      // map.put("nn", new general_service.Enrty<Object, Object>(null, null));
     }
 
     protected void setFeedback() {
@@ -84,6 +86,15 @@ public class DataConsumerMeasurements  extends  DataConsumer implements IMeasure
     {
         feedback = new FeedbackCollection(this, list);
     }
+
+    protected void addVariableValue(String name, Object type)
+    {
+    }
+
+    protected void addVariable(Variable variable)
+    {
+    }
+
 
     java.util.Map<String, Entry<Object, Object>> map = new HashMap<>();
 

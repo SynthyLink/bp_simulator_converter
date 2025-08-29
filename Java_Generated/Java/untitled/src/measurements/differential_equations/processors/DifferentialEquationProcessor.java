@@ -1,5 +1,6 @@
 package measurements.differential_equations.processors;
 
+import diagram.interfaces.IDesktop;
 import general_service.Performer;
 import measurements.differential_equations.interfaces.IDifferentialEquationProcessor;
 import measurements.differential_equations.interfaces.IDifferentialEquationSolver;
@@ -8,6 +9,10 @@ import measurements.time.interfaces.ITimeMeasurementProvider;
 
 public class DifferentialEquationProcessor implements IDifferentialEquationProcessor {
 
+    public DifferentialEquationProcessor(IDesktop desktop)
+    {
+        this.desktop = desktop;
+    }
 
     protected Performer performer = new Performer();
 
@@ -21,7 +26,7 @@ public class DifferentialEquationProcessor implements IDifferentialEquationProce
 
     @Override
     public IDifferentialEquationSolver[] getDifferentialEquations() {
-       return null;
+       return equations;
     }
 
 
@@ -61,7 +66,9 @@ public class DifferentialEquationProcessor implements IDifferentialEquationProce
     }
 
     @Override
-    public IDifferentialEquationProcessor newDifferentialEquations() {
+    public IDifferentialEquationProcessor newDifferentialEquations(IDesktop desktop) {
         return null;
     }
+
+    protected IDesktop desktop;
 }

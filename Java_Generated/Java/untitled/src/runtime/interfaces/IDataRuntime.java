@@ -1,7 +1,8 @@
-package runtime;
+package runtime.interfaces;
 
 import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
+import diagram.interfaces.IDesktop;
 import measurements.interfaces.IStarted;
 import measurements.time.interfaces.ITimeMeasurementProvider;
 
@@ -39,5 +40,7 @@ public interface IDataRuntime {
     ICategoryArrow[] getRuntimeArrows();
 
     IStarted[] getStarted();
+
+    IDesktop getDesktop();
 
 }

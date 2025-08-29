@@ -1,5 +1,6 @@
 package measurements.differential_equations.interfaces;
 
+import diagram.interfaces.IDesktop;
 import measurements.time.interfaces.ITimeMeasurementProvider;
 
 public interface IDifferentialEquationProcessor {
@@ -18,5 +19,5 @@ public interface IDifferentialEquationProcessor {
 
     void clearDifferentialEquations();
 
-    IDifferentialEquationProcessor newDifferentialEquations();
+    IDifferentialEquationProcessor newDifferentialEquations(IDesktop desktop);
 }

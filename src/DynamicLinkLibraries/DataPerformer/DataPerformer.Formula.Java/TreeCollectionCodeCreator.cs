@@ -123,7 +123,6 @@ namespace DataPerformer.Formula.Java
         }
 
 
-
         Dictionary<string, List<string>> ITreeCollectionCodeCreator.CreateCode(object obj, ObjectFormulaTree[] trees, string className, string constructorModifier, bool checkValue)
         {
             this.trees = trees;
@@ -148,13 +147,6 @@ namespace DataPerformer.Formula.Java
                 output = DataPerformerFormula.GetOutput(mm, ltr);
             }
             var attr = performer.GetAttribute<CodeCreatorAttribute>(obj);
-            if (attr == null)
-            {
-                var dict = new Dictionary<string, List<string>>();
-                dict["code"] = l;
-                return dict;
-
-            }
             var ll = new List<string>();
             l.Add("@Override");
             ll.Add("protected void save(){");

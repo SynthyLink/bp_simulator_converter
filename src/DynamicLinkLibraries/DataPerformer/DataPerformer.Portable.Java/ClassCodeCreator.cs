@@ -82,10 +82,10 @@ namespace DataPerformer.Portable.Java
 
         static List<string> CreateRandom(string preffix, object obj)
         {
-            return new List<string>() { "}" };
+            return new List<string>() { "}", "}" };
         }
 
- 
+
         Dictionary<string, List<string>> IAliasCodeCreator.Create(string id, IAlias alias)
         {
             var typeCreator = Performer.GetLaguageObject<ITypeCreator>(this);

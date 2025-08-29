@@ -16,12 +16,14 @@ public class PI extends Desktop
 		public CategoryObject0(String name, IDesktop desktop) {
 			super(name,  desktop);
 			}
+			}
 	
 
 	protected class CategoryObject1 extends measurements.RandomGenerator
 	{
 		public CategoryObject1(String name, IDesktop desktop) {
 			super(name,  desktop);
+			}
 			}
 	
 
@@ -32,6 +34,9 @@ public class PI extends Desktop
 			java.util.Map< String, general_service.Entry<Object, Object >> map = new java.util.HashMap<>();
 			map.put("f", new general_service.Entry<Object, Object>(new double[0], new double[]{0.0040000000000000001}));
 			setMap(map);
+					Object o;
+					o = new double[0];
+					addVariableValue("Formula_1", o);
 				}
 			
 					@Override
@@ -140,6 +145,13 @@ public class PI extends Desktop
 				{
 					return success ? this.var_11 : null;
 				}
+				@Override
+				protected void save(){
+					var v = variables;
+					var x0 = v.get("Formula_1");
+					x0.setIValue(this.get_11());
+				}
+				
 			}
 	
 
@@ -152,6 +164,9 @@ public class PI extends Desktop
 			map.put("c", new general_service.Entry<Object, Object>(new double[0], new double[]{0}));
 			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{0}));
 			setMap(map);
+					Object o;
+					o = new double[0];
+					addVariableValue("a", o);
 				}
 			
 					@Override

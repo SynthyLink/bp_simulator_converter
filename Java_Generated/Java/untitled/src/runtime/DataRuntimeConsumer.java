@@ -2,10 +2,12 @@ package runtime;
 
 import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
+import diagram.interfaces.IDesktop;
 import general_service.Performer;
 import measurements.interfaces.*;
 import measurements.time.interfaces.ITimeMeasurementConsumer;
 import measurements.time.interfaces.ITimeMeasurementProvider;
+import runtime.interfaces.IDataRuntime;
 
 import java.util.*;
 
@@ -15,7 +17,8 @@ public class DataRuntimeConsumer implements IDataRuntime {
         List<IMeasurements> list = new ArrayList<>();
         this.addDataConsumer(dataConsumer, list);
         var count = list.size();
-
+        ICategoryObject cc = (ICategoryObject) dataConsumer;
+        desktop = cc.getDesktop();
         for (int i = count - 1; i >= 0; i--) {
             var n = list.get(i);
             measurements = performer.extend(measurements, n);
@@ -33,13 +36,21 @@ public class DataRuntimeConsumer implements IDataRuntime {
     }
 
     @Override
-    public void updateRuntime() {
+    public void updateRuntime()
+    {
         for (var m : measurements)
         {
             m.updateMeasurements();
         }
-
     }
+
+
+    @Override
+    public IDesktop getDesktop()
+    {
+        return  desktop;
+    }
+
 
     /// <summary>
     /// Refreshes itself
@@ -109,7 +120,8 @@ public class DataRuntimeConsumer implements IDataRuntime {
         return  started;
     }
 
-    protected   void  addDataConsumer(IDataConsumer dc, List<IMeasurements> list)
+
+    protected  void  addDataConsumer(IDataConsumer dc, List<IMeasurements> list)
     {
          var m = dc.getAllMeasurements();
         var n = m.length;
@@ -133,13 +145,17 @@ public class DataRuntimeConsumer implements IDataRuntime {
         {
 
         }
+
+
 }
 
 
 
+    protected IDesktop desktop;
 
     ICategoryArrow[] categoryArrows = new ICategoryArrow[0];
     IStarted[] started  = new IStarted[0];
+
 
     ICategoryObject[] categoryObjects = new ICategoryObject[0];
 

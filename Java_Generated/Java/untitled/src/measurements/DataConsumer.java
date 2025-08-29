@@ -43,8 +43,6 @@ public class DataConsumer extends CategoryObject implements IDataConsumer, IPost
 
     }
 
-    protected void save() {
-    }
 
 
     @Override
@@ -56,8 +54,9 @@ public class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     }
 
     @Override
-    public void addMeasurements(IMeasurements item) {
-        measurements.add(item);
+    public void addMeasurements(IMeasurements item)
+    {
+         measurements.add(item);
     }
 
     @Override

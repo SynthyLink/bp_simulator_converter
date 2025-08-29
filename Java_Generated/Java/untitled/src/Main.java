@@ -16,18 +16,19 @@ public class Main {
         java.util.List<general_service.Entry<int[], String>> list = new java.util.ArrayList<>();
         list.add(new general_service.Entry(new int[] { 1, 2}, "" ));
         var a = new Actor();
-   // a.testRandomTwo();
-        a.testRandomFour();
+    //a.testRandomTwo();
+        a.testODE();;
+        if (false) {
+            //    new generated.ODE_Feedback();
+            //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
+            // to see how IntelliJ IDEA suggests fixing it.
+            System.out.printf("Hello and welcome!");
 
-    //    new generated.ODE_Feedback();
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+            for (int i = 1; i <= 5; i++) {
+                //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
+                // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
+                System.out.println("i = " + i);
+            }
         }
     }
 

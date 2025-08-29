@@ -5,8 +5,10 @@ import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
 import error_handler.interfaces.ICheck;
 import error_handler.interfaces.IErrorHandler;
+import general_service.Performer;
 import general_service.interfaces.IPostSetArrow;
 import general_service.interfaces.IValueSetterFactory;
+import general_service.setters.factory.ValueSetterFactory;
 
 
 import java.util.*;
@@ -24,6 +26,7 @@ public class Desktop  implements IDesktop, ICheck, IErrorHandler
     {
         this.check = check;
         this.errorHandler = errorHandler;
+        valueSetterFactory = new ValueSetterFactory(errorHandler);
         init();
     }
 
@@ -31,6 +34,7 @@ public class Desktop  implements IDesktop, ICheck, IErrorHandler
     {
         this.check = this;
         this.errorHandler = this;
+        valueSetterFactory = new ValueSetterFactory(this);
         init();
     }
 
@@ -116,11 +120,12 @@ arrowMap.put(arrow.getArrowName(), arrow);
     }
 
     @Override
-    public IValueSetterFactory getValueSetterFactory() {
+    public IValueSetterFactory getValueSetterFactory()
+    {
         return valueSetterFactory;
     }
 
-    protected IValueSetterFactory valueSetterFactory = new general_service.setters.factory.ValueSetterFactory();
+    protected IValueSetterFactory valueSetterFactory;
 
     protected void postSet() {
         for (var a : arrows) {
@@ -142,7 +147,8 @@ arrowMap.put(arrow.getArrowName(), arrow);
     }
 
     @Override
-    public void handle(Throwable exception) {
+    public void handle(Throwable exception)
+    {
 
     }
 
@@ -151,8 +157,10 @@ arrowMap.put(arrow.getArrowName(), arrow);
 
     }
 
-    ICheck check;
+    protected ICheck check;
 
-    IErrorHandler errorHandler;
+    protected IErrorHandler errorHandler;
+
+    protected Performer performer = new Performer();
 }
 

@@ -69,7 +69,7 @@ new Dictionary<string, string[]> {
         private static readonly string[] modulodiv = new string[] { "(", " % ", ");" };
 
 
-        private static readonly string[] optionalSeparator = new string[] { "(", ") ? (", ") : (", ");" };
+        private static readonly string[] optionalSeparator = new string[] { "(", "[0]) ? (", "[0]) : (", "[0]);" };
 
         private static readonly string[] power = new string[]
         { "Math.pow(", "[0], ", "[0]);" };
@@ -77,25 +77,25 @@ new Dictionary<string, string[]> {
 
         private static Dictionary<string, string[]> elementaryBinary = new Dictionary<string, string[]>()
         {
-            {"+", new string[] {"(", "[0]) + (", "[0])"}},
-            {"-", new string[] {"(", "[0]) - (", "[0])"}},
+            {"+", new string[] {"(", "[0]) + (", "[0]);" }},
+            {"-", new string[] {"(", "[0]) - (", "[0]);" }},
             {"*", new string[] {"(", "[0]) * (", "[0]);" }},
         };
 
         private static readonly Dictionary<string, string[]> comparation = new Dictionary<string, string[]>()
         {
-            {">", new string[] {"(", "[0]) > (", "[0])"}},
-            {"<", new string[] {"(", "[0]) < (", ")[0]"}},
-            {"\u2260", new string[] {"(", "[0]) != (", "[0])"}},
-            {"\u2264", new string[] {"(", "[0]) >= (", "[0])"}},
-            {"\u2265", new string[] {"(", "[0]) <= (", "[0])" }},
+            {">", new string[] {"(", "[0]) > (", "[0]));"}},
+            {"<", new string[] {"(", "[0]) < (", "[0]));"}},
+            {"\u2260", new string[] {"(", "[0]) != (", "[0]));"}},
+            {"\u2264", new string[] {"(", "[0]) >= (", "[0]));" }},
+            {"\u2265", new string[] {"(", "[0]) <= (", "[0]));" }},
         };
 
         private static readonly Dictionary<string, string[]> logicalOperation = new Dictionary<string, string[]>()
        {
-            {"\u2216", new string[] {"(", "[0]) & (", "[0])"}},
-            {"\u2217", new string[] {"(", "[0]) | (", "[0])" }},
-            {"\u8835", new string[] {" = (!(", "[0])) | (", "[0])" }}
+            {"\u2216", new string[] {"(", "[0]) & (", "[0]);"}},
+            {"\u2217", new string[] {"(", "[0]) | (", "[0]);" }},
+            {"\u8835", new string[] {" = (!(", "[0])) | (", "[0]));" }}
        };
 
 

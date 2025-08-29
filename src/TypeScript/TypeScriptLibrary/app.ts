@@ -2,6 +2,5 @@ import { Actor } from "./Tests/Actor/Actor";
 
 let a = new Actor();
 
-a.actTransformerFeedback();
-
+a.actPI();
 let i = 0;

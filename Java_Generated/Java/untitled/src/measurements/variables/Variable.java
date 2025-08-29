@@ -8,7 +8,7 @@ import measurements.interfaces.IMeasurement;
 import java.lang.reflect.Array;
 
 public class Variable implements IMeasurement,  IValue, IDerivation {
-    public Variable(Object type, String name, IValueSetterFactory factory) {
+    public Variable(Object type, String name,  IValueSetterFactory factory) {
         this.type = type;
         this.name = name;
         setter = factory.getValueSetter(type);
@@ -19,12 +19,13 @@ public class Variable implements IMeasurement,  IValue, IDerivation {
 
     @Override
     public Object getIValue() {
-        return value;
+        return setter.getValue();
     }
 
     @Override
     public void setIValue(Object value) {
-        setter.set(value, this.value);
+
+        setter.setValue(value);
     }
 
     @Override
@@ -49,7 +50,7 @@ public class Variable implements IMeasurement,  IValue, IDerivation {
 
     @Override
     public Object getMeasurementValue() {
-        return value;
+        return setter.getValue();
     }
 
     Object value;
@@ -61,6 +62,11 @@ public class Variable implements IMeasurement,  IValue, IDerivation {
     String name;
 
     IMeasurement derivation;
+
+    @Override
+    public String toString() {
+        return setter.toString();
+    }
 
     IValueSetter setter;
     measurements.Performer mPerformer = new measurements.Performer();

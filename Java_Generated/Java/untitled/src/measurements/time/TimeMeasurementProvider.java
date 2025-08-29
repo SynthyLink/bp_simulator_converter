@@ -16,7 +16,7 @@ public class TimeMeasurementProvider implements ITimeMeasurementProvider, IMeasu
 
     @Override
     public void setTime(double time) {
-this.time[0] = time;
+        this.time[0] = time;
     }
 
 

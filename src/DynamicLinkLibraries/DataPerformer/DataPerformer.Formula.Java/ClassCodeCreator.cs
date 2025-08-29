@@ -1,6 +1,9 @@
 ﻿using BaseTypes.Attributes;
+using BaseTypes.CodeCreator.Interfaces;
+using BaseTypes.CSharp;
 using DataPerformer.Interfaces;
 using Diagram.UI;
+using Diagram.UI.Attributes;
 using Diagram.UI.Interfaces;
 using ErrorHandler;
 using FormulaEditor;
@@ -43,8 +46,6 @@ namespace DataPerformer.Formula.Java
             };
         }
 
-        
-
     
         List<string> CreateObjectTreeObject(string prefix, object obj)
         {
@@ -63,9 +64,51 @@ namespace DataPerformer.Formula.Java
         Dictionary<string, List<string>> IVariablesCodeCreator.Create(IMeasurements measurements)
         {
             var d = new Dictionary<string, List<string>>();
-            d["code"] = new List<string>();
+            var l = CreateJavaVariableList(measurements);
+            d["code"] = l;
             return d;
         }
+
+        public  List<string> CreateJavaVariableList(IMeasurements measurements)
+        {
+
+            var l = new List<string>();
+       /*     var attr = Performer.GetAttribute<CodeCreatorAttribute>(measurements);
+            if (attr == null) return l;
+            if (!attr.InitialState)
+            {
+             //   return l;
+            }*/
+            var typeCreator = Performer.GetLaguageObject<ITypeCreator>(this);
+            if (measurements is IStarted start)
+            {
+                start.Start(0);
+            }
+            var n = measurements.Count;
+            if (n > 0)
+            {
+                l.Add("Object o;");
+            }
+            for (int i = 0; i < n; i++)
+            {
+                var m = measurements[i];
+                var name = "\"" + m.Name + "\"";
+                var type = m.Type;
+                var v = typeCreator.GetType(type);
+                if (v.Contains("[]")) 
+                {
+                    v = v.Replace("[]", "[0]");
+                    v = "new " + v;
+                }
+                l.Add("o = " + v + ";");
+                var pr = m.Parameter();
+                var st = Performer.StringValue(pr);
+                l.Add("addVariableValue(" + name + ", o);");
+
+            }
+            return l;
+        }
+
 
         protected virtual List<string> CreateTreeCollection(string preffix, ITreeCollection obj)
         {

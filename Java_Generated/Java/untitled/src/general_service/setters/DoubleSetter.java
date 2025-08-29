@@ -1,39 +1,53 @@
 package general_service.setters;
 
+import error_handler.interfaces.IErrorHandler;
 import general_service.interfaces.IValueSetter;
 
-public class DoubleSetter implements IValueSetter {
-    public  DoubleSetter()
+import java.lang.reflect.Array;
+
+public class DoubleSetter extends AbstractSetter {
+    private   DoubleSetter()
     {
         value = array;
+        def = new double[]{0};
     }
 
-    @Override
-    public Object getDefaultValue() {
-        return def;
+    IErrorHandler handler;
+
+    public  DoubleSetter(IErrorHandler handler)
+    {
+        value = array;
+        def = new double[]{0};
+        this.handler = handler;
     }
 
-    @Override
-    public Object getValue() {
-        return value;
-    }
+
 
     @Override
     public void setValue(Object o) {
-        if (o == null)
-        {
-            value = null;
-            return;
-        }
-        var d = (double[])o;
-        array[0] = d[0];
-        value = array;
+      try {
+          if (o == null) {
+              value = null;
+              return;
+          }
+          var d = (double[]) o;
+          array[0] = d[0];
+          value = array;
+      }
+      catch (Throwable ex)
+      {
+          handler.handle(ex);
+      }
+    }
 
+    @Override
+    public  String toString()
+    {
+        return  value == null ? "null" : array[0] + "";
     }
 
     private  double[] array = new double[]{0};
 
-    private Object value;
 
-    private double[] def = new double[]{0};
+
 }

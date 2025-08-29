@@ -1,18 +1,25 @@
 package measurements;
 
 import category_theory.interfaces.ICategoryObject;
+import diagram.interfaces.IDesktop;
 import general_service.interfaces.IAction;
 import general_service.interfaces.IAliasName;
+import general_service.interfaces.IFuncT;
+import general_service.interfaces.IValueSetter;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IDerivation;
 import measurements.interfaces.IMeasurement;
+import measurements.interfaces.IMeasurements;
 import measurements.time.TimeMeasurementProvider;
-import runtime.IDataRuntime;
+import runtime.interfaces.IDataRuntime;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Performer {
+
+    protected general_service.Performer performer = new general_service.Performer();
+
     public IMeasurement get(IDataConsumer dc, int[] k) {
         var m = dc.getAllMeasurements();
         var measurements = m[k[0]];
@@ -79,7 +86,7 @@ public class Performer {
         a[0] = v;
     }
 
-    public IVariableSetter getSetter(Object o) {
+    public IValueSetter getSetter(Object o) {
         return null;
     }
 
@@ -118,4 +125,47 @@ public class Performer {
 
     }
 
+    public void performFixedStepCalculation(IDataRuntime runtime,
+                                            double start, double step, int steps, IAction action, IFuncT<boolean[]> condition) {
+        var tm = new TimeMeasurementProvider();
+        runtime.setTimeProvider(tm);
+        runtime.startRuntime(start);
+        var st = start;
+        var curr = start;
+        for (var i = 0; i < steps; i++) {
+            tm.setTime(st);
+            if (i > 0) {
+                runtime.stepRuntime(curr, st);
+                curr = st;
+            }
+            runtime.updateRuntime();
+            var cond = condition.funcT();
+            if (cond[0]) {
+                action.action();
+            }
+            st += step;
+
+        }
+    }
+
+    public void performFixedStepCalculation(IDataRuntime runtime,
+                                            double start, double step, int steps, IAction action, String condition) {
+        var desktop = runtime.getDesktop();
+        var n = condition.lastIndexOf('.');
+        var fn = condition.substring(0, n);
+        var nam = condition.substring(n + 1);
+        IMeasurements m = performer.get(desktop, fn);
+        IFuncT<boolean[]> func = null;
+        var nm = m.getMeasurementsCount();
+        for (var i = 0; i < nm; i++) {
+            var mmm = m.getMeasurement(i);
+            var nmnm = mmm.getMeasurementName();
+            if (nmnm.equals(nam)) {
+                func = new MeasurementBoolFunc(mmm);
+                break;
+            }
+        }
+        performFixedStepCalculation(runtime,
+                start, step, steps, action, func);
+    }
 }

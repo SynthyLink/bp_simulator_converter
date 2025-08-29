@@ -17,7 +17,7 @@ public class DataConsumerVariableMeasurements extends DataConsumerMeasurements  
 
     protected Variable[]  output = new Variable[0];
 
-    protected Map<String, Variable>  vatiables = new HashMap<>();
+    protected Map<String, Variable>  variables = new HashMap<>();
 
 
     @Override
@@ -30,5 +30,16 @@ public class DataConsumerVariableMeasurements extends DataConsumerMeasurements  
         return output[i];
     }
 
+    protected void addVariableValue(String name, Object type)
+    {
+        var variable = new Variable(type, name, valueSetterFactory);
+        addVariable(variable);
+    }
+
+    protected void addVariable(Variable variable)
+    {
+        output = performer.extend(output, variable);
+        variables.put(variable.getMeasurementName(), variable);
+    }
 
 }
