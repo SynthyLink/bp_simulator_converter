@@ -16,12 +16,21 @@ public class ODE_Feed extends Desktop
 		public CategoryObject0(String name, IDesktop desktop) {
 			super(name,  desktop);
 			java.util.Map< String, general_service.Entry<Object, Object >> map = new java.util.HashMap<>();
+			map.put("d", new general_service.Entry<Object, Object>(new double[0], new double[]{-0.17015052092374328}));
+			map.put("k", new general_service.Entry<Object, Object>(new double[0], new double[]{2}));
 			map.put("b", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
 			map.put("c", new general_service.Entry<Object, Object>(new double[0], new double[]{0.31314560830292659}));
-			map.put("k", new general_service.Entry<Object, Object>(new double[0], new double[]{2}));
 			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
-			map.put("d", new general_service.Entry<Object, Object>(new double[0], new double[]{-0.17015052092374328}));
 			setMap(map);
+					Object o;
+					o = new double[0];
+					addVariableValue("Formula_1", o);
+					o = new double[0];
+					addVariableValue("Formula_2", o);
+					o = new double[0];
+					addVariableValue("Formula_3", o);
+					o = new double[0];
+					addVariableValue("Formula_4", o);
 				}
 			
 					@Override
@@ -141,6 +150,19 @@ public class ODE_Feed extends Desktop
 				{
 					return success ? this.var_11 : null;
 				}
+				@Override
+				protected void save(){
+					var v = variables;
+					var x0 = v.get("Formula_1");
+					x0.setIValue(this.get_11());
+					var x1 = v.get("Formula_2");
+					x1.setIValue(this.get_7());
+					var x2 = v.get("Formula_3");
+					x2.setIValue(this.get_8());
+					var x3 = v.get("Formula_4");
+					x3.setIValue(this.get_6());
+				}
+				
 			}
 	
 
@@ -149,10 +171,15 @@ public class ODE_Feed extends Desktop
 		public CategoryObject1(String name, IDesktop desktop) {
 			super(name,  desktop);
 			java.util.Map< String, general_service.Entry<Object, Object >> map = new java.util.HashMap<>();
-			map.put("x", new general_service.Entry<Object, Object>(new double[0], new double[]{0}));
 			map.put("y", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
+			map.put("x", new general_service.Entry<Object, Object>(new double[0], new double[]{0}));
 			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
 			setMap(map);
+					Object o;
+					o = new double[0];
+					addVariableValue("x", o);
+					o = new double[0];
+					addVariableValue("y", o);
 				}
 			
 					@Override

@@ -26,6 +26,12 @@ public class Actor {
         r.test();
     }
 
+    public void testODE_Feedback()
+    {
+        var r = new ODE_FeedAct();
+        r.test();
+    }
+
 
     public void testCondition()
     {

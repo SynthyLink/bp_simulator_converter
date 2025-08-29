@@ -41,6 +41,8 @@ public class DataConsumerMeasurements  extends  DataConsumer implements IMeasure
         iMeasurements.add(measurement);
     }
 
+
+
     public double getInternalTime() {
 
         return timeMeasurement.getTime();
@@ -77,7 +79,7 @@ public class DataConsumerMeasurements  extends  DataConsumer implements IMeasure
         feedback.setFeedbacks();
     }
 
-    protected  void createFeedback() {
+    protected void createFeedback() {
         List<Entry<int[], String>> list = new ArrayList<>();
         setFeedback(list);
     }

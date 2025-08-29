@@ -316,7 +316,8 @@ namespace DinAtm.Pure
                 }
                 ii++;
             }
-            return d + db;
+            var x = d + db;
+            return x;
         }
 
         static long shiftdat(DateTime dat)

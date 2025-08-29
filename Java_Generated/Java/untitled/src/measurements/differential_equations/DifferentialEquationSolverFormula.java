@@ -3,6 +3,7 @@ package measurements.differential_equations;
 import diagram.interfaces.IDesktop;
 import general_service.interfaces.IValue;
 import measurements.DataConsumerVariableMeasurements;
+import measurements.DataConsumerVariableMeasurementsStarted;
 import measurements.Performer;
 import measurements.differential_equations.interfaces.IDifferentialEquationSolver;
 import measurements.time.interfaces.ITimeMeasurementProvider;
@@ -11,7 +12,7 @@ import measurements.variables.Variable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DifferentialEquationSolverFormula extends DataConsumerVariableMeasurements implements IDifferentialEquationSolver {
+public class DifferentialEquationSolverFormula extends DataConsumerVariableMeasurementsStarted implements IDifferentialEquationSolver {
     public DifferentialEquationSolverFormula(String name, IDesktop desktop) {
         super(name, desktop);
     }
@@ -25,6 +26,15 @@ public class DifferentialEquationSolverFormula extends DataConsumerVariableMeasu
         mPerformer.updateChildrenData(this);
         this.calculateTree();
         this.save();
+
+    }
+
+    @Override
+    public void postSetArrow()
+    {
+        init();
+        this.setInitial();
+        createFeedback();
 
     }
 
@@ -44,14 +54,14 @@ public class DifferentialEquationSolverFormula extends DataConsumerVariableMeasu
    }
 
    @Override
-    protected void addVariableValue(String name,Object type, Object value)
+    protected void addVariableValue(String name,Object type)
     {
-        var variable = new Variable(name, type, value);
-        var derivation = new Variable("D" + name, 0, 0);
+        var variable = new Variable(type, name, valueSetterFactory);
+        var derivation = new Variable(type, "D" + name, valueSetterFactory);
         variable.setDerivation(derivation);
-        this.derivations.set(name, derivation);
-        this.addVariable(variable);
-        this.deri.push(derivation);
+        derivations.put(name, derivation);
+        deri = performer.extend(deri, derivation);
+        addVariable(variable);
     }
 
 

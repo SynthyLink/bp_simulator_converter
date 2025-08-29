@@ -1,20 +1,22 @@
 package tests;
 
 import general_service.interfaces.IAction;
-import generated.ODE;
+import generated.ODE_Feed;
+
 import measurements.Performer;
 import measurements.differential_equations.processors.RungeProcessor;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IMeasurements;
 import runtime.DataRuntimeConsumerODE;
 
-public class ODEAct extends ODE implements IAction {
+public class ODE_FeedAct extends ODE_Feed implements IAction {
 
     IDataConsumer consumer;
 
     IMeasurements measurements;
 
-    public ODEAct() {
+    public ODE_FeedAct() {
+        super();
         consumer = performer.get(this, "Chart");
         measurements = consumer.getAllMeasurements()[0];
     }

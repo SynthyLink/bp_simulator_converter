@@ -20,5 +20,10 @@ public class DataConsumerVariableMeasurementsStarted extends DataConsumerVariabl
         initial = new AliasInitialValueCollection(this, this);
     }
 
+    protected void setInitial()
+    {
+        initial = new AliasInitialValueCollection(this, this);
+    }
+
     protected IInitialValueCollection initial;
 }
