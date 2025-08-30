@@ -171,9 +171,9 @@ public class ODE_Feed extends Desktop
 		public CategoryObject1(String name, IDesktop desktop) {
 			super(name,  desktop);
 			java.util.Map< String, general_service.Entry<Object, Object >> map = new java.util.HashMap<>();
+			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
 			map.put("y", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
 			map.put("x", new general_service.Entry<Object, Object>(new double[0], new double[]{0}));
-			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{1}));
 			setMap(map);
 					Object o;
 					o = new double[0];

@@ -5,6 +5,7 @@ import general_service.Entry;
 import general_service.FeedbackCollection;
 import general_service.interfaces.IAlias;
 import general_service.interfaces.IFeedbackCollection;
+import general_service.interfaces.IValueSetter;
 import measurements.interfaces.IMeasurement;
 import measurements.interfaces.IMeasurements;
 import measurements.variables.Variable;
@@ -52,27 +53,31 @@ public class DataConsumerMeasurements  extends  DataConsumer implements IMeasure
 
     @Override
     public String[] getAliasNames() {
-        return new String[0];
+        return aliasNames;
     }
 
     @Override
-    public Object getAliasType(String name) {
-        return map.get(name).getKey();
+    public Object getAliasType(String name)
+    {
+        return map.get(name).getType();
     }
 
     @Override
-    public Object getAliasValue(String name) {
-        return map.get(name).getValue();
+    public Object getAliasValue(String name)
+    {
+        var setter =  map.get(name);
+        return setter.getValue();
     }
 
     @Override
     public void setAliasValue(String name, Object obj) {
-        map.get(name).setValue(obj);
+       var setter =  map.get(name);
+       setter.setValue(obj);
     }
 
     protected void setMap(java.util.Map<String, Entry<Object, Object>> map)
     {
-       performer.copyMap(map, this.map);
+       aliasNames =  copyMap(map, this.map);
     }
 
     protected void setFeedback() {
@@ -98,8 +103,12 @@ public class DataConsumerMeasurements  extends  DataConsumer implements IMeasure
     }
 
 
-    java.util.Map<String, Entry<Object, Object>> map = new HashMap<>();
+    java.util.Map<String, IValueSetter> map = new HashMap<>();
+
+
 
     protected IFeedbackCollection feedback;
+
+    protected String[] aliasNames = new String[0];
 
 }

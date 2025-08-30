@@ -39,4 +39,11 @@ public class Actor {
         r.test();
     }
 
+    public void testTransforRecursiveFeed()
+    {
+        var r = new Transform_Recursive_FeedAct();
+        r.test();
+    }
+
+
 }

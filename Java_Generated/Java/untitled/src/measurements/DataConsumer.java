@@ -2,8 +2,10 @@ package measurements;
 
 import category_theory.CategoryObject;
 import diagram.interfaces.IDesktop;
+import general_service.Entry;
 import general_service.Performer;
 import general_service.interfaces.IPostSetArrow;
+import general_service.interfaces.IValueSetter;
 import general_service.interfaces.IValueSetterFactory;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IMeasurements;
@@ -12,6 +14,7 @@ import measurements.time.interfaces.ITimeMeasurementProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow,
         ITimeMeasurementConsumer
@@ -78,4 +81,12 @@ timeMeasurement = provider;
     public double getInternalTime() {
         return 0;
     }
+
+    protected String[] copyMap(Map<String, Entry<Object, Object>> input, Map<String, IValueSetter> output)
+    {
+        return mPefrformer.copyMap(input, output, valueSetterFactory);
+    }
+
+
+    protected measurements.Performer mPefrformer = new measurements.Performer();
 }

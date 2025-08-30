@@ -6,11 +6,13 @@ public class BooleanSetter extends AbstractSetter {
     public BooleanSetter() {
         value = array;
         def = new boolean[]{true};
+        type = new boolean[0];
     }
 
 
     @Override
-    public void setValue(Object o) {
+    public void setValue(Object o)
+    {
         if (o == null) {
             value = null;
             return;
@@ -18,8 +20,8 @@ public class BooleanSetter extends AbstractSetter {
         var d = (boolean[]) o;
         array[0] = d[0];
         value = array;
-
     }
+
     @Override
     public  String toString()
     {

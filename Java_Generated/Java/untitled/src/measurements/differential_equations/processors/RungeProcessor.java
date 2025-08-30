@@ -24,7 +24,8 @@ public class RungeProcessor extends  DifferentialEquationProcessor {
     public void stepDifferentialEquations(double t0, double t1) {
         double dt = t1 - t0;
         int i = 0;
-        for (IDifferentialEquationSolver s : equations) {
+        for (IDifferentialEquationSolver s : equations)
+        {
             var m = (IMeasurements) s;
             int n = m.getMeasurementsCount();
             for (int j = 0; j < n; j++) {
@@ -92,7 +93,7 @@ public class RungeProcessor extends  DifferentialEquationProcessor {
             var p = m.getMeasurementsCount();
             for (int l = 0; l < p; l++) {
                 IDerivation der = (IDerivation) m.getMeasurement(l);
-                z[i] = mPerformer.getDouble(der);
+                 z[i] = mPerformer.getDouble(der);
                 k[3][i] = z[i] * dt;
                 ++i;
             }

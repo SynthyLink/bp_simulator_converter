@@ -1,11 +1,8 @@
 package measurements;
 
 import category_theory.interfaces.ICategoryObject;
-import diagram.interfaces.IDesktop;
-import general_service.interfaces.IAction;
-import general_service.interfaces.IAliasName;
-import general_service.interfaces.IFuncT;
-import general_service.interfaces.IValueSetter;
+import general_service.Entry;
+import general_service.interfaces.*;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IDerivation;
 import measurements.interfaces.IMeasurement;
@@ -13,7 +10,9 @@ import measurements.interfaces.IMeasurements;
 import measurements.time.TimeMeasurementProvider;
 import runtime.interfaces.IDataRuntime;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Performer {
@@ -101,8 +100,45 @@ public class Performer {
         return getDouble(o);
     }
 
-    public double getDouble(IDerivation derivation) {
-        return getDouble(derivation.getDerivation());
+    public IValueSetter convert(Entry<Object, Object> entry, IValueSetterFactory factory)
+    {
+        var o = entry.getKey();
+        var setter = factory.getValueSetter(o);
+        setter.setValue(entry.getValue());
+        return setter;
+    }
+
+    public String[] copyMap(Map<String, Entry<Object, Object>> input, Map<String, IValueSetter> output, IValueSetterFactory factory)
+    {
+        var es = input.entrySet();
+        var s = new String[0];
+        for (var item : es)
+        {
+            var x = item.getValue();
+            var setter = convert(x, factory);
+            var name = item.getKey();
+            output.put(name, setter);
+            s = performer.extend(s, name);
+        }
+        return s;
+    }
+
+
+ public IMeasurement[] get(IMeasurements measurements)
+ {
+     var m = new IMeasurement[0];
+     var n = measurements.getMeasurementsCount();
+     for (var i = 0; i < n; i++)
+     {
+         m = performer.extend(m, measurements.getMeasurement(i));
+     }
+     return  m;
+ }
+
+    public double getDouble(IDerivation derivation)
+    {
+        var der = derivation.getDerivation();
+        return getDouble(der);
     }
 
     public void performFixedStepCalculation(IDataRuntime runtime,

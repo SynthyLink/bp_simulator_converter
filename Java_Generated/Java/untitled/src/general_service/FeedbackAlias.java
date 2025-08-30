@@ -20,12 +20,11 @@ public class FeedbackAlias implements IFeedback, IFeedbackAlias {
     }
 
     public  FeedbackAlias(IMeasurements measurements, int n, int m, String name) {
-        measurement = measurements.getMeasurement(n);
-        ICategoryObject ca = (ICategoryObject) measurements;
+        measurement = measurements.getMeasurement(m);
+        ICategoryObject co = (ICategoryObject) measurements;
         Object o = measurements;
         this.name = name;
-        IAlias alias = performer.getCategoryObject(o, n);
-        aliasName = new AliasName(alias, name);
+        aliasName = new AliasName(co, n, name);
     }
 
     protected IAliasName aliasName;

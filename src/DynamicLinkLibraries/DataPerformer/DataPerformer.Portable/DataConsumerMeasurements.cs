@@ -17,6 +17,7 @@ using ErrorHandler;
 using Event.Interfaces;
 
 using NamedTree;
+using System.Linq;
 
 namespace DataPerformer.Portable
 {
@@ -191,7 +192,7 @@ namespace DataPerformer.Portable
         }
 
 
-  
+
         #endregion
 
         #region IAlias Members
@@ -199,8 +200,8 @@ namespace DataPerformer.Portable
         /// <summary>
         /// Names of aliases
         /// </summary>
-        public virtual IList<string> AliasNames
-        {
+        public virtual IList<string> AliasNames => parameters.Keys.ToList();
+   /*     {
             get
             {
                 List<string> s = new List<string>();
@@ -210,7 +211,7 @@ namespace DataPerformer.Portable
                 }
                 return s;
             }
-        }
+        }*/
 
         /// <summary>
         /// Access to alias object

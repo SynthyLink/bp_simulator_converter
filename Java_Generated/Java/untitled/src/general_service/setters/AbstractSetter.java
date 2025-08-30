@@ -18,4 +18,11 @@ public abstract class AbstractSetter implements IValueSetter {
         return value;
     }
 
+    @Override
+    public Object getType() {
+        return type;
+    }
+
+   protected Object type;
+
 }

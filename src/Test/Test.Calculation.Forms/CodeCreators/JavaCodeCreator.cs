@@ -7,16 +7,13 @@ namespace Test.Calculation.Forms.CodeCreators
     internal class JavaCodeCreator : Diagram.Java.ClassCodeCreator
 
     {
-        Performer performer = new Performer();
         public JavaCodeCreator() : base(false)
         {
            this.AddClassCodeCreator();
             dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
                    { (object o) => { return o is ObjectTransformer; } , CreateObjectTransformer }
-       //          { (object o) => { return o is DifferentialEquationSolver; } , CreateDifferentialSolver },
-           //      { (object o) => { return o is Recursive; } , CreateRecursive },
-          };
+              };
 
             classes = new Dictionary<string, string>()
             {
@@ -31,7 +28,7 @@ namespace Test.Calculation.Forms.CodeCreators
         {
             var tr = obj as ObjectTransformer;
             return new List<string>() {
-               "\tcoefficient = " + performer.DoubleToString(tr.Coefficient) + ";",
+               "\tcoefficient = " + Performer.DoubleToString(tr.Coefficient) + ";",
                 "}", "}" };
         }
 

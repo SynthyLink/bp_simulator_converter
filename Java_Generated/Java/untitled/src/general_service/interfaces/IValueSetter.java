@@ -7,4 +7,6 @@ public interface IValueSetter {
 
     void  setValue(Object o);
 
+    Object getType();
+
 }
