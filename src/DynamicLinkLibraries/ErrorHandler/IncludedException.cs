@@ -1,6 +1,4 @@
-﻿using System.Net.NetworkInformation;
-
-namespace ErrorHandler
+﻿namespace ErrorHandler
 {
     /// <summary>
     /// Included exception

@@ -79,7 +79,7 @@ namespace Diagram.Java
 
         static string GetStringBoolValue(object o)
         {
-            var x = (double)o;
+            var x = (bool)o;
             var c = o + "";
             return "new boolean[]{" + c + "}";
         }
