@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace FormulaEditor
 {
     /// <summary>
-    /// Transcedent real
+    /// Transcendent real
     /// </summary>
     public class TranscredentRealConstant : ElementaryRealConstant
     {

@@ -93,8 +93,8 @@ new Dictionary<string, string[]> {
 
         private static readonly Dictionary<string, string[]> logicalOperation = new Dictionary<string, string[]>()
        {
-            {"\u2216", new string[] {"(", "[0]) & (", "[0]);"}},
-            {"\u2217", new string[] {"(", "[0]) | (", "[0]);" }},
+            {"\u2216", new string[] {"(", "[0]) & (", "[0]));"}},
+            {"\u2217", new string[] {"(", "[0]) | (", "[0]));" }},
             {"\u8835", new string[] {" = (!(", "[0])) | (", "[0]));" }}
        };
 

@@ -114,7 +114,7 @@ namespace FormulaEditor
 		}
 
 		/// <summary>
-		/// Consructor from formula
+		/// Constructor from formula
 		/// </summary>
 		/// <param name="formula">The formula</param>
 		/// <param name="creator">The formula object creator</param>
@@ -175,6 +175,12 @@ namespace FormulaEditor
         {
             ObjectFormulaTree tree = new ObjectFormulaTree(formula, creator);
             IObjectOperation op = tree.Operation;
+            var c = op.InputTypes.Length;
+            var ch = tree.children.Count;
+            if (c != ch)
+            {
+                throw new ErrorHandler.OwnNotImplemented();
+            }
             if (op is ITreeCreator)
             {
                 ITreeCreator tc = op as ITreeCreator;

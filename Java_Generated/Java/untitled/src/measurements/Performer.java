@@ -191,17 +191,19 @@ public class Performer {
         var fn = condition.substring(0, n);
         var nam = condition.substring(n + 1);
         IMeasurements m = performer.get(desktop, fn);
-        IFuncT<boolean[]> func = null;
+        IFuncT<boolean[]> function = null;
         var nm = m.getMeasurementsCount();
-        for (var i = 0; i < nm; i++) {
-            var mmm = m.getMeasurement(i);
-            var nmnm = mmm.getMeasurementName();
-            if (nmnm.equals(nam)) {
-                func = new MeasurementBoolFunc(mmm);
+        for (var i = 0; i < nm; i++)
+        {
+            var measurement = m.getMeasurement(i);
+            var measurementName = measurement.getMeasurementName();
+            if (measurementName.equals(nam))
+            {
+                function = new MeasurementBoolFunc(measurement);
                 break;
             }
         }
         performFixedStepCalculation(runtime,
-                start, step, steps, action, func);
+                start, step, steps, action, function);
     }
 }

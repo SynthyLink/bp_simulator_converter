@@ -12,6 +12,7 @@ public class MeasurementBoolFunc implements IFuncT<boolean[]> {
 
     @Override
     public boolean[] funcT() {
-        return (boolean[])measurement.getMeasurementValue();
+        var value = measurement.getMeasurementValue();
+        return (boolean[])value;
     }
 }

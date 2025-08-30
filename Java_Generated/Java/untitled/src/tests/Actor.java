@@ -32,6 +32,13 @@ public class Actor {
         r.test();
     }
 
+    public void testOrbitalForecast()
+    {
+        var r = new OrbitalForecastAct();
+        r.test();
+    }
+
+
 
     public void testCondition()
     {

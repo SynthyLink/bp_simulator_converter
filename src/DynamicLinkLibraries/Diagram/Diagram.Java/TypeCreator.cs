@@ -80,8 +80,8 @@ namespace Diagram.Java
         static string GetStringBoolValue(object o)
         {
             var x = (bool)o;
-            var c = o + "";
-            return "new boolean[]{" + c + "}";
+            var c = (o + "").ToLower();
+            return "new boolean[]{ " + c + " }";
         }
 
 

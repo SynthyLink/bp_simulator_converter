@@ -57,7 +57,7 @@ public class Gravity36x36Transformer extends Gravity36x36 implements ICategoryOb
         var x = (double[])input[0];
         var y = (double[])input[1];
         var z = (double[])input[2];
-        Forces(n0, nk, x[0], y[0], z[0], out[0], out[2], out[3]);
+        Forces(n0, nk, x[0], y[0], z[0], out[0], out[1], out[2]);
         for (var i = 0; i < output.length; i++)
         {
             output[i] = out[i];
@@ -65,7 +65,7 @@ public class Gravity36x36Transformer extends Gravity36x36 implements ICategoryOb
 
     }
 
-    double[][] out = new double[4][];
+    double[][] out = new double[3][];
 
 
     protected double[] type = new double[0];

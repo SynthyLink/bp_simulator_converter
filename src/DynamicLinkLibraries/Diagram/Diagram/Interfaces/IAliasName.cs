@@ -37,6 +37,14 @@
         {
             get;
         }
+
+        /// <summary>
+        /// Get
+        /// </summary>
+        object Type
+        {
+            get;
+        }
             
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Diagram.UI.Interfaces;
+﻿using Diagram.UI.Interfaces;
 
 namespace Diagram.UI.Aliases
 {
@@ -87,5 +82,7 @@ namespace Diagram.UI.Aliases
             get;
             set;
         }
+
+        object IAliasName.Type => throw new ErrorHandler.OwnNotImplemented();
     }
 }

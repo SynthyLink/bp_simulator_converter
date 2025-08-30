@@ -1,10 +1,5 @@
 ﻿using BaseTypes.Attributes;
 using Diagram.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gravity_36_36.Wrapper.Java
 {
@@ -33,11 +28,59 @@ namespace Gravity_36_36.Wrapper.Java
             var gr = obj as Gravity;
             var n0 = gr.N0 + "";
             var nk = gr.NK + "";
-            return new List<string>() {
+            var l = new List<string>() {
 
                "\tsetN0(" + n0 + ");",
                "\tsetNK(" + nk + ");",
-                "}", "}" };
+                };
+         //   var ll = Get("R", gr.MUR);
+          //  Performer.Add(l, ll, 1);
+    /*        var ll = Get("C", gr.Cnm);
+            Performer.Add(l, ll, 1);
+            ll = Get("S", gr.Snm);
+            Performer.Add(l, ll, 1);*/
+            var value = gr.Saver;
+            int k = 0;
+            var R = value[k] as double[]; ++k;
+            var C = value[k] as double[]; ++k;
+            var S = value[k] as double[]; ++k;
+            var HP = value[k] as double[]; ++k;
+            var CO = value[k] as double[]; ++k;
+            var  SI = value[k] as double[]; ++k;
+            var AR = value[k] as double[]; ++k;
+            var  CF = value[k] as double[]; ++k;
+            var PNK = value[k] as double[]; ++k;
+            var ANAI = value[k] as double[]; ++k;
+            Performer.Add(l, Get("R", R), 1);
+            Performer.Add(l, Get("C", C), 1);
+            Performer.Add(l, Get("S", S), 1);
+            Performer.Add(l, Get("HP", HP), 1);
+            Performer.Add(l, Get("CO", CO), 1);
+            Performer.Add(l, Get("SI", SI), 1);
+            Performer.Add(l, Get("AR", AR), 1);
+            Performer.Add(l, Get("CF", CF), 1);
+            Performer.Add(l, Get("PNK", PNK), 1);
+            Performer.Add(l, Get("ANAI", ANAI), 1);
+            l.Add("}");
+            l.Add("}");
+            return l;
+        }
+
+        public List<string> Get(string id, double[] x)
+        {
+            var l = new List<string>();
+            l.Add(id + " = new double[] {");
+            var n = x.Length;
+            var m = n - 1;
+            for (var i = 0; i < x.Length; i++)
+            {
+                var s = i < m ? "," : "";
+                s = "\t" + Performer.DoubleToString(x[i]) + s;
+                l.Add(s);
+            }
+            l.Add("};");
+            l.Add("");
+            return l;
         }
     }
 }
