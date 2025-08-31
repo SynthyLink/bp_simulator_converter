@@ -2,17 +2,19 @@ package measurements.differential_equations;
 
 import diagram.interfaces.IDesktop;
 import general_service.interfaces.IValue;
-import measurements.DataConsumerVariableMeasurements;
 import measurements.DataConsumerVariableMeasurementsStarted;
 import measurements.Performer;
 import measurements.differential_equations.interfaces.IDifferentialEquationSolver;
+import measurements.interfaces.IMeasurements;
+import measurements.interfaces.IStarted;
 import measurements.time.interfaces.ITimeMeasurementProvider;
 import measurements.variables.Variable;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class DifferentialEquationSolverFormula extends DataConsumerVariableMeasurementsStarted implements IDifferentialEquationSolver {
+public class DifferentialEquationSolverFormula extends DataConsumerVariableMeasurementsStarted implements IDifferentialEquationSolver, IStarted, IMeasurements
+{
     public DifferentialEquationSolverFormula(String name, IDesktop desktop) {
         super(name, desktop);
     }
@@ -28,6 +30,13 @@ public class DifferentialEquationSolverFormula extends DataConsumerVariableMeasu
         this.save();
 
     }
+
+    @Override
+    public void startedStart(double startTime) {
+        initial.resetInitialValues();
+        feedback.setFeedbacks();
+    }
+
 
     @Override
     public void postSetArrow()

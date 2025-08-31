@@ -2,13 +2,14 @@ package measurements;
 
 import diagram.interfaces.IDesktop;
 import measurements.interfaces.IMeasurements;
+import measurements.interfaces.IStarted;
 import measurements.variables.Variable;
 
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class RecursiveFormula extends DataConsumerVariableMeasurementsStarted {
+public class RecursiveFormula extends DataConsumerVariableMeasurementsStarted implements IStarted, IMeasurements {
     public RecursiveFormula(String name, IDesktop desktop) {
         super(name, desktop);
     }

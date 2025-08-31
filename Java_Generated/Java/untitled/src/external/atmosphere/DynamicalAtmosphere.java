@@ -1,5 +1,6 @@
 package external.atmosphere;
 
+import general_service.date_time.DateTimeBinaryConverter;
 import general_service.date_time.OADateConverter;
 
 import java.time.LocalDateTime;
@@ -83,17 +84,17 @@ public class DynamicalAtmosphere {
     double ome = 7.292115085E-5;
     private short [] dd = new short[4];
     protected double[] xout = new double[3];
+    double[] alphastar = new double[]{0};
+    double[] h = new double[]{0};
 
- 
+
     public DynamicalAtmosphere()
     {
         init();
-        setIf(ifa)
+        setIf(ifa);
     }
 
  
-    double[] alphastar = new double[]{0};
-    double[] h = new double[]{0};
     public double Atm(double t, double[] x)
     {
         double ttt = t / 86400;
@@ -128,29 +129,23 @@ public class DynamicalAtmosphere {
     /// Atmosphere parameters
     /// </summary>
     /// 
-    public  int[] getIf();
+    public  int[] getIf()
     {
         return ifa;
     }
     
-    public void setIf(int[] value)
-        {
-            N10 = 0;
-            for (int i = 0; i < 6; i++)
-            {
-                if (if1[i] == value[0])
-                {
-                    break;
-                }
-                else
-                {
-                    N10++;
-                }
+    public void setIf(int[] value) {
+        N10 = 0;
+        for (int i = 0; i < 6; i++) {
+            if (if1[i] == value[0]) {
+                break;
+            } else {
+                N10++;
             }
-            ifa[0] = value[0];
-            ifa[1] = value[1];
-            ifa[2] = value[2];
         }
+        ifa[0] = value[0];
+        ifa[1] = value[1];
+        ifa[2] = value[2];
     }
 
     private void init()
@@ -159,9 +154,9 @@ public class DynamicalAtmosphere {
         {
             return;
         }
-        ff0 = new double[f0.Length / 21][];
-        ff1 = new double[f0.Length / 21][];
-        for (int i = 0; i < ff0.Length; i++)
+        ff0 = new double[f0.length / 21][];
+        ff1 = new double[f0.length / 21][];
+        for (int i = 0; i < ff0.length; i++)
         {
             double[] fff = new double[21];
             double[] fff1 = new double[21];
@@ -189,9 +184,11 @@ return Math.sqrt(a);
     {
         double hh = rad(x);
 
-
-        h = hh - 6378.140 * (1.0 - 0.335282E-2 * y[2] * y[2]);
-        if (h <= 180)
+for (int i = 0; i < 3; i++) {
+    y[i] = x[i] / hh;
+}
+        h[0] = hh - 6378.140 * (1.0 - 0.335282E-2 * y[2] * y[2]);
+        if (h[0] <= 180)
         {
             f1 = ff0[N10];
         }
@@ -215,60 +212,38 @@ return Math.sqrt(a);
         double a3 = a2 - N2;
         N2++;
         double ad1 = ad[N2 - 1] + (ad[N2] - ad[N2 - 1]) * a3;
-        double gam = alf + f1[12] - s0 - ome * (t - 10800.0);
+        double gam = alf + f1[12] - s0[0] - ome * (t - 10800.0);
         double cosfi = y[2] * Math.sin(del) + Math.cos(del) * (y[0] * Math.cos(gam) +
                 y[1] * Math.sin(gam));
-        double xk4 = 1 + (f1[16] + f1[17] * h + f1[18] * h * h) *
+        double xk4 = 1 + (f1[16] + f1[17] * h[0] + f1[18] * h[0] * h[0]) *
                 Math.log(ifa[1] / f1[20] + f1[19]);
-        double xk3 = 1 + (f1[13] + f1[14] * h + f1[15] * h * h) * ad1;
+        double xk3 = 1 + (f1[13] + f1[14] * h[0] + f1[15] * h[0] * h[0]) * ad1;
         double cosfi2 = Math.abs((1.0 + cosfi) / 2.0);
-        double xk2 = 1 + (f1[6] + f1[7] * h + f1[8] * Math.exp(-(h + f1[9]) / f1[10]
-                * (h + f1[9]) / f1[10])) * Math.pow(cosfi2, f1[11] / 2);
-        double xk1 = 1.0 + (f1[3] + f1[4] * h + f1[5] * h * h) * (ifa[2] - ifa[0]) / ifa[0];
-        double roh = Math.exp(f1[0] - f1[1] * Math.sqrt(h - f1[2]));
+        double xk2 = 1 + (f1[6] + f1[7] * h[0] + f1[8] * Math.exp(-(h[0] + f1[9]) / f1[10]
+                * (h[0] + f1[9]) / f1[10])) * Math.pow(cosfi2, f1[11] / 2);
+        double xk1 = 1.0 + (f1[3] + f1[4] * h[0] + f1[5] * h[0] * h[0]) * (ifa[2] - ifa[0]) / ifa[0];
+        double roh = Math.exp(f1[0] - f1[1] * Math.sqrt(h[0] - f1[2]));
         return roh * xk1 * xk2 * xk3 * xk4;
     }
 
     double[] ASoL = new double[]{0};
     double[] DSoL = new double[]{0};
-
+/*
     double atm(double[] x, double t, double[] s0, double[] h, int[] ifa, LocalDateTime Date)
     {
         date[0] = Date.getDayOfMonth();
         date[1] = Date.getMonthValue();
         date[2] = Date.getYear();
         double days = days1900(Date);
-        ASoL[0] = 0, DSoL[0] = 0;
+        ASoL[0] = 0;
+        DSoL[0] = 0;
         AngleSun(t - 10800.0, days, ASoL, DSoL);
         return atm(x, t, ASoL, DSoL, s0,  h, date);
     }
+    */
 
-double[] date = new double[3];
-double[] dd = new double[3];
 
-    double atm(double[] x, double t, double[] s0,  double[] h, int[] ifa)
-    {
-        AngleSun(-10800.0, t, ASoL, DSoL);
-        //MyTime=t;
-        LocalDateTime dt = OADateConverter.fromOADate(t);
-        dd[2] = (short)dt.getYear();
-        dd[1] = (short)dt.getMonthValue();
-        dd[0] = (short)dt.getDayOfMonth();
-        for (int i = 0; i < 3; i++) date[i] = (int)dd[i];
 
-        double tt;
-        dd[3] = (short)dt.getHour();
-        dd[2] = (short)dt.getMinute();
-        dd[1] = (short)dt.getSecond();
-        double aa = ((double)dt.ToBinary()) / 1000000000;
-        dd[0] = (short)(1000 * (aa - Math.floor(aa)));
-
-        //MyTime.GetDateSec(tm,tt);
-        //memcpy(date,&tm.tm_day,3*sizeof(int));
-        tt = (dd[3] * 60 + dd[2]) * 60 + dd[1] + 0.001 * dd[0];
-        s0 = 0.0;
-        return atm(x, tt, ASoL, DSoL, ref s0, ref h, date);
-    }
 
     void AngleSun(double T, double D, double[] ASoL, double[] DSoL)
     {
@@ -337,7 +312,7 @@ double[] dd = new double[3];
             KDNEY[1] = 29;
         int data = dat.getDayOfMonth() - 1;
         if (dat.getMonthValue() == 1) return data;
-        for (int i = 1; i < dat.geMonthValue(); i++) data += KDNEY[i];
+        for (int i = 1; i < dat.getMonthValue(); i++) data += KDNEY[i];
         return data;
     }
 

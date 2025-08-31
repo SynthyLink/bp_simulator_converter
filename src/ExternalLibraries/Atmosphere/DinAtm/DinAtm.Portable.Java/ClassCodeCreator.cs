@@ -25,7 +25,12 @@ namespace DinAtm.Portable.Java
 
         List<string> CreateAtmosphere(string preffix, object obj)
         {
+            var atm = obj as Atmosphere;
+            var iff = atm.If;
+            var s = "int[] iff = new int[] {" + iff[0] + "," + iff[1] + "," + iff[2] + "};\n setIf(iff);";
              return new List<string>() {
+
+                 s, 
 
                 "}", "}" };
         }

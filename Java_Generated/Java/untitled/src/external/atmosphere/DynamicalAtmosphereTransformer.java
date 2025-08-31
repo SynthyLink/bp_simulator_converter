@@ -48,13 +48,18 @@ public class DynamicalAtmosphereTransformer extends DynamicalAtmosphere implemen
         return type;
     }
 
+    double[] xx = new double[3];
+
     @Override
     public void calculate(Object[] input, Object[] output) {
         var t = (double[]) input[0];
         var x = (double[]) input[1];
         var y = (double[]) input[2];
         var z = (double[]) input[3];
-        out[0] = calculate(t[0], x[0], y[0], z[0]);
+        xx[0] = x[0];
+        xx[1] = y[0];
+        xx[2] = z[0];
+        out[0] = Atm(t[0], xx);
         output[0] = out;
 
     }

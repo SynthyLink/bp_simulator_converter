@@ -1400,6 +1400,7 @@ namespace DataPerformer.Formula
             try
             {
                 feedbackCollection.Fill();
+            //    feedbackCollection.Set();
                 timeOld = time;
                 foreach (Variable v in output)
                 {
@@ -1407,6 +1408,7 @@ namespace DataPerformer.Formula
                     object[] o = variables[c] as object[];
                     v.Value = (double)o[4];
                 }
+                feedbackCollection.Set();
                 prepareStart = () =>
                 {
                     UpdateChildrenData();

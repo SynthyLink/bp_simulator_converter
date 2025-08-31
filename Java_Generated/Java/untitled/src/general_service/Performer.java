@@ -7,6 +7,10 @@ import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
 import error_handler.interfaces.IErrorHandler;
+import general_service.interfaces.IAction;
+import general_service.interfaces.IActionT;
+
+import javax.swing.*;
 
 
 public class Performer {
@@ -32,6 +36,7 @@ public class Performer {
             to.put(item.getKey(), item.getValue());
         }
     }
+
 
 
 

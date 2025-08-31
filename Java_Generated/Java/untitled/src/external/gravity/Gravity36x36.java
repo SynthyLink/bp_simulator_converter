@@ -148,122 +148,121 @@ public class Gravity36x36
         CO[0] = X * R2;
         SI[0] = Y * R2;
         GR = R[0] * R3;
-        if (N0 != 0 || NK != 0)
-        {
+        if (N0 != 0 || NK != 0) {
             CF[1] = CF[0] * CF[0];
             AR[0] = R[1] * R1;
-            for (N = 1; N < N0; N++)
-            {           //1
+            for (N = 1; N < N0; N++) {           //1
                 N3 = N - 1;
                 AR[N] = AR[0] * AR[N3];
                 A = C[N3] * AR[N];
-                if (N == 1)
-                {            //1.1
+                if (N == 1) {            //1.1
                     P20 = /*SQ[4]*/sqrt(5) * (1 - 1.5 * CF[1]);
                     PNK[0] =/*SQ[14]*/sqrt(15) * CF[0] * SF;
                     FR = 3 * A * P20;
                     FF = A * PNK[0] * sqrt(3);//SQ[2];
                 }            //1.1
-                else if (N == 2)
-                {               //1.2
+                else if (N == 2) {               //1.2
                     P30 = /*SQ[6]*/sqrt(7) * (1 - 2.5 * CF[1]) * SF;
                     PNK[1] =/*SQ[62]/SQ[23]*/sqrt(63) / sqrt(24) * CF[0] * (4 - 5 * CF[1]);
                     FR += 4 * A * P30;
                     FF += A * PNK[1] * sqrt(6);//SQ[5];
                 }             //1.2
-                else
-                {             //1.3
+                else {             //1.3
                     N1 = N + N3 + 1;
                     N2 = N1 + 2;
                     N4 = N + 1;
-                    AN = (double)(N + 1);
-                    PN0 = sqrt(N2 + 1)/*SQ[N2]*// AN * (/*SQ[N1]*/sqrt(N1 + 1) * SF * P30 - (double)(N3 + 1) / /*SQ[N1-2]*/sqrt(N1 - 1) * P20);
+                    AN = (double) (N + 1);
+                    PN0 = sqrt(N2 + 1)/*SQ[N2]*/ / AN * (/*SQ[N1]*/sqrt(N1 + 1) * SF * P30 - (double) (N3 + 1) / /*SQ[N1-2]*/sqrt(N1 - 1) * P20);
                     PNK[N3] = sqrt(N2 + 1) / (sqrt(N3 + 1) * sqrt(N4 + 1)) * (sqrt(N1 + 1) * SF * PNK[N - 2] - sqrt(N + 1) *
                             sqrt(N - 1) / sqrt(N1 - 1) * PNK[N - 3]);
-                    FR += (double)(N4 + 1) * A * PN0;
+                    FR += (double) (N4 + 1) * A * PN0;
                     FF += A */*SQ[N]*SQ[N4]/SQ[1]*/sqrt(N + 1) * sqrt(N4 + 1) / sqrt(2) * PNK[N3];
                     P20 = P30;
                     P30 = PN0;
                 }      //1.3
             } //1 CONTINUE
-           // if (NK == 0) break m5;
-            LOG = (NK >= 3);
-            A = CO[0] + CO[0];
-            CO[1] = A * CO[0] - 1;
-            SI[1] = A * SI[0];
-            TG = Z * R2;
-            if (LOG)
-                for (N = 2; N < NK; N++)
-                {          //2
-                    N1 = N - 1;
-                    N2 = N - 2;
-                    CF[N] = CF[0] * CF[N1];
-                    CO[N] = A * CO[N1] - CO[N2];
-                    SI[N] = A * SI[N1] - SI[N2];
-                }             //2
-            CK1 = (C[35] * CO[0] + S[35] * SI[0]) * AR[1];
-            CK2 = (C[35] * SI[0] - S[35] * CO[0]) * AR[1];
-            A = PNK[0];
-            PNK[0] = SK[1] * CF[1];
-            FR += CK1 * 3 * A;
-            FF += CK1 * (PNK[0] + PNK[0] - TG * A);
-            FL += CK2 * A;
-            J = 35;
-            if (LOG)
-                for (N = 2; N < NK; N++)    //commain
-                {                //3
-                    J++;
-                    N1 = N - 1;
-                    N2 = N + N + 1;
-                    N3 = N + 1;
-                    A = PNK[N1];
-                    CK1 = (C[J] * CO[0] + S[J] * SI[0]) * AR[N];
-                    CK2 = (C[J] * SI[0] - S[J] * CO[0]) * AR[N];
-                    if (N == 2)
-                        PNK[1] = /*SQ[6]*/sqrt(7) * SF * PNK[0];
-                    else
-                        PNK[N1] = sqrt(N2 + 2) / (sqrt(N - 1) * sqrt(N + 3)) * (sqrt(N2) *
-                                SF * PNK[N - 2] - sqrt(N3 + 1) * sqrt(N - 2) / sqrt(N2 - 2) * PNK[N - 3]);
-                    FR += (N3 + 1) * CK1 * A;
-                    FF += CK1 * (PNK[N1] */*SQ[N1]*/sqrt(N1 + 1) */*SQ[N+2]*/sqrt(N + 3) - TG * A);
-                    FL += CK2 * A;
-                } //ENDIF //3
-            for (M = 1; M < NK; M++)
-            {                      // 4
-                J = (int)(ANAI[1 + M]) - 1;
-                for (N = M; N < NK; N++) {                       //4.1
-                    N1 = N - M;
-                    N2 = N + M + 1;
-                    N3 = N + N + 2;
-                    N4 = N1 - 2;
-                    N5 = N1 - 3;
-                    A = PNK[N1];
-                    AN = (double) (M + 1) * A;
-                    CK1 = AR[N] * (C[J] * CO[M] + S[J] * SI[M]);
-                    CK2 = AR[N] * (C[J] * SI[M] - S[J] * CO[M]);
-                    if (N1 > 2)
-                        PNK[N1 - 1] = sqrt(N3 + 1) / (sqrt(N4 + 1) * sqrt(N2 + 2)) * (sqrt(N3 - 1) *
-                                SF * PNK[N4] - sqrt(N2 + 1) * sqrt(N5 + 1) / sqrt(N3 - 3) * PNK[N5]);
-                    else if (N1 == 0) {                          //4.1.1
-                        FR += HP[N] * CK1 * A;
-                        FF -= CK1 * AN * TG;
-                        FL += CK2 * AN;
-                    }                          //4.1.1
-                    else {
-                        if (N1 == 1)
-
+            if (NK != 0) {
+                LOG = (NK >= 3);
+                A = CO[0] + CO[0];
+                CO[1] = A * CO[0] - 1;
+                SI[1] = A * SI[0];
+                TG = Z * R2;
+                if (LOG) {
+                    for (N = 2; N < NK; N++) {          //2
+                        N1 = N - 1;
+                        N2 = N - 2;
+                        CF[N] = CF[0] * CF[N1];
+                        CO[N] = A * CO[N1] - CO[N2];
+                        SI[N] = A * SI[N1] - SI[N2];
+                    }
+                }//2
+                CK1 = (C[35] * CO[0] + S[35] * SI[0]) * AR[1];
+                CK2 = (C[35] * SI[0] - S[35] * CO[0]) * AR[1];
+                A = PNK[0];
+                PNK[0] = SK[1] * CF[1];
+                FR += CK1 * 3 * A;
+                FF += CK1 * (PNK[0] + PNK[0] - TG * A);
+                FL += CK2 * A;
+                J = 35;
+                if (LOG) {
+                    for (N = 2; N < NK; N++)    //commain
+                    {                //3
+                        J++;
+                        N1 = N - 1;
+                        N2 = N + N + 1;
+                        N3 = N + 1;
+                        A = PNK[N1];
+                        CK1 = (C[J] * CO[0] + S[J] * SI[0]) * AR[N];
+                        CK2 = (C[J] * SI[0] - S[J] * CO[0]) * AR[N];
+                        if (N == 2)
+                            PNK[1] = /*SQ[6]*/sqrt(7) * SF * PNK[0];
+                        else
+                            PNK[N1] = sqrt(N2 + 2) / (sqrt(N - 1) * sqrt(N + 3)) * (sqrt(N2) *
+                                    SF * PNK[N - 2] - sqrt(N3 + 1) * sqrt(N - 2) / sqrt(N2 - 2) * PNK[N - 3]);
+                        FR += (N3 + 1) * CK1 * A;
+                        FF += CK1 * (PNK[N1] */*SQ[N1]*/sqrt(N1 + 1) */*SQ[N+2]*/sqrt(N + 3) - TG * A);
+                        FL += CK2 * A;
+                    }
+                }//ENDIF //3
+                for (M = 1; M < NK; M++) {                      // 4
+                    J = (int) (ANAI[1 + M]) - 1;
+                    for (N = M; N < NK; N++) {                       //4.1
+                        N1 = N - M;
+                        N2 = N + M + 1;
+                        N3 = N + N + 2;
+                        N4 = N1 - 2;
+                        N5 = N1 - 3;
+                        A = PNK[N1];
+                        AN = (double) (M + 1) * A;
+                        CK1 = AR[N] * (C[J] * CO[M] + S[J] * SI[M]);
+                        CK2 = AR[N] * (C[J] * SI[M] - S[J] * CO[M]);
+                        if (N1 > 2) {
+                            PNK[N1 - 1] = sqrt(N3 + 1) / (sqrt(N4 + 1) * sqrt(N2 + 2)) * (sqrt(N3 - 1) *
+                                    SF * PNK[N4] - sqrt(N2 + 1) * sqrt(N5 + 1) / sqrt(N3 - 3) * PNK[N5]);
+                        }
+                        else if (N1 == 0) {                          //4.1.1
+                            FR += HP[N] * CK1 * A;
+                            FF -= CK1 * AN * TG;
+                            FL += CK2 * AN;
+                            J++;
+                            continue;
+                        }
+                        else if (N1 == 1) {
                             PNK[0] = SK[N] * CF[N];
-                        else if (N1 == 2)
+                        } else if (N1 == 2) {
                             PNK[1] = /*SQ[N3]*/sqrt(N3 + 1) * SF * PNK[0];
+                        }
                         FR += HP[N] * CK1 * A;
                         FF += CK1 * (PNK[N1 - 1] */*SQ[N1-1]*SQ[N2+1]*/sqrt(N1) * sqrt(N2 + 2) - TG * AN);
                         FL += CK2 * AN;
+                        m12:
+                        J++;
                     }
-                  J++;
-                }     //4.1
-            }     //4
-            //    5
-        } //0
+                    //               }     //4.1
+                }     //4
+                //    5
+            }
+        }//0
         m5:
         FR = -GR * FR - R[2] * R3;
         FF = GR * FF;

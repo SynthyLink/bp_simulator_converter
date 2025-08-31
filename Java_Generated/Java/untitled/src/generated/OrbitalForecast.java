@@ -15,6 +15,8 @@ public class OrbitalForecast extends Desktop
 	{
 		public CategoryObject0(String name, IDesktop desktop) {
 			super(name,  desktop);
+			int[] iff = new int[] {150,6,140};
+ setIf(iff);
 			}
 			}
 	
@@ -2167,11 +2169,11 @@ public class OrbitalForecast extends Desktop
 		public CategoryObject2(String name, IDesktop desktop) {
 			super(name,  desktop);
 			java.util.Map< String, general_service.Entry<Object, Object >> map = new java.util.HashMap<>();
-			map.put("x", new general_service.Entry<Object, Object>(new double[0], new double[]{-5110.5458047301981}));
 			map.put("w", new general_service.Entry<Object, Object>(new double[0], new double[]{6.9300634873392948}));
+			map.put("x", new general_service.Entry<Object, Object>(new double[0], new double[]{-5110.5458047301981}));
 			map.put("y", new general_service.Entry<Object, Object>(new double[0], new double[]{4112.9884575937604}));
-			map.put("z", new general_service.Entry<Object, Object>(new double[0], new double[]{2555.3253638965743}));
 			map.put("u", new general_service.Entry<Object, Object>(new double[0], new double[]{-0.44668389543569337}));
+			map.put("z", new general_service.Entry<Object, Object>(new double[0], new double[]{2555.3253638965743}));
 			map.put("v", new general_service.Entry<Object, Object>(new double[0], new double[]{1.7737490756446463}));
 			setMap(map);
 					Object o;
@@ -2456,13 +2458,13 @@ public class OrbitalForecast extends Desktop
 			java.util.Map< String, general_service.Entry<Object, Object >> map = new java.util.HashMap<>();
 			map.put("q", new general_service.Entry<Object, Object>(new double[0], new double[]{5.3174953569821228E-09}));
 			map.put("x", new general_service.Entry<Object, Object>(new double[0], new double[]{-5448.3481532400001}));
-			map.put("o", new general_service.Entry<Object, Object>(new double[0], new double[]{0.00014584231700000001}));
-			map.put("y", new general_service.Entry<Object, Object>(new double[0], new double[]{-4463.9369842100004}));
-			map.put("s", new general_service.Entry<Object, Object>(new double[0], new double[]{1.6189340462770081E-13}));
-			map.put("v", new general_service.Entry<Object, Object>(new double[0], new double[]{1.2168189383400001}));
-			map.put("z", new general_service.Entry<Object, Object>(new double[0], new double[]{0}));
-			map.put("w", new general_service.Entry<Object, Object>(new double[0], new double[]{7.45047785592}));
 			map.put("u", new general_service.Entry<Object, Object>(new double[0], new double[]{-0.98539477743199999}));
+			map.put("w", new general_service.Entry<Object, Object>(new double[0], new double[]{7.45047785592}));
+			map.put("o", new general_service.Entry<Object, Object>(new double[0], new double[]{0.00014584231700000001}));
+			map.put("v", new general_service.Entry<Object, Object>(new double[0], new double[]{1.2168189383400001}));
+			map.put("s", new general_service.Entry<Object, Object>(new double[0], new double[]{1.6189340462770081E-13}));
+			map.put("y", new general_service.Entry<Object, Object>(new double[0], new double[]{-4463.9369842100004}));
+			map.put("z", new general_service.Entry<Object, Object>(new double[0], new double[]{0}));
 			setMap(map);
 					Object o;
 					o = new double[0];

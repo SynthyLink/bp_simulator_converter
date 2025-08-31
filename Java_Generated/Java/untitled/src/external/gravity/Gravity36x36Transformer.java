@@ -62,7 +62,6 @@ public class Gravity36x36Transformer extends Gravity36x36 implements ICategoryOb
         {
             output[i] = out[i];
         }
-
     }
 
     double[][] out = new double[3][];

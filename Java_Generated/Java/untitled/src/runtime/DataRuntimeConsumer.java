@@ -4,6 +4,7 @@ import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
 import general_service.Performer;
+import general_service.interfaces.IActionT;
 import measurements.interfaces.*;
 import measurements.time.interfaces.ITimeMeasurementConsumer;
 import measurements.time.interfaces.ITimeMeasurementProvider;
@@ -11,7 +12,7 @@ import runtime.interfaces.IDataRuntime;
 
 import java.util.*;
 
-public class DataRuntimeConsumer implements IDataRuntime {
+public class DataRuntimeConsumer implements IDataRuntime, IActionT<IStarted> {
 
     public DataRuntimeConsumer(IDataConsumer dataConsumer) {
         List<IMeasurements> list = new ArrayList<>();
@@ -19,7 +20,8 @@ public class DataRuntimeConsumer implements IDataRuntime {
         var count = list.size();
         ICategoryObject cc = (ICategoryObject) dataConsumer;
         desktop = cc.getDesktop();
-        for (int i = count - 1; i >= 0; i--) {
+        for (int i = count - 1; i >= 0; i--)
+        {
             var n = list.get(i);
             measurements = performer.extend(measurements, n);
             if (n instanceof ICategoryObject co) {
@@ -66,9 +68,20 @@ public class DataRuntimeConsumer implements IDataRuntime {
     /// <param name="time">Start time</param>
     @Override
     public void startRuntime(double time) {
-        for (var s : started) {
+       /* for (var s : started) {
             s.startedStart(time);
+        }*/
+        timeStart = time;
+        var co = desktop.getCategoryObjects();
+        for (var obj : co)
+        {
+            Class<?> interfaceClass = IStarted.class;
+            if (interfaceClass.isInstance(obj)) {
+                var started  = (IStarted)obj;
+                started.startedStart(time);
+            }
         }
+
     }
 
     @Override
@@ -154,6 +167,7 @@ public class DataRuntimeConsumer implements IDataRuntime {
     protected IDesktop desktop;
 
     ICategoryArrow[] categoryArrows = new ICategoryArrow[0];
+
     IStarted[] started  = new IStarted[0];
 
 
@@ -167,5 +181,12 @@ public class DataRuntimeConsumer implements IDataRuntime {
 
     protected Map<String, ICategoryObject> categoryObjectsMap = new HashMap<>();
 
+    protected double timeStart;
 
+    @Override
+    public void actionT(IStarted iStarted) {
+        if (iStarted != null) {
+            iStarted.startedStart(timeStart);
+        }
+    }
 }
