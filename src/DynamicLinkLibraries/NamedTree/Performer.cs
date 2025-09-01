@@ -19,6 +19,24 @@ namespace NamedTree
             return a.ToString("G17", System.Globalization.CultureInfo.InvariantCulture);
         }
 
+        /// <summary>
+        /// Gets strings from double array
+        /// </summary>
+        /// <param name="x">The array</param>
+        /// <returns>The strings</returns>
+        public List<string> GetStrings(double[] x)
+        {
+            var l = new List<string>();
+            var n = x.Length;
+            var m = n - 1;
+            for (var i = 0; i < x.Length; i++)
+            {
+                var s = i < m ? "," : "";
+                s = DoubleToString(x[i]) + s;
+                l.Add(s);
+            }
+            return l;
+        }
 
         /// <summary>
         /// Adding list with shift

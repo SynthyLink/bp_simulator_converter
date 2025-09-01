@@ -267,11 +267,11 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Atmosphere\DinAtm\DinAtm.Forms\DinAtm.Forms.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Atmosphere\DinAtm\DinAtm.Portable.Java\DinAtm.Portable.Java.csproj" />
+    <ProjectReference Include="..\..\..\..\ExternalLibraries\Atmosphere\DinAtm\DinAtm.Portable.TypeScript\DinAtm.Portable.TypeScript.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Atmosphere\DinAtm\DinAtm.Portable\DinAtm.Portable.csproj">
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Atmosphere\DinAtm\DinAtm.Pure\DinAtm.Pure.csproj">
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\ExternalLibraries\Atmosphere\DinAtm\DinAtrm.Portable.TypeScript\DinAtrm.Portable.TypeScript.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Atmosphere\Dynamic.Atmosphere\Dynamic.Atmosphere.Portable\Dynamic.Atmosphere.Portable.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Atmosphere\Dynamic.Atmosphere\Dynamic.Atmosphere.Serializable\Dynamic.Atmosphere.Serializable.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Atmosphere\Dynamic.Atmosphere\Dynamic.Atmosphere\Dynamic.Atmosphere.csproj" />
@@ -281,6 +281,7 @@
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Gravity\Gravity_36_36\Gravity_36_36.Wrapper.Java\Gravity_36_36.Wrapper.Java.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Gravity\Gravity_36_36\Gravity_36_36.Wrapper.Serializable\Gravity_36_36.Wrapper.Serializable.csproj">
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\ExternalLibraries\Gravity\Gravity_36_36\Gravity_36_36.Wrapper.TypeScript\Gravity_36_36.Wrapper.TypeScript.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Gravity\Gravity_36_36\Gravity_36_36.Wrapper.UI\Gravity_36_36.Wrapper.UI.csproj">
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Gravity\Gravity_36_36\Gravity_36_36.Wrapper\Gravity_36_36.Wrapper.csproj">

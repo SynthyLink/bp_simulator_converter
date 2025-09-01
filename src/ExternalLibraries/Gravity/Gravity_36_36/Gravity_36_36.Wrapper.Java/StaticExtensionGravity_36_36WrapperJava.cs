@@ -2,6 +2,9 @@
 
 namespace Gravity_36_36.Wrapper.Java
 {
+    /// <summary>
+    /// Static extensions
+    /// </summary>
     [InitAssembly]
     public static class StaticExtensionGravity_36_36WrapperJava
     {

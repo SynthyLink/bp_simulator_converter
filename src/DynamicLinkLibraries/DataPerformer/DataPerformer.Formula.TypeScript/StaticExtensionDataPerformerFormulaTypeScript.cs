@@ -15,6 +15,7 @@ namespace DataPerformer.Formula.TypeScript
         static StaticExtensionDataPerformerFormulaTypeScript()
         {
             new ClassCodeCreator();
+            var cc = CodeCreator.TypeCreator;
         }
 
         /// <summary>

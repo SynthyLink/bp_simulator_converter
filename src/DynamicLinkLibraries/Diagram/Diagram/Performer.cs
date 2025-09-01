@@ -1,4 +1,11 @@
-﻿using BaseTypes.Attributes;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Xml.Linq;
+
+using BaseTypes.Attributes;
 using BaseTypes.CodeCreator.Interfaces;
 using CategoryTheory;
 using Diagram.UI;
@@ -8,12 +15,6 @@ using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;
 using ErrorHandler;
 using NamedTree;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Xml.Linq;
 
 namespace Diagram.UI
 {

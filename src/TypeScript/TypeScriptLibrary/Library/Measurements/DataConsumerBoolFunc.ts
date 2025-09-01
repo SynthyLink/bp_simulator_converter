@@ -7,7 +7,8 @@ import { IMeasurement } from "./Interfaces/IMeasurement";
 export class DataConsumerBoolFunc implements IFunc<boolean>
 {
 
-    constructor(dataConsumer: IDataConsumer, name: string) {
+    constructor(dataConsumer: IDataConsumer, name: string)
+    {
         this.measurement = this.performer.getMeasurementDC(dataConsumer, name);
     }
 

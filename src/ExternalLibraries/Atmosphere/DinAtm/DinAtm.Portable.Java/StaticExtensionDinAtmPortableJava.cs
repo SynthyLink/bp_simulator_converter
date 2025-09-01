@@ -2,6 +2,9 @@
 
 namespace DinAtm.Portable.Java
 {
+    /// <summary>
+    /// Static extension methods
+    /// </summary>
     [InitAssembly]
     public static class StaticExtensionDinAtmPortableJava
     {

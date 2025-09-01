@@ -1,12 +1,14 @@
 ﻿using System.Reflection;
 
 using BaseTypes;
+using BaseTypes.Attributes;
 using BaseTypes.CodeCreator.Interfaces;
-
+using Diagram.UI;
 using Diagram.UI.Interfaces;
 
 namespace Diagram.TypeScript
 {
+    [Language("TS")]
     public class CodeCreator : ITypeCreator, IDictionaryCodeCreator<string, string>,
         IDictionaryCodeCreator<string, object>, 
         IEnumerableCodeCreator<string>, IAliasCodeCreator, 
@@ -14,6 +16,12 @@ namespace Diagram.TypeScript
 
     {
         #region Fields
+
+        public static ITypeCreator TypeCreator
+        {
+            get;
+
+        } = new CodeCreator();
 
 
         static protected UI.TypeScript.Performer performer = new();
@@ -47,6 +55,17 @@ namespace Diagram.TypeScript
 
 
         #endregion
+
+        protected  CodeCreator(bool b)
+        {
+            
+        }
+
+
+        private CodeCreator()
+        {
+           this.AddTypeCreator();
+        }
 
         #region ITypeCreator Members
 

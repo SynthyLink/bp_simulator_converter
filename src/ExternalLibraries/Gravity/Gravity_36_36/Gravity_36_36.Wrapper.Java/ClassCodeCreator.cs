@@ -33,12 +33,6 @@ namespace Gravity_36_36.Wrapper.Java
                "\tsetN0(" + n0 + ");",
                "\tsetNK(" + nk + ");",
                 };
-         //   var ll = Get("R", gr.MUR);
-          //  Performer.Add(l, ll, 1);
-    /*        var ll = Get("C", gr.Cnm);
-            Performer.Add(l, ll, 1);
-            ll = Get("S", gr.Snm);
-            Performer.Add(l, ll, 1);*/
             var value = gr.Saver;
             int k = 0;
             var R = value[k] as double[]; ++k;
@@ -69,15 +63,9 @@ namespace Gravity_36_36.Wrapper.Java
         public List<string> Get(string id, double[] x)
         {
             var l = new List<string>();
-            l.Add(id + " = new double[] {");
-            var n = x.Length;
-            var m = n - 1;
-            for (var i = 0; i < x.Length; i++)
-            {
-                var s = i < m ? "," : "";
-                s = "\t" + Performer.DoubleToString(x[i]) + s;
-                l.Add(s);
-            }
+            l.Add("\t" + id + " = new double[] {");
+            var ll = Performer.GetStrings(x);
+            Performer.Add(l, ll, 2);
             l.Add("};");
             l.Add("");
             return l;

@@ -179,7 +179,6 @@ namespace DataPerformer.Formula.TypeScript
             AddPost(l);
             if (obj is IFeedbackCollectionHolder feedback)
             {
-
                 var dcc = creator as IFeedbackCollectionCodeCreator;
                 var ll = dcc.Create(feedback).Values.ToArray()[0];
                 performer.Add(l, ll, 1);

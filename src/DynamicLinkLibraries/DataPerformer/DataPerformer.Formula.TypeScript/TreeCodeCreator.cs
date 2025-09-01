@@ -112,8 +112,8 @@ namespace DataPerformer.Formula.TypeScript
 
         private static readonly Dictionary<string, string[]> logicalOperation = new Dictionary<string, string[]>()
        {
-            {"\u2216", new string[] {" = (", ") & (", ");"}},
-            {"\u2217", new string[] {" = (", ") | (", ");"}},
+            {"\u2216", new string[] {" = (", ") && (", ");"}},
+            {"\u2217", new string[] {" = (", ") || (", ");"}},
             {"\u8835", new string[] {" = (!(", ")) | (", ");"}}
        };
 

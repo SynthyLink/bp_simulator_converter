@@ -28,17 +28,19 @@ using DataPerformer.Interfaces.Attributes;
 
 namespace DataPerformer.Formula
 {
-    /// <summary>
-    /// Solver of ordinary differential equations system
-    /// </summary>
-    [CodeCreator(InitialState = true, IsSysemOfDifferentialEquations = true)]
+
+ 
+
+/// <summary>
+/// Solver of ordinary differential equations system
+/// </summary>
+[CodeCreator(InitialState = true, IsSysemOfDifferentialEquations = true)]
     public class DifferentialEquationSolver : DataConsumerMeasurements, 
         IDifferentialEquationSolver, 
         IStarted,  ICheckCorrectness, IVariableDetector,
         IDynamical, ITreeCollection, ITimeVariable, IStack, 
-        IRuntimeUpdate, IPostSetArrow, IStringTreeDictionary
+        IRuntimeUpdate, IPostSetArrow, IStringTreeDictionary, IInitialValueCollection
     {
-
         #region Fields
 
 
@@ -48,6 +50,8 @@ namespace DataPerformer.Formula
 
         DataPerformerFormula dataPerformerFormula;
 
+        protected IInitialValueCollection initial;
+    
         /// <summary>
         /// Input dynamical parameter
         /// </summary>
@@ -183,6 +187,7 @@ namespace DataPerformer.Formula
         /// </summary>
         public DifferentialEquationSolver()
         {
+            initial = this;
             dataPerformerFormula = new(this);
             proxyFactory = StaticExtensionDataPerformerFormula.CreatorFactory(this);
             init();
@@ -1153,6 +1158,35 @@ namespace DataPerformer.Formula
 
         #endregion
 
+        #region IInitialValueCollection Members
+
+        IEnumerable<IInitialValue> IInitialValueCollection.Values => throw new OwnNotImplemented();
+
+        void IInitialValueCollection.Add(IInitialValue value)
+        {
+            throw new OwnNotImplemented();
+        }
+
+        void IInitialValueCollection.Clear()
+        {
+            throw new OwnNotImplemented(); ;
+        }
+
+        void IInitialValueCollection.Set()
+        {
+
+            foreach (Variable v in output)
+            {
+                char c = v.Symbol;
+                object[] o = variables[c] as object[];
+                v.Value = (double)o[4];
+            }
+        }
+
+        #endregion
+
+
+
         #region IMeasurements Members
 
 
@@ -1400,14 +1434,10 @@ namespace DataPerformer.Formula
             try
             {
                 feedbackCollection.Fill();
+               
             //    feedbackCollection.Set();
                 timeOld = time;
-                foreach (Variable v in output)
-                {
-                    char c = v.Symbol;
-                    object[] o = variables[c] as object[];
-                    v.Value = (double)o[4];
-                }
+                initial.Set();
                 feedbackCollection.Set();
                 prepareStart = () =>
                 {

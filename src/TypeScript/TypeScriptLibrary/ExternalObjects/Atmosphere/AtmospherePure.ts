@@ -1,6 +1,7 @@
 
 import { DateTime } from 'luxon';
-class AtmospherePure {
+import { RealMatrix } from '../../Library/Matrix/RealMatrix';
+export class AtmospherePure {
 
     protected realMatrix: RealMatrix = new RealMatrix();
 

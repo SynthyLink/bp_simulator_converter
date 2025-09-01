@@ -13,7 +13,7 @@ namespace DataPerformer.Formula.TypeScript
 
     public class CodeCreator : Diagram.TypeScript.CodeCreator, ITreeCollectionCodeCreator
     {
-
+        public CodeCreator() : base(false) { }
 
         #region Fields
         

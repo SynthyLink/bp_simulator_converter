@@ -9,6 +9,7 @@ import { TwoAct } from '../Wrappers/TwoAct';
 import { ODE_FeedbackAct } from '../Wrappers/ODE_FeedbackAct';
 import { TransformerRecursveAct } from '../Wrappers/TransformerRecursveAct';
 import { PIAct } from '../Wrappers/PIAct';
+import { OrbitaForecasAct } from '../Wrappers/OrbitalForecastAct';
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -46,6 +47,19 @@ export class Actor
         }
 
     }
+
+
+    actOrbitalForecast(): void {
+        try {
+            var o = new OrbitaForecasAct();
+            o.test();
+        }
+        catch (e: any) {
+            finish(e);
+        }
+
+    }
+
 
 
     actTransformerFeedback(): void {
