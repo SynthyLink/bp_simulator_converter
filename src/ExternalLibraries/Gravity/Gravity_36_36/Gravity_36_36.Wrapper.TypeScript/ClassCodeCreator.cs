@@ -82,11 +82,6 @@ namespace Gravity_36_36.Wrapper.TypeScript
             return l;
         }
 
-        /*
-         * 	super(desktop, name);
-		this.R = [];
-		this.R.push(22);
-	*/
 
         public static List<string> Get(string id, double[] x)
         {

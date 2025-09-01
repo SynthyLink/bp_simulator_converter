@@ -19,6 +19,10 @@ class DifferentialEquationSolverFormula extends DataConsumerVariableMeasurements
     getDifferentialEquationSolverTimeProvider() {
         throw new Error("Method not implemented.");
     }
+    startedStart(start) {
+        this.initial.resetInitialValues();
+        this.feedback.setFeedbacks();
+    }
     calculateDerivations() {
         this.feedback.setFeedbacks();
         this.performer.updateChildrenData(this);

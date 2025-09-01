@@ -2173,11 +2173,11 @@ class OrbitalForecast_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFor
         this.var_17 = 0;
         this.var_18 = 0;
         let map = new Map([
-            ["w", 6.9300634873392948],
-            ["z", 2555.3253638965743],
             ["u", -0.44668389543569337],
-            ["x", -5110.5458047301981],
             ["y", 4112.9884575937604],
+            ["x", -5110.5458047301981],
+            ["z", 2555.3253638965743],
+            ["w", 6.9300634873392948],
             ["v", 1.7737490756446463],
         ]);
         this.performer.setAliasMap(map, this);
@@ -2446,14 +2446,14 @@ class OrbitalForecast_CategoryObject_5 extends DifferentialEquationSolverFormula
         this.var_31 = 0;
         this.var_32 = 0;
         let map = new Map([
+            ["s", 1.6189340462770081E-13],
             ["v", 1.2168189383400001],
             ["q", 5.3174953569821228E-09],
             ["u", -0.98539477743199999],
-            ["z", 0],
             ["x", -5448.3481532400001],
-            ["o", 0.00014584231700000001],
-            ["s", 1.6189340462770081E-13],
             ["w", 7.45047785592],
+            ["z", 0],
+            ["o", 0.00014584231700000001],
             ["y", -4463.9369842100004],
         ]);
         this.performer.setAliasMap(map, this);

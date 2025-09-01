@@ -96,7 +96,7 @@ export class Gravity {
 
     protected Forces(X: number, Y: number, Z: number,
         FX: number[], FY: number[], FZ: number[]): void {
-        this.ForcesN(this.n0, this.nk, X, Y, X, FX, FY, FZ);
+        this.ForcesN(this.n0, this.nk, X, Y, Z, FX, FY, FZ);
     }
 
     protected ForcesN(N0: number, NK: number, X: number, Y: number, Z: number,
@@ -125,34 +125,41 @@ export class Gravity {
         let TG = 0;
         R2 = Math.sqrt(R2);
         let SF = Z * R1;
+        this.CF[0] = R2 * R1;
+        R2 = 1 / R2;
         this.CO[0] = X * R2;
         this.SI[0] = Y * R2;
         let GR = this.R[0] * R3;
-        if (N0 != 0 || NK != 0) {
+        if (N0 != 0 || NK != 0)
+        {
             this.CF[1] = this.CF[0] * this.CF[0];
             this.AR[0] = this.R[1] * R1;
-            for (let N = 1; N < N0; N++) {
-                let N3 = N - 1;
+            for (let N = 1; N < N0; N++)
+            {
+                N3 = N - 1;
                 this.AR[N] = this.AR[0] * this.AR[N3];
                 A = this.C[N3] * this.AR[N];
-                if (N == 1) {
+                if (N == 1)
+                {
                     P20 = Math.sqrt(5) * (1.0 - 1.5 * this.CF[1]);
                     this.PNK[0] = Math.sqrt(15) * this.CF[0] * SF;
-                    let FR = 3.0 * A * P20;
-                    let FF = A * this.PNK[0] * Math.sqrt(3);
+                    FR = 3.0 * A * P20;
+                    FF = A * this.PNK[0] * Math.sqrt(3);
                 }
-                else if (N == 2) {
+                else if (N == 2)
+                {
                     P30 = Math.sqrt(7) * (1.0 - 2.5 * this.CF[1]) * SF;
                     this.PNK[1] = /*SQ[62]/SQ[23]*/ Math.sqrt(63) / Math.sqrt(24) *
                         this.CF[0] * (4.0 - 5.0 * this.CF[1]);
                     FR += 4 * A * P30;
                     FF += A * this.PNK[1] * Math.sqrt(6); //SQ[5];
                 }
-                else {
-                    let N1 = N + N3 + 1;
-                    let N2 = N1 + 2;
-                    let N4 = N + 1;
-                    let AN = (N + 1);
+                else
+                {
+                    N1 = N + N3 + 1;
+                    N2 = N1 + 2;
+                    N4 = N + 1;
+                    AN = (N + 1);
                     PN0 = Math.sqrt(N2 + 1) / AN * ( /*SQ[N1]*/
                         Math.sqrt(N1 + 1) * SF * P30 - (N3 + 1) / /*SQ[N1-2]*/ Math.sqrt(N1 - 1) * P20);
                     this.PNK[N3] = Math.sqrt(N2 + 1) / (Math.sqrt(N3 + 1) *
@@ -166,94 +173,106 @@ export class Gravity {
 
                 }
 
+                var j = 0;
             }
-            if (NK != 0)
+            var i = 0;
+        }
+        if (NK != 0)
+        {
+            LOG = (NK >= 3);
+            A = this.CO[0] + this.CO[0];
+            this.CO[1] = A * this.CO[0] - 1;
+            this.SI[1] = A * this.SI[0];
+            TG = Z * R2;
+            if (LOG)
             {
-                LOG = (NK >= 3);
-                A = this.CO[0] + this.CO[0];
-                this.CO[1] = A * this.CO[0] - 1;
-                this.SI[1] = A * this.SI[0];
-                TG = Z * R2;
-                if (LOG)
-                    for (let N = 2; N < this.nk; N++) { //2
-                        N1 = N - 1;
-                        N2 = N - 2;
-                        this.CF[N] = this.CF[0] * this.CF[N1];
-                        this.CO[N] = A * this.CO[N1] - this.CO[N2];
-                        this.SI[N] = A * this.SI[N1] - this.SI[N2];
-                    } //2
-                CK1 = (this.C[35] * this.CO[0] + this.S[35] * this.SI[0]) * this.AR[1];
-                CK2 = (this.C[35] * this.SI[0] - this.S[35] * this.CO[0]) * this.AR[1];
-                A = this.PNK[0];
-                this.PNK[0] = this.SK[1] * this.CF[1];
-                FR += CK1 * 3.0 * A;
-                FF += CK1 * (this.PNK[0] + this.PNK[0] - TG * A);
-                FL += CK2 * A;
-                J = 35;
-                if (LOG) {
-                    for (let N = 2; N < NK; N++)    //commain
-                    {                //3
-                        J++;
-                        N1 = N - 1;
-                        N2 = N + N + 1;
-                        N3 = N + 1;
-                        A = this.PNK[N1];
-                        CK1 = (this.C[J] * this.CO[0] + this.S[J] * this.SI[0]) * this.AR[N];
-                        CK2 = (this.C[J] * this.SI[0] - this.S[J] * this.CO[0]) * this.AR[N];
-                        if (N == 2)
-                            this.PNK[1] = /*SQ[6]*/ Math.sqrt(7) * SF * this.PNK[0];
-                        else
-                            this.PNK[N1] = Math.sqrt(N2 + 2) / (Math.sqrt(N - 1) * Math.sqrt(N + 3)) * (Math.sqrt(N2) *
-                                SF * this.PNK[N - 2] - Math.sqrt(N3 + 1) * Math.sqrt(N - 2) / Math.sqrt(N2 - 2) * this.PNK[N - 3]);
-                        FR += (N3 + 1) * CK1 * A;
-                        FF += CK1 * (this.PNK[N1] */*SQ[N1]*/ Math.sqrt(N1 + 1) */*SQ[N+2]*/ Math.sqrt(N + 3) - TG * A);
-                        FL += CK2 * A;
-                    }
-                }//ENDIF //3
-                for (let M = 1; M < NK; M++) {                      // 4
-                    J = Math.floor(this.ANAI[1 + M]) - 1;
-                    for (let N = M; N < NK; N++) {                       //4.1
-                        N1 = N - M;
-                        N2 = N + M + 1;
-                        N3 = N + N + 2;
-                        N4 = N1 - 2;
-                        N5 = N1 - 3;
-                        A = this.PNK[N1];
-                        AN = Math.floor(M + 1) * A;
-                        CK1 = this.AR[N] * (this.C[J] * this.CO[M] + this.S[J] * this.SI[M]);
-                        CK2 = this.AR[N] * (this.C[J] * this.SI[M] - this.S[J] * this.CO[M]);
-                        if (N1 > 2)
-                        {
-                            this.PNK[N1 - 1] = Math.sqrt(N3 + 1) / (Math.sqrt(N4 + 1) * Math.sqrt(N2 + 2)) * (Math.sqrt(N3 - 1) *
-                                SF * this.PNK[N4] - Math.sqrt(N2 + 1) * Math.sqrt(N5 + 1) / Math.sqrt(N3 - 3) * this.PNK[N5]);
-                        }
-                        else if (N1 == 0) {                          //4.1.1
-                            FR += this.HP[N] * CK1 * A;
-                            FF -= CK1 * AN * TG;
-                            FL += CK2 * AN;
-                            J++;
-
-                        }
-                        else
-                        {
-                            if (N1 == 1) {
-                                this.PNK[0] = this.SK[N] * this.CF[N];
-                            } else if (N1 == 2) {
-                                this.PNK[1] = /*SQ[N3]*/ Math.sqrt(N3 + 1) * SF * this.PNK[0];
-                            }
-                            FR += this.HP[N] * CK1 * A;
-                            FF += CK1 * (this.PNK[N1 - 1] */*SQ[N1-1]*SQ[N2+1]*/ Math.sqrt(N1) * Math.sqrt(N2 + 2) - TG * AN);
-                            FL += CK2 * AN;
-                            //                    m12:
-                        }
-                        J++;
-                    }
-                    //               }     //4.1
-                }     //4
-                //    5
+                for (let N = 2; N < this.nk; N++)
+                { //2
+                    N1 = N - 1;
+                    N2 = N - 2;
+                    this.CF[N] = this.CF[0] * this.CF[N1];
+                    this.CO[N] = A * this.CO[N1] - this.CO[N2];
+                    this.SI[N] = A * this.SI[N1] - this.SI[N2];
+                } //2
             }
+            CK1 = (this.C[35] * this.CO[0] + this.S[35] * this.SI[0]) * this.AR[1];
+            CK2 = (this.C[35] * this.SI[0] - this.S[35] * this.CO[0]) * this.AR[1];
+            A = this.PNK[0];
+            this.PNK[0] = this.SK[1] * this.CF[1];
+            FR += CK1 * 3.0 * A;
+            FF += CK1 * (this.PNK[0] + this.PNK[0] - TG * A);
+            FL += CK2 * A;
+            J = 35;
+            if (LOG)
+            {
+                for (let N = 2; N < NK; N++)    //commain
+                {                //3
+                    J++;
+                    N1 = N - 1;
+                    N2 = N + N + 1;
+                    N3 = N + 1;
+                    A = this.PNK[N1];
+                    CK1 = (this.C[J] * this.CO[0] + this.S[J] * this.SI[0]) * this.AR[N];
+                    CK2 = (this.C[J] * this.SI[0] - this.S[J] * this.CO[0]) * this.AR[N];
+                    if (N == 2)
+                        this.PNK[1] = /*SQ[6]*/ Math.sqrt(7) * SF * this.PNK[0];
+                    else
+                        this.PNK[N1] = Math.sqrt(N2 + 2) / (Math.sqrt(N - 1) * Math.sqrt(N + 3)) * (Math.sqrt(N2) *
+                            SF * this.PNK[N - 2] - Math.sqrt(N3 + 1) * Math.sqrt(N - 2) / Math.sqrt(N2 - 2) * this.PNK[N - 3]);
+                    FR += (N3 + 1) * CK1 * A;
+                    FF += CK1 * (this.PNK[N1] */*SQ[N1]*/ Math.sqrt(N1 + 1) */*SQ[N+2]*/ Math.sqrt(N + 3) - TG * A);
+                    FL += CK2 * A;
+                }
+            }//ENDIF //3
+            for (let M = 1; M < NK; M++)
+            {                      // 4
+                J = Math.floor(this.ANAI[1 + M]) - 1;
+                for (let N = M; N < NK; N++) {                       //4.1
+                    N1 = N - M;
+                    N2 = N + M + 1;
+                    N3 = N + N + 2;
+                    N4 = N1 - 2;
+                    N5 = N1 - 3;
+                    A = this.PNK[N1];
+                    AN = Math.floor(M + 1) * A;
+                    CK1 = this.AR[N] * (this.C[J] * this.CO[M] + this.S[J] * this.SI[M]);
+                    CK2 = this.AR[N] * (this.C[J] * this.SI[M] - this.S[J] * this.CO[M]);
+                    if (N1 > 2)
+                    {
+                        this.PNK[N1 - 1] = Math.sqrt(N3 + 1) / (Math.sqrt(N4 + 1) * Math.sqrt(N2 + 2)) * (Math.sqrt(N3 - 1) *
+                            SF * this.PNK[N4] - Math.sqrt(N2 + 1) * Math.sqrt(N5 + 1) / Math.sqrt(N3 - 3) * this.PNK[N5]);
+                    }
+                    else if (N1 == 0)
+                    {                          //4.1.1
+                        FR += this.HP[N] * CK1 * A;
+                        FF -= CK1 * AN * TG;
+                        FL += CK2 * AN;
+                        J++;
+
+                    }
+                    else
+                    {
+                        if (N1 == 1)
+                        {
+
+                            this.PNK[0] = this.SK[N] * this.CF[N];
+                        }
+                        else if (N1 == 2)
+                        {
+                            this.PNK[1] = /*SQ[N3]*/ Math.sqrt(N3 + 1) * SF * this.PNK[0];
+                        }
+                        FR += this.HP[N] * CK1 * A;
+                        FF += CK1 * (this.PNK[N1 - 1] */*SQ[N1-1]*SQ[N2+1]*/ Math.sqrt(N1) * Math.sqrt(N2 + 2) - TG * AN);
+                        FL += CK2 * AN;
+                        //                    m12:
+                    }
+                    J++;
+                }
+                //               }     //4.1
+            }     //4
+            //    5
         }//0
-     //   m5:
+        //   m5:
         FR = -GR * FR - this.R[2] * R3;
         FF = GR * FF;
         FL = -GR / this.CF[0] * FL;
@@ -266,8 +285,5 @@ export class Gravity {
     sqrt(x: number): number {
         return Math.sqrt(x);
     }
-
-
-
 
 }

@@ -42,7 +42,7 @@ class GravityCategoryObject extends Gravity_1.Gravity {
         var x = this.convert(input[0]);
         var y = this.convert(input[1]);
         var z = this.convert(input[2]);
-        this.Forces(x, y, x, this.fx, this.fy, this.fz);
+        this.Forces(x, y, z, this.fx, this.fy, this.fz);
         output[0] = this.fx[0];
         output[1] = this.fy[0];
         output[2] = this.fz[0];

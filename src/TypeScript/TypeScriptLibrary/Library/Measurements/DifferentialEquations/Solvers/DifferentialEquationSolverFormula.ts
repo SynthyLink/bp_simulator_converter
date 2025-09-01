@@ -24,6 +24,12 @@ export class DifferentialEquationSolverFormula extends DataConsumerVariableMeasu
         throw new Error("Method not implemented.");
     }
 
+    startedStart(start: number): void
+    {
+        this.initial.resetInitialValues();
+        this.feedback.setFeedbacks();
+    }
+
 
     calculateDerivations(): void
     {
