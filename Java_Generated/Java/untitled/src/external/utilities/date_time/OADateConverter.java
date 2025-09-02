@@ -1,4 +1,4 @@
-package general_service.date_time;
+package external.utilities.date_time;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

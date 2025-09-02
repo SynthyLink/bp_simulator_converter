@@ -1,5 +1,4 @@
-package general_service.date_time;
-
+package external.utilities.date_time;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -334,7 +333,7 @@ public class DateTimeBinaryConverter {
         return unpackedDateTime;
     }
 
-
+/*
     public static void main(String[] args) {
         // Example 1: A specific date and time
         LocalDateTime dateTime1 = LocalDateTime.of(2023, 10, 27, 10, 30, 15, 123_456_789);
@@ -376,4 +375,6 @@ public class DateTimeBinaryConverter {
         System.out.println("ToBinary (1900 Local): " + binary1900Local);
         System.out.println("FromBinary (1900 Local): " + fromBinary(binary1900Local));
     }
+
+ */
 }

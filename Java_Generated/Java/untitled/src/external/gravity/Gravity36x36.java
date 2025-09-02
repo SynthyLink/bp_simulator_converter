@@ -181,14 +181,17 @@ public class Gravity36x36
                     P30 = PN0;
                 }      //1.3
             } //1 CONTINUE
-            if (NK != 0) {
+            if (NK != 0)
+            {
                 LOG = (NK >= 3);
                 A = CO[0] + CO[0];
                 CO[1] = A * CO[0] - 1;
                 SI[1] = A * SI[0];
                 TG = Z * R2;
-                if (LOG) {
-                    for (N = 2; N < NK; N++) {          //2
+                if (LOG)
+                {
+                    for (N = 2; N < NK; N++)
+                    {          //2
                         N1 = N - 1;
                         N2 = N - 2;
                         CF[N] = CF[0] * CF[N1];
@@ -204,7 +207,8 @@ public class Gravity36x36
                 FF += CK1 * (PNK[0] + PNK[0] - TG * A);
                 FL += CK2 * A;
                 J = 35;
-                if (LOG) {
+                if (LOG)
+                {
                     for (N = 2; N < NK; N++)    //commain
                     {                //3
                         J++;
@@ -215,18 +219,23 @@ public class Gravity36x36
                         CK1 = (C[J] * CO[0] + S[J] * SI[0]) * AR[N];
                         CK2 = (C[J] * SI[0] - S[J] * CO[0]) * AR[N];
                         if (N == 2)
+                        {
                             PNK[1] = /*SQ[6]*/sqrt(7) * SF * PNK[0];
-                        else
+                        }
+                        else {
                             PNK[N1] = sqrt(N2 + 2) / (sqrt(N - 1) * sqrt(N + 3)) * (sqrt(N2) *
                                     SF * PNK[N - 2] - sqrt(N3 + 1) * sqrt(N - 2) / sqrt(N2 - 2) * PNK[N - 3]);
+                        }
                         FR += (N3 + 1) * CK1 * A;
                         FF += CK1 * (PNK[N1] */*SQ[N1]*/sqrt(N1 + 1) */*SQ[N+2]*/sqrt(N + 3) - TG * A);
                         FL += CK2 * A;
                     }
                 }//ENDIF //3
-                for (M = 1; M < NK; M++) {                      // 4
+                for (M = 1; M < NK; M++)
+                {                      // 4
                     J = (int) (ANAI[1 + M]) - 1;
-                    for (N = M; N < NK; N++) {                       //4.1
+                    for (N = M; N < NK; N++)
+                    {                       //4.1
                         N1 = N - M;
                         N2 = N + M + 1;
                         N3 = N + N + 2;
@@ -236,20 +245,25 @@ public class Gravity36x36
                         AN = (double) (M + 1) * A;
                         CK1 = AR[N] * (C[J] * CO[M] + S[J] * SI[M]);
                         CK2 = AR[N] * (C[J] * SI[M] - S[J] * CO[M]);
-                        if (N1 > 2) {
+                        if (N1 > 2)
+                        {
                             PNK[N1 - 1] = sqrt(N3 + 1) / (sqrt(N4 + 1) * sqrt(N2 + 2)) * (sqrt(N3 - 1) *
                                     SF * PNK[N4] - sqrt(N2 + 1) * sqrt(N5 + 1) / sqrt(N3 - 3) * PNK[N5]);
                         }
-                        else if (N1 == 0) {                          //4.1.1
+                        else if (N1 == 0)
+                        {                          //4.1.1
                             FR += HP[N] * CK1 * A;
                             FF -= CK1 * AN * TG;
                             FL += CK2 * AN;
                             J++;
                             continue;
                         }
-                        else if (N1 == 1) {
+                        else if (N1 == 1)
+                        {
                             PNK[0] = SK[N] * CF[N];
-                        } else if (N1 == 2) {
+                        }
+                        else if (N1 == 2)
+                        {
                             PNK[1] = /*SQ[N3]*/sqrt(N3 + 1) * SF * PNK[0];
                         }
                         FR += HP[N] * CK1 * A;

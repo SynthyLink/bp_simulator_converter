@@ -59,7 +59,7 @@ public class DynamicalAtmosphereTransformer extends DynamicalAtmosphere implemen
         xx[0] = x[0];
         xx[1] = y[0];
         xx[2] = z[0];
-        out[0] = Atm(t[0], xx);
+        out[0] = 0;//Atm(t[0], xx);
         output[0] = out;
 
     }

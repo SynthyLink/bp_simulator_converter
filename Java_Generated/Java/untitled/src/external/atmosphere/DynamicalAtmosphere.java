@@ -1,23 +1,16 @@
 package external.atmosphere;
 
-import general_service.date_time.DateTimeBinaryConverter;
-import general_service.date_time.OADateConverter;
+import external.utilities.date_time.OADateConverter;
 
 import java.time.LocalDateTime;
 
-public class DynamicalAtmosphere {
+public class DynamicalAtmosphere
+{
 
-    public double calculate(double x, double y, double z, java.time.LocalDateTime dateTime)
-    {
-        return 0;
-    }
+    double[] ASoL = new double[]{0};
+    double[] DSoL = new double[]{0};
 
-    public double calculate(double time, double x, double y, double z)
-    {
-        return 0;
-    }
-    
-   
+
 
     protected Object[] ob = new Object[2];
 
@@ -94,7 +87,46 @@ public class DynamicalAtmosphere {
         setIf(ifa);
     }
 
- 
+    public void setIf(int[] value) {
+        N10 = 0;
+        for (int i = 0; i < 6; i++) {
+            if (if1[i] == value[0]) {
+                break;
+            } else {
+                N10++;
+            }
+        }
+        ifa[0] = value[0];
+        ifa[1] = value[1];
+        ifa[2] = value[2];
+    }
+
+    private void init()
+    {
+        if (ff0 != null)
+        {
+            return;
+        }
+        ff0 = new double[f0.length / 21][];
+        ff1 = new double[f0.length / 21][];
+        for (int i = 0; i < ff0.length; i++)
+        {
+            double[] fff = new double[21];
+            double[] fff1 = new double[21];
+            ff0[i] = fff;
+            ff1[i] = fff1;
+            int j = i * 21;
+            for (int k = 0; k < 21; k++)
+            {
+                int n = k + j;
+                fff[k] = f0[n];
+                fff1[k] = f01[n];
+            }
+        }
+    }
+
+
+
     public double Atm(double t, double[] x)
     {
         double ttt = t / 86400;
@@ -134,44 +166,7 @@ public class DynamicalAtmosphere {
         return ifa;
     }
     
-    public void setIf(int[] value) {
-        N10 = 0;
-        for (int i = 0; i < 6; i++) {
-            if (if1[i] == value[0]) {
-                break;
-            } else {
-                N10++;
-            }
-        }
-        ifa[0] = value[0];
-        ifa[1] = value[1];
-        ifa[2] = value[2];
-    }
 
-    private void init()
-    {
-        if (ff0 != null)
-        {
-            return;
-        }
-        ff0 = new double[f0.length / 21][];
-        ff1 = new double[f0.length / 21][];
-        for (int i = 0; i < ff0.length; i++)
-        {
-            double[] fff = new double[21];
-            double[] fff1 = new double[21];
-            ff0[i] = fff;
-            ff1[i] = fff1;
-            int j = i * 21;
-            for (int k = 0; k < 21; k++)
-            {
-                int n = k + j;
-                fff[k] = f0[n];
-                fff1[k] = f01[n];
-            }
-        }
-    }
-    
     double rad(double[] x) {
     double a = 0;
     for (int i = 0; i < 3; i++) {
@@ -226,21 +221,6 @@ for (int i = 0; i < 3; i++) {
         return roh * xk1 * xk2 * xk3 * xk4;
     }
 
-    double[] ASoL = new double[]{0};
-    double[] DSoL = new double[]{0};
-/*
-    double atm(double[] x, double t, double[] s0, double[] h, int[] ifa, LocalDateTime Date)
-    {
-        date[0] = Date.getDayOfMonth();
-        date[1] = Date.getMonthValue();
-        date[2] = Date.getYear();
-        double days = days1900(Date);
-        ASoL[0] = 0;
-        DSoL[0] = 0;
-        AngleSun(t - 10800.0, days, ASoL, DSoL);
-        return atm(x, t, ASoL, DSoL, s0,  h, date);
-    }
-    */
 
 
 
