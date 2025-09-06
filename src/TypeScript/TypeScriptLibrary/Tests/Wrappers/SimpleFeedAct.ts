@@ -23,11 +23,14 @@ export class SimpleFeedAct extends SimpleFeed implements IAction
 
         console.log(a, b);;
     }
+    func(): boolean {
+        return false;
+    }
 
     public test(): void {
         var runtime: IDataRuntime = new DataRuntimeConsumer(this.dc);
         var p: PefrormerMeasuremets = new PefrormerMeasuremets();
-        p.performFixedStepCalculation(runtime, 0, 0.001, 1000, this);
+        p.performFixedStepCalculation(runtime, 0, 0.001, 1000, this, this);
     }
 
 

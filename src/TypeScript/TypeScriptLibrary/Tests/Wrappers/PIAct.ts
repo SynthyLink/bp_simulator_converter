@@ -21,10 +21,15 @@ export class PIAct extends PI {
         console.log(a);
     }
 
+    func(): boolean {
+        return false;
+    }
+
+
     public test(): void {
         var runtime: IDataRuntime = new DataRuntimeConsumer(this.dc);
         var p: PefrormerMeasuremets = new PefrormerMeasuremets();
-        p.performFixedStepCalculation(runtime, 0, 0.001, 1000, this);
+        p.performFixedStepCalculation(runtime, 0, 0.001, 1000, this, this);
     }
 
 

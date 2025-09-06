@@ -19,12 +19,15 @@ class ODEAct extends ODE_1.ODE {
         var b = k.getMeasurement(1).getMeasurementValue();
         console.log(a, b);
     }
+    func() {
+        return false;
+    }
     test() {
         try {
             let processor = new RungeProcessor_1.RungeProcessor();
             var runtime = new DataRuntimeConsumerODE_1.DataRuntimeConsumerODE(this.dc, processor);
             var p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
-            p.performFixedStepCalculation(runtime, 0, 0.4, 45, this);
+            p.performFixedStepCalculation(runtime, 0, 0.4, 45, this, this);
         }
         catch (e) {
             let i = 0;

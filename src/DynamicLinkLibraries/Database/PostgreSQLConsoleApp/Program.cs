@@ -16,7 +16,6 @@ Console.WriteLine("Press key");
 Console.ReadLine();
 return;
 
-PostgreSQLConsoleApp.A.TestA();
 
 //var k = Test3();
 

@@ -12,6 +12,9 @@ class ConditionTestAct extends ConditionTest_1.ConditionTest {
         var o = this.getCategoryObjects();
         this.dc = o[2];
     }
+    func() {
+        return false;
+    }
     action() {
         var k = this.dc.getAllMeasurements()[1];
         var a = k.getMeasurement(0).getMeasurementValue();
@@ -20,7 +23,7 @@ class ConditionTestAct extends ConditionTest_1.ConditionTest {
     test() {
         var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc);
         var p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
-        p.peformCondDCFixedStepCalculation(runtime, this.dc, "Condition.Formula_1", 0, 0.01, 500, this);
+        p.peformCondDCFixedStepCalculation(runtime, this.dc, "Condition.Formula_1", this, 0, 0.01, 500, this);
     }
 }
 exports.ConditionTestAct = ConditionTestAct;

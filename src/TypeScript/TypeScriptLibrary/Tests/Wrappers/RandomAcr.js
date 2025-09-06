@@ -17,10 +17,13 @@ class RandomAct extends Random_1.Random {
         var a = k.getMeasurement(0).getMeasurementValue();
         console.log(a);
     }
+    func() {
+        return false;
+    }
     test() {
         var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc);
         var p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
-        p.performFixedStepCalculation(runtime, 0, 1, 1000, this);
+        p.performFixedStepCalculation(runtime, 0, 1, 1000, this, this);
     }
 }
 exports.RandomAct = RandomAct;

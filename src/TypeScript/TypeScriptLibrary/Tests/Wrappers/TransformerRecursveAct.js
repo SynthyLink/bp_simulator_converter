@@ -19,10 +19,13 @@ class TransformerRecursveAct extends TransformerRecursive_1.TransformerRecursive
         console.log(a, b);
         ;
     }
+    func() {
+        return false;
+    }
     test() {
         var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc);
         var p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
-        p.performFixedStepCalculation(runtime, 0, 1, 60, this);
+        p.performFixedStepCalculation(runtime, 0, 1, 60, this, this);
     }
 }
 exports.TransformerRecursveAct = TransformerRecursveAct;

@@ -55,16 +55,16 @@ export class PefrormerMeasuremets
 
 
     public peformCondDCFixedStepCalculation(runtime: IDataRuntime, dataConsumer: IDataConsumer,
-        conditionName: string,  start: number,
+        conditionName: string, stop: IFunc<boolean>, start: number,
         step: number, steps: number, act: IAction): void
     {
         var cond = new DataConsumerBoolFunc(dataConsumer, conditionName);
-        this.peformCondFixedStepCalculation(runtime,cond, start, step, steps, act);
+        this.peformCondFixedStepCalculation(runtime,cond, stop, start, step, steps, act);
     }
 
 
 
-    public peformCondFixedStepCalculation(runtime: IDataRuntime, condition: IFunc<boolean>, start: number,
+    public peformCondFixedStepCalculation(runtime: IDataRuntime, condition: IFunc<boolean>, stop: IFunc<boolean>, start: number,
         step: number, steps: number, act: IAction): void
     {
         var tm: ITimeMeasurementProvider = new TimeMeasurementProvider();
@@ -73,6 +73,7 @@ export class PefrormerMeasuremets
         var st = start;
         for (var i = 0; i < steps; i++)
         {
+            if (stop.func()) return;
             tm.setTime(st);
             runtime.updateRuntime();
             if (condition.func())
@@ -88,7 +89,8 @@ export class PefrormerMeasuremets
         }
     }
 
-    public performFixedStepCalculation(runtime: IDataRuntime, start: number, step: number, steps: number, act: IAction): void
+    public performFixedStepCalculation(runtime: IDataRuntime, start: number, step: number, steps: number,
+        stop: IFunc<boolean>, act: IAction): void
     {
         let tm = new TimeMeasurementProvider();
         runtime.setTimeProvider(tm);
@@ -97,6 +99,8 @@ export class PefrormerMeasuremets
         var curr = start;
         for (var i = 0; i < steps; i++)
         {
+            if (stop.func()) return;
+              
             tm.setTime(st);
             if (i > 0)
             {

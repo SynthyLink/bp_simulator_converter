@@ -20,10 +20,13 @@ export class RandomAct extends Random implements IAction
         var a = k.getMeasurement(0).getMeasurementValue();
         console.log(a);
     }
+    func(): boolean {
+        return false;
+    }
 
     public test(): void {
         var runtime: IDataRuntime = new DataRuntimeConsumer(this.dc);
         var p: PefrormerMeasuremets = new PefrormerMeasuremets();
-        p.performFixedStepCalculation(runtime, 0, 1, 1000, this);
+        p.performFixedStepCalculation(runtime, 0, 1, 1000, this, this);
     }
 }

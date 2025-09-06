@@ -30,6 +30,10 @@ class RecursiveFormula extends DataConsumerVariableMeasurementsStarted_1.DataCon
     }
     save() {
     }
+    startedStart(start) {
+        this.initial.resetInitialValues();
+        this.feedback.setFeedbacks();
+    }
     updateMeasurements() {
         this.feedback.setFeedbacks();
         this.calculateTree();

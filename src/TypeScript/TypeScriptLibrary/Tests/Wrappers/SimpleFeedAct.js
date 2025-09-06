@@ -19,10 +19,13 @@ class SimpleFeedAct extends SimpleFeed_1.SimpleFeed {
         console.log(a, b);
         ;
     }
+    func() {
+        return false;
+    }
     test() {
         var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc);
         var p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
-        p.performFixedStepCalculation(runtime, 0, 0.001, 1000, this);
+        p.performFixedStepCalculation(runtime, 0, 0.001, 1000, this, this);
     }
 }
 exports.SimpleFeedAct = SimpleFeedAct;

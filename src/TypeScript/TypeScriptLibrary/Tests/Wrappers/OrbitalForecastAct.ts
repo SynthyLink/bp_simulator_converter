@@ -23,12 +23,17 @@ export class OrbitaForecasAct extends OrbitalForecast implements IAction {
         console.log(a, b);
     }
 
+    func(): boolean {
+        return false;
+    }
+
+
     public test(): void {
         try {
             let processor = new RungeProcessor();
             var runtime = new DataRuntimeConsumerODE(this.dc, processor);
             var p = new PefrormerMeasuremets();
-            p.peformCondDCFixedStepCalculation(runtime, this.dc, "Recursive.y", 0, 1, 18000, this);
+            p.peformCondDCFixedStepCalculation(runtime, this.dc, "Recursive.y", this, 0, 1, 18000, this);
         }
         catch (e: any)
         {

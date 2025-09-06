@@ -33,6 +33,13 @@ public class RecursiveFormula extends DataConsumerVariableMeasurementsStarted im
     }
 
 
+    @Override
+    public void startedStart(double time)
+    {
+        initial.resetInitialValues();
+        feedback.setFeedbacks();
+    }
+
     protected void calculateTree()
     {
 

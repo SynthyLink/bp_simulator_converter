@@ -23,6 +23,10 @@ export class ODEAct extends ODE
         var b = k.getMeasurement(1).getMeasurementValue();
         console.log(a, b);
     }
+    func(): boolean {
+        return false;
+    }
+
 
     public test(): void
     {
@@ -30,7 +34,7 @@ export class ODEAct extends ODE
             let processor = new RungeProcessor();
             var runtime = new DataRuntimeConsumerODE(this.dc, processor);
             var p = new PefrormerMeasuremets();
-            p.performFixedStepCalculation(runtime, 0, 0.4, 45, this);
+            p.performFixedStepCalculation(runtime, 0, 0.4, 45, this, this);
         }
         catch (e: any)
         {

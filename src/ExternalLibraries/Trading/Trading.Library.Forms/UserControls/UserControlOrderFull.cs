@@ -81,6 +81,10 @@ namespace Trading.Library.Forms.UserControls
             var task =
               new Task(
           SolveTask);
+            task.Start();
+            await task;
+            TaskCompleted();
+            return;
             task.GetAwaiter().OnCompleted(TaskCompleted);
             task.Start();
         }

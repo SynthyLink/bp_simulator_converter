@@ -19,12 +19,15 @@ class OrbitaForecasAct extends OrbitalForecast_1.OrbitalForecast {
         var b = k.getMeasurement(1).getMeasurementValue();
         console.log(a, b);
     }
+    func() {
+        return false;
+    }
     test() {
         try {
             let processor = new RungeProcessor_1.RungeProcessor();
             var runtime = new DataRuntimeConsumerODE_1.DataRuntimeConsumerODE(this.dc, processor);
             var p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
-            p.peformCondDCFixedStepCalculation(runtime, this.dc, "Recursive.y", 0, 1, 18000, this);
+            p.peformCondDCFixedStepCalculation(runtime, this.dc, "Recursive.y", this, 0, 1, 18000, this);
         }
         catch (e) {
             let i = 0;

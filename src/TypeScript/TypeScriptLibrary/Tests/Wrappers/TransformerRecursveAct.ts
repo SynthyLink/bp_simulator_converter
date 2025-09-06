@@ -23,9 +23,14 @@ export class TransformerRecursveAct extends TransformerRecursive implements IAct
         console.log(a, b);;
     }
 
+    func(): boolean {
+        return false;
+    }
+
+
     public test(): void {
         var runtime: IDataRuntime = new DataRuntimeConsumer(this.dc);
         var p: PefrormerMeasuremets = new PefrormerMeasuremets();
-        p.performFixedStepCalculation(runtime, 0, 1, 60, this);
+        p.performFixedStepCalculation(runtime, 0, 1, 60, this, this);
     }
 }
