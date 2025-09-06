@@ -2,5 +2,8 @@ import { Actor } from "./Tests/Actor/Actor";
 
 let a = new Actor();
 
-a.actOrbitalForecast();
+const t = a.actOrbitCalculation();
+
+
+
 let i = 0;

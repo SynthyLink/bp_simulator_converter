@@ -55,6 +55,7 @@ class DataRuntimeConsumer {
         }
     }
     setTimeProvider(timeProvider) {
+        this.timeProvider = timeProvider;
         for (let m of this.measurements) {
             if (this.performer.implementsType(m, "ITimeMeasurementConsumer")) {
                 let tm = m;

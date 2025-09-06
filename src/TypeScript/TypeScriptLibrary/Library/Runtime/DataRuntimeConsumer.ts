@@ -97,6 +97,7 @@ export class DataRuntimeConsumer implements IDataRuntime
 
     setTimeProvider(timeProvider: ITimeMeasurementProvider): void
     {
+        this.timeProvider = timeProvider;
         for (let m of this.measurements)
         {
 

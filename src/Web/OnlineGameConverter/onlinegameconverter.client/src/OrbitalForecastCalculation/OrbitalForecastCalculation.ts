@@ -9,6 +9,7 @@ import { IFunc } from "../Library/Interfaces/IFunc";
 import { RungeProcessor } from "../Library/Measurements/DifferentialEquations/Processors/RungeProcessor";
 import { IDataConsumer } from "../Library/Measurements/Interfaces/IDataConsumer";
 import { IMeasurements } from "../Library/Measurements/Interfaces/IMeasurements";
+import { ITimeMeasurementProvider } from "../Library/Measurements/Interfaces/ITimeMeasurementProvider";
 import { PefrormerMeasuremets } from "../Library/Measurements/PefrormerMeasuremets";
 import { DataRuntimeConsumerODE } from "../Library/Runtime/DataRuntimeConsumerODE";
 import { IDataRuntime } from "../Library/Runtime/Interfaces/IDataRuntime";

@@ -32,6 +32,15 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Actor = void 0;
 const readline = __importStar(require("readline"));
@@ -45,6 +54,7 @@ const ODE_FeedbackAct_1 = require("../Wrappers/ODE_FeedbackAct");
 const TransformerRecursveAct_1 = require("../Wrappers/TransformerRecursveAct");
 const PIAct_1 = require("../Wrappers/PIAct");
 const OrbitalForecastAct_1 = require("../Wrappers/OrbitalForecastAct");
+const OrbitalForecastCalculation_1 = require("../../OrbitalForecastCalculation/OrbitalForecastCalculation");
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -66,6 +76,16 @@ function finish(e) {
     });
 }
 class Actor {
+    actOrbitCalculation() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var o = new OrbitalForecastCalculation_1.OrbitalForecastCalculation();
+            const cond = {
+                Begin: 0, End: 20000, X: -5448.34815324, Y: -4463.93698421, Z: 0, Vx: 0.98539477743, Vy: 1.21681893834, Vz: 7.45047785592
+            };
+            var ab = new AbortController();
+            const t = yield o.calculate(cond, ab);
+        });
+    }
     actODEFeedback() {
         try {
             var o = new ODE_FeedbackAct_1.ODE_FeedbackAct();
