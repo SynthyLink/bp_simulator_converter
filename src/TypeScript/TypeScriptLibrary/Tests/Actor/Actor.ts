@@ -10,6 +10,7 @@ import { ODE_FeedbackAct } from '../Wrappers/ODE_FeedbackAct';
 import { TransformerRecursveAct } from '../Wrappers/TransformerRecursveAct';
 import { PIAct } from '../Wrappers/PIAct';
 import { OrbitaForecasAct } from '../Wrappers/OrbitalForecastAct';
+import { OrbitalForecastCalculation } from '../../OrbitalForecastCalculation/OrbitalForecastCalculation';
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -34,6 +35,15 @@ function finish(e: any) {
 }
 export class Actor
 {
+
+    async actOrbitCalculation(): Promise<void> {
+        var o = new OrbitalForecastCalculation();
+        const cond = {
+            Begin: 0, End: 20000, X: -5448.34815324, Y: -4463.93698421, Z: 0, Vx: 0.98539477743, Vy: 1.21681893834, Vz: 7.45047785592
+        };
+        var ab = new AbortController();
+        const t = await o.calculate(cond, ab);
+    }
 
     actODEFeedback(): void
     {

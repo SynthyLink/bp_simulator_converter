@@ -5,7 +5,7 @@ const FictiveDataConsumer_1 = require("../../Library/Fiction/FictiveDataConsumer
 const RungeProcessor_1 = require("../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor");
 const PefrormerMeasuremets_1 = require("../../Library/Measurements/PefrormerMeasuremets");
 const DataRuntimeConsumerODE_1 = require("../../Library/Runtime/DataRuntimeConsumerODE");
-const OrbitalForecast_1 = require("../OrbitalForecast");
+const OrbitalForecast_1 = require("../../OrbitalForecastCalculation/OrbitalForecast");
 class OrbitaForecasAct extends OrbitalForecast_1.OrbitalForecast {
     constructor() {
         super();

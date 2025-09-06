@@ -5,7 +5,7 @@ import { RungeProcessor } from "../../Library/Measurements/DifferentialEquations
 import { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
 import { PefrormerMeasuremets } from "../../Library/Measurements/PefrormerMeasuremets";
 import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
-import { OrbitalForecast } from "../OrbitalForecast";
+import { OrbitalForecast } from "../../OrbitalForecastCalculation/OrbitalForecast";
 
 export class OrbitaForecasAct extends OrbitalForecast implements IAction {
 
