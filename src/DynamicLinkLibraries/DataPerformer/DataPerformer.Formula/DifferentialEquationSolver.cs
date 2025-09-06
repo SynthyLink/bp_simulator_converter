@@ -1185,8 +1185,6 @@ namespace DataPerformer.Formula
 
         #endregion
 
-
-
         #region IMeasurements Members
 
 

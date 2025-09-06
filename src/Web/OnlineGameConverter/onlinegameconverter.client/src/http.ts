@@ -11,6 +11,42 @@ export interface HttpResponse<RESB> {
   body?: RESB;
 }
 
+
+export const http_cancel = async <RESB, REQB = undefined>(
+    config: HttpRequest<REQB>, controller: AbortController,
+): Promise<HttpResponse<RESB>> => {
+    const request = new Request(`${webAPIUrl}${config.path}`, {
+        method: config.method || 'get',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: config.body ? JSON.stringify(config.body) : undefined,
+    });
+    if (config.accessToken) {
+        request.headers.set('authorization', `bearer ${config.accessToken}`);
+    }
+
+    const signal = controller.signal;
+
+    // console.log('Config', config);
+    console.log('Request', request);
+    // console.log('Request BODY', request.body);
+    const response = await fetch(request, { signal });
+    console.log('Response', response);
+    console.log('Response BODY', response.body);
+
+    if (response.ok) {
+        const body = await response.json();
+        return { ok: response.ok, body };
+    } else {
+        console.log('Response BAD', response);
+        logError(request, response);
+        return { ok: response.ok };
+    }
+};
+
+
+
 export const http = async <RESB, REQB = undefined>(
   config: HttpRequest<REQB>,
 ): Promise<HttpResponse<RESB>> => {

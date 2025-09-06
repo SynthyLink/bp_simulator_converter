@@ -29,7 +29,11 @@ namespace BP_Simulator.Light
 
         static void Test()
         {
-            /*      var atm = new DimAtm.Serializable.Atmosphere();
+
+            var orb = new OnlineGameConverter.Server.BusinessLogic.Orbital.OrbitalForecastCalculator();
+            var aliases = orb.GetAllAliases();
+           var x = (double)aliases["Motion equations.x"];
+             /*      var atm = new DimAtm.Serializable.Atmosphere();
       var l = new DinAtm.Forms.Labels.LabelAtmosphere();
       var g = new Gravity_36_36.Wrapper.Serializable.Gravity();
       using (var s = new MemoryStream())
@@ -243,6 +247,7 @@ namespace BP_Simulator.Light
                null, true,
                 "Business Process Simulation",
                 Properties.Resources.process, logWriter, testInterface);
+            Test();
             return form;
         }
 

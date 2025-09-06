@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { http } from './http';
+import { http, http_cancel } from '../http';
 
 export interface OrbitalForecastConditionNumber {
     Begin: number;
@@ -46,12 +46,13 @@ export interface OrbitalForecastItemString {
 export const getOrbitalForecastFromNumber = async (
     condition: OrbitalForecastConditionNumber,
 ): Promise<OrbitalForecastItemNumber[] | null> => {
+    const controller = new AbortController();
     console.log('ForecastFromNumber');
-    const result = await http<OrbitalForecastItemNumber[], OrbitalForecastConditionNumber>({
+    const result = await http_cancel<OrbitalForecastItemNumber[], OrbitalForecastConditionNumber>({
         path: `/orbital`,
         method: "post",
         body: condition,
-    });
+    }, controller);
     console.log("ok", result.ok);
     console.log("body", result.body);
     if (result.ok && result.body) {
@@ -89,6 +90,20 @@ export const getOrbitalInitial = async (): Promise<OrbitalForecastConditionNumbe
         return null;
     }
 };
+
+
+export const getOrbitalInitialCancel = async (): Promise<OrbitalForecastConditionNumber | null> => {
+    const controller = new AbortController();
+    const result = await http_cancel<OrbitalForecastConditionNumber>({
+        path: '/orbital/initial',
+    }, controller);
+    if (result.ok && result.body) {
+        return result.body;
+    } else {
+        return null;
+    }
+};
+
 
 export const obritalInitial = async (
 ): Promise<OrbitalForecastConditionNumber | null> => {

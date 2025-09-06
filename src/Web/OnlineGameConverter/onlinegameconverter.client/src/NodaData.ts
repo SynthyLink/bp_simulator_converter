@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { http } from './http';
-import { getOrbitalForecastFromNumber, obritalInitial, getOrbitalInitial } from './OrbitalData';
+import { getOrbitalForecastFromNumber, obritalInitial, getOrbitalInitial, getOrbitalInitialCancel } from './Orbital/OrbitalData';
 
 export interface Note {
   Name: string;
@@ -126,6 +126,30 @@ export async function nodeOrbitalIClick(): Promise<void> {
         console.error("Error fetching data:", error);
     }
 };
+
+
+export async function nodeOrbitalIClickCanlel(): Promise<void> {
+
+    try {
+
+        //      const cond = {
+        //          Begin: 0, End: 20000, X: -5448.34815324, Y: -4463.93698421, Z: 0, Vx: 0.98539477743, Vy: 1.21681893834, Vz: 7.45047785592
+        //       };
+        console.log("ORBITAL");
+
+        const response = await getOrbitalInitialCancel();
+        console.log("ORBITALLLL", response);
+        console.log("X", response.x);
+        if (response.ok) {
+            console.log("ORBITAL", response);
+            console.log("X", response.X);
+        }
+    }
+    catch (error) {
+        console.error("Error fetching data:", error);
+    }
+};
+
 
 
 
