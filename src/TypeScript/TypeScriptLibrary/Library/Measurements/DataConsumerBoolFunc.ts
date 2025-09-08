@@ -1,4 +1,3 @@
-import { FictiveMeasurement } from "../Fiction/FictiveMeasurement";
 import { IFunc } from "../Interfaces/IFunc";
 import { Performer } from "../Performer";
 import { IDataConsumer } from "./Interfaces/IDataConsumer";
@@ -23,7 +22,7 @@ export class DataConsumerBoolFunc implements IFunc<boolean>
     }
 
 
-    measurement: IMeasurement = new FictiveMeasurement();
+    measurement !: IMeasurement;
 
     performer: Performer = new Performer();
 

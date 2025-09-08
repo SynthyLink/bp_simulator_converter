@@ -1,14 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PIAct = void 0;
-const FictiveDataConsumer_1 = require("../../Library/Fiction/FictiveDataConsumer");
 const PefrormerMeasuremets_1 = require("../../Library/Measurements/PefrormerMeasuremets");
 const DataRuntimeConsumer_1 = require("../../Library/Runtime/DataRuntimeConsumer");
 const PI_1 = require("../PI");
 class PIAct extends PI_1.PI {
     constructor() {
         super();
-        this.dc = new FictiveDataConsumer_1.FictiveDataConsumer();
         var co = this.getCategoryObject("Chart");
         this.dc = co;
     }

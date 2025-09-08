@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Recursive = void 0;
-const FictiveAlias_1 = require("../Fiction/FictiveAlias");
-const FictionInitialValueCollection_1 = require("../Fiction/FictionInitialValueCollection");
 const AliasInitialValueCollection_1 = require("../AliasInitialValueCollection.");
 const DataConsumerVariableMeasurements_1 = require("./DataConsumerVariableMeasurements");
 class Recursive extends DataConsumerVariableMeasurements_1.DataConsumerVariableMeasurements {
@@ -12,8 +10,6 @@ class Recursive extends DataConsumerVariableMeasurements_1.DataConsumerVariableM
         this.arguments = [];
         //  protected initial: Map<string, any> = new Map();
         this.operationNames = new Map();
-        this.alias = new FictiveAlias_1.FictiveAlias();
-        this.initial = new FictionInitialValueCollection_1.FictionInitialValueCollection();
         this.typeName = "Recursive";
         this.types.push("IStarted");
         this.types.push("IPostSetArrow");

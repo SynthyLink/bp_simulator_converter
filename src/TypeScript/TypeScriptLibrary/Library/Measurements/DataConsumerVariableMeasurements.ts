@@ -1,4 +1,3 @@
-import { FictiveFeedbackCollection } from "../Fiction/FictiveFeedbackCollection";
 import { IAlias } from "../Interfaces/IAlias";
 import { IDesktop } from "../Interfaces/IDesktop";
 import { IFeedbackCollection } from "../Interfaces/IFeedbackCollection";
@@ -42,7 +41,7 @@ export class DataConsumerVariableMeasurements extends DataConsumer implements
 
     protected pMeasurements : PefrormerMeasuremets = new PefrormerMeasuremets();
 
-    protected feedback: IFeedbackCollection = new FictiveFeedbackCollection();
+    protected feedback !: IFeedbackCollection;
 
 
 

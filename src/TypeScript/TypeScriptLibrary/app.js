@@ -2,6 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Actor_1 = require("./Tests/Actor/Actor");
 let a = new Actor_1.Actor();
-const t = a.actOrbitCalculation();
-let i = 0;
+a.actOrbitCalculation();
+a.finish(undefined);
 //# sourceMappingURL=app.js.map

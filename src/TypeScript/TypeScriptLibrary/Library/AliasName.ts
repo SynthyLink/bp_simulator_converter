@@ -1,11 +1,10 @@
-import { FictiveAlias } from "./Fiction/FictiveAlias";
 import { IAlias } from "./Interfaces/IAlias";
 import { IAliasName } from "./Interfaces/IAliasName";
 
 export class AliasName implements IAliasName
 {
 
-    alias: IAlias = new FictiveAlias();
+    alias !: IAlias;
 
     name: string = "";
 

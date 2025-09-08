@@ -1,10 +1,10 @@
 import { CategoryObject } from "../CategoryObject";
-import { IDesktop } from "../Interfaces/IDesktop";
-import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
-import { IDataConsumer } from "./Interfaces/IDataConsumer";
-import { IMeasurements } from "./Interfaces/IMeasurements";
-import { ITimeMeasurementConsumer } from "./Interfaces/ITimeMeasurementConsumer";
-import { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProvider";
+import type { IDesktop } from "../Interfaces/IDesktop";
+import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
+import type { IDataConsumer } from "./Interfaces/IDataConsumer";
+import type { IMeasurements } from "./Interfaces/IMeasurements";
+import type { ITimeMeasurementConsumer } from "./Interfaces/ITimeMeasurementConsumer";
+import type { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProvider";
 
 export class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow, ITimeMeasurementConsumer
 {

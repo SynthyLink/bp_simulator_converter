@@ -1,9 +1,9 @@
 import { OwnNotImplemented } from "./ErrorHandler/OwnNotImplemented";
 import { ICategoryArrow } from "./Interfaces/ICategoryArrow";
 import { ICategoryObject } from "./Interfaces/ICategoryObject";
+import { ICheck } from "./Interfaces/ICheck";
 import { IDesktop } from "./Interfaces/IDesktop";
 import { IObject } from "./Interfaces/IObject";
-import { Check } from "./Types/Check";
 
 export class Desktop implements IDesktop
 {
@@ -13,16 +13,13 @@ export class Desktop implements IDesktop
     getObjects(): IObject[] {
         return this.objects;
     }
-    setCheck(check: Check): void {
+    setCheck(check: ICheck): void {
         this.check = check
     }
     getCheck() {
         return  this.check;
     }
 
-    protected check: Check = () => {
-        return false;
-    }
 
     protected categoryObjects: ICategoryObject[] = [];
 
@@ -39,6 +36,8 @@ export class Desktop implements IDesktop
 
 
     protected target!: ICategoryObject;
+
+    protected check !: ICheck;
 
     getCategoryObject(name: string): ICategoryObject {
         for (var o of this.categoryObjects) {

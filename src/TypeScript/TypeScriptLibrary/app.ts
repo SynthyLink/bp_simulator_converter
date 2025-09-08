@@ -2,8 +2,7 @@ import { Actor } from "./Tests/Actor/Actor";
 
 let a = new Actor();
 
-const t = a.actOrbitCalculation();
+a.actOrbitCalculation();
 
+a.finish(undefined);
 
-
-let i = 0;

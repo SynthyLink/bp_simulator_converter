@@ -1,4 +1,3 @@
-import { FictiveDifferentialEquationProcessor } from "../Fiction/FictiveDifferentialEquationProcessor";
 import { IDifferentialEquationProcessor } from "../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationProcessor ";
 import { IDifferentialEquationSolver } from "../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationSolver";
 import { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
@@ -7,7 +6,7 @@ import { DataRuntimeConsumer } from "./DataRuntimeConsumer";
 
 export class DataRuntimeConsumerODE extends DataRuntimeConsumer
 {
-    protected processor: IDifferentialEquationProcessor = new FictiveDifferentialEquationProcessor();
+    protected processor !: IDifferentialEquationProcessor;
 
     protected differentialEquations: IDifferentialEquationSolver[] = [];
 

@@ -1,5 +1,4 @@
-﻿import { FictiveAlias } from "../Fiction/FictiveAlias";
-import { IAlias } from "../Interfaces/IAlias";
+﻿import { IAlias } from "../Interfaces/IAlias";
 import { IDesktop } from "../Interfaces/IDesktop";
 import { Performer } from "../Performer";
 import { DataConsumer } from "./DataConsumer";
@@ -36,7 +35,7 @@ export class DataConsumerMeasurements extends DataConsumer
 
     protected variable: any;
 
-    protected alias: IAlias = new FictiveAlias();
+    protected alias !: IAlias;
 
     protected external: Map<string, string> = new Map();
 

@@ -1,4 +1,3 @@
-import { FictiveDataConsumer } from "../../Library/Fiction/FictiveDataConsumer";
 import { IAction } from "../../Library/Interfaces/IAction";
 import { IFunc } from "../../Library/Interfaces/IFunc";
 import { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
@@ -9,7 +8,7 @@ import { ConditionTest } from "../ConditionTest";
 
 export class ConditionTestAct extends ConditionTest implements IAction, IFunc<boolean>
 {
-    dc: IDataConsumer = new FictiveDataConsumer();
+    dc !: IDataConsumer;
     constructor() {
         super();
         var o = this.getCategoryObjects();

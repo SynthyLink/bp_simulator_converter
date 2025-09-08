@@ -32,6 +32,11 @@ export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted im
 
     }
 
+    setFeedback(): void
+    {
+       // this.feedback = new FeedbackAliasCollection()
+    }
+
    
     postSetArrow(): void
     {
@@ -61,13 +66,20 @@ export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted im
     startedStart(start: number)
     {
         this.initial.resetInitialValues();
+        if (this.feedback == undefined)
+        {
+            return;
+        }
         this.feedback.setFeedbacks();
     }
 
 
     updateMeasurements(): void
     {
-        this.feedback.setFeedbacks();
+        if (this.feedback != undefined)
+        {
+            this.feedback.setFeedbacks();
+        }
         this.calculateTree();
         this.save();
     }

@@ -5,8 +5,6 @@ import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import { IStarted } from "./Interfaces/IStarted";
 import { IAlias } from "../Interfaces/IAlias";
 import { IFeedbackAliasCollectionHolder } from "../Interfaces/IFeedbackAliasCollectionHolder";
-import { FictiveAlias } from "../Fiction/FictiveAlias";
-import { FictionInitialValueCollection } from "../Fiction/FictionInitialValueCollection";
 import { IInitialValueCollection } from "../Interfaces/IInitialValueCollection";
 import { AliasInitialValueCollection } from "../AliasInitialValueCollection.";
 import { IFeedbackAliasCollection } from "../Interfaces/IFeedbackAliasCollection";
@@ -25,9 +23,9 @@ export class Recursive extends DataConsumerVariableMeasurements implements IStar
 
     protected operationNames: Map<number, string> = new Map();
 
-    protected alias: IAlias = new FictiveAlias();
+    protected alias !: IAlias;
 
-    protected initial: IInitialValueCollection = new FictionInitialValueCollection();
+    protected initial !: IInitialValueCollection;
 
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name);

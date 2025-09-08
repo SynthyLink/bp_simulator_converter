@@ -1,7 +1,11 @@
 
-import { IDesktop } from "../Interfaces/IDesktop";
-import { IMeasurements } from "./Interfaces/IMeasurements";
-import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import type { IDesktop } from "../Interfaces/IDesktop";
+import type { IMeasurements } from "./Interfaces/IMeasurements";
+import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import { DataConsumerVariableMeasurementsStarted } from "./DataConsumerVariableMeasurementsStarted";
 
 
@@ -30,6 +34,11 @@ export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted im
     init(): void
     {
 
+    }
+
+    setFeedback(): void
+    {
+       // this.feedback = new FeedbackAliasCollection()
     }
 
    
@@ -61,13 +70,20 @@ export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted im
     startedStart(start: number)
     {
         this.initial.resetInitialValues();
+        if (this.feedback == undefined)
+        {
+            return;
+        }
         this.feedback.setFeedbacks();
     }
 
 
     updateMeasurements(): void
     {
-        this.feedback.setFeedbacks();
+        if (this.feedback != undefined)
+        {
+            this.feedback.setFeedbacks();
+        }
         this.calculateTree();
         this.save();
     }

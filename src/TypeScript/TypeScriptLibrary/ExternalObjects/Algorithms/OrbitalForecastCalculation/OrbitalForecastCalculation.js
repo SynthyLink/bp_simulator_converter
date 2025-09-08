@@ -1,0 +1,67 @@
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OrbitalForecastCalculation = void 0;
+const RungeProcessor_1 = require("../../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor");
+const PefrormerMeasuremets_1 = require("../../../Library/Measurements/PefrormerMeasuremets");
+const Performer_1 = require("../../../Library/Performer");
+const DataRuntimeConsumerODE_1 = require("../../../Library/Runtime/DataRuntimeConsumerODE");
+const OrbitalForecast_1 = require("./OrbitalForecast");
+class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
+    constructor() {
+        super();
+        this.calculate = (condition, controller) => __awaiter(this, void 0, void 0, function* () {
+            this.contoller = controller;
+            this.list = [];
+            let processor = new RungeProcessor_1.RungeProcessor();
+            this.runtime = new DataRuntimeConsumerODE_1.DataRuntimeConsumerODE(this.dc, processor);
+            let p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
+            this.alias.setAliasValue("x", condition.X);
+            p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, 0, 1, 18000, this);
+            return this.list;
+        });
+        this.list = [];
+        this.contoller = new AbortController();
+        this.performer = new Performer_1.Performer();
+        this.map = new Map();
+        this.dc = this.getCategoryObject("Chart");
+        this.alias = this.getCategoryObject("Motion equations");
+        this.measurements = this.alias;
+        this.performer.getMeasurementsMMap(this.measurements, this.map);
+    }
+    func() {
+        return this.contoller.signal.aborted;
+    }
+    action() {
+        // eslint-disable-next-line no-var
+        let k = this.measurements;
+        let rt = this.runtime.getTimeProvider();
+        let t = rt.getTime();
+        this.performer.getMeasurementsMMap(this.measurements, this.map);
+        const item = {
+            OrbitalTime: t,
+            X: this.get("x"),
+            Y: this.get("y"),
+            Z: this.get("z"),
+            Vx: this.get("u"),
+            Vy: this.get("v"),
+            Vz: this.get("w")
+        };
+        this.list.push(item);
+    }
+    get(i) {
+        let variable = this.map.get(i);
+        return this.performer.convertFromAny(variable === null || variable === void 0 ? void 0 : variable.getMeasurementValue());
+    }
+}
+exports.OrbitalForecastCalculation = OrbitalForecastCalculation;
+;
+//# sourceMappingURL=OrbitalForecastCalculation.js.map

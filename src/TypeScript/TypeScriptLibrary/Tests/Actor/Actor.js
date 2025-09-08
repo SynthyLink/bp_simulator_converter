@@ -54,7 +54,7 @@ const ODE_FeedbackAct_1 = require("../Wrappers/ODE_FeedbackAct");
 const TransformerRecursveAct_1 = require("../Wrappers/TransformerRecursveAct");
 const PIAct_1 = require("../Wrappers/PIAct");
 const OrbitalForecastAct_1 = require("../Wrappers/OrbitalForecastAct");
-const OrbitalForecastCalculation_1 = require("../../OrbitalForecastCalculation/OrbitalForecastCalculation");
+const OrbitalForecastCalculation_1 = require("../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation");
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -76,6 +76,21 @@ function finish(e) {
     });
 }
 class Actor {
+    finish(e) {
+        rl.question('Is this example useful? [y/n] ', (answer) => {
+            switch (answer.toLowerCase()) {
+                case 'y':
+                    console.log('Super!');
+                    break;
+                case 'n':
+                    console.log('Sorry! :(');
+                    break;
+                default:
+                    console.log('Invalid answer!');
+            }
+            rl.close();
+        });
+    }
     actOrbitCalculation() {
         return __awaiter(this, void 0, void 0, function* () {
             var o = new OrbitalForecastCalculation_1.OrbitalForecastCalculation();
@@ -84,6 +99,8 @@ class Actor {
             };
             var ab = new AbortController();
             const t = yield o.calculate(cond, ab);
+            console.log(t);
+            console.log("finish");
         });
     }
     actODEFeedback() {

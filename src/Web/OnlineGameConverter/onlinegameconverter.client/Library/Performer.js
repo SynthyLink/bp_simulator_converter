@@ -3,9 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Performer = void 0;
 const AliasName_1 = require("./AliasName");
 const OwnError_1 = require("./ErrorHandler/OwnError");
-const FictiveAlias_1 = require("./Fiction/FictiveAlias");
-const FictiveMeasurement_1 = require("./Fiction/FictiveMeasurement");
-const FictiveMeasurements_1 = require("./Fiction/FictiveMeasurements");
 class Performer {
     constructor() {
         this.a = 0;
@@ -207,7 +204,15 @@ class Performer {
                 }
             }
         }
-        return new FictiveMeasurement_1.FictiveMeasurement();
+        return this.measurement;
+    }
+    getMeasurementsMMap(measurements, map) {
+        var n = measurements.getMeasurementsCount();
+        for (let i = 0; i < n; i++) {
+            var m = measurements.getMeasurement(i);
+            var name = m.getMeasurementName();
+            map.set(name, m);
+        }
     }
     getMeasurementsDCMap(consumer) {
         var map = new Map();
@@ -231,7 +236,7 @@ class Performer {
             var al = a;
             return al;
         }
-        return new FictiveMeasurements_1.FictiveMeasurements();
+        return this.measurements;
     }
     getAlias(desktop, name) {
         var a = desktop.getCategoryObject(name);
@@ -239,7 +244,7 @@ class Performer {
             var al = a;
             return al;
         }
-        return new FictiveAlias_1.FictiveAlias();
+        return this.alias;
     }
     getAliasName(desktop, name) {
         var l = name.length;

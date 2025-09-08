@@ -1,5 +1,5 @@
 import { OwnNotImplemented } from "../../../ErrorHandler/OwnNotImplemented";
-import { FictiveTimeMeasurementProvider } from "../../../Fiction/FictiveTimeMeasurementProvider";
+
 import { Performer } from "../../../Performer";
 import { IMeasurements } from "../../Interfaces/IMeasurements";
 import { INormalizable } from "../../Interfaces/INormalizable";
@@ -80,6 +80,6 @@ export class DifferentialEquationProcessor implements IDifferentialEquationProce
 
     protected measurements: IMeasurements[] = [];
 
-    protected timeProvider: ITimeMeasurementProvider = new FictiveTimeMeasurementProvider();
+    protected timeProvider !: ITimeMeasurementProvider;
 
 }

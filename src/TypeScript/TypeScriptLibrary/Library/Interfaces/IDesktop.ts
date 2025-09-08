@@ -1,6 +1,6 @@
-import { Check } from "../Types/Check";
 import { ICategoryArrow } from "./ICategoryArrow";
 import { ICategoryObject } from "./ICategoryObject";
+import { ICheck } from "./ICheck";
 import { IObject } from "./IObject";
 
 export interface IDesktop
@@ -18,9 +18,9 @@ export interface IDesktop
     getObjects(): IObject[];
 
 
-    getCheck(): Check;
+    getCheck(): ICheck;
 
-    setCheck(check: Check): void;
+    setCheck(check: ICheck): void;
 
     getCategoryObject(name: string): ICategoryObject;
 

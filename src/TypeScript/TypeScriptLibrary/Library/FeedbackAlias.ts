@@ -1,5 +1,3 @@
-import { FictiveAliasName } from "./Fiction/FictiveAliasName";
-import { FictiveValue } from "./Fiction/FictiveValue";
 import { IAliasName } from "./Interfaces/IAliasName";
 import { IFeedback } from "./Interfaces/IFeedback";
 import { IFeedbackAlias } from "./Interfaces/IFeedbackAlias";
@@ -27,8 +25,8 @@ export class FeedbackAlias implements IFeedback, IFeedbackAlias
         return this.alias;
     }
 
-    protected value: IValue = new FictiveValue();
+    protected value !: IValue;
 
-    protected alias: IAliasName = new FictiveAliasName();
+    protected alias !: IAliasName;
 
 }

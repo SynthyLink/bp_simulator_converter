@@ -1,6 +1,4 @@
 import { AliasInitialValueCollection } from "../AliasInitialValueCollection.";
-import { FictionInitialValueCollection } from "../Fiction/FictionInitialValueCollection";
-import { FictiveAlias } from "../Fiction/FictiveAlias";
 import { IAlias } from "../Interfaces/IAlias";
 import { IDesktop } from "../Interfaces/IDesktop";
 import { IInitialValueCollection } from "../Interfaces/IInitialValueCollection";
@@ -9,10 +7,10 @@ import { IStarted } from "./Interfaces/IStarted";
 
 export class DataConsumerVariableMeasurementsStarted extends DataConsumerVariableMeasurements implements IStarted
 {
-    protected initial: IInitialValueCollection = new FictionInitialValueCollection();
+    protected initial !: IInitialValueCollection;
 
 
-    protected alias: IAlias = new FictiveAlias();
+    protected alias !: IAlias;
 
     constructor(desktop: IDesktop, name: string)
     {

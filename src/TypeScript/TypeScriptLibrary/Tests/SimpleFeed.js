@@ -4,8 +4,6 @@ exports.SimpleFeed = void 0;
 const AliasName_1 = require("../Library/AliasName");
 const Desktop_1 = require("../Library/Desktop");
 const FeedbackAliasCollection_1 = require("../Library/FeedbackAliasCollection");
-const FictiveAliasName_1 = require("../Library/Fiction/FictiveAliasName");
-const FictiveMeasurement_1 = require("../Library/Fiction/FictiveMeasurement");
 const DataLink_1 = require("../Library/Measurements/Arrows/DataLink");
 const DataConsumer_1 = require("../Library/Measurements/DataConsumer");
 const Variable_1 = require("../Library/Measurements/Variables/Variable");
@@ -13,10 +11,6 @@ const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaCo
 class SimpleFeed_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.aliasName0 = new FictiveAliasName_1.FictiveAliasName();
-        this.aliasName1 = new FictiveAliasName_1.FictiveAliasName();
-        this.aliasName3 = new FictiveAliasName_1.FictiveAliasName();
-        this.aliasName4 = new FictiveAliasName_1.FictiveAliasName();
         this.var_0 = 0;
         this.var_1 = 0;
         this.var_2 = 0;
@@ -105,8 +99,6 @@ class SimpleFeed_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaC
 class SimpleFeed_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.measurement4 = new FictiveMeasurement_1.FictiveMeasurement();
-        this.aliasName0 = new FictiveAliasName_1.FictiveAliasName();
         this.var_0 = 0;
         this.var_1 = 0;
         this.var_2 = 0;

@@ -4,9 +4,6 @@ exports.Desktop = void 0;
 const OwnNotImplemented_1 = require("./ErrorHandler/OwnNotImplemented");
 class Desktop {
     constructor() {
-        this.check = () => {
-            return false;
-        };
         this.categoryObjects = [];
         this.categoryArrows = [];
         this.objects = [];

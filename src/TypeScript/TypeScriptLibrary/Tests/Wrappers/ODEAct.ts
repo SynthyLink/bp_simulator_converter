@@ -1,4 +1,3 @@
-import { FictiveDataConsumer } from "../../Library/Fiction/FictiveDataConsumer";
 import { RungeProcessor } from "../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor";
 import { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
 import { PefrormerMeasuremets } from "../../Library/Measurements/PefrormerMeasuremets";
@@ -8,7 +7,7 @@ import { ODE } from "../ODE";
 export class ODEAct extends ODE
 {
 
-    dc: IDataConsumer = new FictiveDataConsumer();
+    dc! : IDataConsumer;
     constructor()
     {
         super();

@@ -15,6 +15,9 @@ class RecursiveFormula extends DataConsumerVariableMeasurementsStarted_1.DataCon
     }
     init() {
     }
+    setFeedback() {
+        // this.feedback = new FeedbackAliasCollection()
+    }
     postSetArrow() {
         this.init();
         this.setInitial();
@@ -32,10 +35,15 @@ class RecursiveFormula extends DataConsumerVariableMeasurementsStarted_1.DataCon
     }
     startedStart(start) {
         this.initial.resetInitialValues();
+        if (this.feedback == undefined) {
+            return;
+        }
         this.feedback.setFeedbacks();
     }
     updateMeasurements() {
-        this.feedback.setFeedbacks();
+        if (this.feedback != undefined) {
+            this.feedback.setFeedbacks();
+        }
         this.calculateTree();
         this.save();
     }

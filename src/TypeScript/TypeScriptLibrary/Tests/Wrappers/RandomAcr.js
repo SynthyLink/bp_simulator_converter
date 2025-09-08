@@ -1,14 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RandomAct = void 0;
-const FictiveDataConsumer_1 = require("../../Library/Fiction/FictiveDataConsumer");
 const PefrormerMeasuremets_1 = require("../../Library/Measurements/PefrormerMeasuremets");
 const DataRuntimeConsumer_1 = require("../../Library/Runtime/DataRuntimeConsumer");
 const Random_1 = require("../Random");
 class RandomAct extends Random_1.Random {
     constructor() {
         super();
-        this.dc = new FictiveDataConsumer_1.FictiveDataConsumer();
         var co = this.getCategoryObject("Chart");
         this.dc = co;
     }

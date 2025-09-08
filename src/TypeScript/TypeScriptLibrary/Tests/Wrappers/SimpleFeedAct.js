@@ -1,14 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SimpleFeedAct = void 0;
-const FictiveDataConsumer_1 = require("../../Library/Fiction/FictiveDataConsumer");
 const PefrormerMeasuremets_1 = require("../../Library/Measurements/PefrormerMeasuremets");
 const DataRuntimeConsumer_1 = require("../../Library/Runtime/DataRuntimeConsumer");
 const SimpleFeed_1 = require("../SimpleFeed");
 class SimpleFeedAct extends SimpleFeed_1.SimpleFeed {
     constructor() {
         super();
-        this.dc = new FictiveDataConsumer_1.FictiveDataConsumer();
         var co = this.getCategoryObject("Chart");
         this.dc = co;
     }

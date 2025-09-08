@@ -1,7 +1,5 @@
 import { FeedbackAlias } from "./FeedbackAlias";
 import { FeedbackCollection } from "./FeedbackCollection";
-import { FictiveDesktop } from "./Fiction/FictiveDesktop";
-import { FictiveMeasurements } from "./Fiction/FictiveMeasurements";
 import { ICategoryObject } from "./Interfaces/ICategoryObject";
 import { IDesktop } from "./Interfaces/IDesktop";
 import { IValue } from "./Interfaces/IValue";
@@ -31,7 +29,7 @@ export class FeedbackAliasCollection extends FeedbackCollection
         }
     }
 
-    protected desktop: IDesktop = new FictiveDesktop();
+    protected desktop !: IDesktop;
 
-    protected measurements: IMeasurements = new FictiveMeasurements();
+    protected measurements !: IMeasurements;
 }

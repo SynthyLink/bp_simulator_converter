@@ -1,8 +1,8 @@
 import { ICategoryObject } from "./Interfaces/ICategoryObject";
+import { ICheck } from "./Interfaces/ICheck";
 import { IDesktop } from "./Interfaces/IDesktop";
 import { IObject } from "./Interfaces/IObject";
 import { Performer } from "./Performer";
-import { Check } from "./Types/Check";
 
 export class CategoryObject implements ICategoryObject, IObject
 {
@@ -12,7 +12,7 @@ export class CategoryObject implements ICategoryObject, IObject
 
     protected name !: string;
 
-    protected checker !: Check;
+    protected checker !: ICheck;
 
     protected variable !: any;
 
@@ -60,7 +60,10 @@ export class CategoryObject implements ICategoryObject, IObject
     }
 
     protected check(x: any): boolean {
-        return this.checker(x);
+        if (this.checker == undefined) {
+            return false;
+        }
+        return this.checker.check(x);
     }
 }
 

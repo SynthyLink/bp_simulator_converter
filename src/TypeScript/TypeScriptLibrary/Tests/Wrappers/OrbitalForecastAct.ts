@@ -1,15 +1,14 @@
 import { OwnNotImplemented } from "../../Library/ErrorHandler/OwnNotImplemented";
-import { FictiveDataConsumer } from "../../Library/Fiction/FictiveDataConsumer";
 import { IAction } from "../../Library/Interfaces/IAction";
 import { RungeProcessor } from "../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor";
 import { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
 import { PefrormerMeasuremets } from "../../Library/Measurements/PefrormerMeasuremets";
 import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
-import { OrbitalForecast } from "../../OrbitalForecastCalculation/OrbitalForecast";
+import { OrbitalForecast } from "../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecast";
 
 export class OrbitaForecasAct extends OrbitalForecast implements IAction {
 
-    dc: IDataConsumer = new FictiveDataConsumer();
+    dc !: IDataConsumer;
     constructor() {
         super();
         var o = this.getCategoryObjects();

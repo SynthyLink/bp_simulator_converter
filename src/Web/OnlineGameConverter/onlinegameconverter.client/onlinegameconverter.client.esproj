@@ -9,7 +9,6 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="OrbitalForecast\" />
     <Folder Include="vscode\" />
   </ItemGroup>
 </Project>

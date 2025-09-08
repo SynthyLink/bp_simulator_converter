@@ -1,6 +1,5 @@
 import { CategoryObject } from "../CategoryObject";
 import { OwnError } from "../ErrorHandler/OwnError";
-import { FictiveDataConsumer } from "../Fiction/FictiveDataConsumer";
 import { IDesktop } from "../Interfaces/IDesktop";
 import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import { Performer } from "../Performer";
@@ -86,7 +85,7 @@ export class ObjectTransformer extends CategoryObject implements IObjectTransfor
     /// </summary>
     providers: IMeasurements[] = [];
 
-    cons: IDataConsumer = new FictiveDataConsumer();
+    cons! : IDataConsumer;
 
     transformers: IObjectTransformer[] = [];
 

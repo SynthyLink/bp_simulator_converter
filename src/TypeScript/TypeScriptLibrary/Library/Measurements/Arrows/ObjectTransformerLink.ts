@@ -1,7 +1,5 @@
 
 import { CategoryArrow } from "../../CategoryArrow";
-import { FictiveObjectTransformer } from "../../Fiction/FictiveObjectTransformer";
-import { FictiveObjectTransformerConsumer } from "../../Fiction/FictiveObjectTransformerConsumer";
 import { ICategoryObject } from "../../Interfaces/ICategoryObject";
 import { IDesktop } from "../../Interfaces/IDesktop";
 import { IObjectTransformer } from "../Interfaces/IObjectTransformer";
@@ -37,9 +35,9 @@ export class ObjectTransformerLink extends CategoryArrow
     }
 
 
-    consumer: IObjectTransformerConsumer = new FictiveObjectTransformerConsumer();
+    consumer !: IObjectTransformerConsumer;
 
-    transformer: IObjectTransformer = new FictiveObjectTransformer();
+    transformer !: IObjectTransformer;
 
 
 }
