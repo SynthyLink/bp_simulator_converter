@@ -34,13 +34,13 @@ export class Performer
 
     public updateChildrenData(dataConsumer: IDataConsumer): void
     {
-        var children = dataConsumer.getAllMeasurements();
+        let children = dataConsumer.getAllMeasurements();
         for (var child of children)
         {
-            var o = child as unknown as IObject;
+            let o = child as unknown as IObject;
             if (this.implementsType(o, "IDataConsumer"))
             {
-                var dc = child as unknown as IDataConsumer;
+                let dc = child as unknown as IDataConsumer;
                 this.updateChildrenData(dc);
             }
             child.updateMeasurements();
@@ -49,8 +49,8 @@ export class Performer
 
     public convertArray<T, S>(objects: T[], type: string): S[] {
 
-        let s: S[] = [];
-        for (var i = 0; i < objects.length; i++) {
+        const s: S[] = [];
+        for (let i = 0; i < objects.length; i++) {
             let o: IObject = objects[i] as IObject;
             if (o.imlplementsType(type)) {
                 s.push(o as unknown as S);

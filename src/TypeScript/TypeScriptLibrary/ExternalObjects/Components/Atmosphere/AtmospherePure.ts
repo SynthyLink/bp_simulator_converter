@@ -103,9 +103,9 @@ export class AtmospherePure {
 
             let j = i * 21;
             for (let k = 0; k < 21; k++) {
-                var n = k + j;
-                fff[k] = this.f0[n];
-                fff1[k] = this.f01[n];
+                let nn = k + j;
+                fff[k] = this.f0[nn];
+                fff1[k] = this.f01[nn];
             }
         }
     }

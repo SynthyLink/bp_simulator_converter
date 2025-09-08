@@ -1,9 +1,12 @@
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { CategoryArrow } from "../../CategoryArrow";
-import { ICategoryObject } from "../../Interfaces/ICategoryObject";
-import { IDesktop } from "../../Interfaces/IDesktop";
-import { IObjectTransformer } from "../Interfaces/IObjectTransformer";
-import { IObjectTransformerConsumer } from "../Interfaces/IObjectTransformerConsumer";
+import type { ICategoryObject } from "../../Interfaces/ICategoryObject";
+import type { IDesktop } from "../../Interfaces/IDesktop";
+import type { IObjectTransformer } from "../Interfaces/IObjectTransformer";
+import type { IObjectTransformerConsumer } from "../Interfaces/IObjectTransformerConsumer";
 
 
 export class ObjectTransformerLink extends CategoryArrow
