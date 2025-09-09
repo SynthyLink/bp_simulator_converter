@@ -1,6 +1,8 @@
 
-import { DateTime } from 'luxon';
-import { RealMatrix } from '../../../Library/Matrix/RealMatrix';
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export class AtmospherePure {
 
     constructor() {
@@ -86,8 +88,8 @@ export class AtmospherePure {
         if (this.ff0.length > 0) {
             return;
         }
-        var n = Math.floor(this.f0.length / 21);
-        for (var i = 0; i < n; i++) {
+        let n = Math.floor(this.f0.length / 21);
+        for (let i = 0; i < n; i++) {
             this.ff0.push([]);
             this.ff1.push([]);
         }

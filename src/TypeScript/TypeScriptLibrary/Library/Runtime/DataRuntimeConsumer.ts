@@ -1,13 +1,17 @@
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
-import { ICategoryArrow } from "../Interfaces/ICategoryArrow";
-import { ICategoryObject } from "../Interfaces/ICategoryObject";
+import type { ICategoryArrow } from "../Interfaces/ICategoryArrow";
+import type { ICategoryObject } from "../Interfaces/ICategoryObject";
 import { Performer } from "../Performer";
-import { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
-import { IMeasurements } from "../Measurements/Interfaces/IMeasurements";
-import { ITimeMeasurementConsumer } from "../Measurements/Interfaces/ITimeMeasurementConsumer";
-import { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
-import { IDataRuntime } from "./Interfaces/IDataRuntime";
-import { IStarted } from "../Measurements/Interfaces/IStarted";
+import type { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
+import type { IMeasurements } from "../Measurements/Interfaces/IMeasurements";
+import type { ITimeMeasurementConsumer } from "../Measurements/Interfaces/ITimeMeasurementConsumer";
+import type { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
+import type { IDataRuntime } from "./Interfaces/IDataRuntime";
+import type { IStarted } from "../Measurements/Interfaces/IStarted";
 
 export class DataRuntimeConsumer implements IDataRuntime
 {

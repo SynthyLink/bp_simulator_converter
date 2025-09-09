@@ -1,5 +1,12 @@
-import { IDesktop } from "../Interfaces/IDesktop";
-import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { IDesktop } from "../Interfaces/IDesktop";
+import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import { DataConsumerVariableMeasurements } from "./DataConsumerVariableMeasurements";
 
 export class VectorFormulaConsumer extends DataConsumerVariableMeasurements implements IPostSetArrow

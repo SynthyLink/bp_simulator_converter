@@ -1,4 +1,7 @@
 "use strict";
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Desktop = void 0;
 const OwnNotImplemented_1 = require("./ErrorHandler/OwnNotImplemented");

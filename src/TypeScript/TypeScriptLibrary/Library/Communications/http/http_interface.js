@@ -79,4 +79,4 @@ const logError = (request, response) => __awaiter(void 0, void 0, void 0, functi
     }
     console.error(`Error requesting ${request.method} ${request.url}`, body);
 });
-//# sourceMappingURL=http.js.map
+//# sourceMappingURL=http_interface.js.map

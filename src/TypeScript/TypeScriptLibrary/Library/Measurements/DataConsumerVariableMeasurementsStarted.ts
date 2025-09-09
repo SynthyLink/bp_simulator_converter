@@ -1,9 +1,12 @@
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AliasInitialValueCollection } from "../AliasInitialValueCollection.";
-import { IAlias } from "../Interfaces/IAlias";
-import { IDesktop } from "../Interfaces/IDesktop";
-import { IInitialValueCollection } from "../Interfaces/IInitialValueCollection";
+import type { IAlias } from "../Interfaces/IAlias";
+import type { IDesktop } from "../Interfaces/IDesktop";
+import type { IInitialValueCollection } from "../Interfaces/IInitialValueCollection";
 import { DataConsumerVariableMeasurements } from "./DataConsumerVariableMeasurements";
-import { IStarted } from "./Interfaces/IStarted";
+import type { IStarted } from "./Interfaces/IStarted";
 
 export class DataConsumerVariableMeasurementsStarted extends DataConsumerVariableMeasurements implements IStarted
 {

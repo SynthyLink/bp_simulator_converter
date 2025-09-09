@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+
 export interface OrbitalForecastConditionNumber {
     Begin: number;
     End: number;
@@ -42,7 +43,6 @@ export interface OrbitalForecastItemString {
     Vz: string;
 }
 
-import { http_cancel } from "../../../Library/Communications/http/http"
 export interface OrbitalForecastConditionNumber {
     Begin: number;
     End: number;
@@ -84,37 +84,7 @@ export interface OrbitalForecastItemString {
     Vy: string;
     Vz: string;
 }
-export const getOrbitalForecastFromNumber = async (
-    condition: OrbitalForecastConditionNumber,
-): Promise<OrbitalForecastItemNumber[] | null> => {
-    const controller = new AbortController();
-    console.log('ForecastFromNumber');
-    const result = await http_cancel<OrbitalForecastItemNumber[], OrbitalForecastConditionNumber>({
-        path: `/orbital`,
-        method: "post",
-        body: condition,
-    }, controller);
-    console.log("ok", result.ok);
-    console.log("body", result.body);
-    if (result.ok && result.body) {
-        return result.body;
-    } else {
-        return null;
-    }
-};
 
-
-export const getOrbitalInitialCancel = async (): Promise<OrbitalForecastConditionNumber | null> => {
-    const controller = new AbortController();
-    const result = await http_cancel<OrbitalForecastConditionNumber>({
-        path: '/orbital/initial',
-    }, controller);
-    if (result.ok && result.body) {
-        return result.body;
-    } else {
-        return null;
-    }
-};
 
 
 

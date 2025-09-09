@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TransformerRecursive = void 0;
-const TestObjectTransformer_1 = require("../ExternalObjects/Components/Test_Obects/TestObjectTransformer");
+const TestObjectTransformer_1 = require("../Test_Obects/TestObjectTransformer");
 const AliasName_1 = require("../Library/AliasName");
 const Desktop_1 = require("../Library/Desktop");
 const FeedbackAliasCollection_1 = require("../Library/FeedbackAliasCollection");

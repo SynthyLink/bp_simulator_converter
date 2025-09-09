@@ -42,10 +42,8 @@ class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
     }
     action() {
         // eslint-disable-next-line no-var
-        let k = this.measurements;
         let rt = this.runtime.getTimeProvider();
         let t = rt.getTime();
-        this.performer.getMeasurementsMMap(this.measurements, this.map);
         const item = {
             OrbitalTime: t,
             X: this.get("x"),

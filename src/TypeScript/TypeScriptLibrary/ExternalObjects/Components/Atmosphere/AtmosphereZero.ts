@@ -1,6 +1,10 @@
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { CategoryObject } from "../../../Library/CategoryObject";
-import { IDesktop } from "../../../Library/Interfaces/IDesktop";
-import { IObjectTransformer } from "../../../Library/Measurements/Interfaces/IObjectTransformer";
+import type { IDesktop } from "../../../Library/Interfaces/IDesktop";
+import type { IObjectTransformer } from "../../../Library/Measurements/Interfaces/IObjectTransformer";
 
 
 export class AtmosphereZero extends CategoryObject implements IObjectTransformer {

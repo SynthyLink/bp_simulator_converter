@@ -1,10 +1,13 @@
-import { IDesktop } from "../../../Interfaces/IDesktop";
-import { IPostSetArrow } from "../../../Interfaces/IPostSetArrow";
-import { IValue } from "../../../Interfaces/IValue";
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { IDesktop } from "../../../Interfaces/IDesktop";
+import type { IPostSetArrow } from "../../../Interfaces/IPostSetArrow";
+import type { IValue } from "../../../Interfaces/IValue";
 import { DataConsumerVariableMeasurementsStarted } from "../../DataConsumerVariableMeasurementsStarted";
-import { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
+import type { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
 import { Variable } from "../../Variables/Variable";
-import { IDifferentialEquationSolver } from "../Interfaces/IDifferentialEquationSolver";
+import type { IDifferentialEquationSolver } from "../Interfaces/IDifferentialEquationSolver";
 
 export class DifferentialEquationSolverFormula extends DataConsumerVariableMeasurementsStarted
     implements IDifferentialEquationSolver, IPostSetArrow {

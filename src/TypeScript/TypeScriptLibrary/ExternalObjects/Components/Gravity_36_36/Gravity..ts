@@ -1,3 +1,7 @@
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Performer } from "../../../Library/Performer";
 
 export class Gravity {

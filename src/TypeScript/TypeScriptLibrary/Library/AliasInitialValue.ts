@@ -1,6 +1,12 @@
-import { IAliasName } from "./Interfaces/IAliasName";
-import { IInitialValue } from "./Interfaces/IInitialValue";
-import { IValue } from "./Interfaces/IValue";
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { IAliasName } from "./Interfaces/IAliasName";
+import type { IInitialValue } from "./Interfaces/IInitialValue";
+import type { IValue } from "./Interfaces/IValue";
 
 
 export class AliasInitialValue implements IInitialValue

@@ -1,6 +1,6 @@
-import { CategoryObject } from "../../../Library/CategoryObject";
-import { IDesktop } from "../../../Library/Interfaces/IDesktop";
-import { IObjectTransformer } from "../../../Library/Measurements/Interfaces/IObjectTransformer";
+import { CategoryObject } from "../Library/CategoryObject";
+import type  { IDesktop } from "../Library/Interfaces/IDesktop";
+import type { IObjectTransformer } from "../Library/Measurements/Interfaces/IObjectTransformer";
 
 export class TestObjectTransformer extends CategoryObject implements IObjectTransformer
 {

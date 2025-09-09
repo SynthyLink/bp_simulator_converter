@@ -1,7 +1,10 @@
-import { ICategoryObject } from "./Interfaces/ICategoryObject";
-import { ICheck } from "./Interfaces/ICheck";
-import { IDesktop } from "./Interfaces/IDesktop";
-import { IObject } from "./Interfaces/IObject";
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { ICategoryObject } from "./Interfaces/ICategoryObject";
+import type { ICheck } from "./Interfaces/ICheck";
+import type { IDesktop } from "./Interfaces/IDesktop";
+import type { IObject } from "./Interfaces/IObject";
 import { Performer } from "./Performer";
 
 export class CategoryObject implements ICategoryObject, IObject

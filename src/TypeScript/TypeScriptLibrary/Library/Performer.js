@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Performer = void 0;
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const AliasName_1 = require("./AliasName");
 const OwnError_1 = require("./ErrorHandler/OwnError");
 class Performer {
@@ -16,19 +19,19 @@ class Performer {
         return s;
     }
     updateChildrenData(dataConsumer) {
-        var children = dataConsumer.getAllMeasurements();
+        let children = dataConsumer.getAllMeasurements();
         for (var child of children) {
-            var o = child;
+            let o = child;
             if (this.implementsType(o, "IDataConsumer")) {
-                var dc = child;
+                let dc = child;
                 this.updateChildrenData(dc);
             }
             child.updateMeasurements();
         }
     }
     convertArray(objects, type) {
-        let s = [];
-        for (var i = 0; i < objects.length; i++) {
+        const s = [];
+        for (let i = 0; i < objects.length; i++) {
             let o = objects[i];
             if (o.imlplementsType(type)) {
                 s.push(o);

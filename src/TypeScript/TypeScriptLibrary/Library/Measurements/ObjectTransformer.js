@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ObjectTransformer = void 0;
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const CategoryObject_1 = require("../CategoryObject");
 const OwnError_1 = require("../ErrorHandler/OwnError");
 const Performer_1 = require("../Performer");

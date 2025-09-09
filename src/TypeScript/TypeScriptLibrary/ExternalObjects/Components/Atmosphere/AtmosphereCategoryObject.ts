@@ -2,12 +2,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { types } from "node:util";
 import { OwnNotImplemented } from "../../../Library/ErrorHandler/OwnNotImplemented";
-import { ICategoryObject } from "../../../Library/Interfaces/ICategoryObject";
-import { IDesktop } from "../../../Library/Interfaces/IDesktop";
-import { IObject } from "../../../Library/Interfaces/IObject";
+import type { ICategoryObject } from "../../../Library/Interfaces/ICategoryObject";
+import type { IDesktop } from "../../../Library/Interfaces/IDesktop";
+import type { IObject } from "../../../Library/Interfaces/IObject";
 import { AtmospherePure } from "./AtmospherePure";
-import { IObjectTransformer } from "../../../Library/Measurements/Interfaces/IObjectTransformer";
-import { ICheck } from "../../../Library/Interfaces/ICheck";
+import type { IObjectTransformer } from "../../../Library/Measurements/Interfaces/IObjectTransformer";
+import type { ICheck } from "../../../Library/Interfaces/ICheck";
 
 
 export class AtmosphereCategoryObject extends AtmospherePure implements ICategoryObject, IObject,

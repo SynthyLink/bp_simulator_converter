@@ -1,13 +1,16 @@
-import { IAction } from "../Interfaces/IAction";
-import { IFunc } from "../Interfaces/IFunc";
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { IAction } from "../Interfaces/IAction";
+import type { IFunc } from "../Interfaces/IFunc";
 import { Performer } from "../Performer";
-import { IDataRuntime } from "../Runtime/Interfaces/IDataRuntime";
+import type { IDataRuntime } from "../Runtime/Interfaces/IDataRuntime";
 import { DataConsumerBoolFunc } from "./DataConsumerBoolFunc";
-import { IArrayElementMeasurement } from "./Interfaces/IArrayElemetMeasurements";
-import { IDataConsumer } from "./Interfaces/IDataConsumer";
-import { IMeasurement } from "./Interfaces/IMeasurement";
-import { IMeasurements } from "./Interfaces/IMeasurements";
-import { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProvider";
+import type { IArrayElementMeasurement } from "./Interfaces/IArrayElemetMeasurements";
+import type { IDataConsumer } from "./Interfaces/IDataConsumer";
+import type { IMeasurement } from "./Interfaces/IMeasurement";
+import type { IMeasurements } from "./Interfaces/IMeasurements";
+import type { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProvider";
 import { TimeMeasurementProvider } from "./TimeMeasurementProvider";
 
 export class PefrormerMeasuremets

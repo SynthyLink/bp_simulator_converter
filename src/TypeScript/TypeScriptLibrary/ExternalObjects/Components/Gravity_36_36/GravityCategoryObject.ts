@@ -1,8 +1,12 @@
 
-import { ICategoryObject } from "../../../Library/Interfaces/ICategoryObject";
-import { IDesktop } from "../../../Library/Interfaces/IDesktop";
-import { IObject } from "../../../Library/Interfaces/IObject";
-import { IObjectTransformer } from "../../../Library/Measurements/Interfaces/IObjectTransformer";
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import type { ICategoryObject } from "../../../Library/Interfaces/ICategoryObject";
+import type { IDesktop } from "../../../Library/Interfaces/IDesktop";
+import type { IObject } from "../../../Library/Interfaces/IObject";
+import type { IObjectTransformer } from "../../../Library/Measurements/Interfaces/IObjectTransformer";
 import { Performer } from "../../../Library/Performer";
 import { Gravity } from "./Gravity.";
 

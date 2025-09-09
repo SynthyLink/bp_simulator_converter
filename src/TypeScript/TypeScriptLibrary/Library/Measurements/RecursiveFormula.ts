@@ -1,7 +1,11 @@
 
-import { IDesktop } from "../Interfaces/IDesktop";
-import { IMeasurements } from "./Interfaces/IMeasurements";
-import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import type { IDesktop } from "../Interfaces/IDesktop";
+import type { IMeasurements } from "./Interfaces/IMeasurements";
+import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import { DataConsumerVariableMeasurementsStarted } from "./DataConsumerVariableMeasurementsStarted";
 
 

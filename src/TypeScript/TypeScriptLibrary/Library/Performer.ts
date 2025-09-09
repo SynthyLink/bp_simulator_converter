@@ -1,15 +1,18 @@
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AliasName } from "./AliasName";
 import { OwnError } from "./ErrorHandler/OwnError";
-import { IAlias } from "./Interfaces/IAlias";
-import { IAliasName } from "./Interfaces/IAliasName";
-import { ICategoryObject } from "./Interfaces/ICategoryObject";
-import { IDesktop } from "./Interfaces/IDesktop";
-import { IObject } from "./Interfaces/IObject";
-import { IValue } from "./Interfaces/IValue";
-import { IDataConsumer } from "./Measurements/Interfaces/IDataConsumer";
-import { IDerivation } from "./Measurements/Interfaces/IDerivation";
-import { IMeasurement } from "./Measurements/Interfaces/IMeasurement";
-import { IMeasurements } from "./Measurements/Interfaces/IMeasurements";
+import type { IAlias } from "./Interfaces/IAlias";
+import type { IAliasName } from "./Interfaces/IAliasName";
+import type { ICategoryObject } from "./Interfaces/ICategoryObject";
+import type { IDesktop } from "./Interfaces/IDesktop";
+import type { IObject } from "./Interfaces/IObject";
+import type { IValue } from "./Interfaces/IValue";
+import type { IDataConsumer } from "./Measurements/Interfaces/IDataConsumer";
+import type { IDerivation } from "./Measurements/Interfaces/IDerivation";
+import type { IMeasurement } from "./Measurements/Interfaces/IMeasurement";
+import type { IMeasurements } from "./Measurements/Interfaces/IMeasurements";
 
 
 export class Performer
@@ -31,13 +34,13 @@ export class Performer
 
     public updateChildrenData(dataConsumer: IDataConsumer): void
     {
-        var children = dataConsumer.getAllMeasurements();
+        let children = dataConsumer.getAllMeasurements();
         for (var child of children)
         {
-            var o = child as unknown as IObject;
+            let o = child as unknown as IObject;
             if (this.implementsType(o, "IDataConsumer"))
             {
-                var dc = child as unknown as IDataConsumer;
+                let dc = child as unknown as IDataConsumer;
                 this.updateChildrenData(dc);
             }
             child.updateMeasurements();
@@ -46,8 +49,8 @@ export class Performer
 
     public convertArray<T, S>(objects: T[], type: string): S[] {
 
-        let s: S[] = [];
-        for (var i = 0; i < objects.length; i++) {
+        const s: S[] = [];
+        for (let i = 0; i < objects.length; i++) {
             let o: IObject = objects[i] as IObject;
             if (o.imlplementsType(type)) {
                 s.push(o as unknown as S);

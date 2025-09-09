@@ -15,7 +15,8 @@ import { DataRuntimeConsumerODE } from "../../../Library/Runtime/DataRuntimeCons
 import type { IDataRuntime } from "../../../Library/Runtime/Interfaces/IDataRuntime";
 import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./OrbitalData";
 import { OrbitalForecast } from "./OrbitalForecast";
-  class OrbitalForecastCalculation extends OrbitalForecast implements IAction, IFunc<boolean> {
+
+ export  class OrbitalForecastCalculation extends OrbitalForecast implements IAction, IFunc<boolean> {
     constructor() {
         super();
         this.dc = this.getCategoryObject("Chart") as unknown as IDataConsumer;
@@ -30,10 +31,8 @@ import { OrbitalForecast } from "./OrbitalForecast";
 
     action(): void {
         // eslint-disable-next-line no-var
-        let k = this.measurements;
         let rt = this.runtime.getTimeProvider();
         let t = rt.getTime();
-        this.performer.getMeasurementsMMap(this.measurements, this.map)
         const item = {
             OrbitalTime: t,
             X: this.get("x"),
@@ -44,10 +43,11 @@ import { OrbitalForecast } from "./OrbitalForecast";
             Vz: this.get("w")
         };
         this.list.push(item);
-
+       
     }
 
-    public calculate = async (condition: OrbitalForecastConditionNumber, controller: AbortController): Promise<OrbitalForecastItemNumber[]> => {
+    public calculate = async (condition: OrbitalForecastConditionNumber, controller: AbortController): Promise<OrbitalForecastItemNumber[]> =>
+    {
         this.contoller = controller;
         this.list = [];
         let processor = new RungeProcessor();
@@ -74,7 +74,7 @@ import { OrbitalForecast } from "./OrbitalForecast";
 
     measurements !: IMeasurements;
 
-    dc!: IDataConsumer;
+    dc! : IDataConsumer;
 
     runtime !: IDataRuntime;
 
@@ -83,7 +83,6 @@ import { OrbitalForecast } from "./OrbitalForecast";
     map: Map<string, IMeasurement> = new Map();
 };
 
-
-export default OrbitalForecastCalculation;
+    
 
 

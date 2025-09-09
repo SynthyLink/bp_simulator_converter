@@ -1,7 +1,13 @@
-import { ICategoryArrow } from "./ICategoryArrow";
-import { ICategoryObject } from "./ICategoryObject";
-import { ICheck } from "./ICheck";
-import { IObject } from "./IObject";
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { ICategoryArrow } from "./ICategoryArrow";
+import type { ICategoryObject } from "./ICategoryObject";
+import type { ICheck } from "./ICheck";
+import type { IObject } from "./IObject";
 
 export interface IDesktop
 {

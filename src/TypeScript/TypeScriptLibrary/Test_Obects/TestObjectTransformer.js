@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TestObjectTransformer = void 0;
-const CategoryObject_1 = require("../../../Library/CategoryObject");
+const CategoryObject_1 = require("../Library/CategoryObject");
 class TestObjectTransformer extends CategoryObject_1.CategoryObject {
     constructor(desktop, name) {
         super(desktop, name);

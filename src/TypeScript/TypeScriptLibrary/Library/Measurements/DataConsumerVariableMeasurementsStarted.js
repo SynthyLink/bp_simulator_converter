@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DataConsumerVariableMeasurementsStarted = void 0;
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const AliasInitialValueCollection_1 = require("../AliasInitialValueCollection.");
 const DataConsumerVariableMeasurements_1 = require("./DataConsumerVariableMeasurements");
 class DataConsumerVariableMeasurementsStarted extends DataConsumerVariableMeasurements_1.DataConsumerVariableMeasurements {

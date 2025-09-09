@@ -1,4 +1,4 @@
-import { TestObjectTransformer } from "../ExternalObjects/Components/Test_Obects/TestObjectTransformer";
+import { TestObjectTransformer } from "../Test_Obects/TestObjectTransformer";
 import { AliasName } from "../Library/AliasName";
 import { Desktop } from "../Library/Desktop";
 import { FeedbackAliasCollection } from "../Library/FeedbackAliasCollection";

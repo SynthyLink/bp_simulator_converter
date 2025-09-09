@@ -1,13 +1,17 @@
 
-import { IDesktop } from "../Interfaces/IDesktop";
-import { IMeasurements } from "./Interfaces/IMeasurements";
-import { IPostSetArrow } from "../Interfaces/IPostSetArrow";
-import { IStarted } from "./Interfaces/IStarted";
-import { IAlias } from "../Interfaces/IAlias";
-import { IFeedbackAliasCollectionHolder } from "../Interfaces/IFeedbackAliasCollectionHolder";
-import { IInitialValueCollection } from "../Interfaces/IInitialValueCollection";
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import type { IDesktop } from "../Interfaces/IDesktop";
+import type { IMeasurements } from "./Interfaces/IMeasurements";
+import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
+import type { IStarted } from "./Interfaces/IStarted";
+import type { IAlias } from "../Interfaces/IAlias";
+import type { IFeedbackAliasCollectionHolder } from "../Interfaces/IFeedbackAliasCollectionHolder";
+import type { IInitialValueCollection } from "../Interfaces/IInitialValueCollection";
 import { AliasInitialValueCollection } from "../AliasInitialValueCollection.";
-import { IFeedbackAliasCollection } from "../Interfaces/IFeedbackAliasCollection";
+import type { IFeedbackAliasCollection } from "../Interfaces/IFeedbackAliasCollection";
 import { DataConsumerVariableMeasurements } from "./DataConsumerVariableMeasurements";
 
 

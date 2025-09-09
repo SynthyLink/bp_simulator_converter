@@ -1,10 +1,13 @@
-import { IAlias } from "../Interfaces/IAlias";
-import { IDesktop } from "../Interfaces/IDesktop";
-import { IFeedbackCollection } from "../Interfaces/IFeedbackCollection";
-import { ISetFeedback } from "../Interfaces/ISetFeedback";
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { IAlias } from "../Interfaces/IAlias";
+import type { IDesktop } from "../Interfaces/IDesktop";
+import type { IFeedbackCollection } from "../Interfaces/IFeedbackCollection";
+import type { ISetFeedback } from "../Interfaces/ISetFeedback";
 import { DataConsumer } from "./DataConsumer";
-import { IMeasurement } from "./Interfaces/IMeasurement";
-import { IMeasurements } from "./Interfaces/IMeasurements";
+import type { IMeasurement } from "./Interfaces/IMeasurement";
+import type { IMeasurements } from "./Interfaces/IMeasurements";
 import { PefrormerMeasuremets } from "./PefrormerMeasuremets";
 import { Variable } from "./Variables/Variable";
 

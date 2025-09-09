@@ -1,9 +1,13 @@
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { FeedbackAlias } from "./FeedbackAlias";
 import { FeedbackCollection } from "./FeedbackCollection";
-import { ICategoryObject } from "./Interfaces/ICategoryObject";
-import { IDesktop } from "./Interfaces/IDesktop";
-import { IValue } from "./Interfaces/IValue";
-import { IMeasurements } from "./Measurements/Interfaces/IMeasurements";
+import type { ICategoryObject } from "./Interfaces/ICategoryObject";
+import type { IDesktop } from "./Interfaces/IDesktop";
+import type { IValue } from "./Interfaces/IValue";
+import type { IMeasurements } from "./Measurements/Interfaces/IMeasurements";
 
 export class FeedbackAliasCollection extends FeedbackCollection
 {

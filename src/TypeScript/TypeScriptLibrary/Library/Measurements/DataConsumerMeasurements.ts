@@ -1,9 +1,12 @@
-﻿import { IAlias } from "../Interfaces/IAlias";
-import { IDesktop } from "../Interfaces/IDesktop";
+﻿/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { IAlias } from "../Interfaces/IAlias";
+import type { IDesktop } from "../Interfaces/IDesktop";
 import { Performer } from "../Performer";
 import { DataConsumer } from "./DataConsumer";
-import { IMeasurement } from "./Interfaces/IMeasurement";
-import { IMeasurements } from "./Interfaces/IMeasurements";
+import type { IMeasurement } from "./Interfaces/IMeasurement";
+import type { IMeasurements } from "./Interfaces/IMeasurements";
 
 export class DataConsumerMeasurements extends DataConsumer
     implements IMeasurements, IAlias

@@ -1,7 +1,11 @@
-import { IDifferentialEquationProcessor } from "../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationProcessor ";
-import { IDifferentialEquationSolver } from "../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationSolver";
-import { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
-import { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import type { IDifferentialEquationProcessor } from "../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationProcessor ";
+import type { IDifferentialEquationSolver } from "../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationSolver";
+import type { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
+import type { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
 import { DataRuntimeConsumer } from "./DataRuntimeConsumer";
 
 export class DataRuntimeConsumerODE extends DataRuntimeConsumer
