@@ -48,6 +48,15 @@ namespace DataPerformer.Portable
         }
 
 
+        public void UpdateChildrenData(IDataConsumer dataConsumer, IFeedbackCollection feedbackCollection)
+        {
+            if (feedbackCollection.IsEmpty)
+            {
+                return;
+            }
+            feedbackCollection.Set();
+            dataConsumer.UpdateChildrenData();
+        }
 
         public int GetNumber(IDataConsumer dataConsumer, IMeasurements measurements)
         {

@@ -5,6 +5,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RecursiveFormula = void 0;
 const DataConsumerVariableMeasurementsStarted_1 = require("./DataConsumerVariableMeasurementsStarted");
+const FeedbackAliasCollection_1 = require("../FeedbackAliasCollection");
 class RecursiveFormula extends DataConsumerVariableMeasurementsStarted_1.DataConsumerVariableMeasurementsStarted {
     constructor(desktop, name) {
         super(desktop, name);
@@ -19,7 +20,8 @@ class RecursiveFormula extends DataConsumerVariableMeasurementsStarted_1.DataCon
     init() {
     }
     setFeedback() {
-        // this.feedback = new FeedbackAliasCollection()
+        let map = new Map();
+        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
     }
     postSetArrow() {
         this.init();
@@ -38,15 +40,10 @@ class RecursiveFormula extends DataConsumerVariableMeasurementsStarted_1.DataCon
     }
     startedStart(start) {
         this.initial.resetInitialValues();
-        if (this.feedback == undefined) {
-            return;
-        }
         this.feedback.setFeedbacks();
     }
     updateMeasurements() {
-        if (this.feedback != undefined) {
-            this.feedback.setFeedbacks();
-        }
+        this.feedback.setFeedbacks();
         this.calculateTree();
         this.save();
     }

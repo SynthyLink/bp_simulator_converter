@@ -9,6 +9,8 @@ import diagram.interfaces.IDesktop;
 import error_handler.interfaces.IErrorHandler;
 import general_service.interfaces.IAction;
 import general_service.interfaces.IActionT;
+import general_service.interfaces.IPrintedObject;
+import general_service.interfaces.IPrinter;
 
 import javax.swing.*;
 
@@ -25,6 +27,27 @@ public class Performer {
         errorHandler.handle(exception);
     }
 
+    static IPrinter printer = new ConsolePrinter();
+
+    static public void print(Object object)
+    {
+        if (object instanceof IPrintedObject po)
+        {
+            po.print(printer);
+            return;
+        }
+        printer.print(object);
+    }
+
+    static public IPrinter getPrinter()
+    {
+        return printer;
+    }
+
+    static  public void setPrinter(IPrinter printer)
+    {
+        Performer.printer = printer;
+    }
 
     public void show(String message) {
         errorHandler.show(message);

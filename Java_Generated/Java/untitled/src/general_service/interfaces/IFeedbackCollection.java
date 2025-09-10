@@ -11,4 +11,6 @@ public interface IFeedbackCollection {
 
     void setFeedbacks();
 
+    boolean isEmpty();
+
 }

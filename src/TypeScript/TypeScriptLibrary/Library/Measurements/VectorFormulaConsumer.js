@@ -15,9 +15,7 @@ class VectorFormulaConsumer extends DataConsumerVariableMeasurements_1.DataConsu
         this.types.push("IPostSetArrow");
     }
     updateMeasurements() {
-        if (this.feedback != undefined) {
-            this.feedback.setFeedbacks();
-        }
+        this.feedback.setFeedbacks();
         this.calculateTree();
         this.save();
     }

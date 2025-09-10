@@ -1,6 +1,7 @@
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { FeedbackAliasCollection } from "../FeedbackAliasCollection";
 import type { IAlias } from "../Interfaces/IAlias";
 import type { IDesktop } from "../Interfaces/IDesktop";
 import type { IFeedbackCollection } from "../Interfaces/IFeedbackCollection";
@@ -111,7 +112,9 @@ export class DataConsumerVariableMeasurements extends DataConsumer implements
         this.variables.set(variable.getMeasurementName(), variable);
     }
 
-    setFeedback(): void { }
-
+    setFeedback(): void {
+        let map = new Map<string, string>();
+        this.feedback = new FeedbackAliasCollection(map, this, this);
+    }
 
 }

@@ -11,6 +11,8 @@ import { TransformerRecursveAct } from '../Wrappers/TransformerRecursveAct';
 import { PIAct } from '../Wrappers/PIAct';
 import { OrbitaForecasAct } from '../Wrappers/OrbitalForecastAct';
 import { OrbitalForecastCalculation } from '../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation';
+import { FeedBackFormulaAct } from '../Wrappers/FeedBackFormulaAct';
+import { RecursvieFeedbackAct } from '../Wrappers/RecursvieFeedbackAct';
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -61,6 +63,31 @@ export class Actor
         console.log(t);
         console.log("finish");
     }
+
+
+    actFeedbackFormula(): void {
+        try {
+            var o = new FeedBackFormulaAct();
+            o.test();
+        }
+        catch (e: any) {
+            finish(e);
+        }
+
+    }
+
+    actRecursiveFeedback(): void {
+        try {
+            var o = new RecursvieFeedbackAct();
+            o.test();
+        }
+        catch (e: any) {
+            finish(e);
+        }
+
+    }
+
+
 
     actODEFeedback(): void
     {

@@ -2,6 +2,31 @@ package tests;
 
 public class Actor {
 
+    public void testSimpleFormula()
+    {
+        var r = new SimpleFormulaAdd();
+        r.test();
+    }
+    public void testComposition()
+    {
+        var r = new FormulaCompositionAct();
+        r.test();
+    }
+
+    public void testRecusveFeedback()
+    {
+        var r = new RecursvieFeedbackAct();
+        r.test();
+    }
+
+    public void testFeedbackFormula()
+    {
+        var r = new FeedbackFormulaAct();
+        r.test();
+    }
+
+
+
     public void testRandomTwo()
     {
         var r = new RandomTwoAct();

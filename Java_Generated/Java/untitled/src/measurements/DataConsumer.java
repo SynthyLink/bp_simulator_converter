@@ -1,12 +1,11 @@
 package measurements;
 
 import category_theory.CategoryObject;
+import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
 import general_service.Entry;
 import general_service.Performer;
-import general_service.interfaces.IPostSetArrow;
-import general_service.interfaces.IValueSetter;
-import general_service.interfaces.IValueSetterFactory;
+import general_service.interfaces.*;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IMeasurements;
 import measurements.time.interfaces.ITimeMeasurementConsumer;
@@ -17,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow,
-        ITimeMeasurementConsumer
+        ITimeMeasurementConsumer, IPrintedObject
 {
 
     protected Performer performer = new Performer();
@@ -89,4 +88,20 @@ timeMeasurement = provider;
 
 
     protected measurements.Performer mPefrformer = new measurements.Performer();
+
+    @Override
+    public void print(IPrinter printer) {
+        var m = getAllMeasurements();
+        for (var mea : m)
+        {
+            ICategoryObject co = (ICategoryObject) mea;
+            var s = co.getCategoryObjectName() + " ";
+            int n = mea.getMeasurementsCount();
+            for (int i = 0; i < n; i++)
+            {
+                s += mea.getMeasurement(i) + " ";
+            }
+            printer.print(s + "\n");
+        }
+    }
 }

@@ -5,18 +5,58 @@ exports.Performer = void 0;
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const AliasName_1 = require("./AliasName");
+const ConsolePrinter_1 = require("./ConsolePrinter");
 const OwnError_1 = require("./ErrorHandler/OwnError");
 class Performer {
     constructor() {
         this.a = 0;
         this.b = false;
         this.s = "";
+        this.printer = new ConsolePrinter_1.ConsolePrinter();
+    }
+    ;
+    setPrinter(printer) {
+        this.printer = printer;
+    }
+    getPrinter() {
+        return this.printer;
+    }
+    print(object) {
+        if (this.implementsType(object, "IPrintedObject")) {
+            var pr = object;
+            pr.print(this.printer);
+            return;
+        }
+        this.printer.print(object);
     }
     convertTS(s, type) {
         if (this.implementsType(s, type)) {
             throw new OwnError_1.OwnError("Illegal type", "Illegal type: " + type, undefined);
         }
         return s;
+    }
+    getByInterface(desktop, type) {
+        let co = desktop.getCategoryObjects();
+        let objects = [];
+        for (var a of co) {
+            if (this.implementsType(a, type)) {
+                objects.push(a);
+            }
+        }
+        return objects;
+    }
+    getByType(desktop, type) {
+        let co = desktop.getCategoryObjects();
+        let objects = [];
+        for (var a of co) {
+            if (this.implementsType(a, type)) {
+                var ob = a;
+                if (ob.getClassName() == type) {
+                    objects.push(a);
+                }
+            }
+        }
+        return objects;
     }
     updateChildrenData(dataConsumer) {
         let children = dataConsumer.getAllMeasurements();

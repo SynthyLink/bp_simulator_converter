@@ -12,8 +12,22 @@ class DataConsumer extends CategoryObject_1.CategoryObject {
         this.types.push("IDataConsumer");
         this.types.push("IPostSetArrow");
         this.types.push("ITimeMeasurementConsumer");
+        this.types.push("IPrintedObject");
         this.tms = this;
         this.dataConsumer = this;
+    }
+    print(printer) {
+        for (var m of this.measurements) {
+            let co = m;
+            let s = co.getCategoryObjectName() + "\t";
+            let n = m.getMeasurementsCount();
+            for (let i = 0; i < n; i++) {
+                var mm = m.getMeasurement(i);
+                var v = mm.getMeasurementValue();
+                s += v + "\t";
+            }
+            printer.print(s);
+        }
     }
     getInternalTime() {
         var tm = this.timeMeasurement;

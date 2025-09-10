@@ -13,7 +13,7 @@ public class VectorFormulaConsumer extends  DataConsumerMeasurements {
 
     @Override
     public void updateMeasurements() {
-        setFeedback();
+        mPefrformer.updateChildrenData(this, feedback);
         calculateTree();
         save();
     }

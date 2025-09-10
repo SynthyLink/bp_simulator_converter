@@ -2,12 +2,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AliasName } from "./AliasName";
+import { ConsolePrinter } from "./ConsolePrinter";
 import { OwnError } from "./ErrorHandler/OwnError";
 import type { IAlias } from "./Interfaces/IAlias";
 import type { IAliasName } from "./Interfaces/IAliasName";
 import type { ICategoryObject } from "./Interfaces/ICategoryObject";
 import type { IDesktop } from "./Interfaces/IDesktop";
 import type { IObject } from "./Interfaces/IObject";
+import type { IPrintedObject } from "./Interfaces/IPrintedObject";
+import type { IPrinter } from "./Interfaces/IPrinter";
 import type { IValue } from "./Interfaces/IValue";
 import type { IDataConsumer } from "./Measurements/Interfaces/IDataConsumer";
 import type { IDerivation } from "./Measurements/Interfaces/IDerivation";
@@ -24,6 +27,26 @@ export class Performer
 
     protected s: string = "";
 
+    protected printer: IPrinter = new ConsolePrinter();;
+
+    public setPrinter(printer: IPrinter): void {
+        this.printer = printer;
+    }
+
+    public getPrinter(): IPrinter {
+        return this.printer;
+    }
+
+    public print(object: any): void {
+        if (this.implementsType(object, "IPrintedObject"))
+        {
+            var pr = object as unknown as IPrintedObject;
+            pr.print(this.printer);
+            return;
+        }
+        this.printer.print(object);
+    }
+
     public convertTS<S, T>(s: S, type: string): T {
         if (this.implementsType(s, type)) {
             throw new OwnError("Illegal type", "Illegal type: " + type, undefined);
@@ -31,6 +54,35 @@ export class Performer
         return s as undefined as T;
     }
 
+    public getByInterface(desktop: IDesktop, type: string): IObject[] {
+        let co = desktop.getCategoryObjects();
+        let objects: IObject[] = [];
+        for (var a of co) {
+            if (this.implementsType(a, type)) {
+                objects.push(a as unknown as IObject);
+            }
+        }
+        return objects;
+    }
+
+
+    public getByType(desktop: IDesktop, type: string): IObject[] {
+        let co = desktop.getCategoryObjects();
+        let objects: IObject[] = [];
+        for (var a of co)
+        {
+  
+            if (this.implementsType(a, type))
+            {
+                var ob = a as unknown as IObject;
+                if (ob.getClassName() == type)
+                {
+                    objects.push(a as unknown as IObject);
+                }
+            }
+        }
+        return objects;
+    }
 
     public updateChildrenData(dataConsumer: IDataConsumer): void
     {

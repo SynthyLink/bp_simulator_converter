@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using BaseTypes.Interfaces;
 
@@ -7,8 +8,8 @@ using CategoryTheory;
 
 using DataPerformer.Interfaces;
 
-using Diagram.UI.Interfaces;
 using Diagram.UI;
+using Diagram.UI.Interfaces;
 using Diagram.UI.Aliases;
 using Diagram.UI.Labels;
 
@@ -17,7 +18,6 @@ using ErrorHandler;
 using Event.Interfaces;
 
 using NamedTree;
-using System.Linq;
 
 namespace DataPerformer.Portable
 {
@@ -304,8 +304,8 @@ namespace DataPerformer.Portable
                 {
                     throw new OwnException("Formulas are not accepted");
                 }
+                performer.UpdateChildrenData(this, feedbackCollection);
                 update();
-                feedbackCollection.Set();
                 isUpdated = true;
             }
             catch (Exception exception)

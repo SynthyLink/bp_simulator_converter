@@ -5,11 +5,11 @@ using DataWarehouse.Interfaces;
 using PostgreSQLWarehouse;
 using PostgreSQLWarehouse.Models;
 //BA(); Console.WriteLine("Finish"); return;
-//var t = CopyToDatabse1();
+var t = CopyToDatabse1();
 
 
 
-var t = CopyToFile();
+//var t = CopyToFile();
 await t;
 Task.WaitAll(t.Result);
 Console.WriteLine("Press key");

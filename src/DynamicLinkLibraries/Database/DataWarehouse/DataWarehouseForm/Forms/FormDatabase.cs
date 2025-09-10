@@ -1,6 +1,7 @@
 using DataWarehouse.Classes;
 using DataWarehouse.Interfaces;
 using DataWarehouse.Interfaces.Async;
+using DataWarehouse.UserControls;
 using DataWarehouse.Utils;
 using Diagram.UI.Interfaces;
 using ErrorHandler;
@@ -296,6 +297,20 @@ namespace DataWarehouse.Forms
             save(saveFileDialogData.FileName);
         }
 
+        private async Task ChangeNameAsync(IDirectoryAsync directory, NodeLabelEditEventArgs e)
+        {
+            ICancellation cl = this;
+            var t = cl.CreateCancellationToken();
+            var task = directory.UpdateNameAsync(e.Label, t);
+            await task;
+            var r = task.Result;
+            if (r == e.Label)
+            {
+                e.CancelEdit = true;
+            }
+            return;
+        }
+
         private void treeViewDir_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             if (e.Label == null)
@@ -303,6 +318,11 @@ namespace DataWarehouse.Forms
                 return;
             }
             var n = SelectedNode.Name;
+            if (SelectedNode is IDirectoryAsync directoryAsync)
+            {
+                ChangeNameAsync(directoryAsync, e);
+                return;
+            }
             SelectedNode.Name = e.Label;
             if (n == SelectedNode.Name)
             {

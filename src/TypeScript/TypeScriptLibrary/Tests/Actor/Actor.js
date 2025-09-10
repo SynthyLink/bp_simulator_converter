@@ -55,6 +55,8 @@ const TransformerRecursveAct_1 = require("../Wrappers/TransformerRecursveAct");
 const PIAct_1 = require("../Wrappers/PIAct");
 const OrbitalForecastAct_1 = require("../Wrappers/OrbitalForecastAct");
 const OrbitalForecastCalculation_1 = require("../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation");
+const FeedBackFormulaAct_1 = require("../Wrappers/FeedBackFormulaAct");
+const RecursvieFeedbackAct_1 = require("../Wrappers/RecursvieFeedbackAct");
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -102,6 +104,24 @@ class Actor {
             console.log(t);
             console.log("finish");
         });
+    }
+    actFeedbackFormula() {
+        try {
+            var o = new FeedBackFormulaAct_1.FeedBackFormulaAct();
+            o.test();
+        }
+        catch (e) {
+            finish(e);
+        }
+    }
+    actRecursiveFeedback() {
+        try {
+            var o = new RecursvieFeedbackAct_1.RecursvieFeedbackAct();
+            o.test();
+        }
+        catch (e) {
+            finish(e);
+        }
     }
     actODEFeedback() {
         try {

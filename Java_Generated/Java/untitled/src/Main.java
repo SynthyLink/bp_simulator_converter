@@ -18,7 +18,13 @@ public class Main {
         var a = new Actor();
     //a.testRandomTwo();
      //   a.testODE_Feedback();
-        a.testOrbitalForecast();
+      //  a.testOrbitalForecast();
+      a.testRecusveFeedback();
+
+
+    //    a.testFeedbackFormula();
+ //       a.testSimpleFormula();
+ //       a.testComposition();
         if (false) {
             //    new generated.ODE_Feedback();
             //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text

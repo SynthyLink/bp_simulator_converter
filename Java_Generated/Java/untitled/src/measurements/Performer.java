@@ -43,6 +43,16 @@ public class Performer {
         return map;
     }
 
+    public  void updateChildrenData(IDataConsumer dataConsumer, IFeedbackCollection collection)
+    {
+        if (collection.isEmpty())
+        {
+            return;
+        }
+        collection.setFeedbacks();
+        updateChildrenData(dataConsumer);
+    }
+
     public void updateChildrenData(IDataConsumer dataConsumer) {
         var children = dataConsumer.getAllMeasurements();
         for (var child : children) {
@@ -141,6 +151,7 @@ public class Performer {
         return getDouble(der);
     }
 
+
     public void performFixedStepCalculation(IDataRuntime runtime,
                                             double start, double step, int steps, IAction action) {
         var tm = new TimeMeasurementProvider();
@@ -183,6 +194,35 @@ public class Performer {
 
         }
     }
+
+    public void performFixedStepCalculation(IDataRuntime runtime,
+                                            double start, double step, int steps, IAction action, IFuncT<boolean[]> condition, IFuncT<boolean[]> stop) {
+        var tm = new TimeMeasurementProvider();
+        runtime.setTimeProvider(tm);
+        runtime.startRuntime(start);
+        var st = start;
+        var curr = start;
+        for (var i = 0; i < steps; i++) {
+            var stp = stop.funcT();
+            if (stp[0])
+            {
+                return;
+            }
+            tm.setTime(st);
+            if (i > 0) {
+                runtime.stepRuntime(curr, st);
+                curr = st;
+            }
+            runtime.updateRuntime();
+            var cond = condition.funcT();
+            if (cond[0]) {
+                action.action();
+            }
+            st += step;
+
+        }
+    }
+
 
     public void performFixedStepCalculation(IDataRuntime runtime,
                                             double start, double step, int steps, IAction action, String condition) {

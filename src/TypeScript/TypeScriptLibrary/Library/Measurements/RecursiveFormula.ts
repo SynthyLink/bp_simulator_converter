@@ -7,6 +7,7 @@ import type { IDesktop } from "../Interfaces/IDesktop";
 import type { IMeasurements } from "./Interfaces/IMeasurements";
 import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import { DataConsumerVariableMeasurementsStarted } from "./DataConsumerVariableMeasurementsStarted";
+import { FeedbackAliasCollection } from "../FeedbackAliasCollection";
 
 
 export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted implements IPostSetArrow
@@ -36,9 +37,9 @@ export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted im
 
     }
 
-    setFeedback(): void
-    {
-       // this.feedback = new FeedbackAliasCollection()
+    setFeedback(): void {
+        let map = new Map<string, string>();
+        this.feedback = new FeedbackAliasCollection(map, this, this);
     }
 
    
@@ -70,20 +71,12 @@ export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted im
     startedStart(start: number)
     {
         this.initial.resetInitialValues();
-        if (this.feedback == undefined)
-        {
-            return;
-        }
         this.feedback.setFeedbacks();
     }
 
 
-    updateMeasurements(): void
-    {
-        if (this.feedback != undefined)
-        {
-            this.feedback.setFeedbacks();
-        }
+    updateMeasurements(): void {
+        this.feedback.setFeedbacks();
         this.calculateTree();
         this.save();
     }

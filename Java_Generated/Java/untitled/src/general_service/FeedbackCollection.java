@@ -45,6 +45,11 @@ public class FeedbackCollection implements IFeedbackCollection {
         }
     }
 
+    @Override
+    public boolean isEmpty() {
+        return feedbacks.length == 0;
+    }
+
     protected IFeedback[] feedbacks = new IFeedback[0];
 
     protected Performer performer = new Performer();
