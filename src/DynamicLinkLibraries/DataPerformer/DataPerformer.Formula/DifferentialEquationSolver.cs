@@ -36,7 +36,7 @@ namespace DataPerformer.Formula
 /// </summary>
 [CodeCreator(InitialState = true, IsSysemOfDifferentialEquations = true)]
     public class DifferentialEquationSolver : DataConsumerMeasurements, 
-        IDifferentialEquationSolver, 
+        IDifferentialEquationSolver, IFeedbackCollectionHolder,
         IStarted,  ICheckCorrectness, IVariableDetector,
         IDynamical, ITreeCollection, ITimeVariable, IStack, 
         IRuntimeUpdate, IPostSetArrow, IStringTreeDictionary, IInitialValueCollection
@@ -1467,12 +1467,18 @@ namespace DataPerformer.Formula
             PostSetArrowProtected();
         }
 
+        #endregion
+
+        #region IFeedbackCollectionHolder
+        IFeedbackCollection IFeedbackCollectionHolder.Feedback => feedbackCollection;
+
+        #endregion
+
         protected override void CreateFeedback()
         {
             throw new OwnNotImplemented();
         }
 
-        #endregion
 
         #region Protected Members
 

@@ -26,7 +26,7 @@ namespace DataPerformer.Portable
     /// Data consumer + measurements
     /// </summary>
     public abstract class DataConsumerMeasurements : DataConsumer,
-        IMeasurements, IAlias, IFeedbackCollectionHolder,  ICheckCorrectness
+        IMeasurements, IAlias,  ICheckCorrectness
     {
 
         #region Fields
@@ -643,8 +643,7 @@ namespace DataPerformer.Portable
 
         IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => Children;
 
-        IFeedbackCollection IFeedbackCollectionHolder.Feedback => feedbackCollection;
-
+    
         protected virtual void SetFeedback()
         {
             FeedBack.Clear();
