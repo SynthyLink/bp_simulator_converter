@@ -54,10 +54,10 @@ public class RecursiveFormula extends DataConsumerVariableMeasurementsStarted im
     @Override
     public void  updateMeasurements()
     {
-        mPefrformer.updateChildrenData(this, feedback);
         calculateTree();
         save();
-       }
+        feedback.setFeedbacks();
+    }
 
     protected  IMeasurements[]  inputs = new IMeasurements[0];
 

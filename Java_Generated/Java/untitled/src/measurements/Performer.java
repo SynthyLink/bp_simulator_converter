@@ -56,7 +56,8 @@ public class Performer {
     public void updateChildrenData(IDataConsumer dataConsumer) {
         var children = dataConsumer.getAllMeasurements();
         for (var child : children) {
-            if (child instanceof IDataConsumer dc) {
+            if (child instanceof IDataConsumer dc)
+            {
                 updateChildrenData(dc);
             }
             child.updateMeasurements();

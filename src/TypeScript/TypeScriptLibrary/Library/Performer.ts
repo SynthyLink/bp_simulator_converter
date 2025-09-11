@@ -16,7 +16,7 @@ import type { IDataConsumer } from "./Measurements/Interfaces/IDataConsumer";
 import type { IDerivation } from "./Measurements/Interfaces/IDerivation";
 import type { IMeasurement } from "./Measurements/Interfaces/IMeasurement";
 import type { IMeasurements } from "./Measurements/Interfaces/IMeasurements";
-
+import type { IFeedbackCollection } from "./Interfaces/IFeedbackCollection";
 
 export class Performer
 {
@@ -65,6 +65,8 @@ export class Performer
         return objects;
     }
 
+   
+
 
     public getByType(desktop: IDesktop, type: string): IObject[] {
         let co = desktop.getCategoryObjects();
@@ -82,6 +84,13 @@ export class Performer
             }
         }
         return objects;
+    }
+
+
+    public updateFeedbackData(dataConsumer: IDataConsumer, feedback: IFeedbackCollection): void {
+        if (feedback.isEmpty()) return;
+        feedback.setFeedbacks();
+        this.updateChildrenData(dataConsumer);
     }
 
     public updateChildrenData(dataConsumer: IDataConsumer): void

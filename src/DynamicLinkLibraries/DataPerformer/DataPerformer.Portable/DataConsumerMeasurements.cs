@@ -285,8 +285,7 @@ namespace DataPerformer.Portable
         /// Access to n - th measurement
         /// </summary>
         IMeasurement IMeasurements.this[int n] => GetMeasurement(n);
-
-        
+       
 
         protected virtual void UpdateMeasurements()
         {
@@ -304,7 +303,7 @@ namespace DataPerformer.Portable
                 {
                     throw new OwnException("Formulas are not accepted");
                 }
-                performer.UpdateChildrenData(this, feedbackCollection);
+       //         performer.UpdateChildrenData(this, feedbackCollection);
                 update();
                 isUpdated = true;
             }

@@ -6,7 +6,8 @@ let a = new Actor();
 
 //a.actRecursiveFeedback();
 
-a.actFeedbackFormula();
+//a.actFeedbackFormula();
+a.actRecursiveFeedbackSimplw();
 
 a.finish(undefined);
 

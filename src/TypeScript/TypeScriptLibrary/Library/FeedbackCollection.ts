@@ -39,6 +39,11 @@ export class FeedbackCollection implements IFeedbackCollection
         this.feedbacks.push(feedback);
     }
 
+    isEmpty(): boolean
+    {
+        return this.feedbacks.length === 0;
+    }
+
     protected performer: Performer = new Performer();
 
 

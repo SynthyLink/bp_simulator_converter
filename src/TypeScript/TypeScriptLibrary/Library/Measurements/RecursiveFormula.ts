@@ -1,4 +1,3 @@
-
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -8,6 +7,7 @@ import type { IMeasurements } from "./Interfaces/IMeasurements";
 import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import { DataConsumerVariableMeasurementsStarted } from "./DataConsumerVariableMeasurementsStarted";
 import { FeedbackAliasCollection } from "../FeedbackAliasCollection";
+import { Performer } from "../Performer";
 
 
 export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted implements IPostSetArrow
@@ -20,6 +20,8 @@ export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted im
   //  protected initial: Map<string, any> = new Map();
 
     protected operationNames: Map<number, string> = new Map();
+
+    protected performer: Performer = new Performer();
 
 
     constructor(desktop: IDesktop, name: string)
@@ -76,8 +78,9 @@ export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted im
 
 
     updateMeasurements(): void {
-        this.feedback.setFeedbacks();
+        //this.performer.updateFeedbackData(this, this.feedback)
         this.calculateTree();
         this.save();
+        this.feedback.setFeedbacks();
     }
 }

@@ -14,22 +14,13 @@ public class FeedbackFormulaAct extends FeedbackFormula implements IAction, IFun
     {
         super();
         var c = getCategoryObjects();
-        consumer = (IDataConsumer) getCategoryObjects().get(2);
+        consumer = (IDataConsumer) getCategoryObject("Chart");
         measurements = consumer.getAllMeasurements();
     }
 
     @Override
     public void action() {
-        for (var m : measurements)
-        {
-            var n  = m.getMeasurementsCount();
-            for (var i = 0; i < n; i++)
-            {
-                var o = m.getMeasurement(i);
-                System.out.print(o + " ");
-            }
-            System.out.println();
-        }
+        general_service.Performer.print(consumer);
     }
 
 

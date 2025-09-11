@@ -8,7 +8,7 @@ import error_handler.interfaces.ICheck;
 
 import error_handler.interfaces.IErrorHandler;
 
-public class RecursvieFeedback extends Desktop
+public class RecursiveFeedback extends Desktop
 {
 
 	protected class CategoryObject0 extends measurements.VectorFormulaConsumer
@@ -16,10 +16,10 @@ public class RecursvieFeedback extends Desktop
 		public CategoryObject0(String name, IDesktop desktop) {
 			super(name,  desktop);
 			java.util.Map< String, general_service.Entry<Object, Object >> map = new java.util.HashMap<>();
-			map.put("b", new general_service.Entry<Object, Object>(new double[0], new double[]{126.75551976866286}));
+			map.put("f", new general_service.Entry<Object, Object>(new double[0], new double[]{4}));
 			map.put("c", new general_service.Entry<Object, Object>(new double[0], new double[]{3}));
 			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{7.1237279830727527}));
-			map.put("f", new general_service.Entry<Object, Object>(new double[0], new double[]{4}));
+			map.put("b", new general_service.Entry<Object, Object>(new double[0], new double[]{126.75551976866286}));
 			setMap(map);
 					Object o;
 					o = new double[0];
@@ -385,11 +385,11 @@ public class RecursvieFeedback extends Desktop
 			}
 	
 
-	public RecursvieFeedback() {
+	public RecursiveFeedback() {
 		super();
 	}
 
-	public RecursvieFeedback(ICheck check, IErrorHandler errorHandler) {
+	public RecursiveFeedback(ICheck check, IErrorHandler errorHandler) {
 		super(check, errorHandler);
 	}
 
@@ -397,14 +397,14 @@ public class RecursvieFeedback extends Desktop
 	@Override
 	public void init()
 	{
-		new RecursvieFeedback.CategoryObject0("X", this);
-		new RecursvieFeedback.CategoryObject1("Y", this);
-		new RecursvieFeedback.CategoryObject2("Rec", this);
-		new RecursvieFeedback.CategoryObject3("Chart", this);
-		new RecursvieFeedback.CategoryArrow0("", this);
-		new RecursvieFeedback.CategoryArrow1("", this);
-		new RecursvieFeedback.CategoryArrow2("", this);
-		new RecursvieFeedback.CategoryArrow3("", this);
+		new RecursiveFeedback.CategoryObject0("X", this);
+		new RecursiveFeedback.CategoryObject1("Y", this);
+		new RecursiveFeedback.CategoryObject2("Rec", this);
+		new RecursiveFeedback.CategoryObject3("Chart", this);
+		new RecursiveFeedback.CategoryArrow0("", this);
+		new RecursiveFeedback.CategoryArrow1("", this);
+		new RecursiveFeedback.CategoryArrow2("", this);
+		new RecursiveFeedback.CategoryArrow3("", this);
 		arrows.get(0).setSource(objects.get(1));
 		arrows.get(0).setTarget(objects.get(0));
 		arrows.get(1).setSource(objects.get(3));

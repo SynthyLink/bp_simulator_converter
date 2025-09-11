@@ -4,6 +4,7 @@ const Actor_1 = require("./Tests/Actor/Actor");
 let a = new Actor_1.Actor();
 //a.actOrbitCalculation();
 //a.actRecursiveFeedback();
-a.actFeedbackFormula();
+//a.actFeedbackFormula();
+a.actRecursiveFeedbackSimplw();
 a.finish(undefined);
 //# sourceMappingURL=app.js.map

@@ -29,6 +29,9 @@ class FeedbackCollection {
     addFeedback(feedback) {
         this.feedbacks.push(feedback);
     }
+    isEmpty() {
+        return this.feedbacks.length === 0;
+    }
 }
 exports.FeedbackCollection = FeedbackCollection;
 //# sourceMappingURL=FeedbackCollection.js.map

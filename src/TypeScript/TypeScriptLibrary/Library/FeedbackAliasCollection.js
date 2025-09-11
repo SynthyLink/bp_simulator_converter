@@ -1,9 +1,9 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FeedbackAliasCollection = void 0;
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.FeedbackAliasCollection = void 0;
 const FeedbackAlias_1 = require("./FeedbackAlias");
 const FeedbackCollection_1 = require("./FeedbackCollection");
 class FeedbackAliasCollection extends FeedbackCollection_1.FeedbackCollection {

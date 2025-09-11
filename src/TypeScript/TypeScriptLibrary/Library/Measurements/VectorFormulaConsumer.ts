@@ -25,7 +25,7 @@ export class VectorFormulaConsumer extends DataConsumerVariableMeasurements impl
     }
 
     updateMeasurements(): void {
-        this.feedback.setFeedbacks();
+        this.performer.updateFeedbackData(this, this.feedback)
         this.calculateTree();
         this.save();
     }

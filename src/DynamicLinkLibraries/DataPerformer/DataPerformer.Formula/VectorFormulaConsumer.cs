@@ -132,8 +132,9 @@ namespace DataPerformer.Formula
             {
                 fm.Reset();
             }
+            performer.UpdateChildrenData(this, feedbackCollection);
             update();
-            if (forward.Count > 0)
+             if (forward.Count > 0)
             {
                 isUpdated = false;
                 th.UpdateMeasurements();

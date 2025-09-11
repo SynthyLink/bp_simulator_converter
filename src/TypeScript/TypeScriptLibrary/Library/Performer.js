@@ -58,6 +58,12 @@ class Performer {
         }
         return objects;
     }
+    updateFeedbackData(dataConsumer, feedback) {
+        if (feedback.isEmpty())
+            return;
+        feedback.setFeedbacks();
+        this.updateChildrenData(dataConsumer);
+    }
     updateChildrenData(dataConsumer) {
         let children = dataConsumer.getAllMeasurements();
         for (var child of children) {

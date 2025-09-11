@@ -16,4 +16,6 @@ export interface IFeedbackCollection
     getFeedbacks(): IFeedback[];
 
     setFeedbacks(): void;
+
+    isEmpty(): boolean;
 }

@@ -16,10 +16,10 @@ public class FormulaComposition extends Desktop
 		public CategoryObject0(String name, IDesktop desktop) {
 			super(name,  desktop);
 			java.util.Map< String, general_service.Entry<Object, Object >> map = new java.util.HashMap<>();
+			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{7.1237279830727527}));
+			map.put("f", new general_service.Entry<Object, Object>(new double[0], new double[]{4}));
 			map.put("c", new general_service.Entry<Object, Object>(new double[0], new double[]{3}));
 			map.put("b", new general_service.Entry<Object, Object>(new double[0], new double[]{2}));
-			map.put("f", new general_service.Entry<Object, Object>(new double[0], new double[]{4}));
-			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{7.1237279830727527}));
 			setMap(map);
 					Object o;
 					o = new double[0];

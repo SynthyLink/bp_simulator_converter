@@ -19,6 +19,13 @@ public class Actor {
         r.test();
     }
 
+    public void testRecusveFeedbackSimple()
+    {
+        var r = new RecursiveFeedbackSimpleAct();
+        r.test();
+    }
+
+
     public void testFeedbackFormula()
     {
         var r = new FeedbackFormulaAct();

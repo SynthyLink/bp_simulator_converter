@@ -2,16 +2,15 @@ package tests;
 
 import general_service.interfaces.IAction;
 import general_service.interfaces.IFuncT;
-import generated.RecursiveFeedback;
+import generated.RecursiveFeedbackSimple;
 import measurements.Performer;
 import measurements.interfaces.IDataConsumer;
 import measurements.interfaces.IMeasurements;
 import runtime.DataRuntimeConsumer;
 
-public class RecursvieFeedbackAct extends RecursiveFeedback implements IAction, IFuncT<boolean[]> {
+public class RecursiveFeedbackSimpleAct extends RecursiveFeedbackSimple implements IAction, IFuncT<boolean[]> {
 
-    public RecursvieFeedbackAct()
-    {
+    public RecursiveFeedbackSimpleAct() {
         super();
         var c = getCategoryObjects();
         consumer = (IDataConsumer) performer.get(this, "Chart");
@@ -21,15 +20,13 @@ public class RecursvieFeedbackAct extends RecursiveFeedback implements IAction, 
     @Override
     public void action() {
         general_service.Performer.print(consumer);
+     }
 
-    }
 
-
-    public void test()
-    {
+    public void test() {
         var r = new DataRuntimeConsumer(consumer);
         var p = new Performer();
-        p.performFixedStepCalculation(r, 0, 0.1, 30, this,this, cond);
+        p.performFixedStepCalculation(r, 0, 0.1, 30, this, this, cond);
     }
 
     IDataConsumer consumer;
@@ -45,16 +42,15 @@ public class RecursvieFeedbackAct extends RecursiveFeedback implements IAction, 
 
     boolean[] b = new boolean[]{true};
 
-    class  Cond implements IFuncT<boolean[]>
-    {
+    class Cond implements IFuncT<boolean[]> {
 
         @Override
         public boolean[] funcT() {
             return b;
         }
+
         boolean[] b = new boolean[]{false};
 
 
     }
-
 }

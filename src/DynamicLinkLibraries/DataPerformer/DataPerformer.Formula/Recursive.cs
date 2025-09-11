@@ -286,7 +286,8 @@ namespace DataPerformer.Formula
 			}
 			try
 			{
-				performer.UpdateChildrenData(this, feedbackAliasCollection);
+				//performer.UpdateChildrenData(this, feedbackAliasCollection);
+
 				Update();
 				foreach (var x in output)
 				{
@@ -295,7 +296,8 @@ namespace DataPerformer.Formula
 						updateItself.UpdateItself();
 					}
 				}
-				isUpdated = true;
+                feedbackAliasCollection.Set();
+                isUpdated = true;
 			}
 			catch (Exception e)
 			{
@@ -1035,6 +1037,7 @@ namespace DataPerformer.Formula
 			if (stated)
 			{
 				initial.Set();
+				feedbackAliasCollection.Set();
 				return;
 
 				foreach (char c in varc)
