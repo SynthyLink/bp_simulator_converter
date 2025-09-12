@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ODE = void 0;
 const AliasName_1 = require("../Library/AliasName");
 const Desktop_1 = require("../Library/Desktop");
-const FeedbackAliasCollection_1 = require("../Library/FeedbackAliasCollection");
 const DataLink_1 = require("../Library/Measurements/Arrows/DataLink");
 const DataConsumer_1 = require("../Library/Measurements/DataConsumer");
 const DifferentialEquationSolverFormula_1 = require("../Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula");
@@ -88,7 +87,6 @@ class ODE_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaConsumer
     }
     setFeedback() {
         let map = new Map([]);
-        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
     }
 }
 class ODE_CategoryObject_1 extends DifferentialEquationSolverFormula_1.DifferentialEquationSolverFormula {
@@ -202,7 +200,6 @@ class ODE_CategoryObject_1 extends DifferentialEquationSolverFormula_1.Different
     }
     setFeedback() {
         let map = new Map([]);
-        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
     }
 }
 class ODE_CategoryObject_2 extends DataConsumer_1.DataConsumer {

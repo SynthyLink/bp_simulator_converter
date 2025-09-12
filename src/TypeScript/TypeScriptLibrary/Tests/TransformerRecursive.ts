@@ -347,7 +347,6 @@ class TransformerRecursive_CategoryObject_3 extends RecursiveFormula
 			["c", "Vector.c" ],
 			["b", "Vector.b" ]
 		]);
-		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
 }
 

@@ -1,13 +1,15 @@
 package measurements;
 
 import diagram.interfaces.IDesktop;
+import general_service.Entry;
 import measurements.interfaces.IStarted;
 import measurements.variables.Variable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class VectorFormulaConsumer extends  DataConsumerMeasurements implements IStarted {
+public class VectorFormulaConsumer extends  DataConsumerMeasurements {
     public VectorFormulaConsumer(String name, IDesktop desktop) {
         super(name, desktop);
     }
@@ -17,6 +19,11 @@ public class VectorFormulaConsumer extends  DataConsumerMeasurements implements 
       //  mPefrformer.updateChildrenData(this, feedback);
         calculateTree();
         save();
+    }
+
+    @Override
+    protected void setFeedback(List<Entry<int[], String>> list) {
+
     }
 
     @Override
@@ -49,8 +56,4 @@ public class VectorFormulaConsumer extends  DataConsumerMeasurements implements 
 
 protected Map<String, Variable>  variables = new HashMap<>();
 
-    @Override
-    public void startedStart(double startTime) {
-        mPefrformer.updateChildrenData(this, feedback);
-    }
 }

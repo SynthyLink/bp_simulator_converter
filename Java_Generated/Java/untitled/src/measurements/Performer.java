@@ -3,10 +3,7 @@ package measurements;
 import category_theory.interfaces.ICategoryObject;
 import general_service.Entry;
 import general_service.interfaces.*;
-import measurements.interfaces.IDataConsumer;
-import measurements.interfaces.IDerivation;
-import measurements.interfaces.IMeasurement;
-import measurements.interfaces.IMeasurements;
+import measurements.interfaces.*;
 import measurements.time.TimeMeasurementProvider;
 import runtime.interfaces.IDataRuntime;
 
@@ -43,8 +40,9 @@ public class Performer {
         return map;
     }
 
-    public  void updateChildrenData(IDataConsumer dataConsumer, IFeedbackCollection collection)
+    public  void updateChildrenData(IDataConsumer dataConsumer, IFeedbackHolder collectionHolder)
     {
+        var collection = collectionHolder.getFeedbackCollection();
         if (collection.isEmpty())
         {
             return;

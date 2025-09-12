@@ -350,7 +350,6 @@ class RecursvieFeedback_CategoryObject_2 extends RecursiveFormula
 		[
 			["b", "X.b" ]
 		]);
-		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
 }
 

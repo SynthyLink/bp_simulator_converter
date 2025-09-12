@@ -58,7 +58,6 @@ class ConditionTest_CategoryObject_0 extends VectorFormulaConsumer
 		let map = new Map<string, string>(
 		[
 		]);
-		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
 }
 
@@ -126,7 +125,6 @@ class ConditionTest_CategoryObject_1 extends VectorFormulaConsumer
 		let map = new Map<string, string>(
 		[
 		]);
-		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
 }
 

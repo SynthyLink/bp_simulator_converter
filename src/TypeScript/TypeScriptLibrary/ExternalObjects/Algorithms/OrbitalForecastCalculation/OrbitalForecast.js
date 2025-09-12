@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrbitalForecast = void 0;
 const AliasName_1 = require("../../../Library/AliasName");
 const Desktop_1 = require("../../../Library/Desktop");
-const FeedbackAliasCollection_1 = require("../../../Library/FeedbackAliasCollection");
 const DataLink_1 = require("../../../Library/Measurements/Arrows/DataLink");
 const ObjectTransformerLink_1 = require("../../../Library/Measurements/Arrows/ObjectTransformerLink");
 const DataConsumer_1 = require("../../../Library/Measurements/DataConsumer");
@@ -2779,7 +2778,6 @@ class OrbitalForecast_CategoryObject_5 extends DifferentialEquationSolverFormula
             ["x", "Vector.x"],
             ["w", "Vector.w"]
         ]);
-        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
     }
 }
 class OrbitalForecast_CategoryObject_6 extends RecursiveFormula_1.RecursiveFormula {

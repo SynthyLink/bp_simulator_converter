@@ -164,7 +164,6 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer
 		let map = new Map<string, string>(
 		[
 		]);
-		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
 }
 
@@ -234,7 +233,6 @@ class Random_CategoryObject_3 extends RecursiveFormula
 		let map = new Map<string, string>(
 		[
 		]);
-		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
 }
 

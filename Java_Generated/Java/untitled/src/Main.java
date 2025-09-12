@@ -39,30 +39,4 @@ public class Main {
             }
         }
     }
-
-    static  void  Test2()
-    {
-        new generated.Two();
-    }
-    static void Test1()
-    {
-        var n = 3;
-        var desk1 = new IDesktop[n];
-        for (var i = 0; i < n; i++)
-        {
-            desk1[i] = new generated.ODE_Feedback();
-
-        }
-        n = 5;
-        var desk2 = new IDesktop[n];
-        for (var i = 0; i < n; i++)
-        {
-            desk2[i] = new generated.ODE_Feedback();
-
-        }
-        var p = new Performer();
-
-        var s  = p.extend(desk1, desk2);
- s = null;
-    }
 }

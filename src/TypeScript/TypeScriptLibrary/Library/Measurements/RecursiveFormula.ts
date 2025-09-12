@@ -10,7 +10,7 @@ import { FeedbackAliasCollection } from "../FeedbackAliasCollection";
 import { Performer } from "../Performer";
 
 
-export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted implements IPostSetArrow
+export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted implements  IPostSetArrow
 {
     protected inputs: IMeasurements[] = [];
 

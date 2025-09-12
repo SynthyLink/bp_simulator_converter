@@ -1,6 +1,8 @@
 package measurements;
 
 import diagram.interfaces.IDesktop;
+import general_service.interfaces.IFeedbackCollection;
+import measurements.interfaces.IFeedbackHolder;
 import measurements.interfaces.IMeasurements;
 import measurements.interfaces.IStarted;
 import measurements.variables.Variable;
@@ -9,7 +11,8 @@ import measurements.variables.Variable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RecursiveFormula extends DataConsumerVariableMeasurementsStarted implements IStarted, IMeasurements {
+public class RecursiveFormula extends DataConsumerVariableMeasurementsStarted implements IStarted, IMeasurements, IFeedbackHolder
+{
     public RecursiveFormula(String name, IDesktop desktop) {
         super(name, desktop);
     }
@@ -59,6 +62,11 @@ public class RecursiveFormula extends DataConsumerVariableMeasurementsStarted im
         feedback.setFeedbacks();
     }
 
+
     protected  IMeasurements[]  inputs = new IMeasurements[0];
 
+    @Override
+    public IFeedbackCollection getFeedbackCollection() {
+        return feedback;
+    }
 }

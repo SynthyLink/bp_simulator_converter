@@ -104,7 +104,6 @@ class SimpleFeed_CategoryObject_0 extends VectorFormulaConsumer
 		let map = new Map<string, string>(
 		[
 		]);
-		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
 }
 
@@ -191,7 +190,6 @@ class SimpleFeed_CategoryObject_1 extends VectorFormulaConsumer
 		[
 			["Formula_1", "A.a" ]
 		]);
-		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
 }
 

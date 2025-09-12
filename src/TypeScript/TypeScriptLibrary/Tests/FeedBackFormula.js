@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FeedBackFormula = void 0;
 const AliasName_js_1 = require("../Library/AliasName.js");
 const Desktop_js_1 = require("../Library/Desktop.js");
-const FeedbackAliasCollection_js_1 = require("../Library/FeedbackAliasCollection.js");
 const DataLink_js_1 = require("../Library/Measurements/Arrows/DataLink.js");
 const DataConsumer_js_1 = require("../Library/Measurements/DataConsumer.js");
 const VectorFormulaConsumer_js_1 = require("../Library/Measurements/VectorFormulaConsumer.js");
@@ -213,7 +212,6 @@ class FeedBackFormula_CategoryObject_1 extends VectorFormulaConsumer_js_1.Vector
         let map = new Map([
             ["Formula_1", "X.a"]
         ]);
-        this.feedback = new FeedbackAliasCollection_js_1.FeedbackAliasCollection(map, this, this);
     }
 }
 class FeedBackFormula_CategoryObject_2 extends DataConsumer_js_1.DataConsumer {

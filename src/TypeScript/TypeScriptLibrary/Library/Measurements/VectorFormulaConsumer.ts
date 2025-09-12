@@ -25,7 +25,6 @@ export class VectorFormulaConsumer extends DataConsumerVariableMeasurements impl
     }
 
     updateMeasurements(): void {
-        this.performer.updateFeedbackData(this, this.feedback)
         this.calculateTree();
         this.save();
     }
@@ -47,7 +46,6 @@ export class VectorFormulaConsumer extends DataConsumerVariableMeasurements impl
     postSetArrow(): void
     {
         this.init();
-        this.setFeedback();
     }
 
 

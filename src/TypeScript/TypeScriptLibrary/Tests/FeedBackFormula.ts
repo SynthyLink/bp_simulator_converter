@@ -230,7 +230,6 @@ class FeedBackFormula_CategoryObject_1 extends VectorFormulaConsumer
 		[
 			["Formula_1", "X.a" ]
 		]);
-		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
 }
 

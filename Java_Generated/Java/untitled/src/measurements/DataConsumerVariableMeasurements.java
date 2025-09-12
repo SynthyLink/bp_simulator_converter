@@ -10,7 +10,7 @@ import measurements.variables.Variable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DataConsumerVariableMeasurements extends DataConsumerMeasurements  {
+public abstract class DataConsumerVariableMeasurements extends DataConsumerMeasurements  {
     public DataConsumerVariableMeasurements(String name, IDesktop desktop) {
         super(name, desktop);
     }

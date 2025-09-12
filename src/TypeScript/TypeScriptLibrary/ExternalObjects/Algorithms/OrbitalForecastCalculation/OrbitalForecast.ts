@@ -2808,7 +2808,6 @@ class OrbitalForecast_CategoryObject_5 extends DifferentialEquationSolverFormula
 			["x", "Vector.x" ],
 			["w", "Vector.w" ]
 		]);
-		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
 }
 

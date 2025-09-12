@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RecursvieFeedback = void 0;
 const AliasName_1 = require("../Library/AliasName");
 const Desktop_1 = require("../Library/Desktop");
-const FeedbackAliasCollection_1 = require("../Library/FeedbackAliasCollection");
 const DataLink_1 = require("../Library/Measurements/Arrows/DataLink");
 const DataConsumer_1 = require("../Library/Measurements/DataConsumer");
 const RecursiveFormula_1 = require("../Library/Measurements/RecursiveFormula");
@@ -325,7 +324,6 @@ class RecursvieFeedback_CategoryObject_2 extends RecursiveFormula_1.RecursiveFor
         let map = new Map([
             ["b", "X.b"]
         ]);
-        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
     }
 }
 class RecursvieFeedback_CategoryObject_3 extends DataConsumer_1.DataConsumer {

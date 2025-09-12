@@ -12,7 +12,7 @@ import measurements.variables.Variable;
 
 import java.util.*;
 
-public class DataConsumerMeasurements  extends  DataConsumer implements IMeasurements, IAlias {
+public abstract class DataConsumerMeasurements  extends  DataConsumer implements IMeasurements, IAlias {
 
 
 
@@ -80,19 +80,14 @@ public class DataConsumerMeasurements  extends  DataConsumer implements IMeasure
        aliasNames =  copyMap(map, this.map);
     }
 
-    protected void setFeedback() {
-        feedback.setFeedbacks();
-    }
+
 
     protected void createFeedback() {
         List<Entry<int[], String>> list = new ArrayList<>();
         setFeedback(list);
     }
 
-    protected void setFeedback(List<Entry<int[], String>> list)
-    {
-        feedback = new FeedbackCollection(this, list);
-    }
+    protected abstract void setFeedback(List<Entry<int[], String>> list);
 
     protected void addVariableValue(String name, Object type)
     {
@@ -106,8 +101,6 @@ public class DataConsumerMeasurements  extends  DataConsumer implements IMeasure
     java.util.Map<String, IValueSetter> map = new HashMap<>();
 
 
-
-    protected IFeedbackCollection feedback;
 
     protected String[] aliasNames = new String[0];
 

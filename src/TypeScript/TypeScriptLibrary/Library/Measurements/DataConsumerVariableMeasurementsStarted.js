@@ -5,6 +5,7 @@ exports.DataConsumerVariableMeasurementsStarted = void 0;
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const AliasInitialValueCollection_1 = require("../AliasInitialValueCollection.");
+const FeedbackAliasCollection_1 = require("../FeedbackAliasCollection");
 const DataConsumerVariableMeasurements_1 = require("./DataConsumerVariableMeasurements");
 class DataConsumerVariableMeasurementsStarted extends DataConsumerVariableMeasurements_1.DataConsumerVariableMeasurements {
     constructor(desktop, name) {
@@ -14,11 +15,18 @@ class DataConsumerVariableMeasurementsStarted extends DataConsumerVariableMeasur
         this.types.push("DataConsumerVariadbleMeasurementsStarted");
         this.alias = this;
     }
+    getFeedbackCollection() {
+        return this.feedback;
+    }
     startedStart(start) {
         this.initial.resetInitialValues();
     }
     setInitial() {
         this.initial = new AliasInitialValueCollection_1.AliasInitialValueCollection(this, this);
+    }
+    setFeedback() {
+        let map = new Map();
+        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
     }
 }
 exports.DataConsumerVariableMeasurementsStarted = DataConsumerVariableMeasurementsStarted;

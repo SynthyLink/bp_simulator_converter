@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConditionTest = void 0;
 const AliasName_1 = require("../Library/AliasName");
 const Desktop_1 = require("../Library/Desktop");
-const FeedbackAliasCollection_1 = require("../Library/FeedbackAliasCollection");
 const DataLink_1 = require("../Library/Measurements/Arrows/DataLink");
 const DataConsumer_1 = require("../Library/Measurements/DataConsumer");
 const Variable_1 = require("../Library/Measurements/Variables/Variable");
@@ -43,7 +42,6 @@ class ConditionTest_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormu
     }
     setFeedback() {
         let map = new Map([]);
-        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
     }
 }
 class ConditionTest_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
@@ -100,7 +98,6 @@ class ConditionTest_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormu
     }
     setFeedback() {
         let map = new Map([]);
-        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
     }
 }
 class ConditionTest_CategoryObject_2 extends DataConsumer_1.DataConsumer {

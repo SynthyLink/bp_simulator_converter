@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Random = void 0;
 const AliasName_1 = require("../Library/AliasName");
 const Desktop_1 = require("../Library/Desktop");
-const FeedbackAliasCollection_1 = require("../Library/FeedbackAliasCollection");
 const DataLink_1 = require("../Library/Measurements/Arrows/DataLink");
 const DataConsumer_1 = require("../Library/Measurements/DataConsumer");
 const RandomGenerator_1 = require("../Library/Measurements/RandomGenerator");
@@ -141,7 +140,6 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaConsu
     }
     setFeedback() {
         let map = new Map([]);
-        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
     }
 }
 class Random_CategoryObject_3 extends RecursiveFormula_1.RecursiveFormula {
@@ -200,7 +198,6 @@ class Random_CategoryObject_3 extends RecursiveFormula_1.RecursiveFormula {
     }
     setFeedback() {
         let map = new Map([]);
-        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
     }
 }
 class Random_CategoryObject_4 extends DataConsumer_1.DataConsumer {

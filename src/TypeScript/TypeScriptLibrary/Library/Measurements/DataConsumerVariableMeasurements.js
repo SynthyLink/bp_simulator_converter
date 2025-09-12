@@ -1,10 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DataConsumerVariableMeasurements = void 0;
-/* eslint-disable no-var */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-const FeedbackAliasCollection_1 = require("../FeedbackAliasCollection");
 const DataConsumer_1 = require("./DataConsumer");
 const PefrormerMeasuremets_1 = require("./PefrormerMeasuremets");
 const Variable_1 = require("./Variables/Variable");
@@ -59,10 +55,6 @@ class DataConsumerVariableMeasurements extends DataConsumer_1.DataConsumer {
     addVariable(variable) {
         this.output.push(variable);
         this.variables.set(variable.getMeasurementName(), variable);
-    }
-    setFeedback() {
-        let map = new Map();
-        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
     }
 }
 exports.DataConsumerVariableMeasurements = DataConsumerVariableMeasurements;
