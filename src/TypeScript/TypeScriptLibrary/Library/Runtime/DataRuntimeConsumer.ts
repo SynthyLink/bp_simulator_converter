@@ -54,6 +54,8 @@ export class DataRuntimeConsumer implements IDataRuntime
             this.measurements.push(dataConsumer as unknown as IMeasurements);
         }
 
+        this.measurements = this.performer.sortMeasurements(this.measurements);
+
     }
 
     addCategoryObjectToRuntime(object: ICategoryObject): void {

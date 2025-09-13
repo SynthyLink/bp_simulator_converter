@@ -1,4 +1,3 @@
-import { RecursvieFeedback } from "../RecursvieFeedback";
 import type { IAction } from "../../Library/Interfaces/IAction";
 import type { IFunc } from "../../Library/Interfaces/IFunc";
 import type { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
@@ -6,9 +5,10 @@ import { PefrormerMeasuremets } from "../../Library/Measurements/PefrormerMeasur
 import { Performer } from "../../Library/Performer";
 import { DataRuntimeConsumer } from "../../Library/Runtime/DataRuntimeConsumer";
 import type { IDataRuntime } from "../../Library/Runtime/Interfaces/IDataRuntime";
+import { RecursiveFeedback } from "../RecursiveFeedback";
 
 
-export class RecursvieFeedbackAct extends RecursvieFeedback implements IAction, IFunc<boolean> {
+export class RecursvieFeedbackAct extends RecursiveFeedback implements IAction, IFunc<boolean> {
     dc !: IDataConsumer;
     constructor() {
         super();

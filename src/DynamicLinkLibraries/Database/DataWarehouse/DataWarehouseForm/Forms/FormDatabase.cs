@@ -1,20 +1,19 @@
-using DataWarehouse.Classes;
-using DataWarehouse.Interfaces;
-using DataWarehouse.Interfaces.Async;
-using DataWarehouse.UserControls;
-using DataWarehouse.Utils;
-using Diagram.UI.Interfaces;
-using ErrorHandler;
-using NamedTree;
-using ResourceService;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using DataWarehouse.Classes;
+using DataWarehouse.Interfaces;
+using DataWarehouse.Interfaces.Async;
+using DataWarehouse.Utils;
+using Diagram.UI.Interfaces;
+using ErrorHandler;
+using NamedTree;
+using ResourceService;
 using WindowsExtensions;
-using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 
 namespace DataWarehouse.Forms
@@ -311,6 +310,8 @@ namespace DataWarehouse.Forms
             return;
         }
 
+
+
         private void treeViewDir_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             if (e.Label == null)
@@ -554,7 +555,7 @@ namespace DataWarehouse.Forms
 
                if (l == null)
                 {
-                    WindowsExtensions.ControlExtensions.ShowMessageBoxModal("Illegal name \"" + nm + "\"");
+                    ControlExtensions.ShowMessageBoxModal("Illegal name \"" + nm + "\"");
                     return;
                 }
           //      Close();
@@ -565,6 +566,31 @@ namespace DataWarehouse.Forms
                 WindowsExtensions.ControlExtensions.ShowMessageBoxModal(ex.Message);
             }
         }
+
+        bool dirdeleted = false;
+
+        private async Task<bool> Delete(IDirectoryAsync directory)
+        {
+            ICancellation cl = this;
+            var t = cl.CreateCancellationToken();
+            var task = directory.RemoveItselfAsync(t);
+            await task;
+            dirdeleted = task.Result;
+            return dirdeleted;
+        }
+
+        bool leafdeleleted = false;
+
+        private async Task Delete(ILeafAsync leaf)
+        {
+            ICancellation cancellation = this;
+            var t = cancellation.CreateCancellationToken();
+            var task = leaf.RemoveItselfAsync(t);
+            await  task;
+            var leafdeleted = task.Result;
+        }
+
+
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
@@ -584,9 +610,22 @@ namespace DataWarehouse.Forms
                 {
                     return;
                 }
+                dirdeleted = false;
+                if (Selected is IDirectoryAsync directory)
+                {
+                    Delete(directory);
+                    return;
+
+                }
+                if (Selected is ILeafAsync leaf)
+                {
+                    Delete(leaf);
+                    return;
+
+                }
                 Selected.RemoveItself();
                 //selectedNode.Remove(selected);
-            //    RefreshTable();
+                //    RefreshTable();
             }
             catch (Exception ex)
             {

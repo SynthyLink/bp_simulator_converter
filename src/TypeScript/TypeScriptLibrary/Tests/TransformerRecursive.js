@@ -4,7 +4,6 @@ exports.TransformerRecursive = void 0;
 const TestObjectTransformer_1 = require("../Test_Obects/TestObjectTransformer");
 const AliasName_1 = require("../Library/AliasName");
 const Desktop_1 = require("../Library/Desktop");
-const FeedbackAliasCollection_1 = require("../Library/FeedbackAliasCollection");
 const DataLink_1 = require("../Library/Measurements/Arrows/DataLink");
 const ObjectTransformerLink_1 = require("../Library/Measurements/Arrows/ObjectTransformerLink");
 const DataConsumer_1 = require("../Library/Measurements/DataConsumer");
@@ -323,7 +322,6 @@ class TransformerRecursive_CategoryObject_3 extends RecursiveFormula_1.Recursive
             ["c", "Vector.c"],
             ["b", "Vector.b"]
         ]);
-        this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
     }
 }
 class TransformerRecursive_CategoryObject_4 extends DataConsumer_1.DataConsumer {

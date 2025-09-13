@@ -6,6 +6,7 @@ import diagram.interfaces.IDesktop;
 import general_service.Performer;
 import general_service.interfaces.IActionT;
 import measurements.interfaces.*;
+import measurements.service.MeasurementsComparator;
 import measurements.time.interfaces.ITimeMeasurementConsumer;
 import measurements.time.interfaces.ITimeMeasurementProvider;
 import runtime.interfaces.IDataRuntime;
@@ -35,6 +36,7 @@ public class DataRuntimeConsumer implements IDataRuntime, IActionT<IStarted> {
         if (dataConsumer instanceof IMeasurements mm) {
             measurements = performer.extend(measurements, mm);
         }
+        sortMeasurements();
     }
 
     @Override
@@ -134,37 +136,45 @@ public class DataRuntimeConsumer implements IDataRuntime, IActionT<IStarted> {
     }
 
 
-    protected  void  addDataConsumer(IDataConsumer dc, List<IMeasurements> list)
-    {
-         var m = dc.getAllMeasurements();
+    protected  void  addDataConsumer(IDataConsumer dc, List<IMeasurements> list) {
+        var m = dc.getAllMeasurements();
         var n = m.length;
-        if (n != 0)
-        {
-            for (var i = 0; i < n; i++)
-            {
+        if (n != 0) {
+            for (var i = 0; i < n; i++) {
                 var mea = m[i];
                 if (list.lastIndexOf(mea) >= 0) {
                     continue;
                 }
                 list.add(mea);
-                if (mea instanceof  IDataConsumer c)
-                {
+                if (mea instanceof IDataConsumer c) {
                     addDataConsumer(c, list);
                 }
 
             }
+        } else {
+
         }
-        else
+    }
+
+    protected void sortMeasurements()
+    {
+        List<IMeasurements> measurementsList = new ArrayList<>();
+        for (var m : measurements)
         {
-
+            measurementsList.add(m);
         }
+        Collections.sort(measurementsList, comparator);
+        var n = measurements.length;
+        measurements = measurementsList.toArray(new IMeasurements[n]);
+    }
 
 
-}
 
 
 
     protected IDesktop desktop;
+
+    protected  Comparator<IMeasurements> comparator = new MeasurementsComparator();
 
     ICategoryArrow[] categoryArrows = new ICategoryArrow[0];
 

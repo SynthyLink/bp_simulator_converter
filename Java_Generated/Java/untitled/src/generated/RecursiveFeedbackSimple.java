@@ -17,8 +17,8 @@ public class RecursiveFeedbackSimple extends Desktop
 			super(name,  desktop);
 			java.util.Map< String, general_service.Entry<Object, Object >> map = new java.util.HashMap<>();
 			map.put("c", new general_service.Entry<Object, Object>(new double[0], new double[]{3}));
+			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{86.009521692867693}));
 			map.put("f", new general_service.Entry<Object, Object>(new double[0], new double[]{4}));
-			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{100.47312604544577}));
 			map.put("b", new general_service.Entry<Object, Object>(new double[0], new double[]{126.75551976866286}));
 			setMap(map);
 					Object o;

@@ -4,10 +4,10 @@ let a = new Actor();
 
 //a.actOrbitCalculation();
 
-//a.actRecursiveFeedback();
+a.actRecursiveFeedback();
 
 //a.actFeedbackFormula();
-a.actRecursiveFeedbackSimplw();
+//a.actRecursiveFeedbackSimplw();
 
 a.finish(undefined);
 

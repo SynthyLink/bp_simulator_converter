@@ -11,7 +11,7 @@ import { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement";
 import { RecursiveFormula } from "../Library/Measurements/RecursiveFormula";
 import { VectorFormulaConsumer } from "../Library/Measurements/VectorFormulaConsumer";
 
-class RecursvieFeedback_CategoryObject_0 extends VectorFormulaConsumer
+class RecursiveFeedback_CategoryObject_0 extends VectorFormulaConsumer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -20,12 +20,12 @@ class RecursvieFeedback_CategoryObject_0 extends VectorFormulaConsumer
 		[
 			["c", 3 ],
 			["a", 7.1237279830727527 ],
-			["b", 126.75551976866286 ],
 			["f", 4 ],
+			["b", 253.52416418337546 ],
 		]);
 		this.performer.setAliasMap(map, this);
-		this.addVariableValue("Formula_1", 0, 0);
-		this.addVariableValue("Formula_2", 0, 0);
+		this.addVariableValue("Formula_1", 0, 172.80153239213379);
+		this.addVariableValue("Formula_2", 0, 11.600000000000001);
 	}
 
 		calculateTree() : void
@@ -144,7 +144,7 @@ class RecursvieFeedback_CategoryObject_0 extends VectorFormulaConsumer
 	
 }
 
-class RecursvieFeedback_CategoryObject_1 extends VectorFormulaConsumer
+class RecursiveFeedback_CategoryObject_1 extends VectorFormulaConsumer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -154,8 +154,8 @@ class RecursvieFeedback_CategoryObject_1 extends VectorFormulaConsumer
 			["k", 1 ]
 		]);
 		this.performer.setAliasMap(map, this);
-		this.addVariableValue("Formula_1", 0, 0);
-		this.addVariableValue("Formula_2", 0, 0);
+		this.addVariableValue("Formula_1", 0, 172.80153239213379);
+		this.addVariableValue("Formula_2", 0, 11.600000000000001);
 	}
 
 		calculateTree() : void
@@ -229,7 +229,7 @@ class RecursvieFeedback_CategoryObject_1 extends VectorFormulaConsumer
 	
 }
 
-class RecursvieFeedback_CategoryObject_2 extends RecursiveFormula
+class RecursiveFeedback_CategoryObject_2 extends RecursiveFormula
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -350,10 +350,11 @@ class RecursvieFeedback_CategoryObject_2 extends RecursiveFormula
 		[
 			["b", "X.b" ]
 		]);
+		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
 }
 
-class RecursvieFeedback_CategoryObject_3 extends DataConsumer
+class RecursiveFeedback_CategoryObject_3 extends DataConsumer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -361,7 +362,7 @@ class RecursvieFeedback_CategoryObject_3 extends DataConsumer
 	}
 }
 
-class RecursvieFeedback_CategoryArrow_0 extends DataLink
+class RecursiveFeedback_CategoryArrow_0 extends DataLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -369,7 +370,7 @@ class RecursvieFeedback_CategoryArrow_0 extends DataLink
 	}
 }
 
-class RecursvieFeedback_CategoryArrow_1 extends DataLink
+class RecursiveFeedback_CategoryArrow_1 extends DataLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -377,7 +378,7 @@ class RecursvieFeedback_CategoryArrow_1 extends DataLink
 	}
 }
 
-class RecursvieFeedback_CategoryArrow_2 extends DataLink
+class RecursiveFeedback_CategoryArrow_2 extends DataLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -385,7 +386,7 @@ class RecursvieFeedback_CategoryArrow_2 extends DataLink
 	}
 }
 
-class RecursvieFeedback_CategoryArrow_3 extends DataLink
+class RecursiveFeedback_CategoryArrow_3 extends DataLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -395,22 +396,22 @@ class RecursvieFeedback_CategoryArrow_3 extends DataLink
 
 
 
-export class RecursvieFeedback extends Desktop
+export class RecursiveFeedback extends Desktop
 {
 	constructor()
 	{
 		super();
 
-		this.name = "RecursvieFeedback";
+		this.name = "RecursiveFeedback";
 
-		new RecursvieFeedback_CategoryObject_0(this, "X");
-		new RecursvieFeedback_CategoryObject_1(this, "Y");
-		new RecursvieFeedback_CategoryObject_2(this, "Rec");
-		new RecursvieFeedback_CategoryObject_3(this, "Chart");
-		new RecursvieFeedback_CategoryArrow_0(this, "");
-		new RecursvieFeedback_CategoryArrow_1(this, "");
-		new RecursvieFeedback_CategoryArrow_2(this, "");
-		new RecursvieFeedback_CategoryArrow_3(this, "");
+		new RecursiveFeedback_CategoryObject_0(this, "X");
+		new RecursiveFeedback_CategoryObject_1(this, "Y");
+		new RecursiveFeedback_CategoryObject_2(this, "Rec");
+		new RecursiveFeedback_CategoryObject_3(this, "Chart");
+		new RecursiveFeedback_CategoryArrow_0(this, "");
+		new RecursiveFeedback_CategoryArrow_1(this, "");
+		new RecursiveFeedback_CategoryArrow_2(this, "");
+		new RecursiveFeedback_CategoryArrow_3(this, "");
 
 		let objects = this.getCategoryObjects();
 		let arrows = this.getCategoryArrows();

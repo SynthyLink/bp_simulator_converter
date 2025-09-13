@@ -7,12 +7,14 @@ exports.Performer = void 0;
 const AliasName_1 = require("./AliasName");
 const ConsolePrinter_1 = require("./ConsolePrinter");
 const OwnError_1 = require("./ErrorHandler/OwnError");
+const MeasurementsComparator_1 = require("./Measurements/MeasurementsComparator");
 class Performer {
     constructor() {
         this.a = 0;
         this.b = false;
         this.s = "";
         this.printer = new ConsolePrinter_1.ConsolePrinter();
+        this.mCompatator = new MeasurementsComparator_1.MeasurementsComparator(this);
     }
     ;
     setPrinter(printer) {
@@ -44,6 +46,53 @@ class Performer {
             }
         }
         return objects;
+    }
+    sortMeasurements(measurements) {
+        return this.mergesort(measurements, this.mCompatator);
+    }
+    mergesort(unsorted, comparator) {
+        if (unsorted.length <= 1) {
+            return unsorted;
+        }
+        var left = [];
+        var right = [];
+        var middle = Math.floor(unsorted.length / 2);
+        for (var i = 0; i < middle; i++) //Dividing the unsorted list
+         {
+            left.push(unsorted[i]);
+        }
+        for (var j = middle; j < unsorted.length; j++) {
+            right.push(unsorted[j]);
+        }
+        left = this.mergesort(left, comparator);
+        right = this.mergesort(right, comparator);
+        return this.merge(left, right, comparator);
+    }
+    merge(left, right, compartor) {
+        var result = [];
+        while (left.length > 0 || right.length > 0) {
+            if (left.length > 0 && right.length > 0) {
+                if (compartor.compare(left[0], right[0]) <= 0) //Comparing First two elements to see which is smaller
+                 {
+                    result.push(left[0]);
+                    left.shift();
+                    //Rest of the list minus the first element
+                }
+                else {
+                    result.push(right[0]);
+                    right.shift();
+                }
+            }
+            else if (left.length > 0) {
+                result.push(left[0]);
+                left.shift();
+            }
+            else if (right.length > 0) {
+                result.push(right[0]);
+                right.shift();
+            }
+        }
+        return result;
     }
     getByType(desktop, type) {
         let co = desktop.getCategoryObjects();

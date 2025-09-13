@@ -29,6 +29,7 @@ class DataRuntimeConsumer {
         if (this.performer.implementsType(dataConsumer, "IMeasurements")) {
             this.measurements.push(dataConsumer);
         }
+        this.measurements = this.performer.sortMeasurements(this.measurements);
     }
     addCategoryObjectToRuntime(object) {
         this.categoryObjects.push(object);

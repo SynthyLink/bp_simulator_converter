@@ -16,10 +16,10 @@ public class RecursiveFeedback extends Desktop
 		public CategoryObject0(String name, IDesktop desktop) {
 			super(name,  desktop);
 			java.util.Map< String, general_service.Entry<Object, Object >> map = new java.util.HashMap<>();
-			map.put("f", new general_service.Entry<Object, Object>(new double[0], new double[]{4}));
 			map.put("c", new general_service.Entry<Object, Object>(new double[0], new double[]{3}));
 			map.put("a", new general_service.Entry<Object, Object>(new double[0], new double[]{7.1237279830727527}));
-			map.put("b", new general_service.Entry<Object, Object>(new double[0], new double[]{126.75551976866286}));
+			map.put("f", new general_service.Entry<Object, Object>(new double[0], new double[]{4}));
+			map.put("b", new general_service.Entry<Object, Object>(new double[0], new double[]{253.52416418337546}));
 			setMap(map);
 					Object o;
 					o = new double[0];
@@ -261,6 +261,7 @@ public class RecursiveFeedback extends Desktop
 						if (check(var_6)) { success = false; return; } 
 						var_7[0] = ((var_3[0]) * (var_6[0]));
 						if (check(var_7)) { success = false; return; } 
+
 					}
 				
 				@Override
