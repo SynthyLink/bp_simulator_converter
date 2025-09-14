@@ -2,27 +2,58 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AliasName } from "./AliasName";
+import { ConsolePrinter } from "./ConsolePrinter";
 import { OwnError } from "./ErrorHandler/OwnError";
 import type { IAlias } from "./Interfaces/IAlias";
 import type { IAliasName } from "./Interfaces/IAliasName";
 import type { ICategoryObject } from "./Interfaces/ICategoryObject";
 import type { IDesktop } from "./Interfaces/IDesktop";
 import type { IObject } from "./Interfaces/IObject";
+import type { IPrintedObject } from "./Interfaces/IPrintedObject";
+import type { IPrinter } from "./Interfaces/IPrinter";
 import type { IValue } from "./Interfaces/IValue";
 import type { IDataConsumer } from "./Measurements/Interfaces/IDataConsumer";
 import type { IDerivation } from "./Measurements/Interfaces/IDerivation";
 import type { IMeasurement } from "./Measurements/Interfaces/IMeasurement";
 import type { IMeasurements } from "./Measurements/Interfaces/IMeasurements";
-
+import type { IFeedbackCollection } from "./Interfaces/IFeedbackCollection";
+import type { IComparator } from "./Interfaces/IComparator";
+import { MeasurementsComparator } from "./Measurements/MeasurementsComparator";
 
 export class Performer
 {
+    constructor() {
+        this.mCompatator = new MeasurementsComparator(this);
+    }
+
     protected a: number = 0;
 
 
     protected b: boolean = false;
 
     protected s: string = "";
+
+    protected printer: IPrinter = new ConsolePrinter();;
+
+    protected mCompatator !: IComparator<IMeasurements>;
+
+    public setPrinter(printer: IPrinter): void {
+        this.printer = printer;
+    }
+
+    public getPrinter(): IPrinter {
+        return this.printer;
+    }
+
+    public print(object: any): void {
+        if (this.implementsType(object, "IPrintedObject"))
+        {
+            var pr = object as unknown as IPrintedObject;
+            pr.print(this.printer);
+            return;
+        }
+        this.printer.print(object);
+    }
 
     public convertTS<S, T>(s: S, type: string): T {
         if (this.implementsType(s, type)) {
@@ -31,6 +62,100 @@ export class Performer
         return s as undefined as T;
     }
 
+    public getByInterface(desktop: IDesktop, type: string): IObject[] {
+        let co = desktop.getCategoryObjects();
+        let objects: IObject[] = [];
+        for (var a of co) {
+            if (this.implementsType(a, type)) {
+                objects.push(a as unknown as IObject);
+            }
+        }
+        return objects;
+    }
+
+    public sortMeasurements(measurements: IMeasurements[]): IMeasurements[] {
+        return this.mergesort(measurements, this.mCompatator);
+    }
+
+    public mergesort<T>(unsorted: T[], comparator: IComparator<T>) {
+        if (unsorted.length <= 1)
+        {
+            return unsorted;
+        }
+        var left: T[] = [];
+        var right: T[] = [];
+        var middle = Math.floor(unsorted.length / 2);
+        for (var i = 0; i < middle; i++)  //Dividing the unsorted list
+        {
+            left.push(unsorted[i]);
+        }
+        for (var j = middle; j < unsorted.length; j++)
+        {
+            right.push(unsorted[j]);
+        }
+        left = this.mergesort(left, comparator);
+        right = this.mergesort(right, comparator);
+        return this.merge(left, right, comparator);
+    }
+
+    protected merge<T>(left: T[], right: T[], comparator: IComparator<T>): T[] {
+        var result: T[] = [];
+        while (left.length > 0 || right.length > 0)
+        {
+            if (left.length > 0 && right.length > 0)
+            {
+                if (comparator.compare(left[0], right[0]) <= 0)  //Comparing First two elements to see which is smaller
+                {
+                    result.push(left[0]);
+                    left.shift();
+                    //Rest of the list minus the first element
+                }
+                else
+                {
+                    result.push(right[0]);
+                    right.shift();
+                }
+            }
+            else if (left.length > 0)
+            {
+                result.push(left[0]);
+                left.shift();
+            }
+            else if (right.length > 0)
+            {
+                result.push(right[0]);
+                right.shift();
+            }
+        }
+        return result;
+    }
+
+
+
+    public getByType(desktop: IDesktop, type: string): IObject[] {
+        let co = desktop.getCategoryObjects();
+        let objects: IObject[] = [];
+        for (var a of co)
+        {
+  
+            if (this.implementsType(a, type))
+            {
+                var ob = a as unknown as IObject;
+                if (ob.getClassName() == type)
+                {
+                    objects.push(a as unknown as IObject);
+                }
+            }
+        }
+        return objects;
+    }
+
+
+    public updateFeedbackData(dataConsumer: IDataConsumer, feedback: IFeedbackCollection): void {
+        if (feedback.isEmpty()) return;
+        feedback.setFeedbacks();
+        this.updateChildrenData(dataConsumer);
+    }
 
     public updateChildrenData(dataConsumer: IDataConsumer): void
     {

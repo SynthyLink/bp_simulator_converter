@@ -260,19 +260,6 @@ namespace DataPerformer.Formula
             try
             {
                 
-                foreach (Variable v in externalAliases.Keys)
-                {
-                    break;
-                    AliasName an = externalAliases[v];
-                    IMeasurement m = v;
-                    var p = m.Parameter;
-                    var value = p();
-                    if (value == null)
-                    {
-
-                    }
-                    an.SetValue(value);
-                }
                 feedbackCollection.Set();
                 foreach (IMeasurements m in Dependent)
                 {

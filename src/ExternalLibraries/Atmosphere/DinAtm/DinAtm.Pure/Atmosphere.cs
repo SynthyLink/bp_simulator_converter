@@ -1,6 +1,7 @@
 ﻿using System;
 
 using RealMatrixProcessor;
+using SunPosition;
 
 namespace DinAtm.Pure
 {
@@ -13,6 +14,8 @@ namespace DinAtm.Pure
     {
 
         #region Fields
+
+        Calculator calculator = new ();
 
         protected RealMatrix realMatrix = new();
 
@@ -82,7 +85,15 @@ namespace DinAtm.Pure
         private ushort[] dd = new ushort[4];
         protected double[] xout = new double[3];
 
-          #endregion
+        public  cLocation cLocation = new cLocation();
+
+        /// <summary>
+        /// Coordinates of Sun
+        /// </summary>
+        public cSunCoordinates cSunCoordinates = new cSunCoordinates();
+
+
+        #endregion
 
         #region Ctor
 
@@ -93,14 +104,19 @@ namespace DinAtm.Pure
         }
 
         #endregion
- 
+
         #region Public Members
+
+        DateTime d1900 = new DateTime(1900, 1, 1);
 
         public double Atm(double t, double[] x)
         {
             double ttt = t / 86400;
             //           ushort ho, mi, ss, sss;
             DateTime dt = DateTime.FromOADate(ttt);
+            var ts = dt - d1900;
+            var dd = ts.Days;
+            var hh = realMatrix.Normalize(x, y, 0);
             int ho = dt.Hour;
             int mi = dt.Minute;
             int ss = dt.Second;

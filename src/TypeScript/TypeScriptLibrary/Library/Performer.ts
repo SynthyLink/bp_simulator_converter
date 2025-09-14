@@ -78,13 +78,12 @@ export class Performer
     }
 
     public mergesort<T>(unsorted: T[], comparator: IComparator<T>) {
-        if (unsorted.length <= 1) {
+        if (unsorted.length <= 1)
+        {
             return unsorted;
         }
-
         var left: T[] = [];
         var right: T[] = [];
-
         var middle = Math.floor(unsorted.length / 2);
         for (var i = 0; i < middle; i++)  //Dividing the unsorted list
         {
@@ -97,17 +96,15 @@ export class Performer
         left = this.mergesort(left, comparator);
         right = this.mergesort(right, comparator);
         return this.merge(left, right, comparator);
-
     }
 
-
-    protected merge<T>(left: T[], right: T[], compartor: IComparator<T>): T[] {
+    protected merge<T>(left: T[], right: T[], comparator: IComparator<T>): T[] {
         var result: T[] = [];
         while (left.length > 0 || right.length > 0)
         {
             if (left.length > 0 && right.length > 0)
             {
-                if (compartor.compare(left[0], right[0]) <= 0)  //Comparing First two elements to see which is smaller
+                if (comparator.compare(left[0], right[0]) <= 0)  //Comparing First two elements to see which is smaller
                 {
                     result.push(left[0]);
                     left.shift();
@@ -133,8 +130,6 @@ export class Performer
         return result;
     }
 
-
-   
 
 
     public getByType(desktop: IDesktop, type: string): IObject[] {

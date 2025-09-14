@@ -16,8 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow,
-        ITimeMeasurementConsumer, IPrintedObject
-{
+        ITimeMeasurementConsumer, IPrintedObject {
 
     protected Performer performer = new Performer();
 
@@ -35,8 +34,7 @@ public class DataConsumer extends CategoryObject implements IDataConsumer, IPost
 
     protected Object variable;
 
-    public DataConsumer(String name, IDesktop desktop)
-    {
+    public DataConsumer(String name, IDesktop desktop) {
         super(name, desktop);
         valueSetterFactory = desktop.getValueSetterFactory();
     }
@@ -44,7 +42,6 @@ public class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     protected void init() {
 
     }
-
 
 
     @Override
@@ -56,9 +53,8 @@ public class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     }
 
     @Override
-    public void addMeasurements(IMeasurements item)
-    {
-         measurements.add(item);
+    public void addMeasurements(IMeasurements item) {
+        measurements.add(item);
     }
 
     @Override
@@ -73,7 +69,7 @@ public class DataConsumer extends CategoryObject implements IDataConsumer, IPost
 
     @Override
     public void setTimeMeasurement(ITimeMeasurementProvider provider) {
-timeMeasurement = provider;
+        timeMeasurement = provider;
     }
 
     @Override
@@ -81,8 +77,7 @@ timeMeasurement = provider;
         return 0;
     }
 
-    protected String[] copyMap(Map<String, Entry<Object, Object>> input, Map<String, IValueSetter> output)
-    {
+    protected String[] copyMap(Map<String, Entry<Object, Object>> input, Map<String, IValueSetter> output) {
         return mPefrformer.copyMap(input, output, valueSetterFactory);
     }
 
@@ -92,13 +87,11 @@ timeMeasurement = provider;
     @Override
     public void print(IPrinter printer) {
         var m = getAllMeasurements();
-        for (var mea : m)
-        {
+        for (var mea : m) {
             ICategoryObject co = (ICategoryObject) mea;
             var s = co.getCategoryObjectName() + " ";
             int n = mea.getMeasurementsCount();
-            for (int i = 0; i < n; i++)
-            {
+            for (int i = 0; i < n; i++) {
                 s += mea.getMeasurement(i) + " ";
             }
             printer.print(s + "\n");

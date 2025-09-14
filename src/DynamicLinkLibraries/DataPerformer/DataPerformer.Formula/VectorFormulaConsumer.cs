@@ -27,7 +27,7 @@ namespace DataPerformer.Formula
     /// Vector formula data transformer
     /// </summary>
     public class VectorFormulaConsumer :
-       DataConsumerMeasurements, IStarted,   IVariableDetector,
+       DataConsumerMeasurements, IStarted, IVariableDetector,
        IRuntimeUpdate, ITreeCollection, ITimeVariable, 
         IReplaceMeasurements, IPostSetArrow
     {

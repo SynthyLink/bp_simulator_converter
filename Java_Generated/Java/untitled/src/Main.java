@@ -17,9 +17,9 @@ public class Main {
         list.add(new general_service.Entry(new int[] { 1, 2}, "" ));
         var a = new Actor();
     //a.testRandomTwo();
-     //   a.testODE_Feedback();
+        a.testODE_Feedback();
       //  a.testOrbitalForecast();
-     a.testRecusveFeedback();
+  //   a.testRecusveFeedback();
       // a.testRecusveFeedbackSimple();
 
 

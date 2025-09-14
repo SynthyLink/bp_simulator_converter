@@ -299,12 +299,14 @@ namespace DataPerformer.Portable
             }
         }
 
+   
 
-         /// <summary>
+
+        /// <summary>
         /// Adds measurements provider 
         /// </summary>
         /// <param name="measurements">Provider to add</param>
-        public void Add(IMeasurements measurements)
+        protected void Add(IMeasurements measurements)
         {
             if (measurements is MeasurementsWrapper)
             {
