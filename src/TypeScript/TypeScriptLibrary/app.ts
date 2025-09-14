@@ -2,7 +2,7 @@ import { Actor } from "./Tests/Actor/Actor";
 
 let a = new Actor();
 
-//a.actOrbitCalculation();
+a.actOrbitCalculation();// 1770457504
 
 //a.actODEFeedback();
 
@@ -11,7 +11,7 @@ let a = new Actor();
 //a.actFeedbackFormula();
 //a.actRecursiveFeedbackSimplw();
 
-a.actODE_FeedAct();
+//a.actODE_FeedAct();
 
 a.finish(undefined);
 

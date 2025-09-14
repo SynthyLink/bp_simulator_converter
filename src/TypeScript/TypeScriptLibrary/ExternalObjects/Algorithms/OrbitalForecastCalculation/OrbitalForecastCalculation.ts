@@ -54,7 +54,7 @@ import { OrbitalForecast } from "./OrbitalForecast";
         this.runtime = new DataRuntimeConsumerODE(this.dc, processor);
         let p = new PefrormerMeasuremets();
         this.alias.setAliasValue("x", condition.X);
-        p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, 0, 1, 18000, this);
+        p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, 1770457504, 1, 18000, this);
 
         return this.list;
     }

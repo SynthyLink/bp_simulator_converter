@@ -21,10 +21,10 @@ export class DifferentialEquationSolverFormula extends DataConsumerVariableMeasu
         this.types.push("DifferentrialEquationSolverFormula");
     }
     setDifferentialEquationSolverTimeProvider(time: ITimeMeasurementProvider): void {
-        throw new Error("Method not implemented.");
+        this.time = time;
     }
     getDifferentialEquationSolverTimeProvider(): ITimeMeasurementProvider {
-        throw new Error("Method not implemented.");
+        return this.time;
     }
 
     startedStart(start: number): void
@@ -88,6 +88,8 @@ export class DifferentialEquationSolverFormula extends DataConsumerVariableMeasu
     protected derivations: Map<string, IValue> = new Map();
 
     protected deri: IValue[] = [];
+
+    time !: ITimeMeasurementProvider;
 
 
    
