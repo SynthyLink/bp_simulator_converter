@@ -4,22 +4,85 @@ import category_theory.interfaces.ICategoryObject;
 import general_service.Entry;
 import general_service.interfaces.*;
 import measurements.interfaces.*;
+import measurements.service.MeasurementsComparator;
 import measurements.time.TimeMeasurementProvider;
 import runtime.interfaces.IDataRuntime;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Performer {
 
     protected general_service.Performer performer = new general_service.Performer();
 
+    Comparator<IMeasurements> comparator = new MeasurementsComparator();
+
     public IMeasurement get(IDataConsumer dc, int[] k) {
         var m = dc.getAllMeasurements();
         var measurements = m[k[0]];
         return measurements.getMeasurement(k[1]);
+    }
+
+    /// <summary>
+    /// Gets dependent objects of data consumer
+    /// </summary>
+    /// <param name="consumer">The data consumer</param>
+    /// <param name="list">List of dependent objects</param>
+    public void GetDependentObjects(IDataConsumer consumer, List<Object> list)
+    {
+        var meas = consumer.getAllMeasurements();
+        for (var m : meas)
+        {
+          /*  if (m is IRuntimeUpdate)
+            {
+                if (!(m as IRuntimeUpdate).ShouldRuntimeUpdate)
+                {
+                    continue;
+                }
+            }*/
+            if (!list.contains(m))
+            {
+                list.add(0, m);
+            }
+            if (m instanceof IDataConsumer c)
+            {
+                GetDependentObjects(c, list);
+            }
+        }
+    }
+
+
+
+    public  void GetDependent(List<IMeasurements> measurements,
+                                   List<Object> list, List<IMeasurements> dependent)
+    {
+        dependent.clear();
+        list.clear();
+        for (IMeasurements m : measurements)
+        {
+          /*  if (m is IRuntimeUpdate)
+            {
+                if (!(m as IRuntimeUpdate).ShouldRuntimeUpdate)
+                {
+                    continue;
+                }
+            }*/
+            dependent.add(0, m);
+            if (m instanceof IDataConsumer dc)
+            {
+                GetDependentObjects(dc, list);
+                for (var  o : list)
+                {
+                    if (o instanceof IMeasurements mm)
+                    {
+                         if (!dependent.contains(mm))
+                        {
+                            dependent.add(0, mm);
+                        }
+                    }
+                }
+            }
+        }
+        Collections.sort(dependent, comparator);
     }
 
     public Map<String, IMeasurement> getMeasurementMap(IDataConsumer consumer) {
@@ -245,4 +308,6 @@ public class Performer {
         performFixedStepCalculation(runtime,
                 start, step, steps, action, function);
     }
+
+
 }

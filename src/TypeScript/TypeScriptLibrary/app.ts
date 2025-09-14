@@ -4,10 +4,14 @@ let a = new Actor();
 
 //a.actOrbitCalculation();
 
-a.actRecursiveFeedback();
+//a.actODEFeedback();
+
+//a.actRecursiveFeedback();
 
 //a.actFeedbackFormula();
 //a.actRecursiveFeedbackSimplw();
+
+a.actODE_FeedAct();
 
 a.finish(undefined);
 

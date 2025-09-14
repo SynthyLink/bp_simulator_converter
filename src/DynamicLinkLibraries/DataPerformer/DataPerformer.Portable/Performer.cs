@@ -126,7 +126,7 @@ namespace DataPerformer.Portable
         /// <param name="measurements">Source</param>
         /// <param name="list">Dependent objects</param>
         /// <param name="dependent">Dependent measurements</param>
-        public  void GetDependentObjects(IEnumerable<IMeasurements> measurements,
+        public  void GetDependent(IEnumerable<IMeasurements> measurements,
             List<object> list, List<IMeasurements> dependent)
         {
             dependent.Clear();
@@ -141,9 +141,9 @@ namespace DataPerformer.Portable
                     }
                 }
                 dependent.Insert(0, m);
-                if (m is IDataConsumer)
+                if (m is IDataConsumer dc)
                 {
-                    (m as IDataConsumer).GetDependentObjects(list);
+                    GetDependentObjects(dc, list);
                     foreach (object o in list)
                     {
                         if (o is IMeasurements)

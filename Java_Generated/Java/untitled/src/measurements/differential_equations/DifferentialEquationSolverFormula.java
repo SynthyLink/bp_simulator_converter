@@ -25,10 +25,13 @@ public class DifferentialEquationSolverFormula extends DataConsumerVariableMeasu
     @Override
     public void calculateDerivations() {
         feedback.setFeedbacks();
-        mPerformer.updateChildrenData(this);
+       // mPerformer.updateChildrenData(this);
+        for (var d : dependent)
+        {
+            d.updateMeasurements();
+        }
         this.calculateTree();
         this.save();
-
     }
 
     @Override

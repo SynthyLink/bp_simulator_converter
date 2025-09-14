@@ -32,7 +32,7 @@ public class ODE_FeedAct extends ODE_Feed implements IAction, IFuncT<boolean[]> 
         var pr = new RungeProcessor(null);
         var r = new DataRuntimeConsumerODE(consumer, pr);
         var p = new Performer();
-        p.performFixedStepCalculation(r, 0, 1, 30,  this, this, cond);
+        p.performFixedStepCalculation(r, 0, 0.1, 30,  this, this, cond);
 
     }
 

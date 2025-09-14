@@ -76,7 +76,7 @@ namespace DataPerformer.Portable
         /// </summary>
         static StaticExtensionDataPerformerPortable()
         {
-            new CSCodeCreator();
+            new CodeCreators.CSCodeCreator();
             TimeMeasureProviderFactory = new DefautFactory();
             Runtime.DataRuntimeFactory.Singleton.SetBase();
             Runtime.DataRuntimeFactory.Singleton.SetBaseAction();
@@ -811,7 +811,7 @@ namespace DataPerformer.Portable
         public static void GetDependent(this IEnumerable<IMeasurements> measurements,
             List<object> list, List<IMeasurements> dependent)
         {
-            performer.GetDependentObjects(measurements, list, dependent);
+            performer.GetDependent(measurements, list, dependent);
             dependent.Clear();
             list.Clear();
             foreach (IMeasurements m in measurements)

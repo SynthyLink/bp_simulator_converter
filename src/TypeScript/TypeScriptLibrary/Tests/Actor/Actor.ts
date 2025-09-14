@@ -14,6 +14,7 @@ import { OrbitalForecastCalculation } from '../../ExternalObjects/Algorithms/Orb
 import { FeedBackFormulaAct } from '../Wrappers/FeedBackFormulaAct';
 import { RecursvieFeedbackAct } from '../Wrappers/RecursvieFeedbackAct';
 import { RecursiveFeedbackSimpleAct } from '../Wrappers/RecursiveFeedbackSimpleAct';
+import { ODE_FeedAct } from '../Wrappers/ODE_FeedAcs';
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -76,6 +77,18 @@ export class Actor
         }
 
     }
+
+    actODE_FeedAct(): void {
+        try {
+            var o = new ODE_FeedAct();
+            o.test();
+        }
+        catch (e: any) {
+            finish(e);
+        }
+
+    }
+
 
     actRecursiveFeedback(): void {
         try {

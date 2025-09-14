@@ -33,9 +33,6 @@ namespace DataPerformer.Portable
 
         protected IFeedbackCollection feedbackCollection;
 
- 
-        protected Performer performer = new Performer();
-
     
         /// <summary>
         /// String representation of formulas

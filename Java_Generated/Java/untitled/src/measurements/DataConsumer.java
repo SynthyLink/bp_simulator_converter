@@ -32,6 +32,10 @@ public class DataConsumer extends CategoryObject implements IDataConsumer, IPost
 
     protected List<IMeasurements> measurements = new ArrayList<>();
 
+    protected List<IMeasurements> dependent = new ArrayList<>();
+
+    protected List<Object> list = new ArrayList<>();
+
     protected Object variable;
 
     public DataConsumer(String name, IDesktop desktop) {
@@ -53,8 +57,10 @@ public class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     }
 
     @Override
-    public void addMeasurements(IMeasurements item) {
+    public void addMeasurements(IMeasurements item)
+    {
         measurements.add(item);
+        mPefrformer.GetDependent(measurements, list, dependent);
     }
 
     @Override

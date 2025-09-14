@@ -4,7 +4,7 @@ using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 using System.Collections.Generic;
 
-namespace DataPerformer.Portable
+namespace DataPerformer.Portable.CodeCreators
 {
     [Language("C#")]
     class CSCodeCreator : IClassCodeCreator
@@ -44,7 +44,7 @@ namespace DataPerformer.Portable
                     return GetObjectTransformer(objectTransformer);
                 case VectorAssembly vectorAssembly:
                     return Get(vectorAssembly);
-                case  DataPerformer.Portable.RandomGenerator random:
+                case  RandomGenerator random:
                     return Get(random);
                 case DataLink dataLink:
                     str = "DataPerformer.Portable.DataLink";
@@ -82,7 +82,7 @@ namespace DataPerformer.Portable
             return l;
         }
 
-        List<string> Get(DataPerformer.Portable.RandomGenerator random)
+        List<string> Get(RandomGenerator random)
         {
             var l = new List<string>();
             string str = "DataPerformer.Portable.RandomGenerator";
