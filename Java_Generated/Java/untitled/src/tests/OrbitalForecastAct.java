@@ -15,17 +15,12 @@ public class OrbitalForecastAct extends OrbitalForecast implements IAction {
 
     public OrbitalForecastAct() {
         consumer = performer.get(this, "Chart");
-        measurements = performer.get(this, "Recursive");
     }
 
     @Override
     public void action()
     {
-        var n = measurements.getMeasurementsCount();
-        for (var i = 0; i < n; i++) {
-            System.out.print(measurements.getMeasurement(i) + " ");
-        }
-        System.out.println();
+      general_service.Performer.print(consumer);
     }
 
     public void test() {
@@ -33,7 +28,7 @@ public class OrbitalForecastAct extends OrbitalForecast implements IAction {
         var r = new DataRuntimeConsumerODE(consumer, pr);
         var p = new Performer();
        // p.performFixedStepCalculation(r, 0, 1, 18000, this);
-        p.performFixedStepCalculation(r, 0, 1, 18000, this, "Recursive.y");
+        p.performFixedStepCalculation(r, 1770457504, 1, 18000, this, "Recursive.y");
 
     }
 }

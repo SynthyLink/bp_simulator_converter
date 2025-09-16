@@ -27,6 +27,7 @@ namespace BP_Simulator.Light
             return o == null;
         }
 
+
         static void Test()
         {
 
@@ -59,6 +60,10 @@ namespace BP_Simulator.Light
 
         static void TestType()
         {
+            var t1 = new DateTime(1899, 12, 30);
+            var t2 = new DateTime(1970, 1, 1);
+            var d = t2 - t1;
+            return;
             var obj = new Test.Calculation.Forms.Seriaizable.ObjectTransformer();
             var t = obj.GetType();
             string st = t.FullName + "," + t.Assembly;

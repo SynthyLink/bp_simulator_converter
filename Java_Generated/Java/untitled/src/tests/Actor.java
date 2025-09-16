@@ -1,5 +1,7 @@
 package tests;
 
+import external.utilities.date_time.OADateConverter;
+
 public class Actor {
 
     public void testSimpleFormula()
@@ -38,6 +40,18 @@ public class Actor {
     {
         var r = new RandomTwoAct();
         r.test();
+    }
+
+    public void testTime()
+    {
+        double t =  1770463387;
+        t = t / (24 * 60 * 60);
+        System.out.println(t);
+        var x = OADateConverter.fromOADate(t);
+        System.out.println(x);
+        System.out.println((OADateConverter.toOADate(x)));;
+
+
     }
 
     public void testRandomFour()

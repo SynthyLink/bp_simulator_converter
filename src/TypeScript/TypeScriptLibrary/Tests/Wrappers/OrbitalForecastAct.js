@@ -4,7 +4,7 @@ exports.OrbitaForecasAct = void 0;
 const RungeProcessor_1 = require("../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor");
 const PefrormerMeasuremets_1 = require("../../Library/Measurements/PefrormerMeasuremets");
 const DataRuntimeConsumerODE_1 = require("../../Library/Runtime/DataRuntimeConsumerODE");
-const OrbitalForecast_1 = require("../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecast");
+const OrbitalForecast_1 = require("../../Algorithms/OrbitalForecastCalculation/OrbitalForecast");
 class OrbitaForecasAct extends OrbitalForecast_1.OrbitalForecast {
     constructor() {
         super();

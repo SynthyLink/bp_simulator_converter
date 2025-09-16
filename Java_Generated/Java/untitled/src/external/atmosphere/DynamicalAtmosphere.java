@@ -1,6 +1,11 @@
 package external.atmosphere;
 
+import external.geography.GeoCoordinates;
+import external.sun.service.SunCoordinates;
+import external.sun.service.SunPosition;
+import external.sun.service.SunTime;
 import external.utilities.date_time.OADateConverter;
+import linear_algebra.RealMatrix;
 
 import java.time.LocalDateTime;
 
@@ -9,7 +14,10 @@ public class DynamicalAtmosphere
 
     double[] ASoL = new double[]{0};
     double[] DSoL = new double[]{0};
+    double[] ed = new double[]{0};
+    double[] eh = new double[]{0};
 
+    double[] h = new double[]{0};
 
 
     protected Object[] ob = new Object[2];
@@ -77,9 +85,12 @@ public class DynamicalAtmosphere
     double ome = 7.292115085E-5;
     private short [] dd = new short[4];
     protected double[] xout = new double[3];
-    double[] alphastar = new double[]{0};
-    double[] h = new double[]{0};
 
+    private GeoCoordinates coordinates = new GeoCoordinates();
+
+    private SunCoordinates sunCoordinates = new SunCoordinates();
+
+    private RealMatrix realMatrix = new RealMatrix();
 
     public DynamicalAtmosphere()
     {
@@ -129,32 +140,28 @@ public class DynamicalAtmosphere
 
     public double Atm(double t, double[] x)
     {
-        double ttt = t / 86400;
-        LocalDateTime dt = OADateConverter.fromOADate(ttt);
-        //           short ho, mi, ss, sss;
-         int ho = dt.getHour();
+        var r2 = x[0] * x[0] + x[1] * x[1];
+        var lat =Math.atan2(x[2],Math.sqrt(r2));
+        var lon =Math.atan2(x[1], x[0]);
+        coordinates.setLatitude(lat);
+        coordinates.setLongitude(lon);
+        double tday = t / 86400;
+        LocalDateTime dt = OADateConverter.fromOADate(tday);
+        var hh = realMatrix.normalize(x, y, 0);
+        int ho = dt.getHour();
         int mi = dt.getMinute();
         int ss = dt.getSecond();
         long it = (long)t;
-        //DateTime dt1 = DateTime.F
         double sss = 1000 * (t - (double)(it));
-        //sss *= 1000;
-        //dt.DecodeTime(&ho, &mi, &ss, &sss);
         double tt = (ho * 60 + mi) * 60 + ss + .001 * sss;
-        double days = days1900(dt) + 1;
-        //AngleSun(tt-10800.,days-1,ASoL,DSoL);
-        AngleSun(tt - 10800.0, days, ASoL, DSoL);
-        alphastar[0] = zvvr(days);
-        double cosdS = Math.cos(DSoL[0]);
-        //double startime=zvvr(days);
-        //double startime1=zvvr(days-1);
-        //double al=startime;
-        double ca = Math.cos(alphastar[0]), sa = Math.sin(alphastar[0]);
+        SunPosition.getPosition(dt,  coordinates, sunCoordinates, ASoL, DSoL,  ed, eh);
+        var alphastar = SunTime.CalculateGreenwichSiderealTime(dt);
         date[0] = dt.getDayOfMonth();
         date[1] = dt.getMonthValue();
         date[2] = dt.getYear();
-        double rho = atm(x, tt, ASoL[0], DSoL[0], alphastar, h, date);
+        var rho = atm(x, tt, DSoL[0], ASoL[0], alphastar, h, date);
         return rho;
+
     }
 
     /// <summary>
@@ -168,14 +175,14 @@ public class DynamicalAtmosphere
     
 
     double rad(double[] x) {
-    double a = 0;
-    for (int i = 0; i < 3; i++) {
-        a += x[i] * x[i];
+        double a = 0;
+        for (int i = 0; i < 3; i++) {
+            a += x[i] * x[i];
+        }
+        return Math.sqrt(a);
     }
-return Math.sqrt(a);
-}
 
-    double atm(double[] x, double t, double alf, double del, double[] s0, double[] h, int[] it)
+    double atm(double[] x, double t, double alf, double del, double s0, double[] h, int[] it)
     {
         double hh = rad(x);
 
@@ -207,7 +214,7 @@ for (int i = 0; i < 3; i++) {
         double a3 = a2 - N2;
         N2++;
         double ad1 = ad[N2 - 1] + (ad[N2] - ad[N2 - 1]) * a3;
-        double gam = alf + f1[12] - s0[0] - ome * (t - 10800.0);
+        double gam = alf + f1[12] - s0 - ome * (t - 10800.0);
         double cosfi = y[2] * Math.sin(del) + Math.cos(del) * (y[0] * Math.cos(gam) +
                 y[1] * Math.sin(gam));
         double xk4 = 1 + (f1[16] + f1[17] * h[0] + f1[18] * h[0] * h[0]) *
@@ -217,98 +224,8 @@ for (int i = 0; i < 3; i++) {
         double xk2 = 1 + (f1[6] + f1[7] * h[0] + f1[8] * Math.exp(-(h[0] + f1[9]) / f1[10]
                 * (h[0] + f1[9]) / f1[10])) * Math.pow(cosfi2, f1[11] / 2);
         double xk1 = 1.0 + (f1[3] + f1[4] * h[0] + f1[5] * h[0] * h[0]) * (ifa[2] - ifa[0]) / ifa[0];
-        double roh = Math.exp(f1[0] - f1[1] * Math.sqrt(h[0] - f1[2]));
+        double roh = Math.exp(f1[0] - f1[1] *Math.sqrt(h[0] - f1[2]));
         return roh * xk1 * xk2 * xk3 * xk4;
-    }
-
-
-
-
-
-    void AngleSun(double T, double D, double[] ASoL, double[] DSoL)
-    {
-        DSoL[0] = D + T / 86400.0;
-        double TC = DSoL[0] / 36525.0;
-        double TC2 = TC * TC;
-        double TC3 = TC2 * TC;
-        double AL0 = 0.01675104 - 0.0000418 * TC - 0.000000126 * TC2;
-        double aLAM = 4.881627933 + 628.3319507 * TC + 5.279620987e-6 * TC2;
-        double H = 4.908229468 + 3.000526417e-2 * TC + 7.902463001e-6 * TC2 +
-                5.817764173e-8 * TC3;
-        double R = 4.523601515 - 33.75714624 * TC + 3.626406333e-5 * TC2 +
-                3.87850945e-8 * TC3;
-        double E0 = 0.4093197551 - 2.271109689e-4 * TC - 2.86040072e-8 * TC2 +
-                8.77513e-9 * TC3 + 4.465134e-5 * Math.cos(R);
-        double DLH = aLAM - H;
-        double DLH2 = 2.0 * DLH;
-        double aLA0 = aLAM + 2.0 * AL0 * Math.sin(DLH) + 1.25 * AL0 * AL0 * Math.sin(DLH2);
-        double DPSI = -17.23 * Math.sin(R);
-        double SL = Math.sin(aLA0);
-        double CL = Math.cos(aLA0);
-        double CE = Math.cos(E0);
-        double SE = Math.sin(E0);
-        double S1 = SL * CE / CL;
-        double AL = Math.atan(S1);
-        if (CL < 0.0) AL += 3.141592654;
-        if (AL < 0.0) AL += 6.283185308;
-        ASoL[0] = AL + (0.061164 * 15.0 * DPSI - 20.496) * 4.84813681e-6;
-        DSoL[0] = Math.atan(SL * SE / Math.sqrt(CL * CL + SL * SL * CE * CE)) - 9.936741207e-5 *
-                SE * Math.cos(ASoL[0]);
-    }
-
-
-
-
-    static double days1900(LocalDateTime dat)
-    {
-        //int y1975=1975;
-        //      double a=1;
-        //      a+=1;
-        long db = shiftdat(dat);
-        double d = 27393.5;
-        int ii = 3;
-        for (int i = 1975; i < dat.getYear(); i++)
-        {
-            d += 365.0;
-            if (ii == 4)
-            {
-                ii = 0;
-                d += 1.0;
-            }
-            ii++;
-        }
-        var x = d + db;
-        return x;
-    }
-
-    static long shiftdat(LocalDateTime dat)
-    {
-
-        KDNEY[1] = 28;
-        double a = .25 * ((double)1999);
-        a = .25 * (double)dat.getYear();
-        int k = 4 * (int)(0.25 * (double)dat.getYear());
-        if (((int)(.25 * (double)dat.getYear())) * 4 == dat.getYear())
-            KDNEY[1] = 29;
-        int data = dat.getDayOfMonth() - 1;
-        if (dat.getMonthValue() == 1) return data;
-        for (int i = 1; i < dat.getMonthValue(); i++) data += KDNEY[i];
-        return data;
-    }
-
-    static double zvvr(double D)
-    {
-        double T1 = D / 36525.0;
-        double T2 = T1 * T1;
-        double R = 4.52360151 - 0.0009242202 * D + 0.00003626794 * T2;
-        double FF = 0.196365056 + 0.230895722 * D - 0.00005604252 * T2;
-        double DD = 6.12152393 + 0.212768711 * D - 0.00002504547 * T2;
-        double SZV0 = 1.7399358945 + 0.0172027912737 * D +
-                0.675587865e-5 * T2 +
-                Math.cos(0.409319754) * (-0.835464852e-4 * Math.sin(R) -
-                        0.617119333e-5 * Math.sin(2.0 * (R + FF + DD)));
-        int SZ1 = (int)(SZV0 / 6.283185308);
-        return SZV0 - SZ1 * 6.283185308;
     }
 
 }

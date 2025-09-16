@@ -1,20 +1,20 @@
-import { AliasName } from "../../../Library/AliasName";
-import { Desktop } from "../../../Library/Desktop";
-import { FeedbackAliasCollection } from "../../../Library/FeedbackAliasCollection";
-import type { IAliasName } from "../../../Library/Interfaces/IAliasName";
-import type { IDesktop } from "../../../Library/Interfaces/IDesktop";
-import type { IPostSetArrow } from "../../../Library/Interfaces/IPostSetArrow";
-import type  { IValue } from "../../../Library/Interfaces/IValue";
-import { DataLink } from "../../../Library/Measurements/Arrows/DataLink";
-import { ObjectTransformerLink } from "../../../Library/Measurements/Arrows/ObjectTransformerLink";
-import { DataConsumer } from "../../../Library/Measurements/DataConsumer";
-import { DifferentialEquationSolverFormula } from "../../../Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula";
-import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
-import { ObjectTransformer } from "../../../Library/Measurements/ObjectTransformer";
-import { RecursiveFormula } from "../../../Library/Measurements/RecursiveFormula";
-import { VectorFormulaConsumer } from "../../../Library/Measurements/VectorFormulaConsumer";
-import { AtmosphereCategoryObject } from "../../Components/Atmosphere/AtmosphereCategoryObject";
-import { GravityCategoryObject } from "../../Components/Gravity_36_36/GravityCategoryObject";
+import { AliasName } from "../../Library/AliasName";
+import { Desktop } from "../../Library/Desktop";
+import { FeedbackAliasCollection } from "../../Library/FeedbackAliasCollection";
+import type { IAliasName } from "../../Library/Interfaces/IAliasName";
+import type { IDesktop } from "../../Library/Interfaces/IDesktop";
+import type { IPostSetArrow } from "../../Library/Interfaces/IPostSetArrow";
+import type  { IValue } from "../../Library/Interfaces/IValue";
+import { DataLink } from "../../Library/Measurements/Arrows/DataLink";
+import { ObjectTransformerLink } from "../../Library/Measurements/Arrows/ObjectTransformerLink";
+import { DataConsumer } from "../../Library/Measurements/DataConsumer";
+import { DifferentialEquationSolverFormula } from "../../Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula";
+import type { IMeasurement } from "../../Library/Measurements/Interfaces/IMeasurement";
+import { ObjectTransformer } from "../../Library/Measurements/ObjectTransformer";
+import { RecursiveFormula } from "../../Library/Measurements/RecursiveFormula";
+import { VectorFormulaConsumer } from "../../Library/Measurements/VectorFormulaConsumer";
+import { AtmosphereCategoryObject } from "../../ExternalObjects/Components/Atmosphere/AtmosphereCategoryObject";
+import { GravityCategoryObject } from "../../ExternalObjects/Components/Gravity_36_36/GravityCategoryObject";
 
 class OrbitalForecast_CategoryObject_0 extends AtmosphereCategoryObject
 {

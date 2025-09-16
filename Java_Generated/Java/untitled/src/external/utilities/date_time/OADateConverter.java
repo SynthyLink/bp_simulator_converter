@@ -1,12 +1,32 @@
 package external.utilities.date_time;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class OADateConverter {
 
-    // The epoch for Ole Automation Date (December 30, 1899, 00:00:00)
+
+    static  int msPerDay = 24 * 60 * 60 * 1000;
+
+    static  long msPerNano =   24 * 60 * 60 * 1_000_000_000L;
+
+    static double nanoInvert;
+
+    static {
+        var a = (double) msPerNano;
+        nanoInvert = 1.0 / a;
+    }
+
+    // The epoch for Ole Automation Date (December 30, 1899, 00:00:00);
     private static final LocalDateTime OADATE_EPOCH = LocalDateTime.of(1899, 12, 30, 0, 0, 0);
+
+    public static double toOADate(LocalDateTime oaDate)
+    {
+        Duration duration = Duration.between(OADATE_EPOCH, oaDate);
+        long n =  duration.toNanos();
+        return (double)n * nanoInvert;
+    }
 
     /**
      * Converts an Ole Automation Date (OADate) double to a Java LocalDateTime.

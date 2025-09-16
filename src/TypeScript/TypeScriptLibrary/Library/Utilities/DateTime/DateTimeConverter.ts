@@ -1,9 +1,35 @@
-import type { DateTime } from 'luxon';
 export class DateTimeConverter {
 
-    public toBinary(dateTime: DateTime): number
+    baseOADate: Date = new Date(1899, 12, 30, 0, 0, 0, 0);
+
+    baseDate: Date = new Date(0);
+
+    baseDays: number = 25569;
+
+    coeff: number = 86400000;
+
+    coeffI: number = 1.0 / 86400000.0;
+
+
+  /*  constructor()
     {
-        const utc = dateTime.toUTC();
-        return 0;
+        var x = this.baseOADate.getTime();
+        this.baseDays = x * this.coeffI - 2;
+    }*/
+
+    public toOADate(date: Date): number
+    {
+        var x = date.getTime() * this.coeffI;
+        return x - this.baseDays;
     }
+
+
+    public fromOADate(date: number): Date
+    {
+        var x = date - this.baseDays;
+        x *= this.coeff;
+        return new Date(x);
+   
+    }
+    
 }

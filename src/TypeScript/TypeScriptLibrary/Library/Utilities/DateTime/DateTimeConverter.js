@@ -2,9 +2,26 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DateTimeConverter = void 0;
 class DateTimeConverter {
-    toBinary(dateTime) {
-        const utc = dateTime.toUTC();
-        return 0;
+    constructor() {
+        this.baseOADate = new Date(1899, 12, 30, 0, 0, 0, 0);
+        this.baseDate = new Date(0);
+        this.baseDays = 25569;
+        this.coeff = 86400000;
+        this.coeffI = 1.0 / 86400000.0;
+    }
+    /*  constructor()
+      {
+          var x = this.baseOADate.getTime();
+          this.baseDays = x * this.coeffI - 2;
+      }*/
+    toOADate(date) {
+        var x = date.getTime() * this.coeffI;
+        return x - this.baseDays;
+    }
+    fromOADate(date) {
+        var x = date - this.baseDays;
+        x *= this.coeff;
+        return new Date(x);
     }
 }
 exports.DateTimeConverter = DateTimeConverter;

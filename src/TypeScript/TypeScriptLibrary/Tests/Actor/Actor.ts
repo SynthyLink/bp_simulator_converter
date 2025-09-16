@@ -10,11 +10,12 @@ import { ODE_FeedbackAct } from '../Wrappers/ODE_FeedbackAct';
 import { TransformerRecursveAct } from '../Wrappers/TransformerRecursveAct';
 import { PIAct } from '../Wrappers/PIAct';
 import { OrbitaForecasAct } from '../Wrappers/OrbitalForecastAct';
-import { OrbitalForecastCalculation } from '../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation';
+import { OrbitalForecastCalculation } from '../../Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation';
 import { FeedBackFormulaAct } from '../Wrappers/FeedBackFormulaAct';
 import { RecursvieFeedbackAct } from '../Wrappers/RecursvieFeedbackAct';
 import { RecursiveFeedbackSimpleAct } from '../Wrappers/RecursiveFeedbackSimpleAct';
 import { ODE_FeedAct } from '../Wrappers/ODE_FeedAcs';
+import { DateTimeConverter } from '../../Library/Utilities/DateTime/DateTimeConverter';
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -58,12 +59,25 @@ export class Actor
     async actOrbitCalculation(): Promise<void> {
         var o = new OrbitalForecastCalculation();
         const cond = {
-            Begin: 0, End: 20000, X: -5448.34815324, Y: -4463.93698421, Z: 0, Vx: 0.98539477743, Vy: 1.21681893834, Vz: 7.45047785592
+            Begin: 1770457504, End: 18000, X: -5448.34815324, Y: -4463.93698421, Z: 0, Vx: 0.98539477743, Vy: 1.21681893834, Vz: 7.45047785592
         };
         var ab = new AbortController();
         const t = await o.calculate(cond, ab);
         console.log(t);
         console.log("finish");
+    }
+
+    actTime(): void {
+        console.log(new Date(0));
+        var x = new DateTimeConverter();
+        console.log(x.fromOADate(0));
+        var  t = 1770463387;
+        t = t / (24 * 60 * 60);
+        console.log(t);
+        var d = x.fromOADate(t);
+        console.log(d);
+        console.log(x.toOADate(d));
+
     }
 
 

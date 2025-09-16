@@ -2,17 +2,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { IAction } from "../../../Library/Interfaces/IAction";
-import type { IAlias } from "../../../Library/Interfaces/IAlias";
-import type { IFunc } from "../../../Library/Interfaces/IFunc";
-import { RungeProcessor } from "../../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor";
-import type { IDataConsumer } from "../../../Library/Measurements/Interfaces/IDataConsumer";
-import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
-import type { IMeasurements } from "../../../Library/Measurements/Interfaces/IMeasurements";
-import { PefrormerMeasuremets } from "../../../Library/Measurements/PefrormerMeasuremets";
-import { Performer } from "../../../Library/Performer";
-import { DataRuntimeConsumerODE } from "../../../Library/Runtime/DataRuntimeConsumerODE";
-import type { IDataRuntime } from "../../../Library/Runtime/Interfaces/IDataRuntime";
+import type { IAction } from "../../Library/Interfaces/IAction";
+import type { IAlias } from "../../Library/Interfaces/IAlias";
+import type { IFunc } from "../../Library/Interfaces/IFunc";
+import { RungeProcessor } from "../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor";
+import type { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
+import type { IMeasurement } from "../../Library/Measurements/Interfaces/IMeasurement";
+import type { IMeasurements } from "../../Library/Measurements/Interfaces/IMeasurements";
+import { PefrormerMeasuremets } from "../../Library/Measurements/PefrormerMeasuremets";
+import { Performer } from "../../Library/Performer";
+import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
+import type { IDataRuntime } from "../../Library/Runtime/Interfaces/IDataRuntime";
 import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./OrbitalData";
 import { OrbitalForecast } from "./OrbitalForecast";
 
@@ -54,7 +54,12 @@ import { OrbitalForecast } from "./OrbitalForecast";
         this.runtime = new DataRuntimeConsumerODE(this.dc, processor);
         let p = new PefrormerMeasuremets();
         this.alias.setAliasValue("x", condition.X);
-        p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, 1770457504, 1, 18000, this);
+        this.alias.setAliasValue("y", condition.Y);
+        this.alias.setAliasValue("z", condition.Z);
+        this.alias.setAliasValue("v", condition.Vx);
+        this.alias.setAliasValue("u", condition.Vy);
+        this.alias.setAliasValue("w", condition.Vz);
+        p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, condition.Begin, 1, condition.End, this);
 
         return this.list;
     }

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Actor_1 = require("./Tests/Actor/Actor");
 let a = new Actor_1.Actor();
+//a.actTime();
 a.actOrbitCalculation(); // 1770457504
 //a.actODEFeedback();
 //a.actRecursiveFeedback();

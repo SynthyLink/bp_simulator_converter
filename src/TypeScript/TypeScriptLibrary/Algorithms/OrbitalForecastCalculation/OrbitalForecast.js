@@ -1,18 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrbitalForecast = void 0;
-const AliasName_1 = require("../../../Library/AliasName");
-const Desktop_1 = require("../../../Library/Desktop");
-const FeedbackAliasCollection_1 = require("../../../Library/FeedbackAliasCollection");
-const DataLink_1 = require("../../../Library/Measurements/Arrows/DataLink");
-const ObjectTransformerLink_1 = require("../../../Library/Measurements/Arrows/ObjectTransformerLink");
-const DataConsumer_1 = require("../../../Library/Measurements/DataConsumer");
-const DifferentialEquationSolverFormula_1 = require("../../../Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula");
-const ObjectTransformer_1 = require("../../../Library/Measurements/ObjectTransformer");
-const RecursiveFormula_1 = require("../../../Library/Measurements/RecursiveFormula");
-const VectorFormulaConsumer_1 = require("../../../Library/Measurements/VectorFormulaConsumer");
-const AtmosphereCategoryObject_1 = require("../../Components/Atmosphere/AtmosphereCategoryObject");
-const GravityCategoryObject_1 = require("../../Components/Gravity_36_36/GravityCategoryObject");
+const AliasName_1 = require("../../Library/AliasName");
+const Desktop_1 = require("../../Library/Desktop");
+const FeedbackAliasCollection_1 = require("../../Library/FeedbackAliasCollection");
+const DataLink_1 = require("../../Library/Measurements/Arrows/DataLink");
+const ObjectTransformerLink_1 = require("../../Library/Measurements/Arrows/ObjectTransformerLink");
+const DataConsumer_1 = require("../../Library/Measurements/DataConsumer");
+const DifferentialEquationSolverFormula_1 = require("../../Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula");
+const ObjectTransformer_1 = require("../../Library/Measurements/ObjectTransformer");
+const RecursiveFormula_1 = require("../../Library/Measurements/RecursiveFormula");
+const VectorFormulaConsumer_1 = require("../../Library/Measurements/VectorFormulaConsumer");
+const AtmosphereCategoryObject_1 = require("../../ExternalObjects/Components/Atmosphere/AtmosphereCategoryObject");
+const GravityCategoryObject_1 = require("../../ExternalObjects/Components/Gravity_36_36/GravityCategoryObject");
 class OrbitalForecast_CategoryObject_0 extends AtmosphereCategoryObject_1.AtmosphereCategoryObject {
     constructor(desktop, name) {
         super(desktop, name);

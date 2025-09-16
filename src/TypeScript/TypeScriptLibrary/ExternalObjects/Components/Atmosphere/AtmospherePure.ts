@@ -3,6 +3,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { DateTimeConverter } from "../../../Library/Utilities/DateTime/DateTimeConverter";
+import { RealMatrix } from "../../../Library/Utilities/Linear_Algebra/RealMatrix";
+import { GeoCoordinates } from "../../Libraries/Geography/GeoCoordinates";
+import { SunCoordinates } from "../../Libraries/Sun.Service/SunCoordinates";
+import { SunPosition } from "../../Libraries/Sun.Service/SunPosition";
+import { SunTime } from "../../Libraries/Sun.Service/SunTime";
+
 export class AtmospherePure {
 
     constructor() {
@@ -12,6 +19,8 @@ export class AtmospherePure {
 
     protected ASoL: number[] = [0]
     protected DSoL: number[] = [0]
+    protected ed: number[] = [0]
+    protected eh: number[] = [0]
 
 
 
@@ -129,36 +138,26 @@ export class AtmospherePure {
 
    
         public Atm(t: number, x: number[]) : number {
-            let ttt = t / 86400;
-         //   let dt =  fromOADate(ttt);
-            //           short ho, mi, ss, sss;
-         /*    int ho = dt.getHour();
-            int mi = dt.getMinute();
-            int ss = dt.getSecond();
-            long it = (long)t;
-            //DateTime dt1 = DateTime.F
-            double sss = 1000 * (t - (double)(it));
-            //sss *= 1000;
-            //dt.DecodeTime(&ho, &mi, &ss, &sss);
-            double tt = (ho * 60 + mi) * 60 + ss + .001 * sss;
-            double days = days1900(dt) + 1;
-            //AngleSun(tt-10800.,days-1,ASoL,DSoL);*/
-            var days = 0;
-            this.AngleSun(ttt - 10800.0, days, this.ASoL, this.DSoL);
-            this.alphastar[0] = 0;// zvvr(days);
-            let cosdS = Math.cos(this.DSoL[0]);
-            //double startime=zvvr(days);
-            //double startime1=zvvr(days-1);
-            //double al=startime;
-            let ca = Math.cos(this.alphastar[0]);
-            let sa = Math.sin(this.alphastar[0]);
-           /* date[0] = dt.getDayOfMonth();
-            date[1] = dt.getMonthValue();
-            date[2] = dt.getYear();*/
-            this.date[0] = 1;
-            this.date[1] = 1;
-            this.date[2] = 2025;
-            let rho = this.atm(x, ttt, this.ASoL[0], this.DSoL[0], this.alphastar, this.h, this.date);
+            var r2 = x[0] * x[0] + x[1] * x[1];
+            var lat = Math.atan2(x[2], Math.sqrt(r2));
+            var lon = Math.atan2(x[1], x[0]);
+            this.coordinates.setLatitude(lat);
+            this.coordinates.setLongitude(lon);
+        let tday = t / 86400;
+        let dt = this.dateTimeConverter.fromOADate(tday);
+            var hh = this.realMatrix.normalize(x, this.y, 0);
+        let ho = dt.getHours();
+        let mi = dt.getMinutes();
+            let ss = dt.getSeconds();
+            let it = Math.floor(t);
+        let sss = 1000 * (t - it);
+            let tt = (ho * 60 + mi) * 60 + ss + .001 * sss;
+            this.sunPosition.getPosition(dt, this.coordinates, this.sunCoordinates, this.ASoL, this.DSoL, this.ed, this.eh);
+            var alphastar = this.sunTime.CalculateGreenwichSiderealTimeFromDate(dt);
+            this.date[0] = dt.getDay();
+            this.date[1] = dt.getMonth();
+            this.date[2] = dt.getFullYear();
+            var rho = this.atm(x, tt, this.DSoL[0], this.ASoL[0], alphastar, this.h, this.date);
             return rho;
         }
 
@@ -179,9 +178,9 @@ export class AtmospherePure {
         return Math.sqrt(a);
     }
 
-    atm(x: number[], t: number, alf: number, del: number, s0: number[], h: number[], it: number[]): number
+    atm(x: number[], t: number, alf: number, del: number, s0: number, h: number[], it: number[]): number
     {
-       let hh = this.rad(x);
+        let hh = this.rad(x);
 
         for (let i = 0; i < 3; i++) {
             this.y[i] = x[i] / hh;
@@ -195,22 +194,21 @@ export class AtmospherePure {
         }
         let N3 = it[1] - 1;
         let a2 = 0;
-        let  dat2 = 0;
+        let dat2 = 0;
         if (N3 <= 0)
             a2 = it[0] / 10;
-        else
-        {
-    dat2 = it[1] / 4;
-    if (Math.abs(Math.floor(dat2 + .00001) - dat2) < .0001)
-        a2 = (this.mac[N3 - 1] + 1 + it[0]) / 10.0;
-    else
-        a2 = (this.mac[N3 - 1] + it[0]) / 10.0;
-}
+        else {
+            dat2 = it[1] / 4;
+            if (Math.abs(Math.floor(dat2 + .00001) - dat2) < .0001)
+                a2 = (this.mac[N3 - 1] + 1 + it[0]) / 10.0;
+            else
+                a2 = (this.mac[N3 - 1] + it[0]) / 10.0;
+        }
         let N2 = Math.floor(a2);
-        let  a3 = a2 - N2;
-N2++;
+        let a3 = a2 - N2;
+        N2++;
         let ad1 = this.ad[N2 - 1] + (this.ad[N2] - this.ad[N2 - 1]) * a3;
-        let gam = alf + this.f1[12] - s0[0] - this.ome * (t - 10800.0);
+        let gam = alf + this.f1[12] - s0 - this.ome * (t - 10800.0);
         let cosfi = this.y[2] * Math.sin(del) + Math.cos(del) * (this.y[0] * Math.cos(gam) +
             this.y[1] * Math.sin(gam));
         let xk4 = 1 + (this.f1[16] + this.f1[17] * this.h[0] + this.f1[18] * this.h[0] * this.h[0]) *
@@ -221,97 +219,28 @@ N2++;
             * (h[0] + this.f1[9]) / this.f1[10])) * Math.pow(cosfi2, this.f1[11] / 2);
         let xk1 = 1.0 + (this.f1[3] + this.f1[4] * this.h[0] + this.f1[5] * this.h[0] * this.h[0]) * (this.ifa[2] - this.ifa[0]) / this.ifa[0];
         let roh = Math.exp(this.f1[0] - this.f1[1] * Math.sqrt(this.h[0] - this.f1[2]));
-return roh * xk1 * xk2 * xk3 * xk4;
+        return roh * xk1 * xk2 * xk3 * xk4;
     }
 
 
 
 
 
-AngleSun(T: number, D : number, ASoL : number[], DSoL : number[]) : void
-{
-    DSoL[0] = D + T / 86400.0;
-        let TC = DSoL[0] / 36525.0;
-        let TC2 = TC * TC;
-        let TC3 = TC2 * TC;
-        let AL0 = 0.01675104 - 0.0000418 * TC - 0.000000126 * TC2;
-        let aLAM = 4.881627933 + 628.3319507 * TC + 5.279620987e-6 * TC2;
-        let H = 4.908229468 + 3.000526417e-2 * TC + 7.902463001e-6 * TC2 +
-        5.817764173e-8 * TC3;
-        let R = 4.523601515 - 33.75714624 * TC + 3.626406333e-5 * TC2 +
-        3.87850945e-8 * TC3;
-        let E0 = 0.4093197551 - 2.271109689e-4 * TC - 2.86040072e-8 * TC2 +
-        8.77513e-9 * TC3 + 4.465134e-5 * Math.cos(R);
-        let DLH = aLAM - H;
-        let DLH2 = 2.0 * DLH;
-        let aLA0 = aLAM + 2.0 * AL0 * Math.sin(DLH) + 1.25 * AL0 * AL0 * Math.sin(DLH2);
-        let DPSI = -17.23 * Math.sin(R);
-        let SL = Math.sin(aLA0);
-        let CL = Math.cos(aLA0);
-        let CE = Math.cos(E0);
-        let SE = Math.sin(E0);
-        let S1 = SL * CE / CL;
-        let AL = Math.atan(S1);
-    if (CL < 0.0) AL += 3.141592654;
-    if (AL < 0.0) AL += 6.283185308;
-    ASoL[0] = AL + (0.061164 * 15.0 * DPSI - 20.496) * 4.84813681e-6;
-    DSoL[0] = Math.atan(SL * SE / Math.sqrt(CL * CL + SL * SL * CE * CE)) - 9.936741207e-5 *
-        SE * Math.cos(ASoL[0]);
-}
 
 
+    private coordinates: GeoCoordinates = new GeoCoordinates();
 
-/*
-    static double days1900(LocalDateTime dat)
-{
-        //int y1975=1975;
-        //      double a=1;
-        //      a+=1;
-        long db = shiftdat(dat);
-        double d = 27393.5;
-        int ii = 3;
-    for (int i = 1975; i < dat.getYear(); i++)
-    {
-        d += 365.0;
-        if (ii == 4) {
-            ii = 0;
-            d += 1.0;
-        }
-        ii++;
-    }
-    var x = d + db;
-    return x;
-}
+    private sunCoordinates: SunCoordinates = new SunCoordinates();
 
-    static long shiftdat(LocalDateTime dat)
-{
+    private realMatrix: RealMatrix = new RealMatrix();
 
-    KDNEY[1] = 28;
-        double a = .25 * ((double)1999);
-    a = .25 * (double)dat.getYear();
-        int k = 4 * (int)(0.25 * (double)dat.getYear());
-    if (((int)(.25 * (double)dat.getYear())) * 4 == dat.getYear())
-        KDNEY[1] = 29;
-        int data = dat.getDayOfMonth() - 1;
-    if (dat.getMonthValue() == 1) return data;
-    for (int i = 1; i < dat.getMonthValue(); i++) data += KDNEY[i];
-    return data;
-}
-*/
-    static zvvr(D: number): number
-{
-        let T1 = D / 36525.0;
-        let T2 = T1 * T1;
-        let R = 4.52360151 - 0.0009242202 * D + 0.00003626794 * T2;
-        let FF = 0.196365056 + 0.230895722 * D - 0.00005604252 * T2;
-        let DD = 6.12152393 + 0.212768711 * D - 0.00002504547 * T2;
-        let SZV0 = 1.7399358945 + 0.0172027912737 * D +
-        0.675587865e-5 * T2 +
-        Math.cos(0.409319754) * (-0.835464852e-4 * Math.sin(R) -
-                0.617119333e-5 * Math.sin(2.0 * (R + FF + DD)));
-        let SZ1 = Math.floor(SZV0 / 6.283185308);
-    return SZV0 - SZ1 * 6.283185308;
-}
+    private sunPosition: SunPosition = new SunPosition();
+
+    private sunTime: SunTime = new SunTime();
+
+    private dateTimeConverter: DateTimeConverter = new DateTimeConverter();
+
+
 
 
 }

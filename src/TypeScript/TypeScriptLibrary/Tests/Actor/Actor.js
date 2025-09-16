@@ -54,11 +54,12 @@ const ODE_FeedbackAct_1 = require("../Wrappers/ODE_FeedbackAct");
 const TransformerRecursveAct_1 = require("../Wrappers/TransformerRecursveAct");
 const PIAct_1 = require("../Wrappers/PIAct");
 const OrbitalForecastAct_1 = require("../Wrappers/OrbitalForecastAct");
-const OrbitalForecastCalculation_1 = require("../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation");
+const OrbitalForecastCalculation_1 = require("../../Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation");
 const FeedBackFormulaAct_1 = require("../Wrappers/FeedBackFormulaAct");
 const RecursvieFeedbackAct_1 = require("../Wrappers/RecursvieFeedbackAct");
 const RecursiveFeedbackSimpleAct_1 = require("../Wrappers/RecursiveFeedbackSimpleAct");
 const ODE_FeedAcs_1 = require("../Wrappers/ODE_FeedAcs");
+const DateTimeConverter_1 = require("../../Library/Utilities/DateTime/DateTimeConverter");
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -99,13 +100,24 @@ class Actor {
         return __awaiter(this, void 0, void 0, function* () {
             var o = new OrbitalForecastCalculation_1.OrbitalForecastCalculation();
             const cond = {
-                Begin: 0, End: 20000, X: -5448.34815324, Y: -4463.93698421, Z: 0, Vx: 0.98539477743, Vy: 1.21681893834, Vz: 7.45047785592
+                Begin: 1770457504, End: 18000, X: -5448.34815324, Y: -4463.93698421, Z: 0, Vx: 0.98539477743, Vy: 1.21681893834, Vz: 7.45047785592
             };
             var ab = new AbortController();
             const t = yield o.calculate(cond, ab);
             console.log(t);
             console.log("finish");
         });
+    }
+    actTime() {
+        console.log(new Date(0));
+        var x = new DateTimeConverter_1.DateTimeConverter();
+        console.log(x.fromOADate(0));
+        var t = 1770463387;
+        t = t / (24 * 60 * 60);
+        console.log(t);
+        var d = x.fromOADate(t);
+        console.log(d);
+        console.log(x.toOADate(d));
     }
     actFeedbackFormula() {
         try {
