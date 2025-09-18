@@ -138,7 +138,7 @@ public class DynamicalAtmosphere
 
 
 
-    public double Atm(double t, double[] x)
+    public double atmosphere(double t, double[] x)
     {
         var r2 = x[0] * x[0] + x[1] * x[1];
         var lat =Math.atan2(x[2],Math.sqrt(r2));
@@ -186,9 +186,9 @@ public class DynamicalAtmosphere
     {
         double hh = rad(x);
 
-for (int i = 0; i < 3; i++) {
-    y[i] = x[i] / hh;
-}
+     for (int i = 0; i < 3; i++) {
+         y[i] = x[i] / hh;
+     }
         h[0] = hh - 6378.140 * (1.0 - 0.335282E-2 * y[2] * y[2]);
         if (h[0] <= 180)
         {

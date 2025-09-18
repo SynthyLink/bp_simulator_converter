@@ -7,14 +7,14 @@ class SunPosition {
         this.dAstronomicalUnit = 149597890; // In km
     }
     convertToJulian(date) {
-        let Month = date.getMonth();
-        let Day = date.getDay();
+        let Day = date.getDate();
+        let Month = date.getMonth() + 1;
         let Year = date.getFullYear();
         if (Month < 3) {
             Month = Month + 12;
             Year = Year - 1;
         }
-        let JulianDay = Day + (153 * Month - 457) / 5 + 365 * Year + (Year / 4) - (Year / 100) + (Year / 400) + 1721119;
+        let JulianDay = Day + Math.floor((153 * Month - 457) / 5) + 365 * Year + Math.floor((Year / 4)) - Math.floor((Year / 100)) + Math.floor((Year / 400)) + 1721119;
         return JulianDay;
     }
     /// <summary>
@@ -24,8 +24,12 @@ class SunPosition {
     /// <param name="dDeclination"></param>
     /// <param name="dRightAscension"></param>
     getPositionFull(time, dDeclination, dRightAscension, dElapsedJulianDays, dDecimalHours) {
-        dDecimalHours[0] = time.getHours() + (time.getMinutes()
-            + (time.getSeconds() / 60.0) / 60.0);
+        var h = time.getHours();
+        var m = time.getMinutes();
+        var s = time.getSeconds();
+        var ss = s / 60.0;
+        var mm = (m + ss) / 60;
+        dDecimalHours[0] = h + ss + mm;
         dElapsedJulianDays[0] = this.convertToJulian(time) - 0.5 - 2451545.0 + dDecimalHours[0] / 24.0;
         // Calculate ecliptic coordinates (ecliptic longitude and obliquity of the
         // ecliptic in radians but without limiting the angle to be less than 2*Pi

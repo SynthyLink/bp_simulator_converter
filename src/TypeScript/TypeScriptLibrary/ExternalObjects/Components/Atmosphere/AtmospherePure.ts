@@ -13,15 +13,14 @@ import { SunTime } from "../../Libraries/Sun.Service/SunTime";
 export class AtmospherePure {
 
     constructor() {
-      //  this.init();
-      //  this.setIf(this.ifa);
+        this.initSelf();
+        this.setIf(this.ifa);
     }
 
     protected ASoL: number[] = [0]
     protected DSoL: number[] = [0]
     protected ed: number[] = [0]
     protected eh: number[] = [0]
-
 
 
     //  protected Object[] ob = new Object[2];
@@ -93,7 +92,13 @@ export class AtmospherePure {
     protected h: number[] = [0]
 
 
-    private init(): void {
+    private set(x: number[], n: number): void {
+        for (let i = 0; i < n; i++) {
+            x.push(0);
+        }
+    }
+
+    private initSelf(): void {
         if (this.ff0.length > 0) {
             return;
         }
@@ -105,29 +110,28 @@ export class AtmospherePure {
         for (let i = 0; i < this.ff0.length; i++) {
             let fff: number[] = [];
             let fff1: number[] = [];
-            for (var ii = 0; ii < 21; ii++) {
-                fff.push(0);
-                fff1.push(0);
-            }
-            this.ff0.push(fff);
-            this.ff1.push(fff1);
-
+            this.set(fff, 21);
+            this.set(fff1, 21);
+            this.ff0[i] = fff;
+            this.ff1[i] = fff1;
             let j = i * 21;
             for (let k = 0; k < 21; k++) {
-                let nn = k + j;
-                fff[k] = this.f0[nn];
-                fff1[k] = this.f01[nn];
+                let n = k + j;
+                fff[k] = this.f0[n];
+                fff1[k] = this.f01[n];
             }
         }
     }
+
     protected setIf(value: number[]): void
     {
         this.N10 = 0;
         for (var i = 0; i < 6; i++) {
-            if (this.f1[i] == value[0]) {
+            if (this.if1[i] == value[0]) {
                 break;
             }
-            else {
+            else
+            {
                 this.N10++;
             }
         }
@@ -137,29 +141,35 @@ export class AtmospherePure {
     }
 
    
-        public Atm(t: number, x: number[]) : number {
-            var r2 = x[0] * x[0] + x[1] * x[1];
-            var lat = Math.atan2(x[2], Math.sqrt(r2));
-            var lon = Math.atan2(x[1], x[0]);
-            this.coordinates.setLatitude(lat);
-            this.coordinates.setLongitude(lon);
+    public atmosphere(t: number, x: number[]): number {
+        var r2 = x[0] * x[0] + x[1] * x[1];
+        var lat = Math.atan2(x[2], Math.sqrt(r2));
+        var lon = Math.atan2(x[1], x[0]);
+        this.coordinates.setLatitude(lat);
+        this.coordinates.setLongitude(lon);
         let tday = t / 86400;
         let dt = this.dateTimeConverter.fromOADate(tday);
-            var hh = this.realMatrix.normalize(x, this.y, 0);
+        var hh = this.realMatrix.normalize(x, this.y, 0);
         let ho = dt.getHours();
         let mi = dt.getMinutes();
-            let ss = dt.getSeconds();
-            let it = Math.floor(t);
+        let ss = dt.getSeconds();
+        let it = Math.floor(t);
         let sss = 1000 * (t - it);
-            let tt = (ho * 60 + mi) * 60 + ss + .001 * sss;
-            this.sunPosition.getPosition(dt, this.coordinates, this.sunCoordinates, this.ASoL, this.DSoL, this.ed, this.eh);
-            var alphastar = this.sunTime.CalculateGreenwichSiderealTimeFromDate(dt);
-            this.date[0] = dt.getDay();
-            this.date[1] = dt.getMonth();
-            this.date[2] = dt.getFullYear();
-            var rho = this.atm(x, tt, this.DSoL[0], this.ASoL[0], alphastar, this.h, this.date);
-            return rho;
+        let tt = (ho * 60 + mi) * 60 + ss + .001 * sss;
+        this.sunPosition.getPosition(dt, this.coordinates, this.sunCoordinates, this.ASoL, this.DSoL, this.ed, this.eh);
+        var alphastar = this.sunTime.CalculateGreenwichSiderealTimeFromDate(dt);
+        this.date[0] = dt.getDate();
+        this.date[1] = dt.getMonth() + 1;
+        this.date[2] = dt.getFullYear();
+        var rho = this.atm(x, tt, this.DSoL[0], this.ASoL[0], alphastar, this.h, this.date);
+        var s = `${rho}`;
+        var b = s.includes("NaN");
+        if (b) {
+            var i = 0;
         }
+
+        return rho;
+    }
 
     /// <summary>
     /// Atmosphere parameters
@@ -178,18 +188,19 @@ export class AtmospherePure {
         return Math.sqrt(a);
     }
 
-    atm(x: number[], t: number, alf: number, del: number, s0: number, h: number[], it: number[]): number
-    {
+    atm(x: number[], t: number, alf: number, del: number, s0: number, h: number[], it: number[]): number {
         let hh = this.rad(x);
 
         for (let i = 0; i < 3; i++) {
             this.y[i] = x[i] / hh;
         }
         h[0] = hh - 6378.140 * (1.0 - 0.335282E-2 * this.y[2] * this.y[2]);
-        if (h[0] <= 180) {
+        if (h[0] <= 180)
+        {
             this.f1 = this.ff0[this.N10];
         }
-        else {
+        else
+        {
             this.f1 = this.ff1[this.N10];
         }
         let N3 = it[1] - 1;

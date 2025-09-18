@@ -20,6 +20,15 @@ class Performer {
     setPrinter(printer) {
         this.printer = printer;
     }
+    setCheker(desktop, check) {
+        const objects = desktop.getCategoryObjects();
+        for (let object of objects) {
+            if (this.implementsType(object, "ICheckHolder")) {
+                var ch = object;
+                ch.setCheck(check);
+            }
+        }
+    }
     getPrinter() {
         return this.printer;
     }

@@ -16,6 +16,11 @@ import { RecursvieFeedbackAct } from '../Wrappers/RecursvieFeedbackAct';
 import { RecursiveFeedbackSimpleAct } from '../Wrappers/RecursiveFeedbackSimpleAct';
 import { ODE_FeedAct } from '../Wrappers/ODE_FeedAcs';
 import { DateTimeConverter } from '../../Library/Utilities/DateTime/DateTimeConverter';
+import { DensityAct } from '../Wrappers/DenstyAct';
+import { IDataConsumer } from '../../Library/Measurements/Interfaces/IDataConsumer';
+import { RungeProcessor } from '../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor';
+import { PefrormerMeasuremets } from '../../Library/Measurements/PefrormerMeasuremets';
+import { DataRuntimeConsumerODE } from '../../Library/Runtime/DataRuntimeConsumerODE';
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -56,15 +61,41 @@ export class Actor
         });
     }
 
-    async actOrbitCalculation(): Promise<void> {
+    async actOrbitCalculation(b: boolean): Promise<void> {
         var o = new OrbitalForecastCalculation();
         const cond = {
-            Begin: 1770457504, End: 18000, X: -5448.34815324, Y: -4463.93698421, Z: 0, Vx: 0.98539477743, Vy: 1.21681893834, Vz: 7.45047785592
+            Begin: 1770457504, End: 18000, X: -5448.34815324, Y: -4463.93698421, Z: 0, Vx: -0.98539477743, Vy: 1.21681893834, Vz: 7.45047785592
         };
-        var ab = new AbortController();
-        const t = await o.calculate(cond, ab);
-        console.log(t);
+        o.set(cond);
+        if (b) {
+            var ab = new AbortController();
+            const t = await o.calculate(cond, ab);
+            console.log(t);
+        }
+        else {
+            let dc = o.getCategoryObject("Chart") as unknown as IDataConsumer;
+            let p = new PefrormerMeasuremets();
+            o.set(cond);
+            o.performFixedStepCalculation();
+            const list = o.getResult();
+            console.log(list);
+
+        //    let m = this.getCategoryObject("A-transformation") as unknown as IMeasurements;
+         //   this.measurement = m.getMeasurement(0);
+
+
+        }
         console.log("finish");
+    }
+
+    actDensity(): void {
+        try {
+            var o = new DensityAct();
+            o.test();
+        }
+        catch (e: any) {
+            finish(e);
+        }
     }
 
     actTime(): void {

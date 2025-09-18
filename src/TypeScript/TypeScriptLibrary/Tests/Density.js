@@ -1,26 +1,26 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrbitalForecast = void 0;
-const AtmosphereCategoryObject_1 = require("../../ExternalObjects/Components/Atmosphere/AtmosphereCategoryObject");
-const GravityCategoryObject_1 = require("../../ExternalObjects/Components/Gravity_36_36/GravityCategoryObject");
-const AliasName_1 = require("../../Library/AliasName");
-const Desktop_1 = require("../../Library/Desktop");
-const FeedbackAliasCollection_1 = require("../../Library/FeedbackAliasCollection");
-const DataLink_1 = require("../../Library/Measurements/Arrows/DataLink");
-const ObjectTransformerLink_1 = require("../../Library/Measurements/Arrows/ObjectTransformerLink");
-const DataConsumer_1 = require("../../Library/Measurements/DataConsumer");
-const DifferentialEquationSolverFormula_1 = require("../../Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula");
-const ObjectTransformer_1 = require("../../Library/Measurements/ObjectTransformer");
-const RecursiveFormula_1 = require("../../Library/Measurements/RecursiveFormula");
-const VectorFormulaConsumer_1 = require("../../Library/Measurements/VectorFormulaConsumer");
-class OrbitalForecast_CategoryObject_0 extends AtmosphereCategoryObject_1.AtmosphereCategoryObject {
+exports.Density = void 0;
+const AtmosphereCategoryObject_1 = require("../ExternalObjects/Components/Atmosphere/AtmosphereCategoryObject");
+const GravityCategoryObject_1 = require("../ExternalObjects/Components/Gravity_36_36/GravityCategoryObject");
+const AliasName_1 = require("../Library/AliasName");
+const Desktop_1 = require("../Library/Desktop");
+const FeedbackAliasCollection_1 = require("../Library/FeedbackAliasCollection");
+const DataLink_1 = require("../Library/Measurements/Arrows/DataLink");
+const ObjectTransformerLink_1 = require("../Library/Measurements/Arrows/ObjectTransformerLink");
+const DataConsumer_1 = require("../Library/Measurements/DataConsumer");
+const DifferentialEquationSolverFormula_1 = require("../Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula");
+const ObjectTransformer_1 = require("../Library/Measurements/ObjectTransformer");
+const RecursiveFormula_1 = require("../Library/Measurements/RecursiveFormula");
+const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaConsumer");
+class Density_CategoryObject_0 extends AtmosphereCategoryObject_1.AtmosphereCategoryObject {
     constructor(desktop, name) {
         super(desktop, name);
         let iff = [150, 6, 140];
         this.setIf(iff);
     }
 }
-class OrbitalForecast_CategoryObject_1 extends GravityCategoryObject_1.GravityCategoryObject {
+class Density_CategoryObject_1 extends GravityCategoryObject_1.GravityCategoryObject {
     constructor(desktop, name) {
         super(desktop, name);
         this.SetN0(36);
@@ -2140,7 +2140,7 @@ class OrbitalForecast_CategoryObject_1 extends GravityCategoryObject_1.GravityCa
         this.ANAI.push(0);
     }
 }
-class OrbitalForecast_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
+class Density_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
         this.var_0 = 0;
@@ -2163,12 +2163,12 @@ class OrbitalForecast_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFor
         this.var_17 = 0;
         this.var_18 = 0;
         let map = new Map([
-            ["z", 2555.3253638965743],
-            ["u", -0.44668389543569337],
-            ["w", 6.9300634873392948],
             ["v", 1.7737490756446463],
             ["y", 4112.9884575937604],
+            ["u", -0.44668389543569337],
             ["x", -5110.5458047301981],
+            ["w", 6.9300634873392948],
+            ["z", 2555.3253638965743],
         ]);
         this.performer.setAliasMap(map, this);
         this.addVariableValue("Formula_1", 0, -5110.5458047301981);
@@ -2178,7 +2178,7 @@ class OrbitalForecast_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFor
         this.addVariableValue("Formula_5", 0, 1.7737490756446463);
         this.addVariableValue("Formula_6", 0, 6.9300634873392948);
         this.addVariableValue("Formula_7", 0, 7.1673908937873003);
-        this.addVariableValue("Formula_8", 0, 0);
+        this.addVariableValue("Formula_8", 0, 1770475503);
     }
     calculateTree() {
         this.success = true;
@@ -2363,7 +2363,7 @@ class OrbitalForecast_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFor
         x7 === null || x7 === void 0 ? void 0 : x7.setIValue(this.get_18());
     }
 }
-class OrbitalForecast_CategoryObject_3 extends ObjectTransformer_1.ObjectTransformer {
+class Density_CategoryObject_3 extends ObjectTransformer_1.ObjectTransformer {
     constructor(desktop, name) {
         super(desktop, name);
         let map = new Map([
@@ -2374,7 +2374,7 @@ class OrbitalForecast_CategoryObject_3 extends ObjectTransformer_1.ObjectTransfo
         this.setLinks(map);
     }
 }
-class OrbitalForecast_CategoryObject_4 extends ObjectTransformer_1.ObjectTransformer {
+class Density_CategoryObject_4 extends ObjectTransformer_1.ObjectTransformer {
     constructor(desktop, name) {
         super(desktop, name);
         let map = new Map([
@@ -2386,7 +2386,7 @@ class OrbitalForecast_CategoryObject_4 extends ObjectTransformer_1.ObjectTransfo
         this.setLinks(map);
     }
 }
-class OrbitalForecast_CategoryObject_5 extends DifferentialEquationSolverFormula_1.DifferentialEquationSolverFormula {
+class Density_CategoryObject_5 extends DifferentialEquationSolverFormula_1.DifferentialEquationSolverFormula {
     constructor(desktop, name) {
         super(desktop, name);
         this.var_0 = 0;
@@ -2423,15 +2423,15 @@ class OrbitalForecast_CategoryObject_5 extends DifferentialEquationSolverFormula
         this.var_31 = 0;
         this.var_32 = 0;
         let map = new Map([
+            ["x", -5448.3481532400001],
             ["o", 0.00014584231700000001],
-            ["w", 7.45047785592],
-            ["z", 0],
             ["s", 1.6189340462770081E-13],
             ["q", 5.3174953569821228E-09],
             ["v", 1.2168189383400001],
-            ["y", -4463.9369842100004],
-            ["x", -5448.3481532400001],
             ["u", -0.98539477743199999],
+            ["w", 7.45047785592],
+            ["z", 0],
+            ["y", -4463.9369842100004],
         ]);
         this.performer.setAliasMap(map, this);
         this.addVariableValue("u", 0, -0.98539477743199999);
@@ -2784,7 +2784,7 @@ class OrbitalForecast_CategoryObject_5 extends DifferentialEquationSolverFormula
         this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
     }
 }
-class OrbitalForecast_CategoryObject_6 extends RecursiveFormula_1.RecursiveFormula {
+class Density_CategoryObject_6 extends RecursiveFormula_1.RecursiveFormula {
     constructor(desktop, name) {
         super(desktop, name);
         this.var_0 = 0;
@@ -2869,95 +2869,95 @@ class OrbitalForecast_CategoryObject_6 extends RecursiveFormula_1.RecursiveFormu
         x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_6());
     }
 }
-class OrbitalForecast_CategoryObject_7 extends DataConsumer_1.DataConsumer {
+class Density_CategoryObject_7 extends DataConsumer_1.DataConsumer {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class OrbitalForecast_CategoryArrow_0 extends ObjectTransformerLink_1.ObjectTransformerLink {
+class Density_CategoryArrow_0 extends ObjectTransformerLink_1.ObjectTransformerLink {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class OrbitalForecast_CategoryArrow_1 extends ObjectTransformerLink_1.ObjectTransformerLink {
+class Density_CategoryArrow_1 extends ObjectTransformerLink_1.ObjectTransformerLink {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class OrbitalForecast_CategoryArrow_2 extends DataLink_1.DataLink {
+class Density_CategoryArrow_2 extends DataLink_1.DataLink {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class OrbitalForecast_CategoryArrow_3 extends DataLink_1.DataLink {
+class Density_CategoryArrow_3 extends DataLink_1.DataLink {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class OrbitalForecast_CategoryArrow_4 extends DataLink_1.DataLink {
+class Density_CategoryArrow_4 extends DataLink_1.DataLink {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class OrbitalForecast_CategoryArrow_5 extends DataLink_1.DataLink {
+class Density_CategoryArrow_5 extends DataLink_1.DataLink {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class OrbitalForecast_CategoryArrow_6 extends DataLink_1.DataLink {
+class Density_CategoryArrow_6 extends DataLink_1.DataLink {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class OrbitalForecast_CategoryArrow_7 extends DataLink_1.DataLink {
+class Density_CategoryArrow_7 extends DataLink_1.DataLink {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class OrbitalForecast_CategoryArrow_8 extends DataLink_1.DataLink {
+class Density_CategoryArrow_8 extends DataLink_1.DataLink {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class OrbitalForecast_CategoryArrow_9 extends DataLink_1.DataLink {
+class Density_CategoryArrow_9 extends DataLink_1.DataLink {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class OrbitalForecast_CategoryArrow_10 extends DataLink_1.DataLink {
+class Density_CategoryArrow_10 extends DataLink_1.DataLink {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class OrbitalForecast_CategoryArrow_11 extends DataLink_1.DataLink {
+class Density_CategoryArrow_11 extends DataLink_1.DataLink {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class OrbitalForecast extends Desktop_1.Desktop {
+class Density extends Desktop_1.Desktop {
     constructor() {
         super();
-        this.name = "OrbitalForecast";
-        new OrbitalForecast_CategoryObject_0(this, "Atmosphere");
-        new OrbitalForecast_CategoryObject_1(this, "Gravity");
-        new OrbitalForecast_CategoryObject_2(this, "Vector");
-        new OrbitalForecast_CategoryObject_3(this, "G-transformation");
-        new OrbitalForecast_CategoryObject_4(this, "A-transformation");
-        new OrbitalForecast_CategoryObject_5(this, "Motion equations");
-        new OrbitalForecast_CategoryObject_6(this, "Recursive");
-        new OrbitalForecast_CategoryObject_7(this, "Chart");
-        new OrbitalForecast_CategoryArrow_0(this, "");
-        new OrbitalForecast_CategoryArrow_1(this, "");
-        new OrbitalForecast_CategoryArrow_2(this, "");
-        new OrbitalForecast_CategoryArrow_3(this, "");
-        new OrbitalForecast_CategoryArrow_4(this, "");
-        new OrbitalForecast_CategoryArrow_5(this, "");
-        new OrbitalForecast_CategoryArrow_6(this, "");
-        new OrbitalForecast_CategoryArrow_7(this, "");
-        new OrbitalForecast_CategoryArrow_8(this, "");
-        new OrbitalForecast_CategoryArrow_9(this, "");
-        new OrbitalForecast_CategoryArrow_10(this, "");
-        new OrbitalForecast_CategoryArrow_11(this, "");
+        this.name = "Density";
+        new Density_CategoryObject_0(this, "Atmosphere");
+        new Density_CategoryObject_1(this, "Gravity");
+        new Density_CategoryObject_2(this, "Vector");
+        new Density_CategoryObject_3(this, "G-transformation");
+        new Density_CategoryObject_4(this, "A-transformation");
+        new Density_CategoryObject_5(this, "Motion equations");
+        new Density_CategoryObject_6(this, "Recursive");
+        new Density_CategoryObject_7(this, "Chart");
+        new Density_CategoryArrow_0(this, "");
+        new Density_CategoryArrow_1(this, "");
+        new Density_CategoryArrow_2(this, "");
+        new Density_CategoryArrow_3(this, "");
+        new Density_CategoryArrow_4(this, "");
+        new Density_CategoryArrow_5(this, "");
+        new Density_CategoryArrow_6(this, "");
+        new Density_CategoryArrow_7(this, "");
+        new Density_CategoryArrow_8(this, "");
+        new Density_CategoryArrow_9(this, "");
+        new Density_CategoryArrow_10(this, "");
+        new Density_CategoryArrow_11(this, "");
         let objects = this.getCategoryObjects();
         let arrows = this.getCategoryArrows();
         arrows[0].setSource(objects[3]);
@@ -2991,5 +2991,5 @@ class OrbitalForecast extends Desktop_1.Desktop {
         objects[6].postSetArrow();
     }
 }
-exports.OrbitalForecast = OrbitalForecast;
-//# sourceMappingURL=OrbitalForecast.js.map
+exports.Density = Density;
+//# sourceMappingURL=Density.js.map

@@ -37,8 +37,15 @@ public class SunPosition {
                             double[] dElapsedJulianDays,
                             double[] dDecimalHours)
     {
-        dDecimalHours[0] = (double) time.getHour() + ((double) time.getMinute()
-                + (double) time.getSecond() / 60.0) / 60.0;
+        var h = time.getHour();
+        var m = time.getMinute();
+        var s = time.getSecond();
+
+        var ss = (double)s / 60.0;
+
+        var mm = ((double)m + ss) / 60;
+
+        dDecimalHours[0] = (double) h + mm;
 
 
         dElapsedJulianDays[0] = convertToJulian(time) - 0.5 - 2451545.0 + dDecimalHours[0] / 24.0;
@@ -71,7 +78,6 @@ public class SunPosition {
             dRightAscension[0] = dRightAscension[0] + 2 * Math.PI;
         }
         dDeclination[0] = Math.asin(Math.sin(dEclipticObliquity) * dSin_EclipticLongitude);
-
     }
 
 

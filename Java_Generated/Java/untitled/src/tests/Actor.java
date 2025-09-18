@@ -78,10 +78,14 @@ public class Actor {
         r.test();
     }
 
-    public void testOrbitalForecast()
+    public void testOrbitalForecast(boolean b)
     {
         var r = new OrbitalForecastAct();
-        r.test();
+        if (b) {
+            r.test();
+            return;
+        }
+        r.test1();
     }
 
 

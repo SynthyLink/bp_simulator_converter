@@ -39,7 +39,7 @@ export class AtmosphereCategoryObject extends AtmospherePure implements ICategor
         this.x[0] = this.performer.convertFromAny<number>(input[1])
         this.x[1] = this.performer.convertFromAny<number>(input[2])
         this.x[2] = this.performer.convertFromAny<number>(input[3])
-        var r = this.Atm(t, this.x);
+        var r = this.atmosphere(t, this.x);
         output[0] = r;
     }
 

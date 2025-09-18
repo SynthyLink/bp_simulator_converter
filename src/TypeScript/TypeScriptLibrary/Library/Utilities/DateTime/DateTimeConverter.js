@@ -21,7 +21,9 @@ class DateTimeConverter {
     fromOADate(date) {
         var x = date - this.baseDays;
         x *= this.coeff;
-        return new Date(x);
+        var d = new Date();
+        var off = d.getTimezoneOffset() * 60000;
+        return new Date(x + off);
     }
 }
 exports.DateTimeConverter = DateTimeConverter;

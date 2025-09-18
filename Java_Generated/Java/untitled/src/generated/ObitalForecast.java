@@ -8,7 +8,7 @@ import error_handler.interfaces.ICheck;
 
 import error_handler.interfaces.IErrorHandler;
 
-public class OrbitalForecast extends Desktop
+public class ObitalForecast extends Desktop
 {
 
 	protected class CategoryObject0 extends external.atmosphere.DynamicalAtmosphereTransformer
@@ -3019,11 +3019,11 @@ public class OrbitalForecast extends Desktop
 			}
 	
 
-	public OrbitalForecast() {
+	public ObitalForecast() {
 		super();
 	}
 
-	public OrbitalForecast(ICheck check, IErrorHandler errorHandler) {
+	public ObitalForecast(ICheck check, IErrorHandler errorHandler) {
 		super(check, errorHandler);
 	}
 
@@ -3031,26 +3031,26 @@ public class OrbitalForecast extends Desktop
 	@Override
 	public void init()
 	{
-		new OrbitalForecast.CategoryObject0("Atmosphere", this);
-		new OrbitalForecast.CategoryObject1("Gravity", this);
-		new OrbitalForecast.CategoryObject2("Vector", this);
-		new OrbitalForecast.CategoryObject3("G-transformation", this);
-		new OrbitalForecast.CategoryObject4("A-transformation", this);
-		new OrbitalForecast.CategoryObject5("Motion equations", this);
-		new OrbitalForecast.CategoryObject6("Recursive", this);
-		new OrbitalForecast.CategoryObject7("Chart", this);
-		new OrbitalForecast.CategoryArrow0("", this);
-		new OrbitalForecast.CategoryArrow1("", this);
-		new OrbitalForecast.CategoryArrow2("", this);
-		new OrbitalForecast.CategoryArrow3("", this);
-		new OrbitalForecast.CategoryArrow4("", this);
-		new OrbitalForecast.CategoryArrow5("", this);
-		new OrbitalForecast.CategoryArrow6("", this);
-		new OrbitalForecast.CategoryArrow7("", this);
-		new OrbitalForecast.CategoryArrow8("", this);
-		new OrbitalForecast.CategoryArrow9("", this);
-		new OrbitalForecast.CategoryArrow10("", this);
-		new OrbitalForecast.CategoryArrow11("", this);
+		new ObitalForecast.CategoryObject0("Atmosphere", this);
+		new ObitalForecast.CategoryObject1("Gravity", this);
+		new ObitalForecast.CategoryObject2("Vector", this);
+		new ObitalForecast.CategoryObject3("G-transformation", this);
+		new ObitalForecast.CategoryObject4("A-transformation", this);
+		new ObitalForecast.CategoryObject5("Motion equations", this);
+		new ObitalForecast.CategoryObject6("Recursive", this);
+		new ObitalForecast.CategoryObject7("Chart", this);
+		new ObitalForecast.CategoryArrow0("", this);
+		new ObitalForecast.CategoryArrow1("", this);
+		new ObitalForecast.CategoryArrow2("", this);
+		new ObitalForecast.CategoryArrow3("", this);
+		new ObitalForecast.CategoryArrow4("", this);
+		new ObitalForecast.CategoryArrow5("", this);
+		new ObitalForecast.CategoryArrow6("", this);
+		new ObitalForecast.CategoryArrow7("", this);
+		new ObitalForecast.CategoryArrow8("", this);
+		new ObitalForecast.CategoryArrow9("", this);
+		new ObitalForecast.CategoryArrow10("", this);
+		new ObitalForecast.CategoryArrow11("", this);
 		arrows.get(0).setSource(objects.get(3));
 		arrows.get(0).setTarget(objects.get(1));
 		arrows.get(1).setSource(objects.get(4));

@@ -3,6 +3,8 @@ package measurements;
 import category_theory.CategoryObject;
 import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
+import error_handler.interfaces.ICheck;
+import error_handler.interfaces.ICheckHolder;
 import general_service.Entry;
 import general_service.Performer;
 import general_service.interfaces.*;
@@ -16,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow,
-        ITimeMeasurementConsumer, IPrintedObject {
+        ITimeMeasurementConsumer, IPrintedObject, ICheckHolder {
 
     protected Performer performer = new Performer();
 
@@ -102,5 +104,16 @@ public class DataConsumer extends CategoryObject implements IDataConsumer, IPost
             }
             printer.print(s + "\n");
         }
+    }
+
+    @Override
+    public ICheck getChecker() {
+        return checker;
+    }
+
+    @Override
+    public void setChecker(ICheck check) {
+        checker = check;
+
     }
 }

@@ -13,8 +13,15 @@ class DataConsumer extends CategoryObject_1.CategoryObject {
         this.types.push("IPostSetArrow");
         this.types.push("ITimeMeasurementConsumer");
         this.types.push("IPrintedObject");
+        this.types.push("ICheckHolder");
         this.tms = this;
         this.dataConsumer = this;
+    }
+    getCheck() {
+        return this.checker;
+    }
+    setCheck(check) {
+        this.checker = check;
     }
     print(printer) {
         for (var m of this.measurements) {

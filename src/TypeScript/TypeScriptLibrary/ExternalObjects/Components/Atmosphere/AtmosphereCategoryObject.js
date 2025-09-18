@@ -37,7 +37,7 @@ class AtmosphereCategoryObject extends AtmospherePure_1.AtmospherePure {
         this.x[0] = this.performer.convertFromAny(input[1]);
         this.x[1] = this.performer.convertFromAny(input[2]);
         this.x[2] = this.performer.convertFromAny(input[3]);
-        var r = this.Atm(t, this.x);
+        var r = this.atmosphere(t, this.x);
         output[0] = r;
     }
     getClassName() {

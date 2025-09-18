@@ -60,6 +60,8 @@ const RecursvieFeedbackAct_1 = require("../Wrappers/RecursvieFeedbackAct");
 const RecursiveFeedbackSimpleAct_1 = require("../Wrappers/RecursiveFeedbackSimpleAct");
 const ODE_FeedAcs_1 = require("../Wrappers/ODE_FeedAcs");
 const DateTimeConverter_1 = require("../../Library/Utilities/DateTime/DateTimeConverter");
+const DenstyAct_1 = require("../Wrappers/DenstyAct");
+const PefrormerMeasuremets_1 = require("../../Library/Measurements/PefrormerMeasuremets");
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -96,17 +98,39 @@ class Actor {
             rl.close();
         });
     }
-    actOrbitCalculation() {
+    actOrbitCalculation(b) {
         return __awaiter(this, void 0, void 0, function* () {
             var o = new OrbitalForecastCalculation_1.OrbitalForecastCalculation();
             const cond = {
-                Begin: 1770457504, End: 18000, X: -5448.34815324, Y: -4463.93698421, Z: 0, Vx: 0.98539477743, Vy: 1.21681893834, Vz: 7.45047785592
+                Begin: 1770457504, End: 18000, X: -5448.34815324, Y: -4463.93698421, Z: 0, Vx: -0.98539477743, Vy: 1.21681893834, Vz: 7.45047785592
             };
-            var ab = new AbortController();
-            const t = yield o.calculate(cond, ab);
-            console.log(t);
+            o.set(cond);
+            if (b) {
+                var ab = new AbortController();
+                const t = yield o.calculate(cond, ab);
+                console.log(t);
+            }
+            else {
+                let dc = o.getCategoryObject("Chart");
+                let p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
+                o.set(cond);
+                o.performFixedStepCalculation();
+                const list = o.getResult();
+                console.log(list);
+                //    let m = this.getCategoryObject("A-transformation") as unknown as IMeasurements;
+                //   this.measurement = m.getMeasurement(0);
+            }
             console.log("finish");
         });
+    }
+    actDensity() {
+        try {
+            var o = new DenstyAct_1.DensityAct();
+            o.test();
+        }
+        catch (e) {
+            finish(e);
+        }
     }
     actTime() {
         console.log(new Date(0));

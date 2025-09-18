@@ -86,10 +86,15 @@ class AtmospherePure {
         this.sunPosition = new SunPosition_1.SunPosition();
         this.sunTime = new SunTime_1.SunTime();
         this.dateTimeConverter = new DateTimeConverter_1.DateTimeConverter();
-        //  this.init();
-        //  this.setIf(this.ifa);
+        this.initSelf();
+        this.setIf(this.ifa);
     }
-    init() {
+    set(x, n) {
+        for (let i = 0; i < n; i++) {
+            x.push(0);
+        }
+    }
+    initSelf() {
         if (this.ff0.length > 0) {
             return;
         }
@@ -101,24 +106,22 @@ class AtmospherePure {
         for (let i = 0; i < this.ff0.length; i++) {
             let fff = [];
             let fff1 = [];
-            for (var ii = 0; ii < 21; ii++) {
-                fff.push(0);
-                fff1.push(0);
-            }
-            this.ff0.push(fff);
-            this.ff1.push(fff1);
+            this.set(fff, 21);
+            this.set(fff1, 21);
+            this.ff0[i] = fff;
+            this.ff1[i] = fff1;
             let j = i * 21;
             for (let k = 0; k < 21; k++) {
-                let nn = k + j;
-                fff[k] = this.f0[nn];
-                fff1[k] = this.f01[nn];
+                let n = k + j;
+                fff[k] = this.f0[n];
+                fff1[k] = this.f01[n];
             }
         }
     }
     setIf(value) {
         this.N10 = 0;
         for (var i = 0; i < 6; i++) {
-            if (this.f1[i] == value[0]) {
+            if (this.if1[i] == value[0]) {
                 break;
             }
             else {
@@ -129,7 +132,7 @@ class AtmospherePure {
         this.ifa[1] = value[1];
         this.ifa[2] = value[2];
     }
-    Atm(t, x) {
+    atmosphere(t, x) {
         var r2 = x[0] * x[0] + x[1] * x[1];
         var lat = Math.atan2(x[2], Math.sqrt(r2));
         var lon = Math.atan2(x[1], x[0]);
@@ -146,10 +149,15 @@ class AtmospherePure {
         let tt = (ho * 60 + mi) * 60 + ss + .001 * sss;
         this.sunPosition.getPosition(dt, this.coordinates, this.sunCoordinates, this.ASoL, this.DSoL, this.ed, this.eh);
         var alphastar = this.sunTime.CalculateGreenwichSiderealTimeFromDate(dt);
-        this.date[0] = dt.getDay();
-        this.date[1] = dt.getMonth();
+        this.date[0] = dt.getDate();
+        this.date[1] = dt.getMonth() + 1;
         this.date[2] = dt.getFullYear();
         var rho = this.atm(x, tt, this.DSoL[0], this.ASoL[0], alphastar, this.h, this.date);
+        var s = `${rho}`;
+        var b = s.includes("NaN");
+        if (b) {
+            var i = 0;
+        }
         return rho;
     }
     /// <summary>

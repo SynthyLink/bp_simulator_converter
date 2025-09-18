@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 
 public class SunTime {
 
+    static double coeff = Math.PI / 360;
+
     public static double CalculateJulianDate(LocalDateTime dateTimeUtc)
     {
         // This is a simplified calculation for demonstration.
@@ -28,7 +30,8 @@ public class SunTime {
     {
         var x = CalculateJulianDate(dateTimeUtc);
         x = CalculateJulianCentury(x);
-        return CalculateGreenwichSiderealTime(x);
+        x =  CalculateGreenwichSiderealTime(x);
+        return x;
     }
 
     public static double CalculateJulianCentury(double julianDate)
@@ -38,15 +41,13 @@ public class SunTime {
     }
 
     // This is a common approximation for GST. More precise formulas exist.
-    public static double CalculateGreenwichSiderealTime(double julianCentury)
-    {
+    public static double CalculateGreenwichSiderealTime(double julianCentury) {
         double gstDegrees = 280.46061837 + 360.98564736629 * julianCentury + 0.000387933 *
                 Math.pow(julianCentury, 2) - Math.pow(julianCentury, 3) / 38710000.0;
-
+        gstDegrees *= coeff;
         // Normalize to 0-360 range
-        gstDegrees = gstDegrees % (2 *Math.PI); //% 360.0;
-        if (gstDegrees < 0)
-        {
+        gstDegrees = gstDegrees % (2 * Math.PI); //% 360.0;
+        if (gstDegrees < 0) {
             gstDegrees += 2 * Math.PI;
         }
         return gstDegrees;

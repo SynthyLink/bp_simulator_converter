@@ -6,6 +6,8 @@ import java.util.Map;
 import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
+import error_handler.interfaces.ICheck;
+import error_handler.interfaces.ICheckHolder;
 import error_handler.interfaces.IErrorHandler;
 import general_service.interfaces.IAction;
 import general_service.interfaces.IActionT;
@@ -15,7 +17,19 @@ import general_service.interfaces.IPrinter;
 import javax.swing.*;
 
 
-public class Performer {
+public class Performer
+{
+    static public void setCheker(IDesktop desktop, ICheck check) {
+        var ojects = desktop.getCategoryObjects();
+        for (var co : ojects)
+        {
+            if (co instanceof ICheckHolder checkHolder)
+            {
+                checkHolder.setChecker(check);
+            }
+        }
+    }
+
 
     static IErrorHandler errorHandler;
 

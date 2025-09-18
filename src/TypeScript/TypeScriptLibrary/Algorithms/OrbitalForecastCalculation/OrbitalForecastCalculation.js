@@ -15,21 +15,32 @@ const PefrormerMeasuremets_1 = require("../../Library/Measurements/PefrormerMeas
 const Performer_1 = require("../../Library/Performer");
 const DataRuntimeConsumerODE_1 = require("../../Library/Runtime/DataRuntimeConsumerODE");
 const OrbitalForecast_1 = require("./OrbitalForecast");
+class Check {
+    check(o) {
+        var s = `${o}`;
+        var b = s.includes("NaN");
+        if (b) {
+            var i = 0;
+        }
+        return b;
+    }
+}
+class Action {
+    constructor(dc, p) {
+        this.dc = dc;
+        this.p = p;
+    }
+    action() {
+        this.p.print(this.dc);
+    }
+}
 class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
     constructor() {
         super();
         this.calculate = (condition, controller) => __awaiter(this, void 0, void 0, function* () {
             this.contoller = controller;
-            this.list = [];
-            let processor = new RungeProcessor_1.RungeProcessor();
-            this.runtime = new DataRuntimeConsumerODE_1.DataRuntimeConsumerODE(this.dc, processor);
+            this.set(condition);
             let p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
-            this.alias.setAliasValue("x", condition.X);
-            this.alias.setAliasValue("y", condition.Y);
-            this.alias.setAliasValue("z", condition.Z);
-            this.alias.setAliasValue("v", condition.Vx);
-            this.alias.setAliasValue("u", condition.Vy);
-            this.alias.setAliasValue("w", condition.Vz);
             p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, condition.Begin, 1, condition.End, this);
             return this.list;
         });
@@ -41,6 +52,10 @@ class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
         this.alias = this.getCategoryObject("Motion equations");
         this.measurements = this.alias;
         this.performer.getMeasurementsMMap(this.measurements, this.map);
+        let check = new Check();
+        this.setCheck(check);
+        this.performer.setCheker(this, check);
+        this.act = new Action(this.dc, this.performer);
     }
     func() {
         return this.contoller.signal.aborted;
@@ -59,6 +74,25 @@ class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
             Vz: this.get("w")
         };
         this.list.push(item);
+    }
+    getResult() {
+        return this.list;
+    }
+    set(condition) {
+        this.condition = condition;
+        this.alias.setAliasValue("x", condition.X);
+        this.alias.setAliasValue("y", condition.Y);
+        this.alias.setAliasValue("z", condition.Z);
+        this.alias.setAliasValue("v", condition.Vx);
+        this.alias.setAliasValue("u", condition.Vy);
+        this.alias.setAliasValue("w", condition.Vz);
+        this.list = [];
+        let processor = new RungeProcessor_1.RungeProcessor();
+        this.runtime = new DataRuntimeConsumerODE_1.DataRuntimeConsumerODE(this.dc, processor);
+    }
+    performFixedStepCalculation() {
+        let p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
+        p.performFixedStepCalculation(this.runtime, this.condition.Begin, 1, this.condition.End, this, this.act);
     }
     get(i) {
         let variable = this.map.get(i);

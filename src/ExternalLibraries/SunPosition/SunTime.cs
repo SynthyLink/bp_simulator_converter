@@ -9,6 +9,8 @@ namespace SunPosition
 {
     public static class SunTime
     {
+
+        static double coeff = Math.PI / 360;
         public static double CalculateJulianDate(DateTime dateTimeUtc)
         {
             // This is a simplified calculation for demonstration.
@@ -39,9 +41,9 @@ namespace SunPosition
         public static double CalculateGreenwichSiderealTime(double julianCentury)
         {
             double gstDegrees = 280.46061837 + 360.98564736629 * julianCentury + 0.000387933 * Math.Pow(julianCentury, 2) - Math.Pow(julianCentury, 3) / 38710000.0;
-
+            gstDegrees *= coeff;
             // Normalize to 0-360 range
-            gstDegrees = gstDegrees % (2 *Math.PI); //% 360.0;
+            gstDegrees = gstDegrees % (2 * Math.PI); //% 360.0;
             if (gstDegrees < 0)
             {
                 gstDegrees += 2 * Math.PI;

@@ -46,6 +46,7 @@ public class CategoryObject implements ICategoryObject {
         return desktop;
     }
 
+
     protected boolean check(Object o)
     {
         return checker.check(o);
