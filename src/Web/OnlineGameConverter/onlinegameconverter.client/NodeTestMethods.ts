@@ -2,10 +2,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 
-import { http_cancel } from "./Library/Communications/http/http_interface";
-import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalData";
-import { OrbitalForecastCalculation } from "./ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation";
-//import { A } from "./ExternalObjects/Algorithms/OrbitalForecastCalculation/A";
+import { http_cancel, http } from "./Library/Communications/http/http_interface";
+import { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./Algorithms/OrbitalForecastCalculation/OrbitalData";
+import { OrbitalForecastCalculation } from "./Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation";
 
 import { OwnError } from "./Library/ErrorHandler/OwnError";
 import { OwnNotImplemented } from "./Library/ErrorHandler/OwnNotImplemented";
@@ -14,7 +13,7 @@ import { OwnNotImplemented } from "./Library/ErrorHandler/OwnNotImplemented";
 export async function actOrbitCalculation(): Promise<void> {
       let o = new OrbitalForecastCalculation();
        const cond = {
-           Begin: 0, End: 20000, X: -5448.34815324, Y: -4463.93698421, Z: 0, Vx: 0.98539477743, Vy: 1.21681893834, Vz: 7.45047785592
+           Begin: 0, End: 20000, X: -5448.34815324, Y: -4463.93698421, Z: 0, Vx: -0.98539477743, Vy: 1.21681893834, Vz: 7.45047785592
        };
        const ab = new AbortController();
        const t = await o.calculate(cond, ab);

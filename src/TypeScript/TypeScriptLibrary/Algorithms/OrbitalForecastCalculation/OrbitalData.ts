@@ -62,6 +62,7 @@ export interface OrbitalForecastItemNumber {
     Vx: number;
     Vy: number;
     Vz: number;
+    Duration: number;
 }
 
 export interface OrbitalForecastConditionString {

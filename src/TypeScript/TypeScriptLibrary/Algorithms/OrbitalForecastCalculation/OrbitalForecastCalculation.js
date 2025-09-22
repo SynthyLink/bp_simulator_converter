@@ -15,6 +15,7 @@ const PefrormerMeasuremets_1 = require("../../Library/Measurements/PefrormerMeas
 const Performer_1 = require("../../Library/Performer");
 const DataRuntimeConsumerODE_1 = require("../../Library/Runtime/DataRuntimeConsumerODE");
 const OrbitalForecast_1 = require("./OrbitalForecast");
+const StopWatch_1 = require("../../Library/Utilities/DateTime/StopWatch");
 class Check {
     check(o) {
         var s = `${o}`;
@@ -41,6 +42,8 @@ class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
             this.contoller = controller;
             this.set(condition);
             let p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
+            this.stopWatch = new StopWatch_1.StopWatch();
+            this.stopWatch.start();
             p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, condition.Begin, 1, condition.End, this);
             return this.list;
         });
@@ -64,6 +67,7 @@ class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
         // eslint-disable-next-line no-var
         let rt = this.runtime.getTimeProvider();
         let t = rt.getTime();
+        this.stopWatch.stop();
         const item = {
             OrbitalTime: t,
             X: this.get("x"),
@@ -71,8 +75,10 @@ class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
             Z: this.get("z"),
             Vx: this.get("u"),
             Vy: this.get("v"),
-            Vz: this.get("w")
+            Vz: this.get("w"),
+            Duration: this.stopWatch.getTotalTime()
         };
+        this.stopWatch.start();
         this.list.push(item);
     }
     getResult() {
@@ -91,6 +97,8 @@ class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
         this.runtime = new DataRuntimeConsumerODE_1.DataRuntimeConsumerODE(this.dc, processor);
     }
     performFixedStepCalculation() {
+        this.stopWatch = new StopWatch_1.StopWatch();
+        this.stopWatch.start();
         let p = new PefrormerMeasuremets_1.PefrormerMeasuremets();
         p.performFixedStepCalculation(this.runtime, this.condition.Begin, 1, this.condition.End, this, this.act);
     }

@@ -1,5 +1,7 @@
 import { CategoryObject } from "../CategoryObject";
 import type { ICategoryObject } from "../Interfaces/ICategoryObject";
+import { ICheck } from "../Interfaces/ICheck";
+import type { ICheckHolder } from "../Interfaces/ICheckHolder";
 import type { IDesktop } from "../Interfaces/IDesktop";
 import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import type { IPrintedObject } from "../Interfaces/IPrintedObject";
@@ -9,7 +11,7 @@ import type { IMeasurements } from "./Interfaces/IMeasurements";
 import type { ITimeMeasurementConsumer } from "./Interfaces/ITimeMeasurementConsumer";
 import type { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProvider";
 
-export class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow, ITimeMeasurementConsumer, IPrintedObject
+export class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow, ITimeMeasurementConsumer, IPrintedObject, ICheckHolder
 {
     constructor(desktop: IDesktop, name: string)
     {
@@ -20,8 +22,15 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         this.types.push("IPostSetArrow");
         this.types.push("ITimeMeasurementConsumer");
         this.types.push("IPrintedObject");
+        this.types.push("ICheckHolder");
         this.tms = this;
         this.dataConsumer = this;
+    }
+    getCheck(): ICheck {
+        return this.checker;
+    }
+    setCheck(check: ICheck): void {
+        this.checker = check;
     }
 
     print(printer: IPrinter): void {

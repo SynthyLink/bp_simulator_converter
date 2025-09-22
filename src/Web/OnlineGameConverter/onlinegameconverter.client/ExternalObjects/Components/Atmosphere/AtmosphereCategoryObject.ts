@@ -8,6 +8,7 @@ import type { IObject } from "../../../Library/Interfaces/IObject";
 import { AtmospherePure } from "./AtmospherePure";
 import type { IObjectTransformer } from "../../../Library/Measurements/Interfaces/IObjectTransformer";
 import type { ICheck } from "../../../Library/Interfaces/ICheck";
+import { Performer } from "../../../Library/Performer";
 
 
 export class AtmosphereCategoryObject extends AtmospherePure implements ICategoryObject, IObject,
@@ -34,7 +35,12 @@ export class AtmosphereCategoryObject extends AtmospherePure implements ICategor
         return this.a;
     }
     calculate(input: any[], output: any[]): void {
-        output[0] = 0;
+        var t = this.performer.convertFromAny<number>(input[0])
+        this.x[0] = this.performer.convertFromAny<number>(input[1])
+        this.x[1] = this.performer.convertFromAny<number>(input[2])
+        this.x[2] = this.performer.convertFromAny<number>(input[3])
+        var r = this.atmosphere(t, this.x);
+        output[0] = r;
     }
 
     getClassName(): string {
@@ -72,4 +78,10 @@ export class AtmosphereCategoryObject extends AtmospherePure implements ICategor
     ooutp: string[] = ["Density"];
 
     a: number = 0;
+
+    x: number[] = [ 0, 0, 0 ];
+
+    performer: Performer = new Performer();
 }
+
+

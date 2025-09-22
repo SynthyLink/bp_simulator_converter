@@ -19,6 +19,8 @@ import type { IMeasurements } from "./Measurements/Interfaces/IMeasurements";
 import type { IFeedbackCollection } from "./Interfaces/IFeedbackCollection";
 import type { IComparator } from "./Interfaces/IComparator";
 import { MeasurementsComparator } from "./Measurements/MeasurementsComparator";
+import type { ICheck } from "./Interfaces/ICheck";
+import type { ICheckHolder } from "./Interfaces/ICheckHolder";
 
 export class Performer
 {
@@ -39,6 +41,16 @@ export class Performer
 
     public setPrinter(printer: IPrinter): void {
         this.printer = printer;
+    }
+
+    public setCheker(desktop: IDesktop, check: ICheck) {
+        const objects = desktop.getCategoryObjects();
+        for (let object of objects) {
+            if (this.implementsType(object, "ICheckHolder")) {
+                var ch = object as unknown as ICheckHolder;
+                ch.setCheck(check);
+            }
+        }
     }
 
     public getPrinter(): IPrinter {

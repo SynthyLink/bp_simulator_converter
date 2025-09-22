@@ -57,6 +57,8 @@ namespace OnlineGameConverter.Server.Classes
 
         public double End { get; init; }
 
+        
+
         /*      public OrbitalForecastCondition(DateTime begin, DateTime end, double x, 
                   double y, double z, double Vx, double Vy, double Vz )
               {

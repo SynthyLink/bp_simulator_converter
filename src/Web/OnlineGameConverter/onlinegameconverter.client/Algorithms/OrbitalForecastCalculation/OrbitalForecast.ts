@@ -1,26 +1,28 @@
-import { AliasName } from "../../../Library/AliasName";
-import { Desktop } from "../../../Library/Desktop";
-import { FeedbackAliasCollection } from "../../../Library/FeedbackAliasCollection";
-import  type { IAliasName } from "../../../Library/Interfaces/IAliasName";
-import type { IDesktop } from "../../../Library/Interfaces/IDesktop";
-import type { IPostSetArrow } from "../../../Library/Interfaces/IPostSetArrow";
-import type  { IValue } from "../../../Library/Interfaces/IValue";
-import { DataLink } from "../../../Library/Measurements/Arrows/DataLink";
-import { ObjectTransformerLink } from "../../../Library/Measurements/Arrows/ObjectTransformerLink";
-import { DataConsumer } from "../../../Library/Measurements/DataConsumer";
-import { DifferentialEquationSolverFormula } from "../../../Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula";
-import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
-import { ObjectTransformer } from "../../../Library/Measurements/ObjectTransformer";
-import { RecursiveFormula } from "../../../Library/Measurements/RecursiveFormula";
-import { VectorFormulaConsumer } from "../../../Library/Measurements/VectorFormulaConsumer";
-import { AtmosphereCategoryObject } from "../../Components/Atmosphere/AtmosphereCategoryObject";
-import { GravityCategoryObject } from "../../Components/Gravity_36_36/GravityCategoryObject";
+import { AtmosphereCategoryObject } from "../../ExternalObjects/Components/Atmosphere/AtmosphereCategoryObject";
+import { GravityCategoryObject } from "../../ExternalObjects/Components/Gravity_36_36/GravityCategoryObject";
+import { AliasName } from "../../Library/AliasName";
+import { Desktop } from "../../Library/Desktop";
+import { FeedbackAliasCollection } from "../../Library/FeedbackAliasCollection";
+import { IAliasName } from "../../Library/Interfaces/IAliasName";
+import { IDesktop } from "../../Library/Interfaces/IDesktop";
+import { IPostSetArrow } from "../../Library/Interfaces/IPostSetArrow";
+import { IValue } from "../../Library/Interfaces/IValue";
+import { DataLink } from "../../Library/Measurements/Arrows/DataLink";
+import { ObjectTransformerLink } from "../../Library/Measurements/Arrows/ObjectTransformerLink";
+import { DataConsumer } from "../../Library/Measurements/DataConsumer";
+import { DifferentialEquationSolverFormula } from "../../Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula";
+import { IMeasurement } from "../../Library/Measurements/Interfaces/IMeasurement";
+import { ObjectTransformer } from "../../Library/Measurements/ObjectTransformer";
+import { RecursiveFormula } from "../../Library/Measurements/RecursiveFormula";
+import { VectorFormulaConsumer } from "../../Library/Measurements/VectorFormulaConsumer";
 
 class OrbitalForecast_CategoryObject_0 extends AtmosphereCategoryObject
 {
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
+let iff : number[] =  [150,6,140];
+ this.setIf(iff);
 	}
 }
 
@@ -1480,197 +1482,197 @@ class OrbitalForecast_CategoryObject_1 extends GravityCategoryObject
 		this.HP.push(0);
 	
 		this.CO = [];
-		this.CO.push(-0.77903980553538399);
-		this.CO.push(0.21380603721721791);
-		this.CO.push(0.44591297822339898);
-		this.CO.push(-0.90857395689893927);
-		this.CO.push(0.96971757917072887);
-		this.CO.push(-0.60232323170387669);
-		this.CO.push(-0.031250032578664655);
-		this.CO.push(0.65101327030999134);
-		this.CO.push(-0.98308047042783531);
-		this.CO.push(0.88070436670547791);
-		this.CO.push(-0.38912704671696274);
-		this.CO.push(-0.27441344909959609);
-		this.CO.push(0.81668504676264941);
-		this.CO.push(-0.99804687092766475);
-		this.CO.push(0.73835143372272349);
-		this.CO.push(-0.1523634437605802);
-		this.CO.push(-0.50095705852683592);
-		this.CO.push(0.93289442267322864);
-		this.CO.push(-0.95256672072195681);
-		this.CO.push(0.55128036306819472);
-		this.CO.push(0.093628027041712247);
-		this.CO.push(-0.6971602830266691);
-		this.CO.push(0.99260319559046684);
-		this.CO.push(-0.84939451790652687);
-		this.CO.push(0.33082108451497705);
-		this.CO.push(0.33394893121142177);
-		this.CO.push(-0.85114010537436768);
-		this.CO.push(0.99219511313700559);
-		this.CO.push(-0.69477887060845456);
-		this.CO.push(0.090325679360802824);
-		this.CO.push(0.554044271240272);
-		this.CO.push(-0.95357076201083291);
-		this.CO.push(0.93169489076202239);
-		this.CO.push(-0.49808405102428055);
-		this.CO.push(-0.15564028626155879);
-		this.CO.push(0.74058400770963306);
+		this.CO.push(-0.77903980555890728);
+		this.CO.push(0.21380603729052017);
+		this.CO.push(0.44591297812265268);
+		this.CO.push(-0.90857395683624942);
+		this.CO.push(0.96971757921654489);
+		this.CO.push(-0.6023232318835734);
+		this.CO.push(-0.031250032316161636);
+		this.CO.push(0.6510132700821577);
+		this.CO.push(-0.98308047036598334);
+		this.CO.push(0.88070436688319187);
+		this.CO.push(-0.38912704709714141);
+		this.CO.push(-0.27441344866665429);
+		this.CO.push(0.81668504648118057);
+		this.CO.push(-0.99804687096047773);
+		this.CO.push(0.73835143410227233);
+		this.CO.push(-0.1523634443538715);
+		this.CO.push(-0.50095705797482148);
+		this.CO.push(0.93289442243000587);
+		this.CO.push(-0.95256672093890038);
+		this.CO.push(0.55128036369424793);
+		this.CO.push(0.093628026257279173);
+		this.CO.push(-0.69716028243491801);
+		this.CO.push(0.99260319548570364);
+		this.CO.push(-0.84939451838174718);
+		this.CO.push(0.33082108540013244);
+		this.CO.push(0.33394893029193551);
+		this.CO.push(-0.8511401048426015);
+		this.CO.push(0.99219511326800103);
+		this.CO.push(-0.69477887139100147);
+		this.CO.push(0.090325680481764592);
+		this.CO.push(0.55404427027202174);
+		this.CO.push(-0.95357076164924959);
+		this.CO.push(0.93169489121175919);
+		this.CO.push(-0.49808405213042273);
+		this.CO.push(-0.15564028496440485);
+		this.CO.push(0.74058400680202852);
 		this.CO.push(0);
 	
 		this.SI = [];
-		this.SI.push(0.62697446629937903);
-		this.SI.push(-0.97687613260303885);
-		this.SI.push(0.89507631845107971);
-		this.SI.push(-0.41772402952787435);
-		this.SI.push(-0.24422902498937527);
-		this.SI.push(0.79825229379551299);
-		this.SI.push(-0.99951159846388604);
-		this.SI.push(0.75906634879982016);
-		this.SI.push(-0.1831742030510457);
-		this.SI.push(-0.47366635775184901);
-		this.SI.push(0.92118409751435382);
-		this.SI.push(-0.96161180262789192);
-		this.SI.push(0.57708364592517214);
-		this.SI.push(0.062469540029498893);
-		this.SI.push(-0.67441616255810355);
-		this.SI.push(0.98832453222887084);
-		this.SI.push(-0.86547214022875418);
-		this.SI.push(0.36014996341133154);
-		this.SI.push(0.30432982530967545);
-		this.SI.push(-0.83432005926706543);
-		this.SI.push(0.99560724814169388);
-		this.SI.push(-0.7169152946967825);
-		this.SI.push(0.12140385539015408);
-		this.SI.push(0.52775842290799946);
-		this.SI.push(-0.94369349369397171);
-		this.SI.push(0.94259116871671811);
-		this.SI.push(-0.52493858785891312);
-		this.SI.push(-0.12469505790946456);
-		this.SI.push(0.71922341518893851);
-		this.SI.push(-0.9959122811011063);
-		this.SI.push(0.8324872044096745);
-		this.SI.push(-0.30116905856691023);
-		this.SI.push(-0.36324183477119365);
-		this.SI.push(0.86712875521184385);
-		this.SI.push(-0.98781379889755527);
-		this.SI.push(0.67196378438479698);
+		this.SI.push(0.62697446627015052);
+		this.SI.push(-0.97687613258699546);
+		this.SI.push(0.89507631850127012);
+		this.SI.push(-0.41772402966422861);
+		this.SI.push(-0.24422902480746234);
+		this.SI.push(0.79825229365992256);
+		this.SI.push(-0.99951159847209325);
+		this.SI.push(0.75906634899522163);
+		this.SI.push(-0.18317420338300106);
+		this.SI.push(-0.47366635742141988);
+		this.SI.push(0.92118409735375872);
+		this.SI.push(-0.96161180275143954);
+		this.SI.push(0.57708364632350484);
+		this.SI.push(0.062469539505262683);
+		this.SI.push(-0.67441616214257349);
+		this.SI.push(0.98832453213740712);
+		this.SI.push(-0.86547214054827371);
+		this.SI.push(0.3601499640413498);
+		this.SI.push(0.30432982463063252);
+		this.SI.push(-0.83432005885339844);
+		this.SI.push(0.99560724821546276);
+		this.SI.push(-0.71691529527222719);
+		this.SI.push(0.12140385624670214);
+		this.SI.push(0.52775842214316249);
+		this.SI.push(-0.94369349338367214);
+		this.SI.push(0.94259116904248141);
+		this.SI.push(-0.52493858872112342);
+		this.SI.push(-0.124695056867139);
+		this.SI.push(0.71922341443298909);
+		this.SI.push(-0.9959122809994394);
+		this.SI.push(0.83248720505407314);
+		this.SI.push(-0.30116905971176733);
+		this.SI.push(-0.36324183361764484);
+		this.SI.push(0.86712875457646932);
+		this.SI.push(-0.98781379910193534);
+		this.SI.push(0.67196378538508517);
 		this.SI.push(0);
 	
 		this.AR = [];
-		this.AR.push(0.9059630668231653);
-		this.AR.push(0.82076907844763503);
-		this.AR.push(0.74358647146404255);
-		this.AR.push(0.6736618801357801);
-		this.AR.push(0.61031278292967095);
-		this.AR.push(0.55292084054434543);
-		this.AR.push(0.50092586040999754);
-		this.AR.push(0.45382032874807415);
-		this.AR.push(0.41114445681930234);
-		this.AR.push(0.37248169300735962);
-		this.AR.push(0.33745465693243226);
-		this.AR.push(0.30572145590826544);
-		this.AR.push(0.27697234778829527);
-		this.AR.push(0.25092671762749635);
-		this.AR.push(0.227330338649677);
-		this.AR.push(0.20595289078501011);
-		this.AR.push(0.18658571255668419);
-		this.AR.push(0.1690397643732392);
-		this.AR.push(0.15314378334664502);
-		this.AR.push(0.13874261162562893);
-		this.AR.push(0.12569568192741012);
-		this.AR.push(0.11387564548538559);
-		this.AR.push(0.10316712902040746);
-		this.AR.push(0.093465608602669517);
-		this.AR.push(0.084676389412168096);
-		this.AR.push(0.076713681439360415);
-		this.AR.push(0.069499762104098292);
-		this.AR.push(0.062964217619309287);
-		this.AR.push(0.057043255694510624);
-		this.AR.push(0.051679082870576834);
-		this.AR.push(0.0468193404080363);
-		this.AR.push(0.04241659322270231);
-		this.AR.push(0.038427866880230074);
-		this.AR.push(0.034814228130285577);
-		this.AR.push(0.031540404885994834);
-		this.AR.push(0.028574441939360228);
+		this.AR.push(0.90596306682259042);
+		this.AR.push(0.82076907844659341);
+		this.AR.push(0.74358647146262702);
+		this.AR.push(0.67366188013407013);
+		this.AR.push(0.6103127829277345);
+		this.AR.push(0.55292084054224022);
+		this.AR.push(0.50092586040777243);
+		this.AR.push(0.45382032874577033);
+		this.AR.push(0.41114445681695427);
+		this.AR.push(0.37248169300499601);
+		this.AR.push(0.33745465693007681);
+		this.AR.push(0.30572145590593752);
+		this.AR.push(0.27697234778601049);
+		this.AR.push(0.25092671762526719);
+		this.AR.push(0.22733033864751323);
+		this.AR.push(0.20595289078291915);
+		this.AR.push(0.18658571255467143);
+		this.AR.push(0.16903976437130844);
+		this.AR.push(0.15314378334479864);
+		this.AR.push(0.13874261162386811);
+		this.AR.push(0.12569568192573513);
+		this.AR.push(0.11387564548379585);
+		this.AR.push(0.10316712901890175);
+		this.AR.push(0.0934656086012461);
+		this.AR.push(0.084676389410824809);
+		this.AR.push(0.076713681438094761);
+		this.AR.push(0.069499762102907564);
+		this.AR.push(0.062964217618190585);
+		this.AR.push(0.057043255693460922);
+		this.AR.push(0.051679082869593052);
+		this.AR.push(0.046819340407115315);
+		this.AR.push(0.04241659322184102);
+		this.AR.push(0.038427866879425392);
+		this.AR.push(0.034814228129534476);
+		this.AR.push(0.031540404885294353);
+		this.AR.push(0.028574441938707486);
 		this.AR.push(0);
 	
 		this.CF = [];
-		this.CF.push(0.93180338989500322);
-		this.CF.push(0.86825755741981936);
-		this.CF.push(0.80904533530574307);
-		this.CF.push(0.75387118601663095);
-		this.CF.push(0.70245972667446321);
-		this.CF.push(0.65455435457998223);
-		this.CF.push(0.60991596646816337);
-		this.CF.push(0.56832176510612176);
-		this.CF.push(0.52956414727699597);
-		this.CF.push(0.4934496675995616);
-		this.CF.push(0.45979807301183406);
-		this.CF.push(0.42844140309961715);
-		this.CF.push(0.39922315177959478);
-		this.CF.push(0.37199748615279382);
-		this.CF.push(0.34662851862959282);
-		this.CF.push(0.32298962869333786);
-		this.CF.push(0.30096283091738063);
-		this.CF.push(0.28043818608121196);
-		this.CF.push(0.26131325244647902);
-		this.CF.push(0.2434925744541179);
-		this.CF.push(0.22688720629060852);
-		this.CF.push(0.21141426794539592);
-		this.CF.push(0.19699653154369043);
-		this.CF.push(0.18356203588996867);
-		this.CF.push(0.17104372729830106);
-		this.CF.push(0.15937912491683343);
-		this.CF.push(0.14851000887600455);
-		this.CF.push(0.13838212970399805);
-		this.CF.push(0.12894493755907541);
-		this.CF.push(0.12015132992734598);
-		this.CF.push(0.11195741652669393);
-		this.CF.push(0.10432230024346026);
-		this.CF.push(0.097207873008500589);
-		this.CF.push(0.090578625593803835);
-		this.CF.push(0.084401470380336713);
-		this.CF.push(0.078645576212520454);
+		this.CF.push(0.93180338993169209);
+		this.CF.push(0.868257557488193);
+		this.CF.push(0.8090453354013093);
+		this.CF.push(0.75387118613536286);
+		this.CF.push(0.7024597268127567);
+		this.CF.push(0.65455435473461698);
+		this.CF.push(0.60991596663626746);
+		this.CF.push(0.56832176528513878);
+		this.CF.push(0.52956414746465574);
+		this.CF.push(0.49344966779385269);
+		this.CF.push(0.45979807321097926);
+		this.CF.push(0.42844140330205083);
+		this.CF.push(0.3992231519839422);
+		this.CF.push(0.37199748635785246);
+		this.CF.push(0.34662851883431528);
+		this.CF.push(0.32298962889681637);
+		this.CF.push(0.30096283111883271);
+		this.CF.push(0.28043818627996769);
+		this.CF.push(0.26131325264196925);
+		this.CF.push(0.24349257464586366);
+		this.CF.push(0.22688720647821134);
+		this.CF.push(0.21141426812852909);
+		this.CF.push(0.19699653172209111);
+		this.CF.push(0.18356203606343061);
+		this.CF.push(0.17104372746666816);
+		this.CF.push(0.15937912507999386);
+		this.CF.push(0.14851000903388545);
+		this.CF.push(0.13838212985656068);
+		this.CF.push(0.12894493770631085);
+		this.CF.push(0.12015133006927131);
+		this.CF.push(0.11195741666334866);
+		this.CF.push(0.10432230037490318);
+		this.CF.push(0.097207873134807027);
+		this.CF.push(0.090578625715063046);
+		this.CF.push(0.084401470496649686);
+		this.CF.push(0.078645576323997879);
 		this.CF.push(0);
 	
 		this.PNK = [];
-		this.PNK.push(0.29089327021924299);
-		this.PNK.push(0.96147609688246016);
-		this.PNK.push(1.992905705280859);
-		this.PNK.push(2.8520803906618917);
-		this.PNK.push(2.6751984779957092);
-		this.PNK.push(1.0472212874010016);
-		this.PNK.push(-1.1988597999205175);
-		this.PNK.push(-2.2804345150565584);
-		this.PNK.push(-1.1293205906204522);
-		this.PNK.push(1.1403084449387828);
-		this.PNK.push(2.0354551855544036);
-		this.PNK.push(0.482767946842308);
-		this.PNK.push(-1.6171794781351592);
-		this.PNK.push(-1.550334303367076);
-		this.PNK.push(0.60493754136547506);
-		this.PNK.push(1.8621354407968105);
-		this.PNK.push(0.41794829555050306);
-		this.PNK.push(-1.611536750464504);
-		this.PNK.push(-1.1679805012970712);
-		this.PNK.push(1.0716797102358204);
-		this.PNK.push(1.5850389259269959);
-		this.PNK.push(-0.45797637551307069);
-		this.PNK.push(-1.7234791269587941);
-		this.PNK.push(-0.10194461585285053);
-		this.PNK.push(1.6742132252551378);
-		this.PNK.push(0.55274470794113351);
-		this.PNK.push(-1.523570703231895);
-		this.PNK.push(-0.88507488498647224);
-		this.PNK.push(1.3378229898080458);
-		this.PNK.push(1.1129249915085691);
-		this.PNK.push(-1.1615627711046335);
-		this.PNK.push(-1.2582568882187648);
-		this.PNK.push(1.0218141659487829);
-		this.PNK.push(1.3420804421888917);
-		this.PNK.push(-0.93336138681096403);
+		this.PNK.push(0.29089327063157433);
+		this.PNK.push(0.96147609795796074);
+		this.PNK.push(1.9929057067906695);
+		this.PNK.push(2.852080391448482);
+		this.PNK.push(2.6751984765768806);
+		this.PNK.push(1.0472212836930446);
+		this.PNK.push(-1.1988598034590252);
+		this.PNK.push(-2.2804345150557359);
+		this.PNK.push(-1.1293205866090439);
+		this.PNK.push(1.1403084488907371);
+		this.PNK.push(2.0354551847450315);
+		this.PNK.push(0.48276794194439082);
+		this.PNK.push(-1.6171794809836411);
+		this.PNK.push(-1.5503343002056609);
+		this.PNK.push(0.60493754639339159);
+		this.PNK.push(1.8621354405329114);
+		this.PNK.push(0.41794829019526042);
+		this.PNK.push(-1.6115367529736164);
+		this.PNK.push(-1.1679804969994156);
+		this.PNK.push(1.0716797147348209);
+		this.PNK.push(1.5850389233986588);
+		this.PNK.push(-0.45797638107805388);
+		this.PNK.push(-1.723479126358191);
+		this.PNK.push(-0.10194460999719542);
+		this.PNK.push(1.6742132263995639);
+		this.PNK.push(0.55274470231814254);
+		this.PNK.push(-1.5235707057849284);
+		this.PNK.push(-0.88507487987264877);
+		this.PNK.push(1.3378229934051453);
+		this.PNK.push(1.1129249869847508);
+		this.PNK.push(-1.1615627754195379);
+		this.PNK.push(-1.2582568842298383);
+		this.PNK.push(1.0218141707166259);
+		this.PNK.push(1.3420804385948193);
+		this.PNK.push(-0.93336139182442901);
 		this.PNK.push(0);
 		this.PNK.push(0);
 	
@@ -2164,21 +2166,21 @@ class OrbitalForecast_CategoryObject_2 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["y", 4112.9884576209461 ],
-			["x", -5110.5458043714179 ],
-			["z", 2555.3253645580562 ],
-			["w", 6.9300634883477716 ],
+			["z", 2555.3253638965743 ],
+			["u", -0.44668389543569337 ],
+			["w", 6.9300634873392948 ],
 			["v", 1.7737490756446463 ],
-			["u", 3.1201970923142439 ],
+			["y", 4112.9884575937604 ],
+			["x", -5110.5458047301981 ],
 		]);
 		this.performer.setAliasMap(map, this);
-		this.addVariableValue("Formula_1", 0, -5110.5458043714179);
-		this.addVariableValue("Formula_2", 0, 4112.9884576209461);
-		this.addVariableValue("Formula_3", 0, 2555.3253645580562);
-		this.addVariableValue("Formula_4", 0, 3.1201970923142439);
+		this.addVariableValue("Formula_1", 0, -5110.5458047301981);
+		this.addVariableValue("Formula_2", 0, 4112.9884575937604);
+		this.addVariableValue("Formula_3", 0, 2555.3253638965743);
+		this.addVariableValue("Formula_4", 0, -0.44668389543569337);
 		this.addVariableValue("Formula_5", 0, 1.7737490756446463);
-		this.addVariableValue("Formula_6", 0, 6.9300634883477716);
-		this.addVariableValue("Formula_7", 0, 7.8043318503743411);
+		this.addVariableValue("Formula_6", 0, 6.9300634873392948);
+		this.addVariableValue("Formula_7", 0, 7.1673908937873003);
 		this.addVariableValue("Formula_8", 0, 0);
 	}
 
@@ -2430,15 +2432,15 @@ class OrbitalForecast_CategoryObject_5 extends DifferentialEquationSolverFormula
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["q", 5.3174953569821228E-09 ],
-			["s", 1.6189340462770081E-13 ],
-			["u", -0.98539477743199999 ],
 			["o", 0.00014584231700000001 ],
-			["x", -5448.3481532400001 ],
-			["v", 1.2168189383400001 ],
 			["w", 7.45047785592 ],
-			["y", -4463.9369842100004 ],
 			["z", 0 ],
+			["s", 1.6189340462770081E-13 ],
+			["q", 5.3174953569821228E-09 ],
+			["v", 1.2168189383400001 ],
+			["y", -4463.9369842100004 ],
+			["x", -5448.3481532400001 ],
+			["u", -0.98539477743199999 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("u", 0, -0.98539477743199999);
@@ -2808,6 +2810,7 @@ class OrbitalForecast_CategoryObject_5 extends DifferentialEquationSolverFormula
 			["x", "Vector.x" ],
 			["w", "Vector.w" ]
 		]);
+		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
 }
 
@@ -3003,6 +3006,14 @@ class OrbitalForecast_CategoryArrow_10 extends DataLink
 	}
 }
 
+class OrbitalForecast_CategoryArrow_11 extends DataLink
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
 
 
 export class OrbitalForecast extends Desktop
@@ -3032,6 +3043,7 @@ export class OrbitalForecast extends Desktop
 		new OrbitalForecast_CategoryArrow_8(this, "");
 		new OrbitalForecast_CategoryArrow_9(this, "");
 		new OrbitalForecast_CategoryArrow_10(this, "");
+		new OrbitalForecast_CategoryArrow_11(this, "");
 
 		let objects = this.getCategoryObjects();
 		let arrows = this.getCategoryArrows();
@@ -3058,6 +3070,8 @@ export class OrbitalForecast extends Desktop
 		arrows[9].setTarget(objects[2]);
 		arrows[10].setSource(objects[7]);
 		arrows[10].setTarget(objects[5]);
+		arrows[11].setSource(objects[7]);
+		arrows[11].setTarget(objects[4]);
 		(objects[2] as unknown as IPostSetArrow).postSetArrow();
 		(objects[3] as unknown as IPostSetArrow).postSetArrow();
 		(objects[4] as unknown as IPostSetArrow).postSetArrow();

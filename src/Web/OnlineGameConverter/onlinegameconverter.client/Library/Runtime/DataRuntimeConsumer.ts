@@ -16,6 +16,7 @@ import type { IStarted } from "../Measurements/Interfaces/IStarted";
 export class DataRuntimeConsumer implements IDataRuntime
 {
 
+
     protected performer: Performer = new Performer();
 
     protected timeProvider !: ITimeMeasurementProvider;

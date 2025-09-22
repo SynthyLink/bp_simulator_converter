@@ -7,6 +7,7 @@ using Diagram.UI;
 using Diagram.UI.Interfaces;
 using OnlineGameConverter.Server.BusinessLogic.Orbital;
 using OnlineGameConverter.Server.Classes;
+using System.Diagnostics;
 
 namespace OnlineGameConverter.Server
 {
@@ -207,6 +208,8 @@ namespace OnlineGameConverter.Server
         {
             try
             {
+                var sw = new Stopwatch();
+                sw.Start();
                 var prp = PrepareCalculation(condition);
                 if (prp == null)
                 {
@@ -219,7 +222,7 @@ namespace OnlineGameConverter.Server
                 var act = () =>
                  {
                      var t = prp.Item2.Time;
-
+                     sw.Stop();
                      var it = new OrbitalForecastItemNumber
                      {
                          DateTime = t,
@@ -228,10 +231,10 @@ namespace OnlineGameConverter.Server
                          Z = parameters["Motion equations.z"](),
                          Vx = parameters["Motion equations.u"](),
                          Vy = parameters["Motion equations.v"](),
-                         Vz = parameters["Motion equations.w"]()
-
+                         Vz = parameters["Motion equations.w"](),
+                         Duration = sw.ElapsedMilliseconds
                      };
-              
+                     sw.Start();
                      l.Add(it);
                     // var dt = DateTime.F
 

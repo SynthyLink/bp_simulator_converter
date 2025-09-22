@@ -17,7 +17,6 @@ import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsume
 import type { IDataRuntime } from "../../Library/Runtime/Interfaces/IDataRuntime";
 import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./OrbitalData";
 import { OrbitalForecast } from "./OrbitalForecast";
-import { StopWatch } from "../../Library/Utilities/DateTime/StopWatch";
 class Check implements ICheck {
     check(o: any): boolean {
         var s = `${o}`;
@@ -72,7 +71,6 @@ export class OrbitalForecastCalculation extends OrbitalForecast implements IActi
         // eslint-disable-next-line no-var
         let rt = this.runtime.getTimeProvider();
         let t = rt.getTime();
-        this.stopWatch.stop();
         const item = {
             OrbitalTime: t,
             X: this.get("x"),
@@ -81,9 +79,8 @@ export class OrbitalForecastCalculation extends OrbitalForecast implements IActi
             Vx: this.get("u"),
             Vy: this.get("v"),
             Vz: this.get("w"),
-            Duration: this.stopWatch.getTotalTime()
+            Duration : 0
         };
-        this.stopWatch.start();
         this.list.push(item);
 
     }
@@ -110,17 +107,12 @@ export class OrbitalForecastCalculation extends OrbitalForecast implements IActi
         this.contoller = controller;
         this.set(condition);
         let p = new PefrormerMeasuremets();
-        this.stopWatch = new StopWatch();
-        this.stopWatch.start();
         p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, condition.Begin, 1, condition.End, this);
-        this.stopWatch.stop();
         return this.list;
     }
 
     public performFixedStepCalculation(): void {
-        this.stopWatch = new StopWatch();
-        this.stopWatch.start();
-       let p = new PefrormerMeasuremets();
+        let p = new PefrormerMeasuremets();
         p.performFixedStepCalculation(this.runtime, this.condition.Begin, 1, this.condition.End, this, this.act);
     }
 
@@ -147,8 +139,6 @@ export class OrbitalForecastCalculation extends OrbitalForecast implements IActi
     performer: Performer = new Performer();
 
     map: Map<string, IMeasurement> = new Map();
-
-    stopWatch !: StopWatch;
 };
 
     

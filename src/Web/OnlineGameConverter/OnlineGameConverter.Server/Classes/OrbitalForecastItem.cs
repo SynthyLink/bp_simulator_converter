@@ -46,9 +46,11 @@ namespace OnlineGameConverter.Server.Classes
 
     public record class OrbitalForecastItemNumber : OrbitaForecastItem
     {
-         public double DateTime { get; init; }
+        public double DateTime { get; init; }
 
-     }
+        public long Duration { get; init; }
+
+    }
 
 
 }
