@@ -3,7 +3,7 @@
 namespace OnlineGameConverter.Server.Classes
 {
 
-    public record class OrbitaForecastItem
+    public  class OrbitaForecastItem
     {
 
         [Display(Name = "Forecast start")]
@@ -32,19 +32,9 @@ namespace OnlineGameConverter.Server.Classes
 
     }
 
-    public record class OrbitalForecastItemDateTime  : OrbitaForecastItem
-    {
-   
+  
 
-        [Display(Name = "Time")]
-        public DateTime DateTime { get; init; }
-
-
-
-
-    }
-
-    public record class OrbitalForecastItemNumber : OrbitaForecastItem
+    public  class OrbitalForecastItemNumber : OrbitaForecastItem
     {
         public double DateTime { get; init; }
 

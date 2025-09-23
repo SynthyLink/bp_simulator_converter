@@ -10,32 +10,61 @@ namespace OnlineGameConverter.Server.Classes
                     -4463.93698421, 0, -0.985394777432, 1.21681893834, 7.45047785592);
 
      */
-    public record class OrbitalForecastCondition
+    public  class OrbitalForecastCondition
     {
+        public OrbitalForecastCondition() { }
  
-        public double X { get;  init; }
+        public double X { get;  set; }
 
-        public double Y { get; init; }
-        public double Z { get; init; }
+        public double Y { get; set; }
+        public double Z { get; set; }
 
-        public double Vx { get; init; }
+        public double Vx { get; set; }
 
-        public double Vy { get; init; }
+        public double Vy { get; set; }
 
-        public double Vz { get; init; }
+        public double Vz { get; set; }
+
+        public OrbitalForecastCondition(OrbitalForecastCondition other)
+        {
+            X = other.X;
+            Y = other.Y;
+            Z = other.Z;
+            Vx = other.Vx;
+            Vy = other.Vy;
+            Vz = other.Vz;
+        }
 
 
     }
 
-    public record  class OrbitalForecastConditionDateTime : OrbitalForecastCondition
+    public class OrbitalForecastConditionDateTime : OrbitalForecastCondition
     {
-              public DateTime Begin { get; init; }
 
-              public DateTime End { get; init; }
+        public OrbitalForecastConditionDateTime()
+        {
+
+        }
+
+        public OrbitalForecastConditionDateTime(OrbitalForecastCondition condition) : base(condition) 
+        {
+
+        }
+
+
+
+        public DateTime Begin { get; set; }
+
+        public DateTime End { get; set; }
+
+        public List<OrbitaForecastItem> Items { get; set; } = new List<OrbitaForecastItem>();
+
 
     }
 
-    public record class OrbitalForecastItemNumberPure : OrbitalForecastCondition
+   
+
+    public  class OrbitalForecastItemNumberPure : OrbitalForecastCondition
     {
         public double Begin { get; init; }
 
@@ -51,11 +80,29 @@ namespace OnlineGameConverter.Server.Classes
     }
 
 
-    public record  class OrbitalForecastConditionNumber :  OrbitalForecastCondition
+    public   class OrbitalForecastConditionNumber :  OrbitalForecastCondition
     {
-        public double Begin { get; init; }
 
-        public double End { get; init; }
+        public OrbitalForecastConditionNumber()
+        {
+
+        }
+
+        public OrbitalForecastConditionNumber(OrbitalForecastCondition condition)
+        {
+            this.X = condition.X;
+            this.Y = condition.Y;
+            this.Z = condition.Z;
+            this.Vx = condition.Vx;
+            this.Vy = condition.Vy;
+            this.Vz = condition.Vz;
+        }
+
+
+
+        public double Begin { get; set; }
+
+        public double End { get; set; }
 
         
 

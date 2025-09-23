@@ -1,8 +1,7 @@
 using OnlineGameConverter.Server;
 using OnlineGameConverter.Server.Classes;
 using OnlineGameConverter.Server.Interfaces;
-
-var builder = WebApplication.CreateBuilder(args);
+/*var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 var cf = configuration.GetChildren();
@@ -55,6 +54,8 @@ builder.Services.AddCors(options =>
         });
 });
 */
+
+/*
 services.AddHttpClient();
 
 
@@ -83,11 +84,22 @@ app.UseCors("CorsPolicy"); // Enable CORS for your app
 
 
 app.UseAuthorization();
-
+/*
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=OrbitalMVC}/{action=Index}/{id?}");
+*/
 
+/*
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=OrbitalMVC}/{action=Index}/{id?}");
+/*
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+*/
+/*
 app.UseEndpoints(static endpoints =>
 {
     endpoints.MapControllers();
@@ -145,3 +157,4 @@ app.UseMvcWithDefaultRoute();
 
 StaticExtension.Init();
 app.Run();
+*/
