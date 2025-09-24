@@ -3,7 +3,7 @@
 
 
 import { http_cancel, http } from "./Library/Communications/http/http_interface";
-import { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./Algorithms/OrbitalForecastCalculation/OrbitalData";
+import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./Algorithms/OrbitalForecastCalculation/OrbitalData";
 import { OrbitalForecastCalculation } from "./Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation";
 
 import { OwnError } from "./Library/ErrorHandler/OwnError";

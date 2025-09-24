@@ -1,6 +1,6 @@
 /* eslint-disable no-empty */
 import React, { useState } from 'react';
-import { getOrbitalForecastFromNumber, obritalInitial } from "../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalFunctions"
+import { getOrbitalForecastFromNumber, obritalInitial } from "./ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalFunctions"
 /*
   const [begin, setBegin] = useState('0');
    const [end, setEnd] = useState('20000');

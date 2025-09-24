@@ -1,6 +1,6 @@
 import { CategoryObject } from "../CategoryObject";
 import type { ICategoryObject } from "../Interfaces/ICategoryObject";
-import { ICheck } from "../Interfaces/ICheck";
+import type { ICheck } from "../Interfaces/ICheck";
 import type { ICheckHolder } from "../Interfaces/ICheckHolder";
 import type { IDesktop } from "../Interfaces/IDesktop";
 import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";

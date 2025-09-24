@@ -1,6 +1,6 @@
 import type { IComparator } from "../Interfaces/IComparator";
 import { Performer } from "../Performer";
-import { IDataConsumer } from "./Interfaces/IDataConsumer";
+import type { IDataConsumer } from "./Interfaces/IDataConsumer";
 import type { IMeasurements } from "./Interfaces/IMeasurements";
 
 export class MeasurementsComparator implements IComparator<IMeasurements> {

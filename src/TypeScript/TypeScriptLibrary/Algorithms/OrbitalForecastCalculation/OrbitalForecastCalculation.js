@@ -45,6 +45,7 @@ class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
             this.stopWatch = new StopWatch_1.StopWatch();
             this.stopWatch.start();
             p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, condition.Begin, 1, condition.End, this);
+            this.stopWatch.stop();
             return this.list;
         });
         this.list = [];

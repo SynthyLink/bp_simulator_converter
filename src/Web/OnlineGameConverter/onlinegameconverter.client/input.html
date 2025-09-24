@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <font color="green"> <p><h1>Obrital forecast</h1></font></p>
+    <form asp-action="OrbitalMVCForm" method="post" class="m-2">
+        <dl>
+            <dt>
+                <table class="fon-index" width="90%" border="1">
+                    <tr>
+                        <td>Parameter</td>
+                        <td>Value</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Begin"></label>
+                        </td>
+                        <td>
+                            <input class="form-control" id="Begin" asp-for="Begin" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="End"></label>
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="End" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="X"></label>
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="X" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Y"></label>
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="Y" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Z"></label>
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="Z" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Vx"></label>
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="Vx" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Vy"></label>
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="Vy" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label asp-for="Vz"></label>
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="Vz" />
+                        </td>
+                    </tr>
+                </table>
+            </dt>
+        </dl>
+        <input asp-page-handler="Start" class="btnsumbit-filter-index"
+               type="submit" value="Start" />
+
+
+</body>
+</html>

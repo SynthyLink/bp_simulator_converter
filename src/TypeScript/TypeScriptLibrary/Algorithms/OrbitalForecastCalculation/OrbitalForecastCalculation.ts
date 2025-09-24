@@ -2,10 +2,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Duration } from "luxon";
 import type { IAction } from "../../Library/Interfaces/IAction";
 import type { IAlias } from "../../Library/Interfaces/IAlias";
-import { ICheck } from "../../Library/Interfaces/ICheck";
+import type { ICheck } from "../../Library/Interfaces/ICheck";
 import type { IFunc } from "../../Library/Interfaces/IFunc";
 import { RungeProcessor } from "../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor";
 import type { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";

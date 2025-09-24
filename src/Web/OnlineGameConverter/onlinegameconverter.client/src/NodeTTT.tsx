@@ -1,4 +1,4 @@
-import { nodeWheatherForecastClick, nodeOrbitalIClickCanlel, nodeOrbitalClick , actOrbitCalculation} from "../NodeTestMethods";
+import { nodeWheatherForecastClick, nodeOrbitalIClickCanlel, nodeOrbitalClick , actOrbitCalculation} from "./NodeTestMethods";
 export const NodeTTT = () => {
     return (
         <><form>
