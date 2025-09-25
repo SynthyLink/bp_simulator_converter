@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace OnlineGameConverter.Server.Controllers
+namespace ReactApp.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]

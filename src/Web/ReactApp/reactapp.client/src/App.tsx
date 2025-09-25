@@ -8,7 +8,7 @@ interface Forecast {
     summary: string;
 }
 
-function AppBackup() {
+function App() {
     const [forecasts, setForecasts] = useState<Forecast[]>();
 
     useEffect(() => {

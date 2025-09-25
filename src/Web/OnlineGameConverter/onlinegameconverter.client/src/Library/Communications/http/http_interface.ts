@@ -1,3 +1,4 @@
+import type { Performer } from '../../Performer';
 import { webAPIUrl } from './AppSettings';
 
 export interface HttpRequest<REQB> {
@@ -11,79 +12,81 @@ export interface HttpResponse<RESB> {
   body?: RESB;
 }
 
+export class HttpCommunication {
 
-export const http_cancel = async <RESB, REQB = undefined>(
-    config: HttpRequest<REQB>, controller: AbortController,
-): Promise<HttpResponse<RESB>> => {
-    const request = new Request(`${webAPIUrl}${config.path}`, {
-        method: config.method || 'get',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: config.body ? JSON.stringify(config.body) : undefined,
-    });
-    if (config.accessToken) {
-        request.headers.set('authorization', `bearer ${config.accessToken}`);
+
+    
+    public async http_cancel<RESB, REQB = undefined>(
+        config: HttpRequest<REQB>, controller: AbortController,
+    ): Promise<HttpResponse<RESB>>  {
+        const request = new Request(`${webAPIUrl}${config.path}`, {
+            method: config.method || 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: config.body ? JSON.stringify(config.body) : undefined,
+        });
+        if (config.accessToken) {
+            request.headers.set('authorization', `bearer ${config.accessToken}`);
+        }
+
+        const signal = controller.signal;
+
+        const response = await fetch(request, { signal });
+
+        if (response.ok) {
+            const body = await response.json();
+            return { ok: response.ok, body };
+        } else {
+            await this.logError(request, response);
+            return { ok: response.ok };
+        }
+    }
+    public  async http<RESB, REQB = undefined>(
+        config: HttpRequest<REQB>,
+    ): Promise<HttpResponse<RESB>>{
+        const request = new Request(`${webAPIUrl}${config.path}`, {
+            method: config.method || 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: config.body ? JSON.stringify(config.body) : undefined,
+        });
+        if (config.accessToken) {
+            request.headers.set('authorization', `bearer ${config.accessToken}`);
+        }
+        const response = await fetch(request);
+
+        if (response.ok) {
+            const body = await response.json();
+            return { ok: response.ok, body };
+        } else {
+            await this.logError(request, response);
+            return { ok: response.ok };
+        }
+    };
+
+    async logError(request: Request, response: Response)
+    {
+        const contentType = response.headers.get('content-type');
+        let body: unknown;
+        if (contentType && contentType.indexOf('application/json') !== -1) {
+            body = await response.json();
+        } else {
+            body = await response.text();
+        }
+        console.error(`Error requesting ${request.method} ${request.url}`, body);
+    };
+
+    public setPerformer(performer: Performer): void {
+        this.performer = performer;
     }
 
-    const signal = controller.signal;
-
-    // console.log('Config', config);
-    console.log('Request', request);
-    // console.log('Request BODY', request.body);
-    const response = await fetch(request, { signal });
-    console.log('Response', response);
-    console.log('Response BODY', response.body);
-
-    if (response.ok) {
-        const body = await response.json();
-        return { ok: response.ok, body };
-    } else {
-        console.log('Response BAD', response);
-        logError(request, response);
-        return { ok: response.ok };
+    public getPerformer(): Performer
+    {
+        return this.performer;
     }
-};
 
 
-
-export const http = async <RESB, REQB = undefined>(
-  config: HttpRequest<REQB>,
-): Promise<HttpResponse<RESB>> => {
-  const request = new Request(`${webAPIUrl}${config.path}`, {
-    method: config.method || 'get',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: config.body ? JSON.stringify(config.body) : undefined,
-  });
-  if (config.accessToken) {
-    request.headers.set('authorization', `bearer ${config.accessToken}`);
-  }
-  // console.log('Config', config);
-  console.log('Request', request);
-    // console.log('Request BODY', request.body);
-  const response = await fetch(request);
-  console.log('Response', response);
-  console.log('Response BODY', response.body);
-
-  if (response.ok) {
-    const body = await response.json();
-    return { ok: response.ok, body };
-  } else {
-    console.log('Response BAD', response);
-    logError(request, response);
-    return { ok: response.ok };
-  }
-};
-
-const logError = async (request: Request, response: Response) => {
-  const contentType = response.headers.get('content-type');
-  let body: unknown;
-  if (contentType && contentType.indexOf('application/json') !== -1) {
-    body = await response.json();
-  } else {
-    body = await response.text();
-  }
-  console.error(`Error requesting ${request.method} ${request.url}`, body);
-};
+    protected performer !: Performer;
+}
