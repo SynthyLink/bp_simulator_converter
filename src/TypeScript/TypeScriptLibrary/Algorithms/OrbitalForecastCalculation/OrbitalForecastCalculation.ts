@@ -73,8 +73,8 @@ export class OrbitalForecastCalculation extends OrbitalForecast implements IActi
         let t = rt.getTime();
         this.stopWatch.stop();
         const item = {
-            OrbitalTime: t,
-            X: this.get("x"),
+            orbitalTime: t,
+            x: this.get("x"),
             Y: this.get("y"),
             Z: this.get("z"),
             Vx: this.get("u"),

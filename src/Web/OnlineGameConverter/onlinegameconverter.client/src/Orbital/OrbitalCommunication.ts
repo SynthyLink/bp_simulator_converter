@@ -8,13 +8,25 @@ export class OrbitalCommunication extends HttpCommunication {
     public async actOrbitCalculation(): Promise<void> {
         let o = new OrbitalForecastCalculation();
         const cond = {
-            Begin: 0, End: 20000, X: -5448.34815324, Y: -4463.93698421, Z: 0, Vx: -0.98539477743, Vy: 1.21681893834, Vz: 7.45047785592
+            begin: 0, end: 20000, x: -5448.34815324, y: -4463.93698421, z: 0, vx: -0.98539477743, vy: 1.21681893834, vz: 7.45047785592
         };
         const ab = new AbortController();
         const t = await o.calculate(cond, ab);
         console.log("IMITATION", t);
+
         //*/
     }
+
+    public async orbitCalculation(condition: OrbitalForecastConditionNumber,
+    ): Promise<OrbitalForecastItemNumber[] | undefined> {
+        let o = new OrbitalForecastCalculation();
+        const ab = new AbortController();
+        const t = await o.calculate(condition, ab);
+        return t;
+    }
+
+
+
 
     public async getOrbitalForecastFromNumber(
         condition: OrbitalForecastConditionNumber,

@@ -16,6 +16,7 @@ import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsume
 import type { IDataRuntime } from "../../Library/Runtime/Interfaces/IDataRuntime";
 import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./OrbitalData";
 import { OrbitalForecast } from "./OrbitalForecast";
+import { StopWatch } from "../../Library/Utilities/DateTime/StopWatch";
 class Check implements ICheck {
     check(o: any): boolean {
         var s = `${o}`;
@@ -70,16 +71,19 @@ export class OrbitalForecastCalculation extends OrbitalForecast implements IActi
         // eslint-disable-next-line no-var
         let rt = this.runtime.getTimeProvider();
         let t = rt.getTime();
+        this.stopWatch.stop();
         const item = {
-            OrbitalTime: t,
-            X: this.get("x"),
-            Y: this.get("y"),
-            Z: this.get("z"),
-            Vx: this.get("u"),
-            Vy: this.get("v"),
-            Vz: this.get("w"),
-            Duration : 0
+            orbitalTime: t,
+           x: this.get("x"),
+            y: this.get("y"),
+            z: this.get("z"),
+            vx: this.get("u"),
+            vy: this.get("v"),
+            vz: this.get("w"),
+            duration: this.stopWatch.getTotalTime()
         };
+        console.log(item);
+        this.stopWatch.start();
         this.list.push(item);
 
     }
@@ -91,12 +95,12 @@ export class OrbitalForecastCalculation extends OrbitalForecast implements IActi
 
     public set(condition: OrbitalForecastConditionNumber): void {
         this.condition = condition;
-        this.alias.setAliasValue("x", condition.X);
-        this.alias.setAliasValue("y", condition.Y);
-        this.alias.setAliasValue("z", condition.Z);
-        this.alias.setAliasValue("v", condition.Vx);
-        this.alias.setAliasValue("u", condition.Vy);
-        this.alias.setAliasValue("w", condition.Vz);
+        this.alias.setAliasValue("x", condition.x);
+        this.alias.setAliasValue("y", condition.y);
+        this.alias.setAliasValue("z", condition.z);
+        this.alias.setAliasValue("v", condition.vx);
+        this.alias.setAliasValue("u", condition.vy);
+        this.alias.setAliasValue("w", condition.vz);
         this.list = [];
         let processor = new RungeProcessor();
         this.runtime = new DataRuntimeConsumerODE(this.dc, processor);
@@ -106,13 +110,20 @@ export class OrbitalForecastCalculation extends OrbitalForecast implements IActi
         this.contoller = controller;
         this.set(condition);
         let p = new PefrormerMeasuremets();
-        p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, condition.Begin, 1, condition.End, this);
+        this.stopWatch = new StopWatch();
+        this.stopWatch.start();
+        var count = Math.floor(condition.end - condition.begin);
+        p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, condition.begin, 1, count, this);
+        this.stopWatch.stop();
         return this.list;
     }
 
     public performFixedStepCalculation(): void {
+        this.stopWatch = new StopWatch();
+        this.stopWatch.start();
         let p = new PefrormerMeasuremets();
-        p.performFixedStepCalculation(this.runtime, this.condition.Begin, 1, this.condition.End, this, this.act);
+        p.performFixedStepCalculation(this.runtime, this.condition.begin, 1,
+            this.condition.end, this, this.act);
     }
 
 
@@ -138,6 +149,8 @@ export class OrbitalForecastCalculation extends OrbitalForecast implements IActi
     performer: Performer = new Performer();
 
     map: Map<string, IMeasurement> = new Map();
+
+    stopWatch !: StopWatch;
 };
 
     

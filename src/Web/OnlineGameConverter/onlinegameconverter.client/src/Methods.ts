@@ -17,6 +17,13 @@ export async function actOrbitCalculation(): Promise<void> {
   
 };
 
+   export async function orbitCalculation(condition: OrbitalForecastConditionNumber,
+   ): Promise<OrbitalForecastItemNumber[] | undefined> {
+       const t = await orbitalCommunication.orbitCalculation(condition);
+       return t;
+   }
+
+
 
 //import { CategoryObject } from '../../Library/Fiction/FictiveDesktop'
 //import { OrbitalForecastCalculation } from "../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation"

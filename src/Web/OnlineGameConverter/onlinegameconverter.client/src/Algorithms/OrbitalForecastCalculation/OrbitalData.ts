@@ -2,24 +2,25 @@
 
 
 export interface OrbitalForecastConditionNumber {
-    Begin: number;
-    End: number;
-    X: number;
-    Y: number;
-    Z: number;
-    Vx: number;
-    Vy: number;
-    Vz: number;
+    begin: number;
+    end: number;
+    x: number;
+    y: number;
+    z: number;
+    vx: number;
+    vy: number;
+    vz: number;
 }
 
 export interface OrbitalForecastItemNumber {
-    OrbitalTime: number;
-    X: number;
-    Y: number;
-    Z: number;
-    Vx: number;
-    Vy: number;
-    Vz: number;
+    orbitalTime: number;
+    x: number;
+    y: number;
+    z: number;
+    vx: number;
+    vy: number;
+    vz: number;
+    duration: number;
 }
 
 export interface OrbitalForecastConditionString {
@@ -43,27 +44,7 @@ export interface OrbitalForecastItemString {
     Vz: string;
 }
 
-export interface OrbitalForecastConditionNumber {
-    Begin: number;
-    End: number;
-    X: number;
-    Y: number;
-    Z: number;
-    Vx: number;
-    Vy: number;
-    Vz: number;
-}
 
-export interface OrbitalForecastItemNumber {
-    OrbitalTime: number;
-    X: number;
-    Y: number;
-    Z: number;
-    Vx: number;
-    Vy: number;
-    Vz: number;
-    Duration: number;
-}
 
 export interface OrbitalForecastConditionString {
     Begin: string;
