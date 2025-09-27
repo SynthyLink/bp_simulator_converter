@@ -46,10 +46,13 @@ namespace OnlineGameConverter.Server
         public OrbitalForecastItemNumberPure GetInitial()
         {
             var dt = DateTime.Now;
+            var b = dt.ToOADate() * 86400;
+            var e = b + 20000;
+
             return new OrbitalForecastItemNumberPure
             {
-                Begin = dateToDouble(dt),
-                End = dateToDouble(dt) + 20000,
+                Begin = b,
+                End = e,
                 X = condition.X,
                 Y = condition.Y,
                 Z = condition.Z,
@@ -258,7 +261,7 @@ namespace OnlineGameConverter.Server
                      sw.Stop();
                      var it = new OrbitalForecastItemNumber
                      {
-                         DateTime = t,
+                         OrbitalTime = t,
                          X = parameters["Motion equations.x"](),
                          Y = parameters["Motion equations.y"](),
                          Z = parameters["Motion equations.z"](),

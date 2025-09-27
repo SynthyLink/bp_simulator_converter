@@ -1,18 +1,84 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState, type JSX, type ReactNode } from 'react';
 import './App.css';
 import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from './Algorithms/OrbitalForecastCalculation/OrbitalData';
 import { getOrbitalInitialCancel, getOrbitalForecastFromNumber, orbitCalculation } from './Methods';
 import { DateTimeConverter } from './Library/Utilities/DateTime/DateTimeConverter';
+import { Performer } from './Library/Performer';
 
 let dt = new DateTimeConverter();
 
-function date(x: number): ReactNode {
-    var y = dt.fromOADate(x);
-    return y + "";
+let performer = new Performer();
+
+function get(x: any): number {
+    return Number(x);
 }
+
+
+function datePure(x: number): string {
+    let y = x / 86400;
+    var d = dt.fromOADate(y);
+    var s = d.toJSON();
+    s = s.substring(0, 19)  + "." + d.getMilliseconds().toString();
+    return s;
+}
+
+function dateValue(x: string): number {
+    var d = new Date(x);
+    var y = dt.toOADate(d);
+    var z = y * 86400;
+    return z;
+}
+
+
+
+function date(x: number): ReactNode {
+    let y = x / 86400;
+    var d = dt.fromOADate(y);
+    return d.toLocaleString();
+}
+
+
 function App() {
-    const [initial, setInitial] = useState<OrbitalForecastConditionNumber>();
+    let [initial, setInitial] = useState<OrbitalForecastConditionNumber>();
     const [client, setClient] = useState<OrbitalForecastItemNumber[]>();
+    const [begin, setBegin] = useState<string>();
+    const [end, setEnd] = useState<string>();
+    const [x, setX] = useState<number>();
+    const [y, setY] = useState<number>();
+    const [z, setZ] = useState<number>();
+    const [vx, setVx] = useState<number>();
+    const [vy, setVy] = useState<number>();
+    const [vz, setVz] = useState<number>();
+
+    const handleBeginChange = (event: any) => {
+        var s = event.target.value;
+ //       var dt = new Date(s);
+        setBegin(s);
+    }
+    const handleEndChange = (event: any) => {
+        setEnd(event.target.value);
+    }
+    const handleXChange = (event: any) => {
+        setX(get(event.target.value));
+    }
+    const handleYChange = (event: any) => {
+        setY(get(event.target.value));
+    }
+    const handleZChange = (event: any) => {
+        setZ(get(event.target.value));
+    }
+
+    const handleVxChange = (event: any) => {
+        setVx(get(event.target.value));
+    }
+    const handleVyChange = (event: any) => {
+        setVy(get(event.target.value));
+    }
+    const handleVzChange = (event: any) => {
+        setVz(get(event.target.value));
+    }
+
+
 
     const [forecast, setForecast] = useState<OrbitalForecastItemNumber[]>();
 
@@ -23,15 +89,17 @@ function App() {
     }, []);
 
     const serverCalc = async (initial: OrbitalForecastConditionNumber): Promise<void> => {
-        console.log("S", initial);
 
         let fore = await getOrbitalForecastFromNumber(initial);
         var r = fore as unknown as OrbitalForecastItemNumber[];
-        if (r === undefined) {
+        if (r === undefined)
+        {
 
         }
-        else {
-             setForecast(r);
+        else
+        {
+            console.log(r);
+            setForecast(r);
         }
     }
 
@@ -48,46 +116,70 @@ function App() {
     }
 
 
-    const btnClick = async () => {
+    const btnClick = async () =>
+    {
+        setClient(undefined);
+        setForecast(undefined);
 
-        
-        if (initial === undefined) {
+        if (begin === undefined) {
             return;
         }
-        await clientCalc(initial);
-        await serverCalc(initial);
+        if (end === undefined) {
+            return;
+        }
+        if (x === undefined) {
+            return;
+        }
+        if (y === undefined) {
+            return;
+        }
+        if (z === undefined) {
+            return;
+        }
+        if (vx === undefined) {
+            return;
+        }
+        if (vy === undefined) {
+            return;
+        }
+        if (vz === undefined) {
+            return;
+        }
+
+        const init: OrbitalForecastConditionNumber = { begin: dateValue(begin), end: dateValue(end), x: x, y: y, z: z, vx: vx, vy: vy, vz: vz };
+        console.log(init);
+        if (init === undefined) {
+            return;
+        }
+        await clientCalc(init);
+        await serverCalc(init);
      }
-
-    
-
- 
-
 
     const b = initial === undefined;
     const contents = b 
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started.</em></p>
-        : <table>
+        ? <em>Loading... Please refresh once the ASP.NET backend has started.</em>
+        : <table className = "my-table">
             <thead>
             <tr>
-                <td>Parameter</td>
-                    <td>Value</td>
+                <th>Parameter</th>
+                    <th>Value</th>
                 </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>
-                    <label asp-for="Begin">Begin</label>
-                </td>
-                <td>
-                    <input type="number" value={initial.begin} onChange={changeState} />
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <label asp-for="Begin">Begin</label>
+                    </td>
+                    <td>
+                        <input className="input-filter-index" type='datetime-local' value={begin} onInput={handleBeginChange} />
+                    </td>
+                </tr>
             <tr>
                 <td>
                     <label>End</label>
                 </td>
                 <td> 
-                    <input type="number" value={initial.end} onChange={changeState} />
+                        <input className="input-filter-index" type="datetime-local" value={end} onChange={handleEndChange} />
                 </td>
             </tr>
             <tr>
@@ -95,7 +187,7 @@ function App() {
                     <label asp-for="X">X</label>
                 </td>
                 <td>
-                    <input type="number" value={initial.x} onChange={changeState} />
+                        <input className="input-filter-index" type="number" value={x} onChange={handleXChange} />
                 </td>
             </tr>
             <tr>
@@ -103,7 +195,7 @@ function App() {
                     <label asp-for="Y">Y</label>
                 </td>
                 <td>
-                    <input type="number" value={initial.y} onChange={changeState} />
+                        <input className="input-filter-index" type="number" value={y} onChange={handleYChange} />
                 </td>
             </tr>
             <tr>
@@ -111,7 +203,7 @@ function App() {
                     <label asp-for="Z">Z</label>
                 </td>
                 <td>
-                    <input type="number" value={initial.z} onChange={changeState} />
+                        <input className="input-filter-index"type="number" value={z} onChange={handleZChange} />
                 </td>
             </tr>
             <tr>
@@ -119,7 +211,7 @@ function App() {
                     <label asp-for="Vx">Vx</label>
                 </td>
                 <td>
-                    <input type="number" value={initial.vx} onChange={changeState} />
+                        <input className="input-filter-index" type="number" value={vx} onChange={handleVxChange} />
                 </td>
             </tr>
             <tr>
@@ -127,7 +219,7 @@ function App() {
                     <label asp-for="Vy">Vy</label>
                 </td>
                     <td>
-                        <input type="number" value={initial.vy} onChange={changeState} />
+                        <input className="input-filter-index" type="number" value={vy} onChange={handleVyChange} />
                     </td>
             </tr>
             <tr>
@@ -135,87 +227,24 @@ function App() {
                     <label asp-for="Vz">Vz</label>
                 </td>
                 <td>
-                    <input type="number" value={initial.vz} onChange={changeState} />
+                        <input className="input-filter-index" type="number" value={vz} onChange={handleVzChange} />
                 </td>
                 </tr>
               </tbody>
         </table>
-
-    const bc = client === undefined
-    const contentsC = bc
-        ? <p><em>Client calculation...</em></p>
-        : <table>
-            <thead>
-                <tr>
-                    <th>Paramerter</th>
-                    <th>Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                {client.map((f, rowIndex) => (
-                    <><tr>                    <td>Time</td>                        <td>{date(f.orbitalTime)}</td>
-                    </tr>
-                        <tr>                    <td>X</td>                        <td>{f.x}</td>
-                        </tr>
-                    <tr>
-                            <td>Y</td>
-                            <td>{f.y}</td>
-                        </tr>
-                        <tr>
-                            <td>Z</td>
-                            <td>{f.z}</td>
-                        </tr><tr>
-                            <td>Y</td>
-                            <td>{f.y}</td>
-                        </tr><tr>
-                            <td>Vx</td>
-                            <td>{f.vx}</td>
-                        </tr><tr>
-                            <td>Vy</td>
-                            <td>{f.vy}</td>
-                        </tr><tr>
-                            <td>Vz</td>
-                            <td>{f.vz}</td>
-                        </tr><tr>
-                            <td>Duration</td>
-                            <td>{f.duration}</td>
-                        </tr></>
-                ))}
-                    </tbody>
-        </table>;
-
-    const bb = forecast === undefined
-    const contentsF = bb
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started.</em></p>
-        : <table>
-            <thead>
-                <tr>
-                    <th>Paramerter</th>
-                    <th>Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                {forecast.map((f, rowIndex) => (
-                    <><tr>                    <td>X</td>                        <td>{f.x}</td>
-                    </tr><tr>
-                            <td>Y</td>
-                            <td>{f.y}</td>
-                        </tr><tr>
-                            <td>Z</td>
-                            <td>{f.z}</td>
-                        </tr></>
-                ))}
-            </tbody>
-        </table>;
+    
+    const contentsC = Load(client, "Client calculation..." );
+    const contentsF = Load(forecast, "Loading from the ASP.NET backend...");
 
 
     return (
-        <div>
+        <div className="body-main">
             <h1 id="tableLabel">Orbital forecast</h1>
-            <h2>This component calculation of orbit forecast.</h2>
+            <h2>This component calculation of orbit forecast</h2>
           <div>  {contents} </div>
             <div>
-                <table>
+                <button onClick={btnClick}>Start</button>
+               <table>
                     <thead>
                         <tr>
                         <td>Server</td>
@@ -225,28 +254,83 @@ function App() {
                     <tbody>
                         <tr>
                             <td>
-                                <div>  {contentsF} </div>
+                              {contentsF} 
                             </td>
                             <td>
-                                <div>  {contentsC} </div>
+                                 {contentsC} 
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <button onClick={btnClick}>Start</button>
         </div>
         
     );
 
+    function Load(orb: OrbitalForecastItemNumber[] | undefined, text: string) {
+        const b = orb === undefined;
+        return b
+            ? <em className="important-message">{text}</em>
+            : <table className="my-table">
+                <thead>
+                    <tr>
+                        <th>Paramerter</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {orb.map((f, rowIndex) => (
+                        <><tr>                    <td>Loop</td>                        <td>{rowIndex + 1}</td>
+                        </tr><tr>                    <td>Time</td>                        <td>{date(f.orbitalTime)}</td>
+                            </tr>
+                            <tr>                    <td>X</td>                        <td>{f.x}</td>
+                            </tr>
+                            <tr>
+                                <td>Y</td>
+                                <td>{f.y}</td>
+                            </tr>
+                            <tr>
+                                <td>Z</td>
+                                <td>{f.z}</td>
+                            </tr><tr>
+                                <td>Y</td>
+                                <td>{f.y}</td>
+                            </tr><tr>
+                                <td>Vx</td>
+                                <td>{f.vx}</td>
+                            </tr><tr>
+                                <td>Vy</td>
+                                <td>{f.vy}</td>
+                            </tr><tr>
+                                <td>Vz</td>
+                                <td>{f.vz}</td>
+                            </tr><tr>
+                                <td>Duration</td>
+                                <td>{f.duration}</td>
+                            </tr><tr className="black-color"><td className="black-color"></td><td className="black-color"></td></tr></>
+                    ))}
+                </tbody>
+            </table>;
 
+    }
 
     async function populateData() {
 
         if (initial === undefined) {
             let init = await getOrbitalInitialCancel();
             var res = init as unknown as OrbitalForecastConditionNumber;
+            var b = datePure(res.begin)
+            var e = datePure(res.end)
+            console.log(b)
+            setBegin(b);
+            setEnd(e);
+            setX(res.x);
+            setY(res.y);
+            setZ(res.z);
+            setVx(res.vx);
+            setVy(res.vy);
+            setVz(res.vz);
             setInitial(res);
         }
         else
@@ -255,9 +339,6 @@ function App() {
         }
     }
 
-
-    function changeState()  {
-    }
 
    
 

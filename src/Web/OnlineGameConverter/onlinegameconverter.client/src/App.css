@@ -5,11 +5,49 @@
     text-align: center;
 }
 
+.body-main {
+    margin-bottom: 60px;
+    background-color: aliceblue;
+}
+
+.important-message {
+    color: red;
+    vertical-align:text-top
+}
+
+.black-color
+{
+    color:black;
+    background-color:black;
+}
+
 th, td {
     padding-left: 1rem;
     padding-right: 1rem;
+    vertical-align: text-top
 }
 
+.my-table {
+    border-collapse: collapse;
+    width: 100%;
+    vertical-align: text-top
+}
+.input-filter-index {
+    width: 100%;
+    height: 100%;
+    background-color: snow;
+}
+.my-table th,
+.my-table td {
+    border: 1px solid #ddd;
+    padding: 1px;
+    vertical-align: text-top
+}
+
+    .my-table th {
+        background-color: #f2f2f2;
+        text-align: center; /* Default header alignment */
+    }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;

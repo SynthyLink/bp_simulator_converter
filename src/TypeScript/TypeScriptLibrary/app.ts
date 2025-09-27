@@ -1,6 +1,8 @@
-import { Actor } from "./Tests/Actor/Actor";
+import { Actor } from "./src/Tests/Actor/Actor";
 
 let a = new Actor();
+
+a.testDate();
 
 //a.actTime();
 

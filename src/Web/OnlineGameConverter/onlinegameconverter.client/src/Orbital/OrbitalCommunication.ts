@@ -25,14 +25,10 @@ export class OrbitalCommunication extends HttpCommunication {
         return t;
     }
 
-
-
-
     public async getOrbitalForecastFromNumber(
         condition: OrbitalForecastConditionNumber,
     ): Promise<OrbitalForecastItemNumber[] | undefined> {
         const controller = new AbortController();
-        console.log('ForecastFromNumber');
         const result = await this.http_cancel<OrbitalForecastItemNumber[], OrbitalForecastConditionNumber>({
             path: `/orbital`,
             method: "post",

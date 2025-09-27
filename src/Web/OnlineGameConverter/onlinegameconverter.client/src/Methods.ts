@@ -25,14 +25,7 @@ export async function actOrbitCalculation(): Promise<void> {
 
 
 
-//import { CategoryObject } from '../../Library/Fiction/FictiveDesktop'
-//import { OrbitalForecastCalculation } from "../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation"
-//import { OrbitalForecast} from "./ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecast"
-/*export function actOrbitCalculation(): void {
-    console.log("IMITATION");
-    const o = new OrbitalForecast();
 
-}*/
 export const getOrbitalForecastFromNumber = async (
     condition: OrbitalForecastConditionNumber,
 ): Promise<OrbitalForecastItemNumber[] | null> => {

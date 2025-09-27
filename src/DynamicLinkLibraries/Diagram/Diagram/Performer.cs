@@ -432,17 +432,12 @@ namespace Diagram.UI
         /// <param name="aliases">Dictionary of aliases</param>
         public void SetAliases(IDesktop desktop, Dictionary<string, object> aliases)
         {
-            IEnumerable<object> l = GetObjectsAndArrows<object>(desktop);
-            foreach (object o in l)
+            IEnumerable<IAlias> l = GetObjectsAndArrows<IAlias>(desktop);
+            foreach (var al in l)
             {
-                if (!(o is IAlias))
-                {
-                    continue;
-                }
-                IAssociatedObject ao = o as IAssociatedObject;
+                IAssociatedObject ao = al as IAssociatedObject;
                 INamedComponent nc = ao.Object as INamedComponent;
                 string name = nc.GetName(desktop);
-                IAlias al = o as IAlias;
                 IList<string> an = al.AliasNames;
                 foreach (string nam in an)
                 {

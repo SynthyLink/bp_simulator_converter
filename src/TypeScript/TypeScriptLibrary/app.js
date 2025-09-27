@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Actor_1 = require("./Tests/Actor/Actor");
+const Actor_1 = require("./src/Tests/Actor/Actor");
 let a = new Actor_1.Actor();
+a.testDate();
 //a.actTime();
 a.actOrbitCalculation(true); // 1770457504
 //a.actDensity();

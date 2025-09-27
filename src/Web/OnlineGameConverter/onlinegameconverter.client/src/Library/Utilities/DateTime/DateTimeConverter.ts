@@ -12,17 +12,19 @@ export class DateTimeConverter {
 
     coeffI: number = 1.0 / 86400000.0;
 
+    off: number = 0;
 
-  /*  constructor()
-    {
-        var x = this.baseOADate.getTime();
-        this.baseDays = x * this.coeffI - 2;
-    }*/
+    constructor() {
+        this.off = this.baseDate.getTimezoneOffset() * 60000;
+    }
+
 
     public toOADate(date: Date): number
     {
-        var x = date.getTime() * this.coeffI;
-        return x - this.baseDays;
+        var t = date.getTime();
+        t *= this.coeffI;
+        t += this.baseDays;
+        return t;
     }
 
 
@@ -30,9 +32,7 @@ export class DateTimeConverter {
     {
         var x = date - this.baseDays;
         x *= this.coeff;
-        var d = new Date();
-        var off  =  d.getTimezoneOffset() * 60000;
-        return new Date(x + off);
-    }
-    
+        return  new Date(x + this.off);
+     }
+
 }

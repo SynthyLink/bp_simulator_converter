@@ -36,7 +36,6 @@ const OrbitalTest = async () => {
 
         try {
             const response = getOrbitalForecastFromNumber(condition);
-            console.error('Forecast:', response);
         } catch (error) {
             console.error('Network error:', error);
             alert('Network error occurred.');
