@@ -4,14 +4,20 @@ import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from '
 import { getOrbitalInitialCancel, getOrbitalForecastFromNumber, orbitCalculation } from './Methods';
 import { DateTimeConverter } from './Library/Utilities/DateTime/DateTimeConverter';
 import { Performer } from './Library/Performer';
+import { setCommunicationServer, webAPIUrl } from './Library/Communications/http/AppSettings';
+import { server } from '../RemoteServer';
 
 let dt = new DateTimeConverter();
 
 let performer = new Performer();
 
+let connected = false;
+
 function get(x: any): number {
     return Number(x);
 }
+
+var serv = false;
 
 
 function datePure(x: number): string {
@@ -98,7 +104,6 @@ function App() {
         }
         else
         {
-            console.log(r);
             setForecast(r);
         }
     }
@@ -147,7 +152,6 @@ function App() {
         }
 
         const init: OrbitalForecastConditionNumber = { begin: dateValue(begin), end: dateValue(end), x: x, y: y, z: z, vx: vx, vy: vy, vz: vz };
-        console.log(init);
         if (init === undefined) {
             return;
         }
@@ -233,8 +237,8 @@ function App() {
               </tbody>
         </table>
     
-    const contentsC = Load(client, "Client calculation..." );
-    const contentsF = Load(forecast, "Loading from the ASP.NET backend...");
+    const contentsC = load(client, "Client calculation..." );
+    const contentsF = load(forecast, "Loading from the ASP.NET backend...");
 
 
     return (
@@ -268,7 +272,7 @@ function App() {
         
     );
 
-    function Load(orb: OrbitalForecastItemNumber[] | undefined, text: string) {
+    function load(orb: OrbitalForecastItemNumber[] | undefined, text: string) {
         const b = orb === undefined;
         return b
             ? <em className="important-message">{text}</em>
@@ -314,15 +318,39 @@ function App() {
             </table>;
 
     }
+    async function setServer(): Promise<void> {
+        if (connected) {
+            return;
+        }
+        console.log(webAPIUrl());
+        try {
+            const request = new Request(`${webAPIUrl()}/testconnection/test`, {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: undefined,
+            });
+            const response = await fetch(request);
+
+            console.log(response);
+            if (!response.ok) {
+                setCommunicationServer(server());
+            }
+        } catch (e: any) {
+            setCommunicationServer(server());
+        }
+    }
+
 
     async function populateData() {
-
+        await setServer();
+ 
         if (initial === undefined) {
             let init = await getOrbitalInitialCancel();
             var res = init as unknown as OrbitalForecastConditionNumber;
             var b = datePure(res.begin)
             var e = datePure(res.end)
-            console.log(b)
             setBegin(b);
             setEnd(e);
             setX(res.x);
