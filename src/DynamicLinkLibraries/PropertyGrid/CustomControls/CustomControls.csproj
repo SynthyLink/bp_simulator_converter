@@ -10,4 +10,7 @@
       <DependentUpon>PropertyGridControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ErrorHandler\ErrorHandler.csproj" />
+  </ItemGroup>
 </Project>

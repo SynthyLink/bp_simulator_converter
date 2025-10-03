@@ -57,9 +57,8 @@ namespace ErrorHandler
             HandleException();
             if (!exception.IsFiction(obj))
             {
-
+                exceptionHandler?.HandleException(exception, obj);
             }
-            exceptionHandler?.HandleException(exception, obj);
         }
 
         /// <summary>

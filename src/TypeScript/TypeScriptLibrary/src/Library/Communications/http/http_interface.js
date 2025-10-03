@@ -14,7 +14,7 @@ const AppSettings_1 = require("./AppSettings");
 class HttpCommunication {
     http_cancel(config, controller) {
         return __awaiter(this, void 0, void 0, function* () {
-            const request = new Request(`${AppSettings_1.webAPIUrl}${config.path}`, {
+            const request = new Request(`${(0, AppSettings_1.webAPIUrl)()}${config.path}`, {
                 method: config.method || 'get',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ class HttpCommunication {
     }
     http(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            const request = new Request(`${AppSettings_1.webAPIUrl}${config.path}`, {
+            const request = new Request(`${(0, AppSettings_1.webAPIUrl)()}${config.path}`, {
                 method: config.method || 'get',
                 headers: {
                     'Content-Type': 'application/json',

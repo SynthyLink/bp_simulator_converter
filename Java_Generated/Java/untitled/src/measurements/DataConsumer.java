@@ -21,6 +21,7 @@ public class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         ITimeMeasurementConsumer, IPrintedObject, ICheckHolder {
 
     protected Performer performer = new Performer();
+    protected measurements.Performer mPerformer = new measurements.Performer();
 
     ITimeMeasurementConsumer tms;
 

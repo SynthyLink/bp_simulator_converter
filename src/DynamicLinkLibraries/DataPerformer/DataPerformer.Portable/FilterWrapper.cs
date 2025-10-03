@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 
 using CategoryTheory;
+
 using DataPerformer.Interfaces;
 using DataPerformer.Portable.Filters;
+
 using Diagram.UI.Interfaces;
+
+using ErrorHandler;
+
 using NamedTree;
 
 namespace DataPerformer.Portable
@@ -12,7 +17,8 @@ namespace DataPerformer.Portable
     /// <summary>
     /// Wrapper of filters
     /// </summary>
-    public class FilterWrapper : DataConsumer, IPostSetArrow, IMeasurements, IRunning
+    public class FilterWrapper : DataConsumer, IPostSetArrow, 
+        IMeasurements, IRunning
     {
 
         #region Fields 
@@ -54,7 +60,7 @@ namespace DataPerformer.Portable
         Donchian Donchian
         {
             get =>
-               filter is Donchian ? filter as Donchian : new Donchian();
+               filter is Donchian  donchian? donchian : new Donchian();
         }
         protected void SetFilter()
         {
@@ -76,7 +82,7 @@ namespace DataPerformer.Portable
                     d.Max = false;
                     filter = d;
                     break;
-                default: throw new ArgumentException();
+                default: throw new OwnArgumentException();
             }
 
             measurementOut = new FilterMeasurement(this);

@@ -1,7 +1,9 @@
 ﻿using BaseTypes.Attributes;
+
 using Diagram.UI;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
+
 using System.Collections.Generic;
 
 namespace DataPerformer.Portable.CodeCreators

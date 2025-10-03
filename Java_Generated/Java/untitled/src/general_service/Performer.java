@@ -74,9 +74,6 @@ public class Performer
         }
     }
 
-
-
-
     public <T> T[] extend(T[] t, T s) {
         var n = t.length;
         var type = t.getClass();

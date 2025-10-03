@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ErrorHandler;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -350,7 +351,7 @@ namespace Vector3D
             // !!! EXCEPTION DELETE
             if (x.Length != 3)
             {
-                throw new ArgumentException();
+                throw new OwnArgumentException();
             }
             return x[0] * x[0] + x[1] * x[1] + x[2] * x[2];
         }
@@ -366,7 +367,7 @@ namespace Vector3D
             // !!! EXCEPTION DELETE
             if (x.Length != 3)
             {
-                throw new ArgumentException();
+                throw new OwnArgumentException();
             }
             double a = ScalarNorm3d(x);
             return Multiply3d(1 / a, x);
@@ -441,7 +442,7 @@ namespace Vector3D
             // !!! DELETE EXCEPTION
             if (quaternion.Length != 4)
             {
-                throw new ArgumentException();
+                throw new OwnArgumentException();
             }
             double a = 0;
             foreach (var q in quaternion)

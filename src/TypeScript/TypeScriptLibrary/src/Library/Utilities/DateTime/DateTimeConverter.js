@@ -8,22 +8,19 @@ class DateTimeConverter {
         this.baseDays = 25569;
         this.coeff = 86400000;
         this.coeffI = 1.0 / 86400000.0;
+        this.off = 0;
+        this.off = this.baseDate.getTimezoneOffset() * 60000;
     }
-    /*  constructor()
-      {
-          var x = this.baseOADate.getTime();
-          this.baseDays = x * this.coeffI - 2;
-      }*/
     toOADate(date) {
-        var x = date.getTime() * this.coeffI;
-        return x - this.baseDays;
+        var t = date.getTime();
+        t *= this.coeffI;
+        t += this.baseDays;
+        return t;
     }
     fromOADate(date) {
         var x = date - this.baseDays;
         x *= this.coeff;
-        var d = new Date();
-        var off = d.getTimezoneOffset() * 60000;
-        return new Date(x + off);
+        return new Date(x + this.off);
     }
 }
 exports.DateTimeConverter = DateTimeConverter;

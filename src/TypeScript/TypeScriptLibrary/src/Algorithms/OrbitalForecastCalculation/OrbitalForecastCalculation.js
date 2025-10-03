@@ -80,7 +80,6 @@ class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
             vz: this.get("w"),
             duration: this.stopWatch.getTotalTime()
         };
-        console.log(item);
         this.stopWatch.start();
         this.list.push(item);
     }
@@ -92,8 +91,8 @@ class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
         this.alias.setAliasValue("x", condition.x);
         this.alias.setAliasValue("y", condition.y);
         this.alias.setAliasValue("z", condition.z);
-        this.alias.setAliasValue("v", condition.vx);
-        this.alias.setAliasValue("u", condition.vy);
+        this.alias.setAliasValue("u", condition.vx);
+        this.alias.setAliasValue("v", condition.vy);
         this.alias.setAliasValue("w", condition.vz);
         this.list = [];
         let processor = new RungeProcessor_1.RungeProcessor();
