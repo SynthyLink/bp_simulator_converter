@@ -14,6 +14,7 @@ using DataPerformer.Interfaces;
 using DataSetService;
 using ErrorHandler;
 using NamedTree;
+using DataSetService.Pure.Interfaces;
 
 namespace DataTableSelection
 {

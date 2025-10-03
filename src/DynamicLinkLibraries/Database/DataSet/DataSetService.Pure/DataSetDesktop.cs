@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
+using DataSetService.Pure.Interfaces;
 
-namespace DataSetService
+namespace DataSetService.Pure
 {
     /// <summary>
     /// Absract desktop

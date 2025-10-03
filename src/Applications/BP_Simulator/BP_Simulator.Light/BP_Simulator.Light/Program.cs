@@ -246,8 +246,8 @@ namespace BP_Simulator.Light
             l.AddRange(ControlSystemLib.Data.UI.Factory.ControlSystemsFactory.ObjectButtons);
             Form form =   StaticExtension.CreateBPFormFull(GetButtons(factory), new IApplicationInitializer[]
             {
-                DataSetService.Initialization.DatabaseInitializer.GetInitializer(
-                 DataSetService.DllDataSetFactoryChooser.BaseDirectoryFactory)
+                DataSetService.Pure.Initialization.DatabaseInitializer.GetInitializer(
+                 DataSetService.Pure.DllDataSetFactoryChooser.BaseDirectoryFactory)
             },
                null, null, filename, null, Factories,
                null, true,

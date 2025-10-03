@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using DataSetService.Pure.Interfaces;
 using Diagram.UI.Interfaces;
 
-namespace DataSetService.Initialization
+namespace DataSetService.Pure.Initialization
 {
     /// <summary>
     /// Initializer of data set service

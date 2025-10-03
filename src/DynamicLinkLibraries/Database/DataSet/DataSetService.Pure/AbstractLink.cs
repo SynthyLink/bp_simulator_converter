@@ -1,9 +1,7 @@
+using DataSetService.Pure.Interfaces;
 using ErrorHandler;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace DataSetService
+namespace DataSetService.Pure
 {
     /// <summary>
     /// Abstract link between tables

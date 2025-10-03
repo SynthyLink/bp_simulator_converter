@@ -7,10 +7,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\CategoryTheory\CategoryTheory\CategoryTheory\CategoryTheory.csproj">
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Diagram\Diagram\Diagram.csproj">
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\ErrorHandler\ErrorHandler.csproj" />
     <ProjectReference Include="..\..\..\..\SerializationInterface\SerializationInterface.csproj">
     </ProjectReference>
+    <ProjectReference Include="..\..\DataSetService.Pure\DataSetService.Pure.csproj" />
   </ItemGroup>
 </Project>

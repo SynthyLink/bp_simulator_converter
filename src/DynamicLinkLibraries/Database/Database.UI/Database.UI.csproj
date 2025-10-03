@@ -56,6 +56,7 @@
     <ProjectReference Include="..\DataSetForm\DataSetForm\DataSetForm.csproj" />
     <ProjectReference Include="..\DataSet\DataSetSerializable\DataSetSerializable.csproj">
     </ProjectReference>
+    <ProjectReference Include="..\DataSet\DataSetService.Pure\DataSetService.Pure.csproj" />
     <ProjectReference Include="..\DataSet\DataSetService\DataSetService\DataSetService.csproj">
     </ProjectReference>
     <ProjectReference Include="..\DataSet\DataTableSelection\DataTableSelection.csproj">

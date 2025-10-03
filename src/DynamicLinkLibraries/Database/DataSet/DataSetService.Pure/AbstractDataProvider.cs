@@ -1,21 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Runtime.Serialization;
 using System.Data;
-using System.Data.Common;
 
 using CategoryTheory;
 
-using Diagram.UI;
-using ErrorHandler;
+using DataSetService.Pure.Interfaces;
 
-namespace DataSetService
+namespace DataSetService.Pure
 {
     /// <summary>
     /// Abstract data provider
     /// </summary>
-    public abstract class AbstractDataProvider : CategoryObject, ISerializable, IDataSetProvider
+    public abstract class AbstractDataProvider : CategoryObject, IDataSetProvider
     {
         #region Fields
 
@@ -63,55 +57,7 @@ namespace DataSetService
         }
 
         /// <summary>
-        /// Deserialization constructor
-        /// </summary>
-        /// <param name="info">Serialization info</param>
-        /// <param name="context">Streaming context</param>
-        public AbstractDataProvider(SerializationInfo info, StreamingContext context)
-        {
-            connectionString = info.GetValue("ConnectionString", typeof(string)) + "";
-            statement = info.GetValue("Statement", typeof(string)) + "";
-            try
-            {
-                desktop = info.GetValue("Desktop", typeof(object)) as IDataSetDesktop;
-            }
-            catch (Exception ex)
-            {
-                ex.HandleException(-1);
-            }
-            try
-            {
-                parameters = info.GetValue("Parameters", typeof(Dictionary<string, string>)) as Dictionary<string, string>;
-            }
-            catch (Exception exc)
-            {
-                exc.HandleException(10);
-            }
-        }
-
-
-        #endregion
-
-        #region ISerializable Members
-
-        /// <summary>
-        /// ISerializable interface implementation
-        /// </summary>
-        /// <param name="info">Serialization info</param>
-        /// <param name="context">Streaming context</param>
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("ConnectionString", connectionString);
-            info.AddValue("Statement", statement);
-            info.AddValue("Parameters", parameters, typeof(Dictionary<string, string>));
-            if (desktop != null)
-            {
-                if (desktop is ISerializable)
-                {
-                    info.AddValue("Desktop", desktop);
-                }
-            }
-        }
+ 
 
         #endregion
 

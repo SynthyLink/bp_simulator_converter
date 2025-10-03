@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DataSetService.Pure.Interfaces;
 using Diagram.UI.Interfaces;
 using ErrorHandler;
 
-namespace DataSetService
+namespace DataSetService.Pure
 {
     /// <summary>
     /// DataSet service Initializer

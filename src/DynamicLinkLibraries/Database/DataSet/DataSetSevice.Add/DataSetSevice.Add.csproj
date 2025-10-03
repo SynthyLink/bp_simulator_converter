@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DataSetService.Pure\DataSetService.Pure.csproj" />
     <ProjectReference Include="..\DataSetService\DataSetService\DataSetService.csproj" />
   </ItemGroup>
 

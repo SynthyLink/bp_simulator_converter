@@ -1,8 +1,8 @@
 ﻿using AssemblyService.Attributes;
 
-using DataSetService;
+using DataSetService.Pure;
 
-using DataSetService.Interfaces;
+using DataSetService.Pure.Interfaces;
 
 namespace DataSetSevice.Add
 {

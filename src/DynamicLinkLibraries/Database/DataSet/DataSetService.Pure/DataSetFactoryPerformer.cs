@@ -4,10 +4,10 @@ using System.Text;
 using System.Data;
 
 
-using Diagram.UI;
 using ErrorHandler;
+using DataSetService.Pure.Interfaces;
 
-namespace DataSetService
+namespace DataSetService.Pure
 {
     /// <summary>
     /// Performer of data set factory

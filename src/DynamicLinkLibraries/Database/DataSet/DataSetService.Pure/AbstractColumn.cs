@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Data;
-using System.Data.Common;
+using DataSetService.Pure.Interfaces;
 
 
-namespace DataSetService
+namespace DataSetService.Pure
 {
     /// <summary>
     /// Abstract implementation of IColumn interface

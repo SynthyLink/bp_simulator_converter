@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 using System.Data;
 
-namespace DataSetService
+namespace DataSetService.Pure
 {
     /// <summary>
     /// Performer of static operations

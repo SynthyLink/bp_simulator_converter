@@ -1,9 +1,8 @@
-using System;
+using DataSetService.Pure.Interfaces;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
 
-namespace DataSetService
+namespace DataSetService.Pure
 {
     /// <summary>
     /// Abstract base class for tables

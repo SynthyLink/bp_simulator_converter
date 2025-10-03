@@ -15,6 +15,7 @@ using DataSetService;
 using Regression.Portable;
 using ErrorHandler;
 using NamedTree;
+using DataSetService.Pure.Interfaces;
 
 
 namespace DataTableSelection

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using CategoryTheory;
 using Database.UI.Forms;
 using DataSetService;
+using DataSetService.Pure.Interfaces;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;

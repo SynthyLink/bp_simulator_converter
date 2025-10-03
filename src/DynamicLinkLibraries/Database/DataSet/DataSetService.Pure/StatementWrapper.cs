@@ -1,19 +1,15 @@
-using DataSetService.Pure;
-using DataSetService.Pure.Interfaces;
-using ErrorHandler;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Runtime.Serialization;
+using DataSetService.Pure.Interfaces;
+using ErrorHandler;
 
-namespace DataSetService
+namespace DataSetService.Pure
 {
     /// <summary>
     /// Wrapper of statement
     /// </summary>
-    [Serializable()]
-    public class StatementWrapper : Pure.StatementWrapper, ISerializable
+    public class StatementWrapper : AbstractDataProvider, IDisposable
     {
 
         #region Fields
@@ -55,63 +51,27 @@ namespace DataSetService
         
         }
 
-        /// <summary>
-        /// Deserialization constructor
-        /// </summary>
-        /// <param name="info">Serialization info</param>
-        /// <param name="context">Streaming context</param>
-        private StatementWrapper(SerializationInfo info, StreamingContext context)
-        {
-            connectionString = info.GetValue("ConnectionString", typeof(string)) + "";
-            statement = info.GetValue("Statement", typeof(string)) + "";
-            try
-            {
-                desktop = info.GetValue("Desktop", typeof(object)) as IDataSetDesktop;
-            }
-            catch (Exception ex)
-            {
-                ex.HandleException(-1);
-            }
-            try
-            {
-                parameters = info.GetValue("Parameters", typeof(Dictionary<string, string>)) as Dictionary<string, string>;
-            }
-            catch (Exception exc)
-            {
-                exc.HandleException(10);
-            }
-            factoryName = info.GetValue("FactoryName", typeof(string)) + "";
-            Init(info, context);
-        }
-
+ 
 
         #endregion
 
-        #region ISerializable Members
-
-        /// <summary>
-        /// ISerializable interface implementation
-        /// </summary>
-        /// <param name="info">Serialization info</param>
-        /// <param name="context">Streaming context</param>
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("ConnectionString", connectionString);
-            info.AddValue("Statement", statement);
-            info.AddValue("Parameters", parameters, typeof(Dictionary<string, string>));
-            if (desktop != null)
-            {
-                if (desktop is ISerializable)
-                {
-                    info.AddValue("Desktop", desktop);
-                }
-            }
-            info.AddValue("FactoryName", factoryName);
-        }
-
-        #endregion
-
+ 
+        #region Members
         
+        /// <summary>
+        /// Schema of dataset
+        /// </summary>
+        public DataSet Schema
+        {
+            get
+            {
+                IDataSetFactory factory = DataSetFactoryChooser.Chooser[factoryName];
+                DbConnection connection = factory.Connection;
+                connection.ConnectionString = connectionString.ConvertConnectionString();
+                return factory.GetData(connection);
+            }
+        }
+
         /// <summary>
         /// Provided data set
         /// </summary>
@@ -187,6 +147,18 @@ namespace DataSetService
             adapter.SelectCommand = command;
         }
 
- 
+        #endregion
+
+        #region IRemovableObject Members
+
+        void IDisposable.Dispose()
+        {
+            if (dataSet != null)
+            {
+                dataSet.Dispose();
+            }
+        }
+
+        #endregion
     }
 }

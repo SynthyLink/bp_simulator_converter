@@ -1,11 +1,8 @@
-﻿using DataSetService.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
+﻿using System.Data;
 
-namespace DataSetService
+using DataSetService.Pure.Interfaces;
+
+namespace DataSetService.Pure
 {
 
     /// <summary>
@@ -19,7 +16,7 @@ namespace DataSetService
         /// <param name="newVersion">New version</param>
         /// <param name="oldVersion">Old version</param>
         /// <returns>Difference</returns>
-        public static DataSet ComputateDiff(this DataSet newVersion, DataSet oldVersion)
+        public static DataSet ComputeDiff(this DataSet newVersion, DataSet oldVersion)
         {
             DataSet diff = null;
             oldVersion.Merge(newVersion);
