@@ -41,13 +41,13 @@ namespace DataPerformer.Formula.CodeCreators
         }
 
 
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
+        List<string> IClassCodeCreator.CreateCode(string prefix, object obj, string volume)
         {
             foreach (Func<object, bool> key in dictionary.Keys)
             {
                 if (key(obj))
                 {
-                    return dictionary[key](preffix, obj);
+                    return dictionary[key](prefix, obj);
                 }
             }
             return null;

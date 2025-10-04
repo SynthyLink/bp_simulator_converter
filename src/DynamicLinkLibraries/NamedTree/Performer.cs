@@ -1,5 +1,4 @@
-﻿using System.Net.WebSockets;
-using System.Reflection;
+﻿using System.Reflection;
 
 using System.Xml;
 
@@ -7,8 +6,39 @@ using ErrorHandler;
 
 namespace NamedTree
 {
+    /// <summary>
+    /// Performer of common operations
+    /// </summary>
     public class Performer
     {
+        /// <summary>
+        /// Generates long string
+        /// </summary>
+        /// <param name="id">Identifier</param>
+        /// <param name="s">String</param>
+        /// <param name="length">Lengh</param>
+        /// <returns>List of strigns</returns>
+        public List<string> GenerateLong(string id, string s, int length)
+        {
+            var l = new List<string>();
+            l.Add("string " + id + " = \"\";");
+
+            var st = s;
+            while (st.Length > length)
+            {
+                var ss = st.Substring(0, length);
+                ss = ss.Replace("\"", "\\\"");
+                st = st.Substring(length);
+                l.Add(id + " += \"" + ss + "\";");
+            }
+            if (st.Length > 0)
+            {
+                st = st.Replace("\"", "\\\"");
+                l.Add(id + " += \"" + st + "\";");
+            }
+            return l;
+        }
+
 
         /// <summary>
         /// Sorts partially ordered set
@@ -16,7 +46,7 @@ namespace NamedTree
         /// <typeparam name="T">The type</typeparam>
         /// <param name="list">The set</param>
         /// <param name="comparer">The comparer</param>
-        public  void SortPatriallyOrderedSet<T>(List<T> list,
+        public void SortPatriallyOrderedSet<T>(List<T> list,
             IComparer<T> comparer)
         {
             list.Sort(comparer);

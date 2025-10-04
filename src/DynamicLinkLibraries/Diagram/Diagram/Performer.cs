@@ -24,7 +24,6 @@ namespace Diagram.UI
     public class Performer : NamedTree.Performer
     {
 
-
    
         /// <summary>
         /// Dictionary from alias

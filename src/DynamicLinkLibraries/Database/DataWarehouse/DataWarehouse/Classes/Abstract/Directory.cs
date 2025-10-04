@@ -704,7 +704,6 @@ namespace DataWarehouse.Classes.Abstract
 
         bool IChildrenName.Check(INamed named)
         {
-          
             return !Names.Contains(named.Name);
         }
 

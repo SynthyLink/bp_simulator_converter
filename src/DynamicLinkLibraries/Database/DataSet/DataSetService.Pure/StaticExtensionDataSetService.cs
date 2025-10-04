@@ -1,6 +1,6 @@
-﻿using System.Data;
-
+﻿using AssemblyService.Attributes;
 using DataSetService.Pure.Interfaces;
+using System.Data;
 
 namespace DataSetService.Pure
 {
@@ -8,8 +8,27 @@ namespace DataSetService.Pure
     /// <summary>
     /// Static extension
     /// </summary>
+    [InitAssembly]
     public static class StaticExtensionDataSetService
     {
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        static StaticExtensionDataSetService()
+        {
+           // new ClassCodeCreator();
+        }
+
+        /// <summary>
+        /// Initialize itself
+        /// </summary>
+        static public void Init(InitAssemblyAttribute attr)
+        {
+
+        }
+
+
         /// <summary>
         /// Computation of differences
         /// </summary>
