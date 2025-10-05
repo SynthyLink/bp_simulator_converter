@@ -33,8 +33,6 @@ namespace DataPerformer.Portable
 
         #endregion
 
-
-
         #region ICategoryArrow Members
 
         ICategoryObject ICategoryArrow.Source

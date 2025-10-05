@@ -1318,7 +1318,7 @@ namespace DataPerformer.UI.UserControls
             dicto = (consumer as DataConsumer).PerformIterator(iterator, globalArg, globalFunc, () => ctx.Token.IsCancellationRequested);
         }
 
-        private void PerformIterator(IDataConsumer consumer, IIterator iterator)
+        private async Task PerformIterator(IDataConsumer consumer, IIterator iterator)
         {
             var mea = consumer.FindMeasurement(globalArg);
             var coord = mea.CreateCoordinateFunctions();
@@ -1344,7 +1344,10 @@ namespace DataPerformer.UI.UserControls
             coll.ForEach((IRunning s) => s.IsRunning = true);
             MeasurementSeries[] series = null;
             ctx = new();
-            dicto = consumer.PerformIterator(iterator, globalArg, globalFunc, out series, () => ctx.Token.IsCancellationRequested);
+            var ct = new CancellationToken();
+            var t = await consumer.PerformIterator(iterator, ct, globalArg, globalFunc,() => ctx.Token.IsCancellationRequested);
+            dicto = t.Item1;
+            series = t.Item2;
         }
 
         public Dictionary<string, object> PerformIterator(IIterator iterator, string argument, string[] values,
@@ -1379,7 +1382,7 @@ Func<bool> stop)
         }
 
 
-        private void StartChart()
+        private async Task StartChart()
         {
             try
             {
@@ -1387,7 +1390,7 @@ Func<bool> stop)
                 var it = (Consumer as DataConsumerIterate).Iterator;
                 if (it != null) 
                 {
-                    PerformIterator(Consumer, it);
+                    await PerformIterator(Consumer, it);
                     return;
                 }
                 if (array == null)
@@ -1810,8 +1813,7 @@ Func<bool> stop)
             {
                 ctx = new();
             }
-            var t = new Task(DoWork);
-            t.Start();
+            var t = DoWork();
             await t;
             WorkCompleted();
             return;
@@ -2033,14 +2035,14 @@ Func<bool> stop)
 
         }
 
-        void DoWork()
+        async Task DoWork()
         {
-            StartChart();
+            await  StartChart();
             ActParent(ActionType.Start, global::Animation.Interfaces.Enums.ActionType.Calculation);
             this.InvokeIfNeeded(() => { toolStripButtonStop.Enabled = false; });
         }
 
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        private  void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
            DoWork();
         }

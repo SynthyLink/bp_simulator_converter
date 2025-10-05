@@ -30,6 +30,7 @@ namespace BP_Simulator.Light
 
         static void Test()
         {
+            //var t = new GeneratedProject.Trading_Gen();
             return;
 
             var orb = new OnlineGameConverter.Server.BusinessLogic.Orbital.OrbitalForecastCalculator();

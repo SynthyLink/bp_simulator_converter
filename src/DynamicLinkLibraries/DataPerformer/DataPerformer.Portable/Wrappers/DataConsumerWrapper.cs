@@ -15,6 +15,7 @@ using DataPerformer.Interfaces.Attributes;
 
 using ErrorHandler;
 using NamedTree;
+using System.Threading.Tasks;
 
 
 namespace DataPerformer.Portable.Wrappers
@@ -22,7 +23,7 @@ namespace DataPerformer.Portable.Wrappers
     /// <summary>
     /// Wrapper of data consumer
     /// </summary>
-    public class DataConsumerWrapper
+    public class DataConsumerWrapper : GeneralWrapper
     {
         /// <summary>
         /// The data consumer
@@ -48,14 +49,16 @@ namespace DataPerformer.Portable.Wrappers
         /// <param name="stop">The stop</param>
         /// <param name="preparation">The preparation action</param>
         /// <param name="errorHandler">The error handler</param>
-        public void PerformIterator(IIterator iterator,
-           Action action, Func<bool> stop = null, Action preparation = null,
+        public async Task PerformIterator(IIterator iterator,
+           Action action, CancellationToken cancellation, Func<bool> stop = null, Action preparation = null,
            IExceptionHandler errorHandler = null)
         {
             Func<bool> st = (stop == null) ? () => false : stop;
             var b = true;
             try
             {
+                var d = Consumer.GetRootConsumerDesktop();
+                await Start(d, cancellation);
                 iterator.Reset();
                 Consumer.ResetAll();
                 var rt = Consumer.CreateRuntime(null);

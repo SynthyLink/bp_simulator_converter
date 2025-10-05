@@ -5,6 +5,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.3" />
+  </ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\DynamicLinkLibraries\AssemblyService\AssemblyService.csproj" />
 		<ProjectReference Include="..\..\DynamicLinkLibraries\BaseTypes\BaseTypes\BaseTypes.csproj">

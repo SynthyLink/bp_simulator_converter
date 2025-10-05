@@ -59,7 +59,6 @@ namespace DataPerformer.Portable
 
         #endregion
 
-
         #region IMeasurements Members
 
         int IMeasurements.Count

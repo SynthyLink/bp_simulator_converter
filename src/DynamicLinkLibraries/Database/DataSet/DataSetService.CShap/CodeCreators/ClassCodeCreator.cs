@@ -3,13 +3,11 @@ using DataSetService.Pure.Interfaces;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
 using Newtonsoft.Json;
-using System.Reflection.Metadata;
-using System.Xml;
 
 namespace DataSetService.Pure.CodeCreators
 {
     [Language("C#")]
-    class ClassCodeCreator : IClassCodeCreator
+    class ClassCodeCreator : Diagram.UI.CodeCreators.ClassCodeCreator
     {
 
         static NamedTree.Performer performer = new();
@@ -20,14 +18,14 @@ namespace DataSetService.Pure.CodeCreators
                     { (o) => { return o is SavedDataProvider; } , CreateSavedDataProvider },
              };
 
-        
-        internal ClassCodeCreator()
+
+        internal ClassCodeCreator() : base(false)
         {
             this.AddClassCodeCreator();
         }
 
 
-        List<string> IClassCodeCreator.CreateCode(string prefix, object obj, string volume)
+        protected override List<string> CreateCode(string prefix, object obj, string volume)
         {
             foreach (Func<object, bool> key in dictionary.Keys)
             {
@@ -57,25 +55,10 @@ namespace DataSetService.Pure.CodeCreators
             var dataSet = prov.DataSet;
             var sr = JsonSerializer.Create();
             var s = JsonConvert.SerializeObject(dataSet);
-           // var s = JsonConvert.Serialize(dataSet, System.Xml.Formatting.Indented));
-            using var stream = new StringWriter();
-    
-    //        dataSet.WriteXml(stream, XmlWriteMode.WriteSchema); 
-            
-
             var ll = performer.GenerateLong("s", s, 1000);
-
             performer.Add(l, ll, 2);
-
-            var ds = new System.Data.DataSet();
-
-            l.Add("\t\tvar doc = new System.Xml.XmlDocument();");
-            l.Add("\t\tdoc.LoadXml(s);");
-            l.Add("\t\tvar ds = new System.Data.DataSet();");
-      //      l.Add("\t\tvar reader = new StringReader(s);");
-       //     l.Add("\t\tds.ReadXml(reader);");
-            l.Add("\t\tDataSetService.Pure.Interfaces.IDataSetProvider prov = this;");
-     //       l.Add("\t\tprov.DataSet = ds;");
+            l.Add("\t\tvar ds = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataSet>(s);");
+            l.Add("\t\tSet(ds);");
 
             l.Add("\t}");
 

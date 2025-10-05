@@ -8,7 +8,6 @@ using System.Xml.Linq;
 
 using AssemblyService;
 
-using BaseTypes.Attributes;
 
 using CategoryTheory;
 
@@ -477,7 +476,7 @@ namespace Diagram.UI
 
         static StaticExtensionDiagramUI()
         {
-            new ObjectContainerClassCodeCreator();
+            new ClassCodeCreator();
             new CShapDesktopCodeCreator();
         }
 
@@ -3417,7 +3416,6 @@ namespace Diagram.UI
         }
 
         #endregion
-
 
         #region Object Comparer Class
 

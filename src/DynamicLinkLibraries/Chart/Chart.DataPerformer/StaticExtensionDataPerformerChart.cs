@@ -1,6 +1,7 @@
 ﻿using Chart.DataPerformer.Interfaces;
 using DataPerformer.Interfaces;
 using DataPerformer.Portable;
+using DataPerformer.Portable.Wrappers;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
 
@@ -82,6 +83,7 @@ namespace Chart.DataPerformer
             return dic;
         }
 
+ 
         /// <summary>
         /// Performs iterator
         /// </summary>
@@ -92,9 +94,10 @@ namespace Chart.DataPerformer
         /// <param name="series">Series</param>
         /// <param name="stop">Stop funcion</param>
         /// <returns>Output</returns>
-        public static Dictionary<string, object> PerformIterator(this IDataConsumer consumer,
-         IIterator iterator, string argument, string[] values,
-     out MeasurementSeries[] series,
+        public static async Task<Tuple<Dictionary<string, object>, MeasurementSeries[]>
+> PerformIterator(
+            this IDataConsumer consumer,
+         IIterator iterator, CancellationToken cancellationToken, string argument, string[] values,
          Func<bool> stop)
         {
             MeasurementSeries[] ss = null;
@@ -103,44 +106,15 @@ namespace Chart.DataPerformer
             {
                 dic = consumer.CreateMeasurements(argument, values, out ss);
             };
-            consumer.PerformIterator(iterator, () =>
+            await consumer.PerformIterator(iterator, () =>
             {
                 foreach (var s in ss)
                 {
                     s.Step();
                 }
 
-            }, stop, preparation);
-            series = ss;
-            return dic;
-        }
-
-        // !!! OLD DELETE !!!
-        public static Dictionary<string, object> PerformIteratorOLD(this IDataConsumer consumer,
-            IIterator iterator, string argument, string[] values,
-        out MeasurementSeries[] series,
-            Func<bool> stop)
-        {
-            iterator.Reset();
-            consumer.ResetAll();
-            var rt = consumer.CreateRuntime(null);
-            Dictionary<string, object> dic = consumer.CreateMeasurements(argument, values, out series);
-            var coll = consumer.GetDependentCollection();
-             coll.ForEach((IRunning s) => s.IsRunning = true);
-            do
-            {
-                if (stop())
-                {
-                    break;
-                }
-                rt.UpdateAll();
-                foreach (var s in series)
-                {
-                    s.Step();
-                }
-            }
-            while (iterator.Next());
-            return dic;
+            }, cancellationToken, stop, preparation);
+            return new Tuple<Dictionary<string, object>, MeasurementSeries[]>(dic, ss);
         }
 
    }

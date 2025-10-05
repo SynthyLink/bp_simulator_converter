@@ -61,14 +61,21 @@ namespace Trading.Library.Forms.UserControls
         }
 
 
-        void SolveTask()
+        async Task SolveTask()
         {
             ctx = new();
             var mea = order.FindMeasurement(order.Date);
              MeasurementSeries[] m = null;
+            var ct = new CancellationToken();
             var str = colorDictionary.ToStrings().ToArray();
-            dictionary = order.PerformIterator(order.Iterator,
-    order.Date, str, out m, () => ctx.Token.IsCancellationRequested);
+            //           var t = await order.PerformIterator(order.Iterator,
+            //  order.Date, ct, str,  () => ctx.Token.IsCancellationRequested; );
+            //         dictionary = t.
+            //order.PerformIterator(order.Iterator, () => { }, ct, order.Date, str,  () => ctx.Token.IsCancellationRequested);
+            var t  = await order.PerformIterator(order.Iterator, ct,
+    order.Date, str,   () => ctx.Token.IsCancellationRequested);
+            m = t.Item2;
+            dictionary = t.Item1;
 
         }
 
@@ -78,16 +85,11 @@ namespace Trading.Library.Forms.UserControls
             toolStripButtonStart.Enabled = false;
             toolStripButtonStop.Enabled = true;
             dColor = colorDictionary.ColorDictionary;
-            var task =
-              new Task(
-          SolveTask);
-            task.Start();
-            await task;
+
+            await SolveTask(); ;
             TaskCompleted();
             return;
-            task.GetAwaiter().OnCompleted(TaskCompleted);
-            task.Start();
-        }
+       }
 
         void TaskCompleted()
         {

@@ -6,7 +6,7 @@ using Trading.Database.Interfaces;
 namespace Trading.Database.SqlServer.Overriden
 {
 
-    public class TradingHistory : Trading.Database.SqlServer.TradingHistory, 
+    public class TradingHistory : SqlServer.TradingHistory, 
         ITradingDatabaseHistoryInteface
     {
         string connectionSrting;
@@ -119,9 +119,31 @@ namespace Trading.Database.SqlServer.Overriden
             return d;
         }
 
-        Task<List<HistoricalDataMessageDateTime>> ITradingDatabaseHistoryInteface.GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end, CancellationToken token)
+        async Task<List<HistoricalDataMessageDateTime>> ITradingDatabaseHistoryInteface.GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end, CancellationToken token)
         {
-            throw new OwnNotImplemented();
+            var r = await SelectHistoryByDateAsync((Guid)id, begin, end);
+            var l = new List<HistoricalDataMessageDateTime>();
+            foreach (var item in r)
+            {
+                var h = new HistoricalDataMessageDateTime
+                {
+                    RequestId = item.RequestId,
+                    Date = item.Date,
+                    Open = item.OpenF,
+                    High = item.High,
+                    Low = item.Low,
+                    Close = item.CloseF,
+                    Volume = item.Volume,
+                    Count = item.Count,
+                    Wap = item.Wap,
+                    HasGaps = item.HasGaps
+
+                };
+
+                l.Add(h);
+
+            }
+            return l;
         }
 
         List<HistoricalDataMessageDateTime> ITradingDatabaseHistoryInteface.GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end)

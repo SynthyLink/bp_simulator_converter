@@ -3,6 +3,7 @@
 using CategoryTheory;
 
 using DataPerformer.Interfaces;
+using Diagram.Interfaces;
 using ErrorHandler;
 
 using IBApi;
@@ -10,12 +11,11 @@ using IBApi;
 using IBApi.messages;
 
 using NamedTree;
-
 using Trading.Database.Interfaces;
 
 namespace Trading.Library.Objects
 {
-    public class DataQuery : CategoryObject, IIterator, IMeasurements
+    public class DataQuery : CategoryObject, IIterator, IMeasurements, IStartTask
     {
 
 
@@ -152,7 +152,8 @@ namespace Trading.Library.Objects
 
         void IIterator.Reset()
         {
-            Exception exceptopn;
+            return;
+            Exception exception;
             try
             {
                 step = 0;
@@ -170,9 +171,9 @@ namespace Trading.Library.Objects
             }
             catch (Exception ex)
             {
-                exceptopn = IncludedException.Get(ex);
+                exception = IncludedException.Get(ex);
             }
-            throw exceptopn;
+            throw exception;
         }
 
         bool IIterator.Next()
@@ -363,6 +364,30 @@ namespace Trading.Library.Objects
             return Symbols[symbol];
         }
 
+        async Task IStartTask.Start(CancellationToken cancellationToken)
+        {
+           Exception exception;
+            try
+            {
+                step = 0;
+                messages.Clear();
+                var bs = Period.ToBarSize();
+                var ct = new CancellationToken();
+                var dt = await Database.GetHistoricalDataMessageDateTimes(Object, Begin, End, cancellationToken);
+                enu = dt.Convert(bs);
+                enumerator = enu.GetEnumerator();
+                enumerator.MoveNext();
+                message = enumerator.Current;
+                messages[step] = message;
+                Set();
+                return;
+            }
+            catch (Exception ex)
+            {
+                exception = IncludedException.Get(ex);
+            }
+            throw exception;
+        }
     }
 }
 

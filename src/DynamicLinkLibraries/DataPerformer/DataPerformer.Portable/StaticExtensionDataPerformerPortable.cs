@@ -23,10 +23,10 @@ using DataPerformer.Portable.Measurements;
 using DataPerformer.Portable.Wrappers;
 
 using Event.Interfaces;
-using System.Drawing;
 using ErrorHandler;
 using System.Threading;
 using NamedTree;
+using System.Threading.Tasks;
 
 namespace DataPerformer.Portable
 {
@@ -76,7 +76,7 @@ namespace DataPerformer.Portable
         /// </summary>
         static StaticExtensionDataPerformerPortable()
         {
-            new CodeCreators.CSCodeCreator();
+            new CodeCreators.ClassCodeCreator();
             TimeMeasureProviderFactory = new DefautFactory();
             Runtime.DataRuntimeFactory.Singleton.SetBase();
             Runtime.DataRuntimeFactory.Singleton.SetBaseAction();
@@ -324,12 +324,12 @@ namespace DataPerformer.Portable
         /// <param name="stop">The stop</param>
         /// <param name="preparation">The preparation action</param>
         /// <param name="errorHandler">The error handler</param>
-        public static void PerformIterator(this IDataConsumer consumer, IIterator iterator,
-           Action action, Func<bool> stop = null, Action preparation = null,
+        public static async Task PerformIterator(this IDataConsumer consumer, IIterator iterator,
+           Action action, CancellationToken cancellation, Func<bool> stop = null, Action preparation = null,
            IExceptionHandler errorHandler = null)
         {
-            var wrapper = new Wrappers.DataConsumerWrapper(consumer);
-            wrapper.PerformIterator(iterator, action, stop, preparation, errorHandler);
+           var wrapper = new Wrappers.DataConsumerWrapper(consumer);
+           await wrapper.PerformIterator(iterator, action, cancellation, stop, preparation, errorHandler);
         }
 
 
