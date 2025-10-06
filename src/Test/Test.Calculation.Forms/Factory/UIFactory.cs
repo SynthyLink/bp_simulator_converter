@@ -32,9 +32,10 @@ namespace Test.Calculation.Forms.Factory
             this.Add();
         }
 
-        ICategoryObject Get(IPaletteButton button)
+        Task<ICategoryObject> Get(IPaletteButton button)
         {
-            return performer.Get<ICategoryObject>(button, assembly);
+            var co = performer.Get<ICategoryObject>(button, assembly);
+            return Task.FromResult(co);
 
         }
 
@@ -74,10 +75,10 @@ namespace Test.Calculation.Forms.Factory
             throw new OwnNotImplemented();
         }
 
-        ICategoryObject IUIFactory.CreateObject(IPaletteButton button)
+        Task<ICategoryObject> IUIFactory.CreateObject(IPaletteButton button)
         {
             var o = Get(button);
-            return o as ICategoryObject;
+            return o as Task<ICategoryObject>;
         }
 
         IObjectLabelUI IUIFactory.CreateObjectLabel(IPaletteButton button)

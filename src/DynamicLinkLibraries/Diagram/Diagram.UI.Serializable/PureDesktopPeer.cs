@@ -17,6 +17,9 @@ using Diagram.UI.Interfaces;
 using SerializationInterface;
 using ErrorHandler;
 using NamedTree;
+using System.Threading.Tasks;
+using System.Threading;
+using Diagram.Interfaces;
 
 
 namespace Diagram.UI
@@ -72,8 +75,9 @@ namespace Diagram.UI
         protected PureDesktopPeer(SerializationInfo info, StreamingContext context)
         {
             byte[] b = info.GetValue("Bytes", typeof(byte[])) as byte[];
+            CancellationToken token = new CancellationToken();
             MemoryStream ms = new MemoryStream(b);
-            Load(ms, true);
+            Load(ms, true, token);
         }
 
 
@@ -296,7 +300,7 @@ namespace Diagram.UI
         /// <param name="desktop">The desktop</param>
         /// <param name="binders">The serialization binders</param>
         /// <returns>List of exceptions or null if right</returns>
-        public static List<Exception> Check(IDesktop desktop, SerializationBinder[] binders)
+        public static async Task< List<Exception>> Check(IDesktop desktop, SerializationBinder[] binders, CancellationToken cancellation)
         {
             exceptions = new List<Exception>();
             bool b = false;
@@ -310,7 +314,7 @@ namespace Diagram.UI
                 Stream stream = new MemoryStream();
                 d.Save(stream);
                 PureDesktopPeer dnew = new PureDesktopPeer();
-                b = dnew.Load(stream);
+                b = await dnew.Load(stream, cancellation);
                 dnew.Dispose();
             }
             catch (Exception e)
@@ -332,7 +336,7 @@ namespace Diagram.UI
         /// </summary>
         /// <param name="stream">The stream</param>
         /// <returns>List of exceptions</returns>
-        public static List<Exception> Check(Stream stream)
+        public static async Task<List<Exception>> Check(Stream stream, CancellationToken token)
         {
             bool b = false;
             SerializationBinder binder = SerializationInterface.StaticExtensionSerializationInterface.Binder;
@@ -340,13 +344,13 @@ namespace Diagram.UI
             try
             {
                 PureDesktopPeer d = new PureDesktopPeer();
-                d.Load(stream, binder, true);
+                b = await d.Load(stream, binder, true, token);
                 d.SetParents();
                 Stream s = new MemoryStream();
                 d.Save(s);
                 d.Dispose();
                 PureDesktopPeer dnew = new PureDesktopPeer();
-                b = dnew.Load(s, binder, true);
+                b = await dnew.Load(s, binder, true, token);
                 dnew.Dispose();
             }
             catch (Exception e)
@@ -374,11 +378,11 @@ namespace Diagram.UI
         /// </summary>
         /// <param name="instream">Input stream</param>
         /// <param name="outstream">Output strem</param>
-        public void Transform(Stream instream, Stream outstream)
+        public async Task Transform(Stream instream, Stream outstream, CancellationToken token)
         {
-            Load(instream);
+            await Load(instream, token);
             this.SetParents();
-           Save(outstream);
+            Save(outstream);
         }
 
         /// <summary>
@@ -386,10 +390,10 @@ namespace Diagram.UI
         /// </summary>
         /// <param name="bytes">The bytes</param>
         /// <returns>Result of cheking</returns>
-        public static List<Exception> Check(byte[] bytes)
+        public static async Task< List<Exception>> Check(byte[] bytes, CancellationToken token)
         {
             MemoryStream stream = new MemoryStream(bytes);
-            return Check(stream);
+            return await Check(stream, token);
         }
 
         /// <summary>
@@ -420,14 +424,14 @@ namespace Diagram.UI
         /// <summary>
         /// Refreshs itself
         /// </summary>
-        public void Refresh()
+        public async Task Refresh(CancellationToken token)
         {
             MemoryStream stream = new MemoryStream();
             Save(stream);
             objects.Clear();
             arrows.Clear();
             stream.Position = 0;
-            Load(stream);
+            await Load(stream, token);
         }
 
  
@@ -438,9 +442,10 @@ namespace Diagram.UI
         /// <param name="binder">Serialization binder</param>
         /// <param name="post">The "post" sign</param>
         /// <returns>True in success and false otherwise</returns>
-        public bool Load(Stream stream, SerializationBinder binder, bool post)
+        public async Task<bool> Load(Stream stream, SerializationBinder binder, bool post, CancellationToken token)
         {
-            if (!loadBinder(stream, binder, post))
+            var b = await loadBinder(stream, binder, post, token);
+            if (!b)
             {
                 return false;
             }
@@ -454,9 +459,9 @@ namespace Diagram.UI
         /// <param name="buffer">Buffer</param>
         /// <param name="binder">Serialization binder</param>
         /// <returns>True in success and false otherwise</returns>
-        public bool Load(byte[] buffer, SerializationBinder binder)
+        public async Task<bool> Load(byte[] buffer, SerializationBinder binder, CancellationToken token)
         {
-            return Load(buffer, binder, true);
+            return await Load(buffer, binder, true, token);
         }
 
         /// <summary>
@@ -464,9 +469,9 @@ namespace Diagram.UI
         /// </summary>
         /// <param name="stream">The stream</param>
         /// <returns>True in success and false otherwise</returns>
-        public bool Load(Stream stream)
+        public async Task<bool> Load(Stream stream, CancellationToken token)
         {
-            return Load(stream, StaticExtensionSerializationInterface.Binder, true);
+            return await Load(stream, StaticExtensionSerializationInterface.Binder, true, token);
         }
  
         /// <summary>
@@ -474,9 +479,9 @@ namespace Diagram.UI
         /// </summary>
         /// <param name="buffer">Buffer</param>
         /// <returns>True in success and false otherwise</returns>
-        public bool Load(byte[] buffer)
+        public async Task<bool> Load(byte[] buffer, CancellationToken token)
         {
-            return Load(buffer, true);
+            return await Load(buffer, true, token);
         }
 
         /// <summary>
@@ -849,27 +854,29 @@ namespace Diagram.UI
 
         #region Internal Members
 
-        internal bool Load(byte[] buffer, SerializationBinder binder, bool post)
+        internal async Task<bool> Load(byte[] buffer, SerializationBinder binder, bool post, CancellationToken token)
         {
             MemoryStream stream = new MemoryStream(buffer);
-            return Load(stream, binder, post);
+            return await Load(stream, binder, post, token);
         }
 
-        internal bool Load(Stream stream, bool post)
+        internal async Task<bool> Load(Stream stream, bool post, CancellationToken token)
         {
-            return Load(stream, StaticExtensionSerializationInterface.Binder, post);
+            return await Load(stream, StaticExtensionSerializationInterface.Binder, post, token);
         }
 
-        internal bool Load(byte[] buffer, bool post)
+        internal async Task<bool> Load(byte[] buffer, bool post, CancellationToken token)
         {
-            return Load(buffer, StaticExtensionSerializationInterface.Binder, post);
+            return await Load(buffer, StaticExtensionSerializationInterface.Binder, post, token);
         }
 
-        internal bool loadBinder(Stream stream, SerializationBinder binder, bool post)
+        internal async Task<bool> loadBinder(Stream stream, SerializationBinder binder, bool post, CancellationToken token)
         {
+            var b = true;
             if (binder == null)
             {
-                if (load(stream, null, post))
+                b = await load(stream, null, post, token);
+                if (b)
                 {
                     PostLoadPrivate();
                     return true;
@@ -880,7 +887,8 @@ namespace Diagram.UI
                 }
             }
             ObjectContainerBase.Binder = binder;
-            if (load(stream, binder, post))
+            b = await load(stream, binder, post, token);
+            if (b)
             {
                 PostLoadPrivate();
                 return true;
@@ -888,9 +896,10 @@ namespace Diagram.UI
             return false;
         }
    
-        private bool load(Stream stream, SerializationBinder binder, bool post)
+        private async Task<bool> load(Stream stream, SerializationBinder binder, bool post, CancellationToken token)
         {
             stream.Position = 0;
+            var tasks = new List<Task>();
             BinaryFormatter bformatter = new BinaryFormatter();
             if (binder != null)
             {
@@ -907,6 +916,11 @@ namespace Diagram.UI
                     objects = new List<IObjectLabel>();
                     foreach (IObjectLabel l in objs)
                     {
+                        var ob = l.Object;
+                        if (ob is IInitializeTask it)
+                        {
+                            tasks.Add(it.Initialize(token));
+                        }
                         objects.Add(l);
                     }
                 }
@@ -915,9 +929,15 @@ namespace Diagram.UI
                     arrows = new List<IArrowLabel>();
                     foreach (IArrowLabel l in arrs)
                     {
+                        var ar = l.Arrow;
+                        if (ar is IInitializeTask it)
+                        {
+                            tasks.Add(it.Initialize(token));
+                        }
                         arrows.Add(l);
                     }
                 }
+                await Task.WhenAll(tasks);
                 foreach (object o in objects)
                 {
                     if (o is INamedComponent)
@@ -941,7 +961,7 @@ namespace Diagram.UI
                         }
                         if (os is IObjectContainer oc)
                         {
-                            bool lb = oc.Load();
+                            bool lb = await oc.Load(token);
                             if (!lb)
                             {
                                 return false;

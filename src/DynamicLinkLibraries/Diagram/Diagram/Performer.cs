@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 
 using BaseTypes.Attributes;
 using BaseTypes.CodeCreator.Interfaces;
 using CategoryTheory;
+using Diagram.Interfaces;
 using Diagram.UI;
 using Diagram.UI.Attributes;
 using Diagram.UI.CodeCreators.Interfaces;
@@ -24,6 +27,13 @@ namespace Diagram.UI
     public class Performer : NamedTree.Performer
     {
 
+        public async Task Initialze(IComponentCollection components, CancellationToken cancellationToken)
+        {
+            var tasks = new List<Task>();
+            ForEach(components, (IInitializeTask task) => 
+            { tasks.Add(task.Initialize(cancellationToken)); });
+            await Task.WhenAll(tasks);
+        }
    
         /// <summary>
         /// Dictionary from alias

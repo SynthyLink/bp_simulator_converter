@@ -13,6 +13,7 @@ using Diagram.UI.Interfaces;
 using ErrorHandler;
 
 using NamedTree;
+using System.Threading;
 
 
 
@@ -282,9 +283,10 @@ namespace Diagram.UI
         /// <param name="objects">Objects</param>
         /// <param name="arrows">Arrows</param>
         /// <param name="associated">Sign for setting associated objects</param>
-        protected virtual void Copy(IEnumerable<IObjectLabel> objects, 
+        protected virtual async void Copy(IEnumerable<IObjectLabel> objects, 
             IEnumerable<IArrowLabel> arrows, bool associated)
         {
+            var ct = new CancellationToken();
             List<IObjectLabel> objs = new List<IObjectLabel>();
             List<IObjectLabel> tobjs = new List<IObjectLabel>();
             foreach (IObjectLabel l in objects)
@@ -299,7 +301,7 @@ namespace Diagram.UI
                 {
                     IObjectContainer oc = l.Object as IObjectContainer;
                     oc.SetParents(this);
-                    oc.Load();
+                   await oc.Load(ct);
                 }
                 // components.Add(lab);
                 table[l.Name] = lab;

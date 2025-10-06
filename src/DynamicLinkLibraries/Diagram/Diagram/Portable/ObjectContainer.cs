@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading;
+using System.Threading.Tasks;
 using CategoryTheory;
 
 using Diagram.UI.Interfaces;
@@ -130,9 +131,9 @@ namespace Diagram.UI.Portable
         /// Loaded Desktop
         /// </summary>
         /// <returns></returns>
-        public virtual IDesktop LoadDesktop()
+        public virtual Task<IDesktop> LoadDesktop(CancellationToken token)
         {
-            return desktop;
+            return Task.FromResult(desktop);
         }
 
         /// <summary>
@@ -162,11 +163,11 @@ namespace Diagram.UI.Portable
         /// Loads itself
         /// </summary>
         /// <returns>True in success</returns>
-        public virtual bool Load()
+        public virtual Task<bool> Load(CancellationToken token)
         {
             if (isLoaded)
             {
-                return false;
+                return Task<bool>.FromResult(isLoaded);
             }
             isLoaded = true;
             if (desktop is PureDesktop pure)
@@ -174,7 +175,7 @@ namespace Diagram.UI.Portable
                 pure.HasParent = true;
             }
             LoadProtected();
-            return true;
+            return Task<bool>.FromResult(true);
         }
 
         /// <summary>
@@ -425,6 +426,11 @@ namespace Diagram.UI.Portable
         void INode<IComponentCollection>.Remove(INode<IComponentCollection> node)
         {
             Remove(node);
+        }
+
+        Task<IDesktop> IObjectContainer.LoadDesktop(CancellationToken token)
+        {
+            throw new NotImplementedException();
         }
 
         INode<IComponentCollection> INode<IComponentCollection>.Parent { get => Parent; set { Parent = value; } }

@@ -10,6 +10,7 @@ using Diagram.UI.Labels;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Interfaces.Labels;
 using ErrorHandler;
+using System.Threading.Tasks;
 
 namespace Diagram.UI.Factory
 {
@@ -69,11 +70,11 @@ namespace Diagram.UI.Factory
         /// </summary>
         /// <param name="button">The button</param>
         /// <returns>Created object</returns>
-        public virtual ICategoryObject CreateObject(IPaletteButton button)
+        public virtual async Task<ICategoryObject> CreateObject(IPaletteButton button)
         {
             foreach (IUIFactory f in factories)
             {
-                ICategoryObject o = f.CreateObject(button);
+                ICategoryObject o = await f.CreateObject(button);
                 if (o != null)
                 {
                     return o;

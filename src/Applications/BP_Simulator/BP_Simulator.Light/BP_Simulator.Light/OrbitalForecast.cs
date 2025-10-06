@@ -65,7 +65,7 @@ namespace GeneratedProject
 			currALabel.TargetNumber = (int)5;
 			bool pl = PostLoad();
 			bool pd = PostDeserialize();
-			 				PostLoad(this);
+			 	PostLoad(this);
 				Name = "OrbitalForecast"; 
 		}
 	

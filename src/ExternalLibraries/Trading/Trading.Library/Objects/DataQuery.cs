@@ -15,7 +15,7 @@ using Trading.Database.Interfaces;
 
 namespace Trading.Library.Objects
 {
-    public class DataQuery : CategoryObject, IIterator, IMeasurements, IStartTask
+    public class DataQuery : CategoryObject, IIterator, IMeasurements, IStartTask, IInitializeTask
     {
 
 
@@ -387,6 +387,12 @@ namespace Trading.Library.Objects
                 exception = IncludedException.Get(ex);
             }
             throw exception;
+        }
+
+        async Task IInitializeTask.Initialize(CancellationToken cancellationToken)
+        {
+            var dt = await Database.GetSymbols(cancellationToken);
+            Symbols = dt;
         }
     }
 }
