@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using OnlineGameConverter.Server.Classes;
+using OnlineGameConverter.Server.Classes.Orbital;
 
 namespace OnlineGameConverter.Server.Controllers
 {

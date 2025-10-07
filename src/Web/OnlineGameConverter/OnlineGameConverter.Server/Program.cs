@@ -1,5 +1,6 @@
 using OnlineGameConverter.Server;
 using OnlineGameConverter.Server.Classes;
+using OnlineGameConverter.Server.Classes.Orbital;
 using OnlineGameConverter.Server.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);

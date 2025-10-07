@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 using BaseTypes.Attributes;
-using CategoryTheory;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Portable;
@@ -11,13 +10,10 @@ using Diagram.UI.Portable;
 namespace Diagram.UI.CodeCreators
 {
     [Language("C#")]
-    public class ClassCodeCreator : IClassCodeCreator
+    internal class ClassCodeCreator : BaseClassCodeCreator
     {
-        protected ClassCodeCreator(bool b)
-        {
-
-        }
-        internal ClassCodeCreator()
+  
+        internal ClassCodeCreator() : base(false)
         {
             this.AddClassCodeCreator();
         }
@@ -31,36 +27,14 @@ namespace Diagram.UI.CodeCreators
             return obj.GetType().Name;
         }
 
-        protected List<string> CreateArrow(object obj)
-        {
-            if (obj is ICategoryArrow arrow)
-            {
-                var str = arrow.GetType().FullName;
-                List<string> l = new List<string>();
-                l.Add(str);
-                l.Add("{");
-                l.Add("}");
-                return l;
-            }
-            return null;
-
-        }
+  
 
         #region IClassCodeCreator Members
 
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
+     
+        protected override List<string> CreateCode(string preffix, object obj, string volume)
         {
-            return CreateCode(preffix, obj, volume);
-        }
-
-        protected virtual List<string> CreateCode(string preffix, object obj, string volume)
-        {
-            var la = CreateArrow(obj);
-            if (la != null)
-            {
-                return la;
-            }
-           var l = new List<string>();
+            var l = new List<string>();
             if (obj is ObjectContainer oc)
             { 
                 l.Add(" Diagram.UI.Portable.ObjectContainer");

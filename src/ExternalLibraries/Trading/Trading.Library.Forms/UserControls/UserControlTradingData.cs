@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Diagram.UI.Forms;
+using Diagram.UI.Utils;
+using IBApi;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-
-using IBApi;
-
 using Trading.Library.Objects;
-using System.ComponentModel;
 
 namespace Trading.Library.Forms.UserControls
 {
@@ -30,7 +30,17 @@ namespace Trading.Library.Forms.UserControls
                       comboBoxSymbol.Items.Add(symbol);
                   }*/
             comboBoxSymbol.Items.AddRange(Symbols.Keys.ToArray());
-            comboBoxSymbol.SelectedIndex = 2;
+            var g = dataQuery.Object;
+            var sms = dataQuery.Symbols;
+            comboBoxSymbol.SelectedIndex = dataQuery.ToIndex(dataQuery.Object);
+/*
+            foreach (var item in sms)
+            {
+                if (item.Value.Equals(g))
+                {
+                    comboBoxSymbol.SelectCombo(item.Key);
+                }
+            }*/
             var itervals = StaticExtensionIBApi.Barsizes;
             comboBoxInterval.Items.Clear();
             comboBoxInterval.Items.AddRange(itervals);
@@ -61,7 +71,6 @@ namespace Trading.Library.Forms.UserControls
                 dataQuery = value;
                 Fill(dataQuery);
                 var g = dataQuery.Object;
-                comboBoxSymbol.SelectedIndex = dataQuery.ToIndex(dataQuery.Object); 
                 comboBoxInterval.SelectedIndex = dataQuery.Period.ToIndex();
                 dateTimePickerBegin.Value = dataQuery.Begin;
                 dateTimePickerEnd.Value = dataQuery.End;

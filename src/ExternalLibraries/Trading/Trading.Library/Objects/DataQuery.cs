@@ -65,9 +65,9 @@ namespace Trading.Library.Objects
         public  int ToIndex(object guid)
         {
             int i = 0;
-            foreach (var symbol in Symbols.Keys)
+            foreach (var symbol in Symbols.Values)
             {
-                if (guid == Symbols[symbol])
+                if (guid.Equals(symbol))
                 {
                     return i;
                 }

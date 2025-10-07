@@ -1,43 +1,28 @@
 ﻿using BaseTypes.Attributes;
 using DataSetService.Pure.Interfaces;
 using Diagram.UI;
-using Diagram.UI.Interfaces;
 using Newtonsoft.Json;
 
 namespace DataSetService.Pure.CodeCreators
 {
     [Language("C#")]
-    class ClassCodeCreator : Diagram.UI.CodeCreators.ClassCodeCreator
+    class ClassCodeCreator : Diagram.UI.CodeCreators.BaseClassCodeCreator
     {
-
-        static NamedTree.Performer performer = new();
-
-        static readonly Dictionary<Func<object, bool>, Func<string, object, List<string>>> dictionary =
-            new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
-            {
-                    { (o) => { return o is SavedDataProvider; } , CreateSavedDataProvider },
-             };
 
 
         internal ClassCodeCreator() : base(false)
         {
             this.AddClassCodeCreator();
-        }
-
-
-        protected override List<string> CreateCode(string prefix, object obj, string volume)
-        {
-            foreach (Func<object, bool> key in dictionary.Keys)
+            dictionary =
+            new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
             {
-                if (key(obj))
-                {
-                    return dictionary[key](prefix, obj);
-                }
-            }
-            return null;
+                    { (o) => { return o is SavedDataProvider; } , CreateSavedDataProvider },
+             };
         }
 
-        static List<string> CreateSavedDataProvider(string preffix, object obj)
+
+ 
+        List<string> CreateSavedDataProvider(string preffix, object obj)
         {
             List<string> l = new List<string>();
             string pr = preffix;

@@ -28,6 +28,8 @@
     <ProjectReference Include="..\..\..\DynamicLinkLibraries\EarClipper\EarClipperSplitter\EarClipperSplitter.csproj" />
     <ProjectReference Include="..\..\..\ExternalLibraries\Atmosphere\DinAtm\DinAtm.Portable\DinAtm.Portable.csproj" />
     <ProjectReference Include="..\..\..\ExternalLibraries\Gravity\Gravity_36_36\Gravity_36_36.Wrapper\Gravity_36_36.Wrapper.csproj" />
+    <ProjectReference Include="..\..\..\ExternalLibraries\Trading\Trading.Database\Trading.Database.csproj" />
+    <ProjectReference Include="..\..\..\ExternalLibraries\Trading\Trading.Library\Trading.Library.csproj" />
   </ItemGroup>
 
   <ItemGroup>

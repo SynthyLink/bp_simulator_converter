@@ -52,6 +52,7 @@
 		<ProjectReference Include="..\..\DynamicLinkLibraries\Scada\Scada.Motion6D\Scada.Motion6D.csproj" />
 		<ProjectReference Include="..\..\DynamicLinkLibraries\SoundService\SoundService\SoundService.csproj" />
 		<ProjectReference Include="..\..\DynamicLinkLibraries\Vector3D\Vector3D.csproj" />
+		<ProjectReference Include="..\..\ExternalLibraries\Trading\Trading.Library\Trading.Library.csproj" />
 	</ItemGroup>
 </Project>
 

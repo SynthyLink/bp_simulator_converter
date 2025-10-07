@@ -6,7 +6,7 @@ using DataPerformer.Portable.Wrappers;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
 using OnlineGameConverter.Server.BusinessLogic.Orbital;
-using OnlineGameConverter.Server.Classes;
+using OnlineGameConverter.Server.Classes.Orbital;
 using System.Diagnostics;
 
 namespace OnlineGameConverter.Server

@@ -1,10 +1,22 @@
-﻿using Trading.Library.Enums;
+﻿using AssemblyService.Attributes;
+using Diagram.UI.CodeCreators;
+using Trading.Library.Enums;
 
 namespace Trading.Library
 {
+    [InitAssembly]
     public static class StaticExtensionTradingLibrary
     {
- 
+        static public void Init(InitAssemblyAttribute attr)
+        {
+
+        }
+
+        static StaticExtensionTradingLibrary()
+        {
+            new CodeCreators.ClassCodeCreator();
+        }
+
         public static PositionType ToPositionType(this double? position)
         {
             if (position == null)

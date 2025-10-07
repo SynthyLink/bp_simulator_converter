@@ -21,6 +21,7 @@ using ErrorHandler;
 
 using NamedTree;
 using BaseTypes.CodeCreator.Interfaces;
+using System.Net.Security;
 
 
 namespace Diagram.UI
@@ -477,6 +478,7 @@ namespace Diagram.UI
         static StaticExtensionDiagramUI()
         {
             new ClassCodeCreator();
+            new BaseClassCodeCreator();
             new CShapDesktopCodeCreator();
         }
 
@@ -554,7 +556,12 @@ namespace Diagram.UI
                 string preffixFull = pr + className;
                 l.Add(className + " : Diagram.UI.PureDesktop");
                 l.Add("{");
-                l.Add("\t" + constructorType + className + "()");
+                l.Add("\t" + constructorType + className + "() : this(false)");
+                l.Add("\t{");
+                l.Add("");
+                l.Add("\t}");
+                l.Add("");
+                l.Add("\tinternal "  + className + "(bool begin)");
                 l.Add("\t{");
                 int ko = 0;
                 var ignoredObjs = new List<IObjectLabel>();
@@ -592,12 +599,6 @@ namespace Diagram.UI
                 }
                 if (postLoad)
                 {
-                    /*           l.Add("\t\tforeach (IObjectLabel l in objects)");
-                               l.Add("\t\t{");
-                               l.Add("\t\t\tl.Desktop = this;");
-                               l.Add("\t\t}");*/
-                    l.Add("\t\tbool pl = PostLoad();");
-                    l.Add("\t\tbool pd = PostDeserialize();");
                     if (check != null)
                     {
                         l.Add("\t\t" + check);
@@ -704,10 +705,14 @@ namespace Diagram.UI
                     l.Add("");
                     l.Add("\t\t static public bool SuccessLoad { get; private set; } = true;");
                     l.Add("");
-                    l.Add("\t\tpublic static  Diagram.UI.Interfaces.IDesktop Desktop { get => new InternalDesktop(); }");
+                    l.Add("\t\tpublic static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktop(System.Threading.CancellationToken token)");
+                    l.Add("\t\t{");
+                    l.Add("\t\t\tvar desk = new InternalDesktop(true);");
+                    l.Add("\t\t\treturn await desk.GetDesktopAsync(desk, token);");
+                    l.Add("\t\t}");
                     l.Add("");
                     List<string> lt = (desktop as PureDesktop).CreateDesktopCode("", "InternalDesktop",
-                        "SuccessLoad = pl & pd;\n\t\t\t\tPostLoad(this);\n\t\t\t\tName = \"" + className + "\"; ", true, "internal ");
+                        "if (!begin){ SuccessLoad = Final(); };\n\t\t\t\tName = \"" + className + "\"; ", true, "internal ");
                     l.Add("\t\tinternal class " + lt[0]);
                     for (int i = 1; i < lt.Count; i++)
                     {

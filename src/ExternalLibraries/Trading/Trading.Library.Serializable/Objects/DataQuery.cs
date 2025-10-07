@@ -17,7 +17,7 @@ namespace Trading.Library.Serializable.Objects
             }
             catch
             {
-                Object = info.GetValue("Guid", typeof(Object));
+                Object = info.GetValue("Guid", typeof(object));
             }
         }
         public DataQuery() 

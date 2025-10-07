@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 
 using OnlineGameConverter.Server.BusinessLogic.Orbital;
-using OnlineGameConverter.Server.Classes;
 using OnlineGameConverter.Server.Interfaces;
+using OnlineGameConverter.Server.Classes.Orbital;
 
 namespace OnlineGameConverter.Server.Pages
 {

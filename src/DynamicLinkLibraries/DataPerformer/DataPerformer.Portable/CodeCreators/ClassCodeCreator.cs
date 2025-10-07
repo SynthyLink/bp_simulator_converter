@@ -2,38 +2,65 @@
 
 using Diagram.UI;
 using Diagram.UI.CodeCreators.Interfaces;
-
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace DataPerformer.Portable.CodeCreators
 {
     [Language("C#")]
-    class ClassCodeCreator : Diagram.UI.CodeCreators.ClassCodeCreator
+    class ClassCodeCreator : Diagram.UI.CodeCreators.BaseClassCodeCreator
     {
         
 
         internal ClassCodeCreator() : base(false)
         {
+           
             this.AddClassCodeCreator();
+            dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
+            {
+                    { (o) => { return o is FilterWrapper; } , CreateFilter },
+             };
+
         }
 
+        List<string> CreateFilter(string preffix, object obj)
+        {
+            var l = new List<string>();
+            string pr = preffix;
+            if (pr[pr.Length - 1] != '.')
+            {
+                pr = pr + ".";
+            }
+            var fv = obj as FilterWrapper;
+            l.Add("DataPerformer.Portable.FilterWrapper");
+            l.Add("{");
+            l.Add("");
+            l.Add("\tinternal CategoryObject() : base(false)");
+            l.Add("\t{");
+            l.Add("\t\tkind = " + fv.Kind + ";");
+            l.Add("\t\tInput = \"" + fv.Input + "\";");
+            l.Add("\t\tSetFilter();");
+            l.Add("\t\tfilter.Count = " + fv.Count + ";");
+            l.Add("\t}");
+            l.Add("}");
+            return l;
+        }
 
-
+    
         #region IClassCodeCreator Members
 
 
-        protected IDesktopCodeCreator DesktopCodeCreator
-        { get; set; }
 
-
-        protected virtual string BaseClassString(string prefix, object obj)
-        {
-            return obj.GetType().Name;
-        }
-
+     
 
         protected override  List<string> CreateCode(string preffix, object obj, string volume)
         {
+            var ll = base.CreateCode(preffix, obj, volume);
+            if (ll != null)
+            {
+                return ll;
+            }
             string str = null;
             List<string> l = new ();
             switch (obj)
@@ -76,6 +103,7 @@ namespace DataPerformer.Portable.CodeCreators
             return l;
         }
 
+  
         List<string> Get(RandomGenerator random)
         {
             var l = new List<string>();

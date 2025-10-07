@@ -14,6 +14,8 @@ using ErrorHandler;
 
 using NamedTree;
 using System.Threading;
+using System.Threading.Tasks;
+using Diagram.Interfaces;
 
 
 
@@ -77,6 +79,41 @@ namespace Diagram.UI
                 onRemove -= value;
             }
         }
+
+        public async Task<IDesktop> GetDesktopAsync(PureDesktop desktop, CancellationToken token)
+        {
+            await desktop.FinalAsync(token);
+            return desktop;
+        }
+
+        protected async Task FinalAsync(CancellationToken token)
+        {
+            var tasks = new List<Task>();
+            foreach (var item in CategoryObjects)
+            {
+                if (item is IInitializeTask task)
+                {
+                    tasks.Add(task.Initialize(token));
+                }
+            }
+            foreach (var item in CategoryArrows)
+            {
+                if (item is IInitializeTask task)
+                {
+                    tasks.Add(task.Initialize(token));
+                }
+            }
+            await Task.WhenAll(tasks);
+        }
+
+        protected bool Final()
+        {
+            bool pl = PostLoad();
+            bool pd = PostDeserialize();
+            var b = pl & pd;
+            PostLoad(this);
+            return b;
+       }
 
         protected virtual void Add(INode<IComponentCollection> collection)
         {
