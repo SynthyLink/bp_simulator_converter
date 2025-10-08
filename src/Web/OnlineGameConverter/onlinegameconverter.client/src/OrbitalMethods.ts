@@ -7,7 +7,7 @@ import { OrbitalForecastCalculation } from "./Algorithms/OrbitalForecastCalculat
 
 import { OwnError } from "./Library/ErrorHandler/OwnError";
 import { OwnNotImplemented } from "./Library/ErrorHandler/OwnNotImplemented";
-import { OrbitalCommunication } from "./Orbital/OrbitalCommunication";
+import { OrbitalCommunication } from "./Algorithms/OrbitalForecastCalculation/OrbitalCommunication";
 
 let orbitalCommunication = new OrbitalCommunication();
 

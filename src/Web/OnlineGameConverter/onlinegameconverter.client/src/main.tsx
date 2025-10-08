@@ -4,11 +4,12 @@ import './index.css'
 import App from './App.tsx'
 import AppBackup from './Backup/AppBackup.tsx'
 import { getTarget } from "../UserConfig.ts"
+import { NodeTest } from './Test/NodeTest.tsx'
 //import AppBackup from './Backup/AppBackup.tsx'
 
 const node = (): ReactNode => {
     return <><StrictMode>
-        <App />
+        <App/>
     </StrictMode></>
 
 }

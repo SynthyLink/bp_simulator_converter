@@ -1,7 +1,7 @@
-import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "../Algorithms/OrbitalForecastCalculation/OrbitalData";
-import { OrbitalForecastCalculation } from "../Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation";
-import { HttpCommunication } from "../Library/Communications/http/http_interface";
-import { getOrbitalInitialCancel, getOrbitalForecastFromNumber } from "../Methods";
+import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./OrbitalData";
+import { OrbitalForecastCalculation } from "./OrbitalForecastCalculation";
+import { HttpCommunication } from "../../Library/Communications/http/http_interface";
+import { getOrbitalInitialCancel, getOrbitalForecastFromNumber } from "../../OrbitalMethods";
 
 export class OrbitalCommunication extends HttpCommunication {
 

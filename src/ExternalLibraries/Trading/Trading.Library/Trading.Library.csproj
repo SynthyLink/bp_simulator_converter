@@ -24,7 +24,6 @@
       <ProjectReference Include="..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable.Basic\DataPerformer.Portable.Basic.csproj" />
       <ProjectReference Include="..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable\DataPerformer.Portable.csproj" />
       <ProjectReference Include="..\..\..\DynamicLinkLibraries\Diagram\Diagram.Extended\Diagram.Extended.csproj" />
-      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Diagram\Diagram.UI.Serializable\Diagram.UI.Serializable.csproj" />
       <ProjectReference Include="..\..\..\DynamicLinkLibraries\Diagram\Diagram.UI\Diagram.UI.csproj" />
       <ProjectReference Include="..\..\..\DynamicLinkLibraries\Diagram\Diagram\Diagram.csproj" />
       <ProjectReference Include="..\..\..\DynamicLinkLibraries\EngineeringInitializer\EngineeringInitializer.csproj" />

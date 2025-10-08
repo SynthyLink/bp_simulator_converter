@@ -11,7 +11,10 @@ using IBApi;
 using IBApi.messages;
 
 using NamedTree;
+using System;
+using System.Web;
 using Trading.Database.Interfaces;
+using Trading.Library.Classes;
 
 namespace Trading.Library.Objects
 {
@@ -43,6 +46,8 @@ namespace Trading.Library.Objects
 
         bool isUpdated = false;
 
+        IInitializeTask task;
+
         #endregion
 
         #region Proprerties
@@ -61,6 +66,33 @@ namespace Trading.Library.Objects
 
         object o = new object();
 
+        public string Symbol
+        {
+            get
+            {
+                var o = this.Object;
+                foreach (var symbol in Symbols)
+                {
+                    if (o.Equals(symbol.Value))
+                    {
+                        return symbol.Key;
+                    }
+
+                }
+                return "";
+
+            }
+            set
+            {
+                foreach (var symbol in Symbols)
+                {
+                    if (o.Equals(symbol.Key))
+                    {
+                        Object = symbol.Key;
+                    }
+                }
+            }
+        }
    
         public  int ToIndex(object guid)
         {
@@ -84,6 +116,7 @@ namespace Trading.Library.Objects
 
         public DataQuery()
         {
+            task = this;
             Database = Trading.Database.StaticExtensionTradingDatabase.Connect();
             Symbols = Database.Symbols;
             measurements =
@@ -364,6 +397,7 @@ namespace Trading.Library.Objects
             return Symbols[symbol];
         }
 
+  
         async Task IStartTask.Start(CancellationToken cancellationToken)
         {
            Exception exception;
@@ -393,6 +427,31 @@ namespace Trading.Library.Objects
         {
             var dt = await Database.GetSymbols(cancellationToken);
             Symbols = dt;
+        }
+
+        public static async Task<DataQuery> Create(CancellationToken cancellationToken)
+        {
+            var x = new DataQuery();
+            await x.task.Initialize(cancellationToken);
+            return x;
+        }
+
+        public static async Task<Dictionary<string, object>> GetHistorycalSymbols(CancellationToken cancellationToken)
+        {
+            var x = new DataQuery();
+            await x.task.Initialize(cancellationToken);
+            return x.Symbols;
+        }
+
+
+        public static async Task<DataQuery> Create(DataQueryInit init, CancellationToken cancellationToken)
+        {
+            var x = await Create(cancellationToken);
+            x.Period = init.period;
+            x.Symbol = init.symbol;
+            x.Begin = new DateTime(init.begin);
+            x.End = new DateTime(init.end);
+            return x;
         }
     }
 }

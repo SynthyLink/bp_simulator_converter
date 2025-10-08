@@ -4,7 +4,7 @@ using System.Linq;
 
 
 
-namespace OnlineGameConverter.Server.BusinessLogic.Trading
+namespace OnlineGameConverter.Server.BusinessLogic.TradingStrategy
 {
 	public static class DonchianTradingStrategy
 	{
