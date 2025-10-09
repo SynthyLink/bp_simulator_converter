@@ -19,6 +19,14 @@ namespace Trading.Library.Serializable.Objects
             {
                 Object = info.GetValue("Guid", typeof(object));
             }
+            if (true)
+            {
+                var p = this.Object.ToString();
+                var b = Begin.ToOADate();
+                var e = End.ToOADate();
+                var tt = Period;
+            }
+
         }
         public DataQuery() 
         { 

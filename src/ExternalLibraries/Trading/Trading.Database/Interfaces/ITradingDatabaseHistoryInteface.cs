@@ -1,4 +1,4 @@
-﻿using IBApi.messages;
+﻿using Trading.Library.Classes;
 
 namespace Trading.Database.Interfaces
 {
@@ -11,7 +11,7 @@ namespace Trading.Database.Interfaces
         /// Deletes a symbol
         /// </summary>
         /// <param name="symbol"></param>
-        Task DeleteBySymbol(string symbol, CancellationToken token);
+        Task DeleteBySymbolAsync(string symbol, CancellationToken token);
 
         void DeleteBySymbol(string symbol);
 
@@ -21,7 +21,7 @@ namespace Trading.Database.Interfaces
         /// <param name="name">Name of symbol</param>
         /// <param name="data">Historical data</param>
 
-        Task FillHisrory(string name, List<HistoricalDataMessageDateTime> data, CancellationToken token);
+        Task FillHisroryAsync(string name, List<HistoricalDataMessageDateTime> data, CancellationToken token);
 
         void FillHisrory(string name, List<HistoricalDataMessageDateTime> data);
 
@@ -45,9 +45,9 @@ namespace Trading.Database.Interfaces
         /// <summary>
         /// Symbols
         /// </summary>
-        Task<Dictionary<string, object>> GetSymbols(CancellationToken token);
+        Task<Dictionary<string, object>> GetSymbolsAsync(CancellationToken token);
 
-        Dictionary<string, object> Symbols { get; }
+      //  Dictionary<string, object> Symbols { get; }
 
     }
 }

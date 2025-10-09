@@ -24,7 +24,6 @@ using NamedTree;
 using Trading.Charts;
 using Trading.Library.Forms.Factory;
 using Trading.Library.Objects;
-using System.Linq.Expressions;
 using ErrorHandler;
 
 namespace Trading.Library.Forms

@@ -1318,7 +1318,7 @@ namespace DataPerformer.UI.UserControls
             dicto = (consumer as DataConsumer).PerformIterator(iterator, globalArg, globalFunc, () => ctx.Token.IsCancellationRequested);
         }
 
-        private async Task PerformIterator(IDataConsumer consumer, IIterator iterator)
+        private async Task PerformIterator(IDataConsumer consumer, IIterator iterator, CancellationToken ct)
         {
             var mea = consumer.FindMeasurement(globalArg);
             var coord = mea.CreateCoordinateFunctions();
@@ -1343,9 +1343,7 @@ namespace DataPerformer.UI.UserControls
             var coll = consumer.GetDependentCollection();
             coll.ForEach((IRunning s) => s.IsRunning = true);
             MeasurementSeries[] series = null;
-            ctx = new();
-            var ct = new CancellationToken();
-            var t = await consumer.PerformIterator(iterator, ct, globalArg, globalFunc,() => ctx.Token.IsCancellationRequested);
+            var t = await consumer.PerformIterator(iterator, ctx.Token, globalArg, globalFunc,() => ctx.Token.IsCancellationRequested);
             dicto = t.Item1;
             series = t.Item2;
         }
@@ -1387,10 +1385,11 @@ Func<bool> stop)
             try
             {
                 mouseTransformerIndicator.X = null;
+                ctx = new CancellationTokenSource();
                 var it = (Consumer as DataConsumerIterate).Iterator;
                 if (it != null) 
                 {
-                    await PerformIterator(Consumer, it);
+                    await PerformIterator(Consumer, it, ctx.Token);
                     return;
                 }
                 if (array == null)

@@ -1,11 +1,11 @@
 import { useEffect, useState, type JSX, type ReactNode } from 'react';
 import './App.css';
 import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from './Algorithms/OrbitalForecastCalculation/OrbitalData';
-import { getOrbitalInitialCancel, getOrbitalForecastFromNumber, orbitCalculation } from './Methods';
+import { getOrbitalInitialCancel, getOrbitalForecastFromNumber, orbitCalculation } from './OrbitalMethods';
 import { DateTimeConverter } from './Library/Utilities/DateTime/DateTimeConverter';
 import { Performer } from './Library/Performer';
 import { setCommunicationServer, webAPIUrl } from './Library/Communications/http/AppSettings';
-import { server } from '../RemoteServer';
+import { server } from './RemoteServer';
 
 let dt = new DateTimeConverter();
 

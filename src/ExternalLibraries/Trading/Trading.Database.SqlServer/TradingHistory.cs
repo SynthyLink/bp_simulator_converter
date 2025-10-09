@@ -1,7 +1,7 @@
 ﻿using ErrorHandler;
-using IBApi.messages;
 using Microsoft.EntityFrameworkCore;
 using Trading.Database.Interfaces;
+using Trading.Library.Classes;
 
 namespace Trading.Database.SqlServer.Overriden
 {
@@ -17,11 +17,11 @@ namespace Trading.Database.SqlServer.Overriden
         {
             this.connectionSrting = connectionSrting;
             var d = Database;
-            var t = SelectSymbols();
+  /*          var t = SelectSymbols();
             foreach (var symbol in t)
             {
                 Symbols[symbol.Name] = symbol.Id;
-            }
+            }*/
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -35,18 +35,19 @@ namespace Trading.Database.SqlServer.Overriden
 
         #region ITradingDatabaseHistoryInteface
 
-        Task ITradingDatabaseHistoryInteface.DeleteBySymbol(string symbol, CancellationToken token)
+        Task ITradingDatabaseHistoryInteface.DeleteBySymbolAsync(string symbol, CancellationToken token)
         {
             throw new OwnNotImplemented();
         }
 
-        Task ITradingDatabaseHistoryInteface.FillHisrory(string name, List<HistoricalDataMessageDateTime> data, CancellationToken token)
+        Task ITradingDatabaseHistoryInteface.FillHisroryAsync(string name, List<HistoricalDataMessageDateTime> data, 
+            CancellationToken token)
         {
             throw new OwnNotImplemented();
         }
 
 
-        Task<Dictionary<string, object>> ITradingDatabaseHistoryInteface.GetSymbols(CancellationToken token)
+        Task<Dictionary<string, object>> ITradingDatabaseHistoryInteface.GetSymbolsAsync(CancellationToken token)
         {
             return GetSymbols(token);
         }
@@ -62,13 +63,13 @@ namespace Trading.Database.SqlServer.Overriden
         }
 
     
-        Dictionary<string, object> ITradingDatabaseHistoryInteface.Symbols => Symbols;
+      //  Dictionary<string, object> ITradingDatabaseHistoryInteface.Symbols => Symbols;
 
 
         #endregion
 
 
-        protected virtual async Task<List<HistoricalDataMessageDateTime>> GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end, CancellationToken token)
+        protected virtual async Task<List<HistoricalDataMessageDateTime>> GetHistoricalDataMessageDateTimesAsync(object id, DateTime begin, DateTime end, CancellationToken token)
         {
             var g = (Guid)id;
             var t = SelectHistoryByDateAsync(g, begin, end, token);
@@ -79,16 +80,16 @@ namespace Trading.Database.SqlServer.Overriden
             {
                 var h = new HistoricalDataMessageDateTime
                 {
-                    RequestId = item.RequestId,
-                    Date = item.Date,
-                    Open = item.OpenF,
-                    High = item.High,
-                    Low = item.Low,
-                    Close = item.CloseF,
-                    Volume = item.Volume,
-                    Count = item.Count,
-                    Wap = item.Wap,
-                    HasGaps = item.HasGaps
+                    requestId = item.RequestId,
+                    date = item.Date,
+                    open = item.OpenF,
+                    high = item.High,
+                    low = item.Low,
+                    close = item.CloseF,
+                    volume = item.Volume,
+                    count = item.Count,
+                    wap = item.Wap,
+                    hasGaps = item.HasGaps
 
                 };
 
@@ -127,16 +128,16 @@ namespace Trading.Database.SqlServer.Overriden
             {
                 var h = new HistoricalDataMessageDateTime
                 {
-                    RequestId = item.RequestId,
-                    Date = item.Date,
-                    Open = item.OpenF,
-                    High = item.High,
-                    Low = item.Low,
-                    Close = item.CloseF,
-                    Volume = item.Volume,
-                    Count = item.Count,
-                    Wap = item.Wap,
-                    HasGaps = item.HasGaps
+                    requestId = item.RequestId,
+                    date = item.Date,
+                    open = item.OpenF,
+                    high = item.High,
+                    low = item.Low,
+                    close = item.CloseF,
+                    volume = item.Volume,
+                    count = item.Count,
+                    wap = item.Wap,
+                    hasGaps = item.HasGaps
 
                 };
 
@@ -154,16 +155,16 @@ namespace Trading.Database.SqlServer.Overriden
             {
                 var h = new HistoricalDataMessageDateTime
                 {
-                    RequestId = item.RequestId,
-                    Date = item.Date,
-                    Open = item.OpenF,
-                    High = item.High,
-                    Low = item.Low,
-                    Close = item.CloseF,
-                    Volume = item.Volume,
-                    Count = item.Count,
-                    Wap = item.Wap,
-                    HasGaps = item.HasGaps
+                    requestId = item.RequestId,
+                    date = item.Date,
+                    open = item.OpenF,
+                    high = item.High,
+                    low = item.Low,
+                    close = item.CloseF,
+                    volume = item.Volume,
+                    count = item.Count,
+                    wap = item.Wap,
+                    hasGaps = item.HasGaps
 
                 };
 

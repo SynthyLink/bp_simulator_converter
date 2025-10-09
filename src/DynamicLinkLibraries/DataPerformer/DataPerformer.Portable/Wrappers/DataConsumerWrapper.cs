@@ -76,6 +76,10 @@ namespace DataPerformer.Portable.Wrappers
                 preparation?.Invoke();
                 while (true)
                 {
+                    if (cancellation.IsCancellationRequested)
+                    {
+                        return;
+                    }
                     if (st())
                     {
                         return;

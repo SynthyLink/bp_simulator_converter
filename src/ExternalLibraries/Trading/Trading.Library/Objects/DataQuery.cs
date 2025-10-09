@@ -6,13 +6,8 @@ using DataPerformer.Interfaces;
 using Diagram.Interfaces;
 using ErrorHandler;
 
-using IBApi;
-
-using IBApi.messages;
 
 using NamedTree;
-using System;
-using System.Web;
 using Trading.Database.Interfaces;
 using Trading.Library.Classes;
 
@@ -86,9 +81,9 @@ namespace Trading.Library.Objects
             {
                 foreach (var symbol in Symbols)
                 {
-                    if (o.Equals(symbol.Key))
+                    if (value.Equals(symbol.Key))
                     {
-                        Object = symbol.Key;
+                        Object = symbol.Value;
                     }
                 }
             }
@@ -116,12 +111,15 @@ namespace Trading.Library.Objects
 
         public DataQuery()
         {
-            task = this;
-            Database = Trading.Database.StaticExtensionTradingDatabase.Connect();
-            Symbols = Database.Symbols;
-            measurements =
-               [
-               new RealTimeMeasurement(this),
+            OwnException exc;
+                try
+            {
+                task = this;
+                Database = Trading.Database.StaticExtensionTradingDatabase.Connect();
+                //     Symbols = Database.Symbols;
+                measurements =
+                   [
+                   new RealTimeMeasurement(this),
                     new LowMeasurement(this),
                     new HighMeasurement(this),
                     new OpenMeasurement(this),
@@ -130,7 +128,13 @@ namespace Trading.Library.Objects
                     new IntegerTimeMeasurement(this),
                     new DateTimeMeasurement(this),
                     new FullTimeMeasurement(this)
-               ];
+                   ];
+            }
+            catch(Exception ex)
+            {
+                
+            }
+
 
         }
         
@@ -189,7 +193,7 @@ namespace Trading.Library.Objects
             Exception exception;
             try
             {
-                step = 0;
+              /*  step = 0;
                 messages.Clear();
                 var bs = Period.ToBarSize();
                 var ct = new CancellationToken();
@@ -200,7 +204,7 @@ namespace Trading.Library.Objects
                 message = enumerator.Current;
                 messages[step] = message;
                 Set();
-                return;
+                return;*/
             }
             catch (Exception ex)
             {
@@ -238,7 +242,7 @@ namespace Trading.Library.Objects
             {
                 var dt = messages[p];
 
-                return ((DateTime)dt.Date).ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+                return ((DateTime)dt.date).ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
             }
             return "";
         }
@@ -289,7 +293,7 @@ namespace Trading.Library.Objects
             public LowMeasurement(DataQuery query) : base("Low", query)
             {
 
-                func = () => query.message.Low;
+                func = () => query.message.low;
             }
         }
 
@@ -299,7 +303,7 @@ namespace Trading.Library.Objects
             public HighMeasurement(DataQuery query) : base("High", query)
             {
 
-                func = () => query.message.High;
+                func = () => query.message.high;
             }
         }
 
@@ -308,7 +312,7 @@ namespace Trading.Library.Objects
             public OpenMeasurement(DataQuery query) : base("Open", query)
             {
 
-                func = () => query.message.Open;
+                func = () => query.message.open;
             }
         }
 
@@ -317,7 +321,7 @@ namespace Trading.Library.Objects
             public CloseMeasurement(DataQuery query) : base("Close", query)
             {
 
-                func = () => query.message.Close;
+                func = () => query.message.close;
             }
         }
 
@@ -341,7 +345,6 @@ namespace Trading.Library.Objects
             public IntegerTimeMeasurement(DataQuery query) : base("Step", query)
             {
                 type = (int)0;
-
                 func = () => query.step;
             }
         }
@@ -351,40 +354,43 @@ namespace Trading.Library.Objects
             public DateTimeMeasurement(DataQuery query) : base("DateTime", query)
             {
                 type = typeof(DateTime);
-                func = () => query.message.Date;
+                func = () => query.message.date;
             }
         }
 
-        class FullTimeMeasurement :  BasicMeasurement
+        class FullTimeMeasurement : BasicMeasurement
         {
             public FullTimeMeasurement(DataQuery query) : base("FullTime", query)
             {
                 type = (double)0;
 
                 func = f;
-             }
+            }
             object f()
             {
-                var d = query.message.Date;
+                var d = query.message.date;
                 if (d == null)
                 {
                     return null;
                 }
                 return d.Value.ToOADate();
             }
-    }
+        }
 
 
 
 
 
-    class CandleMeasurement : BasicMeasurement
+        class CandleMeasurement : BasicMeasurement
         {
 
             public CandleMeasurement(DataQuery query) : base("Candle", query)
             {
                 type = new ArrayReturnType((double)0, new int[4], false);
-                func = () => query.vector;
+                func = () =>
+                {
+                    return query.vector;
+                };
             }
 
         }
@@ -397,18 +403,23 @@ namespace Trading.Library.Objects
             return Symbols[symbol];
         }
 
-  
+        public async Task<List<HistoricalDataMessageDateTime>> GetHistoricalDataMessageDateTimes(CancellationToken token)
+        {
+            return await  Database.GetHistoricalDataMessageDateTimes(Object, Begin, End, token);
+        }
+
+
         async Task IStartTask.Start(CancellationToken cancellationToken)
         {
-           Exception exception;
+            Exception exception;
             try
             {
                 step = 0;
                 messages.Clear();
                 var bs = Period.ToBarSize();
                 var ct = new CancellationToken();
-                var dt = await Database.GetHistoricalDataMessageDateTimes(Object, Begin, End, cancellationToken);
-                enu = dt.Convert(bs);
+                var dt = await GetHistoricalDataMessageDateTimes(cancellationToken);
+                enu = dt;
                 enumerator = enu.GetEnumerator();
                 enumerator.MoveNext();
                 message = enumerator.Current;
@@ -425,7 +436,7 @@ namespace Trading.Library.Objects
 
         async Task IInitializeTask.Initialize(CancellationToken cancellationToken)
         {
-            var dt = await Database.GetSymbols(cancellationToken);
+            var dt = await Database.GetSymbolsAsync(cancellationToken);
             Symbols = dt;
         }
 
@@ -449,10 +460,11 @@ namespace Trading.Library.Objects
             var x = await Create(cancellationToken);
             x.Period = init.period;
             x.Symbol = init.symbol;
-            x.Begin = new DateTime(init.begin);
-            x.End = new DateTime(init.end);
+            x.Begin = DateTime.FromOADate(init.begin);
+            x.End = DateTime.FromOADate(init.end);
             return x;
         }
+      
     }
 }
 

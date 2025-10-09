@@ -13,7 +13,11 @@ namespace Trading.Database
 
         static List<ITradingDatabaseHistoryIntefaceFactory> list = new();
 
-        static public IConnectionStringEditor @interface { get; set; }
+        static public IConnectionStringEditor @interface
+        {
+            get;
+            set;
+        } = new Empty();
 
         static public ITradingDatabaseHistoryIntefaceFactory Trading
         {
@@ -138,6 +142,18 @@ namespace Trading.Database
                 }
             }
 
+        }
+
+        class Empty : IConnectionStringEditor
+        {
+            void IConnectionStringEditor.Close()
+            {
+            }
+
+            string IConnectionStringEditor.ConnectionStrig(string connectionString)
+            {
+                return connectionString;
+            }
         }
     }
 }
