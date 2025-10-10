@@ -1,4 +1,5 @@
-﻿using Trading.Library.Objects;
+﻿using FormulaEditor;
+using Trading.Library.Objects;
 
 namespace OnlineGameConverter.Server
 {
@@ -36,6 +37,14 @@ namespace OnlineGameConverter.Server
                 }
             }
             return stringSymbols;
+        }
+
+        public static async Task<string[][]> GetTradingHistorucalSrtingSymbolsArray(CancellationToken cancellationToken)
+        {
+            var t = await GetTradingHistorucalSrtingSymbols(cancellationToken);
+            var l = from s in t select  new string[] { s.Key, s.Value };
+            return l.ToArray();
+
         }
 
     }

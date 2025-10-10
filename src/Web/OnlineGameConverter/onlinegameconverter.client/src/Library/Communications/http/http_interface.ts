@@ -14,8 +14,27 @@ export interface HttpResponse<RESB> {
 
 export class HttpCommunication {
 
+    public async http_cancel_response<REQB = undefined>(
+        config: HttpRequest<REQB>, controller: AbortController,
+    ): Promise<Response> {
+        const request = new Request(`${webAPIUrl()}${config.path}`, {
+            method: config.method || 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: config.body ? JSON.stringify(config.body) : undefined,
+        });
+        if (config.accessToken) {
+            request.headers.set('authorization', `bearer ${config.accessToken}`);
+        }
 
-    
+        const signal = controller.signal;
+
+        return await fetch(request, { signal });
+    }
+
+
+
     public async http_cancel<RESB, REQB = undefined>(
         config: HttpRequest<REQB>, controller: AbortController,
     ): Promise<HttpResponse<RESB>>  {
@@ -32,8 +51,8 @@ export class HttpCommunication {
 
         const signal = controller.signal;
 
-        const response = await fetch(request, { signal });
-
+        const response = await fetch(request, { signal })
+      
         if (response.ok) {
             const body = await response.json();
             return { ok: response.ok, body };

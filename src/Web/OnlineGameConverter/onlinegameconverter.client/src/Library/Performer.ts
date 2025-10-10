@@ -373,6 +373,34 @@ export class Performer
         }
     }
 
+    public copyMapKeys<T, S>(s: Map<T, S>, t: Map<T, S>): void {
+        for (const key of s.keys()) {
+            t.set(key, s.get(key) as undefined as S);
+        }
+    }
+
+    public copyMapFromArray(x: [][], map: Map<string, string>): void {
+        for (let y of x)
+        {
+            map.set(y[0] + "", y[1] + "");
+        }
+    }
+
+
+    public copyMapForech<T, S>(s: Map<T, S>, t: Map<T, S>): void {
+        s.forEach((x, y, s) => { t.set(y, x) });
+    }
+
+
+    public copyMapEntries<T, S>(s: Map<T, S>, t: Map<T, S>): void {
+        var e = s.entries();
+        for (const [key, value] of e) {
+            t.set(key, value);
+        }
+    }
+
+
+
     public implementsType(o: unknown, type: string): boolean {
         let obj: IObject = o as IObject;
         return obj.imlplementsType(type);
