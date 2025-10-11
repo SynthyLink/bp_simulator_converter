@@ -1,5 +1,7 @@
 package tests;
 
+import android.util.Log;
+
 import general_service.interfaces.IAction;
 import generated.PI;
 import measurements.Performer;
@@ -23,7 +25,7 @@ public class PiAct extends PI implements IAction {
             var n = m.getMeasurementsCount();
             for (var i = 0; i < n; i++) {
                 var o = m.getMeasurement(i);
-                System.out.print(o + "\n");
+                Log.d("", o + "\n");
             }
         }
     }

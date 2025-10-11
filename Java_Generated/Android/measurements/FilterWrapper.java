@@ -71,7 +71,7 @@ public class FilterWrapper extends  DataConsumer implements IMeasurements {
         protected void setFilter() {
             switch (kind) {
                 case Average:
-                    if (filter instanceof Average average) break;
+                    if (filter instanceof Average) break;
                 {
                     filter = new Average();
                 }
@@ -100,7 +100,7 @@ public class FilterWrapper extends  DataConsumer implements IMeasurements {
 
     Donchian getDonchian()
     {
-        return   (filter instanceof  Donchian donchian) ? donchian : new Donchian();
+        return   filter instanceof  Donchian ? (Donchian)filter : new Donchian();
     }
 
     @Override

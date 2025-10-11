@@ -11,13 +11,13 @@ public class MeasurementsComparator implements Comparator<IMeasurements> {
         if (x == y) {
             return 0;
         }
-        if (x instanceof IDataConsumer dcx) {
-            if (isSource(dcx, y)) {
+        if (x instanceof IDataConsumer) {
+            if (isSource((IDataConsumer) x, y)) {
                 return 1;
             }
         }
-        if (y instanceof IDataConsumer dcy) {
-            if (isSource(dcy, x)) {
+        if (y instanceof IDataConsumer) {
+            if (isSource((IDataConsumer) y, x)) {
                 return -1;
             }
         }
@@ -41,9 +41,9 @@ public class MeasurementsComparator implements Comparator<IMeasurements> {
             {
                 return true;
             }
-            if (x instanceof IDataConsumer dataConsumer)
+            if (x instanceof IDataConsumer)
             {
-                if (isSource(dataConsumer, m))
+                if (isSource((IDataConsumer) x, m))
                 {
                     return true;
                 }

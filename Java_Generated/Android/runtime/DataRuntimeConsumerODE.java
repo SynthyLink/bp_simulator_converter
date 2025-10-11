@@ -14,9 +14,9 @@ public class DataRuntimeConsumerODE extends DataRuntimeConsumer{
         var equations = new IDifferentialEquationSolver[0];
         for (var m : this.measurements)
         {
-            if (m instanceof  IDifferentialEquationSolver solver)
+            if (m instanceof  IDifferentialEquationSolver)
             {
-                equations = performer.extend(equations, solver);
+                equations = performer.extend(equations, (IDifferentialEquationSolver)m);
             }
          }
         this.processor.addRangeDifferentialEquations(equations);

@@ -9,22 +9,21 @@ import diagram.interfaces.IDesktop;
 import error_handler.interfaces.ICheck;
 import error_handler.interfaces.ICheckHolder;
 import error_handler.interfaces.IErrorHandler;
-import general_service.interfaces.IAction;
-import general_service.interfaces.IActionT;
 import general_service.interfaces.IPrintedObject;
 import general_service.interfaces.IPrinter;
 
-import javax.swing.*;
+
 
 
 public class Performer
 {
     static public void setCheker(IDesktop desktop, ICheck check) {
-        var ojects = desktop.getCategoryObjects();
-        for (var co : ojects)
+        var objects = desktop.getCategoryObjects();
+        for (var co : objects)
         {
-            if (co instanceof ICheckHolder checkHolder)
+            if (co instanceof ICheckHolder)
             {
+                var checkHolder = (ICheckHolder)co;
                 checkHolder.setChecker(check);
             }
         }
@@ -45,8 +44,9 @@ public class Performer
 
     static public void print(Object object)
     {
-        if (object instanceof IPrintedObject po)
+        if (object instanceof IPrintedObject)
         {
+            var po = (IPrintedObject)object;
             po.print(printer);
             return;
         }
@@ -77,7 +77,7 @@ public class Performer
     public <T> T[] extend(T[] t, T s) {
         var n = t.length;
         var type = t.getClass();
-        var ct = type.componentType();
+        var ct = type.getComponentType();
         var r = (T[]) Array.newInstance(ct, n + 1);
         System.arraycopy(t, 0, r, 0, t.length);
         r[n] = s;
@@ -87,7 +87,7 @@ public class Performer
     public <T> T[] extend(T[] t, T[] s) {
         var n = t.length + s.length;
         var type = s.getClass();
-        var ct = type.componentType();
+        var ct = type.getComponentType();
         var r = (T[]) Array.newInstance(ct, n);
         System.arraycopy(t, 0, r, 0, t.length);
         System.arraycopy(s, 0, r, t.length, s.length);
@@ -114,13 +114,21 @@ public class Performer
     }
 
 
-    public <T> T get(Object object, String name) {
-        return switch (object) {
-            case IDesktop desktop -> get(desktop, name);
-            case ICategoryObject categoryObject -> get(categoryObject, name);
-            case ICategoryArrow categoryArrow -> get(categoryArrow, name);
-            default -> null;
-        };
+    public <T> T get(Object object, String name)
+    {
+        if (object instanceof  IDesktop)
+        {
+            return get((IDesktop)object, name);
+        }
+        if (object instanceof  ICategoryObject)
+        {
+            return get((ICategoryObject)object, name);
+        }
+        if (object instanceof  ICategoryArrow)
+        {
+            return get((ICategoryArrow)object, name);
+        }
+       return  null;
     }
 
     public static  ICategoryObject getCategoryObject(IDesktop desktop, int n)
@@ -142,14 +150,21 @@ public class Performer
     }
 
 
-    public <T>  T getCategoryObject(Object object, int n) {
-        return switch (object) {
-            case IDesktop desktop -> (T)getCategoryObject(desktop, n);
-            case ICategoryObject categoryObject -> (T)getCategoryObject(categoryObject, n);
-            case ICategoryArrow categoryArrow -> (T)getCategoryObject(categoryArrow,n);
-            default -> null;
-        };
+    public <T>  T getCategoryObject(Object object, int name) {
+        if (object instanceof  IDesktop)
+        {
+            return (T)getCategoryObject((IDesktop)object, name);
+        }
+        if (object instanceof  ICategoryObject)
+        {
+            return (T)getCategoryObject((ICategoryObject) object, name);
+        }
+        if (object instanceof  ICategoryArrow)
+        {
+            return (T)getCategoryObject((ICategoryArrow) object, name);
+        }
+        return  null;
+
+        }
     }
 
-
-}

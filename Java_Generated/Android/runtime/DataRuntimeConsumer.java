@@ -25,16 +25,16 @@ public class DataRuntimeConsumer implements IDataRuntime, IActionT<IStarted> {
         {
             var n = list.get(i);
             measurements = performer.extend(measurements, n);
-            if (n instanceof ICategoryObject co) {
-                addCategoryObjectToRuntime(co);
+            if (n instanceof ICategoryObject) {
+                addCategoryObjectToRuntime((ICategoryObject) n);
             }
-            if (n instanceof IStarted st) {
-                started = performer.extend(started, st);
+            if (n instanceof IStarted ) {
+                started = performer.extend(started, (IStarted) n);
             }
 
         }
-        if (dataConsumer instanceof IMeasurements mm) {
-            measurements = performer.extend(measurements, mm);
+        if (dataConsumer instanceof IMeasurements) {
+            measurements = performer.extend(measurements, (IMeasurements) dataConsumer);
         }
         sortMeasurements();
     }
@@ -108,9 +108,10 @@ public class DataRuntimeConsumer implements IDataRuntime, IActionT<IStarted> {
         timeProvider = provider;
         for (var c : categoryObjects)
         {
-            if (c instanceof ITimeMeasurementConsumer co)
+            if (c instanceof ITimeMeasurementConsumer)
             {
-                co.setTimeMeasurement(provider);
+                var co = (ITimeMeasurementConsumer)c;
+                 co.setTimeMeasurement(provider);
             }
         }
     }
@@ -146,8 +147,8 @@ public class DataRuntimeConsumer implements IDataRuntime, IActionT<IStarted> {
                     continue;
                 }
                 list.add(mea);
-                if (mea instanceof IDataConsumer c) {
-                    addDataConsumer(c, list);
+                if (mea instanceof IDataConsumer) {
+                    addDataConsumer((IDataConsumer) mea, list);
                 }
 
             }

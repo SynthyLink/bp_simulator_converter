@@ -129,13 +129,15 @@ arrowMap.put(arrow.getArrowName(), arrow);
 
     protected void postSet() {
         for (var a : arrows) {
-            if (a instanceof IPostSetArrow postSetArrow) {
-                postSetArrow.postSetArrow();
+            if (a instanceof IPostSetArrow) {
+                var  p = (IPostSetArrow)a;
+                p.postSetArrow();
             }
         }
         for (var o : objects) {
-            if (o instanceof IPostSetArrow postSetArrow) {
-                postSetArrow.postSetArrow();
+            if (o instanceof IPostSetArrow) {
+                var  p = (IPostSetArrow)o;
+                p.postSetArrow();
             }
         }
     }

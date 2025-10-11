@@ -235,8 +235,9 @@ public class ObjectTransformer extends CategoryObject implements IObjectTransfor
         public String toString() {
             var s = super.toString();
             var k = outO[n];
-            if (k instanceof double[] d)
+            if (k instanceof double[])
             {
+                var d = (double[])k;
                 if (d.length == 1)
                 {
                     return d[0] + "";

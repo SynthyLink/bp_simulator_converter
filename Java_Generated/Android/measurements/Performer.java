@@ -43,8 +43,9 @@ public class Performer {
             {
                 list.add(0, m);
             }
-            if (m instanceof IDataConsumer c)
+            if (m instanceof IDataConsumer)
             {
+                var c = (IDataConsumer)m;
                 GetDependentObjects(c, list);
             }
         }
@@ -67,13 +68,15 @@ public class Performer {
                 }
             }*/
             dependent.add(0, m);
-            if (m instanceof IDataConsumer dc)
+            if (m instanceof IDataConsumer)
             {
+                var dc = (IDataConsumer)m;
                 GetDependentObjects(dc, list);
                 for (var  o : list)
                 {
-                    if (o instanceof IMeasurements mm)
+                    if (o instanceof IMeasurements)
                     {
+                        var mm = (IMeasurements)o;
                          if (!dependent.contains(mm))
                         {
                             dependent.add(0, mm);
@@ -117,8 +120,9 @@ public class Performer {
     public void updateChildrenData(IDataConsumer dataConsumer) {
         var children = dataConsumer.getAllMeasurements();
         for (var child : children) {
-            if (child instanceof IDataConsumer dc)
+            if (child instanceof IDataConsumer)
             {
+                var dc = (IDataConsumer)child;
                 updateChildrenData(dc);
             }
             child.updateMeasurements();
