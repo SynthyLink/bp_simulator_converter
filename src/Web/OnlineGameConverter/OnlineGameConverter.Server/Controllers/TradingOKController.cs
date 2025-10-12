@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Trading.Library;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Trading.Library.Classes;
 using Trading.Library.Objects;
 
@@ -7,23 +7,24 @@ namespace OnlineGameConverter.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TradingDatabaseController : Controller
+    public class TradingOKController : Controller
     {
-        Performer performer = new();
 
-        ILogger<TradingDatabaseController> logger;
+        ILogger<TradingOKController> logger;
 
         DataQuery query;
 
-        public TradingDatabaseController(ILogger<TradingDatabaseController> logger)
+        public TradingOKController(ILogger<TradingOKController> logger)
         {
             this.logger = logger;
         }
 
         [HttpGet("symbols")]
-        public async Task<string[][]> GetSymbols(CancellationToken token)
+        public async Task<IActionResult> GetSymbols(CancellationToken token)
         {
-            return await StaticExtensionTradingLibrary.GetTradingHistorucalSrtingSymbolsArray(token);
+            var t = await StaticExtensionTradingLibrary.GetTradingHistorucalSrtingSymbolsArray(token);
+
+            return Ok(t);
         }
 
         [HttpPost]
@@ -36,4 +37,5 @@ namespace OnlineGameConverter.Server.Controllers
             return s.ToList();
         }
     }
+}
 }
