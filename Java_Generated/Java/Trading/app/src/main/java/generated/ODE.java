@@ -38,7 +38,8 @@ public class ODE extends Desktop
 						var_4[0] = (Math.sin(var_3[0]));
 						if (check(var_4)) { success = false; return; } 
 						var_5[0] = ((var_0[0]) * (var_4[0]));
-						if (check(var_5)) { success = false; return; } 
+						if (check(var_5)) { success = false;
+                        }
 					}
 				
 				@Override
@@ -134,7 +135,8 @@ public class ODE extends Desktop
 						var_6[0] = ((double[])measurement6.getMeasurementValue())[0];
 						if (check(var_6)) { success = false; return; } 
 						var_7[0] = ((var_5[0]) + (var_6[0]));
-						if (check(var_7)) { success = false; return; } 
+						if (check(var_7)) { success = false;
+                        }
 					}
 				
 				@Override

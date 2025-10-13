@@ -39,7 +39,8 @@ public class Complicated extends Desktop
 						var_8[0] = (Math.sin(var_7[0]));
 						if (check(var_8)) { success = false; return; } 
 						var_9[0] = ((var_4[0]) + (var_8[0]));
-						if (check(var_9)) { success = false; return; } 
+						if (check(var_9)) { success = false;
+                        }
 					}
 				
 				public void init()
@@ -138,7 +139,8 @@ public class Complicated extends Desktop
 						if (check(var_5)) { success = false; return; }
 						var_6[0] = this.getInternalTime();
 						var_7[0] = ((var_5[0]) * (var_6[0]));
-						if (check(var_7)) { success = false; return; } 
+						if (check(var_7)) { success = false;
+                        }
 					}
 				
 				public void init()
@@ -221,7 +223,8 @@ public class Complicated extends Desktop
 						var_3[0] = ((double[])measurement3.getMeasurementValue())[0];
 						if (check(var_3)) { success = false; return; } 
 						var_4[0] = (Math.cos(var_3[0]));
-						if (check(var_4)) { success = false; return; } 
+						if (check(var_4)) { success = false;
+                        }
 					}
 				
 				public void init()
@@ -289,7 +292,8 @@ public class Complicated extends Desktop
 						var_6[0] = ((double[])measurement6.getMeasurementValue())[0];
 						if (check(var_6)) { success = false; return; } 
 						var_7[0] = (Math.cos(var_6[0]));
-						if (check(var_7)) { success = false; return; } 
+						if (check(var_7)) { success = false;
+                        }
 					}
 				
 				public void init()

@@ -62,10 +62,7 @@ public class TestObjectTransformer  extends CategoryObject implements IObjectTra
         out[0][0] = coefficient * (a + b);
         out[1][0] = coefficient * b * c;
         out[2][0] =  coefficient * (c + Math.sin(d));
-        for (var i = 0; i < output.length; i++)
-        {
-            output[i] = out[i];
-        }
+        System.arraycopy(out, 0, output, 0, output.length);
 
     }
 }

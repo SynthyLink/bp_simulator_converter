@@ -160,10 +160,7 @@ public class DataRuntimeConsumer implements IDataRuntime, IActionT<IStarted> {
     protected void sortMeasurements()
     {
         List<IMeasurements> measurementsList = new ArrayList<>();
-        for (var m : measurements)
-        {
-            measurementsList.add(m);
-        }
+        Collections.addAll(measurementsList, measurements);
         Collections.sort(measurementsList, comparator);
         var n = measurements.length;
         measurements = measurementsList.toArray(new IMeasurements[n]);

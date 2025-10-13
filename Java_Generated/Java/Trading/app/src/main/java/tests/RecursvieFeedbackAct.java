@@ -14,7 +14,7 @@ public class RecursvieFeedbackAct extends RecursiveFeedback implements IAction, 
     {
         super();
         var c = getCategoryObjects();
-        consumer = (IDataConsumer) performer.get(this, "Chart");
+        consumer = performer.get(this, "Chart");
         measurements = consumer.getAllMeasurements();
     }
 

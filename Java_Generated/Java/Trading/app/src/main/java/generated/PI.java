@@ -58,7 +58,8 @@ public class PI extends Desktop
 						var_10[0] = ((double[])aliasName10.getAliasNameValue())[0];
 						if (check(var_10)) { success = false; return; }
 						var_11[0] = ((var_8[0]) ? (var_9[0]) : (var_10[0]));
-						if (check(var_11)) { success = false; return; } 
+						if (check(var_11)) { success = false;
+                        }
 					}
 				
 				@Override
@@ -179,7 +180,8 @@ public class PI extends Desktop
 						var_1[0] = ((double[])measurement1.getMeasurementValue())[0];
 						if (check(var_1)) { success = false; return; } 
 						var_2[0] = ((var_0[0]) + (var_1[0]));
-						if (check(var_2)) { success = false; return; } 
+						if (check(var_2)) { success = false;
+                        }
 					}
 				
 				@Override

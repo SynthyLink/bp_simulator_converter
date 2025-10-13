@@ -9,6 +9,12 @@ namespace OnlineGameConverter.Server.Controllers
     [Route("api/[controller]")]
     public class TradingOKController : Controller
     {
+        // Java  Client   ASP Cancellation Token Android
+
+
+        /// <summary>
+        /// Task<IActionResult>  Java client   Cancel request
+        /// </summary>
 
         ILogger<TradingOKController> logger;
 

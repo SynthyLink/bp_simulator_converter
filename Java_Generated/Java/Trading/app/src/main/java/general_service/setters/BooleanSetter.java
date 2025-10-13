@@ -28,7 +28,7 @@ public class BooleanSetter extends AbstractSetter {
         return  value == null ? "null" : array[0] + "";
     }
 
-    private  boolean[] array = new boolean[]{true};
+    private final boolean[] array = new boolean[]{true};
 
 
 }

@@ -78,7 +78,7 @@ public class DynamicalAtmosphereTransformer extends DynamicalAtmosphere implemen
     /// Outputs
     /// </summary>
 
-    protected  String[] outputs = new String[]{ "Density" };;
+    protected  String[] outputs = new String[]{ "Density" };
 
 
 }

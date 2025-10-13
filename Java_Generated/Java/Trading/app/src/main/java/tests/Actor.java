@@ -49,7 +49,7 @@ public class Actor {
         System.out.println(t);
         var x = OADateConverter.fromOADate(t);
         System.out.println(x);
-        System.out.println((OADateConverter.toOADate(x)));;
+        System.out.println((OADateConverter.toOADate(x)));
 
 
     }

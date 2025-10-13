@@ -13,7 +13,7 @@ public class FormulaCompositionAct extends FormulaComposition implements IAction
     public FormulaCompositionAct() {
         super();
         var c = getCategoryObjects();
-        consumer = (IDataConsumer) performer.get(this, "Chart");
+        consumer = performer.get(this, "Chart");
         measurements = consumer.getAllMeasurements();
     }
 

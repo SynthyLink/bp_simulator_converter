@@ -2555,7 +2555,8 @@ public class ObitalForecast extends Desktop
 						var_31[0] = ((var_29[0]) * (var_30[0]));
 						if (check(var_31)) { success = false; return; } 
 						var_32[0] = ((var_27[0]) - (var_31[0]));
-						if (check(var_32)) { success = false; return; } 
+						if (check(var_32)) { success = false;
+                        }
 					}
 				
 				@Override
@@ -2848,7 +2849,8 @@ public class ObitalForecast extends Desktop
 						var_5[0] = ((var_3[0]) < (var_4[0]));
 						if (check(var_5)) { success = false; return; } 
 						var_6[0] = ((var_2[0]) & (var_5[0]));
-						if (check(var_6)) { success = false; return; } 
+						if (check(var_6)) { success = false;
+                        }
 					}
 				
 				@Override

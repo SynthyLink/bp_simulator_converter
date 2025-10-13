@@ -51,7 +51,8 @@ public class SimpleFeed extends Desktop
 						var_10[0] = ((double[])aliasName10.getAliasNameValue())[0];
 						if (check(var_10)) { success = false; return; }
 						var_11[0] = ((double[])aliasName11.getAliasNameValue())[0];
-						if (check(var_11)) { success = false; return; }
+						if (check(var_11)) { success = false;
+                        }
 					}
 				
 				@Override
@@ -168,7 +169,8 @@ public class SimpleFeed extends Desktop
 						var_3[0] = ((var_0[0]) * (var_2[0]));
 						if (check(var_3)) { success = false; return; } 
 						var_4[0] = ((double[])measurement4.getMeasurementValue())[0];
-						if (check(var_4)) { success = false; return; } 
+						if (check(var_4)) { success = false;
+                        }
 					}
 				
 				@Override

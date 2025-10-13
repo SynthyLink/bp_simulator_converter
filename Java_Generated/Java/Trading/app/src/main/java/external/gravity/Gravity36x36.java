@@ -23,7 +23,7 @@ public class Gravity36x36
 
     protected double[] ANAI = new double[478];
 
-    static private double[] SK = new double[]
+    static private final double[] SK = new double[]
         {
                 1.732050807568877E0,  1.936491673103709E0,2.091650066335189E0,
                 2.218529918662356E0,  2.326813808623286E0,2.421824596249695E0,
@@ -171,7 +171,7 @@ public class Gravity36x36
                     N1 = N + N3 + 1;
                     N2 = N1 + 2;
                     N4 = N + 1;
-                    AN = (double) (N + 1);
+                    AN = N + 1;
                     PN0 = sqrt(N2 + 1)/*SQ[N2]*/ / AN * (/*SQ[N1]*/sqrt(N1 + 1) * SF * P30 - (double) (N3 + 1) / /*SQ[N1-2]*/sqrt(N1 - 1) * P20);
                     PNK[N3] = sqrt(N2 + 1) / (sqrt(N3 + 1) * sqrt(N4 + 1)) * (sqrt(N1 + 1) * SF * PNK[N - 2] - sqrt(N + 1) *
                             sqrt(N - 1) / sqrt(N1 - 1) * PNK[N - 3]);
@@ -269,7 +269,6 @@ public class Gravity36x36
                         FR += HP[N] * CK1 * A;
                         FF += CK1 * (PNK[N1 - 1] */*SQ[N1-1]*SQ[N2+1]*/sqrt(N1) * sqrt(N2 + 2) - TG * AN);
                         FL += CK2 * AN;
-                        m12:
                         J++;
                     }
                     //               }     //4.1
@@ -277,7 +276,6 @@ public class Gravity36x36
                 //    5
             }
         }//0
-        m5:
         FR = -GR * FR - R[2] * R3;
         FF = GR * FF;
         FL = -GR / CF[0] * FL;
@@ -301,7 +299,7 @@ public class Gravity36x36
 
     private double sqrt(int i)
     {
-        return Math.sqrt((double)i);
+        return Math.sqrt(i);
     }
 
   }

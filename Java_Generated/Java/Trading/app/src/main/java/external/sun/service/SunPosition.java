@@ -21,7 +21,7 @@ public class SunPosition {
             Month = Month + 12;
             Year = Year - 1;
         }
-        long JulianDay = Day + (153 * Month - 457) / 5 + 365 * Year + (Year / 4) - (Year / 100) + (Year / 400) + 1721119;
+        long JulianDay = Day + (153L * Month - 457) / 5 + 365L * Year + (Year / 4) - (Year / 100) + (Year / 400) + 1721119;
         return JulianDay;
     }
 

@@ -13,7 +13,7 @@ public class RecursiveFeedbackSimpleAct extends RecursiveFeedbackSimple implemen
     public RecursiveFeedbackSimpleAct() {
         super();
         var c = getCategoryObjects();
-        consumer = (IDataConsumer) performer.get(this, "Chart");
+        consumer = performer.get(this, "Chart");
         measurements = consumer.getAllMeasurements();
     }
 

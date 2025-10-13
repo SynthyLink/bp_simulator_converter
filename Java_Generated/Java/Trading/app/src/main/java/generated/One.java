@@ -44,7 +44,8 @@ public class One extends Desktop
 						var_10[0] = (Math.atan2(var_2[0], var_9[0]));
 						if (check(var_10)) { success = false; return; } 
 						var_11[0] = ((var_6[0]) * (var_10[0]));
-						if (check(var_11)) { success = false; return; } 
+						if (check(var_11)) { success = false;
+                        }
 					}
 				
 				public void init()

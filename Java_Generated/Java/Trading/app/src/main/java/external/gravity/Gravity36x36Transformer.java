@@ -58,10 +58,7 @@ public class Gravity36x36Transformer extends Gravity36x36 implements ICategoryOb
         var y = (double[])input[1];
         var z = (double[])input[2];
         Forces(n0, nk, x[0], y[0], z[0], out[0], out[1], out[2]);
-        for (var i = 0; i < output.length; i++)
-        {
-            output[i] = out[i];
-        }
+        System.arraycopy(out, 0, output, 0, output.length);
     }
 
     double[][] out = new double[3][];

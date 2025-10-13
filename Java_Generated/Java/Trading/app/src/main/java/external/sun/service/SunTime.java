@@ -89,7 +89,7 @@ public class SunTime {
         // Calculate integer part of Julian Day Number
         int A = Y / 100;
         int B = A / 4;
-        int C = (int)(2 - A + B); // Use cast to double for precision
+        int C = 2 - A + B; // Use cast to double for precision
 
         double JD0 = (int)(365.25 * (Y + 4716)) + (int)(30.6001 * (M + 1)) + D + C - 1524.5;
 
@@ -108,7 +108,7 @@ public class SunTime {
         return jd;
     }
 
-    private static LocalDateTime  dt1582 = LocalDateTime.of(1582, 10, 15, 0, 0);
+    private static final LocalDateTime  dt1582 = LocalDateTime.of(1582, 10, 15, 0, 0);
 
 
 

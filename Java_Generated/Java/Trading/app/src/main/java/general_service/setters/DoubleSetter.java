@@ -34,5 +34,5 @@ public class DoubleSetter extends AbstractSetter {
         return value == null ? "null" : array[0] + "";
     }
 
-    private double[] array = new double[]{0};
+    private final double[] array = new double[]{0};
 }

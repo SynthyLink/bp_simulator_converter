@@ -56,7 +56,8 @@ public class ODE_Feed extends Desktop
 						var_11[0] = (Math.cos(var_10[0]));
 						if (check(var_11)) { success = false; return; } 
 						var_12[0] = ((var_9[0]) * (var_11[0]));
-						if (check(var_12)) { success = false; return; } 
+						if (check(var_12)) { success = false;
+                        }
 					}
 				
 				@Override
@@ -207,7 +208,8 @@ public class ODE_Feed extends Desktop
 						var_9[0] = ((var_7[0]) * (var_8[0]));
 						if (check(var_9)) { success = false; return; } 
 						var_10[0] = ((var_6[0]) - (var_9[0]));
-						if (check(var_10)) { success = false; return; } 
+						if (check(var_10)) { success = false;
+                        }
 					}
 				
 				@Override
@@ -341,7 +343,8 @@ public class ODE_Feed extends Desktop
 						var_4[0] = ((double[])measurement4.getMeasurementValue())[0];
 						if (check(var_4)) { success = false; return; } 
 						var_5[0] = ((var_3[0]) - (var_4[0]));
-						if (check(var_5)) { success = false; return; } 
+						if (check(var_5)) { success = false;
+                        }
 					}
 				
 				@Override

@@ -13,7 +13,7 @@ public class SimpleFormulaAdd extends SimpleFormula implements IAction, IFuncT<b
     public SimpleFormulaAdd() {
         super();
         var c = getCategoryObjects();
-        consumer = (IDataConsumer) performer.get(this, "Chart");
+        consumer = performer.get(this, "Chart");
         measurements = consumer.getAllMeasurements();
     }
 

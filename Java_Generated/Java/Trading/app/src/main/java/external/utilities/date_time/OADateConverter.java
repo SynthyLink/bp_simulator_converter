@@ -50,7 +50,7 @@ public class OADateConverter {
         long totalSeconds = (long) (fractionalPart * 24 * 60 * 60);
 
         // Create the LocalDateTime by adding the calculated duration to the epoch.
-        LocalDateTime result = OADATE_EPOCH.plus(days, ChronoUnit.DAYS);
+        LocalDateTime result = OADATE_EPOCH.plusDays(days);
 
         // Add the time component
         // We need to be careful with precision here.

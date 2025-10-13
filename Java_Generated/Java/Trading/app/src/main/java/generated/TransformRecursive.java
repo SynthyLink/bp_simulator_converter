@@ -34,7 +34,8 @@ public class TransformRecursive extends Desktop
 						var_2[0] = ((double[])aliasName2.getAliasNameValue())[0];
 						if (check(var_2)) { success = false; return; }
 						var_3[0] = ((double[])aliasName3.getAliasNameValue())[0];
-						if (check(var_3)) { success = false; return; }
+						if (check(var_3)) { success = false;
+                        }
 					}
 				
 				@Override
@@ -172,7 +173,8 @@ public class TransformRecursive extends Desktop
 						if (check(var_14)) { success = false; return; }
 						var_15[0] = this.getInternalTime();
 						var_16[0] = ((var_14[0]) * (var_15[0]));
-						if (check(var_16)) { success = false; return; } 
+						if (check(var_16)) { success = false;
+                        }
 					}
 				
 				@Override

@@ -50,7 +50,8 @@ public class RecursiveFeedbackSimple extends Desktop
 						var_8[0] = ((double[])aliasName8.getAliasNameValue())[0];
 						if (check(var_8)) { success = false; return; }
 						var_9[0] = ((var_8[0]) * (var_4[0]));
-						if (check(var_9)) { success = false; return; } 
+						if (check(var_9)) { success = false;
+                        }
 					}
 				
 				@Override
@@ -181,7 +182,8 @@ public class RecursiveFeedbackSimple extends Desktop
 						var_8[0] = ((var_6[0]) + (var_7[0]));
 						if (check(var_8)) { success = false; return; } 
 						var_9[0] = ((var_5[0]) * (var_8[0]));
-						if (check(var_9)) { success = false; return; } 
+						if (check(var_9)) { success = false;
+                        }
 					}
 				
 				@Override

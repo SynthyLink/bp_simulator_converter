@@ -78,19 +78,19 @@ public class DynamicalAtmosphere
     protected int[] ifa = new int[] { 150, 6, 140 };
     int[] if1 = new int[] { 75, 100, 125, 150, 200, 250 };
     int[] date = new int[3];
-    private double[] r = new double[3];
-    private double[] y = new double[3];
+    private final double[] r = new double[3];
+    private final double[] y = new double[3];
     private double[][] ff0;
     private double[][] ff1;
     double ome = 7.292115085E-5;
-    private short [] dd = new short[4];
+    private final short [] dd = new short[4];
     protected double[] xout = new double[3];
 
-    private GeoCoordinates coordinates = new GeoCoordinates();
+    private final GeoCoordinates coordinates = new GeoCoordinates();
 
-    private SunCoordinates sunCoordinates = new SunCoordinates();
+    private final SunCoordinates sunCoordinates = new SunCoordinates();
 
-    private RealMatrix realMatrix = new RealMatrix();
+    private final RealMatrix realMatrix = new RealMatrix();
 
     public DynamicalAtmosphere()
     {
