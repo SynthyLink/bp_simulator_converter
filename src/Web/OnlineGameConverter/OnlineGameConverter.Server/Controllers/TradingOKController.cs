@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Trading.Library.Classes;
 using Trading.Library.Objects;
+using Trading.Library;
 
 namespace OnlineGameConverter.Server.Controllers
 {
@@ -43,5 +44,4 @@ namespace OnlineGameConverter.Server.Controllers
             return s.ToList();
         }
     }
-}
 }

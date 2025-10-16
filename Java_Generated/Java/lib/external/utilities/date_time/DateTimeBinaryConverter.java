@@ -254,7 +254,7 @@ public class DateTimeBinaryConverter {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             systemDefaultZone = ZoneId.systemDefault();
         }
-        ZonedDateTime zonedInputDateTime;
+        ZonedDateTime zonedInputDateTime = null;
         if (kind == 0) { // Assuming Local or Unspecified maps to system default for conversion
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 zonedInputDateTime = dateTime.atZone(systemDefaultZone);

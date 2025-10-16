@@ -9,7 +9,7 @@ import { NodeTest } from './Test/NodeTest.tsx'
 const indexedDB = window.indexedDB;
 const node = (): ReactNode => {
     return <><StrictMode>
-        <NodeTest />
+        <App />
     </StrictMode></>
 
 }
