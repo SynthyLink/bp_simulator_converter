@@ -8,8 +8,9 @@ using static System.Net.Mime.MediaTypeNames;
 /*
 SimpleTcpServer server = new SimpleTcpServer(6666); // Use port 8888
 await server.Start();
-*/
 
+Console.ReadKey();
+*/
 
 /*
 openssl req -x509 -out localhost.crt -keyout localhost.key 
@@ -36,8 +37,8 @@ if (!File.Exists(certificatePath))
     return;
 }
 
-var  server = new SecureTcpServer(port, certificatePath, certificatePassword);
-await server.StartAsync();
+var  serv = new SecureTcpServer(port, certificatePath, certificatePassword);
+await serv.StartAsync();
 
 Console.ReadKey(true);
 int i = 0;
