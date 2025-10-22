@@ -11,22 +11,21 @@ await server.Start();
 
 Console.ReadKey();
 */
-
-/*
+/*   31.10.82.229
 openssl req -x509 -out localhost.crt -keyout localhost.key 
   -newkey rsa:2048 - nodes - sha256 
   -subj '/CN=localhost' - extensions EXT - config < ( 
    printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 */
 
-string certificatePath = "android.pfx";
+string certificatePath = @"c:\temp\androids.pfx";
 string certificatePassword = "J0hnksM0nster";
 
 
-int port = 6666; // Or any other port
+int port = 80; // Or any other port
 
-var s = AppDomain.CurrentDomain.BaseDirectory;
-certificatePath = Path.Combine(s, certificatePath);
+//var s = AppDomain.CurrentDomain.BaseDirectory;
+//certificatePath = Path.Combine(s, certificatePath);
 
 //TestSert(certificatePath, certificatePassword);
 
@@ -37,25 +36,58 @@ if (!File.Exists(certificatePath))
     return;
 }
 
-var  serv = new SecureTcpServer(port, certificatePath, certificatePassword);
-await serv.StartAsync();
+var serv = new SecureTcpServer(port, certificatePath, certificatePassword);
+//await serv.StartAsync();
+var s = new SimpleTcpServer(port);
+await s.StartAsync();
 
 Console.ReadKey(true);
 int i = 0;
 
 /*
  # Run PowerShell as Administrator
-New-SelfSignedCertificate -DnsName "localhost" -CertStoreLocation "cert:\LocalMachine\My" -FriendlyName "Android"
-# Export the certificate with its private key (you'll need to create a password)
-$cert = Get-ChildItem -Path "Cert:\LocalMachine\My\" | Where-Object {$_.FriendlyName -eq "Android"}
-Export-PfxCertificate -Cert $cert -FilePath "C:\temp\android.pfx" -Password (ConvertTo-SecureString "J0hnksM0nster" -AsPlainText -Force)
+New-SelfSignedCertificate -DnsName "localhost" -CertStoreLocation "cert:\LocalMachine\My" -FriendlyName "AndroidS"
+$cert = Get-ChildItem -Path "Cert:\LocalMachine\My\" | Where-Object {$_.FriendlyName -eq "AndroidS"}
+Export-PfxCertificate -Cert $cert -FilePath "C:\temp\androids.pfx" -Password (ConvertTo-SecureString "J0hnksM0nster" -AsPlainText -Force)
 */
-
 /*
+KeyPass  KEY STORE
+PS C:\WINDOWS\system32> New-SelfSignedCertificate -DnsName "localhost" -CertStoreLocation "cert:\LocalMachine\My" -FriendlyName "AndroidS"
+
+
+   PSParentPath: Microsoft.PowerShell.Security\Certificate::LocalMachine\My
+
+PS C:\WINDOWS\system32> New-SelfSignedCertificate -DnsName "localhost" -CertStoreLocation "cert:\LocalMachine\My" -FriendlyName "AndroidS"
+
+
+   PSParentPath: Microsoft.PowerShell.Security\Certificate::LocalMachine\My
 
 Thumbprint                                Subject
 ----------                                -------
-DC7D5484CE722B3B381E4BB693A5DB244676A34D  CN=localhost
+064187392FE5234197107576517491CEA7E920CB  CN=localhost
+
+
+
+
+    Directory: C:\temp
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        10/21/2025  12:53 PM           2669 androids.pfx
+
+
+PS C:\WINDOWS\system32>
+
+
+
+
+
+
+PS C:\WINDOWS\system32> $cert = Get-ChildItem -Path "Cert:\LocalMachine\My\" | Where-Object {$_.FriendlyName -eq "AndroidS"}
+PS C:\WINDOWS\system32>
+PS C:\WINDOWS\system32> Export-PfxCertificate -Cert $cert -FilePath "C:\temp\androids.pfx" -Password (ConvertTo-SecureString "J0hnksM0nster" -AsPlainText -Force)
+
 */
 
 void TestSert(string path, string passs)

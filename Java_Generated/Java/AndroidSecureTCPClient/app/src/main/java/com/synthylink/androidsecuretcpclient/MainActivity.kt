@@ -1,5 +1,6 @@
 package com.synthylink.androidsecuretcpclient
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -50,7 +51,8 @@ class MainActivity : AppCompatActivity() {
             // Use lifecycleScope for coroutines tied to the Activity's lifecycle
             lifecycleScope.launch {
                 responseTextView.text = "Connecting..."
-                val response = secureTcpClient.connectAndCommunicate(host, port, message)
+
+                val response = secureTcpClient.connectAndCommunicate(host, port, "", message)
                 if (response != null) {
                     responseTextView.text = "Response: $response"
                 } else {

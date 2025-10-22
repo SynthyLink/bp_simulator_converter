@@ -36,7 +36,7 @@ class SecureTcpClient(private val context: Context) {
      * @return The response received from the server, or null if an error occurred.
      */
     @SuppressLint("MissingPermission")
-    suspend fun connectAndCommunicate(host: String, port: Int, message: String): String? =
+    suspend fun connectAndCommunicate(host: String, port: Int, cert : String, message: String): String? =
         withContext(Dispatchers.IO) {
             if (!isNetworkAvailable()) {
                 Log.e(TAG, "No network connection available.")
@@ -44,7 +44,12 @@ class SecureTcpClient(private val context: Context) {
             }
 
             try {
+
+              //  val file = "c:/AUsers/1MySoft/CSharp/src/Web/ConsoleAppSocket/ConsoleAppSocket/bin/Debug/net9.0/android.pfx"
                 // 1. Get the default SSLSocketFactory
+                //val sslSocketFactory: SSLSocketFactory =  getCustomSSLSocketFactoryWithCustomTrustManager()
+              //  val sslSocketFactory: SSLSocketFactory =  getCustomSSLSocketFactory("file")
+
                 val sslSocketFactory: SSLSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
 

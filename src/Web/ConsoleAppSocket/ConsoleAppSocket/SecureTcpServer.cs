@@ -6,19 +6,20 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Security.Authentication;
 
 public class SecureTcpServer
 {
-    private readonly int _port;
-    private readonly string _certificatePath;
-    private readonly string _certificatePassword;
-    private X509Certificate2 _serverCertificate;
+    private readonly int port;
+    private readonly string certificatePath;
+    private readonly string certificatePassword;
+    private X509Certificate2 serverCertificate;
 
     public SecureTcpServer(int port, string certificatePath, string certificatePassword)
     {
-        _port = port;
-        _certificatePath = certificatePath;
-        _certificatePassword = certificatePassword;
+        this.port = port;
+        this.certificatePath = certificatePath;
+        this.certificatePassword = certificatePassword;
     }
 
     public async Task StartAsync()
@@ -26,13 +27,13 @@ public class SecureTcpServer
         try
         {
             // Load the server certificate
-            _serverCertificate = new X509Certificate2(_certificatePath, _certificatePassword);
-            Console.WriteLine($"Server certificate loaded: {_serverCertificate.Subject}");
+            serverCertificate = new X509Certificate2(certificatePath, certificatePassword);
+            Console.WriteLine($"Server certificate loaded: {serverCertificate.Subject}");
 
             // Create a TCP listener
-            TcpListener listener = new TcpListener(IPAddress.Any, _port);
+            TcpListener listener = new TcpListener(IPAddress.Any, port);
             listener.Start();
-            Console.WriteLine($"Server listening on port {_port}...");
+            Console.WriteLine($"Server listening on port {port}...");
 
             while (true)
             {
@@ -66,10 +67,10 @@ public class SecureTcpServer
             // The LocalCertificateValidationCallback is for *client* certificates,
             // and RemoteCertificateValidationCallback is for *server* certificates from the client's perspective.
             // For basic server authentication, we only need to provide our certificate.
-            await sslStream.AuthenticateAsServerAsync(_serverCertificate,
+            await sslStream.AuthenticateAsServerAsync(serverCertificate,
                                                      clientCertificateRequired: true, // Set to true if you need client authentication
                                                      enabledSslProtocols:
-                                                     System.Security.Authentication.SslProtocols.Tls12,
+                                                     SslProtocols.Tls12,
                                                      checkCertificateRevocation: true);
 
             Console.WriteLine("Client authenticated.");
@@ -78,8 +79,8 @@ public class SecureTcpServer
             using StreamReader reader = new StreamReader(sslStream, Encoding.UTF8, leaveOpen: true);
             using StreamWriter writer = new StreamWriter(sslStream, Encoding.UTF8, leaveOpen: true);
             //     { AutoFlush = true };
-             byte[] buffer = new byte[1024];
-              var k = await sslStream.ReadAsync(buffer, 0, buffer.Length);
+            byte[] buffer = new byte[1024];
+            var k = await sslStream.ReadAsync(buffer, 0, buffer.Length);
             // Example: Read a message from the client*/          string receivedMessage = Encoding.UTF8.GetString(buffer, 0, bytesRead);
             string message = Encoding.UTF8.GetString(buffer, 0, k);
             Console.WriteLine($"Received from client: {message}");
