@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Net.Security;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ public class SimpleTcpServer
         _port = port;
     }
 
-    public async Task Start()
+    public async Task StartAsync()
     {
         try
         {
@@ -61,16 +62,23 @@ public class SimpleTcpServer
 
             try
             {
-                while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0)
-                {
-                    string receivedData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                    Console.WriteLine($"Received from client: {receivedData}");
+                    var k = await stream.ReadAsync(buffer, 0, buffer.Length);
+                    // Example: Read a message from the client*/          string receivedMessage = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                    string message = Encoding.UTF8.GetString(buffer, 0, k);
+                    Console.WriteLine($"Received from client: {message}");
+                    byte[] data = Encoding.UTF8.GetBytes($"Server received: {message}");
+                    await stream.WriteAsync(data, 0, data.Length);
+                    await stream.FlushAsync();
+              /* while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+                 {
+                     string receivedData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                     Console.WriteLine($"Received from client: {receivedData}");
 
-                    // Echo back the received data
-                    byte[] responseData = Encoding.UTF8.GetBytes($"Server received: {receivedData}");
-                    await stream.WriteAsync(responseData, 0, responseData.Length);
-                    Console.WriteLine($"Sent to client: Server received: {receivedData}");
-                }
+                     // Echo back the received data
+                     byte[] responseData = Encoding.UTF8.GetBytes($"Server received: {receivedData}");
+                     await stream.WriteAsync(responseData, 0, responseData.Length);
+                     Console.WriteLine($"Sent to client: Server received: {receivedData}");
+                 }*/
             }
             catch (Exception ex)
             {
@@ -82,6 +90,4 @@ public class SimpleTcpServer
             }
         }
     }
-
-  
 }

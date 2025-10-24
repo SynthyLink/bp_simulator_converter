@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
@@ -27,13 +28,25 @@ namespace ConsoleAppSocketClient
 
         private X509Certificate2 FindCertificateByThumbprint(string thumbprint)
         {
-            using (var store = new X509Store(StoreName.My, StoreLocation.LocalMachine)) // Или StoreLocation.LocalMachine
+            StoreName[] names = [ StoreName.TrustedPeople,
+            StoreName.Root, StoreName.AuthRoot,
+                StoreName.CertificateAuthority,
+            StoreName.TrustedPublisher, StoreName.AddressBook,
+            StoreName.My];
+            StoreLocation[] locations = [StoreLocation.LocalMachine, StoreLocation.CurrentUser];
+            foreach (StoreLocation location in locations)
             {
-                store.Open(OpenFlags.ReadOnly);
-                X509Certificate2Collection certificates = store.Certificates.Find(X509FindType.FindByThumbprint, thumbprint, false);
-                if (certificates.Count > 0)
+                foreach (StoreName name in names)
                 {
-                    return certificates[0];
+
+
+                    using var store = new X509Store(name, location);// Или StoreLocation.LocalMachine
+                    store.Open(OpenFlags.ReadOnly);
+                    X509Certificate2Collection certificates = store.Certificates.Find(X509FindType.FindByThumbprint, thumbprint, false);
+                    if (certificates.Count > 0)
+                    {
+                        return certificates[0];
+                    }
                 }
             }
             return null;
@@ -64,7 +77,7 @@ namespace ConsoleAppSocketClient
                await _sslStream.AuthenticateAsClientAsync(
                 _serverHost,
                 clientCertificates,
-                SslProtocols.Tls12,
+                SslProtocols.None,
                 true
             );
                 Console.WriteLine("SSL/TLS handshake successful.");
@@ -228,7 +241,8 @@ namespace ConsoleAppSocketClient
         {
             // IMPORTANT: Replace with your actual server hostname and port
             string serverHostname = "localhost"; // e.g., "localhost" if running locally
-            int serverPort = 6666; // e.g., 443 for HTTPS
+            serverHostname = "31.10.82.229"; // e.g., "localhost" if running locally
+            int serverPort = 80; // e.g., 443 for HTTPS
 
             // IMPORTANT: For testing against a server with a self-signed certificate
             // or one with certificate issues, you *might* need to override the
