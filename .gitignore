@@ -23,4 +23,7 @@ project.assets.json
 *.baml
 *CoverletSourceRootsMapping
 *deps.json
-
+*.vsidx
+*.v1.txt
+.vs
+/src/Web/OnlineGameConverter/OnlineGameConverter.Server/obj/Debug/net9.0/OnlineGameConverter.Server.RazorAssemblyInfo.cs
