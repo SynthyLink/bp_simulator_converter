@@ -3,9 +3,9 @@
 namespace Diagram.UI.TypeScript
 {
     [InitAssembly]
-    public static class StaticrExtensionDiagramTypeScript
+    public static class StaticExtensionDiagramTypeScript
     {
-        static StaticrExtensionDiagramTypeScript()
+        static StaticExtensionDiagramTypeScript()
         {
             new ObjectContainerClassCodeCreator();
             new DesktopCodeCreator();
