@@ -21,7 +21,7 @@ namespace Scada.WPF.Sound.Sample
             StaticExtensionEventInterfaces.TimerEventFactory = WpfTimerEventFactory.Singleton;
             StaticExtensionScadaDesktop.ScadaFactory = StaticExtensionScadaDesktopSerializable.BaseFactory;
             scada = Properties.Resources.atis_sound_event_tu154.ScadaFromBytes("Chart",
-                BaseTypes.Attributes.TimeType.Second, false, null);
+                BaseTypes.Attributes.TimeType.Second, false, null).Result;
             //(scada as Scada.Motion6D.Factory.ScadaDesktopMotion6D).AnimationType =
            //     Animation.Interfaces.Enums.AnimationType.Synchronous;
             chart.Output = new List<Tuple<string, Color, double[]>>()

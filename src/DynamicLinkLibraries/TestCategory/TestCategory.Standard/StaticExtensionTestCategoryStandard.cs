@@ -12,6 +12,8 @@ using FormulaEditor;
 using FormulaEditor.Compiler;
 
 using ErrorHandler;
+using DataSetService.Pure;
+using DataSetService.Pure.Interfaces;
 namespace TestCategory.Standard
 {
     public static class StaticExtensionTestCategoryStandard
@@ -41,7 +43,7 @@ namespace TestCategory.Standard
         /// <param name="bytes">bytes</param>
         public static void Fact(this byte[] bytes)
         {
-            Assert.True(bytes.Test().Item1);
+            Assert.True(bytes.Test().Result.Item1);
         }
 
 
