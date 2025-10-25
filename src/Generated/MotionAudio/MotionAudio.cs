@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 
 
@@ -225,7 +226,7 @@ namespace GeneratedProject
 					{
 						Object = label;
 						desktop = new Desktop(this);
-						Load();
+						Load(CancellationToken.None);
 					}
 				
 					new internal class Desktop : Diagram.UI.PureDesktop
