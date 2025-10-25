@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataSetService.Pure\DataSetService.Pure.csproj" />
+    <ProjectReference Include="..\DataSetService\DataSetService\DataSetService.csproj">
+    </ProjectReference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,61 @@
+﻿using CategoryTheory;
+
+using Diagram.UI;
+using Diagram.UI.Factory;
+using Diagram.UI.Interfaces;
+using Diagram.UI.Interfaces.Labels;
+
+using Internet.Meteo.UI.Labels;
+using System.Threading.Tasks;
+
+namespace Internet.Meteo.UI
+{
+    internal class UIFactory : EmptyUIFactory
+    {
+        internal UIFactory() 
+        {
+            this.Add();
+        }
+
+        /// <summary>
+        /// Creates object the corresponds to button
+        /// </summary>
+        /// <param name="button">The button</param>
+        /// <returns>Created object</returns>
+        public override Task<ICategoryObject> CreateObject(IPaletteButton button)
+        {
+            var type = button.ReflectionType;
+            if (type == typeof(Wrapper.Serializable.Sensor))
+            {
+                ICategoryObject a = new Wrapper.Serializable.Sensor(button.Kind);
+                return Task.FromResult(a);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Creates object label
+        /// </summary>
+        /// <param name="button">Corresponding button</param>
+        /// <returns>The object label</returns>
+        public override IObjectLabelUI CreateObjectLabel(IPaletteButton button)
+        {
+            var type = button.ReflectionType;
+            var kind = button.Kind;
+            var image = button.ButtonImage;
+            if (type == typeof(Wrapper.Serializable.Sensor))
+            {
+                switch (kind)
+                {
+                    case "thermometer":
+                        return (new SensorLabel()).CreateLabelUI(image, true);
+                    case "all":
+                        return (new SensorFullLabel()).CreateLabelUI(image, true);
+                }
+            }
+
+            return null;
+        }
+
+    }
+}

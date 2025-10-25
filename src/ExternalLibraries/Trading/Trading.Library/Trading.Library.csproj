@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Interfaces\DataPerformer.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable\DataPerformer.Portable.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\AliasRegression\AliasRegression.Portable\AliasRegression.Portable.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\AssemblyService\AssemblyService.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\BaseTypes\BaseTypes\BaseTypes.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\CategoryTheory\CategoryTheory\CategoryTheory\CategoryTheory.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Database\DataSet\DataSetSerializable\DataSetSerializable.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Database\DataSet\DataSetService\DataSetService\DataSetService.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Database\DataSet\DataSetSevice.Add\DataSetSevice.Add.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Database\DataSet\DataTableSelection\DataTableSelection.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Database\DataWarehouse\DataWarehouse\DataWarehouse.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Database\Drivers\ODBCTableProvider\ODBCTableProvider.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Basic\DataPerformer.Basic.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Interfaces\DataPerformer.Interfaces.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable.Basic\DataPerformer.Portable.Basic.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable\DataPerformer.Portable.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Diagram\Diagram.Extended\Diagram.Extended.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Diagram\Diagram.UI\Diagram.UI.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Diagram\Diagram\Diagram.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\EngineeringInitializer\EngineeringInitializer.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Events\Event.Basic.Data\Event.Basic.Data.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Events\Event.Basic\Event.Basic.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Events\Event.Data.Interface\Event.Data.Interface.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Events\Event.Interfaces\Event.Interfaces.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Events\Event.Log.Database\Event.Log.Database.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Events\Event.Portable\Event.Portable.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\FormulaEditor\ExtendedFormulaEditor\ExtendedFormulaEditor.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\FormulaEditor\FormulaEditor.Compiler\FormulaEditor.Compiler.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\FormulaEditor\FormulaEditor.Serializable\FormulaEditor.Serializable.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\FormulaEditor\FormulaEditor\FormulaEditor.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\GeneralLinearMethod\GeneralLinearMethod.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\ImageTransformation\ImageTransformation.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Localization.Helper\Localization.Helper.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\MathStatistics\MathStatistics\MathStatistics.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Node\TreeNode.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\OrdinaryDifferentialEquations\OrdinaryDifferentialEquations\OrdinaryDifferentialEquations.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\RealMatrixProcessor\RealMatrixProcessor.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Scada\Scada.Desktop\Scada.Desktop.Serializable\Scada.Desktop.Serializable.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Scada\Scada.Desktop\Scada.Desktop\Scada.Desktop.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Scada\Scada.Interfaces\Scada.Interfaces.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\SerializationInterface\SerializationInterface.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\TestCategory\TestCategory\TestCategory.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Vector3D\Vector3D.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Web.Interfaces\Web.Interfaces\Web.Interfaces.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\XmlSelection\XmlSelection.csproj" />
+      <ProjectReference Include="..\..\..\DynamicLinkLibraries\Zip.Service\Zip.Service.csproj" />
+      <ProjectReference Include="..\CSharpAPI\CSharpAPI.csproj" />
+      <ProjectReference Include="..\Trading.Database\Trading.Database.csproj" />
+    </ItemGroup>
+</Project>
