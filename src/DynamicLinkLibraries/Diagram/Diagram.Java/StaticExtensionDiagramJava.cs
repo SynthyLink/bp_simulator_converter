@@ -1,15 +1,17 @@
 ﻿using AssemblyService.Attributes;
+using Diagram.Java;
 
-namespace Diagram.UI.TypeScript
+namespace Diagram.UI.Java
 {
     [InitAssembly]
-    public static class StaticrExtensionDiagramTypeScript
+    public static class StaticExtensionDiagramJava
     {
-        static StaticrExtensionDiagramTypeScript()
+        static  StaticExtensionDiagramJava()
         {
-            new ObjectContainerClassCodeCreator();
             new DesktopCodeCreator();
+            new TypeCreator();
         }
+
 
         /// <summary>
         /// Initializes itself
