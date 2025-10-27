@@ -61,6 +61,7 @@
     <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer\DataPerformer.csproj">
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\Diagram\Diagram.Java\Diagram.Java.csproj" />
+    <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\Diagram\Diagram.Python\Diagram.Python.csproj" />
     <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\Diagram\Diagram.TypeScript\Diagram.TypeScript.csproj" />
     <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\Diagram\Diagram.UI\Diagram.UI.csproj">
     </ProjectReference>

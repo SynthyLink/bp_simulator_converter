@@ -537,7 +537,7 @@ namespace GeneratedProject
 					{
 						Object = label;
 						desktop = new Desktop(this);
-						Load(CancellationToken.None);
+						Load();
 					}
 				
 					new internal class Desktop : Diagram.UI.PureDesktop
@@ -1523,7 +1523,7 @@ namespace GeneratedProject
 					{
 						Object = label;
 						desktop = new Desktop(this);
-						Load(CancellationToken.None);
+						Load();
 					}
 				
 					new internal class Desktop : Diagram.UI.PureDesktop
@@ -2372,7 +2372,7 @@ namespace GeneratedProject
 					{
 						Object = label;
 						desktop = new Desktop(this);
-						Load(CancellationToken.None);
+						Load();
 					}
 				
 					new internal class Desktop : Diagram.UI.PureDesktop
@@ -3580,7 +3580,7 @@ namespace GeneratedProject
 					{
 						Object = label;
 						desktop = new Desktop(this);
-						Load(CancellationToken.None);
+						Load();
 					}
 				
 					new internal class Desktop : Diagram.UI.PureDesktop
@@ -4368,7 +4368,7 @@ namespace GeneratedProject
 					{
 						Object = label;
 						desktop = new Desktop(this);
-						Load(CancellationToken.None);
+						Load();
 					}
 				
 					new internal class Desktop : Diagram.UI.PureDesktop
@@ -5308,7 +5308,7 @@ namespace GeneratedProject
 					{
 						Object = label;
 						desktop = new Desktop(this);
-						Load(CancellationToken.None);
+						Load();
 					}
 				
 					new internal class Desktop : Diagram.UI.PureDesktop
@@ -6096,7 +6096,7 @@ namespace GeneratedProject
 					{
 						Object = label;
 						desktop = new Desktop(this);
-						Load(CancellationToken.None);
+						Load();
 					}
 				
 					new internal class Desktop : Diagram.UI.PureDesktop

@@ -24,7 +24,7 @@ namespace TestProjectMotion6DExamples
         /// <param name="bytes">Byte array</param>
         internal static void Fact(this byte[] bytes)
         {
-            Assert.True(bytes.Test().Result.Item1);
+            Assert.True(bytes.Test().Item1);
         }
     }
 }
