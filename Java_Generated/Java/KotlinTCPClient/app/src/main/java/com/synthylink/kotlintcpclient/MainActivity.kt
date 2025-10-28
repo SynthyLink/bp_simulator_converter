@@ -4,6 +4,7 @@ import com.synthylink.kotlintcpclient.R
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import communication.TcpClientManager
@@ -22,7 +23,8 @@ class MainActivity : AppCompatActivity() {
     private val SERVER_ADDRESS = "192.168.1.100" // Example IP
     private val SERVER_PORT = 12345
 
-    lateinit var btnComnect : Button;
+    lateinit var   textViewReceivedData : TextView;
+
 
     // Example Port
 
@@ -37,15 +39,22 @@ class MainActivity : AppCompatActivity() {
         // Initialize the client manager
         tcpClientManager = TcpClientManager(SERVER_ADDRESS, SERVER_PORT)
 
-        binding.btnConnect.setOnClickListener {
+        var btnConnect = findViewById(R.id.btnConnect) as Button
+        var btnDisconnect = findViewById(R.id.btnDisconnect) as Button
+        var btnData = findViewById(R.id.btnGetData) as Button
+
+        textViewReceivedData = findViewById(R.id.textViewReceivedData)
+
+
+        btnConnect.setOnClickListener {
             startTcpClient()
         }
 
-        binding.btnDisconnect.setOnClickListener {
+        btnDisconnect.setOnClickListener {
             stopTcpClient()
         }
 
-        binding.btnGetData.setOnClickListener {
+        btnData.setOnClickListener {
             getAndDisplayData()
         }
     }
@@ -84,10 +93,10 @@ class MainActivity : AppCompatActivity() {
                 Log.i(TAG, dataString)
                 Log.i(TAG, "----------------------")
                 // Update UI with dataString
-                binding.textViewReceivedData.text = dataString // Assuming you have a TextView with this ID
+                textViewReceivedData.text = dataString // Assuming you have a TextView with this ID
             } else {
                 Log.i(TAG, "No data received yet or stream is empty.")
-                binding.textViewReceivedData.text = "No data received yet."
+                textViewReceivedData.text = "No data received yet."
             }
         }
     }
