@@ -1,6 +1,7 @@
 package communication
 
 
+
 import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
@@ -21,6 +22,8 @@ class TcpClientManager(
 ) {
 
     private val TAG = "TcpClientManager"
+
+    private  var isActive   = true
     private var socket: Socket? = null
     private val receivedDataMutex = Mutex()
     private var receivedDataOutputStream: ByteArrayOutputStream? = null
@@ -77,13 +80,13 @@ class TcpClientManager(
 
                 if (bytesRead > 0) {
                     // Accumulate received bytes
-                    receivedDataOutputStream?.let {
+                /*    receivedDataOutputStream?.let {
                         // Protect access to the output stream with a mutex
-                        receivedDataOutputStream.withLock {
+                       receivedDataOutputStream.withLock {
                             it.write(buffer, 0, bytesRead)
                             Log.d(TAG, "Received $bytesRead bytes. Total accumulated: ${it.size()}")
                         }
-                    }
+                    }*/
                 }
             } catch (e: IOException) {
                 if (!isActive) {
@@ -103,21 +106,24 @@ class TcpClientManager(
 
     // Function to get the accumulated data
     suspend fun getAccumulatedData(): ByteArray? {
-        return receivedDataOutputStream?.let {
+      /*  return receivedDataOutputStream?.let {
             // Access the data safely using the mutex
             it.withLock {
                 it.toByteArray()
             }
-        }
+            var i = 0;
+        }*/
+
+      return null;
     }
 
     // Function to clear the accumulated data
     suspend fun clearAccumulatedData() {
         receivedDataOutputStream?.let {
-            it.withLock {
+          /*  it.withLock {
                 it.reset()
                 Log.d(TAG, "Accumulated data cleared.")
-            }
+            }*/
         }
     }
 

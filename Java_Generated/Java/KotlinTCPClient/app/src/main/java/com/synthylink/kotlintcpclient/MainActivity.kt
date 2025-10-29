@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 // Ensure no other child coroutines for TCP are running
-                this.coroutineContext.cancelChildren(filter = { it.context.key == TCP_CLIENT_JOB_KEY })
+              //  this.coroutineContext.cancelChildren(filter = { it.context.key == TCP_CLIENT_JOB_KEY })
 
                 tcpClientManager.startAndReceiveData()
             } catch (e: Exception) {
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
     private fun stopTcpClient() {
         lifecycleScope.launch {
             // Cancel any ongoing TCP client operations
-            this.coroutineContext.cancelChildren(filter = { it.context.key == TCP_CLIENT_JOB_KEY })
+       //     this.coroutineContext.cancelChildren(filter = { it.context.key == TCP_CLIENT_JOB_KEY })
             tcpClientManager.stopClient()
             Log.i(TAG, "TCP client stopped.")
         }
@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Define a custom CoroutineContext.Key for filtering child jobs
-    companion object {
-        val TCP_CLIENT_JOB_KEY = object : kotlin.coroutines.CoroutineContext.Key<kotlin.coroutines.Job> {}
-    }
+  //  companion object {
+//        val TCP_CLIENT_JOB_KEY = object : kotlin.coroutines.CoroutineContext.Key<kotlin.coroutines.Job> {}
+//    }
 }

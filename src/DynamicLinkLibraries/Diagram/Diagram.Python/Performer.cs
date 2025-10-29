@@ -16,13 +16,13 @@ namespace Diagram.UI.TypeScript
             l.Add("\t\tsuper(desktop, name);");
         }
 
-        // done
-        public string ClassString(string prefix, string extends = null)
+
+        public string ClassString(string preffix, string extends = null)
         {
-            var s = "class " + prefix;
+            var s = "class " + preffix;
             if (extends != null)
             {
-                s += "(" + extends + "):";
+                s += " extends " + extends;
             }
             return s;
         }
@@ -58,7 +58,7 @@ namespace Diagram.UI.TypeScript
             string s = StringValue(obj);
             if (t.Equals(typeof(double)))
             {
-                return "float(" + s + ")";
+                return "(double)" + s;
             }
             if (t.Equals(typeof(string)))
             {
@@ -67,24 +67,78 @@ namespace Diagram.UI.TypeScript
             return s;
         }
 
-        //done
         public List<string> CreateList(string id, IEnumerable<string> list)
         {
-            return new List<string> { "[" + string.Join(", ", list) + "]" };
+            var lt = list.ToList();
+            var l = new List<string>();
+            foreach ( var item in lt )
+            {
+                l.Add(id + ".push(\"" + item + "\");");
+            }
+            return l;
         }
 
-        //done
         public List<string> CreateMap<T>(string id, Dictionary<T, string> map, string type = null)
         {
-            return ["{" + string.Join(", ", map.Select(kv => StringValue(kv.Key) + ": " + kv.Value)) + "}"];
+            var tt = (type == null) ? "any" : type;
+            var l = new List<string>();
+            l.Add("let " + id + " = new Map<" + tt + ", string>(");
+            var r = new List<T>(map.Keys);
+            int n = r.Count;
+            l.Add("[");
+            if (n == 0)
+            {
+                l.Add("]);");
+            }
+            else
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    var x = r[i];
+                    var s = "\t[" + StringValue(x) + ", \"" + map[x] + "\" ]";
+                    if (i < (n - 1))
+                    {
+                        s += ',';
+                    }
+                    l.Add(s);
+                }
+                l.Add("]);");
+            }
+            return l;
         }
         
         public List<string> CreateStringDictionary(string id, Dictionary<string, string> dictionary)
         {
-            return CreateMap<string>(id, dictionary);
+            List<string> l = new List<string>();
+            var keys = new List<string>(dictionary.Keys);
+            l.Add("let " + id + " = new Map<string, string>(");
+            int n = keys.Count;
+            l.Add("[");
+            if (n == 0)
+            {
+                l.Add("]);");
+            }
+            else
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    string s = keys[i];
+                    s = "\t[\"" + s + "\", \"" + dictionary[s] + "\" ]";
+                    if (i < (n - 1))
+                    {
+                        s += ',';
+                    }
+                    l.Add(s);
+                }
+                l.Add("]);");
+            }
+            return l;
         }
 
-        public List<string> CreateTSAliasList(string id, IAlias alias)
+
+
+
+        public List<string> CreateTSAliasList(string id,  IAlias alias)
         {
             List<string> l = new List<string>();
             var al = alias.AliasNames;
