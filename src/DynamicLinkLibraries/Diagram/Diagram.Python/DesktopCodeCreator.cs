@@ -7,7 +7,7 @@ using Diagram.UI.Labels;
 
 using NamedTree;
 
-namespace Diagram.UI.TypeScript
+namespace Diagram.UI.Python
 {
     [Language("Python", ".py")]
     internal class DesktopCodeCreator : IDesktopCodeCreator
@@ -60,7 +60,7 @@ namespace Diagram.UI.TypeScript
                 for (int i = 0; i < categoryObjects.Count; i++)
                 {
                     var categoryObject = categoryObjects[i];
-                    var pr = className + "_" + "CategoryObject_" + i;
+                    var pr = className + "_category_object_" + i;
                     Current = pr;
                     var c = classCodeCreator.CreateCode(pr, categoryObject, null);
                     l.AddRange(c);
@@ -69,7 +69,7 @@ namespace Diagram.UI.TypeScript
                 for (int i = 0; i < categoryArrows.Count; i++)
                 {
                     var categoryArrow = categoryArrows[i];
-                    var pr = className + "_" + "CategoryArrow_" + i;
+                    var pr = className + "_category_arrow_" + i;
                     var c = classCodeCreator.CreateCode(pr, categoryArrow, null);
                     l.AddRange(c);
                     l.Add("");
@@ -92,7 +92,7 @@ namespace Diagram.UI.TypeScript
                     var nac = categoryObject.Object as INamedComponent;
                     string name = nac.RootName;
                     name = "\"" + name + "\"";
-                    var pr = "\t\tnew " + className + "_" + "CategoryObject_" + i + "(this, " + name + ");";
+                    var pr = "\t\tnew " + className + "_" + "category_object_" + i + "(this, " + name + ");";
                     l.Add(pr);
                 }
                 for (var i = 0; i < categoryArrows.Count; i++)

@@ -1,6 +1,6 @@
 ﻿using AssemblyService.Attributes;
 
-namespace Diagram.UI.TypeScript
+namespace Diagram.UI.Python
 {
     [InitAssembly]
     public static class StaticExtensionDiagramPython

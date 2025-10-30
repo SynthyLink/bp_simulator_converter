@@ -8,7 +8,7 @@ using Diagram.UI;
 using Diagram.UI.Interfaces;
 using System.Linq;
 
-namespace Diagram.TypeScript
+namespace Diagram.Python
 {
     [Language("Python")]
     public class CodeCreator : ITypeCreator, IDictionaryCodeCreator<string, string>,
@@ -73,6 +73,7 @@ namespace Diagram.TypeScript
         /// </summary>
         /// <param name="o">Object</param>
         /// <returns>The string type</returns>
+        /// done?
         public string GetType(object o)
         {
             if (o is ArrayReturnType)
@@ -103,7 +104,6 @@ namespace Diagram.TypeScript
         /// </summary>
         /// <param name="o">The object</param>
         /// <returns></returns>
-        /// done?
         public string GetDefaultValue(object o)
         {
             if (o.GetType().ToString().Contains("System.Tuple"))
@@ -184,6 +184,7 @@ namespace Diagram.TypeScript
                 .Create(id, dictionary.ToDictionary(kv => kv.Key, kv => (object)kv.Value));
         }
 
+        //done
         Dictionary<string, List<string>> IFeedbackCollectionCodeCreator.Create(IFeedbackCollectionHolder holder)
         {
             var d = new Dictionary<string, List<string>>();
@@ -191,6 +192,7 @@ namespace Diagram.TypeScript
             return d;
         }
 
+        //done
         Dictionary<string, List<string>> Create(string id, IAlias alias)
         {
             UI.Performer p = new UI.Performer();
@@ -209,7 +211,7 @@ namespace Diagram.TypeScript
         IDictionaryCodeCreator<string, string> dcc => this;
 
 
-        //done?
+        //irrelevant???
         private List<string> Create(IFeedbackCollectionHolder holder)
         {
             var feedback = holder.Feedback;
@@ -222,7 +224,7 @@ namespace Diagram.TypeScript
                 {
                     l.Add("setFeedback() -> None: ");
                     var ll = dcc.Create("map", fa.Dictionary).Values.ToArray()[0];
-                    ll.Add("\t self.feedback = FeedbackAliasCollection(map, this, this);");
+                    ll.Add("\tself.feedback = FeedbackAliasCollection(map, this, this);");
                     performer.Add(l, ll, 1);
                     //l.Add("}");
                 }
