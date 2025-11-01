@@ -41,6 +41,8 @@ namespace Diagram.UI.Factory
         /// </summary>
         protected IDefaultLabelFactory factory;
 
+        protected object locked = new object();
+
         #endregion
 
         #region Ctor
@@ -74,10 +76,17 @@ namespace Diagram.UI.Factory
         {
             foreach (IUIFactory f in factories)
             {
-                ICategoryObject o = await f.CreateObject(button);
-                if (o != null)
+                try
                 {
-                    return o;
+                    ICategoryObject o = await f.CreateObject(button);
+                    if (o != null)
+                    {
+                        return o;
+                    }
+                }
+                catch (Exception ex)
+                {
+
                 }
             }
             if (defaultValue)
