@@ -25,7 +25,7 @@ namespace Diagram.Python
         } = new CodeCreator();
 
 
-        static protected UI.TypeScript.Performer performer = new();
+        static protected UI.Python.Performer performer = new();
 
         // done! need?
         static public readonly Dictionary<Type, string> TypeCorrespodnence =
@@ -205,7 +205,6 @@ namespace Diagram.Python
         Dictionary<string, List<string>> IAliasCodeCreator.Create(string id, IAlias alias)
         {
             return Create(id, alias);
-
         }
 
         IDictionaryCodeCreator<string, string> dcc => this;

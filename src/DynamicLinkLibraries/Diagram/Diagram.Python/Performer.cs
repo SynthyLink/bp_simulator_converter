@@ -17,9 +17,9 @@ namespace Diagram.UI.Python
         }
 
         //done
-        public string ClassString(string preffix, string extends = null)
+        public string ClassString(string prefix, string extends = null)
         {
-            var s = "class " + preffix;
+            var s = "class " + prefix;
             if (extends != null)
             {
                 s += "(" + extends + ")";

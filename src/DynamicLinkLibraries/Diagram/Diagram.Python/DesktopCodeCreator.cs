@@ -12,10 +12,10 @@ namespace Diagram.UI.Python
     [Language("Python", ".py")]
     internal class DesktopCodeCreator : IDesktopCodeCreator
     {
-        UI.Performer performer = new ();
+        UI.Performer ui_performer = new ();
  
         
-        Performer p = new();
+        Performer performer = new ();
 
         string Current
         {
@@ -48,13 +48,13 @@ namespace Diagram.UI.Python
             try
             {
                 this.collection = desktop;
-                dictionary = performer.Enumerate(desktop);
+                dictionary = ui_performer.Enumerate(desktop);
                 List<ICategoryObject> categoryObjects;
                 List<ICategoryArrow> categoryArrows;
                 Dictionary<ICategoryObject, int> objects;
                 Dictionary<ICategoryArrow, int> arrows;
-                performer.Get(desktop, out categoryObjects, out categoryArrows, out objects, out arrows);
-                IClassCodeCreator classCodeCreator = performer.GetLaguageObject<IClassCodeCreator>(this);
+                ui_performer.Get(desktop, out categoryObjects, out categoryArrows, out objects, out arrows);
+                IClassCodeCreator classCodeCreator = ui_performer.GetLaguageObject<IClassCodeCreator>(this);
                     // StaticExtensionDiagramUI.Creators["TS"]
                 var l = new List<string>();
                 for (int i = 0; i < categoryObjects.Count; i++)
@@ -76,44 +76,45 @@ namespace Diagram.UI.Python
                 }
                 l.Add("");
                 l.Add("");
-                var s = p.ClassString(className, "Desktop");
-                l.Add("export " + s);
-                l.Add("{");
-                l.Add("\tconstructor()");
+                //var s = performer.ClassString(className, "Desktop");
+                //l.Add("export " + s);
+                l.Add(performer.ClassString(className, "Desktop"));
+                //l.Add("{");
+                l.Add("\tdef __init__(self):");
 
-                l.Add("\t{");
-                l.Add("\t\tsuper();");
+                //l.Add("\t{");
+                l.Add("\t\tsuper().__init__()");
                 l.Add("");
-                l.Add("\t\tthis.name = \"" + className + "\";");
+                l.Add("\t\tself.name = \"" + className + "\"");
                 l.Add("");
                 for (var i = 0; i < categoryObjects.Count; i++)
                 {
                     var categoryObject = categoryObjects[i] as IAssociatedObject;
-                    var nac = categoryObject.Object as INamedComponent;
-                    string name = nac.RootName;
-                    name = "\"" + name + "\"";
-                    var pr = "\t\tnew " + className + "_" + "category_object_" + i + "(this, " + name + ");";
+                    var named_component = categoryObject.Object as INamedComponent;
+                    string name = named_component.RootName;
+                    var pr = "\t\t" + className + ".category_object_" + i + "(self, \"" + name + "\")";
                     l.Add(pr);
                 }
                 for (var i = 0; i < categoryArrows.Count; i++)
                 {
                     var categoryArrow = categoryArrows[i] as IAssociatedObject;
-                    var nac = categoryArrow.Object as INamedComponent;
-                    string name = nac.RootName;
-                    name = "\"" + name + "\"";
-                    var pr = "\t\tnew " + className + "_" + "CategoryArrow_" + i + "(this, " + name + ");";
+                    var named_component = categoryArrow.Object as INamedComponent;
+                    string name = named_component.RootName;
+                    var pr = "\t\t" + className + ".category_arrow_" + i + "(self, \"" + name + "\")";
                     l.Add(pr);
                 }
                 l.Add("");
 
-                l.Add("\t\tlet objects = this.getCategoryObjects();");
-                l.Add("\t\tlet arrows = this.getCategoryArrows();");
+
+                l.Add("\t\tobjects = self.category_objects");
+                l.Add("\t\tarrows = self.category_arrows");
                 l.Add("");
                 for (int i = 0; i < categoryArrows.Count; i++)
                 {
                     var categoryArrow = categoryArrows[i];
                     var sn = objects[categoryArrow.Source];
                     var tn = objects[categoryArrow.Target];
+                    // todo replace with overloaded = operation
                     l.Add("\t\tarrows[" + i + "].setSource(objects[" + sn + "]);");
                     l.Add("\t\tarrows[" + i + "].setTarget(objects[" + tn + "]);");
                 }
