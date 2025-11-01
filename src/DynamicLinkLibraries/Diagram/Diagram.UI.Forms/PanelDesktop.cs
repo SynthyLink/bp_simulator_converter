@@ -2340,7 +2340,7 @@ namespace Diagram.UI
 		/// </summary>
 		/// <param name="sender">The sender</param>
 		/// <param name="e">The event arguments</param>
-		private void onMouseUp(object sender, MouseEventArgs e)
+		private async void onMouseUp(object sender, MouseEventArgs e)
 		{
 			if (performsSelection)
 			{
@@ -2359,7 +2359,7 @@ namespace Diagram.UI
 				}
 				return;
 			}
-			AddObjectLabel(e.X, e.Y);
+			await AddObjectLabel(e.X, e.Y);
 		}
 		
 		/// <summary>
