@@ -5,9 +5,14 @@ using System.Text;
 public class AsyncTcpServer
 {
     private readonly IPAddress _ipAddress = IPAddress.Any; // Listen on all available interfaces
-    private readonly int _port = 13000;
+    private int _port = 13000;
     private TcpListener? _listener;
     private bool _isRunning = false;
+
+    public AsyncTcpServer(int port)
+    {
+        _port = port; 
+    }
 
     public async Task StartServerAsync()
     {
@@ -83,11 +88,11 @@ public class AsyncTcpServer
 }
 
 // Example usage in a console application's Main method:
-public class Program
+internal class Program
 {
     public static async Task Main(string[] args)
     {
-        var server = new AsyncTcpServer();
+        var server = new AsyncTcpServer(6666);
         await server.StartServerAsync();
     }
 }

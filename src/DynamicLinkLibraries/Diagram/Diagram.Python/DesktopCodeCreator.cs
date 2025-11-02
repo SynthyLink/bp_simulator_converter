@@ -7,15 +7,15 @@ using Diagram.UI.Labels;
 
 using NamedTree;
 
-namespace Diagram.UI.Python
+namespace Diagram.UI.TypeScript
 {
     [Language("Python", ".py")]
     internal class DesktopCodeCreator : IDesktopCodeCreator
     {
-        UI.Performer ui_performer = new ();
+        UI.Performer performer = new ();
  
         
-        Performer performer = new ();
+        Performer p = new();
 
         string Current
         {
@@ -48,19 +48,19 @@ namespace Diagram.UI.Python
             try
             {
                 this.collection = desktop;
-                dictionary = ui_performer.Enumerate(desktop);
+                dictionary = performer.Enumerate(desktop);
                 List<ICategoryObject> categoryObjects;
                 List<ICategoryArrow> categoryArrows;
                 Dictionary<ICategoryObject, int> objects;
                 Dictionary<ICategoryArrow, int> arrows;
-                ui_performer.Get(desktop, out categoryObjects, out categoryArrows, out objects, out arrows);
-                IClassCodeCreator classCodeCreator = ui_performer.GetLaguageObject<IClassCodeCreator>(this);
+                performer.Get(desktop, out categoryObjects, out categoryArrows, out objects, out arrows);
+                IClassCodeCreator classCodeCreator = performer.GetLaguageObject<IClassCodeCreator>(this);
                     // StaticExtensionDiagramUI.Creators["TS"]
                 var l = new List<string>();
                 for (int i = 0; i < categoryObjects.Count; i++)
                 {
                     var categoryObject = categoryObjects[i];
-                    var pr = className + "_category_object_" + i;
+                    var pr = className + "_" + "CategoryObject_" + i;
                     Current = pr;
                     var c = classCodeCreator.CreateCode(pr, categoryObject, null);
                     l.AddRange(c);
@@ -69,52 +69,51 @@ namespace Diagram.UI.Python
                 for (int i = 0; i < categoryArrows.Count; i++)
                 {
                     var categoryArrow = categoryArrows[i];
-                    var pr = className + "_category_arrow_" + i;
+                    var pr = className + "_" + "CategoryArrow_" + i;
                     var c = classCodeCreator.CreateCode(pr, categoryArrow, null);
                     l.AddRange(c);
                     l.Add("");
                 }
                 l.Add("");
                 l.Add("");
-                //var s = performer.ClassString(className, "Desktop");
-                //l.Add("export " + s);
-                l.Add(performer.ClassString(className, "Desktop"));
-                //l.Add("{");
-                l.Add("\tdef __init__(self):");
+                var s = p.ClassString(className, "Desktop");
+                l.Add("export " + s);
+                l.Add("{");
+                l.Add("\tconstructor()");
 
-                //l.Add("\t{");
-                l.Add("\t\tsuper().__init__()");
+                l.Add("\t{");
+                l.Add("\t\tsuper();");
                 l.Add("");
-                l.Add("\t\tself.name = \"" + className + "\"");
+                l.Add("\t\tthis.name = \"" + className + "\";");
                 l.Add("");
                 for (var i = 0; i < categoryObjects.Count; i++)
                 {
                     var categoryObject = categoryObjects[i] as IAssociatedObject;
-                    var named_component = categoryObject.Object as INamedComponent;
-                    string name = named_component.RootName;
-                    var pr = "\t\t" + className + ".category_object_" + i + "(self, \"" + name + "\")";
+                    var nac = categoryObject.Object as INamedComponent;
+                    string name = nac.RootName;
+                    name = "\"" + name + "\"";
+                    var pr = "\t\tnew " + className + "_" + "CategoryObject_" + i + "(this, " + name + ");";
                     l.Add(pr);
                 }
                 for (var i = 0; i < categoryArrows.Count; i++)
                 {
                     var categoryArrow = categoryArrows[i] as IAssociatedObject;
-                    var named_component = categoryArrow.Object as INamedComponent;
-                    string name = named_component.RootName;
-                    var pr = "\t\t" + className + ".category_arrow_" + i + "(self, \"" + name + "\")";
+                    var nac = categoryArrow.Object as INamedComponent;
+                    string name = nac.RootName;
+                    name = "\"" + name + "\"";
+                    var pr = "\t\tnew " + className + "_" + "CategoryArrow_" + i + "(this, " + name + ");";
                     l.Add(pr);
                 }
                 l.Add("");
 
-
-                l.Add("\t\tobjects = self.category_objects");
-                l.Add("\t\tarrows = self.category_arrows");
+                l.Add("\t\tlet objects = this.getCategoryObjects();");
+                l.Add("\t\tlet arrows = this.getCategoryArrows();");
                 l.Add("");
                 for (int i = 0; i < categoryArrows.Count; i++)
                 {
                     var categoryArrow = categoryArrows[i];
                     var sn = objects[categoryArrow.Source];
                     var tn = objects[categoryArrow.Target];
-                    // todo replace with overloaded = operation
                     l.Add("\t\tarrows[" + i + "].setSource(objects[" + sn + "]);");
                     l.Add("\t\tarrows[" + i + "].setTarget(objects[" + tn + "]);");
                 }
