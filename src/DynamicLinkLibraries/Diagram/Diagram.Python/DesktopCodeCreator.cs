@@ -105,9 +105,8 @@ namespace Diagram.UI.Python
                 }
                 l.Add("");
 
-
-                l.Add("\t\tobjects = self.category_objects");
-                l.Add("\t\tarrows = self.category_arrows");
+                l.Add("\t\tlet objects = this.getCategoryObjects();");
+                l.Add("\t\tlet arrows = this.getCategoryArrows();");
                 l.Add("");
                 for (int i = 0; i < categoryArrows.Count; i++)
                 {
