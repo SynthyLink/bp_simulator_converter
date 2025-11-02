@@ -60,7 +60,7 @@ namespace Diagram.UI.Python
                 for (int i = 0; i < categoryObjects.Count; i++)
                 {
                     var categoryObject = categoryObjects[i];
-                    var pr = className + "_category_object_" + i;
+                    var pr = className + "_CategoryObject_" + i;
                     Current = pr;
                     var c = classCodeCreator.CreateCode(pr, categoryObject, null);
                     l.AddRange(c);
@@ -69,7 +69,7 @@ namespace Diagram.UI.Python
                 for (int i = 0; i < categoryArrows.Count; i++)
                 {
                     var categoryArrow = categoryArrows[i];
-                    var pr = className + "_category_arrow_" + i;
+                    var pr = className + "_CategoryArrow_" + i;
                     var c = classCodeCreator.CreateCode(pr, categoryArrow, null);
                     l.AddRange(c);
                     l.Add("");
@@ -92,7 +92,7 @@ namespace Diagram.UI.Python
                     var categoryObject = categoryObjects[i] as IAssociatedObject;
                     var named_component = categoryObject.Object as INamedComponent;
                     string name = named_component.RootName;
-                    var pr = "\t\t" + className + ".category_object_" + i + "(self, \"" + name + "\")";
+                    var pr = "\t\t" + className + "_CategoryObject_" + i + "(self, \"" + name + "\")";
                     l.Add(pr);
                 }
                 for (var i = 0; i < categoryArrows.Count; i++)
@@ -100,7 +100,7 @@ namespace Diagram.UI.Python
                     var categoryArrow = categoryArrows[i] as IAssociatedObject;
                     var named_component = categoryArrow.Object as INamedComponent;
                     string name = named_component.RootName;
-                    var pr = "\t\t" + className + ".category_arrow_" + i + "(self, \"" + name + "\")";
+                    var pr = "\t\t" + className + "_CategoryArrow_" + i + "(self, \"" + name + "\")";
                     l.Add(pr);
                 }
                 l.Add("");
@@ -115,15 +115,15 @@ namespace Diagram.UI.Python
                     var sn = objects[categoryArrow.Source];
                     var tn = objects[categoryArrow.Target];
                     // todo replace with overloaded = operation
-                    l.Add("\t\tarrows[" + i + "].setSource(objects[" + sn + "]);");
-                    l.Add("\t\tarrows[" + i + "].setTarget(objects[" + tn + "]);");
+                    l.Add("\t\tarrows[" + i + "].source = objects[" + sn + "]");
+                    l.Add("\t\tarrows[" + i + "].target = objects[" + tn + "]");
                 }
                 for (int i = 0; i < categoryArrows.Count; i++)
                 {
                     var categoryArrow = categoryArrows[i];
                     if (categoryArrow is IPostSetArrow)
                     {
-                        l.Add("\t\t(arrows[" + i + "] as unknown as IPostSetArrow).postSetArrow();");
+                        l.Add("\t\t(arrows[" + i + "] as unknown as IPostSetArrow).postSetArrow()");
                     }
 
                 }
@@ -131,12 +131,9 @@ namespace Diagram.UI.Python
                 {
                     if (categoryObjects[i] is IPostSetArrow)
                     {
-                        l.Add("\t\t(objects[" + i + "] as unknown as IPostSetArrow).postSetArrow();");
+                        l.Add("\t\t(objects[" + i + "] as unknown as IPostSetArrow).postSetArrow()");
                     }
                 }
-
-                l.Add("\t}");
-                l.Add("}");
                 return l;
             }
             catch (Exception e)

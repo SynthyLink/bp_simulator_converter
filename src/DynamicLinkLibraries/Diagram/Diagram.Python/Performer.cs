@@ -13,7 +13,7 @@ namespace Diagram.UI.Python
         public void AddObjectConstructor(List<string> l)
         {
             l.Add("\tdef __init__(desktop: IDesktop, name: str):");
-            l.Add("\t\tsuper(desktop, name);");
+            l.Add("\t\tsuper(desktop, name)");
         }
 
         //done
