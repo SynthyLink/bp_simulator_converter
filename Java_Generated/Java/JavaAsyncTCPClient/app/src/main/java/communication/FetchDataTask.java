@@ -2,7 +2,7 @@ package communication;
 
 import android.os.AsyncTask;
 
-public class FetchDataTask extends AsyncTask<String, Void, String> {
+public class FetchDataTask extends AsyncTask<byte[], Void, byte[]> {
 
     String server;
 
@@ -18,22 +18,23 @@ public class FetchDataTask extends AsyncTask<String, Void, String> {
     }
 
     @Override
-    protected String doInBackground(String... strings) {
+    protected byte[] doInBackground(byte[]... bytes) {
         try {
          //   var client = new AsyncTcpClient("31.10.82.229", 7168, null);
-            var client = new AsyncTcpClient(server, port, receiver);
-            client.start();
-          //  client.sendMessage("TTT");
+            var client = new AsyncTcpClient(server, port, receiver, true);
+   //         client.sendBytes(bytes[0]);
+            client.start(bytes[0]);
+
         }
         catch (Exception e)
         {
 var x = e.getMessage();
         }
-        return "";
+        return new  byte[0];
     }
 
     @Override
-    protected void onPostExecute(String result) {
+    protected void onPostExecute(byte[] result) {
         // Update your UI elements here with the 'result'
         // This method runs on the main thread
         System.out.println(result);

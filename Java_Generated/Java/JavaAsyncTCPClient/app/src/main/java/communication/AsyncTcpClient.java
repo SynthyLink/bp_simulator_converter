@@ -20,10 +20,14 @@ public class AsyncTcpClient {
 
     private  IByteReceiver byteReceiver;
 
+    private boolean closeOnSend = true;
+
 
     private  static IErrorHandler errorHandler = new ConsoleErrorHandler();
 
-    public AsyncTcpClient(String host, int port, IByteReceiver byteReceiver) throws IOException {
+    public AsyncTcpClient(String host, int port, IByteReceiver byteReceiver, boolean closeOnSend) throws IOException {
+        this.byteReceiver = byteReceiver;
+        this.closeOnSend = closeOnSend;
         // 1. Create a Selector
         this.selector = Selector.open();
 
@@ -37,7 +41,9 @@ public class AsyncTcpClient {
             showMessage("Connected immediately.");
             // If connected immediately, we need to register for read operations
             registerForRead();
-        } else {
+        }
+        else
+        {
             // Connection is in progress, register for OP_CONNECT
             this.clientChannel.register(selector, SelectionKey.OP_CONNECT);
             showMessage("Connection initiated, waiting for completion...");
@@ -53,10 +59,10 @@ public class AsyncTcpClient {
     private void registerForRead() throws IOException {
         // Register for read operations
         this.clientChannel.register(selector, SelectionKey.OP_READ);
-        System.out.println("Registered for read operations.");
+        showMessage("Registered for read operations.");
     }
 
-    public void start() throws IOException {
+    public void start(byte[] bytes) throws IOException {
         while (true) {
             // 4. Wait for events (blocks until at least one channel is ready)
             int readyChannels = selector.select();
@@ -84,6 +90,7 @@ public class AsyncTcpClient {
                             registerForRead();
                             // You can also write something to the server here if needed
                           //  sendMessage("Hello from async client!");
+                            sendBytes(bytes);
                         } else {
                             // Connection failed (shouldn't happen if finishConnect returns false after isConnectable is true)
                             showMessage("Connection failed.");
@@ -93,6 +100,10 @@ public class AsyncTcpClient {
                     } else if (key.isReadable()) {
                         // Data available for reading
                         handleRead(key);
+                        if (closeOnSend)
+                        {
+                            return;
+                        }
                     }
                     // You could also handle OP_WRITE if needed for sending data
                     // else if (key.isWritable()) {
@@ -100,7 +111,7 @@ public class AsyncTcpClient {
                     // }
 
                 } catch (IOException e) {
-                    System.err.println("Error processing key: " + e.getMessage());
+                    handleError(e);
                     key.cancel(); // Cancel the key
                     try {
                         key.channel().close(); // Close the channel
@@ -120,7 +131,7 @@ public class AsyncTcpClient {
 
         if (bytesRead == -1) {
             // Connection closed by server
-            System.out.println("Connection closed by server.");
+            showMessage("Connection closed by server.");
             key.cancel();
             channel.close();
             return;
@@ -130,8 +141,14 @@ public class AsyncTcpClient {
             readBuffer.flip(); // Prepare buffer for reading
             byte[] data = new byte[bytesRead];
             readBuffer.get(data);
-            String message = new String(data);
-            showMessage("Received: " + message);
+            byteReceiver.Receive(data, bytesRead);
+            if (closeOnSend)
+            {
+                close();
+            }
+
+         //   String message = new String(data);
+          //  showMessage("Received: " + message);
         }
     }
 
@@ -174,11 +191,11 @@ public class AsyncTcpClient {
         int serverPort = 12345;
 
         try {
-            AsyncTcpClient client = new AsyncTcpClient(serverHost, serverPort, null);
+            AsyncTcpClient client = new AsyncTcpClient(serverHost, serverPort, null, true);
             // Run the client in a separate thread to avoid blocking the main thread
             new Thread(() -> {
                 try {
-                    client.start();
+                   client.start(null);
                 } catch (IOException e) {
                     e.printStackTrace();
                     showMessage("Client encountered an error.");

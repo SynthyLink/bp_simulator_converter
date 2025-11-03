@@ -64,7 +64,7 @@ public class AsyncTcpServer
                 // Loop to continuously read data from the client
                 while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
-                    var transformed  = tansformation.Transform(buffer, bytesRead)
+                    var transformed = tansformation.Transform(buffer, bytesRead);
                    // string receivedData = Encoding.ASCII.GetString(buffer, 0, bytesRead);
                    // Console.WriteLine($"Received from client: {receivedData.Trim()}");
 

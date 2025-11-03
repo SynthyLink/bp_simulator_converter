@@ -7,9 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import communication.AsyncTcpClient
+import communication.ConsoleByteReceiver
 import communication.FetchDataTask
 
 class MainActivity : AppCompatActivity() {
+
+    var fech : FetchDataTask = FetchDataTask("31.10.82.229", 7168, ConsoleByteReceiver())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,13 +27,14 @@ class MainActivity : AppCompatActivity() {
             btn = findViewById(R.id.button)
              btn.setOnClickListener { start() }
         } catch (e: Exception) {
-            var s = e.message;
         }
     }
 
-    fun start()
-    {
-        FetchDataTask().execute("https://example.com/api/data");
+    fun start() {
+        fech = FetchDataTask("31.10.82.229", 7168, ConsoleByteReceiver())
+        val string = "Hello world"
+        val b = string.toByteArray()
+        fech.execute(b)
     }
 
     lateinit var btn : Button
