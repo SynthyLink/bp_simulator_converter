@@ -9,13 +9,20 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
+import error_handler.interfaces.IErrorHandler;
+
 public class AsyncTcpClient {
 
     private Selector selector;
     private SocketChannel clientChannel;
     private ByteBuffer readBuffer;
 
-    public AsyncTcpClient(String host, int port) throws IOException {
+    private  IByteReceiver byteReceiver;
+
+
+    private  static IErrorHandler errorHadler;
+
+    public AsyncTcpClient(String host, int port, IByteReceiver byteReceiver) throws IOException {
         // 1. Create a Selector
         this.selector = Selector.open();
 
@@ -38,6 +45,10 @@ public class AsyncTcpClient {
         this.readBuffer = ByteBuffer.allocate(1024); // Allocate a buffer for reading
     }
 
+    public  static void setEerorHandler(IErrorHandler errorHandler)
+    {
+        AsyncTcpClient.errorHadler = errorHandler;
+    }
     private void registerForRead() throws IOException {
         // Register for read operations
         this.clientChannel.register(selector, SelectionKey.OP_READ);
@@ -119,7 +130,7 @@ public class AsyncTcpClient {
             byte[] data = new byte[bytesRead];
             readBuffer.get(data);
             String message = new String(data);
-            System.out.println("Received: " + message);
+            showMessage("Received: " + message);
         }
     }
 
@@ -129,7 +140,7 @@ public class AsyncTcpClient {
             clientChannel.write(writeBuffer);
             System.out.println("Sent: " + message);
         } else {
-            System.err.println("Cannot send message: Client not connected.");
+            showMessage("Cannot send message: Client not connected.");
         }
     }
 
@@ -142,20 +153,30 @@ public class AsyncTcpClient {
         }
     }
 
+    public static void showMessage(String message)
+    {
+        errorHadler.show(message);
+    }
+
+    public  static  void handleError(Throwable e)
+    {
+        errorHadler.handle(e);
+    }
+
     public static void main(String[] args) {
         // Replace with your server's host and port
         String serverHost = "localhost";
         int serverPort = 12345;
 
         try {
-            AsyncTcpClient client = new AsyncTcpClient(serverHost, serverPort);
+            AsyncTcpClient client = new AsyncTcpClient(serverHost, serverPort, null);
             // Run the client in a separate thread to avoid blocking the main thread
             new Thread(() -> {
                 try {
                     client.start();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    System.err.println("Client encountered an error.");
+                    showMessage("Client encountered an error.");
                 }
             }).start();
 
@@ -166,9 +187,10 @@ public class AsyncTcpClient {
             // Keep the main thread alive for a while to observe the client
             Thread.sleep(10000);
             client.close();
-            System.out.println("Client closed.");
+            showMessage("Client closed.");
 
         } catch (IOException | InterruptedException e) {
+            handleError(e);
             e.printStackTrace();
         }
     }

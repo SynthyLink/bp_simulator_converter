@@ -6,7 +6,7 @@ public class FetchDataTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... strings) {
         try {
-            var client = new AsyncTcpClient("31.10.82.229", 7168);
+            var client = new AsyncTcpClient("31.10.82.229", 7168, null);
             client.start();
             client.sendMessage("TTT");
         }

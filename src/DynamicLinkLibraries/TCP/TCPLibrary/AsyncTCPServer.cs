@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
-using System.Text;
+
+using TCPLibrary.Interfaces;
 
 public class AsyncTcpServer
 {
@@ -8,9 +9,11 @@ public class AsyncTcpServer
     private int _port = 13000;
     private TcpListener? _listener;
     private bool _isRunning = false;
+    IByteTransformation tansformation = null;
 
-    public AsyncTcpServer(int port)
+    public AsyncTcpServer(int port, IByteTransformation tansformation)
     {
+        this.tansformation = tansformation;
         _port = port; 
     }
 
@@ -59,12 +62,13 @@ public class AsyncTcpServer
                 // Loop to continuously read data from the client
                 while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
-                    string receivedData = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    Console.WriteLine($"Received from client: {receivedData.Trim()}");
+                    var transformed  = tansformation.Transform(buffer, bytesRead)
+                   // string receivedData = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+                   // Console.WriteLine($"Received from client: {receivedData.Trim()}");
 
                     // Echo the data back to the client (asynchronous send)
-                    byte[] echoData = Encoding.ASCII.GetBytes($"Echo: {receivedData}");
-                    await stream.WriteAsync(echoData, 0, echoData.Length);
+                  //  byte[] echoData = Encoding.ASCII.GetBytes($"Echo: {receivedData}");
+                    await stream.WriteAsync(transformed, 0, transformed.Length);
                 }
             }
             catch (Exception ex)

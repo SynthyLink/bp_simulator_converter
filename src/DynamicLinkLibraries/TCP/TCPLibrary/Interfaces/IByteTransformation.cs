@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TCPLibrary.Interfaces
+﻿namespace TCPLibrary.Interfaces
 {
     public interface IByteTransformation
     {
-        byte[] Transform(byte[] data);
+        byte[] Transform(byte[] data, int length);
     }
 }
