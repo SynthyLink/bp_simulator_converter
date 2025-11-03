@@ -1,6 +1,6 @@
 ﻿using Diagram.UI.Interfaces;
 
-namespace Diagram.UI.TypeScript
+namespace Diagram.UI.Python
 {
  
     public class Performer : DataPerformer.Interfaces.Performer

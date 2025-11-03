@@ -1,6 +1,8 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 
+using ErrorHandler;
+
 using TCPLibrary.Interfaces;
 
 public class AsyncTcpServer
@@ -25,14 +27,14 @@ public class AsyncTcpServer
             _listener = new TcpListener(_ipAddress, _port);
             _listener.Start();
             _isRunning = true;
-            Console.WriteLine($"Server started. Listening on port {_port}...");
+            $"Server started. Listening on port {_port}...".Log();
 
             // 2. Main Acceptance Loop
             while (_isRunning)
             {
                 // AcceptTcpClientAsync waits non-blockingly for a connection
                 TcpClient client = await _listener.AcceptTcpClientAsync();
-                Console.WriteLine("Client Connected!");
+                "Client Connected!".Log();
 
                 // 3. Handle the connection in a separate task
                 // This prevents the main loop from blocking while communicating with this client
@@ -41,7 +43,7 @@ public class AsyncTcpServer
         }
         catch (SocketException ex)
         {
-            Console.WriteLine($"Socket Error: {ex.Message}");
+            $"Socket Error: {ex.Message}".Log();
         }
         finally
         {
@@ -73,12 +75,12 @@ public class AsyncTcpServer
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error handling client: {ex.Message}");
+                $"Error handling client: {ex.Message}".Log();
             }
             finally
             {
                 client.Close();
-                Console.WriteLine("Client disconnected.");
+                "Client disconnected.".Log();
             }
         }
     }
@@ -87,16 +89,7 @@ public class AsyncTcpServer
     {
         _isRunning = false;
         _listener?.Stop();
-        Console.WriteLine("Server stopped.");
+       "Server stopped.".Log();
     }
 }
 
-// Example usage in a console application's Main method:
-internal class Program
-{
-    public static async Task Main(string[] args)
-    {
-        var server = new AsyncTcpServer(6666);
-        await server.StartServerAsync();
-    }
-}

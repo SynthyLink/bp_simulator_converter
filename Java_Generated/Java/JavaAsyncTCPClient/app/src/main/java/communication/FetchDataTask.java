@@ -3,12 +3,27 @@ package communication;
 import android.os.AsyncTask;
 
 public class FetchDataTask extends AsyncTask<String, Void, String> {
+
+    String server;
+
+
+    int port;
+
+    IByteReceiver receiver;
+    public  FetchDataTask(String  server, int port, IByteReceiver receiver)
+    {
+        this.server = server;
+        this.port = port;
+        this.receiver = receiver;
+    }
+
     @Override
     protected String doInBackground(String... strings) {
         try {
-            var client = new AsyncTcpClient("31.10.82.229", 7168, null);
+         //   var client = new AsyncTcpClient("31.10.82.229", 7168, null);
+            var client = new AsyncTcpClient(server, port, receiver);
             client.start();
-            client.sendMessage("TTT");
+          //  client.sendMessage("TTT");
         }
         catch (Exception e)
         {

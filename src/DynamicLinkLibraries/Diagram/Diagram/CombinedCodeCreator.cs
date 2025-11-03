@@ -36,12 +36,12 @@ namespace Diagram.UI
 
         #region IClassCodeCreator Members
 
-        List<string> IClassCodeCreator.CreateCode(string prefix, object obj, string volume)
+        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {
             current = obj;
             foreach (IClassCodeCreator creator in list)
             {
-                List<string> l = creator.CreateCode(prefix, obj, volume);
+                List<string> l = creator.CreateCode(preffix, obj, volume);
                 if (l != null)
                 {
                     return l;

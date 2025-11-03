@@ -53,7 +53,6 @@
     <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Interfaces\DataPerformer.Interfaces.csproj">
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable.Java\DataPerformer.Portable.Java.csproj" />
-    <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable.Python\DataPerformer.Portable.Python.csproj" />
     <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable.TypeScript\DataPerformer.Portable.TypeScript.csproj" />
     <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable\DataPerformer.Portable.csproj">
     </ProjectReference>

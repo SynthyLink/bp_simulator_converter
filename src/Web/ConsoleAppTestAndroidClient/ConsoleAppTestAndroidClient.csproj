@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\DynamicLinkLibraries\ErrorHandler\ErrorHandler.csproj" />
     <ProjectReference Include="..\..\DynamicLinkLibraries\TCP\TCPLibrary\TCPLibrary.csproj" />
   </ItemGroup>
 

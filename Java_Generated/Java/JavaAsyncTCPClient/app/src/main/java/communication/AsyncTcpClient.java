@@ -9,6 +9,7 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
+import error_handler.ConsoleErrorHandler;
 import error_handler.interfaces.IErrorHandler;
 
 public class AsyncTcpClient {
@@ -20,7 +21,7 @@ public class AsyncTcpClient {
     private  IByteReceiver byteReceiver;
 
 
-    private  static IErrorHandler errorHadler;
+    private  static IErrorHandler errorHandler = new ConsoleErrorHandler();
 
     public AsyncTcpClient(String host, int port, IByteReceiver byteReceiver) throws IOException {
         // 1. Create a Selector
@@ -33,21 +34,21 @@ public class AsyncTcpClient {
         // 3. Initiate connection
         if (clientChannel.connect(new InetSocketAddress(host, port))) {
             // Connection established immediately (rare for remote servers)
-            System.out.println("Connected immediately.");
+            showMessage("Connected immediately.");
             // If connected immediately, we need to register for read operations
             registerForRead();
         } else {
             // Connection is in progress, register for OP_CONNECT
             this.clientChannel.register(selector, SelectionKey.OP_CONNECT);
-            System.out.println("Connection initiated, waiting for completion...");
+            showMessage("Connection initiated, waiting for completion...");
         }
 
         this.readBuffer = ByteBuffer.allocate(1024); // Allocate a buffer for reading
     }
 
-    public  static void setEerorHandler(IErrorHandler errorHandler)
+    public  static void setErrorHandler(IErrorHandler errorHandler)
     {
-        AsyncTcpClient.errorHadler = errorHandler;
+        AsyncTcpClient.errorHandler = errorHandler;
     }
     private void registerForRead() throws IOException {
         // Register for read operations
@@ -78,14 +79,14 @@ public class AsyncTcpClient {
                     if (key.isConnectable()) {
                         // Connection complete
                         if (clientChannel.finishConnect()) {
-                            System.out.println("Connection successful!");
+                            showMessage("Connection successful!");
                             // Now that we're connected, register for read operations
                             registerForRead();
                             // You can also write something to the server here if needed
-                            sendMessage("Hello from async client!");
+                          //  sendMessage("Hello from async client!");
                         } else {
                             // Connection failed (shouldn't happen if finishConnect returns false after isConnectable is true)
-                            System.err.println("Connection failed.");
+                            showMessage("Connection failed.");
                             clientChannel.close();
                             return;
                         }
@@ -134,16 +135,20 @@ public class AsyncTcpClient {
         }
     }
 
-    public void sendMessage(String message) throws IOException {
+    public void sendBytes(byte[] bytes)   throws IOException {
         if (clientChannel != null && clientChannel.isConnected()) {
-            ByteBuffer writeBuffer = ByteBuffer.wrap(message.getBytes());
+            ByteBuffer writeBuffer = ByteBuffer.wrap(bytes);
             clientChannel.write(writeBuffer);
-            System.out.println("Sent: " + message);
+
         } else {
-            showMessage("Cannot send message: Client not connected.");
+            showMessage("Cannot send bytes: Client not connected.");
         }
     }
 
+
+    public void sendMessage1(String message) throws IOException {
+        sendBytes(message.getBytes());
+    }
     public void close() throws IOException {
         if (clientChannel != null) {
             clientChannel.close();
@@ -155,12 +160,12 @@ public class AsyncTcpClient {
 
     public static void showMessage(String message)
     {
-        errorHadler.show(message);
+        errorHandler.show(message);
     }
 
     public  static  void handleError(Throwable e)
     {
-        errorHadler.handle(e);
+        errorHandler.handle(e);
     }
 
     public static void main(String[] args) {
@@ -182,7 +187,7 @@ public class AsyncTcpClient {
 
             // Example of sending a message after a delay
             Thread.sleep(2000); // Give the connection time to establish
-            client.sendMessage("Hello World!");
+        //    client.sendMessage("Hello World!");
 
             // Keep the main thread alive for a while to observe the client
             Thread.sleep(10000);

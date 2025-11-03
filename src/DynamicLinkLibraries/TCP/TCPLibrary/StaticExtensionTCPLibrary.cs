@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TCPLibrary
 {
-    internal class StaticExtensionTCPLibrary
+    public static class StaticExtensionTCPLibrary
     {
     }
 }
