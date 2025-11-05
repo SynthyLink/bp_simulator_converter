@@ -296,6 +296,7 @@
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Internet.Meteo\Internet.Meteo\Internet.Meteo.Wrapper\Internet.Meteo.Wrapper.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Internet.Meteo\Internet.Meteo\Internet.Meteo\Internet.Meteo.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\SunPosition\SunPosition.csproj" />
+    <ProjectReference Include="..\..\..\..\ExternalLibraries\Trading\Trading.Charts\Trading.Charts.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Trading\Trading.Database.SqlServer\Trading.Database.SqlServer.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Trading\Trading.Database\Trading.Database.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Trading\Trading.Library.Forms\Trading.Library.Forms.csproj" />
@@ -306,6 +307,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\ThirdParty\ziplib\ZipUtils\ZipUtils.csproj">
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Trading\Trading.Analytics\Trading.Analytics.csproj" />
     <ProjectReference Include="..\..\BP_Simulator.UI\BP_Simulator.UI\BP_Simulator.UI.csproj" />
   </ItemGroup>
   <ItemGroup>

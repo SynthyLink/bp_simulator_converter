@@ -9,6 +9,5 @@ namespace Diagram.Interfaces
     public interface IInitializeTask
     {
         Task Initialize(CancellationToken cancellationToken);
-
     }
 }

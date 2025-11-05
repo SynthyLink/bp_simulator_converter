@@ -4,6 +4,11 @@ import external.utilities.date_time.OADateConverter;
 
 public class Actor {
 
+    public void testWhenAll()
+    {
+        AsyncWhenAllExample.run();
+    }
+
     public void testSimpleFormula()
     {
         var r = new SimpleFormulaAdd();

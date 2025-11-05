@@ -1,14 +1,19 @@
 package error_handler;
+
 import error_handler.interfaces.IErrorHandler;
 
-public class ConsoleErrorHandler  implements IErrorHandler {
+public class KotlinErrorHandler  implements IErrorHandler {
+
+
     @Override
     public void handle(Throwable exception) {
-        System.err.println((exception.getMessage()));
+        ke.print(exception.getMessage());
     }
 
     @Override
     public void show(String message) {
-        System.out.println(message);
+ke.print(message);
     }
+
+    KotlinError ke = new KotlinError();
 }

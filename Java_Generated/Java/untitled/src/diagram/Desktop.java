@@ -1,5 +1,7 @@
 package diagram;
 
+import cancellation.interfaces.ICancellation;
+import cancellation.interfaces.IInitializeTask;
 import category_theory.interfaces.ICategoryArrow;
 import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
@@ -12,6 +14,7 @@ import general_service.setters.factory.ValueSetterFactory;
 
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 public class Desktop  implements IDesktop, ICheck, IErrorHandler
 {
@@ -141,6 +144,57 @@ arrowMap.put(arrow.getArrowName(), arrow);
             }
         }
     }
+
+    protected void postSetArrow()
+    {
+
+    }
+
+    protected  List< CompletableFuture<Void> > GetFutures(ICancellation cancellation)
+    {
+        List< CompletableFuture<Void> > futures = new ArrayList<>();
+        for (var o : objects)
+        {
+            if (o instanceof IInitializeTask)
+            {
+                var init = (IInitializeTask)o;
+                futures.add(init.InitializeFuture(cancellation));
+            }
+        }
+        for (var a : arrows) {
+            if (a instanceof IInitializeTask) {
+                var init = (IInitializeTask) a;
+                futures.add(init.InitializeFuture(cancellation));
+            }
+        }
+
+        return  futures;
+    }
+
+
+/*
+      protected async Task FinalAsync(CancellationToken token)
+      {
+          var tasks = new List<Task>();
+          foreach (var item in CategoryObjects)
+          {
+              if (item is IInitializeTask task)
+              {
+                  tasks.Add(task.Initialize(token));
+              }
+          }
+          foreach (var item in CategoryArrows)
+          {
+              if (item is IInitializeTask task)
+              {
+                  tasks.Add(task.Initialize(token));
+              }
+          }
+          await Task.WhenAll(tasks);
+      }
+
+
+ */
 
 
 

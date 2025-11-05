@@ -1,6 +1,5 @@
 package external.utilities.date_time;
 
-
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -42,31 +41,16 @@ public class DateTimeBinaryConverter {
         }
 
         // Validate date components to fit within the assumed bit allocation
-        int year = 0;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            year = dateTime.getYear();
-        }
+        int year = dateTime.getYear();
         if (year < 1 || year > 9999) {
             throw new IllegalArgumentException("Year must be between 1 and 9999.");
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            int month = dateTime.getMonthValue();
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            int day = dateTime.getDayOfMonth();
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            int hour = dateTime.getHour();
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            int minute = dateTime.getMinute();
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            int second = dateTime.getSecond();
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            int millisecond = dateTime.getNano() / 1_000_000; // Convert nanoseconds to milliseconds
-        }
+        int month = dateTime.getMonthValue();
+        int day = dateTime.getDayOfMonth();
+        int hour = dateTime.getHour();
+        int minute = dateTime.getMinute();
+        int second = dateTime.getSecond();
+        int millisecond = dateTime.getNano() / 1_000_000; // Convert nanoseconds to milliseconds
 
         // Use bit shifting to pack the values.
         // We'll use a signed long, so we need to be careful with the most significant bit.
@@ -237,47 +221,25 @@ public class DateTimeBinaryConverter {
 
         // --- First, determine the base date and time for calculation ---
         // The .NET epoch is January 1, 0001, 00:00:00 UTC.
-        LocalDateTime netEpoch = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            netEpoch = LocalDateTime.of(1, 1, 1, 0, 0, 0);
-        }
-        ZoneId utcZone = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            utcZone = ZoneId.of("UTC");
-        }
+        LocalDateTime netEpoch = LocalDateTime.of(1, 1, 1, 0, 0, 0);
+        ZoneId utcZone = ZoneId.of("UTC");
 
         // Convert the input LocalDateTime to a ZonedDateTime in UTC for consistent tick calculation.
         // If the input `kind` is 0 (Local/Unspecified), we need to assume a zone for `LocalDateTime`.
         // If we assume the `LocalDateTime` is already in the system's local time zone:
-        ZoneId systemDefaultZone = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            systemDefaultZone = ZoneId.systemDefault();
-        }
+        ZoneId systemDefaultZone = ZoneId.systemDefault();
         ZonedDateTime zonedInputDateTime;
         if (kind == 0) { // Assuming Local or Unspecified maps to system default for conversion
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                zonedInputDateTime = dateTime.atZone(systemDefaultZone);
-            }
+            zonedInputDateTime = dateTime.atZone(systemDefaultZone);
         } else { // Kind is 1 (UTC)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                zonedInputDateTime = dateTime.atZone(utcZone);
-            }
+            zonedInputDateTime = dateTime.atZone(utcZone);
         }
         // Ensure we are working with UTC for tick calculation from .NET epoch
-        ZonedDateTime inputDateTimeUtc = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            inputDateTimeUtc = zonedInputDateTime.withZoneSameInstant(utcZone);
-        }
+        ZonedDateTime inputDateTimeUtc = zonedInputDateTime.withZoneSameInstant(utcZone);
 
         // Calculate the difference in nanoseconds from the .NET epoch
-        long daysBetween = 0;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            daysBetween = ChronoUnit.DAYS.between(netEpoch, inputDateTimeUtc);
-        }
-        long nanosBetween = 0; // Nanoseconds within the day
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            nanosBetween = inputDateTimeUtc.getLong(ChronoField.NANO_OF_DAY);
-        }
+        long daysBetween = ChronoUnit.DAYS.between(netEpoch, inputDateTimeUtc);
+        long nanosBetween = inputDateTimeUtc.getLong(ChronoField.NANO_OF_DAY); // Nanoseconds within the day
 
         // Total ticks: days * (24 * 60 * 60 * 10^9) + nanos
         // 1 tick = 100 nanoseconds.
@@ -361,17 +323,9 @@ public class DateTimeBinaryConverter {
         long days = totalNanos / (24 * 60 * 60 * 1_000_000_000L);
         long nanosOfDay = totalNanos % (24 * 60 * 60 * 1_000_000_000L);
 
-        LocalDateTime netEpoch = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            netEpoch = LocalDateTime.of(1, 1, 1, 0, 0, 0);
-        }
-        LocalDateTime unpackedDateTime = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            unpackedDateTime = netEpoch.plusDays(days);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            unpackedDateTime = unpackedDateTime.plusNanos(nanosOfDay);
-        }
+        LocalDateTime netEpoch = LocalDateTime.of(1, 1, 1, 0, 0, 0);
+        LocalDateTime unpackedDateTime = netEpoch.plusDays(days);
+        unpackedDateTime = unpackedDateTime.plusNanos(nanosOfDay);
 
         // Apply the kind. If it's Local, we might need to convert it to system default.
         // For simplicity here, we return LocalDateTime, which is 'Unspecified' by default.

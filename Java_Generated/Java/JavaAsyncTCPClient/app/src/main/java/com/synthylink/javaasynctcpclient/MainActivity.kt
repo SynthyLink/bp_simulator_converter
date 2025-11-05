@@ -9,10 +9,10 @@ import androidx.core.view.WindowInsetsCompat
 import communication.AsyncTcpClient
 import communication.ConsoleByteReceiver
 import communication.FetchDataTask
+import test.AsyncWhenAllExample
 
 class MainActivity : AppCompatActivity() {
 
-    var fech : FetchDataTask = FetchDataTask("31.10.82.229", 7168, ConsoleByteReceiver())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -28,13 +28,22 @@ class MainActivity : AppCompatActivity() {
              btn.setOnClickListener { start() }
         } catch (e: Exception) {
         }
+
+       // AsyncWhenAllExample.run();
     }
 
     fun start() {
+        AsyncWhenAllExample.run()
+        /*
         fech = FetchDataTask("31.10.82.229", 7168, ConsoleByteReceiver())
         val string = "Hello world"
         val b = string.toByteArray()
-        fech.execute(b)
+        fech.execute(b)*/
+    }
+
+    fun whenAll()
+    {
+
     }
 
     lateinit var btn : Button
