@@ -338,7 +338,7 @@ namespace Diagram.UI
                 {
                     IObjectContainer oc = l.Object as IObjectContainer;
                     oc.SetParents(this);
-                   await oc.Load(ct);
+                   await oc.LoadAsync(ct);
                 }
                 // components.Add(lab);
                 table[l.Name] = lab;

@@ -3,7 +3,7 @@
 using CategoryTheory;
 
 using DataPerformer.Interfaces;
-using Diagram.Interfaces;
+using Diagram.UI.Interfaces;
 using ErrorHandler;
 
 
@@ -49,7 +49,7 @@ namespace Trading.Library.Objects
 
         static public ITradingDatabaseHistoryIntefaceFactory Factrory { get; set; }
 
-        public ITradingDatabaseHistoryInteface Database { get; init; }
+        public ITradingDatabaseHistoryInterface Database { get; init; }
 
         public object Object { get; set; } = new object();
 

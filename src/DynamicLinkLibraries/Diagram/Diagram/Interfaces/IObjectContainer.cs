@@ -59,7 +59,9 @@ namespace Diagram.UI.Interfaces
         /// Loads itself
         /// </summary>
         /// <returns>True in success</returns>
-        Task<bool> Load(CancellationToken token);
+        Task<bool> LoadAsync(CancellationToken token);
+
+        bool Load();
 
         /// <summary>
         /// Public interface

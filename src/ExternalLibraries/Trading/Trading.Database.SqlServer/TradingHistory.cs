@@ -6,8 +6,7 @@ using Trading.Library.Classes;
 namespace Trading.Database.SqlServer.Overriden
 {
 
-    public class TradingHistory : SqlServer.TradingHistory, 
-        ITradingDatabaseHistoryInteface
+    public class TradingHistory : SqlServer.TradingHistory,  ITradingDatabaseHistoryInterface
     {
         string connectionSrting;
 
@@ -33,31 +32,31 @@ namespace Trading.Database.SqlServer.Overriden
 
         }
 
-        #region ITradingDatabaseHistoryInteface
+        #region ITradingDatabaseHistoryInterface
 
-        Task ITradingDatabaseHistoryInteface.DeleteBySymbolAsync(string symbol, CancellationToken token)
+        Task ITradingDatabaseHistoryInterface.DeleteBySymbolAsync(string symbol, CancellationToken token)
         {
             throw new OwnNotImplemented();
         }
 
-        Task ITradingDatabaseHistoryInteface.FillHisroryAsync(string name, List<HistoricalDataMessageDateTime> data, 
+        Task ITradingDatabaseHistoryInterface.FillHisroryAsync(string name, List<HistoricalDataMessageDateTime> data, 
             CancellationToken token)
         {
             throw new OwnNotImplemented();
         }
 
 
-        Task<Dictionary<string, object>> ITradingDatabaseHistoryInteface.GetSymbolsAsync(CancellationToken token)
+        Task<Dictionary<string, object>> ITradingDatabaseHistoryInterface.GetSymbolsAsync(CancellationToken token)
         {
             return GetSymbols(token);
         }
 
-        void ITradingDatabaseHistoryInteface.DeleteBySymbol(string symbol)
+        void ITradingDatabaseHistoryInterface.DeleteBySymbol(string symbol)
         {
             throw new OwnNotImplemented();
         }
 
-        void ITradingDatabaseHistoryInteface.FillHisrory(string name, List<HistoricalDataMessageDateTime> data)
+        void ITradingDatabaseHistoryInterface.FillHisrory(string name, List<HistoricalDataMessageDateTime> data)
         {
             throw new OwnNotImplemented();
         }
@@ -120,7 +119,7 @@ namespace Trading.Database.SqlServer.Overriden
             return d;
         }
 
-        async Task<List<HistoricalDataMessageDateTime>> ITradingDatabaseHistoryInteface.GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end, CancellationToken token)
+        async Task<List<HistoricalDataMessageDateTime>> ITradingDatabaseHistoryInterface.GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end, CancellationToken token)
         {
             var r = await SelectHistoryByDateAsync((Guid)id, begin, end);
             var l = new List<HistoricalDataMessageDateTime>();
@@ -147,7 +146,7 @@ namespace Trading.Database.SqlServer.Overriden
             return l;
         }
 
-        List<HistoricalDataMessageDateTime> ITradingDatabaseHistoryInteface.GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end)
+        List<HistoricalDataMessageDateTime> ITradingDatabaseHistoryInterface.GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end)
         {
             var r = SelectHistoryByDate((Guid)id, begin, end);
             var l = new List<HistoricalDataMessageDateTime>();

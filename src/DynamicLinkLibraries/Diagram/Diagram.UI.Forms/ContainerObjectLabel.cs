@@ -52,7 +52,7 @@ namespace Diagram.UI.Labels
 		{
 			var ct = new CancellationToken();
  			IObjectContainer cont = Object as IObjectContainer;
-            await cont.Load(ct);
+            await cont.LoadAsync(ct);
             cont.PostLoad();
             if (cont is ICategoryObject)
             {

@@ -18,7 +18,7 @@ namespace Trading.Database.SqlServer.Factory
 
         }
 
-        ITradingDatabaseHistoryInteface ITradingDatabaseHistoryIntefaceFactory.Create(string connectionString)
+        ITradingDatabaseHistoryInterface ITradingDatabaseHistoryIntefaceFactory.Create(string connectionString)
         {
             if (!l.Contains(connectionString))
             {

@@ -5,7 +5,7 @@ namespace Trading.Database.Interfaces
     /// <summary>
     /// History of trading
     /// </summary>
-    public interface ITradingDatabaseHistoryInteface
+    public interface ITradingDatabaseHistoryInterface
     {
         /// <summary>
         /// Deletes a symbol
