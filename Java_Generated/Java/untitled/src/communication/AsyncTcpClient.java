@@ -21,14 +21,10 @@ public class AsyncTcpClient {
 
     private IByteReceiver byteReceiver;
 
-    private boolean closeOnSend = true;
-
-
     private  static IErrorHandler errorHandler = new ConsoleErrorHandler();
 
-    public AsyncTcpClient(String host, int port, IByteReceiver byteReceiver, boolean closeOnSend) throws IOException {
+    public AsyncTcpClient(String host, int port, IByteReceiver byteReceiver) throws IOException {
         this.byteReceiver = byteReceiver;
-        this.closeOnSend = closeOnSend;
         // 1. Create a Selector
         this.selector = Selector.open();
 
@@ -101,11 +97,7 @@ public class AsyncTcpClient {
                     } else if (key.isReadable()) {
                         // Data available for reading
                         handleRead(key);
-                        if (closeOnSend)
-                        {
-                            return;
-                        }
-                    }
+                     }
                     // You could also handle OP_WRITE if needed for sending data
                     // else if (key.isWritable()) {
                     //     handleWrite(key);
@@ -143,10 +135,6 @@ public class AsyncTcpClient {
             byte[] data = new byte[bytesRead];
             readBuffer.get(data);
             byteReceiver.Receive(data, bytesRead);
-            if (closeOnSend)
-            {
-                close();
-            }
 
             //   String message = new String(data);
             //  showMessage("Received: " + message);
@@ -192,7 +180,7 @@ public class AsyncTcpClient {
         int serverPort = 12345;
 
         try {
-            AsyncTcpClient client = new AsyncTcpClient(serverHost, serverPort, null, true);
+            AsyncTcpClient client = new AsyncTcpClient(serverHost, serverPort, null);
             // Run the client in a separate thread to avoid blocking the main thread
             new Thread(() -> {
                 try {

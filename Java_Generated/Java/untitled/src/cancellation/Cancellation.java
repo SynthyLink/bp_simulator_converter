@@ -4,6 +4,7 @@ import cancellation.interfaces.ICancellation;
 import cancellation.interfaces.ICancelledObject;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 public class Cancellation implements ICancellation {
     @Override
@@ -17,7 +18,7 @@ public class Cancellation implements ICancellation {
     }
 
     @Override
-    public void cancelConcellation() {
+    public CompletableFuture<Void> cancelConcellation() {
         for (var o : list) {
             o.cancelObject();
         }

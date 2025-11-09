@@ -1,6 +1,8 @@
 package cancellation.interfaces;
 
+import java.util.concurrent.CompletableFuture;
+
 public interface ICancelledObject {
-    void cancelObject();
+    CompletableFuture<Void> cancelObject();
 
 }

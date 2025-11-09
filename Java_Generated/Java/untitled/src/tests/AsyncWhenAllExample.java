@@ -58,7 +58,7 @@ public class AsyncWhenAllExample {
         return CompletableFuture.supplyAsync(() -> {
             try {
 
-                var c = new AsyncTcpClient("31.10.82.229",7168, new ConsoleByteReceiver(), true);
+                var c = new AsyncTcpClient("31.10.82.229",7168, new ConsoleByteReceiver());
                 var string = "Hello world";
                 var  b = string.getBytes();
                 c.start(b);
