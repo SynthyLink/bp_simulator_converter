@@ -64,12 +64,15 @@ public class AsyncTcpServer
                 // Loop to continuously read data from the client
                 while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
-                    var transformed = tansformation.Transform(buffer, bytesRead);
-                   // string receivedData = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                   // Console.WriteLine($"Received from client: {receivedData.Trim()}");
-
-                    // Echo the data back to the client (asynchronous send)
-                  //  byte[] echoData = Encoding.ASCII.GetBytes($"Echo: {receivedData}");
+                    var transformed = await tansformation.Transform(buffer, bytesRead);
+                    if (transformed.Length > 1019)
+                    {
+                        byte[] intBytes = BitConverter.GetBytes(transformed.Length);
+                        var tr = new byte[transformed.Length + 4];
+                        Array.Copy(intBytes, 0, tr, 0, 4);
+                        Array.Copy(transformed, 0, tr, 4, transformed.Length);
+                        transformed = tr;
+                    }
                     await stream.WriteAsync(transformed, 0, transformed.Length);
                 }
             }

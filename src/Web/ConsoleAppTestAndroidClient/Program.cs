@@ -3,15 +3,32 @@
 using ErrorHandler;
 using System.Text;
 using TCPLibrary.Interfaces;
+using Trading.Database.Interfaces;
 
-var server = new AsyncTcpServer(7168, new Transformation());
+ITradingDatabaseHistoryIntefaceFactory factory = new Trading.Database.SqlServer.Factory.TradingDatabaseHistoryIntefaceFactory();
+
+var cs =  @"Data Source=IVANKOV\SQLEXPRESS;Initial Catalog=TradeStation;Integrated Security=True;Encrypt=False;MultipleActiveResultSets=True;TrustServerCertificate=true";
+
+var db = factory.Create(cs);
+
 
 StaticExtensionErrorHandler.Set(new ExceptionHandler());
 
+
+var tr = new Trading.Database.Tcp.TradingDatabaseHistoryInterface(db, 7168);
+
+await tr.StarAsync();
+
+throw new Exception();
+/*
+var server = new AsyncTcpServer(7168, new Transformation());
+
 server.StartServerAsync();
+*/
 
 Console.ReadKey();
 
+/*
 class Transformation : IByteTransformation
 {
     byte[] IByteTransformation.Transform(byte[] data, int length)
@@ -24,7 +41,7 @@ class Transformation : IByteTransformation
         return echoData;
     }
 }
-
+*/
 class ExceptionHandler : IExceptionHandler
 {
     void IExceptionHandler.HandleException<T>(T exception, params object[]? obj)

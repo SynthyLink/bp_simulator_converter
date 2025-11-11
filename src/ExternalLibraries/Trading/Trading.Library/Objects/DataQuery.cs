@@ -405,7 +405,9 @@ namespace Trading.Library.Objects
 
         public async Task<List<HistoricalDataMessageDateTime>> GetHistoricalDataMessageDateTimes(CancellationToken token)
         {
-            return await  Database.GetHistoricalDataMessageDateTimes(Object, Begin, End, token);
+            var b = Begin.ToOADate();
+            var e = End.ToOADate();
+            return await  Database.GetHistoricalDataMessageDateTimesAsync(Object, Begin, End, token);
         }
 
 

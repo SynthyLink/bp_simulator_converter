@@ -2,6 +2,6 @@
 {
     public interface IByteTransformation
     {
-        byte[] Transform(byte[] data, int length);
+        Task<byte[]> Transform(byte[] data, int length);
     }
 }

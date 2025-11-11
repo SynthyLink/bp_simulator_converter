@@ -8,8 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import communication.AsyncTcpClient
 import communication.ConsoleByteReceiver
-import communication.FetchDataTask
-import test.AsyncWhenAllExample
+import tests.Actor
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,12 +32,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun start() {
-        AsyncWhenAllExample.run()
+       // AsyncWhenAllExample.run()
         /*
         fech = FetchDataTask("31.10.82.229", 7168, ConsoleByteReceiver())
         val string = "Hello world"
         val b = string.toByteArray()
         fech.execute(b)*/
+        var act = Actor()
+        act.testSymbolsTrading()
     }
 
     fun whenAll()

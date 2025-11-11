@@ -119,7 +119,7 @@ namespace Trading.Database.SqlServer.Overriden
             return d;
         }
 
-        async Task<List<HistoricalDataMessageDateTime>> ITradingDatabaseHistoryInterface.GetHistoricalDataMessageDateTimes(object id, DateTime begin, DateTime end, CancellationToken token)
+        async Task<List<HistoricalDataMessageDateTime>> ITradingDatabaseHistoryInterface.GetHistoricalDataMessageDateTimesAsync(object id, DateTime begin, DateTime end, CancellationToken token)
         {
             var r = await SelectHistoryByDateAsync((Guid)id, begin, end);
             var l = new List<HistoricalDataMessageDateTime>();

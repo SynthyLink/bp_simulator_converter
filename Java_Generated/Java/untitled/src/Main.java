@@ -16,7 +16,8 @@ public class Main {
         java.util.List<general_service.Entry<int[], String>> list = new java.util.ArrayList<>();
         list.add(new general_service.Entry(new int[] { 1, 2}, "" ));
         var a = new Actor();
-        a.testWhenAll();
+        a.testSymbolsTrading();
+ //       a.testWhenAll();
        // a.testTime();
     //a.testRandomTwo();
    //     a.testODE_Feedback();

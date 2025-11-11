@@ -10,6 +10,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\DynamicLinkLibraries\ErrorHandler\ErrorHandler.csproj" />
     <ProjectReference Include="..\..\DynamicLinkLibraries\TCP\TCPLibrary\TCPLibrary.csproj" />
+    <ProjectReference Include="..\..\ExternalLibraries\Trading\Trading.Database.SqlServer\Trading.Database.SqlServer.csproj" />
+    <ProjectReference Include="..\..\ExternalLibraries\Trading\Trading.Database.Tcp\Trading.Database.Tcp.csproj" />
   </ItemGroup>
 
 </Project>

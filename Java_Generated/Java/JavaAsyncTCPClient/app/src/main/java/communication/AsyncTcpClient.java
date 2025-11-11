@@ -9,6 +9,7 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
+import communication.interfaces.IByteReceiver;
 import error_handler.ConsoleErrorHandler;
 import error_handler.interfaces.IErrorHandler;
 
@@ -18,16 +19,12 @@ public class AsyncTcpClient {
     private SocketChannel clientChannel;
     private ByteBuffer readBuffer;
 
-    private  IByteReceiver byteReceiver;
-
-    private boolean closeOnSend = true;
-
+    private IByteReceiver byteReceiver;
 
     private  static IErrorHandler errorHandler = new ConsoleErrorHandler();
 
-    public AsyncTcpClient(String host, int port, IByteReceiver byteReceiver, boolean closeOnSend) throws IOException {
+    public AsyncTcpClient(String host, int port, IByteReceiver byteReceiver) throws IOException {
         this.byteReceiver = byteReceiver;
-        this.closeOnSend = closeOnSend;
         // 1. Create a Selector
         this.selector = Selector.open();
 
@@ -89,7 +86,7 @@ public class AsyncTcpClient {
                             // Now that we're connected, register for read operations
                             registerForRead();
                             // You can also write something to the server here if needed
-                          //  sendMessage("Hello from async client!");
+                            //  sendMessage("Hello from async client!");
                             sendBytes(bytes);
                         } else {
                             // Connection failed (shouldn't happen if finishConnect returns false after isConnectable is true)
@@ -100,11 +97,7 @@ public class AsyncTcpClient {
                     } else if (key.isReadable()) {
                         // Data available for reading
                         handleRead(key);
-                        if (closeOnSend)
-                        {
-                            return;
-                        }
-                    }
+                     }
                     // You could also handle OP_WRITE if needed for sending data
                     // else if (key.isWritable()) {
                     //     handleWrite(key);
@@ -142,13 +135,9 @@ public class AsyncTcpClient {
             byte[] data = new byte[bytesRead];
             readBuffer.get(data);
             byteReceiver.Receive(data, bytesRead);
-            if (closeOnSend)
-            {
-                close();
-            }
 
-         //   String message = new String(data);
-          //  showMessage("Received: " + message);
+            //   String message = new String(data);
+            //  showMessage("Received: " + message);
         }
     }
 
@@ -191,11 +180,11 @@ public class AsyncTcpClient {
         int serverPort = 12345;
 
         try {
-            AsyncTcpClient client = new AsyncTcpClient(serverHost, serverPort, null, true);
+            AsyncTcpClient client = new AsyncTcpClient(serverHost, serverPort, null);
             // Run the client in a separate thread to avoid blocking the main thread
             new Thread(() -> {
                 try {
-                   client.start(null);
+                    client.start(null);
                 } catch (IOException e) {
                     e.printStackTrace();
                     showMessage("Client encountered an error.");
@@ -204,7 +193,7 @@ public class AsyncTcpClient {
 
             // Example of sending a message after a delay
             Thread.sleep(2000); // Give the connection time to establish
-        //    client.sendMessage("Hello World!");
+            //    client.sendMessage("Hello World!");
 
             // Keep the main thread alive for a while to observe the client
             Thread.sleep(10000);
