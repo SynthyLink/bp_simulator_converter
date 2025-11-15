@@ -15,7 +15,7 @@ namespace Trading.Database
 
         ITradingDatabaseHistoryIntefaceFactory current = null;
 
-        ITradingDatabaseHistoryInteface ITradingDatabaseHistoryIntefaceFactory.Create(string url)
+        ITradingDatabaseHistoryInterface ITradingDatabaseHistoryIntefaceFactory.Create(string url)
         {
             if (current != null)
             {

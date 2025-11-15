@@ -1,6 +1,9 @@
 ﻿using System.Net;
 using System.Net.Sockets;
-using System.Text;
+
+using ErrorHandler;
+
+using TCPLibrary.Interfaces;
 
 public class AsyncTcpServer
 {
@@ -8,9 +11,11 @@ public class AsyncTcpServer
     private int _port = 13000;
     private TcpListener? _listener;
     private bool _isRunning = false;
+    IByteTransformation tansformation = null;
 
-    public AsyncTcpServer(int port)
+    public AsyncTcpServer(int port, IByteTransformation tansformation)
     {
+        this.tansformation = tansformation;
         _port = port; 
     }
 
@@ -22,14 +27,14 @@ public class AsyncTcpServer
             _listener = new TcpListener(_ipAddress, _port);
             _listener.Start();
             _isRunning = true;
-            Console.WriteLine($"Server started. Listening on port {_port}...");
+            $"Server started. Listening on port {_port}...".Log();
 
             // 2. Main Acceptance Loop
             while (_isRunning)
             {
                 // AcceptTcpClientAsync waits non-blockingly for a connection
                 TcpClient client = await _listener.AcceptTcpClientAsync();
-                Console.WriteLine("Client Connected!");
+                "Client Connected!".Log();
 
                 // 3. Handle the connection in a separate task
                 // This prevents the main loop from blocking while communicating with this client
@@ -38,7 +43,7 @@ public class AsyncTcpServer
         }
         catch (SocketException ex)
         {
-            Console.WriteLine($"Socket Error: {ex.Message}");
+            $"Socket Error: {ex.Message}".Log();
         }
         finally
         {
@@ -59,22 +64,26 @@ public class AsyncTcpServer
                 // Loop to continuously read data from the client
                 while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
-                    string receivedData = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    Console.WriteLine($"Received from client: {receivedData.Trim()}");
-
-                    // Echo the data back to the client (asynchronous send)
-                    byte[] echoData = Encoding.ASCII.GetBytes($"Echo: {receivedData}");
-                    await stream.WriteAsync(echoData, 0, echoData.Length);
+                    var transformed = await tansformation.Transform(buffer, bytesRead);
+                    if (transformed.Length > 1019)
+                    {
+                        byte[] intBytes = BitConverter.GetBytes(transformed.Length);
+                        var tr = new byte[transformed.Length + 4];
+                        Array.Copy(intBytes, 0, tr, 0, 4);
+                        Array.Copy(transformed, 0, tr, 4, transformed.Length);
+                        transformed = tr;
+                    }
+                    await stream.WriteAsync(transformed, 0, transformed.Length);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error handling client: {ex.Message}");
+                $"Error handling client: {ex.Message}".Log();
             }
             finally
             {
                 client.Close();
-                Console.WriteLine("Client disconnected.");
+                "Client disconnected.".Log();
             }
         }
     }
@@ -83,16 +92,7 @@ public class AsyncTcpServer
     {
         _isRunning = false;
         _listener?.Stop();
-        Console.WriteLine("Server stopped.");
+       "Server stopped.".Log();
     }
 }
 
-// Example usage in a console application's Main method:
-internal class Program
-{
-    public static async Task Main(string[] args)
-    {
-        var server = new AsyncTcpServer(6666);
-        await server.StartServerAsync();
-    }
-}

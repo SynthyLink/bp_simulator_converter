@@ -6,6 +6,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
+using System.Threading;
 
 
 using CategoryTheory;
@@ -13,13 +15,11 @@ using CategoryTheory;
 using Diagram.UI.Labels;
 using Diagram.UI.Attributes;
 using Diagram.UI.Interfaces;
+//using Diagram.Interfaces;
 
 using SerializationInterface;
 using ErrorHandler;
 using NamedTree;
-using System.Threading.Tasks;
-using System.Threading;
-using Diagram.Interfaces;
 
 
 namespace Diagram.UI
@@ -961,7 +961,7 @@ namespace Diagram.UI
                         }
                         if (os is IObjectContainer oc)
                         {
-                            bool lb = await oc.Load(token);
+                            bool lb = await oc.LoadAsync(token);
                             if (!lb)
                             {
                                 return false;

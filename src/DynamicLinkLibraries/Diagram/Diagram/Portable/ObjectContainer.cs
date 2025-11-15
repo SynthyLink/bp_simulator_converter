@@ -158,12 +158,27 @@ namespace Diagram.UI.Portable
             }
         }
 
+        public virtual bool Load()
+        {
+            if (isLoaded)
+            {
+                return isLoaded;
+            }
+            isLoaded = true;
+            if (desktop is PureDesktop pure)
+            {
+                pure.HasParent = true;
+            }
+            LoadProtected();
+            return true;
+        }
+
 
         /// <summary>
         /// Loads itself
         /// </summary>
         /// <returns>True in success</returns>
-        public virtual Task<bool> Load(CancellationToken token)
+        public virtual Task<bool> LoadAsync(CancellationToken token)
         {
             if (isLoaded)
             {

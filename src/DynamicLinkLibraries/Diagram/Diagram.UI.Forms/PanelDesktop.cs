@@ -1539,7 +1539,7 @@ namespace Diagram.UI
             {
                 IContainerObjectLabel cont = label as IContainerObjectLabel;
                 IObjectContainer con = label.Object as IObjectContainer;
-                await con.Load(ct);
+                await con.LoadAsync(ct);
                 con.PostLoad();
                 con.SetParents(this);
                 cont.Expand();

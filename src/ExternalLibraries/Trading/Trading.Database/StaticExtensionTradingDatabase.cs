@@ -46,7 +46,7 @@ namespace Trading.Database
             }
         }
 
-        static public ITradingDatabaseHistoryInteface Connect()
+        static public ITradingDatabaseHistoryInterface Connect()
         {
             while (true)
             {

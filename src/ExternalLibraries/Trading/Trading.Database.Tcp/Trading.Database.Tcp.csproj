@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\DynamicLinkLibraries\ErrorHandler\ErrorHandler.csproj" />
+    <ProjectReference Include="..\..\..\DynamicLinkLibraries\TCP\TCPLibrary\TCPLibrary.csproj" />
+    <ProjectReference Include="..\Trading.Database\Trading.Database.csproj" />
+    <ProjectReference Include="..\Trading.Library\Trading.Library.csproj" />
+  </ItemGroup>
+
+</Project>

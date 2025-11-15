@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace Diagram.Interfaces
+namespace Diagram.UI.Interfaces
 {
     /// <summary>
     /// Initializastion task
@@ -9,6 +9,5 @@ namespace Diagram.Interfaces
     public interface IInitializeTask
     {
         Task Initialize(CancellationToken cancellationToken);
-
     }
 }

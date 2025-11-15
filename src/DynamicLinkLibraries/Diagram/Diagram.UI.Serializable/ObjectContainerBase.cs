@@ -123,7 +123,7 @@ namespace Diagram.UI
         /// Loads itself
         /// </summary>
         /// <returns>True in success</returns>
-        public override async Task<bool> Load(CancellationToken token)
+        public override async Task<bool> LoadAsync(CancellationToken token)
         {
             if (isLoaded)
             {

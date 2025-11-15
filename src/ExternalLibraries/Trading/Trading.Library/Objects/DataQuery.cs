@@ -3,7 +3,7 @@
 using CategoryTheory;
 
 using DataPerformer.Interfaces;
-using Diagram.Interfaces;
+using Diagram.UI.Interfaces;
 using ErrorHandler;
 
 
@@ -49,7 +49,7 @@ namespace Trading.Library.Objects
 
         static public ITradingDatabaseHistoryIntefaceFactory Factrory { get; set; }
 
-        public ITradingDatabaseHistoryInteface Database { get; init; }
+        public ITradingDatabaseHistoryInterface Database { get; init; }
 
         public object Object { get; set; } = new object();
 
@@ -405,7 +405,9 @@ namespace Trading.Library.Objects
 
         public async Task<List<HistoricalDataMessageDateTime>> GetHistoricalDataMessageDateTimes(CancellationToken token)
         {
-            return await  Database.GetHistoricalDataMessageDateTimes(Object, Begin, End, token);
+            var b = Begin.ToOADate();
+            var e = End.ToOADate();
+            return await  Database.GetHistoricalDataMessageDateTimesAsync(Object, Begin, End, token);
         }
 
 
