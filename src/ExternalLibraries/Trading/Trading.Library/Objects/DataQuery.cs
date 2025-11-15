@@ -9,6 +9,7 @@ using ErrorHandler;
 
 using NamedTree;
 using Trading.Database.Interfaces;
+using Trading.Database.Classes;
 using Trading.Library.Classes;
 
 namespace Trading.Library.Objects

@@ -1,5 +1,5 @@
 ﻿
-namespace Trading.Library.Classes
+namespace Trading.Database.Classes
 {
     public record class HistoricalDataMessageDateTime
     {
@@ -14,5 +14,13 @@ namespace Trading.Library.Classes
         public decimal wap { get; init; }
         public bool hasGaps { get; init; }
 
+
+        public void FillVector(double[] vector)
+        {
+            vector[0] = high;
+            vector[1] = low;
+            vector[2] = open;
+            vector[3] = close;
+        }
     }
 }

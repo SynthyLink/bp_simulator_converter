@@ -2,7 +2,6 @@
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
 
-using System.Reflection.Metadata.Ecma335;
 using System.Runtime.Serialization;
 using IBApi.messages;
 
@@ -99,23 +98,7 @@ namespace IBApi.messages
             Wap = bar.WAP;
         }
 
-        public HistoricalDataMessageDateTime Convert
-        {
-            get => new HistoricalDataMessageDateTime
-            {
-                RequestId = this.RequestId,
-                Date = this.Date.Convert(),
-                Open = this.Open,
-                High = this.High,
-                Low = this.Low,
-                Close = this.Close,
-                Volume = this.Volume,
-                Count = this.Count,
-                Wap = this.Wap
-
-            };
-        }
-
+ 
 
         private HistoricalDataMessage(SerializationInfo info, StreamingContext context)
         {

@@ -1,4 +1,4 @@
-﻿using Trading.Library.Classes;
+﻿using Trading.Database.Classes;
 
 namespace Trading.Database.Interfaces
 {

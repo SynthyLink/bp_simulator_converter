@@ -1,7 +1,7 @@
 ﻿using ErrorHandler;
 using Microsoft.EntityFrameworkCore;
 using Trading.Database.Interfaces;
-using Trading.Library.Classes;
+using Trading.Database.Classes;
 
 namespace Trading.Database.SqlServer.Overriden
 {
