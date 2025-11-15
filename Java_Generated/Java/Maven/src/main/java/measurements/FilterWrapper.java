@@ -26,6 +26,8 @@ public class FilterWrapper extends  DataConsumer implements IMeasurements {
 
     protected IFilter filter;
 
+    protected int count;
+
     IMeasurement measurement;
 
     IMeasurement measurementOut;

@@ -1,8 +1,8 @@
+using System;
 
 using CategoryTheory;
 using DataPerformer.Interfaces;
 using NamedTree;
-using System;
 
 namespace DataPerformer.Portable
 {

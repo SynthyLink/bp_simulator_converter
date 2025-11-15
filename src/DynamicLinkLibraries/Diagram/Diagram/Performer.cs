@@ -31,7 +31,7 @@ namespace Diagram.UI
         {
             var tasks = new List<Task>();
             ForEach(components, (IInitializeTask task) => 
-            { tasks.Add(task.Initialize(cancellationToken)); });
+            { tasks.Add(task.InitializeAsync(cancellationToken)); });
             await Task.WhenAll(tasks);
         }
    

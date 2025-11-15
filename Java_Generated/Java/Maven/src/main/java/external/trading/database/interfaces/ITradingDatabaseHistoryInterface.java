@@ -1,10 +1,9 @@
-package trading.database.interfaces;
+package external.trading.database.interfaces;
 
 import cancellation.interfaces.ICancellation;
-import trading.database.classes.HistoricalDataMessageDateTime;
+import external.trading.database.classes.HistoricalDataMessageDateTime;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 public interface ITradingDatabaseHistoryInterface {

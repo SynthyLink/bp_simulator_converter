@@ -56,7 +56,6 @@
     <ProjectReference Include="..\..\PhysicalField\PhysicalField\PhysicalField.csproj" />
     <ProjectReference Include="..\..\SphericalFields\SphericalFields.csproj" />
     <ProjectReference Include="..\..\Vector3D\Vector3D.csproj" />
-    <ProjectReference Include="..\TestCategory.Standard\TestCategory.Standard.csproj" />
     <ProjectReference Include="..\TestCategory\TestCategory.csproj" />
   </ItemGroup>
 

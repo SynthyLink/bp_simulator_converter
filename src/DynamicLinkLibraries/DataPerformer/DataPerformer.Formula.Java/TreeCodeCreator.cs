@@ -103,7 +103,7 @@ new Dictionary<string, string[]> {
         private static string[] fraction = new string[] { "(", ") / (", ");" };
 
 
-        private static string[] equals = new string[] { "(", ").Equals(", ");" };
+        private static string[] equals = new string[] { "(", "[0]) == (", "[0]));" };
 
         #endregion
 

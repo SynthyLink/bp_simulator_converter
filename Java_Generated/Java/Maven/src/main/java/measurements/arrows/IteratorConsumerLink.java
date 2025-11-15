@@ -3,22 +3,23 @@ package measurements.arrows;
 import category_theory.CategoryArrow;
 import category_theory.interfaces.ICategoryObject;
 import diagram.interfaces.IDesktop;
-import measurements.interfaces.IDataConsumer;
-import measurements.interfaces.IMeasurements;
+import measurements.interfaces.IIterator;
+import measurements.interfaces.IIteratorConsumer;
 
-public class DataLink extends CategoryArrow {
-    public DataLink(String name, IDesktop desktop) {
+
+public class IteratorConsumerLink extends CategoryArrow {
+    public IteratorConsumerLink(String name, IDesktop desktop) {
         super(name, desktop);
     }
 
-    IMeasurements measurements;
+    IIterator iterator;
 
-    IDataConsumer dataConsumer;
+    IIteratorConsumer consumer;
 
     @Override
     public void setSource(ICategoryObject source) {
         super.setSource(source);
-        dataConsumer = (IDataConsumer) source;
+        consumer = (IIteratorConsumer) source;
     }
 
     /**
@@ -27,7 +28,7 @@ public class DataLink extends CategoryArrow {
     @Override
     public void setTarget(ICategoryObject target) {
         super.setTarget(target);
-        measurements = (IMeasurements) target;
-        dataConsumer.addMeasurements(measurements);
+        iterator = (IIterator) target;
+        consumer.addIterator(iterator);
     }
 }

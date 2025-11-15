@@ -919,7 +919,7 @@ namespace Diagram.UI
                         var ob = l.Object;
                         if (ob is IInitializeTask it)
                         {
-                            tasks.Add(it.Initialize(token));
+                            tasks.Add(it.InitializeAsync(token));
                         }
                         objects.Add(l);
                     }
@@ -932,7 +932,7 @@ namespace Diagram.UI
                         var ar = l.Arrow;
                         if (ar is IInitializeTask it)
                         {
-                            tasks.Add(it.Initialize(token));
+                            tasks.Add(it.InitializeAsync(token));
                         }
                         arrows.Add(l);
                     }

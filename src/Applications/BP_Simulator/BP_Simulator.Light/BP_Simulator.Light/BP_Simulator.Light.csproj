@@ -299,6 +299,7 @@
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Trading\Trading.Charts\Trading.Charts.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Trading\Trading.Database.SqlServer\Trading.Database.SqlServer.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Trading\Trading.Database\Trading.Database.csproj" />
+    <ProjectReference Include="..\..\..\..\ExternalLibraries\Trading\Trading.Java\Trading.Java.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Trading\Trading.Library.Forms\Trading.Library.Forms.csproj" />
     <ProjectReference Include="..\..\..\..\ExternalLibraries\Trading\Trading.Library\Trading.Library.csproj" />
     <ProjectReference Include="..\..\..\..\Generated\Traiding.Generated\Traiding.Generated.csproj" />
@@ -338,6 +339,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\net9.0-windows\" />
+    <Folder Include="BusinessLogic\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Properties\Settings.settings">

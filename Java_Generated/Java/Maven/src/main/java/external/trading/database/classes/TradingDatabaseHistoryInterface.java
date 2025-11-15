@@ -1,6 +1,6 @@
-package trading.database.classes;
+package external.trading.database.classes;
 
-import trading.database.interfaces.ITradingDatabaseHistoryInterface;
+import external.trading.database.interfaces.ITradingDatabaseHistoryInterface;
 
 public class TradingDatabaseHistoryInterface {
 

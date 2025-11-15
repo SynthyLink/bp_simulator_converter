@@ -83,6 +83,7 @@ namespace Diagram.UI
         public async Task<IDesktop> GetDesktopAsync(PureDesktop desktop, CancellationToken token)
         {
             await desktop.FinalAsync(token);
+            desktop.Final();
             return desktop;
         }
 
@@ -93,14 +94,14 @@ namespace Diagram.UI
             {
                 if (item is IInitializeTask task)
                 {
-                    tasks.Add(task.Initialize(token));
+                    tasks.Add(task.InitializeAsync(token));
                 }
             }
             foreach (var item in CategoryArrows)
             {
                 if (item is IInitializeTask task)
                 {
-                    tasks.Add(task.Initialize(token));
+                    tasks.Add(task.InitializeAsync(token));
                 }
             }
             await Task.WhenAll(tasks);

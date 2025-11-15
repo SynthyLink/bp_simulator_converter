@@ -1,4 +1,4 @@
-package trading.database.classes;
+package external.trading.database.classes;
 
 import java.time.LocalDateTime;
 

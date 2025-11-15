@@ -33,9 +33,9 @@ namespace BP_Simulator.Light
             //var t = new GeneratedProject.Trading_Gen();
             return;
 
-            var orb = new OnlineGameConverter.Server.BusinessLogic.Orbital.OrbitalForecastCalculator();
-            var aliases = orb.GetAllAliases();
-           var x = (double)aliases["Motion equations.x"];
+           // var orb = new OnlineGameConverter.Server.BusinessLogic.Orbital.OrbitalForecastCalculator();
+          //  var aliases = orb.GetAllAliases();
+          // var x = (double)aliases["Motion equations.x"];
              /*      var atm = new DimAtm.Serializable.Atmosphere();
       var l = new DinAtm.Forms.Labels.LabelAtmosphere();
       var g = new Gravity_36_36.Wrapper.Serializable.Gravity();

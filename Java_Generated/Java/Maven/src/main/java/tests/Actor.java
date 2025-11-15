@@ -2,8 +2,8 @@ package tests;
 
 import cancellation.Cancellation;
 import external.utilities.date_time.OADateConverter;
-import trading.database.classes.TcpTradingDatabaseHistoryInterface;
-import trading.database.classes.TradingDatabaseHistoryInterface;
+import external.trading.database.classes.TcpTradingDatabaseHistoryInterface;
+import external.trading.database.classes.TradingDatabaseHistoryInterface;
 
 public class Actor {
 

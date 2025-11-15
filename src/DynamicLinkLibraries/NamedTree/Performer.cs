@@ -78,6 +78,28 @@ namespace NamedTree
             }
         }
 
+        /// <summary>
+        /// Converts to string with p
+        /// </summary>
+        /// <param name="a">Double value</param>
+        /// <returns>String</returns>
+        public string DoubleToStringWrap(double a)
+        {
+            return  "\"" + DoubleToString(a) + "\"";
+        }
+
+        /// <summary>
+        /// Converts to string with p
+        /// </summary>
+        /// <param name="a">Double value</param>
+        /// <returns>String</returns>
+        public string Wrap(object o)
+        {
+            return "\"" + o.ToString() + "\"";
+        }
+
+
+
 
         /// <summary>
         /// Converts to string

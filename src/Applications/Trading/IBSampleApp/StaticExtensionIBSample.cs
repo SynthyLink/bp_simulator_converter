@@ -107,7 +107,7 @@ namespace IBSampleApp
             var list = new List<HistoricalDataMessageDateTime>();
             foreach (var dataItem in data)
             {
-                list.Add(dataItem.Convert);
+               // list.Add(dataItem.Convert);
             }
             return list;
         }

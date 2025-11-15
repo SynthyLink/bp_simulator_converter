@@ -1,21 +1,17 @@
-package trading.database.classes;
+package external.trading.database.classes;
 
 import cancellation.interfaces.ICancellation;
 import cancellation.interfaces.ICancelledObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 import communication.AsyncTcpClient;
 import communication.interfaces.IByteReceiver;
 import external.utilities.date_time.OADateConverter;
 import general_service.Performer;
-import synchronization.AutoResetEvent;
-import trading.database.interfaces.ITradingDatabaseHistoryInterface;
+import external.trading.database.interfaces.ITradingDatabaseHistoryInterface;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
