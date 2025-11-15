@@ -10,6 +10,6 @@ namespace Diagram.UI.Interfaces
         /// </summary>
         /// <param name="cancellationToken">Token</param>
         /// <returns>The task</returns>
-        Task Start(CancellationToken cancellationToken);
+        Task StartAsync(CancellationToken cancellationToken);
     }
 }

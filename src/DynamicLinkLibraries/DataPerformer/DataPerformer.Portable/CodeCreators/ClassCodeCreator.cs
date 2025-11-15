@@ -1,10 +1,8 @@
 ﻿using BaseTypes.Attributes;
 
 using Diagram.UI;
-using Diagram.UI.CodeCreators.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 
 namespace DataPerformer.Portable.CodeCreators
 {

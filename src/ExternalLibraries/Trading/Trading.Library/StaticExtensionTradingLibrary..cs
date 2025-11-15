@@ -1,5 +1,6 @@
 ﻿using AssemblyService.Attributes;
 using System.Runtime.CompilerServices;
+using Trading.Database.Classes;
 using Trading.Library.Classes;
 using Trading.Library.CodeCreators;
 using Trading.Library.Enums;
@@ -38,7 +39,7 @@ namespace Trading.Library
                 throw new ArgumentException("Illegal position type", " " + a);
             }
         }
-
+/*
         public static void FillVector(this HistoricalDataMessageDateTime message, double[] vector)
         {
             vector[0] = message.high;
@@ -46,7 +47,7 @@ namespace Trading.Library
             vector[2] = message.open;
             vector[3] = message.close;
         }
-
+*/
         private static readonly Dictionary<string, TimeSpan> spans = new Dictionary<string, TimeSpan>()
         {
             { "1 sec", TimeSpan.FromSeconds(5) },

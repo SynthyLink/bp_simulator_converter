@@ -15,7 +15,7 @@ namespace DataPerformer.Portable.Wrappers
             var l = new List<Task>();
             performer.ForEach(componentCollection, (IStartTask t) => 
             { 
-                l.Add(t.Start(cancellationToken)); 
+                l.Add(t.StartAsync(cancellationToken)); 
             });
             await Task.WhenAll(l);
         }

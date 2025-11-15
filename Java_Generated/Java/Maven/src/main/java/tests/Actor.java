@@ -2,8 +2,8 @@ package tests;
 
 import cancellation.Cancellation;
 import external.utilities.date_time.OADateConverter;
-import trading.database.classes.TcpTradingDatabaseHistoryInterface;
-import trading.database.classes.TradingDatabaseHistoryInterface;
+import external.trading.database.classes.TcpTradingDatabaseHistoryInterface;
+import external.trading.database.classes.TradingDatabaseHistoryInterface;
 
 public class Actor {
 
@@ -20,6 +20,7 @@ public class Actor {
             var s = trd.getHistoricalDataMessageDateTimesAsync("34f44a39-a8ad-46b7-9c7c-4527ad1ce959", 44929, 45260, cancel);
 
             var g = s.get();
+            int i = 0;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -30,5 +30,4 @@ public class DataLink extends CategoryArrow {
         measurements = (IMeasurements) target;
         dataConsumer.addMeasurements(measurements);
     }
-
 }

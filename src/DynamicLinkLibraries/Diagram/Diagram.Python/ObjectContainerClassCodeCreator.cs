@@ -6,7 +6,7 @@ using ErrorHandler;
 
 namespace Diagram.UI.Python
 {
-    [Language("Python")]
+    [Language("TS")]
     internal class ObjectContainerClassCodeCreator : IClassCodeCreator
     {
         public ObjectContainerClassCodeCreator()

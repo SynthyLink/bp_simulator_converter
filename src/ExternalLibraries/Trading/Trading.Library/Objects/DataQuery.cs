@@ -4,11 +4,13 @@ using CategoryTheory;
 
 using DataPerformer.Interfaces;
 using Diagram.UI.Interfaces;
+
 using ErrorHandler;
 
-
 using NamedTree;
+
 using Trading.Database.Interfaces;
+using Trading.Database.Classes;
 using Trading.Library.Classes;
 
 namespace Trading.Library.Objects
@@ -411,7 +413,7 @@ namespace Trading.Library.Objects
         }
 
 
-        async Task IStartTask.Start(CancellationToken cancellationToken)
+        async Task IStartTask.StartAsync(CancellationToken cancellationToken)
         {
             Exception exception;
             try
@@ -436,7 +438,7 @@ namespace Trading.Library.Objects
             throw exception;
         }
 
-        async Task IInitializeTask.Initialize(CancellationToken cancellationToken)
+        async Task IInitializeTask.InitializeAsync(CancellationToken cancellationToken)
         {
             var dt = await Database.GetSymbolsAsync(cancellationToken);
             Symbols = dt;
@@ -445,14 +447,14 @@ namespace Trading.Library.Objects
         public static async Task<DataQuery> Create(CancellationToken cancellationToken)
         {
             var x = new DataQuery();
-            await x.task.Initialize(cancellationToken);
+            await x.task.InitializeAsync(cancellationToken);
             return x;
         }
 
         public static async Task<Dictionary<string, object>> GetHistorycalSymbols(CancellationToken cancellationToken)
         {
             var x = new DataQuery();
-            await x.task.Initialize(cancellationToken);
+            await x.task.InitializeAsync(cancellationToken);
             return x.Symbols;
         }
 

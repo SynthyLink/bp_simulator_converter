@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CategoryTheory;
 
 using Diagram.UI.Factory;
 using Diagram.UI.Interfaces;

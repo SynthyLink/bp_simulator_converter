@@ -1,19 +1,17 @@
-package trading.database.classes;
+package external.trading.database.classes;
 
 import cancellation.interfaces.ICancellation;
 import cancellation.interfaces.ICancelledObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 import communication.AsyncTcpClient;
 import communication.interfaces.IByteReceiver;
+import external.utilities.date_time.OADateConverter;
 import general_service.Performer;
-import trading.database.interfaces.ITradingDatabaseHistoryInterface;
+import external.trading.database.interfaces.ITradingDatabaseHistoryInterface;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
@@ -25,6 +23,8 @@ public class TcpTradingDatabaseHistoryInterface implements ITradingDatabaseHisto
 
     Performer performer = new Performer();
 
+    OADateConverter oaDateConverter = new OADateConverter();
+
     int port;
 
     String host;
@@ -35,6 +35,10 @@ public class TcpTradingDatabaseHistoryInterface implements ITradingDatabaseHisto
     AsyncTcpClient client;
 
     Map<String, Object> map = new HashMap<>();
+
+   // AutoResetEvent event = new AutoResetEvent(false);
+
+    HistoricalDataMessageDateTime[] messages;
 
 
     public  TcpTradingDatabaseHistoryInterface(String host, int port)
@@ -93,6 +97,7 @@ public class TcpTradingDatabaseHistoryInterface implements ITradingDatabaseHisto
         data.end = end;
         return CompletableFuture.supplyAsync(() ->
         {
+    //        event.set();
             set(cancellation);
             try
             {
@@ -102,31 +107,55 @@ public class TcpTradingDatabaseHistoryInterface implements ITradingDatabaseHisto
                 var sym = gson.toJson(data);
                 var bt = sym.getBytes();
                 client.start(bt);
+     //           event.waitOne();
             }
             catch (Throwable e)
             {
                 int i = 0;
             }
-            return null;
+            return messages;
         });
 
     }
 
     @Override
     public void receiveBytes(byte[] bytes, int length) {
-        String s = new String(bytes);
-      //   JsonObject jsonObject = JsonParser.parseString(s).getAsJsonObject();
-        Gson gson = getGson();
-        var o =  gson.fromJson(s, new TypeToken<Object>(){}.getType());
-    //    var ob =  (Map<String, Object>)gson.fromJson(s, new TypeToken<Map<String, Object>>(){}.getType());
-   //     performer.copyMap(ob, map);
-        if (o instanceof ArrayList<?>)
-        {
-            var list = (ArrayList<?>)o;
-            for (var x : list)
-            {
-var i = 0;
+        try {
+            String s = new String(bytes);
+            //   JsonObject jsonObject = JsonParser.parseString(s).getAsJsonObject();
+            Gson gson = getGson();
+            var o = gson.fromJson(s, new TypeToken<Object>() {
+            }.getType());
+            //    var ob =  (Map<String, Object>)gson.fromJson(s, new TypeToken<Map<String, Object>>(){}.getType());
+            //     performer.copyMap(ob, map);
+            if (o instanceof ArrayList<?>) {
+                var list = (ArrayList<?>) o;
+                messages = new HistoricalDataMessageDateTime[list.size()];
+                int i = 0;
+
+                for (var x : list) {
+                    var mess = new HistoricalDataMessageDateTime();
+                    var map  = (LinkedTreeMap)x;
+                    double dt = (double) map.get("date");
+                    var date = OADateConverter.fromOADate(dt);
+                    mess.date = date;
+                    mess.open = (double) map.get("date");
+                    mess.high = (double) map.get("high");
+                    mess.low = (double) map.get("low");
+                    mess.close = (double) map.get("close");
+                    mess.volume = (double) map.get("volume");
+                    //var ct = map.get("count");
+                   // mess.count = (int) map.get("count");
+                    mess.wap = (double) map.get("wap");
+                    mess.hasGaps = (boolean) map.get("hasGaps");
+                    messages[i] = mess;
+                    ++i;
+                }
+                client.close();
+                // event.reset();
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
     }

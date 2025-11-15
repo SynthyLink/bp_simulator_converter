@@ -8,6 +8,6 @@ namespace Diagram.UI.Interfaces
     /// </summary>
     public interface IInitializeTask
     {
-        Task Initialize(CancellationToken cancellationToken);
+        Task InitializeAsync(CancellationToken cancellationToken);
     }
 }

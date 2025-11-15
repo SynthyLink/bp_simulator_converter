@@ -391,7 +391,11 @@ namespace IBApi
             var list = new List<HistoricalDataMessageDateTime>();
             foreach (var dataItem in data)
             {
-                list.Add(dataItem.Convert);
+                var m = new HistoricalDataMessageDateTime();
+       
+                //list.Add(dataItem.Convert);
+               /// list.
+
             }
             return list;
         }

@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using TCPLibrary.Interfaces;
+using Trading.Database.Classes;
 using Trading.Database.Interfaces;
 using Trading.Library.Classes;
 
@@ -63,7 +64,8 @@ namespace Trading.Database.Tcp
                     var begin = DateTime.FromOADate(b);
                     var end = DateTime.FromOADate(e);
                     var res = await Interface.GetHistoricalDataMessageDateTimesAsync(id, begin, end, new CancellationToken());
-                    var rr = JsonConvert.SerializeObject(res);
+                    var l = from tt in res select new HistoricalDataMessageDateTimeDouble(tt);
+                    var rr = JsonConvert.SerializeObject(l.ToList());
                     bt = Encoding.ASCII.GetBytes(rr);
                     return bt;
                 }

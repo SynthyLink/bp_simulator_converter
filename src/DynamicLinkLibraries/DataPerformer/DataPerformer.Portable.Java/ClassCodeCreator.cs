@@ -12,6 +12,8 @@ namespace DataPerformer.Portable.Java
     [Language("Java")]
     public class ClassCodeCreator : Diagram.Java.ClassCodeCreator, IAliasCodeCreator
     {
+        static Performer  p = new Performer();
+
         protected virtual void InitPortable()
         {
             Performer = new Portable.Performer();
@@ -29,19 +31,23 @@ namespace DataPerformer.Portable.Java
             classes = new Dictionary<string, string>()
             {
                 {"DataLink", "measurements.arrows.DataLink" },
+                {"IteratorConsumerLink", "measurements.arrows.IteratorConsumerLink" },
                    {"ObjectTransformerLink", "measurements.arrows.ObjectTransformerLink" },
                 { "DataConsumer", "measurements.DataConsumer"},
                 { "RandomGenerator", "measurements.RandomGenerator"},
                { "ObjectTransformer", "measurements.ObjectTransformer"},
+               { "FilterWrapper", "measurements.FilterWrapper"},
          };
 
             dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
                    { (object o) => { return DetectType(o, "DataConsumer"); } , CreateDataConsumer },
                    { (object o) => { return o is DataLink; } , CreateDataLink },
+                   { (object o) => { return o is IteratorConsumerLink; } , CreateIteratorConsumerLink },
                    { (object o) => { return o is ObjectTransformerLink; } , CreateObjectTransformerLink },
                  { (object o) => { return o is RandomGenerator; } , CreateRandom },
                  { (object o) => { return o is ObjectTransformer; } , CreateObjectTransformer },
+                 { (object o) => { return o is FilterWrapper; } , CreateFilterWrapper },
           };
            this.AddClassCodeCreator(); 
         
@@ -52,6 +58,13 @@ namespace DataPerformer.Portable.Java
         {
             return new List<string>() { "}", "}" };
         }
+
+
+        static List<string> CreateIteratorConsumerLink(string preffix, object obj)
+        {
+            return new List<string>() { "}", "}" };
+        }
+
 
 
         static List<string> CreateObjectTransformerLink(string preffix, object obj)
@@ -72,6 +85,16 @@ namespace DataPerformer.Portable.Java
             return l;
         }
 
+        static List<string> CreateFilterWrapper(string preffix, object obj)
+        {
+            var fw = obj as FilterWrapper;
+            var l = new List<string>();
+            l.Add("\tinput = " + p.Wrap(fw.Input) + ";");
+            l.Add("}");
+            l.Add("}");
+            return l;
+        }
+  
 
 
         static List<string> CreateDataConsumer(string preffix, object obj)
