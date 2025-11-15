@@ -27,10 +27,10 @@ namespace DataPerformer.Portable.Python
         static readonly Dictionary<Func<object, bool>, Func<string, object, List<string>>> dictionary =
          new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
-                      { (object o) => { return o is ObjectTransformer; } , CreateObjectTransformer },
-              { (object o) => { return o is DataLink; } ,CreateDataLink},
-                   { (object o) => { return o is RandomGenerator; } , CreateRandomGenerator},
-               { (object o) => { return o is ObjectTransformerLink; } , CreateObjectTransformerLink},
+             { (object o) => { return o is ObjectTransformer; }, CreateObjectTransformer },
+             { (object o) => { return o is DataLink; }, CreateDataLink},
+             { (object o) => { return o is RandomGenerator; }, CreateRandomGenerator},
+             { (object o) => { return o is ObjectTransformerLink; }, CreateObjectTransformerLink},
          };
 
 

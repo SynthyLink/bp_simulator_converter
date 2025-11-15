@@ -4,9 +4,9 @@ using Diagram.UI.Interfaces;
 
 using ErrorHandler;
 
-namespace Diagram.UI.TypeScript
+namespace Diagram.UI.Python
 {
-    [Language("TS")]
+    [Language("Python")]
     internal class ObjectContainerClassCodeCreator : IClassCodeCreator
     {
         public ObjectContainerClassCodeCreator()
