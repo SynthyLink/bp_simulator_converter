@@ -2,41 +2,86 @@
 
 using CategoryTheory;
 
-using Diagram.UI.CodeCreators.Interfaces;
+using Diagram.CodeCreators;
 using Diagram.UI.Interfaces;
+
 using ErrorHandler;
 
 namespace Diagram.UI.Java
 {
     [Language("Java", ".java")]
-    public class DesktopCodeCreator : IDesktopCodeCreator
+    public class DesktopCodeCreator : AbstractDesktopCodeCreator
     {
-        UI.Performer performer = new UI.Performer();
 
-        public DesktopCodeCreator() { this.AddDesktopCodeCreator(); }
+        public DesktopCodeCreator() : base(false) { this.AddDesktopCodeCreator(); }
 
         public static void AddOverride(List<string> l)
         {
             l.Add("\t@Override");
         }
 
+        protected override List<string> CreateClasses(IComponentCollection collection, string namespacE, string className, bool staticClass)
+        {
+            var l = new List<string>(); 
+            for (int i = 0; i < categoryObjects.Count; i++)
+            {
+                var categoryObject = categoryObjects[i];
+                var pr = "CategoryObject" + i;
+                var c = classCodeCreator.CreateCode(pr, categoryObject, null);
+                performer.Add(l, c, 1);
+                l.Add("");
+            }
+            for (int i = 0; i < categoryArrows.Count; i++)
+            {
+                var categoryArrow = categoryArrows[i];
+                var pr = "CategoryArrow" + i;
+                var c = classCodeCreator.CreateCode(pr, categoryArrow, null);
+                performer.Add(l, c, 1);
+                l.Add("");
+            }
+            return l;
+        }
 
-        IComponentCollection collection;
+        protected override List<string> CreateObjects(IComponentCollection collection, string namespacE, string className, bool staticClass)
+        {
+            var l = new List<string>(); 
+            for (int i = 0; i < categoryObjects.Count; i++)
+            {
+                var o = categoryObjects[i];
+                var r = performer.GetRootName(o);
+                l.Add("\t\tnew " + className + ".CategoryObject" + i +
+                    "(\"" + r + "\", this);");
+            }
+            for (int i = 0; i < categoryArrows.Count; i++)
+            {
+                l.Add("\t\tnew " + className + ".CategoryArrow" + i +
+                    "(\"" + performer.GetRootName(categoryArrows[i]) + "\", this);");
+            }
+            return l;
 
-        Tuple<Dictionary<ICategoryObject, int>, Dictionary<ICategoryArrow, int>> dictionary;
+        }
 
-        IComponentCollection IDesktopCodeCreator.ComponentCollection => collection;
+        protected override List<string> CreateLinks(IComponentCollection collection, string namespacE, string className, bool staticClass)
+        {
+            var l = new List<string>();
+            for (int i = 0; i < categoryArrows.Count; i++)
+            {
+                var categoryArrow = categoryArrows[i];
+                var sn = objects[categoryArrow.Source];
+                var tn = objects[categoryArrow.Target];
+                l.Add("\t\tarrows.get(" + i + ").setSource(objects.get(" + sn + "));");
+                l.Add("\t\tarrows.get(" + i + ").setTarget(objects.get(" + tn + "));");
+            }
+            return l;
+        }
 
-        Tuple<Dictionary<ICategoryObject, int>, Dictionary<ICategoryArrow, int>> IDesktopCodeCreator.Enumeration => dictionary;
 
-        List<string> IDesktopCodeCreator.CreateCode(IComponentCollection desktop, string namespacE, string className, bool staticClass)
+        protected override List<string> CreateCode(IComponentCollection desktop, string namespacE, string className, bool staticClass)
         {
             Exception exception;
             try
             {
-                collection = desktop;
-                dictionary = performer.Enumerate(collection);
-                var l = new List<string>();
+                var l = base.CreateCode(desktop, namespacE, className, staticClass);
                 l.Add("package generated;");
                 l.Add("");
                 l.Add("import diagram.Desktop;");
@@ -50,29 +95,10 @@ namespace Diagram.UI.Java
                 l.Add("public class " + className + " extends Desktop");
                 l.Add("{");
                 l.Add("");
-                List<ICategoryObject> categoryObjects;
-                List<ICategoryArrow> categoryArrows;
-                Dictionary<ICategoryObject, int> objects;
-                Dictionary<ICategoryArrow, int> arrows;
-                performer.Get(desktop, out categoryObjects, out categoryArrows, out objects, out arrows);
-                IClassCodeCreator classCodeCreator = StaticExtensionDiagramUI.Creators["Java"];
-                for (int i = 0; i < categoryObjects.Count; i++)
-                {
-                    var categoryObject = categoryObjects[i];
-                    var pr = "CategoryObject" + i;
-                    var c = classCodeCreator.CreateCode(pr, categoryObject, null);
-                    performer.Add(l, c, 1);
-                    l.Add("");
-                }
-                for (int i = 0; i < categoryArrows.Count; i++)
-                {
-                    var categoryArrow = categoryArrows[i];
-                    var pr = "CategoryArrow" + i;
-                    var c = classCodeCreator.CreateCode(pr, categoryArrow, null);
-                    performer.Add(l, c, 1);
-                    l.Add("");
-                }
-
+                classCodeCreator = StaticExtensionDiagramUI.Creators["Java"];
+                var ll = CreateClasses(desktop, namespacE, className, staticClass);
+                performer.Add(l, ll, 1);
+   
                 l.Add("\tpublic " + className + "() {");
                 l.Add("\t\tsuper();");
                 l.Add("\t}");
@@ -87,26 +113,10 @@ namespace Diagram.UI.Java
                 AddOverride(l);
                 l.Add("\tpublic void init()");
                 l.Add("\t{");
-                for (int i = 0; i < categoryObjects.Count; i++)
-                {
-                    var o = categoryObjects[i];
-                    var r = performer.GetRootName(o);
-                    l.Add("\t\tnew " + className + ".CategoryObject" + i +
-                        "(\"" + r + "\", this);");
-                }
-                for (int i = 0; i < categoryArrows.Count; i++)
-                {
-                    l.Add("\t\tnew " + className + ".CategoryArrow" + i +
-                        "(\"" + performer.GetRootName(categoryArrows[i]) + "\", this);");
-                }
-                for (int i = 0; i < categoryArrows.Count; i++)
-                {
-                    var categoryArrow = categoryArrows[i];
-                    var sn = objects[categoryArrow.Source];
-                    var tn = objects[categoryArrow.Target];
-                    l.Add("\t\tarrows.get(" + i + ").setSource(objects.get(" + sn + "));");
-                    l.Add("\t\tarrows.get(" + i + ").setTarget(objects.get(" + tn + "));");
-                }
+                ll = CreateObjects(desktop, namespacE, className, staticClass);
+                performer.Add(l, ll, 1);
+                ll = CreateLinks(desktop, namespacE, className, staticClass);
+                performer.Add(l, ll, 2);
                 l.Add("\t\tpostSet();");
                 l.Add("\t}");
                 l.Add("");

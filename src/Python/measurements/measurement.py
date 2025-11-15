@@ -6,14 +6,14 @@ class Measurement:
         pass
 
     @property
-    def measurement_name(self):
+    def measurement_name(self) -> str:
         raise NotImplemented()
     
     @property
-    def measurement_type(self):
+    def measurement_type(self) -> Any:
         raise NotImplemented()
     
     @property
-    def measurement_value(self):
+    def measurement_value(self) -> Any:
         raise NotImplemented()
     
