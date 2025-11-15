@@ -109,11 +109,11 @@ namespace DataPerformer.Portable.Python
         }
 
 
-        static List<string> CreateDataLink(string preffix, object obj)
+        static List<string> CreateDataLink(string prefix, object obj)
         {
 
             List<string> l = new List<string>();
-            var s = performer.ClassString(preffix, "DataLink");
+            var s = performer.ClassString(prefix, "DataLink");
             l.Add(s);
             performer.AddObjectConstructor(l);
             return l;
