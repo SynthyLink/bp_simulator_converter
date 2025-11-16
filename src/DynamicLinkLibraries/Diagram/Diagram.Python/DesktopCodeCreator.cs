@@ -60,6 +60,7 @@ namespace Diagram.UI.Python
                 IClassCodeCreator classCodeCreator = ui_performer.GetLaguageObject<IClassCodeCreator>(this);
                     // StaticExtensionDiagramUI.Creators["TS"]
                 var l = new List<string>();
+                l.Add("from desktop import Desktop\n");
                 for (int i = 0; i < categoryObjects.Count; i++)
                 {
                     var categoryObject = categoryObjects[i];

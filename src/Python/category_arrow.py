@@ -1,12 +1,13 @@
 from typing import Any
 from category_object import CategoryObject
+from desktop import Desktop
 
 class CategoryArrow:
-    def __init__(self, name: str, desktop: "desktop.Desktop"):
+    def __init__(self, name: str, desktop: Desktop):
         self._name = name
         self._desktop = desktop
-        self._source = None
-        self._target = None
+        self._source : CategoryObject = None
+        self._target : CategoryObject = None
         if self._desktop is not None:
             self._desktop += self
             # TODO add checker and error handler
@@ -14,11 +15,11 @@ class CategoryArrow:
         pass
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self._name
     
     @property
-    def source(self):
+    def source(self) -> CategoryObject:
         return self._source
     
     @source.setter
@@ -26,7 +27,7 @@ class CategoryArrow:
         self._source = source
 
     @property
-    def target(self):
+    def target(self) -> CategoryObject:
         return self._source
     
     @target.setter
