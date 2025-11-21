@@ -28,10 +28,10 @@ class CategoryArrow:
 
     @property
     def target(self) -> CategoryObject:
-        return self._source
+        return self._target
     
     @target.setter
-    def source(self, target: CategoryObject):
+    def target(self, target: CategoryObject):
         self._target = target
 
     

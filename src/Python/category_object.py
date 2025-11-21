@@ -1,8 +1,8 @@
 from typing import Any
-import desktop
+from desktop import Desktop
 
 class CategoryObject:
-    def __init__(self, name: str, desktop: "desktop.Desktop"):
+    def __init__(self, name: str, desktop: Desktop):
         self._name = name
         self._desktop = desktop
         if self._desktop is not None:

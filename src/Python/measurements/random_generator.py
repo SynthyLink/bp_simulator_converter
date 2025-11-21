@@ -1,7 +1,7 @@
 import random
-from measurements.measurements import Measurements
+from ..measurements.measurements import Measurements
 from measurement import Measurement
-from desktop import Desktop
+from ..desktop import Desktop
 
 class RandomGenerator(Measurements, Measurement):
     def __init__(self, name: str, desktop: Desktop, seed=-1):

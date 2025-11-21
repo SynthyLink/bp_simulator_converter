@@ -18,11 +18,14 @@ class Desktop:
         return self._category_objects_arrows_dict[key]
     
     def __add__(self, obj_or_arr: CategoryObject | CategoryArrow | List[CategoryObject | CategoryArrow]):
+        self.add(obj_or_arr)
+        
+    def add(self, obj_or_arr: CategoryObject | CategoryArrow | List[CategoryObject | CategoryArrow]):
         if issubclass(obj_or_arr, CategoryObject) or (issubclass, obj_or_arr, CategoryArrow):
             self._category_objects_arrows_dict[obj_or_arr.name] = obj_or_arr
         elif issubclass(obj_or_arr, list):
             for item in obj_or_arr:
-                self = self + item
+                self.add(obj_or_arr)
         else:
             raise TypeError("Item to be added is neither a CategoryObject nor a CategoryArrow")
 
