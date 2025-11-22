@@ -1,9 +1,11 @@
-﻿using BaseTypes.Attributes;
+﻿using BaseTypes;
+using BaseTypes.Attributes;
 using Diagram.UI;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DataPerformer.Portable.Python
 
@@ -24,7 +26,7 @@ namespace DataPerformer.Portable.Python
         }
         #endregion
 
-        static readonly Dictionary<Func<object, bool>, Func<string, object, List<string>>> dictionary =
+        static readonly Dictionary<Func<object, bool>, Func<string, object, List<string>>> classCreationDictionary =
          new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
              { (object o) => { return o is ObjectTransformer; }, CreateObjectTransformer },
@@ -33,35 +35,33 @@ namespace DataPerformer.Portable.Python
              { (object o) => { return o is ObjectTransformerLink; }, CreateObjectTransformerLink},
          };
 
-
         protected IDesktopCodeCreator DesktopCodeCreator
         { get; set; }
 
- 
 
-
-        List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
+        List<string> IClassCodeCreator.CreateCode(string prefix, object obj, string volume)
         {
-            foreach (var val in dictionary)
+            return classCreationDictionary.Keys.Select(k => k(obj)).Any() ? CreateObject(prefix, obj) : null;
+            /*foreach (var val in classCreationDictionary)
             {
                 if (val.Key(obj))
                 {
-                    return val.Value(preffix, obj);
+                    return CreateObject(prefix, obj);
+                    //return val.Value(prefix, obj);
                 }
-            }
-            string th = obj.GetType().Name;
+            }*/
+            /*string th = obj.GetType().Name;
             if (th.Equals("DataConsumer"))
             {
-                DataConsumer c = obj as DataConsumer;
-                return CreateDataConsumer(preffix, obj);
-            }
+                return CreateDataConsumer(prefix, obj);
+            }*/
             return null;
         }
 
         static List<string> CreateObjectTransformer(string prefix, object obj)
         {
             List<string> l = new List<string>();
-           var ot = obj as ObjectTransformer;
+            var ot = obj as ObjectTransformer;
             var s = performer.ClassString(prefix, "ObjectTransformer");
             var ll = performer.CreateStringDictionary("map", ot.Links);
             l.Add(s);
@@ -71,21 +71,31 @@ namespace DataPerformer.Portable.Python
             return l;
         }
 
-
-        static List<string> CreateDataConsumer(string preffix, object obj)
+        static List<string> CreateDataConsumer(string prefix, object obj)
         {
             List<string> l = new List<string>();
-            var s = performer.ClassString(preffix, "DataConsumer");
+            var s = performer.ClassString(prefix, "DataConsumer");
             l.Add(s);
             performer.AddObjectConstructor(l);
             return l;
         }
 
-        static List<string> CreateRandomGenerator(string preffix, object obj)
+        static List<string> CreateRandomGenerator(string prefix, object obj)
         {
             List<string> l = new List<string>();
-            var s = performer.ClassString(preffix, "RandomGenerator");
+            var s = performer.ClassString(prefix, "RandomGenerator");
             l.Add(s);
+            performer.AddObjectConstructor(l);
+            return l;
+        }
+
+        static List<string> CreateObject(string prefix, object clazz)
+        {
+            string className = clazz.GetType().Name;
+            string packageName = string.Concat(className
+                .Select((x, i) => i > 0 && char.IsUpper(x) ? "_" + x.ToString() : x.ToString())).ToLower();
+            List<string> l = ["from lib.measurements." + packageName + " import " + className];
+            l.Add(performer.ClassString(prefix, className));
             performer.AddObjectConstructor(l);
             return l;
         }
@@ -98,11 +108,11 @@ namespace DataPerformer.Portable.Python
             return (S)o;
         }
 
-        static List<string> CreateObjectTransformerLink(string preffix, object obj)
+        static List<string> CreateObjectTransformerLink(string prefix, object obj)
         {
 
             List<string> l = new List<string>();
-            var s = performer.ClassString(preffix, "ObjectTransformerLink");
+            var s = performer.ClassString(prefix, "ObjectTransformerLink");
             l.Add(s);
             performer.AddObjectConstructor(l);
             return l;

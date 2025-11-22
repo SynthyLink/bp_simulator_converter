@@ -60,7 +60,7 @@ namespace Diagram.UI.Python
                 IClassCodeCreator classCodeCreator = ui_performer.GetLaguageObject<IClassCodeCreator>(this);
                     // StaticExtensionDiagramUI.Creators["TS"]
                 var l = new List<string>();
-                l.Add("from desktop import Desktop\n");
+                l.Add("from lib.desktop import Desktop\n");
                 for (int i = 0; i < categoryObjects.Count; i++)
                 {
                     var categoryObject = categoryObjects[i];
@@ -68,6 +68,7 @@ namespace Diagram.UI.Python
                     Current = pr;
                     var c = classCodeCreator.CreateCode(pr, categoryObject, null);
                     l.AddRange(c);
+                    l.Add("");
                     l.Add("");
                 }
                 for (int i = 0; i < categoryArrows.Count; i++)
@@ -96,7 +97,7 @@ namespace Diagram.UI.Python
                     var categoryObject = categoryObjects[i] as IAssociatedObject;
                     var named_component = categoryObject.Object as INamedComponent;
                     string name = named_component.RootName;
-                    var pr = "\t\t" + className + CATEGORY_OBJECT + i + "(self, \"" + name + "\")";
+                    var pr = "\t\t" + className + CATEGORY_OBJECT + i + "(\"" + name + "\", self)";
                     l.Add(pr);
                 }
                 for (var i = 0; i < categoryArrows.Count; i++)
@@ -104,7 +105,7 @@ namespace Diagram.UI.Python
                     var categoryArrow = categoryArrows[i] as IAssociatedObject;
                     var named_component = categoryArrow.Object as INamedComponent;
                     string name = named_component.RootName;
-                    var pr = "\t\t" + className + CATEGORY_ARROW + i + "(self, \"" + name + "\")";
+                    var pr = "\t\t" + className + CATEGORY_ARROW + i + "(\"" + name + "\", self)";
                     l.Add(pr);
                 }
                 l.Add("");

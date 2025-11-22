@@ -12,8 +12,8 @@ namespace Diagram.UI.Python
         // done
         public void AddObjectConstructor(List<string> l)
         {
-            l.Add("\tdef __init__(desktop: Desktop, name: str):");
-            l.Add("\t\tsuper(desktop, name)");
+            l.Add("\tdef __init__(self, name: str, desktop: Desktop):");
+            l.Add("\t\tsuper().__init__(name, desktop)");
         }
 
         //done
