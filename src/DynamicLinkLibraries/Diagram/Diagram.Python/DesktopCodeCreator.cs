@@ -79,15 +79,14 @@ namespace Diagram.UI.Python
                     l.AddRange(c);
                     l.Add("");
                 }
-                l.Add("");
-                l.Add("");
-                //var s = performer.ClassString(className, "Desktop");
-                //l.Add("export " + s);
+                List<string> imports = [];
+                l.ForEach(s => { if (s.Contains("import")) { imports.Add(s);} });
+                imports = imports.Distinct().ToList();
+                l.RemoveAll(s => s.Contains("import"));
+                l = imports.Concat(["", ""]).Concat(l).ToList();
                 l.Add(performer.ClassString(className, "Desktop"));
-                //l.Add("{");
                 l.Add("\tdef __init__(self):");
 
-                //l.Add("\t{");
                 l.Add("\t\tsuper().__init__()");
                 l.Add("");
                 l.Add("\t\tself.name = \"" + className + "\"");
