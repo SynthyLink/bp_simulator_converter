@@ -1,7 +1,8 @@
 from typing import List
 from measurement import Measurement
-from ..desktop import Desktop
-from ..category_object import CategoryObject
+from lib.desktop import Desktop
+from lib.category_object import CategoryObject
+
 
 class Measurements(CategoryObject):
     def __init__(self, name, desktop):
@@ -19,7 +20,6 @@ class Measurements(CategoryObject):
 
     def append(self, measurement: Measurement):
         self._measurements.append(measurement)
-
 
     def __add__(self, measurement: Measurement):
         self.append(measurement)

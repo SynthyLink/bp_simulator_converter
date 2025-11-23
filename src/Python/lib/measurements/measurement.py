@@ -1,19 +1,22 @@
 from typing import Any
 
+
 class Measurement:
     
-    def __init__():
-        pass
+    def __init__(self, name: str, measurement_type: Any, value: Any):
+        self._name = name
+        self._measurement_type = measurement_type
+        self._measurement_value = value
 
     @property
     def measurement_name(self):
-        raise NotImplemented()
+        return self._name
     
     @property
     def measurement_type(self):
-        raise NotImplemented()
+        return self._measurement_type
     
     @property
     def measurement_value(self):
-        raise NotImplemented()
+        return self._measurement_value
     

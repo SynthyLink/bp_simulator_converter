@@ -1,6 +1,7 @@
 from typing import Any
 from desktop import Desktop
 
+
 class CategoryObject:
     def __init__(self, name: str, desktop: Desktop):
         self._name = name

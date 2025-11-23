@@ -5,11 +5,12 @@ from ..measurements.measurements import Measurements
 from ..measurements.measurement import Measurement
 from data_consumer import DataConsumer
 
+
 class DataLink(CategoryArrow):
 
     def __init__(self, name, desktop):
         super().__init__(name, desktop)
-        self._data_consumer : DataConsumer = None
+        self._data_consumer: DataConsumer = None
         self._measurements: Measurements = None
     
     @property
