@@ -27,3 +27,4 @@ project.assets.json
 net9.0*
 /src/Generated
 /src/Typescript/TypeScriptLibrary
+.idea/
