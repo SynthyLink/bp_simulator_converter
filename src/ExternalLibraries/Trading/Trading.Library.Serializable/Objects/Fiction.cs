@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Trading.Library.Serializable.Objects
 {
     [Serializable]
-    public class Fiction : Trading.Library.Objects.Fiction, ISerializable
+    public class Fiction : Library.Objects.Fiction, ISerializable
     {
         public Fiction() { }
 

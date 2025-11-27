@@ -22,7 +22,10 @@ public class TradingJava extends Desktop
 	try {
 		var desktop = new TradingJava(check, errorHandler);
 		var inits = desktop.getTaskInitializers(cancellation);
-		var all = inits.get(0);
+		var all = CompletableFuture.allOf(
+			inits.get(0),
+			inits.get(1)
+		);
 		all.get();
 		desktop.finish();
 return desktop;
@@ -1057,6 +1060,14 @@ throw new RuntimeException(e); }
 				}
 		
 	
+		protected class CategoryObject12 extends external.trading.library.objects.Fiction
+		{
+			public CategoryObject12(String name, IDesktop desktop) {
+				super(name,  desktop);
+				}
+				}
+		
+	
 		protected class CategoryArrow0 extends measurements.arrows.DataLink
 		{
 			public CategoryArrow0(String name, IDesktop desktop) {
@@ -1321,6 +1332,7 @@ throw new RuntimeException(e); }
 			new TradingJava.CategoryObject9("Position", this);
 			new TradingJava.CategoryObject10("Order", this);
 			new TradingJava.CategoryObject11("Chart", this);
+			new TradingJava.CategoryObject12("Fiction", this);
 			new TradingJava.CategoryArrow0("", this);
 			new TradingJava.CategoryArrow1("", this);
 			new TradingJava.CategoryArrow2("", this);

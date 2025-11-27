@@ -1,7 +1,5 @@
 ﻿using BaseTypes.Attributes;
-using DataSetService.Pure.Interfaces;
 using Diagram.UI;
-using System.Text.Json;
 using Trading.Library.Objects;
 
 namespace Trading.Library.CodeCreators
@@ -16,6 +14,7 @@ namespace Trading.Library.CodeCreators
             {
                 { (o) => { return o is DataQuery; }, CreateDataQuery },
                { (o) => { return o is Order; }, CreateOrder },
+               { (o) => { return o is Fiction; }, CreateFiction }
 
             };
         }
@@ -75,5 +74,27 @@ namespace Trading.Library.CodeCreators
             l.Add("}");
             return l;
         }
+
+
+        List<string> CreateFiction(string preffix, object obj)
+        {
+            List<string> l = new List<string>();
+            string pr = preffix;
+            if (pr[pr.Length - 1] != '.')
+            {
+                pr = pr + ".";
+            }
+            var fiction  = obj  as Fiction;
+            l.Add("Trading.Library.Objects.Fiction");
+            l.Add("{");
+            l.Add("");
+            l.Add("\tinternal CategoryObject()");
+            l.Add("\t{");
+            l.Add("\t}");
+            l.Add("}");
+            return l;
+        }
+
+
     }
 }

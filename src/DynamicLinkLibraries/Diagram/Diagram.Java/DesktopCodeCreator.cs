@@ -135,7 +135,7 @@ namespace Diagram.UI.Java
                         l.Add("\t\tvar all = CompletableFuture.allOf(");
                         for (var i = 0; i < n; i++)
                         {
-                            var s = "\t\t\tinits.get(" + i + ");";
+                            var s = "\t\t\tinits.get(" + i + ")";
                             if (i + 1 < n)
                             {
                                 s += ",";
