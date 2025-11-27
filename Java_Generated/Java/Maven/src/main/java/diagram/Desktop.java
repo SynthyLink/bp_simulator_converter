@@ -41,6 +41,23 @@ public class Desktop  implements IDesktop, ICheck, IErrorHandler
         init();
     }
 
+    protected List<CompletableFuture<Void>> getTaskInitializers(ICancellation cancellation)
+    {
+        List<CompletableFuture<Void>> l = new ArrayList<>();
+        var objects = getCategoryObjects();
+       for (var o : objects)
+       {
+           if (o instanceof  IInitializeTask)
+           {
+              var c = ((IInitializeTask)o).InitializeFutureAsync(cancellation);
+              l.add(c);
+           }
+       }
+      //  CompletableFuture<Void>[]  array = new CompletableFuture<Void>[l.size()];
+      //  l.toArray(array);
+        return l;
+    }
+
 
     /**
      * @return
@@ -72,8 +89,8 @@ public class Desktop  implements IDesktop, ICheck, IErrorHandler
      */
     @Override
     public void addCategoryArrow(ICategoryArrow arrow) {
-arrows.add(arrow);
-arrowMap.put(arrow.getArrowName(), arrow);
+        arrows.add(arrow);
+        arrowMap.put(arrow.getArrowName(), arrow);
     }
 
     /**
@@ -119,6 +136,11 @@ arrowMap.put(arrow.getArrowName(), arrow);
 
     @Override
     public void init() {
+
+    }
+
+    protected void finish()
+    {
 
     }
 

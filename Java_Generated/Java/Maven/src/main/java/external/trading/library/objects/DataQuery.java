@@ -29,7 +29,7 @@ public class DataQuery extends CategoryObject implements IInitializeTask, IStart
 
     protected double end;
 
-    protected System period;
+    protected String period;
 
     HistoricalDataMessageDateTime[] data;
 

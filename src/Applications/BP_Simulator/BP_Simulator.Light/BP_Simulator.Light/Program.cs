@@ -65,8 +65,9 @@ namespace BP_Simulator.Light
             var t1 = new DateTime(1899, 12, 30);
             var t2 = new DateTime(1970, 1, 1);
             var d = t2 - t1;
-            return;
-            var obj = new Test.Calculation.Forms.Seriaizable.ObjectTransformer();
+         //   return;
+            // var obj = new Test.Calculation.Forms.Seriaizable.ObjectTransformer();
+            var obj = new Trading.Library.Serializable.Objects.Fiction();
             var t = obj.GetType();
             string st = t.FullName + "," + t.Assembly;
           //  "Test.Calculation.Forms.Seriaizable.ObjectTransformer,Test.Calculation.Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";           var ss = ""
@@ -117,7 +118,7 @@ namespace BP_Simulator.Light
             Abstract3DConverters.StaticExtensionAbstract3DConverters.UseDirectory = true;
            // SaveIcon();
 
-        //    TestType();
+            TestType();
 
             // FormulaMeasurement.CheckValue = (o)                            => o == null;
             FormulaEditor.StaticExtensionFormulaEditor.CheckValue = check;

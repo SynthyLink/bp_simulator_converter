@@ -20,6 +20,7 @@ namespace Trading.Library.Forms.Factory
 
         public override IObjectLabelUI CreateObjectLabel(IPaletteButton button)
         {
+           
             return CreateObjectLabel(button.ReflectionType, button.Kind, button.ButtonImage as Image);
         }
 

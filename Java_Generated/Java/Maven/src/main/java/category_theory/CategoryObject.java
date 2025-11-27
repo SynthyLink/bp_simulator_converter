@@ -13,7 +13,14 @@ public class CategoryObject implements ICategoryObject {
 
     protected  String name;
 
-    public IDesktop desktop;
+    protected IDesktop desktop;
+
+    /*
+    Auxiliary object
+     */
+    protected Object aux;
+
+
 
 
 

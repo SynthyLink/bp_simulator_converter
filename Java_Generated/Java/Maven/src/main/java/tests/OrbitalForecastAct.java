@@ -4,6 +4,7 @@ import error_handler.interfaces.ICheck;
 import general_service.android.AndroidPrinter;
 import general_service.interfaces.IAction;
 import general_service.interfaces.IAlias;
+import generated.OrbitalForecast;
 import measurements.Performer;
 import measurements.differential_equations.processors.RungeProcessor;
 import measurements.interfaces.IDataConsumer;

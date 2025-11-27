@@ -31,6 +31,8 @@ namespace Trading.Java
             l.Add("\tbuyPrice =  " + Performer.Wrap(order.BuyPrice) + ";");
             l.Add("\tsellPrice = " + Performer.Wrap(order.SellPrice) + ";");
             l.Add("\tposition = " + Performer.Wrap(order.Position) + ";");
+            l.Add("}");
+            l.Add("}");
             return l;
         }
 
