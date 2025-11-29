@@ -53,6 +53,7 @@ export class Performer
         }
     }
 
+
     public getPrinter(): IPrinter {
         return this.printer;
     }

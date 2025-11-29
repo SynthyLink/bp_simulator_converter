@@ -23,11 +23,14 @@ export interface IDesktop
 
     getObjects(): IObject[];
 
-
     getCheck(): ICheck;
 
     setCheck(check: ICheck): void;
 
     getCategoryObject(name: string): ICategoryObject;
+
+    initializeTaksAsync(cancel: AbortController): Promise<void>;
+
+    finish(): void
 
 }
