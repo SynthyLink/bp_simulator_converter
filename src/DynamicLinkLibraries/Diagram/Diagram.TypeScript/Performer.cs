@@ -1,4 +1,5 @@
 ﻿using Diagram.UI.Interfaces;
+using ErrorHandler;
 
 namespace Diagram.UI.TypeScript
 {
@@ -29,21 +30,30 @@ namespace Diagram.UI.TypeScript
      
         public string StringValue(object o)
         {
-            if (o == null)
+            Exception exception = null;
+            try
             {
+                if (o == null)
+                {
 
+                }
+                Type t = o.GetType();
+                if (t.Equals(typeof(double)))
+                {
+                    double a = (double)o;
+                    return DoubleToString(a);
+                }
+                if (t.Equals(typeof(bool)))
+                {
+                    return ((bool)o) ? "true" : "false";
+                }
+                return o + "";
             }
-            Type t = o.GetType();
-            if (t.Equals(typeof(double)))
+            catch (Exception ex)
             {
-                double a = (double)o;
-                return DoubleToString(a);
+                exception = ex;
             }
-            if (t.Equals(typeof(bool)))
-            {
-                return ((bool)o) ? "true" : "false";
-            }
-            return o + "";
+            throw IncludedException.Get(exception);
         }
 
         /// <summary>

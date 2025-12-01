@@ -1,16 +1,16 @@
 ﻿using AssemblyService.Attributes;
 
-namespace Trading.Java
+namespace Trading.TypeScript
 {
-    [InitAssembly]
-    public static class StaticExtensionTradingJava
-    {
 
-        static StaticExtensionTradingJava()
+    [InitAssembly]
+    public static class StaticExtensionTradingTypeScript
+    {
+        static StaticExtensionTradingTypeScript()
         {
             new ClassCodeCreator();
         }
-        
+
         #region Public Members
 
         /// <summary>
@@ -22,6 +22,7 @@ namespace Trading.Java
         }
 
         #endregion
+
 
     }
 }

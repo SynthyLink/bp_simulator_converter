@@ -122,7 +122,7 @@ namespace DataPerformer.Formula.TypeScript
         private static string[] fraction = new string[] { " = (", ") / (", ");" };
 
 
-        private static string[] equals = new string[] { " = (", ").Equals(", ");" };
+        private static string[] equals = new string[] { " = (", ") === (", ");" };
 
 
         protected Dictionary<string, Tuple<int, object>> Output

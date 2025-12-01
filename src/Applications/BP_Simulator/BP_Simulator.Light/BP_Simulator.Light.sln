@@ -531,6 +531,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Java", "..\..\..\Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPerformer.Portable.Python", "..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable.Python\DataPerformer.Portable.Python.csproj", "{69A31495-3955-CC1B-2BFD-A6DC9A2F2B83}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.TypeScript", "..\..\..\ExternalLibraries\Trading\Trading.TypeScript\Trading.TypeScript.csproj", "{7C753A25-CC9B-49F5-A303-C1607AA2E90C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -5519,6 +5521,26 @@ Global
 		{69A31495-3955-CC1B-2BFD-A6DC9A2F2B83}.Release|x64.Build.0 = Release|Any CPU
 		{69A31495-3955-CC1B-2BFD-A6DC9A2F2B83}.Release|x86.ActiveCfg = Release|Any CPU
 		{69A31495-3955-CC1B-2BFD-A6DC9A2F2B83}.Release|x86.Build.0 = Release|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Debug|Win32.Build.0 = Debug|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Debug|x64.Build.0 = Debug|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Debug|x86.Build.0 = Debug|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Release|Win32.ActiveCfg = Release|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Release|Win32.Build.0 = Release|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Release|x64.ActiveCfg = Release|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Release|x64.Build.0 = Release|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Release|x86.ActiveCfg = Release|Any CPU
+		{7C753A25-CC9B-49F5-A303-C1607AA2E90C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

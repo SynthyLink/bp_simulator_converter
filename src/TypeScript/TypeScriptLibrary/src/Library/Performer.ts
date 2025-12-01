@@ -53,6 +53,64 @@ export class Performer
         }
     }
 
+    public findMaxWithReduce(numbers: number[]): number | undefined {
+        if (numbers.length === 0) {
+            return undefined;
+        }
+
+        return numbers.reduce((max, current) => {
+            return current > max ? current : max;
+        }, -Infinity); // Start with -Infinity to ensure the first element is always greater
+    }
+
+    public findMinWithReduce(numbers: number[]): number | undefined {
+        if (numbers.length === 0) {
+            return undefined;
+        }
+
+        return numbers.reduce((min, current) => {
+            return current > min ? current : min;
+        }, Infinity); // Start with -Infinity to ensure the first element is always greater
+    }
+
+
+
+    public calculateAverage(numbers: number[]): number {
+        if (numbers.length === 0) {
+            return 0; // Or throw an error, depending on your requirements
+        }
+
+        const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        return sum / numbers.length;
+    }
+
+
+    public calculateAverageRobust(data: any[]): number {
+        const numbers = data.filter((item): item is number => typeof item === 'number'); // Type guard
+
+        if (numbers.length === 0) {
+            return 0;
+        }
+
+        const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        return sum / numbers.length;
+    }
+
+
+    public calculateAverageNull(data: any[]): number | undefined {
+        const numbers = data.filter((item): item is number => typeof item === 'number'); // Type guard
+
+        if (numbers.length != data.length) {
+            return undefined;
+        }
+
+        const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        return sum / numbers.length;
+    }
+
+
+
+
 
     public getPrinter(): IPrinter {
         return this.printer;

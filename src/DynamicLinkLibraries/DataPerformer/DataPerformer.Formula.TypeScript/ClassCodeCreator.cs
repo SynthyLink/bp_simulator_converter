@@ -114,8 +114,16 @@ namespace DataPerformer.Formula.TypeScript
                 var name = "\"" + m.Name + "\"";
                 var type = m.Type;
                 var v = typeCreator.GetDefaultValue(type);
+                var st = v;
                 var pr = m.Parameter();
-                var st = performer.StringValue(pr);
+                if (pr != null)
+                {
+                    st = performer.StringValue(pr);
+                }
+                else
+                {
+
+                }
                 l.Add("this.addVariableValue(" + name + ", " + v + ", " + st + ");");
 
             }
