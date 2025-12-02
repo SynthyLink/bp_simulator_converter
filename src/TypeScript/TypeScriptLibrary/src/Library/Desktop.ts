@@ -46,7 +46,7 @@ export class Desktop implements IDesktop
         await Promise.all(init);
     }
 
-    public async LoadAsync(cancel: AbortController): Promise<void> {
+    public async loadAsync(cancel: AbortController): Promise<void> {
         await this.initializeTaksAsync(cancel);
         this.finish();
     }

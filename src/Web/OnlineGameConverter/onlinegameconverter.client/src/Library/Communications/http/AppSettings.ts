@@ -1,6 +1,4 @@
-let server = 'https://localhost:7168';
-//server = 'http://31.10.82.229:5218';
-server = 'https://31.10.82.229:7168';
+let server = 'http://localhost:5218';
 
 export function setCommunicationServer(s: string): void
 {

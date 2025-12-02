@@ -2,7 +2,9 @@ import { Actor } from "./src/Tests/Actor/Actor";
 
 let a = new Actor();
 
-a.actPI()
+
+//await a.actDonchianLoad();
+//a.actPI()
 //a.testDate();
 
 //a.actTime();

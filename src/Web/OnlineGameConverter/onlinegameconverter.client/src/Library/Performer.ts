@@ -53,6 +53,65 @@ export class Performer
         }
     }
 
+    public findMaxWithReduce(numbers: number[]): number | undefined {
+        if (numbers.length === 0) {
+            return undefined;
+        }
+
+        return numbers.reduce((max, current) => {
+            return current > max ? current : max;
+        }, -Infinity); // Start with -Infinity to ensure the first element is always greater
+    }
+
+    public findMinWithReduce(numbers: number[]): number | undefined {
+        if (numbers.length === 0) {
+            return undefined;
+        }
+
+        return numbers.reduce((min, current) => {
+            return current > min ? current : min;
+        }, Infinity); // Start with -Infinity to ensure the first element is always greater
+    }
+
+
+
+    public calculateAverage(numbers: number[]): number {
+        if (numbers.length === 0) {
+            return 0; // Or throw an error, depending on your requirements
+        }
+
+        const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        return sum / numbers.length;
+    }
+
+
+    public calculateAverageRobust(data: any[]): number {
+        const numbers = data.filter((item): item is number => typeof item === 'number'); // Type guard
+
+        if (numbers.length === 0) {
+            return 0;
+        }
+
+        const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        return sum / numbers.length;
+    }
+
+
+    public calculateAverageNull(data: any[]): number | undefined {
+        const numbers = data.filter((item): item is number => typeof item === 'number'); // Type guard
+
+        if (numbers.length != data.length) {
+            return undefined;
+        }
+
+        const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        return sum / numbers.length;
+    }
+
+
+
+
+
     public getPrinter(): IPrinter {
         return this.printer;
     }
@@ -372,34 +431,6 @@ export class Performer
             t.set(key, value);
         }
     }
-
-    public copyMapKeys<T, S>(s: Map<T, S>, t: Map<T, S>): void {
-        for (const key of s.keys()) {
-            t.set(key, s.get(key) as undefined as S);
-        }
-    }
-
-    public copyMapFromArray(x: [][], map: Map<string, string>): void {
-        for (let y of x)
-        {
-            map.set(y[0] + "", y[1] + "");
-        }
-    }
-
-
-    public copyMapForech<T, S>(s: Map<T, S>, t: Map<T, S>): void {
-        s.forEach((x, y, s) => { t.set(y, x) });
-    }
-
-
-    public copyMapEntries<T, S>(s: Map<T, S>, t: Map<T, S>): void {
-        var e = s.entries();
-        for (const [key, value] of e) {
-            t.set(key, value);
-        }
-    }
-
-
 
     public implementsType(o: unknown, type: string): boolean {
         let obj: IObject = o as IObject;

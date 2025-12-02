@@ -1,10 +1,9 @@
-import type Stream from "stream";
 
 export interface ITradingDatabaseHistoryInterface {
 
-    getSymbolsAsync(cancel: AbortController): Promise<Map<String, String>>
+    getSymbolsAsync(cancel: AbortController): Promise<Map<String, any>>
 
-    getHistoricalDataMessageDateTimesAsync(id: Any, begin: number,
+    getHistoricalDataMessageDateTimesAsync(id: any, begin: number,
         end: number, cancellation: AbortController): Promise<[]>;
 
 }
