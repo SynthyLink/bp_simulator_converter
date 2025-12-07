@@ -28,12 +28,12 @@ public class AsyncWhenAllExample {
             System.out.println("All async operations completed successfully.");
 
             // Now we can safely get the results from individual futures
-            String result1 = future1.get(); // No blocking here as they are already done
+            future1.get(); // No blocking here as they are already done
             String result2 = future2.get();
             String result3 = future3.get();
 
             System.out.println("Results: ");
-            System.out.println("- " + result1);
+            System.out.println("- ");
             System.out.println("- " + result2);
             System.out.println("- " + result3);
 

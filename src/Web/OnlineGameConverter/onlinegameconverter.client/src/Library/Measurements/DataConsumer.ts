@@ -7,11 +7,14 @@ import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import type { IPrintedObject } from "../Interfaces/IPrintedObject";
 import type { IPrinter } from "../Interfaces/IPrinter";
 import type { IDataConsumer } from "./Interfaces/IDataConsumer";
+import { IIterator } from "./Interfaces/IIterator";
+import type { IIteratorConsumer } from "./Interfaces/IIteratorConsumer";
 import type { IMeasurements } from "./Interfaces/IMeasurements";
 import type { ITimeMeasurementConsumer } from "./Interfaces/ITimeMeasurementConsumer";
 import type { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProvider";
 
-export class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow, ITimeMeasurementConsumer, IPrintedObject, ICheckHolder
+export class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow,
+    ITimeMeasurementConsumer, IPrintedObject, ICheckHolder, IIteratorConsumer
 {
     constructor(desktop: IDesktop, name: string)
     {
@@ -23,8 +26,14 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         this.types.push("ITimeMeasurementConsumer");
         this.types.push("IPrintedObject");
         this.types.push("ICheckHolder");
+        this.types.push("IIteratorConsumer");
         this.tms = this;
         this.dataConsumer = this;
+    }
+    addIterator(iterator: IIterator): void {
+        this.iterator = iterator;
+    }
+    removeIterator(iterator: IIterator): void {
     }
     getCheck(): ICheck {
         return this.checker;
@@ -54,14 +63,6 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         return tm.getTime();
     }
 
-  
-    tms!: ITimeMeasurementConsumer; 
-
-    timeMeasurement !: ITimeMeasurementProvider;
-
-    success: boolean = true;
-
-    protected dataConsumer !: IDataConsumer;
 
    
     
@@ -77,8 +78,6 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
 
     }
 
-    private measurements: IMeasurements[] = [];
-
    
     getAllMeasurements(): IMeasurements[] {
         return this.measurements;
@@ -86,5 +85,22 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     addMeasurements(item: IMeasurements): void {
         this.measurements.push(item);
     }
+
+
+
+
+    private measurements: IMeasurements[] = [];
+
+
+    tms!: ITimeMeasurementConsumer;
+
+    timeMeasurement !: ITimeMeasurementProvider;
+
+    success: boolean = true;
+
+    protected dataConsumer !: IDataConsumer;
+
+    protected iterator !: IIterator;
+
 
 }

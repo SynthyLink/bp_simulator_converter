@@ -22,6 +22,7 @@ import { RungeProcessor } from '../../Library/Measurements/DifferentialEquations
 import { PefrormerMeasuremets } from '../../Library/Measurements/PefrormerMeasuremets';
 import { DataRuntimeConsumerODE } from '../../Library/Runtime/DataRuntimeConsumerODE';
 import { toDateTime } from '../../Algorithms/OrbitalForecastCalculation/OrbitalData';
+import { Donchian } from '../Donchian';
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -60,6 +61,12 @@ export class Actor
             }
             rl.close();
         });
+    }
+
+    public async actDonchianLoad(): Promise<void> {
+        var d = new Donchian();
+        var ac = new AbortController();
+        await d.loadAsync(ac);
     }
 
     public testDate(): void {

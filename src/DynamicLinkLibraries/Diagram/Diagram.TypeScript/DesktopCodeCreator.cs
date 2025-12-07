@@ -42,7 +42,8 @@ namespace Diagram.UI.TypeScript
         /// <param name="className">Name of desktop class</param>
         /// <param name="staticClass">The "static class" sign</param>
         /// <returns>The code</returns>
-        List<string> IDesktopCodeCreator.CreateCode(IComponentCollection desktop, string namespacE, string className, bool staticClass)
+        List<string> IDesktopCodeCreator.CreateCode(IComponentCollection desktop, string namespacE, 
+            string className, bool staticClass)
         {
             Exception ex;
             try
@@ -104,7 +105,15 @@ namespace Diagram.UI.TypeScript
                     var pr = "\t\tnew " + className + "_" + "CategoryArrow_" + i + "(this, " + name + ");";
                     l.Add(pr);
                 }
+                if (!staticClass)
+                {
+                    l.Add("this.finish()");
+                }
+                l.Add("}");
                 l.Add("");
+
+                l.Add("finish() : void");
+                l.Add("{");
 
                 l.Add("\t\tlet objects = this.getCategoryObjects();");
                 l.Add("\t\tlet arrows = this.getCategoryArrows();");

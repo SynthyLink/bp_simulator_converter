@@ -8,23 +8,11 @@ import type { ICategoryObject } from "./Interfaces/ICategoryObject";
 import type { ICheck } from "./Interfaces/ICheck";
 import type { IDesktop } from "./Interfaces/IDesktop";
 import type { IObject } from "./Interfaces/IObject";
+import type { IInitializeTask } from "./Interfaces/IInitializeTask"
+import { Performer } from "./Performer";
 
 export class Desktop implements IDesktop
 {
-    addObject(obj: IObject): void {
-        this.objects.push(obj);
-    }
-    getObjects(): IObject[] {
-        return this.objects;
-    }
-    setCheck(check: ICheck): void {
-        this.check = check
-    }
-    getCheck() {
-        return  this.check;
-    }
-
-
     protected categoryObjects: ICategoryObject[] = [];
 
     protected categoryArrows: ICategoryArrow[] = [];
@@ -42,6 +30,45 @@ export class Desktop implements IDesktop
     protected target!: ICategoryObject;
 
     protected check !: ICheck;
+
+    protected performer: Performer = new Performer();
+
+
+     async initializeTaksAsync(cancel: AbortController): Promise<void> {
+
+        var init = [];
+        var ii = this.performer.getByInterface(this, "IInitializeTask");
+        for (var i of ii) {
+            var k = i as unknown as IInitializeTask;
+            var kk = k.initializeTaskAsync(cancel);
+            init.push(k);
+        }
+        await Promise.all(init);
+    }
+
+    public async loadAsync(cancel: AbortController): Promise<void> {
+        await this.initializeTaksAsync(cancel);
+        this.finish();
+    }
+
+    public finish(): void {
+
+    }
+
+
+     addObject(obj: IObject): void {
+        this.objects.push(obj);
+    }
+    getObjects(): IObject[] {
+        return this.objects;
+    }
+    setCheck(check: ICheck): void {
+        this.check = check
+    }
+    getCheck() {
+        return this.check;
+    }
+
 
     getCategoryObject(name: string): ICategoryObject {
         for (var o of this.categoryObjects) {

@@ -167,9 +167,7 @@ class PI_CategoryObject_3 extends RecursiveFormula
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["d", 0 ],
-			["c", 0 ],
-			["a", 0 ],
+			["a", 0 ]
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("a", 0, 0);
@@ -279,11 +277,15 @@ export class PI extends Desktop
 		new PI_CategoryObject_2(this, "Data");
 		new PI_CategoryObject_3(this, "Recursive");
 		new PI_CategoryObject_4(this, "Chart");
-		new PI_CategoryArrow_0(this, "2");
-		new PI_CategoryArrow_1(this, "1");
-		new PI_CategoryArrow_2(this, "3");
-		new PI_CategoryArrow_3(this, "4");
+		new PI_CategoryArrow_0(this, "");
+		new PI_CategoryArrow_1(this, "");
+		new PI_CategoryArrow_2(this, "");
+		new PI_CategoryArrow_3(this, "");
+this.finish()
+}
 
+finish() : void
+{
 		let objects = this.getCategoryObjects();
 		let arrows = this.getCategoryArrows();
 

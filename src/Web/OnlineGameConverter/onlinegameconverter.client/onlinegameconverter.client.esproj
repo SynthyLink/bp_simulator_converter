@@ -12,7 +12,4 @@
     <None Remove="vscode\**" />
     <TypeScriptConfiguration Remove="vscode\**" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\Orbital\" />
-  </ItemGroup>
 </Project>

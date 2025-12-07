@@ -2,11 +2,14 @@ import { Actor } from "./src/Tests/Actor/Actor";
 
 let a = new Actor();
 
-a.testDate();
+
+//await a.actDonchianLoad();
+//a.actPI()
+//a.testDate();
 
 //a.actTime();
 
-a.actOrbitCalculation(true);// 1770457504
+//a.actOrbitCalculation(true);// 1770457504
 
 //a.actDensity();
 

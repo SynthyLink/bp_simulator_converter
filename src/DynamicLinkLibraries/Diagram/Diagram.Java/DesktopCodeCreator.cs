@@ -76,13 +76,20 @@ namespace Diagram.UI.Java
         }
 
 
-        protected override List<string> CreateCode(IComponentCollection desktop, string namespacE, string className, bool staticClass)
+        protected override List<string> CreateCode(IComponentCollection desktop, string namespacE, string className, 
+            bool staticClass)
         {
             Exception exception;
             try
             {
                 var l = base.CreateCode(desktop, namespacE, className, staticClass);
                 l.Add("package generated;");
+                l.Add("");
+                l.Add("import java.util.concurrent.CompletableFuture;");
+                l.Add("");
+                l.Add("import java.util.concurrent.ExecutionException;");
+                l.Add("");
+                l.Add("import cancellation.interfaces.ICancellation;");
                 l.Add("");
                 l.Add("import diagram.Desktop;");
                 l.Add("");
@@ -96,9 +103,61 @@ namespace Diagram.UI.Java
                 l.Add("{");
                 l.Add("");
                 classCodeCreator = StaticExtensionDiagramUI.Creators["Java"];
+                if (staticClass)
+                {
+                    l.Add("\tpublic static IDesktop getDesktop(ICheck check, IErrorHandler errorHandler, ICancellation cancellation)");
+                    l.Add("\t{");
+                    l.Add("\ttry {");
+                    var n = 0;
+                    desktop.ForEach((IInitializeTask task) => { ++n; });
+
+
+
+                    l.Add("\t\tvar desktop = new " + className + "(check, errorHandler);");
+                    if (n == 0)
+                    {
+                        l.Add("\t\tdesktop.finish();");
+                        l.Add("return desktop;");
+                        l.Add("\t}");
+                        l.Add("");
+                        return l;
+                    }
+
+
+                    l.Add("\t\tvar inits = desktop.getTaskInitializers(cancellation);");
+                    if (n == 1)
+                    {
+                        l.Add("\t\tvar all = inits.get(0);");
+
+                    }
+                    else
+                    {
+                        l.Add("\t\tvar all = CompletableFuture.allOf(");
+                        for (var i = 0; i < n; i++)
+                        {
+                            var s = "\t\t\tinits.get(" + i + ")";
+                            if (i + 1 < n)
+                            {
+                                s += ",";
+                            }
+
+                            l.Add(s);
+
+                        }
+                        l.Add("\t\t);");
+                    }
+                    l.Add("\t\tall.get();");
+                    l.Add("\t\tdesktop.finish();");
+                    l.Add("return desktop;");
+                    l.Add("\t}");
+                    l.Add("catch (InterruptedException | ExecutionException e) {");
+                    l.Add("throw new RuntimeException(e); }");
+                    l.Add("\t}");
+                    l.Add("");
+                }
                 var ll = CreateClasses(desktop, namespacE, className, staticClass);
                 performer.Add(l, ll, 1);
-   
+
                 l.Add("\tpublic " + className + "() {");
                 l.Add("\t\tsuper();");
                 l.Add("\t}");
@@ -115,6 +174,15 @@ namespace Diagram.UI.Java
                 l.Add("\t{");
                 ll = CreateObjects(desktop, namespacE, className, staticClass);
                 performer.Add(l, ll, 1);
+                if (!staticClass)
+                {
+                    l.Add("\t\tfinish();");
+                }
+                l.Add("\t}");
+                l.Add("");
+                AddOverride(l);
+                l.Add("\tprotected void finish()");
+                l.Add("\t{");
                 ll = CreateLinks(desktop, namespacE, className, staticClass);
                 performer.Add(l, ll, 2);
                 l.Add("\t\tpostSet();");
@@ -122,7 +190,6 @@ namespace Diagram.UI.Java
                 l.Add("");
                 l.Add("");
                 l.Add("}");
-
                 return l;
             }
             catch (Exception ex)

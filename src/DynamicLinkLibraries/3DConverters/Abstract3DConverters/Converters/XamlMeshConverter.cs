@@ -1,5 +1,4 @@
-﻿using System.Net.NetworkInformation;
-using System.Text;
+﻿using System.Text;
 using System.Xml;
 
 using Abstract3DConverters.Attributes;
