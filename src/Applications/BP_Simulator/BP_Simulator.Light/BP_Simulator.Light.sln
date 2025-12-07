@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36518.9 d17.14
+VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BP_Simulator.Light", "BP_Simulator.Light\BP_Simulator.Light.csproj", "{5ACE77F7-6C16-45EB-8B42-28B05E1B1B06}"
 EndProject
@@ -530,6 +530,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Java", "..\..\..\ExternalLibraries\Trading\Trading.Java\Trading.Java.csproj", "{FDB3AE8B-0411-419C-BFE7-ABD12F7548A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPerformer.Portable.Python", "..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable.Python\DataPerformer.Portable.Python.csproj", "{69A31495-3955-CC1B-2BFD-A6DC9A2F2B83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPerformer.Formula.Python", "..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Formula.Python\DataPerformer.Formula.Python.csproj", "{983544E1-C4AC-D334-F799-B44AA8867330}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -5519,6 +5521,26 @@ Global
 		{69A31495-3955-CC1B-2BFD-A6DC9A2F2B83}.Release|x64.Build.0 = Release|Any CPU
 		{69A31495-3955-CC1B-2BFD-A6DC9A2F2B83}.Release|x86.ActiveCfg = Release|Any CPU
 		{69A31495-3955-CC1B-2BFD-A6DC9A2F2B83}.Release|x86.Build.0 = Release|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Debug|Win32.Build.0 = Debug|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Debug|x64.Build.0 = Debug|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Debug|x86.Build.0 = Debug|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Release|Any CPU.Build.0 = Release|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Release|Win32.ActiveCfg = Release|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Release|Win32.Build.0 = Release|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Release|x64.ActiveCfg = Release|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Release|x64.Build.0 = Release|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Release|x86.ActiveCfg = Release|Any CPU
+		{983544E1-C4AC-D334-F799-B44AA8867330}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
