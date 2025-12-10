@@ -156,7 +156,7 @@ namespace DataPerformer.Formula.TypeScript
                 {
                     performer.Add(l, la, 2);
                 }
-                l.Add("\t\tthis.performer.setAliasMap(map, this);");
+                l.Add("\t\tself.performer.setAliasMap(map, this);");
             }
             if (obj is IMeasurements m)
             {
@@ -226,7 +226,7 @@ namespace DataPerformer.Formula.TypeScript
         public static Dictionary<string, List<string>> Create(string id, Dictionary<string, string> dictionary)
         {
             var l = new List<string>();
-            l.Add("let " + id + " = new Map<string, string>(");
+            /*l.Add("let " + id + " = new Map<string, string>(");
             int n = dictionary.Count;
             int i = 0;
             l.Add("[");
@@ -247,7 +247,12 @@ namespace DataPerformer.Formula.TypeScript
                     ++i;
                 }
                 l.Add("]);");
-            }
+            }*/
+
+            l.Add(id + ": Dict[str, str] = {");
+            string s = id + ": Dict[str, str] = {";
+            var foo = dictionary.Select((string key, string value) => key + ": " + value);
+            //s += ",".Join(dictionary.Select((string key, string value) => key + ": " + value))
 
 
             var d = new Dictionary<string, List<string>>();

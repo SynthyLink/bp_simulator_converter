@@ -67,7 +67,7 @@ namespace DataPerformer.Portable.Python
             l.Add(s);
             performer.AddObjectConstructor(l);
             performer.Add(l, ll, 1);
-            l.Add("\t\tthis.setLinks(map);");
+            l.Add("\t\tself.setLinks(map);");
             return l;
         }
 
