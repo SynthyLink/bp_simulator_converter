@@ -7,7 +7,7 @@ using FormulaEditor.CSharp;
 using FormulaEditor.Interfaces;
 using System.Text;
 
-namespace DataPerformer.Formula.TypeScript
+namespace DataPerformer.Formula.Python
 {
 
 
@@ -32,7 +32,7 @@ namespace DataPerformer.Formula.TypeScript
             set;
         }
 
-        private static ITreeCodeCreator codeCreator = TypeScript.TreeCodeCreator.CodeCreator;
+        private static ITreeCodeCreator codeCreator = Python.TreeCodeCreator.CodeCreator;
 
         /// <summary>
         /// Local code creator
@@ -153,17 +153,14 @@ namespace DataPerformer.Formula.TypeScript
             else
             {
                 l.Add(consturctor + "(FormulaEditor.ObjectFormulaTree[] trees)");
-                l.Add("{");
                 l.Add("\tthis.trees = trees;");
             }
             l.Add("init() : void");
-            l.Add("{");
             if (ob is IMeasurements)
             {
-                l.Add("\tvar all = this.getAllMeasurements();");
+                l.Add("\tvar all = self.getAllMeasurements();");
             }
             performer.Add(l, initializers as List<string>, 1);
-            l.Add("}");
             l.Add("");
             foreach (string s in variables)
             {
@@ -178,7 +175,7 @@ namespace DataPerformer.Formula.TypeScript
         private List<string> PreCreateCode(object obj, out ITreeCodeCreator local,
              out IList<string> variables, out IList<string> initializers, string current)
         {
-            var lcode = TypeScript.TreeCodeCreator.CreateCode(obj, trees, codeCreator,
+            var lcode = Python.TreeCodeCreator.CreateCode(obj, trees, codeCreator,
                 out local, out variables, out initializers, current);
             ObjectFormulaTree[] tr = local.Trees;
             foreach (ObjectFormulaTree tree in tr)
@@ -189,11 +186,9 @@ namespace DataPerformer.Formula.TypeScript
             {
             }
             var l = new List<string>();
-            l.Add("calculateTree() : void");
-            l.Add("{");
-            l.Add("\tthis.success = true;");
+            l.Add("calculateTree() -> None:");
+            l.Add("\tself.success = true;");
             performer.Add(l, lcode as List<string>, 1);
-            l.Add("}");
             return l;
         }
 
@@ -214,8 +209,6 @@ namespace DataPerformer.Formula.TypeScript
                 l.Add("\t\t" + s);
             }
             l.Add("");
-            l.Add("\t}");
-            l.Add("}");
             foreach (string s in l)
             {
                 sb.Append(s + Environment.NewLine);
@@ -231,9 +224,7 @@ namespace DataPerformer.Formula.TypeScript
             // init.Add("this.mapOperations.set(" + n + ", this." + f + ");");
             func.Add("");
             func.Add(f + "() : any");
-            func.Add("{");
-            func.Add("\treturn this.success ? this." + tid + " : undefined;");
-            func.Add("}");
+            func.Add("\treturn self.success ? this." + tid + " : undefined;");
         }
 
         #endregion

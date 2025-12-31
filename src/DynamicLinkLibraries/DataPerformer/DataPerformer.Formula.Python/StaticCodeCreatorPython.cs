@@ -6,9 +6,9 @@ using ErrorHandler;
 using FormulaEditor;
 using FormulaEditor.CodeCreators.Interfaces;
 
-namespace DataPerformer.Formula.TypeScript
+namespace DataPerformer.Formula.Python
 {
-    internal static  class StaticCodeCreatorTypeScript
+    internal static  class StaticCodeCreatorPython
     {
 
         
@@ -310,7 +310,6 @@ namespace DataPerformer.Formula.TypeScript
                         }
                     }
                     code.Add("if (" + rc + ")");
-                    code.Add("{");
                     for (int k = 1; k < 3; k++)
                     {
                         ObjectFormulaTree tt = oft[k];
@@ -356,12 +355,9 @@ namespace DataPerformer.Formula.TypeScript
                         }
                         if (k == 1)
                         {
-                            code.Add("}");
                             code.Add("else");
-                            code.Add("{");
                         }
                     }
-                    code.Add("}");
                     continue;
                 }
                 busy.Add(t);

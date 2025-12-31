@@ -9,7 +9,7 @@ using Diagram.UI.Interfaces;
 
 using FormulaEditor.Interfaces;
 
-namespace DataPerformer.Formula.TypeScript
+namespace DataPerformer.Formula.Python
 {
     /// <summary>
     /// Creator of TS code
@@ -29,11 +29,6 @@ namespace DataPerformer.Formula.TypeScript
         {
             return obj.GetType().Name;
         }
-
-
-
-
-
 
         static Diagram.UI.Python.Performer performer = new();
 
@@ -125,12 +120,12 @@ namespace DataPerformer.Formula.TypeScript
         }
 
 
-        static List<string> CreateTreeCollection(string preffix, ITreeCollection obj, Diagram.Python.CodeCreator creator)
+        static List<string> CreateTreeCollection(string prefix, ITreeCollection obj, Diagram.Python.CodeCreator creator)
         {
             var l = new List<string>();
             bool check = true;
             ITreeCollectionCodeCreator treeCollectionCodeCreator = CodeCreator;
-            var lt = treeCollectionCodeCreator.CreateCode(obj, obj.Trees, preffix, "internal ", check);
+            var lt = treeCollectionCodeCreator.CreateCode(obj, obj.Trees, prefix, "internal ", check);
 
             if (treeCollectionCodeCreator is IAdditionalClassCodeCreator add)
             {
@@ -144,9 +139,8 @@ namespace DataPerformer.Formula.TypeScript
                     l.Add("");
                 }
             }
-            var cs = SClassString(preffix, obj);
+            var cs = SClassString(prefix, obj);
             l.Add(cs);
-            l.Add("{");
             performer.AddObjectConstructor(l);
             if (obj is IAlias ali)
             {
@@ -156,7 +150,7 @@ namespace DataPerformer.Formula.TypeScript
                 {
                     performer.Add(l, la, 2);
                 }
-                l.Add("\t\tself.performer.setAliasMap(map, this);");
+                l.Add("\t\tself.performer.setAliasMap(map, this)");
             }
             if (obj is IMeasurements m)
             {
@@ -220,46 +214,14 @@ namespace DataPerformer.Formula.TypeScript
             return CreateTreeCollection(preffix, obj as ITreeCollection, cc);
         }
 
-  
-   
-
         public static Dictionary<string, List<string>> Create(string id, Dictionary<string, string> dictionary)
         {
-            var l = new List<string>();
-            /*l.Add("let " + id + " = new Map<string, string>(");
-            int n = dictionary.Count;
-            int i = 0;
-            l.Add("[");
-            if (n == 0)
-            {
-                l.Add("]);");
-            }
-            else
-            {
-                foreach (var t in dictionary)
-                {
-                    var s = "\t[\"" + t.Key + "\", \"" + t.Value + "\" ]";
-                    if (i < (n - 1))
-                    {
-                        s += ',';
-                    }
-                    l.Add(s);
-                    ++i;
-                }
-                l.Add("]);");
-            }*/
-
-            l.Add(id + ": Dict[str, str] = {");
             string s = id + ": Dict[str, str] = {";
-            var foo = dictionary.Select((string key, string value) => key + ": " + value);
-            //s += ",".Join(dictionary.Select((string key, string value) => key + ": " + value))
+            IEnumerable<string> foo = dictionary.Select(e => e.Key + ": " + e.Value);
+            s += string.Join(",", dictionary.Select(e => e.Key + ": " + e.Value));
+            s += "}";
 
-
-            var d = new Dictionary<string, List<string>>();
-            d["code"] = l;
-            return d;
+            return new Dictionary<string, List<string>>() { { "code", [s] } };
         }
- 
-
     }
 }

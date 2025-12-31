@@ -1,5 +1,5 @@
-﻿using System.Text;
-using BaseTypes;
+﻿using BaseTypes;
+using BaseTypes.Attributes;
 using BaseTypes.CodeCreator.Interfaces;
 using BaseTypes.Interfaces;
 using DataPerformer.Interfaces;
@@ -12,10 +12,12 @@ using FormulaEditor;
 using FormulaEditor.CodeCreators;
 using FormulaEditor.CodeCreators.Interfaces;
 using FormulaEditor.Interfaces;
+using System.Text;
 
-namespace DataPerformer.Formula.TypeScript
+namespace DataPerformer.Formula.Python
 {
-    internal class TreeCodeCreator : SeparatorCodeCreator, IOperationSeparatorCreator
+	[Language("Python")]
+	internal class TreeCodeCreator : SeparatorCodeCreator, IOperationSeparatorCreator
     {
         #region Fields
 
@@ -305,8 +307,6 @@ namespace DataPerformer.Formula.TypeScript
 
         }
 
-
-
         /// <summary>
         /// Creates Code from tree
         /// </summary>
@@ -481,7 +481,7 @@ namespace DataPerformer.Formula.TypeScript
             try
             {
                 local = null;
-                IList<string> l = StaticCodeCreatorTypeScript.CreateCode(obj, trees, creator, out local,
+                IList<string> l = StaticCodeCreatorPython.CreateCode(obj, trees, creator, out local,
                     out variables, out initializers,  current);
                 ObjectFormulaTree[] lt = local.Trees;
                  foreach (ObjectFormulaTree tree in lt)
@@ -528,8 +528,7 @@ namespace DataPerformer.Formula.TypeScript
                 guid = guid.Replace('-', '_');
                 string ss = "namespace Calculation";
                 // ss += guid;
-                ss += "" + Environment.NewLine + "{" + Environment.NewLine +
-                    Environment.NewLine + "\tpublic class Calculate ";
+                ss += "\n\n\n\tclass Calculate ";
                 return ss;
             }
         }
@@ -888,7 +887,6 @@ namespace DataPerformer.Formula.TypeScript
                 }
                 string[] par = new string[parameters.Length];
                 list.Add("for (int i = 0; i < " + nam + "; i++)");
-                list.Add("{");
                 string si = "i";
                 string sf = si + "]";
                 string retLocal = retp + sf;
@@ -929,7 +927,6 @@ namespace DataPerformer.Formula.TypeScript
                 {
                     initializers.AddRange(init);
                 }
-                list.Add("}");
                 success = true;
                 return;
             }

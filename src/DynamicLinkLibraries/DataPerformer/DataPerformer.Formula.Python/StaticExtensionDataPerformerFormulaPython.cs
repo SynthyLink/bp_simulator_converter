@@ -1,18 +1,18 @@
 ﻿using AssemblyService.Attributes;
 using FormulaEditor;
 
-namespace DataPerformer.Formula.TypeScript
+namespace DataPerformer.Formula.Python
 {
     /// <summary>
     /// Static extensions
     /// </summary>
     [InitAssembly]
-    public static class StaticExtensionDataPerformerFormulaTypeScript
+    public static class StaticExtensionDataPerformerFormulaPython
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        static StaticExtensionDataPerformerFormulaTypeScript()
+        static StaticExtensionDataPerformerFormulaPython()
         {
             new ClassCodeCreator();
             var cc = CodeCreator.TypeCreator;

@@ -170,9 +170,9 @@ namespace Diagram.Python
         //done
         Dictionary<string, List<string>> IDictionaryCodeCreator<string, object>.Create(string id, Dictionary<string, object> dictionary)
         {
-            List<string> l = new List<string> { "# Python generated code \n" + id + " = {" };
-            l.Add(string.Join(", ", dictionary.Select((k, v) => "\"" + k + "\" : " + performer.StringValue(v))));
-            l.Add("}");
+            List<string> l = new List<string> { "# Python generated code \n" };
+            l.Add(id + " = {" + string.Join(", ", dictionary.Select(entry => "\"" + entry.Key + "\" : " + performer.StringValue(entry.Value))) + "}");
+            //l.Add(string.Join(", ", dictionary.Select((k, v) => "\"" + k + "\" : " + performer.StringValue(v))));
             return new Dictionary<string, List<string>> { ["code"] = l };
         }
 
