@@ -13,9 +13,7 @@ using FormulaEditor.CodeCreators.Interfaces;
 namespace DataPerformer.Formula.Python
 {
     internal class TreeCollectionCodeCreator : ITreeCollectionCodeCreator
-    {
-
-     
+    {    
 
         #region Fields
 
@@ -82,14 +80,14 @@ namespace DataPerformer.Formula.Python
                 output = DataPerformerFormula.GetOutput(mm, ltr);
             }
             var ll = new List<string>();
-            ll.Add("save() : void {");
-            var s = "\tvar v = this.variables;";
+            ll.Add("save() -> None:");
+            var s = "\tvar v = self.variables";
             var attr = performer.GetAttribute<CodeCreatorAttribute>(obj);
             if (attr != null)
             {
                 if (attr.IsSysemOfDifferentialEquations)
                 {
-                    s = "\tvar v = this.derivations;";
+                    s = "\tvar v = this.derivations";
                 }
             }
             ll.Add(s);
@@ -99,10 +97,9 @@ namespace DataPerformer.Formula.Python
             {
                 var st = "x" + kk;
                 ++kk;
-                ll.Add("\tvar " + st + " = v.get(" + "\"" + k.Key + "\");");
-                ll.Add("\t" + st + "?.setIValue(this.get_" + k.Value.Item1 + "());");
+                ll.Add("\tvar " + st + " = v.get(" + "\"" + k.Key + "\")");
+                ll.Add("\t" + st + "?.setIValue(this.get_" + k.Value.Item1 + "())");
             }
-            ll.Add("}");
             l.AddRange(ll);
             l.Add("");
             var d = new Dictionary<string, List<string>>();
@@ -155,12 +152,12 @@ namespace DataPerformer.Formula.Python
             else
             {
                 l.Add(consturctor + "(FormulaEditor.ObjectFormulaTree[] trees)");
-                l.Add("\tthis.trees = trees;");
+                l.Add("\tself.trees = trees");
             }
-            l.Add("init() : void");
+            l.Add("init() -> None:");
             if (ob is IMeasurements)
             {
-                l.Add("\tvar all = this.getAllMeasurements();");
+                l.Add("\tvar all = this.getAllMeasurements()");
             }
             performer.Add(l, initializers as List<string>, 1);
             l.Add("");
@@ -188,8 +185,8 @@ namespace DataPerformer.Formula.Python
             {
             }
             var l = new List<string>();
-            l.Add("calculateTree() : void");
-            l.Add("\tthis.success = true;");
+            l.Add("calculateTree() -> None:");
+            l.Add("\tthis.success = true");
             performer.Add(l, lcode as List<string>, 1);
             return l;
         }
@@ -211,7 +208,6 @@ namespace DataPerformer.Formula.Python
                 l.Add("\t\t" + s);
             }
             l.Add("");
-            l.Add("\t}");
             foreach (string s in l)
             {
                 sb.Append(s + Environment.NewLine);
@@ -224,10 +220,10 @@ namespace DataPerformer.Formula.Python
             int n = StaticCodeCreator.GetNumber(local, tree);
             string tid = local[tree];
             string f = "get_" + n;
-           // init.Add("this.mapOperations.set(" + n + ", this." + f + ");");
+           // init.Add("this.mapOperations.set(" + n + ", this." + f + ")");
             func.Add("");
             func.Add(f + "() : any");
-            func.Add("\treturn this.success ? this." + tid + " : undefined;");
+            func.Add("\treturn this.success ? this." + tid + " : undefined");
         }
 
         #endregion

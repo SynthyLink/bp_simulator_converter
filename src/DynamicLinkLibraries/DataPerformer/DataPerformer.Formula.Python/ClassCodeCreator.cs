@@ -97,7 +97,7 @@ namespace DataPerformer.Formula.Python
         static ITypeCreator typeCreator;
 
         //done?
-        public static List<string> CreateTSVariableList(IMeasurements measurements)
+        public static List<string> CreatePythonVariableList(IMeasurements measurements)
         {
             var l = new List<string>();
             if (measurements is IStarted start)
@@ -150,11 +150,11 @@ namespace DataPerformer.Formula.Python
                 {
                     performer.Add(l, la, 2);
                 }
-                l.Add("\t\tself.performer.setAliasMap(map, this)");
+                l.Add("\t\tself.performer.setAliasMap(map, self)");
             }
             if (obj is IMeasurements m)
             {
-                var la = CreateTSVariableList(m);
+                var la = CreatePythonVariableList(m);
                 performer.Add(l, la, 2);
             }
 
@@ -166,10 +166,9 @@ namespace DataPerformer.Formula.Python
                 foreach (var k in dic)
                 {
                     var iname = "\"" + k.Key + "\"";
-                    // !!!!   l.Add("\t\tthis.initial.set(" + iname + ", " + k.Value + ");");
+                    // !!!!   l.Add("\t\tthis.initial.set(" + iname + ", " + k.Value + ")");
                 }
             }
-            l.Add("\t}");
             l.Add("");
             performer.Add(l, lt.Values.ToArray()[0], 1);
             AddPost(l);
@@ -180,7 +179,6 @@ namespace DataPerformer.Formula.Python
                 performer.Add(l, ll, 1);
             }
 
-            l.Add("}");
             return l;
         }
 
@@ -201,10 +199,9 @@ namespace DataPerformer.Formula.Python
 
         static void AddPost(List<string> l)
         {
-            /*  l.Add("postSetArrow() : void {");
-              l.Add("\tthis.init();");
+            /*  l.Add("postSetArrow() -> None: ");
+              l.Add("\tthis.init()");
 
-              l.Add("}");
             */
         }
 

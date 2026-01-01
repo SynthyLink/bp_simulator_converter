@@ -120,14 +120,14 @@ namespace DataPerformer.Formula.Python
                             if (att == null)
                             {
                                 var mtt = "measurement" + ii[0];
-                                vari.Add(mtt + " ! : " + "IMeasurement;");
+                                vari.Add(mtt + " ! : " + "IMeasurement");
                                 init.Add("this." + mtt + " = all[" + ii[1] +
-                                    "].getMeasurement(" + ii[2] + ");");
+                                    "].getMeasurement(" + ii[2] + ")");
                             }
                             else if (att.IsDerivation)
                             {
                                 var vtt = "value" + ii[0];
-                                vari.Add(vtt + " ! : IValue;");
+                                vari.Add(vtt + " ! : IValue");
                             }
                             goto m;
                         }
@@ -153,8 +153,8 @@ namespace DataPerformer.Formula.Python
                                         if (m == op)
                                         {
                                             var mtt = "value" + i;
-                                            vari.Add(mtt + " ! : IValue;");
-                                            init.Add("this." + mtt + " = this.output[" + j + "];");
+                                            vari.Add(mtt + " ! : IValue");
+                                            init.Add("self." + mtt + " = this.output[" + j + "]");
                                             values.Add(i);
                                         }
                                     }
@@ -168,7 +168,7 @@ namespace DataPerformer.Formula.Python
                                     if (m == op)
                                     {
                                         var mtt = "value" + i;
-                                        init.Add("this." + mtt + " = this.output[" + j + "];");
+                                        init.Add("self." + mtt + " = this.output[" + j + "]");
                                         values.Add(i);
                                     }
                                 }
@@ -351,7 +351,7 @@ namespace DataPerformer.Formula.Python
                         else
                         {
                             code.AddRange(CreateCode(obj, creator, tt, busy));
-                            code.Add(rcr + " = " + creator[tt] + ";");
+                            code.Add(rcr + " = " + creator[tt]);
                         }
                         if (k == 1)
                         {

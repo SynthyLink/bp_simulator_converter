@@ -43,7 +43,7 @@ namespace DataPerformer.Formula.Python
 
         public static string ToType(this ObjectFormulaTree obj, int num)
         {
-            return "this.var_" + num + " = this.convert<" + obj.ToType() + ">(this.variable);";
+            return "this.var_" + num + " = this.convert<" + obj.ToType() + ">(this.variable)";
         }
 
     }

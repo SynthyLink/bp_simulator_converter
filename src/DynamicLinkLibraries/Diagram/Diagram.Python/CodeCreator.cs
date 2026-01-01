@@ -223,7 +223,7 @@ namespace Diagram.Python
                 {
                     l.Add("setFeedback() -> None: ");
                     var ll = dcc.Create("map", fa.Dictionary).Values.ToArray()[0];
-                    ll.Add("\tself.feedback = FeedbackAliasCollection(map, this, this)");
+                    ll.Add("\tself.feedback = FeedbackAliasCollection(map, self, self)");
                     performer.Add(l, ll, 1);
                     //l.Add("}");
                 }
