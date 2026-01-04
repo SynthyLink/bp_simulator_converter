@@ -221,7 +221,7 @@ namespace Diagram.Python
                 var d = fa.Dictionary;
                 if (d.Count > 0)
                 {
-                    l.Add("setFeedback() -> None: ");
+                    l.Add("def setFeedback(self) -> None: ");
                     var ll = dcc.Create("map", fa.Dictionary).Values.ToArray()[0];
                     ll.Add("\tself.feedback = FeedbackAliasCollection(map, self, self)");
                     performer.Add(l, ll, 1);

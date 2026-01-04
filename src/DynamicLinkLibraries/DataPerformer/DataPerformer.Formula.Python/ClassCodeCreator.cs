@@ -89,7 +89,7 @@ namespace DataPerformer.Formula.Python
             }
             if (extends != null)
             {
-                s += "(" + extends + ")";
+                s += "(" + extends + "):";
             }
             return s;
         }

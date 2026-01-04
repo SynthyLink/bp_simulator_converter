@@ -187,7 +187,7 @@ namespace DataPerformer.Formula.Python
                             var anvn = "self.value" + num;
                             var lan = new List<string>();
                             lan.Add("self.variable = " + anvn + ".getIValue()");
-                            lan.Add("if self.check(self.variable)");
+                            lan.Add("if self.check(self.variable):");
                             lan.Add("\tself.success = False");
                             lan.Add("\treturn");
                             if (!att.IsDerivation)
@@ -210,7 +210,7 @@ namespace DataPerformer.Formula.Python
                 var anvn = "aliasName" + num;
                 var lan = new List<string>();
                 lan.Add("self.variable = self." + anvn + ".getAliasNameValue()");
-				lan.Add("if self.check(self.variable)");
+				lan.Add("if self.check(self.variable):");
 				lan.Add("\tself.success = False");
 				lan.Add("\treturn");
 				lan.Add(tree.ToType(num));
@@ -241,13 +241,13 @@ namespace DataPerformer.Formula.Python
                 var nam = an.Name;
                 var anvn = "aliasName" + num;
                 var lan = new List<string>();
-                lan.Add("this.variable = " + anvn + ".getAliasNameValue()");
+                lan.Add("self.variable = " + anvn + ".getAliasNameValue()");
                 var init = new List<string>()
                 {
-                    "this." + anvn + " = new AliasName(this.alias, \"" + nam +"\")"
+                    "self." + anvn + " = new AliasName(self.alias, \"" + nam +"\")"
                 };
                 (initializers as List<string>).AddRange(init);
-                var vari = new List<string> () { anvn + " : IAliasName = new FictiveAliasName()" };
+                var vari = new List<string> () { anvn + " : IAliasName = FictiveAliasName()" };
                 (variables as List<string>).AddRange(vari);
             }
         Label:
@@ -266,9 +266,9 @@ namespace DataPerformer.Formula.Python
             var list = new List<string>();
             string tt = TypeCreator.GetType(tree.ReturnType);
             string st = "";
-            if (!tt.Equals("any"))
+            if (!tt.Equals("Any"))
             {
-                st = "this.check<" + tt + ">(";
+                st = "self.check<" + tt + ">("; //TODO where is ") ?
             }
             if (variables == null)
             {
@@ -278,7 +278,7 @@ namespace DataPerformer.Formula.Python
             {
                 initializers = new List<string>();
             }
-            string s = "this.variable";
+            string s = "self.variable";
             int n = sep.Length;
             int m = parameters.Length;
             for (int i = 0; i < n; i++)
@@ -286,13 +286,15 @@ namespace DataPerformer.Formula.Python
                 s += sep[i];
                 if (i < m)
                 {
-                    s += "this." + parameters[i];
+                    s += "self." + parameters[i];
                 }
             }
             list.Add(s);
-            list.Add("if (this.check(this.variable)) { this.success = false; return; } ");
+            list.Add("if self.check(self.variable):");
+            list.Add("\tself.success = False");
+            list.Add("\treturn");
             list.Add(tree.ToType(num));
-            if (s.Contains("this.measurement"))
+            if (s.Contains("self.measurement"))
             {
                 //       variables.Add("measurement" + num + " != IMeasurement");
             }
@@ -738,7 +740,7 @@ namespace DataPerformer.Formula.Python
                 string sp = "";
                 if (art.IsObjectType)
                 {
-                    sp = "(double)";
+                    sp = "(double)"; //TODO float(...)
                 }
                 StringBuilder sb = new StringBuilder();
                 sb.Append(ret);

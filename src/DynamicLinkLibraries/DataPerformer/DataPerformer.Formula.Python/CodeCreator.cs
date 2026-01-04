@@ -80,7 +80,7 @@ namespace DataPerformer.Formula.Python
                 output = DataPerformerFormula.GetOutput(mm, ltr);
             }
             var ll = new List<string>();
-            ll.Add("save() -> None:");
+            ll.Add("def save(self) -> None:");
             var s = "\tv = self.variables";
             var attr = performer.GetAttribute<CodeCreatorAttribute>(obj);
             if (attr != null)
@@ -98,7 +98,7 @@ namespace DataPerformer.Formula.Python
                 var st = "x" + kk;
                 ++kk;
                 ll.Add("\tvar " + st + " = v.get(" + "\"" + k.Key + "\")");
-                ll.Add("\t" + st + "?.setIValue(this.get_" + k.Value.Item1 + "())");
+                ll.Add("\t" + st + ".setIValue(self.get_" + k.Value.Item1 + "())");
             }
             l.AddRange(ll);
             l.Add("");
@@ -143,7 +143,7 @@ namespace DataPerformer.Formula.Python
            IList<string> variables, IList<string> initializers, string consturctor, bool checkValue = true)
         {
             List<string> l = new();
-            performer.Add(l, lcode as List<string>, 1);
+            performer.Add(l, lcode as List<string>, 0);
             int nTree = local.Trees.Length;
             l.Add("");
             if (checkValue)
@@ -154,7 +154,7 @@ namespace DataPerformer.Formula.Python
                 l.Add(consturctor + "(FormulaEditor.ObjectFormulaTree[] trees)");
                 l.Add("\tself.trees = trees");
             }
-            l.Add("init() -> None:");
+            l.Add("def init(self) -> None:");
             if (ob is IMeasurements)
             {
                 l.Add("\tall = self.getAllMeasurements()");
@@ -185,7 +185,7 @@ namespace DataPerformer.Formula.Python
             {
             }
             var l = new List<string>();
-            l.Add("calculateTree() -> None:");
+            l.Add("def calculateTree(self) -> None:");
             l.Add("\tself.success = True");
             performer.Add(l, lcode as List<string>, 1);
             return l;
@@ -219,11 +219,11 @@ namespace DataPerformer.Formula.Python
         {
             int n = StaticCodeCreator.GetNumber(local, tree);
             string tid = local[tree];
-            string f = "get_" + n;
+            string f = "def get_" + n;
             // init.Add("this.mapOperations.set(" + n + ", this." + f + ")");
             func.Add("");
-            func.Add(f + "() : any");
-            func.Add("\treturn self.success ? this." + tid + " : undefined");
+            func.Add(f + "(self) -> Any:");
+            func.Add("\treturn self." + tid + " if self.success else None");
         }
 
         #endregion
