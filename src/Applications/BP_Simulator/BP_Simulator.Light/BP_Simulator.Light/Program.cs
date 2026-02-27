@@ -7,10 +7,13 @@ using ErrorHandler;
 using Trading.Library.Forms;
 using ControlSystemLib = ControlSystems;
 
+using DataSetService.Pure;
+
 
 
 namespace BP_Simulator.Light
 {
+
 
     class Program
     {
@@ -18,6 +21,11 @@ namespace BP_Simulator.Light
         // Unblock-File or Get-ChildItem -Path . -Recurse | Unblock-File
         // Get-ChildItem -Path c:\0\ -Recurse | Unblock-File
         // Get-ChildItem -Path c:\AUsers\1MySoft\CSharp\src\ -Recurse | Unblock-File
+        // Host=localhost; Port=5432; Username=postgres; Database=BusinessAnalysis; Password=GREM0nP0
+        // Host=127.0.0.1; Port=5432; Username=postgres; Database=BusinessAnalisys; Password=GREM0nP0
+
+        //var connection = "Host=127.0.0.1;Database=BusinessAnalisys;Username=postgres;Password=GREM0nP0";
+
         static bool check(object o)
         {
             if (o == null) 
@@ -59,9 +67,17 @@ namespace BP_Simulator.Light
         }
 
 
-
         static void TestType()
         {
+            var dss = new Dictionary<string, DataSetService.Pure.Interfaces.ITable>();
+
+            var tp = dss.GetType();
+
+            var aan = tp.AssemblyQualifiedName;
+
+            var tnn = tp.Name;
+
+
             var t1 = new DateTime(1899, 12, 30);
             var t2 = new DateTime(1970, 1, 1);
             var d = t2 - t1;

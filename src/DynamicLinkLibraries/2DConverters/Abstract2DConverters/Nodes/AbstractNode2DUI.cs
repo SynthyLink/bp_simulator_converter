@@ -54,7 +54,7 @@ namespace Abstract2DConverters.Nodes
         INode2DUI INode<INode2DUI>.Value => Value;
 
         string INamed.Name { get => Name; set => Name = value; }
-        string IDescription.Description { get => Description; set => Description; }
+        string IDescription.Description { get => Description; set => Description = value; }
 
         event Action<INode2DUI> INode<INode2DUI>.OnAdd
         {

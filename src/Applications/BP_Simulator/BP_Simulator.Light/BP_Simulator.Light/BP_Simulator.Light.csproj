@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows7</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+    <StartupObject>BP_Simulator.Light.Program</StartupObject>
     <ApplicationIcon>process.ico</ApplicationIcon>
 
     <!--    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>-->
@@ -318,7 +319,7 @@
     <ProjectReference Include="..\..\BP_Simulator.UI\BP_Simulator.UI\BP_Simulator.UI.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Runtime.Serialization.Formatters" Version="9.0.0" />
+    <PackageReference Include="System.Runtime.Serialization.Formatters" Version="10.0.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

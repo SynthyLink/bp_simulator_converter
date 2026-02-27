@@ -47,15 +47,10 @@ namespace SerializationInterface
         /// <returns>Type</returns>
         public override Type BindToType(string assemblyName, string typeName)
         {
+            var fullName = string.Format("{0}, {1}", typeName, assemblyName);
             try
             {
-
-                /// !!! DELETE TEST !!!
-                if (typeName.Contains("Atmo"))
-                {
-
-                }
-                Type t = Type.GetType(String.Format("{0}, {1}", typeName, assemblyName));
+                Type t = Type.GetType(fullName);
                 if (t != null)
                 {
                     var inter = new List<Type>(t.GetInterfaces());

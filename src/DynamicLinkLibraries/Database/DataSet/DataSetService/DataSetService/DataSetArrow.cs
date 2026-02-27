@@ -1,7 +1,6 @@
 using System;
 using System.Runtime.Serialization;
 
-using CategoryTheory;
 
 
 namespace DataSetService
@@ -13,7 +12,6 @@ namespace DataSetService
     [Serializable()]
     public class DataSetArrow : Pure.DataSetArrow, ISerializable
     {
-
 
 
         #region Constructors

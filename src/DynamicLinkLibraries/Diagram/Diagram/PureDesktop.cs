@@ -1113,8 +1113,9 @@ namespace Diagram.UI
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
+                var ex = IncludedException.Get(e);
                 ex.HandleException(10, "PureDesktop.PostDeserialize");
                 if (exceptions != null)
                 {

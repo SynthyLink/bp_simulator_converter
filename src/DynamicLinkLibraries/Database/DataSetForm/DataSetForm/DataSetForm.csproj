@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
     <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
@@ -12,6 +12,6 @@
     <ProjectReference Include="..\..\DataSet\DataSetService\DataSetService\DataSetService.csproj" />
   </ItemGroup>
 <ItemGroup>
-<PackageReference Include="System.Runtime.Serialization.Formatters" Version="9.0.0" />
+<PackageReference Include="System.Runtime.Serialization.Formatters" Version="10.0.3" />
 </ItemGroup>
 </Project>
