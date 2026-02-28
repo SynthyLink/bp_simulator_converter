@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
@@ -7,6 +7,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\CategoryTheory\CategoryTheory\CategoryTheory\CategoryTheory.csproj">
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Diagram\Diagram.UI.Serializable\Diagram.UI.Serializable.csproj" />
     <ProjectReference Include="..\..\..\..\ErrorHandler\ErrorHandler.csproj" />
     <ProjectReference Include="..\..\..\..\SerializationInterface\SerializationInterface.csproj">
     </ProjectReference>
