@@ -4,7 +4,9 @@ let a = new Actor();
 
 
 //await a.actDonchianLoad();
-//a.actPI()
+
+
+a.actPI()
 //a.testDate();
 
 //a.actTime();
@@ -21,6 +23,13 @@ let a = new Actor();
 //a.actRecursiveFeedbackSimplw();
 
 //a.actODE_FeedAct();
+
+
+async function test() {
+    await a.actDonchianLoad();
+}
+
+test();
 
 a.finish(undefined);
 
