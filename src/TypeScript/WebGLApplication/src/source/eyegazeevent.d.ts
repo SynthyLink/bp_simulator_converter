@@ -1,0 +1,13 @@
+export type EyeGazeEvent = CustomEvent;
+export declare class EyeGazeData {
+    gazePositionXY: [number, number];
+    gazeOriginRightXYZ: [number, number, number];
+    gazeOriginLeftXYZ: [number, number, number];
+    eyePositionRightNormalizedXYZ: [number, number, number];
+    eyePositionLeftNormalizedXYZ: [number, number, number];
+    headPositionXYZ: [number, number, number];
+    headRotationXYZ: [number, number, number];
+    userPresence: boolean;
+    toString(): string;
+}
+//# sourceMappingURL=eyegazeevent.d.ts.map
