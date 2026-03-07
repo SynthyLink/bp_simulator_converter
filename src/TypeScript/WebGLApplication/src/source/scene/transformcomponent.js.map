@@ -1,1 +1,0 @@
-{"version":3,"file":"transformcomponent.js","sourceRoot":"","sources":["transformcomponent.ts"],"names":[],"mappings":";;;AACA,6DAA0D;AAE1D,yCAAiC;AAEjC;;;;GAIG;AACH,MAAa,kBAAmB,SAAQ,uCAAkB;IAE5C,UAAU,CAAO;IAE3B,YAAY,SAAe;QACvB,KAAK,CAAC,oBAAoB,CAAC,CAAC;QAE5B,IAAI,CAAC,UAAU,GAAG,SAAS,CAAC;IAChC,CAAC;IAED,IAAI,SAAS;QACT,OAAO,IAAI,CAAC,UAAU,CAAC;IAC3B,CAAC;CACJ;AAbD,gDAaC"}

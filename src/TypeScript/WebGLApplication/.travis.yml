@@ -1,8 +1,0 @@
-language: Node.js CI
-node_js:
-  - '14'
-install:
-  - npm install
-script:
-  - npm run-script ci
-after_success: npm run-script coverage

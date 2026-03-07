@@ -1,1 +1,0 @@
-{"version":3,"file":"transformcomponent.d.ts","sourceRoot":"","sources":["transformcomponent.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,kBAAkB,EAAE,MAAM,sBAAsB,CAAC;AAE1D,OAAO,EAAE,IAAI,EAAE,MAAM,WAAW,CAAC;AAEjC;;;;GAIG;AACH,qBAAa,kBAAmB,SAAQ,kBAAkB;IAEtD,SAAS,CAAC,UAAU,EAAE,IAAI,CAAC;gBAEf,SAAS,EAAE,IAAI;IAM3B,IAAI,SAAS,IAAI,IAAI,CAEpB;CACJ"}

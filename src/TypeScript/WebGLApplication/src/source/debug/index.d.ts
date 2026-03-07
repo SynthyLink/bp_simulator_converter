@@ -1,7 +1,0 @@
-import * as debug_TestNavigation from './testnavigation';
-import * as debug_TestRenderer from './testrenderer';
-export declare namespace debug {
-    export import TestRenderer = debug_TestRenderer.TestRenderer;
-    export import TestNavigation = debug_TestNavigation.TestNavigation;
-}
-//# sourceMappingURL=index.d.ts.map
