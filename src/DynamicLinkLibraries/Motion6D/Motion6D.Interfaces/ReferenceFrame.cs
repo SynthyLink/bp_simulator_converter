@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+
 using ErrorHandler;
+
 using NamedTree;
 
 using RealMatrixProcessor;
@@ -313,7 +315,6 @@ namespace Motion6D.Interfaces
                     p[i] += m[j, i] * diff[j];
                 }
             }
-
         }
 
         /// <summary>

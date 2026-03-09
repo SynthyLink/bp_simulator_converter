@@ -25,6 +25,7 @@ export class CategoryArrow implements ICategoryArrow, IObject
     getClassName(): string {
         return this.typeName;
     }
+
     imlplementsType(type: string): boolean {
         return this.types.indexOf(type) >= 0;
     }

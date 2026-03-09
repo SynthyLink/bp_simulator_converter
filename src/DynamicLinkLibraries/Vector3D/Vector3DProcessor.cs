@@ -1,9 +1,6 @@
 ﻿using ErrorHandler;
+using RealMatrixProcessor;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Vector3D.Interfaces;
 
 namespace Vector3D
@@ -18,6 +15,8 @@ namespace Vector3D
 
         private readonly double[] idQuaternion = new double[] { 1, 0, 0, 0 };
 
+        protected RealMatrix realMatrix = new RealMatrix();
+
 
         #endregion
 
@@ -27,11 +26,7 @@ namespace Vector3D
         /// <param name="a">Fisrt arqument</param>
         /// <param name="b">Second argument</param>
         /// <returns>The value of the function</returns>
-        double CopySign(double a, double b)
-        {
-            return Math.Abs(a) * Math.Sign(b);
-        }
-
+ 
         /// <summary>
         ///  Sets the Euler angles from the quaternion
         /// </summary>
@@ -116,7 +111,7 @@ namespace Vector3D
             double sinp = 2 * (w * y - z * x);
             if (Math.Abs(sinp) >= 1)
             {
-                angles.pitch = CopySign(Math.PI / 2, sinp);
+                angles.pitch = realMatrix.CopySign(Math.PI / 2, sinp);
                 //std::copysign(M_PI / 2, sinp); // use 90 degrees if out of range
             }
             else
@@ -138,7 +133,7 @@ namespace Vector3D
         /// <param name="time"></param>
         public void RotateOmega(double[] omega, double[] quaternion, double time)
         {
-            double o = PartialNorm(omega,0, 3);
+            double o = realMatrix.PartialNorm(omega,0, 3);
             double phi = 0.5 * o * time;
             double s = Math.Sin(phi);
             quaternion[0] = Math.Sqrt(1 - s * s);
@@ -439,11 +434,6 @@ namespace Vector3D
         /// <param name="The quaternion"></param>
         public void QuaternionNormalize(double[] quaternion)
         {
-            // !!! DELETE EXCEPTION
-            if (quaternion.Length != 4)
-            {
-                throw new OwnArgumentException();
-            }
             double a = 0;
             foreach (var q in quaternion)
             {
@@ -860,36 +850,8 @@ namespace Vector3D
         }
 
 
-        /// <summary>
-        /// Partial square of vector
-        /// </summary>
-        /// <param name="x">The vector</param>
-        /// <param name="startIndex">startIndex</param>
-        /// <param name="length">Length</param>
-        /// <returns>The partial square</returns>
-        public double PartialSquare(double[] x, int startIndex, int length)
-        {
-            double a = 0;
-            for (int i = 0; i < length; i++)
-            {
-                double c = x[i + startIndex];
-                a += c * c;
-            }
-            return a;
-        }
 
-        /// <summary>
-        /// Partial norm of vector
-        /// </summary>
-        /// <param name="x">The vector</param>
-        /// <param name="startIndex">startIndex</param>
-        /// <param name="length">Length</param>
-        /// <returns>The partial norm</returns>
-        public double PartialNorm(double[] x, int startIndex, int length)
-        {
-            return Math.Sqrt(PartialSquare(x, startIndex, length));
-        }
-
+  
         /// <summary>
         /// Converts jagged array to square array
         /// </summary>

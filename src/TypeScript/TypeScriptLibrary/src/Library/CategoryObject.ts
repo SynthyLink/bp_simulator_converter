@@ -39,6 +39,7 @@ export class CategoryObject implements ICategoryObject, IObject
     getClassName(): string {
         return this.typeName;
     }
+
     imlplementsType(type: string): boolean {
         return this.types.indexOf(type) > 0;
     }

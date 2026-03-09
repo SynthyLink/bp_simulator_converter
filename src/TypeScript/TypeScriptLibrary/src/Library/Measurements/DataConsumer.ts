@@ -7,7 +7,7 @@ import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import type { IPrintedObject } from "../Interfaces/IPrintedObject";
 import type { IPrinter } from "../Interfaces/IPrinter";
 import type { IDataConsumer } from "./Interfaces/IDataConsumer";
-import { IIterator } from "./Interfaces/IIterator";
+import type { IIterator } from "./Interfaces/IIterator";
 import type { IIteratorConsumer } from "./Interfaces/IIteratorConsumer";
 import type { IMeasurements } from "./Interfaces/IMeasurements";
 import type { ITimeMeasurementConsumer } from "./Interfaces/ITimeMeasurementConsumer";
