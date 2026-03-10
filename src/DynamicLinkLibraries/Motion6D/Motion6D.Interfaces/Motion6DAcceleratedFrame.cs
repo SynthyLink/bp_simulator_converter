@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-using Vector3D;
-using RealMatrixProcessor;
 using Motion6D.Interfaces;
 
 namespace Motion6D
@@ -25,6 +19,7 @@ namespace Motion6D
         double[] temp = new double[3];
         
         double[] tempV = new double[3];
+
 
         #endregion
 

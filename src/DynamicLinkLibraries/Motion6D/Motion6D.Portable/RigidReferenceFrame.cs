@@ -106,7 +106,7 @@ namespace Motion6D.Portable
         /// <summary>
         /// Own frame
         /// </summary>
-        public ReferenceFrame Own
+        ReferenceFrame IReferenceFrame.Own
         {
             get { return own; }
         }

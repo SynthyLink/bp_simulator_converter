@@ -6,7 +6,7 @@ using Motion6D.Interfaces;
 using Motion6D.Portable.Aggregates;
 using System.Collections.Generic;
 
-namespace Motion6D.Portable.CoreCreators
+namespace Motion6D.Portable.CodeCreators
 {
     [Language("C#")]
     class CSCodeCreator : IClassCodeCreator

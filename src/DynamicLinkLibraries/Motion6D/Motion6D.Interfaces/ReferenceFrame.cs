@@ -235,7 +235,7 @@ namespace Motion6D.Interfaces
         /// </summary>
         public virtual void Update()
         {
-            ReferenceFrame p = ParentFrame;
+            ReferenceFrame p = this.GetParentFrame();
             position = p.Position;
             quaternion = p.quaternion;
             matrix = p.matrix;

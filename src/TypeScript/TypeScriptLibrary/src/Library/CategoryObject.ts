@@ -31,7 +31,9 @@ export class CategoryObject implements ICategoryObject, IObject
         desktop.addCategoryObject(this);
         desktop.addObject(this);
         this.checker = desktop.getCheck();
-   }
+    }
+
+
     getName(): string {
         return this.name;
     }

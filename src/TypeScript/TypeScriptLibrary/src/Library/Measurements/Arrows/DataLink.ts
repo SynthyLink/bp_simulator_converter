@@ -16,7 +16,6 @@ export class DataLink extends CategoryArrow
         this.types.push("DataLink");
     }
 
-    name: string = "";
 
     getSource(): ICategoryObject {
         return this.consumer as unknown as ICategoryObject;
@@ -35,9 +34,6 @@ export class DataLink extends CategoryArrow
         this.consumer.addMeasurements(this.measurements);
     }
 
-    getName(): string {
-        return this.name;
-    }
 
     consumer!: IDataConsumer;
 
