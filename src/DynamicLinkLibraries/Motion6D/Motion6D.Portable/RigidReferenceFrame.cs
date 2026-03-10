@@ -415,6 +415,18 @@ namespace Motion6D.Portable
         #region Protected Members
 
         /// <summary>
+        /// Own reference frame
+        /// </summary>
+        protected virtual ReferenceFrame Own
+        {
+            get
+            {
+                IReferenceFrame f = this;
+                return f.Own;
+            }
+        }
+
+        /// <summary>
         /// The "is serialized" sign
         /// </summary>
         protected bool IsSerialized

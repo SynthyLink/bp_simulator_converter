@@ -193,7 +193,7 @@ namespace Motion6D.Portable
         {
             PureDesktop.DesktopPostLoad += PostLoadPositions;
             PureDesktop.DesktopPostLoad += MotionDesktopPostLoad.Object.PostLoad;
-            new CoreCreators.CSCodeCreator();
+            new CodeCreators.CSCodeCreator();
             DataRuntimeFactory.Singleton.SetBase();
             DataRuntimeFactory.Singleton.SetBaseAction();
         }

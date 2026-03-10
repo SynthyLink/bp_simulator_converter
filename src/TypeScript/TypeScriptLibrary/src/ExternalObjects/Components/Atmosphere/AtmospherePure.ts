@@ -3,8 +3,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { RealMatrix } from "../../../Library/RealMatrixProcessor/RealMatrix";
 import { DateTimeConverter } from "../../../Library/Utilities/DateTime/DateTimeConverter";
-import { RealMatrix } from "../../../Library/Utilities/Linear_Algebra/RealMatrix";
 import { GeoCoordinates } from "../../Libraries/Geography/GeoCoordinates";
 import { SunCoordinates } from "../../Libraries/Sun.Service/SunCoordinates";
 import { SunPosition } from "../../Libraries/Sun.Service/SunPosition";

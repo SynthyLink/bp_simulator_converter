@@ -24,6 +24,8 @@ namespace Motion6D
     {
         #region Fields
 
+        IReferenceFrame oup;
+
         /// <summary>
         /// Change input event
         /// </summary>
@@ -197,7 +199,7 @@ namespace Motion6D
         public InertialReferenceFrame()
         {
             ClearAliases();
-             init();
+            init();
         }
 
         /// <summary>
