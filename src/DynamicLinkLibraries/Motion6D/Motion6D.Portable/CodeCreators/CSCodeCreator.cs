@@ -34,11 +34,11 @@ namespace Motion6D.Portable.CodeCreators
             List<string> l = new List<string>();
             string name = obj.GetType().FullName;
             string str = null;
-            if (obj is ReferenceFrameDataBase)
+            if (obj is ReferenceFrameData)
             {
                 if (name.Contains("ReferenceFrameDataBase") | name.Contains("Motion6D.ReferenceFrameData"))
                 {
-                    return CreateRefetenceFrameData(obj as ReferenceFrameDataBase);
+                    return CreateRefetenceFrameData(obj as ReferenceFrameData);
                 }
             }
             if (obj is RigidReferenceFrame)
@@ -209,7 +209,7 @@ namespace Motion6D.Portable.CodeCreators
 
 
 
-        List<string> CreateRefetenceFrameData(ReferenceFrameDataBase data)
+        List<string> CreateRefetenceFrameData(ReferenceFrameData data)
         {
             List<string> l = new List<string>();
             l.Add("Motion6D.Portable.ReferenceFrameDataBase");

@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using CategoryTheory;
+
 using DataPerformer.Interfaces;
 using DataPerformer.Portable;
 using DataPerformer.Portable.Measurements;
+
 using Diagram.UI;
+
 using ErrorHandler;
+
 using Motion6D.Interfaces;
+
 using NamedTree;
 
 namespace Motion6D.Portable
@@ -14,7 +18,7 @@ namespace Motion6D.Portable
     /// <summary>
     /// Reference frame controlled by data
     /// </summary>
-    public class ReferenceFrameDataBase : RigidReferenceFrame,
+    public class ReferenceFrameData : RigidReferenceFrame,
         IDataConsumer, IMeasurements, IStarted
     {
 
@@ -101,7 +105,7 @@ namespace Motion6D.Portable
         /// <summary>
         /// Default constructor
         /// </summary>
-        public ReferenceFrameDataBase()
+        public ReferenceFrameData()
         {
             ClearAliases();
             coordDel = new Func<object>[] { GetX, GetY, GetZ };
@@ -693,7 +697,6 @@ namespace Motion6D.Portable
 
         void IChildren<IMeasurement>.AddChild(IMeasurement child)
         {
-            throw new ErrorHandler.OwnException();
         }
 
         void IChildren<IMeasurement>.RemoveChild(IMeasurement child)

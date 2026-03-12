@@ -20,7 +20,7 @@ namespace Motion6D
     /// Reference frame controlled by data
     /// </summary>
     [Serializable()]
-    public class ReferenceFrameData : Portable.ReferenceFrameDataBase, ISerializable
+    public class ReferenceFrameData : Portable.ReferenceFrameData, ISerializable
     {
 
         #region Constructors

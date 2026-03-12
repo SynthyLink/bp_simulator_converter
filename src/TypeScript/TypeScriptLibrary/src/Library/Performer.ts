@@ -351,12 +351,18 @@ export class Performer
         this.enlarge2<number>(x, 0, row, column);
     }
 
-    public copyArray<T>(f: T[], t: T[]): void {
-        let i = 0;
-        for (i = 0; i < f.length; i++) {
+    public pushArray<T>(f: T[], t: T[]): void {
+        for (let i = 0; i < f.length; i++) {
             t.push(f[i]);
         }
     }
+
+    public copyArray<T>(f: T[], t: T[]): void {
+        for (let i = 0; i < f.length; i++) {
+            t[i] = f[i];
+        }
+    }
+
 
     public setAliasType(name: string, value: any, map: Map<string, any>, names: string[]): boolean {
         if (map.has(name)) {
