@@ -87,7 +87,7 @@ namespace DataPerformer.Portable
                     }
                 }
             }
-            return null; 
+            return null;
         }
 
         /// <summary>
@@ -118,15 +118,15 @@ namespace DataPerformer.Portable
                 }
             }
         }
-       
-        
+
+
         /// <summary>
         /// Gets dependent measurements
         /// </summary>
         /// <param name="measurements">Source</param>
         /// <param name="list">Dependent objects</param>
         /// <param name="dependent">Dependent measurements</param>
-        public  void GetDependent(IEnumerable<IMeasurements> measurements,
+        public void GetDependent(IEnumerable<IMeasurements> measurements,
             List<object> list, List<IMeasurements> dependent)
         {
             dependent.Clear();
@@ -225,7 +225,7 @@ namespace DataPerformer.Portable
         /// <returns>Initial value</returns>
         public IInitialValue InitialValue(IAlias alias, IMeasurement measurement)
         {
-            if (measurement is  IValue measurementValue)
+            if (measurement is IValue measurementValue)
             {
                 var attr = GetAttribute<CodeCreatorAttribute>(measurement);
                 if (attr != null)
@@ -276,7 +276,7 @@ namespace DataPerformer.Portable
         /// <param name="desktop">Desktop</param>
         /// <param name="alias">Alias name</param>
         /// <returns>Alias</returns>
-        public  AliasName FindAliasName( IDataConsumer consumer,
+        public AliasName FindAliasName(IDataConsumer consumer,
             IDesktop desktop, string alias)
         {
             string ali = alias;
@@ -306,7 +306,7 @@ namespace DataPerformer.Portable
         /// <param name="desktop">Desktop</param>
         /// <param name="alias">Alias name</param>
         /// <returns>Alias</returns>
-        public  object[] FindAlias(IDataConsumer consumer, IDesktop desktop, string alias)
+        public object[] FindAlias(IDataConsumer consumer, IDesktop desktop, string alias)
         {
             for (int i = 0; i < consumer.Count; i++)
             {
@@ -351,7 +351,25 @@ namespace DataPerformer.Portable
         }
 
 
-
-
+        /// <summary>
+        /// Resets data consumer and all depenent objects
+        /// </summary>
+        /// <param name="consumer">The consumer</param>
+        public void FullReset(IDataConsumer consumer)
+        {
+            if (consumer is IMeasurements mea)
+            {
+                mea.IsUpdated = false;
+            }
+            for (int i = 0; i < consumer.Count; i++)
+            {
+                var m = consumer[i];
+                m.IsUpdated = false;
+                if (m is IDataConsumer c)
+                {
+                    c.Reset();
+                }
+            }
+        }
     }
 }

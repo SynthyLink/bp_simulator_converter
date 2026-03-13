@@ -19,7 +19,7 @@ namespace Motion6D.Portable
     /// Reference frame controlled by data
     /// </summary>
     public class ReferenceFrameData : RigidReferenceFrame,
-        IDataConsumer, IMeasurements, IStarted
+        IDataConsumer, IMeasurements
     {
 
         #region Fields
@@ -240,18 +240,6 @@ namespace Motion6D.Portable
 
         #endregion
 
-        #region IStart Members
-
-        /// <summary>
-        /// Starts this object
-        /// </summary>
-        /// <param name="time">Start time</param>
-        void IStarted.Start(double time)
-        {
-            Start(time);
-        }
-
-        #endregion
 
         #region Overriden Members
 
@@ -547,15 +535,6 @@ namespace Motion6D.Portable
 
         IEnumerable<IMeasurement> IChildren<IMeasurement>.Children => outmeasurements;
 
-
-        /// <summary>
-        /// Starts itself
-        /// </summary>
-        /// <param name="time">Start time</param>
-        virtual protected void Start(double time)
-        {
-            Update();
-        }
 
         /// <summary>
         /// Sets parameters

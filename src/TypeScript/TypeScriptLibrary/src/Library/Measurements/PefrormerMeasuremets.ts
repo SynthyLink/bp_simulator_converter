@@ -116,4 +116,57 @@ export class PefrormerMeasuremets
         }
 
     }
+
+    public fullReset(consumer: IDataConsumer): void {
+     //   let m = this.performer.convertObject<IMeasurements, IDataConsumer>(consumer, "IMeasurements");
+      //  if (m.length > 0) {
+       //     !!!
+        // }
+         let meas = consumer.getAllMeasurements();
+        for (let m of meas) {
+            let c = this.performer.convertObject<IDataConsumer, IMeasurements>(m, "IDataConsumer");
+            if (c.length > 0) {
+                c[0].resetDataConsumer();
+                this.fullReset(c[0])
+            }
+
+        }
+
+    }
+
+    /*
+                if (consumer is IMeasurements mea)
+            {
+                mea.IsUpdated = false;
+            }
+            for (int i = 0; i < consumer.Count; i++)
+            {
+                var m = consumer[i];
+                m.IsUpdated = false;
+                if (m is IDataConsumer c)
+                {
+                    c.Reset();
+                }
+            }
+
+            public void FullReset(IDataConsumer consumer)
+        {
+            if (consumer is IMeasurements)
+            {
+                IMeasurements mea = consumer as IMeasurements;
+                mea.IsUpdated = false;
+            }
+            for (int i = 0; i < consumer.Count; i++)
+            {
+                IMeasurements m = consumer[i] as IMeasurements;
+                m.IsUpdated = false;
+                if (m is IDataConsumer)
+                {
+                    IDataConsumer c = m as IDataConsumer;
+                    c.Reset();
+                }
+            }
+        }
+    }
+*/
 }

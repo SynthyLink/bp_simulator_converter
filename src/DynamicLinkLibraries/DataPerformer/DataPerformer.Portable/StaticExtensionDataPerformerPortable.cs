@@ -949,21 +949,7 @@ namespace DataPerformer.Portable
         /// <param name="consumer">The consumer</param>
         public static void FullReset(this IDataConsumer consumer)
         {
-            if (consumer is IMeasurements)
-            {
-                IMeasurements mea = consumer as IMeasurements;
-                mea.IsUpdated = false;
-            }
-            for (int i = 0; i < consumer.Count; i++)
-            {
-                IMeasurements m = consumer[i] as IMeasurements;
-                m.IsUpdated = false;
-                if (m is IDataConsumer)
-                {
-                    IDataConsumer c = m as IDataConsumer;
-                    c.Reset();
-                }
-            }
+            performer.FullReset(consumer);
         }
 
         /// <summary>
