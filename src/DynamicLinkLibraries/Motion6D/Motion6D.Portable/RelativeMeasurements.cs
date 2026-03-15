@@ -40,7 +40,6 @@ namespace Motion6D.Portable
 
         private IPosition source;
 
-
         private IPosition target;
 
         private IVelocity vSource;

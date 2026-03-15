@@ -359,9 +359,8 @@ namespace Motion6D.Portable
                     }
                     x[i] = (double)o;
                 }
-                if (relative is IVelocity)
+                if (relative is IVelocity vel)
                 {
-                    IVelocity vel = relative as IVelocity;
                     double[] v = vel.Velocity;
                     for (int i = 0; i < 3; i++)
                     {
@@ -376,9 +375,8 @@ namespace Motion6D.Portable
                     qua[i] = (double)m.Parameter();
                 }
                 relative.SetMatrix();
-                if (relative is IAngularVelocity)
+                if (relative is IAngularVelocity av)
                 {
-                    IAngularVelocity av = relative as IAngularVelocity;
                     double[] om = av.Omega;
                     IOrientation or = relative as IOrientation;
                     for (int i = 0; i < 4; i++)
@@ -388,9 +386,8 @@ namespace Motion6D.Portable
                     }
                     vp.CalculateDynamics(or.Quaternion, der, om, qd);
                 }
-                if (relative is IAcceleration)
+                if (relative is IAcceleration acc)
                 {
-                    IAcceleration acc = relative as IAcceleration;
                     IAngularAcceleration anc = relative as IAngularAcceleration;
                     double[] linacc = acc.RelativeAcceleration;
                     for (int i = 0; i < linacc.Length; i++)
@@ -401,9 +398,9 @@ namespace Motion6D.Portable
                     {
                        angsec[i] = secondDeriM[i + 3].ToDouble();
                     }
-                    IAngularVelocity av = relative as IAngularVelocity;
-                    double[] om = av.Omega;
-                    IOrientation or = relative as IOrientation;
+                    var avv = relative as IAngularVelocity;
+                    double[] om = avv.Omega;
+                    IOrientation or = relative;
                     double[] angacc = anc.AngularAcceleration;
                     vp.CalculateAcceleratedDynamics(or.Quaternion, der, om, qd, angsec, angacc);
                 }

@@ -22,6 +22,8 @@ import type { ICheck } from "./Interfaces/ICheck";
 import type { ICheckHolder } from "./Interfaces/ICheckHolder";
 import { SortingAlgorithma } from "./Utilities/Sort/SortingAlgorithms";
 import { IComparator } from "./Utilities/Sort/Interfaces/IComparator";
+import { IAction } from "./Interfaces/IAction";
+import { ActionArray } from "./Utilities/Generic/ActionArray";
 
 export class Performer
 {
@@ -44,6 +46,23 @@ export class Performer
 
     public setPrinter(printer: IPrinter): void {
         this.printer = printer;
+    }
+
+    public sumOfActions(first: IAction | undefined, second: IAction | undefined): IAction | undefined {
+        var act = new ActionArray();
+        if (first === undefined) {
+            return second;
+        }
+        else {
+            act.addAction(first)
+            if (second === undefined) {
+                return first;
+            }
+            else {
+                act.addAction(second);
+            }
+        }
+        return act;
     }
 
     public setCheker(desktop: IDesktop, check: ICheck) {
