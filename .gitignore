@@ -24,7 +24,6 @@ project.assets.json
 *CoverletSourceRootsMapping
 *deps.json
 .vs
-net9.0*
+net10.0*
 /src/Generated
-/src/Typescript/TypeScriptLibrary
 .idea/
