@@ -105,6 +105,8 @@ export class ObjectTransformer extends CategoryObject implements IObjectTransfor
         this.types.push("IPostSetArrow");
         this.cons = this;
     }
+    resetDataConsumer(): void {
+    }
     postSetArrow(): void
     {
         this.initTransformer();

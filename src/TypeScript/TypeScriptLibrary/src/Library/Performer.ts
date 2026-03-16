@@ -4,9 +4,14 @@
 import { AliasName } from "./AliasName";
 import { ConsolePrinter } from "./ConsolePrinter";
 import { OwnError } from "./ErrorHandler/OwnError";
+import { MeasurementsComparator } from "./Measurements/MeasurementsComparator";
+import { SortingAlgorithma } from "./Utilities/Sort/SortingAlgorithms";
+import { ActionArray } from "./Utilities/Generic/ActionArray";
+import type { IAction } from "./Interfaces/IAction";
 import type { IAlias } from "./Interfaces/IAlias";
 import type { IAliasName } from "./Interfaces/IAliasName";
 import type { ICategoryObject } from "./Interfaces/ICategoryObject";
+import type { IComparator } from "./Utilities/Sort/Interfaces/IComparator";
 import type { IDesktop } from "./Interfaces/IDesktop";
 import type { IObject } from "./Interfaces/IObject";
 import type { IPrintedObject } from "./Interfaces/IPrintedObject";
@@ -17,13 +22,9 @@ import type { IDerivation } from "./Measurements/Interfaces/IDerivation";
 import type { IMeasurement } from "./Measurements/Interfaces/IMeasurement";
 import type { IMeasurements } from "./Measurements/Interfaces/IMeasurements";
 import type { IFeedbackCollection } from "./Interfaces/IFeedbackCollection";
-import { MeasurementsComparator } from "./Measurements/MeasurementsComparator";
 import type { ICheck } from "./Interfaces/ICheck";
 import type { ICheckHolder } from "./Interfaces/ICheckHolder";
-import { SortingAlgorithma } from "./Utilities/Sort/SortingAlgorithms";
-import { IComparator } from "./Utilities/Sort/Interfaces/IComparator";
-import { IAction } from "./Interfaces/IAction";
-import { ActionArray } from "./Utilities/Generic/ActionArray";
+
 
 export class Performer
 {
@@ -46,6 +47,29 @@ export class Performer
 
     public setPrinter(printer: IPrinter): void {
         this.printer = printer;
+    }
+
+
+    public reoplaceArrayValue<T>(t: T[], s: T[]): void {
+
+        if (s.length == 0) {
+            if (t.length > 0) {
+                t.pop();
+                return;
+            }
+        }
+        let ss = s[0]
+        if (t.length > 0) {
+            t[0] = ss;
+            return;
+        }
+        t.push(ss);
+    }
+
+
+    public executeAction(acttion: IAction | undefined): void {
+        if (acttion === undefined) return;
+        acttion.action();
     }
 
     public sumOfActions(first: IAction | undefined, second: IAction | undefined): IAction | undefined {

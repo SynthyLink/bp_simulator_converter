@@ -13,7 +13,9 @@ using Motion6D.Interfaces;
 using Vector3D;
 
 using RealMatrixProcessor;
+
 using ErrorHandler;
+
 using NamedTree;
 
 namespace Motion6D.Portable
@@ -33,7 +35,6 @@ namespace Motion6D.Portable
 
         EulerAngles angles = new EulerAngles();
 
-        const double a = 0;
 
         double[] aux = new double[3];
 
@@ -253,21 +254,6 @@ namespace Motion6D.Portable
             Array.Copy(omegaRelative, angularVelocity.Omega, 3);
         }
 
-
-        void updDistance()
-        {
-            double[] y = source.Position;
-            double[] x = target.Position;
-            double dist = 0;
-            for (int i = 0; i < 3; i++)
-            {
-                double dd = y[i] - x[i];
-                dist += dd * dd;
-                relativePos[i] = dd;
-            }
-            distance = Math.Sqrt(dist);
-        }
-
         void UpdateAngularVelocity()
         {
             realMatrix.Multiply(aTarget.Omega, relativeFrame.Matrix, aux);
@@ -392,40 +378,29 @@ namespace Motion6D.Portable
         }
 
 
+
+
         void GetParameters(IPosition p, ref IVelocity velocity, ref IOrientation orientation, ref IAngularVelocity om)
         {
             velocity = null;
             orientation = null;
             om = null;
             IPosition pa = p;
-            if (p is IReferenceFrame)
+            if (p is IReferenceFrame f)
             {
-                IReferenceFrame f = p as IReferenceFrame;
                 pa = f.Own;
             }
-            if (pa is IVelocity)
+            if (pa is IVelocity v)
             {
-                velocity = pa as IVelocity;
+                velocity = v;
             }
-            else
+            if (pa is IOrientation or)
             {
-                velocity = null;
+                orientation = or;
             }
-            if (pa is IOrientation)
+            if (pa is IAngularVelocity av)
             {
-                orientation = pa as IOrientation;
-            }
-            else
-            {
-                orientation = null;
-            }
-            if (pa is IAngularVelocity)
-            {
-                om = pa as IAngularVelocity;
-            }
-            else
-            {
-                om = null;
+                om = av;
             }
         }
 
@@ -549,21 +524,18 @@ namespace Motion6D.Portable
             if ((source is IVelocity) & (target is IVelocity))
             {
                 vSource = source as IVelocity;
+                vTarget = target as IVelocity;
                 UpdateAll += UpdateCoinVelocity;
             }
             if (oTarget != null)
             {
                 UpdateAll += UpdateOrientationCoordinates;
-            }
-            if (oTarget != null)
-            {
                 UpdateAll += UpdateOrientationVelocity;
             }
             if (aTarget != null)
             {
                 UpdateAll += AddAngularVelocity;
             }
-
             if ((oSource != null) & (oTarget != null))
             {
                 UpdateAll += UpdateQuaternion;
@@ -633,15 +605,15 @@ namespace Motion6D.Portable
 
         void UpdateQuaternion()
         {
-           vp.QuaternionInvertMultiply(oTarget.Quaternion,oSource.Quaternion, quaternion);
-            Array.Copy(quaternion, relativeFrame.Quaternion, 3);
+            vp.QuaternionInvertMultiply(oTarget.Quaternion, oSource.Quaternion, quaternion);
+            Array.Copy(quaternion, relativeFrame.Quaternion, 4);
             relativeFrame.SetMatrix();
         }
 
         void AddAngularVelocity()
         {
             double[] om = aTarget.Omega;
-            vp.VectorPoduct(relativePos, om, omegaRProduct);
+            vp.VectorProduct(relativePos, om, omegaRProduct);
             realMatrix.PlusEqual(relativeVelocity, omegaRProduct);
         }
 
@@ -657,7 +629,7 @@ namespace Motion6D.Portable
 
         IMeasurement[] CreateCoordMeasurements(IMeasurement[] vel)
         {
-            Func<object>[] pars = new Func<object>[] { GetX, GetY, GetZ };
+            Func<object>[] pars =  { GetX, GetY, GetZ };
             List<IMeasurement> meas = new List<IMeasurement>();
             for (int i = 0; i < 3; i++)
             {
@@ -765,7 +737,7 @@ namespace Motion6D.Portable
 
         void IChildren<IMeasurement>.AddChild(IMeasurement child)
         {
-            throw new ErrorHandler.OwnException();
+            throw new OwnException();
 
         }
 

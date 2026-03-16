@@ -5,6 +5,7 @@ import type { IAction } from "../Interfaces/IAction";
 import type { IFunc } from "../Interfaces/IFunc";
 import { Performer } from "../Performer";
 import type { IDataRuntime } from "../Runtime/Interfaces/IDataRuntime";
+import { IComparator } from "../Utilities/Sort/Interfaces/IComparator";
 import { DataConsumerBoolFunc } from "./DataConsumerBoolFunc";
 import type { IArrayElementMeasurement } from "./Interfaces/IArrayElemetMeasurements";
 import type { IDataConsumer } from "./Interfaces/IDataConsumer";
@@ -15,8 +16,13 @@ import { TimeMeasurementProvider } from "./TimeMeasurementProvider";
 
 export class PefrormerMeasuremets {
 
+    constructor() {
+
+    }
+
     performer: Performer = new Performer();
 
+    protected mCompatator !: IComparator<IMeasurements>;
 
 
     public getArrayMeasurements(array: IArrayElementMeasurement): IMeasurement[] {

@@ -293,7 +293,7 @@ namespace Vector3D
         /// <param name="x">First vector</param>
         /// <param name="y">Second vector</param>
         /// <returns>Vector product</returns>
-        public double[] VectorPoduct(double[] x, double[] y)
+        public double[] VectorProduct(double[] x, double[] y)
         {
             double[] z = new double[3];
             z[0] = x[1] * y[2] - x[2] * y[1];
@@ -308,7 +308,7 @@ namespace Vector3D
         /// <param name="x">First vector</param>
         /// <param name="y">Second vector</param>
         /// <param name="z">Result vector</param>
-        public void VectorPoduct(double[] x, double[] y, double[] z)
+        public void VectorProduct(double[] x, double[] y, double[] z)
         {
             z[0] = x[1] * y[2] - x[2] * y[1];
             z[1] = x[2] * y[0] - x[0] * y[2];
@@ -407,9 +407,9 @@ namespace Vector3D
         {
             double[][] a = new double[3][];
             a[0] = VectorNorm3d(x);
-            a[2] = VectorPoduct(a[0], y);
+            a[2] = VectorProduct(a[0], y);
             a[2] = VectorNorm3d(a[2]);
-            a[1] = VectorPoduct(a[2], a[0]);
+            a[1] = VectorProduct(a[2], a[0]);
             return a;
         }
 
@@ -929,14 +929,14 @@ namespace Vector3D
           double[] position, double[] buffer, double[] buffer1, double[] result)
         {
             Array.Copy(acc, result, 3);
-            VectorPoduct(omega, velocity, buffer);
+            VectorProduct(omega, velocity, buffer);
             for (int i = 0; i < 3; i++)
             {
                 result[i] += buffer[i];
             }
-            VectorPoduct(omega, position, buffer1);
-            VectorPoduct(omega, buffer1, buffer);
-            VectorPoduct(eps, position, buffer1);
+            VectorProduct(omega, position, buffer1);
+            VectorProduct(omega, buffer1, buffer);
+            VectorProduct(eps, position, buffer1);
             for (int i = 0; i < 3; i++)
             {
                 result[i] += buffer[i] + buffer1[i];

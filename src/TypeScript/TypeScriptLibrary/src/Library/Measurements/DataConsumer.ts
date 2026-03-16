@@ -30,6 +30,8 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         this.tms = this;
         this.dataConsumer = this;
     }
+    resetDataConsumer(): void {
+    }
     addIterator(iterator: IIterator): void {
         this.iterator = iterator;
     }

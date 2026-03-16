@@ -67,7 +67,7 @@ namespace Motion6D
             double[,] mb = baseOrientation.Matrix;
             double[] om = baseAngular.Omega;
             double[] pos = relative.Position;
-            vp.VectorPoduct(om, pos, hv);
+            vp.VectorProduct(om, pos, hv);
             for (int i = 0; i < 3; i++)
             {
                 velocity[i] = velocityBase[i];

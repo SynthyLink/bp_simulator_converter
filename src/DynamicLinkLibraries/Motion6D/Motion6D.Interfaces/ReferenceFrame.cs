@@ -222,9 +222,8 @@ namespace Motion6D.Interfaces
         /// <returns>Parent frame</returns>
         static public ReferenceFrame GetOwnFrame(IPosition position)
         {
-            if (position is IReferenceFrame)
+            if (position is IReferenceFrame f)
             {
-                IReferenceFrame f = position as IReferenceFrame;
                 return f.Own;
             }
             return GetParentFrame(position);

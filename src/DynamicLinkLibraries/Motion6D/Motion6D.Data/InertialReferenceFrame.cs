@@ -311,7 +311,7 @@ namespace Motion6D
                 linAccAbsolute[i] = forces[i] * unMass + aux[i];
             }
             realMatrix.Multiply(J, omega, aux);
-            vp.VectorPoduct(omega, aux, aux1);
+            vp.VectorProduct(omega, aux, aux1);
             realMatrix.Add(aux1, 0, forces, 9, aux, 0, 3);
             Array.Copy(forces, 3, aux1, 0, 3);
             realMatrix.Multiply(aux1, T, aux2);
