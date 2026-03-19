@@ -90,7 +90,6 @@ namespace Motion6D.Portable
 
         private IVelocity ivelocity;
 
-
         private ReferenceFrame sourceFrame;
 
         private double[] omegaRProduct = new double[3];
@@ -470,7 +469,6 @@ namespace Motion6D.Portable
                 ivelocity = relativeFrame as IVelocity;
             }
 
-
         }
 
         private void CreateMeasurements()
@@ -720,7 +718,7 @@ namespace Motion6D.Portable
             {
                 return new IMeasurement[0];
             }
-            Func<object>[] pars = new Func<object>[] { GetQ0, GetQ1, GetQ2, GetQ3, 
+            Func<object>[] pars =  { GetQ0, GetQ1, GetQ2, GetQ3, 
                 GetRoll, GetPitch, GetYaw };
             IMeasurement[] m = new IMeasurement[pars.Length];
             for (int i = 0; i < m.Length; i++)

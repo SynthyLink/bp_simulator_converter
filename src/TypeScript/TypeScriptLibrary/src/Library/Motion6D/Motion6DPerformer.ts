@@ -1,6 +1,7 @@
 import { Performer } from "../Performer";
 import type { IPosition } from "./Interfaces/IPosition";
 import type { IReferenceFrame } from "./Interfaces/IReferenceFrame";
+import { Motion6DAcceleratedFrame } from "./Motion6DAcceleratedFrame";
 import { Motion6DFrame } from "./Motion6DFrame";
 import { ReferenceFrame } from "./ReferenceFrame";
 
@@ -70,6 +71,21 @@ export class Motion6DPerformer {
         }
 
     */
+
+    public getRelative(baseFrame: ReferenceFrame, relative: ReferenceFrame): ReferenceFrame {
+        let frame !: ReferenceFrame;
+        let bf = this.performer.convertObject<Motion6DAcceleratedFrame, ReferenceFrame>(baseFrame, "Motion6DAcceleratedFrame")
+        let rf = this.performer.convertObject<Motion6DAcceleratedFrame, ReferenceFrame>(relative, "Motion6DAcceleratedFrame")
+        if ((bf.length > 0) && (rf.length > 0)) {
+            frame = new Motion6DAcceleratedFrame();
+        }
+        else {
+            frame = new ReferenceFrame();
+        }
+        frame.setReferenceFrame(baseFrame, relative);
+        return frame;
+    }
+   
 
     public getRelativeFrame(baseFrame: ReferenceFrame, targetFrame: ReferenceFrame, relative: ReferenceFrame): void
     {

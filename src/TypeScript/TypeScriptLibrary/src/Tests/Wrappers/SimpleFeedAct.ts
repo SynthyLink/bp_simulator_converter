@@ -21,7 +21,7 @@ export class SimpleFeedAct extends SimpleFeed implements IAction
         var a = k.getMeasurement(0).getMeasurementValue();
         var b = k.getMeasurement(1).getMeasurementValue();
 
-        console.log(a, b);;
+        console.log(a, b);
     }
     func(): boolean {
         return false;

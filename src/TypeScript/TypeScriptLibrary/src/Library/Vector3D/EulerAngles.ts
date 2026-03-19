@@ -13,19 +13,23 @@ export class EulerAngles {
     getRoll(): number {
         return this.roll
     }
+
     getPitch(): number {
         return this.pitch
     }
-    getRoYaw(): number {
+
+    getYaw(): number {
         return this.yaw
     }
 
     setRoll(roll: number): void {
         this.roll = roll
     }
+
     setPitch(pitch: number): void {
         this.pitch = pitch
     }
+
     setYaw(yaw: number): void {
         this.yaw = yaw
     }

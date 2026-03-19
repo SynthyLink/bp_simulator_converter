@@ -20,7 +20,7 @@ export class TransformerRecursveAct extends TransformerRecursive implements IAct
         var a = k.getMeasurement(0).getMeasurementValue();
         var b = k.getMeasurement(1).getMeasurementValue();
 
-        console.log(a, b);;
+        console.log(a, b);
     }
 
     func(): boolean {

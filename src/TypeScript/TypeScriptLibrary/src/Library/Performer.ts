@@ -406,6 +406,17 @@ export class Performer
         }
     }
 
+    public copyArraySize<T>(f: T[], t: T[], size: number): void {
+        for (let i = 0; i < size; i++) {
+            t[i] = f[i];
+        }
+    }
+
+    public addArray<T>(array: T[], add: T[]): void {
+        for (let f of add) {
+            array.push(f)
+        }
+    }
 
     public setAliasType(name: string, value: any, map: Map<string, any>, names: string[]): boolean {
         if (map.has(name)) {
