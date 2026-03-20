@@ -16,7 +16,7 @@ export class Motion6DPerformer {
 
     private performer: Performer = new Performer();
 
-    public GetOwnFrame(position: IPosition): ReferenceFrame | undefined{
+    public getOwnFrame(position: IPosition): ReferenceFrame | undefined{
         var pp = this.performer.convertObject<IReferenceFrame, IPosition>(position, "IReferenceFrame")
         if (pp.length > 0) return pp[0].getOwnFrame();
         return this.getParentFrame(position);

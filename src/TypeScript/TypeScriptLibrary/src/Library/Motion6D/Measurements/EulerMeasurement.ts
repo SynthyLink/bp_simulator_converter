@@ -48,7 +48,7 @@ class YawMeasurement extends EulerMeasurement {
     }
 
     getMeasurementValue() {
-        return this.angles.getRoYaw();
+        return this.angles.getYaw();
     }
 
 }

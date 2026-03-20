@@ -6,10 +6,13 @@
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { FictiveCategoryObject } from "./Fiction/FictiveCategoryObject";
+import { FictiveDesktop } from "./Fiction/FictiveDesktop";
 import type { ICategoryArrow } from "./Interfaces/ICategoryArrow";
 import type { ICategoryObject } from "./Interfaces/ICategoryObject";
 import type { IDesktop } from "./Interfaces/IDesktop";
 import type { IObject } from "./Interfaces/IObject";
+import { Performer } from "./Performer";
 
 export class CategoryArrow implements ICategoryArrow, IObject
 {
@@ -19,6 +22,8 @@ export class CategoryArrow implements ICategoryArrow, IObject
         desktop.addCategoryArrow(this);
         desktop.addObject(this);
     }
+
+
     getArrowName(): string {
         return this.name;
     }
@@ -30,11 +35,23 @@ export class CategoryArrow implements ICategoryArrow, IObject
         return this.types.indexOf(type) >= 0;
     }
 
-    protected name !: string;
+    protected name : string = "";
 
-    protected desktop !: IDesktop;
+    protected desktop: IDesktop = new FictiveDesktop();
 
-    getDesktop(): IDesktop {
+
+    protected source: ICategoryObject = new FictiveCategoryObject();
+    ;
+
+    protected target: ICategoryObject = new FictiveCategoryObject();
+
+    protected typeName: string = "CategoryArrow";
+
+    protected types: string[] = ["ICategoryArrow", "CategoryArrow"];
+
+    protected performer: Performer = new Performer()
+
+   getDesktop(): IDesktop {
         return this.desktop;
     }
 
@@ -42,24 +59,18 @@ export class CategoryArrow implements ICategoryArrow, IObject
         return this.name;
     }
 
-    source!: ICategoryObject;
-
-    target!: ICategoryObject;
-
-    protected typeName: string = "CategoryArrow";
-
-    protected types: string[] = ["ICategoryArrow", "CategoryArrow"];
-
-
     getSource(): ICategoryObject {
         return this.source;
     }
+
     getTarget(): ICategoryObject {
         return this.target;
     }
+
     setSource(source: ICategoryObject): void {
         this.source = source;
     }
+
     setTarget(target: ICategoryObject): void {
         this.target = target;
     }

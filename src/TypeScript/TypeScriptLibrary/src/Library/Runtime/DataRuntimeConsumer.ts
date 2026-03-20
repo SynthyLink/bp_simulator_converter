@@ -3,8 +3,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
-import type { ICategoryArrow } from "../Interfaces/ICategoryArrow";
-import type { ICategoryObject } from "../Interfaces/ICategoryObject";
 import { Performer } from "../Performer";
 import type { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
 import type { IMeasurements } from "../Measurements/Interfaces/IMeasurements";
@@ -12,6 +10,8 @@ import type { ITimeMeasurementConsumer } from "../Measurements/Interfaces/ITimeM
 import type { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
 import type { IDataRuntime } from "./Interfaces/IDataRuntime";
 import type { IStarted } from "../Measurements/Interfaces/IStarted";
+import type { ICategoryArrow } from "../Interfaces/ICategoryArrow";
+import type { ICategoryObject } from "../Interfaces/ICategoryObject";
 
 export class DataRuntimeConsumer implements IDataRuntime
 {

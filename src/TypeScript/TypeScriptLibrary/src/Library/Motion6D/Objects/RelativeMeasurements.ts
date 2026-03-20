@@ -13,6 +13,9 @@ import { ReferenceFrame } from "../ReferenceFrame";
 import { FictiveAction } from "../../Fiction/FictiveAction";
 import { OwnNotImplemented } from "../../ErrorHandler/OwnNotImplemented";
 import { NumberMeasurement } from "../../Measurements/NumberMeasurement";
+import { Quaternion } from "../../Vector3D/Quaternion";
+import { EulerMeasurement } from "../Measurements/EulerMeasurement";
+import { MeasurementDerivation } from "../../Measurements/MeasurementDerivation";
 import type { IReferenceFrame } from "../Interfaces/IReferenceFrame";
 import type { IDesktop } from "../../Interfaces/IDesktop";
 import type { IMeasurement } from "../../Measurements/Interfaces/IMeasurement";
@@ -22,12 +25,11 @@ import type { IPosition } from "../Interfaces/IPosition";
 import type { IVelocity } from "../Interfaces/IVelocity";
 import type { IAction } from "../../Interfaces/IAction";
 import type { IMeasurements } from "../../Measurements/Interfaces/IMeasurements";
-import { Quaternion } from "../../Vector3D/Quaternion";
-import { EulerMeasurement } from "../Measurements/EulerMeasurement";
-import { MeasurementDerivation } from "../../Measurements/MeasurementDerivation";
+import type { IPostSetArrow } from "../../Interfaces/IPostSetArrow";
+import { OwnError } from "../../ErrorHandler/OwnError";
 
 
-export class RelativeMeasurements extends CategoryObject implements IMeasurements {
+export class RelativeMeasurements extends CategoryObject implements IMeasurements, IMeasurement, IPostSetArrow {
 
     m6dPerformer: Motion6DPerformer = new Motion6DPerformer()
 
@@ -54,6 +56,10 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
     quaternionMeasurements: IMeasurement[] = [];
 
     angleMeasurements: IMeasurement[] = [];
+
+    velocityArr: IVelocity[] = []
+    orientationArr: IOrientation[] = []
+    omArr: IAngularVelocityMotion6D[] =[]
 
 
 
@@ -86,6 +92,25 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
         this.distanceScalar = new DistanceMeasurement(this.names[3], this)
 
     }
+
+
+    postSetArrow(): void {
+        this.createMeasurements()
+    }
+
+
+
+    getMeasurementName(): string {
+        return "Frame";
+    }
+    getMeasurementType() {
+        return "ReferenceFrame"
+    }
+    getMeasurementValue() {
+        return this.relativeFrame;
+    }
+
+
     getMeasurementsCount(): number {
         return this.measurements.length;
     }
@@ -248,7 +273,7 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
         }
         this.distance = Math.sqrt(dist);
 
-        var f = this.m6dPerformer.GetOwnFrame(this.target);
+        var f = this.m6dPerformer.getOwnFrame(this.target);
         if (f === undefined) {
 
         }
@@ -360,7 +385,7 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
         }
         let f = rf[0];
         let o = f.getOwnFrame()
-        var p = this.m6dPerformer.GetOwnFrame(this.source);
+        var p = this.m6dPerformer.getOwnFrame(this.source);
         if (p == o) {
             return false;
         }
@@ -408,7 +433,7 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
     }
 
     public updateVelocityRotation(): void {
-        let f = this.m6dPerformer.GetOwnFrame(this.target);
+        let f = this.m6dPerformer.getOwnFrame(this.target);
         if (f === undefined) {
 
         }
@@ -477,70 +502,132 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
         return meas;
     }
 
-
-
-         postCreateMeasurements() : void
-         {
-             let up: IAction | undefined
-    this.createConside();
-    let acc = this.createAccMeasurements();
-    let vel = this.createVelocityMeasurements(acc);
-             let coord = this.createCoordMeasurements(vel);
-             let m: IMeasurement[] = []
-             if (vel.length > 0)
-             {
-                 this.performer.addArray<IMeasurement>(m, coord)
-                 this.performer.addArray<IMeasurement>(m, vel)
-                 up = this.updateCoinDistanceAct;
-                 up = this.performer.sumOfActions(up, this.updateCoinVelocityAct)
-
-                 if (this.oTarget != undefined) {
-                     up = this.performer.sumOfActions(up, this.updateOrientationCoordinatesAct)
-                 }
-                 if (this.oTarget != undefined) {
-                     up = this.performer.sumOfActions(up, this.updateOrientationVelocityAct)
-                 }
-                 if (this.aTarget != null) {
-                     up = this.performer.sumOfActions(up, this.addAngularVelocityAct)
-                 }
-                 if ((this.oSource != undefined) && (this.oTarget != undefined)) {
-                     up = this.performer.sumOfActions(up, this.updateQuaternionAct)
-                 }
-                 if ((this.aSource != undefined) && (this.aTarget != undefined)) {
-                     up = this.performer.sumOfActions(up, this.updateAngularVelocityAct)
-                 }
-             }
-             else {
-                 this.performer.addArray(m, this.coordMeasurements)
-             }
-             if (up === undefined) {
-
-             }
-             else {
-                 this.updateAll = up
-             }
-
-             this.relativeFrame = this.m6dPerformer.getRelative(this.targetFrame, this.sourceFrame);
-
-    List < IMeasurement > lm = new List<IMeasurement>();
-    lm.AddRange(measurements);
-    lm.AddRange(CreateQuatenionMeasurements());
-    lm.AddRange(CreateAngularVelicity());
-    lm.Add(measurementFrame);
-    measurements = lm.ToArray();
-    updFrame = UpdateFrame;
-    if (relativeFrame is IAngularVelocity)
-    {
-        angularVelocity = relativeFrame as IAngularVelocity;
-        updFrame += UpdateFrameAngularVelocity;
-    }
-    if (relativeFrame is IVelocity)
-    {
-        ivelocity = relativeFrame as IVelocity;
+    public getSource(): IPosition {
+        return this.source
     }
 
-}
+    public getTarget(): IPosition {
+        return this.target
+    }
 
+
+    public setSource(value: IPosition): void {
+        if (this.source != null && value != null) {
+            throw new OwnError("Souce already exists", "", "");
+        }
+        this.source = value;
+        this.getParameters(this.source, this.velocityArr, this.orientationArr, this.omArr);
+        this.vSource = this.velocityArr[0]
+        this.oSource = this.orientationArr[0]
+        this.aSource = this.omArr[0]
+        this.createMeasurements();
+
+    }
+
+    public setTaget(value: IPosition): void {
+        if (this.target != null && value != null) {
+            throw new OwnError("Souce already exists", "", "");
+        }
+        this.target = value;
+        this.getParameters(this.target, this.velocityArr, this.orientationArr, this.omArr);
+        this.vTarget = this.velocityArr[0]
+        this.oTarget = this.orientationArr[0]
+        this.aTarget = this.omArr[0]
+        this.createMeasurements();
+
+    }
+
+
+
+    createMeasurements(): void {
+        if (this.source == undefined || this.target == undefined) {
+            return;
+        }
+        if (!this.createConside()) {
+            return;
+        }
+        this.getParameters(this.source, this.velocityArr, this.orientationArr, this.omArr);
+        this.vSource = this.velocityArr[0]
+        this.oSource = this.orientationArr[0]
+        this.aSource = this.omArr[0]
+        this.getParameters(this.target, this.velocityArr, this.orientationArr, this.omArr);
+        this.vTarget = this.velocityArr[0]
+        this.oTarget = this.orientationArr[0]
+        this.aTarget = this.omArr[0]
+        this.createConside();
+        let sf = this.m6dPerformer.getOwnFrame(this.source)
+        if (sf != undefined) {
+            this.sourceFrame = sf
+        }
+        let tf = this.m6dPerformer.getOwnFrame(this.target)
+        if (tf != undefined) {
+            this.targetFrame = tf
+        }
+        this.postCreateMeasurements();
+    }
+
+    postCreateMeasurements(): void {
+        let up: IAction | undefined
+        this.createConside();
+        let acc = this.createAccMeasurements();
+        let vel = this.createVelocityMeasurements(acc);
+        let coord = this.createCoordMeasurements(vel);
+        let m: IMeasurement[] = []
+        if (vel.length > 0) {
+            this.performer.addArray<IMeasurement>(m, coord)
+            this.performer.addArray<IMeasurement>(m, vel)
+            up = this.updateCoinDistanceAct;
+            up = this.performer.sumOfActions(up, this.updateCoinVelocityAct)
+
+            if (this.oTarget != undefined) {
+                up = this.performer.sumOfActions(up, this.updateOrientationCoordinatesAct)
+            }
+            if (this.oTarget != undefined) {
+                up = this.performer.sumOfActions(up, this.updateOrientationVelocityAct)
+            }
+            if (this.aTarget != null) {
+                up = this.performer.sumOfActions(up, this.addAngularVelocityAct)
+            }
+            if ((this.oSource != undefined) && (this.oTarget != undefined)) {
+                up = this.performer.sumOfActions(up, this.updateQuaternionAct)
+            }
+            if ((this.aSource != undefined) && (this.aTarget != undefined)) {
+                up = this.performer.sumOfActions(up, this.updateAngularVelocityAct)
+            }
+        }
+        else {
+            this.performer.addArray(m, this.coordMeasurements)
+        }
+        if (up === undefined) {
+
+        }
+        else {
+            this.updateAll = up
+        }
+
+        this.relativeFrame = this.m6dPerformer.getRelative(this.targetFrame, this.sourceFrame);
+        this.performer.addArray(m, this.createQuatenionMeasurements())
+        this.performer.addArray(m, this.createAngularVelicity())
+        m.push(this);
+        this.measurements = m;
+        let upf: IAction | undefined = this.updateFrameAct
+        var av = this.performer.convertObject<IAngularVelocityMotion6D, ReferenceFrame>(this.relativeFrame, "IAngularVelocityMotion6D")
+        if (av.length > 0) {
+            this.angularVelocity = av[0];
+            upf = this.performer.sumOfActions(upf, this.updateFrameAngularVelocityAct)
+
+        }
+        var iv = this.performer.convertObject<IVelocity, ReferenceFrame>(this.relativeFrame, "IVelocity")
+        if (iv.length > 0) {
+            this.ivelocity = iv[0]
+        }
+        if (upf === undefined) {
+
+        }
+        else {
+            this.updFrame = upf;
+        }
+    }
 
 }
 
