@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.Linq;
+
 using BaseTypes.Attributes;
+
 using Diagram.UI;
-using Diagram.UI.CodeCreators.Interfaces;
-using Diagram.UI.Interfaces;
 
 namespace DataPerformer.Portable.TypeScript
 {
@@ -12,11 +12,14 @@ namespace DataPerformer.Portable.TypeScript
     /// Creator of TS code
     /// </summary>
     [Language("TS")]
-    internal class ClassCodeCreator : Diagram.TypeScript.ClassCodeCreator
+    public class ClassCodeCreator : Diagram.TypeScript.ClassCodeCreator
     {
 
+        protected Diagram.UI.TypeScript.Performer performer = new();
 
         #region Ctor
+
+        protected ClassCodeCreator(bool b) : base(true) { }
         internal ClassCodeCreator() : base(false)
         {
             dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
@@ -31,6 +34,30 @@ namespace DataPerformer.Portable.TypeScript
             this.AddClassCodeCreator();
         }
         #endregion
+
+        /// <summary>
+        /// Array to list
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <param name="x">x</param>
+        /// <returns></returns>
+        protected List<string> Get(string id, double[] x)
+        {
+            return performer.Get(id, x).ToList();
+        }
+
+        /// <summary>
+        /// Enumerable to list
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <param name="x">x</param>
+        /// <returns></returns>
+        protected List<string> Get(string id, IEnumerable<string> x)
+        {
+            return performer.CreateList(id, x).ToList();
+        }
+
+
 
         protected override List<string> CreateCode(string preffix, object obj, string volume)
         {
@@ -77,10 +104,10 @@ namespace DataPerformer.Portable.TypeScript
 
 
 
-            List<string> CreateObjectTransformer(string preffix, object obj)
+        List<string> CreateObjectTransformer(string preffix, object obj)
         {
             List<string> l = new List<string>();
-           var ot = obj as ObjectTransformer;
+            var ot = obj as ObjectTransformer;
             var s = performer.ClassString(preffix, "ObjectTransformer");
             var ll = performer.CreateStringDictionary("map", ot.Links);
             l.Add(s);

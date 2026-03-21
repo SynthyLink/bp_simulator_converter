@@ -107,7 +107,7 @@ namespace Diagram.UI.TypeScript
                 }
                 if (!staticClass)
                 {
-                    l.Add("this.finish()");
+                    l.Add("\tthis.finish()");
                 }
                 l.Add("}");
                 l.Add("");

@@ -1,16 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Runtime.Serialization;
 
-
-using CategoryTheory;
-using Diagram.UI;
-
-using DataPerformer;
-using DataPerformer.Interfaces;
-
-using Motion6D.Interfaces;
 using ErrorHandler;
 
 

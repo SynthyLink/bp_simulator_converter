@@ -1,9 +1,7 @@
 ﻿using BaseTypes.Attributes;
 using BaseTypes.CodeCreator.Interfaces;
-using BaseTypes.CSharp;
 using DataPerformer.Interfaces;
 using Diagram.UI;
-using Diagram.UI.Attributes;
 using Diagram.UI.Interfaces;
 using ErrorHandler;
 using FormulaEditor;

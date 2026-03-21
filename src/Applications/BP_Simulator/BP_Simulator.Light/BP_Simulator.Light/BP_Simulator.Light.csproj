@@ -99,6 +99,7 @@
     <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\ImageNavigation\ImageNavigation\ImageNavigation.csproj" />
     <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\ImageTransformation.UI\ImageTransformation.UI.csproj" />
     <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\Motion6D\Motion6D.EmptyCode\Motion6D.EmptyCode.csproj" />
+    <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\Motion6D\Motion6D.Portable.TypeScript\Motion6D.Portable.TypeScript.csproj" />
     <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\Motion6D\Motion6D.Portable\Motion6D.Portable.csproj">
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\DynamicLinkLibraries\Motion6D\Motion6D.UI.Avanced\Motion6D.UI.Advanced.csproj" />

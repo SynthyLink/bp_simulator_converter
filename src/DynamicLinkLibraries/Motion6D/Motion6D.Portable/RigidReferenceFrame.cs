@@ -367,10 +367,12 @@ namespace Motion6D.Portable
         /// <summary>
         /// Relative position
         /// </summary>
-        public double[] RelativePosition
-        {
-            get { return relativePosition; }
-        }
+        public double[] RelativePosition => relativePosition;
+
+        /// <summary>
+        /// Relative quaternioon
+        /// </summary>
+        public double[] RelativeQuaternion => relativeQuaternion;
 
         /// <summary>
         /// Relative matrix

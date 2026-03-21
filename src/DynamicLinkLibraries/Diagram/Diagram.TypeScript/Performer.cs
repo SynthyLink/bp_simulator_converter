@@ -87,6 +87,20 @@ namespace Diagram.UI.TypeScript
             return l;
         }
 
+        public List<string> Get(string id, double[] x)
+        {
+            var l = new List<string>();
+            var r = "\tthis." + id;
+            l.Add(r + " = [];");
+            foreach (var v in x)
+            {
+                var s = DoubleToString(v);
+                l.Add(r + ".push(" + s + ");");
+            }
+            l.Add("");
+            return l;
+        }
+
         public List<string> CreateMap<T>(string id, Dictionary<T, string> map, string type = null)
         {
             var tt = (type == null) ? "any" : type;

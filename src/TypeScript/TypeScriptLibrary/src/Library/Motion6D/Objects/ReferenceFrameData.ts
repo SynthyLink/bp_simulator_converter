@@ -92,6 +92,8 @@ export class ReferenceFrameData extends RigidReferenceFrame implements IDataCons
         this.types.push("IPostSetArrow");
         this.types.push("ReferenceFrameData");
     }
+
+
     resetDataConsumer(): void {
     }
     getMeasurementName(): string {

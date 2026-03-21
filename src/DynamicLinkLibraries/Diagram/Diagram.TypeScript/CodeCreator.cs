@@ -290,7 +290,7 @@ namespace Diagram.TypeScript
                     l.Add("setFeedback(): void {");
                     var ll = dcc.Create("map", fa.Dictionary).Values.ToArray()[0];
                     ll.Add("this.feedback = new FeedbackAliasCollection(map, this, this);");
-                    performer.Add(l, ll, 1);
+                    Add(l, ll, 1);
                     l.Add("}");
                 }
             }
@@ -300,6 +300,11 @@ namespace Diagram.TypeScript
         Dictionary<string, List<string>> IEnumerableCodeCreator<string>.Create(string id, IEnumerable<string> values)
         {
             return new Dictionary<string, List<string>>();  
+        }
+
+        protected void Add(List<string> l, List<string> ll, int shift)
+        {
+            performer.Add(l, ll, shift);
         }
     }
 }

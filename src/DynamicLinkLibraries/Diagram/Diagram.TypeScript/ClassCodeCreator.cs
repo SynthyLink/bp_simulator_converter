@@ -1,9 +1,4 @@
 ﻿using Diagram.UI.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Diagram.TypeScript
 {
@@ -30,6 +25,10 @@ namespace Diagram.TypeScript
                 }
             }
             return null;
+        }
+        protected void Add(List<string> l, List<string> ll, int shift)
+        {
+            performer.Add(l, ll, shift);
         }
 
         List<string> IClassCodeCreator.CreateCode(string prefix, object obj, string volume)

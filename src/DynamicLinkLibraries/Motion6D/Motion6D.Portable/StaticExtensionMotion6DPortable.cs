@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 
 using Diagram.UI;
@@ -15,8 +16,8 @@ using Event.Portable;
 using Motion6D.Interfaces;
 using Motion6D.Portable.Interfaces;
 using Motion6D.Portable.Runtime;
+
 using NamedTree;
-using System.Linq;
 
 namespace Motion6D.Portable
 {

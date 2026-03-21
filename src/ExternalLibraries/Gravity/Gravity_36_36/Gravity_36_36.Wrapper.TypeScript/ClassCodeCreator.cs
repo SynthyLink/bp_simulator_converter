@@ -85,16 +85,7 @@ namespace Gravity_36_36.Wrapper.TypeScript
 
         public static List<string> Get(string id, double[] x)
         {
-            var l = new List<string>();
-            var r = "\tthis." + id; 
-            l.Add(r + " = [];");
-            foreach (var v in x)
-            {
-                var s = performer.DoubleToString(v);
-                l.Add(r + ".push(" + s + ");");
-            }
-            l.Add("");
-            return l;
+            return performer.Get(id, x).ToList(); ;
         }
     }
 }

@@ -42,6 +42,5 @@ export class ReferenceFrameArrow extends CategoryArrow {
 
     positionNode!: INodeT<IPosition>;
 
-
     frame!: IReferenceFrame;
 }
