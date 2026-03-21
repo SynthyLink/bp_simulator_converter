@@ -6,6 +6,7 @@
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { SrvRecord } from "node:dns";
 import { FictiveCategoryObject } from "./Fiction/FictiveCategoryObject";
 import { FictiveDesktop } from "./Fiction/FictiveDesktop";
 import type { ICategoryArrow } from "./Interfaces/ICategoryArrow";
@@ -73,6 +74,11 @@ export class CategoryArrow implements ICategoryArrow, IObject
 
     setTarget(target: ICategoryObject): void {
         this.target = target;
+    }
+
+    protected getObjectT<T, S>(s : S, type: string) : T[]
+    {
+        return this.performer.convertObject<T, S>(s, type)
     }
 }
 

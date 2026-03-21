@@ -71,5 +71,11 @@ export class CategoryObject implements ICategoryObject, IObject
         }
         return this.checker.check(x);
     }
+
+
+    protected getObjectT<T, S>(s: S, type: string): T[] {
+        return this.performer.convertObject<T, S>(s, type)
+    }
+
 }
 

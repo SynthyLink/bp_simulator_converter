@@ -1,7 +1,7 @@
 import { CategoryObject } from "../../CategoryObject";
 import { OwnError } from "../../ErrorHandler/OwnError";
 import type { IDesktop } from "../../Interfaces/IDesktop";
-import type { INodeT } from "../../NamedTree/INodeT";
+import type { INodeT } from "../../NamedTree/Interfaces/INodeT";
 import { RealMatrix } from "../../RealMatrixProcessor/RealMatrix";
 import { Vector3DProcessor } from "../../Vector3D/Vector3DProcessor";
 import type { IPosition } from "../Interfaces/IPosition";

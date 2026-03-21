@@ -1,7 +1,7 @@
 import { CategoryArrow } from "../../CategoryArrow";
 import type { ICategoryObject } from "../../Interfaces/ICategoryObject";
 import type { IDesktop } from "../../Interfaces/IDesktop";
-import { INodeT } from "../../NamedTree/INodeT";
+import { INodeT } from "../../NamedTree/Interfaces/INodeT";
 import { IPosition } from "../Interfaces/IPosition";
 import type { IReferenceFrame } from "../Interfaces/IReferenceFrame";
 

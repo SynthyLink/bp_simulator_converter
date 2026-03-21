@@ -1,7 +1,7 @@
 import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
 import type { IPosition } from "../Motion6D/Interfaces/IPosition";
 import type { IReferenceFrame } from "../Motion6D/Interfaces/IReferenceFrame";
-import type { INodeT } from "../NamedTree/INodeT";
+import type { INodeT } from "../NamedTree/Interfaces/INodeT";
 
 export class FictivePosition implements IPosition { 
     getPosition(): number[] {

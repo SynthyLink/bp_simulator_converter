@@ -1,4 +1,4 @@
-import { INodeT } from "../../NamedTree/INodeT";
+import { INodeT } from "../../NamedTree/Interfaces/INodeT";
 import type { IReferenceFrame } from "./IReferenceFrame";
 
 export interface IPosition extends INodeT<IPosition> {

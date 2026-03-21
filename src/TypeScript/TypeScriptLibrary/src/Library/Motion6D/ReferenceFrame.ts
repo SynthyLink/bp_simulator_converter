@@ -1,5 +1,5 @@
 import type { IObject } from "../Interfaces/IObject";
-import { INodeT } from "../NamedTree/INodeT";
+import { INodeT } from "../NamedTree/Interfaces/INodeT";
 import { Performer } from "../Performer";
 import { RealMatrix } from "../RealMatrixProcessor/RealMatrix";
 import { Vector3DProcessor } from "../Vector3D/Vector3DProcessor";
