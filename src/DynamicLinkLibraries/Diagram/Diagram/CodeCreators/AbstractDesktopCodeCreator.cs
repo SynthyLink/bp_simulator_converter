@@ -1,13 +1,14 @@
-﻿using CategoryTheory;
+﻿using System;
+using System.Collections.Generic;
+
+using CategoryTheory;
+using Diagram.Interfaces;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Numerics;
 
 namespace Diagram.CodeCreators
 {
-    public abstract class AbstractDesktopCodeCreator : IDesktopCodeCreator
+    public abstract class AbstractDesktopCodeCreator : IDesktopCodeCreator, IAdditionalFiles
     {
         protected AbstractDesktopCodeCreator(bool b)
         {
@@ -24,6 +25,11 @@ namespace Diagram.CodeCreators
         protected Dictionary<ICategoryObject, int> objects = new();
         protected Dictionary<ICategoryArrow, int> arrows = new();
 
+        protected virtual Dictionary<string, byte[]> Files
+        {
+            get;
+        } = new();
+
         protected IClassCodeCreator classCodeCreator;
 
 
@@ -35,9 +41,13 @@ namespace Diagram.CodeCreators
 
         Tuple<Dictionary<ICategoryObject, int>, Dictionary<ICategoryArrow, int>> IDesktopCodeCreator.Enumeration => dictionary;
 
+     
+        Dictionary<string, byte[]> IAdditionalFiles.Files => Files;
+
         List<string> IDesktopCodeCreator.CreateCode(IComponentCollection collection, string namespacE, string className, bool staticClass)
         {
-            return CreateCode(collection, namespacE, className, staticClass); ;
+            Files.Clear();
+            return CreateCode(collection, namespacE, className, staticClass);
         }
 
         #endregion

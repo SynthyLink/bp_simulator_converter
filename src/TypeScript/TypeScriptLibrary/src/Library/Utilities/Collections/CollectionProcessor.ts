@@ -8,4 +8,3 @@ export class CollectionProcessor {
 
 }
 
-// public static void Copy (Array sourceArray, long sourceIndex, Array destinationArray, long destinationIndex, long length);

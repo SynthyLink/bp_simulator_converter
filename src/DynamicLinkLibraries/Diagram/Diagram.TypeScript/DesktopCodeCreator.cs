@@ -1,6 +1,6 @@
 ﻿using BaseTypes.Attributes;
 using CategoryTheory;
-
+using Diagram.Interfaces;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;
@@ -10,7 +10,7 @@ using NamedTree;
 namespace Diagram.UI.TypeScript
 {
     [Language("TS", ".ts")]
-    internal class DesktopCodeCreator : IDesktopCodeCreator
+    internal class DesktopCodeCreator : IDesktopCodeCreator, IAdditionalFiles
     {
         UI.Performer performer = new ();
  
@@ -31,6 +31,11 @@ namespace Diagram.UI.TypeScript
 
         Tuple<Dictionary<ICategoryObject, int>, Dictionary<ICategoryArrow, int>> IDesktopCodeCreator.Enumeration => dictionary;
 
+        protected Dictionary<string, byte[]> Files { get; } = new();
+
+
+        Dictionary<string, byte[]> IAdditionalFiles.Files => Files;
+
         public DesktopCodeCreator() { this.AddDesktopCodeCreator(); }
 
 
@@ -45,10 +50,12 @@ namespace Diagram.UI.TypeScript
         List<string> IDesktopCodeCreator.CreateCode(IComponentCollection desktop, string namespacE, 
             string className, bool staticClass)
         {
+            Files.Clear();
+            IAdditionalFiles af = null;
             Exception ex;
             try
             {
-                this.collection = desktop;
+                collection = desktop;
                 dictionary = performer.Enumerate(desktop);
                 List<ICategoryObject> categoryObjects;
                 List<ICategoryArrow> categoryArrows;
@@ -56,24 +63,53 @@ namespace Diagram.UI.TypeScript
                 Dictionary<ICategoryArrow, int> arrows;
                 performer.Get(desktop, out categoryObjects, out categoryArrows, out objects, out arrows);
                 IClassCodeCreator classCodeCreator = performer.GetLaguageObject<IClassCodeCreator>(this);
-                    // StaticExtensionDiagramUI.Creators["TS"]
+                if (classCodeCreator is IAdditionalFiles aff)
+                {
+                    af = aff;
+                }
                 var l = new List<string>();
                 for (int i = 0; i < categoryObjects.Count; i++)
                 {
                     var categoryObject = categoryObjects[i];
                     var pr = className + "_" + "CategoryObject_" + i;
                     Current = pr;
+                    if (af != null)
+                    {
+                            af.Files.Clear();
+                    }
                     var c = classCodeCreator.CreateCode(pr, categoryObject, null);
                     l.AddRange(c);
                     l.Add("");
+                    if (af != null)
+                    {
+                        var ff = af.Files;
+                        foreach (var f in ff)
+                        {
+                            Files[f.Key] = f.Value;
+                        }
+                        af.Files.Clear();
+                    }
                 }
                 for (int i = 0; i < categoryArrows.Count; i++)
                 {
                     var categoryArrow = categoryArrows[i];
                     var pr = className + "_" + "CategoryArrow_" + i;
+                    if (af != null)
+                    {
+                        af.Files.Clear();
+                    }
                     var c = classCodeCreator.CreateCode(pr, categoryArrow, null);
                     l.AddRange(c);
                     l.Add("");
+                    if (af != null)
+                    {
+                        var ff = af.Files;
+                        foreach (var f in ff)
+                        {
+                            Files[f.Key] = f.Value;
+                        }
+                        af.Files.Clear();
+                    }
                 }
                 l.Add("");
                 l.Add("");

@@ -138,6 +138,8 @@ namespace NamedTree
         /// <param name="shift">The shift</param>
         public void Add(List<string> list, List<string> l, int shift)
         {
+            if (list == null) return;
+            if (l == null) return;
             var s = "";
             for (int i = 0; i < shift; i++)
             {

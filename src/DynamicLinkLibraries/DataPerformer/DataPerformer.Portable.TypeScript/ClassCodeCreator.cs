@@ -35,28 +35,6 @@ namespace DataPerformer.Portable.TypeScript
         }
         #endregion
 
-        /// <summary>
-        /// Array to list
-        /// </summary>
-        /// <param name="id">Id</param>
-        /// <param name="x">x</param>
-        /// <returns></returns>
-        protected List<string> Get(string id, double[] x)
-        {
-            return performer.Get(id, x).ToList();
-        }
-
-        /// <summary>
-        /// Enumerable to list
-        /// </summary>
-        /// <param name="id">Id</param>
-        /// <param name="x">x</param>
-        /// <returns></returns>
-        protected List<string> Get(string id, IEnumerable<string> x)
-        {
-            return performer.CreateList(id, x).ToList();
-        }
-
 
 
         protected override List<string> CreateCode(string preffix, object obj, string volume)

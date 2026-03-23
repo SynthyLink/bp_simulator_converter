@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\AssemblyService\AssemblyService.csproj" />
+    <ProjectReference Include="..\..\BaseTypes\BaseTypes\BaseTypes.csproj" />
+    <ProjectReference Include="..\..\Diagram\Diagram.TypeScript\Diagram.TypeScript.csproj" />
+    <ProjectReference Include="..\..\Diagram\Diagram\Diagram.csproj" />
+    <ProjectReference Include="..\Event.Portable\Event.Portable.csproj" />
+  </ItemGroup>
+
+</Project>

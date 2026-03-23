@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Motion6D\Motion6D.Interfaces\Motion6D.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Motion6D\Motion6D.Portable.TypeScript\Motion6D.Portable.TypeScript.csproj" />
+    <ProjectReference Include="..\..\Motion6D\Motion6D.Portable\Motion6D.Portable.csproj" />
+    <ProjectReference Include="..\Wpf.Loader\Wpf.Loader.csproj" />
+    <ProjectReference Include="..\WpfInterface\WpfInterface.csproj" />
+  </ItemGroup>
+
+</Project>

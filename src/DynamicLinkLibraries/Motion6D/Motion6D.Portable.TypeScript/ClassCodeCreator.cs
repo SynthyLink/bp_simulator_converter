@@ -1,32 +1,58 @@
 ﻿using BaseTypes.Attributes;
+using CategoryTheory;
+using Diagram.Interfaces;
 using Diagram.UI;
-using System.ComponentModel;
+using Motion6D.Portable.TypeScript.Interfaces;
 
 namespace Motion6D.Portable.TypeScript
 {
     [Language("TS")]
-    public class ClassCodeCreator : DataPerformer.Portable.TypeScript.ClassCodeCreator
+    public class ClassCodeCreator : DataPerformer.Portable.TypeScript.ClassCodeCreator, IAdditionalFiles
     {
+        IPositionCodeFactory factory;
+
+        IAdditionalFiles additionalFiles;
+
+        Dictionary<string, byte[]> IAdditionalFiles.Files => Files;
+
+        protected virtual Dictionary<string, byte[]> Files { get; } = new Dictionary<string, byte[]>();
+
+
         protected ClassCodeCreator(bool b) : base(b) { }
 
 
 
-        internal ClassCodeCreator() :base(true)
+        internal ClassCodeCreator(IPositionCodeFactory factory) : base(true)
         {
+            this.factory = factory;
+            if (factory is IAdditionalFiles af)
+            {
+                additionalFiles = af;
+            }
             dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
                       { (object o) => { return o.GetType().Name.Contains("RigidReferenceFrame"); } , CreateReferenceFrame },
                       { (object o) => { return o is ReferenceFrameArrow; } , CreateReferenceFrameArrow },
+                      { (object o) => { return o is VisibleConsumerLink;  } , CreateVisibleCosumerLink },
                   { (object o) => { return o is ReferenceFrameData; } , CreateReferenceFrameData},
-        /*        { (object o) => { return o is FilterWrapper; } ,CreateFilterWrapper},
-             { (object o) => { return o is DataLink; } ,CreateDataLink},
-              { (object o) => { return o is ObjectTransformerLink; } , CreateObjectTransformerLink},
-               { (object o) => { return o is IteratorConsumerLink; } , CreateIteratorConsumerLink},*/
-         };
+                  { (object o) => { return o is Camera; } , CreateCamera},
+                          { (object o) => { return o is SerializablePosition; } , CreateSerializablePosition},
+    };
 
 
             this.AddClassCodeCreator();
         }
+
+        protected override  List<string> CreateCode(string prefix, object obj, string volume)
+        {
+            if (factory != null)
+            {
+                var t = factory.CreateCode(prefix, obj, volume);
+                if (t != null) { return t; }
+            }
+            return base.CreateCode(prefix, obj, volume);
+        }
+
 
         List<string> CreateReferenceFrame(string preffix, object obj)
         {
@@ -64,20 +90,126 @@ namespace Motion6D.Portable.TypeScript
             return l;
         }
 
-
-
-        List<string> CreateReferenceFrameArrow(string preffix, object obj)
+        List<string> CreateSerializablePosition(string preffix, object obj)
         {
- 
             var l = new List<string>();
-            var s = performer.ClassString(preffix, "ReferenceFrameArrow");
+            var sp = obj as SerializablePosition;
+            var par = sp.Parameters;
+            if (par != null)
+            {
+                var ll = this.par.CreateParameters(preffix, this, par, "");
+                    Add(l, ll, 2);
+            }
+            IProperties properties = sp;
+            var pr = properties.Properties;
+            if (pr != null)
+            {
+                var ll = this.par.CreateParameters(preffix, this, pr, "");
+                Add(l, ll, 2);
+            }
+            var s = performer.ClassString(preffix, "SerializablePosition");
             l.Add(s);
             l.Add("{");
             performer.AddObjectConstructor(l);
+            if (par != null)
+            {
+                var ll = this.par.SetParameters(preffix, this, par, "");
+                Add(l, ll, 2);
+            }
+            if (pr != null)
+            {
+                var ll = this.pr.SetPropereties(preffix, par, "");
+                Add(l, ll, 2);
+            }
             l.Add("\t}");
             l.Add("}");
             return l;
         }
+
+
+        List<string> CreateCamera(string preffix, object obj)
+        {
+            return CreatePure(preffix, "BasicCamera");
+        }
+
+        List<string> CreateReferenceFrameArrow(string preffix, object obj)
+        {
+            return CreatePure(preffix, "ReferenceFrameArrow");
+        }
+
+        List<string> CreateVisibleCosumerLink(string preffix, object obj)
+        {
+            return CreatePure(preffix, "VisibleConsumerLink");
+        }
+
+
+        protected override List<string> CreatePropereties(string prefix, object obj, string volume)
+        {
+            if (factory is IPropertiesCodeCreator pr)
+            {
+                var pp = pr.CreatePropereties(prefix, obj, volume);
+                if (pp != null)
+                {
+                    return pp;
+                }
+            }
+            return base.CreatePropereties (prefix, obj, volume);    
+        }
+
+        protected override List<string> CreateParameters(string prefix, object parent, object obj, string volume)
+        {
+            if (additionalFiles != null)
+            {
+                additionalFiles.Files.Clear();
+            }
+            if (factory is IParametersCodeCreator pr)
+            {
+                var pp = pr.CreateParameters(prefix, parent, obj, volume);
+                if (pp != null)
+                    if (additionalFiles != null)
+                    {
+                        foreach ( var f in additionalFiles.Files )
+                        {
+                            Files[f.Key] = f.Value;
+                        }
+                        additionalFiles.Files.Clear();
+                    }
+                {
+                    return pp;
+                }
+            }
+            return base.SetParameters(prefix, parent, obj, volume);
+        }
+
+        protected override List<string> SetParameters(string prefix, object parent, object obj, string volume)
+        {
+            if (factory is IParametersCodeCreator pr)
+            {
+                var pp = pr.SetParameters(prefix,  parent, obj, volume);
+                if (pp != null)
+                {
+                    return pp;
+                }
+            }
+            return base.SetParameters(prefix, parent, obj, volume);
+        }
+
+        protected override List<string> SetPropereties(string prefix, object obj, string volume)
+        {
+            if (factory is IPropertiesCodeCreator pr)
+            {
+                var pp = pr.SetPropereties(prefix, obj, volume);
+                if (pp != null)
+                {
+                    return pp;
+                }
+            }
+            return base.SetPropereties(prefix, obj, volume);
+        }
+
+
+
+
 
     }
 }

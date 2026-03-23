@@ -1,5 +1,6 @@
 import type { IPosition } from "./IPosition";
 
 export interface IPositionObject {
-    getObjecPosition(): IPosition;
+    getObjectPosition(): IPosition;
+    setObjectPosition(position: IPosition): void
 }

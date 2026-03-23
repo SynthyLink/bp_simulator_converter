@@ -64,6 +64,7 @@ namespace Diagram.TypeScript
 
         private CodeCreator()
         {
+          
            this.AddTypeCreator();
         }
 

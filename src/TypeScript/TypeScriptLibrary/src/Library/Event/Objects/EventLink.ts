@@ -1,10 +1,10 @@
-import { CategoryArrow } from "../CategoryArrow";
-import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
-import { FictiveEvent } from "../Fiction/FictiveEvent";
-import { FictiveEventHandler } from "../Fiction/FictiveEventHandler";
-import { ICategoryObject } from "../Interfaces/ICategoryObject";
-import { IEvent } from "../Interfaces/IEvent";
-import { IEventHandler } from "../Interfaces/IEventHandler";
+import { CategoryArrow } from "../../CategoryArrow";
+import { OwnNotImplemented } from "../../ErrorHandler/OwnNotImplemented";
+import { FictiveEvent } from "../../Fiction/FictiveEvent";
+import { FictiveEventHandler } from "../../Fiction/FictiveEventHandler";
+import type { ICategoryObject } from "../../Interfaces/ICategoryObject";
+import type { IEvent } from "../../Interfaces/IEvent";
+import type { IEventHandler } from "../../Interfaces/IEventHandler";
 
 export class EventLink extends CategoryArrow
 {

@@ -1,7 +1,20 @@
-import { IAction } from "../../Interfaces/IAction";
-import { IObject } from "../../Interfaces/IObject";
+import type { IAction } from "../../Interfaces/IAction";
+import type { IActionAddRemove } from "../../Interfaces/IActionAddRemove";
+import type { IObject } from "../../Interfaces/IObject";
+import { Performer } from "../../Performer";
 
-export class ActionArray implements IAction, IObject {
+export class ActionArray implements IActionAddRemove, IObject {
+    addAction(action: IAction | undefined): void {
+        if (action === undefined) return;
+        this.actions.push(action)
+    }
+    removeAction(action: IAction): void {
+        if (action === undefined) return;
+        this.performer.remove(this.actions, action)
+    }
+    clearActions(): void {
+        this.actions = [];
+    }
     getClassName(): string {
         return this.typeName;
     }
@@ -22,7 +35,6 @@ export class ActionArray implements IAction, IObject {
 
     protected types: string[] = ["IAction", "IObject", "ActionArray"];
 
-    public addAction(action: IAction): void {
-        this.actions.push(action)
-    }
+    protected performer: Performer = new Performer();
+
 }

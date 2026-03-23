@@ -698,7 +698,7 @@ namespace Abstract3DConverters.Creators
                 }
             }
 
-            Dictionary<string, Effect> IEffectDictionary.Effects => throw new IllegalSetPropetryException("Dictionary of effects is not supported");
+            Dictionary<string, Effect> IEffectDictionary.Effects => throw new IllegalSetPropetryException("Dictionary of effects is not supported ");
 
             void Create()
             {

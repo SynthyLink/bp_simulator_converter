@@ -154,7 +154,10 @@ namespace Diagram.UI
             out Dictionary<ICategoryArrow, int> arrows)
         {
             var lab = Get<IObjectLabel>(collection);
-            categoryObjects = (from ll in lab select ll.Object).ToList();
+            var l = new List<ICategoryObject>();
+            collection.ForEach((ICategoryObject co) => { l.Add(co); }, true);
+            categoryObjects = l;
+           // categoryObjects = collection.ForEach< (from ll in lab select ll.Object).ToList();
             var al = Get<IArrowLabel>(collection);
             categoryArrows = (from la in al select la.Arrow).ToList(); 
             objects = new Dictionary<ICategoryObject, int>();
@@ -167,7 +170,6 @@ namespace Diagram.UI
             {
                 arrows[categoryArrows[i]] = i;
             }
-
         }
 
 
@@ -828,6 +830,17 @@ namespace Diagram.UI
                     IObjectLabel l = o as IObjectLabel;
                     object obj = l.Object;
                     Execute(obj, action, find);
+                    if (obj is IChildren<T> children)
+                    {
+                        foreach (var child in children.Children)
+                        {
+                            if (child != null)
+                            {
+                                Execute(child, action, find);
+                            }
+                        }
+                    }
+
                 }
                 if (o is IArrowLabel)
                 {
@@ -839,7 +852,7 @@ namespace Diagram.UI
                 {
                     Execute(o, action, find);
                 }
-            }
+              }
         }
 
         /// <summary>

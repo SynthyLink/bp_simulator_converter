@@ -32,5 +32,6 @@ namespace Diagram.UI.CodeCreators
             dictionary = performer.Enumerate(collection);
             return collection.CreateInitDesktopCSharpCode(namespacE, className, staticClass);
         }
+       
     }
 }

@@ -190,7 +190,7 @@ namespace Collada.Converters.MeshCreators
 
         object ICollada.Get(string s)
         {
-            throw new IllegalSetPropetryException("Collada get is not supported");
+            throw new IllegalSetPropetryException("Collada get is not supported ");
         }
 
         void ICollada.Init(XmlElement xmlElement)

@@ -251,7 +251,6 @@ namespace Motion6D.Portable
         // !!! DELETE       protected abstract void RealtimeUpdate();
 
         #endregion
-
    
         #region Virtual Members
 

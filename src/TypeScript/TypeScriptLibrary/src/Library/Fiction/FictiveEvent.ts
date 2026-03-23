@@ -1,16 +1,15 @@
 import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
-import { IAction } from "../Interfaces/IAction";
+import { IActionAddRemove } from "../Interfaces/IActionAddRemove";
 import { IEvent } from "../Interfaces/IEvent";
 
 export class FictiveEvent implements IEvent {
-    eventAction(): IAction {
+    eventAction(): IActionAddRemove {
         throw new OwnNotImplemented();
     }
     isEventEnabled(): boolean {
         throw new OwnNotImplemented();
     }
-    setEnabled(enabled: boolean): void {
-        throw new OwnNotImplemented();
+    async setEnabled(enabled: boolean): Promise<void> {
     }
 
 }

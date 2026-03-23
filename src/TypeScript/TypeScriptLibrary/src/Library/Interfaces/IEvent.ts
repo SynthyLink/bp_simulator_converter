@@ -1,10 +1,10 @@
-import { IAction } from "./IAction";
+import type  { IActionAddRemove } from "./IActionAddRemove";
 
 export interface IEvent {
 
-    eventAction(): IAction
+    eventAction(): IActionAddRemove
 
     isEventEnabled(): boolean
 
-    setEnabled(enabled: boolean): void
+    setEnabled(enabled: boolean): Promise<void>
 }

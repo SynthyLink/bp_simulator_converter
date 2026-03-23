@@ -3,6 +3,8 @@ using Diagram.UI.Interfaces;
 using ErrorHandler;
 using Motion6D.Interfaces;
 using NamedTree;
+using System;
+using System.Collections.Generic;
 
 namespace Motion6D.Portable
 {
@@ -10,7 +12,7 @@ namespace Motion6D.Portable
     /// Serializable position
     /// </summary>
     public class SerializablePosition : Position,  ICategoryObject,
-       IPostSetArrow, IProperties, IAllowCodeCreation
+       IPostSetArrow, IProperties, IAllowCodeCreation, IChildren<ICategoryObject>
     {
 
         #region Fields
@@ -26,6 +28,8 @@ namespace Motion6D.Portable
         protected object properties;
 
         private byte[] bytes;
+
+        ICategoryObject[] objects = new ICategoryObject[1];
 
         /// <summary>
         /// Allows code creation
@@ -48,7 +52,6 @@ namespace Motion6D.Portable
  
         #endregion
 
-
         #region IAssociatedObject Members
 
         object IAssociatedObject.Object
@@ -65,13 +68,46 @@ namespace Motion6D.Portable
 
         #endregion
 
-
         #region IAllowCodeCreation Members
 
         bool IAllowCodeCreation.AllowCodeCreation => allowCodeCreation;
 
         #endregion
 
+        #region IChildren<ICategoryObject>
+        IEnumerable<ICategoryObject> IChildren<ICategoryObject>.Children => objects;
+
+        event Action<ICategoryObject> IChildren<ICategoryObject>.OnAdd
+        {
+            add
+            {
+            }
+
+            remove
+            {
+            }
+        }
+
+        event Action<ICategoryObject> IChildren<ICategoryObject>.OnRemove
+        {
+            add
+            {
+            }
+
+            remove
+            {
+            }
+        }
+
+        void IChildren<ICategoryObject>.AddChild(ICategoryObject child)
+        {
+        }
+
+        void IChildren<ICategoryObject>.RemoveChild(ICategoryObject child)
+        {
+        }
+
+        #endregion
 
 
         #region Overriden Members
@@ -97,6 +133,10 @@ namespace Motion6D.Portable
             set
             {
                 base.Parameters = value;
+                if (value is ICategoryObject co)
+                {
+                    objects[0] = co;
+                }
                 SetObject();
                 if (Parameters is IPositionObject)
                 {
@@ -128,9 +168,8 @@ namespace Motion6D.Portable
 
         #region IProperties Members
 
-   
-
-        public virtual object Properties { get => properties; set => properties = value; }
+        object IProperties.Properties { get => Properties; set => Properties = value; }
+        protected virtual object Properties { get => properties; set => properties = value; }
         string INamed.Name { get => performer.GetAssociatedName(this); set => throw new OwnNotImplemented("Position"); }
 
         #endregion

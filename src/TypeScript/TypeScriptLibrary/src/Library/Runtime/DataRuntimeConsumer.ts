@@ -12,6 +12,7 @@ import type { IDataRuntime } from "./Interfaces/IDataRuntime";
 import type { IStarted } from "../Measurements/Interfaces/IStarted";
 import type { ICategoryArrow } from "../Interfaces/ICategoryArrow";
 import type { ICategoryObject } from "../Interfaces/ICategoryObject";
+import { ITimerFactory } from "../Interfaces/ITimerFactory";
 
 export class DataRuntimeConsumer implements IDataRuntime
 {
@@ -57,6 +58,12 @@ export class DataRuntimeConsumer implements IDataRuntime
 
         this.measurements = this.performer.sortMeasurements(this.measurements);
 
+    }
+    getTimerFactory(): ITimerFactory {
+        throw new Error("Method not implemented.");
+    }
+    setTimerFactory(timerFactory: ITimerFactory): void {
+        throw new Error("Method not implemented.");
     }
 
     addCategoryObjectToRuntime(object: ICategoryObject): void {

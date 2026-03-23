@@ -24,6 +24,7 @@ import type { IMeasurements } from "./Measurements/Interfaces/IMeasurements";
 import type { IFeedbackCollection } from "./Interfaces/IFeedbackCollection";
 import type { ICheck } from "./Interfaces/ICheck";
 import type { ICheckHolder } from "./Interfaces/ICheckHolder";
+import { IProperties } from "./Interfaces/IProperties";
 
 
 export class Performer
@@ -270,6 +271,17 @@ export class Performer
             t.push(x);
         }
         return t;
+    }
+
+    public convertProperties<T>(o: ICategoryObject, type: string): T[] {
+        let ob = this.convertObject<T, ICategoryObject>(o, type)
+        if (ob.length > 0) return ob;
+        let prp = this.convertObject<IProperties, ICategoryObject>(o, "IProperties")
+        if (prp.length > 0) {
+            var pp = this.convertObject<T, any>(prp[0].getProperties(), type)
+            if (pp.length > 0) return pp;
+        }
+        return [];
     }
 
 

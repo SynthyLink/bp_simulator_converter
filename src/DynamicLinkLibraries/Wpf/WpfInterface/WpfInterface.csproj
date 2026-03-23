@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-<PackageReference Include="System.Runtime.Serialization.Formatters" Version="10.0.3" />
-    <PackageReference Include="System.Drawing.Common" Version="10.0.3" />
+<PackageReference Include="System.Runtime.Serialization.Formatters" Version="10.0.5" />
+    <PackageReference Include="System.Drawing.Common" Version="10.0.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Animation\Animation.Interfaces\Animation.Interfaces.csproj" />

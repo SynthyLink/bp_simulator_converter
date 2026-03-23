@@ -720,7 +720,7 @@ namespace DataPerformer.Event.Portable.Objects.BufferedData
             {
                 object l = null;
                 IDesktop desktop = this.GetRootDesktop();
-                desktop.ForEach((Diagram.UI.Portable.BelongsToCollection b) =>
+                desktop.ForEach((BelongsToCollection b) =>
                 {
                     ICategoryArrow a = b;
                     var s = a.Source;
