@@ -7,15 +7,10 @@ using Motion6D.Portable.TypeScript.Interfaces;
 namespace Motion6D.Portable.TypeScript
 {
     [Language("TS")]
-    public class ClassCodeCreator : DataPerformer.Portable.TypeScript.ClassCodeCreator, IAdditionalFiles
+    public class ClassCodeCreator : DataPerformer.Portable.TypeScript.ClassCodeCreator
     {
         IPositionCodeFactory factory;
 
-        IAdditionalFiles additionalFiles;
-
-        Dictionary<string, byte[]> IAdditionalFiles.Files => Files;
-
-        protected virtual Dictionary<string, byte[]> Files { get; } = new Dictionary<string, byte[]>();
 
 
         protected ClassCodeCreator(bool b) : base(b) { }
@@ -25,10 +20,6 @@ namespace Motion6D.Portable.TypeScript
         internal ClassCodeCreator(IPositionCodeFactory factory) : base(true)
         {
             this.factory = factory;
-            if (factory is IAdditionalFiles af)
-            {
-                additionalFiles = af;
-            }
             dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
                       { (object o) => { return o.GetType().Name.Contains("RigidReferenceFrame"); } , CreateReferenceFrame },
@@ -99,12 +90,13 @@ namespace Motion6D.Portable.TypeScript
             {
                 var ll = this.par.CreateParameters(preffix, this, par, "");
                     Add(l, ll, 2);
+                
             }
             IProperties properties = sp;
             var pr = properties.Properties;
             if (pr != null)
             {
-                var ll = this.par.CreateParameters(preffix, this, pr, "");
+                var ll = this.pr.CreateProperties(preffix, pr, "");
                 Add(l, ll, 2);
             }
             var s = performer.ClassString(preffix, "SerializablePosition");
@@ -118,7 +110,7 @@ namespace Motion6D.Portable.TypeScript
             }
             if (pr != null)
             {
-                var ll = this.pr.SetPropereties(preffix, par, "");
+                var ll = this.pr.SetProperties(preffix, par, "");
                 Add(l, ll, 2);
             }
             l.Add("\t}");
@@ -143,42 +135,30 @@ namespace Motion6D.Portable.TypeScript
         }
 
 
-        protected override List<string> CreatePropereties(string prefix, object obj, string volume)
+        protected override List<string> CreateProperties(string prefix, object obj, string volume)
         {
             if (factory is IPropertiesCodeCreator pr)
             {
-                var pp = pr.CreatePropereties(prefix, obj, volume);
+                var pp = pr.CreateProperties(prefix, obj, volume);
                 if (pp != null)
                 {
                     return pp;
                 }
             }
-            return base.CreatePropereties (prefix, obj, volume);    
+            return base.CreateProperties (prefix, obj, volume);    
         }
 
         protected override List<string> CreateParameters(string prefix, object parent, object obj, string volume)
         {
-            if (additionalFiles != null)
-            {
-                additionalFiles.Files.Clear();
-            }
             if (factory is IParametersCodeCreator pr)
             {
                 var pp = pr.CreateParameters(prefix, parent, obj, volume);
-                if (pp != null)
-                    if (additionalFiles != null)
-                    {
-                        foreach ( var f in additionalFiles.Files )
-                        {
-                            Files[f.Key] = f.Value;
-                        }
-                        additionalFiles.Files.Clear();
-                    }
+                if (pp != null) 
                 {
                     return pp;
                 }
             }
-            return base.SetParameters(prefix, parent, obj, volume);
+            return base.CreateParameters(prefix, parent, obj, volume);
         }
 
         protected override List<string> SetParameters(string prefix, object parent, object obj, string volume)
@@ -194,17 +174,17 @@ namespace Motion6D.Portable.TypeScript
             return base.SetParameters(prefix, parent, obj, volume);
         }
 
-        protected override List<string> SetPropereties(string prefix, object obj, string volume)
+        protected override List<string> SetProperties(string prefix, object obj, string volume)
         {
             if (factory is IPropertiesCodeCreator pr)
             {
-                var pp = pr.SetPropereties(prefix, obj, volume);
+                var pp = pr.SetProperties(prefix, obj, volume);
                 if (pp != null)
                 {
                     return pp;
                 }
             }
-            return base.SetPropereties(prefix, obj, volume);
+            return base.SetProperties(prefix, obj, volume);
         }
 
 

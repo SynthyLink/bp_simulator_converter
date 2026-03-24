@@ -1,11 +1,12 @@
 ﻿using BaseTypes.Attributes;
 using DataSetService.Pure.Interfaces;
 using Diagram.UI;
+using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 using System.Data;
 using System.Reflection.Metadata;
-using System.Xml;
 using System.Text.Json;
+using System.Xml;
 namespace DataSetService.Pure.CodeCreators
 {
     [Language("C#")]
@@ -38,6 +39,10 @@ namespace DataSetService.Pure.CodeCreators
             }
             return null;
         }
+
+        protected virtual IDesktopCodeCreator DesktopCodeCreator { get; set; }
+
+        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator { get => DesktopCodeCreator; set => DesktopCodeCreator = value; }
 
         static List<string> CreateSavedDataProvider(string preffix, object obj)
         {

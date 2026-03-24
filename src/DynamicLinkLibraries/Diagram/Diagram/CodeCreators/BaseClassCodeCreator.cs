@@ -1,5 +1,6 @@
 ﻿using BaseTypes.Attributes;
 using CategoryTheory;
+using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ namespace Diagram.UI.CodeCreators
         protected Dictionary<Func<object, bool>, Func<string, object, List<string>>> dictionary =
             new Dictionary<Func<object, bool>, Func<string, object, List<string>>>();
 
+        protected virtual IDesktopCodeCreator DesktopCodeCreator {  get; set; }
+
+        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator { get => DesktopCodeCreator; set => DesktopCodeCreator = value; }
 
         protected BaseClassCodeCreator(bool b)
         {

@@ -7,8 +7,6 @@ using ErrorHandler;
 using Trading.Library.Forms;
 using ControlSystemLib = ControlSystems;
 
-using DataSetService.Pure;
-
 
 
 namespace BP_Simulator.Light

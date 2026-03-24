@@ -1,6 +1,7 @@
 ﻿using BaseTypes.Attributes;
 using Diagram.Interfaces;
 using Diagram.UI;
+using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Portable;
 
@@ -9,9 +10,11 @@ namespace Diagram.TypeScript
     [Language("TS")]
     public class ClassCodeCreator : IClassCodeCreator, IParametersCodeCreator, IPropertiesCodeCreator
     {
+
+        protected List<object> loaded = new List<object>();
         protected IParametersCodeCreator par;
         protected IPropertiesCodeCreator pr;
-
+ 
         internal ClassCodeCreator()
         {
             par = this;
@@ -29,6 +32,11 @@ namespace Diagram.TypeScript
             par = this;
             pr = this;
         }
+
+        protected virtual IDesktopCodeCreator DesktopCodeCreator { get; set; }
+
+        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator { get => DesktopCodeCreator; set => DesktopCodeCreator = value; }
+
 
         protected virtual List<string> CreateCode(string prefix, object obj, string volume)
         {
@@ -71,14 +79,7 @@ namespace Diagram.TypeScript
 
         protected virtual List<string> CreatePure(string preffix, string name)
         {
-            var l = new List<string>();
-            var s = performer.ClassString(preffix, name);
-            l.Add(s);
-            l.Add("{");
-            performer.AddObjectConstructor(l);
-            l.Add("\t}");
-            l.Add("}");
-            return l;
+            return performer.CreatePure(preffix, name); 
         }
 
 
@@ -93,11 +94,7 @@ namespace Diagram.TypeScript
             return performer.CreateList(id, x).ToList();
         }
 
-        List<string> IPropertiesCodeCreator.SetPropereties(string prefix, object obj, string volume)
-        {
-            return SetPropereties(prefix, obj, volume);
-        }
-
+   
 
         List<string> IParametersCodeCreator.CreateParameters(string prefix, object parent, object obj, string volume)
         {
@@ -107,17 +104,6 @@ namespace Diagram.TypeScript
         List<string> IParametersCodeCreator.SetParameters(string prefix, object parent, object obj, string volume)
         {
             return SetParameters(prefix, parent, obj, volume);
-        }
-
-        List<string> IPropertiesCodeCreator.CreatePropereties(string prefix, object obj, string volume)
-        {
-            return CreatePropereties(prefix, obj, volume);
-        }
-
-
-        protected virtual List<string> CreatePropereties(string prefix, object obj, string volume)
-        {
-            return null;
         }
 
         protected virtual List<string> CreateParameters(string prefix, object parent, object obj, string volume)
@@ -130,12 +116,30 @@ namespace Diagram.TypeScript
             return null;
         }
 
-        protected virtual List<string> SetPropereties(string prefix, object obj, string volume)
+
+        List<string> IPropertiesCodeCreator.CreateProperties(string prefix, object obj, string volume)
+        {
+            return CreateProperties(prefix, obj, volume);
+        }
+        List<string> IPropertiesCodeCreator.SetProperties(string prefix, object obj, string volume)
+        {
+            return SetProperties(prefix, obj, volume);
+        }
+
+        protected virtual List<string> SetProperties(string prefix, object obj, string volume)
+        {
+            return null;
+        }
+
+
+        protected virtual List<string> CreateProperties(string prefix, object obj, string volume)
         {
             return null;
         }
 
   
+
+
         protected Dictionary<Func<object, bool>, Func<string, object, List<string>>> dictionary;
 
         protected UI.TypeScript.Performer performer = new();

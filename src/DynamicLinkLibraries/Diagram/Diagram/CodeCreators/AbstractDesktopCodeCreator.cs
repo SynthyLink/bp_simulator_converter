@@ -8,7 +8,7 @@ using Diagram.UI.Interfaces;
 
 namespace Diagram.CodeCreators
 {
-    public abstract class AbstractDesktopCodeCreator : IDesktopCodeCreator, IAdditionalFiles
+    public abstract class AbstractDesktopCodeCreator : IDesktopCodeCreator
     {
         protected AbstractDesktopCodeCreator(bool b)
         {
@@ -25,11 +25,7 @@ namespace Diagram.CodeCreators
         protected Dictionary<ICategoryObject, int> objects = new();
         protected Dictionary<ICategoryArrow, int> arrows = new();
 
-        protected virtual Dictionary<string, byte[]> Files
-        {
-            get;
-        } = new();
-
+  
         protected IClassCodeCreator classCodeCreator;
 
 
@@ -41,12 +37,12 @@ namespace Diagram.CodeCreators
 
         Tuple<Dictionary<ICategoryObject, int>, Dictionary<ICategoryArrow, int>> IDesktopCodeCreator.Enumeration => dictionary;
 
-     
-        Dictionary<string, byte[]> IAdditionalFiles.Files => Files;
+        protected virtual Dictionary<object, string> Loaded { get; } = new Dictionary<object, string>();
+
+        Dictionary<object, string> IDesktopCodeCreator.Loaded => Loaded;
 
         List<string> IDesktopCodeCreator.CreateCode(IComponentCollection collection, string namespacE, string className, bool staticClass)
         {
-            Files.Clear();
             return CreateCode(collection, namespacE, className, staticClass);
         }
 

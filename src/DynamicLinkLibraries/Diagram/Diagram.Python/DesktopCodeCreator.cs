@@ -20,6 +20,10 @@ namespace Diagram.UI.Python
 
         private static readonly string CATEGORY_ARROW = "CategoryArrow";
 
+        protected virtual Dictionary<object, string> Loaded { get; } = new Dictionary<object, string>();
+
+        Dictionary<object, string> IDesktopCodeCreator.Loaded => Loaded;
+
         string Current
         {
             get;

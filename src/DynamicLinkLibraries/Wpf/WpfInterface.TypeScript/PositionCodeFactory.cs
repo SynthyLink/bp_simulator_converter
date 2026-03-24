@@ -1,11 +1,13 @@
 ﻿using Diagram.Interfaces;
+using Motion6D.Interfaces;
 using Motion6D.Portable.TypeScript.Interfaces;
-using System.ComponentModel;
 
 namespace WpfInterface.TypeScript
 {
-    public class PositionCodeFactory : IPositionCodeFactory, IParametersCodeCreator, IAdditionalFiles
+    public class PositionCodeFactory : IPositionCodeFactory, IParametersCodeCreator
     {
+
+        Diagram.UI.TypeScript.Performer performer = new();
         public PositionCodeFactory()
         {
         }
@@ -17,15 +19,24 @@ namespace WpfInterface.TypeScript
 
         List<string> IParametersCodeCreator.CreateParameters(string prefix, object parent, object obj, string volume)
         {
+            if (obj is IVisible)
+            {
+                return performer.CreatePure(prefix + "_Shape", "Basic3DShape");
+            }
             return null;
         }
 
         List<string> IParametersCodeCreator.SetParameters(string prefix, object parent, object obj, string volume)
         {
+            var l = new List<string>();
+            if (obj is IVisible)
+            {
+                l.Add("this.setParameters(new + prefix + \"_Shape())");
+                return l;
+            }
             return null;
         }
 
-        Dictionary<string, byte[]> IAdditionalFiles.Files => Files;
 
         protected virtual Dictionary<string, byte[]> Files { get; } = new Dictionary<string, byte[]>();
 

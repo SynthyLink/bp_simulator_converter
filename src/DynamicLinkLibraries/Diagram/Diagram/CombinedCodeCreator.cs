@@ -9,7 +9,7 @@ namespace Diagram.UI
     /// <summary>
     /// Combined class code creator
     /// </summary>
-    public class CombinedCodeCreator : IClassCodeCreator, ICurrentObject, IAdditionalFiles
+    public class CombinedCodeCreator : IClassCodeCreator, ICurrentObject
     {
 
         object current;
@@ -17,18 +17,17 @@ namespace Diagram.UI
         {
             Language = language;   
         }
+        protected virtual IDesktopCodeCreator DesktopCodeCreator { get; set; }
 
-    
+   
+
         protected virtual string Language { get; set; }
 
-        protected  IDesktopCodeCreator DesktopCodeCreator
-        { get; set; }
-
+    
         object ICurrentObject.CurrentObject => current;
 
-        Dictionary<string, byte[]> IAdditionalFiles.Files => Files;
+        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator { get => DesktopCodeCreator; set => DesktopCodeCreator = value; }
 
-        protected virtual Dictionary<string, byte[]> Files { get; } = new();
 
         #region Fields
 
@@ -41,25 +40,13 @@ namespace Diagram.UI
         List<string> IClassCodeCreator.CreateCode(string preffix, object obj, string volume)
         {
             current = obj;
-            Files.Clear();
-            foreach (IClassCodeCreator creator in list)
+                foreach (IClassCodeCreator creator in list)
             {
-                if (creator is IAdditionalFiles additionalFiles)
-                {
-                    additionalFiles.Files.Clear();
-                }
+                creator.DesktopCodeCreator = DesktopCodeCreator;
                 List<string> l = creator.CreateCode(preffix, obj, volume);
                 if (l != null)
                 {
-                    if (creator is IAdditionalFiles af)
-                    {
-                        foreach (var item in af.Files)
-                        {
-                            Files[item.Key] = item.Value;
-                        }
-                        af.Files.Clear();
-                    }
-                    return l;
+                     return l;
                 }
             }
             throw new IncludedException("Type \"" + obj.GetType() + "\" is not supported ", obj);

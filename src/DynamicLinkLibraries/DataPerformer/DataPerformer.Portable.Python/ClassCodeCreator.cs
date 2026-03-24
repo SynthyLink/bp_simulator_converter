@@ -35,8 +35,9 @@ namespace DataPerformer.Portable.Python
              { (object o) => { return o is ObjectTransformerLink; }, CreateObjectTransformerLink},
          };
 
-        protected IDesktopCodeCreator DesktopCodeCreator
-        { get; set; }
+        protected virtual IDesktopCodeCreator DesktopCodeCreator { get; set; }
+
+        IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator { get => DesktopCodeCreator; set => DesktopCodeCreator = value; }
 
 
         List<string> IClassCodeCreator.CreateCode(string prefix, object obj, string volume)

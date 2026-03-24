@@ -10,6 +10,19 @@ namespace Diagram.UI.TypeScript
         public Performer() : base() { }
 
 
+        public  List<string> CreatePure(string preffix, string name)
+        {
+            var l = new List<string>();
+            var s = ClassString(preffix, name);
+            l.Add(s);
+            l.Add("{");
+            AddObjectConstructor(l);
+            l.Add("\t}");
+            l.Add("}");
+            return l;
+        }
+
+
         public void AddObjectConstructor(List<string> l)
         {
             l.Add("\tconstructor(desktop: IDesktop, name: string)");
