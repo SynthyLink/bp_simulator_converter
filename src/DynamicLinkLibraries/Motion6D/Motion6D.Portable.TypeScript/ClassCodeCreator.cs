@@ -88,14 +88,17 @@ namespace Motion6D.Portable.TypeScript
             var par = sp.Parameters;
             if (par != null)
             {
+                this.par.DesktopCodeCreator = DesktopCodeCreator;
                 var ll = this.par.CreateParameters(preffix, this, par, "");
                     Add(l, ll, 2);
+
                 
             }
             IProperties properties = sp;
             var pr = properties.Properties;
             if (pr != null)
             {
+                this.pr.DesktopCodeCreator = DesktopCodeCreator;
                 var ll = this.pr.CreateProperties(preffix, pr, "");
                 Add(l, ll, 2);
             }
@@ -152,6 +155,7 @@ namespace Motion6D.Portable.TypeScript
         {
             if (factory is IParametersCodeCreator pr)
             {
+                pr.DesktopCodeCreator = DesktopCodeCreator;
                 var pp = pr.CreateParameters(prefix, parent, obj, volume);
                 if (pp != null) 
                 {

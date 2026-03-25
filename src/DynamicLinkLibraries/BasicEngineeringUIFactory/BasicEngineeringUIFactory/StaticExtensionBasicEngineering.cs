@@ -40,6 +40,22 @@ namespace BasicEngineering.UI.Factory
         }
 
         /// <summary>
+        /// Server
+        /// </summary>
+        public static string AdditionalSaveURL
+        {
+            get
+            {
+                return Properties.Settings.Default.AdditionalSaveURL;
+            }
+            set
+            {
+                Properties.Settings.Default.AdditionalSaveURL = value;
+            }
+        }
+
+
+        /// <summary>
         /// The "has log" sign
         /// </summary>
         public static  bool HasLog

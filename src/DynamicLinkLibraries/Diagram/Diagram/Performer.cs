@@ -9,14 +9,17 @@ using System.Xml.Linq;
 
 using BaseTypes.Attributes;
 using BaseTypes.CodeCreator.Interfaces;
+
 using CategoryTheory;
-using Diagram.Interfaces;
+
 using Diagram.UI;
 using Diagram.UI.Attributes;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;
+
 using ErrorHandler;
+
 using NamedTree;
 
 namespace Diagram.UI
@@ -34,7 +37,46 @@ namespace Diagram.UI
             { tasks.Add(task.InitializeAsync(cancellationToken)); });
             await Task.WhenAll(tasks);
         }
-   
+
+        /// <summary>
+        /// Saves components
+        /// </summary>
+        /// <param name="saver"></param>
+        /// <param name="components"></param>
+        /// <param name="url"></param>
+        public void Save(ISaveDesktopInformation saver, IComponentCollection components, string url)
+        {
+            if (saver == null)
+            {
+                return;
+            }
+            if (saver.Save(components, url))
+            {
+                return;
+            }
+            var l = new List<object>();
+            components.ForAll((ICategoryObject o) =>
+            {
+                if (l.Contains(o))
+                {
+                    return;
+                }
+                saver.Save(o, url);
+                l.Add(o);
+
+            }, true);
+            components.ForAll((ICategoryArrow a) =>
+            {
+                if (l.Contains(a))
+                {
+                    return;
+                }
+                saver.Save(a, url);
+                l.Add(a);
+
+            }, true);
+        }
+
         /// <summary>
         /// Dictionary from alias
         /// </summary>
@@ -840,7 +882,6 @@ namespace Diagram.UI
                             }
                         }
                     }
-
                 }
                 if (o is IArrowLabel)
                 {
@@ -1433,16 +1474,25 @@ namespace Diagram.UI
                     var o = (a as IObjectLabel).Object;
                     if (o is T tt)
                     {
-                      Execute(tt, action, find);
+                        Execute(tt, action, find);
                     }
                     if (o is IObjectContainer)
                     {
                         ForAll((o as IObjectContainer).Desktop, action, find);
                     }
+                    if (o is IChildren<T> children)
+                    {
+                        foreach (var child in children.Children)
+                        {
+                            if (child != null)
+                            {
+                                Execute(child, action, find);
+                            }
+                        }
+                    }
                 }
             }
         }
-
  
 
         /// <summary>

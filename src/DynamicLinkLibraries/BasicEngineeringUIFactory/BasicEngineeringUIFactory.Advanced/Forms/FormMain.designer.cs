@@ -148,6 +148,8 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
             toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             toolStripComboBoxLanguage = new System.Windows.Forms.ToolStripComboBox();
+            additionalInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripTextBoxAdditionalInforamation = new System.Windows.Forms.ToolStripTextBox();
             databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             readWriteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1005,7 +1007,7 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
             // 
             // wizardsToolStripMenuItem
             // 
-            wizardsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { containerDesignerToolStripMenuItem, derivationCalculatorToolStripMenuItem, editorOfAliasesToolStripMenuItem, toolStripSeparator3, toolStripMenuGereratedFiles, classNameToolStripMenuItem, toolStripTextBoxClassName, staticToolStripMenuItem, toolStripMenuItem2, toolStripMenuItem3, toolStripComboBoxLanguage });
+            wizardsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { containerDesignerToolStripMenuItem, derivationCalculatorToolStripMenuItem, editorOfAliasesToolStripMenuItem, toolStripSeparator3, toolStripMenuGereratedFiles, classNameToolStripMenuItem, toolStripTextBoxClassName, staticToolStripMenuItem, toolStripMenuItem2, toolStripMenuItem3, toolStripComboBoxLanguage, additionalInformationToolStripMenuItem, toolStripTextBoxAdditionalInforamation });
             wizardsToolStripMenuItem.Name = "wizardsToolStripMenuItem";
             wizardsToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             wizardsToolStripMenuItem.Text = "Wizards";
@@ -1078,6 +1080,18 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
             // 
             toolStripComboBoxLanguage.Name = "toolStripComboBoxLanguage";
             toolStripComboBoxLanguage.Size = new System.Drawing.Size(121, 23);
+            // 
+            // additionalInformationToolStripMenuItem
+            // 
+            additionalInformationToolStripMenuItem.Name = "additionalInformationToolStripMenuItem";
+            additionalInformationToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            additionalInformationToolStripMenuItem.Text = "Additional information";
+            additionalInformationToolStripMenuItem.Click += additionalInformationToolStripMenuItem_Click;
+            // 
+            // toolStripTextBoxAdditionalInforamation
+            // 
+            toolStripTextBoxAdditionalInforamation.Name = "toolStripTextBoxAdditionalInforamation";
+            toolStripTextBoxAdditionalInforamation.Size = new System.Drawing.Size(100, 23);
             // 
             // databaseToolStripMenuItem
             // 
@@ -1356,6 +1370,8 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxLanguage;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem additionalInformationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxAdditionalInforamation;
     }
 }
 

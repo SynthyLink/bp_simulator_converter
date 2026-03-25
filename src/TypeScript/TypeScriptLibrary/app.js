@@ -27,6 +27,6 @@ function test() {
         yield a.actDonchianLoad();
     });
 }
-test();
+//test();
 a.finish(undefined);
 //# sourceMappingURL=app.js.map

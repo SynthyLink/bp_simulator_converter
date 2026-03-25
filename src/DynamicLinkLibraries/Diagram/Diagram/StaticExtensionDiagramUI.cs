@@ -21,7 +21,6 @@ using ErrorHandler;
 
 using NamedTree;
 using BaseTypes.CodeCreator.Interfaces;
-using System.Net.Security;
 
 
 namespace Diagram.UI
@@ -1613,6 +1612,30 @@ namespace Diagram.UI
         public static void ForEach<T>(this IComponentCollection collection, Action<T> action, bool find = false) where T : class
         {
             performer.ForEach<T>(collection, action, find);
+        }
+
+        /// <summary>
+        /// Saver of the desktop information
+        /// </summary>
+        public static ISaveDesktopInformation SaveDesktopInformation { get; set; }
+
+        /// <summary>
+        /// Set save information
+        /// </summary>
+        /// <param name="saveDesktopInformation">save information</param>
+        public static void SetSaveDesktopInformation(this ISaveDesktopInformation saveDesktopInformation)
+        {
+            SaveDesktopInformation = saveDesktopInformation;
+        }
+
+        /// <summary>
+        /// Saves collection of componente
+        /// </summary>
+        /// <param name="collection">The collection</param>
+        /// <param name="url">The url</param>
+        public static void Save(this IComponentCollection collection, string url)
+        {
+             performer.Save(SaveDesktopInformation, collection, url);
         }
 
         /// <summary>

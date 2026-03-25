@@ -3,13 +3,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { OwnNotImplemented } from "./ErrorHandler/OwnNotImplemented";
+import { Performer } from "./Performer";
 import type { ICategoryArrow } from "./Interfaces/ICategoryArrow";
 import type { ICategoryObject } from "./Interfaces/ICategoryObject";
 import type { ICheck } from "./Interfaces/ICheck";
 import type { IDesktop } from "./Interfaces/IDesktop";
 import type { IObject } from "./Interfaces/IObject";
 import type { IInitializeTask } from "./Interfaces/IInitializeTask"
-import { Performer } from "./Performer";
 
 export class Desktop implements IDesktop
 {
@@ -30,6 +30,9 @@ export class Desktop implements IDesktop
     protected target!: ICategoryObject;
 
     protected check !: ICheck;
+
+    protected mapObjects: Map<string, ICategoryObject> = new Map()
+
 
     protected performer: Performer = new Performer();
 
@@ -95,5 +98,6 @@ export class Desktop implements IDesktop
     getName(): string {
         return this.name;
     }
+
 
 }

@@ -1,4 +1,4 @@
-import type { IVisible } from "./IVisible";
+import { IVisible } from "../Visible/Interfaces/IVisible";
 
 export interface IVisibleConsumer {
 

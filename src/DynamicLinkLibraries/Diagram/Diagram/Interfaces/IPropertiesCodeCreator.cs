@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Diagram.UI.CodeCreators.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace Diagram.Interfaces
 {
@@ -7,6 +9,7 @@ namespace Diagram.Interfaces
         List<string> CreateProperties(string prefix, object obj, string volume);
 
         List<string> SetProperties(string prefix, object obj, string volume);
+        IDesktopCodeCreator DesktopCodeCreator { get; set; }
 
     }
 }

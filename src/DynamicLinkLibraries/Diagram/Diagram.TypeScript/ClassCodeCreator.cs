@@ -36,7 +36,8 @@ namespace Diagram.TypeScript
         protected virtual IDesktopCodeCreator DesktopCodeCreator { get; set; }
 
         IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator { get => DesktopCodeCreator; set => DesktopCodeCreator = value; }
-
+        IDesktopCodeCreator IParametersCodeCreator.DesktopCodeCreator { get => DesktopCodeCreator; set => DesktopCodeCreator = value; }
+        IDesktopCodeCreator IPropertiesCodeCreator.DesktopCodeCreator { get => DesktopCodeCreator; set => DesktopCodeCreator = value; }
 
         protected virtual List<string> CreateCode(string prefix, object obj, string volume)
         {

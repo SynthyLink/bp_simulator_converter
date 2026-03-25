@@ -8,7 +8,7 @@ import type { ITimer } from "../../Interfaces/ITimer";
 import type { ITimerConsumer } from "../../Interfaces/ITimerConsumer";
 import type { ITimerFactory } from "../../Interfaces/ITimerFactory";
 
-class TimerObject extends CategoryObject implements IEvent, ITimerConsumer {
+export class TimerObject extends CategoryObject implements IEvent, ITimerConsumer {
 
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name)

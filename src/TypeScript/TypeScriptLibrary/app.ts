@@ -29,7 +29,7 @@ async function test() {
     await a.actDonchianLoad();
 }
 
-test();
+//test();
 
 a.finish(undefined);
 

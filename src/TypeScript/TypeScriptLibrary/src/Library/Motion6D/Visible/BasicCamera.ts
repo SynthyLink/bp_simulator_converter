@@ -4,9 +4,9 @@ import { IDesktop } from "../../Interfaces/IDesktop";
 import { INodeT } from "../../NamedTree/Interfaces/INodeT";
 import { IPosition } from "../Interfaces/IPosition";
 import { IReferenceFrame } from "../Interfaces/IReferenceFrame";
-import { IVisible } from "../Interfaces/IVisible";
 import { IVisibleConsumer } from "./Interfaces/IVisibleConsumer";
 import { BasicPosition } from "../Objects/BasicPosition";
+import { IVisible } from "./Interfaces/IVisible";
 
 export class BasicCamera extends BasicPosition implements IVisibleConsumer {
 

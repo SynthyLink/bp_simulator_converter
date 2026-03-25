@@ -13,7 +13,6 @@ namespace Diagram.UI.TypeScript
     {
         UI.Performer performer = new ();
 
-        protected List<object> loaded = new List<object>();
  
         
         Performer p = new();
@@ -63,18 +62,19 @@ namespace Diagram.UI.TypeScript
                 Dictionary<ICategoryArrow, int> arrows;
                 performer.Get(desktop, out categoryObjects, out categoryArrows, out objects, out arrows);
                 IClassCodeCreator classCodeCreator = performer.GetLaguageObject<IClassCodeCreator>(this);
+                classCodeCreator.DesktopCodeCreator = this;
                 var l = new List<string>();
                 for (int i = 0; i < categoryObjects.Count; i++)
                 {
                     var categoryObject = categoryObjects[i];
-                    if (loaded.Contains(categoryObject))
+                    if (Loaded.ContainsKey(categoryObject))
                     {
                         continue;
                     }
                     var pr = className + "_" + "CategoryObject_" + i;
                     Current = pr;
                     var c = classCodeCreator.CreateCode(pr, categoryObject, null);
-                    loaded.Add(categoryObject);
+                    Loaded[categoryObject] = pr;
                     l.AddRange(c);
                     l.Add("");
                  }
@@ -104,7 +104,9 @@ namespace Diagram.UI.TypeScript
                     var nac = categoryObject.Object as INamedComponent;
                     string name = nac.RootName;
                     name = "\"" + name + "\"";
-                    var pr = "\t\tnew " + className + "_" + "CategoryObject_" + i + "(this, " + name + ");";
+                    var cn = Loaded[categoryObject];
+                    var cnn = "\"" + cn + "\""; 
+                    var pr = "\t\tthis.mapObjects.set(" + cnn + ", new " + cn + "(this, " + name + "))";
                     l.Add(pr);
                 }
                 for (var i = 0; i < categoryArrows.Count; i++)
@@ -132,10 +134,14 @@ namespace Diagram.UI.TypeScript
                 for (int i = 0; i < categoryArrows.Count; i++)
                 {
                     var categoryArrow = categoryArrows[i];
-                    var sn = objects[categoryArrow.Source];
-                    var tn = objects[categoryArrow.Target];
-                    l.Add("\t\tarrows[" + i + "].setSource(objects[" + sn + "]);");
-                    l.Add("\t\tarrows[" + i + "].setTarget(objects[" + tn + "]);");
+                    var sn = "\"" + Loaded[categoryArrow.Source] + "\"";
+                    var tn = "\"" + Loaded[categoryArrow.Target] + "\"";
+                    var ss = "s" + i;
+                    var tt = "t" + i;
+                    l.Add("\t\tlet " + ss + " = this.mapObjects.get(" + sn + ")");
+                    l.Add("\t\tif(" + ss + " != undefined)    arrows[" + i + "].setSource(" + ss + ");");
+                    l.Add("\t\tlet " + tt + " = this.mapObjects.get(" + tn + ")");
+                    l.Add("\t\tif(" + tt + " != undefined)    arrows[" + i + "].setTarget(" + tt + ");");
                 }
                 for (int i = 0; i < categoryArrows.Count; i++)
                 {

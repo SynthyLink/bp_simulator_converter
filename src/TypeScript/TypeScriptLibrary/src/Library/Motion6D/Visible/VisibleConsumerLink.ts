@@ -1,8 +1,8 @@
 import { CategoryArrow } from "../../CategoryArrow";
 import type { ICategoryObject } from "../../Interfaces/ICategoryObject";
 import type { IDesktop } from "../../Interfaces/IDesktop";
-import type { IVisible } from "../Interfaces/IVisible";
 import type { IVisibleConsumer } from "../Interfaces/IVisibleConsumer";
+import { IVisible } from "./Interfaces/IVisible";
 
 export class VisibleConsumerLink extends CategoryArrow {
     constructor(desktop: IDesktop, name: string) {

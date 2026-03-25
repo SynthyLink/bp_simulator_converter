@@ -1,6 +1,5 @@
 import { AliasName } from "../Library/AliasName";
 import { Desktop } from "../Library/Desktop";
-import { FeedbackAliasCollection } from "../Library/FeedbackAliasCollection";
 import { IAliasName } from "../Library/Interfaces/IAliasName";
 import { IDesktop } from "../Library/Interfaces/IDesktop";
 import { IPostSetArrow } from "../Library/Interfaces/IPostSetArrow";
@@ -10,7 +9,6 @@ import { DataConsumer } from "../Library/Measurements/DataConsumer";
 import { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement";
 import { RandomGenerator } from "../Library/Measurements/RandomGenerator";
 import { RecursiveFormula } from "../Library/Measurements/RecursiveFormula";
-import { Variable } from "../Library/Measurements/Variables/Variable";
 import { VectorFormulaConsumer } from "../Library/Measurements/VectorFormulaConsumer";
 
 class Random_CategoryObject_0 extends RandomGenerator
@@ -39,7 +37,7 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer
 			["f", 0.0040000000000000001 ]
 		]);
 		this.performer.setAliasMap(map, this);
-		this.addVariable(new Variable("Formula_1", 0, 0));
+		this.addVariableValue("Formula_1", 0, 0.0040000000000000001);
 	}
 
 		calculateTree() : void
@@ -160,11 +158,6 @@ class Random_CategoryObject_2 extends VectorFormulaConsumer
 		x0?.setIValue(this.get_11());
 	}
 	
-	setFeedback(): void {
-		let map = new Map<string, string>(
-		[
-		]);
-	}
 }
 
 class Random_CategoryObject_3 extends RecursiveFormula
@@ -174,12 +167,10 @@ class Random_CategoryObject_3 extends RecursiveFormula
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["d", 0 ],
-			["c", 0 ],
 			["a", 0 ]
 		]);
 		this.performer.setAliasMap(map, this);
-		this.addVariable(new Variable("a", 0, 0));
+		this.addVariableValue("a", 0, 0);
 	}
 
 		calculateTree() : void
@@ -203,8 +194,8 @@ class Random_CategoryObject_3 extends RecursiveFormula
 		this.measurement1 = all[0].getMeasurement(0);
 	}
 	
-	value0 ! : IValue;
 	measurement1 ! : IMeasurement;
+	value0 ! : IValue;
 	var_0 : number  = 0;
 	var_1 : number  = 0;
 	var_2 : number  = 0;
@@ -229,11 +220,6 @@ class Random_CategoryObject_3 extends RecursiveFormula
 		x0?.setIValue(this.get_2());
 	}
 	
-	setFeedback(): void {
-		let map = new Map<string, string>(
-		[
-		]);
-	}
 }
 
 class Random_CategoryObject_4 extends DataConsumer
@@ -286,27 +272,39 @@ export class Random extends Desktop
 
 		this.name = "Random";
 
-		new Random_CategoryObject_0(this, "X");
-		new Random_CategoryObject_1(this, "Y");
-		new Random_CategoryObject_2(this, "Data");
-		new Random_CategoryObject_3(this, "Recursive");
-		new Random_CategoryObject_4(this, "Chart");
-		new Random_CategoryArrow_0(this, "2");
-		new Random_CategoryArrow_1(this, "1");
-		new Random_CategoryArrow_2(this, "3");
-		new Random_CategoryArrow_3(this, "4");
+		this.mapObjects.set("Random_CategoryObject_0", new Random_CategoryObject_0(this, "X"))
+		this.mapObjects.set("Random_CategoryObject_1", new Random_CategoryObject_1(this, "Y"))
+		this.mapObjects.set("Random_CategoryObject_2", new Random_CategoryObject_2(this, "Data"))
+		this.mapObjects.set("Random_CategoryObject_3", new Random_CategoryObject_3(this, "Recursive"))
+		this.mapObjects.set("Random_CategoryObject_4", new Random_CategoryObject_4(this, "Chart"))
+		new Random_CategoryArrow_0(this, "");
+		new Random_CategoryArrow_1(this, "");
+		new Random_CategoryArrow_2(this, "");
+		new Random_CategoryArrow_3(this, "");
+	this.finish()
+}
 
+finish() : void
+{
 		let objects = this.getCategoryObjects();
 		let arrows = this.getCategoryArrows();
 
-		arrows[0].setSource(objects[2]);
-		arrows[0].setTarget(objects[1]);
-		arrows[1].setSource(objects[2]);
-		arrows[1].setTarget(objects[0]);
-		arrows[2].setSource(objects[3]);
-		arrows[2].setTarget(objects[2]);
-		arrows[3].setSource(objects[4]);
-		arrows[3].setTarget(objects[3]);
+		let s0 = this.mapObjects.get("Random_CategoryObject_2")
+		if(s0 != undefined)    arrows[0].setSource(s0);
+		let t0 = this.mapObjects.get("Random_CategoryObject_1")
+		if(t0 != undefined)    arrows[0].setTarget(t0);
+		let s1 = this.mapObjects.get("Random_CategoryObject_2")
+		if(s1 != undefined)    arrows[1].setSource(s1);
+		let t1 = this.mapObjects.get("Random_CategoryObject_0")
+		if(t1 != undefined)    arrows[1].setTarget(t1);
+		let s2 = this.mapObjects.get("Random_CategoryObject_3")
+		if(s2 != undefined)    arrows[2].setSource(s2);
+		let t2 = this.mapObjects.get("Random_CategoryObject_2")
+		if(t2 != undefined)    arrows[2].setTarget(t2);
+		let s3 = this.mapObjects.get("Random_CategoryObject_4")
+		if(s3 != undefined)    arrows[3].setSource(s3);
+		let t3 = this.mapObjects.get("Random_CategoryObject_3")
+		if(t3 != undefined)    arrows[3].setTarget(t3);
 		(objects[2] as unknown as IPostSetArrow).postSetArrow();
 		(objects[3] as unknown as IPostSetArrow).postSetArrow();
 	}
