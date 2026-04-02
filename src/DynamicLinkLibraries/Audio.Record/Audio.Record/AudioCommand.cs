@@ -99,7 +99,7 @@ namespace Audio.Record
 
         #endregion
 
-        #region IAddRemove Members
+        #region IDisposable Members
 
         void IDisposable.Dispose()
         {

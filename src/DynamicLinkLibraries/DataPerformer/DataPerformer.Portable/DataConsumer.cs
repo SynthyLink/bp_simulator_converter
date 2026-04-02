@@ -21,7 +21,7 @@ namespace DataPerformer.Portable
     /// Data consumer
     /// </summary>
     public class DataConsumer : CategoryObject,  IDataConsumer,
-        IEventHandler, ITimeMeasurementConsumer, IAddRemove, ICalculationReason
+        IEventHandler, ITimeMeasurementConsumer, IAddRemove, ICalculationReason, IPostSetArrow
     {
 
         #region Fields
@@ -528,6 +528,16 @@ namespace DataPerformer.Portable
 
         void IChildren<object>.RemoveChild(object child)
         {
+        }
+
+        protected virtual void PostSetArrow()
+        {
+
+        }
+
+        void IPostSetArrow.PostSetArrow()
+        {
+            PostSetArrow();
         }
 
         #endregion

@@ -4,9 +4,14 @@
 import { AliasName } from "./AliasName";
 import { ConsolePrinter } from "./ConsolePrinter";
 import { OwnError } from "./ErrorHandler/OwnError";
+import { MeasurementsComparator } from "./Measurements/MeasurementsComparator";
+import { SortingAlgorithma } from "./Utilities/Sort/SortingAlgorithms";
+import { ActionArray } from "./Utilities/Generic/ActionArray";
+import type { IAction } from "./Interfaces/IAction";
 import type { IAlias } from "./Interfaces/IAlias";
 import type { IAliasName } from "./Interfaces/IAliasName";
 import type { ICategoryObject } from "./Interfaces/ICategoryObject";
+import type { IComparator } from "./Utilities/Sort/Interfaces/IComparator";
 import type { IDesktop } from "./Interfaces/IDesktop";
 import type { IObject } from "./Interfaces/IObject";
 import type { IPrintedObject } from "./Interfaces/IPrintedObject";
@@ -17,10 +22,10 @@ import type { IDerivation } from "./Measurements/Interfaces/IDerivation";
 import type { IMeasurement } from "./Measurements/Interfaces/IMeasurement";
 import type { IMeasurements } from "./Measurements/Interfaces/IMeasurements";
 import type { IFeedbackCollection } from "./Interfaces/IFeedbackCollection";
-import type { IComparator } from "./Interfaces/IComparator";
-import { MeasurementsComparator } from "./Measurements/MeasurementsComparator";
 import type { ICheck } from "./Interfaces/ICheck";
 import type { ICheckHolder } from "./Interfaces/ICheckHolder";
+import { IProperties } from "./Interfaces/IProperties";
+
 
 export class Performer
 {
@@ -35,12 +40,54 @@ export class Performer
 
     protected s: string = "";
 
-    protected printer: IPrinter = new ConsolePrinter();;
+    protected printer: IPrinter = new ConsolePrinter();
+
+    protected sorting: SortingAlgorithma = new SortingAlgorithma();
 
     protected mCompatator !: IComparator<IMeasurements>;
 
     public setPrinter(printer: IPrinter): void {
         this.printer = printer;
+    }
+
+
+    public reoplaceArrayValue<T>(t: T[], s: T[]): void {
+
+        if (s.length == 0) {
+            if (t.length > 0) {
+                t.pop();
+                return;
+            }
+        }
+        let ss = s[0]
+        if (t.length > 0) {
+            t[0] = ss;
+            return;
+        }
+        t.push(ss);
+    }
+
+
+    public executeAction(acttion: IAction | undefined): void {
+        if (acttion === undefined) return;
+        acttion.action();
+    }
+
+    public sumOfActions(first: IAction | undefined, second: IAction | undefined): IAction | undefined {
+        var act = new ActionArray();
+        if (first === undefined) {
+            return second;
+        }
+        else {
+            act.addAction(first)
+            if (second === undefined) {
+                return first;
+            }
+            else {
+                act.addAction(second);
+            }
+        }
+        return act;
     }
 
     public setCheker(desktop: IDesktop, check: ICheck) {
@@ -145,62 +192,8 @@ export class Performer
     }
 
     public sortMeasurements(measurements: IMeasurements[]): IMeasurements[] {
-        return this.mergesort(measurements, this.mCompatator);
+        return this.sorting.mergesort(measurements, this.mCompatator);
     }
-
-    public mergesort<T>(unsorted: T[], comparator: IComparator<T>) {
-        if (unsorted.length <= 1)
-        {
-            return unsorted;
-        }
-        var left: T[] = [];
-        var right: T[] = [];
-        var middle = Math.floor(unsorted.length / 2);
-        for (var i = 0; i < middle; i++)  //Dividing the unsorted list
-        {
-            left.push(unsorted[i]);
-        }
-        for (var j = middle; j < unsorted.length; j++)
-        {
-            right.push(unsorted[j]);
-        }
-        left = this.mergesort(left, comparator);
-        right = this.mergesort(right, comparator);
-        return this.merge(left, right, comparator);
-    }
-
-    protected merge<T>(left: T[], right: T[], comparator: IComparator<T>): T[] {
-        var result: T[] = [];
-        while (left.length > 0 || right.length > 0)
-        {
-            if (left.length > 0 && right.length > 0)
-            {
-                if (comparator.compare(left[0], right[0]) <= 0)  //Comparing First two elements to see which is smaller
-                {
-                    result.push(left[0]);
-                    left.shift();
-                    //Rest of the list minus the first element
-                }
-                else
-                {
-                    result.push(right[0]);
-                    right.shift();
-                }
-            }
-            else if (left.length > 0)
-            {
-                result.push(left[0]);
-                left.shift();
-            }
-            else if (right.length > 0)
-            {
-                result.push(right[0]);
-                right.shift();
-            }
-        }
-        return result;
-    }
-
 
 
     public getByType(desktop: IDesktop, type: string): IObject[] {
@@ -255,8 +248,6 @@ export class Performer
         return s;
     }
 
-
-
     public convertMap<T, S, R>(objects: Map<T, S>, type: string): Map<T, R> {
         let map: Map<T, R> = new Map();
         var ent = objects.entries();
@@ -278,6 +269,17 @@ export class Performer
             t.push(x);
         }
         return t;
+    }
+
+    public convertProperties<T>(o: ICategoryObject, type: string): T[] {
+        let ob = this.convertObject<T, ICategoryObject>(o, type)
+        if (ob.length > 0) return ob;
+        let prp = this.convertObject<IProperties, ICategoryObject>(o, "IProperties")
+        if (prp.length > 0) {
+            var pp = this.convertObject<T, any>(prp[0].getProperties(), type)
+            if (pp.length > 0) return pp;
+        }
+        return [];
     }
 
 
@@ -370,6 +372,17 @@ export class Performer
         return dataConsumer.getAllMeasurements()[i].getMeasurement(j);
     }
 
+    public remove<T>(t: T[], x: T): T[] {
+        let tt: T[] = [];
+        for (let y of t) {
+            if (y != x) {
+                tt.push(x)
+            }
+        }
+        return tt;
+    }
+
+
 
     public enlarge<T>(t: T[], x: T, size: number): void {
         for (let i = 0; i < size; i++) t.push(x);
@@ -391,10 +404,27 @@ export class Performer
         this.enlarge2<number>(x, 0, row, column);
     }
 
-    public copyArray<T>(f: T[], t: T[]): void {
-        let i = 0;
-        for (i = 0; i < f.length; i++) {
+    public pushArray<T>(f: T[], t: T[]): void {
+        for (let i = 0; i < f.length; i++) {
             t.push(f[i]);
+        }
+    }
+
+    public copyArray<T>(f: T[], t: T[]): void {
+        for (let i = 0; i < f.length; i++) {
+            t[i] = f[i];
+        }
+    }
+
+    public copyArraySize<T>(f: T[], t: T[], size: number): void {
+        for (let i = 0; i < size; i++) {
+            t[i] = f[i];
+        }
+    }
+
+    public addArray<T>(array: T[], add: T[]): void {
+        for (let f of add) {
+            array.push(f)
         }
     }
 

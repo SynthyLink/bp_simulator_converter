@@ -5,6 +5,7 @@ import type { IAction } from "../Interfaces/IAction";
 import type { IFunc } from "../Interfaces/IFunc";
 import { Performer } from "../Performer";
 import type { IDataRuntime } from "../Runtime/Interfaces/IDataRuntime";
+import { IComparator } from "../Utilities/Sort/Interfaces/IComparator";
 import { DataConsumerBoolFunc } from "./DataConsumerBoolFunc";
 import type { IArrayElementMeasurement } from "./Interfaces/IArrayElemetMeasurements";
 import type { IDataConsumer } from "./Interfaces/IDataConsumer";
@@ -13,18 +14,22 @@ import type { IMeasurements } from "./Interfaces/IMeasurements";
 import type { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProvider";
 import { TimeMeasurementProvider } from "./TimeMeasurementProvider";
 
-export class PefrormerMeasuremets
-{
+export class PefrormerMeasuremets {
+
+    constructor() {
+
+    }
 
     performer: Performer = new Performer();
 
- 
+    protected mCompatator !: IComparator<IMeasurements>;
+
 
     public getArrayMeasurements(array: IArrayElementMeasurement): IMeasurement[] {
         var n = array.getMeasurementNames().length;
         var mea: IMeasurement[] = [];
         for (var i = 0; i < n; i++) {
-          //  mea.push(new ArrayMeasurement(array, i));
+            //  mea.push(new ArrayMeasurement(array, i));
         }
         return mea;
     }
@@ -45,47 +50,41 @@ export class PefrormerMeasuremets
             if (measurements.find(mea => true) === undefined) {
 
             }
-            else
-            {
+            else {
                 measurements.push(mea);
                 let dc = mea as unknown as IDataConsumer;
                 //     if (dc instanceof IDataConsumer)
 
             }
         }
-        
+
     }
 
 
     public peformCondDCFixedStepCalculation(runtime: IDataRuntime, dataConsumer: IDataConsumer,
         conditionName: string, stop: IFunc<boolean>, start: number,
-        step: number, steps: number, act: IAction): void
-    {
+        step: number, steps: number, act: IAction): void {
         var cond = new DataConsumerBoolFunc(dataConsumer, conditionName);
-        this.peformCondFixedStepCalculation(runtime,cond, stop, start, step, steps, act);
+        this.peformCondFixedStepCalculation(runtime, cond, stop, start, step, steps, act);
     }
 
 
 
     public peformCondFixedStepCalculation(runtime: IDataRuntime, condition: IFunc<boolean>, stop: IFunc<boolean>, start: number,
-        step: number, steps: number, act: IAction): void
-    {
+        step: number, steps: number, act: IAction): void {
         var tm: ITimeMeasurementProvider = new TimeMeasurementProvider();
         runtime.setTimeProvider(tm);
         runtime.startRuntime(start);
         var st = start;
-        for (var i = 0; i < steps; i++)
-        {
+        for (var i = 0; i < steps; i++) {
             if (stop.func()) return;
             tm.setTime(st);
             runtime.updateRuntime();
-            if (condition.func())
-            {
+            if (condition.func()) {
                 act.action();
             }
             let s = st + step;
-            if (i > 0)
-            {
+            if (i > 0) {
                 runtime.stepRuntime(st, s);
             }
             st = s;
@@ -93,20 +92,17 @@ export class PefrormerMeasuremets
     }
 
     public performFixedStepCalculation(runtime: IDataRuntime, start: number, step: number, steps: number,
-        stop: IFunc<boolean>, act: IAction): void
-    {
+        stop: IFunc<boolean>, act: IAction): void {
         let tm = new TimeMeasurementProvider();
         runtime.setTimeProvider(tm);
         runtime.startRuntime(start);
         var st = start;
         var curr = start;
-        for (var i = 0; i < steps; i++)
-        {
+        for (var i = 0; i < steps; i++) {
             if (stop.func()) return;
-              
+
             tm.setTime(st);
-            if (i > 0)
-            {
+            if (i > 0) {
                 runtime.stepRuntime(curr, st);
                 curr = st;
             }
@@ -116,4 +112,17 @@ export class PefrormerMeasuremets
         }
 
     }
+
+    public fullReset(consumer: IDataConsumer): void {
+        let meas = consumer.getAllMeasurements();
+        for (let m of meas) {
+            let c = this.performer.convertObject<IDataConsumer, IMeasurements>(m, "IDataConsumer");
+            if (c.length > 0) {
+                c[0].resetDataConsumer();
+                this.fullReset(c[0])
+            }
+
+        }
+    }
+
 }

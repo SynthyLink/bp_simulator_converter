@@ -24,7 +24,10 @@ import type { IMeasurements } from "./Measurements/Interfaces/IMeasurements";
 import type { IFeedbackCollection } from "./Interfaces/IFeedbackCollection";
 import type { ICheck } from "./Interfaces/ICheck";
 import type { ICheckHolder } from "./Interfaces/ICheckHolder";
-import { IProperties } from "./Interfaces/IProperties";
+import type { IProperties } from "./Interfaces/IProperties";
+import type { IActionT } from "./Interfaces/IActionT";
+import type { IComponentCollection } from "./Interfaces/IComponentCollection";
+import type { ICategoryArrow } from "./Interfaces/ICategoryArrow";
 
 
 export class Performer
@@ -34,7 +37,6 @@ export class Performer
     }
 
     protected a: number = 0;
-
 
     protected b: boolean = false;
 
@@ -46,8 +48,42 @@ export class Performer
 
     protected mCompatator !: IComparator<IMeasurements>;
 
+    public getAllIObjects(categoryObjects: ICategoryObject[], arrows: ICategoryArrow[], objects: IObject[]): void {
+        for (let o of categoryObjects) {
+            var l = this.convertObject<IObject, ICategoryObject>(o, "IObject")
+          if (l.length > 0) {
+                objects.push(l[0])
+            }
+        }
+        for (let a of arrows) {
+            var l = this.convertObject<IObject, ICategoryArrow>(a, "IObject")
+            if (l.length > 0) {
+                objects.push(l[0])
+            }
+        }
+
+    }
+
     public setPrinter(printer: IPrinter): void {
         this.printer = printer;
+    }
+
+    
+
+    public forEach<T>(collection: IComponentCollection, action: IActionT<T>, type: string) {
+        let obj = collection.getObjects()
+        console.log("l", obj.length)
+        for (let o of obj)
+        {
+  
+            var x = this.convertObject<T, IObject>(o, type)
+            
+            if (type == "ITimerConsumer") {
+                console.log(o)
+                console.log(x)
+            }
+             if (x.length > 0) action.action(x[0])
+        }
     }
 
 
@@ -155,10 +191,6 @@ export class Performer
         return sum / numbers.length;
     }
 
-
-
-
-
     public getPrinter(): IPrinter {
         return this.printer;
     }
@@ -248,8 +280,6 @@ export class Performer
         return s;
     }
 
-
-
     public convertMap<T, S, R>(objects: Map<T, S>, type: string): Map<T, R> {
         let map: Map<T, R> = new Map();
         var ent = objects.entries();
@@ -266,7 +296,8 @@ export class Performer
     public convertObject<T, S>(s: S, type: string): T[] {
         let ob = s as unknown as IObject;
         var t: T[] = [];
-        if (ob.imlplementsType(type)) {
+        if (ob.imlplementsType(type))
+        {
             var x = s as unknown as IObject as T;
             t.push(x);
         }
@@ -283,8 +314,6 @@ export class Performer
         }
         return [];
     }
-
-
 
     public select<T>(objects: IObject[], type: string): T[] {
 
@@ -340,6 +369,9 @@ export class Performer
         // A very limited approach would be to use type guards, but that means
         // you'd have to know what type S *could* be in advance. This is not
         // really a general solution.
+        if (t === undefined) {
+            throw new OwnError("Type conversion", "Performer undefined. NULL OBJECT", undefined);
+        }
         if (typeof t === "string" && (null as any as S) instanceof String) { //VERY LIMITED AND UNSAFE EXAMPLE.
             return t as any as S; // Force the type assertion (VERY UNSAFE)
         }
@@ -360,12 +392,12 @@ export class Performer
         if (typeof t === 'number' && (null as any as S) as any === Number) {
             return t as any as S;
         }
-
+        console.warn(t, typeof t)
         throw new OwnError("Type conversion", "Performer", undefined);
 
         // In many cases, a direct conversion may not be possible
         // or may require a more complex transformation.
-        // console.warn("Conversion not possible for types:", typeof t, S);
+        // warn("Conversion not possible for types:", typeof t, S);
         return undefined as any as S; // Or throw an error, or return a default value.
     }
 

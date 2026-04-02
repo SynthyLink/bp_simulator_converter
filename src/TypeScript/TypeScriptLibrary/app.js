@@ -11,8 +11,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const Actor_1 = require("./src/Tests/Actor/Actor");
 let a = new Actor_1.Actor();
+a.actComposition();
 //await a.actDonchianLoad();
-a.actPI();
+//a.actPI()
 //a.testDate();
 //a.actTime();
 //a.actOrbitCalculation(true);// 1770457504

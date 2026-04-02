@@ -19,10 +19,11 @@ import { DateTimeConverter } from '../../Library/Utilities/DateTime/DateTimeConv
 import { DensityAct } from '../Wrappers/DenstyAct';
 import { IDataConsumer } from '../../Library/Measurements/Interfaces/IDataConsumer';
 import { RungeProcessor } from '../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor';
-import { PefrormerMeasuremets } from '../../Library/Measurements/PefrormerMeasuremets';
 import { DataRuntimeConsumerODE } from '../../Library/Runtime/DataRuntimeConsumerODE';
 import { toDateTime } from '../../Algorithms/OrbitalForecastCalculation/OrbitalData';
 import { Donchian } from '../Donchian';
+import { CompositionAct } from '../Wrappers/ComposionAct';
+import { PerformerMeasuremets } from '../../Library/Measurements/PerformerMeasuremets';
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -90,7 +91,7 @@ export class Actor
         }
         else {
             let dc = o.getCategoryObject("Chart") as unknown as IDataConsumer;
-            let p = new PefrormerMeasuremets();
+            let p = new PerformerMeasuremets();
             o.set(cond);
             o.performFixedStepCalculation();
             const list = o.getResult();
@@ -292,6 +293,19 @@ export class Actor
             });
         }
     }
+
+    public actComposition(): void {
+        try {
+            var o = new CompositionAct()
+            o.test();
+        }
+        catch (e: any) {
+            console.log(e);
+        }
+
+    }
+
+
     actRandom(): void {
         try {
             var o = new RandomAct();

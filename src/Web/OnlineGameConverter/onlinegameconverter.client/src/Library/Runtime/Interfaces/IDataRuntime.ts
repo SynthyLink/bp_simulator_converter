@@ -7,6 +7,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ICategoryArrow } from "../../Interfaces/ICategoryArrow";
 import type { ICategoryObject } from "../../Interfaces/ICategoryObject";
+import type { ITimerFactory } from "../../Interfaces/ITimerFactory";
 import type { IStarted } from "../../Measurements/Interfaces/IStarted";
 import type { ITimeMeasurementProvider } from "../../Measurements/Interfaces/ITimeMeasurementProvider";
 
@@ -45,5 +46,10 @@ export interface IDataRuntime
     getRuntimeArrows(): ICategoryArrow[];
 
     getStarted(): IStarted[];
+
+    getTimerFactory(): ITimerFactory
+
+    setTimerFactory(timerFactory: ITimerFactory) : void
+
 
 }

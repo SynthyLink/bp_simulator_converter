@@ -1,12 +1,13 @@
 import { Actor } from "./src/Tests/Actor/Actor";
 
-let a = new Actor();
+let a = new Actor()
 
+a.actComposition()
 
 //await a.actDonchianLoad();
 
 
-a.actPI()
+//a.actPI()
 //a.testDate();
 
 //a.actTime();

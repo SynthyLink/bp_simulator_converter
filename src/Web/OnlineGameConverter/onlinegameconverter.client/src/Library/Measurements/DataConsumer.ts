@@ -3,18 +3,20 @@ import type { ICategoryObject } from "../Interfaces/ICategoryObject";
 import type { ICheck } from "../Interfaces/ICheck";
 import type { ICheckHolder } from "../Interfaces/ICheckHolder";
 import type { IDesktop } from "../Interfaces/IDesktop";
+import type { IEvent } from "../Interfaces/IEvent";
+import type { IEventHandler } from "../Interfaces/IEventHandler";
 import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import type { IPrintedObject } from "../Interfaces/IPrintedObject";
 import type { IPrinter } from "../Interfaces/IPrinter";
 import type { IDataConsumer } from "./Interfaces/IDataConsumer";
-import { IIterator } from "./Interfaces/IIterator";
+import type { IIterator } from "./Interfaces/IIterator";
 import type { IIteratorConsumer } from "./Interfaces/IIteratorConsumer";
 import type { IMeasurements } from "./Interfaces/IMeasurements";
 import type { ITimeMeasurementConsumer } from "./Interfaces/ITimeMeasurementConsumer";
 import type { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProvider";
 
 export class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow,
-    ITimeMeasurementConsumer, IPrintedObject, ICheckHolder, IIteratorConsumer
+    ITimeMeasurementConsumer, IPrintedObject, ICheckHolder, IIteratorConsumer, IEventHandler
 {
     constructor(desktop: IDesktop, name: string)
     {
@@ -29,6 +31,17 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         this.types.push("IIteratorConsumer");
         this.tms = this;
         this.dataConsumer = this;
+    }
+    getChildernT(): IEvent[] {
+        return this.events;
+    }
+    addChildT(child: IEvent): void {
+        this.events.push(child)
+    }
+    removeChildT(child: IEvent): void {
+        this.performer.remove(this.events, child)
+    }
+    resetDataConsumer(): void {
     }
     addIterator(iterator: IIterator): void {
         this.iterator = iterator;
@@ -101,6 +114,8 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     protected dataConsumer !: IDataConsumer;
 
     protected iterator !: IIterator;
+
+    protected events: IEvent[] = [];
 
 
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-using DataPerformer.Interfaces;
+﻿using DataPerformer.Interfaces;
 using ErrorHandler;
 
 namespace DataPerformer.Portable

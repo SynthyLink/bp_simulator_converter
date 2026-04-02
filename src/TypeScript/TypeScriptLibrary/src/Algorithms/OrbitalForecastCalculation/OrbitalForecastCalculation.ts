@@ -10,13 +10,13 @@ import { RungeProcessor } from "../../Library/Measurements/DifferentialEquations
 import type { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
 import type { IMeasurement } from "../../Library/Measurements/Interfaces/IMeasurement";
 import type { IMeasurements } from "../../Library/Measurements/Interfaces/IMeasurements";
-import { PefrormerMeasuremets } from "../../Library/Measurements/PefrormerMeasuremets";
 import { Performer } from "../../Library/Performer";
 import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
-import type { IDataRuntime } from "../../Library/Runtime/Interfaces/IDataRuntime";
 import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./OrbitalData";
 import { OrbitalForecast } from "./OrbitalForecast";
 import { StopWatch } from "../../Library/Utilities/DateTime/StopWatch";
+import { IDataRuntime } from "../../Library/Interfaces/IDataRuntime";
+import { PerformerMeasuremets } from "../../Library/Measurements/PerformerMeasuremets";
 class Check implements ICheck {
     check(o: any): boolean {
         var s = `${o}`;
@@ -108,7 +108,7 @@ export class OrbitalForecastCalculation extends OrbitalForecast implements IActi
     public calculate = async (condition: OrbitalForecastConditionNumber, controller: AbortController): Promise<OrbitalForecastItemNumber[]> => {
         this.contoller = controller;
         this.set(condition);
-        let p = new PefrormerMeasuremets();
+        let p = new PerformerMeasuremets();
         this.stopWatch = new StopWatch();
         this.stopWatch.start();
         var count = Math.floor(condition.end - condition.begin);
@@ -120,7 +120,7 @@ export class OrbitalForecastCalculation extends OrbitalForecast implements IActi
     public performFixedStepCalculation(): void {
         this.stopWatch = new StopWatch();
         this.stopWatch.start();
-        let p = new PefrormerMeasuremets();
+        let p = new PerformerMeasuremets();
         p.performFixedStepCalculation(this.runtime, this.condition.begin, 1,
             this.condition.end, this, this.act);
     }

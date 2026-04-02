@@ -31,7 +31,9 @@ export class CategoryObject implements ICategoryObject, IObject
         desktop.addCategoryObject(this);
         desktop.addObject(this);
         this.checker = desktop.getCheck();
-   }
+    }
+
+
     getName(): string {
         return this.name;
     }
@@ -39,6 +41,7 @@ export class CategoryObject implements ICategoryObject, IObject
     getClassName(): string {
         return this.typeName;
     }
+
     imlplementsType(type: string): boolean {
         return this.types.indexOf(type) > 0;
     }
@@ -68,5 +71,11 @@ export class CategoryObject implements ICategoryObject, IObject
         }
         return this.checker.check(x);
     }
+
+
+    protected getObjectT<T, S>(s: S, type: string): T[] {
+        return this.performer.convertObject<T, S>(s, type)
+    }
+
 }
 

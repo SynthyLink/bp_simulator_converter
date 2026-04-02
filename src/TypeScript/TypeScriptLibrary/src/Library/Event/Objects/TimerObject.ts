@@ -14,7 +14,10 @@ export class TimerObject extends CategoryObject implements IEvent, ITimerConsume
         super(desktop, name)
         this.typeName = "TimerObject"
         this.types.push("IEvent")
-        this.types.push("TimerObject")
+        this.types.push("ITimerConsumer")
+    }
+    getTimeSpan(): TimeSpan {
+        return this.span;
     }
 
     setTimer(timerFactory: ITimerFactory): void {
@@ -30,7 +33,7 @@ export class TimerObject extends CategoryObject implements IEvent, ITimerConsume
         return this.isEnabled;
     }
     async setEnabled(enabled: boolean): Promise<void> {
-        if (this.isEnabled != enabled)
+        if (this.isEnabled == enabled)
             return;
         this.isEnabled = enabled;
         this.timer.setTimerEnabled(enabled)

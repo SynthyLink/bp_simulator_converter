@@ -5,4 +5,7 @@
     <TypeScriptConfiguration Remove="ExternalObjects\**" />
     <TypeScriptConfiguration Remove="Library\**" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\Library\Runtime\Interfaces\" />
+  </ItemGroup>
 </Project>

@@ -17,7 +17,7 @@ namespace DataPerformer.Portable
     /// <summary>
     /// Wrapper of filters
     /// </summary>
-    public class FilterWrapper : DataConsumer, IPostSetArrow, 
+    public class FilterWrapper : DataConsumer, 
         IMeasurements, IRunning
     {
 
@@ -121,7 +121,7 @@ namespace DataPerformer.Portable
 
         #region IPostSetArrow Members
 
-        void IPostSetArrow.PostSetArrow()
+        protected override void PostSetArrow()
         {
             Find();
         }
