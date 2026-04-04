@@ -1,5 +1,11 @@
 import Loader from './loader'; // Used to load files from the web server
 import Input from './input'; // Used to manage the user input
+import { GameOptions } from './GameOptions';
+import { IActionAddRemoveT } from '../Library/Interfaces/IActionAddRemoveT';
+import { ActionArrayT } from '../Library/Utilities/Generic/ActionArrayT';
+import { IPlayEngine } from '../Library/Interfaces/IPlayEngine';
+import { IActionT } from '../Library/Interfaces/IActionT';
+import { constructor } from 'gl-matrix/src/gl-matrix/vec2';
 
 //This is the abstract base of all scenes
 export abstract class Scene {
@@ -8,20 +14,20 @@ export abstract class Scene {
     public constructor(game: Game){
         this.game = game;
         this.gl = game.gl;
+        this.engine = game;
+        
     }
 
     public abstract load(): void; // Here we will tell the loader which files to load from the webserver
     public abstract start(): void; // Here we will initialize the scene objects before entering the draw loop 
     public abstract draw(deltaTime: number): void; // Here will draw the scene (deltaTime is the difference in time between this frame and the past frame in milliseconds)
     public abstract end(): void; // Here we free the memory from objects we allocated
+    protected engine !: IPlayEngine
 }
 
-interface GameOptions {
-    maxfps?: number,
-};
 
 //This class create the WebGL2 context, manages the scenes and handles the game loop
-export default class Game {
+export default class Game implements IPlayEngine, IActionT<number> { 
     canvas: HTMLCanvasElement; // The canvas on which we will draw
     gl: WebGL2RenderingContext; // The WebGL2 context of the canvas (we will use it to draw)
     loader: Loader = new Loader(); // A loader to read files from the webserver
@@ -69,7 +75,9 @@ export default class Game {
         }
     }
 
-    private loop(time: DOMHighResTimeStamp){
+ 
+    private loop(time: DOMHighResTimeStamp) {
+        this.actionGame(time)
         requestAnimationFrame((time) => this.loop(time)); // Tell the browser to call this function again when the next frame needs to be drawn
         if(this.options.maxfps){
             if(time - this.lastTick < (1000/this.options.maxfps)) return;
@@ -85,6 +93,40 @@ export default class Game {
         }
         this.input.update(); // Update some information about the user input
         this.lastTick = time;
+        this.engineAction.addActionT(this);
     }
+
+
+    protected actionGame(time: number) {
+        this.curentAction.actionT(time)
+    }
+
+    actionT(t: number): void {
+        this.currentTime = t;
+    }
+    isEngineEnabled(): boolean {
+        return this.isEnabled
+    }
+    setEngineEnabled(enabled: boolean): void {
+        if (enabled == this.isEnabled) return
+        this.isEnabled = enabled
+        this.curentAction = (enabled) ? this.engineAction : this.emptyAction
+    }
+    getPlayEngineTime(): number {
+        return this.currentTime
+    }
+    getEngineAction(): IActionAddRemoveT<number> {
+        return this.engineAction;
+    }
+
+    engineAction: IActionAddRemoveT<number> = new ActionArrayT()
+
+    emptyAction: IActionAddRemoveT<number> = new ActionArrayT()
+
+    curentAction: IActionAddRemoveT<number> = new ActionArrayT()
+
+    currentTime: number = Math.min()
+
+    isEnabled: boolean = false
 
 }

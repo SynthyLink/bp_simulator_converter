@@ -68,21 +68,13 @@ export class Performer
         this.printer = printer;
     }
 
-    
 
     public forEach<T>(collection: IComponentCollection, action: IActionT<T>, type: string) {
         let obj = collection.getObjects()
-        console.log("l", obj.length)
-        for (let o of obj)
-        {
-  
+        for (let o of obj) {
+
             var x = this.convertObject<T, IObject>(o, type)
-            
-            if (type == "ITimerConsumer") {
-                console.log(o)
-                console.log(x)
-            }
-             if (x.length > 0) action.action(x[0])
+            if (x.length > 0) action.actionT(x[0])
         }
     }
 
@@ -272,7 +264,7 @@ export class Performer
 
         const s: S[] = [];
         for (let i = 0; i < objects.length; i++) {
-            let o: IObject = objects[i] as IObject;
+            let o: IObject = objects[i] as unknown as IObject;
             if (o.imlplementsType(type)) {
                 s.push(o as unknown as S);
             }
@@ -284,9 +276,9 @@ export class Performer
         let map: Map<T, R> = new Map();
         var ent = objects.entries();
         for (const [key, val] of ent) {
-            let o: IObject = val as IObject;
+            let o: IObject = val as unknown as IObject;
             if (o.imlplementsType(type)) {
-                map.set(key, o as R);
+                map.set(key, o as unknown as R);
             }
 
         }
@@ -298,7 +290,7 @@ export class Performer
         var t: T[] = [];
         if (ob.imlplementsType(type))
         {
-            var x = s as unknown as IObject as T;
+            var x = s as unknown as  T;
             t.push(x);
         }
         return t;

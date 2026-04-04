@@ -1,6 +1,6 @@
-import { Actor } from "./src/Tests/Actor/Actor";
+import { ActorWeb } from "./src/Tests/Actor/ActorWeb";
 
-let a = new Actor()
+let a = new ActorWeb()
 
 a.actComposition()
 

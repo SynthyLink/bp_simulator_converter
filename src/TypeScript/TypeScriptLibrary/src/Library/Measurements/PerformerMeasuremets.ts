@@ -1,4 +1,3 @@
-
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -27,7 +26,9 @@ export class PerformerMeasuremets {
     performer: Performer = new Performer();
 
     protected mCompatator !: IComparator<IMeasurements>;
-    
+
+   
+
     public setTimeProvider(timeProvider: ITimeMeasurementProvider, measurements: IMeasurements[]): void {
         for (let m of measurements) {
             let tm = this.performer.convertObject<ITimeMeasurementConsumer, IMeasurements>(m, "ITimeMeasurementConsumer")
@@ -36,14 +37,14 @@ export class PerformerMeasuremets {
             }
         }
     }
-
     
-    public  setTimeProviderCollection(objects: IComponentCollection, timeProvider: ITimeMeasurementProvider): void {
+
+
+    public setTimeProviderCollection(objects: IComponentCollection, timeProvider: ITimeMeasurementProvider): void {
         let objs = objects.getObjects();
         for (let o of objs) {
-            let tm = this.performer.convertObject<ITimeMeasurementConsumer, IObject>(o, "IObject")
-            if (tm.length > 0)
-            {
+            let tm = this.performer.convertObject<ITimeMeasurementConsumer, IObject>(o, "ITimeMeasurementConsumer")
+            if (tm.length > 0) {
                 tm[0].setTimeMeasurement(timeProvider)
             }
         }

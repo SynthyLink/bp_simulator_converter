@@ -28,8 +28,8 @@ for (let name in scenes) {
     selector.add(option);
 }
 selector.value = initialScene;
-let act = new ActorWeb()
-act.actPI()
+//let act = new ActorWeb()
+//act.actPI()
 selector.addEventListener("change", () => {
     game.startScene(selector.value);
 });

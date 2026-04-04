@@ -14,8 +14,8 @@ export class CompositionAct extends Composition implements IAction {
     }
 
     action(): void {
-        var k = this.dc.getAllMeasurements()[0];
-        var a = [k.getMeasurement(0).getMeasurementValue(), k.getMeasurement(1).getMeasurementValue()];
+        var k = this.dc.getAllMeasurements();
+        var a = k[0].getMeasurement(0).getMeasurementValue();
         console.log(a);
     }
     func(): boolean {

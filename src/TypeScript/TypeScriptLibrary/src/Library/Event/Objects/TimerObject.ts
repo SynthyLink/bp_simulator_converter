@@ -22,6 +22,7 @@ export class TimerObject extends CategoryObject implements IEvent, ITimerConsume
 
     setTimer(timerFactory: ITimerFactory): void {
         this.timer = timerFactory.getTimerFromFactory(this.span)
+        this.timer.getTimerEvent().addAction(this.action)
     }
 
 
@@ -32,7 +33,8 @@ export class TimerObject extends CategoryObject implements IEvent, ITimerConsume
     isEventEnabled(): boolean {
         return this.isEnabled;
     }
-    async setEnabled(enabled: boolean): Promise<void> {
+
+    setEventEnabled(enabled: boolean): void {
         if (this.isEnabled == enabled)
             return;
         this.isEnabled = enabled;

@@ -74,7 +74,7 @@ export class Performer
         for (let o of obj) {
 
             var x = this.convertObject<T, IObject>(o, type)
-            if (x.length > 0) action.action(x[0])
+            if (x.length > 0) action.actionT(x[0])
         }
     }
 

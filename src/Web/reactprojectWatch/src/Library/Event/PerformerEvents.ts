@@ -6,7 +6,7 @@ import type { ITimerFactory } from "../Interfaces/ITimerFactory";
 import { Performer } from "../Performer";
 
 export class PerformerEvents implements IActionT<IEventStart> {
-    action(t: IEventStart): void
+    actionT(t: IEventStart): void
     {
         t.setEventEnabled(this.isEnabled)
     }
@@ -31,7 +31,7 @@ export class PerformerEvents implements IActionT<IEventStart> {
 }
 
 class TimerAction implements IActionT<ITimerConsumer> {
-    action(t: ITimerConsumer): void {
+    actionT(t: ITimerConsumer): void {
         t.setTimer(this.factory)
     }
 

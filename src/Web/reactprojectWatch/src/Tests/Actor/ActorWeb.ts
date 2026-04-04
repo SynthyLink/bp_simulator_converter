@@ -26,10 +26,12 @@ import { CompositionEvent } from '../Wrappers/CompositionEvent';
 
 import { PerformerMeasuremets } from '../../Library/Measurements/PerformerMeasuremets';
 import { Composition } from '../Composition';
+import { IFunc } from '../../Library/Interfaces/IFunc';
+import { IPlayEngine } from '../../Library/Interfaces/IPlayEngine';
 
 
 
-function finish(e: any) {
+function finish(e) {
     console.log(e);
   /* rl.question('Is this example useful? [y/n] ', (answer) => {
         switch (answer.toLowerCase()) {
@@ -47,7 +49,7 @@ function finish(e: any) {
    */
 }
 export class ActorWeb {
-    finish(e: any): void {
+    finish(e): void {
      /*   rl.question('Is this example useful? [y/n] ', (answer) => {
             switch (answer.toLowerCase()) {
                 case 'y':
@@ -76,8 +78,8 @@ export class ActorWeb {
     }
 
 
-    public actCompositionEvent() {
-        var comp = new CompositionEvent()
+    public actCompositionEvent(engine: IPlayEngine) {
+        var comp = new CompositionEvent(engine)
         comp.test();
 
     }
@@ -123,7 +125,7 @@ export class ActorWeb {
             var o = new DensityAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
     }
@@ -147,7 +149,7 @@ export class ActorWeb {
             var o = new FeedBackFormulaAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
 
@@ -158,7 +160,7 @@ export class ActorWeb {
             var o = new ODE_FeedAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
 
@@ -170,7 +172,7 @@ export class ActorWeb {
             var o = new RecursvieFeedbackAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
 
@@ -183,7 +185,7 @@ export class ActorWeb {
             var o = new RecursiveFeedbackSimpleAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
 
@@ -196,7 +198,7 @@ export class ActorWeb {
             var o = new ODE_FeedbackAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
 
@@ -208,7 +210,7 @@ export class ActorWeb {
             var o = new OrbitaForecasAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
 
@@ -221,7 +223,7 @@ export class ActorWeb {
             var o = new TransformerRecursveAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
 
@@ -233,7 +235,7 @@ export class ActorWeb {
             var o = new ODEAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
     }
@@ -243,7 +245,7 @@ export class ActorWeb {
             var o = new ConditionTestAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
     }
@@ -253,7 +255,7 @@ export class ActorWeb {
             var o = new PIAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
     }
@@ -264,7 +266,7 @@ export class ActorWeb {
             /*  var o = new TestObjectTransformerSimpleAct();
               o.test();*/
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
     }
@@ -275,7 +277,7 @@ export class ActorWeb {
             var o = new SimpleFeedAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             console.log(e);
         }
     }
@@ -284,7 +286,7 @@ export class ActorWeb {
             var o = new TwoAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             console.log(e);
         }
     }
@@ -294,7 +296,7 @@ export class ActorWeb {
             var o = new CompositionAct()
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             console.log(e);
         }
     }
@@ -307,7 +309,7 @@ export class ActorWeb {
             var o = new RandomAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             console.log(e);
           }
 
@@ -318,7 +320,7 @@ export class ActorWeb {
             var o = new OrbitAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             var i = 0;
         }
     }

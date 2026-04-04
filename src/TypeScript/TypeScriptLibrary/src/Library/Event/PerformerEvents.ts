@@ -6,9 +6,9 @@ import type { ITimerFactory } from "../Interfaces/ITimerFactory";
 import { Performer } from "../Performer";
 
 export class PerformerEvents implements IActionT<IEventStart> {
-    action(t: IEventStart): void
+    actionT(t: IEventStart): void
     {
-        t.setEnabled(this.isEnabled)
+        t.setEventEnabled(this.isEnabled)
     }
 
     isEnabled: boolean = false;
@@ -28,12 +28,10 @@ export class PerformerEvents implements IActionT<IEventStart> {
         this.timerAction.set(factory)
         this.performer.forEach<ITimerConsumer>(collection, this.timerAction, "ITimerConsumer")
     }
-
 }
 
 class TimerAction implements IActionT<ITimerConsumer> {
-    action(t: ITimerConsumer): void {
-        console.log("ST")
+    actionT(t: ITimerConsumer): void {
         t.setTimer(this.factory)
     }
 
@@ -42,5 +40,4 @@ class TimerAction implements IActionT<ITimerConsumer> {
     }
 
     factory !: ITimerFactory;
-
 }

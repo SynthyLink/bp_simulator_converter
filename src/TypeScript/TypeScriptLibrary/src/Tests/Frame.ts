@@ -1224,7 +1224,8 @@ class Frame_CategoryObject_2 extends TimerObject
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
-		this.span = new TimeSpan(100)
+		this.span = new TimeSpan(1000000)
+		console.log(this.span)
 	}
 }
 

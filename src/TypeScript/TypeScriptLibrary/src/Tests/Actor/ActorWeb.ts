@@ -1,5 +1,4 @@
 
-import * as readline from 'readline';
 import { ConditionTestAct } from '../Wrappers/ConditionTestAct';
 import { ODEAct } from '../Wrappers/ODEAct';
 import { OrbitAct } from '../Wrappers/OrbitAct';
@@ -23,16 +22,17 @@ import { DataRuntimeConsumerODE } from '../../Library/Runtime/DataRuntimeConsume
 import { toDateTime } from '../../Algorithms/OrbitalForecastCalculation/OrbitalData';
 import { Donchian } from '../Donchian';
 import { CompositionAct } from '../Wrappers/ComposionAct';
+import { CompositionEvent } from '../Wrappers/CompositionEvent';
+
 import { PerformerMeasuremets } from '../../Library/Measurements/PerformerMeasuremets';
+import { Composition } from '../Composition';
+import { IFunc } from '../../Library/Interfaces/IFunc';
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
 
-function finish(e: any) {
+
+function finish(e : any) {
     console.log(e);
-    rl.question('Is this example useful? [y/n] ', (answer) => {
+  /* rl.question('Is this example useful? [y/n] ', (answer) => {
         switch (answer.toLowerCase()) {
             case 'y':
                 console.log('Super!');
@@ -43,13 +43,13 @@ function finish(e: any) {
             default:
                 console.log('Invalid answer!');
         }
-        rl.close();
-    });
+     //   rl.close();
+   // });
+   */
 }
-export class Actor
-{
-    finish(e: any) : void {
-        rl.question('Is this example useful? [y/n] ', (answer) => {
+export class ActorWeb {
+    finish(e : any): void {
+     /*   rl.question('Is this example useful? [y/n] ', (answer) => {
             switch (answer.toLowerCase()) {
                 case 'y':
                     console.log('Super!');
@@ -61,7 +61,7 @@ export class Actor
                     console.log('Invalid answer!');
             }
             rl.close();
-        });
+        });*/
     }
 
     public async actDonchianLoad(): Promise<void> {
@@ -69,6 +69,20 @@ export class Actor
         var ac = new AbortController();
         await d.loadAsync(ac);
     }
+
+    public actCompositionAct() {
+        var comp = new CompositionAct()
+        comp.test();
+
+    }
+
+
+    public actCompositionEvent(stop: IFunc<boolean>) {
+        var comp = new CompositionEvent(stop)
+        comp.test();
+
+    }
+
 
     public testDate(): void {
         var dt = new DateTimeConverter();
@@ -97,8 +111,8 @@ export class Actor
             const list = o.getResult();
             console.log(list);
 
-        //    let m = this.getCategoryObject("A-transformation") as unknown as IMeasurements;
-         //   this.measurement = m.getMeasurement(0);
+            //    let m = this.getCategoryObject("A-transformation") as unknown as IMeasurements;
+            //   this.measurement = m.getMeasurement(0);
 
 
         }
@@ -110,7 +124,7 @@ export class Actor
             var o = new DensityAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
     }
@@ -119,7 +133,7 @@ export class Actor
         console.log(new Date(0));
         var x = new DateTimeConverter();
         console.log(x.fromOADate(0));
-        var  t = 1770463387;
+        var t = 1770463387;
         t = t / (24 * 60 * 60);
         console.log(t);
         var d = x.fromOADate(t);
@@ -134,7 +148,7 @@ export class Actor
             var o = new FeedBackFormulaAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
 
@@ -145,7 +159,7 @@ export class Actor
             var o = new ODE_FeedAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
 
@@ -157,7 +171,7 @@ export class Actor
             var o = new RecursvieFeedbackAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
 
@@ -170,7 +184,7 @@ export class Actor
             var o = new RecursiveFeedbackSimpleAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
 
@@ -178,14 +192,12 @@ export class Actor
 
 
 
-    actODEFeedback(): void
-    {
-        try
-        {
+    actODEFeedback(): void {
+        try {
             var o = new ODE_FeedbackAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
 
@@ -197,7 +209,7 @@ export class Actor
             var o = new OrbitaForecasAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
 
@@ -210,22 +222,19 @@ export class Actor
             var o = new TransformerRecursveAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
 
     }
 
 
-    actODE(): void
-    {
-        try
-        {
+    actODE(): void {
+        try {
             var o = new ODEAct();
             o.test();
         }
-        catch (e: any)
-        {
+        catch (e) {
             finish(e);
         }
     }
@@ -235,7 +244,7 @@ export class Actor
             var o = new ConditionTestAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
     }
@@ -245,7 +254,7 @@ export class Actor
             var o = new PIAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
     }
@@ -256,7 +265,7 @@ export class Actor
             /*  var o = new TestObjectTransformerSimpleAct();
               o.test();*/
         }
-        catch (e: any) {
+        catch (e) {
             finish(e);
         }
     }
@@ -267,7 +276,7 @@ export class Actor
             var o = new SimpleFeedAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             console.log(e);
         }
     }
@@ -276,21 +285,8 @@ export class Actor
             var o = new TwoAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             console.log(e);
-            rl.question('Is this example useful? [y/n] ', (answer) => {
-                switch (answer.toLowerCase()) {
-                    case 'y':
-                        console.log('Super!');
-                        break;
-                    case 'n':
-                        console.log('Sorry! :(');
-                        break;
-                    default:
-                        console.log('Invalid answer!');
-                }
-                rl.close();
-            });
         }
     }
 
@@ -299,11 +295,12 @@ export class Actor
             var o = new CompositionAct()
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             console.log(e);
         }
-
     }
+
+   
 
 
     actRandom(): void {
@@ -311,22 +308,9 @@ export class Actor
             var o = new RandomAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             console.log(e);
-            rl.question('Is this example useful? [y/n] ', (answer) => {
-                switch (answer.toLowerCase()) {
-                    case 'y':
-                        console.log('Super!');
-                        break;
-                    case 'n':
-                        console.log('Sorry! :(');
-                        break;
-                    default:
-                        console.log('Invalid answer!');
-                }
-                rl.close();
-            });
-        }
+          }
 
     }
 
@@ -335,7 +319,7 @@ export class Actor
             var o = new OrbitAct();
             o.test();
         }
-        catch (e: any) {
+        catch (e) {
             var i = 0;
         }
     }

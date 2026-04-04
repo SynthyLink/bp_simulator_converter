@@ -1,9 +1,12 @@
-import { WatchFactory } from "../../ExternalObjects/Libraries/Web/Watch/WatchFactory";
 import { DataRuntimeConsumerEvent } from "../../Library/Event/Runtime/DataRuntimeConsumerEvent";
 import { Composition } from "../Composition";
 import type { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
 import { IEvent } from "../../Library/Interfaces/IEvent";
 import { IAction } from "../../Library/Interfaces/IAction";
+import { IFunc } from "../../Library/Interfaces/IFunc";
+import { IPlayEngine } from "../../Library/Interfaces/IPlayEngine";
+import { TimerPlayEngineFactory } from "../../Library/Event/TimerPlayEngineFactory";
+import { EngineTimerProvider } from "../../Library/Event/EngineTimerProvider";
 
 
 export class CompositionEvent extends Composition {
@@ -11,18 +14,21 @@ export class CompositionEvent extends Composition {
 
     eve !: DataRuntimeConsumerEvent
 
-    engine: WatchFactory = new WatchFactory();
+    engine !: IPlayEngine;
 
     ev !: IEvent
 
-    constructor() {
+    stop !: IFunc<boolean>
+
+    constructor(engine: IPlayEngine) {
         super()
         var co = this.getCategoryObject("Chart")
         this.ev = this.getCategoryObject("Timer") as unknown as IEvent;
         this.dc = co as unknown as IDataConsumer
-        let eev = new DataRuntimeConsumerEvent(this.dc)
-        eev.setTimeProvider(this.engine)
-        eev.setTimerFactory(this.engine)
+        let eev = new DataRuntimeConsumerEvent(this.dc);
+        eev.setTimeProvider(new EngineTimerProvider(engine))
+        eev.setTimerFactory(new TimerPlayEngineFactory(engine))
+        this.engine = engine;
         this.eve = eev
     }
 
@@ -30,7 +36,7 @@ export class CompositionEvent extends Composition {
         new Action(this.dc, this.ev)
         this.eve.startRuntime(0)
         this.eve.setComponentCollectionRunning(true)
-        this.engine.setEngineEnabled(true)
+  //      this.engine.setEngineEnabled(true)
     }
 }
 

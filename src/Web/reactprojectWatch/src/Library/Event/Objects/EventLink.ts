@@ -29,7 +29,7 @@ export class EventLink extends CategoryArrow
         super.setTarget(target)
   }
 
-    event: IEvent = new FictiveEvent();
+    event: IEvent = new FictiveEvent()
 
     handler: IEventHandler = new FictiveEventHandler();
     /*

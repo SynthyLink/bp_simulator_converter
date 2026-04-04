@@ -8,6 +8,7 @@ import FlyCameraController from '../common/camera-controllers/fly-camera-control
 import { vec3, mat4, quat } from 'gl-matrix';
 import { Vector, Selector, Color, CheckBox } from '../common/dom-utils';
 import { createElement } from 'tsx-create-element';
+import { IPlayEngine } from '../Library/Interfaces/IPlayEngine';
 
 // It is better to create interfaces for each type of light for organization (think of them as structs)
 // We simplify things here and consider the light to have only one color
@@ -334,6 +335,7 @@ export default class SpaceTrippersScene extends Scene {
         this.gl.clearColor(0.1,0.1,0.1,1);
 
         this.setupControls();
+        this.setupStartStop()
     }
 
     public draw(deltaTime: number): void {
@@ -494,6 +496,28 @@ export default class SpaceTrippersScene extends Scene {
         this.meshes = {};
         this.clearControls();
     }
+
+    setStart(v: boolean) {
+        if (this.engine != undefined) {
+            this.engine.setEngineEnabled(v)
+        }
+        return v;
+    }
+
+    running: boolean = true;
+
+
+
+    private setupStartStop() {
+        const controls = document.querySelector('#controls');
+        controls.appendChild(
+            <div>
+                <div className="control-row">
+                    <label className="control-label">Stop</label>
+                  <CheckBox value={this.running} onchange={(v) => { this.setStart(v); }} />
+              </div>
+            </div>);
+    }
    
     private setupControls() {
         const controls = document.querySelector('#controls');
@@ -506,6 +530,7 @@ export default class SpaceTrippersScene extends Scene {
                     })}
                 </div>
             </div>
+            
             
         );      
         

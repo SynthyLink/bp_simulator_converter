@@ -18,10 +18,10 @@ class Composition_CategoryObject_0 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["a", 7.1237279830727527 ],
 			["f", 4 ],
-			["b", 2 ],
 			["c", 3 ],
+			["b", 2 ],
+			["a", 7.1237279830727527 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", 0, 0);
@@ -242,7 +242,7 @@ class Composition_CategoryObject_3 extends TimerObject
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
-		this.span = new TimeSpan(100)
+		this.span = new TimeSpan(100000)
 	}
 }
 
