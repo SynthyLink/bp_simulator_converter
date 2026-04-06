@@ -371,5 +371,29 @@ namespace BasicEngineering.UI.Factory.Properties {
                 this["AdditionalSaveURL"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DirectoryOfAdditionalGeneratedFiles {
+            get {
+                return ((string)(this["DirectoryOfAdditionalGeneratedFiles"]));
+            }
+            set {
+                this["DirectoryOfAdditionalGeneratedFiles"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AdditionalLanguage {
+            get {
+                return ((string)(this["AdditionalLanguage"]));
+            }
+            set {
+                this["AdditionalLanguage"] = value;
+            }
+        }
     }
 }

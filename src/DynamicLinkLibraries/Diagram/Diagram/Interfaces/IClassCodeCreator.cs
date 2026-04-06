@@ -17,6 +17,9 @@ namespace Diagram.UI.Interfaces
         /// <returns>Code</returns>
         List<string> CreateCode(string prefix, object obj, string volume);
 
+        /// <summary>
+        /// Desktop code creator
+        /// </summary>
         IDesktopCodeCreator DesktopCodeCreator { get; set; }
     }
 }

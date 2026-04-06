@@ -46,7 +46,8 @@ namespace Wpf.Loader
 
         public Dictionary<string, byte[]> Attachment
         {
-            get; protected set;
+            get; 
+            protected set;
         }
 
         protected Dictionary<string, string> Urls
@@ -253,8 +254,6 @@ namespace Wpf.Loader
                 parameters[i] = par[i].ToArray();
             }
         }
-
-
 
         /// <summary>
         /// Xaml

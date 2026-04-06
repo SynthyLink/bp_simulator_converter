@@ -161,7 +161,12 @@ namespace Diagram.UI
             var att = GetAttribute<LanguageAttribute>(o);
             if (att == null)
             {
-                return null;
+                var rr = GetAttribute<AdditionalCodeLanguageAttribute>(o);
+                if (rr == null)
+                {
+                    return null;
+                }
+                return rr.Language;
             }
             return att.Language;
         }

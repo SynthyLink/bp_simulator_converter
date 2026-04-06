@@ -1,26 +1,21 @@
-﻿using System;
+﻿using AssemblyService;
+using BaseTypes.CodeCreator.Interfaces;
+using CategoryTheory;
+using Diagram.Interfaces;
+using Diagram.UI.Attributes;
+using Diagram.UI.CodeCreators;
+using Diagram.UI.CodeCreators.Interfaces;
+using Diagram.UI.Interfaces;
+using Diagram.UI.Labels;
+using ErrorHandler;
+using NamedTree;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
-
-using AssemblyService;
-
-
-using CategoryTheory;
-
-using Diagram.UI.CodeCreators;
-using Diagram.UI.CodeCreators.Interfaces;
-using Diagram.UI.Interfaces;
-using Diagram.UI.Attributes;
-using Diagram.UI.Labels;
-
-using ErrorHandler;
-
-using NamedTree;
-using BaseTypes.CodeCreator.Interfaces;
 
 
 namespace Diagram.UI
@@ -63,6 +58,13 @@ namespace Diagram.UI
             get;
         }
         = new Dictionary<string, IDesktopCodeCreator>();
+
+        static public Dictionary<string, IAdditionalCodeGenerator> AdditionalCodeGenerators
+        {
+            get;
+        }
+        = new Dictionary<string, IAdditionalCodeGenerator>();
+
 
 
         /// <summary>
@@ -189,6 +191,21 @@ namespace Diagram.UI
             }
             DesktopCreators.Add(lang, creator);
         }
+
+        /// <summary>
+        /// Adds code creator
+        /// </summary>
+        /// <param name="creator"></param>
+        public static void AddAdditinalCodeCreator(this IAdditionalCodeGenerator creator)
+        {
+            var lang = performer.GetLanguage(creator);
+            if (lang == null)
+            {
+                throw new OwnNotImplemented("AdditionalClassCodeCreator");
+            }
+            AdditionalCodeGenerators.Add(lang, creator);
+        }
+
 
 
 
@@ -1662,7 +1679,6 @@ namespace Diagram.UI
             IDesktop desktop = GetRootDesktop(obj);
             desktop.ForEach(action, find);
         }
-
   
         /// <summary>
         /// Gets root desktop

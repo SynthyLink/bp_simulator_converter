@@ -1,14 +1,20 @@
 using System.IO;
+
 using System.Windows.Markup;
 using System.Windows.Media.Media3D;
+
 using Abstract3DConverters;
+
 using ErrorHandler;
 
 namespace Wpf.Loader
 {
     public static class StaticExtensionWpfLoader
     {
-        static  IFilenameGenerator FilenameGenerator 
+        public const string deleteTexture = "delete_texture_file_";
+
+
+        static IFilenameGenerator FilenameGenerator 
         { 
             get;  
             set; 
@@ -43,12 +49,43 @@ namespace Wpf.Loader
         {
             FileLoad[".xaml"] = Load;
             StaticExtensionAbstract3DConverters.CheckFile = CheckFile.Check;
+            AppDomain.CurrentDomain.ProcessExit += CurrentDomain_DomainUnload;
+            DeleteTextures();
         }
 
+        private static void CurrentDomain_DomainUnload(object? sender, EventArgs e)
+        {
+            DeleteTextures();
+        }
 
         static public void DeleteTextures()
         {
-            FilenameGenerator.Clean();
+            if (FilenameGenerator != null)
+            {
+                FilenameGenerator.Clean();
+                return;
+            }
+            string dir = AppDomain.CurrentDomain.BaseDirectory;
+            if (dir[dir.Length - 1] != Path.DirectorySeparatorChar)
+            {
+                dir += Path.DirectorySeparatorChar;
+            }
+            string[] files = Directory.GetFiles(dir);
+            foreach (string file in files)
+            {
+                if (file.Contains("delete_texture_file"))
+                {
+                    try
+                    {
+                        File.Delete(file);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+            }
+
         }
 
 
@@ -62,11 +99,11 @@ namespace Wpf.Loader
         }
 
 
-        static public double GetArea(this Point3D[] points, out System.Windows.Media.Media3D.Vector3D normal)
+        static public double GetArea(this Point3D[] points, out Vector3D normal)
         {
-            System.Windows.Media.Media3D.Vector3D v1 = points[1] - points[0];
-            System.Windows.Media.Media3D.Vector3D v2 = points[2] - points[0];
-            System.Windows.Media.Media3D.Vector3D n = System.Windows.Media.Media3D.Vector3D.CrossProduct(v1, v2);
+            Vector3D v1 = points[1] - points[0];
+            Vector3D v2 = points[2] - points[0];
+            Vector3D n = Vector3D.CrossProduct(v1, v2);
             double a = n.Length / 2;
             n.Normalize();
             normal = n;
@@ -107,7 +144,7 @@ namespace Wpf.Loader
                     center[j] /= 3;
                 }
                 centers[i] = center;
-                System.Windows.Media.Media3D.Vector3D ved;
+                Vector3D ved;
                 areas[i] = p.GetArea(out ved);
                 vcol.Add(ved);
             }
@@ -135,7 +172,7 @@ namespace Wpf.Loader
         }
 
         static public void Transform(this MeshGeometry3D mesh, Func<Point3D, Point3D> pt,
-     Func<System.Windows.Media.Media3D.Vector3D, System.Windows.Media.Media3D.Vector3D> vt)
+     Func<Vector3D, Vector3D> vt)
         {
             Point3DCollection pos = mesh.Positions;
             Point3DCollection coll = new Point3DCollection();
@@ -146,7 +183,7 @@ namespace Wpf.Loader
             mesh.Positions = coll;
             Vector3DCollection norm = mesh.Normals;
             Vector3DCollection vc = new Vector3DCollection();
-            foreach (System.Windows.Media.Media3D.Vector3D n in norm)
+            foreach (Vector3D n in norm)
             {
                 vc.Add(vt(n));
             }
@@ -331,7 +368,7 @@ namespace Wpf.Loader
 
 
         static public bool Transform(this Visual3D v3d, Func<Point3D, Point3D> pt,
-            Func<System.Windows.Media.Media3D.Vector3D, System.Windows.Media.Media3D.Vector3D> vt)
+            Func<Vector3D, Vector3D> vt)
         {
             if (v3d is ModelVisual3D m3d)
             {
@@ -381,7 +418,7 @@ namespace Wpf.Loader
         static public void InvertZ(this Visual3D v3d)
         {
             v3d.Transform((Point3D p) => { return new Point3D(p.X, p.Y, -p.Z); },
-                (System.Windows.Media.Media3D.Vector3D v) => { return new System.Windows.Media.Media3D.Vector3D(v.X, v.Y, -v.Z); });
+                (Vector3D v) => { return new Vector3D(v.X, v.Y, -v.Z); });
         }
 
 

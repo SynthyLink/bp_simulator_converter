@@ -17,6 +17,11 @@ namespace BasicEngineering.UI.Factory
             set => Properties.Settings.Default.ConversionLanguage = value;
         }
 
+        public static string AdditionalLanguage
+        {
+            get => Properties.Settings.Default.AdditionalLanguage;
+            set => Properties.Settings.Default.AdditionalLanguage = value;
+        }
 
         public static bool StaticClassGenerated
         {
@@ -406,8 +411,25 @@ namespace BasicEngineering.UI.Factory
             }
         }
 
+        // DirectoryOfAdditionalGeneratedFiles
         /// <summary>
-        /// Level of checking
+        /// Directory of generated files
+        /// </summary>
+        public static string DirectoryOfAdditionalGeneratedFiles
+        {
+            get
+            {
+                return Properties.Settings.Default.DirectoryOfAdditionalGeneratedFiles;
+            }
+            set
+            {
+                Properties.Settings.Default.DirectoryOfAdditionalGeneratedFiles = value;
+            }
+        }
+
+
+        /// <summary>
+        /// Directory of generated files
         /// </summary>
         public static string DirectoryOfGeneratedFiles
         {

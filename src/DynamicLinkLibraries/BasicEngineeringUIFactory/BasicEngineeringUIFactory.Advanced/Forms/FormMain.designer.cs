@@ -145,11 +145,11 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
             classNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripTextBoxClassName = new System.Windows.Forms.ToolStripTextBox();
             staticToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             toolStripComboBoxLanguage = new System.Windows.Forms.ToolStripComboBox();
-            additionalInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripTextBoxAdditionalInforamation = new System.Windows.Forms.ToolStripTextBox();
+            toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            additionalCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            additionalSaveURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             readWriteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -169,6 +169,8 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
             folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             timer1 = new System.Windows.Forms.Timer(components);
             saveFileDialogScadaXml = new System.Windows.Forms.SaveFileDialog();
+            languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripComboBoxAdditionalLanguage = new System.Windows.Forms.ToolStripComboBox();
             panelTop.SuspendLayout();
             panelTopTop.SuspendLayout();
             panelBottom.SuspendLayout();
@@ -996,18 +998,18 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
             // customizeToolStripMenuItem
             // 
             customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-            customizeToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            customizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             customizeToolStripMenuItem.Text = "&Customize";
             // 
             // optionsToolStripMenuItem
             // 
             optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            optionsToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             optionsToolStripMenuItem.Text = "&Options";
             // 
             // wizardsToolStripMenuItem
             // 
-            wizardsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { containerDesignerToolStripMenuItem, derivationCalculatorToolStripMenuItem, editorOfAliasesToolStripMenuItem, toolStripSeparator3, toolStripMenuGereratedFiles, classNameToolStripMenuItem, toolStripTextBoxClassName, staticToolStripMenuItem, toolStripMenuItem2, toolStripMenuItem3, toolStripComboBoxLanguage, additionalInformationToolStripMenuItem, toolStripTextBoxAdditionalInforamation });
+            wizardsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { containerDesignerToolStripMenuItem, derivationCalculatorToolStripMenuItem, editorOfAliasesToolStripMenuItem, toolStripSeparator3, toolStripMenuGereratedFiles, classNameToolStripMenuItem, toolStripTextBoxClassName, staticToolStripMenuItem, toolStripMenuItem3, toolStripComboBoxLanguage, toolStripMenuItem2, additionalCodeToolStripMenuItem, additionalSaveURLToolStripMenuItem, languageToolStripMenuItem, toolStripComboBoxAdditionalLanguage });
             wizardsToolStripMenuItem.Name = "wizardsToolStripMenuItem";
             wizardsToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             wizardsToolStripMenuItem.Text = "Wizards";
@@ -1065,11 +1067,6 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
             staticToolStripMenuItem.Text = "Static class";
             staticToolStripMenuItem.Click += staticToolStripMenuItem_Click;
             // 
-            // toolStripMenuItem2
-            // 
-            toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new System.Drawing.Size(213, 6);
-            // 
             // toolStripMenuItem3
             // 
             toolStripMenuItem3.Name = "toolStripMenuItem3";
@@ -1081,17 +1078,23 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
             toolStripComboBoxLanguage.Name = "toolStripComboBoxLanguage";
             toolStripComboBoxLanguage.Size = new System.Drawing.Size(121, 23);
             // 
-            // additionalInformationToolStripMenuItem
+            // toolStripMenuItem2
             // 
-            additionalInformationToolStripMenuItem.Name = "additionalInformationToolStripMenuItem";
-            additionalInformationToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            additionalInformationToolStripMenuItem.Text = "Additional information";
-            additionalInformationToolStripMenuItem.Click += additionalInformationToolStripMenuItem_Click;
+            toolStripMenuItem2.Name = "toolStripMenuItem2";
+            toolStripMenuItem2.Size = new System.Drawing.Size(213, 6);
             // 
-            // toolStripTextBoxAdditionalInforamation
+            // additionalCodeToolStripMenuItem
             // 
-            toolStripTextBoxAdditionalInforamation.Name = "toolStripTextBoxAdditionalInforamation";
-            toolStripTextBoxAdditionalInforamation.Size = new System.Drawing.Size(100, 23);
+            additionalCodeToolStripMenuItem.Name = "additionalCodeToolStripMenuItem";
+            additionalCodeToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            additionalCodeToolStripMenuItem.Text = "Additional code";
+            // 
+            // additionalSaveURLToolStripMenuItem
+            // 
+            additionalSaveURLToolStripMenuItem.Name = "additionalSaveURLToolStripMenuItem";
+            additionalSaveURLToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            additionalSaveURLToolStripMenuItem.Text = "Directory of additional files";
+            additionalSaveURLToolStripMenuItem.Click += additionalSaveURLToolStripMenuItem_Click;
             // 
             // databaseToolStripMenuItem
             // 
@@ -1202,6 +1205,17 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
             // saveFileDialogScadaXml
             // 
             saveFileDialogScadaXml.Filter = "Xml Files|*.xml";
+            // 
+            // languageToolStripMenuItem
+            // 
+            languageToolStripMenuItem.Name = "languageToolStripMenuItem";
+            languageToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            languageToolStripMenuItem.Text = "Language";
+            // 
+            // toolStripComboBoxAdditionalLanguage
+            // 
+            toolStripComboBoxAdditionalLanguage.Name = "toolStripComboBoxAdditionalLanguage";
+            toolStripComboBoxAdditionalLanguage.Size = new System.Drawing.Size(121, 23);
             // 
             // FormMain
             // 
@@ -1370,8 +1384,10 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxLanguage;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem additionalInformationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxAdditionalInforamation;
+        private System.Windows.Forms.ToolStripMenuItem additionalCodeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem additionalSaveURLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem languageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBoxAdditionalLanguage;
     }
 }
 
