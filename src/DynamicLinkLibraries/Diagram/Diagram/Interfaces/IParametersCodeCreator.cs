@@ -1,9 +1,9 @@
 ﻿using Diagram.UI.CodeCreators.Interfaces;
 using System.Collections.Generic;
 
-namespace Diagram.Interfaces
+namespace Diagram.UI.Interfaces
 {
-    public interface IParametersCodeCreator
+    public interface IParametersCodeCreator1
     {
         List<string> CreateParameters(string prefix, object parent, object obj, string volume);
 

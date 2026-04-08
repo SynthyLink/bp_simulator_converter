@@ -9,6 +9,9 @@ export class Basic3DShape extends CategoryObject implements IVisible {
         this.typeName = "Basic3DShape"
         this.types.push("Basic3DShape")
     }
+    getSaveGrahicalData(): Map<string, string> {
+        return this.map
+    }
     getVisibleSize(): number[][] {
         return this.size
     }
@@ -20,6 +23,7 @@ export class Basic3DShape extends CategoryObject implements IVisible {
         }
     }
 
+    grahicalData: Map<string, string> = new Map();
     position !: IPosition
 
     size: number[][] = [[0, 0, 0], [0, 0, 0], [0, 0, 0], ]
@@ -30,4 +34,7 @@ export class Basic3DShape extends CategoryObject implements IVisible {
     setObjectPosition(position: IPosition): void {
         this.position = position
     }
+
+    map: Map<string, string> = new Map()
+
 }

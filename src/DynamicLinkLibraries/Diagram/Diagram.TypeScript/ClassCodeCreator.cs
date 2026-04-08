@@ -8,17 +8,19 @@ using Diagram.UI.Portable;
 namespace Diagram.TypeScript
 {
     [Language("TS")]
-    public class ClassCodeCreator : IClassCodeCreator, IParametersCodeCreator, IPropertiesCodeCreator
+    public class ClassCodeCreator : IClassCodeCreator//, IParametersCodeCreator, IPropertiesCodeCreator
     {
+        protected virtual IChildrenCodeCreator ChildrenCodeCreator { get; set; }
+
 
         protected List<object> loaded = new List<object>();
-        protected IParametersCodeCreator par;
-        protected IPropertiesCodeCreator pr;
+       // protected IParametersCodeCreator par;
+       // protected IPropertiesCodeCreator pr;
  
         internal ClassCodeCreator()
         {
-            par = this;
-            pr = this;
+         //   par = this;
+         //   pr = this;
             dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>
             {
                 { (object o) => { return o is BelongsToCollection; } , CreateBelongs },
@@ -29,16 +31,17 @@ namespace Diagram.TypeScript
 
         protected ClassCodeCreator(bool b)
         {
-            par = this;
-            pr = this;
+           // par = this;
+           // pr = this;
         }
 
         protected virtual IDesktopCodeCreator DesktopCodeCreator { get; set; }
 
         IDesktopCodeCreator IClassCodeCreator.DesktopCodeCreator { get => DesktopCodeCreator; set => DesktopCodeCreator = value; }
-        IDesktopCodeCreator IParametersCodeCreator.DesktopCodeCreator { get => DesktopCodeCreator; set => DesktopCodeCreator = value; }
-        IDesktopCodeCreator IPropertiesCodeCreator.DesktopCodeCreator { get => DesktopCodeCreator; set => DesktopCodeCreator = value; }
+   //     IDesktopCodeCreator IParametersCodeCreator.DesktopCodeCreator { get => DesktopCodeCreator; set => DesktopCodeCreator = value; }
+   //     IDesktopCodeCreator IPropertiesCodeCreator.DesktopCodeCreator { get => DesktopCodeCreator; set => DesktopCodeCreator = value; }
 
+    
         protected virtual List<string> CreateCode(string prefix, object obj, string volume)
         {
             foreach (var val in dictionary)
@@ -95,7 +98,7 @@ namespace Diagram.TypeScript
             return performer.CreateList(id, x).ToList();
         }
 
-   
+   /*
 
         List<string> IParametersCodeCreator.CreateParameters(string prefix, object parent, object obj, string volume)
         {
@@ -106,7 +109,7 @@ namespace Diagram.TypeScript
         {
             return SetParameters(prefix, parent, obj, volume);
         }
-
+   */
         protected virtual List<string> CreateParameters(string prefix, object parent, object obj, string volume)
         {
             return null;
@@ -117,7 +120,7 @@ namespace Diagram.TypeScript
             return null;
         }
 
-
+/*
         List<string> IPropertiesCodeCreator.CreateProperties(string prefix, object obj, string volume)
         {
             return CreateProperties(prefix, obj, volume);
@@ -125,7 +128,7 @@ namespace Diagram.TypeScript
         List<string> IPropertiesCodeCreator.SetProperties(string prefix, object obj, string volume)
         {
             return SetProperties(prefix, obj, volume);
-        }
+   *    }*/
 
         protected virtual List<string> SetProperties(string prefix, object obj, string volume)
         {

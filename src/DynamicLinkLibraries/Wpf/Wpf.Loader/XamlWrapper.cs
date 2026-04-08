@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.IO;
+using System.Net.WebSockets;
 using System.Text;
 using System.Windows.Media.Media3D;
 using System.Xml;
@@ -532,6 +533,32 @@ namespace Wpf.Loader
             return StaticExtensionWpfLoader.GenerateFileName(ext, out path);
         }
 
+        string Replace(string s)
+        {
+            var t = s.Replace('\\', ' ');
+            t = t.Replace('/', ' ');
+            return t;
+        }
+
+        protected Dictionary<string, string> GetGraphicalData(string language)
+        {
+            var d = new Dictionary<string, string>();
+            var p = Attachment;
+            foreach (var item in p)
+            {
+                var f = Path.GetFileName(item.Key);
+                d[Replace(f)] = f;
+                
+             }
+            foreach (var item in Textures)
+            {
+                var f = Path.GetFileName(item.Key);
+                d[Replace(f)] = f;
+            }
+
+            return d;
+        }
+
         protected virtual void Save(string directory, string language)
         {
             var p = Attachment;
@@ -549,12 +576,16 @@ namespace Wpf.Loader
                 using var s = File.OpenWrite(f);
                 s.Write(item.Value);
             }
-
         }
 
         void ISaveGrahicalData.Save(string directory, string language)
         {
            Save(directory, language);
+        }
+
+        Dictionary<string, string> ISaveGrahicalData.GetGraphicalData(string language)
+        {
+            return GetGraphicalData(language);
         }
 
         protected virtual System.Windows.Media.ImageBrush ImageBrush

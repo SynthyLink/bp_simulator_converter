@@ -1,13 +1,12 @@
-﻿using Diagram.Interfaces;
-using Diagram.UI;
+﻿using Diagram.UI;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
-using Motion6D.Interfaces;
 using Motion6D.Portable.TypeScript.Interfaces;
 
 namespace WpfInterface.TypeScript
 {
-    public class PositionCodeFactory : IPositionCodeFactory, IParametersCodeCreator, ISaveDesktopInformation
+    public class PositionCodeFactory : IPositionCodeFactory, ISaveDesktopInformation// IParametersCodeCreator,
+     //   ISaveDesktopInformation
     {
 
         Diagram.UI.TypeScript.Performer performer = new();
@@ -21,38 +20,29 @@ namespace WpfInterface.TypeScript
             return null;
         }
 
-        List<string> IParametersCodeCreator.CreateParameters(string prefix, object parent, object obj, string volume)
+  /*      List<string> IParametersCodeCreator.CreateParameters(string prefix, object parent, object obj, string volume)
         {
-            if (obj is IVisible)
-            {
-                var pr = prefix + "_Visible";
-                var l =  performer.CreatePure(pr, "Basic3DShape");
-                DesktopCodeCreator.Loaded[obj] = pr;
-                return l;
-
-            }
-            return null;
+            var l = new List<string>();
+            l = performer.CreatePure(pr, "Basic3DShape");
+            DesktopCodeCreator.Loaded[obj] = pr;
+            return l;
         }
 
         List<string> IParametersCodeCreator.SetParameters(string prefix, object parent, object obj, string volume)
         {
             var l = new List<string>();
-            if (obj is IVisible)
-            {
-                var pr = prefix + "_Visible";
-                l.Add("this.setParameters(new " + prefix + "(desktop, name))");
-                return l;
-            }
-            return null;
-        }
+            l.Add("this.setParameters(new " + prefix + "(desktop, name))");
+            return l;
+        }*/
 
         bool ISaveDesktopInformation.Save(object o, string url)
         {
             return false;
         }
 
+
         protected virtual Dictionary<string, byte[]> Files { get; } = new Dictionary<string, byte[]>();
-        IDesktopCodeCreator IParametersCodeCreator.DesktopCodeCreator { get => DesktopCodeCreator; set => DesktopCodeCreator = value; }
+        //IDesktopCodeCreator IParametersCodeCreator.DesktopCodeCreator { get => DesktopCodeCreator; set => DesktopCodeCreator = value; }
         public virtual IDesktopCodeCreator DesktopCodeCreator { get; set; }
     }
 }

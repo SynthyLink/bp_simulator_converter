@@ -2,23 +2,43 @@
 using CategoryTheory;
 using Diagram.Interfaces;
 using Diagram.UI;
+using Diagram.UI.CodeCreators.Interfaces;
+using Diagram.UI.Interfaces;
+using Motion6D.Interfaces;
 using Motion6D.Portable.TypeScript.Interfaces;
+using NamedTree;
 
 namespace Motion6D.Portable.TypeScript
 {
     [Language("TS")]
-    public class ClassCodeCreator : DataPerformer.Portable.TypeScript.ClassCodeCreator
+    public class ClassCodeCreator : DataPerformer.Portable.TypeScript.ClassCodeCreator, ICreateSuffix,
+        IChildrenCodeCreator
     {
         IPositionCodeFactory factory;
 
+        protected virtual ICreateSuffix CreateSuffix { get; set; } 
+
+        IDesktopCodeCreator IChildrenCodeCreator.DesktopCodeCreator
+        {
+            get => DesktopCodeCreator;
+            set { }
+        }
 
 
-        protected ClassCodeCreator(bool b) : base(b) { }
+
+        protected ClassCodeCreator(bool b) : base(b) 
+        { 
+        
+        
+        }
 
 
 
         internal ClassCodeCreator(IPositionCodeFactory factory) : base(true)
         {
+            ChildrenCodeCreator = this;
+            CreateSuffix = this;
+
             this.factory = factory;
             dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
@@ -81,41 +101,34 @@ namespace Motion6D.Portable.TypeScript
             return l;
         }
 
+        protected virtual string CreateSuffixProtected(object obj)
+        {
+            if (obj is IVisible)
+            {
+                return "_Visible";
+            }
+            return null;
+
+        }
+
+        string ICreateSuffix.CreateSuffix(object obj)
+        {
+            return CreateSuffixProtected(obj);
+        }
+
+
         List<string> CreateSerializablePosition(string preffix, object obj)
         {
             var l = new List<string>();
             var sp = obj as SerializablePosition;
-            var par = sp.Parameters;
-            if (par != null)
-            {
-                this.par.DesktopCodeCreator = DesktopCodeCreator;
-                var ll = this.par.CreateParameters(preffix, this, par, "");
-                    Add(l, ll, 2);
-
-                
-            }
-            IProperties properties = sp;
-            var pr = properties.Properties;
-            if (pr != null)
-            {
-                this.pr.DesktopCodeCreator = DesktopCodeCreator;
-                var ll = this.pr.CreateProperties(preffix, pr, "");
-                Add(l, ll, 2);
-            }
+            var ll = ChildrenCodeCreator.CreateChildren(preffix, sp, "");
+            l.AddRange(ll);
             var s = performer.ClassString(preffix, "SerializablePosition");
             l.Add(s);
             l.Add("{");
             performer.AddObjectConstructor(l);
-            if (par != null)
-            {
-                var ll = this.par.SetParameters(preffix, this, par, "");
-                Add(l, ll, 2);
-            }
-            if (pr != null)
-            {
-                var ll = this.pr.SetProperties(preffix, par, "");
-                Add(l, ll, 2);
-            }
+            ll = ChildrenCodeCreator.InsertChidren(preffix, sp, "");
+            l.AddRange(ll);
             l.Add("\t}");
             l.Add("}");
             return l;
@@ -137,7 +150,68 @@ namespace Motion6D.Portable.TypeScript
             return CreatePure(preffix, "VisibleConsumerLink");
         }
 
+        List<string> IChildrenCodeCreator.CreateChildren(string prefix, IChildren<ICategoryObject> obj, string volume)
+        {
+            var l = new List<string>();
+            var children = obj.Children;
+            int i = 0;
+            foreach (var child in children)
+            {
+                var pr = prefix + CreateSuffix.CreateSuffix(child) + i;
+                ++i;
+                l.AddRange(GetChild(pr, child));
+                l.Add("");
+                DesktopCodeCreator.Loaded[child] = pr;
+            }
+            return l;
+        }
 
+        List<string> IChildrenCodeCreator.InsertChidren(string prefix, IChildren<ICategoryObject> obj, string volume)
+        {
+            return InsertChildren(prefix, obj, volume);
+        }
+
+        protected virtual List<string> InsertChildren(string prefix, IChildren<ICategoryObject> obj, string volume)
+        {
+            var l = new List<string>();
+            var children = obj.Children;
+            int i = 0;
+            var name = "\"" + performer.GetName(obj as ICategoryObject) + "\"";
+            foreach (var child in children)
+            {
+                var pr = prefix + CreateSuffix.CreateSuffix(child) + i;
+                ++i;
+                l.Add("\t\tthis.addChildT(new " + pr + "(desktop, name))");
+            }
+            return l;
+        }
+
+        List<string> GetChild(string prefix, ICategoryObject obj)
+        {
+            var l = new List<string>();
+             var s = performer.ClassString(prefix, "Basic3DShape");
+            l.Add(s);
+            l.Add("{");
+            performer.AddObjectConstructor(l);
+            if (obj is ISaveGrahicalData save)
+            {
+                l.Add("\t\tlet map = this.getSaveGrahicalData()");
+                var d = save.GetGraphicalData("");
+                foreach (var item in d)
+                {
+                    var key = "\"" + item.Key + "\"";
+                    var val = "\"" + item.Value + "\"";
+                    l.Add("\t\tmap.set(" + key + ", " + val + ")");
+                }
+            }
+            l.Add("\t}");
+            l.Add("}");
+            return l;
+        }
+
+    
+
+        /*
         protected override List<string> CreateProperties(string prefix, object obj, string volume)
         {
             if (factory is IPropertiesCodeCreator pr)
@@ -149,8 +223,8 @@ namespace Motion6D.Portable.TypeScript
                 }
             }
             return base.CreateProperties (prefix, obj, volume);    
-        }
-
+        }*/
+        /*
         protected override List<string> CreateParameters(string prefix, object parent, object obj, string volume)
         {
             if (factory is IParametersCodeCreator pr)
@@ -190,7 +264,7 @@ namespace Motion6D.Portable.TypeScript
             }
             return base.SetProperties(prefix, obj, volume);
         }
-
+        */
 
 
 

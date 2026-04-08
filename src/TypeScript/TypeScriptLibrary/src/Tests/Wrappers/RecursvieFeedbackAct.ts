@@ -1,5 +1,5 @@
 import type { IAction } from "../../Library/Interfaces/IAction";
-import { IDataRuntime } from "../../Library/Interfaces/IDataRuntime";
+import type { IDataRuntime } from "../../Library/Interfaces/IDataRuntime";
 import type { IFunc } from "../../Library/Interfaces/IFunc";
 import type { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
 import { PerformerMeasuremets } from "../../Library/Measurements/PerformerMeasuremets";
