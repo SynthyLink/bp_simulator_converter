@@ -3,10 +3,5 @@ import type { ITimer } from "./ITimer";
 
 export interface ITimerFactory {
 
-    getTimerFromFactory(timeSpan: TimeSpan): ITimer
-
-    isTimerFactoryEnabled(): boolean
-
-    setTimerFactoryEnabled(enabled: boolean) : void
-
+    getTimerFromFactory(timeSpan: TimeSpan) : ITimer
 }

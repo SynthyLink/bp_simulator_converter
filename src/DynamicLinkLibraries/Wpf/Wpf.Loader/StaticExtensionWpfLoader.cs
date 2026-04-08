@@ -99,11 +99,11 @@ namespace Wpf.Loader
         }
 
 
-        static public double GetArea(this Point3D[] points, out Vector3D normal)
+        static public double GetArea(this Point3D[] points, out System.Windows.Media.Media3D.Vector3D normal)
         {
-            Vector3D v1 = points[1] - points[0];
-            Vector3D v2 = points[2] - points[0];
-            Vector3D n = Vector3D.CrossProduct(v1, v2);
+            System.Windows.Media.Media3D.Vector3D v1 = points[1] - points[0];
+            System.Windows.Media.Media3D.Vector3D v2 = points[2] - points[0];
+            System.Windows.Media.Media3D.Vector3D n = System.Windows.Media.Media3D.Vector3D.CrossProduct(v1, v2);
             double a = n.Length / 2;
             n.Normalize();
             normal = n;
@@ -144,7 +144,7 @@ namespace Wpf.Loader
                     center[j] /= 3;
                 }
                 centers[i] = center;
-                Vector3D ved;
+                System.Windows.Media.Media3D.Vector3D ved;
                 areas[i] = p.GetArea(out ved);
                 vcol.Add(ved);
             }
@@ -172,7 +172,7 @@ namespace Wpf.Loader
         }
 
         static public void Transform(this MeshGeometry3D mesh, Func<Point3D, Point3D> pt,
-     Func<Vector3D, Vector3D> vt)
+     Func<System.Windows.Media.Media3D.Vector3D, System.Windows.Media.Media3D.Vector3D> vt)
         {
             Point3DCollection pos = mesh.Positions;
             Point3DCollection coll = new Point3DCollection();
@@ -183,7 +183,7 @@ namespace Wpf.Loader
             mesh.Positions = coll;
             Vector3DCollection norm = mesh.Normals;
             Vector3DCollection vc = new Vector3DCollection();
-            foreach (Vector3D n in norm)
+            foreach (System.Windows.Media.Media3D.Vector3D n in norm)
             {
                 vc.Add(vt(n));
             }
@@ -368,7 +368,7 @@ namespace Wpf.Loader
 
 
         static public bool Transform(this Visual3D v3d, Func<Point3D, Point3D> pt,
-            Func<Vector3D, Vector3D> vt)
+            Func<System.Windows.Media.Media3D.Vector3D, System.Windows.Media.Media3D.Vector3D> vt)
         {
             if (v3d is ModelVisual3D m3d)
             {
@@ -418,7 +418,8 @@ namespace Wpf.Loader
         static public void InvertZ(this Visual3D v3d)
         {
             v3d.Transform((Point3D p) => { return new Point3D(p.X, p.Y, -p.Z); },
-                (Vector3D v) => { return new Vector3D(v.X, v.Y, -v.Z); });
+                (System.Windows.Media.Media3D.Vector3D v) => 
+                { return new System.Windows.Media.Media3D.Vector3D(v.X, v.Y, -v.Z); });
         }
 
 

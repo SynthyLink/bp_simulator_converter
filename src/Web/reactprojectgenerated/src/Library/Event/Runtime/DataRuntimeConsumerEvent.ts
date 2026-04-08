@@ -1,11 +1,11 @@
 import { ICategoryObject } from "../../Interfaces/ICategoryObject";
-import type { IComponentCollection } from "../../Interfaces/IComponentCollection";
+import { IComponentCollection } from "../../Interfaces/IComponentCollection";
 import { IEvent } from "../../Interfaces/IEvent";
-import type { IEventHandler } from "../../Interfaces/IEventHandler";
-import type { IRealtimeCollection } from "../../Interfaces/IRealtimeCollection";
-import type { ITimerFactory } from "../../Interfaces/ITimerFactory";
-import type { IDataConsumer } from "../../Measurements/Interfaces/IDataConsumer";
-import type { ITimeMeasurementProvider } from "../../Measurements/Interfaces/ITimeMeasurementProvider";
+import { IEventHandler } from "../../Interfaces/IEventHandler";
+import { IRealtimeCollection } from "../../Interfaces/IRealtimeCollection";
+import { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
+import { ITimerFactory } from "../../Interfaces/ITimerFactory";
+import { IDataConsumer } from "../../Measurements/Interfaces/IDataConsumer";
 import { DataRuntimeConsumer } from "../../Runtime/DataRuntimeConsumer";
 import { PerformerEvents } from "../PerformerEvents";
 

@@ -1,7 +1,5 @@
-import { TestObjectTransformer } from "../Test_Obects/TestObjectTransformer";
 import { AliasName } from "../Library/AliasName";
 import { Desktop } from "../Library/Desktop";
-import { FeedbackAliasCollection } from "../Library/FeedbackAliasCollection";
 import { IAliasName } from "../Library/Interfaces/IAliasName";
 import { IDesktop } from "../Library/Interfaces/IDesktop";
 import { IPostSetArrow } from "../Library/Interfaces/IPostSetArrow";
@@ -13,6 +11,7 @@ import { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement";
 import { ObjectTransformer } from "../Library/Measurements/ObjectTransformer";
 import { RecursiveFormula } from "../Library/Measurements/RecursiveFormula";
 import { VectorFormulaConsumer } from "../Library/Measurements/VectorFormulaConsumer";
+import { TestObjectTransformer } from "../Test_Obects/TestObjectTransformer";
 
 class TransformerRecursive_CategoryObject_0 extends VectorFormulaConsumer
 {

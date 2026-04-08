@@ -18,7 +18,7 @@ class FictiveDesktop {
     addObject(obj) {
         throw new OwnNotImplemented_1.OwnNotImplemented();
     }
-    getObjects() {
+    getObjectCollection() {
         throw new OwnNotImplemented_1.OwnNotImplemented();
     }
     getCheck() {

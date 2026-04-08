@@ -21,7 +21,7 @@ export class FictiveDesktop implements IDesktop {
     addObject(obj: IObject): void {
         throw new OwnNotImplemented()
     }
-    getObjects(): IObject[] {
+    getObjectCollection(): IObject[] {
         throw new OwnNotImplemented()
     }
     getCheck(): ICheck {

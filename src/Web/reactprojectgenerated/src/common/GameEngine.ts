@@ -1,9 +1,9 @@
-import Game from "../../../../common/game";
-import { ActionArrayT } from "../../../../Library/Utilities/Generic/ActionArrayT";
-import type { GameOptions } from "../../../../common/GameOptions";
-import type { IPlayEngine } from "../../../../Library/Interfaces/IPlayEngine";
-import type { IActionAddRemoveT } from "../../../../Library/Interfaces/IActionAddRemoveT";
-import type { IActionT } from "../../../../Library/Interfaces/IActionT";
+import Game from "./game";
+import { ActionArrayT } from "../Library/Utilities/Generic/ActionArrayT";
+import type { GameOptions } from "./GameOptions";
+import type { IPlayEngine } from "../Library/Interfaces/IPlayEngine";
+import type { IActionAddRemoveT } from "../Library/Interfaces/IActionAddRemoveT";
+import type { IActionT } from "../Library/Interfaces/IActionT";
 
 export class GameEngine extends Game implements IPlayEngine, IActionT<number> {
 

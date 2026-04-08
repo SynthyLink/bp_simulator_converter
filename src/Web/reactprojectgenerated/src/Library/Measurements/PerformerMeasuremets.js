@@ -17,7 +17,7 @@ class PerformerMeasuremets {
         }
     }
     setTimeProviderCollection(objects, timeProvider) {
-        let objs = objects.getObjects();
+        let objs = objects.getObjectCollection();
         for (let o of objs) {
             let tm = this.performer.convertObject(o, "ITimeMeasurementConsumer");
             if (tm.length > 0) {

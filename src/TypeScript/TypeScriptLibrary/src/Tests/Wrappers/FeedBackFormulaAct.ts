@@ -1,10 +1,10 @@
 // FeedBackFormulaAct.ts
 // Wrapper for FeedBackFormulaAct logic
 
-import type { IAction } from "../../Library/Interfaces/IAction";
+import { IAction } from "../../Library/Interfaces/IAction";
 import { IDataRuntime } from "../../Library/Interfaces/IDataRuntime";
-import type { IFunc } from "../../Library/Interfaces/IFunc";
-import type { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
+import { IFunc } from "../../Library/Interfaces/IFunc";
+import { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
 import { PerformerMeasuremets } from "../../Library/Measurements/PerformerMeasuremets";
 import { Performer } from "../../Library/Performer";
 import { DataRuntimeConsumer } from "../../Library/Runtime/DataRuntimeConsumer";

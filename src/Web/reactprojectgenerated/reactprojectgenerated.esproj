@@ -9,6 +9,8 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="src\ExternalObjects\Libraries\Web\Interfaces\" />
+    <Folder Include="src\ExternalObjects\Libraries\Web\Watch\" />
     <Folder Include="src\Library\Runtime\Interfaces\" />
   </ItemGroup>
 </Project>

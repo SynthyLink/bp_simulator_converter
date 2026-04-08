@@ -80,7 +80,7 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection
         return this.categoryArrows;
     }
 
-    getObjects(): IObject[] {
+    getObjectCollection(): IObject[] {
         return this.objects;
     }
     getCategoryObject(name: string): ICategoryObject {

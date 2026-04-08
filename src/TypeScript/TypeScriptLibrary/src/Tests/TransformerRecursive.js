@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TransformerRecursive = void 0;
-const TestObjectTransformer_1 = require("../Test_Obects/TestObjectTransformer");
 const AliasName_1 = require("../Library/AliasName");
 const Desktop_1 = require("../Library/Desktop");
 const DataLink_1 = require("../Library/Measurements/Arrows/DataLink");
@@ -10,6 +9,7 @@ const DataConsumer_1 = require("../Library/Measurements/DataConsumer");
 const ObjectTransformer_1 = require("../Library/Measurements/ObjectTransformer");
 const RecursiveFormula_1 = require("../Library/Measurements/RecursiveFormula");
 const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaConsumer");
+const TestObjectTransformer_1 = require("../Test_Obects/TestObjectTransformer");
 class TransformerRecursive_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);

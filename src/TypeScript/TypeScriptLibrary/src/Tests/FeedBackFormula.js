@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FeedBackFormula = void 0;
-const AliasName_js_1 = require("../Library/AliasName.js");
-const Desktop_js_1 = require("../Library/Desktop.js");
-const DataLink_js_1 = require("../Library/Measurements/Arrows/DataLink.js");
-const DataConsumer_js_1 = require("../Library/Measurements/DataConsumer.js");
-const VectorFormulaConsumer_js_1 = require("../Library/Measurements/VectorFormulaConsumer.js");
-class FeedBackFormula_CategoryObject_0 extends VectorFormulaConsumer_js_1.VectorFormulaConsumer {
+const AliasName_1 = require("../Library/AliasName");
+const Desktop_1 = require("../Library/Desktop");
+const DataLink_1 = require("../Library/Measurements/Arrows/DataLink");
+const DataConsumer_1 = require("../Library/Measurements/DataConsumer");
+const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaConsumer");
+class FeedBackFormula_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
         this.var_0 = 0;
@@ -89,10 +89,10 @@ class FeedBackFormula_CategoryObject_0 extends VectorFormulaConsumer_js_1.Vector
     }
     init() {
         var all = this.getAllMeasurements();
-        this.aliasName0 = new AliasName_js_1.AliasName(this.alias, "a");
-        this.aliasName1 = new AliasName_js_1.AliasName(this.alias, "b");
-        this.aliasName3 = new AliasName_js_1.AliasName(this.alias, "c");
-        this.aliasName8 = new AliasName_js_1.AliasName(this.alias, "f");
+        this.aliasName0 = new AliasName_1.AliasName(this.alias, "a");
+        this.aliasName1 = new AliasName_1.AliasName(this.alias, "b");
+        this.aliasName3 = new AliasName_1.AliasName(this.alias, "c");
+        this.aliasName8 = new AliasName_1.AliasName(this.alias, "f");
     }
     get_0() {
         return this.success ? this.var_0 : undefined;
@@ -132,7 +132,7 @@ class FeedBackFormula_CategoryObject_0 extends VectorFormulaConsumer_js_1.Vector
         x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_9());
     }
 }
-class FeedBackFormula_CategoryObject_1 extends VectorFormulaConsumer_js_1.VectorFormulaConsumer {
+class FeedBackFormula_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
         this.var_0 = 0;
@@ -184,7 +184,7 @@ class FeedBackFormula_CategoryObject_1 extends VectorFormulaConsumer_js_1.Vector
         var all = this.getAllMeasurements();
         this.measurement1 = all[0].getMeasurement(0);
         this.measurement3 = all[0].getMeasurement(1);
-        this.aliasName0 = new AliasName_js_1.AliasName(this.alias, "k");
+        this.aliasName0 = new AliasName_1.AliasName(this.alias, "k");
     }
     get_0() {
         return this.success ? this.var_0 : undefined;
@@ -214,22 +214,22 @@ class FeedBackFormula_CategoryObject_1 extends VectorFormulaConsumer_js_1.Vector
         ]);
     }
 }
-class FeedBackFormula_CategoryObject_2 extends DataConsumer_js_1.DataConsumer {
+class FeedBackFormula_CategoryObject_2 extends DataConsumer_1.DataConsumer {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class FeedBackFormula_CategoryArrow_0 extends DataLink_js_1.DataLink {
+class FeedBackFormula_CategoryArrow_0 extends DataLink_1.DataLink {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class FeedBackFormula_CategoryArrow_1 extends DataLink_js_1.DataLink {
+class FeedBackFormula_CategoryArrow_1 extends DataLink_1.DataLink {
     constructor(desktop, name) {
         super(desktop, name);
     }
 }
-class FeedBackFormula extends Desktop_js_1.Desktop {
+class FeedBackFormula extends Desktop_1.Desktop {
     constructor() {
         super();
         this.name = "FeedBackFormula";

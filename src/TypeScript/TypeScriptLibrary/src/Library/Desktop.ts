@@ -58,6 +58,10 @@ export class Desktop implements IDesktop
 
     }
 
+    getObjectCollection(): IObject[] {
+        return this.objects
+    }
+
 
      addObject(obj: IObject): void {
         this.objects.push(obj);

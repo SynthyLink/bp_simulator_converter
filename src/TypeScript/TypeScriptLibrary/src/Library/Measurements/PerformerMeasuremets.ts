@@ -41,7 +41,7 @@ export class PerformerMeasuremets {
 
 
     public setTimeProviderCollection(objects: IComponentCollection, timeProvider: ITimeMeasurementProvider): void {
-        let objs = objects.getObjects();
+        let objs = objects.getObjectCollection()
         for (let o of objs) {
             let tm = this.performer.convertObject<ITimeMeasurementConsumer, IObject>(o, "ITimeMeasurementConsumer")
             if (tm.length > 0) {

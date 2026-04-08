@@ -1,13 +1,12 @@
-import { AliasName } from "../Library/AliasName.js";
-import { Desktop } from "../Library/Desktop.js";
-import { FeedbackAliasCollection } from "../Library/FeedbackAliasCollection.js";
-import { IAliasName } from "../Library/Interfaces/IAliasName.js";
-import { IDesktop } from "../Library/Interfaces/IDesktop.js";
-import { IPostSetArrow } from "../Library/Interfaces/IPostSetArrow.js";
-import { DataLink } from "../Library/Measurements/Arrows/DataLink.js";
-import { DataConsumer } from "../Library/Measurements/DataConsumer.js";
-import { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement.js";
-import { VectorFormulaConsumer } from "../Library/Measurements/VectorFormulaConsumer.js";
+import { AliasName } from "../Library/AliasName";
+import { Desktop } from "../Library/Desktop";
+import { IAliasName } from "../Library/Interfaces/IAliasName";
+import { IDesktop } from "../Library/Interfaces/IDesktop";
+import { IPostSetArrow } from "../Library/Interfaces/IPostSetArrow";
+import { DataLink } from "../Library/Measurements/Arrows/DataLink";
+import { DataConsumer } from "../Library/Measurements/DataConsumer";
+import { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement";
+import { VectorFormulaConsumer } from "../Library/Measurements/VectorFormulaConsumer";
 
 class FeedBackFormula_CategoryObject_0 extends VectorFormulaConsumer
 {

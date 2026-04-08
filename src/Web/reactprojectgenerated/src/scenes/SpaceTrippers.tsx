@@ -9,75 +9,22 @@ import { vec3, mat4, quat } from 'gl-matrix';
 import { Vector, Selector, Color, CheckBox } from '../common/dom-utils';
 import { createElement } from 'tsx-create-element';
 import { IPlayEngine } from '../Library/Interfaces/IPlayEngine';
+import { AmbientLight } from '../common/Interfaces/AmbientLight';
+import { DirectionalLight } from '../common/Interfaces/DirectionalLight';
+import { SpotLight } from '../common/Interfaces/SpotLight';
+import { BasicScene } from '../common/BasicScene';
 
 // It is better to create interfaces for each type of light for organization (think of them as structs)
 // We simplify things here and consider the light to have only one color
 // Also we separate the ambient light into its own light and make it a hemispherical light (the ambient differs according to the direction)
-interface AmbientLight {
-    type: 'ambient',
-    enabled: boolean,
-    skyColor: vec3,
-    groundColor: vec3,
-    skyDirection: vec3
-};
 
-interface DirectionalLight {
-    type: 'directional',
-    enabled: boolean,
-    color: vec3,
-    direction: vec3
-};
 
-interface PointLight {
-    type: 'point',
-    enabled: boolean,
-    color: vec3,
-    position: vec3,
-    attenuation_quadratic: number,
-    attenuation_linear: number,
-    attenuation_constant: number
-};
 
-interface SpotLight {
-    type: 'spot',
-    enabled: boolean,
-    color: vec3,
-    position: vec3,
-    direction: vec3,
-    attenuation_quadratic: number,
-    attenuation_linear: number,
-    attenuation_constant: number,
-    inner_cone: number,
-    outer_cone: number
-};
+
 
 // This union type: it can be any of the specified types
 type Light = AmbientLight | DirectionalLight | SpotLight;
 
-// This will store the material properties
-// To be more consistent with modern workflows, we use what is called albedo to define the diffuse and ambient
-// And since specular power (shininess) is in the range 0 to infinity and the more popular roughness paramater is in the range 0 to 1, we read the roughness from the image and convert it to shininess (specular power)
-// We also add an emissive properties in case the object itself emits light
-// Finally, while the ambient is naturally the same a the diffuse, some areas recieve less ambient than other (e.g. folds), so we use the ambient occlusion texture to darken the ambient in these areas
-// We also add tints and scales to control the properties without using multiple textures
-interface Material {
-    albedo: WebGLTexture,    //ambient + diffuse
-    albedo_tint: vec3,       
-    specular: WebGLTexture,  //shiness
-    specular_tint: vec3
-    roughness: WebGLTexture,
-    roughness_scale: number,
-    ambient_occlusion: WebGLTexture,
-    emissive: WebGLTexture,
-    emissive_tint: vec3
-};
-
-// This will represent an object in 3D space
-interface Object3D {
-    mesh: Mesh,
-    material: Material,
-    modelMatrix: mat4
-};
 
 interface MoonJSON {
     RotationX: number,
@@ -122,22 +69,11 @@ interface StoneJson {
 };
 
 // In this scene we will draw a scene to multiple targets then use the targets to do a motion blur post processing
-export default class SpaceTrippersScene extends Scene {
+export default class SpaceTrippersScene extends BasicScene {
     
-    programs: {[name: string]: ShaderProgram} = {};
-    camera: Camera;
-    controller: FlyCameraController;
-    meshes: {[name: string]: Mesh} = {};
-    textures: {[name: string]: WebGLTexture} = {};
-    samplers: {[name: string]: WebGLSampler} = {};
-
     moonData: MoonJSON;
     SpaceShuttleData: SpaceShuttlJSON;
     StonesData: StoneJson;
-
-    time: number = 0;
-    Score: number = 0;
-    lifes: number = 15;
 
     Space_Displacement: number = -70;
 

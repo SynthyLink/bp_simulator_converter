@@ -403,7 +403,6 @@ namespace Diagram.UI
             return nc.Desktop;
         }
 
-
         /// <summary>
         /// Gets root  name of an object
         /// </summary>
@@ -872,9 +871,8 @@ namespace Diagram.UI
                     Execute(t, action, find);
                     continue;
                 }
-                if (o is IObjectLabel)
+                if (o is IObjectLabel l)
                 {
-                    IObjectLabel l = o as IObjectLabel;
                     object obj = l.Object;
                     Execute(obj, action, find);
                     if (obj is IChildren<T> children)
@@ -887,11 +885,21 @@ namespace Diagram.UI
                             }
                         }
                     }
+                    if (obj is IChildren<ICategoryObject> co)
+                    {
+                        foreach (var child in co.Children)
+                        {
+                            if (child != null)
+                            {
+                                Execute(child, action, find);
+                            }
+                        }
+                    }
+
                 }
-                if (o is IArrowLabel)
+                if (o is IArrowLabel al)
                 {
-                    IArrowLabel l = o as IArrowLabel;
-                    object obj = l.Arrow;
+                    object obj = al.Arrow;
                     Execute(obj, action, find);
                 }
                 if (o is IAssociatedObject)

@@ -37,7 +37,7 @@ class Performer {
         this.printer = printer;
     }
     forEach(collection, action, type) {
-        let obj = collection.getObjects();
+        let obj = collection.getObjectCollection();
         for (let o of obj) {
             var x = this.convertObject(o, type);
             if (x.length > 0)
@@ -216,6 +216,35 @@ class Performer {
             t.push(x);
         }
         return t;
+    }
+    getObjectCollectionArray(collection, type) {
+        let t = [];
+        var s = collection.getObjectCollection();
+        for (let o of s) {
+            let tt = this.convertObject(o, type);
+            if (tt.length == 0)
+                continue;
+            t.push(tt[0]);
+        }
+        return t;
+    }
+    getObjectCollectionMap(collection, type) {
+        let map = new Map();
+        var s = collection.getObjectCollection();
+        for (let o of s) {
+            let tt = this.convertObject(o, type);
+            if (tt.length == 0)
+                continue;
+            let named = this.convertObject(o, "INamed");
+            if (named.length > 0) {
+                map.set(named[0].getNamedName(), tt[0]);
+            }
+        }
+        return map;
+    }
+    getCollectionObject(collection, name, type) {
+        let o = collection.getCategoryObject(name);
+        return this.convertObject(o, type);
     }
     convertProperties(o, type) {
         let ob = this.convertObject(o, type);

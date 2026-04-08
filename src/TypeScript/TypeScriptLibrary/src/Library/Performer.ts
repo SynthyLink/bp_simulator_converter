@@ -28,6 +28,8 @@ import type { IProperties } from "./Interfaces/IProperties";
 import type { IActionT } from "./Interfaces/IActionT";
 import type { IComponentCollection } from "./Interfaces/IComponentCollection";
 import type { ICategoryArrow } from "./Interfaces/ICategoryArrow";
+import type { IObjectCollection } from "./Interfaces/IObjectCollection";
+import { INamed } from "./NamedTree/Interfaces/INamed";
 
 
 export class Performer
@@ -69,8 +71,8 @@ export class Performer
     }
 
 
-    public forEach<T>(collection: IComponentCollection, action: IActionT<T>, type: string) {
-        let obj = collection.getObjects()
+    public forEach<T>(collection: IObjectCollection, action: IActionT<T>, type: string) {
+        let obj = collection.getObjectCollection()
         for (let o of obj) {
 
             var x = this.convertObject<T, IObject>(o, type)
@@ -204,7 +206,7 @@ export class Performer
         return s as undefined as T;
     }
 
-    public getByInterface(desktop: IDesktop, type: string): IObject[] {
+    public getByInterface(desktop: IComponentCollection, type: string): IObject[] {
         let co = desktop.getCategoryObjects();
         let objects: IObject[] = [];
         for (var a of co) {
@@ -294,6 +296,39 @@ export class Performer
             t.push(x);
         }
         return t;
+    }
+
+    public getObjectCollectionArray<T>(collection: IObjectCollection, type: string): T[] {
+        let t : T[] = []
+        var s = collection.getObjectCollection();
+        for (let o of s) {
+            let tt = this.convertObject<T, IObject>(o, type)
+            if (tt.length == 0) continue
+            t.push(tt[0])
+        }
+        return t;
+    }
+
+
+    public getObjectCollectionMap<T>(collection: IObjectCollection, type: string): Map<string, T>
+    {
+        let map: Map<string, T> = new Map();
+        var s = collection.getObjectCollection();
+        for (let o of s) {
+            let tt = this.convertObject<T, IObject>(o, type)
+            if (tt.length == 0) continue
+            let named = this.convertObject<INamed, IObject>(o, "INamed")
+            if (named.length > 0) {
+                map.set(named[0].getNamedName(), tt[0])
+            }
+
+        }
+        return map;
+    }
+
+    public getCollectionObject<T>(collection: IComponentCollection, name: string, type: string): T[] {
+        let o = collection.getCategoryObject(name)
+        return this.convertObject < T, ICategoryObject>(o, type)
     }
 
     public convertProperties<T>(o: ICategoryObject, type: string): T[] {

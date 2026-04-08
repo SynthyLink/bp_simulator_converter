@@ -2,7 +2,7 @@ import { ActorWeb } from "./Tests/Actor/ActorWeb"
 import SpaceTrippersScene from './scenes/SpaceTrippers';
 import { IFunc } from "./Library/Interfaces/IFunc";
 import Game from "./common/game";
-import { GameEngine } from "./ExternalObjects/Libraries/Web/Watch/GameEngine";
+import { GameEngine } from "./common/GameEngine";
 
 // First thing we need is to get the canvas on which we draw our scenes
 const canvas: HTMLCanvasElement = document.querySelector("#app");

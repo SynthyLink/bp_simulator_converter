@@ -46,7 +46,7 @@ class DataRuntimeConsumer {
     getCategoryArrows() {
         return this.categoryArrows;
     }
-    getObjects() {
+    getObjectCollection() {
         return this.objects;
     }
     getCategoryObject(name) {

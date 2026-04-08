@@ -43,6 +43,9 @@ class Desktop {
     }
     finish() {
     }
+    getObjectCollection() {
+        return this.objects;
+    }
     addObject(obj) {
         this.objects.push(obj);
     }
