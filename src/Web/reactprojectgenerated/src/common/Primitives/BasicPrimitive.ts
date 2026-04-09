@@ -15,10 +15,13 @@ export class BasicPrimitive implements IObject
 
     protected performer: Performer = new Performer()
 
+    protected gl: WebGL2RenderingContext;
+
     constructor(name: string, scene: BasicScene) {
         this.name = name;
         scene.addObjectToScene(this)
         this.game = scene.getGame();
+        this.gl = scene.getGl()
     }
 
 

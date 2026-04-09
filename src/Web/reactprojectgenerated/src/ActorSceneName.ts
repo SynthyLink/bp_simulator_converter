@@ -1,6 +1,7 @@
 import Game from "./common/game";
 import { GameEngine } from "./common/GameEngine";
 import { Desktop } from "./Library/Desktop";
+import SpaceTrippersScene from "./scenes/SpaceTrippers";
 
 class DesktopName extends Desktop {
     constructor() {

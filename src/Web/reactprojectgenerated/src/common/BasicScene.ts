@@ -6,7 +6,7 @@ import ShaderProgram from "./shader-program";
 import type { IObjectCollection } from "../Library/Interfaces/IObjectCollection";
 import { IObject } from "../Library/Interfaces/IObject";
 
-export abstract class BasicScene extends Scene, implements IObjectCollection {
+export abstract class BasicScene extends Scene implements IObjectCollection {
     protected programs: { [name: string]: ShaderProgram } = {};
     protected camera: Camera;
     protected controller: FlyCameraController;
@@ -14,7 +14,7 @@ export abstract class BasicScene extends Scene, implements IObjectCollection {
     protected textures: { [name: string]: WebGLTexture } = {};
     protected samplers: { [name: string]: WebGLSampler } = {};
 
-    protected objects: IObject[] = []
+    protected iobjects: IObject[] = []
 
  
     protected time: number = 0;
@@ -29,11 +29,11 @@ export abstract class BasicScene extends Scene, implements IObjectCollection {
 
 
     public addObjectToScene(object: IObject) {
-        this.objects.push(object);
+        this.iobjects.push(object);
     }
 
     getObjectCollection(): IObject[] {
-        return this.objects
+        return this.iobjects
     }
 
 

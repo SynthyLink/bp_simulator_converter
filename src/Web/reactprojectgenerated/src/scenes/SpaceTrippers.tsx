@@ -13,6 +13,7 @@ import { AmbientLight } from '../common/Interfaces/AmbientLight';
 import { DirectionalLight } from '../common/Interfaces/DirectionalLight';
 import { SpotLight } from '../common/Interfaces/SpotLight';
 import { BasicScene } from '../common/BasicScene';
+import { Object3D } from '../common/Interfaces/Object3D';
 
 // It is better to create interfaces for each type of light for organization (think of them as structs)
 // We simplify things here and consider the light to have only one color

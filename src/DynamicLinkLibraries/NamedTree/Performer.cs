@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-
+using System.Security.Cryptography;
 using System.Xml;
 
 using ErrorHandler;
@@ -11,6 +11,36 @@ namespace NamedTree
     /// </summary>
     public class Performer
     {
+        /// <summary>
+        /// Saves strings
+        /// </summary>
+        /// <param name="strings">The strings</param>
+        /// <param name="fileName"></param>
+        public void SaveStrings(IEnumerable<string> strings, string fileName)
+        {
+            using var writer = new StreamWriter(fileName);
+            SaveStrings(strings, writer);
+         }
+
+        /// <summary>
+        /// Saves strings to writer
+        /// </summary>
+        /// <param name="strings">The strings</param>
+        /// <param name="writer">The writer</param>
+        public void SaveStrings(IEnumerable<string> strings, TextWriter writer)
+        {
+            var l = from line in strings select Write(line, writer);
+            l = l.ToList();
+        }
+
+
+        public bool Write(string s, TextWriter w)
+        {
+            w.WriteLine(s);
+            return true;
+        }
+
+    
         /// <summary>
         /// Generates long string
         /// </summary>

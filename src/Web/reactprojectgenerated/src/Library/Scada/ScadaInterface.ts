@@ -9,8 +9,23 @@ import type { IObject } from "../Interfaces/IObject";
 import { ActionArray } from "../Utilities/Generic/ActionArray";
 import { Performer } from "../Performer";
 
-export abstract class ScadaInterface implements IScadaInterface
+export abstract class ScadaInterface implements IScadaInterface, IObject
 {
+    getClassName(): string {
+        return this.typeName
+    }
+    imlplementsType(type: string): boolean {
+        return this.types.indexOf(type) >= 0;
+    }
+    getName(): string {
+        return this.name
+    }
+
+    protected name: string = "";
+    protected typeName: string = "ScadaInterface";
+
+    protected types: string[] = ["IObject", "IScadaInterface", "IObjectCollection", "ScadaInterface"];
+
 
     performer: Performer = new Performer()
 
@@ -23,7 +38,9 @@ export abstract class ScadaInterface implements IScadaInterface
 
     protected objects: Map<string, string[]> = new Map()
 
-    protected events : string[] = []
+    protected events: string[] = []
+
+
 
     //  !!! FOR LATER EVENTS WITH ARGUMENTS   protected List<string> eventOutputs = new List<string>();
 
@@ -56,7 +73,6 @@ export abstract class ScadaInterface implements IScadaInterface
 
     protected exceptionHandler !: IExceptionHandler
 
-    protected name: string = ""
 
 
 

@@ -5,17 +5,19 @@ import { IActionAddRemoveT } from '../Library/Interfaces/IActionAddRemoveT';
 import { ActionArrayT } from '../Library/Utilities/Generic/ActionArrayT';
 import { IPlayEngine } from '../Library/Interfaces/IPlayEngine';
 import { IActionT } from '../Library/Interfaces/IActionT';
-import { constructor } from 'gl-matrix/src/gl-matrix/vec2';
 
 //This is the abstract base of all scenes
 export abstract class Scene {
-    game: Game;
-    gl: WebGL2RenderingContext;
+    protected game: Game;
+    protected gl: WebGL2RenderingContext;
     public constructor(game: Game){
         this.game = game;
         this.gl = game.gl;
         this.engine = game;
         
+    }
+    public getGl(): WebGL2RenderingContext {
+        return this.gl
     }
 
     public abstract load(): void; // Here we will tell the loader which files to load from the webserver
@@ -59,6 +61,12 @@ export default class Game implements IPlayEngine, IActionT<number> {
     public addScene(name: string, type: new (game: Game) => Scene){
         this.scenes[name] = new type(this);
     }
+
+    public addSceneObject(name: string,  scene :Scene) {
+        this.scenes[name] = scene;
+    }
+
+    
 
     public addScenes(scenes: {[name: string]: new (game: Game) => Scene}){
         for(let name in scenes) this.addScene(name, scenes[name]);

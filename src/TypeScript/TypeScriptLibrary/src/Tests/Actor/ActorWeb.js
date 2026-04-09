@@ -32,6 +32,7 @@ const Donchian_1 = require("../Donchian");
 const ComposionAct_1 = require("../Wrappers/ComposionAct");
 const CompositionEvent_1 = require("../Wrappers/CompositionEvent");
 const PerformerMeasuremets_1 = require("../../Library/Measurements/PerformerMeasuremets");
+//import { Airplane } from '../../Airplane';
 function finish(e) {
     console.log(e);
     /* rl.question('Is this example useful? [y/n] ', (answer) => {
@@ -75,6 +76,9 @@ class ActorWeb {
     actCompositionAct() {
         var comp = new ComposionAct_1.CompositionAct();
         comp.test();
+    }
+    actAirplane() {
+        //  new Airplane()
     }
     actCompositionEvent(stop) {
         var comp = new CompositionEvent_1.CompositionEvent(stop);

@@ -27,6 +27,7 @@ import { CompositionEvent } from '../Wrappers/CompositionEvent';
 import { PerformerMeasuremets } from '../../Library/Measurements/PerformerMeasuremets';
 import { Composition } from '../Composition';
 import { IFunc } from '../../Library/Interfaces/IFunc';
+//import { Airplane } from '../../Airplane';
 
 
 
@@ -76,7 +77,9 @@ export class ActorWeb {
 
     }
 
-
+    public actAirplane() {
+      //  new Airplane()
+    }
     public actCompositionEvent(stop: IFunc<boolean>) {
         var comp = new CompositionEvent(stop)
         comp.test();

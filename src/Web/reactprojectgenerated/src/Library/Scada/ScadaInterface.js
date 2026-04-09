@@ -5,6 +5,9 @@ const ActionArray_1 = require("../Utilities/Generic/ActionArray");
 const Performer_1 = require("../Performer");
 class ScadaInterface {
     constructor() {
+        this.name = "";
+        this.typeName = "ScadaInterface";
+        this.types = ["IObject", "IScadaInterface", "IObjectCollection", "ScadaInterface"];
         this.performer = new Performer_1.Performer();
         this.inputs = new Map();
         this.outputs = new Map();
@@ -28,7 +31,15 @@ class ScadaInterface {
         this.onStop = new ActionArray_1.ActionArray();
         this.onRefresh = new ActionArray_1.ActionArray();
         this.isEnabled = false;
-        this.name = "";
+    }
+    getClassName() {
+        return this.typeName;
+    }
+    imlplementsType(type) {
+        return this.types.indexOf(type) >= 0;
+    }
+    getName() {
+        return this.name;
     }
     getScadaInputs() {
         return this.inputs;

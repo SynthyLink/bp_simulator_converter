@@ -545,8 +545,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Event.Portable.TypeScript",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfInterface.TypeScript", "..\..\..\DynamicLinkLibraries\Wpf\WpfInterface.TypeScript\WpfInterface.TypeScript.csproj", "{BE1040DA-A023-4F9A-8683-E408FD54A9FB}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "reactprojectwatch", "..\..\..\Web\reactprojectWatch\reactprojectwatch.esproj", "{0C181B11-BBCB-45A3-C217-3850DDBBC37E}"
-EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "TypeScriptLibrary", "..\..\..\TypeScript\TypeScriptLibrary\TypeScriptLibrary.esproj", "{0D18B771-C4E9-8ED3-045E-EDA407F2BAE5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGLCodeGenerator", "..\..\..\DynamicLinkLibraries\3DConverters\WebGLCodeGenerator\WebGLCodeGenerator.csproj", "{6263578B-938A-4A24-8BEF-A25C5F232976}"
@@ -5691,36 +5689,6 @@ Global
 		{BE1040DA-A023-4F9A-8683-E408FD54A9FB}.Release|x64.Build.0 = Release|Any CPU
 		{BE1040DA-A023-4F9A-8683-E408FD54A9FB}.Release|x86.ActiveCfg = Release|Any CPU
 		{BE1040DA-A023-4F9A-8683-E408FD54A9FB}.Release|x86.Build.0 = Release|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Debug|Win32.Build.0 = Debug|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Debug|Win32.Deploy.0 = Debug|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Debug|x64.Build.0 = Debug|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Debug|x64.Deploy.0 = Debug|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Debug|x86.Build.0 = Debug|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Debug|x86.Deploy.0 = Debug|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Release|Win32.ActiveCfg = Release|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Release|Win32.Build.0 = Release|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Release|Win32.Deploy.0 = Release|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Release|x64.ActiveCfg = Release|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Release|x64.Build.0 = Release|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Release|x64.Deploy.0 = Release|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Release|x86.ActiveCfg = Release|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Release|x86.Build.0 = Release|Any CPU
-		{0C181B11-BBCB-45A3-C217-3850DDBBC37E}.Release|x86.Deploy.0 = Release|Any CPU
 		{0D18B771-C4E9-8ED3-045E-EDA407F2BAE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0D18B771-C4E9-8ED3-045E-EDA407F2BAE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D18B771-C4E9-8ED3-045E-EDA407F2BAE5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU

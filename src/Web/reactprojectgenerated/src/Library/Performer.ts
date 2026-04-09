@@ -287,6 +287,12 @@ export class Performer
         return map;
     }
 
+    public getName(obj: any): string {
+        var o = this.convertArray<IObject, any>(obj, "IObject")
+        return o[0].getName()
+    }
+
+
     public convertObject<T, S>(s: S, type: string): T[] {
         let ob = s as unknown as IObject;
         var t: T[] = [];

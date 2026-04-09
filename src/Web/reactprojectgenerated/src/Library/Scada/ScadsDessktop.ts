@@ -4,11 +4,19 @@ import { IObject } from "../Interfaces/IObject";
 import { ScadaInterface } from "./ScadaInterface";
 
 export class ScadaDesktop extends ScadaInterface {
+
+    constructor(componentCollection: IComponentCollection) {
+        super()
+        this.types.push("ScadaDesktop")
+        this.typeName = "ScadaDesktop"
+        this.componentCollection = componentCollection;
+    }
+    
     getObjectCollection(): IObject[] {
-        return this.components.getObjectCollection()
+        return this.componentCollection.getObjectCollection()
     }
     getScadaObject<T>(name: string, type: string): T[] {
-        return this.performer.getCollectionObject<T>(this.components, name, type)
+        return this.performer.getCollectionObject<T>(this.componentCollection, name, type)
     }
-    protected components: IComponentCollection = new FictiveDesktop()
+    protected componentCollection !: IComponentCollection;
 }

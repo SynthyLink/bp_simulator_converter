@@ -2,7 +2,7 @@ import { ActorWeb } from "./src/Tests/Actor/ActorWeb";
 
 let a = new ActorWeb()
 
-a.actComposition()
+a.actAirplane()
 
 //await a.actDonchianLoad();
 

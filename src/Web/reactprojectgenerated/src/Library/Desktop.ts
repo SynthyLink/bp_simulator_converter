@@ -11,8 +11,19 @@ import type { IDesktop } from "./Interfaces/IDesktop";
 import type { IObject } from "./Interfaces/IObject";
 import type { IInitializeTask } from "./Interfaces/IInitializeTask"
 
-export class Desktop implements IDesktop
+export class Desktop implements IDesktop, IObject
 {
+    getClassName(): string {
+        return this.typeName;
+    }
+
+    imlplementsType(type: string): boolean {
+        return this.types.indexOf(type) >= 0;
+    }
+    protected typeName: string = "Desktop";
+
+    protected types: string[] = ["IObject", "IDesktop", "IComponentCollection", "IObjectCollection", "Desktop"];
+
     protected categoryObjects: ICategoryObject[] = [];
 
     protected categoryArrows: ICategoryArrow[] = [];

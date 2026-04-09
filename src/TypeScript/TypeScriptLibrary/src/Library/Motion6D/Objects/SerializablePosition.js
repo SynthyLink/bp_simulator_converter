@@ -5,8 +5,12 @@ const BasicPosition_1 = require("./BasicPosition");
 class SerializablePosition extends BasicPosition_1.BasicPosition {
     constructor(desktop, name) {
         super(desktop, name);
+        this.children = [];
         this.typeName = "SerializablePosition";
         this.types.push("SerializablePosition");
+    }
+    getChildren() {
+        return this.children;
     }
     setParameters(parameters) {
         super.setParameters(parameters);
