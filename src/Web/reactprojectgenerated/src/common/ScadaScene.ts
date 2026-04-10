@@ -13,8 +13,14 @@ export abstract class ScadaScene extends BasicScene implements IActionT<Basic3DS
     constructor(game: Game, scada: IScadaInterface) {
         super(game)
         this.scada = scada;
-        this.loadShapes();
+        this.loadShapes()
     }
+
+    public draw(deltaTime: number): void {
+    }
+    public end(): void {
+    }
+
 
     actionT(t: Basic3DShape): void {
         var name = t.getName();

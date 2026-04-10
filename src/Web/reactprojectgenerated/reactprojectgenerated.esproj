@@ -9,9 +9,12 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="src\Library - Copy\**" />
+    <TypeScriptConfiguration Remove="src\Library - Copy\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="src\ExternalObjects\Libraries\Web\Interfaces\" />
     <Folder Include="src\ExternalObjects\Libraries\Web\Watch\" />
-    <Folder Include="src\Library - Copy\Runtime\Interfaces\" />
     <Folder Include="src\Library\Runtime\Interfaces\" />
   </ItemGroup>
 </Project>

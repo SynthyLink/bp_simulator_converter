@@ -16,7 +16,6 @@ export class Object3DPrimitive extends BasicPrimitive implements IStartPrimitive
         this.types.push("IStartPrimitive")
     }
     startPrimitive(): void {
-        console.log("SSSSS")
         this.loadMesh()
     }
 
@@ -25,12 +24,9 @@ export class Object3DPrimitive extends BasicPrimitive implements IStartPrimitive
         for (let key of map.keys()) {
             let n = key.lastIndexOf(".obj")
             if (n > 0) {
-                console.log(key, n)
-                console.log(this.game.loader.resources)
-                let obj = this.game.loader.resources.Cessna_208_Caravan_obj;
+                let obj = this.game.loader.resources[key];
                 console.log(obj)
                 this.mesh = MeshUtils.LoadOBJMesh(this.gl, obj)
-                console.log(this.mesh)
             }
         }
     }

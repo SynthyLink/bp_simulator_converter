@@ -1,22 +1,17 @@
 import { Cessna } from "../Cessna";
 import Game from "../common/game";
 import { ScadaScene } from "../common/ScadaScene";
-import { ScadaDesktop } from "../Library/Scada/ScadsDessktop";
+import { ScadaDesktopEngine } from "../Library/Scada/ScadaDesktopEngine";
+import { Motion6DRealtimeFactory } from "../Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory";
 
-export class NameScene extends ScadaScene {
+export class CessnaScene extends ScadaScene {
     public load(): void {
         this.game.loader.load({
-           // LOAD
+            // LOAD
         }
         )
- }
-    public start(): void {
     }
-    public draw(deltaTime: number): void {
-    }
-    public end(): void {
-    }
-    constructor(game: Game) {
-        super(game, new ScadaDesktop(new Cessna()))
+        constructor(game: Game) {
+            super(game, new ScadaDesktopEngine(new Cessna(), game, new Motion6DRealtimeFactory(), "Chart"))
     }
 }
