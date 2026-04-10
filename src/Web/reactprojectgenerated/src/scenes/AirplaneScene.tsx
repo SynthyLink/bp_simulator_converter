@@ -7,7 +7,7 @@ import { Motion6DRealtimeFactory } from "../Library/Motion6D/Runtime/Event/Motio
 export class AirplaneScene extends ScadaScene {
     public load(): void {
         this.game.loader.load({
-			["Cessna_208_Caravan.obj"]:{ url: 'models/pLANE/Cessna_208_Caravan.obj', type: 'text'},
+			["Airplane_208_Caravan.obj"]:{ url: 'models/pLANE/Airplane_208_Caravan.obj', type: 'text'},
 			["master.mtl"]:{ url: 'models/pLANE/master.mtl', type: 'text'},
 			["mat0_c.jpg"]:{ url: 'models/pLANE/mat0_c.jpg', type: 'image'}
         }

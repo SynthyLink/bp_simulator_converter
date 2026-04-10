@@ -2217,6 +2217,26 @@ var PerformerMeasuremets = /*#__PURE__*/function () {
         _iterator3.f();
       }
     }
+  }], [{
+    key: "getDifferentialEquationProcessor",
+    value: function getDifferentialEquationProcessor() {
+      return this.processor;
+    }
+  }, {
+    key: "setDifferentialEquationProcessor",
+    value: function setDifferentialEquationProcessor(p) {
+      this.processor = p;
+    }
+  }, {
+    key: "getRealtimeEventFactory",
+    value: function getRealtimeEventFactory() {
+      return this.realtimeEventFactory;
+    }
+  }, {
+    key: "setRealtimeEventFactory",
+    value: function setRealtimeEventFactory(f) {
+      this.realtimeEventFactory = f;
+    }
   }]);
 }();
 exports.PerformerMeasuremets = PerformerMeasuremets;
@@ -23752,18 +23772,18 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.DataRuntimeConsumerEvent = void 0;
-var DataRuntimeConsumer_1 = require("../../Runtime/DataRuntimeConsumer");
+var DataRuntimeConsumerODE_1 = require("../../Runtime/DataRuntimeConsumerODE");
 var PerformerEvents_1 = require("../PerformerEvents");
-var DataRuntimeConsumerEvent = /*#__PURE__*/function (_DataRuntimeConsumer_) {
-  function DataRuntimeConsumerEvent(dataConsumer) {
+var DataRuntimeConsumerEvent = /*#__PURE__*/function (_DataRuntimeConsumerO) {
+  function DataRuntimeConsumerEvent(dataConsumer, processor) {
     var _this;
     _classCallCheck(this, DataRuntimeConsumerEvent);
-    _this = _callSuper(this, DataRuntimeConsumerEvent, [dataConsumer]);
+    _this = _callSuper(this, DataRuntimeConsumerEvent, [dataConsumer, processor]);
     _this.ePerformer = new PerformerEvents_1.PerformerEvents();
     _this.isEnabled = false;
     return _this;
   }
-  _inherits(DataRuntimeConsumerEvent, _DataRuntimeConsumer_);
+  _inherits(DataRuntimeConsumerEvent, _DataRuntimeConsumerO);
   return _createClass(DataRuntimeConsumerEvent, [{
     key: "prepare",
     value: function prepare(dataConsumer) {
@@ -23821,9 +23841,9 @@ var DataRuntimeConsumerEvent = /*#__PURE__*/function (_DataRuntimeConsumer_) {
       this.mPerformer.setTimeProviderCollection(this, timeProvider);
     }
   }]);
-}(DataRuntimeConsumer_1.DataRuntimeConsumer);
+}(DataRuntimeConsumerODE_1.DataRuntimeConsumerODE);
 exports.DataRuntimeConsumerEvent = DataRuntimeConsumerEvent;
-},{"../../Runtime/DataRuntimeConsumer":"src/Library/Runtime/DataRuntimeConsumer.ts","../PerformerEvents":"src/Library/Event/PerformerEvents.ts"}],"src/Library/Event/TimerPlayEngineFactory.ts":[function(require,module,exports) {
+},{"../../Runtime/DataRuntimeConsumerODE":"src/Library/Runtime/DataRuntimeConsumerODE.ts","../PerformerEvents":"src/Library/Event/PerformerEvents.ts"}],"src/Library/Event/TimerPlayEngineFactory.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -24361,9 +24381,9 @@ Object.defineProperty(exports, "__esModule", {
 exports.DataRuntimeConsumerMotion6DEvent = void 0;
 var DataRuntimeConsumerEvent_1 = require("../../../Event/Runtime/DataRuntimeConsumerEvent");
 var DataRuntimeConsumerMotion6DEvent = /*#__PURE__*/function (_DataRuntimeConsumerE) {
-  function DataRuntimeConsumerMotion6DEvent(dataConsumer) {
+  function DataRuntimeConsumerMotion6DEvent(dataConsumer, processor) {
     _classCallCheck(this, DataRuntimeConsumerMotion6DEvent);
-    return _callSuper(this, DataRuntimeConsumerMotion6DEvent, [dataConsumer]);
+    return _callSuper(this, DataRuntimeConsumerMotion6DEvent, [dataConsumer, processor]);
   }
   _inherits(DataRuntimeConsumerMotion6DEvent, _DataRuntimeConsumerE);
   return _createClass(DataRuntimeConsumerMotion6DEvent);
@@ -24383,9 +24403,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Motion6DRealtimeFactory = void 0;
 var DataRuntimeConsumerMotion6DEvent_1 = require("./DataRuntimeConsumerMotion6DEvent");
+var Performer_1 = require("../../../Performer");
+var PerformerMeasuremets_1 = require("../../../Measurements/PerformerMeasuremets");
 var Motion6DRealtimeFactory = /*#__PURE__*/function () {
   function Motion6DRealtimeFactory() {
     _classCallCheck(this, Motion6DRealtimeFactory);
+    this.performer = new Performer_1.Performer();
+    this.mPerformer = new PerformerMeasuremets_1.PerformerMeasuremets();
   }
   return _createClass(Motion6DRealtimeFactory, [{
     key: "createRealtimeFromCollection",
@@ -24395,1884 +24419,12 @@ var Motion6DRealtimeFactory = /*#__PURE__*/function () {
   }, {
     key: "createRealtimeFromDataConsumer",
     value: function createRealtimeFromDataConsumer(consumer) {
-      return new DataRuntimeConsumerMotion6DEvent_1.DataRuntimeConsumerMotion6DEvent(consumer);
+      return new DataRuntimeConsumerMotion6DEvent_1.DataRuntimeConsumerMotion6DEvent(consumer, PerformerMeasuremets_1.PerformerMeasuremets.getDifferentialEquationProcessor());
     }
   }]);
 }();
 exports.Motion6DRealtimeFactory = Motion6DRealtimeFactory;
-},{"./DataRuntimeConsumerMotion6DEvent":"src/Library/Motion6D/Runtime/Event/DataRuntimeConsumerMotion6DEvent.ts"}],"src/Library/Motion6D/Objects/Shapes/Basic3DShape.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Basic3DShape = void 0;
-var CategoryObject_1 = require("../../../CategoryObject");
-var Basic3DShape = /*#__PURE__*/function (_CategoryObject_1$Cat) {
-  function Basic3DShape(desktop, name) {
-    var _this;
-    _classCallCheck(this, Basic3DShape);
-    _this = _callSuper(this, Basic3DShape, [desktop, name]);
-    _this.grahicalData = new Map();
-    _this.size = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-    _this.typeName = "Basic3DShape";
-    _this.types.push("Basic3DShape");
-    _this.types.push("IVisible");
-    _this.types.push("IPositionObject");
-    _this.types.push("ISaveGrahicalData");
-    _this.types.push("IStartPrimitive");
-    return _this;
-  }
-  _inherits(Basic3DShape, _CategoryObject_1$Cat);
-  return _createClass(Basic3DShape, [{
-    key: "startPrimitive",
-    value: function startPrimitive() {}
-  }, {
-    key: "getSaveGrahicalData",
-    value: function getSaveGrahicalData() {
-      return this.grahicalData;
-    }
-  }, {
-    key: "getVisibleSize",
-    value: function getVisibleSize() {
-      return this.size;
-    }
-  }, {
-    key: "setVisibleSize",
-    value: function setVisibleSize(size) {
-      for (var i = 0; i < 3; i++) {
-        for (var j = 0; j < 3; j++) {
-          this.size[i][j] = size[i][j];
-        }
-      }
-    }
-  }, {
-    key: "getObjectPosition",
-    value: function getObjectPosition() {
-      return this.position;
-    }
-  }, {
-    key: "setObjectPosition",
-    value: function setObjectPosition(position) {
-      this.position = position;
-    }
-  }]);
-}(CategoryObject_1.CategoryObject);
-exports.Basic3DShape = Basic3DShape;
-},{"../../../CategoryObject":"src/Library/CategoryObject.ts"}],"src/Library/Motion6D/Objects/BasicPosition.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.BasicPosition = void 0;
-var CategoryObject_1 = require("../../CategoryObject");
-var Performer_1 = require("../../Performer");
-var BasicPosition = /*#__PURE__*/function (_CategoryObject_1$Cat) {
-  function BasicPosition(desktop, name) {
-    var _this;
-    _classCallCheck(this, BasicPosition);
-    _this = _callSuper(this, BasicPosition, [desktop, name]);
-    /// <summary>
-    /// Absolute position
-    /// </summary>
-    _this.position = [0, 0, 0];
-    /// <summary>
-    /// Absolute position
-    /// </summary>
-    _this.own = [0, 0, 0];
-    _this.performer = new Performer_1.Performer();
-    _this.nodes = [];
-    _this.typeName = "BasicPosition";
-    _this.types.push("IPosition");
-    _this.types.push("BasicPosition");
-    return _this;
-  }
-  _inherits(BasicPosition, _CategoryObject_1$Cat);
-  return _createClass(BasicPosition, [{
-    key: "getPosition",
-    value: function getPosition() {
-      return this.position;
-    }
-  }, {
-    key: "getParentFrame",
-    value: function getParentFrame() {
-      return this.parent;
-    }
-  }, {
-    key: "setParentFrame",
-    value: function setParentFrame(parent) {
-      this.parent = parent;
-    }
-  }, {
-    key: "getParameters",
-    value: function getParameters() {
-      return this.parameters;
-    }
-  }, {
-    key: "setParameters",
-    value: function setParameters(parameters) {
-      this.parameters = parameters;
-    }
-  }, {
-    key: "updateReferenceFrame",
-    value: function updateReferenceFrame() {
-      var f = this.getBaseFrame();
-      if (f === undefined) return;
-      this.udateFrameProtected(f);
-    }
-  }, {
-    key: "getParentT",
-    value: function getParentT() {
-      return this.parentNode;
-    }
-  }, {
-    key: "setParentT",
-    value: function setParentT(parent) {
-      this.parentNode = parent;
-    }
-  }, {
-    key: "getNodesT",
-    value: function getNodesT() {
-      return this.nodes;
-    }
-  }, {
-    key: "addNodeT",
-    value: function addNodeT(node) {}
-  }, {
-    key: "removeNodeT",
-    value: function removeNodeT(node) {}
-  }, {
-    key: "getNodeValueT",
-    value: function getNodeValueT() {
-      return this;
-    }
-  }, {
-    key: "udateFrameProtected",
-    value: function udateFrameProtected(frame) {
-      var m = frame.getMatrix();
-      var p = frame.getPosition();
-      for (var i = 0; i < 3; i++) {
-        this.position[i] = p[i];
-        for (var j = 0; j < 3; j++) {
-          this.position[i] += m[i][j] * this.own[j];
-        }
-      }
-    }
-  }, {
-    key: "getBaseFrame",
-    value: function getBaseFrame() {
-      if (this.parent == undefined) {
-        return undefined;
-      }
-      return this.parent.getOwnFrame();
-    }
-  }]);
-}(CategoryObject_1.CategoryObject);
-exports.BasicPosition = BasicPosition;
-},{"../../CategoryObject":"src/Library/CategoryObject.ts","../../Performer":"src/Library/Performer.ts"}],"src/Library/Motion6D/Objects/SerializablePosition.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
-function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
-function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.SerializablePosition = void 0;
-var BasicPosition_1 = require("./BasicPosition");
-var SerializablePosition = /*#__PURE__*/function (_BasicPosition_1$Basi) {
-  function SerializablePosition(desktop, name) {
-    var _this;
-    _classCallCheck(this, SerializablePosition);
-    _this = _callSuper(this, SerializablePosition, [desktop, name]);
-    _this.objects = [];
-    _this.map = new Map();
-    _this.typeName = "SerializablePosition";
-    _this.types.push("SerializablePosition");
-    return _this;
-  }
-  _inherits(SerializablePosition, _BasicPosition_1$Basi);
-  return _createClass(SerializablePosition, [{
-    key: "postSetArrow",
-    value: function postSetArrow() {
-      if (this.objects.length == 1) {
-        this.setParameters(this.objects[0]);
-      }
-    }
-  }, {
-    key: "getChildernT",
-    value: function getChildernT() {
-      return this.objects;
-    }
-  }, {
-    key: "addChildT",
-    value: function addChildT(child) {
-      this.objects.push(child);
-    }
-  }, {
-    key: "removeChildT",
-    value: function removeChildT(child) {
-      this.performer.remove(this.objects, child);
-    }
-  }, {
-    key: "setParameters",
-    value: function setParameters(parameters) {
-      _superPropGet(SerializablePosition, "setParameters", this, 3)([parameters]);
-      var po = this.performer.convertObject(parameters, "IPositionObject");
-      if (po.length == 0) return;
-      po[0].setObjectPosition(this);
-    }
-  }]);
-}(BasicPosition_1.BasicPosition);
-exports.SerializablePosition = SerializablePosition;
-},{"./BasicPosition":"src/Library/Motion6D/Objects/BasicPosition.ts"}],"src/Library/Motion6D/Visible/BasicCamera.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.BasicCamera = void 0;
-var BasicPosition_1 = require("../Objects/BasicPosition");
-var BasicCamera = /*#__PURE__*/function (_BasicPosition_1$Basi) {
-  function BasicCamera(desktop, name) {
-    var _this;
-    _classCallCheck(this, BasicCamera);
-    _this = _callSuper(this, BasicCamera, [desktop, name]);
-    _this.visible = [];
-    _this.typeName = "BasicCamera";
-    _this.types.push("IVisibleConsumer");
-    _this.types.push("BasicCamera");
-    return _this;
-  }
-  _inherits(BasicCamera, _BasicPosition_1$Basi);
-  return _createClass(BasicCamera, [{
-    key: "addVisibleObject",
-    value: function addVisibleObject(object) {
-      this.visible.push(object);
-    }
-  }, {
-    key: "removeVisibleObject",
-    value: function removeVisibleObject(object) {
-      this.performer.remove(this.visible, object);
-    }
-  }, {
-    key: "postVisibleObject",
-    value: function postVisibleObject(object) {}
-  }]);
-}(BasicPosition_1.BasicPosition);
-exports.BasicCamera = BasicCamera;
-},{"../Objects/BasicPosition":"src/Library/Motion6D/Objects/BasicPosition.ts"}],"src/Library/Utilities/Collections/CollectionProcessor.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.CollectionProcessor = void 0;
-var CollectionProcessor = /*#__PURE__*/function () {
-  function CollectionProcessor() {
-    _classCallCheck(this, CollectionProcessor);
-  }
-  return _createClass(CollectionProcessor, [{
-    key: "arrayCopy",
-    value: function arrayCopy(source, sourceIndex, destinationArray, destinationIndex, length) {
-      for (var i = 0; i < length; i++) {
-        destinationArray[destinationIndex + i] = source[sourceIndex + i];
-      }
-    }
-  }]);
-}();
-exports.CollectionProcessor = CollectionProcessor;
-},{}],"src/Library/Vector3D/Vector3DProcessor.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Vector3DProcessor = void 0;
-var RealMatrix_1 = require("../RealMatrixProcessor/RealMatrix");
-var CollectionProcessor_1 = require("../Utilities/Collections/CollectionProcessor");
-var Vector3DProcessor = /*#__PURE__*/function () {
-  function Vector3DProcessor() {
-    _classCallCheck(this, Vector3DProcessor);
-    this.idQuaternion = [1, 0, 0, 0];
-    this.realMatrix = new RealMatrix_1.RealMatrix();
-    this.collectionProcessor = new CollectionProcessor_1.CollectionProcessor();
-  }
-  return _createClass(Vector3DProcessor, [{
-    key: "quaternionNormalize",
-    value: function quaternionNormalize(quaternion) {
-      var a = 0;
-      var _iterator = _createForOfIteratorHelper(quaternion),
-        _step;
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var q = _step.value;
-          a += q * q;
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-      a = 1 / Math.sqrt(a);
-      for (var i = 0; i < 4; i++) {
-        quaternion[i] *= a;
-      }
-    }
-  }, {
-    key: "quaternionToeulerAngles",
-    value: function quaternionToeulerAngles(angles, quaternion) {
-      this.quaternionToeulerAnglesXYZW(angles, quaternion[1], quaternion[2], quaternion[3], quaternion[0]);
-    }
-  }, {
-    key: "quaternionToeulerAnglesXYZW",
-    value: function quaternionToeulerAnglesXYZW(angles, x, y, z, w) {
-      // roll (x-axis rotation)
-      var sinr_cosp = 2 * (w * x + y * z);
-      var cosr_cosp = 1 - 2 * (x * x + y * y);
-      angles.setRoll(Math.atan2(sinr_cosp, cosr_cosp));
-      // pitch (y-axis rotation)
-      var sinp = 2 * (w * y - z * x);
-      if (Math.abs(sinp) >= 1) {
-        angles.setPitch(this.realMatrix.copySign(Math.PI / 2, sinp));
-        //std::copysign(M_PI / 2, sinp); // use 90 degrees if out of range
-      } else {
-        angles.setPitch(Math.asin(sinp));
-      }
-      // yaw (z-axis rotation)
-      var siny_cosp = 2 * (w * z + x * y);
-      var cosy_cosp = 1 - 2 * (y * y + z * z);
-      angles.setYaw(Math.atan2(siny_cosp, cosy_cosp));
-    }
-  }, {
-    key: "rotateOmega",
-    value: function rotateOmega(omega, quaternion, time) {
-      var o = this.realMatrix.partialNorm(omega, 0, 3);
-      var phi = 0.5 * o * time;
-      var s = Math.sin(phi);
-      quaternion[0] = Math.sqrt(1 - s * s);
-      o = 1 / o;
-      for (var i = 0; i < 3; i++) {
-        quaternion[i + 1] = o * s * omega[i];
-      }
-    }
-  }, {
-    key: "square3d",
-    value: function square3d(x) {
-      // !!! EXCEPTION DELETE
-      if (x.length != 3) {}
-      return x[0] * x[0] + x[1] * x[1] + x[2] * x[2];
-    }
-  }, {
-    key: "vectorProduct",
-    value: function vectorProduct(x, y, z) {
-      z[0] = x[1] * y[2] - x[2] * y[1];
-      z[1] = x[2] * y[0] - x[0] * y[2];
-      z[2] = x[0] * y[1] - x[1] * y[0];
-    }
-  }, {
-    key: "quaternionMultiply",
-    value: function quaternionMultiply(x, y, z) {
-      z[0] = x[0] * y[0] - x[1] * y[1] - x[2] * y[2] - x[3] * y[3];
-      z[1] = x[0] * y[1] + x[1] * y[0] + x[2] * y[3] - x[3] * y[2];
-      z[2] = x[0] * y[2] + x[2] * y[0] + x[3] * y[1] - x[1] * y[3];
-      z[3] = x[0] * y[3] + x[3] * y[0] + x[1] * y[2] - x[2] * y[1];
-    }
-  }, {
-    key: "quaternionInvertMultiply",
-    value: function quaternionInvertMultiply(x, y, z) {
-      z[0] = x[0] * y[0] + x[1] * y[1] + x[2] * y[2] + x[3] * y[3];
-      z[1] = x[0] * y[1] - x[1] * y[0] - x[2] * y[3] + x[3] * y[2];
-      z[2] = x[0] * y[2] - x[2] * y[0] - x[3] * y[1] + x[1] * y[3];
-      z[3] = x[0] * y[3] - x[3] * y[0] - x[1] * y[2] + x[2] * y[1];
-    }
-  }, {
-    key: "quaternionInvertOmega",
-    value: function quaternionInvertOmega(quaterinon, omegaIn, omegaOut) {
-      omegaOut[0] = quaterinon[0] * omegaIn[0] - quaterinon[2] * omegaIn[2] + quaterinon[3] * omegaIn[1];
-      omegaOut[1] = quaterinon[0] * omegaIn[1] - quaterinon[3] * omegaIn[0] + quaterinon[1] * omegaIn[2];
-      omegaOut[2] = quaterinon[0] * omegaIn[2] - quaterinon[1] * omegaIn[1] + quaterinon[2] * omegaIn[0];
-    }
-  }, {
-    key: "quaternionToMatrix",
-    value: function quaternionToMatrix(q, m, qq) {
-      var norm = 1 / Math.sqrt(q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]);
-      for (var i = 0; i < 4; i++) {
-        q[i] *= norm;
-      }
-      for (var _i = 0; _i < 4; _i++) {
-        for (var j = 0; j <= _i; j++) {
-          qq[_i][j] = q[_i] * q[j];
-        }
-      }
-      m[0][0] = qq[0][0] + qq[1][1] - qq[2][2] - qq[3][3];
-      m[0][1] = 2 * (qq[2][1] - qq[3][0]);
-      m[0][2] = 2 * (qq[2][0] + qq[3][1]);
-      m[1][0] = 2 * (qq[3][0] + qq[2][1]);
-      m[1][1] = qq[0][0] - qq[1][1] + qq[2][2] - qq[3][3];
-      m[1][2] = 2 * (qq[3][2] - qq[1][0]);
-      m[2][0] = 2 * (qq[3][1] - qq[2][0]);
-      m[2][1] = 2 * (qq[1][0] + qq[3][2]);
-      m[2][2] = qq[0][0] - qq[1][1] - qq[2][2] + qq[3][3];
-    }
-  }, {
-    key: "calculateDynamics",
-    value: function calculateDynamics(q, der, m, omega, qd) {
-      var norm = 1 / Math.sqrt(q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]);
-      for (var i = 0; i < 4; i++) {
-        q[i] *= norm;
-        der[i] *= norm;
-      }
-      for (var _i2 = 0; _i2 < 4; _i2++) {
-        for (var j = 0; j < 4; j++) {
-          qd[_i2][j] = q[_i2] * der[j];
-        }
-      }
-      omega[0] = 2 * (-qd[2][3] + qd[3][2] + qd[0][1] - qd[1][0]);
-      omega[1] = 2 * (-qd[3][1] + qd[1][3] + qd[0][2] - qd[2][0]);
-      omega[2] = 2 * (-qd[1][2] + qd[2][1] + qd[0][3] - qd[3][0]);
-    }
-  }, {
-    key: "calculateDynamicsLong",
-    value: function calculateDynamicsLong(q, der, m, omega, qq, qd) {
-      this.calculateDynamics(q, der, m, omega, qd);
-      for (var i = 0; i < 4; i++) {
-        for (var j = 0; j <= i; j++) {
-          qq[i][j] = q[i] * q[j];
-        }
-      }
-      m[0][0] = qq[0][0] + qq[1][1] - qq[2][2] - qq[3][3];
-      m[0][1] = 2 * (qq[2][1] - qq[3][0]);
-      m[0][2] = 2 * (qq[2][0] + qq[3][1]);
-      m[1][0] = 2 * (qq[3][0] + qq[2][1]);
-      m[1][1] = qq[0][0] - qq[1][1] + qq[2][2] - qq[3][3];
-      m[1][2] = 2 * (qq[3][2] - qq[1][0]);
-      m[2][0] = 2 * (qq[3][1] - qq[2][0]);
-      m[2][1] = 2 * (qq[1][0] + qq[3][2]);
-      m[2][2] = qq[0][0] - qq[1][1] - qq[2][2] + qq[3][3];
-    }
-  }, {
-    key: "calculateQuaternionDerivation",
-    value: function calculateQuaternionDerivation(quaternion, omega, quaternionDerivation, auxQuaternion) {
-      auxQuaternion[0] = 0;
-      this.collectionProcessor.arrayCopy(omega, 0, auxQuaternion, 1, 3);
-      this.quaternionMultiply(quaternion, auxQuaternion, quaternionDerivation);
-      for (var i = 0; i < 4; i++) {
-        quaternionDerivation[i] *= 0.5;
-      }
-    }
-  }]);
-}();
-exports.Vector3DProcessor = Vector3DProcessor;
-},{"../RealMatrixProcessor/RealMatrix":"src/Library/RealMatrixProcessor/RealMatrix.ts","../Utilities/Collections/CollectionProcessor":"src/Library/Utilities/Collections/CollectionProcessor.ts"}],"src/Library/Motion6D/ReferenceFrame.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ReferenceFrame = void 0;
-var Performer_1 = require("../Performer");
-var RealMatrix_1 = require("../RealMatrixProcessor/RealMatrix");
-var Vector3DProcessor_1 = require("../Vector3D/Vector3DProcessor");
-var ReferenceFrame = /*#__PURE__*/function () {
-  function ReferenceFrame() {
-    _classCallCheck(this, ReferenceFrame);
-    this.nodes = [];
-    this.performer = new Performer_1.Performer();
-    this.realMatrix = new RealMatrix_1.RealMatrix();
-    this.vp = new Vector3DProcessor_1.Vector3DProcessor();
-    this.positions = [];
-    this.types = ["IObject", "IOrientation", "IPosition", "ReferenceFrame"];
-    this.typeName = "ReferenceFrame";
-    this.quaternion = [1, 0, 0, 0];
-    /// <summary>
-    /// Absolute position
-    /// </summary>
-    this.position = [0, 0, 0];
-    /// <summary>
-    /// Orientation matrix
-    /// </summary>
-    this.matrix = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
-    /// <summary>
-    /// Auxiliary array
-    /// </summary>
-    this.qq = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
-    /// <summary>
-    /// Auxiliary array
-    /// </summary>
-    this.p = [0, 0, 0];
-    /// <summary>
-    /// Auxliary position
-    /// </summary>
-    this.auxPos = [0, 0, 0];
-  }
-  return _createClass(ReferenceFrame, [{
-    key: "setParameters",
-    value: function setParameters(parameters) {
-      this.parameters = parameters;
-    }
-  }, {
-    key: "getParentT",
-    value: function getParentT() {
-      return this.parentNode;
-    }
-  }, {
-    key: "setParentT",
-    value: function setParentT(parent) {
-      this.parentNode = parent;
-    }
-  }, {
-    key: "getNodesT",
-    value: function getNodesT() {
-      return this.nodes;
-    }
-  }, {
-    key: "addNodeT",
-    value: function addNodeT(node) {
-      this.nodes.push(node);
-    }
-  }, {
-    key: "removeNodeT",
-    value: function removeNodeT(node) {
-      this.nodes = this.performer.remove(this.nodes, node);
-    }
-  }, {
-    key: "getNodeValueT",
-    value: function getNodeValueT() {
-      return this;
-    }
-  }, {
-    key: "setReferenceFrame",
-    value: function setReferenceFrame(baseFrame, relative) {
-      var m = baseFrame.getMatrix();
-      var bp = baseFrame.getPosition();
-      var rp = relative.getPosition();
-      for (var i = 0; i < 3; i++) {
-        this.position[i] = bp[i];
-        for (var j = 0; j < 3; j++) {
-          this.position[i] += m[i][j] * rp[j];
-        }
-      }
-      this.vp.quaternionMultiply(baseFrame.quaternion, relative.quaternion, this.quaternion);
-      this.setMatrix();
-    }
-  }, {
-    key: "getQuaternion",
-    value: function getQuaternion() {
-      return this.quaternion;
-    }
-  }, {
-    key: "getMatrix",
-    value: function getMatrix() {
-      return this.matrix;
-    }
-  }, {
-    key: "getPosition",
-    value: function getPosition() {
-      return this.position;
-    }
-  }, {
-    key: "getParentFrame",
-    value: function getParentFrame() {
-      return this.parent;
-    }
-  }, {
-    key: "setParentFrame",
-    value: function setParentFrame(parent) {
-      this.parent = parent;
-    }
-  }, {
-    key: "getParameters",
-    value: function getParameters() {
-      return this.parameters;
-    }
-  }, {
-    key: "updateReferenceFrame",
-    value: function updateReferenceFrame() {
-      var p = this.getParentFrame();
-      if (p === undefined) {
-        return;
-      }
-      var r = p.getOwnFrame();
-      if (r === undefined) {
-        return;
-      }
-      this.position = r.getPosition();
-      this.quaternion = r.getQuaternion();
-      this.matrix = r.getMatrix();
-    }
-  }, {
-    key: "getPositions",
-    value: function getPositions() {
-      return this.positions;
-    }
-  }, {
-    key: "addPosition",
-    value: function addPosition(position) {
-      this.positions.push(position);
-    }
-    // new Error
-  }, {
-    key: "getClassName",
-    value: function getClassName() {
-      return this.typeName;
-    }
-  }, {
-    key: "imlplementsType",
-    value: function imlplementsType(type) {
-      return this.types.indexOf(type) > 0;
-    }
-  }, {
-    key: "getName",
-    value: function getName() {
-      return "";
-    }
-  }, {
-    key: "getRelativePosition",
-    value: function getRelativePosition(inPosition, outPosition) {
-      for (var i = 0; i < 3; i++) {
-        this.auxPos[i] = inPosition[i] - this.position[i];
-      }
-      for (var _i = 0; _i < 3; _i++) {
-        outPosition[_i] = 0;
-        for (var j = 0; j < 3; j++) {
-          outPosition[_i] += this.matrix[j][_i] * this.auxPos[j];
-        }
-      }
-    }
-  }, {
-    key: "norm",
-    value: function norm() {
-      this.vp.quaternionNormalize(this.quaternion);
-    }
-  }, {
-    key: "setMatrix",
-    value: function setMatrix() {
-      this.norm();
-      this.vp.quaternionToMatrix(this.quaternion, this.matrix, this.qq);
-    }
-  }, {
-    key: "getPositionArray",
-    value: function getPositionArray(position, coordinates) {
-      var p1 = this.getPosition();
-      var p2 = position.getPosition();
-      for (var i = 0; i < 3; i++) {
-        this.p[i] = p2[i] - p1[i];
-      }
-      for (var _i2 = 0; _i2 < 3; _i2++) {
-        coordinates[_i2] = 0;
-        for (var j = 0; j < 3; j++) {
-          coordinates[_i2] += this.matrix[_i2][j] * this.p[j];
-        }
-      }
-    }
-  }, {
-    key: "getRelative",
-    value: function getRelative(baseFrame, relativeFrame, result, diff) {
-      this.vp.quaternionInvertMultiply(relativeFrame.quaternion, baseFrame.quaternion, result.quaternion);
-      result.setMatrix();
-      for (var i = 0; i < 3; i++) {
-        diff[i] = relativeFrame.position[i] - baseFrame.position[i];
-      }
-      var m = baseFrame.getMatrix();
-      var p = result.getPosition();
-      for (var _i3 = 0; _i3 < 3; _i3++) {
-        p[_i3] = 0;
-        for (var j = 0; j < 3; j++) {
-          p[_i3] += m[j][_i3] * diff[j];
-        }
-      }
-    }
-  }, {
-    key: "calculateRotatedPosition",
-    value: function calculateRotatedPosition(abs, rot) {
-      for (var i = 0; i < 3; i++) {
-        rot[i] = 0;
-        for (var j = 0; j < 3; j++) {
-          rot[i] += this.matrix[j][i] * abs[j];
-        }
-      }
-    }
-  }]);
-}();
-exports.ReferenceFrame = ReferenceFrame;
-},{"../Performer":"src/Library/Performer.ts","../RealMatrixProcessor/RealMatrix":"src/Library/RealMatrixProcessor/RealMatrix.ts","../Vector3D/Vector3DProcessor":"src/Library/Vector3D/Vector3DProcessor.ts"}],"src/Library/Motion6D/RotatedFrame.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
-function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
-function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.RotatedFrame = void 0;
-var ReferenceFrame_1 = require("./ReferenceFrame");
-var RotatedFrame = /*#__PURE__*/function (_ReferenceFrame_1$Ref) {
-  function RotatedFrame() {
-    var _this;
-    _classCallCheck(this, RotatedFrame);
-    _this = _callSuper(this, RotatedFrame);
-    _this.omega = [0, 0, 0];
-    _this.typeName = "RotatedFrame";
-    _this.types.push("IAngularVelocityMotion6D");
-    _this.types.push("RotatedFrame");
-    return _this;
-  }
-  _inherits(RotatedFrame, _ReferenceFrame_1$Ref);
-  return _createClass(RotatedFrame, [{
-    key: "getOmega",
-    value: function getOmega() {
-      return this.omega;
-    }
-  }, {
-    key: "setReferenceFrame",
-    value: function setReferenceFrame(baseFrame, relative) {
-      _superPropGet(RotatedFrame, "setReferenceFrame", this, 3)([baseFrame, relative]);
-      var ab = this.performer.convertObject(baseFrame, "IAngularVelocityMotion6D");
-      var ar = this.performer.convertObject(relative, "IAngularVelocityMotion6D");
-      var matrix = relative.getMatrix();
-      var ob = ab[0].getOmega();
-      var or = ar[0].getOmega();
-      for (var i = 0; i < or.length; i++) {
-        this.omega[i] = or[i];
-        for (var j = 0; j < 3; j++) {
-          this.omega[i] += matrix[i][j] * ob[j];
-        }
-      }
-    }
-  }]);
-}(ReferenceFrame_1.ReferenceFrame);
-exports.RotatedFrame = RotatedFrame;
-},{"./ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts"}],"src/Library/Motion6D/Motion6DFrame.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
-function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
-function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Motion6DFrame = void 0;
-var RotatedFrame_1 = require("./RotatedFrame");
-var Motion6DFrame = /*#__PURE__*/function (_RotatedFrame_1$Rotat) {
-  function Motion6DFrame() {
-    var _this;
-    _classCallCheck(this, Motion6DFrame);
-    _this = _callSuper(this, Motion6DFrame);
-    _this.velocity = [0, 0, 0];
-    _this.hv = [0, 0, 0];
-    //protected double[] relativeVelocity = new double[] { 0, 0, 0 };
-    /// <summary>
-    /// Derivation
-    /// </summary>
-    _this.der = [0, 0, 0, 0];
-    /// <summary>
-    /// Quaternion derivation
-    /// </summary>
-    _this.qd = [0, 0, 0, 0];
-    _this.typeName = "Motion6DFrame";
-    _this.types.push("IVelocity");
-    _this.types.push("Motion6DFrame");
-    return _this;
-  }
-  _inherits(Motion6DFrame, _RotatedFrame_1$Rotat);
-  return _createClass(Motion6DFrame, [{
-    key: "getVelocity",
-    value: function getVelocity() {
-      return this.velocity;
-    }
-    //         let ab = this.performer.convertObject<IAngularVelocityMotion6D, ReferenceFrame>(baseFrame, "IAngularVelocityMotion6D");
-  }, {
-    key: "setReferenceFrame",
-    value: function setReferenceFrame(baseFrame, relative) {
-      _superPropGet(Motion6DFrame, "setReferenceFrame", this, 3)([baseFrame, relative]);
-      var baseOrientation = baseFrame;
-      var baseVelocity = this.performer.convertObject(baseFrame, "IVelocity");
-      var relativeVelocity = this.performer.convertObject(relative, "IVelocity");
-      var baseAngular = this.performer.convertObject(baseFrame, "IAngularVelocityMotion6D");
-      var ra = this.performer.convertObject(relative, "IAngularVelocityMotion6D");
-      var velocityBase = baseVelocity[0].getVelocity();
-      var velocityRelative = relativeVelocity[0].getVelocity();
-      var mb = baseOrientation.getMatrix();
-      var om = baseAngular[0].getOmega();
-      var pos = relative.getPosition();
-      this.vp.vectorProduct(om, pos, this.hv);
-      for (var i = 0; i < 3; i++) {
-        this.velocity[i] = velocityBase[i];
-        for (var j = 0; j < 3; j++) {
-          this.velocity[i] += mb[i][j] * (velocityRelative[j] + this.hv[j]);
-        }
-      }
-    }
-  }]);
-}(RotatedFrame_1.RotatedFrame);
-exports.Motion6DFrame = Motion6DFrame;
-},{"./RotatedFrame":"src/Library/Motion6D/RotatedFrame.ts"}],"src/Library/Motion6D/Motion6DAcceleratedFrame.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
-function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
-function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Motion6DAcceleratedFrame = void 0;
-var Motion6DFrame_1 = require("./Motion6DFrame");
-var Motion6DAcceleratedFrame = /*#__PURE__*/function (_Motion6DFrame_1$Moti) {
-  function Motion6DAcceleratedFrame() {
-    var _this;
-    _classCallCheck(this, Motion6DAcceleratedFrame);
-    _this = _callSuper(this, Motion6DAcceleratedFrame);
-    _this.relativeAcceleration = [0, 0, 0];
-    _this.acceleration = [0, 0, 0];
-    _this.angularAcceleration = [0, 0, 0];
-    _this.temp = [0, 0, 0];
-    _this.tempV = [0, 0, 0];
-    _this.typeName = "Motion6DAcceleratedFrame";
-    _this.types.push("IAcceleration");
-    _this.types.push("IAngularAcceleration");
-    _this.types.push("Motion6DAcceleratedFrame");
-    return _this;
-  }
-  _inherits(Motion6DAcceleratedFrame, _Motion6DFrame_1$Moti);
-  return _createClass(Motion6DAcceleratedFrame, [{
-    key: "setReferenceFrame",
-    value: function setReferenceFrame(baseFrame, relative) {
-      _superPropGet(Motion6DAcceleratedFrame, "setReferenceFrame", this, 3)([baseFrame, relative]);
-      var arn = this.performer.convertObject(relative, " IAngularAcceleration");
-      var relativeVelocity = this.performer.convertObject(relative, "IVelocity");
-      var baseAngulatVelocity = this.performer.convertObject(baseFrame, "IAngularVelocityMotion6D");
-      var relativeAngularVelocity = this.performer.convertObject(relative, "IAngularVelocityMotion6D");
-      var rp = this.getPosition();
-      var m = this.getMatrix();
-      var relativeOmega = relativeAngularVelocity[0].getOmega();
-      var baseOmega = baseAngulatVelocity[0].getOmega();
-      this.vp.vectorProduct(baseOmega, relativeVelocity[0].getVelocity(), this.tempV);
-      var om2 = this.vp.square3d(baseOmega);
-      var eps = arn[0].getAngularAcceleration();
-      this.vp.vectorProduct(eps, rp, this.temp);
-      for (var i = 0; i < 3; i++) {
-        this.tempV[i] *= 2;
-        this.tempV[i] += om2 * rp[i] + this.relativeAcceleration[i] + this.temp[i];
-      }
-      this.realMatrix.multiplyRight(m, this.tempV, this.acceleration);
-      var relativeOrientation = relative;
-      var relativeMatrix = relativeOrientation.getMatrix();
-      this.realMatrix.multiplyLeft(baseOmega, relativeMatrix, this.temp);
-      this.vp.vectorProduct(this.temp, relativeOmega, this.tempV);
-      for (var _i = 0; _i < 3; _i++) {
-        this.temp[_i] = eps[_i] + this.tempV[_i];
-      }
-      this.realMatrix.multiplyLeft(this.temp, m, this.angularAcceleration);
-    }
-  }, {
-    key: "getAngularAcceleration",
-    value: function getAngularAcceleration() {
-      return this.angularAcceleration;
-    }
-  }, {
-    key: "getLineraAcceleration",
-    value: function getLineraAcceleration() {
-      return this.acceleration;
-      ;
-    }
-  }, {
-    key: "getRelativeAcceleration",
-    value: function getRelativeAcceleration() {
-      return this.relativeAcceleration;
-    }
-  }]);
-}(Motion6DFrame_1.Motion6DFrame);
-exports.Motion6DAcceleratedFrame = Motion6DAcceleratedFrame;
-},{"./Motion6DFrame":"src/Library/Motion6D/Motion6DFrame.ts"}],"src/Library/Motion6D/Motion6DPerformer.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Motion6DPerformer = void 0;
-var Performer_1 = require("../Performer");
-var Motion6DAcceleratedFrame_1 = require("./Motion6DAcceleratedFrame");
-var Motion6DFrame_1 = require("./Motion6DFrame");
-var ReferenceFrame_1 = require("./ReferenceFrame");
-var Motion6DPerformer = /*#__PURE__*/function () {
-  function Motion6DPerformer() {
-    _classCallCheck(this, Motion6DPerformer);
-    this.performer = new Performer_1.Performer();
-  }
-  return _createClass(Motion6DPerformer, [{
-    key: "getBaseFrame",
-    value: function getBaseFrame() {
-      return Motion6DPerformer.baseFrame;
-    }
-  }, {
-    key: "getOwnFrame",
-    value: function getOwnFrame(position) {
-      var pp = this.performer.convertObject(position, "IReferenceFrame");
-      if (pp.length > 0) return pp[0].getOwnFrame();
-      return this.getParentFrame(position);
-    }
-  }, {
-    key: "getFrame",
-    value: function getFrame(position) {
-      var f = this.performer.convertObject(position, "IReferenceFrame");
-      if (f.length == 1) {
-        return f[0].getOwnFrame();
-      }
-      return this.getParentFrame(position);
-    }
-  }, {
-    key: "getParentOwn",
-    value: function getParentOwn(position) {
-      var p = position.getParentFrame();
-      if (p === undefined) {
-        return undefined;
-      }
-      var f = this.performer.convertObject(p, "IReferenceFrame");
-      if (f.length > 0) {
-        return this.getParentFrame(f[0]);
-      }
-      return undefined;
-    }
-  }, {
-    key: "getParentFrame",
-    value: function getParentFrame(position) {
-      var p = position.getParentFrame();
-      if (p === undefined) {
-        return this.getBaseFrame();
-      }
-      return p.getOwnFrame();
-    }
-    /*
-          /// <summary>
-        /// Parent frame
-        /// </summary>
-        /// <param name="position">Position</param>
-        /// <returns>Parent frame</returns>
-        static public ReferenceFrame GetParentFrame(this IPosition position)
-        {
-            if (position.Parent == null)
-            {
-                return Motion6DFrame.Base;
-            }
-            return performer.GetParentOwn(position);
-        }
-      */
-  }, {
-    key: "getRelative",
-    value: function getRelative(baseFrame, relative) {
-      var frame;
-      var bf = this.performer.convertObject(baseFrame, "Motion6DAcceleratedFrame");
-      var rf = this.performer.convertObject(relative, "Motion6DAcceleratedFrame");
-      if (bf.length > 0 && rf.length > 0) {
-        frame = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
-      } else {
-        frame = new ReferenceFrame_1.ReferenceFrame();
-      }
-      frame.setReferenceFrame(baseFrame, relative);
-      return frame;
-    }
-  }, {
-    key: "getRelativeFrame",
-    value: function getRelativeFrame(baseFrame, targetFrame, relative) {
-      var bp = baseFrame.getPosition();
-      var tp = targetFrame.getPosition();
-      var bm = baseFrame.getMatrix();
-      var rp = relative.getPosition();
-      for (var i = 0; i < 3; i++) {
-        rp[i] = 0;
-        for (var j = 0; j < 3; j++) {
-          rp[i] += bm[j][i] * (tp[i] - bp[i]);
-        }
-      }
-      var tm = targetFrame.getMatrix();
-      var rm = relative.getMatrix();
-      for (var _i = 0; _i < 3; _i++) {
-        for (var _j = 0; _j < 3; _j++) {
-          rm[_i][_j] = 0;
-          for (var k = 0; k < 3; k++) {
-            rm[_i][_j] += bm[k][_i] * tm[k][_j];
-          }
-        }
-      }
-    }
-  }]);
-}();
-exports.Motion6DPerformer = Motion6DPerformer;
-Motion6DPerformer.baseFrame = new Motion6DFrame_1.Motion6DFrame();
-},{"../Performer":"src/Library/Performer.ts","./Motion6DAcceleratedFrame":"src/Library/Motion6D/Motion6DAcceleratedFrame.ts","./Motion6DFrame":"src/Library/Motion6D/Motion6DFrame.ts","./ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts"}],"src/Library/Motion6D/MovedFrame.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.MovedFrame = void 0;
-var ReferenceFrame_1 = require("./ReferenceFrame");
-var MovedFrame = /*#__PURE__*/function (_ReferenceFrame_1$Ref) {
-  function MovedFrame() {
-    var _this;
-    _classCallCheck(this, MovedFrame);
-    _this = _callSuper(this, MovedFrame, arguments);
-    _this.velocity = [0, 0, 0];
-    return _this;
-  }
-  _inherits(MovedFrame, _ReferenceFrame_1$Ref);
-  return _createClass(MovedFrame, [{
-    key: "getVelocity",
-    value: function getVelocity() {
-      return this.velocity;
-    }
-  }]);
-}(ReferenceFrame_1.ReferenceFrame);
-exports.MovedFrame = MovedFrame;
-},{"./ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts"}],"src/Library/Motion6D/Objects/RigidReferenceFrame.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.RigidReferenceFrame = void 0;
-var CategoryObject_1 = require("../../CategoryObject");
-var OwnError_1 = require("../../ErrorHandler/OwnError");
-var Motion6DAcceleratedFrame_1 = require("../Motion6DAcceleratedFrame");
-var Motion6DPerformer_1 = require("../Motion6DPerformer");
-var ReferenceFrame_1 = require("../ReferenceFrame");
-var Motion6DFrame_1 = require("../Motion6DFrame");
-var RotatedFrame_1 = require("../RotatedFrame");
-var MovedFrame_1 = require("../MovedFrame");
-var RealMatrix_1 = require("../../RealMatrixProcessor/RealMatrix");
-var Vector3DProcessor_1 = require("../../Vector3D/Vector3DProcessor");
-var PerformerMeasuremets_1 = require("../../Measurements/PerformerMeasuremets");
-var RigidReferenceFrame = /*#__PURE__*/function (_CategoryObject_1$Cat) {
-  function RigidReferenceFrame(desktop, name) {
-    var _this;
-    _classCallCheck(this, RigidReferenceFrame);
-    _this = _callSuper(this, RigidReferenceFrame, [desktop, name]);
-    /// </summary>
-    _this.relativePosition = [0, 0, 0];
-    /// <summary> : IFunc<any>[] = [];
-    /// Relarive quaternion components
-    /// </summary>
-    _this.relativeQuaternion = [1, 0, 0, 0];
-    _this.children = [];
-    //protected double[,] relativeMatrix = new double[3, 3];
-    /// <summary>
-    /// Auxiliary variable
-    /// </summary>
-    _this.q44 = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
-    /// <summary>
-    /// Linear velocity
-    /// </summary>
-    _this.velocity = [0, 0, 0, 0];
-    // protected double[] relativeVelocity = new double[] { 0, 0, 0 };
-    /// <summary>
-    /// Angular velocity
-    /// </summary>
-    _this.omega = [0, 0, 0];
-    _this.aliasNames = ["X", "Y", "Z", "Roll", "Pitch", "Yaw"];
-    _this.alinames = new Map();
-    _this.vp = new Vector3DProcessor_1.Vector3DProcessor();
-    _this.realMatrix = new RealMatrix_1.RealMatrix();
-    _this.own = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
-    _this.relative = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
-    _this.mPerformer = new Motion6DPerformer_1.Motion6DPerformer();
-    _this.measuremrntPerformrer = new PerformerMeasuremets_1.PerformerMeasuremets();
-    _this.nodes = [];
-    _this.typeName = "RigidReferenceFrame";
-    _this.types.push("IReferenceFrame");
-    _this.types.push("IPosition");
-    _this.types.push("IPostLoadPosition");
-    _this.types.push("IPostSetArrow");
-    _this.types.push("IAlias");
-    _this.types.push("RigidReferenceFrame");
-    return _this;
-  }
-  _inherits(RigidReferenceFrame, _CategoryObject_1$Cat);
-  return _createClass(RigidReferenceFrame, [{
-    key: "postSetArrow",
-    value: function postSetArrow() {
-      this.setParameters(this.parameters);
-      this.createFrame();
-    }
-  }, {
-    key: "getAliasNames",
-    value: function getAliasNames() {
-      return this.aliasNames;
-    }
-  }, {
-    key: "getAliasType",
-    value: function getAliasType(name) {
-      return 0;
-    }
-  }, {
-    key: "getAliasValue",
-    value: function getAliasValue(name) {
-      return this.alinames.get(name);
-    }
-  }, {
-    key: "setAliasValue",
-    value: function setAliasValue(name, value) {
-      this.alinames.set(name, value);
-    }
-  }, {
-    key: "postLoadPosition",
-    value: function postLoadPosition() {
-      this.createFrame();
-      this.copyPositionToRelativeFrame();
-      this.copyQuaternionToRelativeFrame();
-      this.init();
-      this.relative.setMatrix();
-    }
-  }, {
-    key: "impl",
-    value: function impl(s) {
-      if (this.parent === undefined) {
-        return true;
-      }
-      var own = this.parent.getOwnFrame();
-      if (own === undefined) {
-        return false;
-      }
-      return this.performer.implementsType(own, s);
-    }
-  }, {
-    key: "isAcceleration",
-    value: function isAcceleration() {
-      return this.impl("IAcceleration");
-    }
-  }, {
-    key: "isVelocity",
-    value: function isVelocity() {
-      return this.impl("IVelocity");
-    }
-  }, {
-    key: "isAngularVelocity",
-    value: function isAngularVelocity() {
-      return this.impl("IAngularVelocity");
-    }
-  }, {
-    key: "copyPositionToRelativeFrame",
-    value: function copyPositionToRelativeFrame() {
-      var rp = this.relative.getPosition();
-      this.performer.copyArray(this.relativePosition, rp);
-    }
-  }, {
-    key: "copyQuaternionToRelativeFrame",
-    value: function copyQuaternionToRelativeFrame() {
-      var rp = this.relative.getQuaternion();
-      this.performer.copyArray(this.relativeQuaternion, rp);
-      this.relative.setMatrix();
-    }
-  }, {
-    key: "copy6DPosition",
-    value: function copy6DPosition() {
-      this.copyPositionToRelativeFrame();
-      this.copyQuaternionToRelativeFrame();
-    }
-  }, {
-    key: "init",
-    value: function init() {
-      if (this.relative === undefined) {
-        return;
-      }
-      var q = this.relative.getQuaternion();
-      for (var i = 0; i < q.length; i++) {
-        q[i] = this.relativeQuaternion[i];
-      }
-      var p = this.relative.getPosition();
-      for (var _i = 0; _i < p.length; _i++) {
-        p[_i] = this.relativePosition[_i];
-      }
-    }
-  }, {
-    key: "createFrame",
-    value: function createFrame() {
-      if (this.isAcceleration()) {
-        this.relative = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
-        this.own = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
-      }
-      if (this.isVelocity() && this.isAngularVelocity()) {
-        this.relative = new Motion6DFrame_1.Motion6DFrame();
-        this.own = new Motion6DFrame_1.Motion6DFrame();
-      }
-      if (this.isAngularVelocity()) {
-        this.relative = new RotatedFrame_1.RotatedFrame();
-        this.own = new RotatedFrame_1.RotatedFrame();
-      }
-      if (this.isVelocity()) {
-        this.relative = new MovedFrame_1.MovedFrame();
-        this.own = new MovedFrame_1.MovedFrame();
-      }
-      this.relative = new ReferenceFrame_1.ReferenceFrame();
-      this.own = new ReferenceFrame_1.ReferenceFrame();
-    }
-  }, {
-    key: "getNodeValueT",
-    value: function getNodeValueT() {
-      return this;
-    }
-  }, {
-    key: "getParentT",
-    value: function getParentT() {
-      return this.parentNode;
-    }
-  }, {
-    key: "setParentT",
-    value: function setParentT(parent) {
-      this.parentNode = parent;
-    }
-  }, {
-    key: "getNodesT",
-    value: function getNodesT() {
-      return this.nodes;
-    }
-  }, {
-    key: "addNodeT",
-    value: function addNodeT(node) {
-      this.nodes.push(node);
-    }
-  }, {
-    key: "removeNodeT",
-    value: function removeNodeT(node) {
-      this.nodes = this.performer.remove(this.nodes, node);
-    }
-  }, {
-    key: "getOwnFrame",
-    value: function getOwnFrame() {
-      return this.own;
-    }
-  }, {
-    key: "getPosition",
-    value: function getPosition() {
-      return this.own.getPosition();
-    }
-  }, {
-    key: "getParentFrame",
-    value: function getParentFrame() {
-      return this.parent;
-    }
-  }, {
-    key: "setParentFrame",
-    value: function setParentFrame(parent) {
-      if (parent != undefined && this.parent != undefined) {
-        throw new OwnError_1.OwnError("Parent", "", "");
-      }
-      this.parent = parent;
-      if (parent == undefined) {
-        this.own = this.mPerformer.getBaseFrame();
-        return;
-      }
-    }
-  }, {
-    key: "getParameters",
-    value: function getParameters() {
-      return this.parameters;
-    }
-  }, {
-    key: "setParameters",
-    value: function setParameters(parameters) {
-      this.parameters = parameters;
-    }
-  }, {
-    key: "updateReferenceFrame",
-    value: function updateReferenceFrame() {
-      var own = this.getOwnFrame();
-      var b = this.getBaseFrame();
-      if (b === null) {} else {
-        own.setReferenceFrame(b, this.relative);
-      }
-    }
-  }, {
-    key: "getBaseFrame",
-    value: function getBaseFrame() {
-      if (this.parent === undefined) {
-        return undefined;
-      } else {
-        return this.parent.getOwnFrame();
-      }
-    }
-  }]);
-}(CategoryObject_1.CategoryObject);
-exports.RigidReferenceFrame = RigidReferenceFrame;
-},{"../../CategoryObject":"src/Library/CategoryObject.ts","../../ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.ts","../Motion6DAcceleratedFrame":"src/Library/Motion6D/Motion6DAcceleratedFrame.ts","../Motion6DPerformer":"src/Library/Motion6D/Motion6DPerformer.ts","../ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts","../Motion6DFrame":"src/Library/Motion6D/Motion6DFrame.ts","../RotatedFrame":"src/Library/Motion6D/RotatedFrame.ts","../MovedFrame":"src/Library/Motion6D/MovedFrame.ts","../../RealMatrixProcessor/RealMatrix":"src/Library/RealMatrixProcessor/RealMatrix.ts","../../Vector3D/Vector3DProcessor":"src/Library/Vector3D/Vector3DProcessor.ts","../../Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts"}],"src/Library/Motion6D/Arrows/ReferenceFrameArrow.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ReferenceFrameArrow = void 0;
-var CategoryArrow_1 = require("../../CategoryArrow");
-var ReferenceFrameArrow = /*#__PURE__*/function (_CategoryArrow_1$Cate) {
-  function ReferenceFrameArrow(desktop, name) {
-    var _this;
-    _classCallCheck(this, ReferenceFrameArrow);
-    _this = _callSuper(this, ReferenceFrameArrow, [desktop, name]);
-    _this.typeName = "ReferenceFrameArrow";
-    _this.types.push("ReferenceFrameArrow");
-    return _this;
-  }
-  _inherits(ReferenceFrameArrow, _CategoryArrow_1$Cate);
-  return _createClass(ReferenceFrameArrow, [{
-    key: "getSource",
-    value: function getSource() {
-      return this.position;
-    }
-  }, {
-    key: "getTagret",
-    value: function getTagret() {
-      return this.frame;
-    }
-  }, {
-    key: "setSource",
-    value: function setSource(source) {
-      this.position = source;
-      this.positionNode = this.position;
-    }
-  }, {
-    key: "setTarget",
-    value: function setTarget(target) {
-      var f = target;
-      this.frame = f;
-      var p = f;
-      if (p === undefined) {} else {
-        p.addNodeT(this.positionNode);
-      }
-    }
-  }]);
-}(CategoryArrow_1.CategoryArrow);
-exports.ReferenceFrameArrow = ReferenceFrameArrow;
-},{"../../CategoryArrow":"src/Library/CategoryArrow.ts"}],"src/Library/Motion6D/Visible/VisibleConsumerLink.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.VisibleConsumerLink = void 0;
-var CategoryArrow_1 = require("../../CategoryArrow");
-var VisibleConsumerLink = /*#__PURE__*/function (_CategoryArrow_1$Cate) {
-  function VisibleConsumerLink(desktop, name) {
-    var _this;
-    _classCallCheck(this, VisibleConsumerLink);
-    _this = _callSuper(this, VisibleConsumerLink, [desktop, name]);
-    _this.typeName = "VisibleConsumerLink";
-    _this.types.push("VisibleConsumerLink");
-    return _this;
-  }
-  _inherits(VisibleConsumerLink, _CategoryArrow_1$Cate);
-  return _createClass(VisibleConsumerLink, [{
-    key: "getSource",
-    value: function getSource() {
-      return this.consumer;
-    }
-  }, {
-    key: "getTagret",
-    value: function getTagret() {
-      return this.visible;
-    }
-  }, {
-    key: "setSource",
-    value: function setSource(source) {
-      var c = this.performer.convertProperties(source, "IVisibleConsumer");
-      this.consumer = c[0];
-    }
-  }, {
-    key: "setTarget",
-    value: function setTarget(target) {
-      this.visible = this.performer.convertProperties(target, "IVisible")[0];
-      this.consumer.addVisibleObject(this.visible);
-    }
-  }]);
-}(CategoryArrow_1.CategoryArrow);
-exports.VisibleConsumerLink = VisibleConsumerLink;
-},{"../../CategoryArrow":"src/Library/CategoryArrow.ts"}],"src/Library/Arrows/BelognsToCollection.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.BelongsToCollection = void 0;
-var CategoryArrow_1 = require("../CategoryArrow");
-var OwnError_1 = require("../ErrorHandler/OwnError");
-var BelongsToCollection = /*#__PURE__*/function (_CategoryArrow_1$Cate) {
-  function BelongsToCollection(desktop, name) {
-    var _this;
-    _classCallCheck(this, BelongsToCollection);
-    _this = _callSuper(this, BelongsToCollection, [desktop, name]);
-    _this.typeName = "BelongsToCollection";
-    _this.types.push("BelongsToCollection");
-    return _this;
-  }
-  _inherits(BelongsToCollection, _CategoryArrow_1$Cate);
-  return _createClass(BelongsToCollection, [{
-    key: "setSource",
-    value: function setSource(source) {
-      this.source = source;
-      var a = this.getObjectT(source, "IAddRemove");
-      if (a.length == 0) {
-        throw new OwnError_1.OwnError("BelongsToCollection", "setSource", "");
-      }
-      this.ar = a[0];
-    }
-  }, {
-    key: "setTarget",
-    value: function setTarget(target) {
-      this.target = target;
-      this.ar.addChildT(target);
-    }
-  }]);
-}(CategoryArrow_1.CategoryArrow);
-exports.BelongsToCollection = BelongsToCollection;
-},{"../CategoryArrow":"src/Library/CategoryArrow.ts","../ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.ts"}],"src/Airplane.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Airplane = void 0;
-var Basic3DShape_1 = require("./Library/Motion6D/Objects/Shapes/Basic3DShape");
-var SerializablePosition_1 = require("./Library/Motion6D/Objects/SerializablePosition");
-var BasicCamera_1 = require("./Library/Motion6D/Visible/BasicCamera");
-var TimerObject_1 = require("./Library/Event/Objects/TimerObject");
-var TimeSpan_1 = require("./Library/Utilities/DateTime/TimeSpan");
-var RigidReferenceFrame_1 = require("./Library/Motion6D/Objects/RigidReferenceFrame");
-var VectorFormulaConsumer_1 = require("./Library/Measurements/VectorFormulaConsumer");
-var DataConsumer_1 = require("./Library/Measurements/DataConsumer");
-var ReferenceFrameArrow_1 = require("./Library/Motion6D/Arrows/ReferenceFrameArrow");
-var VisibleConsumerLink_1 = require("./Library/Motion6D/Visible/VisibleConsumerLink");
-var BelognsToCollection_1 = require("./Library/Arrows/BelognsToCollection");
-var DataLink_1 = require("./Library/Measurements/Arrows/DataLink");
-var EventLink_1 = require("./Library/Event/Objects/EventLink");
-var Desktop_1 = require("./Library/Desktop");
-var Airplane_CategoryObject_0_Visible0 = /*#__PURE__*/function (_Basic3DShape_1$Basic) {
-  function Airplane_CategoryObject_0_Visible0(desktop, name) {
-    var _this;
-    _classCallCheck(this, Airplane_CategoryObject_0_Visible0);
-    _this = _callSuper(this, Airplane_CategoryObject_0_Visible0, [desktop, name]);
-    var map = _this.getSaveGrahicalData();
-    map.set("Cessna_208_Caravan.obj", "Cessna_208_Caravan.obj");
-    map.set("master.mtl", "master.mtl");
-    map.set("mat0_c.jpg", "mat0_c.jpg");
-    return _this;
-  }
-  _inherits(Airplane_CategoryObject_0_Visible0, _Basic3DShape_1$Basic);
-  return _createClass(Airplane_CategoryObject_0_Visible0);
-}(Basic3DShape_1.Basic3DShape);
-var Airplane_CategoryObject_0 = /*#__PURE__*/function (_SerializablePosition) {
-  function Airplane_CategoryObject_0(desktop, name) {
-    var _this2;
-    _classCallCheck(this, Airplane_CategoryObject_0);
-    _this2 = _callSuper(this, Airplane_CategoryObject_0, [desktop, name]);
-    _this2.addChildT(new Airplane_CategoryObject_0_Visible0(desktop, name));
-    return _this2;
-  }
-  _inherits(Airplane_CategoryObject_0, _SerializablePosition);
-  return _createClass(Airplane_CategoryObject_0);
-}(SerializablePosition_1.SerializablePosition);
-var Airplane_CategoryObject_3 = /*#__PURE__*/function (_BasicCamera_1$BasicC) {
-  function Airplane_CategoryObject_3(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryObject_3);
-    return _callSuper(this, Airplane_CategoryObject_3, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryObject_3, _BasicCamera_1$BasicC);
-  return _createClass(Airplane_CategoryObject_3);
-}(BasicCamera_1.BasicCamera);
-var Airplane_CategoryObject_4 = /*#__PURE__*/function (_TimerObject_1$TimerO) {
-  function Airplane_CategoryObject_4(desktop, name) {
-    var _this3;
-    _classCallCheck(this, Airplane_CategoryObject_4);
-    _this3 = _callSuper(this, Airplane_CategoryObject_4, [desktop, name]);
-    _this3.span = new TimeSpan_1.TimeSpan(100);
-    return _this3;
-  }
-  _inherits(Airplane_CategoryObject_4, _TimerObject_1$TimerO);
-  return _createClass(Airplane_CategoryObject_4);
-}(TimerObject_1.TimerObject);
-var Airplane_CategoryObject_5 = /*#__PURE__*/function (_RigidReferenceFrame_) {
-  function Airplane_CategoryObject_5(desktop, name) {
-    var _this4;
-    _classCallCheck(this, Airplane_CategoryObject_5);
-    _this4 = _callSuper(this, Airplane_CategoryObject_5, [desktop, name]);
-    _this4.relativePosition = [];
-    _this4.relativeQuaternion = [];
-    _this4.relativePosition = [];
-    _this4.relativePosition.push(40);
-    _this4.relativePosition.push(40);
-    _this4.relativePosition.push(40);
-    _this4.relativePosition = [];
-    _this4.relativePosition.push(0.88047623921714935);
-    _this4.relativePosition.push(-0.27984814233312139);
-    _this4.relativePosition.push(0.36470519963100095);
-    _this4.relativePosition.push(0.11591689595929504);
-    return _this4;
-  }
-  _inherits(Airplane_CategoryObject_5, _RigidReferenceFrame_);
-  return _createClass(Airplane_CategoryObject_5);
-}(RigidReferenceFrame_1.RigidReferenceFrame);
-var Airplane_CategoryObject_6 = /*#__PURE__*/function (_VectorFormulaConsume) {
-  function Airplane_CategoryObject_6(desktop, name) {
-    var _this5;
-    _classCallCheck(this, Airplane_CategoryObject_6);
-    _this5 = _callSuper(this, Airplane_CategoryObject_6, [desktop, name]);
-    _this5.var_0 = 0;
-    var map = new Map([]);
-    _this5.performer.setAliasMap(map, _this5);
-    _this5.addVariableValue("Formula_1", 0, 0);
-    return _this5;
-  }
-  _inherits(Airplane_CategoryObject_6, _VectorFormulaConsume);
-  return _createClass(Airplane_CategoryObject_6, [{
-    key: "calculateTree",
-    value: function calculateTree() {
-      this.success = true;
-      this.var_0 = this.getInternalTime();
-    }
-  }, {
-    key: "init",
-    value: function init() {
-      var all = this.getAllMeasurements();
-    }
-  }, {
-    key: "get_0",
-    value: function get_0() {
-      return this.success ? this.var_0 : undefined;
-    }
-  }, {
-    key: "save",
-    value: function save() {
-      var v = this.variables;
-      var x0 = v.get("Formula_1");
-      x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_0());
-    }
-  }]);
-}(VectorFormulaConsumer_1.VectorFormulaConsumer);
-var Airplane_CategoryObject_7 = /*#__PURE__*/function (_DataConsumer_1$DataC) {
-  function Airplane_CategoryObject_7(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryObject_7);
-    return _callSuper(this, Airplane_CategoryObject_7, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryObject_7, _DataConsumer_1$DataC);
-  return _createClass(Airplane_CategoryObject_7);
-}(DataConsumer_1.DataConsumer);
-var Airplane_CategoryArrow_0 = /*#__PURE__*/function (_ReferenceFrameArrow_) {
-  function Airplane_CategoryArrow_0(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryArrow_0);
-    return _callSuper(this, Airplane_CategoryArrow_0, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryArrow_0, _ReferenceFrameArrow_);
-  return _createClass(Airplane_CategoryArrow_0);
-}(ReferenceFrameArrow_1.ReferenceFrameArrow);
-var Airplane_CategoryArrow_1 = /*#__PURE__*/function (_VisibleConsumerLink_) {
-  function Airplane_CategoryArrow_1(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryArrow_1);
-    return _callSuper(this, Airplane_CategoryArrow_1, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryArrow_1, _VisibleConsumerLink_);
-  return _createClass(Airplane_CategoryArrow_1);
-}(VisibleConsumerLink_1.VisibleConsumerLink);
-var Airplane_CategoryArrow_2 = /*#__PURE__*/function (_BelognsToCollection_) {
-  function Airplane_CategoryArrow_2(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryArrow_2);
-    return _callSuper(this, Airplane_CategoryArrow_2, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryArrow_2, _BelognsToCollection_);
-  return _createClass(Airplane_CategoryArrow_2);
-}(BelognsToCollection_1.BelongsToCollection);
-var Airplane_CategoryArrow_3 = /*#__PURE__*/function (_BelognsToCollection_2) {
-  function Airplane_CategoryArrow_3(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryArrow_3);
-    return _callSuper(this, Airplane_CategoryArrow_3, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryArrow_3, _BelognsToCollection_2);
-  return _createClass(Airplane_CategoryArrow_3);
-}(BelognsToCollection_1.BelongsToCollection);
-var Airplane_CategoryArrow_4 = /*#__PURE__*/function (_BelognsToCollection_3) {
-  function Airplane_CategoryArrow_4(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryArrow_4);
-    return _callSuper(this, Airplane_CategoryArrow_4, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryArrow_4, _BelognsToCollection_3);
-  return _createClass(Airplane_CategoryArrow_4);
-}(BelognsToCollection_1.BelongsToCollection);
-var Airplane_CategoryArrow_5 = /*#__PURE__*/function (_DataLink_1$DataLink) {
-  function Airplane_CategoryArrow_5(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryArrow_5);
-    return _callSuper(this, Airplane_CategoryArrow_5, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryArrow_5, _DataLink_1$DataLink);
-  return _createClass(Airplane_CategoryArrow_5);
-}(DataLink_1.DataLink);
-var Airplane_CategoryArrow_6 = /*#__PURE__*/function (_EventLink_1$EventLin) {
-  function Airplane_CategoryArrow_6(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryArrow_6);
-    return _callSuper(this, Airplane_CategoryArrow_6, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryArrow_6, _EventLink_1$EventLin);
-  return _createClass(Airplane_CategoryArrow_6);
-}(EventLink_1.EventLink);
-var Airplane = /*#__PURE__*/function (_Desktop_1$Desktop) {
-  function Airplane() {
-    var _this6;
-    _classCallCheck(this, Airplane);
-    _this6 = _callSuper(this, Airplane);
-    _this6.name = "Airplane";
-    _this6.mapObjects.set("Airplane_CategoryObject_0", new Airplane_CategoryObject_0(_this6, "pLANE"));
-    _this6.mapObjects.set("Airplane_CategoryObject_0_Visible0", new Airplane_CategoryObject_0_Visible0(_this6, "pLANE"));
-    _this6.mapObjects.set("Airplane_CategoryObject_0_Visible0", new Airplane_CategoryObject_0_Visible0(_this6, "pLANE"));
-    _this6.mapObjects.set("Airplane_CategoryObject_3", new Airplane_CategoryObject_3(_this6, "Camera"));
-    _this6.mapObjects.set("Airplane_CategoryObject_4", new Airplane_CategoryObject_4(_this6, "Timer"));
-    _this6.mapObjects.set("Airplane_CategoryObject_5", new Airplane_CategoryObject_5(_this6, ""));
-    _this6.mapObjects.set("Airplane_CategoryObject_6", new Airplane_CategoryObject_6(_this6, "Time"));
-    _this6.mapObjects.set("Airplane_CategoryObject_7", new Airplane_CategoryObject_7(_this6, "Chart"));
-    new Airplane_CategoryArrow_0(_this6, "");
-    new Airplane_CategoryArrow_1(_this6, "");
-    new Airplane_CategoryArrow_2(_this6, "");
-    new Airplane_CategoryArrow_3(_this6, "");
-    new Airplane_CategoryArrow_4(_this6, "");
-    new Airplane_CategoryArrow_5(_this6, "");
-    new Airplane_CategoryArrow_6(_this6, "");
-    _this6.finish();
-    return _this6;
-  }
-  _inherits(Airplane, _Desktop_1$Desktop);
-  return _createClass(Airplane, [{
-    key: "finish",
-    value: function finish() {
-      var objects = this.getCategoryObjects();
-      var arrows = this.getCategoryArrows();
-      var s0 = this.mapObjects.get("Airplane_CategoryObject_3");
-      if (s0 != undefined) arrows[0].setSource(s0);
-      var t0 = this.mapObjects.get("Airplane_CategoryObject_5");
-      if (t0 != undefined) arrows[0].setTarget(t0);
-      var s1 = this.mapObjects.get("Airplane_CategoryObject_3");
-      if (s1 != undefined) arrows[1].setSource(s1);
-      var t1 = this.mapObjects.get("Airplane_CategoryObject_0_Visible0");
-      if (t1 != undefined) arrows[1].setTarget(t1);
-      var s2 = this.mapObjects.get("Airplane_CategoryObject_7");
-      if (s2 != undefined) arrows[2].setSource(s2);
-      var t2 = this.mapObjects.get("Airplane_CategoryObject_3");
-      if (t2 != undefined) arrows[2].setTarget(t2);
-      var s3 = this.mapObjects.get("Airplane_CategoryObject_7");
-      if (s3 != undefined) arrows[3].setSource(s3);
-      var t3 = this.mapObjects.get("Airplane_CategoryObject_5");
-      if (t3 != undefined) arrows[3].setTarget(t3);
-      var s4 = this.mapObjects.get("Airplane_CategoryObject_7");
-      if (s4 != undefined) arrows[4].setSource(s4);
-      var t4 = this.mapObjects.get("Airplane_CategoryObject_0");
-      if (t4 != undefined) arrows[4].setTarget(t4);
-      var s5 = this.mapObjects.get("Airplane_CategoryObject_7");
-      if (s5 != undefined) arrows[5].setSource(s5);
-      var t5 = this.mapObjects.get("Airplane_CategoryObject_6");
-      if (t5 != undefined) arrows[5].setTarget(t5);
-      var s6 = this.mapObjects.get("Airplane_CategoryObject_7");
-      if (s6 != undefined) arrows[6].setSource(s6);
-      var t6 = this.mapObjects.get("Airplane_CategoryObject_4");
-      if (t6 != undefined) arrows[6].setTarget(t6);
-      objects[0].postSetArrow();
-      objects[5].postSetArrow();
-      objects[6].postSetArrow();
-      objects[7].postSetArrow();
-    }
-  }]);
-}(Desktop_1.Desktop);
-exports.Airplane = Airplane;
-},{"./Library/Motion6D/Objects/Shapes/Basic3DShape":"src/Library/Motion6D/Objects/Shapes/Basic3DShape.ts","./Library/Motion6D/Objects/SerializablePosition":"src/Library/Motion6D/Objects/SerializablePosition.ts","./Library/Motion6D/Visible/BasicCamera":"src/Library/Motion6D/Visible/BasicCamera.ts","./Library/Event/Objects/TimerObject":"src/Library/Event/Objects/TimerObject.ts","./Library/Utilities/DateTime/TimeSpan":"src/Library/Utilities/DateTime/TimeSpan.ts","./Library/Motion6D/Objects/RigidReferenceFrame":"src/Library/Motion6D/Objects/RigidReferenceFrame.ts","./Library/Measurements/VectorFormulaConsumer":"src/Library/Measurements/VectorFormulaConsumer.ts","./Library/Measurements/DataConsumer":"src/Library/Measurements/DataConsumer.ts","./Library/Motion6D/Arrows/ReferenceFrameArrow":"src/Library/Motion6D/Arrows/ReferenceFrameArrow.ts","./Library/Motion6D/Visible/VisibleConsumerLink":"src/Library/Motion6D/Visible/VisibleConsumerLink.ts","./Library/Arrows/BelognsToCollection":"src/Library/Arrows/BelognsToCollection.ts","./Library/Measurements/Arrows/DataLink":"src/Library/Measurements/Arrows/DataLink.ts","./Library/Event/Objects/EventLink":"src/Library/Event/Objects/EventLink.ts","./Library/Desktop":"src/Library/Desktop.ts"}],"src/Tests/Wrappers/ScadaComposion.ts":[function(require,module,exports) {
+},{"./DataRuntimeConsumerMotion6DEvent":"src/Library/Motion6D/Runtime/Event/DataRuntimeConsumerMotion6DEvent.ts","../../../Performer":"src/Library/Performer.ts","../../../Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts"}],"src/Tests/Wrappers/ScadaComposion.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -26285,12 +24437,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ScadaComposition = void 0;
+var Composition_1 = require("../Composition");
 var ScadaDesktopEngine_1 = require("../../Library/Scada/ScadaDesktopEngine");
 var Motion6DRealtimeFactory_1 = require("../../Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory");
-var Airplane_1 = require("../../Airplane");
 var ScadaComposition = /*#__PURE__*/_createClass(function ScadaComposition(engine) {
   _classCallCheck(this, ScadaComposition);
-  this.scada = new ScadaDesktopEngine_1.ScadaDesktopEngine(new Airplane_1.Airplane(), engine, new Motion6DRealtimeFactory_1.Motion6DRealtimeFactory(), "Chart");
+  this.scada = new ScadaDesktopEngine_1.ScadaDesktopEngine(new Composition_1.Composition(), engine, new Motion6DRealtimeFactory_1.Motion6DRealtimeFactory(), "Chart");
   var dc = this.scada.getScadaObject("Chart", "IDataConsumer");
   var ev = this.scada.getScadaObject("Timer", "IEvent");
   new Action(dc[0], ev[0]);
@@ -26313,7 +24465,7 @@ var Action = /*#__PURE__*/function () {
     }
   }]);
 }();
-},{"../../Library/Scada/ScadaDesktopEngine":"src/Library/Scada/ScadaDesktopEngine.ts","../../Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory":"src/Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory.ts","../../Airplane":"src/Airplane.ts"}],"src/Tests/Actor/ActorWeb.ts":[function(require,module,exports) {
+},{"../Composition":"src/Tests/Composition.ts","../../Library/Scada/ScadaDesktopEngine":"src/Library/Scada/ScadaDesktopEngine.ts","../../Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory":"src/Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory.ts"}],"src/Tests/Actor/ActorWeb.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -37836,7 +35988,1879 @@ var SpaceTrippersScene = /*#__PURE__*/function (_BasicScene_1$BasicSc) {
   }]);
 }(BasicScene_1.BasicScene);
 exports.default = SpaceTrippersScene;
-},{"../common/shader-program":"src/common/shader-program.ts","../common/mesh-utils":"src/common/mesh-utils.ts","../common/texture-utils":"src/common/texture-utils.ts","../common/camera":"src/common/camera.ts","../common/camera-controllers/fly-camera-controller":"src/common/camera-controllers/fly-camera-controller.ts","gl-matrix":"node_modules/gl-matrix/esm/index.js","../common/dom-utils":"src/common/dom-utils.tsx","tsx-create-element":"node_modules/tsx-create-element/dist/es6/index.js","../common/BasicScene":"src/common/BasicScene.ts"}],"src/common/Primitives/BasicPrimitive.ts":[function(require,module,exports) {
+},{"../common/shader-program":"src/common/shader-program.ts","../common/mesh-utils":"src/common/mesh-utils.ts","../common/texture-utils":"src/common/texture-utils.ts","../common/camera":"src/common/camera.ts","../common/camera-controllers/fly-camera-controller":"src/common/camera-controllers/fly-camera-controller.ts","gl-matrix":"node_modules/gl-matrix/esm/index.js","../common/dom-utils":"src/common/dom-utils.tsx","tsx-create-element":"node_modules/tsx-create-element/dist/es6/index.js","../common/BasicScene":"src/common/BasicScene.ts"}],"src/Library/Arrows/BelognsToCollection.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.BelongsToCollection = void 0;
+var CategoryArrow_1 = require("../CategoryArrow");
+var OwnError_1 = require("../ErrorHandler/OwnError");
+var BelongsToCollection = /*#__PURE__*/function (_CategoryArrow_1$Cate) {
+  function BelongsToCollection(desktop, name) {
+    var _this;
+    _classCallCheck(this, BelongsToCollection);
+    _this = _callSuper(this, BelongsToCollection, [desktop, name]);
+    _this.typeName = "BelongsToCollection";
+    _this.types.push("BelongsToCollection");
+    return _this;
+  }
+  _inherits(BelongsToCollection, _CategoryArrow_1$Cate);
+  return _createClass(BelongsToCollection, [{
+    key: "setSource",
+    value: function setSource(source) {
+      this.source = source;
+      var a = this.getObjectT(source, "IAddRemove");
+      if (a.length == 0) {
+        throw new OwnError_1.OwnError("BelongsToCollection", "setSource", "");
+      }
+      this.ar = a[0];
+    }
+  }, {
+    key: "setTarget",
+    value: function setTarget(target) {
+      this.target = target;
+      this.ar.addChildT(target);
+    }
+  }]);
+}(CategoryArrow_1.CategoryArrow);
+exports.BelongsToCollection = BelongsToCollection;
+},{"../CategoryArrow":"src/Library/CategoryArrow.ts","../ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.ts"}],"src/Library/Motion6D/Arrows/ReferenceFrameArrow.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ReferenceFrameArrow = void 0;
+var CategoryArrow_1 = require("../../CategoryArrow");
+var ReferenceFrameArrow = /*#__PURE__*/function (_CategoryArrow_1$Cate) {
+  function ReferenceFrameArrow(desktop, name) {
+    var _this;
+    _classCallCheck(this, ReferenceFrameArrow);
+    _this = _callSuper(this, ReferenceFrameArrow, [desktop, name]);
+    _this.typeName = "ReferenceFrameArrow";
+    _this.types.push("ReferenceFrameArrow");
+    return _this;
+  }
+  _inherits(ReferenceFrameArrow, _CategoryArrow_1$Cate);
+  return _createClass(ReferenceFrameArrow, [{
+    key: "getSource",
+    value: function getSource() {
+      return this.position;
+    }
+  }, {
+    key: "getTagret",
+    value: function getTagret() {
+      return this.frame;
+    }
+  }, {
+    key: "setSource",
+    value: function setSource(source) {
+      this.position = source;
+      this.positionNode = this.position;
+    }
+  }, {
+    key: "setTarget",
+    value: function setTarget(target) {
+      var f = target;
+      this.frame = f;
+      var p = f;
+      if (p === undefined) {} else {
+        p.addNodeT(this.positionNode);
+      }
+    }
+  }]);
+}(CategoryArrow_1.CategoryArrow);
+exports.ReferenceFrameArrow = ReferenceFrameArrow;
+},{"../../CategoryArrow":"src/Library/CategoryArrow.ts"}],"src/Library/Utilities/Collections/CollectionProcessor.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CollectionProcessor = void 0;
+var CollectionProcessor = /*#__PURE__*/function () {
+  function CollectionProcessor() {
+    _classCallCheck(this, CollectionProcessor);
+  }
+  return _createClass(CollectionProcessor, [{
+    key: "arrayCopy",
+    value: function arrayCopy(source, sourceIndex, destinationArray, destinationIndex, length) {
+      for (var i = 0; i < length; i++) {
+        destinationArray[destinationIndex + i] = source[sourceIndex + i];
+      }
+    }
+  }]);
+}();
+exports.CollectionProcessor = CollectionProcessor;
+},{}],"src/Library/Vector3D/Vector3DProcessor.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Vector3DProcessor = void 0;
+var RealMatrix_1 = require("../RealMatrixProcessor/RealMatrix");
+var CollectionProcessor_1 = require("../Utilities/Collections/CollectionProcessor");
+var Vector3DProcessor = /*#__PURE__*/function () {
+  function Vector3DProcessor() {
+    _classCallCheck(this, Vector3DProcessor);
+    this.idQuaternion = [1, 0, 0, 0];
+    this.realMatrix = new RealMatrix_1.RealMatrix();
+    this.collectionProcessor = new CollectionProcessor_1.CollectionProcessor();
+  }
+  return _createClass(Vector3DProcessor, [{
+    key: "quaternionNormalize",
+    value: function quaternionNormalize(quaternion) {
+      var a = 0;
+      var _iterator = _createForOfIteratorHelper(quaternion),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var q = _step.value;
+          a += q * q;
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      a = 1 / Math.sqrt(a);
+      for (var i = 0; i < 4; i++) {
+        quaternion[i] *= a;
+      }
+    }
+  }, {
+    key: "quaternionToeulerAngles",
+    value: function quaternionToeulerAngles(angles, quaternion) {
+      this.quaternionToeulerAnglesXYZW(angles, quaternion[1], quaternion[2], quaternion[3], quaternion[0]);
+    }
+  }, {
+    key: "quaternionToeulerAnglesXYZW",
+    value: function quaternionToeulerAnglesXYZW(angles, x, y, z, w) {
+      // roll (x-axis rotation)
+      var sinr_cosp = 2 * (w * x + y * z);
+      var cosr_cosp = 1 - 2 * (x * x + y * y);
+      angles.setRoll(Math.atan2(sinr_cosp, cosr_cosp));
+      // pitch (y-axis rotation)
+      var sinp = 2 * (w * y - z * x);
+      if (Math.abs(sinp) >= 1) {
+        angles.setPitch(this.realMatrix.copySign(Math.PI / 2, sinp));
+        //std::copysign(M_PI / 2, sinp); // use 90 degrees if out of range
+      } else {
+        angles.setPitch(Math.asin(sinp));
+      }
+      // yaw (z-axis rotation)
+      var siny_cosp = 2 * (w * z + x * y);
+      var cosy_cosp = 1 - 2 * (y * y + z * z);
+      angles.setYaw(Math.atan2(siny_cosp, cosy_cosp));
+    }
+  }, {
+    key: "rotateOmega",
+    value: function rotateOmega(omega, quaternion, time) {
+      var o = this.realMatrix.partialNorm(omega, 0, 3);
+      var phi = 0.5 * o * time;
+      var s = Math.sin(phi);
+      quaternion[0] = Math.sqrt(1 - s * s);
+      o = 1 / o;
+      for (var i = 0; i < 3; i++) {
+        quaternion[i + 1] = o * s * omega[i];
+      }
+    }
+  }, {
+    key: "square3d",
+    value: function square3d(x) {
+      // !!! EXCEPTION DELETE
+      if (x.length != 3) {}
+      return x[0] * x[0] + x[1] * x[1] + x[2] * x[2];
+    }
+  }, {
+    key: "vectorProduct",
+    value: function vectorProduct(x, y, z) {
+      z[0] = x[1] * y[2] - x[2] * y[1];
+      z[1] = x[2] * y[0] - x[0] * y[2];
+      z[2] = x[0] * y[1] - x[1] * y[0];
+    }
+  }, {
+    key: "quaternionMultiply",
+    value: function quaternionMultiply(x, y, z) {
+      z[0] = x[0] * y[0] - x[1] * y[1] - x[2] * y[2] - x[3] * y[3];
+      z[1] = x[0] * y[1] + x[1] * y[0] + x[2] * y[3] - x[3] * y[2];
+      z[2] = x[0] * y[2] + x[2] * y[0] + x[3] * y[1] - x[1] * y[3];
+      z[3] = x[0] * y[3] + x[3] * y[0] + x[1] * y[2] - x[2] * y[1];
+    }
+  }, {
+    key: "quaternionInvertMultiply",
+    value: function quaternionInvertMultiply(x, y, z) {
+      z[0] = x[0] * y[0] + x[1] * y[1] + x[2] * y[2] + x[3] * y[3];
+      z[1] = x[0] * y[1] - x[1] * y[0] - x[2] * y[3] + x[3] * y[2];
+      z[2] = x[0] * y[2] - x[2] * y[0] - x[3] * y[1] + x[1] * y[3];
+      z[3] = x[0] * y[3] - x[3] * y[0] - x[1] * y[2] + x[2] * y[1];
+    }
+  }, {
+    key: "quaternionInvertOmega",
+    value: function quaternionInvertOmega(quaterinon, omegaIn, omegaOut) {
+      omegaOut[0] = quaterinon[0] * omegaIn[0] - quaterinon[2] * omegaIn[2] + quaterinon[3] * omegaIn[1];
+      omegaOut[1] = quaterinon[0] * omegaIn[1] - quaterinon[3] * omegaIn[0] + quaterinon[1] * omegaIn[2];
+      omegaOut[2] = quaterinon[0] * omegaIn[2] - quaterinon[1] * omegaIn[1] + quaterinon[2] * omegaIn[0];
+    }
+  }, {
+    key: "quaternionToMatrix",
+    value: function quaternionToMatrix(q, m, qq) {
+      var norm = 1 / Math.sqrt(q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]);
+      for (var i = 0; i < 4; i++) {
+        q[i] *= norm;
+      }
+      for (var _i = 0; _i < 4; _i++) {
+        for (var j = 0; j <= _i; j++) {
+          qq[_i][j] = q[_i] * q[j];
+        }
+      }
+      m[0][0] = qq[0][0] + qq[1][1] - qq[2][2] - qq[3][3];
+      m[0][1] = 2 * (qq[2][1] - qq[3][0]);
+      m[0][2] = 2 * (qq[2][0] + qq[3][1]);
+      m[1][0] = 2 * (qq[3][0] + qq[2][1]);
+      m[1][1] = qq[0][0] - qq[1][1] + qq[2][2] - qq[3][3];
+      m[1][2] = 2 * (qq[3][2] - qq[1][0]);
+      m[2][0] = 2 * (qq[3][1] - qq[2][0]);
+      m[2][1] = 2 * (qq[1][0] + qq[3][2]);
+      m[2][2] = qq[0][0] - qq[1][1] - qq[2][2] + qq[3][3];
+    }
+  }, {
+    key: "calculateDynamics",
+    value: function calculateDynamics(q, der, m, omega, qd) {
+      var norm = 1 / Math.sqrt(q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]);
+      for (var i = 0; i < 4; i++) {
+        q[i] *= norm;
+        der[i] *= norm;
+      }
+      for (var _i2 = 0; _i2 < 4; _i2++) {
+        for (var j = 0; j < 4; j++) {
+          qd[_i2][j] = q[_i2] * der[j];
+        }
+      }
+      omega[0] = 2 * (-qd[2][3] + qd[3][2] + qd[0][1] - qd[1][0]);
+      omega[1] = 2 * (-qd[3][1] + qd[1][3] + qd[0][2] - qd[2][0]);
+      omega[2] = 2 * (-qd[1][2] + qd[2][1] + qd[0][3] - qd[3][0]);
+    }
+  }, {
+    key: "calculateDynamicsLong",
+    value: function calculateDynamicsLong(q, der, m, omega, qq, qd) {
+      this.calculateDynamics(q, der, m, omega, qd);
+      for (var i = 0; i < 4; i++) {
+        for (var j = 0; j <= i; j++) {
+          qq[i][j] = q[i] * q[j];
+        }
+      }
+      m[0][0] = qq[0][0] + qq[1][1] - qq[2][2] - qq[3][3];
+      m[0][1] = 2 * (qq[2][1] - qq[3][0]);
+      m[0][2] = 2 * (qq[2][0] + qq[3][1]);
+      m[1][0] = 2 * (qq[3][0] + qq[2][1]);
+      m[1][1] = qq[0][0] - qq[1][1] + qq[2][2] - qq[3][3];
+      m[1][2] = 2 * (qq[3][2] - qq[1][0]);
+      m[2][0] = 2 * (qq[3][1] - qq[2][0]);
+      m[2][1] = 2 * (qq[1][0] + qq[3][2]);
+      m[2][2] = qq[0][0] - qq[1][1] - qq[2][2] + qq[3][3];
+    }
+  }, {
+    key: "calculateQuaternionDerivation",
+    value: function calculateQuaternionDerivation(quaternion, omega, quaternionDerivation, auxQuaternion) {
+      auxQuaternion[0] = 0;
+      this.collectionProcessor.arrayCopy(omega, 0, auxQuaternion, 1, 3);
+      this.quaternionMultiply(quaternion, auxQuaternion, quaternionDerivation);
+      for (var i = 0; i < 4; i++) {
+        quaternionDerivation[i] *= 0.5;
+      }
+    }
+  }]);
+}();
+exports.Vector3DProcessor = Vector3DProcessor;
+},{"../RealMatrixProcessor/RealMatrix":"src/Library/RealMatrixProcessor/RealMatrix.ts","../Utilities/Collections/CollectionProcessor":"src/Library/Utilities/Collections/CollectionProcessor.ts"}],"src/Library/Motion6D/ReferenceFrame.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ReferenceFrame = void 0;
+var Performer_1 = require("../Performer");
+var RealMatrix_1 = require("../RealMatrixProcessor/RealMatrix");
+var Vector3DProcessor_1 = require("../Vector3D/Vector3DProcessor");
+var ReferenceFrame = /*#__PURE__*/function () {
+  function ReferenceFrame() {
+    _classCallCheck(this, ReferenceFrame);
+    this.nodes = [];
+    this.performer = new Performer_1.Performer();
+    this.realMatrix = new RealMatrix_1.RealMatrix();
+    this.vp = new Vector3DProcessor_1.Vector3DProcessor();
+    this.positions = [];
+    this.types = ["IObject", "IOrientation", "IPosition", "ReferenceFrame"];
+    this.typeName = "ReferenceFrame";
+    this.quaternion = [1, 0, 0, 0];
+    /// <summary>
+    /// Absolute position
+    /// </summary>
+    this.position = [0, 0, 0];
+    /// <summary>
+    /// Orientation matrix
+    /// </summary>
+    this.matrix = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+    /// <summary>
+    /// Auxiliary array
+    /// </summary>
+    this.qq = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+    /// <summary>
+    /// Auxiliary array
+    /// </summary>
+    this.p = [0, 0, 0];
+    /// <summary>
+    /// Auxliary position
+    /// </summary>
+    this.auxPos = [0, 0, 0];
+  }
+  return _createClass(ReferenceFrame, [{
+    key: "setParameters",
+    value: function setParameters(parameters) {
+      this.parameters = parameters;
+    }
+  }, {
+    key: "getParentT",
+    value: function getParentT() {
+      return this.parentNode;
+    }
+  }, {
+    key: "setParentT",
+    value: function setParentT(parent) {
+      this.parentNode = parent;
+    }
+  }, {
+    key: "getNodesT",
+    value: function getNodesT() {
+      return this.nodes;
+    }
+  }, {
+    key: "addNodeT",
+    value: function addNodeT(node) {
+      this.nodes.push(node);
+    }
+  }, {
+    key: "removeNodeT",
+    value: function removeNodeT(node) {
+      this.nodes = this.performer.remove(this.nodes, node);
+    }
+  }, {
+    key: "getNodeValueT",
+    value: function getNodeValueT() {
+      return this;
+    }
+  }, {
+    key: "setReferenceFrame",
+    value: function setReferenceFrame(baseFrame, relative) {
+      var m = baseFrame.getMatrix();
+      var bp = baseFrame.getPosition();
+      var rp = relative.getPosition();
+      for (var i = 0; i < 3; i++) {
+        this.position[i] = bp[i];
+        for (var j = 0; j < 3; j++) {
+          this.position[i] += m[i][j] * rp[j];
+        }
+      }
+      this.vp.quaternionMultiply(baseFrame.quaternion, relative.quaternion, this.quaternion);
+      this.setMatrix();
+    }
+  }, {
+    key: "getQuaternion",
+    value: function getQuaternion() {
+      return this.quaternion;
+    }
+  }, {
+    key: "getMatrix",
+    value: function getMatrix() {
+      return this.matrix;
+    }
+  }, {
+    key: "getPosition",
+    value: function getPosition() {
+      return this.position;
+    }
+  }, {
+    key: "getParentFrame",
+    value: function getParentFrame() {
+      return this.parent;
+    }
+  }, {
+    key: "setParentFrame",
+    value: function setParentFrame(parent) {
+      this.parent = parent;
+    }
+  }, {
+    key: "getParameters",
+    value: function getParameters() {
+      return this.parameters;
+    }
+  }, {
+    key: "updateReferenceFrame",
+    value: function updateReferenceFrame() {
+      var p = this.getParentFrame();
+      if (p === undefined) {
+        return;
+      }
+      var r = p.getOwnFrame();
+      if (r === undefined) {
+        return;
+      }
+      this.position = r.getPosition();
+      this.quaternion = r.getQuaternion();
+      this.matrix = r.getMatrix();
+    }
+  }, {
+    key: "getPositions",
+    value: function getPositions() {
+      return this.positions;
+    }
+  }, {
+    key: "addPosition",
+    value: function addPosition(position) {
+      this.positions.push(position);
+    }
+    // new Error
+  }, {
+    key: "getClassName",
+    value: function getClassName() {
+      return this.typeName;
+    }
+  }, {
+    key: "imlplementsType",
+    value: function imlplementsType(type) {
+      return this.types.indexOf(type) > 0;
+    }
+  }, {
+    key: "getName",
+    value: function getName() {
+      return "";
+    }
+  }, {
+    key: "getRelativePosition",
+    value: function getRelativePosition(inPosition, outPosition) {
+      for (var i = 0; i < 3; i++) {
+        this.auxPos[i] = inPosition[i] - this.position[i];
+      }
+      for (var _i = 0; _i < 3; _i++) {
+        outPosition[_i] = 0;
+        for (var j = 0; j < 3; j++) {
+          outPosition[_i] += this.matrix[j][_i] * this.auxPos[j];
+        }
+      }
+    }
+  }, {
+    key: "norm",
+    value: function norm() {
+      this.vp.quaternionNormalize(this.quaternion);
+    }
+  }, {
+    key: "setMatrix",
+    value: function setMatrix() {
+      this.norm();
+      this.vp.quaternionToMatrix(this.quaternion, this.matrix, this.qq);
+    }
+  }, {
+    key: "getPositionArray",
+    value: function getPositionArray(position, coordinates) {
+      var p1 = this.getPosition();
+      var p2 = position.getPosition();
+      for (var i = 0; i < 3; i++) {
+        this.p[i] = p2[i] - p1[i];
+      }
+      for (var _i2 = 0; _i2 < 3; _i2++) {
+        coordinates[_i2] = 0;
+        for (var j = 0; j < 3; j++) {
+          coordinates[_i2] += this.matrix[_i2][j] * this.p[j];
+        }
+      }
+    }
+  }, {
+    key: "getRelative",
+    value: function getRelative(baseFrame, relativeFrame, result, diff) {
+      this.vp.quaternionInvertMultiply(relativeFrame.quaternion, baseFrame.quaternion, result.quaternion);
+      result.setMatrix();
+      for (var i = 0; i < 3; i++) {
+        diff[i] = relativeFrame.position[i] - baseFrame.position[i];
+      }
+      var m = baseFrame.getMatrix();
+      var p = result.getPosition();
+      for (var _i3 = 0; _i3 < 3; _i3++) {
+        p[_i3] = 0;
+        for (var j = 0; j < 3; j++) {
+          p[_i3] += m[j][_i3] * diff[j];
+        }
+      }
+    }
+  }, {
+    key: "calculateRotatedPosition",
+    value: function calculateRotatedPosition(abs, rot) {
+      for (var i = 0; i < 3; i++) {
+        rot[i] = 0;
+        for (var j = 0; j < 3; j++) {
+          rot[i] += this.matrix[j][i] * abs[j];
+        }
+      }
+    }
+  }]);
+}();
+exports.ReferenceFrame = ReferenceFrame;
+},{"../Performer":"src/Library/Performer.ts","../RealMatrixProcessor/RealMatrix":"src/Library/RealMatrixProcessor/RealMatrix.ts","../Vector3D/Vector3DProcessor":"src/Library/Vector3D/Vector3DProcessor.ts"}],"src/Library/Motion6D/RotatedFrame.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
+function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
+function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.RotatedFrame = void 0;
+var ReferenceFrame_1 = require("./ReferenceFrame");
+var RotatedFrame = /*#__PURE__*/function (_ReferenceFrame_1$Ref) {
+  function RotatedFrame() {
+    var _this;
+    _classCallCheck(this, RotatedFrame);
+    _this = _callSuper(this, RotatedFrame);
+    _this.omega = [0, 0, 0];
+    _this.typeName = "RotatedFrame";
+    _this.types.push("IAngularVelocityMotion6D");
+    _this.types.push("RotatedFrame");
+    return _this;
+  }
+  _inherits(RotatedFrame, _ReferenceFrame_1$Ref);
+  return _createClass(RotatedFrame, [{
+    key: "getOmega",
+    value: function getOmega() {
+      return this.omega;
+    }
+  }, {
+    key: "setReferenceFrame",
+    value: function setReferenceFrame(baseFrame, relative) {
+      _superPropGet(RotatedFrame, "setReferenceFrame", this, 3)([baseFrame, relative]);
+      var ab = this.performer.convertObject(baseFrame, "IAngularVelocityMotion6D");
+      var ar = this.performer.convertObject(relative, "IAngularVelocityMotion6D");
+      var matrix = relative.getMatrix();
+      var ob = ab[0].getOmega();
+      var or = ar[0].getOmega();
+      for (var i = 0; i < or.length; i++) {
+        this.omega[i] = or[i];
+        for (var j = 0; j < 3; j++) {
+          this.omega[i] += matrix[i][j] * ob[j];
+        }
+      }
+    }
+  }]);
+}(ReferenceFrame_1.ReferenceFrame);
+exports.RotatedFrame = RotatedFrame;
+},{"./ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts"}],"src/Library/Motion6D/Motion6DFrame.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
+function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
+function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Motion6DFrame = void 0;
+var RotatedFrame_1 = require("./RotatedFrame");
+var Motion6DFrame = /*#__PURE__*/function (_RotatedFrame_1$Rotat) {
+  function Motion6DFrame() {
+    var _this;
+    _classCallCheck(this, Motion6DFrame);
+    _this = _callSuper(this, Motion6DFrame);
+    _this.velocity = [0, 0, 0];
+    _this.hv = [0, 0, 0];
+    //protected double[] relativeVelocity = new double[] { 0, 0, 0 };
+    /// <summary>
+    /// Derivation
+    /// </summary>
+    _this.der = [0, 0, 0, 0];
+    /// <summary>
+    /// Quaternion derivation
+    /// </summary>
+    _this.qd = [0, 0, 0, 0];
+    _this.typeName = "Motion6DFrame";
+    _this.types.push("IVelocity");
+    _this.types.push("Motion6DFrame");
+    return _this;
+  }
+  _inherits(Motion6DFrame, _RotatedFrame_1$Rotat);
+  return _createClass(Motion6DFrame, [{
+    key: "getVelocity",
+    value: function getVelocity() {
+      return this.velocity;
+    }
+    //         let ab = this.performer.convertObject<IAngularVelocityMotion6D, ReferenceFrame>(baseFrame, "IAngularVelocityMotion6D");
+  }, {
+    key: "setReferenceFrame",
+    value: function setReferenceFrame(baseFrame, relative) {
+      _superPropGet(Motion6DFrame, "setReferenceFrame", this, 3)([baseFrame, relative]);
+      var baseOrientation = baseFrame;
+      var baseVelocity = this.performer.convertObject(baseFrame, "IVelocity");
+      var relativeVelocity = this.performer.convertObject(relative, "IVelocity");
+      var baseAngular = this.performer.convertObject(baseFrame, "IAngularVelocityMotion6D");
+      var ra = this.performer.convertObject(relative, "IAngularVelocityMotion6D");
+      var velocityBase = baseVelocity[0].getVelocity();
+      var velocityRelative = relativeVelocity[0].getVelocity();
+      var mb = baseOrientation.getMatrix();
+      var om = baseAngular[0].getOmega();
+      var pos = relative.getPosition();
+      this.vp.vectorProduct(om, pos, this.hv);
+      for (var i = 0; i < 3; i++) {
+        this.velocity[i] = velocityBase[i];
+        for (var j = 0; j < 3; j++) {
+          this.velocity[i] += mb[i][j] * (velocityRelative[j] + this.hv[j]);
+        }
+      }
+    }
+  }]);
+}(RotatedFrame_1.RotatedFrame);
+exports.Motion6DFrame = Motion6DFrame;
+},{"./RotatedFrame":"src/Library/Motion6D/RotatedFrame.ts"}],"src/Library/Motion6D/Motion6DAcceleratedFrame.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
+function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
+function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Motion6DAcceleratedFrame = void 0;
+var Motion6DFrame_1 = require("./Motion6DFrame");
+var Motion6DAcceleratedFrame = /*#__PURE__*/function (_Motion6DFrame_1$Moti) {
+  function Motion6DAcceleratedFrame() {
+    var _this;
+    _classCallCheck(this, Motion6DAcceleratedFrame);
+    _this = _callSuper(this, Motion6DAcceleratedFrame);
+    _this.relativeAcceleration = [0, 0, 0];
+    _this.acceleration = [0, 0, 0];
+    _this.angularAcceleration = [0, 0, 0];
+    _this.temp = [0, 0, 0];
+    _this.tempV = [0, 0, 0];
+    _this.typeName = "Motion6DAcceleratedFrame";
+    _this.types.push("IAcceleration");
+    _this.types.push("IAngularAcceleration");
+    _this.types.push("Motion6DAcceleratedFrame");
+    return _this;
+  }
+  _inherits(Motion6DAcceleratedFrame, _Motion6DFrame_1$Moti);
+  return _createClass(Motion6DAcceleratedFrame, [{
+    key: "setReferenceFrame",
+    value: function setReferenceFrame(baseFrame, relative) {
+      _superPropGet(Motion6DAcceleratedFrame, "setReferenceFrame", this, 3)([baseFrame, relative]);
+      var arn = this.performer.convertObject(relative, " IAngularAcceleration");
+      var relativeVelocity = this.performer.convertObject(relative, "IVelocity");
+      var baseAngulatVelocity = this.performer.convertObject(baseFrame, "IAngularVelocityMotion6D");
+      var relativeAngularVelocity = this.performer.convertObject(relative, "IAngularVelocityMotion6D");
+      var rp = this.getPosition();
+      var m = this.getMatrix();
+      var relativeOmega = relativeAngularVelocity[0].getOmega();
+      var baseOmega = baseAngulatVelocity[0].getOmega();
+      this.vp.vectorProduct(baseOmega, relativeVelocity[0].getVelocity(), this.tempV);
+      var om2 = this.vp.square3d(baseOmega);
+      var eps = arn[0].getAngularAcceleration();
+      this.vp.vectorProduct(eps, rp, this.temp);
+      for (var i = 0; i < 3; i++) {
+        this.tempV[i] *= 2;
+        this.tempV[i] += om2 * rp[i] + this.relativeAcceleration[i] + this.temp[i];
+      }
+      this.realMatrix.multiplyRight(m, this.tempV, this.acceleration);
+      var relativeOrientation = relative;
+      var relativeMatrix = relativeOrientation.getMatrix();
+      this.realMatrix.multiplyLeft(baseOmega, relativeMatrix, this.temp);
+      this.vp.vectorProduct(this.temp, relativeOmega, this.tempV);
+      for (var _i = 0; _i < 3; _i++) {
+        this.temp[_i] = eps[_i] + this.tempV[_i];
+      }
+      this.realMatrix.multiplyLeft(this.temp, m, this.angularAcceleration);
+    }
+  }, {
+    key: "getAngularAcceleration",
+    value: function getAngularAcceleration() {
+      return this.angularAcceleration;
+    }
+  }, {
+    key: "getLineraAcceleration",
+    value: function getLineraAcceleration() {
+      return this.acceleration;
+      ;
+    }
+  }, {
+    key: "getRelativeAcceleration",
+    value: function getRelativeAcceleration() {
+      return this.relativeAcceleration;
+    }
+  }]);
+}(Motion6DFrame_1.Motion6DFrame);
+exports.Motion6DAcceleratedFrame = Motion6DAcceleratedFrame;
+},{"./Motion6DFrame":"src/Library/Motion6D/Motion6DFrame.ts"}],"src/Library/Motion6D/Motion6DPerformer.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Motion6DPerformer = void 0;
+var Performer_1 = require("../Performer");
+var Motion6DAcceleratedFrame_1 = require("./Motion6DAcceleratedFrame");
+var Motion6DFrame_1 = require("./Motion6DFrame");
+var ReferenceFrame_1 = require("./ReferenceFrame");
+var Motion6DPerformer = /*#__PURE__*/function () {
+  function Motion6DPerformer() {
+    _classCallCheck(this, Motion6DPerformer);
+    this.performer = new Performer_1.Performer();
+  }
+  return _createClass(Motion6DPerformer, [{
+    key: "getBaseFrame",
+    value: function getBaseFrame() {
+      return Motion6DPerformer.baseFrame;
+    }
+  }, {
+    key: "getOwnFrame",
+    value: function getOwnFrame(position) {
+      var pp = this.performer.convertObject(position, "IReferenceFrame");
+      if (pp.length > 0) return pp[0].getOwnFrame();
+      return this.getParentFrame(position);
+    }
+  }, {
+    key: "getFrame",
+    value: function getFrame(position) {
+      var f = this.performer.convertObject(position, "IReferenceFrame");
+      if (f.length == 1) {
+        return f[0].getOwnFrame();
+      }
+      return this.getParentFrame(position);
+    }
+  }, {
+    key: "getParentOwn",
+    value: function getParentOwn(position) {
+      var p = position.getParentFrame();
+      if (p === undefined) {
+        return undefined;
+      }
+      var f = this.performer.convertObject(p, "IReferenceFrame");
+      if (f.length > 0) {
+        return this.getParentFrame(f[0]);
+      }
+      return undefined;
+    }
+  }, {
+    key: "getParentFrame",
+    value: function getParentFrame(position) {
+      var p = position.getParentFrame();
+      if (p === undefined) {
+        return this.getBaseFrame();
+      }
+      return p.getOwnFrame();
+    }
+    /*
+          /// <summary>
+        /// Parent frame
+        /// </summary>
+        /// <param name="position">Position</param>
+        /// <returns>Parent frame</returns>
+        static public ReferenceFrame GetParentFrame(this IPosition position)
+        {
+            if (position.Parent == null)
+            {
+                return Motion6DFrame.Base;
+            }
+            return performer.GetParentOwn(position);
+        }
+      */
+  }, {
+    key: "getRelative",
+    value: function getRelative(baseFrame, relative) {
+      var frame;
+      var bf = this.performer.convertObject(baseFrame, "Motion6DAcceleratedFrame");
+      var rf = this.performer.convertObject(relative, "Motion6DAcceleratedFrame");
+      if (bf.length > 0 && rf.length > 0) {
+        frame = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
+      } else {
+        frame = new ReferenceFrame_1.ReferenceFrame();
+      }
+      frame.setReferenceFrame(baseFrame, relative);
+      return frame;
+    }
+  }, {
+    key: "getRelativeFrame",
+    value: function getRelativeFrame(baseFrame, targetFrame, relative) {
+      var bp = baseFrame.getPosition();
+      var tp = targetFrame.getPosition();
+      var bm = baseFrame.getMatrix();
+      var rp = relative.getPosition();
+      for (var i = 0; i < 3; i++) {
+        rp[i] = 0;
+        for (var j = 0; j < 3; j++) {
+          rp[i] += bm[j][i] * (tp[i] - bp[i]);
+        }
+      }
+      var tm = targetFrame.getMatrix();
+      var rm = relative.getMatrix();
+      for (var _i = 0; _i < 3; _i++) {
+        for (var _j = 0; _j < 3; _j++) {
+          rm[_i][_j] = 0;
+          for (var k = 0; k < 3; k++) {
+            rm[_i][_j] += bm[k][_i] * tm[k][_j];
+          }
+        }
+      }
+    }
+  }]);
+}();
+exports.Motion6DPerformer = Motion6DPerformer;
+Motion6DPerformer.baseFrame = new Motion6DFrame_1.Motion6DFrame();
+},{"../Performer":"src/Library/Performer.ts","./Motion6DAcceleratedFrame":"src/Library/Motion6D/Motion6DAcceleratedFrame.ts","./Motion6DFrame":"src/Library/Motion6D/Motion6DFrame.ts","./ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts"}],"src/Library/Motion6D/MovedFrame.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MovedFrame = void 0;
+var ReferenceFrame_1 = require("./ReferenceFrame");
+var MovedFrame = /*#__PURE__*/function (_ReferenceFrame_1$Ref) {
+  function MovedFrame() {
+    var _this;
+    _classCallCheck(this, MovedFrame);
+    _this = _callSuper(this, MovedFrame, arguments);
+    _this.velocity = [0, 0, 0];
+    return _this;
+  }
+  _inherits(MovedFrame, _ReferenceFrame_1$Ref);
+  return _createClass(MovedFrame, [{
+    key: "getVelocity",
+    value: function getVelocity() {
+      return this.velocity;
+    }
+  }]);
+}(ReferenceFrame_1.ReferenceFrame);
+exports.MovedFrame = MovedFrame;
+},{"./ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts"}],"src/Library/Motion6D/Objects/RigidReferenceFrame.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.RigidReferenceFrame = void 0;
+var CategoryObject_1 = require("../../CategoryObject");
+var OwnError_1 = require("../../ErrorHandler/OwnError");
+var Motion6DAcceleratedFrame_1 = require("../Motion6DAcceleratedFrame");
+var Motion6DPerformer_1 = require("../Motion6DPerformer");
+var ReferenceFrame_1 = require("../ReferenceFrame");
+var Motion6DFrame_1 = require("../Motion6DFrame");
+var RotatedFrame_1 = require("../RotatedFrame");
+var MovedFrame_1 = require("../MovedFrame");
+var RealMatrix_1 = require("../../RealMatrixProcessor/RealMatrix");
+var Vector3DProcessor_1 = require("../../Vector3D/Vector3DProcessor");
+var PerformerMeasuremets_1 = require("../../Measurements/PerformerMeasuremets");
+var RigidReferenceFrame = /*#__PURE__*/function (_CategoryObject_1$Cat) {
+  function RigidReferenceFrame(desktop, name) {
+    var _this;
+    _classCallCheck(this, RigidReferenceFrame);
+    _this = _callSuper(this, RigidReferenceFrame, [desktop, name]);
+    /// </summary>
+    _this.relativePosition = [0, 0, 0];
+    /// <summary> : IFunc<any>[] = [];
+    /// Relarive quaternion components
+    /// </summary>
+    _this.relativeQuaternion = [1, 0, 0, 0];
+    _this.children = [];
+    //protected double[,] relativeMatrix = new double[3, 3];
+    /// <summary>
+    /// Auxiliary variable
+    /// </summary>
+    _this.q44 = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+    /// <summary>
+    /// Linear velocity
+    /// </summary>
+    _this.velocity = [0, 0, 0, 0];
+    // protected double[] relativeVelocity = new double[] { 0, 0, 0 };
+    /// <summary>
+    /// Angular velocity
+    /// </summary>
+    _this.omega = [0, 0, 0];
+    _this.aliasNames = ["X", "Y", "Z", "Roll", "Pitch", "Yaw"];
+    _this.alinames = new Map();
+    _this.vp = new Vector3DProcessor_1.Vector3DProcessor();
+    _this.realMatrix = new RealMatrix_1.RealMatrix();
+    _this.own = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
+    _this.relative = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
+    _this.mPerformer = new Motion6DPerformer_1.Motion6DPerformer();
+    _this.measuremrntPerformrer = new PerformerMeasuremets_1.PerformerMeasuremets();
+    _this.nodes = [];
+    _this.typeName = "RigidReferenceFrame";
+    _this.types.push("IReferenceFrame");
+    _this.types.push("IPosition");
+    _this.types.push("IPostLoadPosition");
+    _this.types.push("IPostSetArrow");
+    _this.types.push("IAlias");
+    _this.types.push("RigidReferenceFrame");
+    return _this;
+  }
+  _inherits(RigidReferenceFrame, _CategoryObject_1$Cat);
+  return _createClass(RigidReferenceFrame, [{
+    key: "postSetArrow",
+    value: function postSetArrow() {
+      this.setParameters(this.parameters);
+      this.createFrame();
+    }
+  }, {
+    key: "getAliasNames",
+    value: function getAliasNames() {
+      return this.aliasNames;
+    }
+  }, {
+    key: "getAliasType",
+    value: function getAliasType(name) {
+      return 0;
+    }
+  }, {
+    key: "getAliasValue",
+    value: function getAliasValue(name) {
+      return this.alinames.get(name);
+    }
+  }, {
+    key: "setAliasValue",
+    value: function setAliasValue(name, value) {
+      this.alinames.set(name, value);
+    }
+  }, {
+    key: "postLoadPosition",
+    value: function postLoadPosition() {
+      this.createFrame();
+      this.copyPositionToRelativeFrame();
+      this.copyQuaternionToRelativeFrame();
+      this.init();
+      this.relative.setMatrix();
+    }
+  }, {
+    key: "impl",
+    value: function impl(s) {
+      if (this.parent === undefined) {
+        return true;
+      }
+      var own = this.parent.getOwnFrame();
+      if (own === undefined) {
+        return false;
+      }
+      return this.performer.implementsType(own, s);
+    }
+  }, {
+    key: "isAcceleration",
+    value: function isAcceleration() {
+      return this.impl("IAcceleration");
+    }
+  }, {
+    key: "isVelocity",
+    value: function isVelocity() {
+      return this.impl("IVelocity");
+    }
+  }, {
+    key: "isAngularVelocity",
+    value: function isAngularVelocity() {
+      return this.impl("IAngularVelocity");
+    }
+  }, {
+    key: "copyPositionToRelativeFrame",
+    value: function copyPositionToRelativeFrame() {
+      var rp = this.relative.getPosition();
+      this.performer.copyArray(this.relativePosition, rp);
+    }
+  }, {
+    key: "copyQuaternionToRelativeFrame",
+    value: function copyQuaternionToRelativeFrame() {
+      var rp = this.relative.getQuaternion();
+      this.performer.copyArray(this.relativeQuaternion, rp);
+      this.relative.setMatrix();
+    }
+  }, {
+    key: "copy6DPosition",
+    value: function copy6DPosition() {
+      this.copyPositionToRelativeFrame();
+      this.copyQuaternionToRelativeFrame();
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      if (this.relative === undefined) {
+        return;
+      }
+      var q = this.relative.getQuaternion();
+      for (var i = 0; i < q.length; i++) {
+        q[i] = this.relativeQuaternion[i];
+      }
+      var p = this.relative.getPosition();
+      for (var _i = 0; _i < p.length; _i++) {
+        p[_i] = this.relativePosition[_i];
+      }
+    }
+  }, {
+    key: "createFrame",
+    value: function createFrame() {
+      if (this.isAcceleration()) {
+        this.relative = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
+        this.own = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
+      }
+      if (this.isVelocity() && this.isAngularVelocity()) {
+        this.relative = new Motion6DFrame_1.Motion6DFrame();
+        this.own = new Motion6DFrame_1.Motion6DFrame();
+      }
+      if (this.isAngularVelocity()) {
+        this.relative = new RotatedFrame_1.RotatedFrame();
+        this.own = new RotatedFrame_1.RotatedFrame();
+      }
+      if (this.isVelocity()) {
+        this.relative = new MovedFrame_1.MovedFrame();
+        this.own = new MovedFrame_1.MovedFrame();
+      }
+      this.relative = new ReferenceFrame_1.ReferenceFrame();
+      this.own = new ReferenceFrame_1.ReferenceFrame();
+    }
+  }, {
+    key: "getNodeValueT",
+    value: function getNodeValueT() {
+      return this;
+    }
+  }, {
+    key: "getParentT",
+    value: function getParentT() {
+      return this.parentNode;
+    }
+  }, {
+    key: "setParentT",
+    value: function setParentT(parent) {
+      this.parentNode = parent;
+    }
+  }, {
+    key: "getNodesT",
+    value: function getNodesT() {
+      return this.nodes;
+    }
+  }, {
+    key: "addNodeT",
+    value: function addNodeT(node) {
+      this.nodes.push(node);
+    }
+  }, {
+    key: "removeNodeT",
+    value: function removeNodeT(node) {
+      this.nodes = this.performer.remove(this.nodes, node);
+    }
+  }, {
+    key: "getOwnFrame",
+    value: function getOwnFrame() {
+      return this.own;
+    }
+  }, {
+    key: "getPosition",
+    value: function getPosition() {
+      return this.own.getPosition();
+    }
+  }, {
+    key: "getParentFrame",
+    value: function getParentFrame() {
+      return this.parent;
+    }
+  }, {
+    key: "setParentFrame",
+    value: function setParentFrame(parent) {
+      if (parent != undefined && this.parent != undefined) {
+        throw new OwnError_1.OwnError("Parent", "", "");
+      }
+      this.parent = parent;
+      if (parent == undefined) {
+        this.own = this.mPerformer.getBaseFrame();
+        return;
+      }
+    }
+  }, {
+    key: "getParameters",
+    value: function getParameters() {
+      return this.parameters;
+    }
+  }, {
+    key: "setParameters",
+    value: function setParameters(parameters) {
+      this.parameters = parameters;
+    }
+  }, {
+    key: "updateReferenceFrame",
+    value: function updateReferenceFrame() {
+      var own = this.getOwnFrame();
+      var b = this.getBaseFrame();
+      if (b === null) {} else {
+        own.setReferenceFrame(b, this.relative);
+      }
+    }
+  }, {
+    key: "getBaseFrame",
+    value: function getBaseFrame() {
+      if (this.parent === undefined) {
+        return undefined;
+      } else {
+        return this.parent.getOwnFrame();
+      }
+    }
+  }]);
+}(CategoryObject_1.CategoryObject);
+exports.RigidReferenceFrame = RigidReferenceFrame;
+},{"../../CategoryObject":"src/Library/CategoryObject.ts","../../ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.ts","../Motion6DAcceleratedFrame":"src/Library/Motion6D/Motion6DAcceleratedFrame.ts","../Motion6DPerformer":"src/Library/Motion6D/Motion6DPerformer.ts","../ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts","../Motion6DFrame":"src/Library/Motion6D/Motion6DFrame.ts","../RotatedFrame":"src/Library/Motion6D/RotatedFrame.ts","../MovedFrame":"src/Library/Motion6D/MovedFrame.ts","../../RealMatrixProcessor/RealMatrix":"src/Library/RealMatrixProcessor/RealMatrix.ts","../../Vector3D/Vector3DProcessor":"src/Library/Vector3D/Vector3DProcessor.ts","../../Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts"}],"src/Library/Motion6D/Objects/BasicPosition.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.BasicPosition = void 0;
+var CategoryObject_1 = require("../../CategoryObject");
+var Performer_1 = require("../../Performer");
+var BasicPosition = /*#__PURE__*/function (_CategoryObject_1$Cat) {
+  function BasicPosition(desktop, name) {
+    var _this;
+    _classCallCheck(this, BasicPosition);
+    _this = _callSuper(this, BasicPosition, [desktop, name]);
+    /// <summary>
+    /// Absolute position
+    /// </summary>
+    _this.position = [0, 0, 0];
+    /// <summary>
+    /// Absolute position
+    /// </summary>
+    _this.own = [0, 0, 0];
+    _this.performer = new Performer_1.Performer();
+    _this.nodes = [];
+    _this.typeName = "BasicPosition";
+    _this.types.push("IPosition");
+    _this.types.push("BasicPosition");
+    return _this;
+  }
+  _inherits(BasicPosition, _CategoryObject_1$Cat);
+  return _createClass(BasicPosition, [{
+    key: "getPosition",
+    value: function getPosition() {
+      return this.position;
+    }
+  }, {
+    key: "getParentFrame",
+    value: function getParentFrame() {
+      return this.parent;
+    }
+  }, {
+    key: "setParentFrame",
+    value: function setParentFrame(parent) {
+      this.parent = parent;
+    }
+  }, {
+    key: "getParameters",
+    value: function getParameters() {
+      return this.parameters;
+    }
+  }, {
+    key: "setParameters",
+    value: function setParameters(parameters) {
+      this.parameters = parameters;
+    }
+  }, {
+    key: "updateReferenceFrame",
+    value: function updateReferenceFrame() {
+      var f = this.getBaseFrame();
+      if (f === undefined) return;
+      this.udateFrameProtected(f);
+    }
+  }, {
+    key: "getParentT",
+    value: function getParentT() {
+      return this.parentNode;
+    }
+  }, {
+    key: "setParentT",
+    value: function setParentT(parent) {
+      this.parentNode = parent;
+    }
+  }, {
+    key: "getNodesT",
+    value: function getNodesT() {
+      return this.nodes;
+    }
+  }, {
+    key: "addNodeT",
+    value: function addNodeT(node) {}
+  }, {
+    key: "removeNodeT",
+    value: function removeNodeT(node) {}
+  }, {
+    key: "getNodeValueT",
+    value: function getNodeValueT() {
+      return this;
+    }
+  }, {
+    key: "udateFrameProtected",
+    value: function udateFrameProtected(frame) {
+      var m = frame.getMatrix();
+      var p = frame.getPosition();
+      for (var i = 0; i < 3; i++) {
+        this.position[i] = p[i];
+        for (var j = 0; j < 3; j++) {
+          this.position[i] += m[i][j] * this.own[j];
+        }
+      }
+    }
+  }, {
+    key: "getBaseFrame",
+    value: function getBaseFrame() {
+      if (this.parent == undefined) {
+        return undefined;
+      }
+      return this.parent.getOwnFrame();
+    }
+  }]);
+}(CategoryObject_1.CategoryObject);
+exports.BasicPosition = BasicPosition;
+},{"../../CategoryObject":"src/Library/CategoryObject.ts","../../Performer":"src/Library/Performer.ts"}],"src/Library/Motion6D/Objects/SerializablePosition.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
+function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
+function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SerializablePosition = void 0;
+var BasicPosition_1 = require("./BasicPosition");
+var SerializablePosition = /*#__PURE__*/function (_BasicPosition_1$Basi) {
+  function SerializablePosition(desktop, name) {
+    var _this;
+    _classCallCheck(this, SerializablePosition);
+    _this = _callSuper(this, SerializablePosition, [desktop, name]);
+    _this.objects = [];
+    _this.map = new Map();
+    _this.typeName = "SerializablePosition";
+    _this.types.push("SerializablePosition");
+    return _this;
+  }
+  _inherits(SerializablePosition, _BasicPosition_1$Basi);
+  return _createClass(SerializablePosition, [{
+    key: "postSetArrow",
+    value: function postSetArrow() {
+      if (this.objects.length == 1) {
+        this.setParameters(this.objects[0]);
+      }
+    }
+  }, {
+    key: "getChildernT",
+    value: function getChildernT() {
+      return this.objects;
+    }
+  }, {
+    key: "addChildT",
+    value: function addChildT(child) {
+      this.objects.push(child);
+    }
+  }, {
+    key: "removeChildT",
+    value: function removeChildT(child) {
+      this.performer.remove(this.objects, child);
+    }
+  }, {
+    key: "setParameters",
+    value: function setParameters(parameters) {
+      _superPropGet(SerializablePosition, "setParameters", this, 3)([parameters]);
+      var po = this.performer.convertObject(parameters, "IPositionObject");
+      if (po.length == 0) return;
+      po[0].setObjectPosition(this);
+    }
+  }]);
+}(BasicPosition_1.BasicPosition);
+exports.SerializablePosition = SerializablePosition;
+},{"./BasicPosition":"src/Library/Motion6D/Objects/BasicPosition.ts"}],"src/Library/Motion6D/Objects/Shapes/Basic3DShape.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Basic3DShape = void 0;
+var CategoryObject_1 = require("../../../CategoryObject");
+var Basic3DShape = /*#__PURE__*/function (_CategoryObject_1$Cat) {
+  function Basic3DShape(desktop, name) {
+    var _this;
+    _classCallCheck(this, Basic3DShape);
+    _this = _callSuper(this, Basic3DShape, [desktop, name]);
+    _this.grahicalData = new Map();
+    _this.size = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+    _this.typeName = "Basic3DShape";
+    _this.types.push("Basic3DShape");
+    _this.types.push("IVisible");
+    _this.types.push("IPositionObject");
+    _this.types.push("ISaveGrahicalData");
+    _this.types.push("IStartPrimitive");
+    return _this;
+  }
+  _inherits(Basic3DShape, _CategoryObject_1$Cat);
+  return _createClass(Basic3DShape, [{
+    key: "startPrimitive",
+    value: function startPrimitive() {}
+  }, {
+    key: "getSaveGrahicalData",
+    value: function getSaveGrahicalData() {
+      return this.grahicalData;
+    }
+  }, {
+    key: "getVisibleSize",
+    value: function getVisibleSize() {
+      return this.size;
+    }
+  }, {
+    key: "setVisibleSize",
+    value: function setVisibleSize(size) {
+      for (var i = 0; i < 3; i++) {
+        for (var j = 0; j < 3; j++) {
+          this.size[i][j] = size[i][j];
+        }
+      }
+    }
+  }, {
+    key: "getObjectPosition",
+    value: function getObjectPosition() {
+      return this.position;
+    }
+  }, {
+    key: "setObjectPosition",
+    value: function setObjectPosition(position) {
+      this.position = position;
+    }
+  }]);
+}(CategoryObject_1.CategoryObject);
+exports.Basic3DShape = Basic3DShape;
+},{"../../../CategoryObject":"src/Library/CategoryObject.ts"}],"src/Library/Motion6D/Visible/BasicCamera.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.BasicCamera = void 0;
+var BasicPosition_1 = require("../Objects/BasicPosition");
+var BasicCamera = /*#__PURE__*/function (_BasicPosition_1$Basi) {
+  function BasicCamera(desktop, name) {
+    var _this;
+    _classCallCheck(this, BasicCamera);
+    _this = _callSuper(this, BasicCamera, [desktop, name]);
+    _this.visible = [];
+    _this.typeName = "BasicCamera";
+    _this.types.push("IVisibleConsumer");
+    _this.types.push("BasicCamera");
+    return _this;
+  }
+  _inherits(BasicCamera, _BasicPosition_1$Basi);
+  return _createClass(BasicCamera, [{
+    key: "addVisibleObject",
+    value: function addVisibleObject(object) {
+      this.visible.push(object);
+    }
+  }, {
+    key: "removeVisibleObject",
+    value: function removeVisibleObject(object) {
+      this.performer.remove(this.visible, object);
+    }
+  }, {
+    key: "postVisibleObject",
+    value: function postVisibleObject(object) {}
+  }]);
+}(BasicPosition_1.BasicPosition);
+exports.BasicCamera = BasicCamera;
+},{"../Objects/BasicPosition":"src/Library/Motion6D/Objects/BasicPosition.ts"}],"src/Library/Motion6D/Visible/VisibleConsumerLink.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.VisibleConsumerLink = void 0;
+var CategoryArrow_1 = require("../../CategoryArrow");
+var VisibleConsumerLink = /*#__PURE__*/function (_CategoryArrow_1$Cate) {
+  function VisibleConsumerLink(desktop, name) {
+    var _this;
+    _classCallCheck(this, VisibleConsumerLink);
+    _this = _callSuper(this, VisibleConsumerLink, [desktop, name]);
+    _this.typeName = "VisibleConsumerLink";
+    _this.types.push("VisibleConsumerLink");
+    return _this;
+  }
+  _inherits(VisibleConsumerLink, _CategoryArrow_1$Cate);
+  return _createClass(VisibleConsumerLink, [{
+    key: "getSource",
+    value: function getSource() {
+      return this.consumer;
+    }
+  }, {
+    key: "getTagret",
+    value: function getTagret() {
+      return this.visible;
+    }
+  }, {
+    key: "setSource",
+    value: function setSource(source) {
+      var c = this.performer.convertProperties(source, "IVisibleConsumer");
+      this.consumer = c[0];
+    }
+  }, {
+    key: "setTarget",
+    value: function setTarget(target) {
+      this.visible = this.performer.convertProperties(target, "IVisible")[0];
+      this.consumer.addVisibleObject(this.visible);
+    }
+  }]);
+}(CategoryArrow_1.CategoryArrow);
+exports.VisibleConsumerLink = VisibleConsumerLink;
+},{"../../CategoryArrow":"src/Library/CategoryArrow.ts"}],"src/Airplane.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Airplane = void 0;
+var BelognsToCollection_1 = require("./Library/Arrows/BelognsToCollection");
+var Desktop_1 = require("./Library/Desktop");
+var EventLink_1 = require("./Library/Event/Objects/EventLink");
+var TimerObject_1 = require("./Library/Event/Objects/TimerObject");
+var DataLink_1 = require("./Library/Measurements/Arrows/DataLink");
+var DataConsumer_1 = require("./Library/Measurements/DataConsumer");
+var VectorFormulaConsumer_1 = require("./Library/Measurements/VectorFormulaConsumer");
+var ReferenceFrameArrow_1 = require("./Library/Motion6D/Arrows/ReferenceFrameArrow");
+var RigidReferenceFrame_1 = require("./Library/Motion6D/Objects/RigidReferenceFrame");
+var SerializablePosition_1 = require("./Library/Motion6D/Objects/SerializablePosition");
+var Basic3DShape_1 = require("./Library/Motion6D/Objects/Shapes/Basic3DShape");
+var BasicCamera_1 = require("./Library/Motion6D/Visible/BasicCamera");
+var VisibleConsumerLink_1 = require("./Library/Motion6D/Visible/VisibleConsumerLink");
+var TimeSpan_1 = require("./Library/Utilities/DateTime/TimeSpan");
+var Airplane_CategoryObject_0_Visible0 = /*#__PURE__*/function (_Basic3DShape_1$Basic) {
+  function Airplane_CategoryObject_0_Visible0(desktop, name) {
+    var _this;
+    _classCallCheck(this, Airplane_CategoryObject_0_Visible0);
+    _this = _callSuper(this, Airplane_CategoryObject_0_Visible0, [desktop, name]);
+    var map = _this.getSaveGrahicalData();
+    map.set("Cessna_208_Caravan.obj", "Cessna_208_Caravan.obj");
+    map.set("master.mtl", "master.mtl");
+    map.set("mat0_c.jpg", "mat0_c.jpg");
+    return _this;
+  }
+  _inherits(Airplane_CategoryObject_0_Visible0, _Basic3DShape_1$Basic);
+  return _createClass(Airplane_CategoryObject_0_Visible0);
+}(Basic3DShape_1.Basic3DShape);
+var Airplane_CategoryObject_0 = /*#__PURE__*/function (_SerializablePosition) {
+  function Airplane_CategoryObject_0(desktop, name) {
+    var _this2;
+    _classCallCheck(this, Airplane_CategoryObject_0);
+    _this2 = _callSuper(this, Airplane_CategoryObject_0, [desktop, name]);
+    _this2.addChildT(new Airplane_CategoryObject_0_Visible0(desktop, name));
+    return _this2;
+  }
+  _inherits(Airplane_CategoryObject_0, _SerializablePosition);
+  return _createClass(Airplane_CategoryObject_0);
+}(SerializablePosition_1.SerializablePosition);
+var Airplane_CategoryObject_3 = /*#__PURE__*/function (_BasicCamera_1$BasicC) {
+  function Airplane_CategoryObject_3(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryObject_3);
+    return _callSuper(this, Airplane_CategoryObject_3, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryObject_3, _BasicCamera_1$BasicC);
+  return _createClass(Airplane_CategoryObject_3);
+}(BasicCamera_1.BasicCamera);
+var Airplane_CategoryObject_4 = /*#__PURE__*/function (_TimerObject_1$TimerO) {
+  function Airplane_CategoryObject_4(desktop, name) {
+    var _this3;
+    _classCallCheck(this, Airplane_CategoryObject_4);
+    _this3 = _callSuper(this, Airplane_CategoryObject_4, [desktop, name]);
+    _this3.span = new TimeSpan_1.TimeSpan(100);
+    return _this3;
+  }
+  _inherits(Airplane_CategoryObject_4, _TimerObject_1$TimerO);
+  return _createClass(Airplane_CategoryObject_4);
+}(TimerObject_1.TimerObject);
+var Airplane_CategoryObject_5 = /*#__PURE__*/function (_RigidReferenceFrame_) {
+  function Airplane_CategoryObject_5(desktop, name) {
+    var _this4;
+    _classCallCheck(this, Airplane_CategoryObject_5);
+    _this4 = _callSuper(this, Airplane_CategoryObject_5, [desktop, name]);
+    _this4.relativePosition = [];
+    _this4.relativeQuaternion = [];
+    _this4.relativePosition = [];
+    _this4.relativePosition.push(40);
+    _this4.relativePosition.push(40);
+    _this4.relativePosition.push(40);
+    _this4.relativePosition = [];
+    _this4.relativePosition.push(0.88047623921714935);
+    _this4.relativePosition.push(-0.27984814233312139);
+    _this4.relativePosition.push(0.36470519963100095);
+    _this4.relativePosition.push(0.11591689595929504);
+    return _this4;
+  }
+  _inherits(Airplane_CategoryObject_5, _RigidReferenceFrame_);
+  return _createClass(Airplane_CategoryObject_5);
+}(RigidReferenceFrame_1.RigidReferenceFrame);
+var Airplane_CategoryObject_6 = /*#__PURE__*/function (_VectorFormulaConsume) {
+  function Airplane_CategoryObject_6(desktop, name) {
+    var _this5;
+    _classCallCheck(this, Airplane_CategoryObject_6);
+    _this5 = _callSuper(this, Airplane_CategoryObject_6, [desktop, name]);
+    _this5.var_0 = 0;
+    var map = new Map([]);
+    _this5.performer.setAliasMap(map, _this5);
+    _this5.addVariableValue("Formula_1", 0, 0);
+    return _this5;
+  }
+  _inherits(Airplane_CategoryObject_6, _VectorFormulaConsume);
+  return _createClass(Airplane_CategoryObject_6, [{
+    key: "calculateTree",
+    value: function calculateTree() {
+      this.success = true;
+      this.var_0 = this.getInternalTime();
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      var all = this.getAllMeasurements();
+    }
+  }, {
+    key: "get_0",
+    value: function get_0() {
+      return this.success ? this.var_0 : undefined;
+    }
+  }, {
+    key: "save",
+    value: function save() {
+      var v = this.variables;
+      var x0 = v.get("Formula_1");
+      x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_0());
+    }
+  }]);
+}(VectorFormulaConsumer_1.VectorFormulaConsumer);
+var Airplane_CategoryObject_7 = /*#__PURE__*/function (_DataConsumer_1$DataC) {
+  function Airplane_CategoryObject_7(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryObject_7);
+    return _callSuper(this, Airplane_CategoryObject_7, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryObject_7, _DataConsumer_1$DataC);
+  return _createClass(Airplane_CategoryObject_7);
+}(DataConsumer_1.DataConsumer);
+var Airplane_CategoryArrow_0 = /*#__PURE__*/function (_ReferenceFrameArrow_) {
+  function Airplane_CategoryArrow_0(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryArrow_0);
+    return _callSuper(this, Airplane_CategoryArrow_0, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryArrow_0, _ReferenceFrameArrow_);
+  return _createClass(Airplane_CategoryArrow_0);
+}(ReferenceFrameArrow_1.ReferenceFrameArrow);
+var Airplane_CategoryArrow_1 = /*#__PURE__*/function (_VisibleConsumerLink_) {
+  function Airplane_CategoryArrow_1(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryArrow_1);
+    return _callSuper(this, Airplane_CategoryArrow_1, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryArrow_1, _VisibleConsumerLink_);
+  return _createClass(Airplane_CategoryArrow_1);
+}(VisibleConsumerLink_1.VisibleConsumerLink);
+var Airplane_CategoryArrow_2 = /*#__PURE__*/function (_BelognsToCollection_) {
+  function Airplane_CategoryArrow_2(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryArrow_2);
+    return _callSuper(this, Airplane_CategoryArrow_2, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryArrow_2, _BelognsToCollection_);
+  return _createClass(Airplane_CategoryArrow_2);
+}(BelognsToCollection_1.BelongsToCollection);
+var Airplane_CategoryArrow_3 = /*#__PURE__*/function (_BelognsToCollection_2) {
+  function Airplane_CategoryArrow_3(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryArrow_3);
+    return _callSuper(this, Airplane_CategoryArrow_3, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryArrow_3, _BelognsToCollection_2);
+  return _createClass(Airplane_CategoryArrow_3);
+}(BelognsToCollection_1.BelongsToCollection);
+var Airplane_CategoryArrow_4 = /*#__PURE__*/function (_BelognsToCollection_3) {
+  function Airplane_CategoryArrow_4(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryArrow_4);
+    return _callSuper(this, Airplane_CategoryArrow_4, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryArrow_4, _BelognsToCollection_3);
+  return _createClass(Airplane_CategoryArrow_4);
+}(BelognsToCollection_1.BelongsToCollection);
+var Airplane_CategoryArrow_5 = /*#__PURE__*/function (_DataLink_1$DataLink) {
+  function Airplane_CategoryArrow_5(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryArrow_5);
+    return _callSuper(this, Airplane_CategoryArrow_5, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryArrow_5, _DataLink_1$DataLink);
+  return _createClass(Airplane_CategoryArrow_5);
+}(DataLink_1.DataLink);
+var Airplane_CategoryArrow_6 = /*#__PURE__*/function (_EventLink_1$EventLin) {
+  function Airplane_CategoryArrow_6(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryArrow_6);
+    return _callSuper(this, Airplane_CategoryArrow_6, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryArrow_6, _EventLink_1$EventLin);
+  return _createClass(Airplane_CategoryArrow_6);
+}(EventLink_1.EventLink);
+var Airplane = /*#__PURE__*/function (_Desktop_1$Desktop) {
+  function Airplane() {
+    var _this6;
+    _classCallCheck(this, Airplane);
+    _this6 = _callSuper(this, Airplane);
+    _this6.name = "Airplane";
+    _this6.mapObjects.set("Airplane_CategoryObject_0", new Airplane_CategoryObject_0(_this6, "pLANE"));
+    _this6.mapObjects.set("Airplane_CategoryObject_0_Visible0", new Airplane_CategoryObject_0_Visible0(_this6, "pLANE"));
+    _this6.mapObjects.set("Airplane_CategoryObject_0_Visible0", new Airplane_CategoryObject_0_Visible0(_this6, "pLANE"));
+    _this6.mapObjects.set("Airplane_CategoryObject_3", new Airplane_CategoryObject_3(_this6, "Camera"));
+    _this6.mapObjects.set("Airplane_CategoryObject_4", new Airplane_CategoryObject_4(_this6, "Timer"));
+    _this6.mapObjects.set("Airplane_CategoryObject_5", new Airplane_CategoryObject_5(_this6, ""));
+    _this6.mapObjects.set("Airplane_CategoryObject_6", new Airplane_CategoryObject_6(_this6, "Time"));
+    _this6.mapObjects.set("Airplane_CategoryObject_7", new Airplane_CategoryObject_7(_this6, "Chart"));
+    new Airplane_CategoryArrow_0(_this6, "");
+    new Airplane_CategoryArrow_1(_this6, "");
+    new Airplane_CategoryArrow_2(_this6, "");
+    new Airplane_CategoryArrow_3(_this6, "");
+    new Airplane_CategoryArrow_4(_this6, "");
+    new Airplane_CategoryArrow_5(_this6, "");
+    new Airplane_CategoryArrow_6(_this6, "");
+    _this6.finish();
+    return _this6;
+  }
+  _inherits(Airplane, _Desktop_1$Desktop);
+  return _createClass(Airplane, [{
+    key: "finish",
+    value: function finish() {
+      var objects = this.getCategoryObjects();
+      var arrows = this.getCategoryArrows();
+      var s0 = this.mapObjects.get("Airplane_CategoryObject_3");
+      if (s0 != undefined) arrows[0].setSource(s0);
+      var t0 = this.mapObjects.get("Airplane_CategoryObject_5");
+      if (t0 != undefined) arrows[0].setTarget(t0);
+      var s1 = this.mapObjects.get("Airplane_CategoryObject_3");
+      if (s1 != undefined) arrows[1].setSource(s1);
+      var t1 = this.mapObjects.get("Airplane_CategoryObject_0_Visible0");
+      if (t1 != undefined) arrows[1].setTarget(t1);
+      var s2 = this.mapObjects.get("Airplane_CategoryObject_7");
+      if (s2 != undefined) arrows[2].setSource(s2);
+      var t2 = this.mapObjects.get("Airplane_CategoryObject_3");
+      if (t2 != undefined) arrows[2].setTarget(t2);
+      var s3 = this.mapObjects.get("Airplane_CategoryObject_7");
+      if (s3 != undefined) arrows[3].setSource(s3);
+      var t3 = this.mapObjects.get("Airplane_CategoryObject_5");
+      if (t3 != undefined) arrows[3].setTarget(t3);
+      var s4 = this.mapObjects.get("Airplane_CategoryObject_7");
+      if (s4 != undefined) arrows[4].setSource(s4);
+      var t4 = this.mapObjects.get("Airplane_CategoryObject_0");
+      if (t4 != undefined) arrows[4].setTarget(t4);
+      var s5 = this.mapObjects.get("Airplane_CategoryObject_7");
+      if (s5 != undefined) arrows[5].setSource(s5);
+      var t5 = this.mapObjects.get("Airplane_CategoryObject_6");
+      if (t5 != undefined) arrows[5].setTarget(t5);
+      var s6 = this.mapObjects.get("Airplane_CategoryObject_7");
+      if (s6 != undefined) arrows[6].setSource(s6);
+      var t6 = this.mapObjects.get("Airplane_CategoryObject_4");
+      if (t6 != undefined) arrows[6].setTarget(t6);
+      objects[0].postSetArrow();
+      objects[5].postSetArrow();
+      objects[6].postSetArrow();
+      objects[7].postSetArrow();
+    }
+  }]);
+}(Desktop_1.Desktop);
+exports.Airplane = Airplane;
+},{"./Library/Arrows/BelognsToCollection":"src/Library/Arrows/BelognsToCollection.ts","./Library/Desktop":"src/Library/Desktop.ts","./Library/Event/Objects/EventLink":"src/Library/Event/Objects/EventLink.ts","./Library/Event/Objects/TimerObject":"src/Library/Event/Objects/TimerObject.ts","./Library/Measurements/Arrows/DataLink":"src/Library/Measurements/Arrows/DataLink.ts","./Library/Measurements/DataConsumer":"src/Library/Measurements/DataConsumer.ts","./Library/Measurements/VectorFormulaConsumer":"src/Library/Measurements/VectorFormulaConsumer.ts","./Library/Motion6D/Arrows/ReferenceFrameArrow":"src/Library/Motion6D/Arrows/ReferenceFrameArrow.ts","./Library/Motion6D/Objects/RigidReferenceFrame":"src/Library/Motion6D/Objects/RigidReferenceFrame.ts","./Library/Motion6D/Objects/SerializablePosition":"src/Library/Motion6D/Objects/SerializablePosition.ts","./Library/Motion6D/Objects/Shapes/Basic3DShape":"src/Library/Motion6D/Objects/Shapes/Basic3DShape.ts","./Library/Motion6D/Visible/BasicCamera":"src/Library/Motion6D/Visible/BasicCamera.ts","./Library/Motion6D/Visible/VisibleConsumerLink":"src/Library/Motion6D/Visible/VisibleConsumerLink.ts","./Library/Utilities/DateTime/TimeSpan":"src/Library/Utilities/DateTime/TimeSpan.ts"}],"src/common/Primitives/BasicPrimitive.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -38090,8 +38114,8 @@ var AirplaneScene = /*#__PURE__*/function (_ScadaScene_1$ScadaSc) {
   return _createClass(AirplaneScene, [{
     key: "load",
     value: function load() {
-      this.game.loader.load(_defineProperty(_defineProperty(_defineProperty({}, "Cessna_208_Caravan.obj", {
-        url: 'models/pLANE/Cessna_208_Caravan.obj',
+      this.game.loader.load(_defineProperty(_defineProperty(_defineProperty({}, "Airplane_208_Caravan.obj", {
+        url: 'models/pLANE/Airplane_208_Caravan.obj',
         type: 'text'
       }), "master.mtl", {
         url: 'models/pLANE/master.mtl',
@@ -38119,6 +38143,11 @@ var ActorWeb_1 = require("./Tests/Actor/ActorWeb");
 var SpaceTrippers_1 = __importDefault(require("./scenes/SpaceTrippers"));
 var game_1 = __importDefault(require("./common/game"));
 var AirplaneScene_1 = require("./scenes/AirplaneScene");
+var PerformerMeasuremets_1 = require("./Library/Measurements/PerformerMeasuremets");
+var RungeProcessor_1 = require("./Library/Measurements/DifferentialEquations/Processors/RungeProcessor");
+var Motion6DRealtimeFactory_1 = require("./Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory");
+PerformerMeasuremets_1.PerformerMeasuremets.setDifferentialEquationProcessor(new RungeProcessor_1.RungeProcessor());
+PerformerMeasuremets_1.PerformerMeasuremets.setRealtimeEventFactory(new Motion6DRealtimeFactory_1.Motion6DRealtimeFactory());
 function funcAirplane() {
   // First thing we need is to get the canvas on which we draw our scenes
   var canvas = document.querySelector("#app");
@@ -38193,7 +38222,7 @@ function func() {
   act.actCompositionScada(game);
 }
 func();
-},{"./Tests/Actor/ActorWeb":"src/Tests/Actor/ActorWeb.ts","./scenes/SpaceTrippers":"src/scenes/SpaceTrippers.tsx","./common/game":"src/common/game.ts","./scenes/AirplaneScene":"src/scenes/AirplaneScene.tsx"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Tests/Actor/ActorWeb":"src/Tests/Actor/ActorWeb.ts","./scenes/SpaceTrippers":"src/scenes/SpaceTrippers.tsx","./common/game":"src/common/game.ts","./scenes/AirplaneScene":"src/scenes/AirplaneScene.tsx","./Library/Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts","./Library/Measurements/DifferentialEquations/Processors/RungeProcessor":"src/Library/Measurements/DifferentialEquations/Processors/RungeProcessor.ts","./Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory":"src/Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory.ts"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -38218,7 +38247,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50360" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56569" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

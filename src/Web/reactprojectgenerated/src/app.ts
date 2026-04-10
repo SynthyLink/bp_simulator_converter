@@ -4,6 +4,13 @@ import { IFunc } from "./Library/Interfaces/IFunc";
 import Game from "./common/game";
 import { GameEngine } from "./common/GameEngine";
 import { AirplaneScene } from "./scenes/AirplaneScene";
+import { PerformerMeasuremets } from "./Library/Measurements/PerformerMeasuremets";
+import { RungeProcessor } from "./Library/Measurements/DifferentialEquations/Processors/RungeProcessor";
+import { Performer } from "./Library/Performer";
+import { Motion6DRealtimeFactory } from "./Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory";
+
+PerformerMeasuremets.setDifferentialEquationProcessor(new RungeProcessor())
+PerformerMeasuremets.setRealtimeEventFactory(new Motion6DRealtimeFactory())
 
 function funcAirplane() {
 

@@ -13,11 +13,33 @@ import type { IFunc } from "../Interfaces/IFunc";
 import type { IComparator } from "../Utilities/Sort/Interfaces/IComparator";
 import type { IComponentCollection } from "../Interfaces/IComponentCollection";
 import type { IObject } from "../Interfaces/IObject";
+import type { IDifferentialEquationProcessor } from "./DifferentialEquations/Interfaces/IDifferentialEquationProcessor ";
+import type { IRealtimeCollectionFactory } from "../Interfaces/IRealtimeCollectionFactory";
 import { DataConsumerBoolFunc } from "./DataConsumerBoolFunc";
 import { Performer } from "../Performer";
 import { TimeMeasurementProvider } from "./TimeMeasurementProvider";
 
 export class PerformerMeasuremets {
+
+    static processor: IDifferentialEquationProcessor
+
+    static realtimeEventFactory: IRealtimeCollectionFactory
+
+    public static getDifferentialEquationProcessor(): IDifferentialEquationProcessor {
+        return this.processor
+    }
+
+    public static setDifferentialEquationProcessor(p: IDifferentialEquationProcessor): void { 
+        this.processor = p;
+    }
+
+    public static getRealtimeEventFactory(): IRealtimeCollectionFactory {
+        return this.realtimeEventFactory;
+    }
+
+    public static setRealtimeEventFactory(f: IRealtimeCollectionFactory): void {
+        this.realtimeEventFactory = f;
+    }
 
     constructor() {
 

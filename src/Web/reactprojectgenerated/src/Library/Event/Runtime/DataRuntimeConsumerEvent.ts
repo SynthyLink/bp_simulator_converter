@@ -5,18 +5,19 @@ import type { IEventHandler } from "../../Interfaces/IEventHandler";
 import type { IRealtimeCollection } from "../../Interfaces/IRealtimeCollection";
 import type { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
 import type { ITimerFactory } from "../../Interfaces/ITimerFactory";
+import { IDifferentialEquationProcessor } from "../../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationProcessor ";
 import type { IDataConsumer } from "../../Measurements/Interfaces/IDataConsumer";
-import { DataRuntimeConsumer } from "../../Runtime/DataRuntimeConsumer";
+import { DataRuntimeConsumerODE } from "../../Runtime/DataRuntimeConsumerODE";
 import { PerformerEvents } from "../PerformerEvents";
 
-export class DataRuntimeConsumerEvent extends DataRuntimeConsumer implements IRealtimeCollection {
+export class DataRuntimeConsumerEvent extends DataRuntimeConsumerODE implements IRealtimeCollection {
 
     protected ePerformer: PerformerEvents = new PerformerEvents()
 
     protected isEnabled: boolean = false
 
-    constructor(dataConsumer: IDataConsumer) {
-        super(dataConsumer);
+    constructor(dataConsumer: IDataConsumer, processor: IDifferentialEquationProcessor) {
+        super(dataConsumer, processor);
     }
 
     protected prepare(dataConsumer: IDataConsumer) {
