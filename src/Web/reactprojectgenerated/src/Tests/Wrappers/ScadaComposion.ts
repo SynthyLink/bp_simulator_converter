@@ -12,7 +12,7 @@ export class ScadaComposition {
 
     scada: | IScadaInterface
     constructor(engine: IPlayEngine) {
-        this.scada = new ScadaDesktopEngine(new Composition(), engine, new Motion6DRealtimeFactory(), "Chart")
+        this.scada = new ScadaDesktopEngine(new Airplane(), engine, new Motion6DRealtimeFactory(), "Chart")
      let dc = this.scada.getScadaObject<IDataConsumer>("Chart", "IDataConsumer")
         let ev = this.scada.getScadaObject<IEvent>("Timer", "IEvent")
      new Action(dc[0], ev[0])

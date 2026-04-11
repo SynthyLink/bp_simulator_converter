@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Security.Cryptography;
 using System.Xml;
 
 using ErrorHandler;
@@ -11,6 +10,23 @@ namespace NamedTree
     /// </summary>
     public class Performer
     {
+        /// <summary>
+        /// Adds unique item to the list
+        /// </summary>
+        /// <typeparam name="T">The type</typeparam>
+        /// <param name="list">The list</param>
+        /// <param name="item">The item</param>
+        /// <returns>True if added</returns>
+        public bool AddUnique<T>(IList<T> list, T item) where T : class 
+        {
+            if (!list.Contains(item))
+            {
+                list.Add(item);
+                return true;
+            }
+            return false;
+        }
+        
         /// <summary>
         /// Saves strings
         /// </summary>

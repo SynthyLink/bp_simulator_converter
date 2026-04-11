@@ -1,12 +1,21 @@
+import { IActionAddRemove } from "../Interfaces/IActionAddRemove";
+import { IObjectCollection } from "../Interfaces/IObjectCollection";
+import { UpdateMeasurementsAction } from "../Measurements/UpdateMeasurementsAction";
 import { Performer } from "../Performer";
+import { ActionArray } from "../Utilities/Generic/ActionArray";
+import { SortingAlgorithms } from "../Utilities/Sort/SortingAlgorithms";
+import { PositionComparer } from "./Comparators/PositionComparer";
 import type { IPosition } from "./Interfaces/IPosition";
 import type { IReferenceFrame } from "./Interfaces/IReferenceFrame";
 import { Motion6DAcceleratedFrame } from "./Motion6DAcceleratedFrame";
 import { Motion6DFrame } from "./Motion6DFrame";
 import { ReferenceFrame } from "./ReferenceFrame";
+import { UpdatePositionAction } from "./UpdatePositionAction";
 
 export class Motion6DPerformer {
 
+    constructor() {
+    }
     static baseFrame: Motion6DFrame = new Motion6DFrame();
 
     public getBaseFrame(): ReferenceFrame {
@@ -16,13 +25,27 @@ export class Motion6DPerformer {
 
     private performer: Performer = new Performer();
 
+    private comparer = new PositionComparer()
+
+    protected sorting: SortingAlgorithms = new SortingAlgorithms();
+
+
     public getOwnFrame(position: IPosition): ReferenceFrame | undefined{
         var pp = this.performer.convertObject<IReferenceFrame, IPosition>(position, "IReferenceFrame")
         if (pp.length > 0) return pp[0].getOwnFrame();
         return this.getParentFrame(position);
     }
 
-
+    public createUpdateFramesAction(collection: IObjectCollection): IActionAddRemove {
+        let act = new ActionArray();
+        let mea = this.performer.getAll<IPosition>(collection, "IPosition")
+        let mm = this.sorting.mergesort(mea, this.comparer)
+        console.log(mm)
+        for (let m of mm) {
+            act.addAction(new UpdatePositionAction(m))
+        }
+        return act;
+    }
 
     public getFrame(position: IPosition): ReferenceFrame | undefined
     {

@@ -37,8 +37,6 @@ class Timer {
         this.span = span;
         this.factory = factory;
         this.interval = span.getTotalMilliseconds();
-        console.log(span);
-        console.log(this.interval);
     }
     getTimerTimeSpan() {
         return this.span;

@@ -7,7 +7,7 @@ import type { IEvent } from "../../Interfaces/IEvent";
 import type { ITimer } from "../../Interfaces/ITimer";
 import type { ITimerConsumer } from "../../Interfaces/ITimerConsumer";
 import type { ITimerFactory } from "../../Interfaces/ITimerFactory";
-import { IPostSetArrow } from "../../Interfaces/IPostSetArrow";
+import type { IPostSetArrow } from "../../Interfaces/IPostSetArrow";
 
 export class TimerObject extends CategoryObject implements IEvent, ITimerConsumer, IPostSetArrow {
 

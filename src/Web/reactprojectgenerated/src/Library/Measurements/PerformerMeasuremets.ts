@@ -15,9 +15,13 @@ import type { IComponentCollection } from "../Interfaces/IComponentCollection";
 import type { IObject } from "../Interfaces/IObject";
 import type { IDifferentialEquationProcessor } from "./DifferentialEquations/Interfaces/IDifferentialEquationProcessor ";
 import type { IRealtimeCollectionFactory } from "../Interfaces/IRealtimeCollectionFactory";
+import type { IActionAddRemove } from "../Interfaces/IActionAddRemove";
+import type { IObjectCollection } from "../Interfaces/IObjectCollection";
 import { DataConsumerBoolFunc } from "./DataConsumerBoolFunc";
 import { Performer } from "../Performer";
 import { TimeMeasurementProvider } from "./TimeMeasurementProvider";
+import { ActionArray } from "../Utilities/Generic/ActionArray";
+import { UpdateMeasurementsAction } from "./UpdateMeasurementsAction";
 
 export class PerformerMeasuremets {
 
@@ -39,6 +43,16 @@ export class PerformerMeasuremets {
 
     public static setRealtimeEventFactory(f: IRealtimeCollectionFactory): void {
         this.realtimeEventFactory = f;
+    }
+
+    public createUpdateMeasurementsAction(collection: IObjectCollection): IActionAddRemove {
+        let act = new ActionArray();
+        let mea = this.performer.getAll<IMeasurements>(collection, "IMeasurements")
+        let mm = this.performer.sortMeasurements(mea);
+        for (let m of mm) {
+            act.addAction(new UpdateMeasurementsAction(m))
+        }
+        return act;
     }
 
     constructor() {

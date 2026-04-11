@@ -5,7 +5,7 @@ import { AliasName } from "./AliasName";
 import { ConsolePrinter } from "./ConsolePrinter";
 import { OwnError } from "./ErrorHandler/OwnError";
 import { MeasurementsComparator } from "./Measurements/MeasurementsComparator";
-import { SortingAlgorithma } from "./Utilities/Sort/SortingAlgorithms";
+import { SortingAlgorithms } from "./Utilities/Sort/SortingAlgorithms";
 import { ActionArray } from "./Utilities/Generic/ActionArray";
 import type { IAction } from "./Interfaces/IAction";
 import type { IAlias } from "./Interfaces/IAlias";
@@ -29,7 +29,7 @@ import type { IActionT } from "./Interfaces/IActionT";
 import type { IComponentCollection } from "./Interfaces/IComponentCollection";
 import type { ICategoryArrow } from "./Interfaces/ICategoryArrow";
 import type { IObjectCollection } from "./Interfaces/IObjectCollection";
-import { INamed } from "./NamedTree/Interfaces/INamed";
+import type { INamed } from "./NamedTree/Interfaces/INamed";
 
 
 export class Performer
@@ -46,9 +46,19 @@ export class Performer
 
     protected printer: IPrinter = new ConsolePrinter();
 
-    protected sorting: SortingAlgorithma = new SortingAlgorithma();
+    protected sorting: SortingAlgorithms = new SortingAlgorithms();
 
     protected mCompatator !: IComparator<IMeasurements>;
+
+    public addUnique<T>(list: T[], item: T): boolean {
+        for (let x of list) {
+            if (x == item) {
+                return false
+            }
+        }
+        list.push(item)
+        return true;
+    }
 
     public getAllIObjects(categoryObjects: ICategoryObject[], arrows: ICategoryArrow[], objects: IObject[]): void {
         for (let o of categoryObjects) {
@@ -79,6 +89,17 @@ export class Performer
             if (x.length > 0) action.actionT(x[0])
         }
     }
+
+    public getAll<T>(collection: IObjectCollection, type: string) {
+        let t : T[] = []
+        let obj = collection.getObjectCollection()
+        for (let o of obj) {
+
+            var x = this.convertObject<T, IObject>(o, type)
+            if (x.length > 0) t.push(x[0])
+        }
+        return t;
+  }
 
 
     public reoplaceArrayValue<T>(t: T[], s: T[]): void {

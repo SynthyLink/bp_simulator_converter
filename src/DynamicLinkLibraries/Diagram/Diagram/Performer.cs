@@ -202,7 +202,13 @@ namespace Diagram.UI
         {
             var lab = Get<IObjectLabel>(collection);
             var l = new List<ICategoryObject>();
-            collection.ForEach((ICategoryObject co) => { l.Add(co); }, true);
+            collection.ForEach((ICategoryObject co) =>
+            {
+                if (!l.Contains(co))
+                {
+                    l.Add(co);
+                }
+            }, true);
             categoryObjects = l;
            // categoryObjects = collection.ForEach< (from ll in lab select ll.Object).ToList();
             var al = Get<IArrowLabel>(collection);

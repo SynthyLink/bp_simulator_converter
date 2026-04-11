@@ -11,9 +11,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const ActorWeb_1 = require("./src/Tests/Actor/ActorWeb");
 let a = new ActorWeb_1.ActorWeb();
-a.actAirplane();
+//a.actAirplane()
 //await a.actDonchianLoad();
-//a.actPI()
+a.actPI();
 //a.testDate();
 //a.actTime();
 //a.actOrbitCalculation(true);// 1770457504

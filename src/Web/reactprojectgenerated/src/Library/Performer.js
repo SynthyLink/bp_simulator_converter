@@ -16,8 +16,17 @@ class Performer {
         this.b = false;
         this.s = "";
         this.printer = new ConsolePrinter_1.ConsolePrinter();
-        this.sorting = new SortingAlgorithms_1.SortingAlgorithma();
+        this.sorting = new SortingAlgorithms_1.SortingAlgorithms();
         this.mCompatator = new MeasurementsComparator_1.MeasurementsComparator(this);
+    }
+    addUnique(list, item) {
+        for (let x of list) {
+            if (x == item) {
+                return false;
+            }
+        }
+        list.push(item);
+        return true;
     }
     getAllIObjects(categoryObjects, arrows, objects) {
         for (let o of categoryObjects) {
@@ -43,6 +52,16 @@ class Performer {
             if (x.length > 0)
                 action.actionT(x[0]);
         }
+    }
+    getAll(collection, type) {
+        let t = [];
+        let obj = collection.getObjectCollection();
+        for (let o of obj) {
+            var x = this.convertObject(o, type);
+            if (x.length > 0)
+                t.push(x[0]);
+        }
+        return t;
     }
     reoplaceArrayValue(t, s) {
         if (s.length == 0) {
@@ -207,6 +226,10 @@ class Performer {
             }
         }
         return map;
+    }
+    getName(obj) {
+        var o = this.convertArray(obj, "IObject");
+        return o[0].getName();
     }
     convertObject(s, type) {
         let ob = s;

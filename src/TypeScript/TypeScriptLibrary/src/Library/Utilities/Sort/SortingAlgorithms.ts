@@ -1,7 +1,11 @@
 import { IComparator } from "./Interfaces/IComparator";
 
-export class SortingAlgorithma {
+export class SortingAlgorithms {
 
+
+    constructor() {
+
+    }
 
     public mergesort<T>(unsorted: T[], comparator: IComparator<T>) {
         if (unsorted.length <= 1) {

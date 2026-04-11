@@ -117,7 +117,1158 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"src/Library/AliasName.js":[function(require,module,exports) {
+})({"src/Library/AliasName.ts":[function(require,module,exports) {
+"use strict";
+
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.AliasName = void 0;
+var AliasName = /*#__PURE__*/function () {
+  function AliasName(alias, name) {
+    _classCallCheck(this, AliasName);
+    this.name = "";
+    this.alias = alias;
+    this.name = name;
+  }
+  return _createClass(AliasName, [{
+    key: "getAlias",
+    value: function getAlias() {
+      return this.alias;
+    }
+  }, {
+    key: "getAliasNameValue",
+    value: function getAliasNameValue() {
+      return this.alias.getAliasValue(this.name);
+    }
+  }, {
+    key: "setAliasNameValue",
+    value: function setAliasNameValue(value) {
+      if (value != undefined) {
+        this.alias.setAliasValue(this.name, value);
+      }
+    }
+  }, {
+    key: "getNameOfAliasName",
+    value: function getNameOfAliasName() {
+      return this.name;
+    }
+  }]);
+}();
+exports.AliasName = AliasName;
+},{}],"src/Library/ConsolePrinter.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ConsolePrinter = void 0;
+var ConsolePrinter = /*#__PURE__*/function () {
+  function ConsolePrinter() {
+    _classCallCheck(this, ConsolePrinter);
+  }
+  return _createClass(ConsolePrinter, [{
+    key: "print",
+    value: function print(obj) {
+      console.log(obj);
+    }
+  }]);
+}();
+exports.ConsolePrinter = ConsolePrinter;
+},{}],"src/Library/ErrorHandler/OwnError.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.OwnError = void 0;
+/* eslint-disable @typescript-eslint/no-unused-vars */
+var OwnError = /*#__PURE__*/function () {
+  function OwnError(name, message, stack) {
+    _classCallCheck(this, OwnError);
+    this.name = "";
+    this.message = "";
+    this.name = name;
+    this.message = message;
+    this.stack = stack;
+    this.init();
+  }
+  return _createClass(OwnError, [{
+    key: "init",
+    value: function init() {}
+  }]);
+}();
+exports.OwnError = OwnError;
+},{}],"src/Library/Measurements/MeasurementsComparator.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MeasurementsComparator = void 0;
+var MeasurementsComparator = /*#__PURE__*/function () {
+  function MeasurementsComparator(performer) {
+    _classCallCheck(this, MeasurementsComparator);
+    this.performer = performer;
+  }
+  return _createClass(MeasurementsComparator, [{
+    key: "compare",
+    value: function compare(x, y) {
+      if (x == y) {
+        return 0;
+      }
+      if (this.performer.implementsType(x, "IDataConsumer")) {
+        var dcx = x;
+        if (this.isSource(dcx, y)) {
+          return 1;
+        }
+      }
+      if (this.performer.implementsType(y, "IDataConsumer")) {
+        var dcy = y;
+        if (this.isSource(dcy, x)) {
+          return -1;
+        }
+      }
+      return 0;
+    }
+  }, {
+    key: "isSource",
+    value: function isSource(dc, m) {
+      var measurements = dc.getAllMeasurements();
+      var count = measurements.length;
+      for (var i = 0; i < count; i++) {
+        var x = measurements[i];
+        if (m == x) {
+          return true;
+        }
+        if (this.performer.implementsType(x, "IDataConsumer")) {
+          var dataConsumer = x;
+          if (this.isSource(dataConsumer, m)) {
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+  }]);
+}();
+exports.MeasurementsComparator = MeasurementsComparator;
+},{}],"src/Library/Utilities/Sort/SortingAlgorithms.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SortingAlgorithms = void 0;
+var SortingAlgorithms = /*#__PURE__*/function () {
+  function SortingAlgorithms() {
+    _classCallCheck(this, SortingAlgorithms);
+  }
+  return _createClass(SortingAlgorithms, [{
+    key: "mergesort",
+    value: function mergesort(unsorted, comparator) {
+      if (unsorted.length <= 1) {
+        return unsorted;
+      }
+      var left = [];
+      var right = [];
+      var middle = Math.floor(unsorted.length / 2);
+      for (var i = 0; i < middle; i++)
+      //Dividing the unsorted list
+      {
+        left.push(unsorted[i]);
+      }
+      for (var j = middle; j < unsorted.length; j++) {
+        right.push(unsorted[j]);
+      }
+      left = this.mergesort(left, comparator);
+      right = this.mergesort(right, comparator);
+      var result = this.merge(left, right, comparator);
+      return result;
+    }
+  }, {
+    key: "merge",
+    value: function merge(left, right, comparator) {
+      var result = [];
+      while (left.length > 0 || right.length > 0) {
+        if (left.length > 0 && right.length > 0) {
+          if (comparator.compare(left[0], right[0]) <= 0)
+            //Comparing First two elements to see which is smaller
+            {
+              result.push(left[0]);
+              left.shift();
+              //Rest of the list minus the first element
+            } else {
+            result.push(right[0]);
+            right.shift();
+          }
+        } else if (left.length > 0) {
+          result.push(left[0]);
+          left.shift();
+        } else if (right.length > 0) {
+          result.push(right[0]);
+          right.shift();
+        }
+      }
+      return result;
+    }
+  }]);
+}();
+exports.SortingAlgorithms = SortingAlgorithms;
+},{}],"src/Library/Utilities/Generic/ActionArray.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ActionArray = void 0;
+var Performer_1 = require("../../Performer");
+var ActionArray = /*#__PURE__*/function () {
+  function ActionArray() {
+    _classCallCheck(this, ActionArray);
+    this.actions = [];
+    this.typeName = "ActionArray";
+    this.types = ["IAction", "IObject", "ActionArray"];
+    this.performer = new Performer_1.Performer();
+  }
+  return _createClass(ActionArray, [{
+    key: "addAction",
+    value: function addAction(action) {
+      if (action === undefined) return;
+      this.actions.push(action);
+    }
+  }, {
+    key: "removeAction",
+    value: function removeAction(action) {
+      if (action === undefined) return;
+      this.performer.remove(this.actions, action);
+    }
+  }, {
+    key: "clearActions",
+    value: function clearActions() {
+      this.actions = [];
+    }
+  }, {
+    key: "getClassName",
+    value: function getClassName() {
+      return this.typeName;
+    }
+  }, {
+    key: "imlplementsType",
+    value: function imlplementsType(type) {
+      return this.types.indexOf(type) > 0;
+    }
+  }, {
+    key: "getName",
+    value: function getName() {
+      return "";
+    }
+  }, {
+    key: "action",
+    value: function action() {
+      var _iterator = _createForOfIteratorHelper(this.actions),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var _action = _step.value;
+          _action.action();
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    }
+  }]);
+}();
+exports.ActionArray = ActionArray;
+},{"../../Performer":"src/Library/Performer.ts"}],"src/Library/Performer.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Performer = void 0;
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+var AliasName_1 = require("./AliasName");
+var ConsolePrinter_1 = require("./ConsolePrinter");
+var OwnError_1 = require("./ErrorHandler/OwnError");
+var MeasurementsComparator_1 = require("./Measurements/MeasurementsComparator");
+var SortingAlgorithms_1 = require("./Utilities/Sort/SortingAlgorithms");
+var ActionArray_1 = require("./Utilities/Generic/ActionArray");
+var Performer = /*#__PURE__*/function () {
+  function Performer() {
+    _classCallCheck(this, Performer);
+    this.a = 0;
+    this.b = false;
+    this.s = "";
+    this.printer = new ConsolePrinter_1.ConsolePrinter();
+    this.sorting = new SortingAlgorithms_1.SortingAlgorithms();
+    this.mCompatator = new MeasurementsComparator_1.MeasurementsComparator(this);
+  }
+  return _createClass(Performer, [{
+    key: "addUnique",
+    value: function addUnique(list, item) {
+      var _iterator = _createForOfIteratorHelper(list),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var x = _step.value;
+          if (x == item) {
+            return false;
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      list.push(item);
+      return true;
+    }
+  }, {
+    key: "getAllIObjects",
+    value: function getAllIObjects(categoryObjects, arrows, objects) {
+      var _iterator2 = _createForOfIteratorHelper(categoryObjects),
+        _step2;
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var o = _step2.value;
+          var l = this.convertObject(o, "IObject");
+          if (l.length > 0) {
+            objects.push(l[0]);
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+      var _iterator3 = _createForOfIteratorHelper(arrows),
+        _step3;
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var a = _step3.value;
+          var l = this.convertObject(a, "IObject");
+          if (l.length > 0) {
+            objects.push(l[0]);
+          }
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+    }
+  }, {
+    key: "setPrinter",
+    value: function setPrinter(printer) {
+      this.printer = printer;
+    }
+  }, {
+    key: "forEach",
+    value: function forEach(collection, action, type) {
+      var obj = collection.getObjectCollection();
+      var _iterator4 = _createForOfIteratorHelper(obj),
+        _step4;
+      try {
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var o = _step4.value;
+          var x = this.convertObject(o, type);
+          if (x.length > 0) action.actionT(x[0]);
+        }
+      } catch (err) {
+        _iterator4.e(err);
+      } finally {
+        _iterator4.f();
+      }
+    }
+  }, {
+    key: "getAll",
+    value: function getAll(collection, type) {
+      var t = [];
+      var obj = collection.getObjectCollection();
+      var _iterator5 = _createForOfIteratorHelper(obj),
+        _step5;
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var o = _step5.value;
+          var x = this.convertObject(o, type);
+          if (x.length > 0) t.push(x[0]);
+        }
+      } catch (err) {
+        _iterator5.e(err);
+      } finally {
+        _iterator5.f();
+      }
+      return t;
+    }
+  }, {
+    key: "reoplaceArrayValue",
+    value: function reoplaceArrayValue(t, s) {
+      if (s.length == 0) {
+        if (t.length > 0) {
+          t.pop();
+          return;
+        }
+      }
+      var ss = s[0];
+      if (t.length > 0) {
+        t[0] = ss;
+        return;
+      }
+      t.push(ss);
+    }
+  }, {
+    key: "executeAction",
+    value: function executeAction(acttion) {
+      if (acttion === undefined) return;
+      acttion.action();
+    }
+  }, {
+    key: "sumOfActions",
+    value: function sumOfActions(first, second) {
+      var act = new ActionArray_1.ActionArray();
+      if (first === undefined) {
+        return second;
+      } else {
+        act.addAction(first);
+        if (second === undefined) {
+          return first;
+        } else {
+          act.addAction(second);
+        }
+      }
+      return act;
+    }
+  }, {
+    key: "setCheker",
+    value: function setCheker(desktop, check) {
+      var objects = desktop.getCategoryObjects();
+      var _iterator6 = _createForOfIteratorHelper(objects),
+        _step6;
+      try {
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          var object = _step6.value;
+          if (this.implementsType(object, "ICheckHolder")) {
+            var ch = object;
+            ch.setCheck(check);
+          }
+        }
+      } catch (err) {
+        _iterator6.e(err);
+      } finally {
+        _iterator6.f();
+      }
+    }
+  }, {
+    key: "findMaxWithReduce",
+    value: function findMaxWithReduce(numbers) {
+      if (numbers.length === 0) {
+        return undefined;
+      }
+      return numbers.reduce(function (max, current) {
+        return current > max ? current : max;
+      }, -Infinity); // Start with -Infinity to ensure the first element is always greater
+    }
+  }, {
+    key: "findMinWithReduce",
+    value: function findMinWithReduce(numbers) {
+      if (numbers.length === 0) {
+        return undefined;
+      }
+      return numbers.reduce(function (min, current) {
+        return current > min ? current : min;
+      }, Infinity); // Start with -Infinity to ensure the first element is always greater
+    }
+  }, {
+    key: "calculateAverage",
+    value: function calculateAverage(numbers) {
+      if (numbers.length === 0) {
+        return 0; // Or throw an error, depending on your requirements
+      }
+      var sum = numbers.reduce(function (accumulator, currentValue) {
+        return accumulator + currentValue;
+      }, 0);
+      return sum / numbers.length;
+    }
+  }, {
+    key: "calculateAverageRobust",
+    value: function calculateAverageRobust(data) {
+      var numbers = data.filter(function (item) {
+        return typeof item === 'number';
+      }); // Type guard
+      if (numbers.length === 0) {
+        return 0;
+      }
+      var sum = numbers.reduce(function (accumulator, currentValue) {
+        return accumulator + currentValue;
+      }, 0);
+      return sum / numbers.length;
+    }
+  }, {
+    key: "calculateAverageNull",
+    value: function calculateAverageNull(data) {
+      var numbers = data.filter(function (item) {
+        return typeof item === 'number';
+      }); // Type guard
+      if (numbers.length != data.length) {
+        return undefined;
+      }
+      var sum = numbers.reduce(function (accumulator, currentValue) {
+        return accumulator + currentValue;
+      }, 0);
+      return sum / numbers.length;
+    }
+  }, {
+    key: "getPrinter",
+    value: function getPrinter() {
+      return this.printer;
+    }
+  }, {
+    key: "print",
+    value: function print(object) {
+      if (this.implementsType(object, "IPrintedObject")) {
+        var pr = object;
+        pr.print(this.printer);
+        return;
+      }
+      this.printer.print(object);
+    }
+  }, {
+    key: "convertTS",
+    value: function convertTS(s, type) {
+      if (this.implementsType(s, type)) {
+        throw new OwnError_1.OwnError("Illegal type", "Illegal type: " + type, undefined);
+      }
+      return s;
+    }
+  }, {
+    key: "getByInterface",
+    value: function getByInterface(desktop, type) {
+      var co = desktop.getCategoryObjects();
+      var objects = [];
+      var _iterator7 = _createForOfIteratorHelper(co),
+        _step7;
+      try {
+        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+          var a = _step7.value;
+          if (this.implementsType(a, type)) {
+            objects.push(a);
+          }
+        }
+      } catch (err) {
+        _iterator7.e(err);
+      } finally {
+        _iterator7.f();
+      }
+      return objects;
+    }
+  }, {
+    key: "sortMeasurements",
+    value: function sortMeasurements(measurements) {
+      return this.sorting.mergesort(measurements, this.mCompatator);
+    }
+  }, {
+    key: "getByType",
+    value: function getByType(desktop, type) {
+      var co = desktop.getCategoryObjects();
+      var objects = [];
+      var _iterator8 = _createForOfIteratorHelper(co),
+        _step8;
+      try {
+        for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+          var a = _step8.value;
+          if (this.implementsType(a, type)) {
+            var ob = a;
+            if (ob.getClassName() == type) {
+              objects.push(a);
+            }
+          }
+        }
+      } catch (err) {
+        _iterator8.e(err);
+      } finally {
+        _iterator8.f();
+      }
+      return objects;
+    }
+  }, {
+    key: "updateFeedbackData",
+    value: function updateFeedbackData(dataConsumer, feedback) {
+      if (feedback.isEmpty()) return;
+      feedback.setFeedbacks();
+      this.updateChildrenData(dataConsumer);
+    }
+  }, {
+    key: "updateChildrenData",
+    value: function updateChildrenData(dataConsumer) {
+      var children = dataConsumer.getAllMeasurements();
+      var _iterator9 = _createForOfIteratorHelper(children),
+        _step9;
+      try {
+        for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+          var child = _step9.value;
+          var o = child;
+          if (this.implementsType(o, "IDataConsumer")) {
+            var dc = child;
+            this.updateChildrenData(dc);
+          }
+          child.updateMeasurements();
+        }
+      } catch (err) {
+        _iterator9.e(err);
+      } finally {
+        _iterator9.f();
+      }
+    }
+  }, {
+    key: "convertArray",
+    value: function convertArray(objects, type) {
+      var s = [];
+      for (var i = 0; i < objects.length; i++) {
+        var o = objects[i];
+        if (o.imlplementsType(type)) {
+          s.push(o);
+        }
+      }
+      return s;
+    }
+  }, {
+    key: "convertMap",
+    value: function convertMap(objects, type) {
+      var map = new Map();
+      var ent = objects.entries();
+      var _iterator0 = _createForOfIteratorHelper(ent),
+        _step0;
+      try {
+        for (_iterator0.s(); !(_step0 = _iterator0.n()).done;) {
+          var _step0$value = _slicedToArray(_step0.value, 2),
+            key = _step0$value[0],
+            val = _step0$value[1];
+          var o = val;
+          if (o.imlplementsType(type)) {
+            map.set(key, o);
+          }
+        }
+      } catch (err) {
+        _iterator0.e(err);
+      } finally {
+        _iterator0.f();
+      }
+      return map;
+    }
+  }, {
+    key: "getName",
+    value: function getName(obj) {
+      var o = this.convertArray(obj, "IObject");
+      return o[0].getName();
+    }
+  }, {
+    key: "convertObject",
+    value: function convertObject(s, type) {
+      var ob = s;
+      var t = [];
+      if (ob.imlplementsType(type)) {
+        var x = s;
+        t.push(x);
+      }
+      return t;
+    }
+  }, {
+    key: "getObjectCollectionArray",
+    value: function getObjectCollectionArray(collection, type) {
+      var t = [];
+      var s = collection.getObjectCollection();
+      var _iterator1 = _createForOfIteratorHelper(s),
+        _step1;
+      try {
+        for (_iterator1.s(); !(_step1 = _iterator1.n()).done;) {
+          var o = _step1.value;
+          var tt = this.convertObject(o, type);
+          if (tt.length == 0) continue;
+          t.push(tt[0]);
+        }
+      } catch (err) {
+        _iterator1.e(err);
+      } finally {
+        _iterator1.f();
+      }
+      return t;
+    }
+  }, {
+    key: "getObjectCollectionMap",
+    value: function getObjectCollectionMap(collection, type) {
+      var map = new Map();
+      var s = collection.getObjectCollection();
+      var _iterator10 = _createForOfIteratorHelper(s),
+        _step10;
+      try {
+        for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+          var o = _step10.value;
+          var tt = this.convertObject(o, type);
+          if (tt.length == 0) continue;
+          var named = this.convertObject(o, "INamed");
+          if (named.length > 0) {
+            map.set(named[0].getNamedName(), tt[0]);
+          }
+        }
+      } catch (err) {
+        _iterator10.e(err);
+      } finally {
+        _iterator10.f();
+      }
+      return map;
+    }
+  }, {
+    key: "getCollectionObject",
+    value: function getCollectionObject(collection, name, type) {
+      var o = collection.getCategoryObject(name);
+      return this.convertObject(o, type);
+    }
+  }, {
+    key: "convertProperties",
+    value: function convertProperties(o, type) {
+      var ob = this.convertObject(o, type);
+      if (ob.length > 0) return ob;
+      var prp = this.convertObject(o, "IProperties");
+      if (prp.length > 0) {
+        var pp = this.convertObject(prp[0].getProperties(), type);
+        if (pp.length > 0) return pp;
+      }
+      return [];
+    }
+  }, {
+    key: "select",
+    value: function select(objects, type) {
+      var t = [];
+      for (var i = 0; i < objects.length; i++) {
+        var o = objects[i];
+        if (o.imlplementsType(type)) {
+          t.push(o);
+        }
+      }
+      return t;
+    }
+  }, {
+    key: "getDerivation",
+    value: function getDerivation(derivation) {
+      var m = derivation.getDerivation();
+      var x = m.getMeasurementValue();
+      return this.convertFromAny(x);
+    }
+  }, {
+    key: "getDerivationMeasurement",
+    value: function getDerivationMeasurement(measurement) {
+      var d = measurement;
+      return this.getDerivation(d);
+    }
+  }, {
+    key: "setDerivationValue",
+    value: function setDerivationValue(derivation, value) {
+      var m = derivation.getDerivation();
+      var iv = m;
+      iv.setIValue(value);
+    }
+  }, {
+    key: "setDerivationMeasuremtValue",
+    value: function setDerivationMeasuremtValue(measurement, value) {
+      var d = measurement;
+      this.setDerivationValue(d, value);
+    }
+  }, {
+    key: "convertFromAny",
+    value: function convertFromAny(t) {
+      return this.convert(t);
+    }
+  }, {
+    key: "convert",
+    value: function convert(t) {
+      // Typeof checks against string representations of types. S is a generic type,
+      // so you can't directly use typeof S.  It will just return the string "object" or "function".
+      // You need to find a way to determine the *actual* type S at runtime
+      //  and compare it against the type of 't'.
+      // A very limited approach would be to use type guards, but that means
+      // you'd have to know what type S *could* be in advance. This is not
+      // really a general solution.
+      if (t === undefined) {
+        throw new OwnError_1.OwnError("Type conversion", "Performer undefined. NULL OBJECT", undefined);
+      }
+      if (typeof t === "string" && null instanceof String) {
+        //VERY LIMITED AND UNSAFE EXAMPLE.
+        return t; // Force the type assertion (VERY UNSAFE)
+      }
+      if (typeof t === "number") {
+        // } && (t as unknown as S) instanceof Number) {  //VERY LIMITED AND UNSAFE EXAMPLE.
+        return t; // Force the type assertion (VERY UNSAFE)
+      }
+      if (typeof t === "boolean") {
+        //VERY LIMITED AND UNSAFE EXAMPLE.
+        return t; // Force the type assertion (VERY UNSAFE)
+      }
+      //This is better, but assumes S is a string or number
+      if (typeof t === 'string' && null === String) {
+        return t;
+      }
+      if (typeof t === 'number' && null === Number) {
+        return t;
+      }
+      console.warn(t, _typeof(t));
+      throw new OwnError_1.OwnError("Type conversion", "Performer", undefined);
+      // In many cases, a direct conversion may not be possible
+      // or may require a more complex transformation.
+      // warn("Conversion not possible for types:", typeof t, S);
+      return undefined; // Or throw an error, or return a default value.
+    }
+  }, {
+    key: "getMeasurement",
+    value: function getMeasurement(i, j, dataConsumer) {
+      return dataConsumer.getAllMeasurements()[i].getMeasurement(j);
+    }
+  }, {
+    key: "remove",
+    value: function remove(t, x) {
+      var tt = [];
+      var _iterator11 = _createForOfIteratorHelper(t),
+        _step11;
+      try {
+        for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
+          var y = _step11.value;
+          if (y != x) {
+            tt.push(x);
+          }
+        }
+      } catch (err) {
+        _iterator11.e(err);
+      } finally {
+        _iterator11.f();
+      }
+      return tt;
+    }
+  }, {
+    key: "enlarge",
+    value: function enlarge(t, x, size) {
+      for (var i = 0; i < size; i++) t.push(x);
+    }
+  }, {
+    key: "enlarge2",
+    value: function enlarge2(t, x, row, column) {
+      for (var i = 0; i < row; i++) {
+        var y = [];
+        t.push(y);
+        for (var j = 0; i < column; j++) y.push(x);
+      }
+    }
+  }, {
+    key: "enlargeNumber",
+    value: function enlargeNumber(x, size) {
+      this.enlarge(x, 0, size);
+    }
+  }, {
+    key: "enlargeNumber2",
+    value: function enlargeNumber2(x, row, column) {
+      this.enlarge2(x, 0, row, column);
+    }
+  }, {
+    key: "pushArray",
+    value: function pushArray(f, t) {
+      for (var i = 0; i < f.length; i++) {
+        t.push(f[i]);
+      }
+    }
+  }, {
+    key: "copyArray",
+    value: function copyArray(f, t) {
+      for (var i = 0; i < f.length; i++) {
+        t[i] = f[i];
+      }
+    }
+  }, {
+    key: "copyArraySize",
+    value: function copyArraySize(f, t, size) {
+      for (var i = 0; i < size; i++) {
+        t[i] = f[i];
+      }
+    }
+  }, {
+    key: "addArray",
+    value: function addArray(array, add) {
+      var _iterator12 = _createForOfIteratorHelper(add),
+        _step12;
+      try {
+        for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+          var f = _step12.value;
+          array.push(f);
+        }
+      } catch (err) {
+        _iterator12.e(err);
+      } finally {
+        _iterator12.f();
+      }
+    }
+  }, {
+    key: "setAliasType",
+    value: function setAliasType(name, value, map, names) {
+      if (map.has(name)) {
+        return false;
+      }
+      names.push(name);
+      if (typeof value === 'number') {
+        map.set(name, this.a);
+      }
+      if (typeof value === 'boolean') {
+        map.set(name, this.b);
+      }
+      if (typeof value === 'string') {
+        map.set(name, this.s);
+      }
+      return true;
+    }
+  }, {
+    key: "setAliasMap",
+    value: function setAliasMap(map, alias) {
+      var keys = map.keys();
+      /*    keys.foreach(
+              key => alias.setAliasValue(key, map.get(key));
+          );
+          return;*/
+      var _iterator13 = _createForOfIteratorHelper(keys),
+        _step13;
+      try {
+        for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
+          var key = _step13.value;
+          alias.setAliasValue(key, map.get(key));
+        }
+      } catch (err) {
+        _iterator13.e(err);
+      } finally {
+        _iterator13.f();
+      }
+    }
+  }, {
+    key: "copyMap",
+    value: function copyMap(s, t) {
+      var _iterator14 = _createForOfIteratorHelper(s),
+        _step14;
+      try {
+        for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
+          var _step14$value = _slicedToArray(_step14.value, 2),
+            key = _step14$value[0],
+            value = _step14$value[1];
+          t.set(key, value);
+        }
+      } catch (err) {
+        _iterator14.e(err);
+      } finally {
+        _iterator14.f();
+      }
+    }
+  }, {
+    key: "implementsType",
+    value: function implementsType(o, type) {
+      var obj = o;
+      return obj.imlplementsType(type);
+    }
+  }, {
+    key: "getMeasurementsMap",
+    value: function getMeasurementsMap(measurements) {
+      var map = new Map();
+      var n = measurements.getMeasurementsCount();
+      for (var i = 0; i < n; i++) {
+        var m = measurements.getMeasurement(i);
+        var nn = m.getMeasurementName();
+        map.set(nn, m);
+      }
+      return map;
+    }
+  }, {
+    key: "getMeasurementDC",
+    value: function getMeasurementDC(consumer, name) {
+      var mm = consumer.getAllMeasurements();
+      var _iterator15 = _createForOfIteratorHelper(mm),
+        _step15;
+      try {
+        for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
+          var mea = _step15.value;
+          var co = mea;
+          var nm = co.getCategoryObjectName();
+          nm += ".";
+          var n = mea.getMeasurementsCount();
+          for (var i = 0; i < n; i++) {
+            var m = mea.getMeasurement(i);
+            var nam = nm + m.getMeasurementName();
+            if (nam == name) {
+              return m;
+            }
+          }
+        }
+      } catch (err) {
+        _iterator15.e(err);
+      } finally {
+        _iterator15.f();
+      }
+      return this.measurement;
+    }
+  }, {
+    key: "getMeasurementsMMap",
+    value: function getMeasurementsMMap(measurements, map) {
+      var n = measurements.getMeasurementsCount();
+      for (var i = 0; i < n; i++) {
+        var m = measurements.getMeasurement(i);
+        var name = m.getMeasurementName();
+        map.set(name, m);
+      }
+    }
+  }, {
+    key: "getMeasurementsDCMap",
+    value: function getMeasurementsDCMap(consumer) {
+      var map = new Map();
+      var mm = consumer.getAllMeasurements();
+      var _iterator16 = _createForOfIteratorHelper(mm),
+        _step16;
+      try {
+        for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
+          var mea = _step16.value;
+          var co = mea;
+          var nm = co.getCategoryObjectName();
+          nm += ".";
+          var n = mea.getMeasurementsCount();
+          for (var i = 0; i < n; i++) {
+            var m = mea.getMeasurement(i);
+            var name = nm + m.getMeasurementName();
+            map.set(name, m);
+          }
+        }
+      } catch (err) {
+        _iterator16.e(err);
+      } finally {
+        _iterator16.f();
+      }
+      return map;
+    }
+  }, {
+    key: "getMeasurements",
+    value: function getMeasurements(desktop, name) {
+      var a = desktop.getCategoryObject(name);
+      if (this.implementsType(a, "IMeasurements")) {
+        var al = a;
+        return al;
+      }
+      return this.measurements;
+    }
+  }, {
+    key: "getAlias",
+    value: function getAlias(desktop, name) {
+      var a = desktop.getCategoryObject(name);
+      if (this.implementsType(a, "IAlias")) {
+        var al = a;
+        return al;
+      }
+      return this.alias;
+    }
+  }, {
+    key: "getAliasName",
+    value: function getAliasName(desktop, name) {
+      var l = name.length;
+      var n = name.lastIndexOf('.');
+      var s = name.substring(n + 1, l);
+      var t = name.substring(0, n);
+      var al = this.getAlias(desktop, t);
+      return new AliasName_1.AliasName(al, s);
+    }
+  }]);
+}();
+exports.Performer = Performer;
+},{"./AliasName":"src/Library/AliasName.ts","./ConsolePrinter":"src/Library/ConsolePrinter.ts","./ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.ts","./Measurements/MeasurementsComparator":"src/Library/Measurements/MeasurementsComparator.ts","./Utilities/Sort/SortingAlgorithms":"src/Library/Utilities/Sort/SortingAlgorithms.ts","./Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.ts"}],"src/Library/Measurements/DataConsumerBoolFunc.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DataConsumerBoolFunc = void 0;
+var Performer_1 = require("../Performer");
+var DataConsumerBoolFunc = /*#__PURE__*/function () {
+  function DataConsumerBoolFunc(dataConsumer, name) {
+    _classCallCheck(this, DataConsumerBoolFunc);
+    this.performer = new Performer_1.Performer();
+    this.measurement = this.performer.getMeasurementDC(dataConsumer, name);
+  }
+  return _createClass(DataConsumerBoolFunc, [{
+    key: "func",
+    value: function func() {
+      var res = this.measurement.getMeasurementValue();
+      if (res != undefined) {
+        return this.performer.convertFromAny(res);
+      }
+      return false;
+    }
+  }]);
+}();
+exports.DataConsumerBoolFunc = DataConsumerBoolFunc;
+},{"../Performer":"src/Library/Performer.ts"}],"src/Library/AliasName.js":[function(require,module,exports) {
 "use strict";
 
 /* eslint-disable no-var */
@@ -280,840 +1431,7 @@ var MeasurementsComparator = /*#__PURE__*/function () {
   }]);
 }();
 exports.MeasurementsComparator = MeasurementsComparator;
-},{}],"src/Library/Utilities/Sort/SortingAlgorithms.js":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.SortingAlgorithma = void 0;
-var SortingAlgorithma = /*#__PURE__*/function () {
-  function SortingAlgorithma() {
-    _classCallCheck(this, SortingAlgorithma);
-  }
-  return _createClass(SortingAlgorithma, [{
-    key: "mergesort",
-    value: function mergesort(unsorted, comparator) {
-      if (unsorted.length <= 1) {
-        return unsorted;
-      }
-      var left = [];
-      var right = [];
-      var middle = Math.floor(unsorted.length / 2);
-      for (var i = 0; i < middle; i++)
-      //Dividing the unsorted list
-      {
-        left.push(unsorted[i]);
-      }
-      for (var j = middle; j < unsorted.length; j++) {
-        right.push(unsorted[j]);
-      }
-      left = this.mergesort(left, comparator);
-      right = this.mergesort(right, comparator);
-      return this.merge(left, right, comparator);
-    }
-  }, {
-    key: "merge",
-    value: function merge(left, right, comparator) {
-      var result = [];
-      while (left.length > 0 || right.length > 0) {
-        if (left.length > 0 && right.length > 0) {
-          if (comparator.compare(left[0], right[0]) <= 0)
-            //Comparing First two elements to see which is smaller
-            {
-              result.push(left[0]);
-              left.shift();
-              //Rest of the list minus the first element
-            } else {
-            result.push(right[0]);
-            right.shift();
-          }
-        } else if (left.length > 0) {
-          result.push(left[0]);
-          left.shift();
-        } else if (right.length > 0) {
-          result.push(right[0]);
-          right.shift();
-        }
-      }
-      return result;
-    }
-  }]);
-}();
-exports.SortingAlgorithma = SortingAlgorithma;
-},{}],"src/Library/Performer.js":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Performer = void 0;
-/* eslint-disable no-var */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-var AliasName_1 = require("./AliasName");
-var ConsolePrinter_1 = require("./ConsolePrinter");
-var OwnError_1 = require("./ErrorHandler/OwnError");
-var MeasurementsComparator_1 = require("./Measurements/MeasurementsComparator");
-var SortingAlgorithms_1 = require("./Utilities/Sort/SortingAlgorithms");
-var ActionArray_1 = require("./Utilities/Generic/ActionArray");
-var Performer = /*#__PURE__*/function () {
-  function Performer() {
-    _classCallCheck(this, Performer);
-    this.a = 0;
-    this.b = false;
-    this.s = "";
-    this.printer = new ConsolePrinter_1.ConsolePrinter();
-    this.sorting = new SortingAlgorithms_1.SortingAlgorithma();
-    this.mCompatator = new MeasurementsComparator_1.MeasurementsComparator(this);
-  }
-  return _createClass(Performer, [{
-    key: "getAllIObjects",
-    value: function getAllIObjects(categoryObjects, arrows, objects) {
-      var _iterator = _createForOfIteratorHelper(categoryObjects),
-        _step;
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var o = _step.value;
-          var l = this.convertObject(o, "IObject");
-          if (l.length > 0) {
-            objects.push(l[0]);
-          }
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-      var _iterator2 = _createForOfIteratorHelper(arrows),
-        _step2;
-      try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          var a = _step2.value;
-          var l = this.convertObject(a, "IObject");
-          if (l.length > 0) {
-            objects.push(l[0]);
-          }
-        }
-      } catch (err) {
-        _iterator2.e(err);
-      } finally {
-        _iterator2.f();
-      }
-    }
-  }, {
-    key: "setPrinter",
-    value: function setPrinter(printer) {
-      this.printer = printer;
-    }
-  }, {
-    key: "forEach",
-    value: function forEach(collection, action, type) {
-      var obj = collection.getObjectCollection();
-      var _iterator3 = _createForOfIteratorHelper(obj),
-        _step3;
-      try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-          var o = _step3.value;
-          var x = this.convertObject(o, type);
-          if (x.length > 0) action.actionT(x[0]);
-        }
-      } catch (err) {
-        _iterator3.e(err);
-      } finally {
-        _iterator3.f();
-      }
-    }
-  }, {
-    key: "reoplaceArrayValue",
-    value: function reoplaceArrayValue(t, s) {
-      if (s.length == 0) {
-        if (t.length > 0) {
-          t.pop();
-          return;
-        }
-      }
-      var ss = s[0];
-      if (t.length > 0) {
-        t[0] = ss;
-        return;
-      }
-      t.push(ss);
-    }
-  }, {
-    key: "executeAction",
-    value: function executeAction(acttion) {
-      if (acttion === undefined) return;
-      acttion.action();
-    }
-  }, {
-    key: "sumOfActions",
-    value: function sumOfActions(first, second) {
-      var act = new ActionArray_1.ActionArray();
-      if (first === undefined) {
-        return second;
-      } else {
-        act.addAction(first);
-        if (second === undefined) {
-          return first;
-        } else {
-          act.addAction(second);
-        }
-      }
-      return act;
-    }
-  }, {
-    key: "setCheker",
-    value: function setCheker(desktop, check) {
-      var objects = desktop.getCategoryObjects();
-      var _iterator4 = _createForOfIteratorHelper(objects),
-        _step4;
-      try {
-        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-          var object = _step4.value;
-          if (this.implementsType(object, "ICheckHolder")) {
-            var ch = object;
-            ch.setCheck(check);
-          }
-        }
-      } catch (err) {
-        _iterator4.e(err);
-      } finally {
-        _iterator4.f();
-      }
-    }
-  }, {
-    key: "findMaxWithReduce",
-    value: function findMaxWithReduce(numbers) {
-      if (numbers.length === 0) {
-        return undefined;
-      }
-      return numbers.reduce(function (max, current) {
-        return current > max ? current : max;
-      }, -Infinity); // Start with -Infinity to ensure the first element is always greater
-    }
-  }, {
-    key: "findMinWithReduce",
-    value: function findMinWithReduce(numbers) {
-      if (numbers.length === 0) {
-        return undefined;
-      }
-      return numbers.reduce(function (min, current) {
-        return current > min ? current : min;
-      }, Infinity); // Start with -Infinity to ensure the first element is always greater
-    }
-  }, {
-    key: "calculateAverage",
-    value: function calculateAverage(numbers) {
-      if (numbers.length === 0) {
-        return 0; // Or throw an error, depending on your requirements
-      }
-      var sum = numbers.reduce(function (accumulator, currentValue) {
-        return accumulator + currentValue;
-      }, 0);
-      return sum / numbers.length;
-    }
-  }, {
-    key: "calculateAverageRobust",
-    value: function calculateAverageRobust(data) {
-      var numbers = data.filter(function (item) {
-        return typeof item === 'number';
-      }); // Type guard
-      if (numbers.length === 0) {
-        return 0;
-      }
-      var sum = numbers.reduce(function (accumulator, currentValue) {
-        return accumulator + currentValue;
-      }, 0);
-      return sum / numbers.length;
-    }
-  }, {
-    key: "calculateAverageNull",
-    value: function calculateAverageNull(data) {
-      var numbers = data.filter(function (item) {
-        return typeof item === 'number';
-      }); // Type guard
-      if (numbers.length != data.length) {
-        return undefined;
-      }
-      var sum = numbers.reduce(function (accumulator, currentValue) {
-        return accumulator + currentValue;
-      }, 0);
-      return sum / numbers.length;
-    }
-  }, {
-    key: "getPrinter",
-    value: function getPrinter() {
-      return this.printer;
-    }
-  }, {
-    key: "print",
-    value: function print(object) {
-      if (this.implementsType(object, "IPrintedObject")) {
-        var pr = object;
-        pr.print(this.printer);
-        return;
-      }
-      this.printer.print(object);
-    }
-  }, {
-    key: "convertTS",
-    value: function convertTS(s, type) {
-      if (this.implementsType(s, type)) {
-        throw new OwnError_1.OwnError("Illegal type", "Illegal type: " + type, undefined);
-      }
-      return s;
-    }
-  }, {
-    key: "getByInterface",
-    value: function getByInterface(desktop, type) {
-      var co = desktop.getCategoryObjects();
-      var objects = [];
-      var _iterator5 = _createForOfIteratorHelper(co),
-        _step5;
-      try {
-        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-          var a = _step5.value;
-          if (this.implementsType(a, type)) {
-            objects.push(a);
-          }
-        }
-      } catch (err) {
-        _iterator5.e(err);
-      } finally {
-        _iterator5.f();
-      }
-      return objects;
-    }
-  }, {
-    key: "sortMeasurements",
-    value: function sortMeasurements(measurements) {
-      return this.sorting.mergesort(measurements, this.mCompatator);
-    }
-  }, {
-    key: "getByType",
-    value: function getByType(desktop, type) {
-      var co = desktop.getCategoryObjects();
-      var objects = [];
-      var _iterator6 = _createForOfIteratorHelper(co),
-        _step6;
-      try {
-        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-          var a = _step6.value;
-          if (this.implementsType(a, type)) {
-            var ob = a;
-            if (ob.getClassName() == type) {
-              objects.push(a);
-            }
-          }
-        }
-      } catch (err) {
-        _iterator6.e(err);
-      } finally {
-        _iterator6.f();
-      }
-      return objects;
-    }
-  }, {
-    key: "updateFeedbackData",
-    value: function updateFeedbackData(dataConsumer, feedback) {
-      if (feedback.isEmpty()) return;
-      feedback.setFeedbacks();
-      this.updateChildrenData(dataConsumer);
-    }
-  }, {
-    key: "updateChildrenData",
-    value: function updateChildrenData(dataConsumer) {
-      var children = dataConsumer.getAllMeasurements();
-      var _iterator7 = _createForOfIteratorHelper(children),
-        _step7;
-      try {
-        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-          var child = _step7.value;
-          var o = child;
-          if (this.implementsType(o, "IDataConsumer")) {
-            var dc = child;
-            this.updateChildrenData(dc);
-          }
-          child.updateMeasurements();
-        }
-      } catch (err) {
-        _iterator7.e(err);
-      } finally {
-        _iterator7.f();
-      }
-    }
-  }, {
-    key: "convertArray",
-    value: function convertArray(objects, type) {
-      var s = [];
-      for (var i = 0; i < objects.length; i++) {
-        var o = objects[i];
-        if (o.imlplementsType(type)) {
-          s.push(o);
-        }
-      }
-      return s;
-    }
-  }, {
-    key: "convertMap",
-    value: function convertMap(objects, type) {
-      var map = new Map();
-      var ent = objects.entries();
-      var _iterator8 = _createForOfIteratorHelper(ent),
-        _step8;
-      try {
-        for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-          var _step8$value = _slicedToArray(_step8.value, 2),
-            key = _step8$value[0],
-            val = _step8$value[1];
-          var o = val;
-          if (o.imlplementsType(type)) {
-            map.set(key, o);
-          }
-        }
-      } catch (err) {
-        _iterator8.e(err);
-      } finally {
-        _iterator8.f();
-      }
-      return map;
-    }
-  }, {
-    key: "convertObject",
-    value: function convertObject(s, type) {
-      var ob = s;
-      var t = [];
-      if (ob.imlplementsType(type)) {
-        var x = s;
-        t.push(x);
-      }
-      return t;
-    }
-  }, {
-    key: "getObjectCollectionArray",
-    value: function getObjectCollectionArray(collection, type) {
-      var t = [];
-      var s = collection.getObjectCollection();
-      var _iterator9 = _createForOfIteratorHelper(s),
-        _step9;
-      try {
-        for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
-          var o = _step9.value;
-          var tt = this.convertObject(o, type);
-          if (tt.length == 0) continue;
-          t.push(tt[0]);
-        }
-      } catch (err) {
-        _iterator9.e(err);
-      } finally {
-        _iterator9.f();
-      }
-      return t;
-    }
-  }, {
-    key: "getObjectCollectionMap",
-    value: function getObjectCollectionMap(collection, type) {
-      var map = new Map();
-      var s = collection.getObjectCollection();
-      var _iterator0 = _createForOfIteratorHelper(s),
-        _step0;
-      try {
-        for (_iterator0.s(); !(_step0 = _iterator0.n()).done;) {
-          var o = _step0.value;
-          var tt = this.convertObject(o, type);
-          if (tt.length == 0) continue;
-          var named = this.convertObject(o, "INamed");
-          if (named.length > 0) {
-            map.set(named[0].getNamedName(), tt[0]);
-          }
-        }
-      } catch (err) {
-        _iterator0.e(err);
-      } finally {
-        _iterator0.f();
-      }
-      return map;
-    }
-  }, {
-    key: "getCollectionObject",
-    value: function getCollectionObject(collection, name, type) {
-      var o = collection.getCategoryObject(name);
-      return this.convertObject(o, type);
-    }
-  }, {
-    key: "convertProperties",
-    value: function convertProperties(o, type) {
-      var ob = this.convertObject(o, type);
-      if (ob.length > 0) return ob;
-      var prp = this.convertObject(o, "IProperties");
-      if (prp.length > 0) {
-        var pp = this.convertObject(prp[0].getProperties(), type);
-        if (pp.length > 0) return pp;
-      }
-      return [];
-    }
-  }, {
-    key: "select",
-    value: function select(objects, type) {
-      var t = [];
-      for (var i = 0; i < objects.length; i++) {
-        var o = objects[i];
-        if (o.imlplementsType(type)) {
-          t.push(o);
-        }
-      }
-      return t;
-    }
-  }, {
-    key: "getDerivation",
-    value: function getDerivation(derivation) {
-      var m = derivation.getDerivation();
-      var x = m.getMeasurementValue();
-      return this.convertFromAny(x);
-    }
-  }, {
-    key: "getDerivationMeasurement",
-    value: function getDerivationMeasurement(measurement) {
-      var d = measurement;
-      return this.getDerivation(d);
-    }
-  }, {
-    key: "setDerivationValue",
-    value: function setDerivationValue(derivation, value) {
-      var m = derivation.getDerivation();
-      var iv = m;
-      iv.setIValue(value);
-    }
-  }, {
-    key: "setDerivationMeasuremtValue",
-    value: function setDerivationMeasuremtValue(measurement, value) {
-      var d = measurement;
-      this.setDerivationValue(d, value);
-    }
-  }, {
-    key: "convertFromAny",
-    value: function convertFromAny(t) {
-      return this.convert(t);
-    }
-  }, {
-    key: "convert",
-    value: function convert(t) {
-      // Typeof checks against string representations of types. S is a generic type,
-      // so you can't directly use typeof S.  It will just return the string "object" or "function".
-      // You need to find a way to determine the *actual* type S at runtime
-      //  and compare it against the type of 't'.
-      // A very limited approach would be to use type guards, but that means
-      // you'd have to know what type S *could* be in advance. This is not
-      // really a general solution.
-      if (t === undefined) {
-        throw new OwnError_1.OwnError("Type conversion", "Performer undefined. NULL OBJECT", undefined);
-      }
-      if (typeof t === "string" && null instanceof String) {
-        //VERY LIMITED AND UNSAFE EXAMPLE.
-        return t; // Force the type assertion (VERY UNSAFE)
-      }
-      if (typeof t === "number") {
-        // } && (t as unknown as S) instanceof Number) {  //VERY LIMITED AND UNSAFE EXAMPLE.
-        return t; // Force the type assertion (VERY UNSAFE)
-      }
-      if (typeof t === "boolean") {
-        //VERY LIMITED AND UNSAFE EXAMPLE.
-        return t; // Force the type assertion (VERY UNSAFE)
-      }
-      //This is better, but assumes S is a string or number
-      if (typeof t === 'string' && null === String) {
-        return t;
-      }
-      if (typeof t === 'number' && null === Number) {
-        return t;
-      }
-      console.warn(t, _typeof(t));
-      throw new OwnError_1.OwnError("Type conversion", "Performer", undefined);
-      // In many cases, a direct conversion may not be possible
-      // or may require a more complex transformation.
-      // warn("Conversion not possible for types:", typeof t, S);
-      return undefined; // Or throw an error, or return a default value.
-    }
-  }, {
-    key: "getMeasurement",
-    value: function getMeasurement(i, j, dataConsumer) {
-      return dataConsumer.getAllMeasurements()[i].getMeasurement(j);
-    }
-  }, {
-    key: "remove",
-    value: function remove(t, x) {
-      var tt = [];
-      var _iterator1 = _createForOfIteratorHelper(t),
-        _step1;
-      try {
-        for (_iterator1.s(); !(_step1 = _iterator1.n()).done;) {
-          var y = _step1.value;
-          if (y != x) {
-            tt.push(x);
-          }
-        }
-      } catch (err) {
-        _iterator1.e(err);
-      } finally {
-        _iterator1.f();
-      }
-      return tt;
-    }
-  }, {
-    key: "enlarge",
-    value: function enlarge(t, x, size) {
-      for (var i = 0; i < size; i++) t.push(x);
-    }
-  }, {
-    key: "enlarge2",
-    value: function enlarge2(t, x, row, column) {
-      for (var i = 0; i < row; i++) {
-        var y = [];
-        t.push(y);
-        for (var j = 0; i < column; j++) y.push(x);
-      }
-    }
-  }, {
-    key: "enlargeNumber",
-    value: function enlargeNumber(x, size) {
-      this.enlarge(x, 0, size);
-    }
-  }, {
-    key: "enlargeNumber2",
-    value: function enlargeNumber2(x, row, column) {
-      this.enlarge2(x, 0, row, column);
-    }
-  }, {
-    key: "pushArray",
-    value: function pushArray(f, t) {
-      for (var i = 0; i < f.length; i++) {
-        t.push(f[i]);
-      }
-    }
-  }, {
-    key: "copyArray",
-    value: function copyArray(f, t) {
-      for (var i = 0; i < f.length; i++) {
-        t[i] = f[i];
-      }
-    }
-  }, {
-    key: "copyArraySize",
-    value: function copyArraySize(f, t, size) {
-      for (var i = 0; i < size; i++) {
-        t[i] = f[i];
-      }
-    }
-  }, {
-    key: "addArray",
-    value: function addArray(array, add) {
-      var _iterator10 = _createForOfIteratorHelper(add),
-        _step10;
-      try {
-        for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
-          var f = _step10.value;
-          array.push(f);
-        }
-      } catch (err) {
-        _iterator10.e(err);
-      } finally {
-        _iterator10.f();
-      }
-    }
-  }, {
-    key: "setAliasType",
-    value: function setAliasType(name, value, map, names) {
-      if (map.has(name)) {
-        return false;
-      }
-      names.push(name);
-      if (typeof value === 'number') {
-        map.set(name, this.a);
-      }
-      if (typeof value === 'boolean') {
-        map.set(name, this.b);
-      }
-      if (typeof value === 'string') {
-        map.set(name, this.s);
-      }
-      return true;
-    }
-  }, {
-    key: "setAliasMap",
-    value: function setAliasMap(map, alias) {
-      var keys = map.keys();
-      /*    keys.foreach(
-              key => alias.setAliasValue(key, map.get(key));
-          );
-          return;*/
-      var _iterator11 = _createForOfIteratorHelper(keys),
-        _step11;
-      try {
-        for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
-          var key = _step11.value;
-          alias.setAliasValue(key, map.get(key));
-        }
-      } catch (err) {
-        _iterator11.e(err);
-      } finally {
-        _iterator11.f();
-      }
-    }
-  }, {
-    key: "copyMap",
-    value: function copyMap(s, t) {
-      var _iterator12 = _createForOfIteratorHelper(s),
-        _step12;
-      try {
-        for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
-          var _step12$value = _slicedToArray(_step12.value, 2),
-            key = _step12$value[0],
-            value = _step12$value[1];
-          t.set(key, value);
-        }
-      } catch (err) {
-        _iterator12.e(err);
-      } finally {
-        _iterator12.f();
-      }
-    }
-  }, {
-    key: "implementsType",
-    value: function implementsType(o, type) {
-      var obj = o;
-      return obj.imlplementsType(type);
-    }
-  }, {
-    key: "getMeasurementsMap",
-    value: function getMeasurementsMap(measurements) {
-      var map = new Map();
-      var n = measurements.getMeasurementsCount();
-      for (var i = 0; i < n; i++) {
-        var m = measurements.getMeasurement(i);
-        var nn = m.getMeasurementName();
-        map.set(nn, m);
-      }
-      return map;
-    }
-  }, {
-    key: "getMeasurementDC",
-    value: function getMeasurementDC(consumer, name) {
-      var mm = consumer.getAllMeasurements();
-      var _iterator13 = _createForOfIteratorHelper(mm),
-        _step13;
-      try {
-        for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
-          var mea = _step13.value;
-          var co = mea;
-          var nm = co.getCategoryObjectName();
-          nm += ".";
-          var n = mea.getMeasurementsCount();
-          for (var i = 0; i < n; i++) {
-            var m = mea.getMeasurement(i);
-            var nam = nm + m.getMeasurementName();
-            if (nam == name) {
-              return m;
-            }
-          }
-        }
-      } catch (err) {
-        _iterator13.e(err);
-      } finally {
-        _iterator13.f();
-      }
-      return this.measurement;
-    }
-  }, {
-    key: "getMeasurementsMMap",
-    value: function getMeasurementsMMap(measurements, map) {
-      var n = measurements.getMeasurementsCount();
-      for (var i = 0; i < n; i++) {
-        var m = measurements.getMeasurement(i);
-        var name = m.getMeasurementName();
-        map.set(name, m);
-      }
-    }
-  }, {
-    key: "getMeasurementsDCMap",
-    value: function getMeasurementsDCMap(consumer) {
-      var map = new Map();
-      var mm = consumer.getAllMeasurements();
-      var _iterator14 = _createForOfIteratorHelper(mm),
-        _step14;
-      try {
-        for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
-          var mea = _step14.value;
-          var co = mea;
-          var nm = co.getCategoryObjectName();
-          nm += ".";
-          var n = mea.getMeasurementsCount();
-          for (var i = 0; i < n; i++) {
-            var m = mea.getMeasurement(i);
-            var name = nm + m.getMeasurementName();
-            map.set(name, m);
-          }
-        }
-      } catch (err) {
-        _iterator14.e(err);
-      } finally {
-        _iterator14.f();
-      }
-      return map;
-    }
-  }, {
-    key: "getMeasurements",
-    value: function getMeasurements(desktop, name) {
-      var a = desktop.getCategoryObject(name);
-      if (this.implementsType(a, "IMeasurements")) {
-        var al = a;
-        return al;
-      }
-      return this.measurements;
-    }
-  }, {
-    key: "getAlias",
-    value: function getAlias(desktop, name) {
-      var a = desktop.getCategoryObject(name);
-      if (this.implementsType(a, "IAlias")) {
-        var al = a;
-        return al;
-      }
-      return this.alias;
-    }
-  }, {
-    key: "getAliasName",
-    value: function getAliasName(desktop, name) {
-      var l = name.length;
-      var n = name.lastIndexOf('.');
-      var s = name.substring(n + 1, l);
-      var t = name.substring(0, n);
-      var al = this.getAlias(desktop, t);
-      return new AliasName_1.AliasName(al, s);
-    }
-  }]);
-}();
-exports.Performer = Performer;
-},{"./AliasName":"src/Library/AliasName.js","./ConsolePrinter":"src/Library/ConsolePrinter.js","./ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.js","./Measurements/MeasurementsComparator":"src/Library/Measurements/MeasurementsComparator.js","./Utilities/Sort/SortingAlgorithms":"src/Library/Utilities/Sort/SortingAlgorithms.js","./Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.js"}],"src/Library/Utilities/Generic/ActionArray.js":[function(require,module,exports) {
+},{}],"src/Library/Utilities/Generic/ActionArray.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -1189,7 +1507,7 @@ var ActionArray = /*#__PURE__*/function () {
   }]);
 }();
 exports.ActionArray = ActionArray;
-},{"../../Performer":"src/Library/Performer.js"}],"src/Library/Performer.ts":[function(require,module,exports) {
+},{"../../Performer":"src/Library/Performer.js"}],"src/Library/Performer.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -1225,20 +1543,19 @@ var Performer = /*#__PURE__*/function () {
     this.b = false;
     this.s = "";
     this.printer = new ConsolePrinter_1.ConsolePrinter();
-    this.sorting = new SortingAlgorithms_1.SortingAlgorithma();
+    this.sorting = new SortingAlgorithms_1.SortingAlgorithms();
     this.mCompatator = new MeasurementsComparator_1.MeasurementsComparator(this);
   }
   return _createClass(Performer, [{
-    key: "getAllIObjects",
-    value: function getAllIObjects(categoryObjects, arrows, objects) {
-      var _iterator = _createForOfIteratorHelper(categoryObjects),
+    key: "addUnique",
+    value: function addUnique(list, item) {
+      var _iterator = _createForOfIteratorHelper(list),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var o = _step.value;
-          var l = this.convertObject(o, "IObject");
-          if (l.length > 0) {
-            objects.push(l[0]);
+          var x = _step.value;
+          if (x == item) {
+            return false;
           }
         }
       } catch (err) {
@@ -1246,12 +1563,18 @@ var Performer = /*#__PURE__*/function () {
       } finally {
         _iterator.f();
       }
-      var _iterator2 = _createForOfIteratorHelper(arrows),
+      list.push(item);
+      return true;
+    }
+  }, {
+    key: "getAllIObjects",
+    value: function getAllIObjects(categoryObjects, arrows, objects) {
+      var _iterator2 = _createForOfIteratorHelper(categoryObjects),
         _step2;
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          var a = _step2.value;
-          var l = this.convertObject(a, "IObject");
+          var o = _step2.value;
+          var l = this.convertObject(o, "IObject");
           if (l.length > 0) {
             objects.push(l[0]);
           }
@@ -1260,6 +1583,21 @@ var Performer = /*#__PURE__*/function () {
         _iterator2.e(err);
       } finally {
         _iterator2.f();
+      }
+      var _iterator3 = _createForOfIteratorHelper(arrows),
+        _step3;
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var a = _step3.value;
+          var l = this.convertObject(a, "IObject");
+          if (l.length > 0) {
+            objects.push(l[0]);
+          }
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
       }
     }
   }, {
@@ -1271,19 +1609,39 @@ var Performer = /*#__PURE__*/function () {
     key: "forEach",
     value: function forEach(collection, action, type) {
       var obj = collection.getObjectCollection();
-      var _iterator3 = _createForOfIteratorHelper(obj),
-        _step3;
+      var _iterator4 = _createForOfIteratorHelper(obj),
+        _step4;
       try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-          var o = _step3.value;
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var o = _step4.value;
           var x = this.convertObject(o, type);
           if (x.length > 0) action.actionT(x[0]);
         }
       } catch (err) {
-        _iterator3.e(err);
+        _iterator4.e(err);
       } finally {
-        _iterator3.f();
+        _iterator4.f();
       }
+    }
+  }, {
+    key: "getAll",
+    value: function getAll(collection, type) {
+      var t = [];
+      var obj = collection.getObjectCollection();
+      var _iterator5 = _createForOfIteratorHelper(obj),
+        _step5;
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var o = _step5.value;
+          var x = this.convertObject(o, type);
+          if (x.length > 0) t.push(x[0]);
+        }
+      } catch (err) {
+        _iterator5.e(err);
+      } finally {
+        _iterator5.f();
+      }
+      return t;
     }
   }, {
     key: "reoplaceArrayValue",
@@ -1327,20 +1685,20 @@ var Performer = /*#__PURE__*/function () {
     key: "setCheker",
     value: function setCheker(desktop, check) {
       var objects = desktop.getCategoryObjects();
-      var _iterator4 = _createForOfIteratorHelper(objects),
-        _step4;
+      var _iterator6 = _createForOfIteratorHelper(objects),
+        _step6;
       try {
-        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-          var object = _step4.value;
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          var object = _step6.value;
           if (this.implementsType(object, "ICheckHolder")) {
             var ch = object;
             ch.setCheck(check);
           }
         }
       } catch (err) {
-        _iterator4.e(err);
+        _iterator6.e(err);
       } finally {
-        _iterator4.f();
+        _iterator6.f();
       }
     }
   }, {
@@ -1430,19 +1788,19 @@ var Performer = /*#__PURE__*/function () {
     value: function getByInterface(desktop, type) {
       var co = desktop.getCategoryObjects();
       var objects = [];
-      var _iterator5 = _createForOfIteratorHelper(co),
-        _step5;
+      var _iterator7 = _createForOfIteratorHelper(co),
+        _step7;
       try {
-        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-          var a = _step5.value;
+        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+          var a = _step7.value;
           if (this.implementsType(a, type)) {
             objects.push(a);
           }
         }
       } catch (err) {
-        _iterator5.e(err);
+        _iterator7.e(err);
       } finally {
-        _iterator5.f();
+        _iterator7.f();
       }
       return objects;
     }
@@ -1456,11 +1814,11 @@ var Performer = /*#__PURE__*/function () {
     value: function getByType(desktop, type) {
       var co = desktop.getCategoryObjects();
       var objects = [];
-      var _iterator6 = _createForOfIteratorHelper(co),
-        _step6;
+      var _iterator8 = _createForOfIteratorHelper(co),
+        _step8;
       try {
-        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-          var a = _step6.value;
+        for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+          var a = _step8.value;
           if (this.implementsType(a, type)) {
             var ob = a;
             if (ob.getClassName() == type) {
@@ -1469,9 +1827,9 @@ var Performer = /*#__PURE__*/function () {
           }
         }
       } catch (err) {
-        _iterator6.e(err);
+        _iterator8.e(err);
       } finally {
-        _iterator6.f();
+        _iterator8.f();
       }
       return objects;
     }
@@ -1486,11 +1844,11 @@ var Performer = /*#__PURE__*/function () {
     key: "updateChildrenData",
     value: function updateChildrenData(dataConsumer) {
       var children = dataConsumer.getAllMeasurements();
-      var _iterator7 = _createForOfIteratorHelper(children),
-        _step7;
+      var _iterator9 = _createForOfIteratorHelper(children),
+        _step9;
       try {
-        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-          var child = _step7.value;
+        for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+          var child = _step9.value;
           var o = child;
           if (this.implementsType(o, "IDataConsumer")) {
             var dc = child;
@@ -1499,9 +1857,9 @@ var Performer = /*#__PURE__*/function () {
           child.updateMeasurements();
         }
       } catch (err) {
-        _iterator7.e(err);
+        _iterator9.e(err);
       } finally {
-        _iterator7.f();
+        _iterator9.f();
       }
     }
   }, {
@@ -1521,22 +1879,22 @@ var Performer = /*#__PURE__*/function () {
     value: function convertMap(objects, type) {
       var map = new Map();
       var ent = objects.entries();
-      var _iterator8 = _createForOfIteratorHelper(ent),
-        _step8;
+      var _iterator0 = _createForOfIteratorHelper(ent),
+        _step0;
       try {
-        for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-          var _step8$value = _slicedToArray(_step8.value, 2),
-            key = _step8$value[0],
-            val = _step8$value[1];
+        for (_iterator0.s(); !(_step0 = _iterator0.n()).done;) {
+          var _step0$value = _slicedToArray(_step0.value, 2),
+            key = _step0$value[0],
+            val = _step0$value[1];
           var o = val;
           if (o.imlplementsType(type)) {
             map.set(key, o);
           }
         }
       } catch (err) {
-        _iterator8.e(err);
+        _iterator0.e(err);
       } finally {
-        _iterator8.f();
+        _iterator0.f();
       }
       return map;
     }
@@ -1562,19 +1920,19 @@ var Performer = /*#__PURE__*/function () {
     value: function getObjectCollectionArray(collection, type) {
       var t = [];
       var s = collection.getObjectCollection();
-      var _iterator9 = _createForOfIteratorHelper(s),
-        _step9;
+      var _iterator1 = _createForOfIteratorHelper(s),
+        _step1;
       try {
-        for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
-          var o = _step9.value;
+        for (_iterator1.s(); !(_step1 = _iterator1.n()).done;) {
+          var o = _step1.value;
           var tt = this.convertObject(o, type);
           if (tt.length == 0) continue;
           t.push(tt[0]);
         }
       } catch (err) {
-        _iterator9.e(err);
+        _iterator1.e(err);
       } finally {
-        _iterator9.f();
+        _iterator1.f();
       }
       return t;
     }
@@ -1583,11 +1941,11 @@ var Performer = /*#__PURE__*/function () {
     value: function getObjectCollectionMap(collection, type) {
       var map = new Map();
       var s = collection.getObjectCollection();
-      var _iterator0 = _createForOfIteratorHelper(s),
-        _step0;
+      var _iterator10 = _createForOfIteratorHelper(s),
+        _step10;
       try {
-        for (_iterator0.s(); !(_step0 = _iterator0.n()).done;) {
-          var o = _step0.value;
+        for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+          var o = _step10.value;
           var tt = this.convertObject(o, type);
           if (tt.length == 0) continue;
           var named = this.convertObject(o, "INamed");
@@ -1596,9 +1954,9 @@ var Performer = /*#__PURE__*/function () {
           }
         }
       } catch (err) {
-        _iterator0.e(err);
+        _iterator10.e(err);
       } finally {
-        _iterator0.f();
+        _iterator10.f();
       }
       return map;
     }
@@ -1711,19 +2069,19 @@ var Performer = /*#__PURE__*/function () {
     key: "remove",
     value: function remove(t, x) {
       var tt = [];
-      var _iterator1 = _createForOfIteratorHelper(t),
-        _step1;
+      var _iterator11 = _createForOfIteratorHelper(t),
+        _step11;
       try {
-        for (_iterator1.s(); !(_step1 = _iterator1.n()).done;) {
-          var y = _step1.value;
+        for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
+          var y = _step11.value;
           if (y != x) {
             tt.push(x);
           }
         }
       } catch (err) {
-        _iterator1.e(err);
+        _iterator11.e(err);
       } finally {
-        _iterator1.f();
+        _iterator11.f();
       }
       return tt;
     }
@@ -1775,17 +2133,17 @@ var Performer = /*#__PURE__*/function () {
   }, {
     key: "addArray",
     value: function addArray(array, add) {
-      var _iterator10 = _createForOfIteratorHelper(add),
-        _step10;
+      var _iterator12 = _createForOfIteratorHelper(add),
+        _step12;
       try {
-        for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
-          var f = _step10.value;
+        for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+          var f = _step12.value;
           array.push(f);
         }
       } catch (err) {
-        _iterator10.e(err);
+        _iterator12.e(err);
       } finally {
-        _iterator10.f();
+        _iterator12.f();
       }
     }
   }, {
@@ -1814,35 +2172,35 @@ var Performer = /*#__PURE__*/function () {
               key => alias.setAliasValue(key, map.get(key));
           );
           return;*/
-      var _iterator11 = _createForOfIteratorHelper(keys),
-        _step11;
+      var _iterator13 = _createForOfIteratorHelper(keys),
+        _step13;
       try {
-        for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
-          var key = _step11.value;
+        for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
+          var key = _step13.value;
           alias.setAliasValue(key, map.get(key));
         }
       } catch (err) {
-        _iterator11.e(err);
+        _iterator13.e(err);
       } finally {
-        _iterator11.f();
+        _iterator13.f();
       }
     }
   }, {
     key: "copyMap",
     value: function copyMap(s, t) {
-      var _iterator12 = _createForOfIteratorHelper(s),
-        _step12;
+      var _iterator14 = _createForOfIteratorHelper(s),
+        _step14;
       try {
-        for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
-          var _step12$value = _slicedToArray(_step12.value, 2),
-            key = _step12$value[0],
-            value = _step12$value[1];
+        for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
+          var _step14$value = _slicedToArray(_step14.value, 2),
+            key = _step14$value[0],
+            value = _step14$value[1];
           t.set(key, value);
         }
       } catch (err) {
-        _iterator12.e(err);
+        _iterator14.e(err);
       } finally {
-        _iterator12.f();
+        _iterator14.f();
       }
     }
   }, {
@@ -1867,11 +2225,11 @@ var Performer = /*#__PURE__*/function () {
     key: "getMeasurementDC",
     value: function getMeasurementDC(consumer, name) {
       var mm = consumer.getAllMeasurements();
-      var _iterator13 = _createForOfIteratorHelper(mm),
-        _step13;
+      var _iterator15 = _createForOfIteratorHelper(mm),
+        _step15;
       try {
-        for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
-          var mea = _step13.value;
+        for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
+          var mea = _step15.value;
           var co = mea;
           var nm = co.getCategoryObjectName();
           nm += ".";
@@ -1885,9 +2243,9 @@ var Performer = /*#__PURE__*/function () {
           }
         }
       } catch (err) {
-        _iterator13.e(err);
+        _iterator15.e(err);
       } finally {
-        _iterator13.f();
+        _iterator15.f();
       }
       return this.measurement;
     }
@@ -1906,11 +2264,11 @@ var Performer = /*#__PURE__*/function () {
     value: function getMeasurementsDCMap(consumer) {
       var map = new Map();
       var mm = consumer.getAllMeasurements();
-      var _iterator14 = _createForOfIteratorHelper(mm),
-        _step14;
+      var _iterator16 = _createForOfIteratorHelper(mm),
+        _step16;
       try {
-        for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
-          var mea = _step14.value;
+        for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
+          var mea = _step16.value;
           var co = mea;
           var nm = co.getCategoryObjectName();
           nm += ".";
@@ -1922,9 +2280,9 @@ var Performer = /*#__PURE__*/function () {
           }
         }
       } catch (err) {
-        _iterator14.e(err);
+        _iterator16.e(err);
       } finally {
-        _iterator14.f();
+        _iterator16.f();
       }
       return map;
     }
@@ -1961,39 +2319,7 @@ var Performer = /*#__PURE__*/function () {
   }]);
 }();
 exports.Performer = Performer;
-},{"./AliasName":"src/Library/AliasName.js","./ConsolePrinter":"src/Library/ConsolePrinter.js","./ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.js","./Measurements/MeasurementsComparator":"src/Library/Measurements/MeasurementsComparator.js","./Utilities/Sort/SortingAlgorithms":"src/Library/Utilities/Sort/SortingAlgorithms.js","./Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.js"}],"src/Library/Measurements/DataConsumerBoolFunc.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.DataConsumerBoolFunc = void 0;
-var Performer_1 = require("../Performer");
-var DataConsumerBoolFunc = /*#__PURE__*/function () {
-  function DataConsumerBoolFunc(dataConsumer, name) {
-    _classCallCheck(this, DataConsumerBoolFunc);
-    this.performer = new Performer_1.Performer();
-    this.measurement = this.performer.getMeasurementDC(dataConsumer, name);
-  }
-  return _createClass(DataConsumerBoolFunc, [{
-    key: "func",
-    value: function func() {
-      var res = this.measurement.getMeasurementValue();
-      if (res != undefined) {
-        return this.performer.convertFromAny(res);
-      }
-      return false;
-    }
-  }]);
-}();
-exports.DataConsumerBoolFunc = DataConsumerBoolFunc;
-},{"../Performer":"src/Library/Performer.ts"}],"src/Library/Measurements/TimeMeasurementProvider.ts":[function(require,module,exports) {
+},{"./AliasName":"src/Library/AliasName.js","./ConsolePrinter":"src/Library/ConsolePrinter.js","./ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.js","./Measurements/MeasurementsComparator":"src/Library/Measurements/MeasurementsComparator.js","./Utilities/Sort/SortingAlgorithms":"src/Library/Utilities/Sort/SortingAlgorithms.ts","./Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.js"}],"src/Library/Measurements/TimeMeasurementProvider.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -2052,6 +2378,34 @@ var TimeMeasurementProvider = /*#__PURE__*/function () {
   }]);
 }();
 exports.TimeMeasurementProvider = TimeMeasurementProvider;
+},{}],"src/Library/Measurements/UpdateMeasurementsAction.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.UpdateMeasurementsAction = void 0;
+var UpdateMeasurementsAction = /*#__PURE__*/function () {
+  function UpdateMeasurementsAction(m) {
+    _classCallCheck(this, UpdateMeasurementsAction);
+    this.m = m;
+    console.log("MMM", this.m);
+  }
+  return _createClass(UpdateMeasurementsAction, [{
+    key: "action",
+    value: function action() {
+      console.log(this.m);
+      this.m.updateMeasurements();
+    }
+  }]);
+}();
+exports.UpdateMeasurementsAction = UpdateMeasurementsAction;
 },{}],"src/Library/Measurements/PerformerMeasuremets.ts":[function(require,module,exports) {
 "use strict";
 
@@ -2071,40 +2425,42 @@ exports.PerformerMeasuremets = void 0;
 var DataConsumerBoolFunc_1 = require("./DataConsumerBoolFunc");
 var Performer_1 = require("../Performer");
 var TimeMeasurementProvider_1 = require("./TimeMeasurementProvider");
+var ActionArray_1 = require("../Utilities/Generic/ActionArray");
+var UpdateMeasurementsAction_1 = require("./UpdateMeasurementsAction");
 var PerformerMeasuremets = /*#__PURE__*/function () {
   function PerformerMeasuremets() {
     _classCallCheck(this, PerformerMeasuremets);
     this.performer = new Performer_1.Performer();
   }
   return _createClass(PerformerMeasuremets, [{
-    key: "setTimeProvider",
-    value: function setTimeProvider(timeProvider, measurements) {
-      var _iterator = _createForOfIteratorHelper(measurements),
+    key: "createUpdateMeasurementsAction",
+    value: function createUpdateMeasurementsAction(collection) {
+      var act = new ActionArray_1.ActionArray();
+      var mea = this.performer.getAll(collection, "IMeasurements");
+      var mm = this.performer.sortMeasurements(mea);
+      var _iterator = _createForOfIteratorHelper(mm),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var m = _step.value;
-          var tm = this.performer.convertObject(m, "ITimeMeasurementConsumer");
-          if (tm.length > 0) {
-            tm[0].setTimeMeasurement(timeProvider);
-          }
+          act.addAction(new UpdateMeasurementsAction_1.UpdateMeasurementsAction(m));
         }
       } catch (err) {
         _iterator.e(err);
       } finally {
         _iterator.f();
       }
+      return act;
     }
   }, {
-    key: "setTimeProviderCollection",
-    value: function setTimeProviderCollection(objects, timeProvider) {
-      var objs = objects.getObjectCollection();
-      var _iterator2 = _createForOfIteratorHelper(objs),
+    key: "setTimeProvider",
+    value: function setTimeProvider(timeProvider, measurements) {
+      var _iterator2 = _createForOfIteratorHelper(measurements),
         _step2;
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          var o = _step2.value;
-          var tm = this.performer.convertObject(o, "ITimeMeasurementConsumer");
+          var m = _step2.value;
+          var tm = this.performer.convertObject(m, "ITimeMeasurementConsumer");
           if (tm.length > 0) {
             tm[0].setTimeMeasurement(timeProvider);
           }
@@ -2113,6 +2469,26 @@ var PerformerMeasuremets = /*#__PURE__*/function () {
         _iterator2.e(err);
       } finally {
         _iterator2.f();
+      }
+    }
+  }, {
+    key: "setTimeProviderCollection",
+    value: function setTimeProviderCollection(objects, timeProvider) {
+      var objs = objects.getObjectCollection();
+      var _iterator3 = _createForOfIteratorHelper(objs),
+        _step3;
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var o = _step3.value;
+          var tm = this.performer.convertObject(o, "ITimeMeasurementConsumer");
+          if (tm.length > 0) {
+            tm[0].setTimeMeasurement(timeProvider);
+          }
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
       }
     }
   }, {
@@ -2200,11 +2576,11 @@ var PerformerMeasuremets = /*#__PURE__*/function () {
     key: "fullReset",
     value: function fullReset(consumer) {
       var meas = consumer.getAllMeasurements();
-      var _iterator3 = _createForOfIteratorHelper(meas),
-        _step3;
+      var _iterator4 = _createForOfIteratorHelper(meas),
+        _step4;
       try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-          var m = _step3.value;
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var m = _step4.value;
           var c = this.performer.convertObject(m, "IDataConsumer");
           if (c.length > 0) {
             c[0].resetDataConsumer();
@@ -2212,9 +2588,9 @@ var PerformerMeasuremets = /*#__PURE__*/function () {
           }
         }
       } catch (err) {
-        _iterator3.e(err);
+        _iterator4.e(err);
       } finally {
-        _iterator3.f();
+        _iterator4.f();
       }
     }
   }], [{
@@ -2240,37 +2616,7 @@ var PerformerMeasuremets = /*#__PURE__*/function () {
   }]);
 }();
 exports.PerformerMeasuremets = PerformerMeasuremets;
-},{"./DataConsumerBoolFunc":"src/Library/Measurements/DataConsumerBoolFunc.ts","../Performer":"src/Library/Performer.ts","./TimeMeasurementProvider":"src/Library/Measurements/TimeMeasurementProvider.ts"}],"src/Library/ErrorHandler/OwnError.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.OwnError = void 0;
-/* eslint-disable @typescript-eslint/no-unused-vars */
-var OwnError = /*#__PURE__*/function () {
-  function OwnError(name, message, stack) {
-    _classCallCheck(this, OwnError);
-    this.name = "";
-    this.message = "";
-    this.name = name;
-    this.message = message;
-    this.stack = stack;
-    this.init();
-  }
-  return _createClass(OwnError, [{
-    key: "init",
-    value: function init() {}
-  }]);
-}();
-exports.OwnError = OwnError;
-},{}],"src/Library/ErrorHandler/OwnNotImplemented.ts":[function(require,module,exports) {
+},{"./DataConsumerBoolFunc":"src/Library/Measurements/DataConsumerBoolFunc.ts","../Performer":"src/Library/Performer.js","./TimeMeasurementProvider":"src/Library/Measurements/TimeMeasurementProvider.ts","../Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.js","./UpdateMeasurementsAction":"src/Library/Measurements/UpdateMeasurementsAction.ts"}],"src/Library/ErrorHandler/OwnNotImplemented.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -2376,6 +2722,7 @@ var DataRuntimeConsumer = /*#__PURE__*/function () {
     this.categoryArrows = [];
     this.started = [];
     this.objects = [];
+    this.dataConsumer = dataConsumer;
     this.prepare(dataConsumer);
     this.objects = [];
     this.performer.getAllIObjects(this.categoryObjects, this.categoryArrows, this.objects);
@@ -2399,6 +2746,7 @@ var DataRuntimeConsumer = /*#__PURE__*/function () {
         this.measurements.push(dataConsumer);
       }
       this.measurements = this.performer.sortMeasurements(this.measurements);
+      this.performer.addUnique(this.categoryObjects, dataConsumer);
     }
   }, {
     key: "getCategoryObjects",
@@ -2515,55 +2863,7 @@ var DataRuntimeConsumer = /*#__PURE__*/function () {
   }]);
 }();
 exports.DataRuntimeConsumer = DataRuntimeConsumer;
-},{"../ErrorHandler/OwnNotImplemented":"src/Library/ErrorHandler/OwnNotImplemented.ts","../Performer":"src/Library/Performer.ts","../Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts","../Fiction/FictiveCategoryObject":"src/Library/Fiction/FictiveCategoryObject.ts"}],"src/Library/AliasName.ts":[function(require,module,exports) {
-"use strict";
-
-/* eslint-disable no-var */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.AliasName = void 0;
-var AliasName = /*#__PURE__*/function () {
-  function AliasName(alias, name) {
-    _classCallCheck(this, AliasName);
-    this.name = "";
-    this.alias = alias;
-    this.name = name;
-  }
-  return _createClass(AliasName, [{
-    key: "getAlias",
-    value: function getAlias() {
-      return this.alias;
-    }
-  }, {
-    key: "getAliasNameValue",
-    value: function getAliasNameValue() {
-      return this.alias.getAliasValue(this.name);
-    }
-  }, {
-    key: "setAliasNameValue",
-    value: function setAliasNameValue(value) {
-      if (value != undefined) {
-        this.alias.setAliasValue(this.name, value);
-      }
-    }
-  }, {
-    key: "getNameOfAliasName",
-    value: function getNameOfAliasName() {
-      return this.name;
-    }
-  }]);
-}();
-exports.AliasName = AliasName;
-},{}],"src/Library/ErrorHandler/OwnNotImplemented.js":[function(require,module,exports) {
+},{"../ErrorHandler/OwnNotImplemented":"src/Library/ErrorHandler/OwnNotImplemented.ts","../Performer":"src/Library/Performer.ts","../Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts","../Fiction/FictiveCategoryObject":"src/Library/Fiction/FictiveCategoryObject.ts"}],"src/Library/ErrorHandler/OwnNotImplemented.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -3092,83 +3392,7 @@ var CategoryObject = /*#__PURE__*/function () {
   }]);
 }();
 exports.CategoryObject = CategoryObject;
-},{"./Performer":"src/Library/Performer.ts"}],"src/Library/Utilities/Generic/ActionArray.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ActionArray = void 0;
-var Performer_1 = require("../../Performer");
-var ActionArray = /*#__PURE__*/function () {
-  function ActionArray() {
-    _classCallCheck(this, ActionArray);
-    this.actions = [];
-    this.typeName = "ActionArray";
-    this.types = ["IAction", "IObject", "ActionArray"];
-    this.performer = new Performer_1.Performer();
-  }
-  return _createClass(ActionArray, [{
-    key: "addAction",
-    value: function addAction(action) {
-      if (action === undefined) return;
-      this.actions.push(action);
-    }
-  }, {
-    key: "removeAction",
-    value: function removeAction(action) {
-      if (action === undefined) return;
-      this.performer.remove(this.actions, action);
-    }
-  }, {
-    key: "clearActions",
-    value: function clearActions() {
-      this.actions = [];
-    }
-  }, {
-    key: "getClassName",
-    value: function getClassName() {
-      return this.typeName;
-    }
-  }, {
-    key: "imlplementsType",
-    value: function imlplementsType(type) {
-      return this.types.indexOf(type) > 0;
-    }
-  }, {
-    key: "getName",
-    value: function getName() {
-      return "";
-    }
-  }, {
-    key: "action",
-    value: function action() {
-      var _iterator = _createForOfIteratorHelper(this.actions),
-        _step;
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var _action = _step.value;
-          _action.action();
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-    }
-  }]);
-}();
-exports.ActionArray = ActionArray;
-},{"../../Performer":"src/Library/Performer.ts"}],"src/Library/Measurements/DataConsumer.ts":[function(require,module,exports) {
+},{"./Performer":"src/Library/Performer.ts"}],"src/Library/Measurements/DataConsumer.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -3193,7 +3417,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.DataConsumer = void 0;
 var CategoryObject_1 = require("../CategoryObject");
 var ActionArray_1 = require("../Utilities/Generic/ActionArray");
-var Performer_1 = require("../Performer");
 var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
   function DataConsumer(desktop, name) {
     var _this;
@@ -3204,6 +3427,7 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
     _this.success = true;
     _this.events = [];
     _this.eventAction = new ActionArray_1.ActionArray();
+    _this.basicAction = new ActionArray_1.ActionArray();
     _this.fictiveAvtion = new ActionArray_1.ActionArray();
     _this.currentAction = new ActionArray_1.ActionArray();
     _this.typeName = "DataConsumer";
@@ -3220,11 +3444,19 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
     _this.tms = _this;
     _this.dataConsumer = _this;
     _this.currentAction = _this.fictiveAvtion;
-    _this.eventAction.addAction(new UpdateAction(_this));
     return _this;
   }
   _inherits(DataConsumer, _CategoryObject_1$Cat);
   return _createClass(DataConsumer, [{
+    key: "setExternalUpdate",
+    value: function setExternalUpdate(action) {
+      this.eventAction.clearActions();
+      if (action === null) {
+        return;
+      }
+      this.eventAction.addAction(action);
+    }
+  }, {
     key: "isEventEnabled",
     value: function isEventEnabled() {
       return this.isEvEnabled;
@@ -3236,6 +3468,7 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
       this.isEvEnabled = enabled;
       if (enabled) {
         this.currentAction = this.eventAction;
+        console.log("CCCAAA", this.currentAction);
         return;
       }
       this.currentAction = this.fictiveAvtion;
@@ -3243,6 +3476,7 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
   }, {
     key: "action",
     value: function action() {
+      console.log("AAACCCAAA", this.currentAction);
       this.currentAction.action();
     }
   }, {
@@ -3258,7 +3492,8 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
   }, {
     key: "addChildT",
     value: function addChildT(child) {
-      this.events.push(child);
+      this.performer.addUnique(this.events, child);
+      console.log("EEADD", this.events);
     }
   }, {
     key: "removeChildT",
@@ -3330,12 +3565,16 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
   }, {
     key: "postSetArrow",
     value: function postSetArrow() {
+      console.log("EEEVV", this.events);
       var _iterator2 = _createForOfIteratorHelper(this.events),
         _step2;
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           var event = _step2.value;
-          event.eventAction().addAction(this.eventAction);
+          console.log(event);
+          var ea = event.eventAction();
+          console.log(ea);
+          ea.addAction(this);
         }
       } catch (err) {
         _iterator2.e(err);
@@ -3356,20 +3595,7 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
   }]);
 }(CategoryObject_1.CategoryObject);
 exports.DataConsumer = DataConsumer;
-var UpdateAction = /*#__PURE__*/function () {
-  function UpdateAction(dc) {
-    _classCallCheck(this, UpdateAction);
-    this.p = new Performer_1.Performer();
-    this.dc = dc;
-  }
-  return _createClass(UpdateAction, [{
-    key: "action",
-    value: function action() {
-      this.p.updateChildrenData(this.dc);
-    }
-  }]);
-}();
-},{"../CategoryObject":"src/Library/CategoryObject.ts","../Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.ts","../Performer":"src/Library/Performer.ts"}],"src/Library/Measurements/Variables/Variable.ts":[function(require,module,exports) {
+},{"../CategoryObject":"src/Library/CategoryObject.ts","../Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.ts"}],"src/Library/Measurements/Variables/Variable.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -8558,5130 +8784,7 @@ var PIAct = /*#__PURE__*/function (_PI_1$PI) {
   }]);
 }(PI_1.PI);
 exports.PIAct = PIAct;
-},{"../../Library/Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts","../../Library/Runtime/DataRuntimeConsumer":"src/Library/Runtime/DataRuntimeConsumer.ts","../PI":"src/Tests/PI.ts"}],"src/Library/RealMatrixProcessor/RealMatrix.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.RealMatrix = void 0;
-var OwnError_1 = require("../ErrorHandler/OwnError");
-var RealMatrix = /*#__PURE__*/function () {
-  function RealMatrix() {
-    _classCallCheck(this, RealMatrix);
-  }
-  return _createClass(RealMatrix, [{
-    key: "partialSquare",
-    value: function partialSquare(x, startIndex, length) {
-      var a = 0;
-      for (var i = 0; i < length; i++) {
-        var c = x[i + startIndex];
-        a += c * c;
-      }
-      return a;
-    }
-  }, {
-    key: "partialNorm",
-    value: function partialNorm(x, startIndex, length) {
-      return Math.sqrt(this.partialSquare(x, startIndex, length));
-    }
-  }, {
-    key: "plusEqual",
-    value: function plusEqual(x, y) {
-      for (var i = 0; i < x.length; i++) {
-        x[i] += y[i];
-      }
-    }
-  }, {
-    key: "setLength",
-    value: function setLength(x, n) {
-      x.fill(0, 0, n - 1);
-    }
-  }, {
-    key: "setLength2",
-    value: function setLength2(x, n, m) {
-      for (var i = 0; i < n; i++) {
-        var y = [];
-        this.setLength(y, m);
-        x.push(y);
-      }
-    }
-  }, {
-    key: "normalize",
-    value: function normalize(inp, outp, offset) {
-      var a = 0;
-      for (var i = offset; i < outp.length + offset; i++) {
-        var b = inp[i];
-        a += b * b;
-      }
-      a = Math.sqrt(a);
-      var c = 1 / a;
-      for (var _i = 0; _i < outp.length; _i++) {
-        outp[_i] = c * inp[_i + offset];
-      }
-      return a;
-    }
-  }, {
-    key: "getNorm",
-    value: function getNorm(vector) {
-      return Math.sqrt(this.square(vector));
-    }
-  }, {
-    key: "copySign",
-    value: function copySign(a, b) {
-      return Math.abs(a) * Math.sign(b);
-    }
-  }, {
-    key: "invertA",
-    value: function invertA(a) {
-      var x = [];
-      var n = a.length;
-      this.setLength2(x, n, n);
-      this.invert(a, x);
-      return x;
-    }
-  }, {
-    key: "invert",
-    value: function invert(a, aInverted) {
-      var e = 0;
-      var y = 0;
-      var det = 0;
-      var w = 0;
-      var d = 0;
-      var d1 = 0;
-      var i = 0;
-      var j = 0;
-      var k = 0;
-      var ir = 0;
-      var ip = 0;
-      var n = a.length;
-      var jz = [];
-      var c = [0];
-      var ab = [0];
-      jz.fill(0, 0, n - 1);
-      c.fill(0, 0, n - 1);
-      ab.fill(0, 0, n - 1);
-      for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-          aInverted[i][j] = a[i][j];
-        }
-      }
-      for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-          e = Math.abs(aInverted[i][j]);
-          if (d < e) d = e;
-        }
-      }
-      d1 = 1 / d;
-      for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-          aInverted[i][j] *= d1;
-        }
-      }
-      e = 1.0e-26;
-      det = 1;
-      for (i = 0; i < n; i++) {
-        jz[i] = i;
-      }
-      for (i = 0; i < n; i++) {
-        k = i;
-        y = aInverted[i][i];
-        ir = i - 1;
-        ip = i + 1;
-        if (ip < n) {
-          for (j = ip; j < n; j++) {
-            w = aInverted[i][j];
-            if (Math.abs(w) > Math.abs(y)) {
-              k = j;
-              y = w;
-            }
-          }
-        }
-        det *= y;
-        y = 1.0 / y;
-        for (j = 0; j < n; j++) {
-          c[j] = aInverted[j][k];
-          aInverted[j][k] = aInverted[j][i];
-          aInverted[j][i] = -c[j] * y;
-          ab[j] = aInverted[i][j] * y;
-          aInverted[i][j] = ab[j];
-        }
-        aInverted[i][i] = y;
-        j = jz[i];
-        jz[i] = jz[k];
-        jz[k] = j;
-        k = 0;
-        do {
-          if (k <= ir || k >= ip) {
-            j = 0;
-            do {
-              if (j <= ir || j >= ip) {
-                aInverted[k][j] -= ab[j] * c[k];
-              }
-              j++;
-            } while (j < n);
-          }
-          k++;
-        } while (k < n);
-      }
-      i = 0;
-      do {
-        k = jz[i];
-        if (k != i) {
-          for (j = 0; j < n; j++) {
-            w = aInverted[i][j];
-            aInverted[i][j] = aInverted[k][j];
-            aInverted[k][j] = w;
-          }
-          ip = jz[i];
-          jz[i] = jz[k];
-          jz[k] = ip;
-          det = -det;
-        } else {
-          i++;
-        }
-      } while (i < n);
-      d1 = 1.0 / d;
-      for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-          aInverted[i][j] *= d1;
-        }
-      }
-    }
-  }, {
-    key: "det",
-    value: function det(a) {
-      var A = [];
-      var n = a.length;
-      this.setLength2(A, n, n);
-      for (var ii = 0; ii < n; ii++) {
-        for (var jj = 0; jj < n; jj++) {
-          A[ii][jj] = a[ii][jj];
-        }
-      }
-      var bb = false;
-      var MAX = 0;
-      var D = 1;
-      var T = 0;
-      var k,
-        i,
-        j = 0;
-      var z = 0;
-      for (k = 0; k < n; k++) {
-        MAX = 0;
-        for (i = k; i < n; i++) {
-          T = A[i][k];
-          if (!(T == 0)) {
-            MAX = T;
-            j = i;
-            bb = true;
-          }
-          if (bb) {
-            break;
-          }
-        }
-        if (MAX == 0) {
-          return z;
-        }
-        if (j != k) {
-          D = -D;
-          for (i = k; i < n; i++) {
-            T = A[j][i];
-            A[j][i] = A[k][i];
-            A[k][i] = T;
-          }
-        }
-        for (i = k + 1; i < n; i++) {
-          T = A[i][k] / MAX;
-          for (j = k + 1; j < n; j++) {
-            A[i][j] = A[i][j] - T * A[k][j];
-          }
-        }
-        D = D * A[k][k];
-      }
-      return D;
-    }
-  }, {
-    key: "scalarProduct",
-    value: function scalarProduct(x, y) {
-      var sum = 0;
-      for (var i = 0; i < x.length; i++) {
-        sum += x[i] * y[i];
-      }
-      return sum;
-    }
-  }, {
-    key: "multiply",
-    value: function multiply(vector, coefficient) {
-      for (var i = 0; i < vector.length; i++) {
-        vector[i] = vector[i] * coefficient;
-      }
-    }
-  }, {
-    key: "multiplyMatrix",
-    value: function multiplyMatrix(a, b, c) {
-      var a1 = a.length;
-      var a2 = a[0].length;
-      var b1 = b.length;
-      var b2 = b[0].length;
-      var c1 = c.length;
-      var c2 = c[0].length;
-      if (a2 != b1 || a1 != c1 || b2 != c1) {
-        throw new OwnError_1.OwnError("Illegal matrix product dimension", "", "");
-      }
-      var i,
-        j,
-        k = 0;
-      for (i = 0; i < c1; i++) {
-        for (j = 0; j < c2; j++) {
-          c[i][j] = 0;
-        }
-      }
-      for (i = 0; i < a1; i++) {
-        for (j = 0; j < b2; j++) {
-          for (k = 0; k < a2; k++) {
-            c[i][j] += a[i][k] * b[k][j];
-          }
-        }
-      }
-    }
-  }, {
-    key: "square",
-    value: function square(vec) {
-      var a = 0;
-      var _iterator = _createForOfIteratorHelper(vec),
-        _step;
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var x = _step.value;
-          a += x * x;
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-      return a;
-    }
-  }, {
-    key: "norm",
-    value: function norm(vec) {
-      return Math.sqrt(this.square(vec));
-    }
-  }, {
-    key: "multiplyRight",
-    value: function multiplyRight(matrix, vector, product) {
-      if (matrix[0].length != vector.length || matrix.length != product.length) {
-        throw new OwnError_1.OwnError("Illegal dimension of vector or matrix product", "");
-      }
-      var i,
-        j = 0;
-      for (i = 0; i < product.length; i++) {
-        product[i] = 0;
-      }
-      for (i = 0; i < matrix.length; i++) {
-        for (j = 0; j < vector.length; j++) {
-          product[i] += matrix[i][j] * vector[j];
-        }
-      }
-    }
-  }, {
-    key: "multiplyLeft",
-    value: function multiplyLeft(vector, matrix, product) {
-      if (matrix.length != vector.length || matrix[0].length != product.length) {
-        throw new OwnError_1.OwnError("Illegal dimension of vector or matrix product", "");
-      }
-      var i,
-        j = 0;
-      for (i = 0; i < product.length; i++) {
-        product[i] = 0;
-      }
-      for (i = 0; i < matrix[0].length; i++) {
-        for (j = 0; j < vector.length; j++) {
-          product[i] += matrix[j][i] * vector[j];
-        }
-      }
-    }
-  }, {
-    key: "transpose",
-    value: function transpose(x, y) {
-      for (var i = 0; i < x.length; i++) {
-        for (var j = 0; j < x[0].length; j++) {
-          y[j][i] = x[i][j];
-        }
-      }
-    }
-  }, {
-    key: "htah",
-    value: function htah(h, a, result) {
-      for (var i = 0; i < result.length; i++) {
-        for (var j = 0; j < result[0].length; j++) {
-          result[i][j] = 0;
-          for (var k = 0; k < a.length; k++) {
-            for (var l = 0; l < a[0].length; l++) {
-              result[i][j] += h[k][i] * a[k][l] * h[l][j];
-            }
-          }
-        }
-      }
-    }
-  }, {
-    key: "addMatrix",
-    value: function addMatrix(x, y, z) {
-      for (var i = 0; i < x.length; i++) {
-        for (var j = 0; j < x[0].length; j++) {
-          z[i][j] = x[i][j] + y[i][j];
-        }
-      }
-    }
-  }, {
-    key: "addVector",
-    value: function addVector(x, y, z) {
-      for (var i = 0; i < x.length; i++) {
-        z[i] = x[i] + y[i];
-      }
-    }
-  }, {
-    key: "diffatrix",
-    value: function diffatrix(x, y, z) {
-      for (var i = 0; i < x.length; i++) {
-        for (var j = 0; j < x[0].length; j++) {
-          z[i][j] = x[i][j] - y[i][j];
-        }
-      }
-    }
-  }, {
-    key: "diffVector",
-    value: function diffVector(x, y, z) {
-      for (var i = 0; i < x.length; i++) {
-        z[i] = x[i] + y[i];
-      }
-    }
-  }, {
-    key: "lu_Factor",
-    value: function lu_Factor(A, indx) {
-      var i = 0,
-        j = 0,
-        k = 0;
-      var jp = 0;
-      var t = 0;
-      var M = A.length;
-      var N = A[0].length;
-      var minMN = M < N ? M : N;
-      for (j = 0; j < minMN; j++) {
-        // find pivot in column j and  test for singularity.
-        jp = j;
-        t = Math.abs(A[j][j]);
-        for (i = j + 1; i < M; i++) {
-          if (Math.abs(A[i][j]) > Math.abs(t)) {
-            jp = i;
-            t = Math.abs(A[i][j]);
-          }
-        }
-        indx[j] = jp;
-        // jp now has the index of maximum element
-        // of column j, below the diagonal
-        var zero = 0;
-        if (A[jp][j] == zero) {
-          return false; // factorization failed because of zero pivot
-        }
-        if (jp != j)
-          // swap rows j and jp
-          {
-            for (k = 0; k < N; k++) {
-              t = A[j][k];
-              A[j][k] = A[jp][k];
-              A[jp][k] = t;
-            }
-          }
-        if (j < M - 1)
-          // compute elements j+1:M of jth column
-          {
-            // note A(j,j), was A(jp,p) previously which was
-            // guarranteed not to be zero (Label #1)
-            var y = 1;
-            var recp = y / A[j][j];
-            for (k = j + 1; k < M; k++) {
-              A[k][j] *= recp;
-            }
-          }
-        if (j < minMN - 1) {
-          // rank-1 update to trailing submatrix:   E = E - x*y;
-          //
-          // E is the region A(j+1:M, j+1:N)
-          // x is the column vector A(j+1:M,j)
-          // y is row vector A(j,j+1:N)
-          var ii = void 0,
-            jj = 0;
-          for (ii = j + 1; ii < M; ii++) {
-            for (jj = j + 1; jj < N; jj++) {
-              A[ii][jj] -= A[ii][j] * A[j][jj];
-            }
-          }
-        }
-      }
-      return true;
-    }
-  }, {
-    key: "lu_Solve",
-    value: function lu_Solve(A, indx, b) {
-      var i,
-        ii = -1,
-        ip = 0,
-        j;
-      var n = b.length;
-      var sum = 0;
-      for (i = 0; i < n; i++) {
-        ip = indx[i];
-        sum = b[ip];
-        b[ip] = b[i];
-        if (ii >= 0) {
-          for (j = ii; j < i; j++) {
-            sum -= A[i][j] * b[j];
-          }
-        } else if (Math.abs(sum) > 0) {
-          ii = i;
-        }
-        b[i] = sum;
-      }
-      for (i = n - 1; i >= 0; i--) {
-        sum = b[i];
-        for (j = i + 1; j < n; j++) {
-          sum -= A[i][j] * b[j];
-        }
-        b[i] = sum / A[i][i];
-      }
-      return true;
-    }
-  }, {
-    key: "solve",
-    value: function solve(a, indx, b) {
-      if (!this.lu_Factor(a, indx)) {
-        return false;
-      }
-      if (!this.lu_Solve(a, indx, b)) {
-        return false;
-      }
-      return true;
-    }
-  }]);
-}();
-exports.RealMatrix = RealMatrix;
-},{"../ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.ts"}],"src/Library/Utilities/DateTime/DateTimeConverter.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.DateTimeConverter = void 0;
-var DateTimeConverter = /*#__PURE__*/function () {
-  function DateTimeConverter() {
-    _classCallCheck(this, DateTimeConverter);
-    this.baseOADate = new Date(1899, 12, 30, 0, 0, 0, 0);
-    this.baseDate = new Date(0);
-    this.baseDays = 25569;
-    this.coeff = 86400000;
-    this.coeffI = 1.0 / 86400000.0;
-    this.off = 0;
-    this.off = this.baseDate.getTimezoneOffset() * 60000;
-  }
-  return _createClass(DateTimeConverter, [{
-    key: "toOADate",
-    value: function toOADate(date) {
-      var t = date.getTime();
-      t *= this.coeffI;
-      t += this.baseDays;
-      return t;
-    }
-  }, {
-    key: "fromOADate",
-    value: function fromOADate(date) {
-      var x = date - this.baseDays;
-      x *= this.coeff;
-      return new Date(x + this.off);
-    }
-  }]);
-}();
-exports.DateTimeConverter = DateTimeConverter;
-},{}],"src/ExternalObjects/Libraries/Geography/GeoCoordinates.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.GeoCoordinates = void 0;
-var GeoCoordinates = /*#__PURE__*/function () {
-  function GeoCoordinates() {
-    _classCallCheck(this, GeoCoordinates);
-    this.longitude = 0;
-    this.latitude = 0;
-  }
-  return _createClass(GeoCoordinates, [{
-    key: "getLongitude",
-    value: function getLongitude() {
-      return this.longitude;
-    }
-  }, {
-    key: "setLongitude",
-    value: function setLongitude(longitude) {
-      this.longitude = longitude;
-    }
-  }, {
-    key: "getLatitude",
-    value: function getLatitude() {
-      return this.latitude;
-    }
-  }, {
-    key: "setLatitude",
-    value: function setLatitude(latitude) {
-      this.latitude = latitude;
-    }
-  }]);
-}();
-exports.GeoCoordinates = GeoCoordinates;
-},{}],"src/ExternalObjects/Libraries/Sun.Service/SunCoordinates.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.SunCoordinates = void 0;
-var SunCoordinates = /*#__PURE__*/function () {
-  function SunCoordinates() {
-    _classCallCheck(this, SunCoordinates);
-    this.azimuth = 0;
-    this.zenithAngle = 0;
-  }
-  return _createClass(SunCoordinates, [{
-    key: "getAzimuth",
-    value: function getAzimuth() {
-      return this.azimuth;
-    }
-  }, {
-    key: "setAzimuth",
-    value: function setAzimuth(azimuth) {
-      this.azimuth = azimuth;
-    }
-  }, {
-    key: "getZenithAngle",
-    value: function getZenithAngle() {
-      return this.zenithAngle;
-    }
-  }, {
-    key: "setZenithAngle",
-    value: function setZenithAngle(zenithAngle) {
-      this.zenithAngle = zenithAngle;
-    }
-  }]);
-}();
-exports.SunCoordinates = SunCoordinates;
-},{}],"src/ExternalObjects/Libraries/Sun.Service/SunPosition.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.SunPosition = void 0;
-var SunPosition = /*#__PURE__*/function () {
-  function SunPosition() {
-    _classCallCheck(this, SunPosition);
-    this.dEarthMeanRadius = 6371.01; // In km
-    this.dAstronomicalUnit = 149597890; // In km
-  }
-  return _createClass(SunPosition, [{
-    key: "convertToJulian",
-    value: function convertToJulian(date) {
-      var Day = date.getDate();
-      var Month = date.getMonth() + 1;
-      var Year = date.getFullYear();
-      if (Month < 3) {
-        Month = Month + 12;
-        Year = Year - 1;
-      }
-      var JulianDay = Day + Math.floor((153 * Month - 457) / 5) + 365 * Year + Math.floor(Year / 4) - Math.floor(Year / 100) + Math.floor(Year / 400) + 1721119;
-      return JulianDay;
-    }
-    /// <summary>
-    /// Gets position of Sun
-    /// </summary>
-    /// <param name="time"></param>
-    /// <param name="dDeclination"></param>
-    /// <param name="dRightAscension"></param>
-  }, {
-    key: "getPositionFull",
-    value: function getPositionFull(time, dDeclination, dRightAscension, dElapsedJulianDays, dDecimalHours) {
-      var h = time.getHours();
-      var m = time.getMinutes();
-      var s = time.getSeconds();
-      var ss = s / 60.0;
-      var mm = (m + ss) / 60;
-      dDecimalHours[0] = h + ss + mm;
-      dElapsedJulianDays[0] = this.convertToJulian(time) - 0.5 - 2451545.0 + dDecimalHours[0] / 24.0;
-      // Calculate ecliptic coordinates (ecliptic longitude and obliquity of the
-      // ecliptic in radians but without limiting the angle to be less than 2*Pi
-      // (i.e., the result may be greater than 2*Pi)
-      var dMeanLongitude = 0;
-      var dMeanAnomaly = 0;
-      ;
-      var dOmega = 2.1429 - 0.0010394594 * dElapsedJulianDays[0];
-      dMeanLongitude = 4.8950630 + 0.017202791698 * dElapsedJulianDays[0]; // Radians
-      dMeanAnomaly = 6.2400600 + 0.0172019699 * dElapsedJulianDays[0];
-      var dEclipticLongitude = dMeanLongitude + 0.03341607 * Math.sin(dMeanAnomaly) + 0.00034894 * Math.sin(2 * dMeanAnomaly) - 0.0001134 - 0.0000203 * Math.sin(dOmega);
-      var dEclipticObliquity = 0.4090928 - 6.2140e-9 * dElapsedJulianDays[0] + 0.0000396 * Math.cos(dOmega);
-      // Calculate celestial coordinates ( right ascension and declination ) in radians
-      // but without limiting the angle to be less than 2*Pi (i.e., the result may be
-      // greater than 2*Pi)
-      var dSin_EclipticLongitude = Math.sin(dEclipticLongitude);
-      var dY = Math.cos(dEclipticObliquity) * dSin_EclipticLongitude;
-      var dX = Math.cos(dEclipticLongitude);
-      dRightAscension[0] = Math.atan2(dY, dX);
-      if (dRightAscension[0] < 0.0) {
-        dRightAscension[0] = dRightAscension[0] + 2 * Math.PI;
-      }
-      dDeclination[0] = Math.asin(Math.sin(dEclipticObliquity) * dSin_EclipticLongitude);
-    }
-    /// <summary>
-    /// Gets position of Sun
-    /// </summary>
-    /// <param name="udtTime">Time</param>
-    /// <param name="udtLocation">Location</param>
-    /// <param name="udtSunCoordinates">Sun coorditates</param>
-    /// <param name="dDeclination">Declination</param>
-    /// <param name="dRightAscension">Right Ascension </param>
-  }, {
-    key: "getPosition",
-    value: function getPosition(udtTime, udtLocation, udtSunCoordinates, dDeclination, dRightAscension, dElapsedJulianDays, dDecimalHours) {
-      // Auxiliary variables
-      this.getPositionFull(udtTime, dDeclination, dRightAscension, dElapsedJulianDays, dDecimalHours);
-      var dGreenwichMeanSiderealTime = 6.6974243242 + 0.0657098283 * dElapsedJulianDays[0] + dDecimalHours[0];
-      var dLocalMeanSiderealTime = dGreenwichMeanSiderealTime * 15 * Math.PI / 180.0 + udtLocation.getLongitude();
-      var dHourAngle = dLocalMeanSiderealTime - dRightAscension[0];
-      var dLatitudeInRadians = udtLocation.getLatitude();
-      var dCos_Latitude = Math.cos(dLatitudeInRadians);
-      var dSin_Latitude = Math.sin(dLatitudeInRadians);
-      var dCos_HourAngle = Math.cos(dHourAngle);
-      var za = Math.acos(dCos_Latitude * dCos_HourAngle * Math.cos(dDeclination[0]) + Math.sin(dDeclination[0]) * dSin_Latitude);
-      udtSunCoordinates.setZenithAngle(za);
-      var dY = -Math.sin(dHourAngle);
-      var dX = Math.tan(dDeclination[0]) * dCos_Latitude - dSin_Latitude * dCos_HourAngle;
-      udtSunCoordinates.setAzimuth(Math.atan2(dY, dX));
-      if (udtSunCoordinates.getAzimuth() < 0.0) {
-        udtSunCoordinates.setAzimuth(udtSunCoordinates.getAzimuth() + 2 * Math.PI);
-      }
-      // Parallax Correction
-      var dParallax = this.dEarthMeanRadius / this.dAstronomicalUnit * Math.sin(udtSunCoordinates.getZenithAngle());
-      za = udtSunCoordinates.getZenithAngle() + dParallax;
-      udtSunCoordinates.setZenithAngle(za);
-    }
-  }]);
-}();
-exports.SunPosition = SunPosition;
-},{}],"src/ExternalObjects/Libraries/Sun.Service/SunTime.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.SunTime = void 0;
-var SunTime = /*#__PURE__*/function () {
-  function SunTime() {
-    _classCallCheck(this, SunTime);
-    this.coeff = Math.PI / 360.0;
-  }
-  return _createClass(SunTime, [{
-    key: "CalculateGreenwichSiderealTimeFromDate",
-    value: function CalculateGreenwichSiderealTimeFromDate(dateTimeUtc) {
-      var x = this.CalculateJulianDate(dateTimeUtc);
-      x = this.CalculateJulianCentury(x);
-      x = this.CalculateGreenwichSiderealTime(x);
-      return x;
-    }
-  }, {
-    key: "CalculateJulianDate",
-    value: function CalculateJulianDate(dateTimeUtc) {
-      // This is a simplified calculation for demonstration.
-      // For extreme precision, use more robust algorithms.
-      var h = dateTimeUtc.getHours();
-      var y = dateTimeUtc.getFullYear();
-      var m = dateTimeUtc.getMonth() + 1;
-      var mm = dateTimeUtc.getMinutes();
-      var s = dateTimeUtc.getSeconds();
-      var ms = dateTimeUtc.getMilliseconds();
-      var d = dateTimeUtc.getDate();
-      var a = Math.floor((12.0 - h) / 24.0);
-      var JD = 1721424.5 + d + Math.floor((y - 1) / 4.0) - Math.floor((y - 1) / 100.0) + Math.floor((y - 1) / 400.0) + Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + mm / 60.0 + s / 3600.0 + h / 24.0 + ms / 3600000.0 - a;
-      return JD;
-    }
-  }, {
-    key: "CalculateJulianCentury",
-    value: function CalculateJulianCentury(julianDate) {
-      // J2000.0 is Julian Date 2451545.0
-      return (julianDate - 2451545.0) / 36525.0;
-    }
-    // This is a common approximation for GST. More precise formulas exist.
-  }, {
-    key: "CalculateGreenwichSiderealTime",
-    value: function CalculateGreenwichSiderealTime(julianCentury) {
-      var gstDegrees = 280.46061837 + 360.98564736629 * julianCentury + 0.000387933 * Math.pow(julianCentury, 2) - Math.pow(julianCentury, 3) / 38710000.0;
-      gstDegrees *= this.coeff;
-      // Normalize to 0-360 range
-      gstDegrees = gstDegrees % (2 * Math.PI); //% 360.0;
-      if (gstDegrees < 0) {
-        gstDegrees += 2 * Math.PI;
-      }
-      return gstDegrees;
-    }
-  }]);
-}();
-exports.SunTime = SunTime;
-},{}],"src/ExternalObjects/Components/Atmosphere/AtmospherePure.ts":[function(require,module,exports) {
-"use strict";
-
-/* eslint-disable no-var */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.AtmospherePure = void 0;
-var RealMatrix_1 = require("../../../Library/RealMatrixProcessor/RealMatrix");
-var DateTimeConverter_1 = require("../../../Library/Utilities/DateTime/DateTimeConverter");
-var GeoCoordinates_1 = require("../../Libraries/Geography/GeoCoordinates");
-var SunCoordinates_1 = require("../../Libraries/Sun.Service/SunCoordinates");
-var SunPosition_1 = require("../../Libraries/Sun.Service/SunPosition");
-var SunTime_1 = require("../../Libraries/Sun.Service/SunTime");
-var AtmospherePure = /*#__PURE__*/function () {
-  function AtmospherePure() {
-    _classCallCheck(this, AtmospherePure);
-    this.ASoL = [0];
-    this.DSoL = [0];
-    this.ed = [0];
-    this.eh = [0];
-    //  protected Object[] ob = new Object[2];
-    //  public String[] sins = new String[] { "t", "x", "y", "z" };
-    // public String[] sous = new String[] { "Density" };
-    this.mac = [31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365];
-    this.f01 = [-14.608, 0.8969, 67.596, -0.4016, 0.3031E-2, 0.2344E-5, 0.130, 0.14E-3, 3.733, -507.95, 189.85, 4.2, 0.653, -0.7379, 0.8524E-2, -0.5328E-5, -0.1767, 0.1859E-2, -0.1172E-5, 0.80, 2.0, -14.469, 0.8517, 56.026, -0.3957, 0.2988E-2, 0.2246E-5, -0.172, 0.217E-2, 3.784, -566.11, 200.97, 4.1, 0.621, -0.7379, 0.8524E-2, -0.5328E-5, -0.1785, 0.1848E-2, -0.1211E-5, 0.89, 2.0, -15.415, 0.7729, 61.836, -0.3898, 0.2945E-2, 0.2148E-5, -0.274, 0.257E-2, 4.048, -632.63, 230.76, 4.4, 0.635, -0.7379, 0.8524E-2, -0.5328E-5, -0.1802, 0.1838E-2, -0.125E-5, 1.0, 3.0, -16.559, 0.6982, 75.401, -0.3839, 0.2902E-2, 0.2051E-5, -0.247, 0.199E-2, 3.495, -707.58, 278.35, 4.7, 0.632, -0.7379, 0.8524E-2, -0.5328E-5, -0.182, 0.1826E-2, -0.1289E-5, 1.0, 4.0, -18.219, 0.5863, 98.336, -0.3472, 0.2562E-2, 0.2344E-5, -0.201, 0.161E-2, 3.2, -712.0, 290.0, 4.5, 0.611, -0.7379, 0.8524E-2, -0.5328E-5, -0.1855, 0.1805E-2, -0.1367E-5, 1.0, 5.0, -19.068, 0.5177, 109.999, -0.3271, 0.2305E-2, 0.2539E-5, -0.194, 0.134E-2, 3.0, -727.0, 300.0, 4.5, 0.611, -0.7379, 0.8524E-2, -0.5328E-5, -0.1891, 0.1783E-2, -0.1445E-5, 1.0, 5.0];
-    this.f0 = [-18.873, 0.666, 118.013, -0.3644, 0.2618E-2, 0.349E-5, -1.0445, 0.9532E-2, -6.4688, -507.95, 189.85, 4.2, 0.653, -2.6122, 0.02935, -0.6318E-4, -0.4422, 0.4809E-2, -0.9367E-5, 0.8, 2.0, -19.308, 0.596, 119.285, -0.3525, 0.2508E-2, 0.3579E-5, -0.8181, 0.723E-2, -6.8255, -566.11, 200.97, 4.1, 0.621, -2.6122, 0.2935E-1, -0.6318E-4, -0.4109, 0.443E-2, -0.8384E-5, 0.89, 2.0, -19.532, 0.5519, 119.744, -0.3406, 0.2398E-2, 0.3667E-5, -0.6404, 0.5594E-2, -4.2892, -632.63, 230.76, 4.4, 0.635, -2.6122, 0.2935E-1, -0.6318E-4, -0.3814, 0.4074E-2, -0.7461E-5, 1.0, 3.0, -19.592, 0.5296, 119.828, -0.3288, 0.2289E-2, 0.3752E-5, -0.4438, 0.3836E-2, -1.4294, -707.58, 278.35, 4.7, 0.632, -2.6122, 0.2935E-1, -0.6318E-4, -0.349, 0.3682E-2, -0.6444E-5, 1.0, 4.0, -19.614, 0.5032, 119.846, -0.2931, 0.1961E-2, 0.4012E-5, -0.4581, 0.4157E-2, -2.6263, -712.0, 290.0, 4.5, 0.611, -2.6122, 0.2935E-1, -0.6318E-4, -0.2882, 0.2946E-2, -0.4538E-5, 1.0, 5.0, -19.682, 0.4796, 119.927, -0.2016, 0.9112E-3, 0.6411E-5, -0.2977, 0.2401E-2, 0.5736, -727.0, 300.0, 4.5, 0.611, -2.6122, 0.02935, -0.6318E-4, -0.2255, 0.2188E-2, -0.257E-5, 1.0, 5.0];
-    this.ad = [-0.067, -0.088, -0.094, -0.088, -0.053, -0.005, 0.039, 0.09, 0.123, 0.133, 0.123, 0.099, 0.059, 0.017, -0.027, -0.065, -0.103, -0.136, -0.156, -0.172, -0.18, -0.183, -0.179, -0.163, -0.133, -0.085, -0.018, 0.059, 0.123, 0.161, 0.17, 0.156, 0.119, 0.073, 0.027, -0.023, -0.055, -0.078];
-    this.KDNEY = [31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    this.N10 = 0;
-    this.f1 = [];
-    this.ifa = [150, 6, 140];
-    this.if1 = [75, 100, 125, 150, 200, 250];
-    this.date = [0, 0, 0];
-    this.r = [0, 0, 0];
-    this.y = [0, 0, 0];
-    this.ff0 = [];
-    this.ff1 = [];
-    this.ome = 7.292115085E-5;
-    this.dd = [0, 0, 0, 0];
-    this.xout = [0, 0, 0];
-    this.alphastar = [0];
-    this.h = [0];
-    this.coordinates = new GeoCoordinates_1.GeoCoordinates();
-    this.sunCoordinates = new SunCoordinates_1.SunCoordinates();
-    this.realMatrix = new RealMatrix_1.RealMatrix();
-    this.sunPosition = new SunPosition_1.SunPosition();
-    this.sunTime = new SunTime_1.SunTime();
-    this.dateTimeConverter = new DateTimeConverter_1.DateTimeConverter();
-    this.initSelf();
-    this.setIf(this.ifa);
-  }
-  return _createClass(AtmospherePure, [{
-    key: "set",
-    value: function set(x, n) {
-      for (var i = 0; i < n; i++) {
-        x.push(0);
-      }
-    }
-  }, {
-    key: "initSelf",
-    value: function initSelf() {
-      if (this.ff0.length > 0) {
-        return;
-      }
-      var n = Math.floor(this.f0.length / 21);
-      for (var i = 0; i < n; i++) {
-        this.ff0.push([]);
-        this.ff1.push([]);
-      }
-      for (var _i = 0; _i < this.ff0.length; _i++) {
-        var fff = [];
-        var fff1 = [];
-        this.set(fff, 21);
-        this.set(fff1, 21);
-        this.ff0[_i] = fff;
-        this.ff1[_i] = fff1;
-        var j = _i * 21;
-        for (var k = 0; k < 21; k++) {
-          var _n = k + j;
-          fff[k] = this.f0[_n];
-          fff1[k] = this.f01[_n];
-        }
-      }
-    }
-  }, {
-    key: "setIf",
-    value: function setIf(value) {
-      this.N10 = 0;
-      for (var i = 0; i < 6; i++) {
-        if (this.if1[i] == value[0]) {
-          break;
-        } else {
-          this.N10++;
-        }
-      }
-      this.ifa[0] = value[0];
-      this.ifa[1] = value[1];
-      this.ifa[2] = value[2];
-    }
-  }, {
-    key: "atmosphere",
-    value: function atmosphere(t, x) {
-      var r2 = x[0] * x[0] + x[1] * x[1];
-      var lat = Math.atan2(x[2], Math.sqrt(r2));
-      var lon = Math.atan2(x[1], x[0]);
-      this.coordinates.setLatitude(lat);
-      this.coordinates.setLongitude(lon);
-      var tday = t / 86400;
-      var dt = this.dateTimeConverter.fromOADate(tday);
-      var hh = this.realMatrix.normalize(x, this.y, 0);
-      var ho = dt.getHours();
-      var mi = dt.getMinutes();
-      var ss = dt.getSeconds();
-      var it = Math.floor(t);
-      var sss = 1000 * (t - it);
-      var tt = (ho * 60 + mi) * 60 + ss + .001 * sss;
-      this.sunPosition.getPosition(dt, this.coordinates, this.sunCoordinates, this.ASoL, this.DSoL, this.ed, this.eh);
-      var alphastar = this.sunTime.CalculateGreenwichSiderealTimeFromDate(dt);
-      this.date[0] = dt.getDate();
-      this.date[1] = dt.getMonth() + 1;
-      this.date[2] = dt.getFullYear();
-      var rho = this.atm(x, tt, this.DSoL[0], this.ASoL[0], alphastar, this.h, this.date);
-      var s = "".concat(rho);
-      var b = s.includes("NaN");
-      if (b) {
-        var i = 0;
-      }
-      return rho;
-    }
-    /// <summary>
-    /// Atmosphere parameters
-    /// </summary>
-    /// 
-  }, {
-    key: "getIf",
-    value: function getIf() {
-      return this.ifa;
-    }
-  }, {
-    key: "rad",
-    value: function rad(x) {
-      var a = 0;
-      for (var i = 0; i < 3; i++) {
-        a += x[i] * x[i];
-      }
-      return Math.sqrt(a);
-    }
-  }, {
-    key: "atm",
-    value: function atm(x, t, alf, del, s0, h, it) {
-      var hh = this.rad(x);
-      for (var i = 0; i < 3; i++) {
-        this.y[i] = x[i] / hh;
-      }
-      h[0] = hh - 6378.140 * (1.0 - 0.335282E-2 * this.y[2] * this.y[2]);
-      if (h[0] <= 180) {
-        this.f1 = this.ff0[this.N10];
-      } else {
-        this.f1 = this.ff1[this.N10];
-      }
-      var N3 = it[1] - 1;
-      var a2 = 0;
-      var dat2 = 0;
-      if (N3 <= 0) a2 = it[0] / 10;else {
-        dat2 = it[1] / 4;
-        if (Math.abs(Math.floor(dat2 + .00001) - dat2) < .0001) a2 = (this.mac[N3 - 1] + 1 + it[0]) / 10.0;else a2 = (this.mac[N3 - 1] + it[0]) / 10.0;
-      }
-      var N2 = Math.floor(a2);
-      var a3 = a2 - N2;
-      N2++;
-      var ad1 = this.ad[N2 - 1] + (this.ad[N2] - this.ad[N2 - 1]) * a3;
-      var gam = alf + this.f1[12] - s0 - this.ome * (t - 10800.0);
-      var cosfi = this.y[2] * Math.sin(del) + Math.cos(del) * (this.y[0] * Math.cos(gam) + this.y[1] * Math.sin(gam));
-      var xk4 = 1 + (this.f1[16] + this.f1[17] * this.h[0] + this.f1[18] * this.h[0] * this.h[0]) * Math.log(this.ifa[1] / this.f1[20] + this.f1[19]);
-      var xk3 = 1 + (this.f1[13] + this.f1[14] * this.h[0] + this.f1[15] * this.h[0] * this.h[0]) * ad1;
-      var cosfi2 = Math.abs((1.0 + cosfi) / 2.0);
-      var xk2 = 1 + (this.f1[6] + this.f1[7] * this.h[0] + this.f1[8] * Math.exp(-(this.h[0] + this.f1[9]) / this.f1[10] * (h[0] + this.f1[9]) / this.f1[10])) * Math.pow(cosfi2, this.f1[11] / 2);
-      var xk1 = 1.0 + (this.f1[3] + this.f1[4] * this.h[0] + this.f1[5] * this.h[0] * this.h[0]) * (this.ifa[2] - this.ifa[0]) / this.ifa[0];
-      var roh = Math.exp(this.f1[0] - this.f1[1] * Math.sqrt(this.h[0] - this.f1[2]));
-      return roh * xk1 * xk2 * xk3 * xk4;
-    }
-  }]);
-}();
-exports.AtmospherePure = AtmospherePure;
-},{"../../../Library/RealMatrixProcessor/RealMatrix":"src/Library/RealMatrixProcessor/RealMatrix.ts","../../../Library/Utilities/DateTime/DateTimeConverter":"src/Library/Utilities/DateTime/DateTimeConverter.ts","../../Libraries/Geography/GeoCoordinates":"src/ExternalObjects/Libraries/Geography/GeoCoordinates.ts","../../Libraries/Sun.Service/SunCoordinates":"src/ExternalObjects/Libraries/Sun.Service/SunCoordinates.ts","../../Libraries/Sun.Service/SunPosition":"src/ExternalObjects/Libraries/Sun.Service/SunPosition.ts","../../Libraries/Sun.Service/SunTime":"src/ExternalObjects/Libraries/Sun.Service/SunTime.ts"}],"src/ExternalObjects/Components/Atmosphere/AtmosphereCategoryObject.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.AtmosphereCategoryObject = void 0;
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-var OwnNotImplemented_1 = require("../../../Library/ErrorHandler/OwnNotImplemented");
-var AtmospherePure_1 = require("./AtmospherePure");
-var Performer_1 = require("../../../Library/Performer");
-var AtmosphereCategoryObject = /*#__PURE__*/function (_AtmospherePure_1$Atm) {
-  function AtmosphereCategoryObject(desktop, name) {
-    var _this;
-    _classCallCheck(this, AtmosphereCategoryObject);
-    _this = _callSuper(this, AtmosphereCategoryObject);
-    _this.name = "";
-    _this.types = ["IObject", "ICategoryObject", "IObjectTransformer", "AtmospherePure", "AtmosphereCategoryObject"];
-    _this.inp = ["t", "x", "y", "z"];
-    _this.ooutp = ["Density"];
-    _this.a = 0;
-    _this.x = [0, 0, 0];
-    _this.performer = new Performer_1.Performer();
-    _this.desktop = desktop;
-    _this.name = name;
-    desktop.addCategoryObject(_this);
-    desktop.addObject(_this);
-    _this.checker = desktop.getCheck();
-    return _this;
-  }
-  _inherits(AtmosphereCategoryObject, _AtmospherePure_1$Atm);
-  return _createClass(AtmosphereCategoryObject, [{
-    key: "getInput",
-    value: function getInput() {
-      return this.inp;
-    }
-  }, {
-    key: "getOutput",
-    value: function getOutput() {
-      return this.ooutp;
-    }
-  }, {
-    key: "getInputType",
-    value: function getInputType(i) {
-      return this.a;
-    }
-  }, {
-    key: "getOutputType",
-    value: function getOutputType(i) {
-      return this.a;
-    }
-  }, {
-    key: "calculate",
-    value: function calculate(input, output) {
-      var t = this.performer.convertFromAny(input[0]);
-      this.x[0] = this.performer.convertFromAny(input[1]);
-      this.x[1] = this.performer.convertFromAny(input[2]);
-      this.x[2] = this.performer.convertFromAny(input[3]);
-      var r = this.atmosphere(t, this.x);
-      output[0] = r;
-    }
-  }, {
-    key: "getClassName",
-    value: function getClassName() {
-      throw "AtmosphereCategoryObject";
-    }
-  }, {
-    key: "imlplementsType",
-    value: function imlplementsType(type) {
-      return this.types.indexOf(type) > 0;
-    }
-  }, {
-    key: "getName",
-    value: function getName() {
-      return this.name;
-    }
-  }, {
-    key: "getObject",
-    value: function getObject() {
-      throw new OwnNotImplemented_1.OwnNotImplemented();
-    }
-  }, {
-    key: "setObject",
-    value: function setObject(obj) {
-      throw new OwnNotImplemented_1.OwnNotImplemented();
-    }
-  }, {
-    key: "getCategoryObjectName",
-    value: function getCategoryObjectName() {
-      return this.name;
-    }
-  }, {
-    key: "getDesktop",
-    value: function getDesktop() {
-      return this.desktop;
-    }
-  }]);
-}(AtmospherePure_1.AtmospherePure);
-exports.AtmosphereCategoryObject = AtmosphereCategoryObject;
-},{"../../../Library/ErrorHandler/OwnNotImplemented":"src/Library/ErrorHandler/OwnNotImplemented.ts","./AtmospherePure":"src/ExternalObjects/Components/Atmosphere/AtmospherePure.ts","../../../Library/Performer":"src/Library/Performer.ts"}],"src/ExternalObjects/Components/Gravity_36_36/Gravity..ts":[function(require,module,exports) {
-"use strict";
-
-/* eslint-disable no-var */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Gravity = void 0;
-var Performer_1 = require("../../../Library/Performer");
-var Gravity = /*#__PURE__*/function () {
-  /*  !!! DELETE AFTER
-            [0]	-5448.34815324	object {double}
-      [1]	-4463.93698421	object {double}
-      [2]	0	object {double}
-  -		output	{object[3]}	object[]
-      [0]	0.0062231496943680161	object {double}
-      [1]	0.0050988376640921027	object {double}
-      [2]	-2.8664480643872004E-08	object {double}
-    */
-  function Gravity() {
-    _classCallCheck(this, Gravity);
-    this.performer = new Performer_1.Performer();
-    this.R = [];
-    this.C = [];
-    this.S = [];
-    this.HP = [];
-    this.CO = [];
-    this.SI = [];
-    this.AR = [];
-    this.CF = [];
-    this.PNK = [];
-    this.ANAI = [];
-    this.SK = [1.732050807568877E0, 1.936491673103709E0, 2.091650066335189E0, 2.218529918662356E0, 2.326813808623286E0, 2.421824596249695E0, 2.506826616960176E0, 2.583977731709147E0, 2.654784752117980E0, 2.720344864917320E0, 2.781483843970261E0, 2.838840060634283E0, 2.892918063839265E0, 2.944124128779573E0, 2.992790634483277E0, 3.039193256447120E0, 3.083563388216997E0, 3.126097306274296E0, 3.166963057815222E0, 3.206305722292480E0, 3.244251489527417E0, 3.280910862053330E0, 3.316381199514726E0, 3.350748761981671E0, 3.384090366884451E0, 3.416474744628894E0, 3.447963656780269E0, 3.478612825366963E0, 3.508472710600489E0, 3.537589165949811E0, 3.566003993231045E0, 3.593755415611321E0, 3.620878482777667E0, 3.647405419702514E0, 3.673365928240249E0, 3.698787449063569E0];
-    this.n0 = 0;
-    this.nk = 0;
-    this.inp = ["", "", ""];
-    this.inps = ["x", "y", "z"];
-    this.outs = ["Gx", "Gy", "Gz"];
-    this.pos = 0;
-    this.ret = 0;
-    this.enlarge(this.R, 3);
-    this.enlarge(this.C, 700);
-    this.enlarge(this.S, 700);
-    this.enlarge(this.HP, 37);
-    this.enlarge(this.CO, 37);
-    this.enlarge(this.SI, 37);
-    this.enlarge(this.AR, 37);
-    this.enlarge(this.CF, 37);
-    this.enlarge(this.PNK, 37);
-    this.enlarge(this.ANAI, 438);
-  }
-  return _createClass(Gravity, [{
-    key: "enlarge",
-    value: function enlarge(x, n) {
-      this.performer.enlargeNumber(x, n);
-    }
-  }, {
-    key: "GetN0",
-    value: function GetN0() {
-      return this.n0;
-    }
-  }, {
-    key: "SetN0",
-    value: function SetN0(x) {
-      this.n0 = x;
-    }
-  }, {
-    key: "GetNK",
-    value: function GetNK() {
-      return this.nk;
-    }
-  }, {
-    key: "SetNK",
-    value: function SetNK(x) {
-      this.nk = x;
-    }
-  }, {
-    key: "GetMUR",
-    value: function GetMUR() {
-      return this.R;
-    }
-  }, {
-    key: "GetCnm",
-    value: function GetCnm() {
-      return this.C;
-    }
-  }, {
-    key: "GetSnm",
-    value: function GetSnm() {
-      return this.S;
-    }
-  }, {
-    key: "Forces",
-    value: function Forces(X, Y, Z, FX, FY, FZ) {
-      this.ForcesN(this.n0, this.nk, X, Y, Z, FX, FY, FZ);
-    }
-  }, {
-    key: "ForcesN",
-    value: function ForcesN(N0, NK, X, Y, Z, FX, FY, FZ) {
-      var LOG = false;
-      var P20 = 0.0;
-      var P30 = 0.0;
-      var PN0 = 0.0;
-      var A = 0.0;
-      var AN = 0.0;
-      var FR = 0.0;
-      var FF = 0.0;
-      var FL = 0.0;
-      var R2 = X * X + Y * Y;
-      var R3 = 1 / (R2 + Z * Z);
-      var R1 = Math.sqrt(R3);
-      var N1 = 0;
-      var N2 = 0;
-      var N3 = 0;
-      var N4 = 0;
-      var N5 = 0;
-      var CK1 = 0;
-      var CK2 = 0;
-      var J = 0;
-      var TG = 0;
-      R2 = Math.sqrt(R2);
-      var SF = Z * R1;
-      this.CF[0] = R2 * R1;
-      R2 = 1 / R2;
-      this.CO[0] = X * R2;
-      this.SI[0] = Y * R2;
-      var GR = this.R[0] * R3;
-      if (N0 != 0 || NK != 0) {
-        this.CF[1] = this.CF[0] * this.CF[0];
-        this.AR[0] = this.R[1] * R1;
-        for (var N = 1; N < N0; N++) {
-          N3 = N - 1;
-          this.AR[N] = this.AR[0] * this.AR[N3];
-          A = this.C[N3] * this.AR[N];
-          if (N == 1) {
-            P20 = Math.sqrt(5) * (1.0 - 1.5 * this.CF[1]);
-            this.PNK[0] = Math.sqrt(15) * this.CF[0] * SF;
-            FR = 3.0 * A * P20;
-            FF = A * this.PNK[0] * Math.sqrt(3);
-          } else if (N == 2) {
-            P30 = Math.sqrt(7) * (1.0 - 2.5 * this.CF[1]) * SF;
-            this.PNK[1] = /*SQ[62]/SQ[23]*/Math.sqrt(63) / Math.sqrt(24) * this.CF[0] * (4.0 - 5.0 * this.CF[1]);
-            FR += 4 * A * P30;
-            FF += A * this.PNK[1] * Math.sqrt(6); //SQ[5];
-          } else {
-            N1 = N + N3 + 1;
-            N2 = N1 + 2;
-            N4 = N + 1;
-            AN = N + 1;
-            PN0 = Math.sqrt(N2 + 1) / AN * (/*SQ[N1]*/Math.sqrt(N1 + 1) * SF * P30 - (N3 + 1) / /*SQ[N1-2]*/Math.sqrt(N1 - 1) * P20);
-            this.PNK[N3] = Math.sqrt(N2 + 1) / (Math.sqrt(N3 + 1) * Math.sqrt(N4 + 1)) * (Math.sqrt(N1 + 1) * SF * this.PNK[N - 2] - Math.sqrt(N + 1) * Math.sqrt(N - 1) / Math.sqrt(N1 - 1) * this.PNK[N - 3]);
-            FR += (N4 + 1) * A * PN0;
-            FF += A * /*SQ[N]*SQ[N4]/SQ[1]*/Math.sqrt(N + 1) * Math.sqrt(N4 + 1) / Math.sqrt(2) * this.PNK[N3];
-            P20 = P30;
-            P30 = PN0;
-          }
-          var j = 0;
-        }
-        var i = 0;
-      }
-      if (NK != 0) {
-        LOG = NK >= 3;
-        A = this.CO[0] + this.CO[0];
-        this.CO[1] = A * this.CO[0] - 1;
-        this.SI[1] = A * this.SI[0];
-        TG = Z * R2;
-        if (LOG) {
-          for (var _N = 2; _N < this.nk; _N++) {
-            //2
-            N1 = _N - 1;
-            N2 = _N - 2;
-            this.CF[_N] = this.CF[0] * this.CF[N1];
-            this.CO[_N] = A * this.CO[N1] - this.CO[N2];
-            this.SI[_N] = A * this.SI[N1] - this.SI[N2];
-          } //2
-        }
-        CK1 = (this.C[35] * this.CO[0] + this.S[35] * this.SI[0]) * this.AR[1];
-        CK2 = (this.C[35] * this.SI[0] - this.S[35] * this.CO[0]) * this.AR[1];
-        A = this.PNK[0];
-        this.PNK[0] = this.SK[1] * this.CF[1];
-        FR += CK1 * 3.0 * A;
-        FF += CK1 * (this.PNK[0] + this.PNK[0] - TG * A);
-        FL += CK2 * A;
-        J = 35;
-        if (LOG) {
-          for (var _N2 = 2; _N2 < NK; _N2++)
-          //commain
-          {
-            //3
-            J++;
-            N1 = _N2 - 1;
-            N2 = _N2 + _N2 + 1;
-            N3 = _N2 + 1;
-            A = this.PNK[N1];
-            CK1 = (this.C[J] * this.CO[0] + this.S[J] * this.SI[0]) * this.AR[_N2];
-            CK2 = (this.C[J] * this.SI[0] - this.S[J] * this.CO[0]) * this.AR[_N2];
-            if (_N2 == 2) this.PNK[1] = /*SQ[6]*/Math.sqrt(7) * SF * this.PNK[0];else this.PNK[N1] = Math.sqrt(N2 + 2) / (Math.sqrt(_N2 - 1) * Math.sqrt(_N2 + 3)) * (Math.sqrt(N2) * SF * this.PNK[_N2 - 2] - Math.sqrt(N3 + 1) * Math.sqrt(_N2 - 2) / Math.sqrt(N2 - 2) * this.PNK[_N2 - 3]);
-            FR += (N3 + 1) * CK1 * A;
-            FF += CK1 * (this.PNK[N1] * /*SQ[N1]*/Math.sqrt(N1 + 1) * /*SQ[N+2]*/Math.sqrt(_N2 + 3) - TG * A);
-            FL += CK2 * A;
-          }
-        } //ENDIF //3
-        for (var M = 1; M < NK; M++) {
-          // 4
-          J = Math.floor(this.ANAI[1 + M] + 0.5) - 1;
-          for (var _N3 = M; _N3 < NK; _N3++) {
-            //4.1
-            N1 = _N3 - M;
-            N2 = _N3 + M + 1;
-            N3 = _N3 + _N3 + 2;
-            N4 = N1 - 2;
-            N5 = N1 - 3;
-            A = this.PNK[N1];
-            AN = Math.floor(M + 1.5) * A;
-            CK1 = this.AR[_N3] * (this.C[J] * this.CO[M] + this.S[J] * this.SI[M]);
-            CK2 = this.AR[_N3] * (this.C[J] * this.SI[M] - this.S[J] * this.CO[M]);
-            if (N1 > 2) {
-              this.PNK[N1 - 1] = Math.sqrt(N3 + 1) / (Math.sqrt(N4 + 1) * Math.sqrt(N2 + 2)) * (Math.sqrt(N3 - 1) * SF * this.PNK[N4] - Math.sqrt(N2 + 1) * Math.sqrt(N5 + 1) / Math.sqrt(N3 - 3) * this.PNK[N5]);
-            } else if (N1 == 0) {
-              //4.1.1
-              FR += this.HP[_N3] * CK1 * A;
-              FF -= CK1 * AN * TG;
-              FL += CK2 * AN;
-              J++;
-              continue;
-            }
-            if (N1 == 1) {
-              this.PNK[0] = this.SK[_N3] * this.CF[_N3];
-            } else if (N1 == 2) {
-              this.PNK[1] = /*SQ[N3]*/Math.sqrt(N3 + 1) * SF * this.PNK[0];
-            }
-            FR += this.HP[_N3] * CK1 * A;
-            FF += CK1 * (this.PNK[N1 - 1] * /*SQ[N1-1]*SQ[N2+1]*/Math.sqrt(N1) * Math.sqrt(N2 + 2) - TG * AN);
-            FL += CK2 * AN;
-            J++;
-          }
-          //               }     //4.1
-        } //4
-        //    5
-      } //0
-      //   m5:
-      FR = -GR * FR - this.R[2] * R3;
-      FF = GR * FF;
-      FL = -GR / this.CF[0] * FL;
-      A = FF * SF;
-      FX[0] = FR * (X * R1) - A * this.CO[0] - FL * this.SI[0];
-      FY[0] = FR * (Y * R1) - A * this.SI[0] + FL * this.CO[0];
-      FZ[0] = FR * SF + FF * this.CF[0];
-    }
-  }, {
-    key: "sqrt",
-    value: function sqrt(x) {
-      return Math.sqrt(x);
-    }
-  }]);
-}();
-exports.Gravity = Gravity;
-},{"../../../Library/Performer":"src/Library/Performer.ts"}],"src/ExternalObjects/Components/Gravity_36_36/GravityCategoryObject.ts":[function(require,module,exports) {
-"use strict";
-
-/* eslint-disable no-var */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.GravityCategoryObject = void 0;
-var Performer_1 = require("../../../Library/Performer");
-var Gravity_1 = require("./Gravity.");
-var GravityCategoryObject = /*#__PURE__*/function (_Gravity_1$Gravity) {
-  function GravityCategoryObject(desktop, name) {
-    var _this;
-    _classCallCheck(this, GravityCategoryObject);
-    _this = _callSuper(this, GravityCategoryObject);
-    _this.performer = new Performer_1.Performer();
-    _this.obj = new Object();
-    _this.name = "";
-    _this.types = ["IObject", "ICategoryObject", "IObjectTransformer", "GravityCategoryObject"];
-    _this.typeName = "GravityCategoryObject";
-    _this.a = 0;
-    _this.inp = ["x", "y", "z"];
-    _this.ooutp = ["Gx", "Gy", "Gz"];
-    _this.fx = new Array(1);
-    _this.fy = new Array(1);
-    _this.fz = new Array(1);
-    _this.desktop = desktop;
-    _this.name = name;
-    desktop.addCategoryObject(_this);
-    desktop.addObject(_this);
-    _this.n0 = 36;
-    _this.nk = 36;
-    return _this;
-  }
-  _inherits(GravityCategoryObject, _Gravity_1$Gravity);
-  return _createClass(GravityCategoryObject, [{
-    key: "getInput",
-    value: function getInput() {
-      return this.inp;
-    }
-  }, {
-    key: "getOutput",
-    value: function getOutput() {
-      return this.ooutp;
-    }
-  }, {
-    key: "getInputType",
-    value: function getInputType(i) {
-      return this.a;
-    }
-  }, {
-    key: "getOutputType",
-    value: function getOutputType(i) {
-      return this.a;
-    }
-  }, {
-    key: "calculate",
-    value: function calculate(input, output) {
-      var x = this.convert(input[0]);
-      var y = this.convert(input[1]);
-      var z = this.convert(input[2]);
-      this.Forces(x, y, z, this.fx, this.fy, this.fz);
-      output[0] = this.fx[0];
-      output[1] = this.fy[0];
-      output[2] = this.fz[0];
-    }
-  }, {
-    key: "getClassName",
-    value: function getClassName() {
-      return this.typeName;
-    }
-  }, {
-    key: "imlplementsType",
-    value: function imlplementsType(type) {
-      return this.types.indexOf(type) >= 0;
-    }
-  }, {
-    key: "getName",
-    value: function getName() {
-      return this.name;
-    }
-  }, {
-    key: "getObject",
-    value: function getObject() {
-      return this.obj;
-    }
-  }, {
-    key: "setObject",
-    value: function setObject(obj) {
-      this.obj = obj;
-    }
-  }, {
-    key: "getCategoryObjectName",
-    value: function getCategoryObjectName() {
-      return this.name;
-    }
-  }, {
-    key: "getDesktop",
-    value: function getDesktop() {
-      return this.desktop;
-    }
-  }, {
-    key: "convert",
-    value: function convert(x) {
-      return this.performer.convertFromAny(x);
-    }
-  }]);
-}(Gravity_1.Gravity);
-exports.GravityCategoryObject = GravityCategoryObject;
-},{"../../../Library/Performer":"src/Library/Performer.ts","./Gravity.":"src/ExternalObjects/Components/Gravity_36_36/Gravity..ts"}],"src/Algorithms/OrbitalForecastCalculation/OrbitalForecast.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.OrbitalForecast = void 0;
-var AtmosphereCategoryObject_1 = require("../../ExternalObjects/Components/Atmosphere/AtmosphereCategoryObject");
-var GravityCategoryObject_1 = require("../../ExternalObjects/Components/Gravity_36_36/GravityCategoryObject");
-var AliasName_1 = require("../../Library/AliasName");
-var Desktop_1 = require("../../Library/Desktop");
-var FeedbackAliasCollection_1 = require("../../Library/FeedbackAliasCollection");
-var DataLink_1 = require("../../Library/Measurements/Arrows/DataLink");
-var ObjectTransformerLink_1 = require("../../Library/Measurements/Arrows/ObjectTransformerLink");
-var DataConsumer_1 = require("../../Library/Measurements/DataConsumer");
-var DifferentialEquationSolverFormula_1 = require("../../Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula");
-var ObjectTransformer_1 = require("../../Library/Measurements/ObjectTransformer");
-var RecursiveFormula_1 = require("../../Library/Measurements/RecursiveFormula");
-var VectorFormulaConsumer_1 = require("../../Library/Measurements/VectorFormulaConsumer");
-var OrbitalForecast_CategoryObject_0 = /*#__PURE__*/function (_AtmosphereCategoryOb) {
-  function OrbitalForecast_CategoryObject_0(desktop, name) {
-    var _this;
-    _classCallCheck(this, OrbitalForecast_CategoryObject_0);
-    _this = _callSuper(this, OrbitalForecast_CategoryObject_0, [desktop, name]);
-    var iff = [150, 6, 140];
-    _this.setIf(iff);
-    return _this;
-  }
-  _inherits(OrbitalForecast_CategoryObject_0, _AtmosphereCategoryOb);
-  return _createClass(OrbitalForecast_CategoryObject_0);
-}(AtmosphereCategoryObject_1.AtmosphereCategoryObject);
-var OrbitalForecast_CategoryObject_1 = /*#__PURE__*/function (_GravityCategoryObjec) {
-  function OrbitalForecast_CategoryObject_1(desktop, name) {
-    var _this2;
-    _classCallCheck(this, OrbitalForecast_CategoryObject_1);
-    _this2 = _callSuper(this, OrbitalForecast_CategoryObject_1, [desktop, name]);
-    _this2.SetN0(36);
-    _this2.SetNK(36);
-    _this2.R = [];
-    _this2.R.push(398600.43599999999);
-    _this2.R.push(6378.1369999999997);
-    _this2.R.push(398600.40000000002);
-    _this2.C = [];
-    _this2.C.push(-0.0004841650994);
-    _this2.C.push(9.5720110000000009E-07);
-    _this2.C.push(5.3952120000000001E-07);
-    _this2.C.push(6.8343299999999995E-08);
-    _this2.C.push(-1.4951350000000001E-07);
-    _this2.C.push(9.1300899999999999E-08);
-    _this2.C.push(4.8883199999999999E-08);
-    _this2.C.push(2.6862400000000001E-08);
-    _this2.C.push(5.4065000000000001E-08);
-    _this2.C.push(-4.9463800000000001E-08);
-    _this2.C.push(3.56285E-08);
-    _this2.C.push(4.01122E-08);
-    _this2.C.push(-2.1554900000000001E-08);
-    _this2.C.push(3.2274999999999999E-09);
-    _this2.C.push(-6.1890999999999996E-09);
-    _this2.C.push(1.7426599999999999E-08);
-    _this2.C.push(8.5246000000000001E-09);
-    _this2.C.push(-2.1551000000000001E-09);
-    _this2.C.push(1.9923799999999999E-08);
-    _this2.C.push(6.0954000000000003E-09);
-    _this2.C.push(-9.5104999999999994E-09);
-    _this2.C.push(-2.1642599999999999E-08);
-    _this2.C.push(-2.2919999999999999E-10);
-    _this2.C.push(5.1981000000000001E-09);
-    _this2.C.push(5.7589999999999997E-09);
-    _this2.C.push(3.7752E-09);
-    _this2.C.push(-9.9774999999999995E-09);
-    _this2.C.push(-2.5026E-09);
-    _this2.C.push(-6.7262999999999998E-09);
-    _this2.C.push(5.9286000000000004E-09);
-    _this2.C.push(-4.0391000000000002E-09);
-    _this2.C.push(-1.15E-09);
-    _this2.C.push(-4.5042000000000002E-09);
-    _this2.C.push(6.8919000000000002E-09);
-    _this2.C.push(-3.7241E-09);
-    _this2.C.push(-1.7000000000000001E-10);
-    _this2.C.push(2.0277141999999999E-06);
-    _this2.C.push(-5.3615110000000001E-07);
-    _this2.C.push(-5.8280200000000001E-08);
-    _this2.C.push(-7.6894199999999998E-08);
-    _this2.C.push(2.7486870000000002E-07);
-    _this2.C.push(2.3628199999999999E-08);
-    _this2.C.push(1.460968E-07);
-    _this2.C.push(8.1493500000000001E-08);
-    _this2.C.push(1.5143799999999999E-08);
-    _this2.C.push(-5.4500200000000003E-08);
-    _this2.C.push(-5.59665E-08);
-    _this2.C.push(-2.0669300000000001E-08);
-    _this2.C.push(1.3079399999999999E-08);
-    _this2.C.push(2.3769400000000001E-08);
-    _this2.C.push(-2.7380800000000001E-08);
-    _this2.C.push(-1.2802E-09);
-    _this2.C.push(-9.6288999999999993E-09);
-    _this2.C.push(5.2110999999999999E-09);
-    _this2.C.push(-1.71788E-08);
-    _this2.C.push(9.6642000000000006E-09);
-    _this2.C.push(6.3465E-09);
-    _this2.C.push(-5.0423000000000003E-09);
-    _this2.C.push(6.5866000000000004E-09);
-    _this2.C.push(-2.6663999999999998E-09);
-    _this2.C.push(3.9251E-09);
-    _this2.C.push(-7.3064999999999999E-09);
-    _this2.C.push(1.9969E-09);
-    _this2.C.push(-1.7521E-09);
-    _this2.C.push(4.6820999999999998E-09);
-    _this2.C.push(-1.9391000000000001E-09);
-    _this2.C.push(-3.1760999999999998E-09);
-    _this2.C.push(-1.409E-10);
-    _this2.C.push(-1.10388E-08);
-    _this2.C.push(2.3560000000000001E-09);
-    _this2.C.push(2.4390658000000001E-06);
-    _this2.C.push(9.044707E-07);
-    _this2.C.push(3.5021810000000001E-07);
-    _this2.C.push(6.52711E-07);
-    _this2.C.push(4.8734499999999999E-08);
-    _this2.C.push(3.2779499999999998E-07);
-    _this2.C.push(7.7598500000000005E-08);
-    _this2.C.push(2.2451399999999999E-08);
-    _this2.C.push(-9.1276599999999996E-08);
-    _this2.C.push(1.67542E-08);
-    _this2.C.push(1.2380799999999999E-08);
-    _this2.C.push(5.4324200000000001E-08);
-    _this2.C.push(-3.7195200000000001E-08);
-    _this2.C.push(-2.35054E-08);
-    _this2.C.push(-2.1291799999999999E-08);
-    _this2.C.push(-1.91519E-08);
-    _this2.C.push(1.31239E-08);
-    _this2.C.push(2.7528099999999999E-08);
-    _this2.C.push(1.7485999999999999E-08);
-    _this2.C.push(-6.1390000000000004E-09);
-    _this2.C.push(-1.9640799999999999E-08);
-    _this2.C.push(-1.3082700000000001E-08);
-    _this2.C.push(-2.1465E-09);
-    _this2.C.push(1.6401700000000001E-08);
-    _this2.C.push(-1.5745999999999999E-09);
-    _this2.C.push(3.6962000000000001E-09);
-    _this2.C.push(-1.19628E-08);
-    _this2.C.push(-2.5286000000000001E-09);
-    _this2.C.push(-9.2717999999999994E-09);
-    _this2.C.push(1.3617E-09);
-    _this2.C.push(8.3159999999999998E-09);
-    _this2.C.push(-6.8686E-09);
-    _this2.C.push(9.6775000000000001E-09);
-    _this2.C.push(-1.32095E-08);
-    _this2.C.push(-4.8740000000000003E-09);
-    _this2.C.push(7.2034250000000002E-07);
-    _this2.C.push(9.9093369999999997E-07);
-    _this2.C.push(-4.5233010000000002E-07);
-    _this2.C.push(5.7203199999999997E-08);
-    _this2.C.push(2.5122009999999999E-07);
-    _this2.C.push(-1.7785200000000001E-08);
-    _this2.C.push(-1.612938E-07);
-    _this2.C.push(-8.6059000000000006E-09);
-    _this2.C.push(-2.84259E-08);
-    _this2.C.push(4.2159799999999997E-08);
-    _this2.C.push(-2.11569E-08);
-    _this2.C.push(3.2988700000000002E-08);
-    _this2.C.push(5.4276799999999999E-08);
-    _this2.C.push(-3.4110900000000001E-08);
-    _this2.C.push(1.27131E-08);
-    _this2.C.push(-3.3637999999999999E-09);
-    _this2.C.push(-3.3835000000000002E-09);
-    _this2.C.push(-8.1594000000000006E-09);
-    _this2.C.push(2.6379199999999998E-08);
-    _this2.C.push(9.2975999999999998E-09);
-    _this2.C.push(-1.2194E-08);
-    _this2.C.push(-3.3461999999999999E-09);
-    _this2.C.push(-6.8316999999999999E-09);
-    _this2.C.push(9.0688999999999996E-09);
-    _this2.C.push(5.6586000000000003E-09);
-    _this2.C.push(2.4984E-09);
-    _this2.C.push(1.5286000000000001E-09);
-    _this2.C.push(3.8607999999999997E-09);
-    _this2.C.push(-6.3296999999999998E-09);
-    _this2.C.push(-1.5101E-09);
-    _this2.C.push(-5.4439999999999998E-09);
-    _this2.C.push(1.01568E-08);
-    _this2.C.push(2.137E-09);
-    _this2.C.push(-6.0150000000000004E-10);
-    _this2.C.push(-1.8877059999999999E-07);
-    _this2.C.push(-2.955841E-07);
-    _this2.C.push(-8.68265E-08);
-    _this2.C.push(-2.7556099999999999E-07);
-    _this2.C.push(-2.4633979999999998E-07);
-    _this2.C.push(-1.01377E-08);
-    _this2.C.push(-8.5342400000000006E-08);
-    _this2.C.push(-4.0683500000000002E-08);
-    _this2.C.push(-6.9557400000000001E-08);
-    _this2.C.push(-3.8557000000000002E-09);
-    _this2.C.push(-7.8510000000000001E-10);
-    _this2.C.push(-4.3480499999999997E-08);
-    _this2.C.push(3.9121999999999998E-08);
-    _this2.C.push(6.8146999999999996E-09);
-    _this2.C.push(5.2164700000000001E-08);
-    _this2.C.push(1.21511E-08);
-    _this2.C.push(1.4180000000000001E-09);
-    _this2.C.push(-9.4317E-09);
-    _this2.C.push(-3.8186E-09);
-    _this2.C.push(-1.9116200000000001E-08);
-    _this2.C.push(7.1524999999999999E-09);
-    _this2.C.push(5.1080999999999998E-09);
-    _this2.C.push(1.47221E-08);
-    _this2.C.push(5.8679999999999998E-10);
-    _this2.C.push(4.2378000000000004E-09);
-    _this2.C.push(-2.1991300000000001E-08);
-    _this2.C.push(-8.4529999999999997E-10);
-    _this2.C.push(-7.8644000000000003E-09);
-    _this2.C.push(2.0706999999999999E-09);
-    _this2.C.push(-3.2131E-09);
-    _this2.C.push(-4.4926999999999996E-09);
-    _this2.C.push(1.1719999999999999E-10);
-    _this2.C.push(8.4559999999999995E-10);
-    _this2.C.push(1.7376350000000001E-07);
-    _this2.C.push(-2.6733040000000002E-07);
-    _this2.C.push(1.3262E-09);
-    _this2.C.push(-2.5041100000000001E-08);
-    _this2.C.push(-1.71468E-08);
-    _this2.C.push(-5.1021499999999998E-08);
-    _this2.C.push(3.7614600000000001E-08);
-    _this2.C.push(3.1915900000000001E-08);
-    _this2.C.push(6.0720700000000002E-08);
-    _this2.C.push(2.5954799999999999E-08);
-    _this2.C.push(1.13901E-08);
-    _this2.C.push(-1.41227E-08);
-    _this2.C.push(-1.25322E-08);
-    _this2.C.push(1.9873E-09);
-    _this2.C.push(-1.5459700000000001E-08);
-    _this2.C.push(-1.34176E-08);
-    _this2.C.push(4.3733000000000002E-09);
-    _this2.C.push(-8.2423E-09);
-    _this2.C.push(8.0082000000000005E-09);
-    _this2.C.push(-6.0088000000000002E-09);
-    _this2.C.push(-3.7810999999999997E-09);
-    _this2.C.push(3.8380000000000002E-09);
-    _this2.C.push(1.57567E-08);
-    _this2.C.push(5.5800000000000002E-09);
-    _this2.C.push(-3.1614999999999999E-09);
-    _this2.C.push(-1.9984E-09);
-    _this2.C.push(-4.6503E-09);
-    _this2.C.push(5.0123999999999998E-09);
-    _this2.C.push(-4.8492999999999998E-09);
-    _this2.C.push(-4.0990999999999996E-09);
-    _this2.C.push(-6.2657E-09);
-    _this2.C.push(-3.5798E-09);
-    _this2.C.push(9.6846000000000002E-09);
-    _this2.C.push(-3.5883139999999999E-07);
-    _this2.C.push(-6.4923700000000003E-08);
-    _this2.C.push(6.3914300000000002E-08);
-    _this2.C.push(-3.70547E-08);
-    _this2.C.push(-3.9179999999999998E-10);
-    _this2.C.push(4.1892000000000004E-09);
-    _this2.C.push(-3.4153600000000001E-08);
-    _this2.C.push(-1.88109E-08);
-    _this2.C.push(3.4206899999999998E-08);
-    _this2.C.push(1.6911900000000001E-08);
-    _this2.C.push(-1.09756E-08);
-    _this2.C.push(1.5699699999999999E-08);
-    _this2.C.push(-3.8121000000000001E-09);
-    _this2.C.push(1.13814E-08);
-    _this2.C.push(-1.16607E-08);
-    _this2.C.push(1.38314E-08);
-    _this2.C.push(-1.2887200000000001E-08);
-    _this2.C.push(4.2666000000000001E-09);
-    _this2.C.push(1.46476E-08);
-    _this2.C.push(1.14084E-08);
-    _this2.C.push(3.1000000000000001E-12);
-    _this2.C.push(-2.3066999999999999E-09);
-    _this2.C.push(9.9066000000000005E-09);
-    _this2.C.push(7.8999999999999999E-11);
-    _this2.C.push(-1.9375E-09);
-    _this2.C.push(-5.9529E-09);
-    _this2.C.push(1.1794999999999999E-09);
-    _this2.C.push(-3.7860000000000002E-10);
-    _this2.C.push(1.5394999999999999E-09);
-    _this2.C.push(7.3451999999999998E-09);
-    _this2.C.push(9.7030000000000005E-10);
-    _this2.C.push(6.7462199999999996E-08);
-    _this2.C.push(-1.190107E-07);
-    _this2.C.push(7.5610999999999995E-09);
-    _this2.C.push(3.8816999999999999E-09);
-    _this2.C.push(-1.8389399999999999E-08);
-    _this2.C.push(3.5556E-09);
-    _this2.C.push(3.7678799999999999E-08);
-    _this2.C.push(5.6823599999999998E-08);
-    _this2.C.push(-6.9833000000000001E-09);
-    _this2.C.push(2.47642E-08);
-    _this2.C.push(5.8839000000000003E-09);
-    _this2.C.push(5.0711999999999996E-09);
-    _this2.C.push(-1.9405500000000001E-08);
-    _this2.C.push(-1.1822599999999999E-08);
-    _this2.C.push(1.4605799999999999E-08);
-    _this2.C.push(-6.1313000000000001E-09);
-    _this2.C.push(-2.4921000000000001E-09);
-    _this2.C.push(6.9129E-09);
-    _this2.C.push(-2.373E-10);
-    _this2.C.push(-1.28755E-08);
-    _this2.C.push(-8.5909999999999996E-10);
-    _this2.C.push(-4.4995999999999996E-09);
-    _this2.C.push(7.0755000000000002E-09);
-    _this2.C.push(3.4009999999999999E-10);
-    _this2.C.push(2.5424999999999999E-09);
-    _this2.C.push(-4.8291000000000002E-09);
-    _this2.C.push(4.4472999999999997E-09);
-    _this2.C.push(-1.1804E-09);
-    _this2.C.push(7.9530000000000004E-10);
-    _this2.C.push(-1.2419840000000001E-07);
-    _this2.C.push(1.8713229999999999E-07);
-    _this2.C.push(4.0054700000000001E-08);
-    _this2.C.push(-6.9703000000000002E-09);
-    _this2.C.push(-2.5516799999999999E-08);
-    _this2.C.push(-1.16966E-08);
-    _this2.C.push(-3.48919E-08);
-    _this2.C.push(-3.2726099999999997E-08);
-    _this2.C.push(-2.06218E-08);
-    _this2.C.push(3.7817099999999999E-08);
-    _this2.C.push(3.0129099999999997E-08);
-    _this2.C.push(2.9418400000000001E-08);
-    _this2.C.push(4.9121999999999996E-09);
-    _this2.C.push(-1.5243599999999999E-08);
-    _this2.C.push(-2.34988E-08);
-    _this2.C.push(5.5469000000000004E-09);
-    _this2.C.push(1.5658699999999998E-08);
-    _this2.C.push(5.1782000000000002E-09);
-    _this2.C.push(3.5160999999999999E-09);
-    _this2.C.push(-5.2480999999999997E-09);
-    _this2.C.push(-2.0044999999999999E-09);
-    _this2.C.push(-1.2184500000000001E-08);
-    _this2.C.push(1.6689999999999999E-09);
-    _this2.C.push(-1.19E-10);
-    _this2.C.push(1.0039600000000001E-08);
-    _this2.C.push(1.1497000000000001E-09);
-    _this2.C.push(-1.35093E-08);
-    _this2.C.push(2.3738999999999998E-09);
-    _this2.C.push(3.6649999999999998E-10);
-    _this2.C.push(-4.8132399999999999E-08);
-    _this2.C.push(1.243124E-07);
-    _this2.C.push(-3.2224800000000001E-08);
-    _this2.C.push(4.0905299999999998E-08);
-    _this2.C.push(2.4146700000000001E-08);
-    _this2.C.push(3.2298399999999998E-08);
-    _this2.C.push(1.1740299999999999E-08);
-    _this2.C.push(-2.4003700000000001E-08);
-    _this2.C.push(2.2023000000000001E-09);
-    _this2.C.push(-1.78758E-08);
-    _this2.C.push(2.2163999999999999E-09);
-    _this2.C.push(1.9012100000000001E-08);
-    _this2.C.push(1.5020300000000001E-08);
-    _this2.C.push(1.02897E-08);
-    _this2.C.push(-5.8560000000000003E-10);
-    _this2.C.push(-7.4084000000000002E-09);
-    _this2.C.push(-2.9785600000000001E-08);
-    _this2.C.push(-7.2797999999999996E-09);
-    _this2.C.push(1.65E-10);
-    _this2.C.push(8.2431000000000002E-09);
-    _this2.C.push(-5.0682000000000003E-09);
-    _this2.C.push(-5.4353E-09);
-    _this2.C.push(-1.4883999999999999E-09);
-    _this2.C.push(5.8073999999999996E-09);
-    _this2.C.push(3.0105999999999999E-09);
-    _this2.C.push(5.7399999999999997E-11);
-    _this2.C.push(-4.1607999999999999E-09);
-    _this2.C.push(2.3523999999999999E-09);
-    _this2.C.push(9.9753200000000004E-08);
-    _this2.C.push(-5.2064999999999997E-08);
-    _this2.C.push(-6.4899000000000001E-09);
-    _this2.C.push(4.1465899999999997E-08);
-    _this2.C.push(3.8510599999999998E-08);
-    _this2.C.push(1.1479299999999999E-08);
-    _this2.C.push(-1.09552E-08);
-    _this2.C.push(-2.5897999999999999E-09);
-    _this2.C.push(4.7002E-09);
-    _this2.C.push(-3.3704899999999998E-08);
-    _this2.C.push(-3.0161500000000002E-08);
-    _this2.C.push(-9.6824000000000004E-09);
-    _this2.C.push(5.1670999999999997E-09);
-    _this2.C.push(1.45345E-08);
-    _this2.C.push(1.13588E-08);
-    _this2.C.push(7.5752999999999997E-09);
-    _this2.C.push(-1.3095000000000001E-08);
-    _this2.C.push(-1.2852200000000001E-08);
-    _this2.C.push(-7.5322000000000001E-09);
-    _this2.C.push(8.4163000000000004E-09);
-    _this2.C.push(1.6217999999999999E-09);
-    _this2.C.push(1.9809999999999999E-10);
-    _this2.C.push(1.4409000000000001E-09);
-    _this2.C.push(-2.7284999999999998E-09);
-    _this2.C.push(-6.7001999999999997E-09);
-    _this2.C.push(-6.3194999999999999E-09);
-    _this2.C.push(1.3133E-09);
-    _this2.C.push(4.5318100000000001E-08);
-    _this2.C.push(1.05182E-08);
-    _this2.C.push(-4.4539099999999998E-08);
-    _this2.C.push(1.47653E-08);
-    _this2.C.push(-8.754E-10);
-    _this2.C.push(1.8427500000000001E-08);
-    _this2.C.push(-1.5788900000000001E-08);
-    _this2.C.push(-7.8403000000000007E-09);
-    _this2.C.push(1.5746500000000001E-08);
-    _this2.C.push(1.31223E-08);
-    _this2.C.push(8.4047000000000001E-09);
-    _this2.C.push(-3.4555999999999999E-09);
-    _this2.C.push(8.0666000000000002E-09);
-    _this2.C.push(1.1889299999999999E-08);
-    _this2.C.push(4.4306E-09);
-    _this2.C.push(-1.7838E-09);
-    _this2.C.push(2.7287999999999999E-09);
-    _this2.C.push(-4.1603000000000002E-09);
-    _this2.C.push(-5.7377999999999998E-09);
-    _this2.C.push(-1.10613E-08);
-    _this2.C.push(8.508E-10);
-    _this2.C.push(-5.4061999999999998E-09);
-    _this2.C.push(2.0112999999999999E-09);
-    _this2.C.push(-4.2243E-09);
-    _this2.C.push(3.2848000000000001E-09);
-    _this2.C.push(-4.0690000000000001E-10);
-    _this2.C.push(-3.3602E-09);
-    _this2.C.push(-3.1280300000000003E-08);
-    _this2.C.push(8.3128000000000005E-09);
-    _this2.C.push(-3.2455600000000001E-08);
-    _this2.C.push(1.9897400000000001E-08);
-    _this2.C.push(2.91379E-08);
-    _this2.C.push(-2.87346E-08);
-    _this2.C.push(-2.1222E-09);
-    _this2.C.push(-5.9513000000000003E-09);
-    _this2.C.push(-1.9521999999999999E-09);
-    _this2.C.push(-3.8281E-09);
-    _this2.C.push(1.70577E-08);
-    _this2.C.push(1.16255E-08);
-    _this2.C.push(-8.2097999999999995E-09);
-    _this2.C.push(-1.67307E-08);
-    _this2.C.push(-8.6416000000000004E-09);
-    _this2.C.push(1.4295999999999999E-09);
-    _this2.C.push(-2.6580000000000001E-09);
-    _this2.C.push(1.2371400000000001E-08);
-    _this2.C.push(2.7782999999999998E-09);
-    _this2.C.push(-1.2597199999999999E-08);
-    _this2.C.push(-6.8980000000000004E-10);
-    _this2.C.push(1.03061E-08);
-    _this2.C.push(6.7832000000000003E-09);
-    _this2.C.push(-7.2520000000000004E-10);
-    _this2.C.push(-6.1412900000000003E-08);
-    _this2.C.push(3.1958400000000002E-08);
-    _this2.C.push(-2.8757200000000002E-08);
-    _this2.C.push(1.3712400000000001E-08);
-    _this2.C.push(1.64865E-08);
-    _this2.C.push(-6.1816000000000002E-09);
-    _this2.C.push(-7.0963999999999996E-09);
-    _this2.C.push(2.77741E-08);
-    _this2.C.push(-1.85066E-08);
-    _this2.C.push(-1.69513E-08);
-    _this2.C.push(-1.11264E-08);
-    _this2.C.push(-2.5191000000000001E-09);
-    _this2.C.push(8.0623999999999998E-09);
-    _this2.C.push(1.7499999999999999E-10);
-    _this2.C.push(-4.5565999999999998E-09);
-    _this2.C.push(1.6575999999999999E-09);
-    _this2.C.push(-7.2729999999999996E-10);
-    _this2.C.push(1.34213E-08);
-    _this2.C.push(9.3804999999999992E-09);
-    _this2.C.push(4.1739999999999999E-09);
-    _this2.C.push(3.4056999999999999E-09);
-    _this2.C.push(-5.2037999999999998E-09);
-    _this2.C.push(-1.7808000000000001E-09);
-    _this2.C.push(-6.5508000000000002E-09);
-    _this2.C.push(-5.1785100000000002E-08);
-    _this2.C.push(5.4459E-09);
-    _this2.C.push(-1.96596E-08);
-    _this2.C.push(-1.4095600000000001E-08);
-    _this2.C.push(-8.8532999999999996E-09);
-    _this2.C.push(-4.8123999999999996E-09);
-    _this2.C.push(1.08561E-08);
-    _this2.C.push(2.0369799999999999E-08);
-    _this2.C.push(1.0178E-08);
-    _this2.C.push(5.8014000000000003E-09);
-    _this2.C.push(-2.0155699999999999E-08);
-    _this2.C.push(-2.0673100000000001E-08);
-    _this2.C.push(7.3957999999999996E-09);
-    _this2.C.push(1.6175999999999999E-08);
-    _this2.C.push(-6.2352999999999998E-09);
-    _this2.C.push(-6.1507000000000003E-09);
-    _this2.C.push(4.3796000000000001E-09);
-    _this2.C.push(-6.0838E-09);
-    _this2.C.push(-5.282E-10);
-    _this2.C.push(3.7931000000000001E-09);
-    _this2.C.push(-1.2805999999999999E-09);
-    _this2.C.push(-6.8707000000000003E-09);
-    _this2.C.push(-8.0168000000000007E-09);
-    _this2.C.push(-1.9573100000000001E-08);
-    _this2.C.push(-1.3478E-08);
-    _this2.C.push(5.3063999999999998E-09);
-    _this2.C.push(-3.9385700000000003E-08);
-    _this2.C.push(-1.7539299999999999E-08);
-    _this2.C.push(-2.4648099999999999E-08);
-    _this2.C.push(1.78471E-08);
-    _this2.C.push(2.6347199999999999E-08);
-    _this2.C.push(1.8417799999999999E-08);
-    _this2.C.push(6.6160999999999999E-09);
-    _this2.C.push(-3.6318999999999998E-09);
-    _this2.C.push(-1.3675E-08);
-    _this2.C.push(-2.3151E-09);
-    _this2.C.push(-1.08597E-08);
-    _this2.C.push(-7.7082999999999999E-09);
-    _this2.C.push(-1.6878999999999999E-09);
-    _this2.C.push(1.753E-09);
-    _this2.C.push(5.0419000000000001E-09);
-    _this2.C.push(-5.0421999999999998E-09);
-    _this2.C.push(-9.3209999999999991E-10);
-    _this2.C.push(-1.4351099999999999E-08);
-    _this2.C.push(7.5180000000000003E-10);
-    _this2.C.push(-3.6127000000000003E-08);
-    _this2.C.push(-2.9409900000000001E-08);
-    _this2.C.push(1.1331799999999999E-08);
-    _this2.C.push(-2.1050599999999999E-08);
-    _this2.C.push(-1.0692700000000001E-08);
-    _this2.C.push(8.4444999999999999E-09);
-    _this2.C.push(1.2215E-09);
-    _this2.C.push(6.8979000000000003E-09);
-    _this2.C.push(9.4515000000000003E-09);
-    _this2.C.push(1.5537999999999999E-09);
-    _this2.C.push(2.5097000000000001E-09);
-    _this2.C.push(4.3338999999999997E-09);
-    _this2.C.push(-3.1453999999999999E-09);
-    _this2.C.push(-1.6790000000000001E-10);
-    _this2.C.push(-8.8025999999999994E-09);
-    _this2.C.push(-4.6677999999999999E-09);
-    _this2.C.push(2.5011E-09);
-    _this2.C.push(4.3554999999999997E-09);
-    _this2.C.push(5.727E-10);
-    _this2.C.push(-4.1016999999999996E-09);
-    _this2.C.push(3.2539999999999998E-10);
-    _this2.C.push(-3.29779E-08);
-    _this2.C.push(3.6681999999999998E-09);
-    _this2.C.push(3.0652500000000003E-08);
-    _this2.C.push(4.4349000000000001E-09);
-    _this2.C.push(-5.6776000000000003E-09);
-    _this2.C.push(8.9480000000000001E-09);
-    _this2.C.push(-4.0493999999999997E-09);
-    _this2.C.push(-1.1989000000000001E-08);
-    _this2.C.push(-1.31607E-08);
-    _this2.C.push(-1.08818E-08);
-    _this2.C.push(4.5031000000000003E-09);
-    _this2.C.push(1.35711E-08);
-    _this2.C.push(4.1030000000000002E-10);
-    _this2.C.push(-6.5044E-09);
-    _this2.C.push(-3.9763E-09);
-    _this2.C.push(-5.1155000000000004E-09);
-    _this2.C.push(-4.3785999999999997E-09);
-    _this2.C.push(-5.5791000000000003E-09);
-    _this2.C.push(7.9109999999999999E-10);
-    _this2.C.push(5.4932999999999996E-09);
-    _this2.C.push(2.7593999999999998E-09);
-    _this2.C.push(3.3034200000000001E-08);
-    _this2.C.push(1.5241099999999999E-08);
-    _this2.C.push(2.43699E-08);
-    _this2.C.push(8.767E-09);
-    _this2.C.push(7.4795999999999997E-09);
-    _this2.C.push(-7.5720000000000003E-10);
-    _this2.C.push(6.0510000000000001E-10);
-    _this2.C.push(-1.31056E-08);
-    _this2.C.push(-2.6532999999999999E-09);
-    _this2.C.push(3.8205000000000002E-09);
-    _this2.C.push(-4.8796000000000004E-09);
-    _this2.C.push(-1.00442E-08);
-    _this2.C.push(-1.1248999999999999E-09);
-    _this2.C.push(8.2253999999999993E-09);
-    _this2.C.push(-9.6199999999999995E-09);
-    _this2.C.push(-1.0918099999999999E-08);
-    _this2.C.push(-4.4956000000000001E-09);
-    _this2.C.push(3.531E-10);
-    _this2.C.push(-2.3480000000000002E-09);
-    _this2.C.push(-4.7068000000000003E-09);
-    _this2.C.push(-2.7750800000000001E-08);
-    _this2.C.push(1.2513700000000001E-08);
-    _this2.C.push(-7.1168999999999997E-09);
-    _this2.C.push(-4.9207999999999998E-09);
-    _this2.C.push(6.5225999999999998E-09);
-    _this2.C.push(-1.1322000000000001E-09);
-    _this2.C.push(-8.0810000000000003E-10);
-    _this2.C.push(4.1720000000000001E-09);
-    _this2.C.push(-6.2726999999999996E-09);
-    _this2.C.push(-1.16142E-08);
-    _this2.C.push(2.5044000000000002E-09);
-    _this2.C.push(-1.3520000000000001E-10);
-    _this2.C.push(8.4762000000000002E-09);
-    _this2.C.push(-3.8300000000000002E-10);
-    _this2.C.push(4.4389999999999999E-10);
-    _this2.C.push(-4.2858000000000002E-09);
-    _this2.C.push(4.0221E-09);
-    _this2.C.push(-2.6306200000000002E-08);
-    _this2.C.push(-1.66678E-08);
-    _this2.C.push(9.8039999999999996E-09);
-    _this2.C.push(-4.9043999999999997E-09);
-    _this2.C.push(-6.2665000000000002E-09);
-    _this2.C.push(6.6383999999999997E-09);
-    _this2.C.push(6.3429999999999997E-10);
-    _this2.C.push(-1.8593E-09);
-    _this2.C.push(-6.0496000000000003E-09);
-    _this2.C.push(-3.9430000000000001E-09);
-    _this2.C.push(-2.2369E-09);
-    _this2.C.push(2.8537999999999998E-09);
-    _this2.C.push(-8.262E-10);
-    _this2.C.push(4.3770000000000001E-09);
-    _this2.C.push(-1.1465999999999999E-09);
-    _this2.C.push(-5.7191000000000002E-09);
-    _this2.C.push(7.5179999999999999E-09);
-    _this2.C.push(-2.4615599999999998E-08);
-    _this2.C.push(1.5767999999999999E-08);
-    _this2.C.push(1.1140300000000001E-08);
-    _this2.C.push(4.8717999999999997E-09);
-    _this2.C.push(-6.5966999999999998E-09);
-    _this2.C.push(5.9840999999999996E-09);
-    _this2.C.push(7.7244000000000003E-09);
-    _this2.C.push(-7.7158000000000002E-09);
-    _this2.C.push(-8.8595000000000007E-09);
-    _this2.C.push(-6.1490000000000002E-09);
-    _this2.C.push(-1.5404E-09);
-    _this2.C.push(1.7740000000000001E-09);
-    _this2.C.push(-5.6959999999999998E-10);
-    _this2.C.push(1.04901E-08);
-    _this2.C.push(6.2678000000000002E-09);
-    _this2.C.push(-8.9299000000000008E-09);
-    _this2.C.push(-1.7092300000000001E-08);
-    _this2.C.push(3.3958999999999998E-09);
-    _this2.C.push(-1.2772500000000001E-08);
-    _this2.C.push(1.21192E-08);
-    _this2.C.push(-5.4096E-09);
-    _this2.C.push(-1.0523E-09);
-    _this2.C.push(1.2454100000000001E-08);
-    _this2.C.push(-2.6737E-09);
-    _this2.C.push(-7.4700000000000001E-09);
-    _this2.C.push(-9.1124999999999997E-09);
-    _this2.C.push(-6.0012999999999999E-09);
-    _this2.C.push(-2.0442E-09);
-    _this2.C.push(2.2849999999999999E-09);
-    _this2.C.push(9.8619999999999997E-10);
-    _this2.C.push(4.5640000000000004E-09);
-    _this2.C.push(-7.1693E-09);
-    _this2.C.push(8.4211000000000002E-09);
-    _this2.C.push(-2.176E-10);
-    _this2.C.push(-5.0968E-09);
-    _this2.C.push(4.5908999999999999E-09);
-    _this2.C.push(-2.2659999999999998E-09);
-    _this2.C.push(3.3951E-09);
-    _this2.C.push(8.6391999999999997E-09);
-    _this2.C.push(6.7808000000000004E-09);
-    _this2.C.push(-7.0919999999999999E-10);
-    _this2.C.push(-1.4309999999999999E-09);
-    _this2.C.push(-6.7571999999999998E-09);
-    _this2.C.push(-9.853000000000001E-10);
-    _this2.C.push(1.1140300000000001E-08);
-    _this2.C.push(4.8717999999999997E-09);
-    _this2.C.push(6.7431E-09);
-    _this2.C.push(2.2200000000000002E-11);
-    _this2.C.push(9.6281999999999995E-09);
-    _this2.C.push(1.001E-10);
-    _this2.C.push(-2.6160000000000001E-09);
-    _this2.C.push(-3.0546999999999998E-09);
-    _this2.C.push(-4.6500999999999999E-09);
-    _this2.C.push(9.0192999999999992E-09);
-    _this2.C.push(4.8196999999999998E-09);
-    _this2.C.push(2.1631000000000001E-09);
-    _this2.C.push(1.7057E-09);
-    _this2.C.push(8.9667999999999993E-09);
-    _this2.C.push(3.6502000000000001E-09);
-    _this2.C.push(1.07286E-08);
-    _this2.C.push(5.6096999999999998E-09);
-    _this2.C.push(5.6260000000000002E-09);
-    _this2.C.push(3.4385000000000001E-09);
-    _this2.C.push(-1.6244899999999999E-08);
-    _this2.C.push(-1.80762E-08);
-    _this2.C.push(2.9450000000000001E-09);
-    _this2.C.push(5.8310000000000002E-09);
-    _this2.C.push(5.3013999999999999E-09);
-    _this2.C.push(3.4153E-09);
-    _this2.C.push(-8.3959999999999998E-10);
-    _this2.C.push(-5.8366999999999999E-09);
-    _this2.C.push(8.6338000000000005E-09);
-    _this2.C.push(9.0137999999999996E-09);
-    _this2.C.push(3.6889999999999999E-10);
-    _this2.C.push(-1.13406E-08);
-    _this2.C.push(4.2350000000000004E-09);
-    _this2.C.push(1.0518899999999999E-08);
-    _this2.C.push(2.4294999999999999E-09);
-    _this2.C.push(-4.6325999999999999E-09);
-    _this2.C.push(3.0975000000000001E-09);
-    _this2.C.push(6.8459999999999997E-09);
-    _this2.C.push(-7.3754999999999996E-09);
-    _this2.C.push(-6.7189E-09);
-    _this2.C.push(-5.6394999999999998E-09);
-    _this2.C.push(6.2000000000000003E-10);
-    _this2.C.push(-3.6279999999999999E-09);
-    _this2.C.push(-8.5760000000000002E-10);
-    _this2.C.push(1.2529700000000001E-08);
-    _this2.C.push(1.16954E-08);
-    _this2.C.push(-7.1207999999999996E-09);
-    _this2.C.push(7.2606000000000003E-09);
-    _this2.C.push(7.9714999999999996E-09);
-    _this2.C.push(-3.786E-09);
-    _this2.C.push(8.9150999999999995E-09);
-    _this2.C.push(2.9940000000000002E-09);
-    _this2.C.push(9.2619999999999997E-10);
-    _this2.C.push(1.0961E-09);
-    _this2.C.push(6.8818E-09);
-    _this2.C.push(1.9693999999999998E-09);
-    _this2.C.push(1.04845E-08);
-    _this2.C.push(2.1891999999999998E-09);
-    _this2.C.push(-2.1781000000000002E-09);
-    _this2.C.push(3.1745000000000002E-09);
-    _this2.C.push(-1.5941099999999999E-08);
-    _this2.C.push(5.1354000000000003E-09);
-    _this2.C.push(8.0871000000000003E-09);
-    _this2.C.push(2.7622999999999999E-09);
-    _this2.C.push(-5.4599999999999998E-11);
-    _this2.C.push(-9.4740000000000006E-10);
-    _this2.C.push(-4.2625999999999997E-09);
-    _this2.C.push(-3.1930000000000002E-10);
-    _this2.C.push(-1.6973299999999999E-08);
-    _this2.C.push(-2.6501999999999998E-09);
-    _this2.C.push(-8.9973999999999996E-09);
-    _this2.C.push(-9.1731999999999997E-09);
-    _this2.C.push(-3.2430000000000001E-09);
-    _this2.C.push(3.6344000000000002E-09);
-    _this2.C.push(-2.8722000000000001E-09);
-    _this2.C.push(6.4791999999999997E-09);
-    _this2.C.push(-5.8913000000000001E-09);
-    _this2.C.push(5.0965000000000003E-09);
-    _this2.C.push(6.5942000000000002E-09);
-    _this2.C.push(6.24E-09);
-    _this2.C.push(-5.3443000000000002E-09);
-    _this2.C.push(7.4786000000000002E-09);
-    _this2.C.push(2.4732000000000001E-09);
-    _this2.C.push(1.06401E-08);
-    _this2.C.push(6.0071000000000001E-09);
-    _this2.C.push(1.3699E-09);
-    _this2.C.push(-5.7815000000000004E-09);
-    _this2.C.push(-2.0539000000000001E-09);
-    _this2.C.push(-5.7021E-09);
-    _this2.C.push(-5.5092E-09);
-    _this2.C.push(-1.4267E-09);
-    _this2.C.push(1.3750999999999999E-09);
-    _this2.S = [];
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(0);
-    _this2.S.push(1.19E-09);
-    _this2.S.push(2.4921710000000002E-07);
-    _this2.S.push(-4.7343599999999998E-07);
-    _this2.S.push(-9.6083899999999997E-08);
-    _this2.S.push(2.69984E-08);
-    _this2.S.push(9.7465900000000002E-08);
-    _this2.S.push(5.8847200000000002E-08);
-    _this2.S.push(1.9970700000000001E-08);
-    _this2.S.push(-1.3027769999999999E-07);
-    _this2.S.push(-2.66145E-08);
-    _this2.S.push(-4.2095400000000003E-08);
-    _this2.S.push(3.9529299999999999E-08);
-    _this2.S.push(3.0458199999999998E-08);
-    _this2.S.push(7.0986999999999999E-09);
-    _this2.S.push(3.4085499999999998E-08);
-    _this2.S.push(-3.1844899999999999E-08);
-    _this2.S.push(-3.6262100000000003E-08);
-    _this2.S.push(-2.9679000000000001E-09);
-    _this2.S.push(5.8029999999999999E-09);
-    _this2.S.push(2.05518E-08);
-    _this2.S.push(-9.644000000000001E-10);
-    _this2.S.push(1.30062E-08);
-    _this2.S.push(-3.3126999999999999E-09);
-    _this2.S.push(-1.0529699999999999E-08);
-    _this2.S.push(-8.2429999999999998E-09);
-    _this2.S.push(-1.4270000000000001E-10);
-    _this2.S.push(6.2147999999999997E-09);
-    _this2.S.push(-3.1928E-09);
-    _this2.S.push(1.7543E-09);
-    _this2.S.push(-1.19952E-08);
-    _this2.S.push(3.4070000000000002E-10);
-    _this2.S.push(7.4670000000000002E-10);
-    _this2.S.push(2.4123E-09);
-    _this2.S.push(-5.7405000000000002E-09);
-    _this2.S.push(5.0525000000000001E-09);
-    _this2.S.push(-1.4000946E-06);
-    _this2.S.push(-6.1944769999999997E-07);
-    _this2.S.push(6.6301520000000002E-07);
-    _this2.S.push(-3.2386370000000002E-07);
-    _this2.S.push(-3.7401310000000002E-07);
-    _this2.S.push(9.3246699999999998E-08);
-    _this2.S.push(6.6008700000000003E-08);
-    _this2.S.push(-3.35532E-08);
-    _this2.S.push(-5.1102899999999999E-08);
-    _this2.S.push(-9.84958E-08);
-    _this2.S.push(3.1920600000000003E-08);
-    _this2.S.push(-6.3428299999999994E-08);
-    _this2.S.push(-3.3551000000000001E-09);
-    _this2.S.push(-3.33181E-08);
-    _this2.S.push(2.6832000000000002E-08);
-    _this2.S.push(7.7318000000000001E-09);
-    _this2.S.push(1.2939399999999999E-08);
-    _this2.S.push(-2.3289000000000001E-09);
-    _this2.S.push(1.37476E-08);
-    _this2.S.push(4.7932000000000004E-09);
-    _this2.S.push(-2.0825999999999998E-09);
-    _this2.S.push(-4.0370999999999996E-09);
-    _this2.S.push(1.34247E-08);
-    _this2.S.push(1.04728E-08);
-    _this2.S.push(9.2185000000000008E-09);
-    _this2.S.push(3.1719999999999998E-09);
-    _this2.S.push(-1.16064E-08);
-    _this2.S.push(-6.536E-10);
-    _this2.S.push(-3.0842000000000002E-09);
-    _this2.S.push(5.7275000000000003E-09);
-    _this2.S.push(-4.9376999999999996E-09);
-    _this2.S.push(1.5229E-09);
-    _this2.S.push(6.367E-09);
-    _this2.S.push(2.4944E-09);
-    _this2.S.push(-2.0946000000000002E-09);
-    _this2.S.push(1.4138845E-06);
-    _this2.S.push(-2.009274E-07);
-    _this2.S.push(-2.1529579999999999E-07);
-    _this2.S.push(9.3727999999999997E-09);
-    _this2.S.push(-2.1529269999999999E-07);
-    _this2.S.push(-8.6346999999999999E-08);
-    _this2.S.push(-7.5968299999999999E-08);
-    _this2.S.push(-1.5502819999999999E-07);
-    _this2.S.push(-1.4628950000000001E-07);
-    _this2.S.push(2.4672800000000001E-08);
-    _this2.S.push(9.6380799999999997E-08);
-    _this2.S.push(2.1021599999999999E-08);
-    _this2.S.push(1.5095699999999999E-08);
-    _this2.S.push(-2.7123000000000001E-08);
-    _this2.S.push(8.5514000000000001E-09);
-    _this2.S.push(-1.4744E-09);
-    _this2.S.push(-9.9510000000000001E-10);
-    _this2.S.push(3.0306500000000001E-08);
-    _this2.S.push(1.8713399999999999E-08);
-    _this2.S.push(8.2273999999999999E-09);
-    _this2.S.push(-1.7319300000000001E-08);
-    _this2.S.push(-8.2339999999999995E-09);
-    _this2.S.push(-1.4673900000000001E-08);
-    _this2.S.push(-3.1308E-09);
-    _this2.S.push(2.1284999999999998E-09);
-    _this2.S.push(9.0419999999999992E-09);
-    _this2.S.push(-8.2879999999999995E-09);
-    _this2.S.push(-9.4092999999999998E-09);
-    _this2.S.push(-8.6681000000000007E-09);
-    _this2.S.push(1.3112E-09);
-    _this2.S.push(2.6047999999999999E-09);
-    _this2.S.push(7.4330999999999999E-09);
-    _this2.S.push(3.5834999999999999E-09);
-    _this2.S.push(-9.9549E-09);
-    _this2.S.push(3.094237E-07);
-    _this2.S.push(4.96903E-08);
-    _this2.S.push(-4.7130640000000002E-07);
-    _this2.S.push(-1.2376720000000001E-07);
-    _this2.S.push(7.0179600000000002E-08);
-    _this2.S.push(1.89722E-08);
-    _this2.S.push(-7.8733999999999995E-08);
-    _this2.S.push(-6.4482600000000001E-08);
-    _this2.S.push(-2.8551999999999998E-09);
-    _this2.S.push(-1.3302799999999999E-08);
-    _this2.S.push(-1.9293299999999999E-08);
-    _this2.S.push(7.0734E-09);
-    _this2.S.push(4.5473400000000001E-08);
-    _this2.S.push(2.10642E-08);
-    _this2.S.push(2.0212E-09);
-    _this2.S.push(-4.2206999999999997E-09);
-    _this2.S.push(-2.2961599999999999E-08);
-    _this2.S.push(1.3932E-08);
-    _this2.S.push(1.43386E-08);
-    _this2.S.push(6.4666999999999996E-09);
-    _this2.S.push(3.7349000000000004E-09);
-    _this2.S.push(4.1832999999999998E-09);
-    _this2.S.push(-1.6528500000000001E-08);
-    _this2.S.push(9.2713999999999992E-09);
-    _this2.S.push(3.3269000000000002E-09);
-    _this2.S.push(-1.3639999999999999E-10);
-    _this2.S.push(-3.0520999999999998E-09);
-    _this2.S.push(-8.4769999999999998E-10);
-    _this2.S.push(-6.5448E-09);
-    _this2.S.push(3.1032000000000002E-09);
-    _this2.S.push(-3.7018000000000002E-09);
-    _this2.S.push(1.8778999999999999E-09);
-    _this2.S.push(-3.0954999999999999E-09);
-    _this2.S.push(-6.6890700000000005E-07);
-    _this2.S.push(-5.3678019999999995E-07);
-    _this2.S.push(1.8620000000000001E-08);
-    _this2.S.push(8.9462800000000001E-08);
-    _this2.S.push(-5.3773299999999998E-08);
-    _this2.S.push(-5.1106500000000002E-08);
-    _this2.S.push(5.03126E-08);
-    _this2.S.push(9.6522000000000002E-09);
-    _this2.S.push(6.4653700000000001E-08);
-    _this2.S.push(-1.62511E-08);
-    _this2.S.push(8.8505000000000004E-09);
-    _this2.S.push(3.3199999999999999E-11);
-    _this2.S.push(5.0564E-09);
-    _this2.S.push(2.9103599999999999E-08);
-    _this2.S.push(2.73694E-08);
-    _this2.S.push(-3.5994000000000002E-09);
-    _this2.S.push(9.7040000000000008E-10);
-    _this2.S.push(3.5020000000000001E-09);
-    _this2.S.push(-2.3535999999999998E-09);
-    _this2.S.push(-1.26654E-08);
-    _this2.S.push(-3.6623000000000001E-09);
-    _this2.S.push(1.06647E-08);
-    _this2.S.push(7.9196000000000007E-09);
-    _this2.S.push(3.2829999999999999E-10);
-    _this2.S.push(1.8419E-09);
-    _this2.S.push(-3.3849000000000002E-09);
-    _this2.S.push(-2.0512000000000001E-09);
-    _this2.S.push(5.4480000000000002E-10);
-    _this2.S.push(1.1091E-09);
-    _this2.S.push(5.9137000000000004E-09);
-    _this2.S.push(-8.9831999999999993E-09);
-    _this2.S.push(1.6489999999999999E-10);
-    _this2.S.push(-2.371348E-07);
-    _this2.S.push(1.517387E-07);
-    _this2.S.push(3.0912260000000001E-07);
-    _this2.S.push(2.2264820000000001E-07);
-    _this2.S.push(-7.8379799999999994E-08);
-    _this2.S.push(3.4921599999999998E-08);
-    _this2.S.push(4.0134500000000001E-08);
-    _this2.S.push(-4.2567999999999996E-09);
-    _this2.S.push(5.4355999999999997E-09);
-    _this2.S.push(-3.5833099999999999E-08);
-    _this2.S.push(-3.2851799999999998E-08);
-    _this2.S.push(-2.7477900000000001E-08);
-    _this2.S.push(-1.15996E-08);
-    _this2.S.push(2.0107700000000001E-08);
-    _this2.S.push(8.9349999999999996E-10);
-    _this2.S.push(1.8168E-09);
-    _this2.S.push(-5.2022999999999997E-09);
-    _this2.S.push(1.6717399999999999E-08);
-    _this2.S.push(9.0189999999999996E-10);
-    _this2.S.push(3.9236999999999996E-09);
-    _this2.S.push(-6.4851999999999999E-09);
-    _this2.S.push(6.2788000000000003E-09);
-    _this2.S.push(4.9177000000000001E-09);
-    _this2.S.push(6.8547999999999999E-09);
-    _this2.S.push(1.4467E-09);
-    _this2.S.push(3.3188000000000002E-09);
-    _this2.S.push(-8.5579000000000008E-09);
-    _this2.S.push(-4.8727000000000003E-09);
-    _this2.S.push(3.5989000000000001E-09);
-    _this2.S.push(6.0509000000000003E-09);
-    _this2.S.push(-4.6861999999999998E-09);
-    _this2.S.push(2.4083600000000001E-08);
-    _this2.S.push(7.5094800000000001E-08);
-    _this2.S.push(-9.6990999999999998E-08);
-    _this2.S.push(-3.3500999999999998E-09);
-    _this2.S.push(-8.9553700000000006E-08);
-    _this2.S.push(3.5816600000000001E-08);
-    _this2.S.push(-5.8835999999999998E-09);
-    _this2.S.push(-6.3812999999999999E-09);
-    _this2.S.push(6.1453000000000003E-09);
-    _this2.S.push(-7.0595000000000003E-09);
-    _this2.S.push(-3.5158000000000002E-09);
-    _this2.S.push(3.3473999999999998E-09);
-    _this2.S.push(-6.3048999999999996E-09);
-    _this2.S.push(-1.5386E-09);
-    _this2.S.push(3.5728999999999999E-09);
-    _this2.S.push(1.8228E-09);
-    _this2.S.push(2.8609999999999999E-09);
-    _this2.S.push(2.8966000000000001E-09);
-    _this2.S.push(-7.4194000000000002E-09);
-    _this2.S.push(1.1771E-09);
-    _this2.S.push(-2.3620999999999999E-09);
-    _this2.S.push(5.2728999999999999E-09);
-    _this2.S.push(-4.6636000000000003E-09);
-    _this2.S.push(1.4214999999999999E-09);
-    _this2.S.push(-2.4004000000000001E-09);
-    _this2.S.push(2.4856000000000002E-09);
-    _this2.S.push(-1.447E-10);
-    _this2.S.push(-3.3291E-09);
-    _this2.S.push(2.9285E-09);
-    _this2.S.push(4.1387999999999998E-09);
-    _this2.S.push(1.2017220000000001E-07);
-    _this2.S.push(-2.3538999999999999E-09);
-    _this2.S.push(-9.1679999999999998E-08);
-    _this2.S.push(2.5325099999999999E-08);
-    _this2.S.push(1.6192099999999999E-08);
-    _this2.S.push(-8.8472999999999994E-09);
-    _this2.S.push(-1.4984800000000001E-08);
-    _this2.S.push(2.35054E-08);
-    _this2.S.push(5.6651999999999998E-09);
-    _this2.S.push(3.9290999999999996E-09);
-    _this2.S.push(2.4813000000000001E-09);
-    _this2.S.push(-9.3126000000000003E-09);
-    _this2.S.push(3.4215999999999998E-09);
-    _this2.S.push(4.0666999999999996E-09);
-    _this2.S.push(2.1983000000000002E-09);
-    _this2.S.push(-1.5897E-09);
-    _this2.S.push(-4.8356999999999998E-09);
-    _this2.S.push(1.6270000000000001E-09);
-    _this2.S.push(1.4723E-09);
-    _this2.S.push(-9.8612999999999994E-09);
-    _this2.S.push(-5.3160000000000003E-09);
-    _this2.S.push(7.4112999999999998E-09);
-    _this2.S.push(2.5351000000000001E-09);
-    _this2.S.push(1.9169999999999999E-10);
-    _this2.S.push(3.0254999999999999E-09);
-    _this2.S.push(1.10768E-08);
-    _this2.S.push(3.7096000000000001E-09);
-    _this2.S.push(1.01232E-08);
-    _this2.S.push(-3.4356E-09);
-    _this2.S.push(9.8739200000000006E-08);
-    _this2.S.push(-3.8032800000000003E-08);
-    _this2.S.push(4.3290199999999997E-08);
-    _this2.S.push(2.43333E-08);
-    _this2.S.push(4.60357E-08);
-    _this2.S.push(2.7619999999999999E-08);
-    _this2.S.push(3.7432799999999998E-08);
-    _this2.S.push(-3.8312099999999998E-08);
-    _this2.S.push(-2.8306100000000001E-08);
-    _this2.S.push(3.44506E-08);
-    _this2.S.push(2.5673E-09);
-    _this2.S.push(-4.8859000000000003E-09);
-    _this2.S.push(6.8850000000000001E-09);
-    _this2.S.push(8.3147999999999995E-09);
-    _this2.S.push(-1.8424200000000001E-08);
-    _this2.S.push(-1.6283399999999999E-08);
-    _this2.S.push(1.3628E-08);
-    _this2.S.push(1.699E-09);
-    _this2.S.push(7.6482999999999997E-09);
-    _this2.S.push(-6.4752999999999998E-09);
-    _this2.S.push(-3.8188999999999997E-09);
-    _this2.S.push(-7.5010999999999993E-09);
-    _this2.S.push(1.742E-09);
-    _this2.S.push(1.0645E-09);
-    _this2.S.push(3.6263999999999998E-09);
-    _this2.S.push(4.0018999999999996E-09);
-    _this2.S.push(-1.7539999999999999E-09);
-    _this2.S.push(-1.2762E-09);
-    _this2.S.push(-2.24543E-08);
-    _this2.S.push(-1.7331000000000001E-08);
-    _this2.S.push(3.1763300000000001E-08);
-    _this2.S.push(-3.6184299999999998E-08);
-    _this2.S.push(-1.0119E-09);
-    _this2.S.push(1.5596100000000002E-08);
-    _this2.S.push(1.28282E-08);
-    _this2.S.push(1.8696999999999999E-08);
-    _this2.S.push(-5.1743999999999998E-09);
-    _this2.S.push(-6.9965999999999996E-09);
-    _this2.S.push(-5.4108000000000004E-09);
-    _this2.S.push(-5.8739999999999996E-10);
-    _this2.S.push(2.4126099999999999E-08);
-    _this2.S.push(-3.1763999999999999E-09);
-    _this2.S.push(1.7288400000000001E-08);
-    _this2.S.push(-4.7881999999999997E-09);
-    _this2.S.push(-4.2048999999999998E-09);
-    _this2.S.push(7.0209999999999998E-10);
-    _this2.S.push(7.9032999999999994E-09);
-    _this2.S.push(1.8968999999999999E-09);
-    _this2.S.push(-5.5394999999999997E-09);
-    _this2.S.push(-8.0774000000000003E-09);
-    _this2.S.push(-5.6584000000000002E-09);
-    _this2.S.push(5.3440000000000004E-10);
-    _this2.S.push(8.1729999999999996E-10);
-    _this2.S.push(6.8519999999999999E-09);
-    _this2.S.push(5.3536000000000002E-09);
-    _this2.S.push(-6.9074100000000006E-08);
-    _this2.S.push(-6.8163999999999997E-09);
-    _this2.S.push(-4.3063000000000003E-09);
-    _this2.S.push(-3.94554E-08);
-    _this2.S.push(1.9130899999999999E-08);
-    _this2.S.push(-2.9384000000000001E-09);
-    _this2.S.push(1.1855700000000001E-08);
-    _this2.S.push(2.1960999999999999E-09);
-    _this2.S.push(1.02937E-08);
-    _this2.S.push(-1.8428999999999999E-08);
-    _this2.S.push(-3.5139199999999999E-08);
-    _this2.S.push(-1.64381E-08);
-    _this2.S.push(1.5378899999999999E-08);
-    _this2.S.push(1.85777E-08);
-    _this2.S.push(7.9568999999999993E-09);
-    _this2.S.push(1.8849E-09);
-    _this2.S.push(-7.6154000000000008E-09);
-    _this2.S.push(2.3565999999999999E-09);
-    _this2.S.push(7.0721999999999996E-09);
-    _this2.S.push(9.9434000000000002E-09);
-    _this2.S.push(1.5715499999999999E-08);
-    _this2.S.push(4.811E-09);
-    _this2.S.push(-7.7170000000000005E-09);
-    _this2.S.push(2.4097000000000001E-09);
-    _this2.S.push(-1.8095E-09);
-    _this2.S.push(1.9426999999999999E-09);
-    _this2.S.push(-1.0879700000000001E-08);
-    _this2.S.push(8.7796399999999996E-08);
-    _this2.S.push(-3.13314E-08);
-    _this2.S.push(1.4775599999999999E-08);
-    _this2.S.push(6.1632000000000004E-09);
-    _this2.S.push(1.9377499999999999E-08);
-    _this2.S.push(-1.6901200000000001E-08);
-    _this2.S.push(8.1173000000000005E-09);
-    _this2.S.push(1.7357999999999999E-08);
-    _this2.S.push(1.40674E-08);
-    _this2.S.push(-8.7932000000000006E-09);
-    _this2.S.push(-1.33824E-08);
-    _this2.S.push(-5.5536000000000003E-09);
-    _this2.S.push(1.22275E-08);
-    _this2.S.push(1.7457000000000001E-09);
-    _this2.S.push(4.264E-10);
-    _this2.S.push(1.0900199999999999E-08);
-    _this2.S.push(-1.7172E-09);
-    _this2.S.push(-8.5304999999999999E-09);
-    _this2.S.push(3.1964999999999999E-09);
-    _this2.S.push(1.3919499999999999E-08);
-    _this2.S.push(1.01392E-08);
-    _this2.S.push(-2.4785000000000001E-09);
-    _this2.S.push(-5.4193000000000001E-09);
-    _this2.S.push(-3.4005E-09);
-    _this2.S.push(6.7812399999999994E-08);
-    _this2.S.push(4.5298900000000002E-08);
-    _this2.S.push(-4.2554E-09);
-    _this2.S.push(1.2041E-09);
-    _this2.S.push(2.0753099999999999E-08);
-    _this2.S.push(-3.46579E-08);
-    _this2.S.push(-2.8023499999999999E-08);
-    _this2.S.push(6.7269E-09);
-    _this2.S.push(1.36367E-08);
-    _this2.S.push(1.9729500000000001E-08);
-    _this2.S.push(-4.4651999999999998E-09);
-    _this2.S.push(2.7378000000000002E-09);
-    _this2.S.push(-1.16876E-08);
-    _this2.S.push(2.1769000000000002E-09);
-    _this2.S.push(-2.5631E-09);
-    _this2.S.push(5.5353000000000001E-09);
-    _this2.S.push(-1.7457999999999999E-09);
-    _this2.S.push(3.4719E-09);
-    _this2.S.push(3.6678000000000001E-09);
-    _this2.S.push(2.3826E-09);
-    _this2.S.push(5.2653999999999996E-09);
-    _this2.S.push(3.1756000000000001E-09);
-    _this2.S.push(2.5409000000000002E-09);
-    _this2.S.push(5.6450000000000003E-09);
-    _this2.S.push(-5.0039000000000001E-09);
-    _this2.S.push(-2.4319800000000001E-08);
-    _this2.S.push(-3.8677100000000002E-08);
-    _this2.S.push(1.1643800000000001E-08);
-    _this2.S.push(-1.2869300000000001E-08);
-    _this2.S.push(-1.2904300000000001E-08);
-    _this2.S.push(-1.39252E-08);
-    _this2.S.push(7.9162999999999992E-09);
-    _this2.S.push(7.7607999999999999E-09);
-    _this2.S.push(-2.0946999999999998E-09);
-    _this2.S.push(-6.0990000000000003E-10);
-    _this2.S.push(7.8295000000000007E-09);
-    _this2.S.push(6.5214999999999999E-09);
-    _this2.S.push(1.0670099999999999E-08);
-    _this2.S.push(-1.09321E-08);
-    _this2.S.push(-4.3945999999999997E-09);
-    _this2.S.push(6.0829999999999998E-09);
-    _this2.S.push(3.1072000000000002E-09);
-    _this2.S.push(3.3685000000000001E-09);
-    _this2.S.push(3.4849999999999999E-09);
-    _this2.S.push(7.1894999999999996E-09);
-    _this2.S.push(-6.7366000000000001E-09);
-    _this2.S.push(-4.1709999999999998E-09);
-    _this2.S.push(-5.1538000000000001E-09);
-    _this2.S.push(-3.33624E-08);
-    _this2.S.push(5.3556E-09);
-    _this2.S.push(-2.0874299999999999E-08);
-    _this2.S.push(-1.3702399999999999E-08);
-    _this2.S.push(-1.4079000000000001E-09);
-    _this2.S.push(1.09014E-08);
-    _this2.S.push(4.2003000000000001E-09);
-    _this2.S.push(-3.1340000000000001E-09);
-    _this2.S.push(-1.6102300000000001E-08);
-    _this2.S.push(-7.2531000000000001E-09);
-    _this2.S.push(7.6165999999999995E-09);
-    _this2.S.push(1.0877999999999999E-09);
-    _this2.S.push(-9.772000000000001E-10);
-    _this2.S.push(-6.2682000000000003E-09);
-    _this2.S.push(-1.9558999999999998E-09);
-    _this2.S.push(-3.3483000000000001E-09);
-    _this2.S.push(-7.7404000000000003E-09);
-    _this2.S.push(-1.7867E-09);
-    _this2.S.push(7.1017999999999996E-09);
-    _this2.S.push(8.7396999999999995E-09);
-    _this2.S.push(2.1175999999999998E-09);
-    _this2.S.push(3.7963999999999998E-09);
-    _this2.S.push(3.2960999999999998E-09);
-    _this2.S.push(7.1842999999999997E-09);
-    _this2.S.push(-7.5292E-09);
-    _this2.S.push(-2.663E-10);
-    _this2.S.push(-7.3172000000000003E-09);
-    _this2.S.push(-7.1399999999999997E-09);
-    _this2.S.push(1.11168E-08);
-    _this2.S.push(3.7851999999999997E-09);
-    _this2.S.push(-1.2863000000000001E-08);
-    _this2.S.push(-7.5036000000000004E-09);
-    _this2.S.push(1.6662999999999999E-09);
-    _this2.S.push(-1.19188E-08);
-    _this2.S.push(-1.31772E-08);
-    _this2.S.push(3.3800999999999999E-09);
-    _this2.S.push(5.2229000000000002E-09);
-    _this2.S.push(3.1105E-09);
-    _this2.S.push(3.7108E-09);
-    _this2.S.push(-2.2594999999999999E-09);
-    _this2.S.push(-1.2433E-09);
-    _this2.S.push(2.0824000000000002E-09);
-    _this2.S.push(-1.9037E-08);
-    _this2.S.push(5.0832999999999996E-09);
-    _this2.S.push(-1.37472E-08);
-    _this2.S.push(-1.25965E-08);
-    _this2.S.push(-5.9466999999999997E-09);
-    _this2.S.push(-1.34798E-08);
-    _this2.S.push(-1.1688E-08);
-    _this2.S.push(-4.6885999999999997E-09);
-    _this2.S.push(-1.4118E-09);
-    _this2.S.push(8.0827999999999994E-09);
-    _this2.S.push(9.3409999999999991E-10);
-    _this2.S.push(-3.4579999999999998E-09);
-    _this2.S.push(-2.8975E-09);
-    _this2.S.push(-4.3441000000000003E-09);
-    _this2.S.push(7.4653000000000007E-09);
-    _this2.S.push(9.8834E-09);
-    _this2.S.push(9.4764000000000001E-09);
-    _this2.S.push(4.0699999999999999E-10);
-    _this2.S.push(-7.2514E-09);
-    _this2.S.push(-4.4269000000000001E-09);
-    _this2.S.push(-1.0543400000000001E-08);
-    _this2.S.push(-8.7291000000000004E-09);
-    _this2.S.push(-5.9279999999999996E-10);
-    _this2.S.push(-9.4125999999999995E-09);
-    _this2.S.push(-1.4985199999999999E-08);
-    _this2.S.push(-1.20752E-08);
-    _this2.S.push(-9.5975999999999992E-09);
-    _this2.S.push(-1.2915100000000001E-08);
-    _this2.S.push(5.9036000000000002E-09);
-    _this2.S.push(1.09539E-08);
-    _this2.S.push(-2.9946E-09);
-    _this2.S.push(-3.669E-09);
-    _this2.S.push(-7.8313999999999992E-09);
-    _this2.S.push(1.9857999999999999E-09);
-    _this2.S.push(1.0409999999999999E-10);
-    _this2.S.push(-4.9602999999999999E-09);
-    _this2.S.push(-5.8118000000000001E-09);
-    _this2.S.push(-9.1086000000000006E-09);
-    _this2.S.push(4.0581000000000003E-09);
-    _this2.S.push(4.2819000000000003E-09);
-    _this2.S.push(1.0673400000000001E-08);
-    _this2.S.push(1.5313299999999999E-08);
-    _this2.S.push(-3.7544000000000002E-09);
-    _this2.S.push(9.0104999999999999E-09);
-    _this2.S.push(-8.6424999999999995E-09);
-    _this2.S.push(8.4412000000000002E-09);
-    _this2.S.push(2.9262000000000001E-09);
-    _this2.S.push(-4.1454000000000002E-09);
-    _this2.S.push(2.24177E-08);
-    _this2.S.push(5.7826000000000003E-09);
-    _this2.S.push(5.2409999999999998E-10);
-    _this2.S.push(2.2133999999999998E-09);
-    _this2.S.push(-1.4221000000000001E-09);
-    _this2.S.push(2.4841000000000001E-09);
-    _this2.S.push(4.2618999999999999E-09);
-    _this2.S.push(-4.3685000000000004E-09);
-    _this2.S.push(-3.5370000000000001E-09);
-    _this2.S.push(-1.12091E-08);
-    _this2.S.push(1.5860500000000002E-08);
-    _this2.S.push(1.8929099999999999E-08);
-    _this2.S.push(-1.0896400000000001E-08);
-    _this2.S.push(7.6167E-09);
-    _this2.S.push(-2.1785999999999999E-09);
-    _this2.S.push(-1.2914400000000001E-08);
-    _this2.S.push(2.3213999999999999E-09);
-    _this2.S.push(4.6444999999999998E-09);
-    _this2.S.push(3.0398999999999998E-09);
-    _this2.S.push(1.0770599999999999E-08);
-    _this2.S.push(5.6219999999999998E-09);
-    _this2.S.push(4.5399999999999998E-10);
-    _this2.S.push(-8.0768999999999997E-09);
-    _this2.S.push(-5.7621999999999998E-09);
-    _this2.S.push(2.8395E-09);
-    _this2.S.push(1.6190999999999999E-09);
-    _this2.S.push(-2.2236000000000001E-09);
-    _this2.S.push(2.23187E-08);
-    _this2.S.push(1.32542E-08);
-    _this2.S.push(-3.2617E-09);
-    _this2.S.push(-7.7411000000000001E-09);
-    _this2.S.push(1.6121E-09);
-    _this2.S.push(-5.5616000000000003E-09);
-    _this2.S.push(5.3421000000000004E-09);
-    _this2.S.push(-4.0463E-09);
-    _this2.S.push(-6.5115000000000001E-09);
-    _this2.S.push(5.2115E-09);
-    _this2.S.push(9.0297999999999996E-09);
-    _this2.S.push(3.0135E-09);
-    _this2.S.push(-5.7345E-09);
-    _this2.S.push(-1.5149999999999999E-10);
-    _this2.S.push(-4.7129999999999998E-09);
-    _this2.S.push(2.4227999999999999E-09);
-    _this2.S.push(3.6872999999999999E-09);
-    _this2.S.push(-1.9882999999999998E-09);
-    _this2.S.push(4.1806999999999998E-09);
-    _this2.S.push(8.4745999999999997E-09);
-    _this2.S.push(3.4241000000000002E-09);
-    _this2.S.push(-5.8837999999999999E-09);
-    _this2.S.push(7.0090000000000003E-10);
-    _this2.S.push(-5.5580999999999997E-09);
-    _this2.S.push(-9.0752999999999999E-09);
-    _this2.S.push(-2.0044999999999999E-09);
-    _this2.S.push(-1.3228699999999999E-08);
-    _this2.S.push(5.6377000000000001E-09);
-    _this2.S.push(4.1636E-09);
-    _this2.S.push(-6.4260000000000004E-10);
-    _this2.S.push(-1.0896400000000001E-08);
-    _this2.S.push(-9.1901000000000003E-09);
-    _this2.S.push(-1.0824E-08);
-    _this2.S.push(1.18854E-08);
-    _this2.S.push(-8.0894000000000006E-09);
-    _this2.S.push(2.9153000000000001E-09);
-    _this2.S.push(1.6815E-09);
-    _this2.S.push(-8.4043E-09);
-    _this2.S.push(6.1025000000000004E-09);
-    _this2.S.push(6.3699999999999997E-11);
-    _this2.S.push(-7.1528000000000004E-09);
-    _this2.S.push(-8.0674000000000005E-09);
-    _this2.S.push(-1.9524E-09);
-    _this2.S.push(7.7399999999999999E-11);
-    _this2.S.push(-3.2617E-09);
-    _this2.S.push(-7.7411000000000001E-09);
-    _this2.S.push(1.3169899999999999E-08);
-    _this2.S.push(-6.1479999999999999E-10);
-    _this2.S.push(-1.3781699999999999E-08);
-    _this2.S.push(-9.3040000000000001E-10);
-    _this2.S.push(-3.2619000000000001E-09);
-    _this2.S.push(-2.9426000000000002E-09);
-    _this2.S.push(6.8929999999999999E-10);
-    _this2.S.push(-6.2328999999999998E-09);
-    _this2.S.push(4.5286999999999999E-09);
-    _this2.S.push(4.8391E-09);
-    _this2.S.push(-4.5420999999999999E-09);
-    _this2.S.push(5.2190999999999999E-09);
-    _this2.S.push(1.4492999999999999E-09);
-    _this2.S.push(3.9942000000000001E-09);
-    _this2.S.push(-1.7208399999999999E-08);
-    _this2.S.push(6.3145000000000001E-09);
-    _this2.S.push(-1.5072300000000001E-08);
-    _this2.S.push(-1.7282999999999999E-09);
-    _this2.S.push(-5.5120999999999996E-09);
-    _this2.S.push(-1.04979E-08);
-    _this2.S.push(-9.5514999999999995E-09);
-    _this2.S.push(1.7015E-09);
-    _this2.S.push(1.3716100000000001E-08);
-    _this2.S.push(5.3569999999999996E-09);
-    _this2.S.push(-2.9276000000000001E-09);
-    _this2.S.push(2.9511999999999999E-09);
-    _this2.S.push(-8.6781000000000005E-09);
-    _this2.S.push(1.00453E-08);
-    _this2.S.push(-9.3520000000000004E-10);
-    _this2.S.push(-3.7771999999999997E-09);
-    _this2.S.push(2.7860000000000001E-09);
-    _this2.S.push(-1.3695600000000001E-08);
-    _this2.S.push(1.7638000000000001E-09);
-    _this2.S.push(7.3591000000000004E-09);
-    _this2.S.push(2.1540999999999998E-09);
-    _this2.S.push(1.1044E-09);
-    _this2.S.push(-1.2353000000000001E-09);
-    _this2.S.push(1.26688E-08);
-    _this2.S.push(1.0135699999999999E-08);
-    _this2.S.push(-7.0194999999999996E-09);
-    _this2.S.push(1.6316E-09);
-    _this2.S.push(-4.1028000000000003E-09);
-    _this2.S.push(-1.3122500000000001E-08);
-    _this2.S.push(7.3980999999999999E-09);
-    _this2.S.push(5.4994999999999999E-09);
-    _this2.S.push(-5.3912000000000002E-09);
-    _this2.S.push(-5.0892000000000002E-09);
-    _this2.S.push(2.8652E-09);
-    _this2.S.push(-2.5111000000000001E-09);
-    _this2.S.push(3.2099999999999998E-10);
-    _this2.S.push(-1.8440600000000001E-08);
-    _this2.S.push(-1.5044100000000001E-08);
-    _this2.S.push(-3.4620999999999999E-09);
-    _this2.S.push(-8.0465000000000003E-09);
-    _this2.S.push(3.3029999999999999E-09);
-    _this2.S.push(-4.1551000000000003E-09);
-    _this2.S.push(3.4309999999999998E-09);
-    _this2.S.push(4.0290999999999997E-09);
-    _this2.S.push(-4.7807000000000003E-09);
-    _this2.S.push(1.8070000000000001E-09);
-    _this2.S.push(-1.453E-10);
-    _this2.S.push(4.1452999999999997E-09);
-    _this2.S.push(-5.6003000000000002E-09);
-    _this2.S.push(-1.4377999999999999E-09);
-    _this2.S.push(-1.73273E-08);
-    _this2.S.push(-1.9148E-09);
-    _this2.S.push(3.6857000000000002E-09);
-    _this2.S.push(4.3111000000000001E-09);
-    _this2.S.push(-1.8424E-09);
-    _this2.S.push(5.9459999999999999E-10);
-    _this2.S.push(2.2099E-09);
-    _this2.S.push(1.1197E-09);
-    _this2.S.push(6.6707000000000001E-09);
-    _this2.S.push(-7.7810000000000003E-10);
-    _this2.S.push(2.4247000000000001E-09);
-    _this2.S.push(-4.1506000000000001E-09);
-    _this2.S.push(3.65E-09);
-    _this2.S.push(-6.0513000000000004E-09);
-    _this2.S.push(4.7941999999999998E-09);
-    _this2.S.push(8.9332999999999993E-09);
-    _this2.S.push(1.7421E-09);
-    _this2.S.push(-1.6236000000000001E-09);
-    _this2.S.push(-6.6836000000000004E-09);
-    _this2.S.push(9.6230000000000008E-10);
-    _this2.S.push(2.5193000000000002E-09);
-    _this2.S.push(4.8661999999999996E-09);
-    _this2.S.push(-4.9306000000000003E-09);
-    _this2.S.push(-9.0703999999999996E-09);
-    _this2.S.push(-3.8034999999999999E-09);
-    _this2.HP = [];
-    _this2.HP.push(2);
-    _this2.HP.push(3);
-    _this2.HP.push(4);
-    _this2.HP.push(5);
-    _this2.HP.push(6);
-    _this2.HP.push(7);
-    _this2.HP.push(8);
-    _this2.HP.push(9);
-    _this2.HP.push(10);
-    _this2.HP.push(11);
-    _this2.HP.push(12);
-    _this2.HP.push(13);
-    _this2.HP.push(14);
-    _this2.HP.push(15);
-    _this2.HP.push(16);
-    _this2.HP.push(17);
-    _this2.HP.push(18);
-    _this2.HP.push(19);
-    _this2.HP.push(20);
-    _this2.HP.push(21);
-    _this2.HP.push(22);
-    _this2.HP.push(23);
-    _this2.HP.push(24);
-    _this2.HP.push(25);
-    _this2.HP.push(26);
-    _this2.HP.push(27);
-    _this2.HP.push(28);
-    _this2.HP.push(29);
-    _this2.HP.push(30);
-    _this2.HP.push(31);
-    _this2.HP.push(32);
-    _this2.HP.push(33);
-    _this2.HP.push(34);
-    _this2.HP.push(35);
-    _this2.HP.push(36);
-    _this2.HP.push(37);
-    _this2.HP.push(0);
-    _this2.CO = [];
-    _this2.CO.push(-0.77903980555890728);
-    _this2.CO.push(0.21380603729052017);
-    _this2.CO.push(0.44591297812265268);
-    _this2.CO.push(-0.90857395683624942);
-    _this2.CO.push(0.96971757921654489);
-    _this2.CO.push(-0.6023232318835734);
-    _this2.CO.push(-0.031250032316161636);
-    _this2.CO.push(0.6510132700821577);
-    _this2.CO.push(-0.98308047036598334);
-    _this2.CO.push(0.88070436688319187);
-    _this2.CO.push(-0.38912704709714141);
-    _this2.CO.push(-0.27441344866665429);
-    _this2.CO.push(0.81668504648118057);
-    _this2.CO.push(-0.99804687096047773);
-    _this2.CO.push(0.73835143410227233);
-    _this2.CO.push(-0.1523634443538715);
-    _this2.CO.push(-0.50095705797482148);
-    _this2.CO.push(0.93289442243000587);
-    _this2.CO.push(-0.95256672093890038);
-    _this2.CO.push(0.55128036369424793);
-    _this2.CO.push(0.093628026257279173);
-    _this2.CO.push(-0.69716028243491801);
-    _this2.CO.push(0.99260319548570364);
-    _this2.CO.push(-0.84939451838174718);
-    _this2.CO.push(0.33082108540013244);
-    _this2.CO.push(0.33394893029193551);
-    _this2.CO.push(-0.8511401048426015);
-    _this2.CO.push(0.99219511326800103);
-    _this2.CO.push(-0.69477887139100147);
-    _this2.CO.push(0.090325680481764592);
-    _this2.CO.push(0.55404427027202174);
-    _this2.CO.push(-0.95357076164924959);
-    _this2.CO.push(0.93169489121175919);
-    _this2.CO.push(-0.49808405213042273);
-    _this2.CO.push(-0.15564028496440485);
-    _this2.CO.push(0.74058400680202852);
-    _this2.CO.push(0);
-    _this2.SI = [];
-    _this2.SI.push(0.62697446627015052);
-    _this2.SI.push(-0.97687613258699546);
-    _this2.SI.push(0.89507631850127012);
-    _this2.SI.push(-0.41772402966422861);
-    _this2.SI.push(-0.24422902480746234);
-    _this2.SI.push(0.79825229365992256);
-    _this2.SI.push(-0.99951159847209325);
-    _this2.SI.push(0.75906634899522163);
-    _this2.SI.push(-0.18317420338300106);
-    _this2.SI.push(-0.47366635742141988);
-    _this2.SI.push(0.92118409735375872);
-    _this2.SI.push(-0.96161180275143954);
-    _this2.SI.push(0.57708364632350484);
-    _this2.SI.push(0.062469539505262683);
-    _this2.SI.push(-0.67441616214257349);
-    _this2.SI.push(0.98832453213740712);
-    _this2.SI.push(-0.86547214054827371);
-    _this2.SI.push(0.3601499640413498);
-    _this2.SI.push(0.30432982463063252);
-    _this2.SI.push(-0.83432005885339844);
-    _this2.SI.push(0.99560724821546276);
-    _this2.SI.push(-0.71691529527222719);
-    _this2.SI.push(0.12140385624670214);
-    _this2.SI.push(0.52775842214316249);
-    _this2.SI.push(-0.94369349338367214);
-    _this2.SI.push(0.94259116904248141);
-    _this2.SI.push(-0.52493858872112342);
-    _this2.SI.push(-0.124695056867139);
-    _this2.SI.push(0.71922341443298909);
-    _this2.SI.push(-0.9959122809994394);
-    _this2.SI.push(0.83248720505407314);
-    _this2.SI.push(-0.30116905971176733);
-    _this2.SI.push(-0.36324183361764484);
-    _this2.SI.push(0.86712875457646932);
-    _this2.SI.push(-0.98781379910193534);
-    _this2.SI.push(0.67196378538508517);
-    _this2.SI.push(0);
-    _this2.AR = [];
-    _this2.AR.push(0.90596306682259042);
-    _this2.AR.push(0.82076907844659341);
-    _this2.AR.push(0.74358647146262702);
-    _this2.AR.push(0.67366188013407013);
-    _this2.AR.push(0.6103127829277345);
-    _this2.AR.push(0.55292084054224022);
-    _this2.AR.push(0.50092586040777243);
-    _this2.AR.push(0.45382032874577033);
-    _this2.AR.push(0.41114445681695427);
-    _this2.AR.push(0.37248169300499601);
-    _this2.AR.push(0.33745465693007681);
-    _this2.AR.push(0.30572145590593752);
-    _this2.AR.push(0.27697234778601049);
-    _this2.AR.push(0.25092671762526719);
-    _this2.AR.push(0.22733033864751323);
-    _this2.AR.push(0.20595289078291915);
-    _this2.AR.push(0.18658571255467143);
-    _this2.AR.push(0.16903976437130844);
-    _this2.AR.push(0.15314378334479864);
-    _this2.AR.push(0.13874261162386811);
-    _this2.AR.push(0.12569568192573513);
-    _this2.AR.push(0.11387564548379585);
-    _this2.AR.push(0.10316712901890175);
-    _this2.AR.push(0.0934656086012461);
-    _this2.AR.push(0.084676389410824809);
-    _this2.AR.push(0.076713681438094761);
-    _this2.AR.push(0.069499762102907564);
-    _this2.AR.push(0.062964217618190585);
-    _this2.AR.push(0.057043255693460922);
-    _this2.AR.push(0.051679082869593052);
-    _this2.AR.push(0.046819340407115315);
-    _this2.AR.push(0.04241659322184102);
-    _this2.AR.push(0.038427866879425392);
-    _this2.AR.push(0.034814228129534476);
-    _this2.AR.push(0.031540404885294353);
-    _this2.AR.push(0.028574441938707486);
-    _this2.AR.push(0);
-    _this2.CF = [];
-    _this2.CF.push(0.93180338993169209);
-    _this2.CF.push(0.868257557488193);
-    _this2.CF.push(0.8090453354013093);
-    _this2.CF.push(0.75387118613536286);
-    _this2.CF.push(0.7024597268127567);
-    _this2.CF.push(0.65455435473461698);
-    _this2.CF.push(0.60991596663626746);
-    _this2.CF.push(0.56832176528513878);
-    _this2.CF.push(0.52956414746465574);
-    _this2.CF.push(0.49344966779385269);
-    _this2.CF.push(0.45979807321097926);
-    _this2.CF.push(0.42844140330205083);
-    _this2.CF.push(0.3992231519839422);
-    _this2.CF.push(0.37199748635785246);
-    _this2.CF.push(0.34662851883431528);
-    _this2.CF.push(0.32298962889681637);
-    _this2.CF.push(0.30096283111883271);
-    _this2.CF.push(0.28043818627996769);
-    _this2.CF.push(0.26131325264196925);
-    _this2.CF.push(0.24349257464586366);
-    _this2.CF.push(0.22688720647821134);
-    _this2.CF.push(0.21141426812852909);
-    _this2.CF.push(0.19699653172209111);
-    _this2.CF.push(0.18356203606343061);
-    _this2.CF.push(0.17104372746666816);
-    _this2.CF.push(0.15937912507999386);
-    _this2.CF.push(0.14851000903388545);
-    _this2.CF.push(0.13838212985656068);
-    _this2.CF.push(0.12894493770631085);
-    _this2.CF.push(0.12015133006927131);
-    _this2.CF.push(0.11195741666334866);
-    _this2.CF.push(0.10432230037490318);
-    _this2.CF.push(0.097207873134807027);
-    _this2.CF.push(0.090578625715063046);
-    _this2.CF.push(0.084401470496649686);
-    _this2.CF.push(0.078645576323997879);
-    _this2.CF.push(0);
-    _this2.PNK = [];
-    _this2.PNK.push(0.29089327063157433);
-    _this2.PNK.push(0.96147609795796074);
-    _this2.PNK.push(1.9929057067906695);
-    _this2.PNK.push(2.852080391448482);
-    _this2.PNK.push(2.6751984765768806);
-    _this2.PNK.push(1.0472212836930446);
-    _this2.PNK.push(-1.1988598034590252);
-    _this2.PNK.push(-2.2804345150557359);
-    _this2.PNK.push(-1.1293205866090439);
-    _this2.PNK.push(1.1403084488907371);
-    _this2.PNK.push(2.0354551847450315);
-    _this2.PNK.push(0.48276794194439082);
-    _this2.PNK.push(-1.6171794809836411);
-    _this2.PNK.push(-1.5503343002056609);
-    _this2.PNK.push(0.60493754639339159);
-    _this2.PNK.push(1.8621354405329114);
-    _this2.PNK.push(0.41794829019526042);
-    _this2.PNK.push(-1.6115367529736164);
-    _this2.PNK.push(-1.1679804969994156);
-    _this2.PNK.push(1.0716797147348209);
-    _this2.PNK.push(1.5850389233986588);
-    _this2.PNK.push(-0.45797638107805388);
-    _this2.PNK.push(-1.723479126358191);
-    _this2.PNK.push(-0.10194460999719542);
-    _this2.PNK.push(1.6742132263995639);
-    _this2.PNK.push(0.55274470231814254);
-    _this2.PNK.push(-1.5235707057849284);
-    _this2.PNK.push(-0.88507487987264877);
-    _this2.PNK.push(1.3378229934051453);
-    _this2.PNK.push(1.1129249869847508);
-    _this2.PNK.push(-1.1615627754195379);
-    _this2.PNK.push(-1.2582568842298383);
-    _this2.PNK.push(1.0218141707166259);
-    _this2.PNK.push(1.3420804385948193);
-    _this2.PNK.push(-0.93336139182442901);
-    _this2.PNK.push(0);
-    _this2.PNK.push(0);
-    _this2.ANAI = [];
-    _this2.ANAI.push(1);
-    _this2.ANAI.push(36);
-    _this2.ANAI.push(71);
-    _this2.ANAI.push(106);
-    _this2.ANAI.push(140);
-    _this2.ANAI.push(173);
-    _this2.ANAI.push(205);
-    _this2.ANAI.push(236);
-    _this2.ANAI.push(266);
-    _this2.ANAI.push(295);
-    _this2.ANAI.push(323);
-    _this2.ANAI.push(350);
-    _this2.ANAI.push(376);
-    _this2.ANAI.push(401);
-    _this2.ANAI.push(425);
-    _this2.ANAI.push(448);
-    _this2.ANAI.push(470);
-    _this2.ANAI.push(491);
-    _this2.ANAI.push(511);
-    _this2.ANAI.push(530);
-    _this2.ANAI.push(548);
-    _this2.ANAI.push(565);
-    _this2.ANAI.push(581);
-    _this2.ANAI.push(596);
-    _this2.ANAI.push(610);
-    _this2.ANAI.push(623);
-    _this2.ANAI.push(635);
-    _this2.ANAI.push(646);
-    _this2.ANAI.push(656);
-    _this2.ANAI.push(665);
-    _this2.ANAI.push(673);
-    _this2.ANAI.push(680);
-    _this2.ANAI.push(686);
-    _this2.ANAI.push(691);
-    _this2.ANAI.push(695);
-    _this2.ANAI.push(698);
-    _this2.ANAI.push(700);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    _this2.ANAI.push(0);
-    return _this2;
-  }
-  _inherits(OrbitalForecast_CategoryObject_1, _GravityCategoryObjec);
-  return _createClass(OrbitalForecast_CategoryObject_1);
-}(GravityCategoryObject_1.GravityCategoryObject);
-var OrbitalForecast_CategoryObject_2 = /*#__PURE__*/function (_VectorFormulaConsume) {
-  function OrbitalForecast_CategoryObject_2(desktop, name) {
-    var _this3;
-    _classCallCheck(this, OrbitalForecast_CategoryObject_2);
-    _this3 = _callSuper(this, OrbitalForecast_CategoryObject_2, [desktop, name]);
-    _this3.var_0 = 0;
-    _this3.var_1 = 0;
-    _this3.var_2 = 0;
-    _this3.var_3 = 0;
-    _this3.var_4 = 0;
-    _this3.var_5 = 0;
-    _this3.var_6 = 0;
-    _this3.var_7 = 2;
-    _this3.var_8 = 0;
-    _this3.var_9 = 0;
-    _this3.var_10 = 2;
-    _this3.var_11 = 0;
-    _this3.var_12 = 0;
-    _this3.var_13 = 0;
-    _this3.var_14 = 2;
-    _this3.var_15 = 0;
-    _this3.var_16 = 0;
-    _this3.var_17 = 0;
-    _this3.var_18 = 0;
-    var map = new Map([["z", 2555.3253638965743], ["u", -0.44668389543569337], ["w", 6.9300634873392948], ["v", 1.7737490756446463], ["y", 4112.9884575937604], ["x", -5110.5458047301981]]);
-    _this3.performer.setAliasMap(map, _this3);
-    _this3.addVariableValue("Formula_1", 0, -5110.5458047301981);
-    _this3.addVariableValue("Formula_2", 0, 4112.9884575937604);
-    _this3.addVariableValue("Formula_3", 0, 2555.3253638965743);
-    _this3.addVariableValue("Formula_4", 0, -0.44668389543569337);
-    _this3.addVariableValue("Formula_5", 0, 1.7737490756446463);
-    _this3.addVariableValue("Formula_6", 0, 6.9300634873392948);
-    _this3.addVariableValue("Formula_7", 0, 7.1673908937873003);
-    _this3.addVariableValue("Formula_8", 0, 0);
-    return _this3;
-  }
-  _inherits(OrbitalForecast_CategoryObject_2, _VectorFormulaConsume);
-  return _createClass(OrbitalForecast_CategoryObject_2, [{
-    key: "calculateTree",
-    value: function calculateTree() {
-      this.success = true;
-      this.variable = this.aliasName0.getAliasNameValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_0 = this.convert(this.variable);
-      this.variable = this.aliasName1.getAliasNameValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_1 = this.convert(this.variable);
-      this.variable = this.aliasName2.getAliasNameValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_2 = this.convert(this.variable);
-      this.variable = this.aliasName3.getAliasNameValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_3 = this.convert(this.variable);
-      this.variable = this.aliasName4.getAliasNameValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_4 = this.convert(this.variable);
-      this.variable = this.aliasName5.getAliasNameValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_5 = this.convert(this.variable);
-      this.variable = this.aliasName6.getAliasNameValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_6 = this.convert(this.variable);
-      this.variable = Math.pow(this.var_6, this.var_7);
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_8 = this.convert(this.variable);
-      this.variable = this.aliasName9.getAliasNameValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_9 = this.convert(this.variable);
-      this.variable = Math.pow(this.var_9, this.var_10);
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_11 = this.convert(this.variable);
-      this.variable = this.var_8 + this.var_11;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_12 = this.convert(this.variable);
-      this.variable = this.aliasName13.getAliasNameValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_13 = this.convert(this.variable);
-      this.variable = Math.pow(this.var_13, this.var_14);
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_15 = this.convert(this.variable);
-      this.variable = this.var_12 + this.var_15;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_16 = this.convert(this.variable);
-      this.variable = Math.sqrt(this.var_16);
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_17 = this.convert(this.variable);
-      this.var_18 = this.getInternalTime();
-    }
-  }, {
-    key: "init",
-    value: function init() {
-      var all = this.getAllMeasurements();
-      this.aliasName0 = new AliasName_1.AliasName(this.alias, "x");
-      this.aliasName1 = new AliasName_1.AliasName(this.alias, "y");
-      this.aliasName2 = new AliasName_1.AliasName(this.alias, "z");
-      this.aliasName3 = new AliasName_1.AliasName(this.alias, "u");
-      this.aliasName4 = new AliasName_1.AliasName(this.alias, "v");
-      this.aliasName5 = new AliasName_1.AliasName(this.alias, "w");
-      this.aliasName6 = new AliasName_1.AliasName(this.alias, "u");
-      this.aliasName9 = new AliasName_1.AliasName(this.alias, "v");
-      this.aliasName13 = new AliasName_1.AliasName(this.alias, "w");
-    }
-  }, {
-    key: "get_0",
-    value: function get_0() {
-      return this.success ? this.var_0 : undefined;
-    }
-  }, {
-    key: "get_1",
-    value: function get_1() {
-      return this.success ? this.var_1 : undefined;
-    }
-  }, {
-    key: "get_2",
-    value: function get_2() {
-      return this.success ? this.var_2 : undefined;
-    }
-  }, {
-    key: "get_3",
-    value: function get_3() {
-      return this.success ? this.var_3 : undefined;
-    }
-  }, {
-    key: "get_4",
-    value: function get_4() {
-      return this.success ? this.var_4 : undefined;
-    }
-  }, {
-    key: "get_5",
-    value: function get_5() {
-      return this.success ? this.var_5 : undefined;
-    }
-  }, {
-    key: "get_6",
-    value: function get_6() {
-      return this.success ? this.var_6 : undefined;
-    }
-  }, {
-    key: "get_7",
-    value: function get_7() {
-      return this.success ? this.var_7 : undefined;
-    }
-  }, {
-    key: "get_8",
-    value: function get_8() {
-      return this.success ? this.var_8 : undefined;
-    }
-  }, {
-    key: "get_9",
-    value: function get_9() {
-      return this.success ? this.var_9 : undefined;
-    }
-  }, {
-    key: "get_10",
-    value: function get_10() {
-      return this.success ? this.var_10 : undefined;
-    }
-  }, {
-    key: "get_11",
-    value: function get_11() {
-      return this.success ? this.var_11 : undefined;
-    }
-  }, {
-    key: "get_12",
-    value: function get_12() {
-      return this.success ? this.var_12 : undefined;
-    }
-  }, {
-    key: "get_13",
-    value: function get_13() {
-      return this.success ? this.var_13 : undefined;
-    }
-  }, {
-    key: "get_14",
-    value: function get_14() {
-      return this.success ? this.var_14 : undefined;
-    }
-  }, {
-    key: "get_15",
-    value: function get_15() {
-      return this.success ? this.var_15 : undefined;
-    }
-  }, {
-    key: "get_16",
-    value: function get_16() {
-      return this.success ? this.var_16 : undefined;
-    }
-  }, {
-    key: "get_17",
-    value: function get_17() {
-      return this.success ? this.var_17 : undefined;
-    }
-  }, {
-    key: "get_18",
-    value: function get_18() {
-      return this.success ? this.var_18 : undefined;
-    }
-  }, {
-    key: "save",
-    value: function save() {
-      var v = this.variables;
-      var x0 = v.get("Formula_1");
-      x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_0());
-      var x1 = v.get("Formula_2");
-      x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_1());
-      var x2 = v.get("Formula_3");
-      x2 === null || x2 === void 0 ? void 0 : x2.setIValue(this.get_2());
-      var x3 = v.get("Formula_4");
-      x3 === null || x3 === void 0 ? void 0 : x3.setIValue(this.get_3());
-      var x4 = v.get("Formula_5");
-      x4 === null || x4 === void 0 ? void 0 : x4.setIValue(this.get_4());
-      var x5 = v.get("Formula_6");
-      x5 === null || x5 === void 0 ? void 0 : x5.setIValue(this.get_5());
-      var x6 = v.get("Formula_7");
-      x6 === null || x6 === void 0 ? void 0 : x6.setIValue(this.get_17());
-      var x7 = v.get("Formula_8");
-      x7 === null || x7 === void 0 ? void 0 : x7.setIValue(this.get_18());
-    }
-  }]);
-}(VectorFormulaConsumer_1.VectorFormulaConsumer);
-var OrbitalForecast_CategoryObject_3 = /*#__PURE__*/function (_ObjectTransformer_1$) {
-  function OrbitalForecast_CategoryObject_3(desktop, name) {
-    var _this4;
-    _classCallCheck(this, OrbitalForecast_CategoryObject_3);
-    _this4 = _callSuper(this, OrbitalForecast_CategoryObject_3, [desktop, name]);
-    var map = new Map([["x", "Vector.Formula_1"], ["y", "Vector.Formula_2"], ["z", "Vector.Formula_3"]]);
-    _this4.setLinks(map);
-    return _this4;
-  }
-  _inherits(OrbitalForecast_CategoryObject_3, _ObjectTransformer_1$);
-  return _createClass(OrbitalForecast_CategoryObject_3);
-}(ObjectTransformer_1.ObjectTransformer);
-var OrbitalForecast_CategoryObject_4 = /*#__PURE__*/function (_ObjectTransformer_1$2) {
-  function OrbitalForecast_CategoryObject_4(desktop, name) {
-    var _this5;
-    _classCallCheck(this, OrbitalForecast_CategoryObject_4);
-    _this5 = _callSuper(this, OrbitalForecast_CategoryObject_4, [desktop, name]);
-    var map = new Map([["t", "Vector.Formula_8"], ["x", "Vector.Formula_1"], ["y", "Vector.Formula_2"], ["z", "Vector.Formula_3"]]);
-    _this5.setLinks(map);
-    return _this5;
-  }
-  _inherits(OrbitalForecast_CategoryObject_4, _ObjectTransformer_1$2);
-  return _createClass(OrbitalForecast_CategoryObject_4);
-}(ObjectTransformer_1.ObjectTransformer);
-var OrbitalForecast_CategoryObject_5 = /*#__PURE__*/function (_DifferentialEquation) {
-  function OrbitalForecast_CategoryObject_5(desktop, name) {
-    var _this6;
-    _classCallCheck(this, OrbitalForecast_CategoryObject_5);
-    _this6 = _callSuper(this, OrbitalForecast_CategoryObject_5, [desktop, name]);
-    _this6.var_0 = 0;
-    _this6.var_1 = 0;
-    _this6.var_2 = 0;
-    _this6.var_3 = 0;
-    _this6.var_4 = 0;
-    _this6.var_5 = 0;
-    _this6.var_6 = 0;
-    _this6.var_7 = 0;
-    _this6.var_8 = 0;
-    _this6.var_9 = 0;
-    _this6.var_10 = 0;
-    _this6.var_11 = 0;
-    _this6.var_12 = 0;
-    _this6.var_13 = 0;
-    _this6.var_14 = 0;
-    _this6.var_15 = 0;
-    _this6.var_16 = 0;
-    _this6.var_17 = 0;
-    _this6.var_18 = 0;
-    _this6.var_19 = 0;
-    _this6.var_20 = 0;
-    _this6.var_21 = 0;
-    _this6.var_22 = 0;
-    _this6.var_23 = 0;
-    _this6.var_24 = 0;
-    _this6.var_25 = 0;
-    _this6.var_26 = 0;
-    _this6.var_27 = 0;
-    _this6.var_28 = 0;
-    _this6.var_29 = 0;
-    _this6.var_30 = 0;
-    _this6.var_31 = 0;
-    _this6.var_32 = 0;
-    var map = new Map([["o", 0.00014584231700000001], ["w", 7.45047785592], ["z", 0], ["s", 1.6189340462770081E-13], ["q", 5.3174953569821228E-09], ["v", 1.2168189383400001], ["y", -4463.9369842100004], ["x", -5448.3481532400001], ["u", -0.98539477743199999]]);
-    _this6.performer.setAliasMap(map, _this6);
-    _this6.addVariableValue("u", 0, -0.98539477743199999);
-    _this6.addVariableValue("v", 0, 1.2168189383400001);
-    _this6.addVariableValue("w", 0, 7.45047785592);
-    _this6.addVariableValue("x", 0, -5448.3481532400001);
-    _this6.addVariableValue("y", 0, -4463.9369842100004);
-    _this6.addVariableValue("z", 0, 0);
-    return _this6;
-  }
-  _inherits(OrbitalForecast_CategoryObject_5, _DifferentialEquation);
-  return _createClass(OrbitalForecast_CategoryObject_5, [{
-    key: "calculateTree",
-    value: function calculateTree() {
-      this.success = true;
-      this.variable = this.measurement0.getMeasurementValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_0 = this.convert(this.variable);
-      this.variable = this.aliasName1.getAliasNameValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_1 = this.convert(this.variable);
-      this.variable = this.value2.getIValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_2 = this.convert(this.variable);
-      this.variable = this.var_1 * this.var_2;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_3 = this.convert(this.variable);
-      this.variable = this.aliasName4.getAliasNameValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_4 = this.convert(this.variable);
-      this.variable = this.measurement5.getMeasurementValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_5 = this.convert(this.variable);
-      this.variable = this.var_4 * this.var_5;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_6 = this.convert(this.variable);
-      this.variable = this.measurement7.getMeasurementValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_7 = this.convert(this.variable);
-      this.variable = this.var_6 * this.var_7;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_8 = this.convert(this.variable);
-      this.variable = this.value9.getIValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_9 = this.convert(this.variable);
-      this.variable = this.var_8 * this.var_9;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_10 = this.convert(this.variable);
-      this.variable = this.var_3 - this.var_10;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_11 = this.convert(this.variable);
-      this.variable = this.var_0 + this.var_11;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_12 = this.convert(this.variable);
-      this.variable = this.aliasName13.getAliasNameValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_13 = this.convert(this.variable);
-      this.variable = this.value14.getIValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_14 = this.convert(this.variable);
-      this.variable = this.var_13 * this.var_14;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_15 = this.convert(this.variable);
-      this.variable = this.var_12 + this.var_15;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_16 = this.convert(this.variable);
-      this.variable = this.measurement17.getMeasurementValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_17 = this.convert(this.variable);
-      this.variable = this.value18.getIValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_18 = this.convert(this.variable);
-      this.variable = this.var_1 * this.var_18;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_19 = this.convert(this.variable);
-      this.variable = this.var_4 * this.var_5;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_20 = this.convert(this.variable);
-      this.variable = this.var_20 * this.var_7;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_21 = this.convert(this.variable);
-      this.variable = this.var_21 * this.var_14;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_22 = this.convert(this.variable);
-      this.variable = this.var_19 - this.var_22;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_23 = this.convert(this.variable);
-      this.variable = this.var_13 * this.var_9;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_24 = this.convert(this.variable);
-      this.variable = this.var_23 - this.var_24;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_25 = this.convert(this.variable);
-      this.variable = this.var_17 + this.var_25;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_26 = this.convert(this.variable);
-      this.variable = this.measurement27.getMeasurementValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_27 = this.convert(this.variable);
-      this.variable = this.var_4 * this.var_5;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_28 = this.convert(this.variable);
-      this.variable = this.var_28 * this.var_7;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_29 = this.convert(this.variable);
-      this.variable = this.value30.getIValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_30 = this.convert(this.variable);
-      this.variable = this.var_29 * this.var_30;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_31 = this.convert(this.variable);
-      this.variable = this.var_27 - this.var_31;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_32 = this.convert(this.variable);
-    }
-  }, {
-    key: "init",
-    value: function init() {
-      var all = this.getAllMeasurements();
-      this.measurement0 = all[0].getMeasurement(0);
-      this.value2 = this.output[3];
-      this.measurement5 = all[1].getMeasurement(0);
-      this.measurement7 = all[2].getMeasurement(6);
-      this.value9 = this.output[0];
-      this.value14 = this.output[1];
-      this.measurement17 = all[0].getMeasurement(1);
-      this.value18 = this.output[4];
-      this.measurement27 = all[0].getMeasurement(2);
-      this.value30 = this.output[2];
-      this.aliasName1 = new AliasName_1.AliasName(this.alias, "q");
-      this.aliasName4 = new AliasName_1.AliasName(this.alias, "s");
-      this.aliasName13 = new AliasName_1.AliasName(this.alias, "o");
-    }
-  }, {
-    key: "get_0",
-    value: function get_0() {
-      return this.success ? this.var_0 : undefined;
-    }
-  }, {
-    key: "get_1",
-    value: function get_1() {
-      return this.success ? this.var_1 : undefined;
-    }
-  }, {
-    key: "get_2",
-    value: function get_2() {
-      return this.success ? this.var_2 : undefined;
-    }
-  }, {
-    key: "get_3",
-    value: function get_3() {
-      return this.success ? this.var_3 : undefined;
-    }
-  }, {
-    key: "get_4",
-    value: function get_4() {
-      return this.success ? this.var_4 : undefined;
-    }
-  }, {
-    key: "get_5",
-    value: function get_5() {
-      return this.success ? this.var_5 : undefined;
-    }
-  }, {
-    key: "get_6",
-    value: function get_6() {
-      return this.success ? this.var_6 : undefined;
-    }
-  }, {
-    key: "get_7",
-    value: function get_7() {
-      return this.success ? this.var_7 : undefined;
-    }
-  }, {
-    key: "get_8",
-    value: function get_8() {
-      return this.success ? this.var_8 : undefined;
-    }
-  }, {
-    key: "get_9",
-    value: function get_9() {
-      return this.success ? this.var_9 : undefined;
-    }
-  }, {
-    key: "get_10",
-    value: function get_10() {
-      return this.success ? this.var_10 : undefined;
-    }
-  }, {
-    key: "get_11",
-    value: function get_11() {
-      return this.success ? this.var_11 : undefined;
-    }
-  }, {
-    key: "get_12",
-    value: function get_12() {
-      return this.success ? this.var_12 : undefined;
-    }
-  }, {
-    key: "get_13",
-    value: function get_13() {
-      return this.success ? this.var_13 : undefined;
-    }
-  }, {
-    key: "get_14",
-    value: function get_14() {
-      return this.success ? this.var_14 : undefined;
-    }
-  }, {
-    key: "get_15",
-    value: function get_15() {
-      return this.success ? this.var_15 : undefined;
-    }
-  }, {
-    key: "get_16",
-    value: function get_16() {
-      return this.success ? this.var_16 : undefined;
-    }
-  }, {
-    key: "get_17",
-    value: function get_17() {
-      return this.success ? this.var_17 : undefined;
-    }
-  }, {
-    key: "get_18",
-    value: function get_18() {
-      return this.success ? this.var_18 : undefined;
-    }
-  }, {
-    key: "get_19",
-    value: function get_19() {
-      return this.success ? this.var_19 : undefined;
-    }
-  }, {
-    key: "get_20",
-    value: function get_20() {
-      return this.success ? this.var_20 : undefined;
-    }
-  }, {
-    key: "get_21",
-    value: function get_21() {
-      return this.success ? this.var_21 : undefined;
-    }
-  }, {
-    key: "get_22",
-    value: function get_22() {
-      return this.success ? this.var_22 : undefined;
-    }
-  }, {
-    key: "get_23",
-    value: function get_23() {
-      return this.success ? this.var_23 : undefined;
-    }
-  }, {
-    key: "get_24",
-    value: function get_24() {
-      return this.success ? this.var_24 : undefined;
-    }
-  }, {
-    key: "get_25",
-    value: function get_25() {
-      return this.success ? this.var_25 : undefined;
-    }
-  }, {
-    key: "get_26",
-    value: function get_26() {
-      return this.success ? this.var_26 : undefined;
-    }
-  }, {
-    key: "get_27",
-    value: function get_27() {
-      return this.success ? this.var_27 : undefined;
-    }
-  }, {
-    key: "get_28",
-    value: function get_28() {
-      return this.success ? this.var_28 : undefined;
-    }
-  }, {
-    key: "get_29",
-    value: function get_29() {
-      return this.success ? this.var_29 : undefined;
-    }
-  }, {
-    key: "get_30",
-    value: function get_30() {
-      return this.success ? this.var_30 : undefined;
-    }
-  }, {
-    key: "get_31",
-    value: function get_31() {
-      return this.success ? this.var_31 : undefined;
-    }
-  }, {
-    key: "get_32",
-    value: function get_32() {
-      return this.success ? this.var_32 : undefined;
-    }
-  }, {
-    key: "save",
-    value: function save() {
-      var v = this.derivations;
-      var x0 = v.get("v");
-      x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_26());
-      var x1 = v.get("u");
-      x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_16());
-      var x2 = v.get("z");
-      x2 === null || x2 === void 0 ? void 0 : x2.setIValue(this.get_30());
-      var x3 = v.get("y");
-      x3 === null || x3 === void 0 ? void 0 : x3.setIValue(this.get_14());
-      var x4 = v.get("x");
-      x4 === null || x4 === void 0 ? void 0 : x4.setIValue(this.get_9());
-      var x5 = v.get("w");
-      x5 === null || x5 === void 0 ? void 0 : x5.setIValue(this.get_32());
-    }
-  }, {
-    key: "setFeedback",
-    value: function setFeedback() {
-      var map = new Map([["v", "Vector.u"], ["u", "Vector.u"], ["z", "Vector.z"], ["y", "Vector.y"], ["x", "Vector.x"], ["w", "Vector.w"]]);
-      this.feedback = new FeedbackAliasCollection_1.FeedbackAliasCollection(map, this, this);
-    }
-  }]);
-}(DifferentialEquationSolverFormula_1.DifferentialEquationSolverFormula);
-var OrbitalForecast_CategoryObject_6 = /*#__PURE__*/function (_RecursiveFormula_1$R) {
-  function OrbitalForecast_CategoryObject_6(desktop, name) {
-    var _this7;
-    _classCallCheck(this, OrbitalForecast_CategoryObject_6);
-    _this7 = _callSuper(this, OrbitalForecast_CategoryObject_6, [desktop, name]);
-    _this7.var_0 = 0;
-    _this7.var_1 = 0;
-    _this7.var_2 = false;
-    _this7.var_3 = 0;
-    _this7.var_4 = 0;
-    _this7.var_5 = false;
-    _this7.var_6 = false;
-    var map = new Map([["x", 0], ["y", false]]);
-    _this7.performer.setAliasMap(map, _this7);
-    _this7.addVariableValue("x", 0, 0);
-    _this7.addVariableValue("y", false, false);
-    return _this7;
-  }
-  _inherits(OrbitalForecast_CategoryObject_6, _RecursiveFormula_1$R);
-  return _createClass(OrbitalForecast_CategoryObject_6, [{
-    key: "calculateTree",
-    value: function calculateTree() {
-      this.success = true;
-      this.variable = this.measurement0.getMeasurementValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_0 = this.convert(this.variable);
-      this.variable = this.var_0 > this.var_1;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_2 = this.convert(this.variable);
-      this.variable = this.value3.getIValue();
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_3 = this.convert(this.variable);
-      this.variable = this.var_3 < this.var_4;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_5 = this.convert(this.variable);
-      this.variable = this.var_2 && this.var_5;
-      if (this.check(this.variable)) {
-        this.success = false;
-        return;
-      }
-      this.var_6 = this.convert(this.variable);
-    }
-  }, {
-    key: "init",
-    value: function init() {
-      var all = this.getAllMeasurements();
-      this.measurement0 = all[0].getMeasurement(5);
-      this.value3 = this.output[0];
-    }
-  }, {
-    key: "get_0",
-    value: function get_0() {
-      return this.success ? this.var_0 : undefined;
-    }
-  }, {
-    key: "get_1",
-    value: function get_1() {
-      return this.success ? this.var_1 : undefined;
-    }
-  }, {
-    key: "get_2",
-    value: function get_2() {
-      return this.success ? this.var_2 : undefined;
-    }
-  }, {
-    key: "get_3",
-    value: function get_3() {
-      return this.success ? this.var_3 : undefined;
-    }
-  }, {
-    key: "get_4",
-    value: function get_4() {
-      return this.success ? this.var_4 : undefined;
-    }
-  }, {
-    key: "get_5",
-    value: function get_5() {
-      return this.success ? this.var_5 : undefined;
-    }
-  }, {
-    key: "get_6",
-    value: function get_6() {
-      return this.success ? this.var_6 : undefined;
-    }
-  }, {
-    key: "save",
-    value: function save() {
-      var v = this.variables;
-      var x0 = v.get("x");
-      x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_0());
-      var x1 = v.get("y");
-      x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_6());
-    }
-  }]);
-}(RecursiveFormula_1.RecursiveFormula);
-var OrbitalForecast_CategoryObject_7 = /*#__PURE__*/function (_DataConsumer_1$DataC) {
-  function OrbitalForecast_CategoryObject_7(desktop, name) {
-    _classCallCheck(this, OrbitalForecast_CategoryObject_7);
-    return _callSuper(this, OrbitalForecast_CategoryObject_7, [desktop, name]);
-  }
-  _inherits(OrbitalForecast_CategoryObject_7, _DataConsumer_1$DataC);
-  return _createClass(OrbitalForecast_CategoryObject_7);
-}(DataConsumer_1.DataConsumer);
-var OrbitalForecast_CategoryArrow_0 = /*#__PURE__*/function (_ObjectTransformerLin) {
-  function OrbitalForecast_CategoryArrow_0(desktop, name) {
-    _classCallCheck(this, OrbitalForecast_CategoryArrow_0);
-    return _callSuper(this, OrbitalForecast_CategoryArrow_0, [desktop, name]);
-  }
-  _inherits(OrbitalForecast_CategoryArrow_0, _ObjectTransformerLin);
-  return _createClass(OrbitalForecast_CategoryArrow_0);
-}(ObjectTransformerLink_1.ObjectTransformerLink);
-var OrbitalForecast_CategoryArrow_1 = /*#__PURE__*/function (_ObjectTransformerLin2) {
-  function OrbitalForecast_CategoryArrow_1(desktop, name) {
-    _classCallCheck(this, OrbitalForecast_CategoryArrow_1);
-    return _callSuper(this, OrbitalForecast_CategoryArrow_1, [desktop, name]);
-  }
-  _inherits(OrbitalForecast_CategoryArrow_1, _ObjectTransformerLin2);
-  return _createClass(OrbitalForecast_CategoryArrow_1);
-}(ObjectTransformerLink_1.ObjectTransformerLink);
-var OrbitalForecast_CategoryArrow_2 = /*#__PURE__*/function (_DataLink_1$DataLink) {
-  function OrbitalForecast_CategoryArrow_2(desktop, name) {
-    _classCallCheck(this, OrbitalForecast_CategoryArrow_2);
-    return _callSuper(this, OrbitalForecast_CategoryArrow_2, [desktop, name]);
-  }
-  _inherits(OrbitalForecast_CategoryArrow_2, _DataLink_1$DataLink);
-  return _createClass(OrbitalForecast_CategoryArrow_2);
-}(DataLink_1.DataLink);
-var OrbitalForecast_CategoryArrow_3 = /*#__PURE__*/function (_DataLink_1$DataLink2) {
-  function OrbitalForecast_CategoryArrow_3(desktop, name) {
-    _classCallCheck(this, OrbitalForecast_CategoryArrow_3);
-    return _callSuper(this, OrbitalForecast_CategoryArrow_3, [desktop, name]);
-  }
-  _inherits(OrbitalForecast_CategoryArrow_3, _DataLink_1$DataLink2);
-  return _createClass(OrbitalForecast_CategoryArrow_3);
-}(DataLink_1.DataLink);
-var OrbitalForecast_CategoryArrow_4 = /*#__PURE__*/function (_DataLink_1$DataLink3) {
-  function OrbitalForecast_CategoryArrow_4(desktop, name) {
-    _classCallCheck(this, OrbitalForecast_CategoryArrow_4);
-    return _callSuper(this, OrbitalForecast_CategoryArrow_4, [desktop, name]);
-  }
-  _inherits(OrbitalForecast_CategoryArrow_4, _DataLink_1$DataLink3);
-  return _createClass(OrbitalForecast_CategoryArrow_4);
-}(DataLink_1.DataLink);
-var OrbitalForecast_CategoryArrow_5 = /*#__PURE__*/function (_DataLink_1$DataLink4) {
-  function OrbitalForecast_CategoryArrow_5(desktop, name) {
-    _classCallCheck(this, OrbitalForecast_CategoryArrow_5);
-    return _callSuper(this, OrbitalForecast_CategoryArrow_5, [desktop, name]);
-  }
-  _inherits(OrbitalForecast_CategoryArrow_5, _DataLink_1$DataLink4);
-  return _createClass(OrbitalForecast_CategoryArrow_5);
-}(DataLink_1.DataLink);
-var OrbitalForecast_CategoryArrow_6 = /*#__PURE__*/function (_DataLink_1$DataLink5) {
-  function OrbitalForecast_CategoryArrow_6(desktop, name) {
-    _classCallCheck(this, OrbitalForecast_CategoryArrow_6);
-    return _callSuper(this, OrbitalForecast_CategoryArrow_6, [desktop, name]);
-  }
-  _inherits(OrbitalForecast_CategoryArrow_6, _DataLink_1$DataLink5);
-  return _createClass(OrbitalForecast_CategoryArrow_6);
-}(DataLink_1.DataLink);
-var OrbitalForecast_CategoryArrow_7 = /*#__PURE__*/function (_DataLink_1$DataLink6) {
-  function OrbitalForecast_CategoryArrow_7(desktop, name) {
-    _classCallCheck(this, OrbitalForecast_CategoryArrow_7);
-    return _callSuper(this, OrbitalForecast_CategoryArrow_7, [desktop, name]);
-  }
-  _inherits(OrbitalForecast_CategoryArrow_7, _DataLink_1$DataLink6);
-  return _createClass(OrbitalForecast_CategoryArrow_7);
-}(DataLink_1.DataLink);
-var OrbitalForecast_CategoryArrow_8 = /*#__PURE__*/function (_DataLink_1$DataLink7) {
-  function OrbitalForecast_CategoryArrow_8(desktop, name) {
-    _classCallCheck(this, OrbitalForecast_CategoryArrow_8);
-    return _callSuper(this, OrbitalForecast_CategoryArrow_8, [desktop, name]);
-  }
-  _inherits(OrbitalForecast_CategoryArrow_8, _DataLink_1$DataLink7);
-  return _createClass(OrbitalForecast_CategoryArrow_8);
-}(DataLink_1.DataLink);
-var OrbitalForecast_CategoryArrow_9 = /*#__PURE__*/function (_DataLink_1$DataLink8) {
-  function OrbitalForecast_CategoryArrow_9(desktop, name) {
-    _classCallCheck(this, OrbitalForecast_CategoryArrow_9);
-    return _callSuper(this, OrbitalForecast_CategoryArrow_9, [desktop, name]);
-  }
-  _inherits(OrbitalForecast_CategoryArrow_9, _DataLink_1$DataLink8);
-  return _createClass(OrbitalForecast_CategoryArrow_9);
-}(DataLink_1.DataLink);
-var OrbitalForecast_CategoryArrow_10 = /*#__PURE__*/function (_DataLink_1$DataLink9) {
-  function OrbitalForecast_CategoryArrow_10(desktop, name) {
-    _classCallCheck(this, OrbitalForecast_CategoryArrow_10);
-    return _callSuper(this, OrbitalForecast_CategoryArrow_10, [desktop, name]);
-  }
-  _inherits(OrbitalForecast_CategoryArrow_10, _DataLink_1$DataLink9);
-  return _createClass(OrbitalForecast_CategoryArrow_10);
-}(DataLink_1.DataLink);
-var OrbitalForecast_CategoryArrow_11 = /*#__PURE__*/function (_DataLink_1$DataLink0) {
-  function OrbitalForecast_CategoryArrow_11(desktop, name) {
-    _classCallCheck(this, OrbitalForecast_CategoryArrow_11);
-    return _callSuper(this, OrbitalForecast_CategoryArrow_11, [desktop, name]);
-  }
-  _inherits(OrbitalForecast_CategoryArrow_11, _DataLink_1$DataLink0);
-  return _createClass(OrbitalForecast_CategoryArrow_11);
-}(DataLink_1.DataLink);
-var OrbitalForecast = /*#__PURE__*/function (_Desktop_1$Desktop) {
-  function OrbitalForecast() {
-    var _this8;
-    _classCallCheck(this, OrbitalForecast);
-    _this8 = _callSuper(this, OrbitalForecast);
-    _this8.name = "OrbitalForecast";
-    new OrbitalForecast_CategoryObject_0(_this8, "Atmosphere");
-    new OrbitalForecast_CategoryObject_1(_this8, "Gravity");
-    new OrbitalForecast_CategoryObject_2(_this8, "Vector");
-    new OrbitalForecast_CategoryObject_3(_this8, "G-transformation");
-    new OrbitalForecast_CategoryObject_4(_this8, "A-transformation");
-    new OrbitalForecast_CategoryObject_5(_this8, "Motion equations");
-    new OrbitalForecast_CategoryObject_6(_this8, "Recursive");
-    new OrbitalForecast_CategoryObject_7(_this8, "Chart");
-    new OrbitalForecast_CategoryArrow_0(_this8, "");
-    new OrbitalForecast_CategoryArrow_1(_this8, "");
-    new OrbitalForecast_CategoryArrow_2(_this8, "");
-    new OrbitalForecast_CategoryArrow_3(_this8, "");
-    new OrbitalForecast_CategoryArrow_4(_this8, "");
-    new OrbitalForecast_CategoryArrow_5(_this8, "");
-    new OrbitalForecast_CategoryArrow_6(_this8, "");
-    new OrbitalForecast_CategoryArrow_7(_this8, "");
-    new OrbitalForecast_CategoryArrow_8(_this8, "");
-    new OrbitalForecast_CategoryArrow_9(_this8, "");
-    new OrbitalForecast_CategoryArrow_10(_this8, "");
-    new OrbitalForecast_CategoryArrow_11(_this8, "");
-    var objects = _this8.getCategoryObjects();
-    var arrows = _this8.getCategoryArrows();
-    arrows[0].setSource(objects[3]);
-    arrows[0].setTarget(objects[1]);
-    arrows[1].setSource(objects[4]);
-    arrows[1].setTarget(objects[0]);
-    arrows[2].setSource(objects[3]);
-    arrows[2].setTarget(objects[2]);
-    arrows[3].setSource(objects[4]);
-    arrows[3].setTarget(objects[2]);
-    arrows[4].setSource(objects[5]);
-    arrows[4].setTarget(objects[3]);
-    arrows[5].setSource(objects[5]);
-    arrows[5].setTarget(objects[4]);
-    arrows[6].setSource(objects[5]);
-    arrows[6].setTarget(objects[2]);
-    arrows[7].setSource(objects[6]);
-    arrows[7].setTarget(objects[5]);
-    arrows[8].setSource(objects[7]);
-    arrows[8].setTarget(objects[6]);
-    arrows[9].setSource(objects[7]);
-    arrows[9].setTarget(objects[2]);
-    arrows[10].setSource(objects[7]);
-    arrows[10].setTarget(objects[5]);
-    arrows[11].setSource(objects[7]);
-    arrows[11].setTarget(objects[4]);
-    objects[2].postSetArrow();
-    objects[3].postSetArrow();
-    objects[4].postSetArrow();
-    objects[5].postSetArrow();
-    objects[6].postSetArrow();
-    return _this8;
-  }
-  _inherits(OrbitalForecast, _Desktop_1$Desktop);
-  return _createClass(OrbitalForecast);
-}(Desktop_1.Desktop);
-exports.OrbitalForecast = OrbitalForecast;
-},{"../../ExternalObjects/Components/Atmosphere/AtmosphereCategoryObject":"src/ExternalObjects/Components/Atmosphere/AtmosphereCategoryObject.ts","../../ExternalObjects/Components/Gravity_36_36/GravityCategoryObject":"src/ExternalObjects/Components/Gravity_36_36/GravityCategoryObject.ts","../../Library/AliasName":"src/Library/AliasName.ts","../../Library/Desktop":"src/Library/Desktop.ts","../../Library/FeedbackAliasCollection":"src/Library/FeedbackAliasCollection.ts","../../Library/Measurements/Arrows/DataLink":"src/Library/Measurements/Arrows/DataLink.ts","../../Library/Measurements/Arrows/ObjectTransformerLink":"src/Library/Measurements/Arrows/ObjectTransformerLink.ts","../../Library/Measurements/DataConsumer":"src/Library/Measurements/DataConsumer.ts","../../Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula":"src/Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula.ts","../../Library/Measurements/ObjectTransformer":"src/Library/Measurements/ObjectTransformer.ts","../../Library/Measurements/RecursiveFormula":"src/Library/Measurements/RecursiveFormula.ts","../../Library/Measurements/VectorFormulaConsumer":"src/Library/Measurements/VectorFormulaConsumer.ts"}],"src/Tests/Wrappers/OrbitalForecastAct.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.OrbitaForecasAct = void 0;
-var RungeProcessor_1 = require("../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor");
-var PerformerMeasuremets_1 = require("../../Library/Measurements/PerformerMeasuremets");
-var DataRuntimeConsumerODE_1 = require("../../Library/Runtime/DataRuntimeConsumerODE");
-var OrbitalForecast_1 = require("../../Algorithms/OrbitalForecastCalculation/OrbitalForecast");
-var OrbitaForecasAct = /*#__PURE__*/function (_OrbitalForecast_1$Or) {
-  function OrbitaForecasAct() {
-    var _this;
-    _classCallCheck(this, OrbitaForecasAct);
-    _this = _callSuper(this, OrbitaForecasAct);
-    var o = _this.getCategoryObjects();
-    _this.dc = _this.getCategoryObject("Chart");
-    return _this;
-  }
-  _inherits(OrbitaForecasAct, _OrbitalForecast_1$Or);
-  return _createClass(OrbitaForecasAct, [{
-    key: "action",
-    value: function action() {
-      var k = this.dc.getAllMeasurements()[0];
-      var a = k.getMeasurement(0).getMeasurementValue();
-      var b = k.getMeasurement(1).getMeasurementValue();
-      console.log(a, b);
-    }
-  }, {
-    key: "func",
-    value: function func() {
-      return false;
-    }
-  }, {
-    key: "test",
-    value: function test() {
-      try {
-        var processor = new RungeProcessor_1.RungeProcessor();
-        var runtime = new DataRuntimeConsumerODE_1.DataRuntimeConsumerODE(this.dc, processor);
-        var p = new PerformerMeasuremets_1.PerformerMeasuremets();
-        p.peformCondDCFixedStepCalculation(runtime, this.dc, "Recursive.y", this, 0, 1, 18000, this);
-      } catch (e) {
-        var i = 0;
-        //    throw new OwnNotImplemented();
-      }
-    }
-  }]);
-}(OrbitalForecast_1.OrbitalForecast);
-exports.OrbitaForecasAct = OrbitaForecasAct;
-},{"../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor":"src/Library/Measurements/DifferentialEquations/Processors/RungeProcessor.ts","../../Library/Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts","../../Library/Runtime/DataRuntimeConsumerODE":"src/Library/Runtime/DataRuntimeConsumerODE.ts","../../Algorithms/OrbitalForecastCalculation/OrbitalForecast":"src/Algorithms/OrbitalForecastCalculation/OrbitalForecast.ts"}],"src/Library/Utilities/DateTime/TaskInfo.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.TaskInfo = void 0;
-/**
-* class to hold data about one task executed within the stop watch.
-*/
-var TaskInfo = /*#__PURE__*/function () {
-  function TaskInfo(taskName, timeMillis) {
-    _classCallCheck(this, TaskInfo);
-    this._taskName = taskName;
-    this._timeMillis = timeMillis;
-  }
-  return _createClass(TaskInfo, [{
-    key: "taskName",
-    get: function get() {
-      return this._taskName;
-    }
-  }, {
-    key: "timeMills",
-    get: function get() {
-      return this._timeMillis;
-    }
-  }, {
-    key: "percentage",
-    get: function get() {
-      return this._percentage;
-    }
-  }, {
-    key: "calculatePercentage",
-    value: function calculatePercentage(totalTimeMillis) {
-      this._percentage = (this._timeMillis * 100 / totalTimeMillis).toFixed(2);
-      return this._percentage;
-    }
-  }]);
-}();
-exports.TaskInfo = TaskInfo;
-},{}],"src/Library/Utilities/DateTime/StopWatch.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.StopWatch = void 0;
-var TaskInfo_1 = require("./TaskInfo");
-var StopWatch = /*#__PURE__*/function () {
-  function StopWatch() {
-    var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-    _classCallCheck(this, StopWatch);
-    this.currentTaskName = null;
-    this.startTimeMillis = 0;
-    this.totalTimeMillis = 0;
-    this.taskList = [];
-    this.id = id;
-  }
-  /**
-   * start a task
-   */
-  return _createClass(StopWatch, [{
-    key: "start",
-    value: function start() {
-      var taskName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-      this.currentTaskName !== null && this.throwError('Can\'t start StopWatch: it\'s already running');
-      this.currentTaskName = taskName;
-      this.startTimeMillis = Date.now();
-    }
-    /**
-     * stop the current task
-     */
-  }, {
-    key: "stop",
-    value: function stop() {
-      this.currentTaskName === null && this.throwError('Can\'t stop StopWatch: it\'s not running');
-      var lastTime = Date.now() - this.startTimeMillis;
-      this.totalTimeMillis += lastTime;
-      var lastTaskInfo = new TaskInfo_1.TaskInfo(this.currentTaskName, lastTime);
-      this.taskList.push(lastTaskInfo);
-      this.currentTaskName = null;
-    }
-    /**
-     * Return a string with a table describing all tasks performed.
-     */
-  }, {
-    key: "prettyPrint",
-    value: function prettyPrint() {
-      var _this = this;
-      var output = [this.shortSummary()];
-      if (this.taskList.length) {
-        output.push('------------------------------------------');
-        output.push('ms \t\t % \t\t Task name');
-        output.push('------------------------------------------');
-        this.taskList.forEach(function (task) {
-          var percentage = '0';
-          try {
-            percentage = task.calculatePercentage(_this.totalTimeMillis);
-          } catch (e) {}
-          output.push("".concat(task.timeMills, " \t\t ").concat(percentage, " \t\t ").concat(task.taskName));
-        });
-      } else {
-        output.push(StopWatch.NoTaskMessage);
-      }
-      var outputString = output.join('\n');
-      console.info(outputString);
-      return outputString;
-    }
-    /**
-     * Return a task matching the given name
-     */
-  }, {
-    key: "getTask",
-    value: function getTask(taskName) {
-      var task = this.taskList.find(function (task) {
-        return task.taskName === taskName;
-      });
-      task === null || task === void 0 ? void 0 : task.calculatePercentage(this.totalTimeMillis);
-      return task;
-    }
-    /**
-     * Return the total running time in milliseconds
-     */
-  }, {
-    key: "getTotalTime",
-    value: function getTotalTime() {
-      return this.totalTimeMillis;
-    }
-    /**
-     * Return a short description of the total running time.
-     */
-  }, {
-    key: "shortSummary",
-    value: function shortSummary() {
-      return "StopWatch '".concat(this.id, "' running time (millis) = ").concat(this.totalTimeMillis);
-    }
-    /**
-     * Return whether the stop watch is currently running
-     */
-  }, {
-    key: "isRunning",
-    value: function isRunning() {
-      return this.currentTaskName !== null;
-    }
-    /**
-     * Return the number of tasks timed.
-     */
-  }, {
-    key: "getTaskCount",
-    value: function getTaskCount() {
-      return this.taskList.length;
-    }
-  }, {
-    key: "throwError",
-    value: function throwError(msg) {
-      throw new Error(msg);
-    }
-  }]);
-}();
-exports.StopWatch = StopWatch;
-StopWatch.NoTaskMessage = 'No task info kept';
-},{"./TaskInfo":"src/Library/Utilities/DateTime/TaskInfo.ts"}],"src/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation.ts":[function(require,module,exports) {
-"use strict";
-
-function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
-function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function (resolve) {
-      resolve(value);
-    });
-  }
-  return new (P || (P = Promise))(function (resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.OrbitalForecastCalculation = void 0;
-var RungeProcessor_1 = require("../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor");
-var PerformerMeasuremets_1 = require("../../Library/Measurements/PerformerMeasuremets");
-var Performer_1 = require("../../Library/Performer");
-var DataRuntimeConsumerODE_1 = require("../../Library/Runtime/DataRuntimeConsumerODE");
-var OrbitalForecast_1 = require("./OrbitalForecast");
-var StopWatch_1 = require("../../Library/Utilities/DateTime/StopWatch");
-var Check = /*#__PURE__*/function () {
-  function Check() {
-    _classCallCheck(this, Check);
-  }
-  return _createClass(Check, [{
-    key: "check",
-    value: function check(o) {
-      var s = "".concat(o);
-      var b = s.includes("NaN");
-      if (b) {
-        var i = 0;
-      }
-      return b;
-    }
-  }]);
-}();
-var Action = /*#__PURE__*/function () {
-  function Action(dc, p) {
-    _classCallCheck(this, Action);
-    this.dc = dc;
-    this.p = p;
-  }
-  return _createClass(Action, [{
-    key: "action",
-    value: function action() {
-      this.p.print(this.dc);
-    }
-  }]);
-}();
-var OrbitalForecastCalculation = /*#__PURE__*/function (_OrbitalForecast_1$Or) {
-  function OrbitalForecastCalculation() {
-    var _this;
-    _classCallCheck(this, OrbitalForecastCalculation);
-    _this = _callSuper(this, OrbitalForecastCalculation);
-    _this.calculate = function (condition, controller) {
-      return __awaiter(_this, void 0, void 0, /*#__PURE__*/_regenerator().m(function _callee() {
-        var p, count;
-        return _regenerator().w(function (_context) {
-          while (1) switch (_context.n) {
-            case 0:
-              this.contoller = controller;
-              this.set(condition);
-              p = new PerformerMeasuremets_1.PefrormerMeasuremets();
-              this.stopWatch = new StopWatch_1.StopWatch();
-              this.stopWatch.start();
-              count = Math.floor(condition.end - condition.begin);
-              p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, condition.begin, 1, count, this);
-              this.stopWatch.stop();
-              return _context.a(2, this.list);
-          }
-        }, _callee, this);
-      }));
-    };
-    _this.list = [];
-    _this.contoller = new AbortController();
-    _this.performer = new Performer_1.Performer();
-    _this.map = new Map();
-    _this.dc = _this.getCategoryObject("Chart");
-    _this.alias = _this.getCategoryObject("Motion equations");
-    _this.measurements = _this.alias;
-    _this.performer.getMeasurementsMMap(_this.measurements, _this.map);
-    var check = new Check();
-    _this.setCheck(check);
-    _this.performer.setCheker(_this, check);
-    _this.act = new Action(_this.dc, _this.performer);
-    return _this;
-  }
-  _inherits(OrbitalForecastCalculation, _OrbitalForecast_1$Or);
-  return _createClass(OrbitalForecastCalculation, [{
-    key: "func",
-    value: function func() {
-      return this.contoller.signal.aborted;
-    }
-  }, {
-    key: "action",
-    value: function action() {
-      // eslint-disable-next-line no-var
-      var rt = this.runtime.getTimeProvider();
-      var t = rt.getTime();
-      this.stopWatch.stop();
-      var item = {
-        orbitalTime: t,
-        x: this.get("x"),
-        y: this.get("y"),
-        z: this.get("z"),
-        vx: this.get("u"),
-        vy: this.get("v"),
-        vz: this.get("w"),
-        duration: this.stopWatch.getTotalTime()
-      };
-      this.stopWatch.start();
-      this.list.push(item);
-    }
-  }, {
-    key: "getResult",
-    value: function getResult() {
-      return this.list;
-    }
-  }, {
-    key: "set",
-    value: function set(condition) {
-      this.condition = condition;
-      this.alias.setAliasValue("x", condition.x);
-      this.alias.setAliasValue("y", condition.y);
-      this.alias.setAliasValue("z", condition.z);
-      this.alias.setAliasValue("u", condition.vx);
-      this.alias.setAliasValue("v", condition.vy);
-      this.alias.setAliasValue("w", condition.vz);
-      this.list = [];
-      var processor = new RungeProcessor_1.RungeProcessor();
-      this.runtime = new DataRuntimeConsumerODE_1.DataRuntimeConsumerODE(this.dc, processor);
-    }
-  }, {
-    key: "performFixedStepCalculation",
-    value: function performFixedStepCalculation() {
-      this.stopWatch = new StopWatch_1.StopWatch();
-      this.stopWatch.start();
-      var p = new PerformerMeasuremets_1.PefrormerMeasuremets();
-      p.performFixedStepCalculation(this.runtime, this.condition.begin, 1, this.condition.end, this, this.act);
-    }
-  }, {
-    key: "get",
-    value: function get(i) {
-      var variable = this.map.get(i);
-      return this.performer.convertFromAny(variable === null || variable === void 0 ? void 0 : variable.getMeasurementValue());
-    }
-  }]);
-}(OrbitalForecast_1.OrbitalForecast);
-exports.OrbitalForecastCalculation = OrbitalForecastCalculation;
-;
-},{"../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor":"src/Library/Measurements/DifferentialEquations/Processors/RungeProcessor.ts","../../Library/Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts","../../Library/Performer":"src/Library/Performer.ts","../../Library/Runtime/DataRuntimeConsumerODE":"src/Library/Runtime/DataRuntimeConsumerODE.ts","./OrbitalForecast":"src/Algorithms/OrbitalForecastCalculation/OrbitalForecast.ts","../../Library/Utilities/DateTime/StopWatch":"src/Library/Utilities/DateTime/StopWatch.ts"}],"src/Library/Desktop.js":[function(require,module,exports) {
+},{"../../Library/Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts","../../Library/Runtime/DataRuntimeConsumer":"src/Library/Runtime/DataRuntimeConsumer.ts","../PI":"src/Tests/PI.ts"}],"src/Library/Desktop.js":[function(require,module,exports) {
 "use strict";
 
 /* eslint-disable no-var */
@@ -14126,89 +9229,7 @@ var DataLink = /*#__PURE__*/function (_CategoryArrow_1$Cate) {
   }]);
 }(CategoryArrow_1.CategoryArrow);
 exports.DataLink = DataLink;
-},{"../../CategoryArrow":"src/Library/CategoryArrow.js"}],"src/Library/CategoryObject.js":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.CategoryObject = void 0;
-var Performer_1 = require("./Performer");
-var CategoryObject = /*#__PURE__*/function () {
-  function CategoryObject(desktop, name) {
-    _classCallCheck(this, CategoryObject);
-    this.types = ["IObject", "ICategoryObject", "CategoryObject"];
-    this.typeName = "CategoryObject";
-    this.performer = new Performer_1.Performer();
-    this.desktop = desktop;
-    this.name = name;
-    desktop.addCategoryObject(this);
-    desktop.addObject(this);
-    this.checker = desktop.getCheck();
-  }
-  return _createClass(CategoryObject, [{
-    key: "getName",
-    value: function getName() {
-      return this.name;
-    }
-  }, {
-    key: "getClassName",
-    value: function getClassName() {
-      return this.typeName;
-    }
-  }, {
-    key: "imlplementsType",
-    value: function imlplementsType(type) {
-      return this.types.indexOf(type) >= 0;
-    }
-  }, {
-    key: "convert",
-    value: function convert(a) {
-      return this.performer.convertFromAny(a);
-    }
-  }, {
-    key: "getDesktop",
-    value: function getDesktop() {
-      return this.desktop;
-    }
-  }, {
-    key: "getObject",
-    value: function getObject() {
-      return this.obj;
-    }
-  }, {
-    key: "setObject",
-    value: function setObject(obj) {
-      this.obj = obj;
-    }
-  }, {
-    key: "getCategoryObjectName",
-    value: function getCategoryObjectName() {
-      return this.name;
-    }
-  }, {
-    key: "check",
-    value: function check(x) {
-      if (this.checker == undefined) {
-        return false;
-      }
-      return this.checker.check(x);
-    }
-  }, {
-    key: "getObjectT",
-    value: function getObjectT(s, type) {
-      return this.performer.convertObject(s, type);
-    }
-  }]);
-}();
-exports.CategoryObject = CategoryObject;
-},{"./Performer":"src/Library/Performer.ts"}],"src/Library/Measurements/DataConsumer.js":[function(require,module,exports) {
+},{"../../CategoryArrow":"src/Library/CategoryArrow.js"}],"src/Library/Measurements/DataConsumer.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -14409,7 +9430,98 @@ var UpdateAction = /*#__PURE__*/function () {
     }
   }]);
 }();
-},{"../CategoryObject":"src/Library/CategoryObject.js","../Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.js","../Performer":"src/Library/Performer.js"}],"src/Library/Measurements/PerformerMeasuremets.js":[function(require,module,exports) {
+},{"../CategoryObject":"src/Library/CategoryObject.ts","../Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.ts","../Performer":"src/Library/Performer.js"}],"src/Library/Measurements/DataConsumerBoolFunc.js":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DataConsumerBoolFunc = void 0;
+var Performer_1 = require("../Performer");
+var DataConsumerBoolFunc = /*#__PURE__*/function () {
+  function DataConsumerBoolFunc(dataConsumer, name) {
+    _classCallCheck(this, DataConsumerBoolFunc);
+    this.performer = new Performer_1.Performer();
+    this.measurement = this.performer.getMeasurementDC(dataConsumer, name);
+  }
+  return _createClass(DataConsumerBoolFunc, [{
+    key: "func",
+    value: function func() {
+      var res = this.measurement.getMeasurementValue();
+      if (res != undefined) {
+        return this.performer.convertFromAny(res);
+      }
+      return false;
+    }
+  }]);
+}();
+exports.DataConsumerBoolFunc = DataConsumerBoolFunc;
+},{"../Performer":"src/Library/Performer.js"}],"src/Library/Measurements/TimeMeasurementProvider.js":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TimeMeasurementProvider = void 0;
+var TimeMeasurementProvider = /*#__PURE__*/function () {
+  function TimeMeasurementProvider() {
+    _classCallCheck(this, TimeMeasurementProvider);
+    this.time = 0;
+  }
+  return _createClass(TimeMeasurementProvider, [{
+    key: "getMeasurementName",
+    value: function getMeasurementName() {
+      return "Time";
+    }
+  }, {
+    key: "getMeasurementType",
+    value: function getMeasurementType() {
+      return 0;
+    }
+  }, {
+    key: "getMeasurementValue",
+    value: function getMeasurementValue() {
+      return this.time;
+    }
+  }, {
+    key: "getTimeMeasurement",
+    value: function getTimeMeasurement() {
+      return this;
+    }
+  }, {
+    key: "setTime",
+    value: function setTime(time) {
+      this.time = time;
+    }
+  }, {
+    key: "getStep",
+    value: function getStep() {
+      return 0;
+    }
+  }, {
+    key: "setStep",
+    value: function setStep(time) {}
+  }, {
+    key: "getTime",
+    value: function getTime() {
+      return this.time;
+    }
+  }]);
+}();
+exports.TimeMeasurementProvider = TimeMeasurementProvider;
+},{}],"src/Library/Measurements/PerformerMeasuremets.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -14577,7 +9689,7 @@ var PerformerMeasuremets = /*#__PURE__*/function () {
   }]);
 }();
 exports.PerformerMeasuremets = PerformerMeasuremets;
-},{"./DataConsumerBoolFunc":"src/Library/Measurements/DataConsumerBoolFunc.ts","../Performer":"src/Library/Performer.ts","./TimeMeasurementProvider":"src/Library/Measurements/TimeMeasurementProvider.ts"}],"src/Library/Measurements/Variables/Variable.js":[function(require,module,exports) {
+},{"./DataConsumerBoolFunc":"src/Library/Measurements/DataConsumerBoolFunc.js","../Performer":"src/Library/Performer.js","./TimeMeasurementProvider":"src/Library/Measurements/TimeMeasurementProvider.js"}],"src/Library/Measurements/Variables/Variable.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -16837,7 +11949,1517 @@ var ODE_FeedAct = /*#__PURE__*/function (_ODE_Feed_1$ODE_Feed) {
   }]);
 }(ODE_Feed_1.ODE_Feed);
 exports.ODE_FeedAct = ODE_FeedAct;
-},{"../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor":"src/Library/Measurements/DifferentialEquations/Processors/RungeProcessor.ts","../../Library/Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts","../../Library/Performer":"src/Library/Performer.ts","../../Library/Runtime/DataRuntimeConsumerODE":"src/Library/Runtime/DataRuntimeConsumerODE.ts","../ODE_Feed":"src/Tests/ODE_Feed.ts"}],"src/Tests/Density.ts":[function(require,module,exports) {
+},{"../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor":"src/Library/Measurements/DifferentialEquations/Processors/RungeProcessor.ts","../../Library/Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts","../../Library/Performer":"src/Library/Performer.ts","../../Library/Runtime/DataRuntimeConsumerODE":"src/Library/Runtime/DataRuntimeConsumerODE.ts","../ODE_Feed":"src/Tests/ODE_Feed.ts"}],"src/Library/Utilities/DateTime/DateTimeConverter.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DateTimeConverter = void 0;
+var DateTimeConverter = /*#__PURE__*/function () {
+  function DateTimeConverter() {
+    _classCallCheck(this, DateTimeConverter);
+    this.baseOADate = new Date(1899, 12, 30, 0, 0, 0, 0);
+    this.baseDate = new Date(0);
+    this.baseDays = 25569;
+    this.coeff = 86400000;
+    this.coeffI = 1.0 / 86400000.0;
+    this.off = 0;
+    this.off = this.baseDate.getTimezoneOffset() * 60000;
+  }
+  return _createClass(DateTimeConverter, [{
+    key: "toOADate",
+    value: function toOADate(date) {
+      var t = date.getTime();
+      t *= this.coeffI;
+      t += this.baseDays;
+      return t;
+    }
+  }, {
+    key: "fromOADate",
+    value: function fromOADate(date) {
+      var x = date - this.baseDays;
+      x *= this.coeff;
+      return new Date(x + this.off);
+    }
+  }]);
+}();
+exports.DateTimeConverter = DateTimeConverter;
+},{}],"src/Library/RealMatrixProcessor/RealMatrix.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.RealMatrix = void 0;
+var OwnError_1 = require("../ErrorHandler/OwnError");
+var RealMatrix = /*#__PURE__*/function () {
+  function RealMatrix() {
+    _classCallCheck(this, RealMatrix);
+  }
+  return _createClass(RealMatrix, [{
+    key: "partialSquare",
+    value: function partialSquare(x, startIndex, length) {
+      var a = 0;
+      for (var i = 0; i < length; i++) {
+        var c = x[i + startIndex];
+        a += c * c;
+      }
+      return a;
+    }
+  }, {
+    key: "partialNorm",
+    value: function partialNorm(x, startIndex, length) {
+      return Math.sqrt(this.partialSquare(x, startIndex, length));
+    }
+  }, {
+    key: "plusEqual",
+    value: function plusEqual(x, y) {
+      for (var i = 0; i < x.length; i++) {
+        x[i] += y[i];
+      }
+    }
+  }, {
+    key: "setLength",
+    value: function setLength(x, n) {
+      x.fill(0, 0, n - 1);
+    }
+  }, {
+    key: "setLength2",
+    value: function setLength2(x, n, m) {
+      for (var i = 0; i < n; i++) {
+        var y = [];
+        this.setLength(y, m);
+        x.push(y);
+      }
+    }
+  }, {
+    key: "normalize",
+    value: function normalize(inp, outp, offset) {
+      var a = 0;
+      for (var i = offset; i < outp.length + offset; i++) {
+        var b = inp[i];
+        a += b * b;
+      }
+      a = Math.sqrt(a);
+      var c = 1 / a;
+      for (var _i = 0; _i < outp.length; _i++) {
+        outp[_i] = c * inp[_i + offset];
+      }
+      return a;
+    }
+  }, {
+    key: "getNorm",
+    value: function getNorm(vector) {
+      return Math.sqrt(this.square(vector));
+    }
+  }, {
+    key: "copySign",
+    value: function copySign(a, b) {
+      return Math.abs(a) * Math.sign(b);
+    }
+  }, {
+    key: "invertA",
+    value: function invertA(a) {
+      var x = [];
+      var n = a.length;
+      this.setLength2(x, n, n);
+      this.invert(a, x);
+      return x;
+    }
+  }, {
+    key: "invert",
+    value: function invert(a, aInverted) {
+      var e = 0;
+      var y = 0;
+      var det = 0;
+      var w = 0;
+      var d = 0;
+      var d1 = 0;
+      var i = 0;
+      var j = 0;
+      var k = 0;
+      var ir = 0;
+      var ip = 0;
+      var n = a.length;
+      var jz = [];
+      var c = [0];
+      var ab = [0];
+      jz.fill(0, 0, n - 1);
+      c.fill(0, 0, n - 1);
+      ab.fill(0, 0, n - 1);
+      for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+          aInverted[i][j] = a[i][j];
+        }
+      }
+      for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+          e = Math.abs(aInverted[i][j]);
+          if (d < e) d = e;
+        }
+      }
+      d1 = 1 / d;
+      for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+          aInverted[i][j] *= d1;
+        }
+      }
+      e = 1.0e-26;
+      det = 1;
+      for (i = 0; i < n; i++) {
+        jz[i] = i;
+      }
+      for (i = 0; i < n; i++) {
+        k = i;
+        y = aInverted[i][i];
+        ir = i - 1;
+        ip = i + 1;
+        if (ip < n) {
+          for (j = ip; j < n; j++) {
+            w = aInverted[i][j];
+            if (Math.abs(w) > Math.abs(y)) {
+              k = j;
+              y = w;
+            }
+          }
+        }
+        det *= y;
+        y = 1.0 / y;
+        for (j = 0; j < n; j++) {
+          c[j] = aInverted[j][k];
+          aInverted[j][k] = aInverted[j][i];
+          aInverted[j][i] = -c[j] * y;
+          ab[j] = aInverted[i][j] * y;
+          aInverted[i][j] = ab[j];
+        }
+        aInverted[i][i] = y;
+        j = jz[i];
+        jz[i] = jz[k];
+        jz[k] = j;
+        k = 0;
+        do {
+          if (k <= ir || k >= ip) {
+            j = 0;
+            do {
+              if (j <= ir || j >= ip) {
+                aInverted[k][j] -= ab[j] * c[k];
+              }
+              j++;
+            } while (j < n);
+          }
+          k++;
+        } while (k < n);
+      }
+      i = 0;
+      do {
+        k = jz[i];
+        if (k != i) {
+          for (j = 0; j < n; j++) {
+            w = aInverted[i][j];
+            aInverted[i][j] = aInverted[k][j];
+            aInverted[k][j] = w;
+          }
+          ip = jz[i];
+          jz[i] = jz[k];
+          jz[k] = ip;
+          det = -det;
+        } else {
+          i++;
+        }
+      } while (i < n);
+      d1 = 1.0 / d;
+      for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+          aInverted[i][j] *= d1;
+        }
+      }
+    }
+  }, {
+    key: "det",
+    value: function det(a) {
+      var A = [];
+      var n = a.length;
+      this.setLength2(A, n, n);
+      for (var ii = 0; ii < n; ii++) {
+        for (var jj = 0; jj < n; jj++) {
+          A[ii][jj] = a[ii][jj];
+        }
+      }
+      var bb = false;
+      var MAX = 0;
+      var D = 1;
+      var T = 0;
+      var k,
+        i,
+        j = 0;
+      var z = 0;
+      for (k = 0; k < n; k++) {
+        MAX = 0;
+        for (i = k; i < n; i++) {
+          T = A[i][k];
+          if (!(T == 0)) {
+            MAX = T;
+            j = i;
+            bb = true;
+          }
+          if (bb) {
+            break;
+          }
+        }
+        if (MAX == 0) {
+          return z;
+        }
+        if (j != k) {
+          D = -D;
+          for (i = k; i < n; i++) {
+            T = A[j][i];
+            A[j][i] = A[k][i];
+            A[k][i] = T;
+          }
+        }
+        for (i = k + 1; i < n; i++) {
+          T = A[i][k] / MAX;
+          for (j = k + 1; j < n; j++) {
+            A[i][j] = A[i][j] - T * A[k][j];
+          }
+        }
+        D = D * A[k][k];
+      }
+      return D;
+    }
+  }, {
+    key: "scalarProduct",
+    value: function scalarProduct(x, y) {
+      var sum = 0;
+      for (var i = 0; i < x.length; i++) {
+        sum += x[i] * y[i];
+      }
+      return sum;
+    }
+  }, {
+    key: "multiply",
+    value: function multiply(vector, coefficient) {
+      for (var i = 0; i < vector.length; i++) {
+        vector[i] = vector[i] * coefficient;
+      }
+    }
+  }, {
+    key: "multiplyMatrix",
+    value: function multiplyMatrix(a, b, c) {
+      var a1 = a.length;
+      var a2 = a[0].length;
+      var b1 = b.length;
+      var b2 = b[0].length;
+      var c1 = c.length;
+      var c2 = c[0].length;
+      if (a2 != b1 || a1 != c1 || b2 != c1) {
+        throw new OwnError_1.OwnError("Illegal matrix product dimension", "", "");
+      }
+      var i,
+        j,
+        k = 0;
+      for (i = 0; i < c1; i++) {
+        for (j = 0; j < c2; j++) {
+          c[i][j] = 0;
+        }
+      }
+      for (i = 0; i < a1; i++) {
+        for (j = 0; j < b2; j++) {
+          for (k = 0; k < a2; k++) {
+            c[i][j] += a[i][k] * b[k][j];
+          }
+        }
+      }
+    }
+  }, {
+    key: "square",
+    value: function square(vec) {
+      var a = 0;
+      var _iterator = _createForOfIteratorHelper(vec),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var x = _step.value;
+          a += x * x;
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      return a;
+    }
+  }, {
+    key: "norm",
+    value: function norm(vec) {
+      return Math.sqrt(this.square(vec));
+    }
+  }, {
+    key: "multiplyRight",
+    value: function multiplyRight(matrix, vector, product) {
+      if (matrix[0].length != vector.length || matrix.length != product.length) {
+        throw new OwnError_1.OwnError("Illegal dimension of vector or matrix product", "");
+      }
+      var i,
+        j = 0;
+      for (i = 0; i < product.length; i++) {
+        product[i] = 0;
+      }
+      for (i = 0; i < matrix.length; i++) {
+        for (j = 0; j < vector.length; j++) {
+          product[i] += matrix[i][j] * vector[j];
+        }
+      }
+    }
+  }, {
+    key: "multiplyLeft",
+    value: function multiplyLeft(vector, matrix, product) {
+      if (matrix.length != vector.length || matrix[0].length != product.length) {
+        throw new OwnError_1.OwnError("Illegal dimension of vector or matrix product", "");
+      }
+      var i,
+        j = 0;
+      for (i = 0; i < product.length; i++) {
+        product[i] = 0;
+      }
+      for (i = 0; i < matrix[0].length; i++) {
+        for (j = 0; j < vector.length; j++) {
+          product[i] += matrix[j][i] * vector[j];
+        }
+      }
+    }
+  }, {
+    key: "transpose",
+    value: function transpose(x, y) {
+      for (var i = 0; i < x.length; i++) {
+        for (var j = 0; j < x[0].length; j++) {
+          y[j][i] = x[i][j];
+        }
+      }
+    }
+  }, {
+    key: "htah",
+    value: function htah(h, a, result) {
+      for (var i = 0; i < result.length; i++) {
+        for (var j = 0; j < result[0].length; j++) {
+          result[i][j] = 0;
+          for (var k = 0; k < a.length; k++) {
+            for (var l = 0; l < a[0].length; l++) {
+              result[i][j] += h[k][i] * a[k][l] * h[l][j];
+            }
+          }
+        }
+      }
+    }
+  }, {
+    key: "addMatrix",
+    value: function addMatrix(x, y, z) {
+      for (var i = 0; i < x.length; i++) {
+        for (var j = 0; j < x[0].length; j++) {
+          z[i][j] = x[i][j] + y[i][j];
+        }
+      }
+    }
+  }, {
+    key: "addVector",
+    value: function addVector(x, y, z) {
+      for (var i = 0; i < x.length; i++) {
+        z[i] = x[i] + y[i];
+      }
+    }
+  }, {
+    key: "diffatrix",
+    value: function diffatrix(x, y, z) {
+      for (var i = 0; i < x.length; i++) {
+        for (var j = 0; j < x[0].length; j++) {
+          z[i][j] = x[i][j] - y[i][j];
+        }
+      }
+    }
+  }, {
+    key: "diffVector",
+    value: function diffVector(x, y, z) {
+      for (var i = 0; i < x.length; i++) {
+        z[i] = x[i] + y[i];
+      }
+    }
+  }, {
+    key: "lu_Factor",
+    value: function lu_Factor(A, indx) {
+      var i = 0,
+        j = 0,
+        k = 0;
+      var jp = 0;
+      var t = 0;
+      var M = A.length;
+      var N = A[0].length;
+      var minMN = M < N ? M : N;
+      for (j = 0; j < minMN; j++) {
+        // find pivot in column j and  test for singularity.
+        jp = j;
+        t = Math.abs(A[j][j]);
+        for (i = j + 1; i < M; i++) {
+          if (Math.abs(A[i][j]) > Math.abs(t)) {
+            jp = i;
+            t = Math.abs(A[i][j]);
+          }
+        }
+        indx[j] = jp;
+        // jp now has the index of maximum element
+        // of column j, below the diagonal
+        var zero = 0;
+        if (A[jp][j] == zero) {
+          return false; // factorization failed because of zero pivot
+        }
+        if (jp != j)
+          // swap rows j and jp
+          {
+            for (k = 0; k < N; k++) {
+              t = A[j][k];
+              A[j][k] = A[jp][k];
+              A[jp][k] = t;
+            }
+          }
+        if (j < M - 1)
+          // compute elements j+1:M of jth column
+          {
+            // note A(j,j), was A(jp,p) previously which was
+            // guarranteed not to be zero (Label #1)
+            var y = 1;
+            var recp = y / A[j][j];
+            for (k = j + 1; k < M; k++) {
+              A[k][j] *= recp;
+            }
+          }
+        if (j < minMN - 1) {
+          // rank-1 update to trailing submatrix:   E = E - x*y;
+          //
+          // E is the region A(j+1:M, j+1:N)
+          // x is the column vector A(j+1:M,j)
+          // y is row vector A(j,j+1:N)
+          var ii = void 0,
+            jj = 0;
+          for (ii = j + 1; ii < M; ii++) {
+            for (jj = j + 1; jj < N; jj++) {
+              A[ii][jj] -= A[ii][j] * A[j][jj];
+            }
+          }
+        }
+      }
+      return true;
+    }
+  }, {
+    key: "lu_Solve",
+    value: function lu_Solve(A, indx, b) {
+      var i,
+        ii = -1,
+        ip = 0,
+        j;
+      var n = b.length;
+      var sum = 0;
+      for (i = 0; i < n; i++) {
+        ip = indx[i];
+        sum = b[ip];
+        b[ip] = b[i];
+        if (ii >= 0) {
+          for (j = ii; j < i; j++) {
+            sum -= A[i][j] * b[j];
+          }
+        } else if (Math.abs(sum) > 0) {
+          ii = i;
+        }
+        b[i] = sum;
+      }
+      for (i = n - 1; i >= 0; i--) {
+        sum = b[i];
+        for (j = i + 1; j < n; j++) {
+          sum -= A[i][j] * b[j];
+        }
+        b[i] = sum / A[i][i];
+      }
+      return true;
+    }
+  }, {
+    key: "solve",
+    value: function solve(a, indx, b) {
+      if (!this.lu_Factor(a, indx)) {
+        return false;
+      }
+      if (!this.lu_Solve(a, indx, b)) {
+        return false;
+      }
+      return true;
+    }
+  }]);
+}();
+exports.RealMatrix = RealMatrix;
+},{"../ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.ts"}],"src/ExternalObjects/Libraries/Geography/GeoCoordinates.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GeoCoordinates = void 0;
+var GeoCoordinates = /*#__PURE__*/function () {
+  function GeoCoordinates() {
+    _classCallCheck(this, GeoCoordinates);
+    this.longitude = 0;
+    this.latitude = 0;
+  }
+  return _createClass(GeoCoordinates, [{
+    key: "getLongitude",
+    value: function getLongitude() {
+      return this.longitude;
+    }
+  }, {
+    key: "setLongitude",
+    value: function setLongitude(longitude) {
+      this.longitude = longitude;
+    }
+  }, {
+    key: "getLatitude",
+    value: function getLatitude() {
+      return this.latitude;
+    }
+  }, {
+    key: "setLatitude",
+    value: function setLatitude(latitude) {
+      this.latitude = latitude;
+    }
+  }]);
+}();
+exports.GeoCoordinates = GeoCoordinates;
+},{}],"src/ExternalObjects/Libraries/Sun.Service/SunCoordinates.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SunCoordinates = void 0;
+var SunCoordinates = /*#__PURE__*/function () {
+  function SunCoordinates() {
+    _classCallCheck(this, SunCoordinates);
+    this.azimuth = 0;
+    this.zenithAngle = 0;
+  }
+  return _createClass(SunCoordinates, [{
+    key: "getAzimuth",
+    value: function getAzimuth() {
+      return this.azimuth;
+    }
+  }, {
+    key: "setAzimuth",
+    value: function setAzimuth(azimuth) {
+      this.azimuth = azimuth;
+    }
+  }, {
+    key: "getZenithAngle",
+    value: function getZenithAngle() {
+      return this.zenithAngle;
+    }
+  }, {
+    key: "setZenithAngle",
+    value: function setZenithAngle(zenithAngle) {
+      this.zenithAngle = zenithAngle;
+    }
+  }]);
+}();
+exports.SunCoordinates = SunCoordinates;
+},{}],"src/ExternalObjects/Libraries/Sun.Service/SunPosition.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SunPosition = void 0;
+var SunPosition = /*#__PURE__*/function () {
+  function SunPosition() {
+    _classCallCheck(this, SunPosition);
+    this.dEarthMeanRadius = 6371.01; // In km
+    this.dAstronomicalUnit = 149597890; // In km
+  }
+  return _createClass(SunPosition, [{
+    key: "convertToJulian",
+    value: function convertToJulian(date) {
+      var Day = date.getDate();
+      var Month = date.getMonth() + 1;
+      var Year = date.getFullYear();
+      if (Month < 3) {
+        Month = Month + 12;
+        Year = Year - 1;
+      }
+      var JulianDay = Day + Math.floor((153 * Month - 457) / 5) + 365 * Year + Math.floor(Year / 4) - Math.floor(Year / 100) + Math.floor(Year / 400) + 1721119;
+      return JulianDay;
+    }
+    /// <summary>
+    /// Gets position of Sun
+    /// </summary>
+    /// <param name="time"></param>
+    /// <param name="dDeclination"></param>
+    /// <param name="dRightAscension"></param>
+  }, {
+    key: "getPositionFull",
+    value: function getPositionFull(time, dDeclination, dRightAscension, dElapsedJulianDays, dDecimalHours) {
+      var h = time.getHours();
+      var m = time.getMinutes();
+      var s = time.getSeconds();
+      var ss = s / 60.0;
+      var mm = (m + ss) / 60;
+      dDecimalHours[0] = h + ss + mm;
+      dElapsedJulianDays[0] = this.convertToJulian(time) - 0.5 - 2451545.0 + dDecimalHours[0] / 24.0;
+      // Calculate ecliptic coordinates (ecliptic longitude and obliquity of the
+      // ecliptic in radians but without limiting the angle to be less than 2*Pi
+      // (i.e., the result may be greater than 2*Pi)
+      var dMeanLongitude = 0;
+      var dMeanAnomaly = 0;
+      ;
+      var dOmega = 2.1429 - 0.0010394594 * dElapsedJulianDays[0];
+      dMeanLongitude = 4.8950630 + 0.017202791698 * dElapsedJulianDays[0]; // Radians
+      dMeanAnomaly = 6.2400600 + 0.0172019699 * dElapsedJulianDays[0];
+      var dEclipticLongitude = dMeanLongitude + 0.03341607 * Math.sin(dMeanAnomaly) + 0.00034894 * Math.sin(2 * dMeanAnomaly) - 0.0001134 - 0.0000203 * Math.sin(dOmega);
+      var dEclipticObliquity = 0.4090928 - 6.2140e-9 * dElapsedJulianDays[0] + 0.0000396 * Math.cos(dOmega);
+      // Calculate celestial coordinates ( right ascension and declination ) in radians
+      // but without limiting the angle to be less than 2*Pi (i.e., the result may be
+      // greater than 2*Pi)
+      var dSin_EclipticLongitude = Math.sin(dEclipticLongitude);
+      var dY = Math.cos(dEclipticObliquity) * dSin_EclipticLongitude;
+      var dX = Math.cos(dEclipticLongitude);
+      dRightAscension[0] = Math.atan2(dY, dX);
+      if (dRightAscension[0] < 0.0) {
+        dRightAscension[0] = dRightAscension[0] + 2 * Math.PI;
+      }
+      dDeclination[0] = Math.asin(Math.sin(dEclipticObliquity) * dSin_EclipticLongitude);
+    }
+    /// <summary>
+    /// Gets position of Sun
+    /// </summary>
+    /// <param name="udtTime">Time</param>
+    /// <param name="udtLocation">Location</param>
+    /// <param name="udtSunCoordinates">Sun coorditates</param>
+    /// <param name="dDeclination">Declination</param>
+    /// <param name="dRightAscension">Right Ascension </param>
+  }, {
+    key: "getPosition",
+    value: function getPosition(udtTime, udtLocation, udtSunCoordinates, dDeclination, dRightAscension, dElapsedJulianDays, dDecimalHours) {
+      // Auxiliary variables
+      this.getPositionFull(udtTime, dDeclination, dRightAscension, dElapsedJulianDays, dDecimalHours);
+      var dGreenwichMeanSiderealTime = 6.6974243242 + 0.0657098283 * dElapsedJulianDays[0] + dDecimalHours[0];
+      var dLocalMeanSiderealTime = dGreenwichMeanSiderealTime * 15 * Math.PI / 180.0 + udtLocation.getLongitude();
+      var dHourAngle = dLocalMeanSiderealTime - dRightAscension[0];
+      var dLatitudeInRadians = udtLocation.getLatitude();
+      var dCos_Latitude = Math.cos(dLatitudeInRadians);
+      var dSin_Latitude = Math.sin(dLatitudeInRadians);
+      var dCos_HourAngle = Math.cos(dHourAngle);
+      var za = Math.acos(dCos_Latitude * dCos_HourAngle * Math.cos(dDeclination[0]) + Math.sin(dDeclination[0]) * dSin_Latitude);
+      udtSunCoordinates.setZenithAngle(za);
+      var dY = -Math.sin(dHourAngle);
+      var dX = Math.tan(dDeclination[0]) * dCos_Latitude - dSin_Latitude * dCos_HourAngle;
+      udtSunCoordinates.setAzimuth(Math.atan2(dY, dX));
+      if (udtSunCoordinates.getAzimuth() < 0.0) {
+        udtSunCoordinates.setAzimuth(udtSunCoordinates.getAzimuth() + 2 * Math.PI);
+      }
+      // Parallax Correction
+      var dParallax = this.dEarthMeanRadius / this.dAstronomicalUnit * Math.sin(udtSunCoordinates.getZenithAngle());
+      za = udtSunCoordinates.getZenithAngle() + dParallax;
+      udtSunCoordinates.setZenithAngle(za);
+    }
+  }]);
+}();
+exports.SunPosition = SunPosition;
+},{}],"src/ExternalObjects/Libraries/Sun.Service/SunTime.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SunTime = void 0;
+var SunTime = /*#__PURE__*/function () {
+  function SunTime() {
+    _classCallCheck(this, SunTime);
+    this.coeff = Math.PI / 360.0;
+  }
+  return _createClass(SunTime, [{
+    key: "CalculateGreenwichSiderealTimeFromDate",
+    value: function CalculateGreenwichSiderealTimeFromDate(dateTimeUtc) {
+      var x = this.CalculateJulianDate(dateTimeUtc);
+      x = this.CalculateJulianCentury(x);
+      x = this.CalculateGreenwichSiderealTime(x);
+      return x;
+    }
+  }, {
+    key: "CalculateJulianDate",
+    value: function CalculateJulianDate(dateTimeUtc) {
+      // This is a simplified calculation for demonstration.
+      // For extreme precision, use more robust algorithms.
+      var h = dateTimeUtc.getHours();
+      var y = dateTimeUtc.getFullYear();
+      var m = dateTimeUtc.getMonth() + 1;
+      var mm = dateTimeUtc.getMinutes();
+      var s = dateTimeUtc.getSeconds();
+      var ms = dateTimeUtc.getMilliseconds();
+      var d = dateTimeUtc.getDate();
+      var a = Math.floor((12.0 - h) / 24.0);
+      var JD = 1721424.5 + d + Math.floor((y - 1) / 4.0) - Math.floor((y - 1) / 100.0) + Math.floor((y - 1) / 400.0) + Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + mm / 60.0 + s / 3600.0 + h / 24.0 + ms / 3600000.0 - a;
+      return JD;
+    }
+  }, {
+    key: "CalculateJulianCentury",
+    value: function CalculateJulianCentury(julianDate) {
+      // J2000.0 is Julian Date 2451545.0
+      return (julianDate - 2451545.0) / 36525.0;
+    }
+    // This is a common approximation for GST. More precise formulas exist.
+  }, {
+    key: "CalculateGreenwichSiderealTime",
+    value: function CalculateGreenwichSiderealTime(julianCentury) {
+      var gstDegrees = 280.46061837 + 360.98564736629 * julianCentury + 0.000387933 * Math.pow(julianCentury, 2) - Math.pow(julianCentury, 3) / 38710000.0;
+      gstDegrees *= this.coeff;
+      // Normalize to 0-360 range
+      gstDegrees = gstDegrees % (2 * Math.PI); //% 360.0;
+      if (gstDegrees < 0) {
+        gstDegrees += 2 * Math.PI;
+      }
+      return gstDegrees;
+    }
+  }]);
+}();
+exports.SunTime = SunTime;
+},{}],"src/ExternalObjects/Components/Atmosphere/AtmospherePure.ts":[function(require,module,exports) {
+"use strict";
+
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.AtmospherePure = void 0;
+var RealMatrix_1 = require("../../../Library/RealMatrixProcessor/RealMatrix");
+var DateTimeConverter_1 = require("../../../Library/Utilities/DateTime/DateTimeConverter");
+var GeoCoordinates_1 = require("../../Libraries/Geography/GeoCoordinates");
+var SunCoordinates_1 = require("../../Libraries/Sun.Service/SunCoordinates");
+var SunPosition_1 = require("../../Libraries/Sun.Service/SunPosition");
+var SunTime_1 = require("../../Libraries/Sun.Service/SunTime");
+var AtmospherePure = /*#__PURE__*/function () {
+  function AtmospherePure() {
+    _classCallCheck(this, AtmospherePure);
+    this.ASoL = [0];
+    this.DSoL = [0];
+    this.ed = [0];
+    this.eh = [0];
+    //  protected Object[] ob = new Object[2];
+    //  public String[] sins = new String[] { "t", "x", "y", "z" };
+    // public String[] sous = new String[] { "Density" };
+    this.mac = [31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365];
+    this.f01 = [-14.608, 0.8969, 67.596, -0.4016, 0.3031E-2, 0.2344E-5, 0.130, 0.14E-3, 3.733, -507.95, 189.85, 4.2, 0.653, -0.7379, 0.8524E-2, -0.5328E-5, -0.1767, 0.1859E-2, -0.1172E-5, 0.80, 2.0, -14.469, 0.8517, 56.026, -0.3957, 0.2988E-2, 0.2246E-5, -0.172, 0.217E-2, 3.784, -566.11, 200.97, 4.1, 0.621, -0.7379, 0.8524E-2, -0.5328E-5, -0.1785, 0.1848E-2, -0.1211E-5, 0.89, 2.0, -15.415, 0.7729, 61.836, -0.3898, 0.2945E-2, 0.2148E-5, -0.274, 0.257E-2, 4.048, -632.63, 230.76, 4.4, 0.635, -0.7379, 0.8524E-2, -0.5328E-5, -0.1802, 0.1838E-2, -0.125E-5, 1.0, 3.0, -16.559, 0.6982, 75.401, -0.3839, 0.2902E-2, 0.2051E-5, -0.247, 0.199E-2, 3.495, -707.58, 278.35, 4.7, 0.632, -0.7379, 0.8524E-2, -0.5328E-5, -0.182, 0.1826E-2, -0.1289E-5, 1.0, 4.0, -18.219, 0.5863, 98.336, -0.3472, 0.2562E-2, 0.2344E-5, -0.201, 0.161E-2, 3.2, -712.0, 290.0, 4.5, 0.611, -0.7379, 0.8524E-2, -0.5328E-5, -0.1855, 0.1805E-2, -0.1367E-5, 1.0, 5.0, -19.068, 0.5177, 109.999, -0.3271, 0.2305E-2, 0.2539E-5, -0.194, 0.134E-2, 3.0, -727.0, 300.0, 4.5, 0.611, -0.7379, 0.8524E-2, -0.5328E-5, -0.1891, 0.1783E-2, -0.1445E-5, 1.0, 5.0];
+    this.f0 = [-18.873, 0.666, 118.013, -0.3644, 0.2618E-2, 0.349E-5, -1.0445, 0.9532E-2, -6.4688, -507.95, 189.85, 4.2, 0.653, -2.6122, 0.02935, -0.6318E-4, -0.4422, 0.4809E-2, -0.9367E-5, 0.8, 2.0, -19.308, 0.596, 119.285, -0.3525, 0.2508E-2, 0.3579E-5, -0.8181, 0.723E-2, -6.8255, -566.11, 200.97, 4.1, 0.621, -2.6122, 0.2935E-1, -0.6318E-4, -0.4109, 0.443E-2, -0.8384E-5, 0.89, 2.0, -19.532, 0.5519, 119.744, -0.3406, 0.2398E-2, 0.3667E-5, -0.6404, 0.5594E-2, -4.2892, -632.63, 230.76, 4.4, 0.635, -2.6122, 0.2935E-1, -0.6318E-4, -0.3814, 0.4074E-2, -0.7461E-5, 1.0, 3.0, -19.592, 0.5296, 119.828, -0.3288, 0.2289E-2, 0.3752E-5, -0.4438, 0.3836E-2, -1.4294, -707.58, 278.35, 4.7, 0.632, -2.6122, 0.2935E-1, -0.6318E-4, -0.349, 0.3682E-2, -0.6444E-5, 1.0, 4.0, -19.614, 0.5032, 119.846, -0.2931, 0.1961E-2, 0.4012E-5, -0.4581, 0.4157E-2, -2.6263, -712.0, 290.0, 4.5, 0.611, -2.6122, 0.2935E-1, -0.6318E-4, -0.2882, 0.2946E-2, -0.4538E-5, 1.0, 5.0, -19.682, 0.4796, 119.927, -0.2016, 0.9112E-3, 0.6411E-5, -0.2977, 0.2401E-2, 0.5736, -727.0, 300.0, 4.5, 0.611, -2.6122, 0.02935, -0.6318E-4, -0.2255, 0.2188E-2, -0.257E-5, 1.0, 5.0];
+    this.ad = [-0.067, -0.088, -0.094, -0.088, -0.053, -0.005, 0.039, 0.09, 0.123, 0.133, 0.123, 0.099, 0.059, 0.017, -0.027, -0.065, -0.103, -0.136, -0.156, -0.172, -0.18, -0.183, -0.179, -0.163, -0.133, -0.085, -0.018, 0.059, 0.123, 0.161, 0.17, 0.156, 0.119, 0.073, 0.027, -0.023, -0.055, -0.078];
+    this.KDNEY = [31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    this.N10 = 0;
+    this.f1 = [];
+    this.ifa = [150, 6, 140];
+    this.if1 = [75, 100, 125, 150, 200, 250];
+    this.date = [0, 0, 0];
+    this.r = [0, 0, 0];
+    this.y = [0, 0, 0];
+    this.ff0 = [];
+    this.ff1 = [];
+    this.ome = 7.292115085E-5;
+    this.dd = [0, 0, 0, 0];
+    this.xout = [0, 0, 0];
+    this.alphastar = [0];
+    this.h = [0];
+    this.coordinates = new GeoCoordinates_1.GeoCoordinates();
+    this.sunCoordinates = new SunCoordinates_1.SunCoordinates();
+    this.realMatrix = new RealMatrix_1.RealMatrix();
+    this.sunPosition = new SunPosition_1.SunPosition();
+    this.sunTime = new SunTime_1.SunTime();
+    this.dateTimeConverter = new DateTimeConverter_1.DateTimeConverter();
+    this.initSelf();
+    this.setIf(this.ifa);
+  }
+  return _createClass(AtmospherePure, [{
+    key: "set",
+    value: function set(x, n) {
+      for (var i = 0; i < n; i++) {
+        x.push(0);
+      }
+    }
+  }, {
+    key: "initSelf",
+    value: function initSelf() {
+      if (this.ff0.length > 0) {
+        return;
+      }
+      var n = Math.floor(this.f0.length / 21);
+      for (var i = 0; i < n; i++) {
+        this.ff0.push([]);
+        this.ff1.push([]);
+      }
+      for (var _i = 0; _i < this.ff0.length; _i++) {
+        var fff = [];
+        var fff1 = [];
+        this.set(fff, 21);
+        this.set(fff1, 21);
+        this.ff0[_i] = fff;
+        this.ff1[_i] = fff1;
+        var j = _i * 21;
+        for (var k = 0; k < 21; k++) {
+          var _n = k + j;
+          fff[k] = this.f0[_n];
+          fff1[k] = this.f01[_n];
+        }
+      }
+    }
+  }, {
+    key: "setIf",
+    value: function setIf(value) {
+      this.N10 = 0;
+      for (var i = 0; i < 6; i++) {
+        if (this.if1[i] == value[0]) {
+          break;
+        } else {
+          this.N10++;
+        }
+      }
+      this.ifa[0] = value[0];
+      this.ifa[1] = value[1];
+      this.ifa[2] = value[2];
+    }
+  }, {
+    key: "atmosphere",
+    value: function atmosphere(t, x) {
+      var r2 = x[0] * x[0] + x[1] * x[1];
+      var lat = Math.atan2(x[2], Math.sqrt(r2));
+      var lon = Math.atan2(x[1], x[0]);
+      this.coordinates.setLatitude(lat);
+      this.coordinates.setLongitude(lon);
+      var tday = t / 86400;
+      var dt = this.dateTimeConverter.fromOADate(tday);
+      var hh = this.realMatrix.normalize(x, this.y, 0);
+      var ho = dt.getHours();
+      var mi = dt.getMinutes();
+      var ss = dt.getSeconds();
+      var it = Math.floor(t);
+      var sss = 1000 * (t - it);
+      var tt = (ho * 60 + mi) * 60 + ss + .001 * sss;
+      this.sunPosition.getPosition(dt, this.coordinates, this.sunCoordinates, this.ASoL, this.DSoL, this.ed, this.eh);
+      var alphastar = this.sunTime.CalculateGreenwichSiderealTimeFromDate(dt);
+      this.date[0] = dt.getDate();
+      this.date[1] = dt.getMonth() + 1;
+      this.date[2] = dt.getFullYear();
+      var rho = this.atm(x, tt, this.DSoL[0], this.ASoL[0], alphastar, this.h, this.date);
+      var s = "".concat(rho);
+      var b = s.includes("NaN");
+      if (b) {
+        var i = 0;
+      }
+      return rho;
+    }
+    /// <summary>
+    /// Atmosphere parameters
+    /// </summary>
+    /// 
+  }, {
+    key: "getIf",
+    value: function getIf() {
+      return this.ifa;
+    }
+  }, {
+    key: "rad",
+    value: function rad(x) {
+      var a = 0;
+      for (var i = 0; i < 3; i++) {
+        a += x[i] * x[i];
+      }
+      return Math.sqrt(a);
+    }
+  }, {
+    key: "atm",
+    value: function atm(x, t, alf, del, s0, h, it) {
+      var hh = this.rad(x);
+      for (var i = 0; i < 3; i++) {
+        this.y[i] = x[i] / hh;
+      }
+      h[0] = hh - 6378.140 * (1.0 - 0.335282E-2 * this.y[2] * this.y[2]);
+      if (h[0] <= 180) {
+        this.f1 = this.ff0[this.N10];
+      } else {
+        this.f1 = this.ff1[this.N10];
+      }
+      var N3 = it[1] - 1;
+      var a2 = 0;
+      var dat2 = 0;
+      if (N3 <= 0) a2 = it[0] / 10;else {
+        dat2 = it[1] / 4;
+        if (Math.abs(Math.floor(dat2 + .00001) - dat2) < .0001) a2 = (this.mac[N3 - 1] + 1 + it[0]) / 10.0;else a2 = (this.mac[N3 - 1] + it[0]) / 10.0;
+      }
+      var N2 = Math.floor(a2);
+      var a3 = a2 - N2;
+      N2++;
+      var ad1 = this.ad[N2 - 1] + (this.ad[N2] - this.ad[N2 - 1]) * a3;
+      var gam = alf + this.f1[12] - s0 - this.ome * (t - 10800.0);
+      var cosfi = this.y[2] * Math.sin(del) + Math.cos(del) * (this.y[0] * Math.cos(gam) + this.y[1] * Math.sin(gam));
+      var xk4 = 1 + (this.f1[16] + this.f1[17] * this.h[0] + this.f1[18] * this.h[0] * this.h[0]) * Math.log(this.ifa[1] / this.f1[20] + this.f1[19]);
+      var xk3 = 1 + (this.f1[13] + this.f1[14] * this.h[0] + this.f1[15] * this.h[0] * this.h[0]) * ad1;
+      var cosfi2 = Math.abs((1.0 + cosfi) / 2.0);
+      var xk2 = 1 + (this.f1[6] + this.f1[7] * this.h[0] + this.f1[8] * Math.exp(-(this.h[0] + this.f1[9]) / this.f1[10] * (h[0] + this.f1[9]) / this.f1[10])) * Math.pow(cosfi2, this.f1[11] / 2);
+      var xk1 = 1.0 + (this.f1[3] + this.f1[4] * this.h[0] + this.f1[5] * this.h[0] * this.h[0]) * (this.ifa[2] - this.ifa[0]) / this.ifa[0];
+      var roh = Math.exp(this.f1[0] - this.f1[1] * Math.sqrt(this.h[0] - this.f1[2]));
+      return roh * xk1 * xk2 * xk3 * xk4;
+    }
+  }]);
+}();
+exports.AtmospherePure = AtmospherePure;
+},{"../../../Library/RealMatrixProcessor/RealMatrix":"src/Library/RealMatrixProcessor/RealMatrix.ts","../../../Library/Utilities/DateTime/DateTimeConverter":"src/Library/Utilities/DateTime/DateTimeConverter.ts","../../Libraries/Geography/GeoCoordinates":"src/ExternalObjects/Libraries/Geography/GeoCoordinates.ts","../../Libraries/Sun.Service/SunCoordinates":"src/ExternalObjects/Libraries/Sun.Service/SunCoordinates.ts","../../Libraries/Sun.Service/SunPosition":"src/ExternalObjects/Libraries/Sun.Service/SunPosition.ts","../../Libraries/Sun.Service/SunTime":"src/ExternalObjects/Libraries/Sun.Service/SunTime.ts"}],"src/ExternalObjects/Components/Atmosphere/AtmosphereCategoryObject.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.AtmosphereCategoryObject = void 0;
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+var OwnNotImplemented_1 = require("../../../Library/ErrorHandler/OwnNotImplemented");
+var AtmospherePure_1 = require("./AtmospherePure");
+var Performer_1 = require("../../../Library/Performer");
+var AtmosphereCategoryObject = /*#__PURE__*/function (_AtmospherePure_1$Atm) {
+  function AtmosphereCategoryObject(desktop, name) {
+    var _this;
+    _classCallCheck(this, AtmosphereCategoryObject);
+    _this = _callSuper(this, AtmosphereCategoryObject);
+    _this.name = "";
+    _this.types = ["IObject", "ICategoryObject", "IObjectTransformer", "AtmospherePure", "AtmosphereCategoryObject"];
+    _this.inp = ["t", "x", "y", "z"];
+    _this.ooutp = ["Density"];
+    _this.a = 0;
+    _this.x = [0, 0, 0];
+    _this.performer = new Performer_1.Performer();
+    _this.desktop = desktop;
+    _this.name = name;
+    desktop.addCategoryObject(_this);
+    desktop.addObject(_this);
+    _this.checker = desktop.getCheck();
+    return _this;
+  }
+  _inherits(AtmosphereCategoryObject, _AtmospherePure_1$Atm);
+  return _createClass(AtmosphereCategoryObject, [{
+    key: "getInput",
+    value: function getInput() {
+      return this.inp;
+    }
+  }, {
+    key: "getOutput",
+    value: function getOutput() {
+      return this.ooutp;
+    }
+  }, {
+    key: "getInputType",
+    value: function getInputType(i) {
+      return this.a;
+    }
+  }, {
+    key: "getOutputType",
+    value: function getOutputType(i) {
+      return this.a;
+    }
+  }, {
+    key: "calculate",
+    value: function calculate(input, output) {
+      var t = this.performer.convertFromAny(input[0]);
+      this.x[0] = this.performer.convertFromAny(input[1]);
+      this.x[1] = this.performer.convertFromAny(input[2]);
+      this.x[2] = this.performer.convertFromAny(input[3]);
+      var r = this.atmosphere(t, this.x);
+      output[0] = r;
+    }
+  }, {
+    key: "getClassName",
+    value: function getClassName() {
+      throw "AtmosphereCategoryObject";
+    }
+  }, {
+    key: "imlplementsType",
+    value: function imlplementsType(type) {
+      return this.types.indexOf(type) > 0;
+    }
+  }, {
+    key: "getName",
+    value: function getName() {
+      return this.name;
+    }
+  }, {
+    key: "getObject",
+    value: function getObject() {
+      throw new OwnNotImplemented_1.OwnNotImplemented();
+    }
+  }, {
+    key: "setObject",
+    value: function setObject(obj) {
+      throw new OwnNotImplemented_1.OwnNotImplemented();
+    }
+  }, {
+    key: "getCategoryObjectName",
+    value: function getCategoryObjectName() {
+      return this.name;
+    }
+  }, {
+    key: "getDesktop",
+    value: function getDesktop() {
+      return this.desktop;
+    }
+  }]);
+}(AtmospherePure_1.AtmospherePure);
+exports.AtmosphereCategoryObject = AtmosphereCategoryObject;
+},{"../../../Library/ErrorHandler/OwnNotImplemented":"src/Library/ErrorHandler/OwnNotImplemented.ts","./AtmospherePure":"src/ExternalObjects/Components/Atmosphere/AtmospherePure.ts","../../../Library/Performer":"src/Library/Performer.ts"}],"src/ExternalObjects/Components/Gravity_36_36/Gravity..ts":[function(require,module,exports) {
+"use strict";
+
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Gravity = void 0;
+var Performer_1 = require("../../../Library/Performer");
+var Gravity = /*#__PURE__*/function () {
+  /*  !!! DELETE AFTER
+            [0]	-5448.34815324	object {double}
+      [1]	-4463.93698421	object {double}
+      [2]	0	object {double}
+  -		output	{object[3]}	object[]
+      [0]	0.0062231496943680161	object {double}
+      [1]	0.0050988376640921027	object {double}
+      [2]	-2.8664480643872004E-08	object {double}
+    */
+  function Gravity() {
+    _classCallCheck(this, Gravity);
+    this.performer = new Performer_1.Performer();
+    this.R = [];
+    this.C = [];
+    this.S = [];
+    this.HP = [];
+    this.CO = [];
+    this.SI = [];
+    this.AR = [];
+    this.CF = [];
+    this.PNK = [];
+    this.ANAI = [];
+    this.SK = [1.732050807568877E0, 1.936491673103709E0, 2.091650066335189E0, 2.218529918662356E0, 2.326813808623286E0, 2.421824596249695E0, 2.506826616960176E0, 2.583977731709147E0, 2.654784752117980E0, 2.720344864917320E0, 2.781483843970261E0, 2.838840060634283E0, 2.892918063839265E0, 2.944124128779573E0, 2.992790634483277E0, 3.039193256447120E0, 3.083563388216997E0, 3.126097306274296E0, 3.166963057815222E0, 3.206305722292480E0, 3.244251489527417E0, 3.280910862053330E0, 3.316381199514726E0, 3.350748761981671E0, 3.384090366884451E0, 3.416474744628894E0, 3.447963656780269E0, 3.478612825366963E0, 3.508472710600489E0, 3.537589165949811E0, 3.566003993231045E0, 3.593755415611321E0, 3.620878482777667E0, 3.647405419702514E0, 3.673365928240249E0, 3.698787449063569E0];
+    this.n0 = 0;
+    this.nk = 0;
+    this.inp = ["", "", ""];
+    this.inps = ["x", "y", "z"];
+    this.outs = ["Gx", "Gy", "Gz"];
+    this.pos = 0;
+    this.ret = 0;
+    this.enlarge(this.R, 3);
+    this.enlarge(this.C, 700);
+    this.enlarge(this.S, 700);
+    this.enlarge(this.HP, 37);
+    this.enlarge(this.CO, 37);
+    this.enlarge(this.SI, 37);
+    this.enlarge(this.AR, 37);
+    this.enlarge(this.CF, 37);
+    this.enlarge(this.PNK, 37);
+    this.enlarge(this.ANAI, 438);
+  }
+  return _createClass(Gravity, [{
+    key: "enlarge",
+    value: function enlarge(x, n) {
+      this.performer.enlargeNumber(x, n);
+    }
+  }, {
+    key: "GetN0",
+    value: function GetN0() {
+      return this.n0;
+    }
+  }, {
+    key: "SetN0",
+    value: function SetN0(x) {
+      this.n0 = x;
+    }
+  }, {
+    key: "GetNK",
+    value: function GetNK() {
+      return this.nk;
+    }
+  }, {
+    key: "SetNK",
+    value: function SetNK(x) {
+      this.nk = x;
+    }
+  }, {
+    key: "GetMUR",
+    value: function GetMUR() {
+      return this.R;
+    }
+  }, {
+    key: "GetCnm",
+    value: function GetCnm() {
+      return this.C;
+    }
+  }, {
+    key: "GetSnm",
+    value: function GetSnm() {
+      return this.S;
+    }
+  }, {
+    key: "Forces",
+    value: function Forces(X, Y, Z, FX, FY, FZ) {
+      this.ForcesN(this.n0, this.nk, X, Y, Z, FX, FY, FZ);
+    }
+  }, {
+    key: "ForcesN",
+    value: function ForcesN(N0, NK, X, Y, Z, FX, FY, FZ) {
+      var LOG = false;
+      var P20 = 0.0;
+      var P30 = 0.0;
+      var PN0 = 0.0;
+      var A = 0.0;
+      var AN = 0.0;
+      var FR = 0.0;
+      var FF = 0.0;
+      var FL = 0.0;
+      var R2 = X * X + Y * Y;
+      var R3 = 1 / (R2 + Z * Z);
+      var R1 = Math.sqrt(R3);
+      var N1 = 0;
+      var N2 = 0;
+      var N3 = 0;
+      var N4 = 0;
+      var N5 = 0;
+      var CK1 = 0;
+      var CK2 = 0;
+      var J = 0;
+      var TG = 0;
+      R2 = Math.sqrt(R2);
+      var SF = Z * R1;
+      this.CF[0] = R2 * R1;
+      R2 = 1 / R2;
+      this.CO[0] = X * R2;
+      this.SI[0] = Y * R2;
+      var GR = this.R[0] * R3;
+      if (N0 != 0 || NK != 0) {
+        this.CF[1] = this.CF[0] * this.CF[0];
+        this.AR[0] = this.R[1] * R1;
+        for (var N = 1; N < N0; N++) {
+          N3 = N - 1;
+          this.AR[N] = this.AR[0] * this.AR[N3];
+          A = this.C[N3] * this.AR[N];
+          if (N == 1) {
+            P20 = Math.sqrt(5) * (1.0 - 1.5 * this.CF[1]);
+            this.PNK[0] = Math.sqrt(15) * this.CF[0] * SF;
+            FR = 3.0 * A * P20;
+            FF = A * this.PNK[0] * Math.sqrt(3);
+          } else if (N == 2) {
+            P30 = Math.sqrt(7) * (1.0 - 2.5 * this.CF[1]) * SF;
+            this.PNK[1] = /*SQ[62]/SQ[23]*/Math.sqrt(63) / Math.sqrt(24) * this.CF[0] * (4.0 - 5.0 * this.CF[1]);
+            FR += 4 * A * P30;
+            FF += A * this.PNK[1] * Math.sqrt(6); //SQ[5];
+          } else {
+            N1 = N + N3 + 1;
+            N2 = N1 + 2;
+            N4 = N + 1;
+            AN = N + 1;
+            PN0 = Math.sqrt(N2 + 1) / AN * (/*SQ[N1]*/Math.sqrt(N1 + 1) * SF * P30 - (N3 + 1) / /*SQ[N1-2]*/Math.sqrt(N1 - 1) * P20);
+            this.PNK[N3] = Math.sqrt(N2 + 1) / (Math.sqrt(N3 + 1) * Math.sqrt(N4 + 1)) * (Math.sqrt(N1 + 1) * SF * this.PNK[N - 2] - Math.sqrt(N + 1) * Math.sqrt(N - 1) / Math.sqrt(N1 - 1) * this.PNK[N - 3]);
+            FR += (N4 + 1) * A * PN0;
+            FF += A * /*SQ[N]*SQ[N4]/SQ[1]*/Math.sqrt(N + 1) * Math.sqrt(N4 + 1) / Math.sqrt(2) * this.PNK[N3];
+            P20 = P30;
+            P30 = PN0;
+          }
+          var j = 0;
+        }
+        var i = 0;
+      }
+      if (NK != 0) {
+        LOG = NK >= 3;
+        A = this.CO[0] + this.CO[0];
+        this.CO[1] = A * this.CO[0] - 1;
+        this.SI[1] = A * this.SI[0];
+        TG = Z * R2;
+        if (LOG) {
+          for (var _N = 2; _N < this.nk; _N++) {
+            //2
+            N1 = _N - 1;
+            N2 = _N - 2;
+            this.CF[_N] = this.CF[0] * this.CF[N1];
+            this.CO[_N] = A * this.CO[N1] - this.CO[N2];
+            this.SI[_N] = A * this.SI[N1] - this.SI[N2];
+          } //2
+        }
+        CK1 = (this.C[35] * this.CO[0] + this.S[35] * this.SI[0]) * this.AR[1];
+        CK2 = (this.C[35] * this.SI[0] - this.S[35] * this.CO[0]) * this.AR[1];
+        A = this.PNK[0];
+        this.PNK[0] = this.SK[1] * this.CF[1];
+        FR += CK1 * 3.0 * A;
+        FF += CK1 * (this.PNK[0] + this.PNK[0] - TG * A);
+        FL += CK2 * A;
+        J = 35;
+        if (LOG) {
+          for (var _N2 = 2; _N2 < NK; _N2++)
+          //commain
+          {
+            //3
+            J++;
+            N1 = _N2 - 1;
+            N2 = _N2 + _N2 + 1;
+            N3 = _N2 + 1;
+            A = this.PNK[N1];
+            CK1 = (this.C[J] * this.CO[0] + this.S[J] * this.SI[0]) * this.AR[_N2];
+            CK2 = (this.C[J] * this.SI[0] - this.S[J] * this.CO[0]) * this.AR[_N2];
+            if (_N2 == 2) this.PNK[1] = /*SQ[6]*/Math.sqrt(7) * SF * this.PNK[0];else this.PNK[N1] = Math.sqrt(N2 + 2) / (Math.sqrt(_N2 - 1) * Math.sqrt(_N2 + 3)) * (Math.sqrt(N2) * SF * this.PNK[_N2 - 2] - Math.sqrt(N3 + 1) * Math.sqrt(_N2 - 2) / Math.sqrt(N2 - 2) * this.PNK[_N2 - 3]);
+            FR += (N3 + 1) * CK1 * A;
+            FF += CK1 * (this.PNK[N1] * /*SQ[N1]*/Math.sqrt(N1 + 1) * /*SQ[N+2]*/Math.sqrt(_N2 + 3) - TG * A);
+            FL += CK2 * A;
+          }
+        } //ENDIF //3
+        for (var M = 1; M < NK; M++) {
+          // 4
+          J = Math.floor(this.ANAI[1 + M] + 0.5) - 1;
+          for (var _N3 = M; _N3 < NK; _N3++) {
+            //4.1
+            N1 = _N3 - M;
+            N2 = _N3 + M + 1;
+            N3 = _N3 + _N3 + 2;
+            N4 = N1 - 2;
+            N5 = N1 - 3;
+            A = this.PNK[N1];
+            AN = Math.floor(M + 1.5) * A;
+            CK1 = this.AR[_N3] * (this.C[J] * this.CO[M] + this.S[J] * this.SI[M]);
+            CK2 = this.AR[_N3] * (this.C[J] * this.SI[M] - this.S[J] * this.CO[M]);
+            if (N1 > 2) {
+              this.PNK[N1 - 1] = Math.sqrt(N3 + 1) / (Math.sqrt(N4 + 1) * Math.sqrt(N2 + 2)) * (Math.sqrt(N3 - 1) * SF * this.PNK[N4] - Math.sqrt(N2 + 1) * Math.sqrt(N5 + 1) / Math.sqrt(N3 - 3) * this.PNK[N5]);
+            } else if (N1 == 0) {
+              //4.1.1
+              FR += this.HP[_N3] * CK1 * A;
+              FF -= CK1 * AN * TG;
+              FL += CK2 * AN;
+              J++;
+              continue;
+            }
+            if (N1 == 1) {
+              this.PNK[0] = this.SK[_N3] * this.CF[_N3];
+            } else if (N1 == 2) {
+              this.PNK[1] = /*SQ[N3]*/Math.sqrt(N3 + 1) * SF * this.PNK[0];
+            }
+            FR += this.HP[_N3] * CK1 * A;
+            FF += CK1 * (this.PNK[N1 - 1] * /*SQ[N1-1]*SQ[N2+1]*/Math.sqrt(N1) * Math.sqrt(N2 + 2) - TG * AN);
+            FL += CK2 * AN;
+            J++;
+          }
+          //               }     //4.1
+        } //4
+        //    5
+      } //0
+      //   m5:
+      FR = -GR * FR - this.R[2] * R3;
+      FF = GR * FF;
+      FL = -GR / this.CF[0] * FL;
+      A = FF * SF;
+      FX[0] = FR * (X * R1) - A * this.CO[0] - FL * this.SI[0];
+      FY[0] = FR * (Y * R1) - A * this.SI[0] + FL * this.CO[0];
+      FZ[0] = FR * SF + FF * this.CF[0];
+    }
+  }, {
+    key: "sqrt",
+    value: function sqrt(x) {
+      return Math.sqrt(x);
+    }
+  }]);
+}();
+exports.Gravity = Gravity;
+},{"../../../Library/Performer":"src/Library/Performer.ts"}],"src/ExternalObjects/Components/Gravity_36_36/GravityCategoryObject.ts":[function(require,module,exports) {
+"use strict";
+
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GravityCategoryObject = void 0;
+var Performer_1 = require("../../../Library/Performer");
+var Gravity_1 = require("./Gravity.");
+var GravityCategoryObject = /*#__PURE__*/function (_Gravity_1$Gravity) {
+  function GravityCategoryObject(desktop, name) {
+    var _this;
+    _classCallCheck(this, GravityCategoryObject);
+    _this = _callSuper(this, GravityCategoryObject);
+    _this.performer = new Performer_1.Performer();
+    _this.obj = new Object();
+    _this.name = "";
+    _this.types = ["IObject", "ICategoryObject", "IObjectTransformer", "GravityCategoryObject"];
+    _this.typeName = "GravityCategoryObject";
+    _this.a = 0;
+    _this.inp = ["x", "y", "z"];
+    _this.ooutp = ["Gx", "Gy", "Gz"];
+    _this.fx = new Array(1);
+    _this.fy = new Array(1);
+    _this.fz = new Array(1);
+    _this.desktop = desktop;
+    _this.name = name;
+    desktop.addCategoryObject(_this);
+    desktop.addObject(_this);
+    _this.n0 = 36;
+    _this.nk = 36;
+    return _this;
+  }
+  _inherits(GravityCategoryObject, _Gravity_1$Gravity);
+  return _createClass(GravityCategoryObject, [{
+    key: "getInput",
+    value: function getInput() {
+      return this.inp;
+    }
+  }, {
+    key: "getOutput",
+    value: function getOutput() {
+      return this.ooutp;
+    }
+  }, {
+    key: "getInputType",
+    value: function getInputType(i) {
+      return this.a;
+    }
+  }, {
+    key: "getOutputType",
+    value: function getOutputType(i) {
+      return this.a;
+    }
+  }, {
+    key: "calculate",
+    value: function calculate(input, output) {
+      var x = this.convert(input[0]);
+      var y = this.convert(input[1]);
+      var z = this.convert(input[2]);
+      this.Forces(x, y, z, this.fx, this.fy, this.fz);
+      output[0] = this.fx[0];
+      output[1] = this.fy[0];
+      output[2] = this.fz[0];
+    }
+  }, {
+    key: "getClassName",
+    value: function getClassName() {
+      return this.typeName;
+    }
+  }, {
+    key: "imlplementsType",
+    value: function imlplementsType(type) {
+      return this.types.indexOf(type) >= 0;
+    }
+  }, {
+    key: "getName",
+    value: function getName() {
+      return this.name;
+    }
+  }, {
+    key: "getObject",
+    value: function getObject() {
+      return this.obj;
+    }
+  }, {
+    key: "setObject",
+    value: function setObject(obj) {
+      this.obj = obj;
+    }
+  }, {
+    key: "getCategoryObjectName",
+    value: function getCategoryObjectName() {
+      return this.name;
+    }
+  }, {
+    key: "getDesktop",
+    value: function getDesktop() {
+      return this.desktop;
+    }
+  }, {
+    key: "convert",
+    value: function convert(x) {
+      return this.performer.convertFromAny(x);
+    }
+  }]);
+}(Gravity_1.Gravity);
+exports.GravityCategoryObject = GravityCategoryObject;
+},{"../../../Library/Performer":"src/Library/Performer.ts","./Gravity.":"src/ExternalObjects/Components/Gravity_36_36/Gravity..ts"}],"src/Tests/Density.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -20095,30 +16717,7 @@ var DensityAct = /*#__PURE__*/function (_Density_1$Density) {
   }]);
 }(Density_1.Density);
 exports.DensityAct = DensityAct;
-},{"../Density":"src/Tests/Density.ts","../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor":"src/Library/Measurements/DifferentialEquations/Processors/RungeProcessor.ts","../../Library/Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts","../../Library/Runtime/DataRuntimeConsumerODE":"src/Library/Runtime/DataRuntimeConsumerODE.ts"}],"src/Algorithms/OrbitalForecastCalculation/OrbitalData.ts":[function(require,module,exports) {
-"use strict";
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.toDateTime = void 0;
-var DateTimeConverter_1 = require("../../Library/Utilities/DateTime/DateTimeConverter");
-var converter = new DateTimeConverter_1.DateTimeConverter();
-function toDateTime(time) {
-  return {
-    orbitalTime: converter.fromOADate(time.orbitalTime / 86400.),
-    x: time.x,
-    y: time.y,
-    z: time.z,
-    vx: time.vx,
-    vy: time.vy,
-    vz: time.vz,
-    duration: time.duration
-  };
-}
-exports.toDateTime = toDateTime;
-},{"../../Library/Utilities/DateTime/DateTimeConverter":"src/Library/Utilities/DateTime/DateTimeConverter.ts"}],"src/Library/Communications/http/AppSettings.ts":[function(require,module,exports) {
+},{"../Density":"src/Tests/Density.ts","../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor":"src/Library/Measurements/DifferentialEquations/Processors/RungeProcessor.ts","../../Library/Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts","../../Library/Runtime/DataRuntimeConsumerODE":"src/Library/Runtime/DataRuntimeConsumerODE.ts"}],"src/Library/Communications/http/AppSettings.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22963,7 +19562,11 @@ var EventLink = /*#__PURE__*/function (_CategoryArrow_1$Cate) {
       }
       this.event = e[0];
       this.handler.addChildT(e[0]);
+      console.log("EVENT", e[0]);
+      console.log("HANDLER", this.handler);
       _superPropGet(EventLink, "setTarget", this, 3)([target]);
+      console.log("EVENT", e[0]);
+      console.log("HANDLER", this.handler);
     }
   }]);
 }(CategoryArrow_1.CategoryArrow);
@@ -23716,8 +20319,9 @@ var PerformerEvents = /*#__PURE__*/function () {
     }
   }, {
     key: "setComponentCollectionEnabled",
-    value: function setComponentCollectionEnabled(collection, isEnabled) {
-      this.isEnabled = this.isEnabled;
+    value: function setComponentCollectionEnabled(collection, enabled) {
+      if (this.isEnabled == enabled) return;
+      this.isEnabled = enabled;
       this.performer.forEach(collection, this, "IEventStart");
     }
   }, {
@@ -23781,10 +20385,19 @@ var DataRuntimeConsumerEvent = /*#__PURE__*/function (_DataRuntimeConsumerO) {
     _this = _callSuper(this, DataRuntimeConsumerEvent, [dataConsumer, processor]);
     _this.ePerformer = new PerformerEvents_1.PerformerEvents();
     _this.isEnabled = false;
+    var up = _this.dataConsumer;
+    var ob = _this.dataConsumer;
+    up.setExternalUpdate(_this.getExtenalUpdate(ob, _this));
+    console.log("UPPP", up);
     return _this;
   }
   _inherits(DataRuntimeConsumerEvent, _DataRuntimeConsumerO);
   return _createClass(DataRuntimeConsumerEvent, [{
+    key: "getExtenalUpdate",
+    value: function getExtenalUpdate(obj, realime) {
+      return this.mPerformer.createUpdateMeasurementsAction(this);
+    }
+  }, {
     key: "prepare",
     value: function prepare(dataConsumer) {
       _superPropGet(DataRuntimeConsumerEvent, "prepare", this, 3)([dataConsumer]);
@@ -24348,7 +20961,6 @@ var ScadaDesktopEngine = /*#__PURE__*/function (_ScadaDesktop_1$Scada) {
   return _createClass(ScadaDesktopEngine, [{
     key: "createRuntime",
     value: function createRuntime() {
-      console.log(2);
       var co = this.componentCollection.getCategoryObject(this.chart);
       var dc = co;
       var eev = this.factory.createRealtimeFromDataConsumer(dc);
@@ -24359,19 +20971,925 @@ var ScadaDesktopEngine = /*#__PURE__*/function (_ScadaDesktop_1$Scada) {
   }]);
 }(ScadaDesktop_1.ScadaDesktop);
 exports.ScadaDesktopEngine = ScadaDesktopEngine;
-},{"./ScadaDesktop":"src/Library/Scada/ScadaDesktop.ts","../Event/EngineTimerProvider":"src/Library/Event/EngineTimerProvider.ts","../Event/TimerPlayEngineFactory":"src/Library/Event/TimerPlayEngineFactory.ts"}],"src/Library/Motion6D/Runtime/Event/DataRuntimeConsumerMotion6DEvent.ts":[function(require,module,exports) {
+},{"./ScadaDesktop":"src/Library/Scada/ScadaDesktop.ts","../Event/EngineTimerProvider":"src/Library/Event/EngineTimerProvider.ts","../Event/TimerPlayEngineFactory":"src/Library/Event/TimerPlayEngineFactory.ts"}],"src/Library/Motion6D/Comparators/PositionComparer.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.PositionComparer = void 0;
+var PositionComparer = /*#__PURE__*/function () {
+  function PositionComparer() {
+    _classCallCheck(this, PositionComparer);
+  }
+  return _createClass(PositionComparer, [{
+    key: "compare",
+    value: function compare(x, y) {
+      if (this.isSource(x, y)) return -1;
+      if (this.isSource(y, x)) return 1;
+      return 0;
+    }
+  }, {
+    key: "isSource",
+    value: function isSource(source, target) {
+      var tp = target.getParentFrame();
+      if (tp === undefined) {
+        return false;
+      }
+      if (tp == source) {
+        return true;
+      }
+      if (this.isSource(source, tp)) {
+        return true;
+      }
+      return false;
+    }
+  }]);
+}();
+exports.PositionComparer = PositionComparer;
+},{}],"src/Library/Utilities/Collections/CollectionProcessor.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CollectionProcessor = void 0;
+var CollectionProcessor = /*#__PURE__*/function () {
+  function CollectionProcessor() {
+    _classCallCheck(this, CollectionProcessor);
+  }
+  return _createClass(CollectionProcessor, [{
+    key: "arrayCopy",
+    value: function arrayCopy(source, sourceIndex, destinationArray, destinationIndex, length) {
+      for (var i = 0; i < length; i++) {
+        destinationArray[destinationIndex + i] = source[sourceIndex + i];
+      }
+    }
+  }]);
+}();
+exports.CollectionProcessor = CollectionProcessor;
+},{}],"src/Library/Vector3D/Vector3DProcessor.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Vector3DProcessor = void 0;
+var RealMatrix_1 = require("../RealMatrixProcessor/RealMatrix");
+var CollectionProcessor_1 = require("../Utilities/Collections/CollectionProcessor");
+var Vector3DProcessor = /*#__PURE__*/function () {
+  function Vector3DProcessor() {
+    _classCallCheck(this, Vector3DProcessor);
+    this.idQuaternion = [1, 0, 0, 0];
+    this.realMatrix = new RealMatrix_1.RealMatrix();
+    this.collectionProcessor = new CollectionProcessor_1.CollectionProcessor();
+  }
+  return _createClass(Vector3DProcessor, [{
+    key: "quaternionNormalize",
+    value: function quaternionNormalize(quaternion) {
+      var a = 0;
+      var _iterator = _createForOfIteratorHelper(quaternion),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var q = _step.value;
+          a += q * q;
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      a = 1 / Math.sqrt(a);
+      for (var i = 0; i < 4; i++) {
+        quaternion[i] *= a;
+      }
+    }
+  }, {
+    key: "quaternionToeulerAngles",
+    value: function quaternionToeulerAngles(angles, quaternion) {
+      this.quaternionToeulerAnglesXYZW(angles, quaternion[1], quaternion[2], quaternion[3], quaternion[0]);
+    }
+  }, {
+    key: "quaternionToeulerAnglesXYZW",
+    value: function quaternionToeulerAnglesXYZW(angles, x, y, z, w) {
+      // roll (x-axis rotation)
+      var sinr_cosp = 2 * (w * x + y * z);
+      var cosr_cosp = 1 - 2 * (x * x + y * y);
+      angles.setRoll(Math.atan2(sinr_cosp, cosr_cosp));
+      // pitch (y-axis rotation)
+      var sinp = 2 * (w * y - z * x);
+      if (Math.abs(sinp) >= 1) {
+        angles.setPitch(this.realMatrix.copySign(Math.PI / 2, sinp));
+        //std::copysign(M_PI / 2, sinp); // use 90 degrees if out of range
+      } else {
+        angles.setPitch(Math.asin(sinp));
+      }
+      // yaw (z-axis rotation)
+      var siny_cosp = 2 * (w * z + x * y);
+      var cosy_cosp = 1 - 2 * (y * y + z * z);
+      angles.setYaw(Math.atan2(siny_cosp, cosy_cosp));
+    }
+  }, {
+    key: "rotateOmega",
+    value: function rotateOmega(omega, quaternion, time) {
+      var o = this.realMatrix.partialNorm(omega, 0, 3);
+      var phi = 0.5 * o * time;
+      var s = Math.sin(phi);
+      quaternion[0] = Math.sqrt(1 - s * s);
+      o = 1 / o;
+      for (var i = 0; i < 3; i++) {
+        quaternion[i + 1] = o * s * omega[i];
+      }
+    }
+  }, {
+    key: "square3d",
+    value: function square3d(x) {
+      // !!! EXCEPTION DELETE
+      if (x.length != 3) {}
+      return x[0] * x[0] + x[1] * x[1] + x[2] * x[2];
+    }
+  }, {
+    key: "vectorProduct",
+    value: function vectorProduct(x, y, z) {
+      z[0] = x[1] * y[2] - x[2] * y[1];
+      z[1] = x[2] * y[0] - x[0] * y[2];
+      z[2] = x[0] * y[1] - x[1] * y[0];
+    }
+  }, {
+    key: "quaternionMultiply",
+    value: function quaternionMultiply(x, y, z) {
+      z[0] = x[0] * y[0] - x[1] * y[1] - x[2] * y[2] - x[3] * y[3];
+      z[1] = x[0] * y[1] + x[1] * y[0] + x[2] * y[3] - x[3] * y[2];
+      z[2] = x[0] * y[2] + x[2] * y[0] + x[3] * y[1] - x[1] * y[3];
+      z[3] = x[0] * y[3] + x[3] * y[0] + x[1] * y[2] - x[2] * y[1];
+    }
+  }, {
+    key: "quaternionInvertMultiply",
+    value: function quaternionInvertMultiply(x, y, z) {
+      z[0] = x[0] * y[0] + x[1] * y[1] + x[2] * y[2] + x[3] * y[3];
+      z[1] = x[0] * y[1] - x[1] * y[0] - x[2] * y[3] + x[3] * y[2];
+      z[2] = x[0] * y[2] - x[2] * y[0] - x[3] * y[1] + x[1] * y[3];
+      z[3] = x[0] * y[3] - x[3] * y[0] - x[1] * y[2] + x[2] * y[1];
+    }
+  }, {
+    key: "quaternionInvertOmega",
+    value: function quaternionInvertOmega(quaterinon, omegaIn, omegaOut) {
+      omegaOut[0] = quaterinon[0] * omegaIn[0] - quaterinon[2] * omegaIn[2] + quaterinon[3] * omegaIn[1];
+      omegaOut[1] = quaterinon[0] * omegaIn[1] - quaterinon[3] * omegaIn[0] + quaterinon[1] * omegaIn[2];
+      omegaOut[2] = quaterinon[0] * omegaIn[2] - quaterinon[1] * omegaIn[1] + quaterinon[2] * omegaIn[0];
+    }
+  }, {
+    key: "quaternionToMatrix",
+    value: function quaternionToMatrix(q, m, qq) {
+      var norm = 1 / Math.sqrt(q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]);
+      for (var i = 0; i < 4; i++) {
+        q[i] *= norm;
+      }
+      for (var _i = 0; _i < 4; _i++) {
+        for (var j = 0; j <= _i; j++) {
+          qq[_i][j] = q[_i] * q[j];
+        }
+      }
+      m[0][0] = qq[0][0] + qq[1][1] - qq[2][2] - qq[3][3];
+      m[0][1] = 2 * (qq[2][1] - qq[3][0]);
+      m[0][2] = 2 * (qq[2][0] + qq[3][1]);
+      m[1][0] = 2 * (qq[3][0] + qq[2][1]);
+      m[1][1] = qq[0][0] - qq[1][1] + qq[2][2] - qq[3][3];
+      m[1][2] = 2 * (qq[3][2] - qq[1][0]);
+      m[2][0] = 2 * (qq[3][1] - qq[2][0]);
+      m[2][1] = 2 * (qq[1][0] + qq[3][2]);
+      m[2][2] = qq[0][0] - qq[1][1] - qq[2][2] + qq[3][3];
+    }
+  }, {
+    key: "calculateDynamics",
+    value: function calculateDynamics(q, der, m, omega, qd) {
+      var norm = 1 / Math.sqrt(q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]);
+      for (var i = 0; i < 4; i++) {
+        q[i] *= norm;
+        der[i] *= norm;
+      }
+      for (var _i2 = 0; _i2 < 4; _i2++) {
+        for (var j = 0; j < 4; j++) {
+          qd[_i2][j] = q[_i2] * der[j];
+        }
+      }
+      omega[0] = 2 * (-qd[2][3] + qd[3][2] + qd[0][1] - qd[1][0]);
+      omega[1] = 2 * (-qd[3][1] + qd[1][3] + qd[0][2] - qd[2][0]);
+      omega[2] = 2 * (-qd[1][2] + qd[2][1] + qd[0][3] - qd[3][0]);
+    }
+  }, {
+    key: "calculateDynamicsLong",
+    value: function calculateDynamicsLong(q, der, m, omega, qq, qd) {
+      this.calculateDynamics(q, der, m, omega, qd);
+      for (var i = 0; i < 4; i++) {
+        for (var j = 0; j <= i; j++) {
+          qq[i][j] = q[i] * q[j];
+        }
+      }
+      m[0][0] = qq[0][0] + qq[1][1] - qq[2][2] - qq[3][3];
+      m[0][1] = 2 * (qq[2][1] - qq[3][0]);
+      m[0][2] = 2 * (qq[2][0] + qq[3][1]);
+      m[1][0] = 2 * (qq[3][0] + qq[2][1]);
+      m[1][1] = qq[0][0] - qq[1][1] + qq[2][2] - qq[3][3];
+      m[1][2] = 2 * (qq[3][2] - qq[1][0]);
+      m[2][0] = 2 * (qq[3][1] - qq[2][0]);
+      m[2][1] = 2 * (qq[1][0] + qq[3][2]);
+      m[2][2] = qq[0][0] - qq[1][1] - qq[2][2] + qq[3][3];
+    }
+  }, {
+    key: "calculateQuaternionDerivation",
+    value: function calculateQuaternionDerivation(quaternion, omega, quaternionDerivation, auxQuaternion) {
+      auxQuaternion[0] = 0;
+      this.collectionProcessor.arrayCopy(omega, 0, auxQuaternion, 1, 3);
+      this.quaternionMultiply(quaternion, auxQuaternion, quaternionDerivation);
+      for (var i = 0; i < 4; i++) {
+        quaternionDerivation[i] *= 0.5;
+      }
+    }
+  }]);
+}();
+exports.Vector3DProcessor = Vector3DProcessor;
+},{"../RealMatrixProcessor/RealMatrix":"src/Library/RealMatrixProcessor/RealMatrix.ts","../Utilities/Collections/CollectionProcessor":"src/Library/Utilities/Collections/CollectionProcessor.ts"}],"src/Library/Motion6D/ReferenceFrame.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ReferenceFrame = void 0;
+var Performer_1 = require("../Performer");
+var RealMatrix_1 = require("../RealMatrixProcessor/RealMatrix");
+var Vector3DProcessor_1 = require("../Vector3D/Vector3DProcessor");
+var ReferenceFrame = /*#__PURE__*/function () {
+  function ReferenceFrame() {
+    _classCallCheck(this, ReferenceFrame);
+    this.nodes = [];
+    this.performer = new Performer_1.Performer();
+    this.realMatrix = new RealMatrix_1.RealMatrix();
+    this.vp = new Vector3DProcessor_1.Vector3DProcessor();
+    this.positions = [];
+    this.types = ["IObject", "IOrientation", "IPosition", "ReferenceFrame"];
+    this.typeName = "ReferenceFrame";
+    this.quaternion = [1, 0, 0, 0];
+    /// <summary>
+    /// Absolute position
+    /// </summary>
+    this.position = [0, 0, 0];
+    /// <summary>
+    /// Orientation matrix
+    /// </summary>
+    this.matrix = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+    /// <summary>
+    /// Auxiliary array
+    /// </summary>
+    this.qq = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+    /// <summary>
+    /// Auxiliary array
+    /// </summary>
+    this.p = [0, 0, 0];
+    /// <summary>
+    /// Auxliary position
+    /// </summary>
+    this.auxPos = [0, 0, 0];
+  }
+  return _createClass(ReferenceFrame, [{
+    key: "setParameters",
+    value: function setParameters(parameters) {
+      this.parameters = parameters;
+    }
+  }, {
+    key: "getParentT",
+    value: function getParentT() {
+      return this.parentNode;
+    }
+  }, {
+    key: "setParentT",
+    value: function setParentT(parent) {
+      this.parentNode = parent;
+    }
+  }, {
+    key: "getNodesT",
+    value: function getNodesT() {
+      return this.nodes;
+    }
+  }, {
+    key: "addNodeT",
+    value: function addNodeT(node) {
+      this.nodes.push(node);
+    }
+  }, {
+    key: "removeNodeT",
+    value: function removeNodeT(node) {
+      this.nodes = this.performer.remove(this.nodes, node);
+    }
+  }, {
+    key: "getNodeValueT",
+    value: function getNodeValueT() {
+      return this;
+    }
+  }, {
+    key: "setReferenceFrame",
+    value: function setReferenceFrame(baseFrame, relative) {
+      var m = baseFrame.getMatrix();
+      var bp = baseFrame.getPosition();
+      var rp = relative.getPosition();
+      for (var i = 0; i < 3; i++) {
+        this.position[i] = bp[i];
+        for (var j = 0; j < 3; j++) {
+          this.position[i] += m[i][j] * rp[j];
+        }
+      }
+      this.vp.quaternionMultiply(baseFrame.quaternion, relative.quaternion, this.quaternion);
+      this.setMatrix();
+    }
+  }, {
+    key: "getQuaternion",
+    value: function getQuaternion() {
+      return this.quaternion;
+    }
+  }, {
+    key: "getMatrix",
+    value: function getMatrix() {
+      return this.matrix;
+    }
+  }, {
+    key: "getPosition",
+    value: function getPosition() {
+      return this.position;
+    }
+  }, {
+    key: "getParentFrame",
+    value: function getParentFrame() {
+      return this.parent;
+    }
+  }, {
+    key: "setParentFrame",
+    value: function setParentFrame(parent) {
+      this.parent = parent;
+    }
+  }, {
+    key: "getParameters",
+    value: function getParameters() {
+      return this.parameters;
+    }
+  }, {
+    key: "updateReferenceFrame",
+    value: function updateReferenceFrame() {
+      var p = this.getParentFrame();
+      if (p === undefined) {
+        return;
+      }
+      var r = p.getOwnFrame();
+      if (r === undefined) {
+        return;
+      }
+      this.position = r.getPosition();
+      this.quaternion = r.getQuaternion();
+      this.matrix = r.getMatrix();
+    }
+  }, {
+    key: "getPositions",
+    value: function getPositions() {
+      return this.positions;
+    }
+  }, {
+    key: "addPosition",
+    value: function addPosition(position) {
+      this.positions.push(position);
+    }
+    // new Error
+  }, {
+    key: "getClassName",
+    value: function getClassName() {
+      return this.typeName;
+    }
+  }, {
+    key: "imlplementsType",
+    value: function imlplementsType(type) {
+      return this.types.indexOf(type) > 0;
+    }
+  }, {
+    key: "getName",
+    value: function getName() {
+      return "";
+    }
+  }, {
+    key: "getRelativePosition",
+    value: function getRelativePosition(inPosition, outPosition) {
+      for (var i = 0; i < 3; i++) {
+        this.auxPos[i] = inPosition[i] - this.position[i];
+      }
+      for (var _i = 0; _i < 3; _i++) {
+        outPosition[_i] = 0;
+        for (var j = 0; j < 3; j++) {
+          outPosition[_i] += this.matrix[j][_i] * this.auxPos[j];
+        }
+      }
+    }
+  }, {
+    key: "norm",
+    value: function norm() {
+      this.vp.quaternionNormalize(this.quaternion);
+    }
+  }, {
+    key: "setMatrix",
+    value: function setMatrix() {
+      this.norm();
+      this.vp.quaternionToMatrix(this.quaternion, this.matrix, this.qq);
+    }
+  }, {
+    key: "getPositionArray",
+    value: function getPositionArray(position, coordinates) {
+      var p1 = this.getPosition();
+      var p2 = position.getPosition();
+      for (var i = 0; i < 3; i++) {
+        this.p[i] = p2[i] - p1[i];
+      }
+      for (var _i2 = 0; _i2 < 3; _i2++) {
+        coordinates[_i2] = 0;
+        for (var j = 0; j < 3; j++) {
+          coordinates[_i2] += this.matrix[_i2][j] * this.p[j];
+        }
+      }
+    }
+  }, {
+    key: "getRelative",
+    value: function getRelative(baseFrame, relativeFrame, result, diff) {
+      this.vp.quaternionInvertMultiply(relativeFrame.quaternion, baseFrame.quaternion, result.quaternion);
+      result.setMatrix();
+      for (var i = 0; i < 3; i++) {
+        diff[i] = relativeFrame.position[i] - baseFrame.position[i];
+      }
+      var m = baseFrame.getMatrix();
+      var p = result.getPosition();
+      for (var _i3 = 0; _i3 < 3; _i3++) {
+        p[_i3] = 0;
+        for (var j = 0; j < 3; j++) {
+          p[_i3] += m[j][_i3] * diff[j];
+        }
+      }
+    }
+  }, {
+    key: "calculateRotatedPosition",
+    value: function calculateRotatedPosition(abs, rot) {
+      for (var i = 0; i < 3; i++) {
+        rot[i] = 0;
+        for (var j = 0; j < 3; j++) {
+          rot[i] += this.matrix[j][i] * abs[j];
+        }
+      }
+    }
+  }]);
+}();
+exports.ReferenceFrame = ReferenceFrame;
+},{"../Performer":"src/Library/Performer.ts","../RealMatrixProcessor/RealMatrix":"src/Library/RealMatrixProcessor/RealMatrix.ts","../Vector3D/Vector3DProcessor":"src/Library/Vector3D/Vector3DProcessor.ts"}],"src/Library/Motion6D/RotatedFrame.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
 function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
 function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
 function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
+function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
+function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.RotatedFrame = void 0;
+var ReferenceFrame_1 = require("./ReferenceFrame");
+var RotatedFrame = /*#__PURE__*/function (_ReferenceFrame_1$Ref) {
+  function RotatedFrame() {
+    var _this;
+    _classCallCheck(this, RotatedFrame);
+    _this = _callSuper(this, RotatedFrame);
+    _this.omega = [0, 0, 0];
+    _this.typeName = "RotatedFrame";
+    _this.types.push("IAngularVelocityMotion6D");
+    _this.types.push("RotatedFrame");
+    return _this;
+  }
+  _inherits(RotatedFrame, _ReferenceFrame_1$Ref);
+  return _createClass(RotatedFrame, [{
+    key: "getOmega",
+    value: function getOmega() {
+      return this.omega;
+    }
+  }, {
+    key: "setReferenceFrame",
+    value: function setReferenceFrame(baseFrame, relative) {
+      _superPropGet(RotatedFrame, "setReferenceFrame", this, 3)([baseFrame, relative]);
+      var ab = this.performer.convertObject(baseFrame, "IAngularVelocityMotion6D");
+      var ar = this.performer.convertObject(relative, "IAngularVelocityMotion6D");
+      var matrix = relative.getMatrix();
+      var ob = ab[0].getOmega();
+      var or = ar[0].getOmega();
+      for (var i = 0; i < or.length; i++) {
+        this.omega[i] = or[i];
+        for (var j = 0; j < 3; j++) {
+          this.omega[i] += matrix[i][j] * ob[j];
+        }
+      }
+    }
+  }]);
+}(ReferenceFrame_1.ReferenceFrame);
+exports.RotatedFrame = RotatedFrame;
+},{"./ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts"}],"src/Library/Motion6D/Motion6DFrame.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
+function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
+function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Motion6DFrame = void 0;
+var RotatedFrame_1 = require("./RotatedFrame");
+var Motion6DFrame = /*#__PURE__*/function (_RotatedFrame_1$Rotat) {
+  function Motion6DFrame() {
+    var _this;
+    _classCallCheck(this, Motion6DFrame);
+    _this = _callSuper(this, Motion6DFrame);
+    _this.velocity = [0, 0, 0];
+    _this.hv = [0, 0, 0];
+    //protected double[] relativeVelocity = new double[] { 0, 0, 0 };
+    /// <summary>
+    /// Derivation
+    /// </summary>
+    _this.der = [0, 0, 0, 0];
+    /// <summary>
+    /// Quaternion derivation
+    /// </summary>
+    _this.qd = [0, 0, 0, 0];
+    _this.typeName = "Motion6DFrame";
+    _this.types.push("IVelocity");
+    _this.types.push("Motion6DFrame");
+    return _this;
+  }
+  _inherits(Motion6DFrame, _RotatedFrame_1$Rotat);
+  return _createClass(Motion6DFrame, [{
+    key: "getVelocity",
+    value: function getVelocity() {
+      return this.velocity;
+    }
+    //         let ab = this.performer.convertObject<IAngularVelocityMotion6D, ReferenceFrame>(baseFrame, "IAngularVelocityMotion6D");
+  }, {
+    key: "setReferenceFrame",
+    value: function setReferenceFrame(baseFrame, relative) {
+      _superPropGet(Motion6DFrame, "setReferenceFrame", this, 3)([baseFrame, relative]);
+      var baseOrientation = baseFrame;
+      var baseVelocity = this.performer.convertObject(baseFrame, "IVelocity");
+      var relativeVelocity = this.performer.convertObject(relative, "IVelocity");
+      var baseAngular = this.performer.convertObject(baseFrame, "IAngularVelocityMotion6D");
+      var ra = this.performer.convertObject(relative, "IAngularVelocityMotion6D");
+      var velocityBase = baseVelocity[0].getVelocity();
+      var velocityRelative = relativeVelocity[0].getVelocity();
+      var mb = baseOrientation.getMatrix();
+      var om = baseAngular[0].getOmega();
+      var pos = relative.getPosition();
+      this.vp.vectorProduct(om, pos, this.hv);
+      for (var i = 0; i < 3; i++) {
+        this.velocity[i] = velocityBase[i];
+        for (var j = 0; j < 3; j++) {
+          this.velocity[i] += mb[i][j] * (velocityRelative[j] + this.hv[j]);
+        }
+      }
+    }
+  }]);
+}(RotatedFrame_1.RotatedFrame);
+exports.Motion6DFrame = Motion6DFrame;
+},{"./RotatedFrame":"src/Library/Motion6D/RotatedFrame.ts"}],"src/Library/Motion6D/Motion6DAcceleratedFrame.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
+function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
+function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Motion6DAcceleratedFrame = void 0;
+var Motion6DFrame_1 = require("./Motion6DFrame");
+var Motion6DAcceleratedFrame = /*#__PURE__*/function (_Motion6DFrame_1$Moti) {
+  function Motion6DAcceleratedFrame() {
+    var _this;
+    _classCallCheck(this, Motion6DAcceleratedFrame);
+    _this = _callSuper(this, Motion6DAcceleratedFrame);
+    _this.relativeAcceleration = [0, 0, 0];
+    _this.acceleration = [0, 0, 0];
+    _this.angularAcceleration = [0, 0, 0];
+    _this.temp = [0, 0, 0];
+    _this.tempV = [0, 0, 0];
+    _this.typeName = "Motion6DAcceleratedFrame";
+    _this.types.push("IAcceleration");
+    _this.types.push("IAngularAcceleration");
+    _this.types.push("Motion6DAcceleratedFrame");
+    return _this;
+  }
+  _inherits(Motion6DAcceleratedFrame, _Motion6DFrame_1$Moti);
+  return _createClass(Motion6DAcceleratedFrame, [{
+    key: "setReferenceFrame",
+    value: function setReferenceFrame(baseFrame, relative) {
+      _superPropGet(Motion6DAcceleratedFrame, "setReferenceFrame", this, 3)([baseFrame, relative]);
+      var arn = this.performer.convertObject(relative, " IAngularAcceleration");
+      var relativeVelocity = this.performer.convertObject(relative, "IVelocity");
+      var baseAngulatVelocity = this.performer.convertObject(baseFrame, "IAngularVelocityMotion6D");
+      var relativeAngularVelocity = this.performer.convertObject(relative, "IAngularVelocityMotion6D");
+      var rp = this.getPosition();
+      var m = this.getMatrix();
+      var relativeOmega = relativeAngularVelocity[0].getOmega();
+      var baseOmega = baseAngulatVelocity[0].getOmega();
+      this.vp.vectorProduct(baseOmega, relativeVelocity[0].getVelocity(), this.tempV);
+      var om2 = this.vp.square3d(baseOmega);
+      var eps = arn[0].getAngularAcceleration();
+      this.vp.vectorProduct(eps, rp, this.temp);
+      for (var i = 0; i < 3; i++) {
+        this.tempV[i] *= 2;
+        this.tempV[i] += om2 * rp[i] + this.relativeAcceleration[i] + this.temp[i];
+      }
+      this.realMatrix.multiplyRight(m, this.tempV, this.acceleration);
+      var relativeOrientation = relative;
+      var relativeMatrix = relativeOrientation.getMatrix();
+      this.realMatrix.multiplyLeft(baseOmega, relativeMatrix, this.temp);
+      this.vp.vectorProduct(this.temp, relativeOmega, this.tempV);
+      for (var _i = 0; _i < 3; _i++) {
+        this.temp[_i] = eps[_i] + this.tempV[_i];
+      }
+      this.realMatrix.multiplyLeft(this.temp, m, this.angularAcceleration);
+    }
+  }, {
+    key: "getAngularAcceleration",
+    value: function getAngularAcceleration() {
+      return this.angularAcceleration;
+    }
+  }, {
+    key: "getLineraAcceleration",
+    value: function getLineraAcceleration() {
+      return this.acceleration;
+      ;
+    }
+  }, {
+    key: "getRelativeAcceleration",
+    value: function getRelativeAcceleration() {
+      return this.relativeAcceleration;
+    }
+  }]);
+}(Motion6DFrame_1.Motion6DFrame);
+exports.Motion6DAcceleratedFrame = Motion6DAcceleratedFrame;
+},{"./Motion6DFrame":"src/Library/Motion6D/Motion6DFrame.ts"}],"src/Library/Motion6D/UpdatePositionAction.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.UpdatePositionAction = void 0;
+var UpdatePositionAction = /*#__PURE__*/function () {
+  function UpdatePositionAction(position) {
+    _classCallCheck(this, UpdatePositionAction);
+    this.position = position;
+  }
+  return _createClass(UpdatePositionAction, [{
+    key: "action",
+    value: function action() {
+      this.position.updateReferenceFrame();
+    }
+  }]);
+}();
+exports.UpdatePositionAction = UpdatePositionAction;
+},{}],"src/Library/Motion6D/Motion6DPerformer.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Motion6DPerformer = void 0;
+var Performer_1 = require("../Performer");
+var ActionArray_1 = require("../Utilities/Generic/ActionArray");
+var SortingAlgorithms_1 = require("../Utilities/Sort/SortingAlgorithms");
+var PositionComparer_1 = require("./Comparators/PositionComparer");
+var Motion6DAcceleratedFrame_1 = require("./Motion6DAcceleratedFrame");
+var Motion6DFrame_1 = require("./Motion6DFrame");
+var ReferenceFrame_1 = require("./ReferenceFrame");
+var UpdatePositionAction_1 = require("./UpdatePositionAction");
+var Motion6DPerformer = /*#__PURE__*/function () {
+  function Motion6DPerformer() {
+    _classCallCheck(this, Motion6DPerformer);
+    this.performer = new Performer_1.Performer();
+    this.comparer = new PositionComparer_1.PositionComparer();
+    this.sorting = new SortingAlgorithms_1.SortingAlgorithms();
+  }
+  return _createClass(Motion6DPerformer, [{
+    key: "getBaseFrame",
+    value: function getBaseFrame() {
+      return Motion6DPerformer.baseFrame;
+    }
+  }, {
+    key: "getOwnFrame",
+    value: function getOwnFrame(position) {
+      var pp = this.performer.convertObject(position, "IReferenceFrame");
+      if (pp.length > 0) return pp[0].getOwnFrame();
+      return this.getParentFrame(position);
+    }
+  }, {
+    key: "createUpdateFramesAction",
+    value: function createUpdateFramesAction(collection) {
+      var act = new ActionArray_1.ActionArray();
+      var mea = this.performer.getAll(collection, "IPosition");
+      var mm = this.sorting.mergesort(mea, this.comparer);
+      console.log(mm);
+      var _iterator = _createForOfIteratorHelper(mm),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var m = _step.value;
+          act.addAction(new UpdatePositionAction_1.UpdatePositionAction(m));
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      return act;
+    }
+  }, {
+    key: "getFrame",
+    value: function getFrame(position) {
+      var f = this.performer.convertObject(position, "IReferenceFrame");
+      if (f.length == 1) {
+        return f[0].getOwnFrame();
+      }
+      return this.getParentFrame(position);
+    }
+  }, {
+    key: "getParentOwn",
+    value: function getParentOwn(position) {
+      var p = position.getParentFrame();
+      if (p === undefined) {
+        return undefined;
+      }
+      var f = this.performer.convertObject(p, "IReferenceFrame");
+      if (f.length > 0) {
+        return this.getParentFrame(f[0]);
+      }
+      return undefined;
+    }
+  }, {
+    key: "getParentFrame",
+    value: function getParentFrame(position) {
+      var p = position.getParentFrame();
+      if (p === undefined) {
+        return this.getBaseFrame();
+      }
+      return p.getOwnFrame();
+    }
+    /*
+          /// <summary>
+        /// Parent frame
+        /// </summary>
+        /// <param name="position">Position</param>
+        /// <returns>Parent frame</returns>
+        static public ReferenceFrame GetParentFrame(this IPosition position)
+        {
+            if (position.Parent == null)
+            {
+                return Motion6DFrame.Base;
+            }
+            return performer.GetParentOwn(position);
+        }
+      */
+  }, {
+    key: "getRelative",
+    value: function getRelative(baseFrame, relative) {
+      var frame;
+      var bf = this.performer.convertObject(baseFrame, "Motion6DAcceleratedFrame");
+      var rf = this.performer.convertObject(relative, "Motion6DAcceleratedFrame");
+      if (bf.length > 0 && rf.length > 0) {
+        frame = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
+      } else {
+        frame = new ReferenceFrame_1.ReferenceFrame();
+      }
+      frame.setReferenceFrame(baseFrame, relative);
+      return frame;
+    }
+  }, {
+    key: "getRelativeFrame",
+    value: function getRelativeFrame(baseFrame, targetFrame, relative) {
+      var bp = baseFrame.getPosition();
+      var tp = targetFrame.getPosition();
+      var bm = baseFrame.getMatrix();
+      var rp = relative.getPosition();
+      for (var i = 0; i < 3; i++) {
+        rp[i] = 0;
+        for (var j = 0; j < 3; j++) {
+          rp[i] += bm[j][i] * (tp[i] - bp[i]);
+        }
+      }
+      var tm = targetFrame.getMatrix();
+      var rm = relative.getMatrix();
+      for (var _i = 0; _i < 3; _i++) {
+        for (var _j = 0; _j < 3; _j++) {
+          rm[_i][_j] = 0;
+          for (var k = 0; k < 3; k++) {
+            rm[_i][_j] += bm[k][_i] * tm[k][_j];
+          }
+        }
+      }
+    }
+  }]);
+}();
+exports.Motion6DPerformer = Motion6DPerformer;
+Motion6DPerformer.baseFrame = new Motion6DFrame_1.Motion6DFrame();
+},{"../Performer":"src/Library/Performer.ts","../Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.ts","../Utilities/Sort/SortingAlgorithms":"src/Library/Utilities/Sort/SortingAlgorithms.ts","./Comparators/PositionComparer":"src/Library/Motion6D/Comparators/PositionComparer.ts","./Motion6DAcceleratedFrame":"src/Library/Motion6D/Motion6DAcceleratedFrame.ts","./Motion6DFrame":"src/Library/Motion6D/Motion6DFrame.ts","./ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts","./UpdatePositionAction":"src/Library/Motion6D/UpdatePositionAction.ts"}],"src/Library/Motion6D/Runtime/Event/DataRuntimeConsumerMotion6DEvent.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
+function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
+function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
 function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
 function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
 function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
@@ -24380,16 +21898,31 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DataRuntimeConsumerMotion6DEvent = void 0;
 var DataRuntimeConsumerEvent_1 = require("../../../Event/Runtime/DataRuntimeConsumerEvent");
+var Motion6DPerformer_1 = require("../../Motion6DPerformer");
 var DataRuntimeConsumerMotion6DEvent = /*#__PURE__*/function (_DataRuntimeConsumerE) {
   function DataRuntimeConsumerMotion6DEvent(dataConsumer, processor) {
+    var _this;
     _classCallCheck(this, DataRuntimeConsumerMotion6DEvent);
-    return _callSuper(this, DataRuntimeConsumerMotion6DEvent, [dataConsumer, processor]);
+    _this = _callSuper(this, DataRuntimeConsumerMotion6DEvent, [dataConsumer, processor]);
+    _this.motionPefromer = new Motion6DPerformer_1.Motion6DPerformer();
+    console.log("CCC", _this);
+    return _this;
   }
   _inherits(DataRuntimeConsumerMotion6DEvent, _DataRuntimeConsumerE);
-  return _createClass(DataRuntimeConsumerMotion6DEvent);
+  return _createClass(DataRuntimeConsumerMotion6DEvent, [{
+    key: "getExtenalUpdate",
+    value: function getExtenalUpdate(obj, realime) {
+      var a = _superPropGet(DataRuntimeConsumerMotion6DEvent, "getExtenalUpdate", this, 3)([obj, realime]);
+      console.log("EEEE", a);
+      this.motionPefromer = new Motion6DPerformer_1.Motion6DPerformer();
+      var act = this.motionPefromer.createUpdateFramesAction(this);
+      a.addAction(act);
+      return a;
+    }
+  }]);
 }(DataRuntimeConsumerEvent_1.DataRuntimeConsumerEvent);
 exports.DataRuntimeConsumerMotion6DEvent = DataRuntimeConsumerMotion6DEvent;
-},{"../../../Event/Runtime/DataRuntimeConsumerEvent":"src/Library/Event/Runtime/DataRuntimeConsumerEvent.ts"}],"src/Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory.ts":[function(require,module,exports) {
+},{"../../../Event/Runtime/DataRuntimeConsumerEvent":"src/Library/Event/Runtime/DataRuntimeConsumerEvent.ts","../../Motion6DPerformer":"src/Library/Motion6D/Motion6DPerformer.ts"}],"src/Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -24424,7 +21957,1073 @@ var Motion6DRealtimeFactory = /*#__PURE__*/function () {
   }]);
 }();
 exports.Motion6DRealtimeFactory = Motion6DRealtimeFactory;
-},{"./DataRuntimeConsumerMotion6DEvent":"src/Library/Motion6D/Runtime/Event/DataRuntimeConsumerMotion6DEvent.ts","../../../Performer":"src/Library/Performer.ts","../../../Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts"}],"src/Tests/Wrappers/ScadaComposion.ts":[function(require,module,exports) {
+},{"./DataRuntimeConsumerMotion6DEvent":"src/Library/Motion6D/Runtime/Event/DataRuntimeConsumerMotion6DEvent.ts","../../../Performer":"src/Library/Performer.ts","../../../Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts"}],"src/Library/Motion6D/Objects/Shapes/Basic3DShape.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Basic3DShape = void 0;
+var CategoryObject_1 = require("../../../CategoryObject");
+var Basic3DShape = /*#__PURE__*/function (_CategoryObject_1$Cat) {
+  function Basic3DShape(desktop, name) {
+    var _this;
+    _classCallCheck(this, Basic3DShape);
+    _this = _callSuper(this, Basic3DShape, [desktop, name]);
+    _this.grahicalData = new Map();
+    _this.size = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+    _this.typeName = "Basic3DShape";
+    _this.types.push("Basic3DShape");
+    _this.types.push("IVisible");
+    _this.types.push("IPositionObject");
+    _this.types.push("ISaveGrahicalData");
+    _this.types.push("IStartPrimitive");
+    return _this;
+  }
+  _inherits(Basic3DShape, _CategoryObject_1$Cat);
+  return _createClass(Basic3DShape, [{
+    key: "startPrimitive",
+    value: function startPrimitive() {}
+  }, {
+    key: "getSaveGrahicalData",
+    value: function getSaveGrahicalData() {
+      return this.grahicalData;
+    }
+  }, {
+    key: "getVisibleSize",
+    value: function getVisibleSize() {
+      return this.size;
+    }
+  }, {
+    key: "setVisibleSize",
+    value: function setVisibleSize(size) {
+      for (var i = 0; i < 3; i++) {
+        for (var j = 0; j < 3; j++) {
+          this.size[i][j] = size[i][j];
+        }
+      }
+    }
+  }, {
+    key: "getObjectPosition",
+    value: function getObjectPosition() {
+      return this.position;
+    }
+  }, {
+    key: "setObjectPosition",
+    value: function setObjectPosition(position) {
+      this.position = position;
+    }
+  }]);
+}(CategoryObject_1.CategoryObject);
+exports.Basic3DShape = Basic3DShape;
+},{"../../../CategoryObject":"src/Library/CategoryObject.ts"}],"src/Library/Motion6D/Objects/BasicPosition.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.BasicPosition = void 0;
+var CategoryObject_1 = require("../../CategoryObject");
+var Performer_1 = require("../../Performer");
+var BasicPosition = /*#__PURE__*/function (_CategoryObject_1$Cat) {
+  function BasicPosition(desktop, name) {
+    var _this;
+    _classCallCheck(this, BasicPosition);
+    _this = _callSuper(this, BasicPosition, [desktop, name]);
+    /// <summary>
+    /// Absolute position
+    /// </summary>
+    _this.position = [0, 0, 0];
+    /// <summary>
+    /// Absolute position
+    /// </summary>
+    _this.own = [0, 0, 0];
+    _this.performer = new Performer_1.Performer();
+    _this.nodes = [];
+    _this.typeName = "BasicPosition";
+    _this.types.push("IPosition");
+    _this.types.push("BasicPosition");
+    return _this;
+  }
+  _inherits(BasicPosition, _CategoryObject_1$Cat);
+  return _createClass(BasicPosition, [{
+    key: "getPosition",
+    value: function getPosition() {
+      return this.position;
+    }
+  }, {
+    key: "getParentFrame",
+    value: function getParentFrame() {
+      return this.parent;
+    }
+  }, {
+    key: "setParentFrame",
+    value: function setParentFrame(parent) {
+      this.parent = parent;
+    }
+  }, {
+    key: "getParameters",
+    value: function getParameters() {
+      return this.parameters;
+    }
+  }, {
+    key: "setParameters",
+    value: function setParameters(parameters) {
+      this.parameters = parameters;
+    }
+  }, {
+    key: "updateReferenceFrame",
+    value: function updateReferenceFrame() {
+      var f = this.getBaseFrame();
+      if (f === undefined) return;
+      this.udateFrameProtected(f);
+    }
+  }, {
+    key: "getParentT",
+    value: function getParentT() {
+      return this.parentNode;
+    }
+  }, {
+    key: "setParentT",
+    value: function setParentT(parent) {
+      this.parentNode = parent;
+    }
+  }, {
+    key: "getNodesT",
+    value: function getNodesT() {
+      return this.nodes;
+    }
+  }, {
+    key: "addNodeT",
+    value: function addNodeT(node) {}
+  }, {
+    key: "removeNodeT",
+    value: function removeNodeT(node) {}
+  }, {
+    key: "getNodeValueT",
+    value: function getNodeValueT() {
+      return this;
+    }
+  }, {
+    key: "udateFrameProtected",
+    value: function udateFrameProtected(frame) {
+      var m = frame.getMatrix();
+      var p = frame.getPosition();
+      for (var i = 0; i < 3; i++) {
+        this.position[i] = p[i];
+        for (var j = 0; j < 3; j++) {
+          this.position[i] += m[i][j] * this.own[j];
+        }
+      }
+    }
+  }, {
+    key: "getBaseFrame",
+    value: function getBaseFrame() {
+      if (this.parent == undefined) {
+        return undefined;
+      }
+      return this.parent.getOwnFrame();
+    }
+  }]);
+}(CategoryObject_1.CategoryObject);
+exports.BasicPosition = BasicPosition;
+},{"../../CategoryObject":"src/Library/CategoryObject.ts","../../Performer":"src/Library/Performer.ts"}],"src/Library/Motion6D/Objects/SerializablePosition.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
+function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
+function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SerializablePosition = void 0;
+var BasicPosition_1 = require("./BasicPosition");
+var SerializablePosition = /*#__PURE__*/function (_BasicPosition_1$Basi) {
+  function SerializablePosition(desktop, name) {
+    var _this;
+    _classCallCheck(this, SerializablePosition);
+    _this = _callSuper(this, SerializablePosition, [desktop, name]);
+    _this.objects = [];
+    _this.map = new Map();
+    _this.typeName = "SerializablePosition";
+    _this.types.push("SerializablePosition");
+    return _this;
+  }
+  _inherits(SerializablePosition, _BasicPosition_1$Basi);
+  return _createClass(SerializablePosition, [{
+    key: "postSetArrow",
+    value: function postSetArrow() {
+      if (this.objects.length == 1) {
+        this.setParameters(this.objects[0]);
+      }
+    }
+  }, {
+    key: "getChildernT",
+    value: function getChildernT() {
+      return this.objects;
+    }
+  }, {
+    key: "addChildT",
+    value: function addChildT(child) {
+      this.objects.push(child);
+    }
+  }, {
+    key: "removeChildT",
+    value: function removeChildT(child) {
+      this.performer.remove(this.objects, child);
+    }
+  }, {
+    key: "setParameters",
+    value: function setParameters(parameters) {
+      _superPropGet(SerializablePosition, "setParameters", this, 3)([parameters]);
+      var po = this.performer.convertObject(parameters, "IPositionObject");
+      if (po.length == 0) return;
+      po[0].setObjectPosition(this);
+    }
+  }]);
+}(BasicPosition_1.BasicPosition);
+exports.SerializablePosition = SerializablePosition;
+},{"./BasicPosition":"src/Library/Motion6D/Objects/BasicPosition.ts"}],"src/Library/Motion6D/Visible/BasicCamera.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.BasicCamera = void 0;
+var BasicPosition_1 = require("../Objects/BasicPosition");
+var BasicCamera = /*#__PURE__*/function (_BasicPosition_1$Basi) {
+  function BasicCamera(desktop, name) {
+    var _this;
+    _classCallCheck(this, BasicCamera);
+    _this = _callSuper(this, BasicCamera, [desktop, name]);
+    _this.visible = [];
+    _this.typeName = "BasicCamera";
+    _this.types.push("IVisibleConsumer");
+    _this.types.push("BasicCamera");
+    return _this;
+  }
+  _inherits(BasicCamera, _BasicPosition_1$Basi);
+  return _createClass(BasicCamera, [{
+    key: "addVisibleObject",
+    value: function addVisibleObject(object) {
+      this.visible.push(object);
+    }
+  }, {
+    key: "removeVisibleObject",
+    value: function removeVisibleObject(object) {
+      this.performer.remove(this.visible, object);
+    }
+  }, {
+    key: "postVisibleObject",
+    value: function postVisibleObject(object) {}
+  }]);
+}(BasicPosition_1.BasicPosition);
+exports.BasicCamera = BasicCamera;
+},{"../Objects/BasicPosition":"src/Library/Motion6D/Objects/BasicPosition.ts"}],"src/Library/Motion6D/MovedFrame.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MovedFrame = void 0;
+var ReferenceFrame_1 = require("./ReferenceFrame");
+var MovedFrame = /*#__PURE__*/function (_ReferenceFrame_1$Ref) {
+  function MovedFrame() {
+    var _this;
+    _classCallCheck(this, MovedFrame);
+    _this = _callSuper(this, MovedFrame, arguments);
+    _this.velocity = [0, 0, 0];
+    return _this;
+  }
+  _inherits(MovedFrame, _ReferenceFrame_1$Ref);
+  return _createClass(MovedFrame, [{
+    key: "getVelocity",
+    value: function getVelocity() {
+      return this.velocity;
+    }
+  }]);
+}(ReferenceFrame_1.ReferenceFrame);
+exports.MovedFrame = MovedFrame;
+},{"./ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts"}],"src/Library/Motion6D/Objects/RigidReferenceFrame.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.RigidReferenceFrame = void 0;
+var CategoryObject_1 = require("../../CategoryObject");
+var OwnError_1 = require("../../ErrorHandler/OwnError");
+var Motion6DAcceleratedFrame_1 = require("../Motion6DAcceleratedFrame");
+var Motion6DPerformer_1 = require("../Motion6DPerformer");
+var ReferenceFrame_1 = require("../ReferenceFrame");
+var Motion6DFrame_1 = require("../Motion6DFrame");
+var RotatedFrame_1 = require("../RotatedFrame");
+var MovedFrame_1 = require("../MovedFrame");
+var RealMatrix_1 = require("../../RealMatrixProcessor/RealMatrix");
+var Vector3DProcessor_1 = require("../../Vector3D/Vector3DProcessor");
+var PerformerMeasuremets_1 = require("../../Measurements/PerformerMeasuremets");
+var RigidReferenceFrame = /*#__PURE__*/function (_CategoryObject_1$Cat) {
+  function RigidReferenceFrame(desktop, name) {
+    var _this;
+    _classCallCheck(this, RigidReferenceFrame);
+    _this = _callSuper(this, RigidReferenceFrame, [desktop, name]);
+    /// </summary>
+    _this.relativePosition = [0, 0, 0];
+    /// <summary> : IFunc<any>[] = [];
+    /// Relarive quaternion components
+    /// </summary>
+    _this.relativeQuaternion = [1, 0, 0, 0];
+    _this.children = [];
+    //protected double[,] relativeMatrix = new double[3, 3];
+    /// <summary>
+    /// Auxiliary variable
+    /// </summary>
+    _this.q44 = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+    /// <summary>
+    /// Linear velocity
+    /// </summary>
+    _this.velocity = [0, 0, 0, 0];
+    // protected double[] relativeVelocity = new double[] { 0, 0, 0 };
+    /// <summary>
+    /// Angular velocity
+    /// </summary>
+    _this.omega = [0, 0, 0];
+    _this.aliasNames = ["X", "Y", "Z", "Roll", "Pitch", "Yaw"];
+    _this.alinames = new Map();
+    _this.vp = new Vector3DProcessor_1.Vector3DProcessor();
+    _this.realMatrix = new RealMatrix_1.RealMatrix();
+    _this.own = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
+    _this.relative = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
+    _this.mPerformer = new Motion6DPerformer_1.Motion6DPerformer();
+    _this.measuremrntPerformrer = new PerformerMeasuremets_1.PerformerMeasuremets();
+    _this.nodes = [];
+    _this.typeName = "RigidReferenceFrame";
+    _this.types.push("IReferenceFrame");
+    _this.types.push("IPosition");
+    _this.types.push("IPostLoadPosition");
+    _this.types.push("IPostSetArrow");
+    _this.types.push("IAlias");
+    _this.types.push("RigidReferenceFrame");
+    return _this;
+  }
+  _inherits(RigidReferenceFrame, _CategoryObject_1$Cat);
+  return _createClass(RigidReferenceFrame, [{
+    key: "postSetArrow",
+    value: function postSetArrow() {
+      this.setParameters(this.parameters);
+      this.createFrame();
+    }
+  }, {
+    key: "getAliasNames",
+    value: function getAliasNames() {
+      return this.aliasNames;
+    }
+  }, {
+    key: "getAliasType",
+    value: function getAliasType(name) {
+      return 0;
+    }
+  }, {
+    key: "getAliasValue",
+    value: function getAliasValue(name) {
+      return this.alinames.get(name);
+    }
+  }, {
+    key: "setAliasValue",
+    value: function setAliasValue(name, value) {
+      this.alinames.set(name, value);
+    }
+  }, {
+    key: "postLoadPosition",
+    value: function postLoadPosition() {
+      this.createFrame();
+      this.copyPositionToRelativeFrame();
+      this.copyQuaternionToRelativeFrame();
+      this.init();
+      this.relative.setMatrix();
+    }
+  }, {
+    key: "impl",
+    value: function impl(s) {
+      if (this.parent === undefined) {
+        return true;
+      }
+      var own = this.parent.getOwnFrame();
+      if (own === undefined) {
+        return false;
+      }
+      return this.performer.implementsType(own, s);
+    }
+  }, {
+    key: "isAcceleration",
+    value: function isAcceleration() {
+      return this.impl("IAcceleration");
+    }
+  }, {
+    key: "isVelocity",
+    value: function isVelocity() {
+      return this.impl("IVelocity");
+    }
+  }, {
+    key: "isAngularVelocity",
+    value: function isAngularVelocity() {
+      return this.impl("IAngularVelocity");
+    }
+  }, {
+    key: "copyPositionToRelativeFrame",
+    value: function copyPositionToRelativeFrame() {
+      var rp = this.relative.getPosition();
+      this.performer.copyArray(this.relativePosition, rp);
+    }
+  }, {
+    key: "copyQuaternionToRelativeFrame",
+    value: function copyQuaternionToRelativeFrame() {
+      var rp = this.relative.getQuaternion();
+      this.performer.copyArray(this.relativeQuaternion, rp);
+      this.relative.setMatrix();
+    }
+  }, {
+    key: "copy6DPosition",
+    value: function copy6DPosition() {
+      this.copyPositionToRelativeFrame();
+      this.copyQuaternionToRelativeFrame();
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      if (this.relative === undefined) {
+        return;
+      }
+      var q = this.relative.getQuaternion();
+      for (var i = 0; i < q.length; i++) {
+        q[i] = this.relativeQuaternion[i];
+      }
+      var p = this.relative.getPosition();
+      for (var _i = 0; _i < p.length; _i++) {
+        p[_i] = this.relativePosition[_i];
+      }
+    }
+  }, {
+    key: "createFrame",
+    value: function createFrame() {
+      if (this.isAcceleration()) {
+        this.relative = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
+        this.own = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
+      }
+      if (this.isVelocity() && this.isAngularVelocity()) {
+        this.relative = new Motion6DFrame_1.Motion6DFrame();
+        this.own = new Motion6DFrame_1.Motion6DFrame();
+      }
+      if (this.isAngularVelocity()) {
+        this.relative = new RotatedFrame_1.RotatedFrame();
+        this.own = new RotatedFrame_1.RotatedFrame();
+      }
+      if (this.isVelocity()) {
+        this.relative = new MovedFrame_1.MovedFrame();
+        this.own = new MovedFrame_1.MovedFrame();
+      }
+      this.relative = new ReferenceFrame_1.ReferenceFrame();
+      this.own = new ReferenceFrame_1.ReferenceFrame();
+    }
+  }, {
+    key: "getNodeValueT",
+    value: function getNodeValueT() {
+      return this;
+    }
+  }, {
+    key: "getParentT",
+    value: function getParentT() {
+      return this.parentNode;
+    }
+  }, {
+    key: "setParentT",
+    value: function setParentT(parent) {
+      this.parentNode = parent;
+    }
+  }, {
+    key: "getNodesT",
+    value: function getNodesT() {
+      return this.nodes;
+    }
+  }, {
+    key: "addNodeT",
+    value: function addNodeT(node) {
+      this.nodes.push(node);
+    }
+  }, {
+    key: "removeNodeT",
+    value: function removeNodeT(node) {
+      this.nodes = this.performer.remove(this.nodes, node);
+    }
+  }, {
+    key: "getOwnFrame",
+    value: function getOwnFrame() {
+      return this.own;
+    }
+  }, {
+    key: "getPosition",
+    value: function getPosition() {
+      return this.own.getPosition();
+    }
+  }, {
+    key: "getParentFrame",
+    value: function getParentFrame() {
+      return this.parent;
+    }
+  }, {
+    key: "setParentFrame",
+    value: function setParentFrame(parent) {
+      if (parent != undefined && this.parent != undefined) {
+        throw new OwnError_1.OwnError("Parent", "", "");
+      }
+      this.parent = parent;
+      if (parent == undefined) {
+        this.own = this.mPerformer.getBaseFrame();
+        return;
+      }
+    }
+  }, {
+    key: "getParameters",
+    value: function getParameters() {
+      return this.parameters;
+    }
+  }, {
+    key: "setParameters",
+    value: function setParameters(parameters) {
+      this.parameters = parameters;
+    }
+  }, {
+    key: "updateReferenceFrame",
+    value: function updateReferenceFrame() {
+      var own = this.getOwnFrame();
+      var b = this.getBaseFrame();
+      if (b === null) {} else {
+        own.setReferenceFrame(b, this.relative);
+      }
+    }
+  }, {
+    key: "getBaseFrame",
+    value: function getBaseFrame() {
+      if (this.parent === undefined) {
+        return undefined;
+      } else {
+        return this.parent.getOwnFrame();
+      }
+    }
+  }]);
+}(CategoryObject_1.CategoryObject);
+exports.RigidReferenceFrame = RigidReferenceFrame;
+},{"../../CategoryObject":"src/Library/CategoryObject.ts","../../ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.ts","../Motion6DAcceleratedFrame":"src/Library/Motion6D/Motion6DAcceleratedFrame.ts","../Motion6DPerformer":"src/Library/Motion6D/Motion6DPerformer.ts","../ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts","../Motion6DFrame":"src/Library/Motion6D/Motion6DFrame.ts","../RotatedFrame":"src/Library/Motion6D/RotatedFrame.ts","../MovedFrame":"src/Library/Motion6D/MovedFrame.ts","../../RealMatrixProcessor/RealMatrix":"src/Library/RealMatrixProcessor/RealMatrix.ts","../../Vector3D/Vector3DProcessor":"src/Library/Vector3D/Vector3DProcessor.ts","../../Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts"}],"src/Library/Motion6D/Arrows/ReferenceFrameArrow.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ReferenceFrameArrow = void 0;
+var CategoryArrow_1 = require("../../CategoryArrow");
+var ReferenceFrameArrow = /*#__PURE__*/function (_CategoryArrow_1$Cate) {
+  function ReferenceFrameArrow(desktop, name) {
+    var _this;
+    _classCallCheck(this, ReferenceFrameArrow);
+    _this = _callSuper(this, ReferenceFrameArrow, [desktop, name]);
+    _this.typeName = "ReferenceFrameArrow";
+    _this.types.push("ReferenceFrameArrow");
+    return _this;
+  }
+  _inherits(ReferenceFrameArrow, _CategoryArrow_1$Cate);
+  return _createClass(ReferenceFrameArrow, [{
+    key: "getSource",
+    value: function getSource() {
+      return this.position;
+    }
+  }, {
+    key: "getTagret",
+    value: function getTagret() {
+      return this.frame;
+    }
+  }, {
+    key: "setSource",
+    value: function setSource(source) {
+      this.position = source;
+      this.positionNode = this.position;
+    }
+  }, {
+    key: "setTarget",
+    value: function setTarget(target) {
+      var f = target;
+      this.frame = f;
+      var p = f;
+      if (p === undefined) {} else {
+        p.addNodeT(this.positionNode);
+      }
+    }
+  }]);
+}(CategoryArrow_1.CategoryArrow);
+exports.ReferenceFrameArrow = ReferenceFrameArrow;
+},{"../../CategoryArrow":"src/Library/CategoryArrow.ts"}],"src/Library/Motion6D/Visible/VisibleConsumerLink.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.VisibleConsumerLink = void 0;
+var CategoryArrow_1 = require("../../CategoryArrow");
+var VisibleConsumerLink = /*#__PURE__*/function (_CategoryArrow_1$Cate) {
+  function VisibleConsumerLink(desktop, name) {
+    var _this;
+    _classCallCheck(this, VisibleConsumerLink);
+    _this = _callSuper(this, VisibleConsumerLink, [desktop, name]);
+    _this.typeName = "VisibleConsumerLink";
+    _this.types.push("VisibleConsumerLink");
+    return _this;
+  }
+  _inherits(VisibleConsumerLink, _CategoryArrow_1$Cate);
+  return _createClass(VisibleConsumerLink, [{
+    key: "getSource",
+    value: function getSource() {
+      return this.consumer;
+    }
+  }, {
+    key: "getTagret",
+    value: function getTagret() {
+      return this.visible;
+    }
+  }, {
+    key: "setSource",
+    value: function setSource(source) {
+      var c = this.performer.convertProperties(source, "IVisibleConsumer");
+      this.consumer = c[0];
+    }
+  }, {
+    key: "setTarget",
+    value: function setTarget(target) {
+      this.visible = this.performer.convertProperties(target, "IVisible")[0];
+      this.consumer.addVisibleObject(this.visible);
+    }
+  }]);
+}(CategoryArrow_1.CategoryArrow);
+exports.VisibleConsumerLink = VisibleConsumerLink;
+},{"../../CategoryArrow":"src/Library/CategoryArrow.ts"}],"src/Library/Arrows/BelognsToCollection.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.BelongsToCollection = void 0;
+var CategoryArrow_1 = require("../CategoryArrow");
+var OwnError_1 = require("../ErrorHandler/OwnError");
+var BelongsToCollection = /*#__PURE__*/function (_CategoryArrow_1$Cate) {
+  function BelongsToCollection(desktop, name) {
+    var _this;
+    _classCallCheck(this, BelongsToCollection);
+    _this = _callSuper(this, BelongsToCollection, [desktop, name]);
+    _this.typeName = "BelongsToCollection";
+    _this.types.push("BelongsToCollection");
+    return _this;
+  }
+  _inherits(BelongsToCollection, _CategoryArrow_1$Cate);
+  return _createClass(BelongsToCollection, [{
+    key: "setSource",
+    value: function setSource(source) {
+      this.source = source;
+      var a = this.getObjectT(source, "IAddRemove");
+      if (a.length == 0) {
+        throw new OwnError_1.OwnError("BelongsToCollection", "setSource", "");
+      }
+      this.ar = a[0];
+    }
+  }, {
+    key: "setTarget",
+    value: function setTarget(target) {
+      this.target = target;
+      this.ar.addChildT(target);
+    }
+  }]);
+}(CategoryArrow_1.CategoryArrow);
+exports.BelongsToCollection = BelongsToCollection;
+},{"../CategoryArrow":"src/Library/CategoryArrow.ts","../ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.ts"}],"src/Airplane.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Airplane = void 0;
+var Basic3DShape_1 = require("./Library/Motion6D/Objects/Shapes/Basic3DShape");
+var SerializablePosition_1 = require("./Library/Motion6D/Objects/SerializablePosition");
+var BasicCamera_1 = require("./Library/Motion6D/Visible/BasicCamera");
+var TimerObject_1 = require("./Library/Event/Objects/TimerObject");
+var TimeSpan_1 = require("./Library/Utilities/DateTime/TimeSpan");
+var RigidReferenceFrame_1 = require("./Library/Motion6D/Objects/RigidReferenceFrame");
+var VectorFormulaConsumer_1 = require("./Library/Measurements/VectorFormulaConsumer");
+var DataConsumer_1 = require("./Library/Measurements/DataConsumer");
+var ReferenceFrameArrow_1 = require("./Library/Motion6D/Arrows/ReferenceFrameArrow");
+var VisibleConsumerLink_1 = require("./Library/Motion6D/Visible/VisibleConsumerLink");
+var BelognsToCollection_1 = require("./Library/Arrows/BelognsToCollection");
+var DataLink_1 = require("./Library/Measurements/Arrows/DataLink");
+var EventLink_1 = require("./Library/Event/Objects/EventLink");
+var Desktop_1 = require("./Library/Desktop");
+var Airplane_CategoryObject_0_Visible0 = /*#__PURE__*/function (_Basic3DShape_1$Basic) {
+  function Airplane_CategoryObject_0_Visible0(desktop, name) {
+    var _this;
+    _classCallCheck(this, Airplane_CategoryObject_0_Visible0);
+    _this = _callSuper(this, Airplane_CategoryObject_0_Visible0, [desktop, name]);
+    var map = _this.getSaveGrahicalData();
+    map.set("Cessna_208_Caravan.obj", "Cessna_208_Caravan.obj");
+    map.set("master.mtl", "master.mtl");
+    map.set("mat0_c.jpg", "mat0_c.jpg");
+    return _this;
+  }
+  _inherits(Airplane_CategoryObject_0_Visible0, _Basic3DShape_1$Basic);
+  return _createClass(Airplane_CategoryObject_0_Visible0);
+}(Basic3DShape_1.Basic3DShape);
+var Airplane_CategoryObject_0 = /*#__PURE__*/function (_SerializablePosition) {
+  function Airplane_CategoryObject_0(desktop, name) {
+    var _this2;
+    _classCallCheck(this, Airplane_CategoryObject_0);
+    _this2 = _callSuper(this, Airplane_CategoryObject_0, [desktop, name]);
+    _this2.addChildT(new Airplane_CategoryObject_0_Visible0(desktop, name));
+    return _this2;
+  }
+  _inherits(Airplane_CategoryObject_0, _SerializablePosition);
+  return _createClass(Airplane_CategoryObject_0);
+}(SerializablePosition_1.SerializablePosition);
+var Airplane_CategoryObject_1 = /*#__PURE__*/function (_BasicCamera_1$BasicC) {
+  function Airplane_CategoryObject_1(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryObject_1);
+    return _callSuper(this, Airplane_CategoryObject_1, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryObject_1, _BasicCamera_1$BasicC);
+  return _createClass(Airplane_CategoryObject_1);
+}(BasicCamera_1.BasicCamera);
+var Airplane_CategoryObject_2 = /*#__PURE__*/function (_TimerObject_1$TimerO) {
+  function Airplane_CategoryObject_2(desktop, name) {
+    var _this3;
+    _classCallCheck(this, Airplane_CategoryObject_2);
+    _this3 = _callSuper(this, Airplane_CategoryObject_2, [desktop, name]);
+    _this3.span = new TimeSpan_1.TimeSpan(100);
+    return _this3;
+  }
+  _inherits(Airplane_CategoryObject_2, _TimerObject_1$TimerO);
+  return _createClass(Airplane_CategoryObject_2);
+}(TimerObject_1.TimerObject);
+var Airplane_CategoryObject_3 = /*#__PURE__*/function (_RigidReferenceFrame_) {
+  function Airplane_CategoryObject_3(desktop, name) {
+    var _this4;
+    _classCallCheck(this, Airplane_CategoryObject_3);
+    _this4 = _callSuper(this, Airplane_CategoryObject_3, [desktop, name]);
+    _this4.relativePosition = [];
+    _this4.relativeQuaternion = [];
+    _this4.relativePosition = [];
+    _this4.relativePosition.push(40);
+    _this4.relativePosition.push(40);
+    _this4.relativePosition.push(40);
+    _this4.relativePosition = [];
+    _this4.relativePosition.push(0.88047623921714935);
+    _this4.relativePosition.push(-0.27984814233312139);
+    _this4.relativePosition.push(0.36470519963100095);
+    _this4.relativePosition.push(0.11591689595929504);
+    return _this4;
+  }
+  _inherits(Airplane_CategoryObject_3, _RigidReferenceFrame_);
+  return _createClass(Airplane_CategoryObject_3);
+}(RigidReferenceFrame_1.RigidReferenceFrame);
+var Airplane_CategoryObject_4 = /*#__PURE__*/function (_VectorFormulaConsume) {
+  function Airplane_CategoryObject_4(desktop, name) {
+    var _this5;
+    _classCallCheck(this, Airplane_CategoryObject_4);
+    _this5 = _callSuper(this, Airplane_CategoryObject_4, [desktop, name]);
+    _this5.var_0 = 0;
+    var map = new Map([]);
+    _this5.performer.setAliasMap(map, _this5);
+    _this5.addVariableValue("Formula_1", 0, 0);
+    return _this5;
+  }
+  _inherits(Airplane_CategoryObject_4, _VectorFormulaConsume);
+  return _createClass(Airplane_CategoryObject_4, [{
+    key: "calculateTree",
+    value: function calculateTree() {
+      this.success = true;
+      this.var_0 = this.getInternalTime();
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      var all = this.getAllMeasurements();
+    }
+  }, {
+    key: "get_0",
+    value: function get_0() {
+      return this.success ? this.var_0 : undefined;
+    }
+  }, {
+    key: "save",
+    value: function save() {
+      var v = this.variables;
+      var x0 = v.get("Formula_1");
+      x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_0());
+    }
+  }]);
+}(VectorFormulaConsumer_1.VectorFormulaConsumer);
+var Airplane_CategoryObject_5 = /*#__PURE__*/function (_DataConsumer_1$DataC) {
+  function Airplane_CategoryObject_5(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryObject_5);
+    return _callSuper(this, Airplane_CategoryObject_5, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryObject_5, _DataConsumer_1$DataC);
+  return _createClass(Airplane_CategoryObject_5);
+}(DataConsumer_1.DataConsumer);
+var Airplane_CategoryArrow_0 = /*#__PURE__*/function (_ReferenceFrameArrow_) {
+  function Airplane_CategoryArrow_0(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryArrow_0);
+    return _callSuper(this, Airplane_CategoryArrow_0, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryArrow_0, _ReferenceFrameArrow_);
+  return _createClass(Airplane_CategoryArrow_0);
+}(ReferenceFrameArrow_1.ReferenceFrameArrow);
+var Airplane_CategoryArrow_1 = /*#__PURE__*/function (_VisibleConsumerLink_) {
+  function Airplane_CategoryArrow_1(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryArrow_1);
+    return _callSuper(this, Airplane_CategoryArrow_1, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryArrow_1, _VisibleConsumerLink_);
+  return _createClass(Airplane_CategoryArrow_1);
+}(VisibleConsumerLink_1.VisibleConsumerLink);
+var Airplane_CategoryArrow_2 = /*#__PURE__*/function (_BelognsToCollection_) {
+  function Airplane_CategoryArrow_2(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryArrow_2);
+    return _callSuper(this, Airplane_CategoryArrow_2, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryArrow_2, _BelognsToCollection_);
+  return _createClass(Airplane_CategoryArrow_2);
+}(BelognsToCollection_1.BelongsToCollection);
+var Airplane_CategoryArrow_3 = /*#__PURE__*/function (_BelognsToCollection_2) {
+  function Airplane_CategoryArrow_3(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryArrow_3);
+    return _callSuper(this, Airplane_CategoryArrow_3, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryArrow_3, _BelognsToCollection_2);
+  return _createClass(Airplane_CategoryArrow_3);
+}(BelognsToCollection_1.BelongsToCollection);
+var Airplane_CategoryArrow_4 = /*#__PURE__*/function (_BelognsToCollection_3) {
+  function Airplane_CategoryArrow_4(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryArrow_4);
+    return _callSuper(this, Airplane_CategoryArrow_4, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryArrow_4, _BelognsToCollection_3);
+  return _createClass(Airplane_CategoryArrow_4);
+}(BelognsToCollection_1.BelongsToCollection);
+var Airplane_CategoryArrow_5 = /*#__PURE__*/function (_DataLink_1$DataLink) {
+  function Airplane_CategoryArrow_5(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryArrow_5);
+    return _callSuper(this, Airplane_CategoryArrow_5, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryArrow_5, _DataLink_1$DataLink);
+  return _createClass(Airplane_CategoryArrow_5);
+}(DataLink_1.DataLink);
+var Airplane_CategoryArrow_6 = /*#__PURE__*/function (_EventLink_1$EventLin) {
+  function Airplane_CategoryArrow_6(desktop, name) {
+    _classCallCheck(this, Airplane_CategoryArrow_6);
+    return _callSuper(this, Airplane_CategoryArrow_6, [desktop, name]);
+  }
+  _inherits(Airplane_CategoryArrow_6, _EventLink_1$EventLin);
+  return _createClass(Airplane_CategoryArrow_6);
+}(EventLink_1.EventLink);
+var Airplane = /*#__PURE__*/function (_Desktop_1$Desktop) {
+  function Airplane() {
+    var _this6;
+    _classCallCheck(this, Airplane);
+    _this6 = _callSuper(this, Airplane);
+    _this6.name = "Airplane";
+    _this6.mapObjects.set("Airplane_CategoryObject_0", new Airplane_CategoryObject_0(_this6, "pLANE"));
+    _this6.mapObjects.set("Airplane_CategoryObject_1", new Airplane_CategoryObject_1(_this6, "Camera"));
+    _this6.mapObjects.set("Airplane_CategoryObject_2", new Airplane_CategoryObject_2(_this6, "Timer"));
+    _this6.mapObjects.set("Airplane_CategoryObject_3", new Airplane_CategoryObject_3(_this6, ""));
+    _this6.mapObjects.set("Airplane_CategoryObject_4", new Airplane_CategoryObject_4(_this6, "Time"));
+    _this6.mapObjects.set("Airplane_CategoryObject_5", new Airplane_CategoryObject_5(_this6, "Chart"));
+    new Airplane_CategoryArrow_0(_this6, "");
+    new Airplane_CategoryArrow_1(_this6, "");
+    new Airplane_CategoryArrow_2(_this6, "");
+    new Airplane_CategoryArrow_3(_this6, "");
+    new Airplane_CategoryArrow_4(_this6, "");
+    new Airplane_CategoryArrow_5(_this6, "");
+    new Airplane_CategoryArrow_6(_this6, "");
+    _this6.finish();
+    return _this6;
+  }
+  _inherits(Airplane, _Desktop_1$Desktop);
+  return _createClass(Airplane, [{
+    key: "finish",
+    value: function finish() {
+      var objects = this.getCategoryObjects();
+      var arrows = this.getCategoryArrows();
+      var s0 = this.mapObjects.get("Airplane_CategoryObject_1");
+      if (s0 != undefined) arrows[0].setSource(s0);
+      var t0 = this.mapObjects.get("Airplane_CategoryObject_3");
+      if (t0 != undefined) arrows[0].setTarget(t0);
+      var s1 = this.mapObjects.get("Airplane_CategoryObject_1");
+      if (s1 != undefined) arrows[1].setSource(s1);
+      var t1 = this.mapObjects.get("Airplane_CategoryObject_0_Visible0");
+      if (t1 != undefined) arrows[1].setTarget(t1);
+      var s2 = this.mapObjects.get("Airplane_CategoryObject_5");
+      if (s2 != undefined) arrows[2].setSource(s2);
+      var t2 = this.mapObjects.get("Airplane_CategoryObject_1");
+      if (t2 != undefined) arrows[2].setTarget(t2);
+      var s3 = this.mapObjects.get("Airplane_CategoryObject_5");
+      if (s3 != undefined) arrows[3].setSource(s3);
+      var t3 = this.mapObjects.get("Airplane_CategoryObject_3");
+      if (t3 != undefined) arrows[3].setTarget(t3);
+      var s4 = this.mapObjects.get("Airplane_CategoryObject_5");
+      if (s4 != undefined) arrows[4].setSource(s4);
+      var t4 = this.mapObjects.get("Airplane_CategoryObject_0");
+      if (t4 != undefined) arrows[4].setTarget(t4);
+      var s5 = this.mapObjects.get("Airplane_CategoryObject_5");
+      if (s5 != undefined) arrows[5].setSource(s5);
+      var t5 = this.mapObjects.get("Airplane_CategoryObject_4");
+      if (t5 != undefined) arrows[5].setTarget(t5);
+      var s6 = this.mapObjects.get("Airplane_CategoryObject_5");
+      if (s6 != undefined) arrows[6].setSource(s6);
+      var t6 = this.mapObjects.get("Airplane_CategoryObject_2");
+      if (t6 != undefined) arrows[6].setTarget(t6);
+      objects[0].postSetArrow();
+      objects[4].postSetArrow();
+      objects[5].postSetArrow();
+      objects[6].postSetArrow();
+      console.log("ARROWS", arrows);
+    }
+  }]);
+}(Desktop_1.Desktop);
+exports.Airplane = Airplane;
+},{"./Library/Motion6D/Objects/Shapes/Basic3DShape":"src/Library/Motion6D/Objects/Shapes/Basic3DShape.ts","./Library/Motion6D/Objects/SerializablePosition":"src/Library/Motion6D/Objects/SerializablePosition.ts","./Library/Motion6D/Visible/BasicCamera":"src/Library/Motion6D/Visible/BasicCamera.ts","./Library/Event/Objects/TimerObject":"src/Library/Event/Objects/TimerObject.ts","./Library/Utilities/DateTime/TimeSpan":"src/Library/Utilities/DateTime/TimeSpan.ts","./Library/Motion6D/Objects/RigidReferenceFrame":"src/Library/Motion6D/Objects/RigidReferenceFrame.ts","./Library/Measurements/VectorFormulaConsumer":"src/Library/Measurements/VectorFormulaConsumer.ts","./Library/Measurements/DataConsumer":"src/Library/Measurements/DataConsumer.ts","./Library/Motion6D/Arrows/ReferenceFrameArrow":"src/Library/Motion6D/Arrows/ReferenceFrameArrow.ts","./Library/Motion6D/Visible/VisibleConsumerLink":"src/Library/Motion6D/Visible/VisibleConsumerLink.ts","./Library/Arrows/BelognsToCollection":"src/Library/Arrows/BelognsToCollection.ts","./Library/Measurements/Arrows/DataLink":"src/Library/Measurements/Arrows/DataLink.ts","./Library/Event/Objects/EventLink":"src/Library/Event/Objects/EventLink.ts","./Library/Desktop":"src/Library/Desktop.ts"}],"src/Tests/Wrappers/ScadaComposion.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -24437,12 +23036,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ScadaComposition = void 0;
-var Composition_1 = require("../Composition");
 var ScadaDesktopEngine_1 = require("../../Library/Scada/ScadaDesktopEngine");
 var Motion6DRealtimeFactory_1 = require("../../Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory");
+var Airplane_1 = require("../../Airplane");
 var ScadaComposition = /*#__PURE__*/_createClass(function ScadaComposition(engine) {
   _classCallCheck(this, ScadaComposition);
-  this.scada = new ScadaDesktopEngine_1.ScadaDesktopEngine(new Composition_1.Composition(), engine, new Motion6DRealtimeFactory_1.Motion6DRealtimeFactory(), "Chart");
+  this.scada = new ScadaDesktopEngine_1.ScadaDesktopEngine(new Airplane_1.Airplane(), engine, new Motion6DRealtimeFactory_1.Motion6DRealtimeFactory(), "Chart");
   var dc = this.scada.getScadaObject("Chart", "IDataConsumer");
   var ev = this.scada.getScadaObject("Timer", "IEvent");
   new Action(dc[0], ev[0]);
@@ -24465,7 +23064,7 @@ var Action = /*#__PURE__*/function () {
     }
   }]);
 }();
-},{"../Composition":"src/Tests/Composition.ts","../../Library/Scada/ScadaDesktopEngine":"src/Library/Scada/ScadaDesktopEngine.ts","../../Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory":"src/Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory.ts"}],"src/Tests/Actor/ActorWeb.ts":[function(require,module,exports) {
+},{"../../Library/Scada/ScadaDesktopEngine":"src/Library/Scada/ScadaDesktopEngine.ts","../../Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory":"src/Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory.ts","../../Airplane":"src/Airplane.ts"}],"src/Tests/Actor/ActorWeb.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -24519,15 +23118,15 @@ var TwoAct_1 = require("../Wrappers/TwoAct");
 var ODE_FeedbackAct_1 = require("../Wrappers/ODE_FeedbackAct");
 var TransformerRecursveAct_1 = require("../Wrappers/TransformerRecursveAct");
 var PIAct_1 = require("../Wrappers/PIAct");
-var OrbitalForecastAct_1 = require("../Wrappers/OrbitalForecastAct");
-var OrbitalForecastCalculation_1 = require("../../Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation");
+//import { OrbitaForecasAct } from '../Wrappers/OrbitalForecastAct';
+//import { OrbitalForecastCalculation } from '../../Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation';
 var FeedBackFormulaAct_1 = require("../Wrappers/FeedBackFormulaAct");
 var RecursvieFeedbackAct_1 = require("../Wrappers/RecursvieFeedbackAct");
 var RecursiveFeedbackSimpleAct_1 = require("../Wrappers/RecursiveFeedbackSimpleAct");
 var ODE_FeedAcs_1 = require("../Wrappers/ODE_FeedAcs");
 var DateTimeConverter_1 = require("../../Library/Utilities/DateTime/DateTimeConverter");
 var DenstyAct_1 = require("../Wrappers/DenstyAct");
-var OrbitalData_1 = require("../../Algorithms/OrbitalForecastCalculation/OrbitalData");
+//import { toDateTime } from '../../Algorithms/OrbitalForecastCalculation/OrbitalData';
 var Donchian_1 = require("../Donchian");
 var ComposionAct_1 = require("../Wrappers/ComposionAct");
 var CompositionEvent_1 = require("../Wrappers/CompositionEvent");
@@ -24619,7 +23218,7 @@ var ActorWeb = /*#__PURE__*/function () {
         return _regenerator().w(function (_context2) {
           while (1) switch (_context2.n) {
             case 0:
-              o = new OrbitalForecastCalculation_1.OrbitalForecastCalculation();
+              o = new OrbitalForecastCalculation();
               bb = 1770457504;
               cond = {
                 begin: bb,
@@ -24645,7 +23244,7 @@ var ActorWeb = /*#__PURE__*/function () {
               try {
                 for (_iterator.s(); !(_step = _iterator.n()).done;) {
                   x = _step.value;
-                  y = OrbitalData_1.toDateTime(x);
+                  y = toDateTime(x);
                   console.log(y);
                 }
               } catch (err) {
@@ -24749,7 +23348,7 @@ var ActorWeb = /*#__PURE__*/function () {
     key: "actOrbitalForecast",
     value: function actOrbitalForecast() {
       try {
-        var o = new OrbitalForecastAct_1.OrbitaForecasAct();
+        var o = new OrbitaForecasAct();
         o.test();
       } catch (e) {
         finish(e);
@@ -24858,7 +23457,7 @@ var ActorWeb = /*#__PURE__*/function () {
   }]);
 }();
 exports.ActorWeb = ActorWeb;
-},{"../Wrappers/ConditionTestAct":"src/Tests/Wrappers/ConditionTestAct.ts","../Wrappers/ODEAct":"src/Tests/Wrappers/ODEAct.ts","../Wrappers/OrbitAct":"src/Tests/Wrappers/OrbitAct.ts","../Wrappers/RandomAcr":"src/Tests/Wrappers/RandomAcr.ts","../Wrappers/SimpleFeedAct":"src/Tests/Wrappers/SimpleFeedAct.ts","../Wrappers/TwoAct":"src/Tests/Wrappers/TwoAct.ts","../Wrappers/ODE_FeedbackAct":"src/Tests/Wrappers/ODE_FeedbackAct.ts","../Wrappers/TransformerRecursveAct":"src/Tests/Wrappers/TransformerRecursveAct.ts","../Wrappers/PIAct":"src/Tests/Wrappers/PIAct.ts","../Wrappers/OrbitalForecastAct":"src/Tests/Wrappers/OrbitalForecastAct.ts","../../Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation":"src/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation.ts","../Wrappers/FeedBackFormulaAct":"src/Tests/Wrappers/FeedBackFormulaAct.ts","../Wrappers/RecursvieFeedbackAct":"src/Tests/Wrappers/RecursvieFeedbackAct.ts","../Wrappers/RecursiveFeedbackSimpleAct":"src/Tests/Wrappers/RecursiveFeedbackSimpleAct.ts","../Wrappers/ODE_FeedAcs":"src/Tests/Wrappers/ODE_FeedAcs.ts","../../Library/Utilities/DateTime/DateTimeConverter":"src/Library/Utilities/DateTime/DateTimeConverter.ts","../Wrappers/DenstyAct":"src/Tests/Wrappers/DenstyAct.ts","../../Algorithms/OrbitalForecastCalculation/OrbitalData":"src/Algorithms/OrbitalForecastCalculation/OrbitalData.ts","../Donchian":"src/Tests/Donchian.ts","../Wrappers/ComposionAct":"src/Tests/Wrappers/ComposionAct.ts","../Wrappers/CompositionEvent":"src/Tests/Wrappers/CompositionEvent.ts","../../Library/Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts","../Wrappers/ScadaComposion":"src/Tests/Wrappers/ScadaComposion.ts"}],"src/common/shader-program.ts":[function(require,module,exports) {
+},{"../Wrappers/ConditionTestAct":"src/Tests/Wrappers/ConditionTestAct.ts","../Wrappers/ODEAct":"src/Tests/Wrappers/ODEAct.ts","../Wrappers/OrbitAct":"src/Tests/Wrappers/OrbitAct.ts","../Wrappers/RandomAcr":"src/Tests/Wrappers/RandomAcr.ts","../Wrappers/SimpleFeedAct":"src/Tests/Wrappers/SimpleFeedAct.ts","../Wrappers/TwoAct":"src/Tests/Wrappers/TwoAct.ts","../Wrappers/ODE_FeedbackAct":"src/Tests/Wrappers/ODE_FeedbackAct.ts","../Wrappers/TransformerRecursveAct":"src/Tests/Wrappers/TransformerRecursveAct.ts","../Wrappers/PIAct":"src/Tests/Wrappers/PIAct.ts","../Wrappers/FeedBackFormulaAct":"src/Tests/Wrappers/FeedBackFormulaAct.ts","../Wrappers/RecursvieFeedbackAct":"src/Tests/Wrappers/RecursvieFeedbackAct.ts","../Wrappers/RecursiveFeedbackSimpleAct":"src/Tests/Wrappers/RecursiveFeedbackSimpleAct.ts","../Wrappers/ODE_FeedAcs":"src/Tests/Wrappers/ODE_FeedAcs.ts","../../Library/Utilities/DateTime/DateTimeConverter":"src/Library/Utilities/DateTime/DateTimeConverter.ts","../Wrappers/DenstyAct":"src/Tests/Wrappers/DenstyAct.ts","../Donchian":"src/Tests/Donchian.ts","../Wrappers/ComposionAct":"src/Tests/Wrappers/ComposionAct.ts","../Wrappers/CompositionEvent":"src/Tests/Wrappers/CompositionEvent.ts","../../Library/Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts","../Wrappers/ScadaComposion":"src/Tests/Wrappers/ScadaComposion.ts"}],"src/common/shader-program.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -35988,1879 +34587,7 @@ var SpaceTrippersScene = /*#__PURE__*/function (_BasicScene_1$BasicSc) {
   }]);
 }(BasicScene_1.BasicScene);
 exports.default = SpaceTrippersScene;
-},{"../common/shader-program":"src/common/shader-program.ts","../common/mesh-utils":"src/common/mesh-utils.ts","../common/texture-utils":"src/common/texture-utils.ts","../common/camera":"src/common/camera.ts","../common/camera-controllers/fly-camera-controller":"src/common/camera-controllers/fly-camera-controller.ts","gl-matrix":"node_modules/gl-matrix/esm/index.js","../common/dom-utils":"src/common/dom-utils.tsx","tsx-create-element":"node_modules/tsx-create-element/dist/es6/index.js","../common/BasicScene":"src/common/BasicScene.ts"}],"src/Library/Arrows/BelognsToCollection.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.BelongsToCollection = void 0;
-var CategoryArrow_1 = require("../CategoryArrow");
-var OwnError_1 = require("../ErrorHandler/OwnError");
-var BelongsToCollection = /*#__PURE__*/function (_CategoryArrow_1$Cate) {
-  function BelongsToCollection(desktop, name) {
-    var _this;
-    _classCallCheck(this, BelongsToCollection);
-    _this = _callSuper(this, BelongsToCollection, [desktop, name]);
-    _this.typeName = "BelongsToCollection";
-    _this.types.push("BelongsToCollection");
-    return _this;
-  }
-  _inherits(BelongsToCollection, _CategoryArrow_1$Cate);
-  return _createClass(BelongsToCollection, [{
-    key: "setSource",
-    value: function setSource(source) {
-      this.source = source;
-      var a = this.getObjectT(source, "IAddRemove");
-      if (a.length == 0) {
-        throw new OwnError_1.OwnError("BelongsToCollection", "setSource", "");
-      }
-      this.ar = a[0];
-    }
-  }, {
-    key: "setTarget",
-    value: function setTarget(target) {
-      this.target = target;
-      this.ar.addChildT(target);
-    }
-  }]);
-}(CategoryArrow_1.CategoryArrow);
-exports.BelongsToCollection = BelongsToCollection;
-},{"../CategoryArrow":"src/Library/CategoryArrow.ts","../ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.ts"}],"src/Library/Motion6D/Arrows/ReferenceFrameArrow.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ReferenceFrameArrow = void 0;
-var CategoryArrow_1 = require("../../CategoryArrow");
-var ReferenceFrameArrow = /*#__PURE__*/function (_CategoryArrow_1$Cate) {
-  function ReferenceFrameArrow(desktop, name) {
-    var _this;
-    _classCallCheck(this, ReferenceFrameArrow);
-    _this = _callSuper(this, ReferenceFrameArrow, [desktop, name]);
-    _this.typeName = "ReferenceFrameArrow";
-    _this.types.push("ReferenceFrameArrow");
-    return _this;
-  }
-  _inherits(ReferenceFrameArrow, _CategoryArrow_1$Cate);
-  return _createClass(ReferenceFrameArrow, [{
-    key: "getSource",
-    value: function getSource() {
-      return this.position;
-    }
-  }, {
-    key: "getTagret",
-    value: function getTagret() {
-      return this.frame;
-    }
-  }, {
-    key: "setSource",
-    value: function setSource(source) {
-      this.position = source;
-      this.positionNode = this.position;
-    }
-  }, {
-    key: "setTarget",
-    value: function setTarget(target) {
-      var f = target;
-      this.frame = f;
-      var p = f;
-      if (p === undefined) {} else {
-        p.addNodeT(this.positionNode);
-      }
-    }
-  }]);
-}(CategoryArrow_1.CategoryArrow);
-exports.ReferenceFrameArrow = ReferenceFrameArrow;
-},{"../../CategoryArrow":"src/Library/CategoryArrow.ts"}],"src/Library/Utilities/Collections/CollectionProcessor.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.CollectionProcessor = void 0;
-var CollectionProcessor = /*#__PURE__*/function () {
-  function CollectionProcessor() {
-    _classCallCheck(this, CollectionProcessor);
-  }
-  return _createClass(CollectionProcessor, [{
-    key: "arrayCopy",
-    value: function arrayCopy(source, sourceIndex, destinationArray, destinationIndex, length) {
-      for (var i = 0; i < length; i++) {
-        destinationArray[destinationIndex + i] = source[sourceIndex + i];
-      }
-    }
-  }]);
-}();
-exports.CollectionProcessor = CollectionProcessor;
-},{}],"src/Library/Vector3D/Vector3DProcessor.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Vector3DProcessor = void 0;
-var RealMatrix_1 = require("../RealMatrixProcessor/RealMatrix");
-var CollectionProcessor_1 = require("../Utilities/Collections/CollectionProcessor");
-var Vector3DProcessor = /*#__PURE__*/function () {
-  function Vector3DProcessor() {
-    _classCallCheck(this, Vector3DProcessor);
-    this.idQuaternion = [1, 0, 0, 0];
-    this.realMatrix = new RealMatrix_1.RealMatrix();
-    this.collectionProcessor = new CollectionProcessor_1.CollectionProcessor();
-  }
-  return _createClass(Vector3DProcessor, [{
-    key: "quaternionNormalize",
-    value: function quaternionNormalize(quaternion) {
-      var a = 0;
-      var _iterator = _createForOfIteratorHelper(quaternion),
-        _step;
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var q = _step.value;
-          a += q * q;
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-      a = 1 / Math.sqrt(a);
-      for (var i = 0; i < 4; i++) {
-        quaternion[i] *= a;
-      }
-    }
-  }, {
-    key: "quaternionToeulerAngles",
-    value: function quaternionToeulerAngles(angles, quaternion) {
-      this.quaternionToeulerAnglesXYZW(angles, quaternion[1], quaternion[2], quaternion[3], quaternion[0]);
-    }
-  }, {
-    key: "quaternionToeulerAnglesXYZW",
-    value: function quaternionToeulerAnglesXYZW(angles, x, y, z, w) {
-      // roll (x-axis rotation)
-      var sinr_cosp = 2 * (w * x + y * z);
-      var cosr_cosp = 1 - 2 * (x * x + y * y);
-      angles.setRoll(Math.atan2(sinr_cosp, cosr_cosp));
-      // pitch (y-axis rotation)
-      var sinp = 2 * (w * y - z * x);
-      if (Math.abs(sinp) >= 1) {
-        angles.setPitch(this.realMatrix.copySign(Math.PI / 2, sinp));
-        //std::copysign(M_PI / 2, sinp); // use 90 degrees if out of range
-      } else {
-        angles.setPitch(Math.asin(sinp));
-      }
-      // yaw (z-axis rotation)
-      var siny_cosp = 2 * (w * z + x * y);
-      var cosy_cosp = 1 - 2 * (y * y + z * z);
-      angles.setYaw(Math.atan2(siny_cosp, cosy_cosp));
-    }
-  }, {
-    key: "rotateOmega",
-    value: function rotateOmega(omega, quaternion, time) {
-      var o = this.realMatrix.partialNorm(omega, 0, 3);
-      var phi = 0.5 * o * time;
-      var s = Math.sin(phi);
-      quaternion[0] = Math.sqrt(1 - s * s);
-      o = 1 / o;
-      for (var i = 0; i < 3; i++) {
-        quaternion[i + 1] = o * s * omega[i];
-      }
-    }
-  }, {
-    key: "square3d",
-    value: function square3d(x) {
-      // !!! EXCEPTION DELETE
-      if (x.length != 3) {}
-      return x[0] * x[0] + x[1] * x[1] + x[2] * x[2];
-    }
-  }, {
-    key: "vectorProduct",
-    value: function vectorProduct(x, y, z) {
-      z[0] = x[1] * y[2] - x[2] * y[1];
-      z[1] = x[2] * y[0] - x[0] * y[2];
-      z[2] = x[0] * y[1] - x[1] * y[0];
-    }
-  }, {
-    key: "quaternionMultiply",
-    value: function quaternionMultiply(x, y, z) {
-      z[0] = x[0] * y[0] - x[1] * y[1] - x[2] * y[2] - x[3] * y[3];
-      z[1] = x[0] * y[1] + x[1] * y[0] + x[2] * y[3] - x[3] * y[2];
-      z[2] = x[0] * y[2] + x[2] * y[0] + x[3] * y[1] - x[1] * y[3];
-      z[3] = x[0] * y[3] + x[3] * y[0] + x[1] * y[2] - x[2] * y[1];
-    }
-  }, {
-    key: "quaternionInvertMultiply",
-    value: function quaternionInvertMultiply(x, y, z) {
-      z[0] = x[0] * y[0] + x[1] * y[1] + x[2] * y[2] + x[3] * y[3];
-      z[1] = x[0] * y[1] - x[1] * y[0] - x[2] * y[3] + x[3] * y[2];
-      z[2] = x[0] * y[2] - x[2] * y[0] - x[3] * y[1] + x[1] * y[3];
-      z[3] = x[0] * y[3] - x[3] * y[0] - x[1] * y[2] + x[2] * y[1];
-    }
-  }, {
-    key: "quaternionInvertOmega",
-    value: function quaternionInvertOmega(quaterinon, omegaIn, omegaOut) {
-      omegaOut[0] = quaterinon[0] * omegaIn[0] - quaterinon[2] * omegaIn[2] + quaterinon[3] * omegaIn[1];
-      omegaOut[1] = quaterinon[0] * omegaIn[1] - quaterinon[3] * omegaIn[0] + quaterinon[1] * omegaIn[2];
-      omegaOut[2] = quaterinon[0] * omegaIn[2] - quaterinon[1] * omegaIn[1] + quaterinon[2] * omegaIn[0];
-    }
-  }, {
-    key: "quaternionToMatrix",
-    value: function quaternionToMatrix(q, m, qq) {
-      var norm = 1 / Math.sqrt(q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]);
-      for (var i = 0; i < 4; i++) {
-        q[i] *= norm;
-      }
-      for (var _i = 0; _i < 4; _i++) {
-        for (var j = 0; j <= _i; j++) {
-          qq[_i][j] = q[_i] * q[j];
-        }
-      }
-      m[0][0] = qq[0][0] + qq[1][1] - qq[2][2] - qq[3][3];
-      m[0][1] = 2 * (qq[2][1] - qq[3][0]);
-      m[0][2] = 2 * (qq[2][0] + qq[3][1]);
-      m[1][0] = 2 * (qq[3][0] + qq[2][1]);
-      m[1][1] = qq[0][0] - qq[1][1] + qq[2][2] - qq[3][3];
-      m[1][2] = 2 * (qq[3][2] - qq[1][0]);
-      m[2][0] = 2 * (qq[3][1] - qq[2][0]);
-      m[2][1] = 2 * (qq[1][0] + qq[3][2]);
-      m[2][2] = qq[0][0] - qq[1][1] - qq[2][2] + qq[3][3];
-    }
-  }, {
-    key: "calculateDynamics",
-    value: function calculateDynamics(q, der, m, omega, qd) {
-      var norm = 1 / Math.sqrt(q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]);
-      for (var i = 0; i < 4; i++) {
-        q[i] *= norm;
-        der[i] *= norm;
-      }
-      for (var _i2 = 0; _i2 < 4; _i2++) {
-        for (var j = 0; j < 4; j++) {
-          qd[_i2][j] = q[_i2] * der[j];
-        }
-      }
-      omega[0] = 2 * (-qd[2][3] + qd[3][2] + qd[0][1] - qd[1][0]);
-      omega[1] = 2 * (-qd[3][1] + qd[1][3] + qd[0][2] - qd[2][0]);
-      omega[2] = 2 * (-qd[1][2] + qd[2][1] + qd[0][3] - qd[3][0]);
-    }
-  }, {
-    key: "calculateDynamicsLong",
-    value: function calculateDynamicsLong(q, der, m, omega, qq, qd) {
-      this.calculateDynamics(q, der, m, omega, qd);
-      for (var i = 0; i < 4; i++) {
-        for (var j = 0; j <= i; j++) {
-          qq[i][j] = q[i] * q[j];
-        }
-      }
-      m[0][0] = qq[0][0] + qq[1][1] - qq[2][2] - qq[3][3];
-      m[0][1] = 2 * (qq[2][1] - qq[3][0]);
-      m[0][2] = 2 * (qq[2][0] + qq[3][1]);
-      m[1][0] = 2 * (qq[3][0] + qq[2][1]);
-      m[1][1] = qq[0][0] - qq[1][1] + qq[2][2] - qq[3][3];
-      m[1][2] = 2 * (qq[3][2] - qq[1][0]);
-      m[2][0] = 2 * (qq[3][1] - qq[2][0]);
-      m[2][1] = 2 * (qq[1][0] + qq[3][2]);
-      m[2][2] = qq[0][0] - qq[1][1] - qq[2][2] + qq[3][3];
-    }
-  }, {
-    key: "calculateQuaternionDerivation",
-    value: function calculateQuaternionDerivation(quaternion, omega, quaternionDerivation, auxQuaternion) {
-      auxQuaternion[0] = 0;
-      this.collectionProcessor.arrayCopy(omega, 0, auxQuaternion, 1, 3);
-      this.quaternionMultiply(quaternion, auxQuaternion, quaternionDerivation);
-      for (var i = 0; i < 4; i++) {
-        quaternionDerivation[i] *= 0.5;
-      }
-    }
-  }]);
-}();
-exports.Vector3DProcessor = Vector3DProcessor;
-},{"../RealMatrixProcessor/RealMatrix":"src/Library/RealMatrixProcessor/RealMatrix.ts","../Utilities/Collections/CollectionProcessor":"src/Library/Utilities/Collections/CollectionProcessor.ts"}],"src/Library/Motion6D/ReferenceFrame.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ReferenceFrame = void 0;
-var Performer_1 = require("../Performer");
-var RealMatrix_1 = require("../RealMatrixProcessor/RealMatrix");
-var Vector3DProcessor_1 = require("../Vector3D/Vector3DProcessor");
-var ReferenceFrame = /*#__PURE__*/function () {
-  function ReferenceFrame() {
-    _classCallCheck(this, ReferenceFrame);
-    this.nodes = [];
-    this.performer = new Performer_1.Performer();
-    this.realMatrix = new RealMatrix_1.RealMatrix();
-    this.vp = new Vector3DProcessor_1.Vector3DProcessor();
-    this.positions = [];
-    this.types = ["IObject", "IOrientation", "IPosition", "ReferenceFrame"];
-    this.typeName = "ReferenceFrame";
-    this.quaternion = [1, 0, 0, 0];
-    /// <summary>
-    /// Absolute position
-    /// </summary>
-    this.position = [0, 0, 0];
-    /// <summary>
-    /// Orientation matrix
-    /// </summary>
-    this.matrix = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
-    /// <summary>
-    /// Auxiliary array
-    /// </summary>
-    this.qq = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
-    /// <summary>
-    /// Auxiliary array
-    /// </summary>
-    this.p = [0, 0, 0];
-    /// <summary>
-    /// Auxliary position
-    /// </summary>
-    this.auxPos = [0, 0, 0];
-  }
-  return _createClass(ReferenceFrame, [{
-    key: "setParameters",
-    value: function setParameters(parameters) {
-      this.parameters = parameters;
-    }
-  }, {
-    key: "getParentT",
-    value: function getParentT() {
-      return this.parentNode;
-    }
-  }, {
-    key: "setParentT",
-    value: function setParentT(parent) {
-      this.parentNode = parent;
-    }
-  }, {
-    key: "getNodesT",
-    value: function getNodesT() {
-      return this.nodes;
-    }
-  }, {
-    key: "addNodeT",
-    value: function addNodeT(node) {
-      this.nodes.push(node);
-    }
-  }, {
-    key: "removeNodeT",
-    value: function removeNodeT(node) {
-      this.nodes = this.performer.remove(this.nodes, node);
-    }
-  }, {
-    key: "getNodeValueT",
-    value: function getNodeValueT() {
-      return this;
-    }
-  }, {
-    key: "setReferenceFrame",
-    value: function setReferenceFrame(baseFrame, relative) {
-      var m = baseFrame.getMatrix();
-      var bp = baseFrame.getPosition();
-      var rp = relative.getPosition();
-      for (var i = 0; i < 3; i++) {
-        this.position[i] = bp[i];
-        for (var j = 0; j < 3; j++) {
-          this.position[i] += m[i][j] * rp[j];
-        }
-      }
-      this.vp.quaternionMultiply(baseFrame.quaternion, relative.quaternion, this.quaternion);
-      this.setMatrix();
-    }
-  }, {
-    key: "getQuaternion",
-    value: function getQuaternion() {
-      return this.quaternion;
-    }
-  }, {
-    key: "getMatrix",
-    value: function getMatrix() {
-      return this.matrix;
-    }
-  }, {
-    key: "getPosition",
-    value: function getPosition() {
-      return this.position;
-    }
-  }, {
-    key: "getParentFrame",
-    value: function getParentFrame() {
-      return this.parent;
-    }
-  }, {
-    key: "setParentFrame",
-    value: function setParentFrame(parent) {
-      this.parent = parent;
-    }
-  }, {
-    key: "getParameters",
-    value: function getParameters() {
-      return this.parameters;
-    }
-  }, {
-    key: "updateReferenceFrame",
-    value: function updateReferenceFrame() {
-      var p = this.getParentFrame();
-      if (p === undefined) {
-        return;
-      }
-      var r = p.getOwnFrame();
-      if (r === undefined) {
-        return;
-      }
-      this.position = r.getPosition();
-      this.quaternion = r.getQuaternion();
-      this.matrix = r.getMatrix();
-    }
-  }, {
-    key: "getPositions",
-    value: function getPositions() {
-      return this.positions;
-    }
-  }, {
-    key: "addPosition",
-    value: function addPosition(position) {
-      this.positions.push(position);
-    }
-    // new Error
-  }, {
-    key: "getClassName",
-    value: function getClassName() {
-      return this.typeName;
-    }
-  }, {
-    key: "imlplementsType",
-    value: function imlplementsType(type) {
-      return this.types.indexOf(type) > 0;
-    }
-  }, {
-    key: "getName",
-    value: function getName() {
-      return "";
-    }
-  }, {
-    key: "getRelativePosition",
-    value: function getRelativePosition(inPosition, outPosition) {
-      for (var i = 0; i < 3; i++) {
-        this.auxPos[i] = inPosition[i] - this.position[i];
-      }
-      for (var _i = 0; _i < 3; _i++) {
-        outPosition[_i] = 0;
-        for (var j = 0; j < 3; j++) {
-          outPosition[_i] += this.matrix[j][_i] * this.auxPos[j];
-        }
-      }
-    }
-  }, {
-    key: "norm",
-    value: function norm() {
-      this.vp.quaternionNormalize(this.quaternion);
-    }
-  }, {
-    key: "setMatrix",
-    value: function setMatrix() {
-      this.norm();
-      this.vp.quaternionToMatrix(this.quaternion, this.matrix, this.qq);
-    }
-  }, {
-    key: "getPositionArray",
-    value: function getPositionArray(position, coordinates) {
-      var p1 = this.getPosition();
-      var p2 = position.getPosition();
-      for (var i = 0; i < 3; i++) {
-        this.p[i] = p2[i] - p1[i];
-      }
-      for (var _i2 = 0; _i2 < 3; _i2++) {
-        coordinates[_i2] = 0;
-        for (var j = 0; j < 3; j++) {
-          coordinates[_i2] += this.matrix[_i2][j] * this.p[j];
-        }
-      }
-    }
-  }, {
-    key: "getRelative",
-    value: function getRelative(baseFrame, relativeFrame, result, diff) {
-      this.vp.quaternionInvertMultiply(relativeFrame.quaternion, baseFrame.quaternion, result.quaternion);
-      result.setMatrix();
-      for (var i = 0; i < 3; i++) {
-        diff[i] = relativeFrame.position[i] - baseFrame.position[i];
-      }
-      var m = baseFrame.getMatrix();
-      var p = result.getPosition();
-      for (var _i3 = 0; _i3 < 3; _i3++) {
-        p[_i3] = 0;
-        for (var j = 0; j < 3; j++) {
-          p[_i3] += m[j][_i3] * diff[j];
-        }
-      }
-    }
-  }, {
-    key: "calculateRotatedPosition",
-    value: function calculateRotatedPosition(abs, rot) {
-      for (var i = 0; i < 3; i++) {
-        rot[i] = 0;
-        for (var j = 0; j < 3; j++) {
-          rot[i] += this.matrix[j][i] * abs[j];
-        }
-      }
-    }
-  }]);
-}();
-exports.ReferenceFrame = ReferenceFrame;
-},{"../Performer":"src/Library/Performer.ts","../RealMatrixProcessor/RealMatrix":"src/Library/RealMatrixProcessor/RealMatrix.ts","../Vector3D/Vector3DProcessor":"src/Library/Vector3D/Vector3DProcessor.ts"}],"src/Library/Motion6D/RotatedFrame.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
-function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
-function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.RotatedFrame = void 0;
-var ReferenceFrame_1 = require("./ReferenceFrame");
-var RotatedFrame = /*#__PURE__*/function (_ReferenceFrame_1$Ref) {
-  function RotatedFrame() {
-    var _this;
-    _classCallCheck(this, RotatedFrame);
-    _this = _callSuper(this, RotatedFrame);
-    _this.omega = [0, 0, 0];
-    _this.typeName = "RotatedFrame";
-    _this.types.push("IAngularVelocityMotion6D");
-    _this.types.push("RotatedFrame");
-    return _this;
-  }
-  _inherits(RotatedFrame, _ReferenceFrame_1$Ref);
-  return _createClass(RotatedFrame, [{
-    key: "getOmega",
-    value: function getOmega() {
-      return this.omega;
-    }
-  }, {
-    key: "setReferenceFrame",
-    value: function setReferenceFrame(baseFrame, relative) {
-      _superPropGet(RotatedFrame, "setReferenceFrame", this, 3)([baseFrame, relative]);
-      var ab = this.performer.convertObject(baseFrame, "IAngularVelocityMotion6D");
-      var ar = this.performer.convertObject(relative, "IAngularVelocityMotion6D");
-      var matrix = relative.getMatrix();
-      var ob = ab[0].getOmega();
-      var or = ar[0].getOmega();
-      for (var i = 0; i < or.length; i++) {
-        this.omega[i] = or[i];
-        for (var j = 0; j < 3; j++) {
-          this.omega[i] += matrix[i][j] * ob[j];
-        }
-      }
-    }
-  }]);
-}(ReferenceFrame_1.ReferenceFrame);
-exports.RotatedFrame = RotatedFrame;
-},{"./ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts"}],"src/Library/Motion6D/Motion6DFrame.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
-function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
-function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Motion6DFrame = void 0;
-var RotatedFrame_1 = require("./RotatedFrame");
-var Motion6DFrame = /*#__PURE__*/function (_RotatedFrame_1$Rotat) {
-  function Motion6DFrame() {
-    var _this;
-    _classCallCheck(this, Motion6DFrame);
-    _this = _callSuper(this, Motion6DFrame);
-    _this.velocity = [0, 0, 0];
-    _this.hv = [0, 0, 0];
-    //protected double[] relativeVelocity = new double[] { 0, 0, 0 };
-    /// <summary>
-    /// Derivation
-    /// </summary>
-    _this.der = [0, 0, 0, 0];
-    /// <summary>
-    /// Quaternion derivation
-    /// </summary>
-    _this.qd = [0, 0, 0, 0];
-    _this.typeName = "Motion6DFrame";
-    _this.types.push("IVelocity");
-    _this.types.push("Motion6DFrame");
-    return _this;
-  }
-  _inherits(Motion6DFrame, _RotatedFrame_1$Rotat);
-  return _createClass(Motion6DFrame, [{
-    key: "getVelocity",
-    value: function getVelocity() {
-      return this.velocity;
-    }
-    //         let ab = this.performer.convertObject<IAngularVelocityMotion6D, ReferenceFrame>(baseFrame, "IAngularVelocityMotion6D");
-  }, {
-    key: "setReferenceFrame",
-    value: function setReferenceFrame(baseFrame, relative) {
-      _superPropGet(Motion6DFrame, "setReferenceFrame", this, 3)([baseFrame, relative]);
-      var baseOrientation = baseFrame;
-      var baseVelocity = this.performer.convertObject(baseFrame, "IVelocity");
-      var relativeVelocity = this.performer.convertObject(relative, "IVelocity");
-      var baseAngular = this.performer.convertObject(baseFrame, "IAngularVelocityMotion6D");
-      var ra = this.performer.convertObject(relative, "IAngularVelocityMotion6D");
-      var velocityBase = baseVelocity[0].getVelocity();
-      var velocityRelative = relativeVelocity[0].getVelocity();
-      var mb = baseOrientation.getMatrix();
-      var om = baseAngular[0].getOmega();
-      var pos = relative.getPosition();
-      this.vp.vectorProduct(om, pos, this.hv);
-      for (var i = 0; i < 3; i++) {
-        this.velocity[i] = velocityBase[i];
-        for (var j = 0; j < 3; j++) {
-          this.velocity[i] += mb[i][j] * (velocityRelative[j] + this.hv[j]);
-        }
-      }
-    }
-  }]);
-}(RotatedFrame_1.RotatedFrame);
-exports.Motion6DFrame = Motion6DFrame;
-},{"./RotatedFrame":"src/Library/Motion6D/RotatedFrame.ts"}],"src/Library/Motion6D/Motion6DAcceleratedFrame.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
-function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
-function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Motion6DAcceleratedFrame = void 0;
-var Motion6DFrame_1 = require("./Motion6DFrame");
-var Motion6DAcceleratedFrame = /*#__PURE__*/function (_Motion6DFrame_1$Moti) {
-  function Motion6DAcceleratedFrame() {
-    var _this;
-    _classCallCheck(this, Motion6DAcceleratedFrame);
-    _this = _callSuper(this, Motion6DAcceleratedFrame);
-    _this.relativeAcceleration = [0, 0, 0];
-    _this.acceleration = [0, 0, 0];
-    _this.angularAcceleration = [0, 0, 0];
-    _this.temp = [0, 0, 0];
-    _this.tempV = [0, 0, 0];
-    _this.typeName = "Motion6DAcceleratedFrame";
-    _this.types.push("IAcceleration");
-    _this.types.push("IAngularAcceleration");
-    _this.types.push("Motion6DAcceleratedFrame");
-    return _this;
-  }
-  _inherits(Motion6DAcceleratedFrame, _Motion6DFrame_1$Moti);
-  return _createClass(Motion6DAcceleratedFrame, [{
-    key: "setReferenceFrame",
-    value: function setReferenceFrame(baseFrame, relative) {
-      _superPropGet(Motion6DAcceleratedFrame, "setReferenceFrame", this, 3)([baseFrame, relative]);
-      var arn = this.performer.convertObject(relative, " IAngularAcceleration");
-      var relativeVelocity = this.performer.convertObject(relative, "IVelocity");
-      var baseAngulatVelocity = this.performer.convertObject(baseFrame, "IAngularVelocityMotion6D");
-      var relativeAngularVelocity = this.performer.convertObject(relative, "IAngularVelocityMotion6D");
-      var rp = this.getPosition();
-      var m = this.getMatrix();
-      var relativeOmega = relativeAngularVelocity[0].getOmega();
-      var baseOmega = baseAngulatVelocity[0].getOmega();
-      this.vp.vectorProduct(baseOmega, relativeVelocity[0].getVelocity(), this.tempV);
-      var om2 = this.vp.square3d(baseOmega);
-      var eps = arn[0].getAngularAcceleration();
-      this.vp.vectorProduct(eps, rp, this.temp);
-      for (var i = 0; i < 3; i++) {
-        this.tempV[i] *= 2;
-        this.tempV[i] += om2 * rp[i] + this.relativeAcceleration[i] + this.temp[i];
-      }
-      this.realMatrix.multiplyRight(m, this.tempV, this.acceleration);
-      var relativeOrientation = relative;
-      var relativeMatrix = relativeOrientation.getMatrix();
-      this.realMatrix.multiplyLeft(baseOmega, relativeMatrix, this.temp);
-      this.vp.vectorProduct(this.temp, relativeOmega, this.tempV);
-      for (var _i = 0; _i < 3; _i++) {
-        this.temp[_i] = eps[_i] + this.tempV[_i];
-      }
-      this.realMatrix.multiplyLeft(this.temp, m, this.angularAcceleration);
-    }
-  }, {
-    key: "getAngularAcceleration",
-    value: function getAngularAcceleration() {
-      return this.angularAcceleration;
-    }
-  }, {
-    key: "getLineraAcceleration",
-    value: function getLineraAcceleration() {
-      return this.acceleration;
-      ;
-    }
-  }, {
-    key: "getRelativeAcceleration",
-    value: function getRelativeAcceleration() {
-      return this.relativeAcceleration;
-    }
-  }]);
-}(Motion6DFrame_1.Motion6DFrame);
-exports.Motion6DAcceleratedFrame = Motion6DAcceleratedFrame;
-},{"./Motion6DFrame":"src/Library/Motion6D/Motion6DFrame.ts"}],"src/Library/Motion6D/Motion6DPerformer.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Motion6DPerformer = void 0;
-var Performer_1 = require("../Performer");
-var Motion6DAcceleratedFrame_1 = require("./Motion6DAcceleratedFrame");
-var Motion6DFrame_1 = require("./Motion6DFrame");
-var ReferenceFrame_1 = require("./ReferenceFrame");
-var Motion6DPerformer = /*#__PURE__*/function () {
-  function Motion6DPerformer() {
-    _classCallCheck(this, Motion6DPerformer);
-    this.performer = new Performer_1.Performer();
-  }
-  return _createClass(Motion6DPerformer, [{
-    key: "getBaseFrame",
-    value: function getBaseFrame() {
-      return Motion6DPerformer.baseFrame;
-    }
-  }, {
-    key: "getOwnFrame",
-    value: function getOwnFrame(position) {
-      var pp = this.performer.convertObject(position, "IReferenceFrame");
-      if (pp.length > 0) return pp[0].getOwnFrame();
-      return this.getParentFrame(position);
-    }
-  }, {
-    key: "getFrame",
-    value: function getFrame(position) {
-      var f = this.performer.convertObject(position, "IReferenceFrame");
-      if (f.length == 1) {
-        return f[0].getOwnFrame();
-      }
-      return this.getParentFrame(position);
-    }
-  }, {
-    key: "getParentOwn",
-    value: function getParentOwn(position) {
-      var p = position.getParentFrame();
-      if (p === undefined) {
-        return undefined;
-      }
-      var f = this.performer.convertObject(p, "IReferenceFrame");
-      if (f.length > 0) {
-        return this.getParentFrame(f[0]);
-      }
-      return undefined;
-    }
-  }, {
-    key: "getParentFrame",
-    value: function getParentFrame(position) {
-      var p = position.getParentFrame();
-      if (p === undefined) {
-        return this.getBaseFrame();
-      }
-      return p.getOwnFrame();
-    }
-    /*
-          /// <summary>
-        /// Parent frame
-        /// </summary>
-        /// <param name="position">Position</param>
-        /// <returns>Parent frame</returns>
-        static public ReferenceFrame GetParentFrame(this IPosition position)
-        {
-            if (position.Parent == null)
-            {
-                return Motion6DFrame.Base;
-            }
-            return performer.GetParentOwn(position);
-        }
-      */
-  }, {
-    key: "getRelative",
-    value: function getRelative(baseFrame, relative) {
-      var frame;
-      var bf = this.performer.convertObject(baseFrame, "Motion6DAcceleratedFrame");
-      var rf = this.performer.convertObject(relative, "Motion6DAcceleratedFrame");
-      if (bf.length > 0 && rf.length > 0) {
-        frame = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
-      } else {
-        frame = new ReferenceFrame_1.ReferenceFrame();
-      }
-      frame.setReferenceFrame(baseFrame, relative);
-      return frame;
-    }
-  }, {
-    key: "getRelativeFrame",
-    value: function getRelativeFrame(baseFrame, targetFrame, relative) {
-      var bp = baseFrame.getPosition();
-      var tp = targetFrame.getPosition();
-      var bm = baseFrame.getMatrix();
-      var rp = relative.getPosition();
-      for (var i = 0; i < 3; i++) {
-        rp[i] = 0;
-        for (var j = 0; j < 3; j++) {
-          rp[i] += bm[j][i] * (tp[i] - bp[i]);
-        }
-      }
-      var tm = targetFrame.getMatrix();
-      var rm = relative.getMatrix();
-      for (var _i = 0; _i < 3; _i++) {
-        for (var _j = 0; _j < 3; _j++) {
-          rm[_i][_j] = 0;
-          for (var k = 0; k < 3; k++) {
-            rm[_i][_j] += bm[k][_i] * tm[k][_j];
-          }
-        }
-      }
-    }
-  }]);
-}();
-exports.Motion6DPerformer = Motion6DPerformer;
-Motion6DPerformer.baseFrame = new Motion6DFrame_1.Motion6DFrame();
-},{"../Performer":"src/Library/Performer.ts","./Motion6DAcceleratedFrame":"src/Library/Motion6D/Motion6DAcceleratedFrame.ts","./Motion6DFrame":"src/Library/Motion6D/Motion6DFrame.ts","./ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts"}],"src/Library/Motion6D/MovedFrame.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.MovedFrame = void 0;
-var ReferenceFrame_1 = require("./ReferenceFrame");
-var MovedFrame = /*#__PURE__*/function (_ReferenceFrame_1$Ref) {
-  function MovedFrame() {
-    var _this;
-    _classCallCheck(this, MovedFrame);
-    _this = _callSuper(this, MovedFrame, arguments);
-    _this.velocity = [0, 0, 0];
-    return _this;
-  }
-  _inherits(MovedFrame, _ReferenceFrame_1$Ref);
-  return _createClass(MovedFrame, [{
-    key: "getVelocity",
-    value: function getVelocity() {
-      return this.velocity;
-    }
-  }]);
-}(ReferenceFrame_1.ReferenceFrame);
-exports.MovedFrame = MovedFrame;
-},{"./ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts"}],"src/Library/Motion6D/Objects/RigidReferenceFrame.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.RigidReferenceFrame = void 0;
-var CategoryObject_1 = require("../../CategoryObject");
-var OwnError_1 = require("../../ErrorHandler/OwnError");
-var Motion6DAcceleratedFrame_1 = require("../Motion6DAcceleratedFrame");
-var Motion6DPerformer_1 = require("../Motion6DPerformer");
-var ReferenceFrame_1 = require("../ReferenceFrame");
-var Motion6DFrame_1 = require("../Motion6DFrame");
-var RotatedFrame_1 = require("../RotatedFrame");
-var MovedFrame_1 = require("../MovedFrame");
-var RealMatrix_1 = require("../../RealMatrixProcessor/RealMatrix");
-var Vector3DProcessor_1 = require("../../Vector3D/Vector3DProcessor");
-var PerformerMeasuremets_1 = require("../../Measurements/PerformerMeasuremets");
-var RigidReferenceFrame = /*#__PURE__*/function (_CategoryObject_1$Cat) {
-  function RigidReferenceFrame(desktop, name) {
-    var _this;
-    _classCallCheck(this, RigidReferenceFrame);
-    _this = _callSuper(this, RigidReferenceFrame, [desktop, name]);
-    /// </summary>
-    _this.relativePosition = [0, 0, 0];
-    /// <summary> : IFunc<any>[] = [];
-    /// Relarive quaternion components
-    /// </summary>
-    _this.relativeQuaternion = [1, 0, 0, 0];
-    _this.children = [];
-    //protected double[,] relativeMatrix = new double[3, 3];
-    /// <summary>
-    /// Auxiliary variable
-    /// </summary>
-    _this.q44 = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
-    /// <summary>
-    /// Linear velocity
-    /// </summary>
-    _this.velocity = [0, 0, 0, 0];
-    // protected double[] relativeVelocity = new double[] { 0, 0, 0 };
-    /// <summary>
-    /// Angular velocity
-    /// </summary>
-    _this.omega = [0, 0, 0];
-    _this.aliasNames = ["X", "Y", "Z", "Roll", "Pitch", "Yaw"];
-    _this.alinames = new Map();
-    _this.vp = new Vector3DProcessor_1.Vector3DProcessor();
-    _this.realMatrix = new RealMatrix_1.RealMatrix();
-    _this.own = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
-    _this.relative = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
-    _this.mPerformer = new Motion6DPerformer_1.Motion6DPerformer();
-    _this.measuremrntPerformrer = new PerformerMeasuremets_1.PerformerMeasuremets();
-    _this.nodes = [];
-    _this.typeName = "RigidReferenceFrame";
-    _this.types.push("IReferenceFrame");
-    _this.types.push("IPosition");
-    _this.types.push("IPostLoadPosition");
-    _this.types.push("IPostSetArrow");
-    _this.types.push("IAlias");
-    _this.types.push("RigidReferenceFrame");
-    return _this;
-  }
-  _inherits(RigidReferenceFrame, _CategoryObject_1$Cat);
-  return _createClass(RigidReferenceFrame, [{
-    key: "postSetArrow",
-    value: function postSetArrow() {
-      this.setParameters(this.parameters);
-      this.createFrame();
-    }
-  }, {
-    key: "getAliasNames",
-    value: function getAliasNames() {
-      return this.aliasNames;
-    }
-  }, {
-    key: "getAliasType",
-    value: function getAliasType(name) {
-      return 0;
-    }
-  }, {
-    key: "getAliasValue",
-    value: function getAliasValue(name) {
-      return this.alinames.get(name);
-    }
-  }, {
-    key: "setAliasValue",
-    value: function setAliasValue(name, value) {
-      this.alinames.set(name, value);
-    }
-  }, {
-    key: "postLoadPosition",
-    value: function postLoadPosition() {
-      this.createFrame();
-      this.copyPositionToRelativeFrame();
-      this.copyQuaternionToRelativeFrame();
-      this.init();
-      this.relative.setMatrix();
-    }
-  }, {
-    key: "impl",
-    value: function impl(s) {
-      if (this.parent === undefined) {
-        return true;
-      }
-      var own = this.parent.getOwnFrame();
-      if (own === undefined) {
-        return false;
-      }
-      return this.performer.implementsType(own, s);
-    }
-  }, {
-    key: "isAcceleration",
-    value: function isAcceleration() {
-      return this.impl("IAcceleration");
-    }
-  }, {
-    key: "isVelocity",
-    value: function isVelocity() {
-      return this.impl("IVelocity");
-    }
-  }, {
-    key: "isAngularVelocity",
-    value: function isAngularVelocity() {
-      return this.impl("IAngularVelocity");
-    }
-  }, {
-    key: "copyPositionToRelativeFrame",
-    value: function copyPositionToRelativeFrame() {
-      var rp = this.relative.getPosition();
-      this.performer.copyArray(this.relativePosition, rp);
-    }
-  }, {
-    key: "copyQuaternionToRelativeFrame",
-    value: function copyQuaternionToRelativeFrame() {
-      var rp = this.relative.getQuaternion();
-      this.performer.copyArray(this.relativeQuaternion, rp);
-      this.relative.setMatrix();
-    }
-  }, {
-    key: "copy6DPosition",
-    value: function copy6DPosition() {
-      this.copyPositionToRelativeFrame();
-      this.copyQuaternionToRelativeFrame();
-    }
-  }, {
-    key: "init",
-    value: function init() {
-      if (this.relative === undefined) {
-        return;
-      }
-      var q = this.relative.getQuaternion();
-      for (var i = 0; i < q.length; i++) {
-        q[i] = this.relativeQuaternion[i];
-      }
-      var p = this.relative.getPosition();
-      for (var _i = 0; _i < p.length; _i++) {
-        p[_i] = this.relativePosition[_i];
-      }
-    }
-  }, {
-    key: "createFrame",
-    value: function createFrame() {
-      if (this.isAcceleration()) {
-        this.relative = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
-        this.own = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
-      }
-      if (this.isVelocity() && this.isAngularVelocity()) {
-        this.relative = new Motion6DFrame_1.Motion6DFrame();
-        this.own = new Motion6DFrame_1.Motion6DFrame();
-      }
-      if (this.isAngularVelocity()) {
-        this.relative = new RotatedFrame_1.RotatedFrame();
-        this.own = new RotatedFrame_1.RotatedFrame();
-      }
-      if (this.isVelocity()) {
-        this.relative = new MovedFrame_1.MovedFrame();
-        this.own = new MovedFrame_1.MovedFrame();
-      }
-      this.relative = new ReferenceFrame_1.ReferenceFrame();
-      this.own = new ReferenceFrame_1.ReferenceFrame();
-    }
-  }, {
-    key: "getNodeValueT",
-    value: function getNodeValueT() {
-      return this;
-    }
-  }, {
-    key: "getParentT",
-    value: function getParentT() {
-      return this.parentNode;
-    }
-  }, {
-    key: "setParentT",
-    value: function setParentT(parent) {
-      this.parentNode = parent;
-    }
-  }, {
-    key: "getNodesT",
-    value: function getNodesT() {
-      return this.nodes;
-    }
-  }, {
-    key: "addNodeT",
-    value: function addNodeT(node) {
-      this.nodes.push(node);
-    }
-  }, {
-    key: "removeNodeT",
-    value: function removeNodeT(node) {
-      this.nodes = this.performer.remove(this.nodes, node);
-    }
-  }, {
-    key: "getOwnFrame",
-    value: function getOwnFrame() {
-      return this.own;
-    }
-  }, {
-    key: "getPosition",
-    value: function getPosition() {
-      return this.own.getPosition();
-    }
-  }, {
-    key: "getParentFrame",
-    value: function getParentFrame() {
-      return this.parent;
-    }
-  }, {
-    key: "setParentFrame",
-    value: function setParentFrame(parent) {
-      if (parent != undefined && this.parent != undefined) {
-        throw new OwnError_1.OwnError("Parent", "", "");
-      }
-      this.parent = parent;
-      if (parent == undefined) {
-        this.own = this.mPerformer.getBaseFrame();
-        return;
-      }
-    }
-  }, {
-    key: "getParameters",
-    value: function getParameters() {
-      return this.parameters;
-    }
-  }, {
-    key: "setParameters",
-    value: function setParameters(parameters) {
-      this.parameters = parameters;
-    }
-  }, {
-    key: "updateReferenceFrame",
-    value: function updateReferenceFrame() {
-      var own = this.getOwnFrame();
-      var b = this.getBaseFrame();
-      if (b === null) {} else {
-        own.setReferenceFrame(b, this.relative);
-      }
-    }
-  }, {
-    key: "getBaseFrame",
-    value: function getBaseFrame() {
-      if (this.parent === undefined) {
-        return undefined;
-      } else {
-        return this.parent.getOwnFrame();
-      }
-    }
-  }]);
-}(CategoryObject_1.CategoryObject);
-exports.RigidReferenceFrame = RigidReferenceFrame;
-},{"../../CategoryObject":"src/Library/CategoryObject.ts","../../ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.ts","../Motion6DAcceleratedFrame":"src/Library/Motion6D/Motion6DAcceleratedFrame.ts","../Motion6DPerformer":"src/Library/Motion6D/Motion6DPerformer.ts","../ReferenceFrame":"src/Library/Motion6D/ReferenceFrame.ts","../Motion6DFrame":"src/Library/Motion6D/Motion6DFrame.ts","../RotatedFrame":"src/Library/Motion6D/RotatedFrame.ts","../MovedFrame":"src/Library/Motion6D/MovedFrame.ts","../../RealMatrixProcessor/RealMatrix":"src/Library/RealMatrixProcessor/RealMatrix.ts","../../Vector3D/Vector3DProcessor":"src/Library/Vector3D/Vector3DProcessor.ts","../../Measurements/PerformerMeasuremets":"src/Library/Measurements/PerformerMeasuremets.ts"}],"src/Library/Motion6D/Objects/BasicPosition.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.BasicPosition = void 0;
-var CategoryObject_1 = require("../../CategoryObject");
-var Performer_1 = require("../../Performer");
-var BasicPosition = /*#__PURE__*/function (_CategoryObject_1$Cat) {
-  function BasicPosition(desktop, name) {
-    var _this;
-    _classCallCheck(this, BasicPosition);
-    _this = _callSuper(this, BasicPosition, [desktop, name]);
-    /// <summary>
-    /// Absolute position
-    /// </summary>
-    _this.position = [0, 0, 0];
-    /// <summary>
-    /// Absolute position
-    /// </summary>
-    _this.own = [0, 0, 0];
-    _this.performer = new Performer_1.Performer();
-    _this.nodes = [];
-    _this.typeName = "BasicPosition";
-    _this.types.push("IPosition");
-    _this.types.push("BasicPosition");
-    return _this;
-  }
-  _inherits(BasicPosition, _CategoryObject_1$Cat);
-  return _createClass(BasicPosition, [{
-    key: "getPosition",
-    value: function getPosition() {
-      return this.position;
-    }
-  }, {
-    key: "getParentFrame",
-    value: function getParentFrame() {
-      return this.parent;
-    }
-  }, {
-    key: "setParentFrame",
-    value: function setParentFrame(parent) {
-      this.parent = parent;
-    }
-  }, {
-    key: "getParameters",
-    value: function getParameters() {
-      return this.parameters;
-    }
-  }, {
-    key: "setParameters",
-    value: function setParameters(parameters) {
-      this.parameters = parameters;
-    }
-  }, {
-    key: "updateReferenceFrame",
-    value: function updateReferenceFrame() {
-      var f = this.getBaseFrame();
-      if (f === undefined) return;
-      this.udateFrameProtected(f);
-    }
-  }, {
-    key: "getParentT",
-    value: function getParentT() {
-      return this.parentNode;
-    }
-  }, {
-    key: "setParentT",
-    value: function setParentT(parent) {
-      this.parentNode = parent;
-    }
-  }, {
-    key: "getNodesT",
-    value: function getNodesT() {
-      return this.nodes;
-    }
-  }, {
-    key: "addNodeT",
-    value: function addNodeT(node) {}
-  }, {
-    key: "removeNodeT",
-    value: function removeNodeT(node) {}
-  }, {
-    key: "getNodeValueT",
-    value: function getNodeValueT() {
-      return this;
-    }
-  }, {
-    key: "udateFrameProtected",
-    value: function udateFrameProtected(frame) {
-      var m = frame.getMatrix();
-      var p = frame.getPosition();
-      for (var i = 0; i < 3; i++) {
-        this.position[i] = p[i];
-        for (var j = 0; j < 3; j++) {
-          this.position[i] += m[i][j] * this.own[j];
-        }
-      }
-    }
-  }, {
-    key: "getBaseFrame",
-    value: function getBaseFrame() {
-      if (this.parent == undefined) {
-        return undefined;
-      }
-      return this.parent.getOwnFrame();
-    }
-  }]);
-}(CategoryObject_1.CategoryObject);
-exports.BasicPosition = BasicPosition;
-},{"../../CategoryObject":"src/Library/CategoryObject.ts","../../Performer":"src/Library/Performer.ts"}],"src/Library/Motion6D/Objects/SerializablePosition.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
-function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
-function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.SerializablePosition = void 0;
-var BasicPosition_1 = require("./BasicPosition");
-var SerializablePosition = /*#__PURE__*/function (_BasicPosition_1$Basi) {
-  function SerializablePosition(desktop, name) {
-    var _this;
-    _classCallCheck(this, SerializablePosition);
-    _this = _callSuper(this, SerializablePosition, [desktop, name]);
-    _this.objects = [];
-    _this.map = new Map();
-    _this.typeName = "SerializablePosition";
-    _this.types.push("SerializablePosition");
-    return _this;
-  }
-  _inherits(SerializablePosition, _BasicPosition_1$Basi);
-  return _createClass(SerializablePosition, [{
-    key: "postSetArrow",
-    value: function postSetArrow() {
-      if (this.objects.length == 1) {
-        this.setParameters(this.objects[0]);
-      }
-    }
-  }, {
-    key: "getChildernT",
-    value: function getChildernT() {
-      return this.objects;
-    }
-  }, {
-    key: "addChildT",
-    value: function addChildT(child) {
-      this.objects.push(child);
-    }
-  }, {
-    key: "removeChildT",
-    value: function removeChildT(child) {
-      this.performer.remove(this.objects, child);
-    }
-  }, {
-    key: "setParameters",
-    value: function setParameters(parameters) {
-      _superPropGet(SerializablePosition, "setParameters", this, 3)([parameters]);
-      var po = this.performer.convertObject(parameters, "IPositionObject");
-      if (po.length == 0) return;
-      po[0].setObjectPosition(this);
-    }
-  }]);
-}(BasicPosition_1.BasicPosition);
-exports.SerializablePosition = SerializablePosition;
-},{"./BasicPosition":"src/Library/Motion6D/Objects/BasicPosition.ts"}],"src/Library/Motion6D/Objects/Shapes/Basic3DShape.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Basic3DShape = void 0;
-var CategoryObject_1 = require("../../../CategoryObject");
-var Basic3DShape = /*#__PURE__*/function (_CategoryObject_1$Cat) {
-  function Basic3DShape(desktop, name) {
-    var _this;
-    _classCallCheck(this, Basic3DShape);
-    _this = _callSuper(this, Basic3DShape, [desktop, name]);
-    _this.grahicalData = new Map();
-    _this.size = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-    _this.typeName = "Basic3DShape";
-    _this.types.push("Basic3DShape");
-    _this.types.push("IVisible");
-    _this.types.push("IPositionObject");
-    _this.types.push("ISaveGrahicalData");
-    _this.types.push("IStartPrimitive");
-    return _this;
-  }
-  _inherits(Basic3DShape, _CategoryObject_1$Cat);
-  return _createClass(Basic3DShape, [{
-    key: "startPrimitive",
-    value: function startPrimitive() {}
-  }, {
-    key: "getSaveGrahicalData",
-    value: function getSaveGrahicalData() {
-      return this.grahicalData;
-    }
-  }, {
-    key: "getVisibleSize",
-    value: function getVisibleSize() {
-      return this.size;
-    }
-  }, {
-    key: "setVisibleSize",
-    value: function setVisibleSize(size) {
-      for (var i = 0; i < 3; i++) {
-        for (var j = 0; j < 3; j++) {
-          this.size[i][j] = size[i][j];
-        }
-      }
-    }
-  }, {
-    key: "getObjectPosition",
-    value: function getObjectPosition() {
-      return this.position;
-    }
-  }, {
-    key: "setObjectPosition",
-    value: function setObjectPosition(position) {
-      this.position = position;
-    }
-  }]);
-}(CategoryObject_1.CategoryObject);
-exports.Basic3DShape = Basic3DShape;
-},{"../../../CategoryObject":"src/Library/CategoryObject.ts"}],"src/Library/Motion6D/Visible/BasicCamera.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.BasicCamera = void 0;
-var BasicPosition_1 = require("../Objects/BasicPosition");
-var BasicCamera = /*#__PURE__*/function (_BasicPosition_1$Basi) {
-  function BasicCamera(desktop, name) {
-    var _this;
-    _classCallCheck(this, BasicCamera);
-    _this = _callSuper(this, BasicCamera, [desktop, name]);
-    _this.visible = [];
-    _this.typeName = "BasicCamera";
-    _this.types.push("IVisibleConsumer");
-    _this.types.push("BasicCamera");
-    return _this;
-  }
-  _inherits(BasicCamera, _BasicPosition_1$Basi);
-  return _createClass(BasicCamera, [{
-    key: "addVisibleObject",
-    value: function addVisibleObject(object) {
-      this.visible.push(object);
-    }
-  }, {
-    key: "removeVisibleObject",
-    value: function removeVisibleObject(object) {
-      this.performer.remove(this.visible, object);
-    }
-  }, {
-    key: "postVisibleObject",
-    value: function postVisibleObject(object) {}
-  }]);
-}(BasicPosition_1.BasicPosition);
-exports.BasicCamera = BasicCamera;
-},{"../Objects/BasicPosition":"src/Library/Motion6D/Objects/BasicPosition.ts"}],"src/Library/Motion6D/Visible/VisibleConsumerLink.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.VisibleConsumerLink = void 0;
-var CategoryArrow_1 = require("../../CategoryArrow");
-var VisibleConsumerLink = /*#__PURE__*/function (_CategoryArrow_1$Cate) {
-  function VisibleConsumerLink(desktop, name) {
-    var _this;
-    _classCallCheck(this, VisibleConsumerLink);
-    _this = _callSuper(this, VisibleConsumerLink, [desktop, name]);
-    _this.typeName = "VisibleConsumerLink";
-    _this.types.push("VisibleConsumerLink");
-    return _this;
-  }
-  _inherits(VisibleConsumerLink, _CategoryArrow_1$Cate);
-  return _createClass(VisibleConsumerLink, [{
-    key: "getSource",
-    value: function getSource() {
-      return this.consumer;
-    }
-  }, {
-    key: "getTagret",
-    value: function getTagret() {
-      return this.visible;
-    }
-  }, {
-    key: "setSource",
-    value: function setSource(source) {
-      var c = this.performer.convertProperties(source, "IVisibleConsumer");
-      this.consumer = c[0];
-    }
-  }, {
-    key: "setTarget",
-    value: function setTarget(target) {
-      this.visible = this.performer.convertProperties(target, "IVisible")[0];
-      this.consumer.addVisibleObject(this.visible);
-    }
-  }]);
-}(CategoryArrow_1.CategoryArrow);
-exports.VisibleConsumerLink = VisibleConsumerLink;
-},{"../../CategoryArrow":"src/Library/CategoryArrow.ts"}],"src/Airplane.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Airplane = void 0;
-var BelognsToCollection_1 = require("./Library/Arrows/BelognsToCollection");
-var Desktop_1 = require("./Library/Desktop");
-var EventLink_1 = require("./Library/Event/Objects/EventLink");
-var TimerObject_1 = require("./Library/Event/Objects/TimerObject");
-var DataLink_1 = require("./Library/Measurements/Arrows/DataLink");
-var DataConsumer_1 = require("./Library/Measurements/DataConsumer");
-var VectorFormulaConsumer_1 = require("./Library/Measurements/VectorFormulaConsumer");
-var ReferenceFrameArrow_1 = require("./Library/Motion6D/Arrows/ReferenceFrameArrow");
-var RigidReferenceFrame_1 = require("./Library/Motion6D/Objects/RigidReferenceFrame");
-var SerializablePosition_1 = require("./Library/Motion6D/Objects/SerializablePosition");
-var Basic3DShape_1 = require("./Library/Motion6D/Objects/Shapes/Basic3DShape");
-var BasicCamera_1 = require("./Library/Motion6D/Visible/BasicCamera");
-var VisibleConsumerLink_1 = require("./Library/Motion6D/Visible/VisibleConsumerLink");
-var TimeSpan_1 = require("./Library/Utilities/DateTime/TimeSpan");
-var Airplane_CategoryObject_0_Visible0 = /*#__PURE__*/function (_Basic3DShape_1$Basic) {
-  function Airplane_CategoryObject_0_Visible0(desktop, name) {
-    var _this;
-    _classCallCheck(this, Airplane_CategoryObject_0_Visible0);
-    _this = _callSuper(this, Airplane_CategoryObject_0_Visible0, [desktop, name]);
-    var map = _this.getSaveGrahicalData();
-    map.set("Cessna_208_Caravan.obj", "Cessna_208_Caravan.obj");
-    map.set("master.mtl", "master.mtl");
-    map.set("mat0_c.jpg", "mat0_c.jpg");
-    return _this;
-  }
-  _inherits(Airplane_CategoryObject_0_Visible0, _Basic3DShape_1$Basic);
-  return _createClass(Airplane_CategoryObject_0_Visible0);
-}(Basic3DShape_1.Basic3DShape);
-var Airplane_CategoryObject_0 = /*#__PURE__*/function (_SerializablePosition) {
-  function Airplane_CategoryObject_0(desktop, name) {
-    var _this2;
-    _classCallCheck(this, Airplane_CategoryObject_0);
-    _this2 = _callSuper(this, Airplane_CategoryObject_0, [desktop, name]);
-    _this2.addChildT(new Airplane_CategoryObject_0_Visible0(desktop, name));
-    return _this2;
-  }
-  _inherits(Airplane_CategoryObject_0, _SerializablePosition);
-  return _createClass(Airplane_CategoryObject_0);
-}(SerializablePosition_1.SerializablePosition);
-var Airplane_CategoryObject_3 = /*#__PURE__*/function (_BasicCamera_1$BasicC) {
-  function Airplane_CategoryObject_3(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryObject_3);
-    return _callSuper(this, Airplane_CategoryObject_3, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryObject_3, _BasicCamera_1$BasicC);
-  return _createClass(Airplane_CategoryObject_3);
-}(BasicCamera_1.BasicCamera);
-var Airplane_CategoryObject_4 = /*#__PURE__*/function (_TimerObject_1$TimerO) {
-  function Airplane_CategoryObject_4(desktop, name) {
-    var _this3;
-    _classCallCheck(this, Airplane_CategoryObject_4);
-    _this3 = _callSuper(this, Airplane_CategoryObject_4, [desktop, name]);
-    _this3.span = new TimeSpan_1.TimeSpan(100);
-    return _this3;
-  }
-  _inherits(Airplane_CategoryObject_4, _TimerObject_1$TimerO);
-  return _createClass(Airplane_CategoryObject_4);
-}(TimerObject_1.TimerObject);
-var Airplane_CategoryObject_5 = /*#__PURE__*/function (_RigidReferenceFrame_) {
-  function Airplane_CategoryObject_5(desktop, name) {
-    var _this4;
-    _classCallCheck(this, Airplane_CategoryObject_5);
-    _this4 = _callSuper(this, Airplane_CategoryObject_5, [desktop, name]);
-    _this4.relativePosition = [];
-    _this4.relativeQuaternion = [];
-    _this4.relativePosition = [];
-    _this4.relativePosition.push(40);
-    _this4.relativePosition.push(40);
-    _this4.relativePosition.push(40);
-    _this4.relativePosition = [];
-    _this4.relativePosition.push(0.88047623921714935);
-    _this4.relativePosition.push(-0.27984814233312139);
-    _this4.relativePosition.push(0.36470519963100095);
-    _this4.relativePosition.push(0.11591689595929504);
-    return _this4;
-  }
-  _inherits(Airplane_CategoryObject_5, _RigidReferenceFrame_);
-  return _createClass(Airplane_CategoryObject_5);
-}(RigidReferenceFrame_1.RigidReferenceFrame);
-var Airplane_CategoryObject_6 = /*#__PURE__*/function (_VectorFormulaConsume) {
-  function Airplane_CategoryObject_6(desktop, name) {
-    var _this5;
-    _classCallCheck(this, Airplane_CategoryObject_6);
-    _this5 = _callSuper(this, Airplane_CategoryObject_6, [desktop, name]);
-    _this5.var_0 = 0;
-    var map = new Map([]);
-    _this5.performer.setAliasMap(map, _this5);
-    _this5.addVariableValue("Formula_1", 0, 0);
-    return _this5;
-  }
-  _inherits(Airplane_CategoryObject_6, _VectorFormulaConsume);
-  return _createClass(Airplane_CategoryObject_6, [{
-    key: "calculateTree",
-    value: function calculateTree() {
-      this.success = true;
-      this.var_0 = this.getInternalTime();
-    }
-  }, {
-    key: "init",
-    value: function init() {
-      var all = this.getAllMeasurements();
-    }
-  }, {
-    key: "get_0",
-    value: function get_0() {
-      return this.success ? this.var_0 : undefined;
-    }
-  }, {
-    key: "save",
-    value: function save() {
-      var v = this.variables;
-      var x0 = v.get("Formula_1");
-      x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_0());
-    }
-  }]);
-}(VectorFormulaConsumer_1.VectorFormulaConsumer);
-var Airplane_CategoryObject_7 = /*#__PURE__*/function (_DataConsumer_1$DataC) {
-  function Airplane_CategoryObject_7(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryObject_7);
-    return _callSuper(this, Airplane_CategoryObject_7, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryObject_7, _DataConsumer_1$DataC);
-  return _createClass(Airplane_CategoryObject_7);
-}(DataConsumer_1.DataConsumer);
-var Airplane_CategoryArrow_0 = /*#__PURE__*/function (_ReferenceFrameArrow_) {
-  function Airplane_CategoryArrow_0(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryArrow_0);
-    return _callSuper(this, Airplane_CategoryArrow_0, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryArrow_0, _ReferenceFrameArrow_);
-  return _createClass(Airplane_CategoryArrow_0);
-}(ReferenceFrameArrow_1.ReferenceFrameArrow);
-var Airplane_CategoryArrow_1 = /*#__PURE__*/function (_VisibleConsumerLink_) {
-  function Airplane_CategoryArrow_1(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryArrow_1);
-    return _callSuper(this, Airplane_CategoryArrow_1, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryArrow_1, _VisibleConsumerLink_);
-  return _createClass(Airplane_CategoryArrow_1);
-}(VisibleConsumerLink_1.VisibleConsumerLink);
-var Airplane_CategoryArrow_2 = /*#__PURE__*/function (_BelognsToCollection_) {
-  function Airplane_CategoryArrow_2(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryArrow_2);
-    return _callSuper(this, Airplane_CategoryArrow_2, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryArrow_2, _BelognsToCollection_);
-  return _createClass(Airplane_CategoryArrow_2);
-}(BelognsToCollection_1.BelongsToCollection);
-var Airplane_CategoryArrow_3 = /*#__PURE__*/function (_BelognsToCollection_2) {
-  function Airplane_CategoryArrow_3(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryArrow_3);
-    return _callSuper(this, Airplane_CategoryArrow_3, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryArrow_3, _BelognsToCollection_2);
-  return _createClass(Airplane_CategoryArrow_3);
-}(BelognsToCollection_1.BelongsToCollection);
-var Airplane_CategoryArrow_4 = /*#__PURE__*/function (_BelognsToCollection_3) {
-  function Airplane_CategoryArrow_4(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryArrow_4);
-    return _callSuper(this, Airplane_CategoryArrow_4, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryArrow_4, _BelognsToCollection_3);
-  return _createClass(Airplane_CategoryArrow_4);
-}(BelognsToCollection_1.BelongsToCollection);
-var Airplane_CategoryArrow_5 = /*#__PURE__*/function (_DataLink_1$DataLink) {
-  function Airplane_CategoryArrow_5(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryArrow_5);
-    return _callSuper(this, Airplane_CategoryArrow_5, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryArrow_5, _DataLink_1$DataLink);
-  return _createClass(Airplane_CategoryArrow_5);
-}(DataLink_1.DataLink);
-var Airplane_CategoryArrow_6 = /*#__PURE__*/function (_EventLink_1$EventLin) {
-  function Airplane_CategoryArrow_6(desktop, name) {
-    _classCallCheck(this, Airplane_CategoryArrow_6);
-    return _callSuper(this, Airplane_CategoryArrow_6, [desktop, name]);
-  }
-  _inherits(Airplane_CategoryArrow_6, _EventLink_1$EventLin);
-  return _createClass(Airplane_CategoryArrow_6);
-}(EventLink_1.EventLink);
-var Airplane = /*#__PURE__*/function (_Desktop_1$Desktop) {
-  function Airplane() {
-    var _this6;
-    _classCallCheck(this, Airplane);
-    _this6 = _callSuper(this, Airplane);
-    _this6.name = "Airplane";
-    _this6.mapObjects.set("Airplane_CategoryObject_0", new Airplane_CategoryObject_0(_this6, "pLANE"));
-    _this6.mapObjects.set("Airplane_CategoryObject_0_Visible0", new Airplane_CategoryObject_0_Visible0(_this6, "pLANE"));
-    _this6.mapObjects.set("Airplane_CategoryObject_0_Visible0", new Airplane_CategoryObject_0_Visible0(_this6, "pLANE"));
-    _this6.mapObjects.set("Airplane_CategoryObject_3", new Airplane_CategoryObject_3(_this6, "Camera"));
-    _this6.mapObjects.set("Airplane_CategoryObject_4", new Airplane_CategoryObject_4(_this6, "Timer"));
-    _this6.mapObjects.set("Airplane_CategoryObject_5", new Airplane_CategoryObject_5(_this6, ""));
-    _this6.mapObjects.set("Airplane_CategoryObject_6", new Airplane_CategoryObject_6(_this6, "Time"));
-    _this6.mapObjects.set("Airplane_CategoryObject_7", new Airplane_CategoryObject_7(_this6, "Chart"));
-    new Airplane_CategoryArrow_0(_this6, "");
-    new Airplane_CategoryArrow_1(_this6, "");
-    new Airplane_CategoryArrow_2(_this6, "");
-    new Airplane_CategoryArrow_3(_this6, "");
-    new Airplane_CategoryArrow_4(_this6, "");
-    new Airplane_CategoryArrow_5(_this6, "");
-    new Airplane_CategoryArrow_6(_this6, "");
-    _this6.finish();
-    return _this6;
-  }
-  _inherits(Airplane, _Desktop_1$Desktop);
-  return _createClass(Airplane, [{
-    key: "finish",
-    value: function finish() {
-      var objects = this.getCategoryObjects();
-      var arrows = this.getCategoryArrows();
-      var s0 = this.mapObjects.get("Airplane_CategoryObject_3");
-      if (s0 != undefined) arrows[0].setSource(s0);
-      var t0 = this.mapObjects.get("Airplane_CategoryObject_5");
-      if (t0 != undefined) arrows[0].setTarget(t0);
-      var s1 = this.mapObjects.get("Airplane_CategoryObject_3");
-      if (s1 != undefined) arrows[1].setSource(s1);
-      var t1 = this.mapObjects.get("Airplane_CategoryObject_0_Visible0");
-      if (t1 != undefined) arrows[1].setTarget(t1);
-      var s2 = this.mapObjects.get("Airplane_CategoryObject_7");
-      if (s2 != undefined) arrows[2].setSource(s2);
-      var t2 = this.mapObjects.get("Airplane_CategoryObject_3");
-      if (t2 != undefined) arrows[2].setTarget(t2);
-      var s3 = this.mapObjects.get("Airplane_CategoryObject_7");
-      if (s3 != undefined) arrows[3].setSource(s3);
-      var t3 = this.mapObjects.get("Airplane_CategoryObject_5");
-      if (t3 != undefined) arrows[3].setTarget(t3);
-      var s4 = this.mapObjects.get("Airplane_CategoryObject_7");
-      if (s4 != undefined) arrows[4].setSource(s4);
-      var t4 = this.mapObjects.get("Airplane_CategoryObject_0");
-      if (t4 != undefined) arrows[4].setTarget(t4);
-      var s5 = this.mapObjects.get("Airplane_CategoryObject_7");
-      if (s5 != undefined) arrows[5].setSource(s5);
-      var t5 = this.mapObjects.get("Airplane_CategoryObject_6");
-      if (t5 != undefined) arrows[5].setTarget(t5);
-      var s6 = this.mapObjects.get("Airplane_CategoryObject_7");
-      if (s6 != undefined) arrows[6].setSource(s6);
-      var t6 = this.mapObjects.get("Airplane_CategoryObject_4");
-      if (t6 != undefined) arrows[6].setTarget(t6);
-      objects[0].postSetArrow();
-      objects[5].postSetArrow();
-      objects[6].postSetArrow();
-      objects[7].postSetArrow();
-    }
-  }]);
-}(Desktop_1.Desktop);
-exports.Airplane = Airplane;
-},{"./Library/Arrows/BelognsToCollection":"src/Library/Arrows/BelognsToCollection.ts","./Library/Desktop":"src/Library/Desktop.ts","./Library/Event/Objects/EventLink":"src/Library/Event/Objects/EventLink.ts","./Library/Event/Objects/TimerObject":"src/Library/Event/Objects/TimerObject.ts","./Library/Measurements/Arrows/DataLink":"src/Library/Measurements/Arrows/DataLink.ts","./Library/Measurements/DataConsumer":"src/Library/Measurements/DataConsumer.ts","./Library/Measurements/VectorFormulaConsumer":"src/Library/Measurements/VectorFormulaConsumer.ts","./Library/Motion6D/Arrows/ReferenceFrameArrow":"src/Library/Motion6D/Arrows/ReferenceFrameArrow.ts","./Library/Motion6D/Objects/RigidReferenceFrame":"src/Library/Motion6D/Objects/RigidReferenceFrame.ts","./Library/Motion6D/Objects/SerializablePosition":"src/Library/Motion6D/Objects/SerializablePosition.ts","./Library/Motion6D/Objects/Shapes/Basic3DShape":"src/Library/Motion6D/Objects/Shapes/Basic3DShape.ts","./Library/Motion6D/Visible/BasicCamera":"src/Library/Motion6D/Visible/BasicCamera.ts","./Library/Motion6D/Visible/VisibleConsumerLink":"src/Library/Motion6D/Visible/VisibleConsumerLink.ts","./Library/Utilities/DateTime/TimeSpan":"src/Library/Utilities/DateTime/TimeSpan.ts"}],"src/common/Primitives/BasicPrimitive.ts":[function(require,module,exports) {
+},{"../common/shader-program":"src/common/shader-program.ts","../common/mesh-utils":"src/common/mesh-utils.ts","../common/texture-utils":"src/common/texture-utils.ts","../common/camera":"src/common/camera.ts","../common/camera-controllers/fly-camera-controller":"src/common/camera-controllers/fly-camera-controller.ts","gl-matrix":"node_modules/gl-matrix/esm/index.js","../common/dom-utils":"src/common/dom-utils.tsx","tsx-create-element":"node_modules/tsx-create-element/dist/es6/index.js","../common/BasicScene":"src/common/BasicScene.ts"}],"src/common/Primitives/BasicPrimitive.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -38247,7 +34974,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56569" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52791" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

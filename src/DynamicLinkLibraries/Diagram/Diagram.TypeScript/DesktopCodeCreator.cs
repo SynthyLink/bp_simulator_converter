@@ -5,6 +5,7 @@ using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;
 
 using NamedTree;
+using System.ComponentModel;
 
 namespace Diagram.UI.TypeScript
 {
@@ -54,6 +55,7 @@ namespace Diagram.UI.TypeScript
             Exception ex;
             try
             {
+                Loaded.Clear();
                 collection = desktop;
                 dictionary = performer.Enumerate(desktop);
                 List<ICategoryObject> categoryObjects;
@@ -64,19 +66,23 @@ namespace Diagram.UI.TypeScript
                 IClassCodeCreator classCodeCreator = performer.GetLaguageObject<IClassCodeCreator>(this);
                 classCodeCreator.DesktopCodeCreator = this;
                 var l = new List<string>();
-                for (int i = 0; i < categoryObjects.Count; i++)
+                int j = 0;
+                foreach  (var categoryObject in categoryObjects)
                 {
-                    var categoryObject = categoryObjects[i];
                     if (Loaded.ContainsKey(categoryObject))
                     {
                         continue;
                     }
-                    var pr = className + "_" + "CategoryObject_" + i;
+                    var pr = className + "_" + "CategoryObject_" + j;
                     Current = pr;
                     var c = classCodeCreator.CreateCode(pr, categoryObject, null);
-                    Loaded[categoryObject] = pr;
+                    if (!Loaded.ContainsKey(categoryObject))
+                    {
+                        Loaded[categoryObject] = pr;
+                    }
                     l.AddRange(c);
                     l.Add("");
+                    ++j;
                  }
                 for (int i = 0; i < categoryArrows.Count; i++)
                 {
@@ -98,13 +104,26 @@ namespace Diagram.UI.TypeScript
                 l.Add("");
                 l.Add("\t\tthis.name = \"" + className + "\";");
                 l.Add("");
+                var lco = new List<ICategoryObject>();
                 for (var i = 0; i < categoryObjects.Count; i++)
                 {
                     var categoryObject = categoryObjects[i] as IAssociatedObject;
+                    if (categoryObject is IChildren<ICategoryObject> ch)
+                    {
+                        foreach (var child in ch.Children)
+                        {
+                            lco.Add(child);
+                        }
+                    }
+                    if (lco.Contains(categoryObject))
+                    {
+                        continue;
+                    }
                     var nac = categoryObject.Object as INamedComponent;
                     string name = nac.RootName;
                     name = "\"" + name + "\"";
                     var cn = Loaded[categoryObject];
+                    
                     var cnn = "\"" + cn + "\""; 
                     var pr = "\t\tthis.mapObjects.set(" + cnn + ", new " + cn + "(this, " + name + "))";
                     l.Add(pr);

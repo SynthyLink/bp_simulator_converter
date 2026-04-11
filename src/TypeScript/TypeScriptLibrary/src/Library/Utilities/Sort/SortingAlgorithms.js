@@ -1,7 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SortingAlgorithma = void 0;
-class SortingAlgorithma {
+exports.SortingAlgorithms = void 0;
+class SortingAlgorithms {
+    constructor() {
+    }
     mergesort(unsorted, comparator) {
         if (unsorted.length <= 1) {
             return unsorted;
@@ -47,5 +49,5 @@ class SortingAlgorithma {
         return result;
     }
 }
-exports.SortingAlgorithma = SortingAlgorithma;
+exports.SortingAlgorithms = SortingAlgorithms;
 //# sourceMappingURL=SortingAlgorithms.js.map

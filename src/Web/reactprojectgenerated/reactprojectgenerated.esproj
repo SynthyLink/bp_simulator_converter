@@ -13,6 +13,7 @@
     <TypeScriptConfiguration Remove="src\Library - Copy\**" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="src\Algorithms\" />
     <Folder Include="src\ExternalObjects\Libraries\Web\Interfaces\" />
     <Folder Include="src\ExternalObjects\Libraries\Web\Watch\" />
     <Folder Include="src\Library\Runtime\Interfaces\" />

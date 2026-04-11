@@ -1,23 +1,36 @@
+import type { IActionAddRemove } from "../../Interfaces/IActionAddRemove";
 import type { ICategoryObject } from "../../Interfaces/ICategoryObject";
 import type { IComponentCollection } from "../../Interfaces/IComponentCollection";
 import type { IEvent } from "../../Interfaces/IEvent";
 import type { IEventHandler } from "../../Interfaces/IEventHandler";
+import type { IExternalUpdate } from "../../Interfaces/IExternalUpdate";
+import type { IExternalUpdateClient } from "../../Interfaces/IExternalUpdateClient";
+import type { IObject } from "../../Interfaces/IObject";
 import type { IRealtimeCollection } from "../../Interfaces/IRealtimeCollection";
 import type { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
 import type { ITimerFactory } from "../../Interfaces/ITimerFactory";
-import { IDifferentialEquationProcessor } from "../../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationProcessor ";
+import type { IDifferentialEquationProcessor } from "../../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationProcessor ";
 import type { IDataConsumer } from "../../Measurements/Interfaces/IDataConsumer";
 import { DataRuntimeConsumerODE } from "../../Runtime/DataRuntimeConsumerODE";
 import { PerformerEvents } from "../PerformerEvents";
 
-export class DataRuntimeConsumerEvent extends DataRuntimeConsumerODE implements IRealtimeCollection {
+export class DataRuntimeConsumerEvent extends DataRuntimeConsumerODE implements IRealtimeCollection, IExternalUpdate
+{
 
     protected ePerformer: PerformerEvents = new PerformerEvents()
 
     protected isEnabled: boolean = false
 
     constructor(dataConsumer: IDataConsumer, processor: IDifferentialEquationProcessor) {
-        super(dataConsumer, processor);
+        super(dataConsumer, processor)
+        var up = this.dataConsumer as unknown as IExternalUpdateClient
+        var ob = this.dataConsumer as unknown as IObject;
+        up.setExternalUpdate(this.getExtenalUpdate(ob, this))
+        console.log("UPPP", up)
+    }
+
+    getExtenalUpdate(obj: IObject | undefined, realime: IRealtimeCollection): IActionAddRemove {
+        return  this.mPerformer.createUpdateMeasurementsAction(this)
     }
 
     protected prepare(dataConsumer: IDataConsumer) {

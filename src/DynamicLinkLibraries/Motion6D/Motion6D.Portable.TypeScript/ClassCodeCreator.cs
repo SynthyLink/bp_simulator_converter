@@ -157,6 +157,10 @@ namespace Motion6D.Portable.TypeScript
             int i = 0;
             foreach (var child in children)
             {
+                if (DesktopCodeCreator.Loaded.ContainsKey(child))
+                {
+                    continue;
+                }
                 var pr = prefix + CreateSuffix.CreateSuffix(child) + i;
                 ++i;
                 l.AddRange(GetChild(pr, child));

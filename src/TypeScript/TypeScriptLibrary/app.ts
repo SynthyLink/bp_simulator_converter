@@ -2,12 +2,12 @@ import { ActorWeb } from "./src/Tests/Actor/ActorWeb";
 
 let a = new ActorWeb()
 
-a.actAirplane()
+//a.actAirplane()
 
 //await a.actDonchianLoad();
 
 
-//a.actPI()
+a.actPI()
 //a.testDate();
 
 //a.actTime();

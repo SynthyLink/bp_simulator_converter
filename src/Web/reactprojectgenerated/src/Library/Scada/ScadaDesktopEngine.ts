@@ -17,7 +17,6 @@ export class ScadaDesktopEngine extends ScadaDesktop {
         this.createRuntime()
     }
     public createRuntime(): void {
-        console.log(2)
         let co = this.componentCollection.getCategoryObject(this.chart)
         let dc = co as unknown as IDataConsumer
         let eev = this.factory.createRealtimeFromDataConsumer(dc);
