@@ -29,6 +29,7 @@ export class PerformerMeasuremets {
 
     static realtimeEventFactory: IRealtimeCollectionFactory
 
+
     public static getDifferentialEquationProcessor(): IDifferentialEquationProcessor {
         return this.processor
     }

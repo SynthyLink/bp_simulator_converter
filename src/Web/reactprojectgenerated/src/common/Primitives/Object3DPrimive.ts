@@ -25,7 +25,6 @@ export class Object3DPrimitive extends BasicPrimitive implements IStartPrimitive
             let n = key.lastIndexOf(".obj")
             if (n > 0) {
                 let obj = this.game.loader.resources[key];
-                console.log(obj)
                 this.mesh = MeshUtils.LoadOBJMesh(this.gl, obj)
             }
         }

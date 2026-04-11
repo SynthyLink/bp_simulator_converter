@@ -44,13 +44,11 @@ class DataConsumer extends CategoryObject_1.CategoryObject {
         this.isEvEnabled = enabled;
         if (enabled) {
             this.currentAction = this.eventAction;
-            console.log("CCCAAA", this.currentAction);
             return;
         }
         this.currentAction = this.fictiveAvtion;
     }
     action() {
-        console.log("AAACCCAAA", this.currentAction);
         this.currentAction.action();
     }
     getAddRemoveType() {

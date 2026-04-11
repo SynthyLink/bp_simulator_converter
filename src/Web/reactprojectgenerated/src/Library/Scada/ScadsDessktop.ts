@@ -9,8 +9,6 @@ export class ScadaDesktop extends ScadaInterface {
         super()
         this.types.push("ScadaDesktop")
         this.typeName = "ScadaDesktop"
-        console.log("GGGG")
-        console.log(componentCollection)
         this.componentCollection = componentCollection;
     }
     

@@ -13,10 +13,19 @@ export class PerformerEvents implements IActionT<IEventStart> {
 
     isEnabled: boolean = false;
 
+    static timeScale: number = 1;
 
     performer: Performer = new Performer()
 
     timerAction: TimerAction = new TimerAction()
+
+    public static getTimeScale(): number {
+        return this.timeScale
+    }
+
+    public static setTimeScale(timeScale: number): void {
+        this.timeScale = timeScale;
+    }
 
     public setComponentCollectionEnabled(collection: IComponentCollection, enabled: boolean): void {
         if (this.isEnabled == enabled) return

@@ -339,7 +339,6 @@ class Performer {
         if (typeof t === 'number' && null === Number) {
             return t;
         }
-        console.warn(t, typeof t);
         throw new OwnError_1.OwnError("Type conversion", "Performer", undefined);
         // In many cases, a direct conversion may not be possible
         // or may require a more complex transformation.

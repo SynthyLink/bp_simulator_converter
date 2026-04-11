@@ -49,7 +49,7 @@ class Airplane_CategoryObject_2 extends TimerObject
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
-		this.span = new TimeSpan(10000000)
+		this.span = TimeSpan.fromMilliseconds(1000)
 	}
 }
 
@@ -237,6 +237,6 @@ finish() : void
 		(objects[0] as unknown as IPostSetArrow).postSetArrow();
 		(objects[4] as unknown as IPostSetArrow).postSetArrow();
 		(objects[5] as unknown as IPostSetArrow).postSetArrow();
-	(objects[6] as unknown as IPostSetArrow).postSetArrow();
+		(objects[6] as unknown as IPostSetArrow).postSetArrow();
 	}
 }

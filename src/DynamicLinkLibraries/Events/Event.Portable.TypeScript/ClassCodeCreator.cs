@@ -43,7 +43,7 @@ namespace Event.Portable.TypeScript
             performer.AddObjectConstructor(l);
             var span = timer.TimeSpan;
             var ss = span.Milliseconds + "";
-            l.Add("\t\tthis.span = new TimeSpan(" + ss + ")");
+            l.Add("\t\tthis.span = TimeSpan.fromMilliseconds(" + ss + ")");
             l.Add("\t}");
             l.Add("}");
             return l;

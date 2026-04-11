@@ -8,10 +8,11 @@ import { PerformerMeasuremets } from "./Library/Measurements/PerformerMeasuremet
 import { RungeProcessor } from "./Library/Measurements/DifferentialEquations/Processors/RungeProcessor";
 import { Performer } from "./Library/Performer";
 import { Motion6DRealtimeFactory } from "./Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory";
+import { PerformerEvents } from "./Library/Event/PerformerEvents";
 
 PerformerMeasuremets.setDifferentialEquationProcessor(new RungeProcessor())
 PerformerMeasuremets.setRealtimeEventFactory(new Motion6DRealtimeFactory())
-
+PerformerEvents.setTimeScale(0.001)
 function funcAirplane() {
 
     // First thing we need is to get the canvas on which we draw our scenes
@@ -95,4 +96,4 @@ function func() {
 
 
 
-func()
+funcAirplane()
