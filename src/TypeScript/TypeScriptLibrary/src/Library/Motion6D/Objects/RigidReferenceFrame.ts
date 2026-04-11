@@ -1,25 +1,38 @@
 import { CategoryObject } from "../../CategoryObject";
 import { OwnError } from "../../ErrorHandler/OwnError";
-import type { IDesktop } from "../../Interfaces/IDesktop";
-import type { INodeT } from "../../NamedTree/Interfaces/INodeT";
-import { RealMatrix } from "../../RealMatrixProcessor/RealMatrix";
-import { Vector3DProcessor } from "../../Vector3D/Vector3DProcessor";
-import type { IPosition } from "../Interfaces/IPosition";
-import type { IReferenceFrame } from "../Interfaces/IReferenceFrame";
 import { Motion6DAcceleratedFrame } from "../Motion6DAcceleratedFrame";
 import { Motion6DPerformer } from "../Motion6DPerformer";
 import { ReferenceFrame } from "../ReferenceFrame";
 import { Motion6DFrame } from "../Motion6DFrame";
 import { RotatedFrame } from "../RotatedFrame";
 import { MovedFrame } from "../MovedFrame";
+import { RealMatrix } from "../../RealMatrixProcessor/RealMatrix";
+import { Vector3DProcessor } from "../../Vector3D/Vector3DProcessor";
+import { PerformerMeasuremets } from "../../Measurements/PerformerMeasuremets";
+import type { IDesktop } from "../../Interfaces/IDesktop";
+import type { INodeT } from "../../NamedTree/Interfaces/INodeT";
+import type { IPosition } from "../Interfaces/IPosition";
+import type { IReferenceFrame } from "../Interfaces/IReferenceFrame";
 import type { IPostLoadPosition } from "../Interfaces/IPostLoadPosition";
 import type { IAlias } from "../../Interfaces/IAlias";
 import type { IPostSetArrow } from "../../Interfaces/IPostSetArrow";
-import { PerformerMeasuremets } from "../../Measurements/PerformerMeasuremets";
 
 
 export class RigidReferenceFrame extends CategoryObject implements IReferenceFrame, IPostLoadPosition, IAlias, IPostSetArrow
 {
+
+    constructor(desktop: IDesktop, name: string) {
+        super(desktop, name);
+        this.typeName = "RigidReferenceFrame";
+        this.types.push("IReferenceFrame");
+        this.types.push("IPosition");
+        this.types.push("IPostLoadPosition");
+        this.types.push("IPostSetArrow");
+        this.types.push("IAlias");
+        this.types.push("RigidReferenceFrame");
+    }
+
+
 
     /// </summary>
     protected relativePosition: number[] = [0, 0, 0];
@@ -81,18 +94,6 @@ export class RigidReferenceFrame extends CategoryObject implements IReferenceFra
 
     nodes: INodeT<IPosition>[] = [];
 
-    constructor(desktop: IDesktop, name: string) {
-        super(desktop, name);
-        this.typeName = "RigidReferenceFrame";
-        this.types.push("IReferenceFrame");
-        this.types.push("IPostLoadPosition");
-        this.types.push("IPostSetArrow");
-        this.types.push("IAlias");
-        this.types.push("IStarted");
-        this.types.push("RigidReferenceFrame");
-    }
-
-
     postSetArrow(): void {
         this.setParameters(this.parameters)
             this.createFrame();
@@ -122,9 +123,9 @@ export class RigidReferenceFrame extends CategoryObject implements IReferenceFra
       }
 
     protected impl(s: string): boolean {
-        if (this.parent === null) { return true; }
+        if (this.parent === undefined) { return true; }
         var own = this.parent.getOwnFrame();
-        if (own === null) { return false }
+        if (own === undefined) { return false }
         return this.performer.implementsType(own, s)
     }
 
@@ -132,12 +133,12 @@ export class RigidReferenceFrame extends CategoryObject implements IReferenceFra
         return this.impl("IAcceleration")
     }
 
-    protected isVelociry(): boolean {
+    protected isVelocity(): boolean {
         return this.impl("IVelocity")
     }
 
 
-    protected isAngularVelociry(): boolean {
+    protected isAngularVelocity(): boolean {
         return this.impl("IAngularVelocity")
     }
 
@@ -180,15 +181,15 @@ export class RigidReferenceFrame extends CategoryObject implements IReferenceFra
             this.relative = new Motion6DAcceleratedFrame();
             this.own = new Motion6DAcceleratedFrame();
         }
-        if (this.isVelociry() && this.isAngularVelociry()) {
+        if (this.isVelocity() && this.isAngularVelocity()) {
             this.relative = new Motion6DFrame();
             this.own = new Motion6DFrame();
         }
-        if (this.isAngularVelociry()) {
+        if (this.isAngularVelocity()) {
             this.relative = new RotatedFrame();
             this.own = new RotatedFrame();
         }
-        if (this.isVelociry()) {
+        if (this.isVelocity()) {
             this.relative = new MovedFrame();
             this.own = new MovedFrame();
         }

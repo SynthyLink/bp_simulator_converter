@@ -17,11 +17,19 @@ const OwnNotImplemented_1 = require("./ErrorHandler/OwnNotImplemented");
 const Performer_1 = require("./Performer");
 class Desktop {
     constructor() {
+        this.typeName = "Desktop";
+        this.types = ["IObject", "IDesktop", "IComponentCollection", "IObjectCollection", "Desktop"];
         this.categoryObjects = [];
         this.categoryArrows = [];
         this.objects = [];
         this.mapObjects = new Map();
         this.performer = new Performer_1.Performer();
+    }
+    getClassName() {
+        return this.typeName;
+    }
+    imlplementsType(type) {
+        return this.types.indexOf(type) >= 0;
     }
     initializeTaksAsync(cancel) {
         return __awaiter(this, void 0, void 0, function* () {

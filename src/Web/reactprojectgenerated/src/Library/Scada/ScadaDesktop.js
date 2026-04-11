@@ -15,6 +15,12 @@ class ScadaDesktop extends ScadaInterface_1.ScadaInterface {
     getScadaObject(name, type) {
         return this.performer.getCollectionObject(this.componentCollection, name, type);
     }
+    setScadaEnabled(enabled) {
+        this.runtime.setComponentCollectionRunning(enabled);
+    }
+    isScadaEnabled() {
+        return this.runtime.isComponentCollectionRunning();
+    }
 }
 exports.ScadaDesktop = ScadaDesktop;
-//# sourceMappingURL=ScadsDessktop.js.map
+//# sourceMappingURL=ScadaDesktop.js.map

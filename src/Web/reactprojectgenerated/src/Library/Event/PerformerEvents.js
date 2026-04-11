@@ -11,8 +11,10 @@ class PerformerEvents {
     actionT(t) {
         t.setEventEnabled(this.isEnabled);
     }
-    setComponentCollectionEnabled(collection, isEnabled) {
-        this.isEnabled = this.isEnabled;
+    setComponentCollectionEnabled(collection, enabled) {
+        if (this.isEnabled == enabled)
+            return;
+        this.isEnabled = enabled;
         this.performer.forEach(collection, this, "IEventStart");
     }
     setComponentCollectionTimer(collection, factory) {

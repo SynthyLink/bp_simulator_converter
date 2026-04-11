@@ -7,14 +7,18 @@ import type { IEvent } from "../../Interfaces/IEvent";
 import type { ITimer } from "../../Interfaces/ITimer";
 import type { ITimerConsumer } from "../../Interfaces/ITimerConsumer";
 import type { ITimerFactory } from "../../Interfaces/ITimerFactory";
+import type { IPostSetArrow } from "../../Interfaces/IPostSetArrow";
 
-export class TimerObject extends CategoryObject implements IEvent, ITimerConsumer {
+export class TimerObject extends CategoryObject implements IEvent, ITimerConsumer, IPostSetArrow {
 
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name)
         this.typeName = "TimerObject"
         this.types.push("IEvent")
         this.types.push("ITimerConsumer")
+        this.types.push("IPostSetArrow")
+    }
+    postSetArrow(): void {
     }
     getTimeSpan(): TimeSpan {
         return this.span;

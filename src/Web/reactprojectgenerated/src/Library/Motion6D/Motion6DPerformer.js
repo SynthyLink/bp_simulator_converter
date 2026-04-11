@@ -2,12 +2,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Motion6DPerformer = void 0;
 const Performer_1 = require("../Performer");
+const ActionArray_1 = require("../Utilities/Generic/ActionArray");
+const SortingAlgorithms_1 = require("../Utilities/Sort/SortingAlgorithms");
+const PositionComparer_1 = require("./Comparators/PositionComparer");
 const Motion6DAcceleratedFrame_1 = require("./Motion6DAcceleratedFrame");
 const Motion6DFrame_1 = require("./Motion6DFrame");
 const ReferenceFrame_1 = require("./ReferenceFrame");
+const UpdatePositionAction_1 = require("./UpdatePositionAction");
 class Motion6DPerformer {
     constructor() {
         this.performer = new Performer_1.Performer();
+        this.comparer = new PositionComparer_1.PositionComparer();
+        this.sorting = new SortingAlgorithms_1.SortingAlgorithms();
     }
     getBaseFrame() {
         return Motion6DPerformer.baseFrame;
@@ -17,6 +23,16 @@ class Motion6DPerformer {
         if (pp.length > 0)
             return pp[0].getOwnFrame();
         return this.getParentFrame(position);
+    }
+    createUpdateFramesAction(collection) {
+        let act = new ActionArray_1.ActionArray();
+        let mea = this.performer.getAll(collection, "IPosition");
+        let mm = this.sorting.mergesort(mea, this.comparer);
+        console.log(mm);
+        for (let m of mm) {
+            act.addAction(new UpdatePositionAction_1.UpdatePositionAction(m));
+        }
+        return act;
     }
     getFrame(position) {
         var f = this.performer.convertObject(position, "IReferenceFrame");

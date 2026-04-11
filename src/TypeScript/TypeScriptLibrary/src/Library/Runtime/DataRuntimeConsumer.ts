@@ -40,9 +40,11 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection
 
     protected objects: IObject[] = []
 
+    protected dataConsumer: IDataConsumer
 
     constructor(dataConsumer: IDataConsumer)
     {
+        this.dataConsumer = dataConsumer;
         this.prepare(dataConsumer)
         this.objects = []
         this.performer.getAllIObjects(this.categoryObjects, this.categoryArrows, this.objects)
@@ -50,9 +52,6 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection
 
     protected prepare(dataConsumer: IDataConsumer): void {
         let nm: IMeasurements[] = [];
-
-
-
         this.addDataConsumer(dataConsumer, nm);
         for (let i = nm.length - 1; i >= 0; i--) {
             var n = nm[i];
@@ -70,6 +69,7 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection
         }
 
         this.measurements = this.performer.sortMeasurements(this.measurements);
+        this.performer.addUnique(this.categoryObjects, dataConsumer as unknown as ICategoryObject)
 
     }
 

@@ -18,6 +18,7 @@ class DataRuntimeConsumer {
         this.categoryArrows = [];
         this.started = [];
         this.objects = [];
+        this.dataConsumer = dataConsumer;
         this.prepare(dataConsumer);
         this.objects = [];
         this.performer.getAllIObjects(this.categoryObjects, this.categoryArrows, this.objects);
@@ -39,6 +40,7 @@ class DataRuntimeConsumer {
             this.measurements.push(dataConsumer);
         }
         this.measurements = this.performer.sortMeasurements(this.measurements);
+        this.performer.addUnique(this.categoryObjects, dataConsumer);
     }
     getCategoryObjects() {
         return this.categoryObjects;

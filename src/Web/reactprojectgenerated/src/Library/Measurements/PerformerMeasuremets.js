@@ -4,7 +4,30 @@ exports.PerformerMeasuremets = void 0;
 const DataConsumerBoolFunc_1 = require("./DataConsumerBoolFunc");
 const Performer_1 = require("../Performer");
 const TimeMeasurementProvider_1 = require("./TimeMeasurementProvider");
+const ActionArray_1 = require("../Utilities/Generic/ActionArray");
+const UpdateMeasurementsAction_1 = require("./UpdateMeasurementsAction");
 class PerformerMeasuremets {
+    static getDifferentialEquationProcessor() {
+        return this.processor;
+    }
+    static setDifferentialEquationProcessor(p) {
+        this.processor = p;
+    }
+    static getRealtimeEventFactory() {
+        return this.realtimeEventFactory;
+    }
+    static setRealtimeEventFactory(f) {
+        this.realtimeEventFactory = f;
+    }
+    createUpdateMeasurementsAction(collection) {
+        let act = new ActionArray_1.ActionArray();
+        let mea = this.performer.getAll(collection, "IMeasurements");
+        let mm = this.performer.sortMeasurements(mea);
+        for (let m of mm) {
+            act.addAction(new UpdateMeasurementsAction_1.UpdateMeasurementsAction(m));
+        }
+        return act;
+    }
     constructor() {
         this.performer = new Performer_1.Performer();
     }

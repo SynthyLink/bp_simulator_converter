@@ -14,7 +14,7 @@ class CategoryArrow {
         this.source = new FictiveCategoryObject_1.FictiveCategoryObject();
         this.target = new FictiveCategoryObject_1.FictiveCategoryObject();
         this.typeName = "CategoryArrow";
-        this.types = ["ICategoryArrow", "CategoryArrow"];
+        this.types = ["IObject", "ICategoryArrow", "CategoryArrow"];
         this.performer = new Performer_1.Performer();
         this.desktop = desktop;
         this.name = name;

@@ -18,8 +18,9 @@ export class PerformerEvents implements IActionT<IEventStart> {
 
     timerAction: TimerAction = new TimerAction()
 
-    public setComponentCollectionEnabled(collection: IComponentCollection, isEnabled: boolean): void {
-        this.isEnabled = this.isEnabled
+    public setComponentCollectionEnabled(collection: IComponentCollection, enabled: boolean): void {
+        if (this.isEnabled == enabled) return
+        this.isEnabled = enabled
         this.performer.forEach<IEventStart>(collection, this, "IEventStart")
     }
 

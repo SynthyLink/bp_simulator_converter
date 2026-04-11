@@ -15,7 +15,8 @@ class VisibleConsumerLink extends CategoryArrow_1.CategoryArrow {
         return this.visible;
     }
     setSource(source) {
-        this.consumer = this.performer.convertProperties(source, "IVisibleConsumer")[0];
+        var c = this.performer.convertProperties(source, "IVisibleConsumer");
+        this.consumer = c[0];
     }
     setTarget(target) {
         this.visible = this.performer.convertProperties(target, "IVisible")[0];

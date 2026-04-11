@@ -13,11 +13,47 @@ import type { IFunc } from "../Interfaces/IFunc";
 import type { IComparator } from "../Utilities/Sort/Interfaces/IComparator";
 import type { IComponentCollection } from "../Interfaces/IComponentCollection";
 import type { IObject } from "../Interfaces/IObject";
+import type { IDifferentialEquationProcessor } from "./DifferentialEquations/Interfaces/IDifferentialEquationProcessor ";
+import type { IRealtimeCollectionFactory } from "../Interfaces/IRealtimeCollectionFactory";
+import type { IActionAddRemove } from "../Interfaces/IActionAddRemove";
+import type { IObjectCollection } from "../Interfaces/IObjectCollection";
 import { DataConsumerBoolFunc } from "./DataConsumerBoolFunc";
 import { Performer } from "../Performer";
 import { TimeMeasurementProvider } from "./TimeMeasurementProvider";
+import { ActionArray } from "../Utilities/Generic/ActionArray";
+import { UpdateMeasurementsAction } from "./UpdateMeasurementsAction";
 
 export class PerformerMeasuremets {
+
+    static processor: IDifferentialEquationProcessor
+
+    static realtimeEventFactory: IRealtimeCollectionFactory
+
+    public static getDifferentialEquationProcessor(): IDifferentialEquationProcessor {
+        return this.processor
+    }
+
+    public static setDifferentialEquationProcessor(p: IDifferentialEquationProcessor): void { 
+        this.processor = p;
+    }
+
+    public static getRealtimeEventFactory(): IRealtimeCollectionFactory {
+        return this.realtimeEventFactory;
+    }
+
+    public static setRealtimeEventFactory(f: IRealtimeCollectionFactory): void {
+        this.realtimeEventFactory = f;
+    }
+
+    public createUpdateMeasurementsAction(collection: IObjectCollection): IActionAddRemove {
+        let act = new ActionArray();
+        let mea = this.performer.getAll<IMeasurements>(collection, "IMeasurements")
+        let mm = this.performer.sortMeasurements(mea);
+        for (let m of mm) {
+            act.addAction(new UpdateMeasurementsAction(m))
+        }
+        return act;
+    }
 
     constructor() {
 

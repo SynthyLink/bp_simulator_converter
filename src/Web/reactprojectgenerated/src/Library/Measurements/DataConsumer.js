@@ -3,15 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DataConsumer = void 0;
 const CategoryObject_1 = require("../CategoryObject");
 const ActionArray_1 = require("../Utilities/Generic/ActionArray");
-const Performer_1 = require("../Performer");
 class DataConsumer extends CategoryObject_1.CategoryObject {
     constructor(desktop, name) {
         super(desktop, name);
         this.isEvEnabled = false;
         this.measurements = [];
         this.success = true;
-        this.events = [];
         this.eventAction = new ActionArray_1.ActionArray();
+        this.basicAction = new ActionArray_1.ActionArray();
         this.fictiveAvtion = new ActionArray_1.ActionArray();
         this.currentAction = new ActionArray_1.ActionArray();
         this.typeName = "DataConsumer";
@@ -28,7 +27,13 @@ class DataConsumer extends CategoryObject_1.CategoryObject {
         this.tms = this;
         this.dataConsumer = this;
         this.currentAction = this.fictiveAvtion;
-        this.eventAction.addAction(new UpdateAction(this));
+    }
+    setExternalUpdate(action) {
+        this.eventAction.clearActions();
+        if (action === null) {
+            return;
+        }
+        this.eventAction.addAction(action);
     }
     isEventEnabled() {
         return this.isEvEnabled;
@@ -39,11 +44,13 @@ class DataConsumer extends CategoryObject_1.CategoryObject {
         this.isEvEnabled = enabled;
         if (enabled) {
             this.currentAction = this.eventAction;
+            console.log("CCCAAA", this.currentAction);
             return;
         }
         this.currentAction = this.fictiveAvtion;
     }
     action() {
+        console.log("AAACCCAAA", this.currentAction);
         this.currentAction.action();
     }
     getAddRemoveType() {
@@ -53,7 +60,6 @@ class DataConsumer extends CategoryObject_1.CategoryObject {
         return this.events;
     }
     addChildT(child) {
-        this.events.push(child);
     }
     removeChildT(child) {
         this.performer.remove(this.events, child);
@@ -96,8 +102,12 @@ class DataConsumer extends CategoryObject_1.CategoryObject {
         ;
     }
     postSetArrow() {
+        console.log("EEEVV", this.events);
         for (let event of this.events) {
-            event.eventAction().addAction(this.eventAction);
+            console.log(event);
+            let ea = event.eventAction();
+            console.log(ea);
+            ea.addAction(this);
         }
     }
     getAllMeasurements() {
@@ -108,13 +118,4 @@ class DataConsumer extends CategoryObject_1.CategoryObject {
     }
 }
 exports.DataConsumer = DataConsumer;
-class UpdateAction {
-    constructor(dc) {
-        this.p = new Performer_1.Performer();
-        this.dc = dc;
-    }
-    action() {
-        this.p.updateChildrenData(this.dc);
-    }
-}
 //# sourceMappingURL=DataConsumer.js.map

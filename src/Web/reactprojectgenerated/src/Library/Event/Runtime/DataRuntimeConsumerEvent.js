@@ -1,13 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DataRuntimeConsumerEvent = void 0;
-const DataRuntimeConsumer_1 = require("../../Runtime/DataRuntimeConsumer");
+const DataRuntimeConsumerODE_1 = require("../../Runtime/DataRuntimeConsumerODE");
 const PerformerEvents_1 = require("../PerformerEvents");
-class DataRuntimeConsumerEvent extends DataRuntimeConsumer_1.DataRuntimeConsumer {
-    constructor(dataConsumer) {
-        super(dataConsumer);
+class DataRuntimeConsumerEvent extends DataRuntimeConsumerODE_1.DataRuntimeConsumerODE {
+    constructor(dataConsumer, processor) {
+        super(dataConsumer, processor);
         this.ePerformer = new PerformerEvents_1.PerformerEvents();
         this.isEnabled = false;
+        var up = this.dataConsumer;
+        var ob = this.dataConsumer;
+        up.setExternalUpdate(this.getExtenalUpdate(ob, this));
+    }
+    getExtenalUpdate(obj, realime) {
+        return this.mPerformer.createUpdateMeasurementsAction(this);
     }
     prepare(dataConsumer) {
         super.prepare(dataConsumer);

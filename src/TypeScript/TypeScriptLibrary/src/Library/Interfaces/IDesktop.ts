@@ -27,8 +27,6 @@ export interface IDesktop extends IComponentCollection
 
     setCheck(check: ICheck): void;
 
-
-
     finish(): void
 
 }

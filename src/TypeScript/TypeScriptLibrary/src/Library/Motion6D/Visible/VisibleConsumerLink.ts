@@ -1,8 +1,8 @@
 import { CategoryArrow } from "../../CategoryArrow";
 import type { ICategoryObject } from "../../Interfaces/ICategoryObject";
 import type { IDesktop } from "../../Interfaces/IDesktop";
-import type { IVisibleConsumer } from "../Interfaces/IVisibleConsumer";
-import { IVisible } from "./Interfaces/IVisible";
+import type { IVisible } from "./Interfaces/IVisible";
+import type { IVisibleConsumer } from "./Interfaces/IVisibleConsumer";
 
 export class VisibleConsumerLink extends CategoryArrow {
     constructor(desktop: IDesktop, name: string) {
@@ -20,8 +20,8 @@ export class VisibleConsumerLink extends CategoryArrow {
     }
 
     setSource(source: ICategoryObject): void {
-
-        this.consumer = this.performer.convertProperties<IVisibleConsumer>(source, "IVisibleConsumer" )[0]
+        var c = this.performer.convertProperties<IVisibleConsumer>(source, "IVisibleConsumer")
+        this.consumer = c[0]
     }
 
     setTarget(target: ICategoryObject): void {

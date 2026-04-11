@@ -1,8 +1,8 @@
 import { CategoryObject } from "../../../CategoryObject"
 import { IDesktop } from "../../../Interfaces/IDesktop"
+import { IStartPrimitive } from "../../../UI/IStartPrimitive"
 import { IPosition } from "../../Interfaces/IPosition"
 import { IVisible } from "../../Visible/Interfaces/IVisible"
-import { IStartPrimitive } from "../../../../common/Interfaces/IStartPrimitive"
 
 export class Basic3DShape extends CategoryObject implements IVisible, IStartPrimitive {
     constructor(desktop: IDesktop, name: string) {

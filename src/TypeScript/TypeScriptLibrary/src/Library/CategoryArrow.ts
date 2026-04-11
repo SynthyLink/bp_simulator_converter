@@ -48,7 +48,7 @@ export class CategoryArrow implements ICategoryArrow, IObject
 
     protected typeName: string = "CategoryArrow";
 
-    protected types: string[] = ["ICategoryArrow", "CategoryArrow"];
+    protected types: string[] = ["IObject", "ICategoryArrow", "CategoryArrow"];
 
     protected performer: Performer = new Performer()
 

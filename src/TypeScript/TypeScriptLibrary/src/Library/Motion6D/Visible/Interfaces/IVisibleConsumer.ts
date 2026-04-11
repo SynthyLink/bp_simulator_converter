@@ -1,7 +1,8 @@
 import { IVisible } from "./IVisible"
 
 export interface IVisibleConsumer {
-    addVisible(visible: IVisible): void
-    removeVisible(visible: IVisible): void
-    postVisible(visible: IVisible): void
+
+    addVisibleObject(object: IVisible): void;
+    removeVisibleObject(object: IVisible): void;
+    postVisibleObject(object: IVisible): void;
 }

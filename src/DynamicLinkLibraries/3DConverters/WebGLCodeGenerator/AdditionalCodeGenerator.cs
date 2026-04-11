@@ -4,8 +4,6 @@ using Diagram.UI;
 using Diagram.UI.Interfaces;
 
 using Motion6D.Interfaces;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.InteropServices;
 
 namespace WebGLCodeGenerator
 {

@@ -23,10 +23,10 @@ export class CompositionEvent extends Composition {
         var co = this.getCategoryObject("Chart")
         this.ev = this.getCategoryObject("Timer") as unknown as IEvent;
         this.dc = co as unknown as IDataConsumer
-        let eev = new DataRuntimeConsumerEvent(this.dc)
+       // let eev = new DataRuntimeConsumerEvent(this.dc)
       //  eev.setTimeProvider(this.engine)
       //  eev.setTimerFactory(this.engine)
-        this.eve = eev
+       // this.eve = eev
         this.stop = stop
     }
 

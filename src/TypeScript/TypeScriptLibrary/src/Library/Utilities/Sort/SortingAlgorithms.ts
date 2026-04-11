@@ -23,7 +23,8 @@ export class SortingAlgorithms {
         }
         left = this.mergesort(left, comparator);
         right = this.mergesort(right, comparator);
-        return this.merge(left, right, comparator);
+        let result = this.merge(left, right, comparator);
+        return result;
     }
 
     protected merge<T>(left: T[], right: T[], comparator: IComparator<T>): T[] {
@@ -52,6 +53,5 @@ export class SortingAlgorithms {
         }
         return result;
     }
-
 
 }

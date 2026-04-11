@@ -13,6 +13,9 @@ class TimerObject extends CategoryObject_1.CategoryObject {
         this.typeName = "TimerObject";
         this.types.push("IEvent");
         this.types.push("ITimerConsumer");
+        this.types.push("IPostSetArrow");
+    }
+    postSetArrow() {
     }
     getTimeSpan() {
         return this.span;

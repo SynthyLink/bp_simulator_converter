@@ -1431,6 +1431,74 @@ var MeasurementsComparator = /*#__PURE__*/function () {
   }]);
 }();
 exports.MeasurementsComparator = MeasurementsComparator;
+},{}],"src/Library/Utilities/Sort/SortingAlgorithms.js":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SortingAlgorithms = void 0;
+var SortingAlgorithms = /*#__PURE__*/function () {
+  function SortingAlgorithms() {
+    _classCallCheck(this, SortingAlgorithms);
+  }
+  return _createClass(SortingAlgorithms, [{
+    key: "mergesort",
+    value: function mergesort(unsorted, comparator) {
+      if (unsorted.length <= 1) {
+        return unsorted;
+      }
+      var left = [];
+      var right = [];
+      var middle = Math.floor(unsorted.length / 2);
+      for (var i = 0; i < middle; i++)
+      //Dividing the unsorted list
+      {
+        left.push(unsorted[i]);
+      }
+      for (var j = middle; j < unsorted.length; j++) {
+        right.push(unsorted[j]);
+      }
+      left = this.mergesort(left, comparator);
+      right = this.mergesort(right, comparator);
+      var result = this.merge(left, right, comparator);
+      return result;
+    }
+  }, {
+    key: "merge",
+    value: function merge(left, right, comparator) {
+      var result = [];
+      while (left.length > 0 || right.length > 0) {
+        if (left.length > 0 && right.length > 0) {
+          if (comparator.compare(left[0], right[0]) <= 0)
+            //Comparing First two elements to see which is smaller
+            {
+              result.push(left[0]);
+              left.shift();
+              //Rest of the list minus the first element
+            } else {
+            result.push(right[0]);
+            right.shift();
+          }
+        } else if (left.length > 0) {
+          result.push(left[0]);
+          left.shift();
+        } else if (right.length > 0) {
+          result.push(right[0]);
+          right.shift();
+        }
+      }
+      return result;
+    }
+  }]);
+}();
+exports.SortingAlgorithms = SortingAlgorithms;
 },{}],"src/Library/Utilities/Generic/ActionArray.js":[function(require,module,exports) {
 "use strict";
 
@@ -2319,7 +2387,7 @@ var Performer = /*#__PURE__*/function () {
   }]);
 }();
 exports.Performer = Performer;
-},{"./AliasName":"src/Library/AliasName.js","./ConsolePrinter":"src/Library/ConsolePrinter.js","./ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.js","./Measurements/MeasurementsComparator":"src/Library/Measurements/MeasurementsComparator.js","./Utilities/Sort/SortingAlgorithms":"src/Library/Utilities/Sort/SortingAlgorithms.ts","./Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.js"}],"src/Library/Measurements/TimeMeasurementProvider.ts":[function(require,module,exports) {
+},{"./AliasName":"src/Library/AliasName.js","./ConsolePrinter":"src/Library/ConsolePrinter.js","./ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.js","./Measurements/MeasurementsComparator":"src/Library/Measurements/MeasurementsComparator.js","./Utilities/Sort/SortingAlgorithms":"src/Library/Utilities/Sort/SortingAlgorithms.js","./Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.js"}],"src/Library/Measurements/TimeMeasurementProvider.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -2395,12 +2463,10 @@ var UpdateMeasurementsAction = /*#__PURE__*/function () {
   function UpdateMeasurementsAction(m) {
     _classCallCheck(this, UpdateMeasurementsAction);
     this.m = m;
-    console.log("MMM", this.m);
   }
   return _createClass(UpdateMeasurementsAction, [{
     key: "action",
     value: function action() {
-      console.log(this.m);
       this.m.updateMeasurements();
     }
   }]);
@@ -3425,11 +3491,11 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
     _this.isEvEnabled = false;
     _this.measurements = [];
     _this.success = true;
-    _this.events = [];
     _this.eventAction = new ActionArray_1.ActionArray();
     _this.basicAction = new ActionArray_1.ActionArray();
     _this.fictiveAvtion = new ActionArray_1.ActionArray();
     _this.currentAction = new ActionArray_1.ActionArray();
+    _this.externalEvents = [];
     _this.typeName = "DataConsumer";
     _this.types.push("DataConsumer");
     _this.types.push("IDataConsumer");
@@ -3468,7 +3534,6 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
       this.isEvEnabled = enabled;
       if (enabled) {
         this.currentAction = this.eventAction;
-        console.log("CCCAAA", this.currentAction);
         return;
       }
       this.currentAction = this.fictiveAvtion;
@@ -3476,7 +3541,6 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
   }, {
     key: "action",
     value: function action() {
-      console.log("AAACCCAAA", this.currentAction);
       this.currentAction.action();
     }
   }, {
@@ -3487,18 +3551,19 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
   }, {
     key: "getChildernT",
     value: function getChildernT() {
-      return this.events;
+      return this.externalEvents;
     }
   }, {
     key: "addChildT",
     value: function addChildT(child) {
-      this.performer.addUnique(this.events, child);
-      console.log("EEADD", this.events);
+      var ev = this.performer.convertObject(child, "IEvent");
+      if (ev.length == 0) return;
+      this.performer.addUnique(this.externalEvents, child);
     }
   }, {
     key: "removeChildT",
     value: function removeChildT(child) {
-      this.performer.remove(this.events, child);
+      this.performer.remove(this.externalEvents, child);
     }
   }, {
     key: "resetDataConsumer",
@@ -3565,15 +3630,12 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
   }, {
     key: "postSetArrow",
     value: function postSetArrow() {
-      console.log("EEEVV", this.events);
-      var _iterator2 = _createForOfIteratorHelper(this.events),
+      var _iterator2 = _createForOfIteratorHelper(this.externalEvents),
         _step2;
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           var event = _step2.value;
-          console.log(event);
           var ea = event.eventAction();
-          console.log(ea);
           ea.addAction(this);
         }
       } catch (err) {
@@ -8837,6 +8899,8 @@ var Performer_1 = require("./Performer");
 var Desktop = /*#__PURE__*/function () {
   function Desktop() {
     _classCallCheck(this, Desktop);
+    this.typeName = "Desktop";
+    this.types = ["IObject", "IDesktop", "IComponentCollection", "IObjectCollection", "Desktop"];
     this.categoryObjects = [];
     this.categoryArrows = [];
     this.objects = [];
@@ -8844,6 +8908,16 @@ var Desktop = /*#__PURE__*/function () {
     this.performer = new Performer_1.Performer();
   }
   return _createClass(Desktop, [{
+    key: "getClassName",
+    value: function getClassName() {
+      return this.typeName;
+    }
+  }, {
+    key: "imlplementsType",
+    value: function imlplementsType(type) {
+      return this.types.indexOf(type) >= 0;
+    }
+  }, {
     key: "initializeTaksAsync",
     value: function initializeTaksAsync(cancel) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regenerator().m(function _callee() {
@@ -9008,7 +9082,7 @@ var FictiveCategoryObject = /*#__PURE__*/function () {
   }]);
 }();
 exports.FictiveCategoryObject = FictiveCategoryObject;
-},{"../ErrorHandler/OwnNotImplemented":"src/Library/ErrorHandler/OwnNotImplemented.ts"}],"src/Library/Fiction/FictiveDesktop.js":[function(require,module,exports) {
+},{"../ErrorHandler/OwnNotImplemented":"src/Library/ErrorHandler/OwnNotImplemented.js"}],"src/Library/Fiction/FictiveDesktop.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -9084,7 +9158,7 @@ var FictiveDesktop = /*#__PURE__*/function () {
   }]);
 }();
 exports.FictiveDesktop = FictiveDesktop;
-},{"../ErrorHandler/OwnNotImplemented":"src/Library/ErrorHandler/OwnNotImplemented.ts"}],"src/Library/CategoryArrow.js":[function(require,module,exports) {
+},{"../ErrorHandler/OwnNotImplemented":"src/Library/ErrorHandler/OwnNotImplemented.js"}],"src/Library/CategoryArrow.js":[function(require,module,exports) {
 "use strict";
 
 /* eslint-disable no-var */
@@ -9111,7 +9185,7 @@ var CategoryArrow = /*#__PURE__*/function () {
     this.source = new FictiveCategoryObject_1.FictiveCategoryObject();
     this.target = new FictiveCategoryObject_1.FictiveCategoryObject();
     this.typeName = "CategoryArrow";
-    this.types = ["ICategoryArrow", "CategoryArrow"];
+    this.types = ["IObject", "ICategoryArrow", "CategoryArrow"];
     this.performer = new Performer_1.Performer();
     this.desktop = desktop;
     this.name = name;
@@ -9254,7 +9328,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.DataConsumer = void 0;
 var CategoryObject_1 = require("../CategoryObject");
 var ActionArray_1 = require("../Utilities/Generic/ActionArray");
-var Performer_1 = require("../Performer");
 var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
   function DataConsumer(desktop, name) {
     var _this;
@@ -9263,8 +9336,8 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
     _this.isEvEnabled = false;
     _this.measurements = [];
     _this.success = true;
-    _this.events = [];
     _this.eventAction = new ActionArray_1.ActionArray();
+    _this.basicAction = new ActionArray_1.ActionArray();
     _this.fictiveAvtion = new ActionArray_1.ActionArray();
     _this.currentAction = new ActionArray_1.ActionArray();
     _this.typeName = "DataConsumer";
@@ -9281,11 +9354,19 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
     _this.tms = _this;
     _this.dataConsumer = _this;
     _this.currentAction = _this.fictiveAvtion;
-    _this.eventAction.addAction(new UpdateAction(_this));
     return _this;
   }
   _inherits(DataConsumer, _CategoryObject_1$Cat);
   return _createClass(DataConsumer, [{
+    key: "setExternalUpdate",
+    value: function setExternalUpdate(action) {
+      this.eventAction.clearActions();
+      if (action === null) {
+        return;
+      }
+      this.eventAction.addAction(action);
+    }
+  }, {
     key: "isEventEnabled",
     value: function isEventEnabled() {
       return this.isEvEnabled;
@@ -9297,6 +9378,7 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
       this.isEvEnabled = enabled;
       if (enabled) {
         this.currentAction = this.eventAction;
+        console.log("CCCAAA", this.currentAction);
         return;
       }
       this.currentAction = this.fictiveAvtion;
@@ -9304,6 +9386,7 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
   }, {
     key: "action",
     value: function action() {
+      console.log("AAACCCAAA", this.currentAction);
       this.currentAction.action();
     }
   }, {
@@ -9318,9 +9401,7 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
     }
   }, {
     key: "addChildT",
-    value: function addChildT(child) {
-      this.events.push(child);
-    }
+    value: function addChildT(child) {}
   }, {
     key: "removeChildT",
     value: function removeChildT(child) {
@@ -9391,12 +9472,16 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
   }, {
     key: "postSetArrow",
     value: function postSetArrow() {
+      console.log("EEEVV", this.events);
       var _iterator2 = _createForOfIteratorHelper(this.events),
         _step2;
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           var event = _step2.value;
-          event.eventAction().addAction(this.eventAction);
+          console.log(event);
+          var ea = event.eventAction();
+          console.log(ea);
+          ea.addAction(this);
         }
       } catch (err) {
         _iterator2.e(err);
@@ -9417,20 +9502,7 @@ var DataConsumer = /*#__PURE__*/function (_CategoryObject_1$Cat) {
   }]);
 }(CategoryObject_1.CategoryObject);
 exports.DataConsumer = DataConsumer;
-var UpdateAction = /*#__PURE__*/function () {
-  function UpdateAction(dc) {
-    _classCallCheck(this, UpdateAction);
-    this.p = new Performer_1.Performer();
-    this.dc = dc;
-  }
-  return _createClass(UpdateAction, [{
-    key: "action",
-    value: function action() {
-      this.p.updateChildrenData(this.dc);
-    }
-  }]);
-}();
-},{"../CategoryObject":"src/Library/CategoryObject.ts","../Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.ts","../Performer":"src/Library/Performer.js"}],"src/Library/Measurements/DataConsumerBoolFunc.js":[function(require,module,exports) {
+},{"../CategoryObject":"src/Library/CategoryObject.ts","../Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.ts"}],"src/Library/Measurements/DataConsumerBoolFunc.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -9521,6 +9593,34 @@ var TimeMeasurementProvider = /*#__PURE__*/function () {
   }]);
 }();
 exports.TimeMeasurementProvider = TimeMeasurementProvider;
+},{}],"src/Library/Measurements/UpdateMeasurementsAction.js":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.UpdateMeasurementsAction = void 0;
+var UpdateMeasurementsAction = /*#__PURE__*/function () {
+  function UpdateMeasurementsAction(m) {
+    _classCallCheck(this, UpdateMeasurementsAction);
+    this.m = m;
+    console.log("MMM", this.m);
+  }
+  return _createClass(UpdateMeasurementsAction, [{
+    key: "action",
+    value: function action() {
+      console.log(this.m);
+      this.m.updateMeasurements();
+    }
+  }]);
+}();
+exports.UpdateMeasurementsAction = UpdateMeasurementsAction;
 },{}],"src/Library/Measurements/PerformerMeasuremets.js":[function(require,module,exports) {
 "use strict";
 
@@ -9540,40 +9640,42 @@ exports.PerformerMeasuremets = void 0;
 var DataConsumerBoolFunc_1 = require("./DataConsumerBoolFunc");
 var Performer_1 = require("../Performer");
 var TimeMeasurementProvider_1 = require("./TimeMeasurementProvider");
+var ActionArray_1 = require("../Utilities/Generic/ActionArray");
+var UpdateMeasurementsAction_1 = require("./UpdateMeasurementsAction");
 var PerformerMeasuremets = /*#__PURE__*/function () {
   function PerformerMeasuremets() {
     _classCallCheck(this, PerformerMeasuremets);
     this.performer = new Performer_1.Performer();
   }
   return _createClass(PerformerMeasuremets, [{
-    key: "setTimeProvider",
-    value: function setTimeProvider(timeProvider, measurements) {
-      var _iterator = _createForOfIteratorHelper(measurements),
+    key: "createUpdateMeasurementsAction",
+    value: function createUpdateMeasurementsAction(collection) {
+      var act = new ActionArray_1.ActionArray();
+      var mea = this.performer.getAll(collection, "IMeasurements");
+      var mm = this.performer.sortMeasurements(mea);
+      var _iterator = _createForOfIteratorHelper(mm),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var m = _step.value;
-          var tm = this.performer.convertObject(m, "ITimeMeasurementConsumer");
-          if (tm.length > 0) {
-            tm[0].setTimeMeasurement(timeProvider);
-          }
+          act.addAction(new UpdateMeasurementsAction_1.UpdateMeasurementsAction(m));
         }
       } catch (err) {
         _iterator.e(err);
       } finally {
         _iterator.f();
       }
+      return act;
     }
   }, {
-    key: "setTimeProviderCollection",
-    value: function setTimeProviderCollection(objects, timeProvider) {
-      var objs = objects.getObjectCollection();
-      var _iterator2 = _createForOfIteratorHelper(objs),
+    key: "setTimeProvider",
+    value: function setTimeProvider(timeProvider, measurements) {
+      var _iterator2 = _createForOfIteratorHelper(measurements),
         _step2;
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          var o = _step2.value;
-          var tm = this.performer.convertObject(o, "ITimeMeasurementConsumer");
+          var m = _step2.value;
+          var tm = this.performer.convertObject(m, "ITimeMeasurementConsumer");
           if (tm.length > 0) {
             tm[0].setTimeMeasurement(timeProvider);
           }
@@ -9582,6 +9684,26 @@ var PerformerMeasuremets = /*#__PURE__*/function () {
         _iterator2.e(err);
       } finally {
         _iterator2.f();
+      }
+    }
+  }, {
+    key: "setTimeProviderCollection",
+    value: function setTimeProviderCollection(objects, timeProvider) {
+      var objs = objects.getObjectCollection();
+      var _iterator3 = _createForOfIteratorHelper(objs),
+        _step3;
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var o = _step3.value;
+          var tm = this.performer.convertObject(o, "ITimeMeasurementConsumer");
+          if (tm.length > 0) {
+            tm[0].setTimeMeasurement(timeProvider);
+          }
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
       }
     }
   }, {
@@ -9669,11 +9791,11 @@ var PerformerMeasuremets = /*#__PURE__*/function () {
     key: "fullReset",
     value: function fullReset(consumer) {
       var meas = consumer.getAllMeasurements();
-      var _iterator3 = _createForOfIteratorHelper(meas),
-        _step3;
+      var _iterator4 = _createForOfIteratorHelper(meas),
+        _step4;
       try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-          var m = _step3.value;
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var m = _step4.value;
           var c = this.performer.convertObject(m, "IDataConsumer");
           if (c.length > 0) {
             c[0].resetDataConsumer();
@@ -9681,15 +9803,35 @@ var PerformerMeasuremets = /*#__PURE__*/function () {
           }
         }
       } catch (err) {
-        _iterator3.e(err);
+        _iterator4.e(err);
       } finally {
-        _iterator3.f();
+        _iterator4.f();
       }
+    }
+  }], [{
+    key: "getDifferentialEquationProcessor",
+    value: function getDifferentialEquationProcessor() {
+      return this.processor;
+    }
+  }, {
+    key: "setDifferentialEquationProcessor",
+    value: function setDifferentialEquationProcessor(p) {
+      this.processor = p;
+    }
+  }, {
+    key: "getRealtimeEventFactory",
+    value: function getRealtimeEventFactory() {
+      return this.realtimeEventFactory;
+    }
+  }, {
+    key: "setRealtimeEventFactory",
+    value: function setRealtimeEventFactory(f) {
+      this.realtimeEventFactory = f;
     }
   }]);
 }();
 exports.PerformerMeasuremets = PerformerMeasuremets;
-},{"./DataConsumerBoolFunc":"src/Library/Measurements/DataConsumerBoolFunc.js","../Performer":"src/Library/Performer.js","./TimeMeasurementProvider":"src/Library/Measurements/TimeMeasurementProvider.js"}],"src/Library/Measurements/Variables/Variable.js":[function(require,module,exports) {
+},{"./DataConsumerBoolFunc":"src/Library/Measurements/DataConsumerBoolFunc.js","../Performer":"src/Library/Performer.js","./TimeMeasurementProvider":"src/Library/Measurements/TimeMeasurementProvider.js","../Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.js","./UpdateMeasurementsAction":"src/Library/Measurements/UpdateMeasurementsAction.js"}],"src/Library/Measurements/Variables/Variable.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -19562,11 +19704,7 @@ var EventLink = /*#__PURE__*/function (_CategoryArrow_1$Cate) {
       }
       this.event = e[0];
       this.handler.addChildT(e[0]);
-      console.log("EVENT", e[0]);
-      console.log("HANDLER", this.handler);
       _superPropGet(EventLink, "setTarget", this, 3)([target]);
-      console.log("EVENT", e[0]);
-      console.log("HANDLER", this.handler);
     }
   }]);
 }(CategoryArrow_1.CategoryArrow);
@@ -20388,7 +20526,6 @@ var DataRuntimeConsumerEvent = /*#__PURE__*/function (_DataRuntimeConsumerO) {
     var up = _this.dataConsumer;
     var ob = _this.dataConsumer;
     up.setExternalUpdate(_this.getExtenalUpdate(ob, _this));
-    console.log("UPPP", up);
     return _this;
   }
   _inherits(DataRuntimeConsumerEvent, _DataRuntimeConsumerO);
@@ -21905,7 +22042,6 @@ var DataRuntimeConsumerMotion6DEvent = /*#__PURE__*/function (_DataRuntimeConsum
     _classCallCheck(this, DataRuntimeConsumerMotion6DEvent);
     _this = _callSuper(this, DataRuntimeConsumerMotion6DEvent, [dataConsumer, processor]);
     _this.motionPefromer = new Motion6DPerformer_1.Motion6DPerformer();
-    console.log("CCC", _this);
     return _this;
   }
   _inherits(DataRuntimeConsumerMotion6DEvent, _DataRuntimeConsumerE);
@@ -21913,7 +22049,6 @@ var DataRuntimeConsumerMotion6DEvent = /*#__PURE__*/function (_DataRuntimeConsum
     key: "getExtenalUpdate",
     value: function getExtenalUpdate(obj, realime) {
       var a = _superPropGet(DataRuntimeConsumerMotion6DEvent, "getExtenalUpdate", this, 3)([obj, realime]);
-      console.log("EEEE", a);
       this.motionPefromer = new Motion6DPerformer_1.Motion6DPerformer();
       var act = this.motionPefromer.createUpdateFramesAction(this);
       a.addAction(act);
@@ -22830,7 +22965,7 @@ var Airplane_CategoryObject_2 = /*#__PURE__*/function (_TimerObject_1$TimerO) {
     var _this3;
     _classCallCheck(this, Airplane_CategoryObject_2);
     _this3 = _callSuper(this, Airplane_CategoryObject_2, [desktop, name]);
-    _this3.span = new TimeSpan_1.TimeSpan(100);
+    _this3.span = new TimeSpan_1.TimeSpan(10000000);
     return _this3;
   }
   _inherits(Airplane_CategoryObject_2, _TimerObject_1$TimerO);
@@ -23018,7 +23153,6 @@ var Airplane = /*#__PURE__*/function (_Desktop_1$Desktop) {
       objects[4].postSetArrow();
       objects[5].postSetArrow();
       objects[6].postSetArrow();
-      console.log("ARROWS", arrows);
     }
   }]);
 }(Desktop_1.Desktop);
@@ -34974,7 +35108,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52791" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59801" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

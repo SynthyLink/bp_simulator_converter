@@ -1,19 +1,31 @@
-import type { ICategoryObject } from "../../Interfaces/ICategoryObject";
-import type { IChildren } from "../../Interfaces/IChildren";
-import type { IDesktop } from "../../Interfaces/IDesktop";
-import type { IPositionObject } from "../Interfaces/IPositionObject";
+import { ICategoryObject } from "../../Interfaces/ICategoryObject";
+import { IDesktop } from "../../Interfaces/IDesktop";
+import { IPostSetArrow } from "../../Interfaces/IPostSetArrow";
+import { IChildrenT } from "../../NamedTree/Interfaces/IChildrenT";
+import { IPositionObject } from "../Interfaces/IPositionObject";
 import { BasicPosition } from "./BasicPosition";
 
-export class SerializablePosition extends BasicPosition implements IChildren<ICategoryObject>  {
+export class SerializablePosition extends BasicPosition
+    implements IChildrenT<ICategoryObject>, IPostSetArrow {
 
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name);
         this.typeName = "SerializablePosition";
         this.types.push("SerializablePosition");
     }
-
-    getChildren(): ICategoryObject[] {
-        return this.children;
+    postSetArrow(): void {
+        if (this.objects.length == 1) {
+            this.setParameters(this.objects[0])
+        }
+    }
+    getChildernT(): ICategoryObject[] {
+        return this.objects
+    }
+    addChildT(child: ICategoryObject): void {
+        this.objects.push(child)
+    }
+    removeChildT(child: ICategoryObject): void {
+        this.performer.remove(this.objects, child)
     }
 
     setParameters(parameters: any): void {
@@ -23,6 +35,8 @@ export class SerializablePosition extends BasicPosition implements IChildren<ICa
         po[0].setObjectPosition(this)
     }
 
-    children: ICategoryObject[] = [];
+    objects: ICategoryObject[] = [];
+
+    protected map: Map<string, string> = new Map();
 
 }

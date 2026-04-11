@@ -20,9 +20,11 @@ import type { IMeasurements } from "./Interfaces/IMeasurements";
 import type { ITimeMeasurementConsumer } from "./Interfaces/ITimeMeasurementConsumer";
 import type { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProvider";
 import type { IEventStart } from "../Interfaces/IEventStart";
+import type { IExternalUpdateClient } from "../Interfaces/IExternalUpdateClient";
 
 export class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow,
-    ITimeMeasurementConsumer, IPrintedObject, ICheckHolder, IIteratorConsumer, IEventHandler, IAddRemove, IAction, IEventStart
+    ITimeMeasurementConsumer, IPrintedObject, ICheckHolder, IIteratorConsumer, IEventHandler, IAddRemove, IAction,
+    IEventStart, IExternalUpdateClient
 {
     constructor(desktop: IDesktop, name: string)
     {
@@ -41,35 +43,52 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         this.tms = this;
         this.dataConsumer = this;
         this.currentAction = this.fictiveAvtion;
-        this.eventAction.addAction(new UpdateAction(this))
     }
+
+    setExternalUpdate(action: IActionAddRemove | undefined): void {
+        this.eventAction.clearActions();
+        if (action === null) {
+            return;
+        }
+        this.eventAction.addAction(action)
+    }
+
     isEvEnabled: boolean = false;
+
 
     isEventEnabled(): boolean {
         return this.isEvEnabled
     }
+
     setEventEnabled(enabled: boolean): void {
         if (enabled == this.isEvEnabled) return
         this.isEvEnabled = enabled
-        if (enabled) {
+       if (enabled) {
             this.currentAction = this.eventAction
+           console.log("CCCAAA", this.currentAction)
             return
         }
         this.currentAction = this.fictiveAvtion
     }
 
     action(): void {
+        console.log("AAACCCAAA", this.currentAction)
         this.currentAction.action();
-    }
+  }
+
     getAddRemoveType(): string {
         return ""
     }
+
     getChildernT(): IEvent[] {
         return this.events;
     }
+
     addChildT(child: IEvent): void {
-        this.events.push(child)
+        this.performer.addUnique(this.events, child)
+        console.log("EEADD", this.events)
     }
+
     removeChildT(child: IEvent): void {
         this.performer.remove(this.events, child)
     }
@@ -118,8 +137,12 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     }
 
     postSetArrow(): void {
+        console.log("EEEVV", this.events)
         for (let event of this.events) {
-            event.eventAction().addAction(this.eventAction)
+            console.log(event)
+            let ea = event.eventAction();
+            console.log(ea)
+            ea.addAction(this)
         }
     }
    
@@ -149,19 +172,12 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
 
     protected eventAction: IActionAddRemove = new ActionArray()
 
+    protected basicAction: IActionAddRemove = new ActionArray()
+
+
     protected fictiveAvtion: IActionAddRemove = new ActionArray()
 
     protected currentAction: IActionAddRemove = new ActionArray()
 
 }
 
-class UpdateAction implements IAction {
-    p: Performer = new Performer()
-    dc !: IDataConsumer
-    constructor(dc: IDataConsumer) {
-        this.dc = dc
-    }
-    action(): void {
-        this.p.updateChildrenData(this.dc)
-    }
-}

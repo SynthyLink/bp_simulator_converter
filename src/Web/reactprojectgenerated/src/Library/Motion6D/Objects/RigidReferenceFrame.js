@@ -3,14 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RigidReferenceFrame = void 0;
 const CategoryObject_1 = require("../../CategoryObject");
 const OwnError_1 = require("../../ErrorHandler/OwnError");
-const RealMatrix_1 = require("../../RealMatrixProcessor/RealMatrix");
-const Vector3DProcessor_1 = require("../../Vector3D/Vector3DProcessor");
 const Motion6DAcceleratedFrame_1 = require("../Motion6DAcceleratedFrame");
 const Motion6DPerformer_1 = require("../Motion6DPerformer");
 const ReferenceFrame_1 = require("../ReferenceFrame");
 const Motion6DFrame_1 = require("../Motion6DFrame");
 const RotatedFrame_1 = require("../RotatedFrame");
 const MovedFrame_1 = require("../MovedFrame");
+const RealMatrix_1 = require("../../RealMatrixProcessor/RealMatrix");
+const Vector3DProcessor_1 = require("../../Vector3D/Vector3DProcessor");
 const PerformerMeasuremets_1 = require("../../Measurements/PerformerMeasuremets");
 class RigidReferenceFrame extends CategoryObject_1.CategoryObject {
     constructor(desktop, name) {
@@ -47,10 +47,10 @@ class RigidReferenceFrame extends CategoryObject_1.CategoryObject {
         this.nodes = [];
         this.typeName = "RigidReferenceFrame";
         this.types.push("IReferenceFrame");
+        this.types.push("IPosition");
         this.types.push("IPostLoadPosition");
         this.types.push("IPostSetArrow");
         this.types.push("IAlias");
-        this.types.push("IStarted");
         this.types.push("RigidReferenceFrame");
     }
     postSetArrow() {
@@ -77,11 +77,11 @@ class RigidReferenceFrame extends CategoryObject_1.CategoryObject {
         this.relative.setMatrix();
     }
     impl(s) {
-        if (this.parent === null) {
+        if (this.parent === undefined) {
             return true;
         }
         var own = this.parent.getOwnFrame();
-        if (own === null) {
+        if (own === undefined) {
             return false;
         }
         return this.performer.implementsType(own, s);
@@ -89,10 +89,10 @@ class RigidReferenceFrame extends CategoryObject_1.CategoryObject {
     isAcceleration() {
         return this.impl("IAcceleration");
     }
-    isVelociry() {
+    isVelocity() {
         return this.impl("IVelocity");
     }
-    isAngularVelociry() {
+    isAngularVelocity() {
         return this.impl("IAngularVelocity");
     }
     copyPositionToRelativeFrame() {
@@ -126,15 +126,15 @@ class RigidReferenceFrame extends CategoryObject_1.CategoryObject {
             this.relative = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
             this.own = new Motion6DAcceleratedFrame_1.Motion6DAcceleratedFrame();
         }
-        if (this.isVelociry() && this.isAngularVelociry()) {
+        if (this.isVelocity() && this.isAngularVelocity()) {
             this.relative = new Motion6DFrame_1.Motion6DFrame();
             this.own = new Motion6DFrame_1.Motion6DFrame();
         }
-        if (this.isAngularVelociry()) {
+        if (this.isAngularVelocity()) {
             this.relative = new RotatedFrame_1.RotatedFrame();
             this.own = new RotatedFrame_1.RotatedFrame();
         }
-        if (this.isVelociry()) {
+        if (this.isVelocity()) {
             this.relative = new MovedFrame_1.MovedFrame();
             this.own = new MovedFrame_1.MovedFrame();
         }

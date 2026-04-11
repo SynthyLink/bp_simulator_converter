@@ -7,18 +7,16 @@ class BasicCamera extends BasicPosition_1.BasicPosition {
         super(desktop, name);
         this.visible = [];
         this.typeName = "BasicCamera";
-        this.types.push("IDataConsumer");
-        this.types.push("IMeasurements");
-        this.types.push("IPostSetArrow");
+        this.types.push("IVisibleConsumer");
         this.types.push("BasicCamera");
     }
-    addVisible(visible) {
-        this.visible.push(visible);
+    addVisibleObject(object) {
+        this.visible.push(object);
     }
-    removeVisible(visible) {
-        this.performer.remove(this.visible, visible);
+    removeVisibleObject(object) {
+        this.performer.remove(this.visible, object);
     }
-    postVisible(visible) {
+    postVisibleObject(object) {
     }
 }
 exports.BasicCamera = BasicCamera;

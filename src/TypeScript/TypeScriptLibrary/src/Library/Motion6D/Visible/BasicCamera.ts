@@ -13,16 +13,22 @@ export class BasicCamera extends BasicPosition implements IVisibleConsumer {
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name);
         this.typeName = "BasicCamera";
-        this.types.push("IDataConsumer");
-        this.types.push("IMeasurements");
-        this.types.push("IPostSetArrow");
+        this.types.push("IVisibleConsumer");
         this.types.push("BasicCamera");
+    }
+    addVisibleObject(object: IVisible): void {
+        this.visible.push(object)
+    }
+    removeVisibleObject(object: IVisible): void {
+        this.performer.remove<IVisible>(this.visible, object)
+    }
+    postVisibleObject(object: IVisible): void {
     }
 
 
     protected visible: IVisible[] = []
 
-
+/*
     addVisible(visible: IVisible): void {
         this.visible.push(visible)
 
@@ -32,7 +38,7 @@ export class BasicCamera extends BasicPosition implements IVisibleConsumer {
     }
     postVisible(visible: IVisible): void {
     }
-
+    */
 
 
     /*

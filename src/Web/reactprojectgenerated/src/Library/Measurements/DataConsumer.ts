@@ -65,14 +65,12 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         this.isEvEnabled = enabled
        if (enabled) {
             this.currentAction = this.eventAction
-           console.log("CCCAAA", this.currentAction)
             return
         }
         this.currentAction = this.fictiveAvtion
     }
 
     action(): void {
-        console.log("AAACCCAAA", this.currentAction)
         this.currentAction.action();
   }
 
@@ -81,17 +79,20 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     }
 
     getChildernT(): IEvent[] {
-        return this.events;
+        return this.externalEvents
     }
 
-    addChildT(child: IEvent): void {
-        this.performer.addUnique(this.events, child)
-        console.log("EEADD", this.events)
+    addChildT(child: IEvent): void
+    {
+        var ev = this.performer.convertObject(child, "IEvent")
+        if (ev.length == 0) return
+        this.performer.addUnique(this.externalEvents, child)
     }
 
     removeChildT(child: IEvent): void {
-        this.performer.remove(this.events, child)
+        this.performer.remove(this.externalEvents, child)
     }
+
     resetDataConsumer(): void {
     }
     addIterator(iterator: IIterator): void {
@@ -137,11 +138,8 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     }
 
     postSetArrow(): void {
-        console.log("EEEVV", this.events)
-        for (let event of this.events) {
-            console.log(event)
+        for (let event of this.externalEvents) {
             let ea = event.eventAction();
-            console.log(ea)
             ea.addAction(this)
         }
     }
@@ -168,8 +166,6 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
 
     protected iterator !: IIterator;
 
-    protected events: IEvent[] = [];
-
     protected eventAction: IActionAddRemove = new ActionArray()
 
     protected basicAction: IActionAddRemove = new ActionArray()
@@ -178,6 +174,9 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     protected fictiveAvtion: IActionAddRemove = new ActionArray()
 
     protected currentAction: IActionAddRemove = new ActionArray()
+
+    protected externalEvents: IEvent[] = []
+
 
 }
 
