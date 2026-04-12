@@ -1,7 +1,6 @@
 // Here, we import the things we need from other script files 
 import Game from './common/game';
 import SpaceTrippersScene from './scenes/SpaceTrippers';
-import { ActorWeb } from './Tests/Actor/ActorWeb';
 
 // First thing we need is to get the canvas on which we draw our scenes
 const canvas: HTMLCanvasElement = document.querySelector("#app");
@@ -28,8 +27,6 @@ for (let name in scenes) {
     selector.add(option);
 }
 selector.value = initialScene;
-//let act = new ActorWeb()
-//act.actPI()
 selector.addEventListener("change", () => {
     game.startScene(selector.value);
 });

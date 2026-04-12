@@ -23,6 +23,10 @@ export abstract class BasicScene extends Scene implements IObjectCollection {
 
     Space_Displacement: number = -70;
 
+    public constructor(game: Game) {
+        super(game)
+    }
+
     public getGame(): Game {
         return this.game;
     }

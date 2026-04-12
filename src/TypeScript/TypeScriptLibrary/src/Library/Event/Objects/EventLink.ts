@@ -26,11 +26,7 @@ export class EventLink extends CategoryArrow
         }
         this.event = e[0]
         this.handler.addChildT(e[0])
-        console.log("EVENT", e[0])
-        console.log("HANDLER", this.handler)
         super.setTarget(target)
-        console.log("EVENT", e[0])
-        console.log("HANDLER", this.handler)
  }
 
     event: IEvent = new FictiveEvent();

@@ -15,9 +15,9 @@ export class DataRuntimeConsumerODE extends DataRuntimeConsumer
     protected differentialEquations: IDifferentialEquationSolver[] = [];
 
     constructor(consumer: IDataConsumer, processor: IDifferentialEquationProcessor) {
-        super(consumer);
+        super(consumer)
         this.processor = processor.newDifferentialEquations();
-        let equations: IDifferentialEquationSolver[] = [];
+      let equations: IDifferentialEquationSolver[] = [];
         for (let measurements of this.measurements)
         {
             if (this.performer.implementsType(measurements, "IDifferentialEquationSolver"))

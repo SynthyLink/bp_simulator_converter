@@ -12,12 +12,10 @@ export class DataRuntimeConsumerMotion6DEvent extends DataRuntimeConsumerEvent {
     protected motionPefromer: Motion6DPerformer = new Motion6DPerformer();
     constructor(dataConsumer: IDataConsumer, processor: IDifferentialEquationProcessor) {
         super(dataConsumer, processor);
-        console.log("CCC", this)
     }
 
     getExtenalUpdate(obj: IObject | undefined, realime: IRealtimeCollection): IActionAddRemove {
         var a = super.getExtenalUpdate(obj, realime)
-        console.log("EEEE", a)
         this.motionPefromer = new Motion6DPerformer()
         var act = this.motionPefromer.createUpdateFramesAction(this);
         a.addAction(act);

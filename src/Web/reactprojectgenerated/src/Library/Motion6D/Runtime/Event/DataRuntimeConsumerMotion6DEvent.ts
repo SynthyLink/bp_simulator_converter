@@ -4,14 +4,14 @@ import { Motion6DPerformer } from "../../Motion6DPerformer";
 import type { IActionAddRemove } from "../../../Interfaces/IActionAddRemove";
 import type { IObject } from "../../../Interfaces/IObject";
 import type { IRealtimeCollection } from "../../../Interfaces/IRealtimeCollection";
-import type { IDifferentialEquationProcessor } from "../../../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationProcessor ";
 import type { IDataConsumer } from "../../../Measurements/Interfaces/IDataConsumer";
+import type { IFactory } from "../../../Interfaces/IFactory";
 
 export class DataRuntimeConsumerMotion6DEvent extends DataRuntimeConsumerEvent {
 
     protected motionPefromer: Motion6DPerformer = new Motion6DPerformer();
-    constructor(dataConsumer: IDataConsumer, processor: IDifferentialEquationProcessor) {
-        super(dataConsumer, processor);
+    constructor(dataConsumer: IDataConsumer, factory: IFactory) {
+        super(dataConsumer, factory);
     }
 
     getExtenalUpdate(obj: IObject | undefined, realime: IRealtimeCollection): IActionAddRemove {

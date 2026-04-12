@@ -1,8 +1,11 @@
-import { Airplane } from "../Airplane";
 import Game from "../common/game";
 import { ScadaScene } from "../common/ScadaScene";
 import { ScadaDesktopEngine } from "../Library/Scada/ScadaDesktopEngine";
+import { Airplane } from "../Airplane";
 import { Motion6DRealtimeFactory } from "../Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory";
+import { UniversalFactory } from "../Library/UniversalFactory";
+
+let factory = new UniversalFactory();
 
 export class AirplaneScene extends ScadaScene {
     public load(): void {
@@ -14,6 +17,6 @@ export class AirplaneScene extends ScadaScene {
         )
     }
     constructor(game: Game) {
-        super(game, new ScadaDesktopEngine(new Airplane(), game, new Motion6DRealtimeFactory(), "Chart" ))
+        super(game, new ScadaDesktopEngine(new Airplane(), game, factory, "Chart"))
     }
 }

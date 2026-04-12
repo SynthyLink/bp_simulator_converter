@@ -16,8 +16,28 @@ import type { IDataRuntime } from "../Interfaces/IDataRuntime";
 import type { IComponentCollection } from "../Interfaces/IComponentCollection";
 import type { IObject } from "../Interfaces/IObject";
 
-export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection
+export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, IObject
 {
+
+    getName(): string {
+        return this.name;
+    }
+
+
+    getClassName(): string {
+        return this.typeName;
+    }
+
+    imlplementsType(type: string): boolean {
+        return this.types.indexOf(type) >= 0;
+    }
+
+    protected typeName: string = "CategoryArrow";
+
+    protected types: string[] = ["IObject", "IComponentCollection", "IDataRuntime", "DataRuntimeConsumer"];
+
+    protected name: string = "";
+
 
 
     protected performer: Performer = new Performer();
@@ -44,6 +64,7 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection
 
     constructor(dataConsumer: IDataConsumer)
     {
+        console.log("DataRuntimeConsumerTTT")
         this.dataConsumer = dataConsumer;
         this.prepare(dataConsumer)
         this.objects = []

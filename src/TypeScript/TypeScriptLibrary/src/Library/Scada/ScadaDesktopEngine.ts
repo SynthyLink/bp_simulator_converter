@@ -1,24 +1,30 @@
-import { ScadaDesktop } from "./ScadaDesktop";
 import type { IComponentCollection } from "../Interfaces/IComponentCollection";
-import { IPlayEngine } from "../Interfaces/IPlayEngine";
-import { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
-import { DataRuntimeConsumerEvent } from "../Event/Runtime/DataRuntimeConsumerEvent";
+import type { IPlayEngine } from "../Interfaces/IPlayEngine";
+import type { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
+import type { IRealtimeCollectionFactory } from "../Interfaces/IRealtimeCollectionFactory";
 import { EngineTimerProvider } from "../Event/EngineTimerProvider";
 import { TimerPlayEngineFactory } from "../Event/TimerPlayEngineFactory";
-import { IRealtimeCollectionFactory } from "../Interfaces/IRealtimeCollectionFactory";
+import { ScadaDesktop } from "./ScadaDesktop";
+import { IFactory } from "../Interfaces/IFactory";
 
 export class ScadaDesktopEngine extends ScadaDesktop {
 
-    constructor(componentCollection: IComponentCollection, engine: IPlayEngine, factory: IRealtimeCollectionFactory, chart: string) {
+    constructor(componentCollection: IComponentCollection, engine: IPlayEngine, factory: IFactory, chart: string) {
         super(componentCollection)
+        console.log("UUUUUUUUUUUUUU")
         this.engine = engine
         this.chart = chart;
-        this.factory = factory;
+        var f = factory.getFactory<IRealtimeCollectionFactory>("IRealtimeCollectionFactory")
+        if (f === undefined) {
+            return;
+        }
+        this.factory = f
         this.createRuntime()
     }
     public createRuntime(): void {
         let co = this.componentCollection.getCategoryObject(this.chart)
         let dc = co as unknown as IDataConsumer
+        console.log(dc)
         let eev = this.factory.createRealtimeFromDataConsumer(dc);
         eev.setTimeProvider(new EngineTimerProvider(this.engine))
         eev.setTimerFactory(new TimerPlayEngineFactory(this.engine))

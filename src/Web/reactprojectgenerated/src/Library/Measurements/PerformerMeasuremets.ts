@@ -25,24 +25,25 @@ import { UpdateMeasurementsAction } from "./UpdateMeasurementsAction";
 
 export class PerformerMeasuremets {
 
-    static processor: IDifferentialEquationProcessor
+     processor !: IDifferentialEquationProcessor
 
-    static realtimeEventFactory: IRealtimeCollectionFactory
+     realtimeEventFactory !: IRealtimeCollectionFactory
 
 
-    public static getDifferentialEquationProcessor(): IDifferentialEquationProcessor {
+    public  getDifferentialEquationProcessor(): IDifferentialEquationProcessor {
         return this.processor
     }
 
-    public static setDifferentialEquationProcessor(p: IDifferentialEquationProcessor): void { 
+    public  setDifferentialEquationProcessor(p: IDifferentialEquationProcessor): void { 
         this.processor = p;
+        console.log(this.processor)
     }
 
-    public static getRealtimeEventFactory(): IRealtimeCollectionFactory {
+    public  getRealtimeEventFactory(): IRealtimeCollectionFactory {
         return this.realtimeEventFactory;
     }
 
-    public static setRealtimeEventFactory(f: IRealtimeCollectionFactory): void {
+    public  setRealtimeEventFactory(f: IRealtimeCollectionFactory): void {
         this.realtimeEventFactory = f;
     }
 

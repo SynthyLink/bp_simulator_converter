@@ -1,12 +1,12 @@
 {
-  "name": "spacetrippers",
+  "name": "SpaceTrippers",
   "version": "1.0.0",
   "description": "A WebGl 3D interactive game",
   "main": "index.html",
   "scripts": {
-    "watch": "parcel index.html --port 8000",
+    "watch": "parcel index.html --port 8080",
     "build": "parcel build index.html --no-source-maps --no-content-hash --public-url ."
-  },
+  },    
   "start": "node src/app.ts",
   "staticFiles": {
     "staticPath": "static",
@@ -27,7 +27,5 @@
     "ts-key-enum": "^2.0.0",
     "tsx-create-element": "^2.0.0",
     "webgl-obj-loader": "^2.0.3"
-  },
-  "keywords": [],
-  "type": "commonjs"
+  }
 }

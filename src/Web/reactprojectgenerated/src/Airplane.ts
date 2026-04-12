@@ -198,7 +198,8 @@ export class Airplane extends Desktop
 		new Airplane_CategoryArrow_4(this, "");
 		new Airplane_CategoryArrow_5(this, "");
 		new Airplane_CategoryArrow_6(this, "");
-	this.finish()
+		this.finish()
+		console.log("AIRPLANE")
 }
 
 finish() : void

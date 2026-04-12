@@ -38,6 +38,17 @@ export class Performer
         this.mCompatator = new MeasurementsComparator(this);
     }
 
+    static desktop: IDesktop;
+
+    public static getCurrentDesktop(): IDesktop {
+        return this.desktop
+    }
+
+    public static setCurrentDesktop(desktop: IDesktop): void {
+        this.desktop = desktop
+    }
+
+
     protected a: number = 0;
 
     protected b: boolean = false;

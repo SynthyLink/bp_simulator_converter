@@ -26,7 +26,6 @@ export class DataRuntimeConsumerEvent extends DataRuntimeConsumerODE implements 
         var up = this.dataConsumer as unknown as IExternalUpdateClient
         var ob = this.dataConsumer as unknown as IObject;
         up.setExternalUpdate(this.getExtenalUpdate(ob, this))
-        console.log("UPPP", up)
     }
 
     getExtenalUpdate(obj: IObject | undefined, realime: IRealtimeCollection): IActionAddRemove {
