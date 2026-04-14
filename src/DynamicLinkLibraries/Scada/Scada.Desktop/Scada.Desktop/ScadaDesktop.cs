@@ -23,7 +23,7 @@ using Scada.Interfaces;
 
 using ErrorHandler;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace Scada.Desktop
 {

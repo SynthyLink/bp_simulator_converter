@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using CategoryTheory;
 
 using Diagram.UI.Interfaces;
+
 using Diagram.UI.Labels;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace Diagram.UI.Portable
 {

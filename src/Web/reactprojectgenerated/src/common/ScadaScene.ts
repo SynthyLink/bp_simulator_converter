@@ -1,11 +1,11 @@
 import { BasicScene } from "./BasicScene";
-import type { IScadaInterface } from "../Library/Scada/Interfaces/IScadaInterface";
 import Game from "./game";
-import type { IActionT } from "../Library/Interfaces/IActionT";
 import { Basic3DShape } from "../Library/Motion6D/Objects/Shapes/Basic3DShape";
 import { Object3DPrimitive } from "./Primitives/Object3DPrimive";
 import { Performer } from "../Library/Performer";
-import { IStartPrimitive } from "./Interfaces/IStartPrimitive";
+import type { IStartPrimitive } from "./Interfaces/IStartPrimitive";
+import type { IActionT } from "../Library/Interfaces/IActionT";
+import type { IScadaInterface } from "../Library/Scada/Interfaces/IScadaInterface";
 
 export abstract class ScadaScene extends BasicScene implements IActionT<Basic3DShape> {
 

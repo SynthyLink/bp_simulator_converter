@@ -17,7 +17,7 @@ using Motion6D.Interfaces;
 using Motion6D.Portable.Interfaces;
 using Motion6D.Portable.Runtime;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace Motion6D.Portable
 {

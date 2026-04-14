@@ -6,7 +6,7 @@ using CategoryTheory;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace Diagram.UI
 {

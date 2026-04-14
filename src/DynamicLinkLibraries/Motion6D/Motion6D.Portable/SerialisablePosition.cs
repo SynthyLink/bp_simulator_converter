@@ -1,11 +1,11 @@
-﻿using CategoryTheory;
+﻿using System;
+using System.Collections.Generic;
+
+using CategoryTheory;
 using Diagram.UI.Interfaces;
 using ErrorHandler;
 using Motion6D.Interfaces;
-using NamedTree;
-
-using System;
-using System.Collections.Generic;
+using NamedTree.Interfaces;
 
 namespace Motion6D.Portable
 {

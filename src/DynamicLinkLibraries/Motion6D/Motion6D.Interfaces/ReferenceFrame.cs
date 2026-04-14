@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using ErrorHandler;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 using RealMatrixProcessor;
 

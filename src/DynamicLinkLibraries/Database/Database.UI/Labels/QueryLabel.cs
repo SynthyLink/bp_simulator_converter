@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 using System.Windows.Forms;
 using CategoryTheory;
 using Database.UI.Forms;
@@ -15,7 +11,7 @@ using Diagram.UI;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;
 using ErrorHandler;
-using NamedTree;
+using NamedTree.Interfaces;
 using Web.Interfaces;
 
 

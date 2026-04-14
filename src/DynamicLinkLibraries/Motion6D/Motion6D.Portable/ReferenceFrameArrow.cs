@@ -10,7 +10,7 @@ using Diagram.UI.Interfaces;
 
 using Motion6D.Interfaces;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace Motion6D.Portable
 {

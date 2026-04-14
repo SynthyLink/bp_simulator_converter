@@ -1,4 +1,5 @@
 ﻿using NamedTree;
+using NamedTree.Interfaces;
 
 namespace Abstract2DConverters.Interfaces
 {

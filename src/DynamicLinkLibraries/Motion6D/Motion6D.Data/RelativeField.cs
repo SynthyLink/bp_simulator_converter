@@ -1,22 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
+using System.Linq;
 
 using CategoryTheory;
-using Diagram.UI;
 using SerializationInterface;
 using BaseTypes;
 
-using PhysicalField;
 using DataPerformer;
 using Motion6D.Interfaces;
 using PhysicalField.Interfaces;
 using Motion6D.Portable;
-using NamedTree;
-using System.Linq;
+using NamedTree.Interfaces;
 
 namespace Motion6D
 {

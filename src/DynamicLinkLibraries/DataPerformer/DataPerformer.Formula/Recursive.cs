@@ -21,7 +21,7 @@ using FormulaEditor.Symbols;
 
 using ErrorHandler;
 
-using NamedTree;
+using NamedTree.Interfaces;
 using DataPerformer.Interfaces.Attributes;
 
 namespace DataPerformer.Formula

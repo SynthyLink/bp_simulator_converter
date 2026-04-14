@@ -19,13 +19,14 @@ export class ScadaDesktopEngine extends ScadaDesktop {
             return;
         }
         this.factory = f
+        this.uFactory = factory;
         this.createRuntime()
     }
     public createRuntime(): void {
         let co = this.componentCollection.getCategoryObject(this.chart)
         let dc = co as unknown as IDataConsumer
         console.log(dc)
-        let eev = this.factory.createRealtimeFromDataConsumer(dc);
+        let eev = this.factory.createRealtimeFromDataConsumer(dc, this.uFactory);
         eev.setTimeProvider(new EngineTimerProvider(this.engine))
         eev.setTimerFactory(new TimerPlayEngineFactory(this.engine))
         this.runtime = eev
@@ -36,5 +37,7 @@ export class ScadaDesktopEngine extends ScadaDesktop {
     chart: string = ""
 
     factory !: IRealtimeCollectionFactory;
+
+    uFactory !: IFactory
 
 }

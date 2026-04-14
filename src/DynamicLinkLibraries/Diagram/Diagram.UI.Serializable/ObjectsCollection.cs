@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Runtime.Serialization;
 
 
 using CategoryTheory;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;
-using System.Dynamic;
-using NamedTree;
+
+using NamedTree.Interfaces;
 
 namespace Diagram.UI
 {

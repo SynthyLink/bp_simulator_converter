@@ -4,8 +4,7 @@ using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;
 
-using NamedTree;
-using System.ComponentModel;
+using NamedTree.Interfaces;
 
 namespace Diagram.UI.TypeScript
 {

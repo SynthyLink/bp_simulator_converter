@@ -1,9 +1,11 @@
 ﻿using Abstract2DConverters.Interfaces;
 
 using NamedTree;
+using NamedTree.Interfaces;
 
 namespace Abstract2DConverters.Nodes
 {
+
     public class AbstractNode2DUI : INode2DUI
     {
 

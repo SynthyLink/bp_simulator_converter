@@ -16,13 +16,14 @@ class ScadaDesktopEngine extends ScadaDesktop_1.ScadaDesktop {
             return;
         }
         this.factory = f;
+        this.uFactory = factory;
         this.createRuntime();
     }
     createRuntime() {
         let co = this.componentCollection.getCategoryObject(this.chart);
         let dc = co;
         console.log(dc);
-        let eev = this.factory.createRealtimeFromDataConsumer(dc);
+        let eev = this.factory.createRealtimeFromDataConsumer(dc, this.uFactory);
         eev.setTimeProvider(new EngineTimerProvider_1.EngineTimerProvider(this.engine));
         eev.setTimerFactory(new TimerPlayEngineFactory_1.TimerPlayEngineFactory(this.engine));
         this.runtime = eev;

@@ -17,6 +17,7 @@ import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "
 import { OrbitalForecast } from "./OrbitalForecast";
 import { StopWatch } from "../../Library/Utilities/DateTime/StopWatch";
 import { IDataRuntime } from "../../Library/Interfaces/IDataRuntime";
+import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
 class Check implements ICheck {
     check(o: any): boolean {
         var s = `${o}`;
@@ -102,7 +103,7 @@ export class OrbitalForecastCalculation extends OrbitalForecast implements IActi
         this.alias.setAliasValue("w", condition.vz);
         this.list = [];
         let processor = new RungeProcessor();
-        this.runtime = new DataRuntimeConsumerODE(this.dc, processor);
+        this.runtime = new DataRuntimeConsumerODE(this.dc, new Motion6DFactory())
     }
 
     public calculate = async (condition: OrbitalForecastConditionNumber, controller: AbortController): Promise<OrbitalForecastItemNumber[]> => {

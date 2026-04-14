@@ -4,10 +4,14 @@ exports.DataRuntimeConsumerEvent = void 0;
 const DataRuntimeConsumerODE_1 = require("../../Runtime/DataRuntimeConsumerODE");
 const PerformerEvents_1 = require("../PerformerEvents");
 class DataRuntimeConsumerEvent extends DataRuntimeConsumerODE_1.DataRuntimeConsumerODE {
-    constructor(dataConsumer, processor) {
-        super(dataConsumer, processor);
+    constructor(dataConsumer, factory) {
+        super(dataConsumer, factory);
         this.ePerformer = new PerformerEvents_1.PerformerEvents();
         this.isEnabled = false;
+        this.typeName = "DataRuntimeConsumerEvent";
+        this.types.push("IRealtimeCollection");
+        this.types.push("IExternalUpdate");
+        this.types.push("DataRuntimeConsumerEvent");
         var up = this.dataConsumer;
         var ob = this.dataConsumer;
         up.setExternalUpdate(this.getExtenalUpdate(ob, this));

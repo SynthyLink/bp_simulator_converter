@@ -4,24 +4,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CategoryArrow = void 0;
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const FictiveCategoryObject_1 = require("./Fiction/FictiveCategoryObject");
 const FictiveDesktop_1 = require("./Fiction/FictiveDesktop");
 const Performer_1 = require("./Performer");
 class CategoryArrow {
     constructor(desktop, name) {
+        this.typeName = "CategoryArrow";
+        this.types = ["IObject", "ICategoryArrow", "CategoryArrow"];
         this.name = "";
         this.desktop = new FictiveDesktop_1.FictiveDesktop();
         this.source = new FictiveCategoryObject_1.FictiveCategoryObject();
         this.target = new FictiveCategoryObject_1.FictiveCategoryObject();
-        this.typeName = "CategoryArrow";
-        this.types = ["IObject", "ICategoryArrow", "CategoryArrow"];
         this.performer = new Performer_1.Performer();
         this.desktop = desktop;
         this.name = name;
         desktop.addCategoryArrow(this);
         desktop.addObject(this);
     }
-    getArrowName() {
+    getName() {
         return this.name;
     }
     getClassName() {
@@ -30,11 +33,10 @@ class CategoryArrow {
     imlplementsType(type) {
         return this.types.indexOf(type) >= 0;
     }
-    ;
     getDesktop() {
         return this.desktop;
     }
-    getName() {
+    getArrowName() {
         return this.name;
     }
     getSource() {

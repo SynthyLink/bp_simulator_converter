@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using BaseTypes.Attributes;
 using CategoryTheory;
 using DataPerformer.Interfaces;
@@ -13,7 +14,7 @@ using ErrorHandler;
 using Event.Interfaces;
 using Event.Log.Database.Interfaces;
 using Event.Portable;
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace DataPerformer.Event.Portable.Objects.BufferedData
 {

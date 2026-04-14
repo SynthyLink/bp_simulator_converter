@@ -15,11 +15,10 @@ using CategoryTheory;
 using Diagram.UI.Labels;
 using Diagram.UI.Attributes;
 using Diagram.UI.Interfaces;
-//using Diagram.Interfaces;
 
 using SerializationInterface;
 using ErrorHandler;
-using NamedTree;
+using NamedTree.Interfaces;
 
 
 namespace Diagram.UI

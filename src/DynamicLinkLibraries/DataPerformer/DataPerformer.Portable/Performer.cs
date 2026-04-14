@@ -14,6 +14,7 @@ using Diagram.UI.Labels;
 using NamedTree;
 
 using ErrorHandler;
+using NamedTree.Interfaces;
 
 
 namespace DataPerformer.Portable

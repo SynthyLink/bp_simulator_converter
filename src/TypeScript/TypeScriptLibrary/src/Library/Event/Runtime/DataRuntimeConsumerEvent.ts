@@ -5,11 +5,11 @@ import type { IEvent } from "../../Interfaces/IEvent";
 import type { IEventHandler } from "../../Interfaces/IEventHandler";
 import type { IExternalUpdate } from "../../Interfaces/IExternalUpdate";
 import type { IExternalUpdateClient } from "../../Interfaces/IExternalUpdateClient";
+import type { IFactory } from "../../Interfaces/IFactory";
 import type { IObject } from "../../Interfaces/IObject";
 import type { IRealtimeCollection } from "../../Interfaces/IRealtimeCollection";
 import type { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
 import type { ITimerFactory } from "../../Interfaces/ITimerFactory";
-import type { IDifferentialEquationProcessor } from "../../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationProcessor ";
 import type { IDataConsumer } from "../../Measurements/Interfaces/IDataConsumer";
 import { DataRuntimeConsumerODE } from "../../Runtime/DataRuntimeConsumerODE";
 import { PerformerEvents } from "../PerformerEvents";
@@ -21,8 +21,12 @@ export class DataRuntimeConsumerEvent extends DataRuntimeConsumerODE implements 
 
     protected isEnabled: boolean = false
 
-    constructor(dataConsumer: IDataConsumer, processor: IDifferentialEquationProcessor) {
-        super(dataConsumer, processor)
+    constructor(dataConsumer: IDataConsumer, factory: IFactory) {
+        super(dataConsumer, factory)
+        this.typeName = "DataRuntimeConsumerEvent"
+        this.types.push("IRealtimeCollection")
+        this.types.push("IExternalUpdate")
+        this.types.push("DataRuntimeConsumerEvent")
         var up = this.dataConsumer as unknown as IExternalUpdateClient
         var ob = this.dataConsumer as unknown as IObject;
         up.setExternalUpdate(this.getExtenalUpdate(ob, this))

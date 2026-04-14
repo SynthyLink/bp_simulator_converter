@@ -5,6 +5,8 @@ VisualStudioVersion = 18.4.11626.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "reactprojectgenerated", "reactprojectgenerated.esproj", "{18787140-EA01-EB02-158B-BC167D31AF98}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "TypeScriptLibrary", "..\..\TypeScript\TypeScriptLibrary\TypeScriptLibrary.esproj", "{B26B6314-8A11-9FD2-54F3-ABFC7CC01F2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,12 @@ Global
 		{18787140-EA01-EB02-158B-BC167D31AF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18787140-EA01-EB02-158B-BC167D31AF98}.Release|Any CPU.Build.0 = Release|Any CPU
 		{18787140-EA01-EB02-158B-BC167D31AF98}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B26B6314-8A11-9FD2-54F3-ABFC7CC01F2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B26B6314-8A11-9FD2-54F3-ABFC7CC01F2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B26B6314-8A11-9FD2-54F3-ABFC7CC01F2D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B26B6314-8A11-9FD2-54F3-ABFC7CC01F2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B26B6314-8A11-9FD2-54F3-ABFC7CC01F2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B26B6314-8A11-9FD2-54F3-ABFC7CC01F2D}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

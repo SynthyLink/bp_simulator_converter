@@ -19,7 +19,7 @@ using Database.UI.Windows;
 
 using Diagram.UI;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 using Trading.Charts;
 using Trading.Library.Forms.Factory;

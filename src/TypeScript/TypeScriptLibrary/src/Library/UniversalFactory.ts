@@ -1,5 +1,5 @@
-import { IFactory } from "./Interfaces/IFactory";
-import { IObject } from "./Interfaces/IObject";
+import type { IFactory } from "./Interfaces/IFactory";
+import type { IObject } from "./Interfaces/IObject";
 import { Performer } from "./Performer";
 
 export class UniversalFactory implements IFactory {
@@ -12,8 +12,9 @@ export class UniversalFactory implements IFactory {
     performer: Performer = new Performer()
     factories: Map<string, IObject> = new Map();
 
-    public addFactory<T>(t: T, type: string): void
-    {
+    public addFactory<T>(t: T, type: string): void {
+        console.log("TTTTTTTTTTTTTTTT")
+        console.log(t)
         var tt = this.performer.convertObject<IObject, T>(t, type)
         if (tt.length > 0) this.factories.set(type, tt[0])
     }

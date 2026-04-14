@@ -6,7 +6,7 @@ using CategoryTheory;
 using DataPerformer.Interfaces;
 using DataPerformer.Portable.Measurements;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace DataPerformer.Portable
 {

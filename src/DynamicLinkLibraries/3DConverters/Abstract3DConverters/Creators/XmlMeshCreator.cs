@@ -3,6 +3,7 @@
 using Abstract3DConverters.Interfaces;
 using Abstract3DConverters.Materials;
 using NamedTree;
+using NamedTree.Interfaces;
 
 namespace Abstract3DConverters.Creators
 {

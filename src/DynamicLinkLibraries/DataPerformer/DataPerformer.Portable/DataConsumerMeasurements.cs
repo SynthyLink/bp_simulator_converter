@@ -17,7 +17,7 @@ using ErrorHandler;
 
 using Event.Interfaces;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace DataPerformer.Portable
 {

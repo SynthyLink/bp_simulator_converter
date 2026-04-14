@@ -13,7 +13,7 @@ using Diagram.UI.Interfaces;
 
 using ErrorHandler;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 using SerializationInterface;
 

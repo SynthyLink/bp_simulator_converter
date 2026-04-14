@@ -17,6 +17,7 @@ using DataPerformer.Portable.Helpers;
 
 using Event.Interfaces;
 using NamedTree;
+using NamedTree.Interfaces;
 
 namespace DataPerformer.Portable.Runtime
 {

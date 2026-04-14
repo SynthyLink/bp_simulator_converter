@@ -5,7 +5,7 @@ using CategoryTheory;
 
 using Diagram.UI.Interfaces;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 using Audio.Record.Interfaces;
 

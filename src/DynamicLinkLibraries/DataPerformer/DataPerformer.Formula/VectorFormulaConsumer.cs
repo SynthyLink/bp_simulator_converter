@@ -8,7 +8,6 @@ using CategoryTheory;
 using DataPerformer.Formula.Interfaces;
 using DataPerformer.Interfaces;
 using DataPerformer.Portable;
-
 using Diagram.UI;
 using Diagram.UI.Aliases;
 using Diagram.UI.Labels;
@@ -19,7 +18,7 @@ using FormulaEditor;
 using FormulaEditor.Interfaces;
 using FormulaEditor.Symbols;
     
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace DataPerformer.Formula
 {

@@ -7,6 +7,7 @@ import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsume
 import { IMeasurement } from "../../Library/Measurements/Interfaces/IMeasurement";
 import { IMeasurements } from "../../Library/Measurements/Interfaces/IMeasurements";
 import { IFunc } from "../../Library/Interfaces/IFunc";
+import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
 
 
 export class DensityAct extends Density implements IAction, IFunc<boolean> {
@@ -38,7 +39,7 @@ export class DensityAct extends Density implements IAction, IFunc<boolean> {
     public test(): void {
         try {
             let processor = new RungeProcessor();
-            var runtime = new DataRuntimeConsumerODE(this.dc, processor);
+            var runtime = new DataRuntimeConsumerODE(this.dc, new Motion6DFactory());
             var p = new PerformerMeasuremets();
             p.performFixedStepCalculation(runtime, 1770457504, 1, 18000, this, this);
         }

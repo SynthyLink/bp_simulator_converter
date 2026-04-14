@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
+
 using DataPerformer.Interfaces;
 using DataPerformer.Portable;
 using DataPerformer.Portable.Measurements;
 using Diagram.UI;
 using Diagram.UI.Aliases;
 using Motion6D.Interfaces;
-using NamedTree;
-using RealMatrixProcessor;
-using Vector3D;
+using NamedTree.Interfaces;
 
 namespace Motion6D
 {

@@ -13,7 +13,7 @@ using Diagram.UI.Labels;
 
 using GeneralLinearMethod;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 using ErrorHandler;
 

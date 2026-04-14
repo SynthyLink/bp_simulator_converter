@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using CategoryTheory;
-
 using DataPerformer.Interfaces;
 using DataPerformer.Portable.Filters;
 
@@ -10,7 +8,7 @@ using Diagram.UI.Interfaces;
 
 using ErrorHandler;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace DataPerformer.Portable
 {

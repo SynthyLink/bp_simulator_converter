@@ -9,7 +9,19 @@ const Performer_1 = require("../Performer");
 const PerformerMeasuremets_1 = require("../Measurements/PerformerMeasuremets");
 const FictiveCategoryObject_1 = require("../Fiction/FictiveCategoryObject");
 class DataRuntimeConsumer {
+    getName() {
+        return this.name;
+    }
+    getClassName() {
+        return this.typeName;
+    }
+    imlplementsType(type) {
+        return this.types.indexOf(type) >= 0;
+    }
     constructor(dataConsumer) {
+        this.typeName = "CategoryArrow";
+        this.types = ["IObject", "IComponentCollection", "IDataRuntime", "DataRuntimeConsumer"];
+        this.name = "";
         this.performer = new Performer_1.Performer();
         this.mPerformer = new PerformerMeasuremets_1.PerformerMeasuremets();
         this.measurements = [];

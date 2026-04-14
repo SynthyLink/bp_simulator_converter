@@ -22,7 +22,7 @@ using DataPerformer.Formula.Interfaces;
 
 using ErrorHandler;
 
-using NamedTree;
+using NamedTree.Interfaces;
 using DataPerformer.Interfaces.Attributes;
 
 

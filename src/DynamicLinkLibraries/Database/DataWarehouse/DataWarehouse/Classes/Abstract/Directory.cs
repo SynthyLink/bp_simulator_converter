@@ -6,7 +6,7 @@ using DataWarehouse.Interfaces.Async;
 
 using ErrorHandler;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 
 namespace DataWarehouse.Classes.Abstract
@@ -814,6 +814,10 @@ namespace DataWarehouse.Classes.Abstract
         {
             return Post();
         }
+
+        public abstract bool Check(INamed named);
+        public abstract bool Add(INamed named);
+        public abstract bool Remove(INamed named);
 
 
         #endregion

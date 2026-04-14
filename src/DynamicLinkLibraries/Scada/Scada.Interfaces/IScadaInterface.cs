@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 using ErrorHandler;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace Scada.Interfaces
 {

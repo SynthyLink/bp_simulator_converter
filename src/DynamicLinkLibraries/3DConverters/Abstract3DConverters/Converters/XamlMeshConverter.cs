@@ -6,7 +6,7 @@ using Abstract3DConverters.Interfaces;
 using Abstract3DConverters.MaterialCreators;
 using Abstract3DConverters.Materials;
 using ErrorHandler;
-using NamedTree;
+using NamedTree.Interfaces;
 
 
 

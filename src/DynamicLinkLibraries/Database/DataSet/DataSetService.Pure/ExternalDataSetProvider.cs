@@ -2,7 +2,7 @@
 
 using DataSetService.Pure.Interfaces;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace DataSetService.Pure
 {

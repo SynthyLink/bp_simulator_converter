@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using BaseTypes.Interfaces;
 using DataPerformer.Interfaces;
-using DataPerformer.Portable.Interfaces;
 
 using Diagram.UI;
 using Diagram.UI.Aliases;
@@ -10,7 +9,7 @@ using Diagram.UI.Labels;
 
 using ErrorHandler;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace DataPerformer.Portable.Wrappers
 {

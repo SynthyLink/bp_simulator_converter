@@ -13,6 +13,18 @@ class DifferentialEquationProcessor {
         this.equations = [];
         this.norm = [];
         this.measurements = [];
+        this.typeName = "DifferentialEquationProcessor";
+        this.types = ["IObject", "IDifferentialEquationProcessor", "DifferentialEquationProcessor"];
+        this.name = "";
+    }
+    getName() {
+        return this.name;
+    }
+    getClassName() {
+        return this.typeName;
+    }
+    imlplementsType(type) {
+        return this.types.indexOf(type) >= 0;
     }
     getDifferentialEquations() {
         return this.equations;

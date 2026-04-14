@@ -1,19 +1,19 @@
-import { Basic3DShape } from "./Library/Motion6D/Objects/Shapes/Basic3DShape";
-import { IDesktop } from "./Library/Interfaces/IDesktop";
-import { SerializablePosition } from "./Library/Motion6D/Objects/SerializablePosition";
-import { BasicCamera } from "./Library/Motion6D/Visible/BasicCamera";
-import { TimerObject } from "./Library/Event/Objects/TimerObject";
-import { TimeSpan } from "./Library/Utilities/DateTime/TimeSpan";
-import { RigidReferenceFrame } from "./Library/Motion6D/Objects/RigidReferenceFrame";
-import { VectorFormulaConsumer } from "./Library/Measurements/VectorFormulaConsumer";
-import { DataConsumer } from "./Library/Measurements/DataConsumer";
-import { ReferenceFrameArrow } from "./Library/Motion6D/Arrows/ReferenceFrameArrow";
-import { VisibleConsumerLink } from "./Library/Motion6D/Visible/VisibleConsumerLink";
 import { BelongsToCollection } from "./Library/Arrows/BelognsToCollection";
-import { DataLink } from "./Library/Measurements/Arrows/DataLink";
-import { EventLink } from "./Library/Event/Objects/EventLink";
 import { Desktop } from "./Library/Desktop";
+import { EventLink } from "./Library/Event/Objects/EventLink";
+import { TimerObject } from "./Library/Event/Objects/TimerObject";
+import { IDesktop } from "./Library/Interfaces/IDesktop";
 import { IPostSetArrow } from "./Library/Interfaces/IPostSetArrow";
+import { DataLink } from "./Library/Measurements/Arrows/DataLink";
+import { DataConsumer } from "./Library/Measurements/DataConsumer";
+import { VectorFormulaConsumer } from "./Library/Measurements/VectorFormulaConsumer";
+import { ReferenceFrameArrow } from "./Library/Motion6D/Arrows/ReferenceFrameArrow";
+import { RigidReferenceFrame } from "./Library/Motion6D/Objects/RigidReferenceFrame";
+import { SerializablePosition } from "./Library/Motion6D/Objects/SerializablePosition";
+import { Basic3DShape } from "./Library/Motion6D/Objects/Shapes/Basic3DShape";
+import { BasicCamera } from "./Library/Motion6D/Visible/BasicCamera";
+import { VisibleConsumerLink } from "./Library/Motion6D/Visible/VisibleConsumerLink";
+import { TimeSpan } from "./Library/Utilities/DateTime/TimeSpan";
 
 class Airplane_CategoryObject_0_Visible0 extends Basic3DShape
 {
@@ -49,7 +49,7 @@ class Airplane_CategoryObject_2 extends TimerObject
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
-		this.span = TimeSpan.fromMilliseconds(1000)
+		this.span = TimeSpan.fromMilliseconds(100)
 	}
 }
 
@@ -198,8 +198,7 @@ export class Airplane extends Desktop
 		new Airplane_CategoryArrow_4(this, "");
 		new Airplane_CategoryArrow_5(this, "");
 		new Airplane_CategoryArrow_6(this, "");
-		this.finish()
-		console.log("AIRPLANE")
+	this.finish()
 }
 
 finish() : void

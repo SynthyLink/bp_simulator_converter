@@ -26,7 +26,6 @@ function funcAirplane() {
     };
     const initialScene = "Game";
     const air = new AirplaneScene(game);
-    console.log(2)
 
     // Then we add those scenes to the game object and ask it to start the initial scene
     //var sc = type of SpaceTrippersScene
@@ -47,8 +46,10 @@ function funcAirplane() {
     selector.addEventListener("change", () => {
         game.startScene(selector.value);
     });
+    /*
     let act = new ActorWebNew()
     act.actCompositionEvent(game)
+    */
 }
 
 function func() {
@@ -92,6 +93,6 @@ function func() {
     act.actCompositionScada(game)
 }
 
-func()
+//func()
 
-//funcAirplane()
+funcAirplane()

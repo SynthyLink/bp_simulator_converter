@@ -22,11 +22,22 @@ export class Object3DPrimitive extends BasicPrimitive implements IStartPrimitive
     loadMesh(): void {
         let map = this.shape.getSaveGrahicalData()
         for (let key of map.keys()) {
+            let obj = this.game.loader.resources[key];
             let n = key.lastIndexOf(".obj")
             if (n > 0) {
-                let obj = this.game.loader.resources[key];
                 this.mesh = MeshUtils.LoadOBJMesh(this.gl, obj)
+                console.log(this.mesh)
+                continue
             }
+            console.log(obj)
+
+            n = key.lastIndexOf(".mtl")
+            if (n >= 0) {
+                continue;
+            }
+            let txt = TextureUtils.LoadImage(this.gl, obj);
+            this.textures[key] = txt;
+            console.log(txt)
         }
     }
 
@@ -39,6 +50,7 @@ export class Object3DPrimitive extends BasicPrimitive implements IStartPrimitive
 
     //Move Controllers
     type: 'orthographic' | 'perspective' = 'perspective';
+    protected textures: { [name: string]: WebGLTexture } = {};
 
     position: vec3 = vec3.fromValues(0, 0, 0);
     direction: vec3 = vec3.fromValues(0, 0, 1);

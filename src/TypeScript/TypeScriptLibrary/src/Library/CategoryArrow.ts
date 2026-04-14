@@ -6,7 +6,6 @@
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SrvRecord } from "node:dns";
 import { FictiveCategoryObject } from "./Fiction/FictiveCategoryObject";
 import { FictiveDesktop } from "./Fiction/FictiveDesktop";
 import type { ICategoryArrow } from "./Interfaces/ICategoryArrow";
@@ -24,10 +23,11 @@ export class CategoryArrow implements ICategoryArrow, IObject
         desktop.addObject(this);
     }
 
-
-    getArrowName(): string {
+    getName(): string {
         return this.name;
     }
+
+
     getClassName(): string {
         return this.typeName;
     }
@@ -36,19 +36,22 @@ export class CategoryArrow implements ICategoryArrow, IObject
         return this.types.indexOf(type) >= 0;
     }
 
+    protected typeName: string = "CategoryArrow";
+
+    protected types: string[] = ["IObject", "ICategoryArrow", "CategoryArrow"];
+
     protected name : string = "";
+
+
 
     protected desktop: IDesktop = new FictiveDesktop();
 
 
     protected source: ICategoryObject = new FictiveCategoryObject();
-    ;
+
 
     protected target: ICategoryObject = new FictiveCategoryObject();
 
-    protected typeName: string = "CategoryArrow";
-
-    protected types: string[] = ["IObject", "ICategoryArrow", "CategoryArrow"];
 
     protected performer: Performer = new Performer()
 
@@ -56,9 +59,11 @@ export class CategoryArrow implements ICategoryArrow, IObject
         return this.desktop;
     }
 
-    getName(): string {
+
+    getArrowName(): string {
         return this.name;
     }
+
 
     getSource(): ICategoryObject {
         return this.source;

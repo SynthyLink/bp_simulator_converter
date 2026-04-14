@@ -4,7 +4,7 @@ using DataPerformer.Portable;
 using Diagram.UI.Interfaces;
 using DataPerformer.Interfaces.Attributes;
 using Trading.Library.Enums;
-using NamedTree;
+using NamedTree.Interfaces;
 using ErrorHandler;
 
 namespace Trading.Library.Objects

@@ -1,8 +1,5 @@
-using CategoryTheory;
-using DataSetService;
 using Diagram.UI;
-using NamedTree;
-using System.Diagnostics.Metrics;
+using NamedTree.Interfaces;
 
 namespace Trading.Analytics
 {

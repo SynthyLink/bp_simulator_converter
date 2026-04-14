@@ -3,7 +3,8 @@ using Abstract3DConverters.Materials;
 using Abstract3DConverters.Points;
 
 using ErrorHandler;
-using NamedTree;
+
+using NamedTree.Interfaces;
 
 
 

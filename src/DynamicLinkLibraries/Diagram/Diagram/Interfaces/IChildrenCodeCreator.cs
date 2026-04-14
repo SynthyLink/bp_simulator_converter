@@ -1,7 +1,8 @@
 ﻿using CategoryTheory;
-using Diagram.UI.CodeCreators.Interfaces;
-using NamedTree;
 using System.Collections.Generic;
+
+using Diagram.UI.CodeCreators.Interfaces;
+using NamedTree.Interfaces;
 
 namespace Diagram.Interfaces
 {

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using CategoryTheory;
 using DataPerformer.Interfaces;
 
 using Diagram.UI;
 using Diagram.UI.Interfaces;
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace DataPerformer.Portable
 {
@@ -319,7 +318,8 @@ namespace DataPerformer.Portable
             // IDataRuntime dr = consumer.CreateRuntime();
         }
 
-        static void SetTimeProvider(IChildren<IAssociatedObject> co, ITimeMeasurementProvider provider, IDictionary<ITimeMeasurementConsumer, IMeasurement> dictionary)
+        static void SetTimeProvider(IChildren<IAssociatedObject> co, 
+            ITimeMeasurementProvider provider, IDictionary<ITimeMeasurementConsumer, IMeasurement> dictionary)
         {
             IAssociatedObject[] ao = co.Children.ToArray();
             foreach (object o in ao)

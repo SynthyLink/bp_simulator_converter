@@ -8,6 +8,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Threading;
 
 using CategoryTheory;
 
@@ -20,16 +23,16 @@ using Diagram.UI.Forms.Interfaces;
 
 using SerializationInterface;
 
-using System.ComponentModel;
-using System.Threading.Tasks;
 
 using Common.UI;
 
 using ToolBox;
+
 using ErrorHandler;
-using NamedTree;
+
+using NamedTree.Interfaces;
+
 using WindowsExtensions;
-using System.Threading;
 
 
 namespace Diagram.UI

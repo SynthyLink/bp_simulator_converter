@@ -5,8 +5,6 @@ using System.Runtime.Serialization;
 
 using CategoryTheory;
 
-using Diagram.UI;
-
 using BaseTypes;
 using BaseTypes.Utils;
 
@@ -14,7 +12,7 @@ using DataSetService;
 
 using Regression.Portable;
 using ErrorHandler;
-using NamedTree;
+using NamedTree.Interfaces;
 using DataSetService.Pure.Interfaces;
 
 

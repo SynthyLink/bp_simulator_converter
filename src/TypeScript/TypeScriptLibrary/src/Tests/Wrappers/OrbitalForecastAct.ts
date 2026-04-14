@@ -5,6 +5,7 @@ import { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsum
 import { PerformerMeasuremets } from "../../Library/Measurements/PerformerMeasuremets";
 import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
 import { OrbitalForecast } from "../../Algorithms/OrbitalForecastCalculation/OrbitalForecast";
+import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
 
 export class OrbitaForecasAct extends OrbitalForecast implements IAction {
 
@@ -30,7 +31,7 @@ export class OrbitaForecasAct extends OrbitalForecast implements IAction {
     public test(): void {
         try {
             let processor = new RungeProcessor();
-            var runtime = new DataRuntimeConsumerODE(this.dc, processor);
+            var runtime = new DataRuntimeConsumerODE(this.dc, new Motion6DFactory());
             var p = new PerformerMeasuremets();
             p.peformCondDCFixedStepCalculation(runtime, this.dc, "Recursive.y", this, 0, 1, 18000, this);
         }

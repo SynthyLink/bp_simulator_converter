@@ -4,12 +4,14 @@ exports.RungeProcessor = void 0;
 const DifferentialEquationProcessor_1 = require("./DifferentialEquationProcessor");
 class RungeProcessor extends DifferentialEquationProcessor_1.DifferentialEquationProcessor {
     constructor() {
-        super(...arguments);
+        super();
         this.w = [];
         this.z = [];
         this.f = [];
         this.k = [];
         this.a = [0.5, 0.5, 1.0, 1.0, 0.5];
+        this.typeName = "RungeProcessor";
+        this.types.push("RungeProcessor");
     }
     stepDifferentialEquations(t0, t1) {
         let dt = t1 - t0;

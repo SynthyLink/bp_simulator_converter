@@ -4,8 +4,8 @@ exports.DataRuntimeConsumerMotion6DEvent = void 0;
 const DataRuntimeConsumerEvent_1 = require("../../../Event/Runtime/DataRuntimeConsumerEvent");
 const Motion6DPerformer_1 = require("../../Motion6DPerformer");
 class DataRuntimeConsumerMotion6DEvent extends DataRuntimeConsumerEvent_1.DataRuntimeConsumerEvent {
-    constructor(dataConsumer, processor) {
-        super(dataConsumer, processor);
+    constructor(dataConsumer, factory) {
+        super(dataConsumer, factory);
         this.motionPefromer = new Motion6DPerformer_1.Motion6DPerformer();
     }
     getExtenalUpdate(obj, realime) {

@@ -16,7 +16,7 @@ using RealMatrixProcessor;
 
 using ErrorHandler;
 
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace Motion6D.Portable
 {

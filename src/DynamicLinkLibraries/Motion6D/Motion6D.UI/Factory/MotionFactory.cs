@@ -11,7 +11,7 @@ using Diagram.UI.Interfaces;
 
 using Motion6D.Aggregates;
 using Motion6D.UI.Forms;
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace Motion6D.UI.Factory
 {

@@ -1,5 +1,5 @@
 ﻿
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace Event.Interfaces
 {

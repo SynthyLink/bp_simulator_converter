@@ -72,12 +72,16 @@ export default class Game implements IPlayEngine, IActionT<number> {
         for(let name in scenes) this.addScene(name, scenes[name]);
     }
 
+    setNext() {
+        this.nextSceneReady = true
+    }
+
     public startScene(name: string){
         if(name in this.scenes){
             this.nextScene = this.scenes[name];
             this.nextSceneReady = false;
             this.nextScene.load();
-            this.loader.wait().then(()=>{this.nextSceneReady = true;}) // This will make the loader notify us when the files are ready
+            this.loader.wait().then(() => { this.setNext() }) // This will make the loader notify us when the files are ready
         } else {
             console.warn(`Scene "${name}" not found`);
         }

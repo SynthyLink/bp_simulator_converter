@@ -51,7 +51,7 @@ using ToolBox;
 
 using WindowsExtensions;
 using ErrorHandler;
-using NamedTree;
+using NamedTree.Interfaces;
 
 namespace DataPerformer.UI.UserControls
 {

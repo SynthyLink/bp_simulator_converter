@@ -3,11 +3,17 @@ using System.Collections.Generic;
 
 
 using CategoryTheory;
+
 using DataPerformer.Interfaces;
+
 using Diagram.UI.Interfaces;
+
 using Motion6D.Interfaces;
-using NamedTree;
+
+using NamedTree.Interfaces;
+
 using RealMatrixProcessor;
+
 using Vector3D;
 
 namespace Motion6D.Portable

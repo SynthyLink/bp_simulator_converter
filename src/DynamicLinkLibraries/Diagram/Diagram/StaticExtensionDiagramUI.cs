@@ -1,21 +1,21 @@
-﻿using AssemblyService;
-using BaseTypes.CodeCreator.Interfaces;
-using CategoryTheory;
-using Diagram.Interfaces;
-using Diagram.UI.Attributes;
-using Diagram.UI.CodeCreators;
-using Diagram.UI.CodeCreators.Interfaces;
-using Diagram.UI.Interfaces;
-using Diagram.UI.Labels;
-using ErrorHandler;
-using NamedTree;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
+
+using AssemblyService;
+using BaseTypes.CodeCreator.Interfaces;
+using CategoryTheory;
+using Diagram.UI.Attributes;
+using Diagram.UI.CodeCreators;
+using Diagram.UI.CodeCreators.Interfaces;
+using Diagram.UI.Interfaces;
+using Diagram.UI.Labels;
+using ErrorHandler;
+using NamedTree.Interfaces;
 
 
 namespace Diagram.UI
