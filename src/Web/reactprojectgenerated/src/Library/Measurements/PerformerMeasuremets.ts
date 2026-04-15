@@ -36,7 +36,6 @@ export class PerformerMeasuremets {
 
     public  setDifferentialEquationProcessor(p: IDifferentialEquationProcessor): void { 
         this.processor = p;
-        console.log(this.processor)
     }
 
     public  getRealtimeEventFactory(): IRealtimeCollectionFactory {

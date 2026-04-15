@@ -13,8 +13,6 @@ export class UniversalFactory implements IFactory {
     factories: Map<string, IObject> = new Map();
 
     public addFactory<T>(t: T, type: string): void {
-        console.log("TTTTTTTTTTTTTTTT")
-        console.log(t)
         var tt = this.performer.convertObject<IObject, T>(t, type)
         if (tt.length > 0) this.factories.set(type, tt[0])
     }

@@ -3,8 +3,7 @@
 import { DateTimeConverter } from "../../Library/Utilities/DateTime/DateTimeConverter";
 
 const converter = new DateTimeConverter();
-export interface OrbitalForecastConditionNumber
-{
+export interface OrbitalForecastConditionNumber {
     begin: number;
     end: number;
     x: number;
@@ -14,31 +13,6 @@ export interface OrbitalForecastConditionNumber
     vy: number;
     vz: number;
 }
-
-/*
-    public record  class OrbitalForecastConditionNumber 
-    {
-
-
-        public double begin { get; init; }
-
-        public double end { get; init; }
-
-        public double x { get; init; }
-
-        public double y { get; init; }
-        
-        public double z { get; init; }
-
-        public double vx { get; init; }
-
-        public double vy { get; init; }
-
-        public double vz { get; set; }
-
-    }
-
-*/
 
 export interface OrbitalForecastItemNumber {
     orbitalTime: number;

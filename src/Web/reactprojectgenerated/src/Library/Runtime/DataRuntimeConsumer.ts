@@ -64,7 +64,6 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
 
     constructor(dataConsumer: IDataConsumer)
     {
-        console.log("DataRuntimeConsumerTTT")
         this.dataConsumer = dataConsumer;
         this.prepare(dataConsumer)
         this.objects = []

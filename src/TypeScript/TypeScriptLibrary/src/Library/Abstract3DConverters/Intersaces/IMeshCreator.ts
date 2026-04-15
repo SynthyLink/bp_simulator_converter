@@ -1,5 +1,25 @@
+import { Effect } from "../Effect";
 import { IMesh } from "./IMesh";
 
 export interface IMeshCreator {
-    createMesh(game: any, url: string): IMesh
+    /// <summary>
+    /// Directory
+    /// </summary>
+    getURL(): string
+
+    /// <summary>
+    /// Loads itself
+    /// </summary>
+    /// <param name="obj">Object</param>
+    load(obj : any): void;
+
+    /// <summary>
+    /// Meshes
+    /// </summary>
+    getMeshes(): IMesh[]
+
+    /// <summary>
+    /// Effects
+    /// </summary>
+    getEffects(): Map<string, Effect>
 }

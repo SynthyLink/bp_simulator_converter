@@ -7,13 +7,11 @@
 import type { ICategoryArrow } from "./ICategoryArrow";
 import type { ICategoryObject } from "./ICategoryObject";
 import type { ICheck } from "./ICheck";
+import type { IComponentCollection } from "./IComponentCollection";
 import type { IObject } from "./IObject";
 
-export interface IDesktop
+export interface IDesktop extends IComponentCollection
 {
-    getCategoryObjects(): ICategoryObject[];
-
-    getCategoryArrows(): ICategoryArrow[];
 
     addCategoryObject(obj: ICategoryObject): void;
 
@@ -21,15 +19,13 @@ export interface IDesktop
 
     addObject(obj: IObject): void;
 
-    getObjects(): IObject[];
+    getCategoryObject(name: string): ICategoryObject;
+
+    initializeTaksAsync(cancel: AbortController): Promise<void>;
 
     getCheck(): ICheck;
 
     setCheck(check: ICheck): void;
-
-    getCategoryObject(name: string): ICategoryObject;
-
-    initializeTaksAsync(cancel: AbortController): Promise<void>;
 
     finish(): void
 

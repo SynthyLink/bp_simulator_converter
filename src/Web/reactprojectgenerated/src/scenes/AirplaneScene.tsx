@@ -1,8 +1,7 @@
 import { Airplane } from "../Airplane";
-import Game from "../common/game";
+import  Game  from "../common/game";
+import { GameFactory } from "../common/GameFactory";
 import { ScadaScene } from "../common/ScadaScene";
-import { Motion6DFactory } from "../Library/Motion6D/Motion6DFactory";
-import { ScadaDesktopEngine } from "../Library/Scada/ScadaDesktopEngine";
 
 
 export class AirplaneScene extends ScadaScene {
@@ -15,8 +14,6 @@ export class AirplaneScene extends ScadaScene {
         )
     }
     constructor(game: Game) {
-        super(game, new ScadaDesktopEngine(new Airplane(), game, new Motion6DFactory(), "Chart"))
+        super(game, new GameFactory(), new Airplane())
     }
 }
-
-

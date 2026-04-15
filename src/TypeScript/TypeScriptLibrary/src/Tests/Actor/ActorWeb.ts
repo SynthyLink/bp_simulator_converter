@@ -81,8 +81,8 @@ export class ActorWeb {
       //  new Airplane()
     }
     public actCompositionEvent(stop: IFunc<boolean>) {
-        var comp = new CompositionEvent(stop)
-        comp.test();
+      //  var comp = new CompositionEvent(stop)
+       // comp.test();
 
     }
 

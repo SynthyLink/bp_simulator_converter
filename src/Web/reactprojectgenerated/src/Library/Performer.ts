@@ -30,6 +30,8 @@ import type { IComponentCollection } from "./Interfaces/IComponentCollection";
 import type { ICategoryArrow } from "./Interfaces/ICategoryArrow";
 import type { IObjectCollection } from "./Interfaces/IObjectCollection";
 import type { INamed } from "./NamedTree/Interfaces/INamed";
+import type { IFactory } from "./Interfaces/IFactory";
+import type { IFactoryConsumer } from "./Interfaces/IFactoryConsumer";
 
 
 export class Performer
@@ -69,6 +71,11 @@ export class Performer
         }
         list.push(item)
         return true;
+    }
+
+    public setFactoryToObjectCollection(collection: IObjectCollection, factory: IFactory) {
+        let setter = new FactorySetter(factory)
+        this.forEach<IFactoryConsumer>(collection, setter, "IFactoryConsumer")
     }
 
     public getAllIObjects(categoryObjects: ICategoryObject[], arrows: ICategoryArrow[], objects: IObject[]): void {
@@ -667,5 +674,15 @@ export class Performer
 
     alias !: IAlias;
 
+}
 
+class FactorySetter implements IActionT<IFactoryConsumer>
+{
+    constructor(factory: IFactory) {
+        this.factory = factory
+    }
+    actionT(t: IFactoryConsumer): void {
+        t.setConsumerFactory(this.factory)
+    }
+    factory: IFactory
 }

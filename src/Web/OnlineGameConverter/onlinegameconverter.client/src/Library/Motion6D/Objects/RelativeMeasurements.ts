@@ -1,39 +1,39 @@
 import { CategoryObject } from "../../CategoryObject";
+import { OwnError } from "../../ErrorHandler/OwnError";
+import { FictiveAction } from "../../Fiction/FictiveAction";
 import { FictiveAngularVelocityMotion6D } from "../../Fiction/FictiveAngularVelocityMotion6D";
 import { FictiveOrientation } from "../../Fiction/FictiveOrientation";
 import { FictivePosition } from "../../Fiction/FictivePosition";
 import { FictiveVelocity } from "../../Fiction/FictiveVelocity";
 import { FictiveMeasurement } from "../../Fiction/FicvtiveMeasurement";
+import { MeasurementDerivation } from "../../Measurements/MeasurementDerivation";
 import { RealMatrix } from "../../RealMatrixProcessor/RealMatrix";
 import { EulerAngles } from "../../Vector3D/EulerAngles";
 import { Vector3DProcessor } from "../../Vector3D/Vector3DProcessor";
+import { EulerMeasurement } from "../Measurements/EulerMeasurement";
 import { Motion6DAcceleratedFrame } from "../Motion6DAcceleratedFrame";
 import { Motion6DPerformer } from "../Motion6DPerformer";
 import { ReferenceFrame } from "../ReferenceFrame";
-import { FictiveAction } from "../../Fiction/FictiveAction";
-import { OwnNotImplemented } from "../../ErrorHandler/OwnNotImplemented";
-import { NumberMeasurement } from "../../Measurements/NumberMeasurement";
-import { Quaternion } from "../../Vector3D/Quaternion";
-import { EulerMeasurement } from "../Measurements/EulerMeasurement";
-import { MeasurementDerivation } from "../../Measurements/MeasurementDerivation";
-import { OwnError } from "../../ErrorHandler/OwnError";
-import { ActionArray } from ""
-import type { IReferenceFrame } from "../Interfaces/IReferenceFrame";
+import { ActionArray } from "../../Utilities/Generic/ActionArray";
+import type { IAction } from "../../Interfaces/IAction";
+import type { IActionAddRemove } from "../../Interfaces/IActionAddRemove";
 import type { IDesktop } from "../../Interfaces/IDesktop";
+import type { IPostSetArrow } from "../../Interfaces/IPostSetArrow";
 import type { IMeasurement } from "../../Measurements/Interfaces/IMeasurement";
+import type { IMeasurements } from "../../Measurements/Interfaces/IMeasurements";
 import type { IAngularVelocityMotion6D } from "../Interfaces/IAngularVelocityMotion6D";
 import type { IOrientation } from "../Interfaces/IOrientation";
 import type { IPosition } from "../Interfaces/IPosition";
+import type { IReferenceFrame } from "../Interfaces/IReferenceFrame";
 import type { IVelocity } from "../Interfaces/IVelocity";
-import type { IAction } from "../../Interfaces/IAction";
-import type { IMeasurements } from "../../Measurements/Interfaces/IMeasurements";
-import type { IPostSetArrow } from "../../Interfaces/IPostSetArrow";
-import type { IActionAddRemove } from "../../Interfaces/IActionAddRemove";
+import { NumberMeasurement } from "../../Measurements/NumberMeasurement";
+import { OwnNotImplemented } from "../../ErrorHandler/OwnNotImplemented";
+
 
 
 export class RelativeMeasurements extends CategoryObject implements IMeasurements, IMeasurement, IPostSetArrow {
 
-    m6dPerformer: Motion6DPerformer = new Motion6DPerformer()
+    m6dPerformer: Motion6DPerformer = new Motion6DPerformer();
 
 
 
@@ -43,7 +43,7 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
 
     protected own: ReferenceFrame = new Motion6DAcceleratedFrame();
 
-    protected relative: number[] = [0, 0, 0]
+    protected relative: number[] = [0, 0, 0];
 
     protected mPerformer: Motion6DPerformer = new Motion6DPerformer();
 
@@ -59,9 +59,9 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
 
     angleMeasurements: IMeasurement[] = [];
 
-    velocityArr: IVelocity[] = []
-    orientationArr: IOrientation[] = []
-    omArr: IAngularVelocityMotion6D[] =[]
+    velocityArr: IVelocity[] = [];
+    orientationArr: IOrientation[] = [];
+    omArr: IAngularVelocityMotion6D[] = [];
 
 
 
@@ -69,7 +69,7 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
         "x", "y", "z", "Distance",
         "Vx", "Vy", "Vz", "Velocity", "Q0", "Q1", "Q2", "Q3", "Roll", "Pitch", "Yaw",
         "OMx", "OMy", "OMz", "A11", "A12", "A13", "A21", "A22", "A23", "A31", "A32", "A33"
-    ]
+    ];
 
 
     constructor(desktop: IDesktop, name: string) {
@@ -78,26 +78,26 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
         this.types.push("IMeasurements");
         this.types.push("IPostSetArrow");
         this.types.push("RelativeMeasurements");
-        this.createActions()
+        this.createActions();
         let em = new EulerMeasurement("", this.angles);
-        this.angleMeasurements = [em.getRoll("Roll", this.angles), em.getPitch("Pitch", this.angles), em.getYaw("Yaw", this.angles)]
+        this.angleMeasurements = [em.getRoll("Roll", this.angles), em.getPitch("Pitch", this.angles), em.getYaw("Yaw", this.angles)];
         for (let i = 0; i < 3; i++) {
-            this.coordMeasurements.push(new CoordMeasurement(this.names[i], this, i))
-            this.velocityMeasurements.push(new VelocityMeasurement(this.names[i + 4], this, i))
-            this.omegaMeasurements.push(new OmegaMeasurement(this.names[i + 15], this, i))
+            this.coordMeasurements.push(new CoordMeasurement(this.names[i], this, i));
+            this.velocityMeasurements.push(new VelocityMeasurement(this.names[i + 4], this, i));
+            this.omegaMeasurements.push(new OmegaMeasurement(this.names[i + 15], this, i));
         }
         for (let i = 0; i < 4; i++) {
-            this.quaternionMeasurements.push(new QuaternionMeasurement(this.names[i + 8], this, i))
+            this.quaternionMeasurements.push(new QuaternionMeasurement(this.names[i + 8], this, i));
 
         }
-        this.velocityScalar = new VelocityScalarMeasurement(this.names[7], this)
-        this.distanceScalar = new DistanceMeasurement(this.names[3], this)
+        this.velocityScalar = new VelocityScalarMeasurement(this.names[7], this);
+        this.distanceScalar = new DistanceMeasurement(this.names[3], this);
 
     }
 
 
     postSetArrow(): void {
-        this.createMeasurements()
+        this.createMeasurements();
     }
 
 
@@ -106,7 +106,7 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
         return "Frame";
     }
     getMeasurementType() {
-        return "ReferenceFrame"
+        return "ReferenceFrame";
     }
     getMeasurementValue() {
         return this.relativeFrame;
@@ -117,12 +117,12 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
         return this.measurements.length;
     }
     getMeasurement(i: number): IMeasurement {
-        return this.measurements[i]
+        return this.measurements[i];
     }
 
     updateMeasurements(): void {
-        this.performer.executeAction(this.updateAll)
-        this.performer.executeAction(this.updFrame)
+        this.performer.executeAction(this.updateAll);
+        this.performer.executeAction(this.updFrame);
     }
 
     protected source: IPosition = new FictivePosition();
@@ -137,28 +137,28 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
 
     protected oTarget: IOrientation = new FictiveOrientation();
 
-    protected aSource: IAngularVelocityMotion6D = new FictiveAngularVelocityMotion6D()
+    protected aSource: IAngularVelocityMotion6D = new FictiveAngularVelocityMotion6D();
 
 
-    protected aTarget: IAngularVelocityMotion6D = new FictiveAngularVelocityMotion6D()
+    protected aTarget: IAngularVelocityMotion6D = new FictiveAngularVelocityMotion6D();
 
-    protected relativePos: number[] = [0, 0, 0]
+    protected relativePos: number[] = [0, 0, 0];
 
-    protected relativeP: number[] = [0, 0, 0]
+    protected relativeP: number[] = [0, 0, 0];
 
-    protected relativeVelocity: number[] = [0, 0, 0]
+    protected relativeVelocity: number[] = [0, 0, 0];
 
 
-    protected quaternion: number[] = [0, 0, 0, 0]
+    protected quaternion: number[] = [0, 0, 0, 0];
 
-    protected measurementFrame: IMeasurement = new FictiveMeasurement()
+    protected measurementFrame: IMeasurement = new FictiveMeasurement();
 
     protected velocityScalar: IMeasurement = new FictiveMeasurement();
 
     protected distanceScalar: IMeasurement = new FictiveMeasurement();
 
 
-    protected measurements: IMeasurement[] = []
+    protected measurements: IMeasurement[] = [];
 
     protected distance: number = 0;
 
@@ -171,11 +171,11 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
     protected relativeFrame: ReferenceFrame = new ReferenceFrame();
 
 
-    protected omegaRProduct: number[] = [0, 0, 0]
-    protected matrixPosition: number[] = [0, 0, 0]
-    protected matrixVelocity: number[] = [0, 0, 0]
-    protected omegaRelative: number[] = [0, 0, 0]
-    protected aux: number[] = [0, 0, 0]
+    protected omegaRProduct: number[] = [0, 0, 0];
+    protected matrixPosition: number[] = [0, 0, 0];
+    protected matrixVelocity: number[] = [0, 0, 0];
+    protected omegaRelative: number[] = [0, 0, 0];
+    protected aux: number[] = [0, 0, 0];
 
     private angularVelocity: IAngularVelocityMotion6D = new FictiveAngularVelocityMotion6D();
 
@@ -204,35 +204,35 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
     updateVelocityRotationAct: IAction = new FictiveAction();
 
     createActions(): void {
-        this.updateFrameAct = new UpdateFrameAct(this)
-        this.updateFrameAngularVelocityAct = new UpdateFrameAngularVelocityAct(this)
+        this.updateFrameAct = new UpdateFrameAct(this);
+        this.updateFrameAngularVelocityAct = new UpdateFrameAngularVelocityAct(this);
         this.updateAngularVelocityAct = new UpdateAngularVelocityAct(this);
         this.updateCoinVelocityAct = new UpdateCoinVelocityAct(this);
         this.updateCoinDistanceAct = new UpdateCoinDistanceAct(this);
         this.updateRelativePositionAct = new UpdateRelativePositionAct(this);
-        this.updateOrientationCoordinatesAct = new UpdateOrientationCoordinatesAct(this)
-        this.updateOrientationVelocityAct = new UpdateOrientationVelocityAct(this)
-        this.updateQuaternionAct = new UpdateQuaternionAct(this)
-        this.addAngularVelocityAct = new AddAngularVelocityAct(this)
-        this.updateVelocityRotationAct = new UpdateVelocityRotationAct(this)
+        this.updateOrientationCoordinatesAct = new UpdateOrientationCoordinatesAct(this);
+        this.updateOrientationVelocityAct = new UpdateOrientationVelocityAct(this);
+        this.updateQuaternionAct = new UpdateQuaternionAct(this);
+        this.addAngularVelocityAct = new AddAngularVelocityAct(this);
+        this.updateVelocityRotationAct = new UpdateVelocityRotationAct(this);
     }
 
     public updateFrame(): void {
-        this.performer.copyArray(this.relativePos, this.relativeFrame.getPosition())
-        this.performer.copyArray(this.quaternion, this.relativeFrame.getQuaternion())
+        this.performer.copyArray(this.relativePos, this.relativeFrame.getPosition());
+        this.performer.copyArray(this.quaternion, this.relativeFrame.getQuaternion());
         this.vp.quaternionToeulerAngles(this.angles, this.quaternion);
 
     }
 
     public updateFrameAngularVelocity(): void {
-        this.performer.copyArray(this.omegaRelative, this.angularVelocity.getOmega())
+        this.performer.copyArray(this.omegaRelative, this.angularVelocity.getOmega());
     }
 
 
 
     public updateAngularVelocity(): void {
         this.realMatrix.multiplyLeft(this.aTarget.getOmega(), this.relativeFrame.getMatrix(), this.aux);
-        let om = this.aSource.getOmega()
+        let om = this.aSource.getOmega();
         for (let i = 0; i < 3; i++) {
             this.omegaRelative[i] = om[i] - this.aux[i];
         }
@@ -248,7 +248,7 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
             a += x * this.relativePos[i];
         }
         this.velocity = a / this.distance;
-        this.performer.copyArray(this.relativeVelocity, this.ivelocity.getVelocity())
+        this.performer.copyArray(this.relativeVelocity, this.ivelocity.getVelocity());
     }
 
     public updateCoinDistance(): void {
@@ -267,7 +267,7 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
     public updateRelativePosition(): void {
         let y = this.source.getPosition();
         let x = this.target.getPosition();
-        let dist = 0
+        let dist = 0;
         for (let i = 0; i < 3; i++) {
             let dd = y[i] - x[i];
             dist += dd * dd;
@@ -277,7 +277,6 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
 
         var f = this.m6dPerformer.getOwnFrame(this.target);
         if (f === undefined) {
-
         }
         else {
             f.calculateRotatedPosition(this.relative, this.relativePos);
@@ -287,28 +286,27 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
 
     protected getParameters(p: IPosition, velocity: IVelocity[], orientation: IOrientation[], om: IAngularVelocityMotion6D[]) {
 
-        let pa = p
-        if (velocity.length > 0) velocity.pop()
-        if (om.length > 0) om.pop()
-        if (orientation.length > 0) orientation.pop()
+        let pa = p;
+        if (velocity.length > 0) velocity.pop();
+        if (om.length > 0) om.pop();
+        if (orientation.length > 0) orientation.pop();
 
-        let rf = this.performer.convertObject<IReferenceFrame, IPosition>(p, "IReferenceFrame")
+        let rf = this.performer.convertObject<IReferenceFrame, IPosition>(p, "IReferenceFrame");
         if (rf.length > 0) {
-            let pp = rf[0].getOwnFrame()
+            let pp = rf[0].getOwnFrame();
             if (pp === undefined) {
-
             }
             else {
                 pa = pp;
 
             }
         }
-        let vf = this.performer.convertObject<IVelocity, IPosition>(pa, "IVelocity")
-        this.performer.reoplaceArrayValue<IVelocity>(vf, velocity)
-        let oof = this.performer.convertObject<IOrientation, IPosition>(pa, "IOrientation")
-        this.performer.reoplaceArrayValue<IOrientation>(oof, orientation)
-        let omf = this.performer.convertObject<IAngularVelocityMotion6D, IPosition>(pa, "IAngularVelocityMotion6D")
-        this.performer.reoplaceArrayValue<IAngularVelocityMotion6D>(omf, om)
+        let vf = this.performer.convertObject<IVelocity, IPosition>(pa, "IVelocity");
+        this.performer.reoplaceArrayValue<IVelocity>(vf, velocity);
+        let oof = this.performer.convertObject<IOrientation, IPosition>(pa, "IOrientation");
+        this.performer.reoplaceArrayValue<IOrientation>(oof, orientation);
+        let omf = this.performer.convertObject<IAngularVelocityMotion6D, IPosition>(pa, "IAngularVelocityMotion6D");
+        this.performer.reoplaceArrayValue<IAngularVelocityMotion6D>(omf, om);
 
     }
 
@@ -322,21 +320,21 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
     }
 
     public getQuaternion(): number[] {
-        return this.quaternion
+        return this.quaternion;
 
     }
 
     public getCoordinate(): number[] {
-        return this.relativePos
+        return this.relativePos;
     }
 
 
     public getVelocity(): number[] {
-        return this.relativeVelocity
+        return this.relativeVelocity;
     }
 
     public getVelocityScalar(): number {
-        return this.velocity
+        return this.velocity;
     }
 
 
@@ -356,7 +354,7 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
     }
 
     public addAngularVelocity(): void {
-        let om = this.aTarget.getOmega()
+        let om = this.aTarget.getOmega();
         this.vp.vectorProduct(this.relativePos, om, this.omegaRProduct);
         this.realMatrix.plusEqual(this.relativeVelocity, this.omegaRProduct);
 
@@ -364,7 +362,7 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
     }
     public updateQuaternion(): void {
         this.vp.quaternionInvertMultiply(this.oTarget.getQuaternion(), this.oSource.getQuaternion(), this.quaternion);
-        this.performer.copyArray<number>(this.quaternion, this.relativeFrame.getQuaternion())
+        this.performer.copyArray<number>(this.quaternion, this.relativeFrame.getQuaternion());
         this.relativeFrame.setMatrix();
 
     }
@@ -377,7 +375,7 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
 
     createConside(): boolean {
         let ua: IActionAddRemove = new ActionArray();
-        let rf = this.performer.convertObject<IReferenceFrame, IPosition>(this.target, "IReferenceFrame")
+        let rf = this.performer.convertObject<IReferenceFrame, IPosition>(this.target, "IReferenceFrame");
         if (rf.length == 0) {
             this.updateAll = this.updateCoinDistanceAct;
             this.measurements = [
@@ -386,48 +384,47 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
             return false;
         }
         let f = rf[0];
-        let o = f.getOwnFrame()
+        let o = f.getOwnFrame();
         var p = this.m6dPerformer.getOwnFrame(this.source);
         if (p == o) {
             return false;
         }
         ua.addAction(this.updateCoinDistanceAct);
         if ((this.oSource != undefined) && (this.oTarget != undefined)) {
-            ua.addAction(this.updateRelativePositionAct)
+            ua.addAction(this.updateRelativePositionAct);
         }
-        let vs = this.performer.convertObject<IVelocity, IPosition>(this.source, "IVelocity")
-        let vt = this.performer.convertObject<IVelocity, IPosition>(this.target, "IVelocity")
+        let vs = this.performer.convertObject<IVelocity, IPosition>(this.source, "IVelocity");
+        let vt = this.performer.convertObject<IVelocity, IPosition>(this.target, "IVelocity");
 
         if ((vs.length > 0) && (vt.length > 0)) {
-            this.vSource = vs[0]
-            this.vTarget = vt[0]
-            ua.addAction(this.updateCoinVelocityAct)
+            this.vSource = vs[0];
+            this.vTarget = vt[0];
+            ua.addAction(this.updateCoinVelocityAct);
         }
-        let ot = this.performer.convertObject<IOrientation, IPosition>(this.target, "IOrientation")
-        let os = this.performer.convertObject<IOrientation, IPosition>(this.source, "IOrientation")
+        let ot = this.performer.convertObject<IOrientation, IPosition>(this.target, "IOrientation");
+        let os = this.performer.convertObject<IOrientation, IPosition>(this.source, "IOrientation");
         if (ot.length > 0) {
-            this.oTarget = ot[0]
-            ua.addAction(this.updateOrientationCoordinatesAct)
-           ua.addAction(this.updateOrientationVelocityAct)
+            this.oTarget = ot[0];
+            ua.addAction(this.updateOrientationCoordinatesAct);
+            ua.addAction(this.updateOrientationVelocityAct);
         }
 
         if (this.aTarget != undefined) {
-            ua.addAction(this.addAngularVelocityAct)
+            ua.addAction(this.addAngularVelocityAct);
         }
-        ua.addAction(this.addAngularVelocityAct)
+        ua.addAction(this.addAngularVelocityAct);
         if ((os.length > 0) && (ot.length > 0)) {
-            ua.addAction(this.updateQuaternionAct)
-            ua.addAction(this.addAngularVelocityAct)
-            let vs = this.performer.convertObject<IVelocity, IPosition>(this.source, "IVelocity")
-            let vt = this.performer.convertObject<IVelocity, IPosition>(this.target, "IVelocity")
+            ua.addAction(this.updateQuaternionAct);
+            ua.addAction(this.addAngularVelocityAct);
+            let vs = this.performer.convertObject<IVelocity, IPosition>(this.source, "IVelocity");
+            let vt = this.performer.convertObject<IVelocity, IPosition>(this.target, "IVelocity");
 
             if ((vs.length > 0) && (vt.length > 0)) {
-                ua.addAction(this.updateVelocityRotationAct)
+                ua.addAction(this.updateVelocityRotationAct);
             }
 
         }
         if (ua === undefined) {
-
         } else {
             this.updateAll = ua;
         }
@@ -437,7 +434,6 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
     public updateVelocityRotation(): void {
         let f = this.m6dPerformer.getOwnFrame(this.target);
         if (f === undefined) {
-
         }
         else {
             f.calculateRotatedPosition(this.relativeVelocity, this.aux);
@@ -447,37 +443,37 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
     }
 
     createCoordMeasurements(vel: IMeasurement[]): IMeasurement[] {
-        let meas: IMeasurement[] = []
+        let meas: IMeasurement[] = [];
         for (let i = 0; i < 3; i++) {
             if (vel.length < 3) {
                 meas.push(this.coordMeasurements[i]);
             }
             else {
-                meas.push(new MeasurementDerivation(this.coordMeasurements[i], this.velocityMeasurements[i]))
+                meas.push(new MeasurementDerivation(this.coordMeasurements[i], this.velocityMeasurements[i]));
             }
         }
         if (vel.length < 3) {
-            meas.push(new DistanceMeasurement(this.names[3], this))
+            meas.push(new DistanceMeasurement(this.names[3], this));
         }
         else {
             meas.push(new MeasurementDerivation(new DistanceMeasurement(this.names[3], this),
-                new VelocityScalarMeasurement(this.names[7], this)))
+                new VelocityScalarMeasurement(this.names[7], this)));
         }
 
         return meas;
     }
 
-    createQuatenionMeasurements(): IMeasurement[]{
+    createQuatenionMeasurements(): IMeasurement[] {
         if ((this.oSource === undefined) || (this.oTarget == undefined)) {
-            return []
+            return [];
         }
         return [this.quaternionMeasurements[0], this.quaternionMeasurements[1], this.quaternionMeasurements[2],
-            this.quaternionMeasurements[3], this.angleMeasurements[0], this.angleMeasurements[1], this.angleMeasurements[2]]
+        this.quaternionMeasurements[3], this.angleMeasurements[0], this.angleMeasurements[1], this.angleMeasurements[2]];
     }
 
     createAngularVelicity(): IMeasurement[] {
         if ((this.aSource === undefined) || (this.aTarget === undefined)) {
-            return []
+            return [];
         }
         let measurements: IMeasurement[] = [];
         for (let i = 0; i < 3; i++) {
@@ -488,28 +484,28 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
 
     createVelocityMeasurements(acc: IMeasurement[]): IMeasurement[] {
         if ((this.vSource === undefined) || (this.vTarget === null)) {
-            return  [];
+            return [];
         }
-        let meas : IMeasurement[] = [];
+        let meas: IMeasurement[] = [];
         for (let i = 0; i < 3; i++) {
 
             if (acc.length > 0) {
-                meas.push(new MeasurementDerivation(this.velocityMeasurements[i], acc[i]))
+                meas.push(new MeasurementDerivation(this.velocityMeasurements[i], acc[i]));
             }
             else {
-                meas.push(this.velocityMeasurements[i])
+                meas.push(this.velocityMeasurements[i]);
             }
         }
-        meas.push(this.velocityScalar)
+        meas.push(this.velocityScalar);
         return meas;
     }
 
     public getSource(): IPosition {
-        return this.source
+        return this.source;
     }
 
     public getTarget(): IPosition {
-        return this.target
+        return this.target;
     }
 
 
@@ -519,9 +515,9 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
         }
         this.source = value;
         this.getParameters(this.source, this.velocityArr, this.orientationArr, this.omArr);
-        this.vSource = this.velocityArr[0]
-        this.oSource = this.orientationArr[0]
-        this.aSource = this.omArr[0]
+        this.vSource = this.velocityArr[0];
+        this.oSource = this.orientationArr[0];
+        this.aSource = this.omArr[0];
         this.createMeasurements();
 
     }
@@ -532,9 +528,9 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
         }
         this.target = value;
         this.getParameters(this.target, this.velocityArr, this.orientationArr, this.omArr);
-        this.vTarget = this.velocityArr[0]
-        this.oTarget = this.orientationArr[0]
-        this.aTarget = this.omArr[0]
+        this.vTarget = this.velocityArr[0];
+        this.oTarget = this.orientationArr[0];
+        this.aTarget = this.omArr[0];
         this.createMeasurements();
 
     }
@@ -549,83 +545,81 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
             return;
         }
         this.getParameters(this.source, this.velocityArr, this.orientationArr, this.omArr);
-        this.vSource = this.velocityArr[0]
-        this.oSource = this.orientationArr[0]
-        this.aSource = this.omArr[0]
+        this.vSource = this.velocityArr[0];
+        this.oSource = this.orientationArr[0];
+        this.aSource = this.omArr[0];
         this.getParameters(this.target, this.velocityArr, this.orientationArr, this.omArr);
-        this.vTarget = this.velocityArr[0]
-        this.oTarget = this.orientationArr[0]
-        this.aTarget = this.omArr[0]
+        this.vTarget = this.velocityArr[0];
+        this.oTarget = this.orientationArr[0];
+        this.aTarget = this.omArr[0];
         this.createConside();
-        let sf = this.m6dPerformer.getOwnFrame(this.source)
+        let sf = this.m6dPerformer.getOwnFrame(this.source);
         if (sf != undefined) {
-            this.sourceFrame = sf
+            this.sourceFrame = sf;
         }
-        let tf = this.m6dPerformer.getOwnFrame(this.target)
+        let tf = this.m6dPerformer.getOwnFrame(this.target);
         if (tf != undefined) {
-            this.targetFrame = tf
+            this.targetFrame = tf;
         }
         this.postCreateMeasurements();
     }
 
     postCreateMeasurements(): void {
-        let up: IActionAddRemove = new ArrayAction()
+        let up: IActionAddRemove = new ActionArray();
         this.createConside();
         let acc = this.createAccMeasurements();
         let vel = this.createVelocityMeasurements(acc);
         let coord = this.createCoordMeasurements(vel);
-        let m: IMeasurement[] = []
+        let m: IMeasurement[] = [];
         if (vel.length > 0) {
-            this.performer.addArray<IMeasurement>(m, coord)
-            this.performer.addArray<IMeasurement>(m, vel)
+            this.performer.addArray<IMeasurement>(m, coord);
+            this.performer.addArray<IMeasurement>(m, vel);
             up.addAction(this.updateCoinDistanceAct);
-            up.addAction(this.updateCoinVelocityAct)
+            up.addAction(this.updateCoinVelocityAct);
 
             if (this.oTarget != undefined) {
-                up.addAction(this.updateOrientationCoordinatesAct)
+                up.addAction(this.updateOrientationCoordinatesAct);
             }
             if (this.oTarget != undefined) {
-                up.addAction(this.updateOrientationVelocityAct)
+                up.addAction(this.updateOrientationVelocityAct);
             }
             if (this.aTarget != null) {
-                up.addAction(this.addAngularVelocityAct)
+                up.addAction(this.addAngularVelocityAct);
             }
             if ((this.oSource != undefined) && (this.oTarget != undefined)) {
-                up.addAction( this.updateQuaternionAct)
+                up.addAction(this.updateQuaternionAct);
             }
             if ((this.aSource != undefined) && (this.aTarget != undefined)) {
-                up.addAction( this.updateAngularVelocityAct)
+                up.addAction(this.updateAngularVelocityAct);
             }
         }
         else {
-            this.performer.addArray(m, this.coordMeasurements)
+            this.performer.addArray(m, this.coordMeasurements);
         }
         if (up === undefined) {
-
         }
         else {
-            this.updateAll = up
+            this.updateAll = up;
         }
 
         this.relativeFrame = this.m6dPerformer.getRelative(this.targetFrame, this.sourceFrame);
-        this.performer.addArray(m, this.createQuatenionMeasurements())
-        this.performer.addArray(m, this.createAngularVelicity())
+        this.performer.addArray(m, this.createQuatenionMeasurements());
+        this.performer.addArray(m, this.createAngularVelicity());
         m.push(this);
         this.measurements = m;
-        let upf: IActionAddRemove = new ActionArray()
-        upf.addAction(this.updateFrameAct)
-        var av = this.performer.convertObject<IAngularVelocityMotion6D, ReferenceFrame>(this.relativeFrame, "IAngularVelocityMotion6D")
+        let upf: IActionAddRemove = new ActionArray();
+        upf.addAction(this.updateFrameAct);
+        var av = this.performer.convertObject<IAngularVelocityMotion6D, ReferenceFrame>(this.relativeFrame, "IAngularVelocityMotion6D");
         if (av.length > 0) {
             this.angularVelocity = av[0];
-            upf.addAction(this.updateFrameAngularVelocityAct)
+            upf.addAction(this.updateFrameAngularVelocityAct);
 
         }
-        var iv = this.performer.convertObject<IVelocity, ReferenceFrame>(this.relativeFrame, "IVelocity")
+        var iv = this.performer.convertObject<IVelocity, ReferenceFrame>(this.relativeFrame, "IVelocity");
         if (iv.length > 0) {
-            this.ivelocity = iv[0]
+            this.ivelocity = iv[0];
         }
         if (upf === undefined) {
-
         }
         else {
             this.updFrame = upf;
@@ -633,8 +627,6 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
     }
 
 }
-
-
 
 class RelativeMeasurement extends NumberMeasurement {
     protected relative !: RelativeMeasurements
@@ -653,7 +645,7 @@ class RelativeMeasurementNumber extends RelativeMeasurement {
     }
 }
 
-class CoordMeasurement extends RelativeMeasurementNumber {
+export class CoordMeasurement extends RelativeMeasurementNumber {
     constructor(name: string, relative: RelativeMeasurements, num: number) {
         super(name, relative, num)
     }
@@ -663,7 +655,7 @@ class CoordMeasurement extends RelativeMeasurementNumber {
     }
 }
 
-class VelocityMeasurement extends RelativeMeasurementNumber {
+export class VelocityMeasurement extends RelativeMeasurementNumber {
     constructor(name: string, relative: RelativeMeasurements, num: number) {
         super(name, relative, num)
     }
@@ -673,7 +665,7 @@ class VelocityMeasurement extends RelativeMeasurementNumber {
     }
 
 }
-class OmegaMeasurement extends RelativeMeasurementNumber {
+export class OmegaMeasurement extends RelativeMeasurementNumber {
     constructor(name: string, relative: RelativeMeasurements, num: number) {
         super(name, relative, num)
     }
@@ -684,7 +676,7 @@ class OmegaMeasurement extends RelativeMeasurementNumber {
 
 }
 
-class QuaternionMeasurement extends RelativeMeasurementNumber {
+export class QuaternionMeasurement extends RelativeMeasurementNumber {
     constructor(name: string, relative: RelativeMeasurements, num: number) {
         super(name, relative, num)
     }
@@ -695,7 +687,7 @@ class QuaternionMeasurement extends RelativeMeasurementNumber {
 
 }
 
-class DistanceMeasurement extends RelativeMeasurement {
+export class DistanceMeasurement extends RelativeMeasurement {
     constructor(name: string, relative: RelativeMeasurements) {
         super(name, relative)
     }
@@ -706,7 +698,7 @@ class DistanceMeasurement extends RelativeMeasurement {
 
 }
 
-class VelocityScalarMeasurement extends RelativeMeasurement {
+export class VelocityScalarMeasurement extends RelativeMeasurement {
     constructor(name: string, relative: RelativeMeasurements) {
         super(name, relative)
     }
@@ -732,7 +724,7 @@ class UpdateAct implements IAction {
 
 }
 
-class UpdateVelocityRotationAct extends UpdateAct {
+export class UpdateVelocityRotationAct extends UpdateAct {
 
     constructor(relative: RelativeMeasurements) {
         super(relative)
@@ -743,7 +735,7 @@ class UpdateVelocityRotationAct extends UpdateAct {
     }
 }
 
-class UpdateQuaternionAct extends UpdateAct {
+export class UpdateQuaternionAct extends UpdateAct {
 
     constructor(relative: RelativeMeasurements) {
         super(relative)
@@ -754,7 +746,7 @@ class UpdateQuaternionAct extends UpdateAct {
     }
 
 }
-class AddAngularVelocityAct extends UpdateAct {
+export class AddAngularVelocityAct extends UpdateAct {
 
     constructor(relative: RelativeMeasurements) {
         super(relative)
@@ -767,7 +759,7 @@ class AddAngularVelocityAct extends UpdateAct {
 }
 
 
-class UpdateOrientationCoordinatesAct extends UpdateAct {
+export class UpdateOrientationCoordinatesAct extends UpdateAct {
 
     constructor(relative: RelativeMeasurements) {
         super(relative)
@@ -779,7 +771,7 @@ class UpdateOrientationCoordinatesAct extends UpdateAct {
 
 }
 
-class UpdateOrientationVelocityAct extends UpdateAct {
+export class UpdateOrientationVelocityAct extends UpdateAct {
 
     constructor(relative: RelativeMeasurements) {
         super(relative)
@@ -794,7 +786,7 @@ class UpdateOrientationVelocityAct extends UpdateAct {
 
 
 
-class UpdateFrameAct extends UpdateAct {
+export class UpdateFrameAct extends UpdateAct {
 
    constructor(relative: RelativeMeasurements) {
         super(relative)
@@ -806,7 +798,7 @@ class UpdateFrameAct extends UpdateAct {
 
 }
 
-class UpdateFrameAngularVelocityAct extends UpdateAct {
+export class UpdateFrameAngularVelocityAct extends UpdateAct {
     constructor(relative: RelativeMeasurements) {
         super(relative)
     }
@@ -816,7 +808,7 @@ class UpdateFrameAngularVelocityAct extends UpdateAct {
     }
 
 }
-class UpdateAngularVelocityAct extends UpdateAct {
+export class UpdateAngularVelocityAct extends UpdateAct {
 
     constructor(relative: RelativeMeasurements) {
         super(relative)
@@ -828,7 +820,7 @@ class UpdateAngularVelocityAct extends UpdateAct {
 }
 
 
-class UpdateCoinVelocityAct extends UpdateAct {
+export class UpdateCoinVelocityAct extends UpdateAct {
 
     constructor(relative: RelativeMeasurements) {
         super(relative)
@@ -838,7 +830,7 @@ class UpdateCoinVelocityAct extends UpdateAct {
         this.relative.updateCoinVelocity();
     }
 }
-class UpdateRelativePositionAct extends UpdateAct  {
+export class UpdateRelativePositionAct extends UpdateAct  {
     constructor(relative: RelativeMeasurements) {
         super(relative)
     }
@@ -849,7 +841,7 @@ class UpdateRelativePositionAct extends UpdateAct  {
 
 }
 
-class UpdateCoinDistanceAct extends UpdateAct {
+export class UpdateCoinDistanceAct extends UpdateAct {
 
     constructor(relative: RelativeMeasurements) {
         super(relative)

@@ -5,11 +5,13 @@ import Mesh from "./mesh";
 import ShaderProgram from "./shader-program";
 import type { IObjectCollection } from "../Library/Interfaces/IObjectCollection";
 import { IObject } from "../Library/Interfaces/IObject";
+import { IFactory } from "../Library/Interfaces/IFactory";
+import { Performer } from "../Library/Performer";
 
 export abstract class BasicScene extends Scene implements IObjectCollection {
     protected programs: { [name: string]: ShaderProgram } = {};
-    protected camera: Camera;
-    protected controller: FlyCameraController;
+    protected camera : Camera;
+    protected controller : FlyCameraController;
     protected meshes: { [name: string]: Mesh } = {};
     protected textures: { [name: string]: WebGLTexture } = {};
     protected samplers: { [name: string]: WebGLSampler } = {};
@@ -21,10 +23,12 @@ export abstract class BasicScene extends Scene implements IObjectCollection {
     protected Score: number = 0;
     protected lifes: number = 15;
 
+
     Space_Displacement: number = -70;
 
-    public constructor(game: Game) {
+    public constructor(game: Game, factory: IFactory) {
         super(game)
+        this.factory = factory
     }
 
     public getGame(): Game {
@@ -39,6 +43,8 @@ export abstract class BasicScene extends Scene implements IObjectCollection {
     getObjectCollection(): IObject[] {
         return this.iobjects
     }
+
+    protected factory: IFactory
 
 
 

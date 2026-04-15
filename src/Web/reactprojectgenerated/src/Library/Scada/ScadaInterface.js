@@ -31,7 +31,6 @@ class ScadaInterface {
         this.onStop = new ActionArray_1.ActionArray();
         this.onRefresh = new ActionArray_1.ActionArray();
         this.isEnabled = false;
-        console.log("UUUUUUUUUUUUUUUUU");
     }
     getClassName() {
         return this.typeName;

@@ -5,7 +5,7 @@ import { AliasName } from "./AliasName";
 import { ConsolePrinter } from "./ConsolePrinter";
 import { OwnError } from "./ErrorHandler/OwnError";
 import { MeasurementsComparator } from "./Measurements/MeasurementsComparator";
-import { SortingAlgorithma } from "./Utilities/Sort/SortingAlgorithms";
+import { SortingAlgorithms } from "./Utilities/Sort/SortingAlgorithms";
 import { ActionArray } from "./Utilities/Generic/ActionArray";
 import type { IAction } from "./Interfaces/IAction";
 import type { IAlias } from "./Interfaces/IAlias";
@@ -24,7 +24,14 @@ import type { IMeasurements } from "./Measurements/Interfaces/IMeasurements";
 import type { IFeedbackCollection } from "./Interfaces/IFeedbackCollection";
 import type { ICheck } from "./Interfaces/ICheck";
 import type { ICheckHolder } from "./Interfaces/ICheckHolder";
-import { IProperties } from "./Interfaces/IProperties";
+import type { IProperties } from "./Interfaces/IProperties";
+import type { IActionT } from "./Interfaces/IActionT";
+import type { IComponentCollection } from "./Interfaces/IComponentCollection";
+import type { ICategoryArrow } from "./Interfaces/ICategoryArrow";
+import type { IObjectCollection } from "./Interfaces/IObjectCollection";
+import type { INamed } from "./NamedTree/Interfaces/INamed";
+import type { IFactory } from "./Interfaces/IFactory";
+import type { IFactoryConsumer } from "./Interfaces/IFactoryConsumer";
 
 
 export class Performer
@@ -33,8 +40,18 @@ export class Performer
         this.mCompatator = new MeasurementsComparator(this);
     }
 
-    protected a: number = 0;
+    static desktop: IDesktop;
 
+    public static getCurrentDesktop(): IDesktop {
+        return this.desktop
+    }
+
+    public static setCurrentDesktop(desktop: IDesktop): void {
+        this.desktop = desktop
+    }
+
+
+    protected a: number = 0;
 
     protected b: boolean = false;
 
@@ -42,13 +59,65 @@ export class Performer
 
     protected printer: IPrinter = new ConsolePrinter();
 
-    protected sorting: SortingAlgorithma = new SortingAlgorithma();
+    protected sorting: SortingAlgorithms = new SortingAlgorithms();
 
     protected mCompatator !: IComparator<IMeasurements>;
+
+    public addUnique<T>(list: T[], item: T): boolean {
+        for (let x of list) {
+            if (x == item) {
+                return false
+            }
+        }
+        list.push(item)
+        return true;
+    }
+
+    public setFactoryToObjectCollection(collection: IObjectCollection, factory: IFactory) {
+        let setter = new FactorySetter(factory)
+        this.forEach<IFactoryConsumer>(collection, setter, "IFactoryConsumer")
+    }
+
+    public getAllIObjects(categoryObjects: ICategoryObject[], arrows: ICategoryArrow[], objects: IObject[]): void {
+        for (let o of categoryObjects) {
+            var l = this.convertObject<IObject, ICategoryObject>(o, "IObject")
+          if (l.length > 0) {
+                objects.push(l[0])
+            }
+        }
+        for (let a of arrows) {
+            var l = this.convertObject<IObject, ICategoryArrow>(a, "IObject")
+            if (l.length > 0) {
+                objects.push(l[0])
+            }
+        }
+
+    }
 
     public setPrinter(printer: IPrinter): void {
         this.printer = printer;
     }
+
+
+    public forEach<T>(collection: IObjectCollection, action: IActionT<T>, type: string) {
+        let obj = collection.getObjectCollection()
+        for (let o of obj) {
+
+            var x = this.convertObject<T, IObject>(o, type)
+            if (x.length > 0) action.actionT(x[0])
+        }
+    }
+
+    public getAll<T>(collection: IObjectCollection, type: string) {
+        let t : T[] = []
+        let obj = collection.getObjectCollection()
+        for (let o of obj) {
+
+            var x = this.convertObject<T, IObject>(o, type)
+            if (x.length > 0) t.push(x[0])
+        }
+        return t;
+  }
 
 
     public reoplaceArrayValue<T>(t: T[], s: T[]): void {
@@ -155,10 +224,6 @@ export class Performer
         return sum / numbers.length;
     }
 
-
-
-
-
     public getPrinter(): IPrinter {
         return this.printer;
     }
@@ -180,7 +245,7 @@ export class Performer
         return s as undefined as T;
     }
 
-    public getByInterface(desktop: IDesktop, type: string): IObject[] {
+    public getByInterface(desktop: IComponentCollection, type: string): IObject[] {
         let co = desktop.getCategoryObjects();
         let objects: IObject[] = [];
         for (var a of co) {
@@ -240,7 +305,7 @@ export class Performer
 
         const s: S[] = [];
         for (let i = 0; i < objects.length; i++) {
-            let o: IObject = objects[i] as IObject;
+            let o: IObject = objects[i] as unknown as IObject;
             if (o.imlplementsType(type)) {
                 s.push(o as unknown as S);
             }
@@ -252,23 +317,63 @@ export class Performer
         let map: Map<T, R> = new Map();
         var ent = objects.entries();
         for (const [key, val] of ent) {
-            let o: IObject = val as IObject;
+            let o: IObject = val as unknown as IObject;
             if (o.imlplementsType(type)) {
-                map.set(key, o as R);
+                map.set(key, o as unknown as R);
             }
 
         }
         return map;
     }
 
+    public getName(obj: any): string {
+        var o = this.convertArray<IObject, any>(obj, "IObject")
+        return o[0].getName()
+    }
+
+
     public convertObject<T, S>(s: S, type: string): T[] {
         let ob = s as unknown as IObject;
         var t: T[] = [];
-        if (ob.imlplementsType(type)) {
-            var x = s as unknown as IObject as T;
+        if (ob.imlplementsType(type))
+        {
+            var x = s as unknown as  T;
             t.push(x);
         }
         return t;
+    }
+
+    public getObjectCollectionArray<T>(collection: IObjectCollection, type: string): T[] {
+        let t : T[] = []
+        var s = collection.getObjectCollection();
+        for (let o of s) {
+            let tt = this.convertObject<T, IObject>(o, type)
+            if (tt.length == 0) continue
+            t.push(tt[0])
+        }
+        return t;
+    }
+
+
+    public getObjectCollectionMap<T>(collection: IObjectCollection, type: string): Map<string, T>
+    {
+        let map: Map<string, T> = new Map();
+        var s = collection.getObjectCollection();
+        for (let o of s) {
+            let tt = this.convertObject<T, IObject>(o, type)
+            if (tt.length == 0) continue
+            let named = this.convertObject<INamed, IObject>(o, "INamed")
+            if (named.length > 0) {
+                map.set(named[0].getNamedName(), tt[0])
+            }
+
+        }
+        return map;
+    }
+
+    public getCollectionObject<T>(collection: IComponentCollection, name: string, type: string): T[] {
+        let o = collection.getCategoryObject(name)
+        return this.convertObject < T, ICategoryObject>(o, type)
     }
 
     public convertProperties<T>(o: ICategoryObject, type: string): T[] {
@@ -281,8 +386,6 @@ export class Performer
         }
         return [];
     }
-
-
 
     public select<T>(objects: IObject[], type: string): T[] {
 
@@ -338,6 +441,9 @@ export class Performer
         // A very limited approach would be to use type guards, but that means
         // you'd have to know what type S *could* be in advance. This is not
         // really a general solution.
+        if (t === undefined) {
+            throw new OwnError("Type conversion", "Performer undefined. NULL OBJECT", undefined);
+        }
         if (typeof t === "string" && (null as any as S) instanceof String) { //VERY LIMITED AND UNSAFE EXAMPLE.
             return t as any as S; // Force the type assertion (VERY UNSAFE)
         }
@@ -358,12 +464,12 @@ export class Performer
         if (typeof t === 'number' && (null as any as S) as any === Number) {
             return t as any as S;
         }
-
+        console.warn(t, typeof t)
         throw new OwnError("Type conversion", "Performer", undefined);
 
         // In many cases, a direct conversion may not be possible
         // or may require a more complex transformation.
-        // console.warn("Conversion not possible for types:", typeof t, S);
+        // warn("Conversion not possible for types:", typeof t, S);
         return undefined as any as S; // Or throw an error, or return a default value.
     }
 
@@ -568,5 +674,15 @@ export class Performer
 
     alias !: IAlias;
 
+}
 
+class FactorySetter implements IActionT<IFactoryConsumer>
+{
+    constructor(factory: IFactory) {
+        this.factory = factory
+    }
+    actionT(t: IFactoryConsumer): void {
+        t.setConsumerFactory(this.factory)
+    }
+    factory: IFactory
 }

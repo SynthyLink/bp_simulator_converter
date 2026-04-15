@@ -2,16 +2,15 @@ import type { IComponentCollection } from "../Interfaces/IComponentCollection";
 import type { IPlayEngine } from "../Interfaces/IPlayEngine";
 import type { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
 import type { IRealtimeCollectionFactory } from "../Interfaces/IRealtimeCollectionFactory";
+import type { IFactory } from "../Interfaces/IFactory";
 import { EngineTimerProvider } from "../Event/EngineTimerProvider";
 import { TimerPlayEngineFactory } from "../Event/TimerPlayEngineFactory";
 import { ScadaDesktop } from "./ScadaDesktop";
-import { IFactory } from "../Interfaces/IFactory";
 
 export class ScadaDesktopEngine extends ScadaDesktop {
 
     constructor(componentCollection: IComponentCollection, engine: IPlayEngine, factory: IFactory, chart: string) {
         super(componentCollection)
-        console.log("UUUUUUUUUUUUUU")
         this.engine = engine
         this.chart = chart;
         var f = factory.getFactory<IRealtimeCollectionFactory>("IRealtimeCollectionFactory")
@@ -25,7 +24,6 @@ export class ScadaDesktopEngine extends ScadaDesktop {
     public createRuntime(): void {
         let co = this.componentCollection.getCategoryObject(this.chart)
         let dc = co as unknown as IDataConsumer
-        console.log(dc)
         let eev = this.factory.createRealtimeFromDataConsumer(dc, this.uFactory);
         eev.setTimeProvider(new EngineTimerProvider(this.engine))
         eev.setTimerFactory(new TimerPlayEngineFactory(this.engine))

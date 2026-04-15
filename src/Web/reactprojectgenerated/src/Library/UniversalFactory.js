@@ -13,8 +13,6 @@ class UniversalFactory {
         return (pp.length == 0) ? undefined : pp[0];
     }
     addFactory(t, type) {
-        console.log("TTTTTTTTTTTTTTTT");
-        console.log(t);
         var tt = this.performer.convertObject(t, type);
         if (tt.length > 0)
             this.factories.set(type, tt[0]);

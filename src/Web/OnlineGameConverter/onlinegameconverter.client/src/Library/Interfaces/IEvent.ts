@@ -1,10 +1,8 @@
 import type  { IActionAddRemove } from "./IActionAddRemove";
+import type { IEventStart } from "./IEventStart";
 
-export interface IEvent {
+export interface IEvent extends IEventStart {
 
     eventAction(): IActionAddRemove
 
-    isEventEnabled(): boolean
-
-    setEnabled(enabled: boolean): Promise<void>
 }

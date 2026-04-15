@@ -30,7 +30,6 @@ class DataRuntimeConsumer {
         this.categoryArrows = [];
         this.started = [];
         this.objects = [];
-        console.log("DataRuntimeConsumerTTT");
         this.dataConsumer = dataConsumer;
         this.prepare(dataConsumer);
         this.objects = [];

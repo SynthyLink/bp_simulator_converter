@@ -7,18 +7,26 @@ import type { IEvent } from "../../Interfaces/IEvent";
 import type { ITimer } from "../../Interfaces/ITimer";
 import type { ITimerConsumer } from "../../Interfaces/ITimerConsumer";
 import type { ITimerFactory } from "../../Interfaces/ITimerFactory";
+import type { IPostSetArrow } from "../../Interfaces/IPostSetArrow";
 
-export class TimerObject extends CategoryObject implements IEvent, ITimerConsumer {
+export class TimerObject extends CategoryObject implements IEvent, ITimerConsumer, IPostSetArrow {
 
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name)
         this.typeName = "TimerObject"
         this.types.push("IEvent")
-        this.types.push("TimerObject")
+        this.types.push("ITimerConsumer")
+        this.types.push("IPostSetArrow")
+    }
+    postSetArrow(): void {
+    }
+    getTimeSpan(): TimeSpan {
+        return this.span;
     }
 
     setTimer(timerFactory: ITimerFactory): void {
         this.timer = timerFactory.getTimerFromFactory(this.span)
+        this.timer.getTimerEvent().addAction(this.action)
     }
 
 
@@ -29,8 +37,9 @@ export class TimerObject extends CategoryObject implements IEvent, ITimerConsume
     isEventEnabled(): boolean {
         return this.isEnabled;
     }
-    async setEnabled(enabled: boolean): Promise<void> {
-        if (this.isEnabled != enabled)
+
+    setEventEnabled(enabled: boolean): void {
+        if (this.isEnabled == enabled)
             return;
         this.isEnabled = enabled;
         this.timer.setTimerEnabled(enabled)

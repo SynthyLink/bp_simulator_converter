@@ -64,7 +64,7 @@ export class TimeSpan {
     get hours() {
         return Math.round((this._ticks / TimeSpan.ticksPerHour) % 24);
     }
-    get milliseconds() {
+    public get milliseconds() {
         return Math.round((this._ticks / TimeSpan.ticksPerMillisecond) % 1000);
     }
     get minutes() {
@@ -80,9 +80,16 @@ export class TimeSpan {
     get totalHours() {
         return this._ticks * TimeSpan.hoursPerTick;
     }
+
     get totalMilliseconds() {
         return this._ticks * TimeSpan.millisecondsPerTick;
     }
+
+    getTotalMilliseconds(): number{
+        return this._ticks * TimeSpan.millisecondsPerTick;
+    }
+
+
     get totalMinutes() {
         return this._ticks * TimeSpan.minutesPerTick;
     }

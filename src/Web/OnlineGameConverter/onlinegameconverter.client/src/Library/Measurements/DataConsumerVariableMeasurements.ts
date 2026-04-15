@@ -6,7 +6,7 @@ import type { IDesktop } from "../Interfaces/IDesktop";
 import { DataConsumer } from "./DataConsumer";
 import type { IMeasurement } from "./Interfaces/IMeasurement";
 import type { IMeasurements } from "./Interfaces/IMeasurements";
-import { PefrormerMeasuremets } from "./PefrormerMeasuremets";
+import { PerformerMeasuremets } from "./PerformerMeasuremets";
 import { Variable } from "./Variables/Variable";
 
 
@@ -40,7 +40,7 @@ export class DataConsumerVariableMeasurements extends DataConsumer implements
 
     protected alias !: IAlias;
 
-    protected pMeasurements : PefrormerMeasuremets = new PefrormerMeasuremets();
+    protected pMeasurements: PerformerMeasuremets = new PerformerMeasuremets();
 
 
 

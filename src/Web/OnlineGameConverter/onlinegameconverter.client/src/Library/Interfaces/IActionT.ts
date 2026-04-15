@@ -1,3 +1,3 @@
 export interface IActionT<T> {
-    action(t : T): void;
+    actionT(t : T): void;
 }

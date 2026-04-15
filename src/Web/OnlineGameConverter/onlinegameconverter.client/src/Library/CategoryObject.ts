@@ -43,7 +43,7 @@ export class CategoryObject implements ICategoryObject, IObject
     }
 
     imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) > 0;
+        return this.types.indexOf(type) >= 0;
     }
 
     protected convert<T>(a: any): T {

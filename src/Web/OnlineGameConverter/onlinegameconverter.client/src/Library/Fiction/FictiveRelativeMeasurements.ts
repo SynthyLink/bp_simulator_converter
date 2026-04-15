@@ -1,4 +1,4 @@
-import { IDesktop } from "../Interfaces/IDesktop";
+import type { IDesktop } from "../Interfaces/IDesktop";
 import { RelativeMeasurements } from "../Motion6D/Objects/RelativeMeasurements";
 
 export class FictiveRelativeMeasurements extends RelativeMeasurements {

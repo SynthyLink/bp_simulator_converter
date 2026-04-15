@@ -9,12 +9,26 @@ import type { INormalizable } from "../../Interfaces/INormalizable";
 import type { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
 import type { IDifferentialEquationProcessor } from "../Interfaces/IDifferentialEquationProcessor ";
 import type { IDifferentialEquationSolver } from "../Interfaces/IDifferentialEquationSolver";
+import type { IObject } from "../../../Interfaces/IObject";
 
 
-export class DifferentialEquationProcessor implements IDifferentialEquationProcessor
+export class DifferentialEquationProcessor implements IDifferentialEquationProcessor, IObject
 {
      
-   
+    getName(): string {
+        return this.name;
+    }
+
+
+    getClassName(): string {
+        return this.typeName;
+    }
+
+    imlplementsType(type: string): boolean {
+        return this.types.indexOf(type) >= 0;
+    }
+
+  
     getDifferentialEquations(): IDifferentialEquationSolver[] {
         return this.equations;
     }
@@ -84,5 +98,12 @@ export class DifferentialEquationProcessor implements IDifferentialEquationProce
     protected measurements: IMeasurements[] = [];
 
     protected timeProvider !: ITimeMeasurementProvider;
+
+    protected typeName: string = "DifferentialEquationProcessor";
+
+    protected types: string[] = ["IObject", "IDifferentialEquationProcessor", "DifferentialEquationProcessor"];
+
+    protected name: string = ""
+
 
 }

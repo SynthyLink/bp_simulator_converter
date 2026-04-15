@@ -12,7 +12,6 @@ class PerformerMeasuremets {
     }
     setDifferentialEquationProcessor(p) {
         this.processor = p;
-        console.log(this.processor);
     }
     getRealtimeEventFactory() {
         return this.realtimeEventFactory;

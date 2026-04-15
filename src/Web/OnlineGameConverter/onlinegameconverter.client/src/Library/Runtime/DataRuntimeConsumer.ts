@@ -4,21 +4,46 @@
 
 import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
 import { Performer } from "../Performer";
+import { PerformerMeasuremets } from "../Measurements/PerformerMeasuremets"
+import { FictiveCategoryObject } from "../Fiction/FictiveCategoryObject";
 import type { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
 import type { IMeasurements } from "../Measurements/Interfaces/IMeasurements";
-import type { ITimeMeasurementConsumer } from "../Measurements/Interfaces/ITimeMeasurementConsumer";
 import type { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
-import type { IDataRuntime } from "./Interfaces/IDataRuntime";
 import type { IStarted } from "../Measurements/Interfaces/IStarted";
 import type { ICategoryArrow } from "../Interfaces/ICategoryArrow";
 import type { ICategoryObject } from "../Interfaces/ICategoryObject";
-import { ITimerFactory } from "../Interfaces/ITimerFactory";
+import type { IDataRuntime } from "../Interfaces/IDataRuntime";
+import type { IComponentCollection } from "../Interfaces/IComponentCollection";
+import type { IObject } from "../Interfaces/IObject";
 
-export class DataRuntimeConsumer implements IDataRuntime
+export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, IObject
 {
+
+    getName(): string {
+        return this.name;
+    }
+
+
+    getClassName(): string {
+        return this.typeName;
+    }
+
+    imlplementsType(type: string): boolean {
+        return this.types.indexOf(type) >= 0;
+    }
+
+    protected typeName: string = "CategoryArrow";
+
+    protected types: string[] = ["IObject", "IComponentCollection", "IDataRuntime", "DataRuntimeConsumer"];
+
+    protected name: string = "";
+
 
 
     protected performer: Performer = new Performer();
+
+
+    protected mPerformer: PerformerMeasuremets = new PerformerMeasuremets()
 
     protected timeProvider !: ITimeMeasurementProvider;
 
@@ -33,21 +58,29 @@ export class DataRuntimeConsumer implements IDataRuntime
 
     protected started: IStarted[] = [];
 
+    protected objects: IObject[] = []
+
+    protected dataConsumer: IDataConsumer
 
     constructor(dataConsumer: IDataConsumer)
     {
+        console.log("DataRuntimeConsumerTTT")
+        this.dataConsumer = dataConsumer;
+        this.prepare(dataConsumer)
+        this.objects = []
+        this.performer.getAllIObjects(this.categoryObjects, this.categoryArrows, this.objects)
+    }
+
+    protected prepare(dataConsumer: IDataConsumer): void {
         let nm: IMeasurements[] = [];
         this.addDataConsumer(dataConsumer, nm);
-        for (let i = nm.length - 1; i >= 0; i--)
-        {
+        for (let i = nm.length - 1; i >= 0; i--) {
             var n = nm[i];
             this.measurements.push(nm[i]);
-            if (this.performer.implementsType(n, "ICategoryObject"))
-            {
+            if (this.performer.implementsType(n, "ICategoryObject")) {
                 this.addCategoryObjectToRuntime(n as unknown as ICategoryObject);
             }
-            if (this.performer.implementsType(n, "IStarted"))
-            {
+            if (this.performer.implementsType(n, "IStarted")) {
                 this.started.push(n as unknown as IStarted);
             }
 
@@ -57,13 +90,24 @@ export class DataRuntimeConsumer implements IDataRuntime
         }
 
         this.measurements = this.performer.sortMeasurements(this.measurements);
+        this.performer.addUnique(this.categoryObjects, dataConsumer as unknown as ICategoryObject)
 
     }
-    getTimerFactory(): ITimerFactory {
-        throw new Error("Method not implemented.");
+
+    getCategoryObjects(): ICategoryObject[] {
+        return this.categoryObjects
     }
-    setTimerFactory(timerFactory: ITimerFactory): void {
-        throw new Error("Method not implemented.");
+    getCategoryArrows(): ICategoryArrow[] {
+        return this.categoryArrows;
+    }
+
+    getObjectCollection(): IObject[] {
+        return this.objects;
+    }
+    getCategoryObject(name: string): ICategoryObject {
+        let a = this.categoryObjectsMap.get(name)
+        if (a != undefined) return a;
+        return new FictiveCategoryObject()
     }
 
     addCategoryObjectToRuntime(object: ICategoryObject): void {
@@ -112,15 +156,9 @@ export class DataRuntimeConsumer implements IDataRuntime
     setTimeProvider(timeProvider: ITimeMeasurementProvider): void
     {
         this.timeProvider = timeProvider;
-        for (let m of this.measurements)
-        {
-
-            if (this.performer.implementsType(m, "ITimeMeasurementConsumer")) {
-                let tm: ITimeMeasurementConsumer = m as unknown as ITimeMeasurementConsumer;
-                tm.setTimeMeasurement(timeProvider)
-            }
-        }
+        this.mPerformer.setTimeProvider(timeProvider, this.measurements)
     }
+
 
     getTimeProvider(): ITimeMeasurementProvider
     {

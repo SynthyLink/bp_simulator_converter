@@ -7,7 +7,7 @@ export interface ITimer  {
 
     isTimerEnabled(): boolean
 
-    setTimerEnabled(enabled: boolean): Promise<void>
+    setTimerEnabled(enabled: boolean): void
 
     getTimerEvent(): IActionAddRemove
 

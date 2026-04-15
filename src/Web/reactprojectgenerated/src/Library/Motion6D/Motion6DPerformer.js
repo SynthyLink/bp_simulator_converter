@@ -28,7 +28,6 @@ class Motion6DPerformer {
         let act = new ActionArray_1.ActionArray();
         let mea = this.performer.getAll(collection, "IPosition");
         let mm = this.sorting.mergesort(mea, this.comparer);
-        console.log(mm);
         for (let m of mm) {
             act.addAction(new UpdatePositionAction_1.UpdatePositionAction(m));
         }

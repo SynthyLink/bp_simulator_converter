@@ -27,7 +27,7 @@ export class EventLink extends CategoryArrow
         this.event = e[0]
         this.handler.addChildT(e[0])
         super.setTarget(target)
-  }
+ }
 
     event: IEvent = new FictiveEvent();
 
