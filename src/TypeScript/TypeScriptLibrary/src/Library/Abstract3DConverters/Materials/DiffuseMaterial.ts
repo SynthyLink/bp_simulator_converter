@@ -1,5 +1,5 @@
 import { ImageTexture } from "../ImageTexture";
-import { IImageHolder } from "../Intersaces/IImageHolder";
+import { IImageHolder } from "../Interfaces/IImageHolder";
 import { SimpleMaterial } from "./SimpleMaterial";
 
 export class DiffuseMaterial extends SimpleMaterial implements IImageHolder {

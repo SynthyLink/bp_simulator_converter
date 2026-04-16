@@ -1,7 +1,7 @@
 import { INodeT } from "../NamedTree/Interfaces/INodeT";
 import { Performer } from "../Performer";
-import { Effect } from "./Effect";
-import { IMesh } from "./Intersaces/IMesh";
+import { EffectTexture } from "./EffectTexture";
+import { IMesh } from "./Interfaces/IMesh";
 
 export class AbstractMesh implements IMesh {
 
@@ -11,7 +11,7 @@ export class AbstractMesh implements IMesh {
     getAbsoluteVertices(): number[] {
         return this.absolutevertices;
     }
-    getEffect(): Effect {
+    getEffect(): EffectTexture {
         return this.effect;
     }
     calculateAbsolute(): void {
@@ -83,7 +83,7 @@ export class AbstractMesh implements IMesh {
 
     nodes: INodeT<IMesh>[] = []
 
-    effect: Effect = new Effect()
+    effect: EffectTexture = new EffectTexture()
 
 
     transformationMatrix: number[] = []

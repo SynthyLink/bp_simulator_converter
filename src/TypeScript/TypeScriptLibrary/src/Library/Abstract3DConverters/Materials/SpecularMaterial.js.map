@@ -1,1 +1,0 @@
-{"version":3,"file":"SpecularMaterial.js","sourceRoot":"","sources":["SpecularMaterial.ts"],"names":[],"mappings":";;;AAAA,qDAAkD;AAElD,MAAa,gBAAiB,SAAQ,+BAAc;IAApD;;QAWI,kBAAa,GAAW,CAAC,CAAC;IAC9B,CAAC;IATG,gBAAgB;QACZ,OAAO,IAAI,CAAC,aAAa,CAAA;IAC7B,CAAC;IAED,gBAAgB,CAAC,CAAS;QACtB,IAAI,CAAC,aAAa,GAAG,CAAC,CAAA;IAC1B,CAAC;CAGJ;AAZD,4CAYC"}

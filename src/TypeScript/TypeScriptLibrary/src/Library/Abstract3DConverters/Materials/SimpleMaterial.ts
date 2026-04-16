@@ -1,11 +1,11 @@
-import { Color } from "../Color";
+import { ColorTexture } from "../ColorTexture";
 import { Material } from "./Material";
 
 export class SimpleMaterial extends Material {
 
-    constructor(color: Color) {
+    constructor(color: ColorTexture) {
         super()
         this.color = color
     }
-    color: Color = new Color([]);
+    color: ColorTexture = new ColorTexture([]);
 }

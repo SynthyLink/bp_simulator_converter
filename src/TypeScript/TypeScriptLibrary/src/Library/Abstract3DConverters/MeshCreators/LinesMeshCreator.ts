@@ -1,35 +1,72 @@
 import { IFactory } from "../../Interfaces/IFactory";
-import { Effect } from "../Effect";
-import { IMesh } from "../Intersaces/IMesh";
-import { IMeshCreator } from "../Intersaces/IMeshCreator";
+import { EffectTexture } from "../EffectTexture";
+import { IMesh } from "../Interfaces/IMesh";
+import { IMeshCreator } from "../Interfaces/IMeshCreator";
+import { IMeshCreatorTextConverter } from "../Interfaces/IMeshCreatorTextConverter";
 
-export abstract class LinesMeshCreator implements IMeshCreator {
+export abstract class LinesMeshCreator implements IMeshCreator
+{
 
-    constructor(url: string, sep: string, obj: any, factory: IFactory) {
+    constructor(url:  string, obj: any, factory: IFactory) {
         this.url = url
-        this.sep = sep;
         this.factory = factory
         this.obj = obj;
+        let tc = factory.getFactory<IMeshCreatorTextConverter>("IMeshCreatorTextConverter")
+        if (tc != undefined) {
+            this.textConverter = tc
+        }
     }
 
-    getURL(): string {
+    loadMeshCreator(): void {
+        this.text = this.textConverter.convertToText(this.obj, this.url)
+        this.loadText(this.text)
+    }
+
+
+    getName(): string {
+        return this.name;
+    }
+
+
+    getClassName(): string {
+        return this.typeName;
+    }
+
+    imlplementsType(type: string): boolean {
+        return this.types.indexOf(type) >= 0;
+    }
+
+
+    getMeshCreatorURL(): string {
         return this.url;
     }
 
-    load(obj: any): void {
-        let s = obj as string
-        let text = s.split(this.sep)
-        this.loadText(text)
+
+    getMeshCreatorMeshes(): IMesh[] {
+        return this.meshes
     }
 
-    abstract loadText(text: string[]): void
+    getMeshCreatorEffects(): Map<string, EffectTexture> {
+        return this.effects
+    }
 
-    abstract getMeshes(): IMesh[];
+    getMeshCreatorFactory(): IFactory {
+        return this.factory;
+    }
+    getMeshCreatorGenerator() {
+        return this.obj;
+    }
 
-    abstract getEffects(): Map<string, Effect>
+
+    loadText(text: string[]): void {
+        this.lines = text;
+    }
 
 
-    protected sep: string;
+    effects: Map<string, EffectTexture> = new Map()
+
+    meshes: IMesh[] = []
+
 
     protected text: string[] = []
 
@@ -37,6 +74,17 @@ export abstract class LinesMeshCreator implements IMeshCreator {
 
     protected factory: IFactory
 
-    protected obj : any
+    protected obj: any
+
+    protected typeName: string = "LinesMeshCreator";
+
+    protected types: string[] = ["IObject", "IMeshCreator", "LinesMeshCreator"];
+
+    protected name: string = ""
+
+    protected textConverter !: IMeshCreatorTextConverter
+
+    protected lines: string[] = []
+
 
 }
