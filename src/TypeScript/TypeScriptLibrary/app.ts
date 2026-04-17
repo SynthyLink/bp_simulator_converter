@@ -6,8 +6,8 @@ let a = new ActorWeb()
 
 //await a.actDonchianLoad();
 
-
-a.actPI()
+a.readTest("c:\\AUsers\\1MySoft\\CSharp\\src\\Web\\reactprojectgenerated\\static\\models\\pLANE\\Cessna_208_Caravan.obj")
+//a.actPI()
 //a.testDate();
 
 //a.actTime();

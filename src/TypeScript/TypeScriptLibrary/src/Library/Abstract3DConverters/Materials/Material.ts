@@ -4,6 +4,10 @@ import { Performer } from "../../Performer";
 
 export class Material implements INamed, IObject {
 
+    constructor(name: string) {
+        this.namedName = name;
+    }
+
     getNamedName(): string {
         return this.namedName
     }

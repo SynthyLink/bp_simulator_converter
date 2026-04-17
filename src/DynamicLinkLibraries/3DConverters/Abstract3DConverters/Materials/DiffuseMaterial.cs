@@ -46,8 +46,6 @@ namespace Abstract3DConverters.Materials
         }
 
         #endregion
-
- 
     
 
         public Color AmbientColor { get; private set; }

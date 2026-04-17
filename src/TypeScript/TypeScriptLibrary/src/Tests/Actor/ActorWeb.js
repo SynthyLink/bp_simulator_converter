@@ -31,6 +31,7 @@ const OrbitalData_1 = require("../../Algorithms/OrbitalForecastCalculation/Orbit
 const Donchian_1 = require("../Donchian");
 const ComposionAct_1 = require("../Wrappers/ComposionAct");
 const PerformerMeasuremets_1 = require("../../Library/Measurements/PerformerMeasuremets");
+const StreamReader_1 = require("../../Library/IO/StreamReader");
 //import { Airplane } from '../../Airplane';
 function finish(e) {
     console.log(e);
@@ -64,6 +65,11 @@ class ActorWeb {
                }
                rl.close();
            });*/
+    }
+    readTest(f) {
+        let reader = new StreamReader_1.StreamReader(f);
+        let s = reader.readToEnd();
+        console.log(s);
     }
     actDonchianLoad() {
         return __awaiter(this, void 0, void 0, function* () {

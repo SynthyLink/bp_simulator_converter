@@ -27,6 +27,7 @@ import { CompositionEvent } from '../Wrappers/CompositionEvent';
 import { PerformerMeasuremets } from '../../Library/Measurements/PerformerMeasuremets';
 import { Composition } from '../Composition';
 import { IFunc } from '../../Library/Interfaces/IFunc';
+import { StreamReader } from '../../Library/IO/StreamReader';
 //import { Airplane } from '../../Airplane';
 
 
@@ -63,6 +64,12 @@ export class ActorWeb {
             }
             rl.close();
         });*/
+    }
+
+    public readTest(f: string): void {
+        let reader = new StreamReader(f)
+        let s = reader.readToEnd()
+        console.log(s)
     }
 
     public async actDonchianLoad(): Promise<void> {

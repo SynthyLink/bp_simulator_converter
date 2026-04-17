@@ -3,10 +3,11 @@ import { Material } from "./Material";
 
 export class MaterialGroup extends Material implements IChildrenT<Material>
 {
-    constructor() {
-        super()
+    constructor(name: string) {
+        super(name)
         this.types.push("IChildrenT<Material>")
-        this.types.push("MaterialCollection")
+        this.types.push("MaterialGroup")
+        this.typeName = "MaterialGroup"
     }
     getChildernT(): Material[] {
         return this.materials;

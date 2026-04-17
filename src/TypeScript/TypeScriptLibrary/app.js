@@ -13,7 +13,8 @@ const ActorWeb_1 = require("./src/Tests/Actor/ActorWeb");
 let a = new ActorWeb_1.ActorWeb();
 //a.actAirplane()
 //await a.actDonchianLoad();
-a.actPI();
+a.readTest("c:\\AUsers\\1MySoft\\CSharp\\src\\Web\\reactprojectgenerated\\static\\models\\pLANE\\Cessna_208_Caravan.obj");
+//a.actPI()
 //a.testDate();
 //a.actTime();
 //a.actOrbitCalculation(true);// 1770457504

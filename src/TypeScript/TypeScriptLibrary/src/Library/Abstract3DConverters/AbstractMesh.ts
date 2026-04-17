@@ -83,7 +83,7 @@ export class AbstractMesh implements IMesh {
 
     nodes: INodeT<IMesh>[] = []
 
-    effect: EffectTexture = new EffectTexture()
+    effect !: EffectTexture
 
 
     transformationMatrix: number[] = []
