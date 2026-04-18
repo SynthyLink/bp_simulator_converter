@@ -25,10 +25,13 @@ export interface IMeshCreator extends IObject {
     /// <summary>
     /// Effects
     /// </summary>
-    getMeshCreatorEffects(): Map<string, EffectTexture >
+    getMeshCreatorEffects(): Map<string, EffectTexture>
 
     ///Gets the facrory
     getMeshCreatorFactory(): IFactory
 
-    getMeshCreatorGenerator() : any
+    getMeshCreatorGenerator(): any
+
+    getMeshCreatorDirectory(): string
+
 }

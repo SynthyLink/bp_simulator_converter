@@ -12,7 +12,7 @@ import type { IFactory } from "../../Interfaces/IFactory";
 import type { IEffectDitionary } from "../Interfaces/IEffectDitionary";
 import type { IMaterialCreator } from "../Interfaces/IMaterialCreator";
 
-class MtlWrapper implements IEffectDitionary {
+export class MtlWrapper implements IEffectDitionary {
     effects: Map<string, EffectTexture> = new Map();
     name: string = "";
     obj: any;

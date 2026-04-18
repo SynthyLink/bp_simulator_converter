@@ -73,6 +73,15 @@ export class Performer
         return true;
     }
 
+    public toShiftString(str: string, shift: string): string {
+        {
+            if (str.indexOf(shift) == 0) {
+                return str.substring(shift.length)
+            }
+            return "";
+        }
+    }
+
     public setFactoryToObjectCollection(collection: IObjectCollection, factory: IFactory) {
         let setter = new FactorySetter(factory)
         this.forEach<IFactoryConsumer>(collection, setter, "IFactoryConsumer")
