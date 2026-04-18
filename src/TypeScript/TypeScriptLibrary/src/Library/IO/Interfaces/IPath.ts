@@ -5,4 +5,6 @@ export interface IPath {
 
     getFileExtension(fileName: string): string
 
+    getDirectoryName(fileName: string): string
+
 }

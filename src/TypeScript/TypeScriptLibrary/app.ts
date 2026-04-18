@@ -1,12 +1,16 @@
-import { ActorWeb } from "./src/Tests/Actor/ActorWeb";
+import { Actor } from "./src/Tests/Actor/Actor";
 
-let a = new ActorWeb()
+let a = new Actor()
+
+var caravan = "c:\\AUsers\\1MySoft\\CSharp\\src\\Web\\reactprojectgenerated\\static\\models\\pLANE\\Cessna_208_Caravan.obj"
+
+a.loadObj(caravan)
 
 //a.actAirplane()
 
 //await a.actDonchianLoad();
 
-a.readTest("c:\\AUsers\\1MySoft\\CSharp\\src\\Web\\reactprojectgenerated\\static\\models\\pLANE\\Cessna_208_Caravan.obj")
+//a.readTest(caravan)
 //a.actPI()
 //a.testDate();
 

@@ -1,13 +1,15 @@
-import { ActorWeb } from "./Tests/Actor/ActorWeb";
+import { Actor } from "./Tests/Actor/Actor";
 
-let a = new ActorWeb()
+let a = new Actor()
+
+
 
 //a.actAirplane()
 
 //await a.actDonchianLoad();
 
 
-a.actPI()
+//a.actPI()
 //a.testDate();
 
 //a.actTime();

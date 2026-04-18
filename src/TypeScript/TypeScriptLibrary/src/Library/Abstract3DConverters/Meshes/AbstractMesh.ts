@@ -1,7 +1,7 @@
-import { INodeT } from "../NamedTree/Interfaces/INodeT";
-import { Performer } from "../Performer";
-import { EffectTexture } from "./EffectTexture";
-import { IMesh } from "./Interfaces/IMesh";
+import { INodeT } from "../../NamedTree/Interfaces/INodeT";
+import { Performer } from "../../Performer";
+import { EffectTexture } from "../EffectTexture";
+import { IMesh } from "../Interfaces/IMesh";
 
 export class AbstractMesh implements IMesh {
 

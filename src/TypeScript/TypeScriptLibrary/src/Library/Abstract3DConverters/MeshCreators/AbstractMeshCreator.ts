@@ -12,6 +12,9 @@ import type { IIODirectoryFactory } from "../../IO/Interfaces/IIODirectoryFactor
 import { Performer } from "../../Performer";
 import { Converter3DPefrormer } from "../Converter3DPerformer";
 import { EffectTexture } from "../EffectTexture";
+import { IImageDetector } from "../Interfaces/IImageDetector";
+import { IImageDetectorFactory } from "../Interfaces/IImageDetectorFactory";
+import { IStringSplitter } from "../../Utilities/String/Interfaces/IStringSplitter";
 
 export abstract class AbstractMeshCreator implements IMeshCreator {
 
@@ -20,7 +23,7 @@ export abstract class AbstractMeshCreator implements IMeshCreator {
         this.directory = directory
         this.factory = factory
         this.obj = obj;
-        let tc = factory.getFactory<IMeshCreatorTextConverter>("IMeshCreatorTextConverter")
+        let tc = factory.getFactory<IStringSplitter>("IStringSplitter")
         let tf = factory.getFactory<ITextReaderFactory>("ITextReaderFactory")
         if (tf != undefined) {
             this.textReaderFactory = tf
@@ -36,10 +39,16 @@ export abstract class AbstractMeshCreator implements IMeshCreator {
         if (tpath != undefined) {
             this.path = tpath.createPath(obj)
         }
+        if (directory.length == 0) {
+            this.directory = this.path.getDirectoryName(url)
+        }
         let td = factory.getFactory<IIODirectoryFactory>("IIODirectoryFactory")
         if (td != undefined) {
             this.directoryio = td.createDirectoryFacrory(obj)
         }
+        
+        let idt = factory.getFactory<IImageDetectorFactory>("IImageDetectorFactory")
+        if (idt != undefined) this.imageDetector = idt.createImageDetector(obj)
    }
     getMeshCreatorDirectory(): string {
         return this.directory
@@ -110,7 +119,6 @@ export abstract class AbstractMeshCreator implements IMeshCreator {
 
     protected directoryio !: IIODirectory
 
-
     protected text: string[] = []
 
     protected url: string = "";
@@ -125,7 +133,7 @@ export abstract class AbstractMeshCreator implements IMeshCreator {
 
     protected name: string = ""
 
-    protected textConverter !: IMeshCreatorTextConverter
+    protected textConverter !: IStringSplitter
 
     protected textReaderFactory !: ITextReaderFactory
 
@@ -135,6 +143,7 @@ export abstract class AbstractMeshCreator implements IMeshCreator {
 
     protected path !: IPath
 
-
     protected effectList: EffectTexture[] = []
+
+    protected imageDetector !: IImageDetector
 }

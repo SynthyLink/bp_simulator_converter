@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ActorWeb = void 0;
+exports.Actor = void 0;
 const ConditionTestAct_1 = require("../Wrappers/ConditionTestAct");
 const ODEAct_1 = require("../Wrappers/ODEAct");
 const OrbitAct_1 = require("../Wrappers/OrbitAct");
@@ -31,7 +31,11 @@ const OrbitalData_1 = require("../../Algorithms/OrbitalForecastCalculation/Orbit
 const Donchian_1 = require("../Donchian");
 const ComposionAct_1 = require("../Wrappers/ComposionAct");
 const PerformerMeasuremets_1 = require("../../Library/Measurements/PerformerMeasuremets");
+const Obj3DCreator_1 = require("../../Library/Abstract3DConverters/MeshCreators/Obj3DCreator");
+const UniversalFactory_1 = require("../../Library/UniversalFactory");
 const StreamReader_1 = require("../../Library/IO/StreamReader");
+const FileSystemFactory_1 = require("../../Library/IO/FileSystemFactory");
+const LineEndSplitter_1 = require("../../Library/Utilities/String/LineEndSplitter");
 //import { Airplane } from '../../Airplane';
 function finish(e) {
     console.log(e);
@@ -50,7 +54,9 @@ function finish(e) {
      // });
      */
 }
-class ActorWeb {
+class Actor {
+    constructor() {
+    }
     finish(e) {
         /*   rl.question('Is this example useful? [y/n] ', (answer) => {
                switch (answer.toLowerCase()) {
@@ -65,6 +71,14 @@ class ActorWeb {
                }
                rl.close();
            });*/
+    }
+    loadObj(filename) {
+        var fact = new UniversalFactory_1.UniversalFactory();
+        var ff = new FileSystemFactory_1.FileSystemFactory();
+        ff.setFactory(fact);
+        var ss = new LineEndSplitter_1.LineEndSplitter();
+        fact.addFactory(ss, "IStringSplitter");
+        var creator = new Obj3DCreator_1.Obj3DCreator(filename, undefined, fact);
     }
     readTest(f) {
         let reader = new StreamReader_1.StreamReader(f);
@@ -286,5 +300,5 @@ class ActorWeb {
         }
     }
 }
-exports.ActorWeb = ActorWeb;
-//# sourceMappingURL=ActorWeb.js.map
+exports.Actor = Actor;
+//# sourceMappingURL=Actor.js.map

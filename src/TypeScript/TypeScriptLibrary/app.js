@@ -9,11 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ActorWeb_1 = require("./src/Tests/Actor/ActorWeb");
-let a = new ActorWeb_1.ActorWeb();
+const Actor_1 = require("./src/Tests/Actor/Actor");
+let a = new Actor_1.Actor();
+var caravan = "c:\\AUsers\\1MySoft\\CSharp\\src\\Web\\reactprojectgenerated\\static\\models\\pLANE\\Cessna_208_Caravan.obj";
+a.loadObj(caravan);
 //a.actAirplane()
 //await a.actDonchianLoad();
-a.readTest("c:\\AUsers\\1MySoft\\CSharp\\src\\Web\\reactprojectgenerated\\static\\models\\pLANE\\Cessna_208_Caravan.obj");
+//a.readTest(caravan)
 //a.actPI()
 //a.testDate();
 //a.actTime();

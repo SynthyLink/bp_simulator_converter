@@ -12,7 +12,7 @@ export class UniversalFactory implements IFactory {
     performer: Performer = new Performer()
     factories: Map<string, IObject> = new Map();
 
-    public addFactory<T>(t: T, type: string): void {
+    addFactory<T>(t: T, type: string): void {
         var tt = this.performer.convertObject<IObject, T>(t, type)
         if (tt.length > 0) this.factories.set(type, tt[0])
     }

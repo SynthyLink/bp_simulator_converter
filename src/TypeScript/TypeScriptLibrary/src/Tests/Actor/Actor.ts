@@ -27,7 +27,13 @@ import { CompositionEvent } from '../Wrappers/CompositionEvent';
 import { PerformerMeasuremets } from '../../Library/Measurements/PerformerMeasuremets';
 import { Composition } from '../Composition';
 import { IFunc } from '../../Library/Interfaces/IFunc';
+import { Obj3DCreator } from '../../Library/Abstract3DConverters/MeshCreators/Obj3DCreator';
+import { UniversalFactory } from '../../Library/UniversalFactory';
 import { StreamReader } from '../../Library/IO/StreamReader';
+import { FileSystemFactory } from '../../Library/IO/FileSystemFactory';
+import { LineEndSplitter } from '../../Library/Utilities/String/LineEndSplitter';
+import type { IStringSplitter } from '../../Library/Utilities/String/Interfaces/IStringSplitter';
+
 //import { Airplane } from '../../Airplane';
 
 
@@ -49,7 +55,11 @@ function finish(e : any) {
    // });
    */
 }
-export class ActorWeb {
+export class Actor {
+    constructor()
+    {
+
+    }
     finish(e : any): void {
      /*   rl.question('Is this example useful? [y/n] ', (answer) => {
             switch (answer.toLowerCase()) {
@@ -65,6 +75,17 @@ export class ActorWeb {
             rl.close();
         });*/
     }
+
+    public loadObj(filename: string): void {
+        var fact = new UniversalFactory()
+        var ff = new FileSystemFactory()
+        ff.setFactory(fact)
+        var ss = new LineEndSplitter()
+        fact.addFactory<IStringSplitter>(ss, "IStringSplitter")
+        var creator = new Obj3DCreator(filename, undefined, fact)
+    }
+
+
 
     public readTest(f: string): void {
         let reader = new StreamReader(f)

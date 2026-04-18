@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ActorWeb_1 = require("./Tests/Actor/ActorWeb");
-let a = new ActorWeb_1.ActorWeb();
+const Actor_1 = require("./Tests/Actor/Actor");
+let a = new Actor_1.Actor();
 //a.actAirplane()
 //await a.actDonchianLoad();
-a.actPI();
+//a.actPI()
 //a.testDate();
 //a.actTime();
 //a.actOrbitCalculation(true);// 1770457504

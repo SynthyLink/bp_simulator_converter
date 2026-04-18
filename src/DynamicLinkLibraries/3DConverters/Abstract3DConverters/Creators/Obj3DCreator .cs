@@ -939,9 +939,6 @@ namespace Abstract3DConverters.Creators
 
         public class MtlWrapper : IEffectDictionary
         {
-
-
-
             public MtlWrapper(string directory)
             {
                 Directory = directory;
