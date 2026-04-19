@@ -49,7 +49,8 @@ export abstract class AbstractMeshCreator implements IMeshCreator {
         
         let idt = factory.getFactory<IImageDetectorFactory>("IImageDetectorFactory")
         if (idt != undefined) this.imageDetector = idt.createImageDetector(obj)
-   }
+    }
+
     getMeshCreatorDirectory(): string {
         return this.directory
     }
@@ -89,6 +90,13 @@ export abstract class AbstractMeshCreator implements IMeshCreator {
         return this.obj;
     }
 
+
+    protected detecctImage(path: string): boolean {
+        if (this.imageDetector === undefined) {
+            return true
+        }
+        return this.imageDetector.detectImage(path)
+    }
 
     protected existsFile(fileName: string) {
         return this.fileio.existsFile(fileName)

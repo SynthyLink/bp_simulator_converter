@@ -344,6 +344,9 @@ export class Performer
     public convertObject<T, S>(s: S, type: string): T[] {
         let ob = s as unknown as IObject;
         var t: T[] = [];
+        if (ob === undefined) {
+            return t;
+        }
         if (ob.imlplementsType(type))
         {
             var x = s as unknown as  T;

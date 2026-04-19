@@ -74,7 +74,7 @@ namespace Abstract3DConverters
 
         public static IPolygonSplitter PolygonSplitter => PolygonSplitterFactory.CreatePolygonSplitter();
 
-        static readonly Type[] InputTypes = new Type[] { typeof(InitAttribute) };
+        static readonly Type[] InputTypes = [ typeof(InitAttribute) ];
 
         static Dictionary<string, ConstructorInfo> creators = new();
 
@@ -190,9 +190,6 @@ namespace Abstract3DConverters
         {
             HandleExceptionFunc(exception, [obj]);
         }
-
-
-
 
         /// <summary>
         /// The Check file sign

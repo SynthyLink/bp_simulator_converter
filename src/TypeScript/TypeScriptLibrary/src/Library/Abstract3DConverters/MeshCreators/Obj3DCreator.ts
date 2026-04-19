@@ -145,9 +145,9 @@ export class Obj3DCreator extends LinesMeshCreator {
                             break;
                         }
                     }
-                    if (file.length == 0)
+                    if (file.length >= 0)
                     {
-                        if (this.imageDetector.detectImage(file))
+                        if (this.detecctImage(file))
                         {
                             this.default = this.createEffectFromImage(file);
                         }
