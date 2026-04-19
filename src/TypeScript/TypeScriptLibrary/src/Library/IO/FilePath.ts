@@ -2,6 +2,9 @@ import path from 'path/posix';
 import { IPath } from "./Interfaces/IPath"
 
 export class FilePath implements IPath {
+    getFileNameWithoutExtension(fileName: string): string {
+        return path.parse(fileName).name
+    }
     getDirectoryName(fileName: string): string {
         return path.dirname(fileName)
     }

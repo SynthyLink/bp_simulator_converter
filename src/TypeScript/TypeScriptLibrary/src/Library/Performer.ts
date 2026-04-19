@@ -82,6 +82,23 @@ export class Performer
         }
     }
 
+    public cut<T>(t: T[], n: number): T[] {
+        let s: T[] = []
+        for (let i = 0; i < n; i++) {
+            s.push(t[i])
+        }
+        return s
+    }
+
+    public addCut<T>(list: T[][], t: T[], n: number): void {
+        var tt = t;
+        if (t.length > n) {
+            tt = this.cut(t, n);
+        }
+        list.push(tt);
+    }
+
+
     public setFactoryToObjectCollection(collection: IObjectCollection, factory: IFactory) {
         let setter = new FactorySetter(factory)
         this.forEach<IFactoryConsumer>(collection, setter, "IFactoryConsumer")

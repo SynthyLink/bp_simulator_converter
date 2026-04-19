@@ -82,7 +82,7 @@ export class Actor {
         ff.setFactory(fact)
         var ss = new LineEndSplitter()
         fact.addFactory<IStringSplitter>(ss, "IStringSplitter")
-        var creator = new Obj3DCreator(filename, undefined, fact)
+        var creator = new Obj3DCreator(filename, "", undefined, fact)
     }
 
 

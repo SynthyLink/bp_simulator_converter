@@ -1,22 +1,19 @@
 import type { IFactory } from "../../Interfaces/IFactory";
-import type { IMesh } from "../Interfaces/IMesh";
-import type { IMeshCreator } from "../Interfaces/IMeshCreator";
-import type { IMeshCreatorTextConverter } from "../Interfaces/IMeshCreatorTextConverter";
-import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
-import { IFileFactory } from "../../IO/Interfaces/IFileFactory";
 import { AbstractMeshCreator } from "./AbstractMeshCreator";
 
 export abstract class LinesMeshCreator extends AbstractMeshCreator
 {
 
-    constructor(url: string,  obj: any, factory: IFactory) {
-        super(url, "", obj, factory)      
-
+    constructor(url: string, directory: string, obj: any, factory: IFactory) {
+        super(url, directory, obj, factory)
+        var r = this.textReaderFactory.getTextReader(obj, url) 
+        this.globalString = r.readToEnd();
+        this.loadMeshCreator()
     }
 
     loadMeshCreator(): void {
-        this.text = this.textConverter.splitStrings(this.obj, this.url)
-        this.loadText(this.text)
+        this.lines = this.textConverter.splitStrings(this.obj, this.globalString)
+        this.loadLines()
     }
     protected loadStrings(url: string): string[] {
         var r = this.textReaderFactory.getTextReader(this.obj, url)
@@ -27,11 +24,11 @@ export abstract class LinesMeshCreator extends AbstractMeshCreator
         return this.name;
     }
 
-    loadText(text: string[]): void {
-        this.lines = text;
-    }
+    protected abstract loadLines(): void
 
     lines: string[] = []
+
+    globalString : string = ""
 
   
 }

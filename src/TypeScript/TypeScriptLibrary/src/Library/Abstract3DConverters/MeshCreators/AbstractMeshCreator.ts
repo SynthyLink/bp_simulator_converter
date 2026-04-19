@@ -4,7 +4,6 @@ import type { IFileFactory } from "../../IO/Interfaces/IFileFactory";
 import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
 import type { IMesh } from "../Interfaces/IMesh";
 import type { IMeshCreator } from "../Interfaces/IMeshCreator";
-import type { IMeshCreatorTextConverter } from "../Interfaces/IMeshCreatorTextConverter";
 import type { IPath } from "../../IO/Interfaces/IPath";
 import type { IPathFactory } from "../../IO/Interfaces/IPathFactory";
 import type { IIODirectory } from "../../IO/Interfaces/IIODirectory";
@@ -114,6 +113,21 @@ export abstract class AbstractMeshCreator implements IMeshCreator {
         return this.cPerformer.toShiftString(str, shift)
     }
 
+    protected toReal(s: string): number {
+        return this.performer.convert<string, number>(s)
+    }
+
+    protected toRealArray(str: string): number[]
+    {
+        return this.cPerformer.toRealArray(str)
+    }
+
+    protected addTexture(l: number[][], texture: number[]): void {
+        this.cPerformer.addTexture(l, texture)
+    }
+
+
+
 
     protected effects: Map<string, EffectTexture> = new Map()
 
@@ -126,8 +140,6 @@ export abstract class AbstractMeshCreator implements IMeshCreator {
     protected dict: Map<string, EffectTexture> = new Map();
 
     protected directoryio !: IIODirectory
-
-    protected text: string[] = []
 
     protected url: string = "";
 
@@ -154,4 +166,8 @@ export abstract class AbstractMeshCreator implements IMeshCreator {
     protected effectList: EffectTexture[] = []
 
     protected imageDetector !: IImageDetector
+
+    protected vertices: number[][] = []
+    protected normals: number[][] = []
+    protected textures: number[][] = []
 }

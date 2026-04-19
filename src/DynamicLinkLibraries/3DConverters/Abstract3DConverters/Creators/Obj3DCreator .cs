@@ -13,6 +13,37 @@ namespace Abstract3DConverters.Creators
     [Attributes.Extension([".obj"])]
     public class Obj3DCreator : LinesMeshCreator, IAdditionalInformation, ISeparateTextures
     {
+        #region Fields and Properties
+     
+        string objs = "# object ";
+
+
+        public Image Ka { get; private set; }
+        public Image Kd { get; private set; }
+        public Image Ks { get; private set; }
+
+        public string Name { get; private set; }
+
+        public Color Ambient { get; private set; }
+
+        public Color Emissive { get; private set; }
+
+
+        public Color Diffuse { get; private set; }
+
+        public Color Specular { get; private set; }
+
+
+        public float Ns { get; private set; }
+        public float Ni { get; private set; }
+        public float d { get; private set; } = 1;
+        public int illum { get; private set; }
+
+
+        private Effect effect;
+
+        #endregion
+
         #region Ctor
 
         public Obj3DCreator(string filename, string directory, params object[] objects) : base(filename, directory, objects)
@@ -185,22 +216,6 @@ namespace Abstract3DConverters.Creators
                 }
                 return MeshName;
             }
-            /*             if (MatExists)
-                         {
-                             return MeshName;
-                         }
-                   //      MatExists = true;
-                         return Fiction;
-                     /*        if (line.Contains(objs) | line.StartsWith("g "))
-                             {
-                                 var name = s.ToString(line, "g");
-                                 if (name == null)
-                                 {
-                                     name = s.ToString(line, objs);
-                                 }
-                                 MatExists = false;
-                                 return name;
-                             }*/
             if (line.StartsWith("g "))
             {
                 var name = s.ToString(line, "g");
@@ -212,7 +227,6 @@ namespace Abstract3DConverters.Creators
 
         //Func<string, string> GetName;
 
-        string  objs = "# object ";
 
         void CreateGeometry()
         {
@@ -1043,30 +1057,6 @@ namespace Abstract3DConverters.Creators
                 return dict;
             }
 
-
-            public Image Ka { get; private set; }
-            public Image Kd { get; private set; }
-            public Image Ks { get; private set; }
-
-            public string Name { get; private set; }
-
-            public Color Ambient { get; private set; }
-
-            public Color Emissive { get; private set; }
-
-
-            public Color Diffuse { get; private set; }
-
-            public Color Specular { get; private set; }
-
-
-            public float Ns { get; private set; }
-            public float Ni { get; private set; }
-            public float d { get; private set; } = 1;
-            public int illum { get; private set; }
-
-
-            private Effect effect;
             public Effect Effect
             {
                 get

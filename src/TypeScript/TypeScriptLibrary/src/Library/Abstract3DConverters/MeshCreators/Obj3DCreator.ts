@@ -7,6 +7,9 @@ import { DiffuseMaterial } from "../Materials/DiffuseMaterial";
 import { MaterialGroup } from "../Materials/MaterialGroup";
 import { LinesMeshCreator } from "./LinesMeshCreator";
 import { MtlWrapper } from "./MtlWrapper";
+interface idx {
+    effect: EffectTexture; indx: number[][][]
+};
 
 export class Obj3DCreator extends LinesMeshCreator {
     effectsPrivate: Map<string, EffectTexture> = new Map()
@@ -27,8 +30,23 @@ export class Obj3DCreator extends LinesMeshCreator {
 
     default !: EffectTexture
 
-    constructor(url: string, obj: any, factory: IFactory) {
-        super(url, obj, factory)
+    nm: number = 0
+
+    usedMaterials: string[] = []
+
+    objs: string = "# object "
+
+    fiction: string = "rrg5dvmg.bil";
+
+    names: string[] = []
+
+
+    tuple !: idx
+
+
+
+    constructor(url: string, directory: string, obj: any, factory: IFactory) {
+        super(url, directory, obj, factory)
     }
 
     mtlDetetctor !: IMtlDetector
@@ -38,14 +56,21 @@ export class Obj3DCreator extends LinesMeshCreator {
 
     mtll: string = "mtllib "
 
-    loadText(text: string[]): void {
-        super.loadText(text)
+    loadLines(): void {
+        this.createMaterials()
     }
+
+    iindexes: idx[][] = []
 
 
     createMaterialsFromLUrl(url: string, eff: EffectTexture[]): Map<string, EffectTexture> {
         let lines = this.loadStrings(url)
         return this.createMaterialsFromLines(lines, eff);
+    }
+
+    getMeshName(): string {
+        ++this.nm;
+        return "Mesh_" + this.nm;
     }
 
     createMaterialsFromLines(lines: string[], eff: EffectTexture[]): Map<string, EffectTexture> {
@@ -84,33 +109,30 @@ export class Obj3DCreator extends LinesMeshCreator {
         return e;
 
     }
-    
+
     createEffect(f: string): EffectTexture {
         var fd = this.toShiftString(f, "usemtl");
         var file = this.fileio.existsFile(fd);
-        let image !: ImageTexture ;
+        let image !: ImageTexture;
         var inm = "";
         if (file != null) {
             inm = this.path.getFileName(fd);
             image = new ImageTexture(inm, this.getMeshCreatorDirectory())
         }
-        var ff: number[] = [1,1,1,1] 
+        var ff: number[] = [1, 1, 1, 1]
         var d = new DiffuseMaterial("", new ColorTexture(ff), new ColorTexture(ff), 1)
-        let  mat = new MaterialGroup(f);
+        let mat = new MaterialGroup(f);
         mat.addChildT(d);
         return new EffectTexture(this.effectsPrivate, inm, mat, image);
     }
-    
 
-    createMaterials(): void
-    {
-        try
-        {
+
+    createMaterials(): void {
+        try {
             let def !: EffectTexture;
             let eff: EffectTexture[] = []
             let mt: Map<string, EffectTexture> = new Map()
-            if (this.materialLines.length > 0)
-            {
+            if (this.materialLines.length > 0) {
                 mt = this.createMaterialsFromLines(this.materialLines, eff)
                 if (eff.length > 0) this.default = eff[0]
             }
@@ -145,10 +167,8 @@ export class Obj3DCreator extends LinesMeshCreator {
                             break;
                         }
                     }
-                    if (file.length >= 0)
-                    {
-                        if (this.detecctImage(file))
-                        {
+                    if (file.length >= 0) {
+                        if (this.detecctImage(file)) {
                             this.default = this.createEffectFromImage(file);
                         }
                     }
@@ -156,22 +176,277 @@ export class Obj3DCreator extends LinesMeshCreator {
 
             }
         }
-        catch (e)
-        {
+        catch (e) {
 
         }
     }
 
-    createEffectFromImage(f: string): EffectTexture
-    {
+    createEffectFromImage(f: string): EffectTexture {
         let image = new ImageTexture(f, this.getMeshCreatorDirectory());
-        let ff : number[] =[1,1,1,1]
-        let  d = new DiffuseMaterial("", new ColorTexture(ff), new ColorTexture(ff), 1);
+        let ff: number[] = [1, 1, 1, 1]
+        let d = new DiffuseMaterial("", new ColorTexture(ff), new ColorTexture(ff), 1);
         let mat = new MaterialGroup(f);
         mat.addChildT(d);
         return new EffectTexture(this.dict, f, mat, image);
     }
 
+    detect(st: string): EffectTexture | undefined {
+        if (this.effectsPrivate.has(st)) {
+            let es = this.effectsPrivate.get(st);
+            if (es != undefined) return es
+        }
+        var s = st.replace("_", " ");
+        if (this.effectsPrivate.has(s)) {
+            let es = this.effectsPrivate.get(st);
+            if (es != undefined) return es
+        }
+        for (var ee of this.effectsPrivate) {
+            var fn = this.path.getFileNameWithoutExtension(ee[0]);
+            if (fn == st) {
+                return ee[1];
+            }
+        }
+        return undefined;
+    }
+
+
+
+    getInitial(line: string): string | undefined {
+        var n = this.toShiftString(line, this.objs);
+        if (line.indexOf("usemtl ") == 0) {
+            var mat = line.substring("usemtl ".length);
+            var effect = this.detect(mat);
+            if (effect != undefined) this.effectList.push(effect);
+            if (!this.usedMaterials.includes(mat)) {
+                this.usedMaterials.push(mat);
+            }
+            return this.getMeshName();
+        }
+        return undefined
+
+    }
+
+    CreateDefaultGeometry(): void {
+        try {
+            var effect = this.default;
+            let indexes: idx[] = []
+            this.iindexes.push(indexes);
+            this.tuple = { effect: effect, indx: [] }
+            indexes.push(this.tuple)
+
+            for (var line of this.lines) {
+                if (line.indexOf("v ") == 0) {
+                    var f = this.toRealArray(line.substring("v ".length).trim());
+                    this.vertices.push(f)
+                    continue;
+                }
+                if (line.indexOf("vt ") == 0) {
+                    var f = this.toRealArray(line.substring("vt ".length).trim());
+                    this.addTexture(this.textures, f);
+                    continue;
+                }
+                if (line.indexOf("vn ") == 0) {
+                    var f = this.toRealArray(line.substring("vn ".length).trim());
+                    this.normals.push(f);
+                    continue;
+                }
+                if (line.indexOf("f ") == 0) {
+                    var s = line.substring("f ".length).trim();
+                    var ss = s.split(" ");
+                    if (ss.length != 3) {
+
+                    }
+                    let ind: number[][] = []
+                    for (var i = 0; i < ss.length; i++) ind.push([])
+                    for (var j = 0; j < ss.length; j++) {
+                        var sss = ss[j].split("/")
+                        var ii = [-1, -1, -1]
+                        ind[j] = ii;
+                        //var k =  new int[sss.Length];
+                        for (var m = 0; m < sss.length; m++) {
+                            if (sss[m].length == 0) {
+                                ii[m] = -1;
+                            }
+                            else {
+                                ii[m] = this.performer.convert<string, number>(sss[m]) - 1;// Shifts[m];
+                            }
+                        }
+                    }
+                    this.tuple.indx.push(ind);
+                    continue;
+                }
+
+            }
+        }
+        catch (e) {
+
+        }
+    }
+    createNamedGeometry(): void {
+        // GetName = GetInititial;
+        try {
+            let indexes: idx[] = []
+            for (let k = 0; k < this.lines.length; k++) {
+                var line = this.lines[k];
+                var name = this.getInitial(line);
+                if (name != undefined) {
+                    if (name != this.fiction) {
+                        this.names.push(name);
+                        indexes = [];
+                        this.iindexes.push(indexes);
+                        if (line.indexOf("usemtl ") == 0) {
+                            var mat = line.substring("usemtl ".length);
+                            if (mat == "_default_") {
+                                continue;
+                            }
+                            var effect = this.detect(mat);
+                            if (effect != undefined) {
+                                this.effectList.push(effect);
+                            }
+                            if (!this.usedMaterials.includes(mat)) {
+                                this.usedMaterials.push(mat);
+                            }
+                            if (effect != undefined) {
+                                this.tuple = { effect: effect, indx: [] }
+                            }
+                            this.iindexes.push([this.tuple]);
+                            continue;
+                        }
+                        continue;
+                    }
+                    else {
+                    }
+                }
+                if (line.indexOf("usemtl ") == 0) {
+                    var mat = line.substring("usemtl ".length);
+                    if (mat == "_default_") {
+                        continue;
+                    }
+                    var effect = this.effectsPrivate.get(mat);
+                    if (effect != undefined) this.effectList.push(effect);
+                    if (!this.usedMaterials.includes(mat)) {
+                        this.usedMaterials.push(mat);
+                    }
+                    if (effect != undefined) {
+                        this.tuple = { effect: effect, indx: [] }
+                    }
+                    this.iindexes.push([this.tuple]);
+                    continue;
+                }
+
+                if (line.indexOf("v ") == 0) {
+                    var f = this.toRealArray(line.substring("v ".length).trim());
+                    this.vertices.push(f)
+                    continue;
+                }
+                if (line.indexOf("vt ") == 0) {
+                    var f = this.toRealArray(line.substring("vt ".length).trim());
+                    this.addTexture(this.textures, f);
+                    continue;
+                }
+                if (line.indexOf("vn ") == 0) {
+                    var f = this.toRealArray(line.substring("vn ".length).trim());
+                    this.normals.push(f);
+                    continue;
+                }
+                if (line.indexOf("f ") == 0) {
+                    var s = line.substring("f ".length).trim();
+                    var ss = s.split(" ");
+                    var ind: number[][] = []
+                    for (let i = 0; i < ss.length; i++) ind.push([])
+                    for (let j = 0; j < ss.length; j++) {
+                        var sss = ss[j].split("/");
+                        var i: number[] = [-1, -1, -1]
+                        ind[j] = i;
+                        //var k =  new int[sss.Length];
+                        for (let m = 0; m < sss.length; m++) {
+                            if (sss[m].length == 0) {
+                                i[m] = -1;
+                            }
+                            else {
+                                i[m] = this.performer.convert<string, number>(sss[m]) - 1;// Shifts[m];
+                            }
+                        }
+                    }
+                    this.tuple.indx.push(ind);
+                    continue;
+                }
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+    createUnNamedGeometry(): void {
+        try {
+            let indexes: idx[] = []
+            this.iindexes.push(indexes);
+
+            for (var line of this.lines) {
+                if (line.startsWith("usemtl")) {
+                    var mat = line.substring("usemtl ".length);
+                    if (mat != undefined) {
+                        if (mat == "_default_") {
+                            continue;
+                        }
+                        var effect = this.detect(mat);
+                        if (!this.usedMaterials.includes(mat)) {
+                            this.usedMaterials.push(mat);
+                        }
+                        if (effect != undefined) this.tuple = { effect: effect, indx: [] }
+                        this.iindexes.push([this.tuple]);
+                        continue;
+                    }
+                }
+
+                if (line.indexOf("v ") == 0) {
+                    var f = this.toRealArray(line.substring("v ".length).trim());
+                    this.vertices.push(f);
+                    continue;
+                }
+                if (line.indexOf("vt ") == 0) {
+                    var f = this.toRealArray(line.substring("vt ".length).trim());
+                    this.addTexture(this.textures, f);
+                    continue;
+                }
+                if (line.indexOf("vn ") == 0) {
+                    var f = this.toRealArray(line.substring("vn ".length).trim());
+                    this.normals.push(f);
+                    continue;
+                }
+                if (line.indexOf("f ") == 0) {
+                    var s = line.substring("f ".length).trim();
+                    var ss = s.split(" ");
+                    var ind: number[][] = []
+                    for (var ii = 0; ii < ss.length; ii++) {
+                        var a: number[] = []
+                        ind.push(a)
+                    }
+                    for (var j = 0; j < ss.length; j++) {
+                        var sss = ss[j].split("/");
+                        var i: number[] = [-1, -1, -1]
+                        ind[j] = i;
+                        //var k =  new int[sss.Length];
+                        for (var m = 0; m < sss.length; m++) {
+                            if (sss[m].length == 0) {
+                                i[m] = -1;
+                            }
+                            else {
+                                i[m] = this.performer.convert<string, number>(sss[m]) - 1;// Shifts[m];
+                            }
+                        }
+                    }
+                    this.tuple.indx.push(ind);
+                    continue;
+                }
+
+            }
+        }
+        catch (e) {
+        }
+    }
+
+
 }
- 
 
