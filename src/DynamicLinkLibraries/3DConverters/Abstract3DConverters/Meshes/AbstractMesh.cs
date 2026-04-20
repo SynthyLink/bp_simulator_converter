@@ -221,7 +221,6 @@ namespace Abstract3DConverters.Meshes
         string INamed.Name {  get => Name; set => Name = value; }
 
         #endregion
-
    
         #region IMesh Implementation
 
@@ -325,10 +324,6 @@ namespace Abstract3DConverters.Meshes
         /// </summary>
         protected virtual List<IMesh> Nodes { get; } = new();
 
-        /// <summary>
-        /// Vertices
-        /// </summary>
-        protected List<float[]> Vertices { get;  set; }
 
         /// <summary>
         /// Absolute Verices
@@ -341,6 +336,10 @@ namespace Abstract3DConverters.Meshes
         /// </summary>
         public List<float[]> AbsoluteNormals { get; protected set; }
 
+        /// <summary>
+        /// Vertices
+        /// </summary>
+        protected List<float[]> Vertices { get; set; }
 
         /// <summary>
         /// Normals

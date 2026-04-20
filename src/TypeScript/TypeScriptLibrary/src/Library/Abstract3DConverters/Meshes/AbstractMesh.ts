@@ -1,16 +1,39 @@
-import { INodeT } from "../../NamedTree/Interfaces/INodeT";
+import type { INodeT } from "../../NamedTree/Interfaces/INodeT";
+import type { IMesh } from "../Interfaces/IMesh";
+import type { IMeshCreator } from "../Interfaces/IMeshCreator";
+import type { ITextureIndex } from "../Interfaces/ITextureIndex";
+import type { IGeometry } from "../Interfaces/IGeometry";
 import { Performer } from "../../Performer";
 import { EffectTexture } from "../EffectTexture";
-import { IMesh } from "../Interfaces/IMesh";
+import { Converter3DPefrormer } from "../Converter3DPerformer";
+import { PointTexture } from "../Points/PointTexture";
 
 export class AbstractMesh implements IMesh {
 
-    constructor() {
+    // IMesh parent, string name,  float[] matrix, Effect effect, 
+    //List<Polygon> polygons, List<float[]> vertices, List < float[] > normals, IMeshCreator creator
 
+    constructor(parent: IMesh | undefined, name: string, transformationMatrix: number[], effect: EffectTexture | undefined,
+        vertices: number[][], textures: number[][], normals: number[][], tuple: ITextureIndex | undefined, creator: IMeshCreator)
+    {
+        if (tuple != null) this.tuple = tuple
+        if (parent != undefined) {
+            this.parent = parent
+            parent.addNodeT(this)
+        }
+        this.name = name
+        this.transformationMatrix = transformationMatrix
+        if (effect != undefined)  this.effect = effect
+        this.vertices = vertices
+        this.textures = textures
+        this.normals = normals
+        this.creator = creator
     }
-    getAbsoluteVertices(): number[] {
-        return this.absolutevertices;
+    getAbsoluteVertices(): number[][] {
+        return this.vertices;
     }
+
+
     getEffect(): EffectTexture {
         return this.effect;
     }
@@ -18,19 +41,24 @@ export class AbstractMesh implements IMesh {
         
     }
 
+    protected tuple !: ITextureIndex
+
+    protected creator !: IMeshCreator
+
+
     protected typeName: string = "AbstractMesh";
 
     protected types: string[] = ["IObject", "IMesh", "INodeT<IMesh>", "IGeometry", "INamed", "AbstractMesh"];
 
     protected name: string = "";
 
-    getVertices(): number[] {
+    getVertices(): number[][] {
         return this.vertices;
     }
-    getNormals(): number[] {
+    getNormals(): number[][] {
         return this.normals
     }
-    getTextures(): number[] {
+    getTextures(): number[][] {
         return this.textures;
     }
     getTransformationMatrix(): number[] {
@@ -77,6 +105,14 @@ export class AbstractMesh implements IMesh {
         return this;
     }
 
+    public createPointTexture(geometry: IGeometry, vertex: number, texture: number, normal: number): PointTexture {
+        return this.cPerformer.createPointTexture(geometry, vertex, texture, normal)
+    }
+
+
+    cPerformer: Converter3DPefrormer = new Converter3DPefrormer()
+
+
     performer : Performer = new Performer()
 
     parent !: INodeT<IMesh> 
@@ -87,10 +123,10 @@ export class AbstractMesh implements IMesh {
 
 
     transformationMatrix: number[] = []
-    textures: number[] = []
-    normals: number[] = []
-    vertices: number[] = []
-    absolutevertices: number[] = []
+    textures: number[][] = []
+    normals: number[][] = []
+    vertices: number[][] = []
+    absolutevertices: number[][] = []
 
 
 }

@@ -79,6 +79,7 @@ class Actor {
         var ss = new LineEndSplitter_1.LineEndSplitter();
         fact.addFactory(ss, "IStringSplitter");
         var creator = new Obj3DCreator_1.Obj3DCreator(filename, "", undefined, fact);
+        var m = creator.getMeshCreatorMeshes();
     }
     readTest(f) {
         let reader = new StreamReader_1.StreamReader(f);

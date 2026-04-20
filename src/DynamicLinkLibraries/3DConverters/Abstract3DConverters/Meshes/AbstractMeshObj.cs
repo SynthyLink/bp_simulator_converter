@@ -42,7 +42,8 @@ namespace Abstract3DConverters.Meshes
         internal List<float[]> IntTextures { get; private set; }
         internal List<float[]> IntNormals { get; private set; }
 
-        private AbstractMeshObj(AbstractMeshObj parent, Tuple<Effect, List<int[][]>> tuple, Obj3DCreator creator) : base(parent, creator.MeshName, null, creator)
+        private AbstractMeshObj(AbstractMeshObj parent, Tuple<Effect, List<int[][]>> tuple, Obj3DCreator creator) : 
+            base(parent, creator.MeshName, null, creator)
         {
             try
             {

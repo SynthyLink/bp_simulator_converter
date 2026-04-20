@@ -1,7 +1,9 @@
 import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
-import { IFile } from "../IO/Interfaces/IFile";
+import type { IFile } from "../IO/Interfaces/IFile";
 import { Performer } from "../Performer";
 import { ColorTexture } from "./ColorTexture";
+import type { IGeometry } from "./Interfaces/IGeometry";
+import { PointTexture } from "./Points/PointTexture";
 
 export class Converter3DPefrormer {
 
@@ -26,6 +28,12 @@ export class Converter3DPefrormer {
         }
         return x;
     }
+
+    public createPointTexture(geometry: IGeometry, vertex: number, texture: number, normal: number): PointTexture
+    {
+        return new PointTexture(geometry, vertex, texture, normal)
+    }
+
 
     public getTextureCoordinate(a: number): number{
         if (a >= 0 && a <= 1)

@@ -4,7 +4,7 @@ import { IGeometry } from "./IGeometry";
 
 export interface IMesh extends IGeometry, INodeT<IMesh> {
 
-    getAbsoluteVertices(): number[]
+    getAbsoluteVertices(): number[][]
 
     getEffect(): EffectTexture
 
