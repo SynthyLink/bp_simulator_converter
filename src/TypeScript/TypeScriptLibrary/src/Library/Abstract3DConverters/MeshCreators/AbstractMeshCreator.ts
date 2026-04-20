@@ -126,6 +126,10 @@ export abstract class AbstractMeshCreator implements IMeshCreator {
         this.cPerformer.addTexture(l, texture)
     }
 
+    protected toFloat(s: string): number {
+        return this.performer.convert<string, number>(s)
+    }
+
 
 
 

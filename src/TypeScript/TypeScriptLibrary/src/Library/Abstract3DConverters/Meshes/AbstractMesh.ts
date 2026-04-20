@@ -109,6 +109,11 @@ export class AbstractMesh implements IMesh {
         return this.cPerformer.createPointTexture(geometry, vertex, texture, normal)
     }
 
+    protected toFloat(s: string): number {
+        return this.performer.convert<string, number>(s)
+    }
+
+
 
     cPerformer: Converter3DPefrormer = new Converter3DPefrormer()
 

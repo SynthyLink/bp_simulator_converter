@@ -111,14 +111,6 @@ namespace Abstract3DConverters.Meshes
             try
             {
                 Effect = creator.Default;
-           /*     var el = creator.EffectList;
-                if (el != null)
-                {
-                    if (number < el.Count)
-                    {
-                        Effect = el[number];
-                    }
-                }*/
                 IntVertices = creator.Vertices;
                 IntTextures = creator.Textures;
                 IntNormals = creator.Normals;
@@ -198,7 +190,7 @@ namespace Abstract3DConverters.Meshes
         }
 
 
-
+/*
         internal AbstractMeshObj(string name, Obj3DCreator objCreator, int begin, out int end, out string nextName, int[] shift, List<string> lines) : base(null, name, null, null, objCreator)
         {
             nextName = "";
@@ -395,6 +387,6 @@ namespace Abstract3DConverters.Meshes
             {
                 exception.HandleExceptionDouble("AbstractMeshObj 2");
             }
-        }
+        }*/
     }
 }

@@ -11,9 +11,11 @@ import { AbstractMeshPolygon } from "./AbstractMeshPolygon";
 export class AbstractMeshObj extends AbstractMeshPolygon {
 
     constructor(parent: IMesh | undefined, name: string, transformationMatrix: number[], effect: EffectTexture, polygons: Polygon[],
-        vertices: number[][], textures: number[][], normals: number[][], tuple: ITextureIndex | undefined, creator: Obj3DCreator, variant: number) {
+        vertices: number[][], textures: number[][], normals: number[][], tuple: ITextureIndex | undefined,
+        creator: Obj3DCreator, variant: number, meshNumber: number) {
         super(parent, name, transformationMatrix, effect, polygons, vertices, textures, normals, tuple, creator);
         this.o3dCreator = creator;
+        this.meshNumber = meshNumber
         if (variant == 0) {
             this.vertices = [];
             this.textures = [];
@@ -58,12 +60,85 @@ export class AbstractMeshObj extends AbstractMeshPolygon {
             }
             return
         }
+        if (variant == 1) {
+            this.effect = creator.getDefaultEffect()
+            /*     var el = creator.EffectList;
+                 if (el != null)
+                 {
+                     if (number < el.Count)
+                     {
+                         Effect = el[number];
+                     }
+                 }*/
+            this.intVertices = creator.getVertices()
+            this.intTextures = creator.getTextures()
+            this.intNormals = creator.getNormals()
+            this.polygons = []
+            let number = meshNumber
+            this.iindexes = creator.getIndexes()[number];
+            let names = creator.getNames()
+            if (names.length > number) {
+                this.name = names[number];
+            }
+            else {
+                name = creator.getMeshName();
+            }
+            if (this.iindexes != undefined)
+            {
+                if (this.iindexes.length > 0) {
+                    for (var t of this.iindexes) {
+                        new AbstractMeshObj(this, "", [], t.effect, [], [], [], [], undefined, creator, 1, 0)
+                    }
+                    return;
+                }
+            }
+            if (this.iindexes != undefined) {
+            for (var tp of this.iindexes)
+            {
+                var iind = tp.indx
+                for (var ii of iind)
+                {
+                    for (var iii of ii)
+                    {
+                        this.vertices.push(this.intVertices[iii[0]])
+                        this.textures.push(this.intTextures[iii[1]])
+                        if (iii.length > 2) {
+                            if (iii[2] >= 0) {
+                                this.normals.push(this.intNormals[iii[2]])
+                          }
+                        }
+                    }
+                }
+            }
+                for (var tpi of this.iindexes) {
+                    var effect = tpi.effect
+                    var idxx = tpi.indx;
+                    for (var indx of idxx) {
+                        var l: PointTexture[] = []
+                        for (let i = 0; i < indx.length; i++) {
+                            let npp = this.np
+                            var ik = (this.normals.length == 0) ? -1 : npp;
+                            var point = this.createPointTexture(this, npp, npp, ik);
+                            ++this.np;
+                            if (point == null) {
+                                throw new OwnError("AbstractMeshObj POINT ERROR", "", "");
+                            }
+                            l.push(point);
+                        }
+                        var polygon = new Polygon(this, l, effect);
+                        this.polygons.push(polygon);
+                    }
+                }
+            }
+
+        }
     }
 
     createTriangles(): void {
     }
     protected o3dCreator!: Obj3DCreator;
     protected global: Map<number, number[]> = new Map();
+    np: number = 0
 
     protected shift: number = 0;
     protected shiftTexture: number = 0;
@@ -75,6 +150,6 @@ export class AbstractMeshObj extends AbstractMeshPolygon {
     protected intNormals: number[][] = [];
     protected intTextures: number[][] = [];
 
-
+    meshNumber: number = 0
 
 }
