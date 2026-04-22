@@ -1,14 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Image = void 0;
-class Image {
-    constructor(url) {
+exports.ImageTexture = void 0;
+class ImageTexture {
+    constructor(url, directory) {
         this.url = "";
+        this.directory = "";
         this.url = url;
+        this.directory = directory;
     }
     getUrl() {
         return this.url;
     }
 }
-exports.Image = Image;
-//# sourceMappingURL=Image.js.map
+exports.ImageTexture = ImageTexture;
+//# sourceMappingURL=ImageTexture.js.map

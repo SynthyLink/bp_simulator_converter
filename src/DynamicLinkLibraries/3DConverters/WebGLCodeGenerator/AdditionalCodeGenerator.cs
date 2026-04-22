@@ -1,5 +1,5 @@
 ﻿using BaseTypes.Attributes;
-
+using DataPerformer.Portable;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
 
@@ -63,6 +63,10 @@ namespace WebGLCodeGenerator
             foreach (var s in scene)
             {
                 var t = s;
+                if (t.Contains("})"))
+                {
+                    continue;
+                }
                 if (t.Contains("Cessna"))
                 {
                     t = t.Replace("Cessna", name);
@@ -93,6 +97,7 @@ namespace WebGLCodeGenerator
         List<string> GetLoad()
         {
             var l = new List<string>();
+            var res = new List<string>();
             var s = "";
             componentCollection.ForEach((ISaveGrahicalData data)
             =>
@@ -102,15 +107,21 @@ namespace WebGLCodeGenerator
                 var t = data.GetGraphicalData("");
                 foreach (var item in t)
                 {
+                    res.Add("this.addResource(\"" + Path.Combine(datadir, item.Key) + "\")");
                     if (s.Length > 0)
                     {
-                       s += ",";
+                        s += ",";
                         l.Add(s);
                     }
                     s = Add(item);
                 }
             });
             l.Add(s);
+            l.Add("})");
+            foreach (var r in res)
+            {
+                l.Add(r.Replace("\\", "/"));
+            }
             return l;
         }
 

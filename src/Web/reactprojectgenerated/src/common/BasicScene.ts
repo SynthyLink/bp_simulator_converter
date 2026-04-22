@@ -6,9 +6,11 @@ import ShaderProgram from "./shader-program";
 import type { IObjectCollection } from "../Library/Interfaces/IObjectCollection";
 import { IObject } from "../Library/Interfaces/IObject";
 import { IFactory } from "../Library/Interfaces/IFactory";
-import { Performer } from "../Library/Performer";
+import { ILoader } from "../Library/Interfaces/ILoader";
+import { ILoaderFactory } from "../Library/Interfaces/ILoaderFactory";
+import { IResourceCollection } from "../Library/Interfaces/IResouceCollection";
 
-export abstract class BasicScene extends Scene implements IObjectCollection {
+export abstract class BasicScene extends Scene implements IObject, IObjectCollection, IResourceCollection {
     protected programs: { [name: string]: ShaderProgram } = {};
     protected camera : Camera;
     protected controller : FlyCameraController;
@@ -29,7 +31,51 @@ export abstract class BasicScene extends Scene implements IObjectCollection {
     public constructor(game: Game, factory: IFactory) {
         super(game)
         this.factory = factory
+        let l = factory.getFactory<ILoaderFactory>("ILoaderFactory")
+        this.loader = l.getLoader(this)
     }
+    addResource(url: string): void {
+        if (!this.resourceFiles.includes(url)) this.resourceFiles.push(url)
+    }
+    getResources(): string[] {
+        return this.resourceFiles;
+    }
+
+    public getDirectoryFiles(dir: string): string[] {
+        let l: string[] = [];
+        for (let d of this.resourceFiles) {
+            if (d.startsWith(dir)) l.push(d)
+        }
+        l.sort()
+        return l
+    }
+
+    public fileExists(fileName: string): boolean {
+        return this.resourceFiles.includes(fileName)
+    }
+
+    public getFactory(): IFactory {
+        return this.factory
+    }
+
+    getName(): string {
+        return this.name;
+    }
+
+
+    getClassName(): string {
+        return this.typeName;
+    }
+
+    imlplementsType(type: string): boolean {
+        return this.types.indexOf(type) >= 0;
+    }
+
+    protected typeName: string = "BasicScene";
+
+    protected types: string[] = ["IObject", "IObjectCollection", "BasicScene"];
+
+    protected name: string = "";
 
     public getGame(): Game {
         return this.game;
@@ -44,8 +90,14 @@ export abstract class BasicScene extends Scene implements IObjectCollection {
         return this.iobjects
     }
 
+    public getResourceText(url: string): string {
+        return this.game.loader.resources[url];
+
+    }
+
     protected factory: IFactory
 
+    protected loader: ILoader
 
-
+    protected resourceFiles: string[]
 }

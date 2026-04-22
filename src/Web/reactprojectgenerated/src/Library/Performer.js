@@ -34,6 +34,28 @@ class Performer {
         list.push(item);
         return true;
     }
+    toShiftString(str, shift) {
+        {
+            if (str.indexOf(shift) == 0) {
+                return str.substring(shift.length);
+            }
+            return "";
+        }
+    }
+    cut(t, n) {
+        let s = [];
+        for (let i = 0; i < n; i++) {
+            s.push(t[i]);
+        }
+        return s;
+    }
+    addCut(list, t, n) {
+        var tt = t;
+        if (t.length > n) {
+            tt = this.cut(t, n);
+        }
+        list.push(tt);
+    }
     setFactoryToObjectCollection(collection, factory) {
         let setter = new FactorySetter(factory);
         this.forEach(collection, setter, "IFactoryConsumer");
@@ -244,6 +266,9 @@ class Performer {
     convertObject(s, type) {
         let ob = s;
         var t = [];
+        if (ob === undefined) {
+            return t;
+        }
         if (ob.imlplementsType(type)) {
             var x = s;
             t.push(x);
@@ -322,6 +347,9 @@ class Performer {
     convertFromAny(t) {
         return this.convert(t);
     }
+    toNumber(s) {
+        return Number(s);
+    }
     convert(t) {
         // Typeof checks against string representations of types. S is a generic type,
         // so you can't directly use typeof S.  It will just return the string "object" or "function".
@@ -330,20 +358,23 @@ class Performer {
         // A very limited approach would be to use type guards, but that means
         // you'd have to know what type S *could* be in advance. This is not
         // really a general solution.
+        const tt = typeof t;
         if (t === undefined) {
             throw new OwnError_1.OwnError("Type conversion", "Performer undefined. NULL OBJECT", undefined);
         }
-        if (typeof t === "string" && null instanceof String) { //VERY LIMITED AND UNSAFE EXAMPLE.
+        if (tt === "string") {
+            if (null instanceof String) { //VERY LIMITED AND UNSAFE EXAMPLE.
+                return t; // Force the type assertion (VERY UNSAFE)
+            }
+        }
+        if (tt === "number") { // } && (t as unknown as S) instanceof Number) {  //VERY LIMITED AND UNSAFE EXAMPLE.
             return t; // Force the type assertion (VERY UNSAFE)
         }
-        if (typeof t === "number") { // } && (t as unknown as S) instanceof Number) {  //VERY LIMITED AND UNSAFE EXAMPLE.
-            return t; // Force the type assertion (VERY UNSAFE)
-        }
-        if (typeof t === "boolean") { //VERY LIMITED AND UNSAFE EXAMPLE.
+        if (tt === "boolean") { //VERY LIMITED AND UNSAFE EXAMPLE.
             return t; // Force the type assertion (VERY UNSAFE)
         }
         //This is better, but assumes S is a string or number
-        if (typeof t === 'string' && null === String) {
+        if (tt === 'string' && null === String) {
             return t;
         }
         if (typeof t === 'number' && null === Number) {
@@ -520,9 +551,12 @@ class Performer {
 exports.Performer = Performer;
 class FactorySetter {
     constructor(factory) {
+        console.log("SETTER", factory);
         this.factory = factory;
     }
     actionT(t) {
+        console.log("SETTERT");
+        console.log(this.factory);
         t.setConsumerFactory(this.factory);
     }
 }

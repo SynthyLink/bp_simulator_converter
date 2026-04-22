@@ -17,7 +17,6 @@ const RandomAcr_1 = require("../Wrappers/RandomAcr");
 const SimpleFeedAct_1 = require("../Wrappers/SimpleFeedAct");
 const TwoAct_1 = require("../Wrappers/TwoAct");
 const ODE_FeedbackAct_1 = require("../Wrappers/ODE_FeedbackAct");
-const TransformerRecursveAct_1 = require("../Wrappers/TransformerRecursveAct");
 const PIAct_1 = require("../Wrappers/PIAct");
 const OrbitalForecastAct_1 = require("../Wrappers/OrbitalForecastAct");
 const OrbitalForecastCalculation_1 = require("../../Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation");
@@ -80,6 +79,7 @@ class Actor {
         fact.addFactory(ss, "IStringSplitter");
         var creator = new Obj3DCreator_1.Obj3DCreator(filename, "", undefined, fact);
         var m = creator.getMeshCreatorMeshes();
+        console.log(m);
     }
     readTest(f) {
         let reader = new StreamReader_1.StreamReader(f);
@@ -212,8 +212,8 @@ class Actor {
     }
     actTransformerFeedback() {
         try {
-            var o = new TransformerRecursveAct_1.TransformerRecursveAct();
-            o.test();
+            //    var o = new TransformerRecursveAct();
+            //   o.test();
         }
         catch (e) {
             finish(e);

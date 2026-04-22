@@ -6,6 +6,8 @@ import { Basic3DShape } from "../../Library/Motion6D/Objects/Shapes/Basic3DShape
 import { IStartPrimitive } from "../Interfaces/IStartPrimitive";
 import * as MeshUtils from  "../../common/mesh-utils"
 import * as TextureUtils from '../../common/texture-utils';
+import { IMesh } from "../../Library/Abstract3DConverters/Interfaces/IMesh";
+import { Obj3DCreator } from "../../Library/Abstract3DConverters/MeshCreators/Obj3DCreator";
 
 export class Object3DPrimitive extends BasicPrimitive implements IStartPrimitive {
     constructor(name: string, scene: BasicScene, shape: Basic3DShape) {
@@ -25,18 +27,15 @@ export class Object3DPrimitive extends BasicPrimitive implements IStartPrimitive
             let obj = this.game.loader.resources[key];
             let n = key.lastIndexOf(".obj")
             if (n > 0) {
-                console.log(obj)
-                this.mesh = MeshUtils.LoadOBJMesh(this.gl, obj)
-                var spt = obj as string
-                var spp = spt.split("\n");
-                for (let i = 0; i < spp.length; i++) {
-                    console.log(i)
-                    console.log(spp[i])
-                }
-                console.log(this.mesh)
-                continue
+                //this.mesh = MeshUtils.LoadOBJMesh(this.gl, obj)
+                //var spt = obj as string
+                // var spp = spt.split("\n");
+                console.log("MMMMMMSSSS")
+                console.log(this.factory)
+             var creator = new Obj3DCreator(key, "", this.scene, this.factory);
+                this.meshes = creator.getMeshCreatorMeshes()
+                console.log("MMMMMM")
             }
-            console.log(obj)
 
             n = key.lastIndexOf(".mtl")
             if (n >= 0) {
@@ -44,7 +43,6 @@ export class Object3DPrimitive extends BasicPrimitive implements IStartPrimitive
             }
             let txt = TextureUtils.LoadImage(this.gl, obj);
             this.textures[key] = txt;
-            console.log(txt)
         }
     }
 
@@ -55,6 +53,7 @@ export class Object3DPrimitive extends BasicPrimitive implements IStartPrimitive
     currentModelMatrix: mat4; // The model matrix of the object in the current frame
     previousModelMatrix: mat4; // The model matrix of the object in the previous frame
 
+    meshes : IMesh[] 
     //Move Controllers
     type: 'orthographic' | 'perspective' = 'perspective';
     protected textures: { [name: string]: WebGLTexture } = {};

@@ -39,7 +39,7 @@ export class FileSystemFactory implements IObject, ITextReaderFactory, IFileFact
 
     protected name: string = "";
 
-    createDirectoryFacrory(object: any): IIODirectory {
+    createDirectoryFactory(object: any): IIODirectory {
         return new FileSystemDirectory()
     }
     createFile(obj: any): IFile {

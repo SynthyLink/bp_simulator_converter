@@ -32,6 +32,7 @@ import type { IObjectCollection } from "./Interfaces/IObjectCollection";
 import type { INamed } from "./NamedTree/Interfaces/INamed";
 import type { IFactory } from "./Interfaces/IFactory";
 import type { IFactoryConsumer } from "./Interfaces/IFactoryConsumer";
+import { IResourceCollection } from "./Interfaces/IResouceCollection";
 
 
 export class Performer
@@ -73,6 +74,32 @@ export class Performer
         return true;
     }
 
+    public toShiftString(str: string, shift: string): string {
+        {
+            if (str.indexOf(shift) == 0) {
+                return str.substring(shift.length)
+            }
+            return "";
+        }
+    }
+
+    public cut<T>(t: T[], n: number): T[] {
+        let s: T[] = []
+        for (let i = 0; i < n; i++) {
+            s.push(t[i])
+        }
+        return s
+    }
+
+    public addCut<T>(list: T[][], t: T[], n: number): void {
+        var tt = t;
+        if (t.length > n) {
+            tt = this.cut(t, n);
+        }
+        list.push(tt);
+    }
+
+
     public setFactoryToObjectCollection(collection: IObjectCollection, factory: IFactory) {
         let setter = new FactorySetter(factory)
         this.forEach<IFactoryConsumer>(collection, setter, "IFactoryConsumer")
@@ -102,9 +129,8 @@ export class Performer
     public forEach<T>(collection: IObjectCollection, action: IActionT<T>, type: string) {
         let obj = collection.getObjectCollection()
         for (let o of obj) {
-
             var x = this.convertObject<T, IObject>(o, type)
-            if (x.length > 0) action.actionT(x[0])
+         if (x.length > 0) action.actionT(x[0])
         }
     }
 
@@ -335,6 +361,9 @@ export class Performer
     public convertObject<T, S>(s: S, type: string): T[] {
         let ob = s as unknown as IObject;
         var t: T[] = [];
+        if (ob === undefined) {
+            return t;
+        }
         if (ob.imlplementsType(type))
         {
             var x = s as unknown as  T;
@@ -432,6 +461,9 @@ export class Performer
         return this.convert<any, T>(t);
     }
 
+    public toNumber(s: any): number {
+        return Number(s)
+    }
 
     public convert<T, S>(t: T): S {
         // Typeof checks against string representations of types. S is a generic type,
@@ -441,23 +473,26 @@ export class Performer
         // A very limited approach would be to use type guards, but that means
         // you'd have to know what type S *could* be in advance. This is not
         // really a general solution.
+        const tt = typeof t
         if (t === undefined) {
             throw new OwnError("Type conversion", "Performer undefined. NULL OBJECT", undefined);
         }
-        if (typeof t === "string" && (null as any as S) instanceof String) { //VERY LIMITED AND UNSAFE EXAMPLE.
-            return t as any as S; // Force the type assertion (VERY UNSAFE)
+        if (tt === "string") {
+            if ((null as any as S) instanceof String) { //VERY LIMITED AND UNSAFE EXAMPLE.
+                return t as any as S; // Force the type assertion (VERY UNSAFE)
+            }
         }
 
-        if (typeof t === "number") { // } && (t as unknown as S) instanceof Number) {  //VERY LIMITED AND UNSAFE EXAMPLE.
+        if (tt === "number") { // } && (t as unknown as S) instanceof Number) {  //VERY LIMITED AND UNSAFE EXAMPLE.
             return t as unknown as S; // Force the type assertion (VERY UNSAFE)
         }
 
-        if (typeof t === "boolean") { //VERY LIMITED AND UNSAFE EXAMPLE.
+        if (tt === "boolean") { //VERY LIMITED AND UNSAFE EXAMPLE.
             return t as any as S; // Force the type assertion (VERY UNSAFE)
         }
 
         //This is better, but assumes S is a string or number
-        if (typeof t === 'string' && (null as any as S) as any === String) {
+        if (tt === 'string' && (null as any as S) as any === String) {
             return t as any as S;
         }
 
@@ -666,6 +701,11 @@ export class Performer
         return new AliasName(al, s);
     }
 
+    public collectResources(res: IResourceCollection, collection: IObjectCollection) {
+        var rs = new ResourceSetter(res)
+        this.forEach<IResourceCollection>(collection, rs, "IResourceCollection")
+    }
+
     measurements !: IMeasurements;
 
     measurement !: IMeasurement;
@@ -680,9 +720,24 @@ class FactorySetter implements IActionT<IFactoryConsumer>
 {
     constructor(factory: IFactory) {
         this.factory = factory
-    }
+  }
     actionT(t: IFactoryConsumer): void {
-        t.setConsumerFactory(this.factory)
+      t.setConsumerFactory(this.factory)
     }
+
     factory: IFactory
+}
+
+class ResourceSetter implements IActionT<IResourceCollection> {
+
+    constructor(t: IResourceCollection) {
+        this.collection = t;
+    }
+
+    actionT(t: IResourceCollection): void {
+        var rr = t.getResources()
+        for (var s of rr) this.collection.addResource(s);
+    }
+
+    collection: IResourceCollection
 }

@@ -6,7 +6,6 @@ import { RandomAct } from '../Wrappers/RandomAcr';
 import { SimpleFeedAct } from '../Wrappers/SimpleFeedAct';
 import { TwoAct } from '../Wrappers/TwoAct';
 import { ODE_FeedbackAct } from '../Wrappers/ODE_FeedbackAct';
-import { TransformerRecursveAct } from '../Wrappers/TransformerRecursveAct';
 import { PIAct } from '../Wrappers/PIAct';
 import { OrbitaForecasAct } from '../Wrappers/OrbitalForecastAct';
 import { OrbitalForecastCalculation } from '../../Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation';
@@ -84,6 +83,7 @@ export class Actor {
         fact.addFactory<IStringSplitter>(ss, "IStringSplitter")
         var creator = new Obj3DCreator(filename, "", undefined, fact)
         var m = creator.getMeshCreatorMeshes()
+        console.log(m)
     }
 
 
@@ -251,8 +251,8 @@ export class Actor {
 
     actTransformerFeedback(): void {
         try {
-            var o = new TransformerRecursveAct();
-            o.test();
+        //    var o = new TransformerRecursveAct();
+         //   o.test();
         }
         catch (e) {
             finish(e);

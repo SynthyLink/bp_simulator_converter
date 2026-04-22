@@ -19,7 +19,7 @@ import type { IMesh } from "../Interfaces/IMesh";
 import { AbstractMeshObj } from "../Meshes/AbstractMeshObj";
 
 export class Obj3DCreator extends LinesMeshCreator {
-    effectsPrivate: Map<string, EffectTexture> = new Map()
+    effectsPrivate !: Map<string, EffectTexture>
     ka !: ImageTexture
     kd !: ImageTexture
     ks !: ImageTexture
@@ -39,13 +39,13 @@ export class Obj3DCreator extends LinesMeshCreator {
 
     nm: number = 0
 
-    usedMaterials: string[] = []
+    usedMaterials !: string[]
 
     objs: string = "# object "
 
     fiction: string = "rrg5dvmg.bil";
 
-    names: string[] = []
+    names !: string[]
 
 
     tuple !: ITextureIndex
@@ -74,11 +74,15 @@ export class Obj3DCreator extends LinesMeshCreator {
     {
         this.materialLines = []
         this.effectsPrivate = new Map()
+        this.usedMaterials = []
+        this.iindexes = []
+        this.names = []
+        this.name = ""
         this.createMaterials()
         this.createGeometry()
     }
 
-    iindexes: ITextureIndex[][] = []
+    iindexes !: ITextureIndex[][]
 
     public getVertices(): number[][] {
         return this.vertices
@@ -213,40 +217,38 @@ export class Obj3DCreator extends LinesMeshCreator {
                         var file = line.substring("mtllib ".length).trim();
                         mt = this.createMaterialsFromLUrl(file, eff)
                         if (eff.length > 0) this.default = eff[0]
-                        continue
-                    }
-                    if (this.effectsPrivate.size == 0 && this.default == undefined) {
-                        for (let l of this.lines) {
-                            let p = this.toShiftString(l, "usemtl")
-                            if (p.length > 0) this.createEffect(p)
-                        }
-                        continue
-                    }
-                    if (this.effectsPrivate.has("_default_")) {
-                        let def = this.effectsPrivate.get("_default_")
-                        if (def != undefined) {
-                            this.default = def
-                        }
                     }
                 }
-                if (this.default == undefined && this.effectList.length == 0) {
-                    let file: string = ""
-                    let files = this.directoryio.getDirectoryFiles(this.directory)
-                    for (var f of files) {
-                        if (this.path.getFileExtension(f) == ".mtl") {
-                            this.createMaterialsFromLUrl(file, eff)
-                            if (eff.length > 0) this.default = eff[0]
-                            break;
-                        }
-                    }
-                    if (file.length >= 0) {
-                        if (this.detecctImage(file)) {
-                            this.default = this.createEffectFromImage(file);
-                        }
+                if (this.effectsPrivate.size == 0 && this.default == undefined) {
+                    for (let l of this.lines) {
+                        let p = this.toShiftString(l, "usemtl")
+                        if (p.length > 0) this.createEffect(p)
                     }
                 }
-
+                if (this.effectsPrivate.has("_default_")) {
+                    let def = this.effectsPrivate.get("_default_")
+                    if (def != undefined) {
+                        this.default = def
+                    }
+                }
             }
+            if (this.default == undefined && this.effectList.length == 0) {
+                let file: string = ""
+                let files = this.directoryio.getDirectoryFiles(this.directory)
+                for (var f of files) {
+                    if (this.path.getFileExtension(f) == ".mtl") {
+                        let mp = this.createMaterialsFromLUrl(f, eff)
+                        if (eff.length > 0) this.default = eff[0]
+                        break;
+                    }
+                }
+                if (file.length >= 0) {
+                    if (this.detectImage(file)) {
+                        this.default = this.createEffectFromImage(file);
+                    }
+                }
+            }
+
         }
         catch (e)
         {
@@ -306,24 +308,23 @@ export class Obj3DCreator extends LinesMeshCreator {
             this.iindexes.push(indexes);
             this.tuple = { effect: effect, indx: [] }
             indexes.push(this.tuple)
-
             for (var line of this.lines) {
-                if (line.indexOf("v ") == 0) {
+                if (line.startsWith("v ")) {
                     var f = this.toRealArray(line.substring("v ".length).trim());
                     this.vertices.push(f)
                     continue;
                 }
-                if (line.indexOf("vt ") == 0) {
+                if (line.startsWith("vt ")) {
                     var f = this.toRealArray(line.substring("vt ".length).trim());
                     this.addTexture(this.textures, f);
                     continue;
                 }
-                if (line.indexOf("vn ") == 0) {
+                if (line.startsWith("vn ")) {
                     var f = this.toRealArray(line.substring("vn ".length).trim());
                     this.normals.push(f);
                     continue;
                 }
-                if (line.indexOf("f ") == 0) {
+                if (line.startsWith("f ")) {
                     var s = line.substring("f ".length).trim();
                     var ss = s.split(" ");
                     if (ss.length != 3) {
@@ -341,7 +342,7 @@ export class Obj3DCreator extends LinesMeshCreator {
                                 ii[m] = -1;
                             }
                             else {
-                                ii[m] = this.performer.convert<string, number>(sss[m]) - 1;// Shifts[m];
+                                ii[m] = this.performer.toNumber(sss[m]) - 1;// Shifts[m];
                             }
                         }
                     }
@@ -352,9 +353,10 @@ export class Obj3DCreator extends LinesMeshCreator {
             }
         }
         catch (e) {
-
+            var me = e + ""
         }
     }
+
     createNamedGeometry(): void {
         // GetName = GetInititial;
         try {
@@ -506,7 +508,7 @@ export class Obj3DCreator extends LinesMeshCreator {
                                 i[m] = -1;
                             }
                             else {
-                                i[m] = this.performer.convert<string, number>(sss[m]) - 1;// Shifts[m];
+                                i[m] = this.performer.toNumber(sss[m]) - 1;// Shifts[m];
                             }
                         }
                     }
@@ -551,6 +553,8 @@ class MtlWrapper implements IEffectDitionary {
 
     performer: Performer = new Performer()
 
+    newName: string = ""
+
 
     constructor(obj: any, name: string, factory: IFactory, start: number, lines: string[], effects: Map<string, EffectTexture>,
         directory: string) {
@@ -559,7 +563,40 @@ class MtlWrapper implements IEffectDitionary {
         this.obj = obj;
         this.lines = lines;
         this.directory = directory;
-    }
+        var i = start;
+        var list: string[] = []
+        for (; i < lines.length; i++) {
+            var line = lines[i];
+            if (line == undefined) {
+                break;
+            }
+            if (line.length == 0) {
+                continue;
+            }
+            list.push(line);
+            if (line.startsWith("newmtl")) {
+                var ss = line.split(" ")
+                this.newName = ss[ss.length - 1];
+                break;
+            }
+
+        }
+        if (list.length == 0) {
+            return;
+        }
+
+        this.finalize(list, this.directory);
+        this.createEmpty();
+        var mat = this.effect;
+        if (mat != undefined) {
+            this.effects.set(this.newName, this.effect)
+        }
+
+        if (i + 1 < lines.length) {
+            new MtlWrapper(this.obj, this.newName, this.factory, i + 1, this.lines, this.effects, this.directory);
+        }
+
+}
     /* string str, int start, List<string> lines,
     Dictionary<string, Effect> effects, string directory*/
     getEffectDictionary(): Map<string, EffectTexture> {
@@ -584,15 +621,16 @@ class MtlWrapper implements IEffectDitionary {
         var i = start;
         for (; i < lines.length; i++) {
             var line = lines[i];
-            if (line.indexOf("newmtl") >= 0) {
+            if (line.startsWith("newmtl")) {
                 var ss = line.split(" ");
                 name = ss[ss.length - 1];
                 break;
             }
 
         }
-        new MtlWrapper(this.obj, name, this.factory, i + 1, this.lines, this.dict, this.directory);
-        return this.dict;
+        var mt = new MtlWrapper(this.obj, name, this.factory, i, this.lines, this.dict, this.directory);
+        var eff = mt.getEffectDictionary();
+        return eff;
 
     }
 

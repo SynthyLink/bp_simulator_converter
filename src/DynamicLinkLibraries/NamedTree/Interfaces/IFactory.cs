@@ -11,7 +11,7 @@
         /// <typeparam name="T">The type</typeparam>
         /// <param name="name">The name</param>
         /// <returns>The factory</returns>
-        T Get<T>(string name) where T : class;
+        T Get<T>() where T : class;
 
         /// <summary>
         /// Sets the factory
@@ -19,6 +19,6 @@
         /// <typeparam name="T">The type</typeparam>
         /// <param name="name">The name</param>
         /// <param name="t">The factory</param>
-        void Set<T>(string name, T t) where T : class;
+        void Set<T>(T t) where T : class;
     }
 }

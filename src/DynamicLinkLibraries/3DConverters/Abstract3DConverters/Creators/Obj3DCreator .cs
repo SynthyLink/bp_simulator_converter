@@ -15,7 +15,8 @@ namespace Abstract3DConverters.Creators
     {
         #region Ctor
 
-        public Obj3DCreator(string filename, string directory, params object[] objects) : base(filename, directory, objects)
+        public Obj3DCreator(string filename, string directory, params object[] objects) : 
+            base(filename, directory, objects)
         {
 
         }
@@ -70,7 +71,7 @@ namespace Abstract3DConverters.Creators
             get;
             set;
         }
-   
+
         protected override void CreateAdditional(object additional)
         {
             switch (additional)
@@ -83,7 +84,7 @@ namespace Abstract3DConverters.Creators
                     break;
 
             }
-              CreateAll();
+            CreateAll();
         }
 
         void Process(Tuple<string, byte[]> tuple)
@@ -658,6 +659,7 @@ namespace Abstract3DConverters.Creators
                             Effect deff = null;
                             var file = line.Substring("mtllib ".Length).Trim();
                             CreateMaterials(file, out deff);
+                            break;
                         }
                     }
                     if (EffectsPrivate.Count == 0 & Default == null)

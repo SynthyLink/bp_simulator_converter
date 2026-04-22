@@ -42,10 +42,7 @@ export class CategoryArrow implements ICategoryArrow, IObject
 
     protected name : string = "";
 
-
-
     protected desktop: IDesktop = new FictiveDesktop();
-
 
     protected source: ICategoryObject = new FictiveCategoryObject();
 

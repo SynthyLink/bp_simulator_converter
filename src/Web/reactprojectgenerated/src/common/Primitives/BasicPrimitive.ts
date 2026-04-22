@@ -1,6 +1,6 @@
-import { IFactory } from "../../Library/Interfaces/IFactory";
-import { IFactoryConsumer } from "../../Library/Interfaces/IFactoryConsumer";
-import { IObject } from "../../Library/Interfaces/IObject";
+import type { IFactory } from "../../Library/Interfaces/IFactory";
+import type { IFactoryConsumer } from "../../Library/Interfaces/IFactoryConsumer";
+import type { IObject } from "../../Library/Interfaces/IObject";
 import { Performer } from "../../Library/Performer";
 import { BasicScene } from "../BasicScene";
 import Game from "../game";
@@ -11,7 +11,7 @@ export class BasicPrimitive implements IObject, IFactoryConsumer
 
     protected typeName: string = "BasicPrimitive";
 
-    protected types: string[] = ["IObject", "BasicPrimitive"];
+    protected types: string[] = ["IObject", "IFactoryConsumer", "BasicPrimitive"];
 
     protected game ! : Game
 
@@ -21,15 +21,21 @@ export class BasicPrimitive implements IObject, IFactoryConsumer
 
     protected factory: IFactory
 
+    protected scene: BasicScene
+
     constructor(name: string, scene: BasicScene) {
         this.name = name;
+        this.scene = scene
         scene.addObjectToScene(this)
         this.game = scene.getGame();
         this.gl = scene.getGl()
     }
-    setConsumerFactory(facrory: IFactory): void {
-        this.factory = facrory
+  
+    setConsumerFactory(factory: IFactory): void
+    {
+        this.factory = factory
     }
+
     getConsumerFactory(): IFactory {
         return this.factory
     }

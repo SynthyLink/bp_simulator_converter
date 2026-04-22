@@ -6,15 +6,18 @@ class BasicPrimitive {
     constructor(name, scene) {
         this.name = "";
         this.typeName = "BasicPrimitive";
-        this.types = ["IObject", "BasicPrimitive"];
+        this.types = ["IObject", "IFactoryConsumer", "BasicPrimitive"];
         this.performer = new Performer_1.Performer();
         this.name = name;
+        this.scene = scene;
         scene.addObjectToScene(this);
         this.game = scene.getGame();
         this.gl = scene.getGl();
     }
-    setConsumerFactory(facrory) {
-        this.factory = facrory;
+    setConsumerFactory(factory) {
+        console.log("FACTORY");
+        console.log(factory);
+        this.factory = factory;
     }
     getConsumerFactory() {
         return this.factory;

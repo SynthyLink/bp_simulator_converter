@@ -1,7 +1,8 @@
 export class ImageTexture {
 
-    constructor(url: string) {
+    constructor(url: string, directory: string) {
         this.url = url
+        this.directory = directory
     }
 
     public getUrl(): string {
@@ -9,4 +10,6 @@ export class ImageTexture {
     }
 
     url: string = "";
+
+    directory: string = ""
 }

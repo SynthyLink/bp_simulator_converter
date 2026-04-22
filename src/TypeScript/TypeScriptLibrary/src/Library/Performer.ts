@@ -128,9 +128,8 @@ export class Performer
     public forEach<T>(collection: IObjectCollection, action: IActionT<T>, type: string) {
         let obj = collection.getObjectCollection()
         for (let o of obj) {
-
             var x = this.convertObject<T, IObject>(o, type)
-            if (x.length > 0) action.actionT(x[0])
+         if (x.length > 0) action.actionT(x[0])
         }
     }
 
@@ -461,6 +460,9 @@ export class Performer
         return this.convert<any, T>(t);
     }
 
+    public toNumber(s: any): number {
+        return Number(s)
+    }
 
     public convert<T, S>(t: T): S {
         // Typeof checks against string representations of types. S is a generic type,
@@ -470,23 +472,26 @@ export class Performer
         // A very limited approach would be to use type guards, but that means
         // you'd have to know what type S *could* be in advance. This is not
         // really a general solution.
+        const tt = typeof t
         if (t === undefined) {
             throw new OwnError("Type conversion", "Performer undefined. NULL OBJECT", undefined);
         }
-        if (typeof t === "string" && (null as any as S) instanceof String) { //VERY LIMITED AND UNSAFE EXAMPLE.
-            return t as any as S; // Force the type assertion (VERY UNSAFE)
+        if (tt === "string") {
+            if ((null as any as S) instanceof String) { //VERY LIMITED AND UNSAFE EXAMPLE.
+                return t as any as S; // Force the type assertion (VERY UNSAFE)
+            }
         }
 
-        if (typeof t === "number") { // } && (t as unknown as S) instanceof Number) {  //VERY LIMITED AND UNSAFE EXAMPLE.
+        if (tt === "number") { // } && (t as unknown as S) instanceof Number) {  //VERY LIMITED AND UNSAFE EXAMPLE.
             return t as unknown as S; // Force the type assertion (VERY UNSAFE)
         }
 
-        if (typeof t === "boolean") { //VERY LIMITED AND UNSAFE EXAMPLE.
+        if (tt === "boolean") { //VERY LIMITED AND UNSAFE EXAMPLE.
             return t as any as S; // Force the type assertion (VERY UNSAFE)
         }
 
         //This is better, but assumes S is a string or number
-        if (typeof t === 'string' && (null as any as S) as any === String) {
+        if (tt === 'string' && (null as any as S) as any === String) {
             return t as any as S;
         }
 
@@ -709,9 +714,10 @@ class FactorySetter implements IActionT<IFactoryConsumer>
 {
     constructor(factory: IFactory) {
         this.factory = factory
-    }
+  }
     actionT(t: IFactoryConsumer): void {
-        t.setConsumerFactory(this.factory)
+      t.setConsumerFactory(this.factory)
     }
+
     factory: IFactory
 }

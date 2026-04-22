@@ -36,8 +36,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Object3DPrimitive = void 0;
 const BasicPrimitive_1 = require("./BasicPrimitive");
 const gl_matrix_1 = require("gl-matrix");
-const MeshUtils = __importStar(require("../../common/mesh-utils"));
 const TextureUtils = __importStar(require("../../common/texture-utils"));
+const Obj3DCreator_1 = require("../../Library/Abstract3DConverters/MeshCreators/Obj3DCreator");
 class Object3DPrimitive extends BasicPrimitive_1.BasicPrimitive {
     constructor(name, scene, shape) {
         super(name, scene);
@@ -66,25 +66,21 @@ class Object3DPrimitive extends BasicPrimitive_1.BasicPrimitive {
             let obj = this.game.loader.resources[key];
             let n = key.lastIndexOf(".obj");
             if (n > 0) {
-                console.log(obj);
-                this.mesh = MeshUtils.LoadOBJMesh(this.gl, obj);
-                var spt = obj;
-                var spp = spt.split("\n");
-                for (let i = 0; i < spp.length; i++) {
-                    console.log(i);
-                    console.log(spp[i]);
-                }
-                console.log(this.mesh);
-                continue;
+                //this.mesh = MeshUtils.LoadOBJMesh(this.gl, obj)
+                //var spt = obj as string
+                // var spp = spt.split("\n");
+                console.log("MMMMMMSSSS");
+                console.log(this.factory);
+                var creator = new Obj3DCreator_1.Obj3DCreator(key, "", this.scene, this.factory);
+                this.meshes = creator.getMeshCreatorMeshes();
+                console.log("MMMMMM");
             }
-            console.log(obj);
             n = key.lastIndexOf(".mtl");
             if (n >= 0) {
                 continue;
             }
             let txt = TextureUtils.LoadImage(this.gl, obj);
             this.textures[key] = txt;
-            console.log(txt);
         }
     }
 }

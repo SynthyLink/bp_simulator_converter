@@ -34,7 +34,7 @@ export class PerformerMeasuremets {
         return this.processor
     }
 
-    public  setDifferentialEquationProcessor(p: IDifferentialEquationProcessor): void { 
+    public setDifferentialEquationProcessor(p: IDifferentialEquationProcessor): void {
         this.processor = p;
     }
 

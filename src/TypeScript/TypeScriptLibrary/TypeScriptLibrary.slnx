@@ -1,5 +1,4 @@
 <Solution>
-  <Project Path="../../DynamicLinkLibraries/3DConverters/Abstract3DConverters/Abstract3DConverters.csproj" />
   <Project Path="TypeScriptLibrary.esproj">
     <Build />
     <Deploy />

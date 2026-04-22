@@ -9,10 +9,6 @@ namespace Abstract3DConverters.Meshes
     [CommonVetrices]
     class AbstractMeshObj : AbstractMeshPolygon
     {
-        Dictionary<int, int[]> Global
-        {
-            get;
-        } = new();
 
         internal int Shift
         {

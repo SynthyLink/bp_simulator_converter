@@ -12,7 +12,6 @@ import { Performer } from "../Performer";
 export abstract class ScadaInterface implements IScadaInterface, IObject
 {
     constructor() {
-        console.log("UUUUUUUUUUUUUUUUU")
     }
 
     getClassName(): string {

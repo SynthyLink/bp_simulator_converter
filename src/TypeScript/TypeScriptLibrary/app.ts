@@ -2,15 +2,16 @@ import { Actor } from "./src/Tests/Actor/Actor";
 
 let a = new Actor()
 
+var mtl = "c:\\AUsers\\1MySoft\\CSharp\\src\\Web\\reactprojectgenerated\\static\\models\\pLANE\\master.mtl"
 var caravan = "c:\\AUsers\\1MySoft\\CSharp\\src\\Web\\reactprojectgenerated\\static\\models\\pLANE\\Cessna_208_Caravan.obj"
 
 a.loadObj(caravan)
-
+//a.readTest(mtl)
 //a.actAirplane()
 
 //await a.actDonchianLoad();
 
-//a.readTest(caravan)
+//a.readTest000m()
 //a.actPI()
 //a.testDate();
 

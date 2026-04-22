@@ -1,42 +1,34 @@
-import { IFactory } from "../../Interfaces/IFactory";
-import { Effect } from "../Effect";
-import { IMesh } from "../Intersaces/IMesh";
-import { IMeshCreator } from "../Intersaces/IMeshCreator";
+import type { IFactory } from "../../Interfaces/IFactory";
+import { AbstractMeshCreator } from "./AbstractMeshCreator";
 
-export abstract class LinesMeshCreator implements IMeshCreator {
+export abstract class LinesMeshCreator extends AbstractMeshCreator
+{
 
-    constructor(url: string, sep: string, obj: any, factory: IFactory) {
-        this.url = url
-        this.sep = sep;
-        this.factory = factory
-        this.obj = obj;
+    constructor(url: string, directory: string, obj: any, factory: IFactory) {
+        super(url, directory, obj, factory)
+        var r = this.textReaderFactory.getTextReader(obj, url) 
+        this.globalString = r.readToEnd();
+        this.loadMeshCreator()
     }
 
-    getURL(): string {
-        return this.url;
+    loadMeshCreator(): void {
+        this.lines = this.textConverter.splitStrings(this.obj, this.globalString)
+        this.loadLines()
+    }
+    protected loadStrings(url: string): string[] {
+        var r = this.textReaderFactory.getTextReader(this.obj, url)
+        return r.getStrings()
     }
 
-    load(obj: any): void {
-        let s = obj as string
-        let text = s.split(this.sep)
-        this.loadText(text)
+    getName(): string {
+        return this.name;
     }
 
-    abstract loadText(text: string[]): void
+    protected abstract loadLines(): void
 
-    abstract getMeshes(): IMesh[];
+    lines: string[] = []
 
-    abstract getEffects(): Map<string, Effect>
+    globalString : string = ""
 
-
-    protected sep: string;
-
-    protected text: string[] = []
-
-    protected url: string = "";
-
-    protected factory: IFactory
-
-    protected obj : any
-
+  
 }

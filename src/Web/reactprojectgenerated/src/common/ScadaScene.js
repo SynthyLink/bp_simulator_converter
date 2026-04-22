@@ -3,20 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ScadaScene = void 0;
 const ScadaDesktopEngine_1 = require("../Library/Scada/ScadaDesktopEngine");
 const BasicScene_1 = require("./BasicScene");
-const Object3DPrimive_1 = require("./Primitives/Object3DPrimive");
 const Performer_1 = require("../Library/Performer");
 class ScadaScene extends BasicScene_1.BasicScene {
     constructor(game, factory, desktop) {
         super(game, factory);
         this.startp = new Start();
         this.performer = new Performer_1.Performer();
-        console.log("PPPPPPPPPPPPP");
         this.scada = new ScadaDesktopEngine_1.ScadaDesktopEngine(desktop, game, factory, "Chart");
-        console.log(this.scada);
-        console.log("PPPPHHHPPPPPPPPP");
-        console.log(this.performer);
-        this.loadShapes();
-        console.log(this.performer.setFactoryToObjectCollection);
+        this.loadScada();
         this.performer.setFactoryToObjectCollection(this, factory);
     }
     draw(deltaTime) {
@@ -24,13 +18,10 @@ class ScadaScene extends BasicScene_1.BasicScene {
     end() {
     }
     actionT(t) {
-        var name = t.getName();
-        new Object3DPrimive_1.Object3DPrimitive(name, this, t);
+        this.loader.loadObject(this, t);
     }
-    loadShapes() {
-        console.log("LLLLL");
-        console.log(this.scada);
-        this.performer.forEach(this.scada, this, "Basic3DShape");
+    loadScada() {
+        this.performer.forEach(this.scada, this, "IObject");
     }
     start() {
         this.performer.forEach(this, this.startp, "IStartPrimitive");
