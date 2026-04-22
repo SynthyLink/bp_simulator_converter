@@ -10,8 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="src\Abstract3DConverters\**" />
+    <None Remove="src\common\Factory\**" />
     <None Remove="src\Library - Copy\**" />
     <TypeScriptConfiguration Remove="src\Abstract3DConverters\**" />
+    <TypeScriptConfiguration Remove="src\common\Factory\**" />
     <TypeScriptConfiguration Remove="src\Library - Copy\**" />
   </ItemGroup>
   <ItemGroup>

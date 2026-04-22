@@ -12,8 +12,8 @@ import { IResourceCollection } from "../Library/Interfaces/IResouceCollection";
 
 export abstract class BasicScene extends Scene implements IObject, IObjectCollection, IResourceCollection {
     protected programs: { [name: string]: ShaderProgram } = {};
-    protected camera : Camera;
-    protected controller : FlyCameraController;
+    protected camera !: Camera;
+    protected controller !: FlyCameraController;
     protected meshes: { [name: string]: Mesh } = {};
     protected textures: { [name: string]: WebGLTexture } = {};
     protected samplers: { [name: string]: WebGLSampler } = {};
@@ -32,7 +32,9 @@ export abstract class BasicScene extends Scene implements IObject, IObjectCollec
         super(game)
         this.factory = factory
         let l = factory.getFactory<ILoaderFactory>("ILoaderFactory")
-        this.loader = l.getLoader(this)
+        if (l != undefined) {
+            this.loader = l.getLoader(this)
+        }
     }
     addResource(url: string): void {
         if (!this.resourceFiles.includes(url)) this.resourceFiles.push(url)
@@ -95,9 +97,9 @@ export abstract class BasicScene extends Scene implements IObject, IObjectCollec
 
     }
 
-    protected factory: IFactory
+    protected factory !: IFactory
 
-    protected loader: ILoader
+    protected loader !: ILoader
 
-    protected resourceFiles: string[]
+    protected resourceFiles: string[] =[]
 }

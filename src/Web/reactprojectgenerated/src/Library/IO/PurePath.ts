@@ -1,6 +1,7 @@
 import { IPath } from "./Interfaces/IPath";
+import { IObject } from "../Interfaces/IObject";
 
-export class PurePath implements IPath {
+export class PurePath implements IPath, IObject {
     pathCombine(path1: string, path2: string): string {
         let p1 = path1
         if (p1.endsWith("/") || p1.endsWith("\\")) p1 = path1.substr(0, path1.length - 1)
@@ -29,5 +30,24 @@ export class PurePath implements IPath {
         var fn = this.getFileName(fileName)
         return fileName.substr(0, fileName.length - fn.length)
      }
+
+    getName(): string {
+        return this.name;
+    }
+
+
+    getClassName(): string {
+        return this.typeName;
+    }
+
+    imlplementsType(type: string): boolean {
+        return this.types.indexOf(type) >= 0;
+    }
+
+    protected typeName: string = "PurePath";
+
+    protected types: string[] = ["IObject", "IPath", "PurePath"];
+
+    protected name: string = "";
 
 }

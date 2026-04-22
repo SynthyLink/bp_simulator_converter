@@ -7,10 +7,14 @@ import { Motion6DRealtimeFactory } from "./Runtime/Event/Motion6DRealtimeFactory
 export class Motion6DFactory extends UniversalFactory {
     constructor() {
         super()
+        this.types.push("Motion6DFactory")
+        this.typeName = "Motion6DFactory"
         let processor = new RungeProcessor();
         this.addFactory<IDifferentialEquationProcessor>(processor, "IDifferentialEquationProcessor")
         let f = new Motion6DRealtimeFactory()
         this.addFactory<IRealtimeCollectionFactory>(f, "IRealtimeCollectionFactory")
+        this.types.push("Motion6DFactory")
+        this.typeName = "Motion6DFactory"
 
     }
 }

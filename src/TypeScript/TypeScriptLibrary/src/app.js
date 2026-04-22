@@ -13,6 +13,10 @@ const Actor_1 = require("./Tests/Actor/Actor");
 let a = new Actor_1.Actor();
 //a.actAirplane()
 //await a.actDonchianLoad();
+//a.readTest(caravan)
+//a.readTest(caravan)
+//a.actAirplane()
+//await a.actDonchianLoad();
 //a.actPI()
 //a.testDate();
 //a.actTime();

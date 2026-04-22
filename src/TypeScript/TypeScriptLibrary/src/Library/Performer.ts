@@ -32,6 +32,7 @@ import type { IObjectCollection } from "./Interfaces/IObjectCollection";
 import type { INamed } from "./NamedTree/Interfaces/INamed";
 import type { IFactory } from "./Interfaces/IFactory";
 import type { IFactoryConsumer } from "./Interfaces/IFactoryConsumer";
+import { IResourceCollection } from "./Interfaces/IResouceCollection";
 
 
 export class Performer
@@ -700,6 +701,11 @@ export class Performer
         return new AliasName(al, s);
     }
 
+    public collectResources(res: IResourceCollection, collection: IObjectCollection) {
+        var rs = new ResourceSetter(res)
+        this.forEach<IResourceCollection>(collection, rs, "IResourceCollection")
+    }
+
     measurements !: IMeasurements;
 
     measurement !: IMeasurement;
@@ -720,4 +726,18 @@ class FactorySetter implements IActionT<IFactoryConsumer>
     }
 
     factory: IFactory
+}
+
+class ResourceSetter implements IActionT<IResourceCollection> {
+
+    constructor(t: IResourceCollection) {
+        this.collection = t;
+    }
+
+    actionT(t: IResourceCollection): void {
+        var rr = t.getResources()
+        for (var s of rr) this.collection.addResource(s);
+    }
+
+    collection: IResourceCollection
 }

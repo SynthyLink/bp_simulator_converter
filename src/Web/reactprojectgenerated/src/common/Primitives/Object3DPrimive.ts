@@ -4,8 +4,6 @@ import { vec3, mat4 } from "gl-matrix";
 import Mesh from "../mesh";
 import { Basic3DShape } from "../../Library/Motion6D/Objects/Shapes/Basic3DShape";
 import { IStartPrimitive } from "../Interfaces/IStartPrimitive";
-import * as MeshUtils from  "../../common/mesh-utils"
-import * as TextureUtils from '../../common/texture-utils';
 import { IMesh } from "../../Library/Abstract3DConverters/Interfaces/IMesh";
 import { Obj3DCreator } from "../../Library/Abstract3DConverters/MeshCreators/Obj3DCreator";
 
@@ -16,12 +14,15 @@ export class Object3DPrimitive extends BasicPrimitive implements IStartPrimitive
         this.typeName = "Object3DPrimitive"
         this.types.push("Object3DPrimitive")
         this.types.push("IStartPrimitive")
+        console.log(this)
     }
+
     startPrimitive(): void {
         this.loadMesh()
     }
 
     loadMesh(): void {
+        console.log("LOADM")
         let map = this.shape.getSaveGrahicalData()
         for (let key of map.keys()) {
             let obj = this.game.loader.resources[key];
@@ -32,28 +33,23 @@ export class Object3DPrimitive extends BasicPrimitive implements IStartPrimitive
                 // var spp = spt.split("\n");
                 console.log("MMMMMMSSSS")
                 console.log(this.factory)
-             var creator = new Obj3DCreator(key, "", this.scene, this.factory);
+                var creator = new Obj3DCreator(key, "", this.scene, this.factory);
                 this.meshes = creator.getMeshCreatorMeshes()
+                console.log(this.meshes.length)
                 console.log("MMMMMM")
             }
 
-            n = key.lastIndexOf(".mtl")
-            if (n >= 0) {
-                continue;
-            }
-            let txt = TextureUtils.LoadImage(this.gl, obj);
-            this.textures[key] = txt;
         }
     }
 
     shape !: Basic3DShape
-    mesh: Mesh; // which mesh to draw
-    texture: WebGLTexture; // which texture to attach
-    tint: [number, number, number, number]; // the color tint of the object
+    mesh !: Mesh; // which mesh to draw
+    texture !: WebGLTexture; // which texture to attach
+    tint !: [number, number, number, number]; // the color tint of the object
     currentModelMatrix: mat4; // The model matrix of the object in the current frame
     previousModelMatrix: mat4; // The model matrix of the object in the previous frame
 
-    meshes : IMesh[] 
+    meshes : IMesh[] = []
     //Move Controllers
     type: 'orthographic' | 'perspective' = 'perspective';
     protected textures: { [name: string]: WebGLTexture } = {};

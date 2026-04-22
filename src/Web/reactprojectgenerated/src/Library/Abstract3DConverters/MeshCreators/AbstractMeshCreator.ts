@@ -43,7 +43,7 @@ export abstract class AbstractMeshCreator implements IMeshCreator {
         }
         let td = factory.getFactory<IIODirectoryFactory>("IIODirectoryFactory")
         if (td != undefined) {
-            this.directoryio = td.createDirectoryFacrory(obj)
+            this.directoryio = td.createDirectoryFactory(obj)
         }
         let idt = factory.getFactory<IImageDetectorFactory>("IImageDetectorFactory")
         if (idt != undefined) this.imageDetector = idt.getImageDetector(obj)

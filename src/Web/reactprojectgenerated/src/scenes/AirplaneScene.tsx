@@ -1,6 +1,6 @@
 import { Airplane } from "../Airplane";
 import  Game  from "../common/game";
-import { GameFactory } from "../common/Factory/GameFactory";
+import { GameFactory } from "../common/GameFactory";
 import { ScadaScene } from "../common/ScadaScene";
 
 

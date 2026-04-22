@@ -551,12 +551,9 @@ class Performer {
 exports.Performer = Performer;
 class FactorySetter {
     constructor(factory) {
-        console.log("SETTER", factory);
         this.factory = factory;
     }
     actionT(t) {
-        console.log("SETTERT");
-        console.log(this.factory);
         t.setConsumerFactory(this.factory);
     }
 }

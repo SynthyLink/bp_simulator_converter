@@ -1,7 +1,8 @@
+import { IObject } from "../Interfaces/IObject";
 import { ITextReader } from "./Interfaces/ITextReader";
 
 
-export class LinesTextReader implements ITextReader {
+export class LinesTextReader implements IObject, ITextReader {
 
     getStrings(): string[] {
         return this.strings
@@ -34,6 +35,26 @@ export class LinesTextReader implements ITextReader {
             this.strings.push(str.replace("\r", ""))
         }
     }
+
+    getName(): string {
+        return this.name;
+    }
+
+
+    getClassName(): string {
+        return this.typeName;
+    }
+
+    imlplementsType(type: string): boolean {
+        return this.types.indexOf(type) >= 0;
+    }
+
+    protected typeName: string = "CategoryArrow";
+
+    protected types: string[] = ["IObject", "ITextReader", "LinesTextReader"];
+
+    protected name: string = "";
+
 
     strings: string[] = [];
 

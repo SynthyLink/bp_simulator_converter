@@ -1,4 +1,4 @@
-import { TimeType } from "../../Enums/TimeType";
+import { TimeType } from "../Enums/TimeType";
 import type { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
 
 export interface ITimeMeasurementProviderFactory {

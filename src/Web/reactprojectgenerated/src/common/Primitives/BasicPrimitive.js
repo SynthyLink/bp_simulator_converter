@@ -15,8 +15,6 @@ class BasicPrimitive {
         this.gl = scene.getGl();
     }
     setConsumerFactory(factory) {
-        console.log("FACTORY");
-        console.log(factory);
         this.factory = factory;
     }
     getConsumerFactory() {

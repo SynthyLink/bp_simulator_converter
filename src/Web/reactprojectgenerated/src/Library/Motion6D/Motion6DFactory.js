@@ -11,6 +11,8 @@ class Motion6DFactory extends UniversalFactory_1.UniversalFactory {
         this.addFactory(processor, "IDifferentialEquationProcessor");
         let f = new Motion6DRealtimeFactory_1.Motion6DRealtimeFactory();
         this.addFactory(f, "IRealtimeCollectionFactory");
+        this.types.push("Motion6DFactory");
+        this.typeName = "Motion6DFactory";
     }
 }
 exports.Motion6DFactory = Motion6DFactory;

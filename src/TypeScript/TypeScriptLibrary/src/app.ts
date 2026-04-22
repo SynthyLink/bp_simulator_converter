@@ -3,6 +3,13 @@ import { Actor } from "./Tests/Actor/Actor";
 let a = new Actor()
 
 
+//a.actAirplane()
+
+//await a.actDonchianLoad();
+
+//a.readTest(caravan)
+
+//a.readTest(caravan)
 
 //a.actAirplane()
 

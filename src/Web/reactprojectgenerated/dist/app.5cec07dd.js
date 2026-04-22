@@ -9051,7 +9051,7 @@ exports.CheckBox = function (props) {
     }
   });
 };
-},{"tsx-create-element":"node_modules/tsx-create-element/dist/es6/index.js"}],"src/common/loader.js":[function(require,module,exports) {
+},{"tsx-create-element":"node_modules/tsx-create-element/dist/es6/index.js"}],"src/common/loader.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -10235,7 +10235,7 @@ var Key;
     Key["Separator"] = "Separator";
 })(Key = exports.Key || (exports.Key = {}));
 
-},{}],"src/common/input.js":[function(require,module,exports) {
+},{}],"src/common/input.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -10683,83 +10683,7 @@ var SortingAlgorithms = /*#__PURE__*/function () {
   }]);
 }();
 exports.SortingAlgorithms = SortingAlgorithms;
-},{}],"src/Library/Utilities/Generic/ActionArray.js":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ActionArray = void 0;
-var Performer_1 = require("../../Performer");
-var ActionArray = /*#__PURE__*/function () {
-  function ActionArray() {
-    _classCallCheck(this, ActionArray);
-    this.actions = [];
-    this.typeName = "ActionArray";
-    this.types = ["IAction", "IObject", "ActionArray"];
-    this.performer = new Performer_1.Performer();
-  }
-  return _createClass(ActionArray, [{
-    key: "addAction",
-    value: function addAction(action) {
-      if (action === undefined) return;
-      this.actions.push(action);
-    }
-  }, {
-    key: "removeAction",
-    value: function removeAction(action) {
-      if (action === undefined) return;
-      this.performer.remove(this.actions, action);
-    }
-  }, {
-    key: "clearActions",
-    value: function clearActions() {
-      this.actions = [];
-    }
-  }, {
-    key: "getClassName",
-    value: function getClassName() {
-      return this.typeName;
-    }
-  }, {
-    key: "imlplementsType",
-    value: function imlplementsType(type) {
-      return this.types.indexOf(type) > 0;
-    }
-  }, {
-    key: "getName",
-    value: function getName() {
-      return "";
-    }
-  }, {
-    key: "action",
-    value: function action() {
-      var _iterator = _createForOfIteratorHelper(this.actions),
-        _step;
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var _action = _step.value;
-          _action.action();
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-    }
-  }]);
-}();
-exports.ActionArray = ActionArray;
-},{"../../Performer":"src/Library/Performer.js"}],"src/Library/Performer.js":[function(require,module,exports) {
+},{}],"src/Library/Performer.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -11629,19 +11553,1001 @@ exports.Performer = Performer;
 var FactorySetter = /*#__PURE__*/function () {
   function FactorySetter(factory) {
     _classCallCheck(this, FactorySetter);
-    console.log("SETTER", factory);
     this.factory = factory;
   }
   return _createClass(FactorySetter, [{
     key: "actionT",
     value: function actionT(t) {
-      console.log("SETTERT");
-      console.log(this.factory);
       t.setConsumerFactory(this.factory);
     }
   }]);
 }();
-},{"./AliasName":"src/Library/AliasName.js","./ConsolePrinter":"src/Library/ConsolePrinter.js","./ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.js","./Measurements/MeasurementsComparator":"src/Library/Measurements/MeasurementsComparator.js","./Utilities/Sort/SortingAlgorithms":"src/Library/Utilities/Sort/SortingAlgorithms.js","./Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.js"}],"src/Library/Utilities/Generic/ActionArrayT.js":[function(require,module,exports) {
+},{"./AliasName":"src/Library/AliasName.js","./ConsolePrinter":"src/Library/ConsolePrinter.js","./ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.js","./Measurements/MeasurementsComparator":"src/Library/Measurements/MeasurementsComparator.js","./Utilities/Sort/SortingAlgorithms":"src/Library/Utilities/Sort/SortingAlgorithms.js","./Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.js"}],"src/Library/Utilities/Generic/ActionArray.js":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ActionArray = void 0;
+var Performer_1 = require("../../Performer");
+var ActionArray = /*#__PURE__*/function () {
+  function ActionArray() {
+    _classCallCheck(this, ActionArray);
+    this.actions = [];
+    this.typeName = "ActionArray";
+    this.types = ["IAction", "IObject", "ActionArray"];
+    this.performer = new Performer_1.Performer();
+  }
+  return _createClass(ActionArray, [{
+    key: "addAction",
+    value: function addAction(action) {
+      if (action === undefined) return;
+      this.actions.push(action);
+    }
+  }, {
+    key: "removeAction",
+    value: function removeAction(action) {
+      if (action === undefined) return;
+      this.performer.remove(this.actions, action);
+    }
+  }, {
+    key: "clearActions",
+    value: function clearActions() {
+      this.actions = [];
+    }
+  }, {
+    key: "getClassName",
+    value: function getClassName() {
+      return this.typeName;
+    }
+  }, {
+    key: "imlplementsType",
+    value: function imlplementsType(type) {
+      return this.types.indexOf(type) > 0;
+    }
+  }, {
+    key: "getName",
+    value: function getName() {
+      return "";
+    }
+  }, {
+    key: "action",
+    value: function action() {
+      var _iterator = _createForOfIteratorHelper(this.actions),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var _action = _step.value;
+          _action.action();
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    }
+  }]);
+}();
+exports.ActionArray = ActionArray;
+},{"../../Performer":"src/Library/Performer.js"}],"src/Library/Performer.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Performer = void 0;
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+var AliasName_1 = require("./AliasName");
+var ConsolePrinter_1 = require("./ConsolePrinter");
+var OwnError_1 = require("./ErrorHandler/OwnError");
+var MeasurementsComparator_1 = require("./Measurements/MeasurementsComparator");
+var SortingAlgorithms_1 = require("./Utilities/Sort/SortingAlgorithms");
+var ActionArray_1 = require("./Utilities/Generic/ActionArray");
+var Performer = /*#__PURE__*/function () {
+  function Performer() {
+    _classCallCheck(this, Performer);
+    this.a = 0;
+    this.b = false;
+    this.s = "";
+    this.printer = new ConsolePrinter_1.ConsolePrinter();
+    this.sorting = new SortingAlgorithms_1.SortingAlgorithms();
+    this.mCompatator = new MeasurementsComparator_1.MeasurementsComparator(this);
+  }
+  return _createClass(Performer, [{
+    key: "addUnique",
+    value: function addUnique(list, item) {
+      var _iterator = _createForOfIteratorHelper(list),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var x = _step.value;
+          if (x == item) {
+            return false;
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      list.push(item);
+      return true;
+    }
+  }, {
+    key: "toShiftString",
+    value: function toShiftString(str, shift) {
+      {
+        if (str.indexOf(shift) == 0) {
+          return str.substring(shift.length);
+        }
+        return "";
+      }
+    }
+  }, {
+    key: "cut",
+    value: function cut(t, n) {
+      var s = [];
+      for (var i = 0; i < n; i++) {
+        s.push(t[i]);
+      }
+      return s;
+    }
+  }, {
+    key: "addCut",
+    value: function addCut(list, t, n) {
+      var tt = t;
+      if (t.length > n) {
+        tt = this.cut(t, n);
+      }
+      list.push(tt);
+    }
+  }, {
+    key: "setFactoryToObjectCollection",
+    value: function setFactoryToObjectCollection(collection, factory) {
+      var setter = new FactorySetter(factory);
+      this.forEach(collection, setter, "IFactoryConsumer");
+    }
+  }, {
+    key: "getAllIObjects",
+    value: function getAllIObjects(categoryObjects, arrows, objects) {
+      var _iterator2 = _createForOfIteratorHelper(categoryObjects),
+        _step2;
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var o = _step2.value;
+          var l = this.convertObject(o, "IObject");
+          if (l.length > 0) {
+            objects.push(l[0]);
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+      var _iterator3 = _createForOfIteratorHelper(arrows),
+        _step3;
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var a = _step3.value;
+          var l = this.convertObject(a, "IObject");
+          if (l.length > 0) {
+            objects.push(l[0]);
+          }
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+    }
+  }, {
+    key: "setPrinter",
+    value: function setPrinter(printer) {
+      this.printer = printer;
+    }
+  }, {
+    key: "forEach",
+    value: function forEach(collection, action, type) {
+      var obj = collection.getObjectCollection();
+      var _iterator4 = _createForOfIteratorHelper(obj),
+        _step4;
+      try {
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var o = _step4.value;
+          var x = this.convertObject(o, type);
+          if (x.length > 0) action.actionT(x[0]);
+        }
+      } catch (err) {
+        _iterator4.e(err);
+      } finally {
+        _iterator4.f();
+      }
+    }
+  }, {
+    key: "getAll",
+    value: function getAll(collection, type) {
+      var t = [];
+      var obj = collection.getObjectCollection();
+      var _iterator5 = _createForOfIteratorHelper(obj),
+        _step5;
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var o = _step5.value;
+          var x = this.convertObject(o, type);
+          if (x.length > 0) t.push(x[0]);
+        }
+      } catch (err) {
+        _iterator5.e(err);
+      } finally {
+        _iterator5.f();
+      }
+      return t;
+    }
+  }, {
+    key: "reoplaceArrayValue",
+    value: function reoplaceArrayValue(t, s) {
+      if (s.length == 0) {
+        if (t.length > 0) {
+          t.pop();
+          return;
+        }
+      }
+      var ss = s[0];
+      if (t.length > 0) {
+        t[0] = ss;
+        return;
+      }
+      t.push(ss);
+    }
+  }, {
+    key: "executeAction",
+    value: function executeAction(acttion) {
+      if (acttion === undefined) return;
+      acttion.action();
+    }
+  }, {
+    key: "sumOfActions",
+    value: function sumOfActions(first, second) {
+      var act = new ActionArray_1.ActionArray();
+      if (first === undefined) {
+        return second;
+      } else {
+        act.addAction(first);
+        if (second === undefined) {
+          return first;
+        } else {
+          act.addAction(second);
+        }
+      }
+      return act;
+    }
+  }, {
+    key: "setCheker",
+    value: function setCheker(desktop, check) {
+      var objects = desktop.getCategoryObjects();
+      var _iterator6 = _createForOfIteratorHelper(objects),
+        _step6;
+      try {
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          var object = _step6.value;
+          if (this.implementsType(object, "ICheckHolder")) {
+            var ch = object;
+            ch.setCheck(check);
+          }
+        }
+      } catch (err) {
+        _iterator6.e(err);
+      } finally {
+        _iterator6.f();
+      }
+    }
+  }, {
+    key: "findMaxWithReduce",
+    value: function findMaxWithReduce(numbers) {
+      if (numbers.length === 0) {
+        return undefined;
+      }
+      return numbers.reduce(function (max, current) {
+        return current > max ? current : max;
+      }, -Infinity); // Start with -Infinity to ensure the first element is always greater
+    }
+  }, {
+    key: "findMinWithReduce",
+    value: function findMinWithReduce(numbers) {
+      if (numbers.length === 0) {
+        return undefined;
+      }
+      return numbers.reduce(function (min, current) {
+        return current > min ? current : min;
+      }, Infinity); // Start with -Infinity to ensure the first element is always greater
+    }
+  }, {
+    key: "calculateAverage",
+    value: function calculateAverage(numbers) {
+      if (numbers.length === 0) {
+        return 0; // Or throw an error, depending on your requirements
+      }
+      var sum = numbers.reduce(function (accumulator, currentValue) {
+        return accumulator + currentValue;
+      }, 0);
+      return sum / numbers.length;
+    }
+  }, {
+    key: "calculateAverageRobust",
+    value: function calculateAverageRobust(data) {
+      var numbers = data.filter(function (item) {
+        return typeof item === 'number';
+      }); // Type guard
+      if (numbers.length === 0) {
+        return 0;
+      }
+      var sum = numbers.reduce(function (accumulator, currentValue) {
+        return accumulator + currentValue;
+      }, 0);
+      return sum / numbers.length;
+    }
+  }, {
+    key: "calculateAverageNull",
+    value: function calculateAverageNull(data) {
+      var numbers = data.filter(function (item) {
+        return typeof item === 'number';
+      }); // Type guard
+      if (numbers.length != data.length) {
+        return undefined;
+      }
+      var sum = numbers.reduce(function (accumulator, currentValue) {
+        return accumulator + currentValue;
+      }, 0);
+      return sum / numbers.length;
+    }
+  }, {
+    key: "getPrinter",
+    value: function getPrinter() {
+      return this.printer;
+    }
+  }, {
+    key: "print",
+    value: function print(object) {
+      if (this.implementsType(object, "IPrintedObject")) {
+        var pr = object;
+        pr.print(this.printer);
+        return;
+      }
+      this.printer.print(object);
+    }
+  }, {
+    key: "convertTS",
+    value: function convertTS(s, type) {
+      if (this.implementsType(s, type)) {
+        throw new OwnError_1.OwnError("Illegal type", "Illegal type: " + type, undefined);
+      }
+      return s;
+    }
+  }, {
+    key: "getByInterface",
+    value: function getByInterface(desktop, type) {
+      var co = desktop.getCategoryObjects();
+      var objects = [];
+      var _iterator7 = _createForOfIteratorHelper(co),
+        _step7;
+      try {
+        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+          var a = _step7.value;
+          if (this.implementsType(a, type)) {
+            objects.push(a);
+          }
+        }
+      } catch (err) {
+        _iterator7.e(err);
+      } finally {
+        _iterator7.f();
+      }
+      return objects;
+    }
+  }, {
+    key: "sortMeasurements",
+    value: function sortMeasurements(measurements) {
+      return this.sorting.mergesort(measurements, this.mCompatator);
+    }
+  }, {
+    key: "getByType",
+    value: function getByType(desktop, type) {
+      var co = desktop.getCategoryObjects();
+      var objects = [];
+      var _iterator8 = _createForOfIteratorHelper(co),
+        _step8;
+      try {
+        for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+          var a = _step8.value;
+          if (this.implementsType(a, type)) {
+            var ob = a;
+            if (ob.getClassName() == type) {
+              objects.push(a);
+            }
+          }
+        }
+      } catch (err) {
+        _iterator8.e(err);
+      } finally {
+        _iterator8.f();
+      }
+      return objects;
+    }
+  }, {
+    key: "updateFeedbackData",
+    value: function updateFeedbackData(dataConsumer, feedback) {
+      if (feedback.isEmpty()) return;
+      feedback.setFeedbacks();
+      this.updateChildrenData(dataConsumer);
+    }
+  }, {
+    key: "updateChildrenData",
+    value: function updateChildrenData(dataConsumer) {
+      var children = dataConsumer.getAllMeasurements();
+      var _iterator9 = _createForOfIteratorHelper(children),
+        _step9;
+      try {
+        for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+          var child = _step9.value;
+          var o = child;
+          if (this.implementsType(o, "IDataConsumer")) {
+            var dc = child;
+            this.updateChildrenData(dc);
+          }
+          child.updateMeasurements();
+        }
+      } catch (err) {
+        _iterator9.e(err);
+      } finally {
+        _iterator9.f();
+      }
+    }
+  }, {
+    key: "convertArray",
+    value: function convertArray(objects, type) {
+      var s = [];
+      for (var i = 0; i < objects.length; i++) {
+        var o = objects[i];
+        if (o.imlplementsType(type)) {
+          s.push(o);
+        }
+      }
+      return s;
+    }
+  }, {
+    key: "convertMap",
+    value: function convertMap(objects, type) {
+      var map = new Map();
+      var ent = objects.entries();
+      var _iterator0 = _createForOfIteratorHelper(ent),
+        _step0;
+      try {
+        for (_iterator0.s(); !(_step0 = _iterator0.n()).done;) {
+          var _step0$value = _slicedToArray(_step0.value, 2),
+            key = _step0$value[0],
+            val = _step0$value[1];
+          var o = val;
+          if (o.imlplementsType(type)) {
+            map.set(key, o);
+          }
+        }
+      } catch (err) {
+        _iterator0.e(err);
+      } finally {
+        _iterator0.f();
+      }
+      return map;
+    }
+  }, {
+    key: "getName",
+    value: function getName(obj) {
+      var o = this.convertArray(obj, "IObject");
+      return o[0].getName();
+    }
+  }, {
+    key: "convertObject",
+    value: function convertObject(s, type) {
+      var ob = s;
+      var t = [];
+      if (ob === undefined) {
+        return t;
+      }
+      if (ob.imlplementsType(type)) {
+        var x = s;
+        t.push(x);
+      }
+      return t;
+    }
+  }, {
+    key: "getObjectCollectionArray",
+    value: function getObjectCollectionArray(collection, type) {
+      var t = [];
+      var s = collection.getObjectCollection();
+      var _iterator1 = _createForOfIteratorHelper(s),
+        _step1;
+      try {
+        for (_iterator1.s(); !(_step1 = _iterator1.n()).done;) {
+          var o = _step1.value;
+          var tt = this.convertObject(o, type);
+          if (tt.length == 0) continue;
+          t.push(tt[0]);
+        }
+      } catch (err) {
+        _iterator1.e(err);
+      } finally {
+        _iterator1.f();
+      }
+      return t;
+    }
+  }, {
+    key: "getObjectCollectionMap",
+    value: function getObjectCollectionMap(collection, type) {
+      var map = new Map();
+      var s = collection.getObjectCollection();
+      var _iterator10 = _createForOfIteratorHelper(s),
+        _step10;
+      try {
+        for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+          var o = _step10.value;
+          var tt = this.convertObject(o, type);
+          if (tt.length == 0) continue;
+          var named = this.convertObject(o, "INamed");
+          if (named.length > 0) {
+            map.set(named[0].getNamedName(), tt[0]);
+          }
+        }
+      } catch (err) {
+        _iterator10.e(err);
+      } finally {
+        _iterator10.f();
+      }
+      return map;
+    }
+  }, {
+    key: "getCollectionObject",
+    value: function getCollectionObject(collection, name, type) {
+      var o = collection.getCategoryObject(name);
+      return this.convertObject(o, type);
+    }
+  }, {
+    key: "convertProperties",
+    value: function convertProperties(o, type) {
+      var ob = this.convertObject(o, type);
+      if (ob.length > 0) return ob;
+      var prp = this.convertObject(o, "IProperties");
+      if (prp.length > 0) {
+        var pp = this.convertObject(prp[0].getProperties(), type);
+        if (pp.length > 0) return pp;
+      }
+      return [];
+    }
+  }, {
+    key: "select",
+    value: function select(objects, type) {
+      var t = [];
+      for (var i = 0; i < objects.length; i++) {
+        var o = objects[i];
+        if (o.imlplementsType(type)) {
+          t.push(o);
+        }
+      }
+      return t;
+    }
+  }, {
+    key: "getDerivation",
+    value: function getDerivation(derivation) {
+      var m = derivation.getDerivation();
+      var x = m.getMeasurementValue();
+      return this.convertFromAny(x);
+    }
+  }, {
+    key: "getDerivationMeasurement",
+    value: function getDerivationMeasurement(measurement) {
+      var d = measurement;
+      return this.getDerivation(d);
+    }
+  }, {
+    key: "setDerivationValue",
+    value: function setDerivationValue(derivation, value) {
+      var m = derivation.getDerivation();
+      var iv = m;
+      iv.setIValue(value);
+    }
+  }, {
+    key: "setDerivationMeasuremtValue",
+    value: function setDerivationMeasuremtValue(measurement, value) {
+      var d = measurement;
+      this.setDerivationValue(d, value);
+    }
+  }, {
+    key: "convertFromAny",
+    value: function convertFromAny(t) {
+      return this.convert(t);
+    }
+  }, {
+    key: "toNumber",
+    value: function toNumber(s) {
+      return Number(s);
+    }
+  }, {
+    key: "convert",
+    value: function convert(t) {
+      // Typeof checks against string representations of types. S is a generic type,
+      // so you can't directly use typeof S.  It will just return the string "object" or "function".
+      // You need to find a way to determine the *actual* type S at runtime
+      //  and compare it against the type of 't'.
+      // A very limited approach would be to use type guards, but that means
+      // you'd have to know what type S *could* be in advance. This is not
+      // really a general solution.
+      var tt = _typeof(t);
+      if (t === undefined) {
+        throw new OwnError_1.OwnError("Type conversion", "Performer undefined. NULL OBJECT", undefined);
+      }
+      if (tt === "string") {
+        if (null instanceof String) {
+          //VERY LIMITED AND UNSAFE EXAMPLE.
+          return t; // Force the type assertion (VERY UNSAFE)
+        }
+      }
+      if (tt === "number") {
+        // } && (t as unknown as S) instanceof Number) {  //VERY LIMITED AND UNSAFE EXAMPLE.
+        return t; // Force the type assertion (VERY UNSAFE)
+      }
+      if (tt === "boolean") {
+        //VERY LIMITED AND UNSAFE EXAMPLE.
+        return t; // Force the type assertion (VERY UNSAFE)
+      }
+      //This is better, but assumes S is a string or number
+      if (tt === 'string' && null === String) {
+        return t;
+      }
+      if (typeof t === 'number' && null === Number) {
+        return t;
+      }
+      console.warn(t, _typeof(t));
+      throw new OwnError_1.OwnError("Type conversion", "Performer", undefined);
+      // In many cases, a direct conversion may not be possible
+      // or may require a more complex transformation.
+      // warn("Conversion not possible for types:", typeof t, S);
+      return undefined; // Or throw an error, or return a default value.
+    }
+  }, {
+    key: "getMeasurement",
+    value: function getMeasurement(i, j, dataConsumer) {
+      return dataConsumer.getAllMeasurements()[i].getMeasurement(j);
+    }
+  }, {
+    key: "remove",
+    value: function remove(t, x) {
+      var tt = [];
+      var _iterator11 = _createForOfIteratorHelper(t),
+        _step11;
+      try {
+        for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
+          var y = _step11.value;
+          if (y != x) {
+            tt.push(x);
+          }
+        }
+      } catch (err) {
+        _iterator11.e(err);
+      } finally {
+        _iterator11.f();
+      }
+      return tt;
+    }
+  }, {
+    key: "enlarge",
+    value: function enlarge(t, x, size) {
+      for (var i = 0; i < size; i++) t.push(x);
+    }
+  }, {
+    key: "enlarge2",
+    value: function enlarge2(t, x, row, column) {
+      for (var i = 0; i < row; i++) {
+        var y = [];
+        t.push(y);
+        for (var j = 0; i < column; j++) y.push(x);
+      }
+    }
+  }, {
+    key: "enlargeNumber",
+    value: function enlargeNumber(x, size) {
+      this.enlarge(x, 0, size);
+    }
+  }, {
+    key: "enlargeNumber2",
+    value: function enlargeNumber2(x, row, column) {
+      this.enlarge2(x, 0, row, column);
+    }
+  }, {
+    key: "pushArray",
+    value: function pushArray(f, t) {
+      for (var i = 0; i < f.length; i++) {
+        t.push(f[i]);
+      }
+    }
+  }, {
+    key: "copyArray",
+    value: function copyArray(f, t) {
+      for (var i = 0; i < f.length; i++) {
+        t[i] = f[i];
+      }
+    }
+  }, {
+    key: "copyArraySize",
+    value: function copyArraySize(f, t, size) {
+      for (var i = 0; i < size; i++) {
+        t[i] = f[i];
+      }
+    }
+  }, {
+    key: "addArray",
+    value: function addArray(array, add) {
+      var _iterator12 = _createForOfIteratorHelper(add),
+        _step12;
+      try {
+        for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+          var f = _step12.value;
+          array.push(f);
+        }
+      } catch (err) {
+        _iterator12.e(err);
+      } finally {
+        _iterator12.f();
+      }
+    }
+  }, {
+    key: "setAliasType",
+    value: function setAliasType(name, value, map, names) {
+      if (map.has(name)) {
+        return false;
+      }
+      names.push(name);
+      if (typeof value === 'number') {
+        map.set(name, this.a);
+      }
+      if (typeof value === 'boolean') {
+        map.set(name, this.b);
+      }
+      if (typeof value === 'string') {
+        map.set(name, this.s);
+      }
+      return true;
+    }
+  }, {
+    key: "setAliasMap",
+    value: function setAliasMap(map, alias) {
+      var keys = map.keys();
+      /*    keys.foreach(
+              key => alias.setAliasValue(key, map.get(key));
+          );
+          return;*/
+      var _iterator13 = _createForOfIteratorHelper(keys),
+        _step13;
+      try {
+        for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
+          var key = _step13.value;
+          alias.setAliasValue(key, map.get(key));
+        }
+      } catch (err) {
+        _iterator13.e(err);
+      } finally {
+        _iterator13.f();
+      }
+    }
+  }, {
+    key: "copyMap",
+    value: function copyMap(s, t) {
+      var _iterator14 = _createForOfIteratorHelper(s),
+        _step14;
+      try {
+        for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
+          var _step14$value = _slicedToArray(_step14.value, 2),
+            key = _step14$value[0],
+            value = _step14$value[1];
+          t.set(key, value);
+        }
+      } catch (err) {
+        _iterator14.e(err);
+      } finally {
+        _iterator14.f();
+      }
+    }
+  }, {
+    key: "implementsType",
+    value: function implementsType(o, type) {
+      var obj = o;
+      return obj.imlplementsType(type);
+    }
+  }, {
+    key: "getMeasurementsMap",
+    value: function getMeasurementsMap(measurements) {
+      var map = new Map();
+      var n = measurements.getMeasurementsCount();
+      for (var i = 0; i < n; i++) {
+        var m = measurements.getMeasurement(i);
+        var nn = m.getMeasurementName();
+        map.set(nn, m);
+      }
+      return map;
+    }
+  }, {
+    key: "getMeasurementDC",
+    value: function getMeasurementDC(consumer, name) {
+      var mm = consumer.getAllMeasurements();
+      var _iterator15 = _createForOfIteratorHelper(mm),
+        _step15;
+      try {
+        for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
+          var mea = _step15.value;
+          var co = mea;
+          var nm = co.getCategoryObjectName();
+          nm += ".";
+          var n = mea.getMeasurementsCount();
+          for (var i = 0; i < n; i++) {
+            var m = mea.getMeasurement(i);
+            var nam = nm + m.getMeasurementName();
+            if (nam == name) {
+              return m;
+            }
+          }
+        }
+      } catch (err) {
+        _iterator15.e(err);
+      } finally {
+        _iterator15.f();
+      }
+      return this.measurement;
+    }
+  }, {
+    key: "getMeasurementsMMap",
+    value: function getMeasurementsMMap(measurements, map) {
+      var n = measurements.getMeasurementsCount();
+      for (var i = 0; i < n; i++) {
+        var m = measurements.getMeasurement(i);
+        var name = m.getMeasurementName();
+        map.set(name, m);
+      }
+    }
+  }, {
+    key: "getMeasurementsDCMap",
+    value: function getMeasurementsDCMap(consumer) {
+      var map = new Map();
+      var mm = consumer.getAllMeasurements();
+      var _iterator16 = _createForOfIteratorHelper(mm),
+        _step16;
+      try {
+        for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
+          var mea = _step16.value;
+          var co = mea;
+          var nm = co.getCategoryObjectName();
+          nm += ".";
+          var n = mea.getMeasurementsCount();
+          for (var i = 0; i < n; i++) {
+            var m = mea.getMeasurement(i);
+            var name = nm + m.getMeasurementName();
+            map.set(name, m);
+          }
+        }
+      } catch (err) {
+        _iterator16.e(err);
+      } finally {
+        _iterator16.f();
+      }
+      return map;
+    }
+  }, {
+    key: "getMeasurements",
+    value: function getMeasurements(desktop, name) {
+      var a = desktop.getCategoryObject(name);
+      if (this.implementsType(a, "IMeasurements")) {
+        var al = a;
+        return al;
+      }
+      return this.measurements;
+    }
+  }, {
+    key: "getAlias",
+    value: function getAlias(desktop, name) {
+      var a = desktop.getCategoryObject(name);
+      if (this.implementsType(a, "IAlias")) {
+        var al = a;
+        return al;
+      }
+      return this.alias;
+    }
+  }, {
+    key: "getAliasName",
+    value: function getAliasName(desktop, name) {
+      var l = name.length;
+      var n = name.lastIndexOf('.');
+      var s = name.substring(n + 1, l);
+      var t = name.substring(0, n);
+      var al = this.getAlias(desktop, t);
+      return new AliasName_1.AliasName(al, s);
+    }
+  }, {
+    key: "collectResources",
+    value: function collectResources(res, collection) {
+      var rs = new ResourceSetter(res);
+      this.forEach(collection, rs, "IResourceCollection");
+    }
+  }], [{
+    key: "getCurrentDesktop",
+    value: function getCurrentDesktop() {
+      return this.desktop;
+    }
+  }, {
+    key: "setCurrentDesktop",
+    value: function setCurrentDesktop(desktop) {
+      this.desktop = desktop;
+    }
+  }]);
+}();
+exports.Performer = Performer;
+var FactorySetter = /*#__PURE__*/function () {
+  function FactorySetter(factory) {
+    _classCallCheck(this, FactorySetter);
+    this.factory = factory;
+  }
+  return _createClass(FactorySetter, [{
+    key: "actionT",
+    value: function actionT(t) {
+      t.setConsumerFactory(this.factory);
+    }
+  }]);
+}();
+var ResourceSetter = /*#__PURE__*/function () {
+  function ResourceSetter(t) {
+    _classCallCheck(this, ResourceSetter);
+    this.collection = t;
+  }
+  return _createClass(ResourceSetter, [{
+    key: "actionT",
+    value: function actionT(t) {
+      var rr = t.getResources();
+      var _iterator17 = _createForOfIteratorHelper(rr),
+        _step17;
+      try {
+        for (_iterator17.s(); !(_step17 = _iterator17.n()).done;) {
+          var s = _step17.value;
+          this.collection.addResource(s);
+        }
+      } catch (err) {
+        _iterator17.e(err);
+      } finally {
+        _iterator17.f();
+      }
+    }
+  }]);
+}();
+},{"./AliasName":"src/Library/AliasName.js","./ConsolePrinter":"src/Library/ConsolePrinter.js","./ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.js","./Measurements/MeasurementsComparator":"src/Library/Measurements/MeasurementsComparator.js","./Utilities/Sort/SortingAlgorithms":"src/Library/Utilities/Sort/SortingAlgorithms.js","./Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.js"}],"src/Library/Utilities/Generic/ActionArrayT.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -11717,7 +12623,7 @@ var ActionArrayT = /*#__PURE__*/function () {
   }]);
 }();
 exports.ActionArrayT = ActionArrayT;
-},{"../../Performer":"src/Library/Performer.js"}],"src/common/game.js":[function(require,module,exports) {
+},{"../../Performer":"src/Library/Performer.ts"}],"src/common/game.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -11772,16 +12678,11 @@ var Game = /*#__PURE__*/function () {
     this.options = options !== null && options !== void 0 ? options : {};
     this.gl = this.canvas.getContext("webgl2", {
       preserveDrawingBuffer: true,
-      // This will prevent the Browser from automatically clearing the frame buffer every frame
       alpha: true,
-      // this will tell the browser that we want an alpha component in our frame buffer
       antialias: true,
-      // this will tell the browser that we want antialiasing
       depth: true,
-      // this will tell the browser that we want a depth buffer
       powerPreference: "high-performance",
       premultipliedAlpha: false,
-      // This can be used if the canvas are going to be blended with the rest of the webpage (transparency)
       stencil: true // this will tell the browser that we want a stencil buffer
     }); // This command loads the WebGL2 context which we will use to draw
     this.input = new input_1.default(this.canvas);
@@ -11883,10 +12784,13 @@ var Game = /*#__PURE__*/function () {
   }]);
 }();
 exports.default = Game;
-},{"./loader":"src/common/loader.js","./input":"src/common/input.js","../Library/Utilities/Generic/ActionArrayT":"src/Library/Utilities/Generic/ActionArrayT.js"}],"src/common/BasicScene.ts":[function(require,module,exports) {
+},{"./loader":"src/common/loader.ts","./input":"src/common/input.ts","../Library/Utilities/Generic/ActionArrayT":"src/Library/Utilities/Generic/ActionArrayT.ts"}],"src/common/BasicScene.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
@@ -11921,13 +12825,50 @@ var BasicScene = /*#__PURE__*/function (_game_1$Scene) {
     _this.typeName = "BasicScene";
     _this.types = ["IObject", "IObjectCollection", "BasicScene"];
     _this.name = "";
+    _this.resourceFiles = [];
     _this.factory = factory;
     var l = factory.getFactory("ILoaderFactory");
-    _this.loader = l.getLoader(_this);
+    if (l != undefined) {
+      _this.loader = l.getLoader(_this);
+    }
     return _this;
   }
   _inherits(BasicScene, _game_1$Scene);
   return _createClass(BasicScene, [{
+    key: "addResource",
+    value: function addResource(url) {
+      if (!this.resourceFiles.includes(url)) this.resourceFiles.push(url);
+    }
+  }, {
+    key: "getResources",
+    value: function getResources() {
+      return this.resourceFiles;
+    }
+  }, {
+    key: "getDirectoryFiles",
+    value: function getDirectoryFiles(dir) {
+      var l = [];
+      var _iterator = _createForOfIteratorHelper(this.resourceFiles),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var d = _step.value;
+          if (d.startsWith(dir)) l.push(d);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      l.sort();
+      return l;
+    }
+  }, {
+    key: "fileExists",
+    value: function fileExists(fileName) {
+      return this.resourceFiles.includes(fileName);
+    }
+  }, {
     key: "getFactory",
     value: function getFactory() {
       return this.factory;
@@ -11962,10 +12903,15 @@ var BasicScene = /*#__PURE__*/function (_game_1$Scene) {
     value: function getObjectCollection() {
       return this.iobjects;
     }
+  }, {
+    key: "getResourceText",
+    value: function getResourceText(url) {
+      return this.game.loader.resources[url];
+    }
   }]);
 }(game_1.Scene);
 exports.BasicScene = BasicScene;
-},{"./game":"src/common/game.js"}],"src/scenes/SpaceTrippers.tsx":[function(require,module,exports) {
+},{"./game":"src/common/game.ts"}],"src/scenes/SpaceTrippers.tsx":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -12486,1522 +13432,7 @@ var SpaceTrippersScene = /*#__PURE__*/function (_BasicScene_1$BasicSc) {
   }]);
 }(BasicScene_1.BasicScene);
 exports.default = SpaceTrippersScene;
-},{"../common/shader-program":"src/common/shader-program.ts","../common/mesh-utils":"src/common/mesh-utils.ts","../common/texture-utils":"src/common/texture-utils.ts","../common/camera":"src/common/camera.ts","../common/camera-controllers/fly-camera-controller":"src/common/camera-controllers/fly-camera-controller.ts","gl-matrix":"node_modules/gl-matrix/esm/index.js","../common/dom-utils":"src/common/dom-utils.tsx","tsx-create-element":"node_modules/tsx-create-element/dist/es6/index.js","../common/BasicScene":"src/common/BasicScene.ts"}],"src/common/loader.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
-function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
-var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function (resolve) {
-      resolve(value);
-    });
-  }
-  return new (P || (P = Promise))(function (resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-;
-var loadFunctions = {
-  'text': function text(url) {
-    return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regenerator().m(function _callee() {
-      var response, data;
-      return _regenerator().w(function (_context) {
-        while (1) switch (_context.n) {
-          case 0:
-            _context.n = 1;
-            return fetch(url);
-          case 1:
-            response = _context.v;
-            _context.n = 2;
-            return response.text();
-          case 2:
-            data = _context.v;
-            return _context.a(2, data);
-        }
-      }, _callee);
-    }));
-  },
-  'json': function json(url) {
-    return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regenerator().m(function _callee2() {
-      var response, data;
-      return _regenerator().w(function (_context2) {
-        while (1) switch (_context2.n) {
-          case 0:
-            _context2.n = 1;
-            return fetch(url);
-          case 1:
-            response = _context2.v;
-            _context2.n = 2;
-            return response.json();
-          case 2:
-            data = _context2.v;
-            return _context2.a(2, data);
-        }
-      }, _callee2);
-    }));
-  },
-  'image': function image(url) {
-    return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regenerator().m(function _callee3() {
-      return _regenerator().w(function (_context3) {
-        while (1) switch (_context3.n) {
-          case 0:
-            return _context3.a(2, new Promise(function (resolve, reject) {
-              var image = new Image();
-              try {
-                if (new URL(url).origin !== window.origin) image.crossOrigin = "";
-              } catch (_a) {}
-              image.onload = function () {
-                return resolve(image);
-              };
-              image.onerror = reject;
-              image.src = url;
-            }));
-        }
-      }, _callee3);
-    }));
-  }
-};
-// This is helper class to fetch resources from the webserver
-// Unlike C++, we can't block the main thread till files are read, so we use promises to notify the Game Class when the resources are ready
-// This class is a work in progress so expect it to be enhanced in future labs
-var Loader = /*#__PURE__*/function () {
-  function Loader() {
-    _classCallCheck(this, Loader);
-    this.resources = {};
-    this.promises = [];
-  }
-  return _createClass(Loader, [{
-    key: "load",
-    value: function load(resources) {
-      var _this = this;
-      var _loop = function _loop(name) {
-        var resource = resources[name];
-        var promise = loadFunctions[resource.type](resource.url).then(function (data) {
-          _this.resources[name] = data;
-          if (resource.success) resource.success(name, data, resource, _this);
-        }).catch(function (reason) {
-          console.error("Failed to load ".concat(name, ": ").concat(reason));
-          if (resource.failure) resource.failure(name, resource, _this);
-        });
-        _this.promises.push(promise);
-      };
-      for (var name in resources) {
-        _loop(name);
-      }
-    }
-  }, {
-    key: "unload",
-    value: function unload() {
-      for (var _len = arguments.length, resources = new Array(_len), _key = 0; _key < _len; _key++) {
-        resources[_key] = arguments[_key];
-      }
-      for (var _i = 0, _resources = resources; _i < _resources.length; _i++) {
-        var name = _resources[_i];
-        delete this.resources[name];
-      }
-    }
-  }, {
-    key: "clear",
-    value: function clear() {
-      for (var name in this.resources) {
-        delete this.resources[name];
-      }
-    }
-  }, {
-    key: "wait",
-    value: function wait() {
-      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regenerator().m(function _callee4() {
-        var awaited;
-        return _regenerator().w(function (_context4) {
-          while (1) switch (_context4.n) {
-            case 0:
-              if (!(this.promises.length > 0)) {
-                _context4.n = 2;
-                break;
-              }
-              awaited = _toConsumableArray(this.promises);
-              this.promises.splice(0, this.promises.length);
-              _context4.n = 1;
-              return Promise.all(awaited);
-            case 1:
-              _context4.n = 0;
-              break;
-            case 2:
-              return _context4.a(2);
-          }
-        }, _callee4, this);
-      }));
-    }
-  }]);
-}();
-exports.default = Loader;
-},{}],"src/common/input.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var ts_key_enum_1 = require("ts-key-enum");
-var gl_matrix_1 = require("gl-matrix");
-// This is a small helper class we created to manage the user input
-// The input on webpages is received via event listeners only so this class add some listeners and collect the keyboard and mouse input to be accessed at any time
-// This class is a work in progress so expect it to be enhanced in future labs
-var Input = /*#__PURE__*/function () {
-  function Input(canvas) {
-    var _this = this;
-    _classCallCheck(this, Input);
-    this.firstMouseMove = true;
-    this.pointerLocked = false;
-    this.canvas = canvas;
-    this.currentKeys = {};
-    this.previousKeys = {};
-    for (var key in ts_key_enum_1.Key) {
-      this.currentKeys[key] = false;
-      this.previousKeys[key] = false;
-    }
-    for (var ascii = 32; ascii < 127; ascii++) {
-      var _key = String.fromCharCode(ascii);
-      this.currentKeys[_key] = false;
-      this.previousKeys[_key] = false;
-    }
-    document.addEventListener("keydown", function (ev) {
-      if (document.activeElement === canvas) {
-        var _key2 = ev.key;
-        if (_key2.length == 1) {
-          var code = _key2.charCodeAt(0);
-          if (code >= 'A'.charCodeAt(0) && code <= 'Z'.charCodeAt(0)) _key2 = _key2.toLowerCase();
-        }
-        _this.currentKeys[_key2] = true;
-        switch (ev.key) {
-          case ts_key_enum_1.Key.ArrowUp:
-          case ts_key_enum_1.Key.ArrowDown:
-          case ts_key_enum_1.Key.ArrowLeft:
-          case ts_key_enum_1.Key.ArrowRight:
-          case ' ':
-            ev.preventDefault();
-        }
-      }
-    });
-    document.addEventListener("keyup", function (ev) {
-      var key = ev.key;
-      if (key.length == 1) {
-        var code = key.charCodeAt(0);
-        if (code >= 'A'.charCodeAt(0) && code <= 'Z'.charCodeAt(0)) key = key.toLowerCase();
-      }
-      _this.currentKeys[key] = false;
-    });
-    this.currentButtons = [false, false, false];
-    this.previousButtons = [false, false, false];
-    canvas.addEventListener("click", function (ev) {
-      canvas.focus();
-      ev.preventDefault();
-      _this.currentButtons[ev.button] = true;
-    });
-    canvas.addEventListener("mouseup", function (ev) {
-      ev.preventDefault();
-      _this.currentButtons[ev.button] = false;
-    });
-    this.currentMousePosition = gl_matrix_1.vec2.fromValues(0, 0);
-    this.perviousMousePosition = gl_matrix_1.vec2.fromValues(0, 0);
-    canvas.addEventListener("mousemove", function (ev) {
-      ev.preventDefault();
-      if (_this.pointerLocked) {
-        _this.currentMousePosition[0] += ev.movementX;
-        _this.currentMousePosition[1] += ev.movementY;
-      } else {
-        gl_matrix_1.vec2.set(_this.currentMousePosition, ev.pageX - canvas.offsetLeft, ev.pageY - canvas.offsetTop);
-      }
-      if (_this.firstMouseMove) {
-        gl_matrix_1.vec2.copy(_this.perviousMousePosition, _this.currentMousePosition);
-        _this.firstMouseMove = false;
-      }
-    });
-    this.previousWheelPosition = gl_matrix_1.vec3.fromValues(0, 0, 0);
-    this.currentWheelPosition = gl_matrix_1.vec3.fromValues(0, 0, 0);
-    canvas.addEventListener("wheel", function (ev) {
-      ev.preventDefault();
-      _this.currentWheelPosition[0] += ev.deltaX;
-      _this.currentWheelPosition[1] += ev.deltaY;
-      _this.currentWheelPosition[2] += ev.deltaZ;
-    });
-    canvas.addEventListener("drag", function (ev) {
-      ev.preventDefault();
-    });
-    canvas.addEventListener("dragend", function (ev) {
-      ev.preventDefault();
-    });
-    canvas.addEventListener("dragenter", function (ev) {
-      ev.preventDefault();
-    });
-    canvas.addEventListener("dragexit", function (ev) {
-      ev.preventDefault();
-    });
-    canvas.addEventListener("dragleave", function (ev) {
-      ev.preventDefault();
-    });
-    canvas.addEventListener("dragover", function (ev) {
-      ev.preventDefault();
-    });
-    canvas.addEventListener("dragstart", function (ev) {
-      ev.preventDefault();
-    });
-    canvas.addEventListener("drop", function (ev) {
-      ev.preventDefault();
-    });
-    document.addEventListener("pointerlockchange", function () {
-      _this.pointerLocked = document.pointerLockElement == canvas;
-    }, false);
-  }
-  return _createClass(Input, [{
-    key: "update",
-    value: function update() {
-      for (var key in ts_key_enum_1.Key) {
-        this.previousKeys[key] = this.currentKeys[key];
-      }
-      for (var ascii = 32; ascii < 127; ascii++) {
-        var _key3 = String.fromCharCode(ascii);
-        this.previousKeys[_key3] = this.currentKeys[_key3];
-      }
-      for (var button = 0; button < 3; button++) {
-        this.previousButtons[button] = this.currentButtons[button];
-      }
-      gl_matrix_1.vec2.copy(this.perviousMousePosition, this.currentMousePosition);
-      gl_matrix_1.vec3.copy(this.previousWheelPosition, this.currentWheelPosition);
-    }
-  }, {
-    key: "isKeyDown",
-    value: function isKeyDown(key) {
-      return this.currentKeys[key];
-    }
-  }, {
-    key: "isKeyUp",
-    value: function isKeyUp(key) {
-      return !this.currentKeys[key];
-    }
-  }, {
-    key: "isKeyJustDown",
-    value: function isKeyJustDown(key) {
-      return this.currentKeys[key] && !this.previousKeys[key];
-    }
-  }, {
-    key: "isKeyJustUp",
-    value: function isKeyJustUp(key) {
-      return !this.currentKeys[key] && this.previousKeys[key];
-    }
-  }, {
-    key: "isButtonDown",
-    value: function isButtonDown(button) {
-      return this.currentButtons[button];
-    }
-  }, {
-    key: "isButtonUp",
-    value: function isButtonUp(button) {
-      return !this.currentButtons[button];
-    }
-  }, {
-    key: "isButtonJustDown",
-    value: function isButtonJustDown(button) {
-      return this.currentButtons[button] && !this.previousButtons[button];
-    }
-  }, {
-    key: "isButtonJustUp",
-    value: function isButtonJustUp(button) {
-      return !this.currentButtons[button] && this.previousButtons[button];
-    }
-  }, {
-    key: "MousePosition",
-    get: function get() {
-      return gl_matrix_1.vec2.copy(gl_matrix_1.vec2.create(), this.currentMousePosition);
-    }
-  }, {
-    key: "MouseDelta",
-    get: function get() {
-      return gl_matrix_1.vec2.sub(gl_matrix_1.vec2.create(), this.currentMousePosition, this.perviousMousePosition);
-    }
-  }, {
-    key: "WheelPosition",
-    get: function get() {
-      return gl_matrix_1.vec3.copy(gl_matrix_1.vec3.create(), this.currentWheelPosition);
-    }
-  }, {
-    key: "WheelDelta",
-    get: function get() {
-      return gl_matrix_1.vec3.sub(gl_matrix_1.vec3.create(), this.currentWheelPosition, this.previousWheelPosition);
-    }
-  }, {
-    key: "requestPointerLock",
-    value: function requestPointerLock() {
-      this.canvas.requestPointerLock();
-    }
-  }, {
-    key: "exitPointerLock",
-    value: function exitPointerLock() {
-      document.exitPointerLock();
-    }
-  }, {
-    key: "isPointerLocked",
-    value: function isPointerLocked() {
-      return this.pointerLocked;
-    }
-  }]);
-}();
-exports.default = Input;
-},{"ts-key-enum":"node_modules/ts-key-enum/dist/js/Key.enum.js","gl-matrix":"node_modules/gl-matrix/esm/index.js"}],"src/Library/Performer.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Performer = void 0;
-/* eslint-disable no-var */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-var AliasName_1 = require("./AliasName");
-var ConsolePrinter_1 = require("./ConsolePrinter");
-var OwnError_1 = require("./ErrorHandler/OwnError");
-var MeasurementsComparator_1 = require("./Measurements/MeasurementsComparator");
-var SortingAlgorithms_1 = require("./Utilities/Sort/SortingAlgorithms");
-var ActionArray_1 = require("./Utilities/Generic/ActionArray");
-var Performer = /*#__PURE__*/function () {
-  function Performer() {
-    _classCallCheck(this, Performer);
-    this.a = 0;
-    this.b = false;
-    this.s = "";
-    this.printer = new ConsolePrinter_1.ConsolePrinter();
-    this.sorting = new SortingAlgorithms_1.SortingAlgorithms();
-    this.mCompatator = new MeasurementsComparator_1.MeasurementsComparator(this);
-  }
-  return _createClass(Performer, [{
-    key: "addUnique",
-    value: function addUnique(list, item) {
-      var _iterator = _createForOfIteratorHelper(list),
-        _step;
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var x = _step.value;
-          if (x == item) {
-            return false;
-          }
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-      list.push(item);
-      return true;
-    }
-  }, {
-    key: "toShiftString",
-    value: function toShiftString(str, shift) {
-      {
-        if (str.indexOf(shift) == 0) {
-          return str.substring(shift.length);
-        }
-        return "";
-      }
-    }
-  }, {
-    key: "cut",
-    value: function cut(t, n) {
-      var s = [];
-      for (var i = 0; i < n; i++) {
-        s.push(t[i]);
-      }
-      return s;
-    }
-  }, {
-    key: "addCut",
-    value: function addCut(list, t, n) {
-      var tt = t;
-      if (t.length > n) {
-        tt = this.cut(t, n);
-      }
-      list.push(tt);
-    }
-  }, {
-    key: "setFactoryToObjectCollection",
-    value: function setFactoryToObjectCollection(collection, factory) {
-      var setter = new FactorySetter(factory);
-      this.forEach(collection, setter, "IFactoryConsumer");
-    }
-  }, {
-    key: "getAllIObjects",
-    value: function getAllIObjects(categoryObjects, arrows, objects) {
-      var _iterator2 = _createForOfIteratorHelper(categoryObjects),
-        _step2;
-      try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          var o = _step2.value;
-          var l = this.convertObject(o, "IObject");
-          if (l.length > 0) {
-            objects.push(l[0]);
-          }
-        }
-      } catch (err) {
-        _iterator2.e(err);
-      } finally {
-        _iterator2.f();
-      }
-      var _iterator3 = _createForOfIteratorHelper(arrows),
-        _step3;
-      try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-          var a = _step3.value;
-          var l = this.convertObject(a, "IObject");
-          if (l.length > 0) {
-            objects.push(l[0]);
-          }
-        }
-      } catch (err) {
-        _iterator3.e(err);
-      } finally {
-        _iterator3.f();
-      }
-    }
-  }, {
-    key: "setPrinter",
-    value: function setPrinter(printer) {
-      this.printer = printer;
-    }
-  }, {
-    key: "forEach",
-    value: function forEach(collection, action, type) {
-      var obj = collection.getObjectCollection();
-      var _iterator4 = _createForOfIteratorHelper(obj),
-        _step4;
-      try {
-        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-          var o = _step4.value;
-          var x = this.convertObject(o, type);
-          if (x.length > 0) action.actionT(x[0]);
-        }
-      } catch (err) {
-        _iterator4.e(err);
-      } finally {
-        _iterator4.f();
-      }
-    }
-  }, {
-    key: "getAll",
-    value: function getAll(collection, type) {
-      var t = [];
-      var obj = collection.getObjectCollection();
-      var _iterator5 = _createForOfIteratorHelper(obj),
-        _step5;
-      try {
-        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-          var o = _step5.value;
-          var x = this.convertObject(o, type);
-          if (x.length > 0) t.push(x[0]);
-        }
-      } catch (err) {
-        _iterator5.e(err);
-      } finally {
-        _iterator5.f();
-      }
-      return t;
-    }
-  }, {
-    key: "reoplaceArrayValue",
-    value: function reoplaceArrayValue(t, s) {
-      if (s.length == 0) {
-        if (t.length > 0) {
-          t.pop();
-          return;
-        }
-      }
-      var ss = s[0];
-      if (t.length > 0) {
-        t[0] = ss;
-        return;
-      }
-      t.push(ss);
-    }
-  }, {
-    key: "executeAction",
-    value: function executeAction(acttion) {
-      if (acttion === undefined) return;
-      acttion.action();
-    }
-  }, {
-    key: "sumOfActions",
-    value: function sumOfActions(first, second) {
-      var act = new ActionArray_1.ActionArray();
-      if (first === undefined) {
-        return second;
-      } else {
-        act.addAction(first);
-        if (second === undefined) {
-          return first;
-        } else {
-          act.addAction(second);
-        }
-      }
-      return act;
-    }
-  }, {
-    key: "setCheker",
-    value: function setCheker(desktop, check) {
-      var objects = desktop.getCategoryObjects();
-      var _iterator6 = _createForOfIteratorHelper(objects),
-        _step6;
-      try {
-        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-          var object = _step6.value;
-          if (this.implementsType(object, "ICheckHolder")) {
-            var ch = object;
-            ch.setCheck(check);
-          }
-        }
-      } catch (err) {
-        _iterator6.e(err);
-      } finally {
-        _iterator6.f();
-      }
-    }
-  }, {
-    key: "findMaxWithReduce",
-    value: function findMaxWithReduce(numbers) {
-      if (numbers.length === 0) {
-        return undefined;
-      }
-      return numbers.reduce(function (max, current) {
-        return current > max ? current : max;
-      }, -Infinity); // Start with -Infinity to ensure the first element is always greater
-    }
-  }, {
-    key: "findMinWithReduce",
-    value: function findMinWithReduce(numbers) {
-      if (numbers.length === 0) {
-        return undefined;
-      }
-      return numbers.reduce(function (min, current) {
-        return current > min ? current : min;
-      }, Infinity); // Start with -Infinity to ensure the first element is always greater
-    }
-  }, {
-    key: "calculateAverage",
-    value: function calculateAverage(numbers) {
-      if (numbers.length === 0) {
-        return 0; // Or throw an error, depending on your requirements
-      }
-      var sum = numbers.reduce(function (accumulator, currentValue) {
-        return accumulator + currentValue;
-      }, 0);
-      return sum / numbers.length;
-    }
-  }, {
-    key: "calculateAverageRobust",
-    value: function calculateAverageRobust(data) {
-      var numbers = data.filter(function (item) {
-        return typeof item === 'number';
-      }); // Type guard
-      if (numbers.length === 0) {
-        return 0;
-      }
-      var sum = numbers.reduce(function (accumulator, currentValue) {
-        return accumulator + currentValue;
-      }, 0);
-      return sum / numbers.length;
-    }
-  }, {
-    key: "calculateAverageNull",
-    value: function calculateAverageNull(data) {
-      var numbers = data.filter(function (item) {
-        return typeof item === 'number';
-      }); // Type guard
-      if (numbers.length != data.length) {
-        return undefined;
-      }
-      var sum = numbers.reduce(function (accumulator, currentValue) {
-        return accumulator + currentValue;
-      }, 0);
-      return sum / numbers.length;
-    }
-  }, {
-    key: "getPrinter",
-    value: function getPrinter() {
-      return this.printer;
-    }
-  }, {
-    key: "print",
-    value: function print(object) {
-      if (this.implementsType(object, "IPrintedObject")) {
-        var pr = object;
-        pr.print(this.printer);
-        return;
-      }
-      this.printer.print(object);
-    }
-  }, {
-    key: "convertTS",
-    value: function convertTS(s, type) {
-      if (this.implementsType(s, type)) {
-        throw new OwnError_1.OwnError("Illegal type", "Illegal type: " + type, undefined);
-      }
-      return s;
-    }
-  }, {
-    key: "getByInterface",
-    value: function getByInterface(desktop, type) {
-      var co = desktop.getCategoryObjects();
-      var objects = [];
-      var _iterator7 = _createForOfIteratorHelper(co),
-        _step7;
-      try {
-        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-          var a = _step7.value;
-          if (this.implementsType(a, type)) {
-            objects.push(a);
-          }
-        }
-      } catch (err) {
-        _iterator7.e(err);
-      } finally {
-        _iterator7.f();
-      }
-      return objects;
-    }
-  }, {
-    key: "sortMeasurements",
-    value: function sortMeasurements(measurements) {
-      return this.sorting.mergesort(measurements, this.mCompatator);
-    }
-  }, {
-    key: "getByType",
-    value: function getByType(desktop, type) {
-      var co = desktop.getCategoryObjects();
-      var objects = [];
-      var _iterator8 = _createForOfIteratorHelper(co),
-        _step8;
-      try {
-        for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-          var a = _step8.value;
-          if (this.implementsType(a, type)) {
-            var ob = a;
-            if (ob.getClassName() == type) {
-              objects.push(a);
-            }
-          }
-        }
-      } catch (err) {
-        _iterator8.e(err);
-      } finally {
-        _iterator8.f();
-      }
-      return objects;
-    }
-  }, {
-    key: "updateFeedbackData",
-    value: function updateFeedbackData(dataConsumer, feedback) {
-      if (feedback.isEmpty()) return;
-      feedback.setFeedbacks();
-      this.updateChildrenData(dataConsumer);
-    }
-  }, {
-    key: "updateChildrenData",
-    value: function updateChildrenData(dataConsumer) {
-      var children = dataConsumer.getAllMeasurements();
-      var _iterator9 = _createForOfIteratorHelper(children),
-        _step9;
-      try {
-        for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
-          var child = _step9.value;
-          var o = child;
-          if (this.implementsType(o, "IDataConsumer")) {
-            var dc = child;
-            this.updateChildrenData(dc);
-          }
-          child.updateMeasurements();
-        }
-      } catch (err) {
-        _iterator9.e(err);
-      } finally {
-        _iterator9.f();
-      }
-    }
-  }, {
-    key: "convertArray",
-    value: function convertArray(objects, type) {
-      var s = [];
-      for (var i = 0; i < objects.length; i++) {
-        var o = objects[i];
-        if (o.imlplementsType(type)) {
-          s.push(o);
-        }
-      }
-      return s;
-    }
-  }, {
-    key: "convertMap",
-    value: function convertMap(objects, type) {
-      var map = new Map();
-      var ent = objects.entries();
-      var _iterator0 = _createForOfIteratorHelper(ent),
-        _step0;
-      try {
-        for (_iterator0.s(); !(_step0 = _iterator0.n()).done;) {
-          var _step0$value = _slicedToArray(_step0.value, 2),
-            key = _step0$value[0],
-            val = _step0$value[1];
-          var o = val;
-          if (o.imlplementsType(type)) {
-            map.set(key, o);
-          }
-        }
-      } catch (err) {
-        _iterator0.e(err);
-      } finally {
-        _iterator0.f();
-      }
-      return map;
-    }
-  }, {
-    key: "getName",
-    value: function getName(obj) {
-      var o = this.convertArray(obj, "IObject");
-      return o[0].getName();
-    }
-  }, {
-    key: "convertObject",
-    value: function convertObject(s, type) {
-      var ob = s;
-      var t = [];
-      if (ob === undefined) {
-        return t;
-      }
-      if (ob.imlplementsType(type)) {
-        var x = s;
-        t.push(x);
-      }
-      return t;
-    }
-  }, {
-    key: "getObjectCollectionArray",
-    value: function getObjectCollectionArray(collection, type) {
-      var t = [];
-      var s = collection.getObjectCollection();
-      var _iterator1 = _createForOfIteratorHelper(s),
-        _step1;
-      try {
-        for (_iterator1.s(); !(_step1 = _iterator1.n()).done;) {
-          var o = _step1.value;
-          var tt = this.convertObject(o, type);
-          if (tt.length == 0) continue;
-          t.push(tt[0]);
-        }
-      } catch (err) {
-        _iterator1.e(err);
-      } finally {
-        _iterator1.f();
-      }
-      return t;
-    }
-  }, {
-    key: "getObjectCollectionMap",
-    value: function getObjectCollectionMap(collection, type) {
-      var map = new Map();
-      var s = collection.getObjectCollection();
-      var _iterator10 = _createForOfIteratorHelper(s),
-        _step10;
-      try {
-        for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
-          var o = _step10.value;
-          var tt = this.convertObject(o, type);
-          if (tt.length == 0) continue;
-          var named = this.convertObject(o, "INamed");
-          if (named.length > 0) {
-            map.set(named[0].getNamedName(), tt[0]);
-          }
-        }
-      } catch (err) {
-        _iterator10.e(err);
-      } finally {
-        _iterator10.f();
-      }
-      return map;
-    }
-  }, {
-    key: "getCollectionObject",
-    value: function getCollectionObject(collection, name, type) {
-      var o = collection.getCategoryObject(name);
-      return this.convertObject(o, type);
-    }
-  }, {
-    key: "convertProperties",
-    value: function convertProperties(o, type) {
-      var ob = this.convertObject(o, type);
-      if (ob.length > 0) return ob;
-      var prp = this.convertObject(o, "IProperties");
-      if (prp.length > 0) {
-        var pp = this.convertObject(prp[0].getProperties(), type);
-        if (pp.length > 0) return pp;
-      }
-      return [];
-    }
-  }, {
-    key: "select",
-    value: function select(objects, type) {
-      var t = [];
-      for (var i = 0; i < objects.length; i++) {
-        var o = objects[i];
-        if (o.imlplementsType(type)) {
-          t.push(o);
-        }
-      }
-      return t;
-    }
-  }, {
-    key: "getDerivation",
-    value: function getDerivation(derivation) {
-      var m = derivation.getDerivation();
-      var x = m.getMeasurementValue();
-      return this.convertFromAny(x);
-    }
-  }, {
-    key: "getDerivationMeasurement",
-    value: function getDerivationMeasurement(measurement) {
-      var d = measurement;
-      return this.getDerivation(d);
-    }
-  }, {
-    key: "setDerivationValue",
-    value: function setDerivationValue(derivation, value) {
-      var m = derivation.getDerivation();
-      var iv = m;
-      iv.setIValue(value);
-    }
-  }, {
-    key: "setDerivationMeasuremtValue",
-    value: function setDerivationMeasuremtValue(measurement, value) {
-      var d = measurement;
-      this.setDerivationValue(d, value);
-    }
-  }, {
-    key: "convertFromAny",
-    value: function convertFromAny(t) {
-      return this.convert(t);
-    }
-  }, {
-    key: "toNumber",
-    value: function toNumber(s) {
-      return Number(s);
-    }
-  }, {
-    key: "convert",
-    value: function convert(t) {
-      // Typeof checks against string representations of types. S is a generic type,
-      // so you can't directly use typeof S.  It will just return the string "object" or "function".
-      // You need to find a way to determine the *actual* type S at runtime
-      //  and compare it against the type of 't'.
-      // A very limited approach would be to use type guards, but that means
-      // you'd have to know what type S *could* be in advance. This is not
-      // really a general solution.
-      var tt = _typeof(t);
-      if (t === undefined) {
-        throw new OwnError_1.OwnError("Type conversion", "Performer undefined. NULL OBJECT", undefined);
-      }
-      if (tt === "string") {
-        if (null instanceof String) {
-          //VERY LIMITED AND UNSAFE EXAMPLE.
-          return t; // Force the type assertion (VERY UNSAFE)
-        }
-      }
-      if (tt === "number") {
-        // } && (t as unknown as S) instanceof Number) {  //VERY LIMITED AND UNSAFE EXAMPLE.
-        return t; // Force the type assertion (VERY UNSAFE)
-      }
-      if (tt === "boolean") {
-        //VERY LIMITED AND UNSAFE EXAMPLE.
-        return t; // Force the type assertion (VERY UNSAFE)
-      }
-      //This is better, but assumes S is a string or number
-      if (tt === 'string' && null === String) {
-        return t;
-      }
-      if (typeof t === 'number' && null === Number) {
-        return t;
-      }
-      console.warn(t, _typeof(t));
-      throw new OwnError_1.OwnError("Type conversion", "Performer", undefined);
-      // In many cases, a direct conversion may not be possible
-      // or may require a more complex transformation.
-      // warn("Conversion not possible for types:", typeof t, S);
-      return undefined; // Or throw an error, or return a default value.
-    }
-  }, {
-    key: "getMeasurement",
-    value: function getMeasurement(i, j, dataConsumer) {
-      return dataConsumer.getAllMeasurements()[i].getMeasurement(j);
-    }
-  }, {
-    key: "remove",
-    value: function remove(t, x) {
-      var tt = [];
-      var _iterator11 = _createForOfIteratorHelper(t),
-        _step11;
-      try {
-        for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
-          var y = _step11.value;
-          if (y != x) {
-            tt.push(x);
-          }
-        }
-      } catch (err) {
-        _iterator11.e(err);
-      } finally {
-        _iterator11.f();
-      }
-      return tt;
-    }
-  }, {
-    key: "enlarge",
-    value: function enlarge(t, x, size) {
-      for (var i = 0; i < size; i++) t.push(x);
-    }
-  }, {
-    key: "enlarge2",
-    value: function enlarge2(t, x, row, column) {
-      for (var i = 0; i < row; i++) {
-        var y = [];
-        t.push(y);
-        for (var j = 0; i < column; j++) y.push(x);
-      }
-    }
-  }, {
-    key: "enlargeNumber",
-    value: function enlargeNumber(x, size) {
-      this.enlarge(x, 0, size);
-    }
-  }, {
-    key: "enlargeNumber2",
-    value: function enlargeNumber2(x, row, column) {
-      this.enlarge2(x, 0, row, column);
-    }
-  }, {
-    key: "pushArray",
-    value: function pushArray(f, t) {
-      for (var i = 0; i < f.length; i++) {
-        t.push(f[i]);
-      }
-    }
-  }, {
-    key: "copyArray",
-    value: function copyArray(f, t) {
-      for (var i = 0; i < f.length; i++) {
-        t[i] = f[i];
-      }
-    }
-  }, {
-    key: "copyArraySize",
-    value: function copyArraySize(f, t, size) {
-      for (var i = 0; i < size; i++) {
-        t[i] = f[i];
-      }
-    }
-  }, {
-    key: "addArray",
-    value: function addArray(array, add) {
-      var _iterator12 = _createForOfIteratorHelper(add),
-        _step12;
-      try {
-        for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
-          var f = _step12.value;
-          array.push(f);
-        }
-      } catch (err) {
-        _iterator12.e(err);
-      } finally {
-        _iterator12.f();
-      }
-    }
-  }, {
-    key: "setAliasType",
-    value: function setAliasType(name, value, map, names) {
-      if (map.has(name)) {
-        return false;
-      }
-      names.push(name);
-      if (typeof value === 'number') {
-        map.set(name, this.a);
-      }
-      if (typeof value === 'boolean') {
-        map.set(name, this.b);
-      }
-      if (typeof value === 'string') {
-        map.set(name, this.s);
-      }
-      return true;
-    }
-  }, {
-    key: "setAliasMap",
-    value: function setAliasMap(map, alias) {
-      var keys = map.keys();
-      /*    keys.foreach(
-              key => alias.setAliasValue(key, map.get(key));
-          );
-          return;*/
-      var _iterator13 = _createForOfIteratorHelper(keys),
-        _step13;
-      try {
-        for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
-          var key = _step13.value;
-          alias.setAliasValue(key, map.get(key));
-        }
-      } catch (err) {
-        _iterator13.e(err);
-      } finally {
-        _iterator13.f();
-      }
-    }
-  }, {
-    key: "copyMap",
-    value: function copyMap(s, t) {
-      var _iterator14 = _createForOfIteratorHelper(s),
-        _step14;
-      try {
-        for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
-          var _step14$value = _slicedToArray(_step14.value, 2),
-            key = _step14$value[0],
-            value = _step14$value[1];
-          t.set(key, value);
-        }
-      } catch (err) {
-        _iterator14.e(err);
-      } finally {
-        _iterator14.f();
-      }
-    }
-  }, {
-    key: "implementsType",
-    value: function implementsType(o, type) {
-      var obj = o;
-      return obj.imlplementsType(type);
-    }
-  }, {
-    key: "getMeasurementsMap",
-    value: function getMeasurementsMap(measurements) {
-      var map = new Map();
-      var n = measurements.getMeasurementsCount();
-      for (var i = 0; i < n; i++) {
-        var m = measurements.getMeasurement(i);
-        var nn = m.getMeasurementName();
-        map.set(nn, m);
-      }
-      return map;
-    }
-  }, {
-    key: "getMeasurementDC",
-    value: function getMeasurementDC(consumer, name) {
-      var mm = consumer.getAllMeasurements();
-      var _iterator15 = _createForOfIteratorHelper(mm),
-        _step15;
-      try {
-        for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
-          var mea = _step15.value;
-          var co = mea;
-          var nm = co.getCategoryObjectName();
-          nm += ".";
-          var n = mea.getMeasurementsCount();
-          for (var i = 0; i < n; i++) {
-            var m = mea.getMeasurement(i);
-            var nam = nm + m.getMeasurementName();
-            if (nam == name) {
-              return m;
-            }
-          }
-        }
-      } catch (err) {
-        _iterator15.e(err);
-      } finally {
-        _iterator15.f();
-      }
-      return this.measurement;
-    }
-  }, {
-    key: "getMeasurementsMMap",
-    value: function getMeasurementsMMap(measurements, map) {
-      var n = measurements.getMeasurementsCount();
-      for (var i = 0; i < n; i++) {
-        var m = measurements.getMeasurement(i);
-        var name = m.getMeasurementName();
-        map.set(name, m);
-      }
-    }
-  }, {
-    key: "getMeasurementsDCMap",
-    value: function getMeasurementsDCMap(consumer) {
-      var map = new Map();
-      var mm = consumer.getAllMeasurements();
-      var _iterator16 = _createForOfIteratorHelper(mm),
-        _step16;
-      try {
-        for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
-          var mea = _step16.value;
-          var co = mea;
-          var nm = co.getCategoryObjectName();
-          nm += ".";
-          var n = mea.getMeasurementsCount();
-          for (var i = 0; i < n; i++) {
-            var m = mea.getMeasurement(i);
-            var name = nm + m.getMeasurementName();
-            map.set(name, m);
-          }
-        }
-      } catch (err) {
-        _iterator16.e(err);
-      } finally {
-        _iterator16.f();
-      }
-      return map;
-    }
-  }, {
-    key: "getMeasurements",
-    value: function getMeasurements(desktop, name) {
-      var a = desktop.getCategoryObject(name);
-      if (this.implementsType(a, "IMeasurements")) {
-        var al = a;
-        return al;
-      }
-      return this.measurements;
-    }
-  }, {
-    key: "getAlias",
-    value: function getAlias(desktop, name) {
-      var a = desktop.getCategoryObject(name);
-      if (this.implementsType(a, "IAlias")) {
-        var al = a;
-        return al;
-      }
-      return this.alias;
-    }
-  }, {
-    key: "getAliasName",
-    value: function getAliasName(desktop, name) {
-      var l = name.length;
-      var n = name.lastIndexOf('.');
-      var s = name.substring(n + 1, l);
-      var t = name.substring(0, n);
-      var al = this.getAlias(desktop, t);
-      return new AliasName_1.AliasName(al, s);
-    }
-  }], [{
-    key: "getCurrentDesktop",
-    value: function getCurrentDesktop() {
-      return this.desktop;
-    }
-  }, {
-    key: "setCurrentDesktop",
-    value: function setCurrentDesktop(desktop) {
-      this.desktop = desktop;
-    }
-  }]);
-}();
-exports.Performer = Performer;
-var FactorySetter = /*#__PURE__*/function () {
-  function FactorySetter(factory) {
-    _classCallCheck(this, FactorySetter);
-    this.factory = factory;
-  }
-  return _createClass(FactorySetter, [{
-    key: "actionT",
-    value: function actionT(t) {
-      t.setConsumerFactory(this.factory);
-    }
-  }]);
-}();
-},{"./AliasName":"src/Library/AliasName.js","./ConsolePrinter":"src/Library/ConsolePrinter.js","./ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.js","./Measurements/MeasurementsComparator":"src/Library/Measurements/MeasurementsComparator.js","./Utilities/Sort/SortingAlgorithms":"src/Library/Utilities/Sort/SortingAlgorithms.js","./Utilities/Generic/ActionArray":"src/Library/Utilities/Generic/ActionArray.js"}],"src/Library/Utilities/Generic/ActionArrayT.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ActionArrayT = void 0;
-var Performer_1 = require("../../Performer");
-var ActionArrayT = /*#__PURE__*/function () {
-  function ActionArrayT() {
-    _classCallCheck(this, ActionArrayT);
-    this.actions = [];
-    this.typeName = "ActionArrayT";
-    this.types = ["IActionT", "IActionArrayT", "IObject", "ActionArrayT"];
-    this.performer = new Performer_1.Performer();
-  }
-  return _createClass(ActionArrayT, [{
-    key: "addActionT",
-    value: function addActionT(action) {
-      if (action === undefined) return;
-      this.actions.push(action);
-    }
-  }, {
-    key: "removeActionT",
-    value: function removeActionT(action) {
-      if (action === undefined) return;
-      this.performer.remove(this.actions, action);
-    }
-  }, {
-    key: "clearActionsT",
-    value: function clearActionsT() {
-      this.actions = [];
-    }
-  }, {
-    key: "getClassName",
-    value: function getClassName() {
-      return this.typeName;
-    }
-  }, {
-    key: "imlplementsType",
-    value: function imlplementsType(type) {
-      return this.types.indexOf(type) > 0;
-    }
-  }, {
-    key: "getName",
-    value: function getName() {
-      return "";
-    }
-  }, {
-    key: "actionT",
-    value: function actionT(t) {
-      var _iterator = _createForOfIteratorHelper(this.actions),
-        _step;
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var action = _step.value;
-          action.actionT(t);
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-    }
-  }]);
-}();
-exports.ActionArrayT = ActionArrayT;
-},{"../../Performer":"src/Library/Performer.ts"}],"src/common/game.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Scene = void 0;
-var loader_1 = __importDefault(require("./loader")); // Used to load files from the web server
-var input_1 = __importDefault(require("./input")); // Used to manage the user input
-var ActionArrayT_1 = require("../Library/Utilities/Generic/ActionArrayT");
-//This is the abstract base of all scenes
-var Scene = /*#__PURE__*/function () {
-  function Scene(game) {
-    _classCallCheck(this, Scene);
-    this.game = game;
-    this.gl = game.gl;
-    this.engine = game;
-  }
-  return _createClass(Scene, [{
-    key: "getGl",
-    value: function getGl() {
-      return this.gl;
-    }
-  }]);
-}();
-exports.Scene = Scene;
-//This class create the WebGL2 context, manages the scenes and handles the game loop
-var Game = /*#__PURE__*/function () {
-  function Game(canvas, options) {
-    _classCallCheck(this, Game);
-    this.loader = new loader_1.default(); // A loader to read files from the webserver
-    this.scenes = {}; // A dictionary of all available scenes
-    this.currentScene = null; // The scene that is currently being drawn
-    this.nextScene = null; // The scene that will replace the current scene after its files have been loaded
-    this.nextSceneReady = false; // Whether the files requested by the next scene has been loaded or not 
-    this.engineAction = new ActionArrayT_1.ActionArrayT();
-    this.emptyAction = new ActionArrayT_1.ActionArrayT();
-    this.curentAction = new ActionArrayT_1.ActionArrayT();
-    this.currentTime = Math.min();
-    this.isEnabled = false;
-    this.canvas = canvas;
-    this.options = options !== null && options !== void 0 ? options : {};
-    this.gl = this.canvas.getContext("webgl2", {
-      preserveDrawingBuffer: true,
-      alpha: true,
-      antialias: true,
-      depth: true,
-      powerPreference: "high-performance",
-      premultipliedAlpha: false,
-      stencil: true // this will tell the browser that we want a stencil buffer
-    }); // This command loads the WebGL2 context which we will use to draw
-    this.input = new input_1.default(this.canvas);
-    this.lastTick = performance.now();
-    this.loop(performance.now()); // Start the game loop
-  }
-  return _createClass(Game, [{
-    key: "addScene",
-    value: function addScene(name, type) {
-      this.scenes[name] = new type(this);
-    }
-  }, {
-    key: "addSceneObject",
-    value: function addSceneObject(name, scene) {
-      this.scenes[name] = scene;
-    }
-  }, {
-    key: "addScenes",
-    value: function addScenes(scenes) {
-      for (var name in scenes) this.addScene(name, scenes[name]);
-    }
-  }, {
-    key: "setNext",
-    value: function setNext() {
-      this.nextSceneReady = true;
-    }
-  }, {
-    key: "startScene",
-    value: function startScene(name) {
-      var _this = this;
-      if (name in this.scenes) {
-        this.nextScene = this.scenes[name];
-        this.nextSceneReady = false;
-        this.nextScene.load();
-        this.loader.wait().then(function () {
-          _this.setNext();
-        }); // This will make the loader notify us when the files are ready
-      } else {
-        console.warn("Scene \"".concat(name, "\" not found"));
-      }
-    }
-  }, {
-    key: "loop",
-    value: function loop(time) {
-      var _this2 = this;
-      this.actionGame(time);
-      requestAnimationFrame(function (time) {
-        return _this2.loop(time);
-      }); // Tell the browser to call this function again when the next frame needs to be drawn
-      if (this.options.maxfps) {
-        if (time - this.lastTick < 1000 / this.options.maxfps) return;
-      }
-      if (this.nextScene != null && this.nextSceneReady) {
-        // If there is a next scene and it is ready, replace the current scene with it.
-        if (this.currentScene != null) this.currentScene.end(); // If there was an old scene, tell it to free its memory
-        this.currentScene = this.nextScene;
-        this.nextScene = null;
-        this.currentScene.start(); // Tell the scene to initialize its objects
-      }
-      if (this.currentScene != null) {
-        this.currentScene.draw(time - this.lastTick); // Tell the scene to draw itself
-      }
-      this.input.update(); // Update some information about the user input
-      this.lastTick = time;
-      this.engineAction.addActionT(this);
-    }
-  }, {
-    key: "actionGame",
-    value: function actionGame(time) {
-      this.curentAction.actionT(time);
-    }
-  }, {
-    key: "actionT",
-    value: function actionT(t) {
-      this.currentTime = t;
-    }
-  }, {
-    key: "isEngineEnabled",
-    value: function isEngineEnabled() {
-      return this.isEnabled;
-    }
-  }, {
-    key: "setEngineEnabled",
-    value: function setEngineEnabled(enabled) {
-      if (enabled == this.isEnabled) return;
-      this.isEnabled = enabled;
-      this.curentAction = enabled ? this.engineAction : this.emptyAction;
-    }
-  }, {
-    key: "getPlayEngineTime",
-    value: function getPlayEngineTime() {
-      return this.currentTime;
-    }
-  }, {
-    key: "getEngineAction",
-    value: function getEngineAction() {
-      return this.engineAction;
-    }
-  }]);
-}();
-exports.default = Game;
-},{"./loader":"src/common/loader.ts","./input":"src/common/input.ts","../Library/Utilities/Generic/ActionArrayT":"src/Library/Utilities/Generic/ActionArrayT.ts"}],"src/Library/ErrorHandler/OwnNotImplemented.js":[function(require,module,exports) {
+},{"../common/shader-program":"src/common/shader-program.ts","../common/mesh-utils":"src/common/mesh-utils.ts","../common/texture-utils":"src/common/texture-utils.ts","../common/camera":"src/common/camera.ts","../common/camera-controllers/fly-camera-controller":"src/common/camera-controllers/fly-camera-controller.ts","gl-matrix":"node_modules/gl-matrix/esm/index.js","../common/dom-utils":"src/common/dom-utils.tsx","tsx-create-element":"node_modules/tsx-create-element/dist/es6/index.js","../common/BasicScene":"src/common/BasicScene.ts"}],"src/Library/ErrorHandler/OwnNotImplemented.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -18853,9 +18284,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.UniversalFactory = void 0;
 var Performer_1 = require("./Performer");
+var OwnError_1 = require("./ErrorHandler/OwnError");
 var UniversalFactory = /*#__PURE__*/function () {
   function UniversalFactory() {
     _classCallCheck(this, UniversalFactory);
+    this.typeName = "UniversalFactory";
+    this.types = ["IObject", "IFactory", "UniversalFactory"];
+    this.name = "";
     this.performer = new Performer_1.Performer();
     this.factories = new Map();
   }
@@ -18869,13 +18304,29 @@ var UniversalFactory = /*#__PURE__*/function () {
   }, {
     key: "addFactory",
     value: function addFactory(t, type) {
+      if (this.factories.has(type)) throw new OwnError_1.OwnError("Factory", type, "aleady exists");
       var tt = this.performer.convertObject(t, type);
       if (tt.length > 0) this.factories.set(type, tt[0]);
+    }
+  }, {
+    key: "getName",
+    value: function getName() {
+      return this.name;
+    }
+  }, {
+    key: "getClassName",
+    value: function getClassName() {
+      return this.typeName;
+    }
+  }, {
+    key: "imlplementsType",
+    value: function imlplementsType(type) {
+      return this.types.indexOf(type) >= 0;
     }
   }]);
 }();
 exports.UniversalFactory = UniversalFactory;
-},{"./Performer":"src/Library/Performer.js"}],"src/Library/Measurements/DataConsumerBoolFunc.js":[function(require,module,exports) {
+},{"./Performer":"src/Library/Performer.js","./ErrorHandler/OwnError":"src/Library/ErrorHandler/OwnError.js"}],"src/Library/Measurements/DataConsumerBoolFunc.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -21299,6 +20750,8 @@ var Motion6DFactory = /*#__PURE__*/function (_UniversalFactory_1$U) {
     _this.addFactory(processor, "IDifferentialEquationProcessor");
     var f = new Motion6DRealtimeFactory_1.Motion6DRealtimeFactory();
     _this.addFactory(f, "IRealtimeCollectionFactory");
+    _this.types.push("Motion6DFactory");
+    _this.typeName = "Motion6DFactory";
     return _this;
   }
   _inherits(Motion6DFactory, _UniversalFactory_1$U);
@@ -21335,8 +20788,6 @@ var BasicPrimitive = /*#__PURE__*/function () {
   return _createClass(BasicPrimitive, [{
     key: "setConsumerFactory",
     value: function setConsumerFactory(factory) {
-      console.log("FACTORY");
-      console.log(factory);
       this.factory = factory;
     }
   }, {
@@ -21362,50 +20813,7 @@ var BasicPrimitive = /*#__PURE__*/function () {
   }]);
 }();
 exports.BasicPrimitive = BasicPrimitive;
-},{"../../Library/Performer":"src/Library/Performer.js"}],"src/common/texture-utils.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.LoadImage = LoadImage;
-exports.CheckerBoard = CheckerBoard;
-exports.SingleColor = SingleColor;
-function LoadImage(gl, image) {
-  var texture = gl.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, texture);
-  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  gl.pixelStorei(gl.UNPACK_ALIGNMENT, 4);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-  gl.generateMipmap(gl.TEXTURE_2D);
-  return texture;
-}
-function CheckerBoard(gl, imageSize, cellSize, color0, color1) {
-  var texture = gl.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, texture);
-  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  gl.pixelStorei(gl.UNPACK_ALIGNMENT, 4);
-  var data = Array(imageSize[0] * imageSize[1] * 4);
-  for (var j = 0; j < imageSize[1]; j++) {
-    for (var i = 0; i < imageSize[0]; i++) {
-      data[i + j * imageSize[0]] = (Math.floor(i / cellSize[0]) + Math.floor(j / cellSize[1])) % 2 == 0 ? color0 : color1;
-    }
-  }
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, imageSize[0], imageSize[1], 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(data.flat()));
-  gl.generateMipmap(gl.TEXTURE_2D);
-  return texture;
-}
-function SingleColor(gl) {
-  var color = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [255, 255, 255, 255];
-  var texture = gl.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, texture);
-  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-  gl.pixelStorei(gl.UNPACK_ALIGNMENT, 4);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(color));
-  gl.generateMipmap(gl.TEXTURE_2D);
-  return texture;
-}
-},{}],"src/Library/Abstract3DConverters/ColorTexture.js":[function(require,module,exports) {
+},{"../../Library/Performer":"src/Library/Performer.js"}],"src/Library/Abstract3DConverters/ColorTexture.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -21929,7 +21337,7 @@ var AbstractMeshCreator = /*#__PURE__*/function () {
     }
     var td = factory.getFactory("IIODirectoryFactory");
     if (td != undefined) {
-      this.directoryio = td.createDirectoryFacrory(obj);
+      this.directoryio = td.createDirectoryFactory(obj);
     }
     var idt = factory.getFactory("IImageDetectorFactory");
     if (idt != undefined) this.imageDetector = idt.getImageDetector(obj);
@@ -23528,60 +22936,19 @@ function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.
 function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
 function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
 function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  var desc = Object.getOwnPropertyDescriptor(m, k);
-  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-    desc = {
-      enumerable: true,
-      get: function get() {
-        return m[k];
-      }
-    };
-  }
-  Object.defineProperty(o, k2, desc);
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-var __importStar = this && this.__importStar || function () {
-  var _ownKeys = function ownKeys(o) {
-    _ownKeys = Object.getOwnPropertyNames || function (o) {
-      var ar = [];
-      for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-      return ar;
-    };
-    return _ownKeys(o);
-  };
-  return function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k = _ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-    __setModuleDefault(result, mod);
-    return result;
-  };
-}();
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Object3DPrimitive = void 0;
 var BasicPrimitive_1 = require("./BasicPrimitive");
 var gl_matrix_1 = require("gl-matrix");
-var TextureUtils = __importStar(require("../../common/texture-utils"));
 var Obj3DCreator_1 = require("../../Library/Abstract3DConverters/MeshCreators/Obj3DCreator");
 var Object3DPrimitive = /*#__PURE__*/function (_BasicPrimitive_1$Bas) {
   function Object3DPrimitive(name, scene, shape) {
     var _this;
     _classCallCheck(this, Object3DPrimitive);
     _this = _callSuper(this, Object3DPrimitive, [name, scene]);
+    _this.meshes = [];
     //Move Controllers
     _this.type = 'perspective';
     _this.textures = {};
@@ -23597,6 +22964,7 @@ var Object3DPrimitive = /*#__PURE__*/function (_BasicPrimitive_1$Bas) {
     _this.typeName = "Object3DPrimitive";
     _this.types.push("Object3DPrimitive");
     _this.types.push("IStartPrimitive");
+    console.log(_this);
     return _this;
   }
   _inherits(Object3DPrimitive, _BasicPrimitive_1$Bas);
@@ -23608,6 +22976,7 @@ var Object3DPrimitive = /*#__PURE__*/function (_BasicPrimitive_1$Bas) {
   }, {
     key: "loadMesh",
     value: function loadMesh() {
+      console.log("LOADM");
       var map = this.shape.getSaveGrahicalData();
       var _iterator = _createForOfIteratorHelper(map.keys()),
         _step;
@@ -23624,14 +22993,9 @@ var Object3DPrimitive = /*#__PURE__*/function (_BasicPrimitive_1$Bas) {
             console.log(this.factory);
             var creator = new Obj3DCreator_1.Obj3DCreator(key, "", this.scene, this.factory);
             this.meshes = creator.getMeshCreatorMeshes();
+            console.log(this.meshes.length);
             console.log("MMMMMM");
           }
-          n = key.lastIndexOf(".mtl");
-          if (n >= 0) {
-            continue;
-          }
-          var txt = TextureUtils.LoadImage(this.gl, obj);
-          this.textures[key] = txt;
         }
       } catch (err) {
         _iterator.e(err);
@@ -23642,7 +23006,7 @@ var Object3DPrimitive = /*#__PURE__*/function (_BasicPrimitive_1$Bas) {
   }]);
 }(BasicPrimitive_1.BasicPrimitive);
 exports.Object3DPrimitive = Object3DPrimitive;
-},{"./BasicPrimitive":"src/common/Primitives/BasicPrimitive.js","gl-matrix":"node_modules/gl-matrix/esm/index.js","../../common/texture-utils":"src/common/texture-utils.js","../../Library/Abstract3DConverters/MeshCreators/Obj3DCreator":"src/Library/Abstract3DConverters/MeshCreators/Obj3DCreator.js"}],"src/common/Factory/GameLoader.js":[function(require,module,exports) {
+},{"./BasicPrimitive":"src/common/Primitives/BasicPrimitive.js","gl-matrix":"node_modules/gl-matrix/esm/index.js","../../Library/Abstract3DConverters/MeshCreators/Obj3DCreator":"src/Library/Abstract3DConverters/MeshCreators/Obj3DCreator.js"}],"src/common/GameLoader.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -23655,8 +23019,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.GameLoaderFactory = void 0;
-var Performer_1 = require("../../Library/Performer");
-var Object3DPrimive_1 = require("../Primitives/Object3DPrimive");
+var Performer_1 = require("../Library/Performer");
+var Object3DPrimive_1 = require("./Primitives/Object3DPrimive");
 var GameLoaderFactory = /*#__PURE__*/function () {
   function GameLoaderFactory() {
     _classCallCheck(this, GameLoaderFactory);
@@ -23711,7 +23075,7 @@ var GameLoader = /*#__PURE__*/function () {
     }
   }]);
 }();
-},{"../../Library/Performer":"src/Library/Performer.js","../Primitives/Object3DPrimive":"src/common/Primitives/Object3DPrimive.js"}],"src/Library/Utilities/String/LineEndSplitter.js":[function(require,module,exports) {
+},{"../Library/Performer":"src/Library/Performer.js","./Primitives/Object3DPrimive":"src/common/Primitives/Object3DPrimive.js"}],"src/Library/Utilities/String/LineEndSplitter.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -23754,7 +23118,49 @@ var LineEndSplitter = /*#__PURE__*/function () {
   }]);
 }();
 exports.LineEndSplitter = LineEndSplitter;
-},{}],"src/Library/IO/PurePath.js":[function(require,module,exports) {
+},{}],"src/common/SceneHolder.js":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SceneHolder = void 0;
+var Performer_1 = require("../Library/Performer");
+var SceneHolder = /*#__PURE__*/function () {
+  function SceneHolder(scene) {
+    _classCallCheck(this, SceneHolder);
+    this.performer = new Performer_1.Performer();
+    this.typeName = "SceneHolder";
+    this.types = ["IObject", "SceneHolder"];
+    this.name = "";
+    this.performer = new Performer_1.Performer();
+    this.scene = this.performer.convertObject(scene, "BasicScene")[0];
+  }
+  return _createClass(SceneHolder, [{
+    key: "getName",
+    value: function getName() {
+      return this.name;
+    }
+  }, {
+    key: "getClassName",
+    value: function getClassName() {
+      return this.typeName;
+    }
+  }, {
+    key: "imlplementsType",
+    value: function imlplementsType(type) {
+      return this.types.indexOf(type) >= 0;
+    }
+  }]);
+}();
+exports.SceneHolder = SceneHolder;
+},{"../Library/Performer":"src/Library/Performer.js"}],"src/Library/IO/PurePath.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -23770,6 +23176,9 @@ exports.PurePath = void 0;
 var PurePath = /*#__PURE__*/function () {
   function PurePath() {
     _classCallCheck(this, PurePath);
+    this.typeName = "PurePath";
+    this.types = ["IObject", "IPath", "PurePath"];
+    this.name = "";
   }
   return _createClass(PurePath, [{
     key: "pathCombine",
@@ -23807,18 +23216,80 @@ var PurePath = /*#__PURE__*/function () {
       var fn = this.getFileName(fileName);
       return fileName.substr(0, fileName.length - fn.length);
     }
+  }, {
+    key: "getName",
+    value: function getName() {
+      return this.name;
+    }
+  }, {
+    key: "getClassName",
+    value: function getClassName() {
+      return this.typeName;
+    }
+  }, {
+    key: "imlplementsType",
+    value: function imlplementsType(type) {
+      return this.types.indexOf(type) >= 0;
+    }
   }]);
 }();
 exports.PurePath = PurePath;
-},{}],"src/common/GameFactory.js":[function(require,module,exports) {
+},{}],"src/Library/IO/PurePathFactory.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.PurePathFactory = void 0;
+var PurePath_1 = require("./PurePath");
+var PurePathFactory = /*#__PURE__*/function () {
+  function PurePathFactory() {
+    _classCallCheck(this, PurePathFactory);
+    this.typeName = "PurePathFactory";
+    this.types = ["IObject", "IPathFactory", "PurePathFactory"];
+    this.name = "";
+  }
+  return _createClass(PurePathFactory, [{
+    key: "createPath",
+    value: function createPath(obj) {
+      return new PurePath_1.PurePath();
+    }
+  }, {
+    key: "getName",
+    value: function getName() {
+      return this.name;
+    }
+  }, {
+    key: "getClassName",
+    value: function getClassName() {
+      return this.typeName;
+    }
+  }, {
+    key: "imlplementsType",
+    value: function imlplementsType(type) {
+      return this.types.indexOf(type) >= 0;
+    }
+  }]);
+}();
+exports.PurePathFactory = PurePathFactory;
+},{"./PurePath":"src/Library/IO/PurePath.ts"}],"src/common/GameFactory.js":[function(require,module,exports) {
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
 function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
 function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
@@ -23831,22 +23302,47 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.GameFactory = void 0;
 var Motion6DFactory_1 = require("../Library/Motion6D/Motion6DFactory");
-var GameLoader_1 = require("./Factory/GameLoader");
+var GameLoader_1 = require("./GameLoader");
 var LineEndSplitter_1 = require("../Library/Utilities/String/LineEndSplitter");
-var PurePath_1 = require("../Library/IO/PurePath");
+var SceneHolder_1 = require("./SceneHolder");
+var PurePathFactory_1 = require("../Library/IO/PurePathFactory");
+// lass FileSystemFactory implements IObject, ITextReaderFactory, 
 var GameFactory = /*#__PURE__*/function (_Motion6DFactory_1$Mo) {
   function GameFactory() {
     var _this;
     _classCallCheck(this, GameFactory);
     _this = _callSuper(this, GameFactory);
+    _this.types.push("IIODirectoryFactory");
+    _this.types.push("IFileFactory");
+    _this.types.push("ITextReaderFactory");
+    _this.types.push("GameFactory");
+    _this.typeName = "GameFactory";
     _this.addFactory(new GameMtlDetector(), "IMtlDetector");
     _this.addFactory(new GameLoader_1.GameLoaderFactory(), "ILoaderFactory");
     _this.addFactory(new LineEndSplitter_1.LineEndSplitter(), "IStringSplitter");
-    _this.addFactory(new PurePath_1.PurePath(), "IPath");
+    _this.addFactory(new PurePathFactory_1.PurePathFactory(), "IPathFactory");
+    _this.addFactory(_this, "IIODirectoryFactory");
+    _this.addFactory(_this, "IFileFactory");
+    _this.addFactory(_this, "ITextReaderFactory");
     return _this;
   }
   _inherits(GameFactory, _Motion6DFactory_1$Mo);
-  return _createClass(GameFactory);
+  return _createClass(GameFactory, [{
+    key: "getTextReader",
+    value: function getTextReader(obj, url) {
+      return new SceneReader(obj, url);
+    }
+  }, {
+    key: "createFile",
+    value: function createFile(obj) {
+      return new SceneFile(obj);
+    }
+  }, {
+    key: "createDirectoryFactory",
+    value: function createDirectoryFactory(object) {
+      return new SceneDirectory(object);
+    }
+  }]);
 }(Motion6DFactory_1.Motion6DFactory);
 exports.GameFactory = GameFactory;
 var GameMtlDetector = /*#__PURE__*/function () {
@@ -23879,7 +23375,109 @@ var GameMtlDetector = /*#__PURE__*/function () {
     }
   }]);
 }();
-},{"../Library/Motion6D/Motion6DFactory":"src/Library/Motion6D/Motion6DFactory.js","./Factory/GameLoader":"src/common/Factory/GameLoader.js","../Library/Utilities/String/LineEndSplitter":"src/Library/Utilities/String/LineEndSplitter.js","../Library/IO/PurePath":"src/Library/IO/PurePath.js"}],"src/Library/Event/EngineTimerProvider.js":[function(require,module,exports) {
+var SceneDirectory = /*#__PURE__*/function (_SceneHolder_1$SceneH) {
+  function SceneDirectory(object) {
+    var _this2;
+    _classCallCheck(this, SceneDirectory);
+    _this2 = _callSuper(this, SceneDirectory, [object]);
+    _this2.types.push("IIODirectory");
+    _this2.types.push("SceneDirectory");
+    _this2.typeName = "SceneDirectory";
+    return _this2;
+  }
+  _inherits(SceneDirectory, _SceneHolder_1$SceneH);
+  return _createClass(SceneDirectory, [{
+    key: "getDirectoryFiles",
+    value: function getDirectoryFiles(directory) {
+      return this.scene.getDirectoryFiles(directory);
+    }
+  }]);
+}(SceneHolder_1.SceneHolder);
+var SceneFile = /*#__PURE__*/function (_SceneHolder_1$SceneH2) {
+  function SceneFile(object) {
+    var _this3;
+    _classCallCheck(this, SceneFile);
+    _this3 = _callSuper(this, SceneFile, [object]);
+    _this3.types.push("IFile");
+    _this3.types.push("SceneFile");
+    _this3.typeName = "SceneFile";
+    return _this3;
+  }
+  _inherits(SceneFile, _SceneHolder_1$SceneH2);
+  return _createClass(SceneFile, [{
+    key: "existsFile",
+    value: function existsFile(fileName) {
+      return this.scene.fileExists(fileName);
+    }
+  }]);
+}(SceneHolder_1.SceneHolder);
+var SceneReader = /*#__PURE__*/function (_SceneHolder_1$SceneH3) {
+  function SceneReader(object, url) {
+    var _this4;
+    _classCallCheck(this, SceneReader);
+    _this4 = _callSuper(this, SceneReader, [object]);
+    _this4.strings = [];
+    _this4.text = "";
+    _this4.end = false;
+    _this4.n = 0;
+    _this4.types.push("ITextReader");
+    _this4.types.push("SceneReader");
+    _this4.typeName = "SceneReader";
+    _this4.text = _this4.scene.getResourceText(url);
+    _this4.split();
+    return _this4;
+  }
+  _inherits(SceneReader, _SceneHolder_1$SceneH3);
+  return _createClass(SceneReader, [{
+    key: "getStrings",
+    value: function getStrings() {
+      return this.strings;
+    }
+  }, {
+    key: "reset",
+    value: function reset() {
+      this.n = 0;
+      this.end = false;
+    }
+  }, {
+    key: "readToEnd",
+    value: function readToEnd() {
+      this.end = true;
+      return this.text;
+    }
+  }, {
+    key: "readLine",
+    value: function readLine() {
+      var s = this.strings[this.n];
+      this.n++;
+      if (this.n >= this.strings.length) this.end = true;
+      return s;
+    }
+  }, {
+    key: "eof",
+    value: function eof() {
+      return this.end;
+    }
+  }, {
+    key: "split",
+    value: function split() {
+      var s = this.text.split("\n");
+      var _iterator = _createForOfIteratorHelper(s),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var str = _step.value;
+          this.strings.push(str.replace("\r", ""));
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    }
+  }]);
+}(SceneHolder_1.SceneHolder);
+},{"../Library/Motion6D/Motion6DFactory":"src/Library/Motion6D/Motion6DFactory.js","./GameLoader":"src/common/GameLoader.js","../Library/Utilities/String/LineEndSplitter":"src/Library/Utilities/String/LineEndSplitter.js","./SceneHolder":"src/common/SceneHolder.js","../Library/IO/PurePathFactory":"src/Library/IO/PurePathFactory.js"}],"src/Library/Event/EngineTimerProvider.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -24556,6 +24154,9 @@ exports.ScadaDesktopEngine = ScadaDesktopEngine;
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
@@ -24590,13 +24191,55 @@ var BasicScene = /*#__PURE__*/function (_game_1$Scene) {
     _this.typeName = "BasicScene";
     _this.types = ["IObject", "IObjectCollection", "BasicScene"];
     _this.name = "";
+    _this.resourceFiles = [];
     _this.factory = factory;
     var l = factory.getFactory("ILoaderFactory");
-    _this.loader = l.getLoader(_this);
+    if (l != undefined) {
+      _this.loader = l.getLoader(_this);
+    }
     return _this;
   }
   _inherits(BasicScene, _game_1$Scene);
   return _createClass(BasicScene, [{
+    key: "addResource",
+    value: function addResource(url) {
+      if (!this.resourceFiles.includes(url)) this.resourceFiles.push(url);
+    }
+  }, {
+    key: "getResources",
+    value: function getResources() {
+      return this.resourceFiles;
+    }
+  }, {
+    key: "getDirectoryFiles",
+    value: function getDirectoryFiles(dir) {
+      var l = [];
+      var _iterator = _createForOfIteratorHelper(this.resourceFiles),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var d = _step.value;
+          if (d.startsWith(dir)) l.push(d);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      l.sort();
+      return l;
+    }
+  }, {
+    key: "fileExists",
+    value: function fileExists(fileName) {
+      return this.resourceFiles.includes(fileName);
+    }
+  }, {
+    key: "getFactory",
+    value: function getFactory() {
+      return this.factory;
+    }
+  }, {
     key: "getName",
     value: function getName() {
       return this.name;
@@ -24626,10 +24269,15 @@ var BasicScene = /*#__PURE__*/function (_game_1$Scene) {
     value: function getObjectCollection() {
       return this.iobjects;
     }
+  }, {
+    key: "getResourceText",
+    value: function getResourceText(url) {
+      return this.game.loader.resources[url];
+    }
   }]);
 }(game_1.Scene);
 exports.BasicScene = BasicScene;
-},{"./game":"src/common/game.js"}],"src/common/ScadaScene.js":[function(require,module,exports) {
+},{"./game":"src/common/game.ts"}],"src/common/ScadaScene.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -24743,6 +24391,9 @@ var AirplaneScene = /*#__PURE__*/function (_ScadaScene_1$ScadaSc) {
         url: 'models/pLANE/mat0_c.jpg',
         type: 'image'
       }));
+      this.addResource("models/pLANE/Cessna_208_Caravan.obj");
+      this.addResource("models/pLANE/master.mtl");
+      this.addResource("models/pLANE/mat0_c.jpg");
     }
   }]);
 }(ScadaScene_1.ScadaScene);
@@ -26428,43 +26079,7 @@ var RungeProcessor = /*#__PURE__*/function (_DifferentialEquation) {
   }]);
 }(DifferentialEquationProcessor_1.DifferentialEquationProcessor);
 exports.RungeProcessor = RungeProcessor;
-},{"./DifferentialEquationProcessor":"src/Library/Measurements/DifferentialEquations/Processors/DifferentialEquationProcessor.js"}],"src/Library/UniversalFactory.ts":[function(require,module,exports) {
-"use strict";
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.UniversalFactory = void 0;
-var Performer_1 = require("./Performer");
-var UniversalFactory = /*#__PURE__*/function () {
-  function UniversalFactory() {
-    _classCallCheck(this, UniversalFactory);
-    this.performer = new Performer_1.Performer();
-    this.factories = new Map();
-  }
-  return _createClass(UniversalFactory, [{
-    key: "getFactory",
-    value: function getFactory(typeName) {
-      var p = this.factories.get(typeName);
-      var pp = this.performer.convertObject(p, typeName);
-      return pp.length == 0 ? undefined : pp[0];
-    }
-  }, {
-    key: "addFactory",
-    value: function addFactory(t, type) {
-      var tt = this.performer.convertObject(t, type);
-      if (tt.length > 0) this.factories.set(type, tt[0]);
-    }
-  }]);
-}();
-exports.UniversalFactory = UniversalFactory;
-},{"./Performer":"src/Library/Performer.ts"}],"src/Library/Motion6D/Motion6DFactory.ts":[function(require,module,exports) {
+},{"./DifferentialEquationProcessor":"src/Library/Measurements/DifferentialEquations/Processors/DifferentialEquationProcessor.js"}],"src/Library/Motion6D/Motion6DFactory.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -26492,17 +26107,21 @@ var Motion6DFactory = /*#__PURE__*/function (_UniversalFactory_1$U) {
     var _this;
     _classCallCheck(this, Motion6DFactory);
     _this = _callSuper(this, Motion6DFactory);
+    _this.types.push("Motion6DFactory");
+    _this.typeName = "Motion6DFactory";
     var processor = new RungeProcessor_1.RungeProcessor();
     _this.addFactory(processor, "IDifferentialEquationProcessor");
     var f = new Motion6DRealtimeFactory_1.Motion6DRealtimeFactory();
     _this.addFactory(f, "IRealtimeCollectionFactory");
+    _this.types.push("Motion6DFactory");
+    _this.typeName = "Motion6DFactory";
     return _this;
   }
   _inherits(Motion6DFactory, _UniversalFactory_1$U);
   return _createClass(Motion6DFactory);
 }(UniversalFactory_1.UniversalFactory);
 exports.Motion6DFactory = Motion6DFactory;
-},{"../Measurements/DifferentialEquations/Processors/RungeProcessor":"src/Library/Measurements/DifferentialEquations/Processors/RungeProcessor.ts","../UniversalFactory":"src/Library/UniversalFactory.ts","./Runtime/Event/Motion6DRealtimeFactory":"src/Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory.ts"}],"src/Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory.ts":[function(require,module,exports) {
+},{"../Measurements/DifferentialEquations/Processors/RungeProcessor":"src/Library/Measurements/DifferentialEquations/Processors/RungeProcessor.js","../UniversalFactory":"src/Library/UniversalFactory.js","./Runtime/Event/Motion6DRealtimeFactory":"src/Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory.js"}],"src/Library/Motion6D/Runtime/Event/Motion6DRealtimeFactory.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -26797,7 +26416,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63407" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55303" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

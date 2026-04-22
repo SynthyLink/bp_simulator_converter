@@ -17,9 +17,34 @@ class BasicScene extends game_1.Scene {
         this.typeName = "BasicScene";
         this.types = ["IObject", "IObjectCollection", "BasicScene"];
         this.name = "";
+        this.resourceFiles = [];
         this.factory = factory;
         let l = factory.getFactory("ILoaderFactory");
-        this.loader = l.getLoader(this);
+        if (l != undefined) {
+            this.loader = l.getLoader(this);
+        }
+    }
+    addResource(url) {
+        if (!this.resourceFiles.includes(url))
+            this.resourceFiles.push(url);
+    }
+    getResources() {
+        return this.resourceFiles;
+    }
+    getDirectoryFiles(dir) {
+        let l = [];
+        for (let d of this.resourceFiles) {
+            if (d.startsWith(dir))
+                l.push(d);
+        }
+        l.sort();
+        return l;
+    }
+    fileExists(fileName) {
+        return this.resourceFiles.includes(fileName);
+    }
+    getFactory() {
+        return this.factory;
     }
     getName() {
         return this.name;
@@ -38,6 +63,9 @@ class BasicScene extends game_1.Scene {
     }
     getObjectCollection() {
         return this.iobjects;
+    }
+    getResourceText(url) {
+        return this.game.loader.resources[url];
     }
 }
 exports.BasicScene = BasicScene;
