@@ -139,7 +139,7 @@ namespace WebGLCodeGenerator
             this.componentCollection = componentCollection;
             this.name = name;
             this.directory = directory;
-            sceneFile = name + "Scene.tsx";
+            sceneFile = name + "Scene.ts";
             modeldir = "models";
             var dir = Path.Combine(directory, modeldir); 
             componentCollection.ForEach((ISaveGrahicalData data) => Save(data, dir));

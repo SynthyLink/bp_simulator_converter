@@ -551,6 +551,8 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "TypeScriptLibrary", "..\..\
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "reactprojectgenerated", "..\..\..\Web\reactprojectgenerated\reactprojectgenerated.esproj", "{74F83EF4-B883-D89C-C9E2-4C848A52BEB2}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "reactprojectpure", "..\..\..\Web\reactprojectpure\reactprojectpure.esproj", "{8583498D-6976-EC54-0683-4F113B2B325E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -5769,6 +5771,36 @@ Global
 		{74F83EF4-B883-D89C-C9E2-4C848A52BEB2}.Release|x86.ActiveCfg = Release|Any CPU
 		{74F83EF4-B883-D89C-C9E2-4C848A52BEB2}.Release|x86.Build.0 = Release|Any CPU
 		{74F83EF4-B883-D89C-C9E2-4C848A52BEB2}.Release|x86.Deploy.0 = Release|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Debug|Win32.Build.0 = Debug|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Debug|Win32.Deploy.0 = Debug|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Debug|x64.Build.0 = Debug|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Debug|x64.Deploy.0 = Debug|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Debug|x86.Build.0 = Debug|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Debug|x86.Deploy.0 = Debug|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|Win32.ActiveCfg = Release|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|Win32.Build.0 = Release|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|Win32.Deploy.0 = Release|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|x64.ActiveCfg = Release|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|x64.Build.0 = Release|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|x64.Deploy.0 = Release|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|x86.ActiveCfg = Release|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|x86.Build.0 = Release|Any CPU
+		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|x86.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

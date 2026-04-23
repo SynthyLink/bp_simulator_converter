@@ -1,10 +1,12 @@
 import Loader from './loader'; // Used to load files from the web server
-import Input from './input'; // Used to manage the user input
 import { GameOptions } from './GameOptions';
 import { IActionAddRemoveT } from '../Library/Interfaces/IActionAddRemoveT';
 import { ActionArrayT } from '../Library/Utilities/Generic/ActionArrayT';
 import { IPlayEngine } from '../Library/Interfaces/IPlayEngine';
 import { IActionT } from '../Library/Interfaces/IActionT';
+import { ActionArray } from '../Library/Utilities/Generic/ActionArray';
+import { IActionAddRemove } from '../Library/Interfaces/IActionAddRemove';
+import { IAction } from '../Library/Interfaces/IAction';
 
 //This is the abstract base of all scenes
 export abstract class Scene {
@@ -16,6 +18,7 @@ export abstract class Scene {
         this.engine = game;
         
     }
+
     public getGl(): WebGL2RenderingContext {
         return this.gl
     }
@@ -33,13 +36,13 @@ export default class Game implements IPlayEngine, IActionT<number> {
     canvas: HTMLCanvasElement; // The canvas on which we will draw
     gl: WebGL2RenderingContext; // The WebGL2 context of the canvas (we will use it to draw)
     loader: Loader = new Loader(); // A loader to read files from the webserver
-    input: Input; // A manager for user input (keyboard and mouse)
     scenes: {[name: string]: Scene} = {}; // A dictionary of all available scenes
     currentScene: Scene = null; // The scene that is currently being drawn
     nextScene: Scene = null; // The scene that will replace the current scene after its files have been loaded
     nextSceneReady: boolean = false; // Whether the files requested by the next scene has been loaded or not 
     lastTick: number; // The time of the last frame in milliseconds (used to calculate delta time)
     options: GameOptions;
+    updateGame: IActionAddRemove = new ActionArray();
 
     constructor(canvas: HTMLCanvasElement, options?: GameOptions){
         this.canvas = canvas;
@@ -53,9 +56,17 @@ export default class Game implements IPlayEngine, IActionT<number> {
             premultipliedAlpha: false, // This can be used if the canvas are going to be blended with the rest of the webpage (transparency)
             stencil: true // this will tell the browser that we want a stencil buffer
         }); // This command loads the WebGL2 context which we will use to draw
-        this.input = new Input(this.canvas);
         this.lastTick = performance.now();
         this.loop(performance.now()); // Start the game loop
+    }
+
+    public getCanvas(): HTMLCanvasElement {
+        return this.canvas
+    }
+    
+
+    public addUpdate(update: IAction): void {
+        this.updateGame.addAction(update)
     }
 
     public addScene(name: string, type: new (game: Game) => Scene){
@@ -87,9 +98,14 @@ export default class Game implements IPlayEngine, IActionT<number> {
         }
     }
 
+    public getDeltaTime(): number {
+        return this.deltaTime
+    }
+
+    deltaTime: number = 0
+
  
     private loop(time: DOMHighResTimeStamp) {
-        this.actionGame(time)
         requestAnimationFrame((time) => this.loop(time)); // Tell the browser to call this function again when the next frame needs to be drawn
         if(this.options.maxfps){
             if(time - this.lastTick < (1000/this.options.maxfps)) return;
@@ -100,10 +116,11 @@ export default class Game implements IPlayEngine, IActionT<number> {
             this.nextScene = null;
             this.currentScene.start(); // Tell the scene to initialize its objects
         }
-        if(this.currentScene != null){
-            this.currentScene.draw(time-this.lastTick); // Tell the scene to draw itself
-        }
-        this.input.update(); // Update some information about the user input
+        if (this.currentScene != null) {
+            this.deltaTime = time - this.lastTick;
+            this.currentScene.draw(this.deltaTime); // Tell the scene to draw itself
+            this.updateGame.action(); // Update some information about the user input
+   }
         this.lastTick = time;
         this.engineAction.addActionT(this);
     }

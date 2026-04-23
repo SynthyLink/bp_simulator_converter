@@ -10,6 +10,13 @@ import { Motion6DRealtimeFactory } from "./Library/Motion6D/Runtime/Event/Motion
 import { PerformerEvents } from "./Library/Event/PerformerEvents";
 import { ActorWebNew } from './Tests/Actor/ActorWebNEW';
 import { Airplane } from './Airplane';
+import { UniversalFactory } from './Library/UniversalFactory';
+import { GameFactory } from './common/GameFactory';
+import AirplanePage from './scenes/AirplanePage';
+import FlyCameraController from './common/camera-controllers/fly-camera-controller';
+import Input from './common/input';
+import Camera from './common/camera';
+import { IAction } from './Library/Interfaces/IAction';
 
 PerformerEvents.setTimeScale(0.001)
 function funcAirplane() {
@@ -25,7 +32,7 @@ function funcAirplane() {
         "Game": SpaceTrippersScene
     };
     const initialScene = "Game";
-    const air = new AirplaneScene(game);
+    const air = new AirplanePage(game);
 
     // Then we add those scenes to the game object and ask it to start the initial scene
     //var sc = type of SpaceTrippersScene
@@ -70,8 +77,14 @@ function func() {
     // Then we add those scenes to the game object and ask it to start the initial scene
     //var sc = type of SpaceTrippersScene
     //game.addScenes(scenes);
-    game.addSceneObject("Game", new SpaceTrippersScene(game))
+    var scene = new  SpaceTrippersScene(game, new GameFactory())
+    game.addSceneObject("Game", scene);
+    var input = new Input(canvas)
     //game.addSceneObject("Air", air)
+    var conrtoller = new ExtendedFlyCameraController(scene.getCamera(), input, game, scene)
+    scene.addUpdate(conrtoller)
+    var cc = new InputController(input, scene)
+    scene.addUpdate(cc)
     game.startScene(initialScene);
 
     // Here we setup a selector element to switch scenes from the webpage
@@ -93,6 +106,37 @@ function func() {
     act.actCompositionScada(game)
 }
 
-//func()
+class ExtendedFlyCameraController extends FlyCameraController implements IAction
+{
+    scene !: SpaceTrippersScene;
+    game !: Game
 
-funcAirplane()
+    constructor(camera: Camera, input: Input, game : Game, scene : SpaceTrippersScene) {
+        super(camera, input)
+        this.scene = scene
+        this.game = game
+    }
+    action(): void {
+        this.update(this.game.getDeltaTime())
+    }
+}
+
+class InputController implements IAction{
+    constructor(input: Input, scene: SpaceTrippersScene) {
+        this.scene = scene
+        this.input = input
+    }
+    action(): void {
+        if (this.input.isButtonDown(0)) {
+            if (this.input.isKeyDown("l")) this.scene.addMovement(1)
+            if (this.input.isKeyDown("j")) this.scene.addMovement(-1)
+        }
+    }
+    input !: Input;
+    scene !: SpaceTrippersScene;
+
+}
+
+func()
+
+//funcAirplane()

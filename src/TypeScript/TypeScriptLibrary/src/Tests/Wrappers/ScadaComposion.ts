@@ -7,21 +7,23 @@ import { IAction } from "../../Library/Interfaces/IAction";
 import { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
 import { IEvent } from "../../Library/Interfaces/IEvent";
 import { Airplane } from "../../Airplane";
+import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
+//import { GameFactory } from "../../common/GameFactory";
 
 export class ScadaComposition {
 
     scada !: IScadaInterface
     constructor(engine: IPlayEngine) {
-   /*     console.log("AAAPPPm")
+       console.log("AAAPPPm")
         let a = new Airplane();
-        let f = new Motion6DRealtimeFactory()
+        let f = new Motion6DFactory()
         console.log(a)
         console.log(f)
         this.scada = new ScadaDesktopEngine(a, engine, f, "Chart")
      let dc = this.scada.getScadaObject<IDataConsumer>("Chart", "IDataConsumer")
         let ev = this.scada.getScadaObject<IEvent>("Timer", "IEvent")
      new Action(dc[0], ev[0])
-      this.scada.setScadaEnabled(true)*/
+      this.scada.setScadaEnabled(true)
     }
 }
     class Action implements IAction {

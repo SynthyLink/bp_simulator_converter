@@ -1,18 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ScadaComposition = void 0;
+const ScadaDesktopEngine_1 = require("../../Library/Scada/ScadaDesktopEngine");
+const Airplane_1 = require("../../Airplane");
+const Motion6DFactory_1 = require("../../Library/Motion6D/Motion6DFactory");
+//import { GameFactory } from "../../common/GameFactory";
 class ScadaComposition {
     constructor(engine) {
-        /*     console.log("AAAPPPm")
-             let a = new Airplane();
-             let f = new Motion6DRealtimeFactory()
-             console.log(a)
-             console.log(f)
-             this.scada = new ScadaDesktopEngine(a, engine, f, "Chart")
-          let dc = this.scada.getScadaObject<IDataConsumer>("Chart", "IDataConsumer")
-             let ev = this.scada.getScadaObject<IEvent>("Timer", "IEvent")
-          new Action(dc[0], ev[0])
-           this.scada.setScadaEnabled(true)*/
+        console.log("AAAPPPm");
+        let a = new Airplane_1.Airplane();
+        let f = new Motion6DFactory_1.Motion6DFactory();
+        console.log(a);
+        console.log(f);
+        this.scada = new ScadaDesktopEngine_1.ScadaDesktopEngine(a, engine, f, "Chart");
+        let dc = this.scada.getScadaObject("Chart", "IDataConsumer");
+        let ev = this.scada.getScadaObject("Timer", "IEvent");
+        new Action(dc[0], ev[0]);
+        this.scada.setScadaEnabled(true);
     }
 }
 exports.ScadaComposition = ScadaComposition;
