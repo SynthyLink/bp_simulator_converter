@@ -1,20 +1,23 @@
-import { IAction } from "../../Interfaces/IAction"
-import { IObjectCollection } from "../../Interfaces/IObjectCollection"
-import { IPlayEngine } from "../../Interfaces/IPlayEngine"
-import { IFile } from "../../IO/Interfaces/IFile"
-import { IIODirectory } from "../../IO/Interfaces/IIODirectory"
-import { IScene } from "./IScene"
+import type { IAddAction } from "../../Interfaces/IAddAction"
+import { IExternalAction } from "../../Interfaces/IExternalAction"
+import type { IFactoryConsumer } from "../../Interfaces/IFactoryConsumer"
+import type { IObject } from "../../Interfaces/IObject"
+import type { IObjectCollection } from "../../Interfaces/IObjectCollection"
+import type { ISelfLoad } from "../../Interfaces/ISelfLoad"
+import type { ISelfStart } from "../../Interfaces/ISelfStart"
+import type { IChildrenT } from "../../NamedTree/Interfaces/IChildrenT"
+import type { IScene } from "./IScene"
 
-export interface IGame extends IFile, IIODirectory, IObjectCollection,
-    IPlayEngine
+export interface IGame extends  IObjectCollection,
+    ISelfStart, IAddAction, ISelfLoad, IFactoryConsumer, IExternalAction,
+    IChildrenT<IScene>, IObject
 {
+    getScenes(): Map<string, IScene>
 
-    load(b: boolean): void
+    addScene(name: string, scene: IScene): void
 
-    start(b: boolean): void 
+    cycle(time: number): void
 
-    addUpdate(update: IAction, add: boolean): void
-
-    getScenes(): { [name: string]: IScene }
+    run() : void
 
 }

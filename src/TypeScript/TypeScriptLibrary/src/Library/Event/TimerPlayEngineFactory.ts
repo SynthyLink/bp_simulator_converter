@@ -19,10 +19,9 @@ export class TimerPlayEngineFactory implements ITimerFactory, IActionT<number> {
     }
 
     isTimerFactoryEnabled(): boolean {
-        throw new Error("Method not implemented.");
+       return true
     }
     setTimerFactoryEnabled(enabled: boolean): void {
-        throw new Error("Method not implemented.");
     }
     getTimerFromFactory(timeSpan: TimeSpan): ITimer {
         var t = new Timer(this, timeSpan)

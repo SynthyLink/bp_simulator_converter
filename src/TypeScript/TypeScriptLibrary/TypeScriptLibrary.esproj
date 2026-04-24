@@ -8,5 +8,6 @@
   <ItemGroup>
     <Folder Include="src\ExternalObjects\Libraries\Web\Interfaces\" />
     <Folder Include="src\Library\Runtime\Interfaces\" />
+    <Folder Include="src\Genrerated\" />
   </ItemGroup>
 </Project>

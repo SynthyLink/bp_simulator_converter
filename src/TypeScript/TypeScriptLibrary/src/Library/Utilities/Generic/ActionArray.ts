@@ -4,13 +4,18 @@ import type { IObject } from "../../Interfaces/IObject";
 import { Performer } from "../../Performer";
 
 export class ActionArray implements IActionAddRemove, IObject {
+    isEmptyAction(): boolean {
+        return this.actions.length == 0
+    }
     addAction(action: IAction | undefined): void {
+        if (this.performer.isEmptyAction(action)) return;
         if (action === undefined) return;
         this.actions.push(action)
     }
     removeAction(action: IAction): void {
+        if (this.performer.isEmptyAction(action)) return;
         if (action === undefined) return;
-        this.performer.remove(this.actions, action)
+         this.performer.remove(this.actions, action)
     }
     clearActions(): void {
         this.actions = [];

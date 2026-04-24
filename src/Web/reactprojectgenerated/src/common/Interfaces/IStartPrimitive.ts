@@ -1,3 +1,3 @@
 export interface IStartPrimitive {
-    startPrimitive(): void
+    startPrimitive(start: boolean): void
 }

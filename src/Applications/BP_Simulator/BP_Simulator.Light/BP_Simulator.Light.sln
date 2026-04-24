@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 18
-VisualStudioVersion = 18.0.11116.177
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37216.2 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BP_Simulator.Light", "BP_Simulator.Light\BP_Simulator.Light.csproj", "{5ACE77F7-6C16-45EB-8B42-28B05E1B1B06}"
 EndProject
@@ -552,6 +552,8 @@ EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "reactprojectgenerated", "..\..\..\Web\reactprojectgenerated\reactprojectgenerated.esproj", "{74F83EF4-B883-D89C-C9E2-4C848A52BEB2}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "reactprojectpure", "..\..\..\Web\reactprojectpure\reactprojectpure.esproj", "{8583498D-6976-EC54-0683-4F113B2B325E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Motion6D.CodeGenerator", "..\..\..\DynamicLinkLibraries\Motion6D\Motion6D.CodeGenerator\Motion6D.CodeGenerator.csproj", "{1A1CC824-8416-45AF-80D0-7DDADF80D29C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -5801,6 +5803,26 @@ Global
 		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|x86.ActiveCfg = Release|Any CPU
 		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|x86.Build.0 = Release|Any CPU
 		{8583498D-6976-EC54-0683-4F113B2B325E}.Release|x86.Deploy.0 = Release|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Debug|Win32.Build.0 = Debug|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Debug|x64.Build.0 = Debug|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Debug|x86.Build.0 = Debug|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Release|Win32.ActiveCfg = Release|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Release|Win32.Build.0 = Release|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Release|x64.ActiveCfg = Release|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Release|x64.Build.0 = Release|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Release|x86.ActiveCfg = Release|Any CPU
+		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
