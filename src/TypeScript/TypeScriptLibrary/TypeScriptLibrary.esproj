@@ -6,8 +6,9 @@
     <TypeScriptConfiguration Remove="Library\**" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="models\" />
     <Folder Include="src\ExternalObjects\Libraries\Web\Interfaces\" />
     <Folder Include="src\Library\Runtime\Interfaces\" />
-    <Folder Include="src\Genrerated\" />
+    <Folder Include="src\scenes\" />
   </ItemGroup>
 </Project>

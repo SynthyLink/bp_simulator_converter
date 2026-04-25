@@ -1,0 +1,1 @@
+{"version":3,"file":"IScadaConsumer.d.ts","sourceRoot":"","sources":["IScadaConsumer.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,eAAe,EAAE,MAAM,mBAAmB,CAAC;AAEzD,MAAM,WAAW,cAAc;IAC3B,gBAAgB,IAAI,eAAe,CAAA;IACnC,gBAAgB,CAAC,KAAK,EAAE,eAAe,GAAG,OAAO,CAAA;CACpD"}

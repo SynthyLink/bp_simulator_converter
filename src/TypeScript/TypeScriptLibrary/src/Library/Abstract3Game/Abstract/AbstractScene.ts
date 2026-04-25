@@ -2,20 +2,19 @@ import { IAction } from "../../Interfaces/IAction";
 import { IActionAddRemove } from "../../Interfaces/IActionAddRemove";
 import { IFactory } from "../../Interfaces/IFactory";
 import { IObject } from "../../Interfaces/IObject";
-import { Performer } from "../../Performer";
 import { ActionArray } from "../../Utilities/Generic/ActionArray";
-import { GamePerformer } from "../GamePerformer";
+import { ScenePerformer } from "../ScernePerformer";
 import { IGame } from "../Interfaces/IGame";
 import { IScene } from "../Interfaces/IScene";
 import { ISceneObject } from "../Interfaces/ISceneObject";
 
-export abstract class AbstractScene implements IScene {
+export  class AbstractScene implements IScene {
 
     constructor(game: IGame, name: string) {
         this.game = game;
         this.factory = game.getConsumerFactory()
         this.name = name;
-        this.performer = new GamePerformer(this)
+        this.performer = new ScenePerformer(this)
     }
 
     getSceneObject(name: string): ISceneObject | undefined {
@@ -23,11 +22,21 @@ export abstract class AbstractScene implements IScene {
         return undefined
     }
 
+    public addResource(resource: string): void {
+        this.resources.push(resource)
+    }
+
+    public getResources(): string[] {
+        return this.resources
+    }
+
+    protected resources: string[] = []
+
     protected game !: IGame
 
     protected factory !: IFactory
 
-    protected performer !: GamePerformer
+    protected performer !: ScenePerformer
 
     protected externalAction: IActionAddRemove = new ActionArray();
 

@@ -1,4 +1,3 @@
-import { IMeshHolder } from "../../Abstract3DConverters/Interfaces/IMeshHolder";
 import { IObject } from "../../Interfaces/IObject";
 import { Basic3DShape } from "../../Motion6D/Objects/Shapes/Basic3DShape";
 import { Scene3DMesh } from "../SceneObjects/Scene3DMesh";

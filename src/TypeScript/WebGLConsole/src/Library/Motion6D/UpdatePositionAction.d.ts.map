@@ -1,0 +1,1 @@
+{"version":3,"file":"UpdatePositionAction.d.ts","sourceRoot":"","sources":["UpdatePositionAction.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,uBAAuB,CAAC;AAChD,OAAO,EAAE,SAAS,EAAE,MAAM,wBAAwB,CAAC;AAEnD,qBAAa,oBAAqB,YAAW,OAAO;IAEhD,QAAQ,EAAE,SAAS,CAAC;gBAER,QAAQ,EAAE,SAAS;IAG/B,MAAM,IAAI,IAAI;CAIjB"}

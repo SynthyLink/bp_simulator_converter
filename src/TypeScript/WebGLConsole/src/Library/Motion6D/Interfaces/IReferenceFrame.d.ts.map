@@ -1,0 +1,1 @@
+{"version":3,"file":"IReferenceFrame.d.ts","sourceRoot":"","sources":["IReferenceFrame.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,mBAAmB,CAAC;AACnD,OAAO,EAAE,SAAS,EAAE,MAAM,aAAa,CAAC;AAExC,MAAM,WAAW,eAAgB,SAAQ,SAAS;IAE9C,WAAW,IAAI,cAAc,GAAG,SAAS,CAAC;CAC7C"}

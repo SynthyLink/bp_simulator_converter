@@ -1,0 +1,1 @@
+{"version":3,"file":"IAssociatedObject.d.ts","sourceRoot":"","sources":["IAssociatedObject.ts"],"names":[],"mappings":"AAIA,OAAO,KAAK,EAAE,OAAO,EAAE,MAAM,WAAW,CAAC;AAEzC,MAAM,WAAW,iBAAiB;IAE9B,mBAAmB,IAAI,OAAO,CAAC;IAC/B,mBAAmB,CAAC,GAAG,EAAE,OAAO,GAAG,IAAI,CAAC;CAC3C"}

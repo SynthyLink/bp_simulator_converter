@@ -1,0 +1,1 @@
+{"version":3,"file":"ITimerConsumer.d.ts","sourceRoot":"","sources":["ITimerConsumer.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,QAAQ,EAAE,MAAM,gCAAgC,CAAC;AAC1D,OAAO,KAAK,EAAE,aAAa,EAAE,MAAM,iBAAiB,CAAC;AAErD,MAAM,WAAW,cAAc;IAC3B,QAAQ,CAAC,YAAY,EAAE,aAAa,GAAG,IAAI,CAAA;IAC3C,WAAW,IAAI,QAAQ,CAAA;CAC1B"}

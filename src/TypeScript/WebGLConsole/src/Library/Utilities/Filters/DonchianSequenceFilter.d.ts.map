@@ -1,0 +1,1 @@
+{"version":3,"file":"DonchianSequenceFilter.d.ts","sourceRoot":"","sources":["DonchianSequenceFilter.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,WAAW,EAAE,MAAM,eAAe,CAAC;AAE5C,qBAAa,sBAAuB,SAAQ,WAAW;gBAGvC,KAAK,EAAE,MAAM,EAAE,GAAG,EAAE,OAAO;IAKvC,SAAS,CAAC,GAAG,EAAE,OAAO,CAAO;IAE7B,cAAc,CAAC,CAAC,EAAE,MAAM,GAAG,MAAM,GAAG,SAAS;CAUhD"}

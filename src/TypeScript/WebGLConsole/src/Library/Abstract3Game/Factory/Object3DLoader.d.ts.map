@@ -1,0 +1,1 @@
+{"version":3,"file":"Object3DLoader.d.ts","sourceRoot":"","sources":["Object3DLoader.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,OAAO,EAAE,MAAM,0BAA0B,CAAC;AAGnD,OAAO,EAAE,eAAe,EAAE,MAAM,mBAAmB,CAAC;AAEpD,qBAAa,cAAe,SAAQ,eAAe;IAE/C,UAAU,CAAC,MAAM,EAAE,OAAO,EAAE,KAAK,EAAE,OAAO,GAAG,IAAI;CAUpD"}

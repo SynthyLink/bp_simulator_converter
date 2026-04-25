@@ -150,6 +150,8 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
             toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             additionalCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             additionalSaveURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripComboBoxAdditionalLanguage = new System.Windows.Forms.ToolStripComboBox();
             databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             readWriteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -169,8 +171,6 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
             folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             timer1 = new System.Windows.Forms.Timer(components);
             saveFileDialogScadaXml = new System.Windows.Forms.SaveFileDialog();
-            languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripComboBoxAdditionalLanguage = new System.Windows.Forms.ToolStripComboBox();
             panelTop.SuspendLayout();
             panelTopTop.SuspendLayout();
             panelBottom.SuspendLayout();
@@ -998,13 +998,13 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
             // customizeToolStripMenuItem
             // 
             customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-            customizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            customizeToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             customizeToolStripMenuItem.Text = "&Customize";
             // 
             // optionsToolStripMenuItem
             // 
             optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            optionsToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             optionsToolStripMenuItem.Text = "&Options";
             // 
             // wizardsToolStripMenuItem
@@ -1095,6 +1095,17 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
             additionalSaveURLToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             additionalSaveURLToolStripMenuItem.Text = "Directory of additional files";
             additionalSaveURLToolStripMenuItem.Click += additionalSaveURLToolStripMenuItem_Click;
+            // 
+            // languageToolStripMenuItem
+            // 
+            languageToolStripMenuItem.Name = "languageToolStripMenuItem";
+            languageToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            languageToolStripMenuItem.Text = "Language";
+            // 
+            // toolStripComboBoxAdditionalLanguage
+            // 
+            toolStripComboBoxAdditionalLanguage.Name = "toolStripComboBoxAdditionalLanguage";
+            toolStripComboBoxAdditionalLanguage.Size = new System.Drawing.Size(121, 23);
             // 
             // databaseToolStripMenuItem
             // 
@@ -1205,17 +1216,6 @@ namespace BasicEngineering.UI.Factory.Advanced.Forms
             // saveFileDialogScadaXml
             // 
             saveFileDialogScadaXml.Filter = "Xml Files|*.xml";
-            // 
-            // languageToolStripMenuItem
-            // 
-            languageToolStripMenuItem.Name = "languageToolStripMenuItem";
-            languageToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            languageToolStripMenuItem.Text = "Language";
-            // 
-            // toolStripComboBoxAdditionalLanguage
-            // 
-            toolStripComboBoxAdditionalLanguage.Name = "toolStripComboBoxAdditionalLanguage";
-            toolStripComboBoxAdditionalLanguage.Size = new System.Drawing.Size(121, 23);
             // 
             // FormMain
             // 

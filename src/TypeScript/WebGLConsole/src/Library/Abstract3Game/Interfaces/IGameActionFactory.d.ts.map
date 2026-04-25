@@ -1,0 +1,1 @@
+{"version":3,"file":"IGameActionFactory.d.ts","sourceRoot":"","sources":["IGameActionFactory.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,WAAW,EAAE,MAAM,eAAe,CAAC;AAE5C,MAAM,WAAW,kBAAkB;IAC/B,aAAa,CAAC,MAAM,EAAE,GAAG,GAAG,WAAW,GAAG,SAAS,CAAA;CACtD"}

@@ -1,5 +1,4 @@
 ﻿using BaseTypes.Attributes;
-using DataPerformer.Portable;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
 
@@ -28,7 +27,7 @@ namespace WebGLCodeGenerator
 
         static AdditionalCodeGenerator()
         {
-            var f = Properties.Resources.NameScene;
+            var f = Properties.Resources.CessnaScene;
             using var stream = new MemoryStream(f);
             using var reader = new StreamReader(stream);
             do
@@ -111,13 +110,13 @@ namespace WebGLCodeGenerator
                     if (s.Length > 0)
                     {
                         s += ",";
-                        l.Add(s);
+                       // l.Add(s);
                     }
                     s = Add(item);
                 }
             });
-            l.Add(s);
-            l.Add("})");
+            //l.Add(s);
+           // l.Add("})");
             foreach (var r in res)
             {
                 l.Add(r.Replace("\\", "/"));
@@ -144,7 +143,7 @@ namespace WebGLCodeGenerator
             var dir = Path.Combine(directory, modeldir); 
             componentCollection.ForEach((ISaveGrahicalData data) => Save(data, dir));
             var l = CreateScene();
-            dir = Path.Combine(Path.Combine(directory, "src"), "scenes");
+            dir = Path.Combine(directory, "scenes");
             var p = Path.Combine(dir, sceneFile);
             if (File.Exists(p))
             {

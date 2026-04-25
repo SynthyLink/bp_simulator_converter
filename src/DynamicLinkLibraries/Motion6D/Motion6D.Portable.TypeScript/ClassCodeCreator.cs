@@ -192,6 +192,7 @@ namespace Motion6D.Portable.TypeScript
 
         List<string> GetChild(string prefix, ICategoryObject obj)
         {
+            var name = obj.Name; 
             var l = new List<string>();
              var s = performer.ClassString(prefix, "Basic3DShape");
             l.Add(s);
@@ -203,10 +204,11 @@ namespace Motion6D.Portable.TypeScript
                 var d = save.GetGraphicalData("");
                 foreach (var item in d)
                 {
+                    var v = Path.Combine(name, item.Value);
                     var key = "\"" + item.Key + "\"";
-                    var val = "\"" + item.Value + "\"";
-                    l.Add("\t\tmap.set(" + key + ", " + val + ")");
-                }
+                    var val = "\"" + v + "\"";
+                    l.Add("\t\tmap.set(" + key + ", " + val.Replace('\\', '/') + ")");
+                } l.Add("\t\tthis.postCreateResources(map)");
             }
             l.Add("\t}");
             l.Add("}");

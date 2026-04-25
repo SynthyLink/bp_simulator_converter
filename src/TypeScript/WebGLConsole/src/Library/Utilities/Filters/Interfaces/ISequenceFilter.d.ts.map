@@ -1,0 +1,1 @@
+{"version":3,"file":"ISequenceFilter.d.ts","sourceRoot":"","sources":["ISequenceFilter.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,eAAe;IAC5B,cAAc,IAAI,MAAM,CAAA;IAExB,cAAc,CAAC,KAAK,EAAE,MAAM,GAAG,IAAI,CAAA;IAEnC,cAAc,CAAC,CAAC,EAAE,MAAM,GAAG,MAAM,GAAG,SAAS,CAAA;IAE7C,WAAW,IAAI,IAAI,CAAA;CACtB"}

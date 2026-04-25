@@ -1,6 +1,10 @@
+import { IFactory } from "../../Interfaces/IFactory";
 import { EngineGame } from "../Abstract/EngineGame";
 
 export class EnigneGameImitation extends EngineGame {
+    constructor(name: string, factory: IFactory) {
+        super(name, factory)
+    }
 
     protected steps: number = 0;
 

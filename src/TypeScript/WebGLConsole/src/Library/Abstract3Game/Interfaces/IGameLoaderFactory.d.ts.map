@@ -1,0 +1,1 @@
+{"version":3,"file":"IGameLoaderFactory.d.ts","sourceRoot":"","sources":["IGameLoaderFactory.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,iCAAiC,CAAC;AACjE,OAAO,EAAE,OAAO,EAAE,MAAM,0BAA0B,CAAC;AAEnD,MAAM,WAAW,kBAAmB,SAAQ,cAAc,EAAE,OAAO;CAElE"}

@@ -63,9 +63,9 @@ namespace WebGLCodeGenerator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] NameScene {
+        internal static byte[] CessnaScene {
             get {
-                object obj = ResourceManager.GetObject("NameScene", resourceCulture);
+                object obj = ResourceManager.GetObject("CessnaScene", resourceCulture);
                 return ((byte[])(obj));
             }
         }

@@ -1,0 +1,1 @@
+{"version":3,"file":"FictiveCategoryObject.d.ts","sourceRoot":"","sources":["FictiveCategoryObject.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,eAAe,EAAE,MAAM,+BAA+B,CAAC;AAChE,OAAO,EAAE,QAAQ,EAAE,MAAM,wBAAwB,CAAC;AAElD,qBAAa,qBAAsB,YAAW,eAAe;IACzD,SAAS,IAAI,MAAM;IAGnB,SAAS,CAAC,GAAG,EAAE,MAAM,GAAG,IAAI;IAG5B,qBAAqB,IAAI,MAAM;IAG/B,UAAU,IAAI,QAAQ;CAIzB"}

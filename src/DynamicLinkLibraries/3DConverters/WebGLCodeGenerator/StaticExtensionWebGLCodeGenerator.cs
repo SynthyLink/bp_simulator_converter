@@ -1,4 +1,6 @@
-﻿namespace WebGLCodeGenerator
+﻿using AssemblyService.Attributes;
+
+namespace WebGLCodeGenerator
 {
     /// <summary>
     /// Static Extension

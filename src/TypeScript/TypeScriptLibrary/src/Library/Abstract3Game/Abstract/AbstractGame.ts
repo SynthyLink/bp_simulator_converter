@@ -5,6 +5,7 @@ import { IFactory } from "../../Interfaces/IFactory";
 import { IObject } from "../../Interfaces/IObject";
 import { Performer } from "../../Performer";
 import { ActionArray } from "../../Utilities/Generic/ActionArray";
+import { GamePerformer } from "../GamePerformer";
 import { IGame } from "../Interfaces/IGame";
 import { IScene } from "../Interfaces/IScene";
 
@@ -12,6 +13,7 @@ import { IScene } from "../Interfaces/IScene";
 export abstract class AbstractGame implements IGame
 {
     constructor(name: string, factory: IFactory) {
+        this.performer = new GamePerformer(this)
         this.factory = factory
         this.name = name
     }
@@ -19,7 +21,7 @@ export abstract class AbstractGame implements IGame
         this.scenes.set(name, scene)
         this.objects.push(scene)
     }
-   protected performer: Performer = new Performer()
+    protected performer !: GamePerformer
 
     protected typeName: string = "AbstractGame";
 

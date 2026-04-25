@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.2752196">
+  <ItemGroup>
+    <None Remove="src\ExternalObjects\**" />
+    <TypeScriptConfiguration Remove="src\ExternalObjects\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="models\" />
+    <Folder Include="scenes\" />
+    <Folder Include="src\Library\Runtime\Interfaces\" />
+  </ItemGroup>
+</Project>

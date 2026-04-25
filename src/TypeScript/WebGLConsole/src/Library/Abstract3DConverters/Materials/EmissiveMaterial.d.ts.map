@@ -1,0 +1,1 @@
+{"version":3,"file":"EmissiveMaterial.d.ts","sourceRoot":"","sources":["EmissiveMaterial.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,YAAY,EAAE,MAAM,iBAAiB,CAAC;AAC/C,OAAO,EAAE,YAAY,EAAE,MAAM,iBAAiB,CAAC;AAC/C,OAAO,EAAE,cAAc,EAAE,MAAM,kBAAkB,CAAC;AAElD,qBAAa,gBAAiB,SAAQ,cAAc;gBACpC,IAAI,EAAE,MAAM,EAAE,KAAK,EAAE,YAAY,EAAE,KAAK,EAAE,YAAY;CAKrE"}

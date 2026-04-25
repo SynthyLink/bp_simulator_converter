@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.37216.2 d17.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.5.11716.220 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BP_Simulator.Light", "BP_Simulator.Light\BP_Simulator.Light.csproj", "{5ACE77F7-6C16-45EB-8B42-28B05E1B1B06}"
 EndProject
@@ -554,6 +554,8 @@ EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "reactprojectpure", "..\..\..\Web\reactprojectpure\reactprojectpure.esproj", "{8583498D-6976-EC54-0683-4F113B2B325E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Motion6D.CodeGenerator", "..\..\..\DynamicLinkLibraries\Motion6D\Motion6D.CodeGenerator\Motion6D.CodeGenerator.csproj", "{1A1CC824-8416-45AF-80D0-7DDADF80D29C}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "WebGLConsole", "..\..\..\TypeScript\WebGLConsole\WebGLConsole.esproj", "{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -5823,6 +5825,36 @@ Global
 		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Release|x64.Build.0 = Release|Any CPU
 		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Release|x86.ActiveCfg = Release|Any CPU
 		{1A1CC824-8416-45AF-80D0-7DDADF80D29C}.Release|x86.Build.0 = Release|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Debug|Win32.Build.0 = Debug|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Debug|Win32.Deploy.0 = Debug|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Debug|x64.Build.0 = Debug|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Debug|x64.Deploy.0 = Debug|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Debug|x86.Build.0 = Debug|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Debug|x86.Deploy.0 = Debug|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Release|Win32.ActiveCfg = Release|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Release|Win32.Build.0 = Release|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Release|Win32.Deploy.0 = Release|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Release|x64.ActiveCfg = Release|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Release|x64.Build.0 = Release|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Release|x64.Deploy.0 = Release|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Release|x86.ActiveCfg = Release|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Release|x86.Build.0 = Release|Any CPU
+		{AC3CF4A0-E07E-C52A-A308-1F4ABD1F3967}.Release|x86.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

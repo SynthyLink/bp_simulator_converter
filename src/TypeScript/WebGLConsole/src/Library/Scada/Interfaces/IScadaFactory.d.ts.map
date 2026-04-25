@@ -1,0 +1,1 @@
+{"version":3,"file":"IScadaFactory.d.ts","sourceRoot":"","sources":["IScadaFactory.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,QAAQ,EAAE,MAAM,2BAA2B,CAAC;AAC1D,OAAO,KAAK,EAAE,eAAe,EAAE,MAAM,mBAAmB,CAAC;AAEzD,MAAM,WAAW,aAAa;IAC1B,WAAW,CAAC,OAAO,EAAE,QAAQ,EAAE,YAAY,EAAE,MAAM,GAAG,eAAe,CAAA;CACxE"}

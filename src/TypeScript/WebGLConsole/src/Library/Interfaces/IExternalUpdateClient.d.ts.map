@@ -1,0 +1,1 @@
+{"version":3,"file":"IExternalUpdateClient.d.ts","sourceRoot":"","sources":["IExternalUpdateClient.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,gBAAgB,EAAE,MAAM,oBAAoB,CAAC;AAE3D,MAAM,WAAW,qBAAqB;IAClC,iBAAiB,CAAC,MAAM,EAAE,gBAAgB,GAAG,SAAS,GAAG,IAAI,CAAA;CAChE"}
