@@ -1,1 +1,0 @@
-{"version":3,"file":"Rigid3DShape.d.ts","sourceRoot":"","sources":["Rigid3DShape.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,yBAAyB,CAAC;AACzD,OAAO,EAAE,QAAQ,EAAE,MAAM,8BAA8B,CAAC;AAExD,qBAAa,YAAa,SAAQ,cAAc;gBAChC,OAAO,EAAE,QAAQ,EAAE,IAAI,EAAE,MAAM;CAK9C"}

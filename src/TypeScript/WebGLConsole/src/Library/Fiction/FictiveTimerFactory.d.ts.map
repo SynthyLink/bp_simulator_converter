@@ -1,1 +1,0 @@
-{"version":3,"file":"FictiveTimerFactory.d.ts","sourceRoot":"","sources":["FictiveTimerFactory.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,MAAM,EAAE,MAAM,sBAAsB,CAAC;AAC9C,OAAO,EAAE,aAAa,EAAE,MAAM,6BAA6B,CAAC;AAC5D,OAAO,EAAE,QAAQ,EAAE,MAAM,gCAAgC,CAAC;AAE1D,qBAAa,mBAAoB,YAAW,aAAa;IACrD,mBAAmB,CAAC,QAAQ,EAAE,QAAQ,GAAG,MAAM;CAIlD"}

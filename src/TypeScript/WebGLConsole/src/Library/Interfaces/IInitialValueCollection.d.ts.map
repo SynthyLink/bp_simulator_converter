@@ -1,1 +1,0 @@
-{"version":3,"file":"IInitialValueCollection.d.ts","sourceRoot":"","sources":["IInitialValueCollection.ts"],"names":[],"mappings":"AAMA,OAAO,KAAK,EAAE,aAAa,EAAE,MAAM,iBAAiB,CAAC;AAErD,MAAM,WAAW,uBAAuB;IAEpC,gBAAgB,IAAI,aAAa,EAAE,CAAC;IACpC,kBAAkB,IAAI,IAAI,CAAC;IAC3B,eAAe,CAAC,KAAK,EAAE,aAAa,GAAG,IAAI,CAAC;CAC/C"}

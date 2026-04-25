@@ -1,1 +1,0 @@
-{"version":3,"file":"FileImageDetector.d.ts","sourceRoot":"","sources":["FileImageDetector.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,MAAM,2BAA2B,CAAC;AAClD,OAAO,EAAE,cAAc,EAAE,MAAM,8BAA8B,CAAC;AAE9D,qBAAa,iBAAkB,YAAW,cAAc;gBACxC,YAAY,EAAE,KAAK;IAI/B,WAAW,CAAC,IAAI,EAAE,MAAM,GAAG,OAAO;IAIlC,YAAY,EAAI,KAAK,CAAA;CAExB"}

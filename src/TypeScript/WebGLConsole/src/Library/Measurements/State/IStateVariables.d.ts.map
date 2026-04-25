@@ -1,1 +1,0 @@
-{"version":3,"file":"IStateVariables.d.ts","sourceRoot":"","sources":["IStateVariables.ts"],"names":[],"mappings":"AAGA,MAAM,WAAW,eAAe;IAE5B,gCAAgC,IAAI,MAAM,EAAE,CAAC;IAE7C,uBAAuB,IAAI,MAAM,CAAC;IAElC,uBAAuB,CAAC,KAAK,EAAE,MAAM,EAAE,EAAE,MAAM,EAAE,MAAM,EAAE,MAAM,EAAE,MAAM,GAAG,IAAI,CAAC;CAClF"}

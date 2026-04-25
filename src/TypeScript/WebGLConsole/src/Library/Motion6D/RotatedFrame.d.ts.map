@@ -1,1 +1,0 @@
-{"version":3,"file":"RotatedFrame.d.ts","sourceRoot":"","sources":["RotatedFrame.ts"],"names":[],"mappings":"AACA,OAAO,KAAI,EAAE,wBAAwB,EAAE,MAAM,uCAAuC,CAAC;AACrF,OAAO,EAAE,cAAc,EAAE,MAAM,kBAAkB,CAAC;AAElD,qBAAa,YAAa,SAAQ,cAAe,YAAW,wBAAwB;;IAUhF,SAAS,CAAC,KAAK,EAAE,MAAM,EAAE,CAAa;IACtC,QAAQ,IAAI,MAAM,EAAE;IAIb,iBAAiB,CAAC,SAAS,EAAE,cAAc,EAAE,QAAQ,EAAE,cAAc,GAAG,IAAI;CAetF"}

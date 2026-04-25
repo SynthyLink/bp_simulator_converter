@@ -1,1 +1,0 @@
-{"version":3,"file":"ITimeMeasurementConsumer.d.ts","sourceRoot":"","sources":["ITimeMeasurementConsumer.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,wBAAwB,EAAE,MAAM,4BAA4B,CAAC;AAEtE,MAAM,WAAW,wBAAwB;IAErC,kBAAkB,IAAI,wBAAwB,CAAC;IAE/C,kBAAkB,CAAC,WAAW,EAAE,wBAAwB,GAAG,IAAI,CAAC;IAEhE,eAAe,IAAI,MAAM,CAAC;CAE7B"}

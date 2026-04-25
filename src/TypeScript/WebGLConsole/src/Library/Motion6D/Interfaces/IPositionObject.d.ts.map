@@ -1,1 +1,0 @@
-{"version":3,"file":"IPositionObject.d.ts","sourceRoot":"","sources":["IPositionObject.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,SAAS,EAAE,MAAM,aAAa,CAAC;AAE7C,MAAM,WAAW,eAAe;IAC5B,iBAAiB,IAAI,SAAS,CAAC;IAC/B,iBAAiB,CAAC,QAAQ,EAAE,SAAS,GAAG,IAAI,CAAA;CAC/C"}

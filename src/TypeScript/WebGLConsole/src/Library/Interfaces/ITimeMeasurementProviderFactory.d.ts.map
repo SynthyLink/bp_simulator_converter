@@ -1,1 +1,0 @@
-{"version":3,"file":"ITimeMeasurementProviderFactory.d.ts","sourceRoot":"","sources":["ITimeMeasurementProviderFactory.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,QAAQ,EAAE,MAAM,mBAAmB,CAAC;AAC7C,OAAO,KAAK,EAAE,wBAAwB,EAAE,MAAM,qDAAqD,CAAC;AAEpG,MAAM,WAAW,+BAA+B;IAU5C,MAAM,CAAC,UAAU,EAAE,OAAO,EAAE,QAAQ,EAAE,QAAQ,EAAE,MAAM,EAAE,MAAM,GAAG,wBAAwB,CAAA;CAExF"}

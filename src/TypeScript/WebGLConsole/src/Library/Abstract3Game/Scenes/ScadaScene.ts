@@ -10,8 +10,8 @@ import { AbstractScene } from "../Abstract/AbstractScene";
 
 export class ScadaScene extends AbstractScene implements IScadaConsumer
 {
-    constructor(game: IGame, collection: IComponentCollection) {
-        super(game, (collection as unknown as IObject).getName())
+    constructor(game: IGame, collection: IComponentCollection, chart: string) {
+        super(game, chart)
         this.collection = collection
         
         var engine = this.performer.convertObject<IPlayEngine, IObject>(game, "IPlayEngine")

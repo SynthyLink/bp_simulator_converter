@@ -1,1 +1,0 @@
-{"version":3,"file":"FictiveEventHandler.d.ts","sourceRoot":"","sources":["FictiveEventHandler.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,MAAM,EAAE,MAAM,sBAAsB,CAAC;AAC9C,OAAO,EAAE,aAAa,EAAE,MAAM,6BAA6B,CAAC;AAE5D,qBAAa,mBAAoB,YAAW,aAAa;IACrD,YAAY,IAAI,MAAM,EAAE;IAGxB,SAAS,CAAC,KAAK,EAAE,MAAM,GAAG,IAAI;IAG9B,YAAY,CAAC,KAAK,EAAE,MAAM,GAAG,IAAI;CAIpC"}

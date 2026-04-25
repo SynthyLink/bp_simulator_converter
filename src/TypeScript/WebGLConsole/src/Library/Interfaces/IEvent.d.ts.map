@@ -1,1 +1,0 @@
-{"version":3,"file":"IEvent.d.ts","sourceRoot":"","sources":["IEvent.ts"],"names":[],"mappings":"AAAA,OAAO,KAAM,EAAE,gBAAgB,EAAE,MAAM,oBAAoB,CAAC;AAC5D,OAAO,KAAK,EAAE,WAAW,EAAE,MAAM,eAAe,CAAC;AAEjD,MAAM,WAAW,MAAO,SAAQ,WAAW;IAEvC,WAAW,IAAI,gBAAgB,CAAA;CAElC"}

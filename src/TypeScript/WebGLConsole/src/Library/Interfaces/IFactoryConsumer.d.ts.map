@@ -1,1 +1,0 @@
-{"version":3,"file":"IFactoryConsumer.d.ts","sourceRoot":"","sources":["IFactoryConsumer.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,QAAQ,EAAE,MAAM,YAAY,CAAC;AAEtC,MAAM,WAAW,gBAAgB;IAC7B,kBAAkB,CAAC,OAAO,EAAE,QAAQ,GAAG,IAAI,CAAA;IAC3C,kBAAkB,IAAI,QAAQ,CAAA;CAEjC"}

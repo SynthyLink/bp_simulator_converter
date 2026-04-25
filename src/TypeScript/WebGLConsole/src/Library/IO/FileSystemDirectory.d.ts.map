@@ -1,1 +1,0 @@
-{"version":3,"file":"FileSystemDirectory.d.ts","sourceRoot":"","sources":["FileSystemDirectory.ts"],"names":[],"mappings":"AAIA,OAAO,EAAE,YAAY,EAAE,MAAM,2BAA2B,CAAC;AAEzD,qBAAa,mBAAoB,YAAW,YAAY;IACpD,iBAAiB,CAAC,SAAS,EAAE,MAAM,GAAG,MAAM,EAAE;IAmB9C,KAAK,EAAE,MAAM,EAAE,CAAK;CAIvB"}
