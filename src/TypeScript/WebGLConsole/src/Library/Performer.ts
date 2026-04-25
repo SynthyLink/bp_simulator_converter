@@ -703,7 +703,7 @@ export class Performer
         let act: IActionT<T> = action
         let arr: IActionAddRemoveT<T> = act as unknown as IActionAddRemoveT<T>
         if (arr == undefined) return false
-        return arr.isEmptyAction()
+        return arr.isEmptyActionT()
     }
 
 
@@ -715,6 +715,7 @@ export class Performer
         return arr.isEmptyAction()
     }
 
+  
 
     public convertArrayT<T, S>(collection: IObjectCollection, f: IFuncT<T, S>, type: string): T[] {
         let t: T[] = []
@@ -730,6 +731,11 @@ export class Performer
             var x = this.convertObject<T, IObject>(o, type)
             if (x.length > 0) action.actionT(x[0])
         }
+    }
+    public loadChildren(object: IObject, collection:
+        IObjectCollection, loader: ILoader, load: boolean): void {
+        var lc = new LoadChild(object, loader, load)
+        this.forEach<IObject>(collection, lc, "IObject")
     }
 
 
@@ -805,6 +811,8 @@ class ExternalActionCreator implements IActionT<IExternalAction> {
     actionT(t: IExternalAction): void {
         this.action.addAction(t.getExternalAction())
     }
+    isEmptyActionT(): boolean { return false }
+
     action !: IActionAddRemove
     
     constructor(action: IActionAddRemove) {
@@ -817,8 +825,9 @@ class ActionCreator implements IActionT<IObject> {
     actionT(t: IObject): void {
         var act = this.functT.functT(t)
         if (act != undefined) this.action.addAction(act)
-
     }
+    isEmptyActionT(): boolean { return false }
+
     functT !: IFuncT<IAction | undefined, IObject>
     action !: IActionAddRemove
     constructor(functT: IFuncT<IAction | undefined, IObject>, action: IActionAddRemove) {
@@ -842,6 +851,8 @@ class AddTS<T, S> implements IActionT<S>{
         let t = this.funcT.functT(s)
         if (t != undefined) this.array.push(t)
     }
+    isEmptyActionT(): boolean { return false }
+
 }
 
 
@@ -850,28 +861,33 @@ class Start implements IActionT<ISelfStart> {
     actionT(t: ISelfStart): void {
         t.startItself(true)
     }
+    isEmptyActionT(): boolean { return false }
+
 }
 
 class Stop implements IActionT<ISelfStart> {
     actionT(t: ISelfStart): void {
         t.startItself(false)
     }
+    isEmptyActionT(): boolean { return false }
+
 }
 
 class Load implements IActionT<ISelfLoad> {
     actionT(t: ISelfLoad): void {
         t.loadItself(true)
     }
+    isEmptyActionT(): boolean { return false }
+
 }
 
 class Unload implements IActionT<ISelfLoad> {
     actionT(t: ISelfLoad): void {
         t.loadItself(false)
     }
+    isEmptyActionT(): boolean { return false }
+
 }
-
-
-
 
 
 
@@ -892,6 +908,7 @@ class LoadChild implements IActionT<IObject> {
     actionT(t: IObject): void {
         this.loader.loadObject(this.parent, t)
     }
+    isEmptyActionT(): boolean { return false }
 
 }
 
@@ -905,6 +922,8 @@ class FactorySetter implements IActionT<IFactoryConsumer>
     actionT(t: IFactoryConsumer): void {
       t.setConsumerFactory(this.factory)
     }
+    isEmptyActionT(): boolean { return false }
+
 
     factory: IFactory
 }
@@ -919,6 +938,7 @@ class ResourceSetter implements IActionT<IResourceCollection> {
         var rr = t.getResources()
         for (var s of rr) this.collection.addResource(s);
     }
+    isEmptyActionT(): boolean { return false }
 
     collection: IResourceCollection
 }

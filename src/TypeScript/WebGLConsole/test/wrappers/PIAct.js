@@ -15,6 +15,7 @@ class PIAct extends PI_1.PI {
         var a = k.getMeasurement(0).getMeasurementValue();
         console.log(a);
     }
+    isEmptyAction() { return false; }
     func() {
         return false;
     }

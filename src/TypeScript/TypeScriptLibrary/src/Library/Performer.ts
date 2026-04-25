@@ -689,7 +689,6 @@ export class Performer
     }
 
     public getAliasName(desktop: IDesktop, name: string): IAliasName {
-
         var l = name.length;
         var n = name.lastIndexOf('.');
         var s = name.substring(n + 1, l);
@@ -715,14 +714,12 @@ export class Performer
         return arr.isEmptyAction()
     }
 
-
     public convertArrayT<T, S>(collection: IObjectCollection, f: IFuncT<T, S>, type: string): T[] {
         let t: T[] = []
         let add = new AddTS<T, S>(t, f)
         this.forEach<S>(collection, add, "type")
         return t
     }
-
 
     public forEach<T>(collection: IObjectCollection, action: IActionT<T>, type: string) {
         let obj = collection.getObjectCollection()
@@ -751,6 +748,11 @@ export class Performer
             this.forEach<ISelfStart>(collection, this.stop, "ISelfStart")
 
         }
+    }
+
+    public loadChildren(object: IObject, collection: IObjectCollection, loader: ILoader, load: boolean): void {
+        var lc = new LoadChild(object, loader, load)
+        this.forEach<IObject>(collection, lc, "IObject")
     }
 
     public loadCollecion(load: boolean, collection: IObjectCollection) {
@@ -797,6 +799,9 @@ export class Performer
 
     unload: Unload = new Unload()
 
+    
+    
+  
 }
 
 
@@ -844,8 +849,6 @@ class AddTS<T, S> implements IActionT<S>{
     }
 }
 
-
-
 class Start implements IActionT<ISelfStart> {
     actionT(t: ISelfStart): void {
         t.startItself(true)
@@ -869,10 +872,6 @@ class Unload implements IActionT<ISelfLoad> {
         t.loadItself(false)
     }
 }
-
-
-
-
 
 
 class LoadChild implements IActionT<IObject> {

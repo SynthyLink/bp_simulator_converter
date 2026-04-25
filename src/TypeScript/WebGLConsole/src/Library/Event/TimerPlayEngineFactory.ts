@@ -17,6 +17,7 @@ export class TimerPlayEngineFactory implements ITimerFactory, IActionT<number> {
             timer.setTime(t)
         }
     }
+    isEmptyActionT(): boolean { return false }
 
     isTimerFactoryEnabled(): boolean {
        return true

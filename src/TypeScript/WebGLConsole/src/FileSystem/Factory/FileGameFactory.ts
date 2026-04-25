@@ -1,5 +1,8 @@
 import { IMtlDetector } from "../../Library/Abstract3DConverters/Interfaces/IMtlDetector";
 import { MtlDetectorTextReader } from "../../Library/Abstract3DConverters/MeshCreators/MtlDetectorTextReader";
+import { BacicGameLoaderFactory } from "../../Library/Abstract3Game/Factory/BacicGameLoaderFactory";
+import { BasicGameLoader } from "../../Library/Abstract3Game/Factory/BasicGameLoader";
+import { IGameLoaderFactory } from "../../Library/Abstract3Game/Interfaces/IGameLoaderFactory";
 import { IPath } from "../../Library/IO/Interfaces/IPath";
 import { Motion6DFactory } from "../../Library/Motion6DFactory";
 import { IStringSplitter } from "../../Library/Utilities/String/Interfaces/IStringSplitter";
@@ -19,6 +22,7 @@ export class FileGameFactory extends Motion6DFactory {
         var f = new RelativeFileSystemFactory(path)
         f.setFactory(this)
         var mtl = new MtlDetectorTextReader(f)
+        this.addFactory<IGameLoaderFactory>(new BacicGameLoaderFactory(), "IGameLoaderFactory")
         this.addFactory<IMtlDetector>(mtl, "IMtlDetector")
         this.addFactory<IStringSplitter>(new LineEndSplitter(), "IStringSplitter")
 

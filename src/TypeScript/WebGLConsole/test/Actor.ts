@@ -13,8 +13,12 @@ export class Actor {
     constructor() {
         this.factory = new FileGameFactory(this.dir);
         this.game = new EngineGameImitation("", this.factory);
-        var sc = new CessnaScene(this.game)
+        var sc = new CessnaScene(this.game, "Chart")
     }
+
+    
+
+
     dir: string = "C:\\AUsers\\1MySoft\\CSharp\\src\\TypeScript\\WebGLConsole\\models\\";
     actPI(): void {
         try {

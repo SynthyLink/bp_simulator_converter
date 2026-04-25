@@ -721,6 +721,7 @@ class UpdateAct implements IAction {
     action(): void {
         throw new OwnNotImplemented();
     }
+    isEmptyAction(): boolean { return false }
 
 }
 

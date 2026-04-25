@@ -6,6 +6,8 @@ export class UpdateMeasurementsAction implements IAction {
        this.m.updateMeasurements()
     }
 
+    isEmptyAction(): boolean { return false }
+
     constructor(m: IMeasurements) {
         this.m = m;
     }

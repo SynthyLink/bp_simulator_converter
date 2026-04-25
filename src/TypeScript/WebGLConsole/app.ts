@@ -2,6 +2,6 @@ import { Actor } from "./test/Actor";
 
 let act = new Actor()
 
-act.actPI()
+//act.actPI()
 
 console.log('Hello world');

@@ -12,6 +12,7 @@ import { PurePathFactory } from "../../IO/PurePathFactory";
 import { Motion6DFactory } from "../../Motion6D/Motion6DFactory";
 import { IStringSplitter } from "../../Utilities/String/Interfaces/IStringSplitter";
 import { LineEndSplitter } from "../../Utilities/String/LineEndSplitter";
+import { IGameLoaderFactory } from "../Interfaces/IGameLoaderFactory";
 
 export class FactoryGameImitation extends Motion6DFactory implements IIODirectoryFactory, IFileFactory, ITextReaderFactory {
     constructor() {
@@ -22,7 +23,7 @@ export class FactoryGameImitation extends Motion6DFactory implements IIODirector
         this.types.push("GameFactory")
         this.typeName = "GameFactory"
         this.addFactory<IMtlDetector>(new GameMtlDetector(), "IMtlDetector")
-        this.addFactory<ILoaderFactory>(new GameLoaderFactory(), "ILoaderFactory")
+        this.addFactory<IGameLoaderFactory>(new GameLoaderFactory(), "IGameLoaderFactory")
         this.addFactory<IStringSplitter>(new LineEndSplitter(), "IStringSplitter")
         this.addFactory<IPathFactory>(new PurePathFactory(), "IPathFactory")
         this.addFactory<IIODirectoryFactory>(this, "IIODirectoryFactory")

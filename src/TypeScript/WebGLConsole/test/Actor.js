@@ -10,7 +10,7 @@ class Actor {
         this.dir = "C:\\AUsers\\1MySoft\\CSharp\\src\\TypeScript\\WebGLConsole\\models\\";
         this.factory = new FileGameFactory_1.FileGameFactory(this.dir);
         this.game = new EngineGameImitation_1.EngineGameImitation("", this.factory);
-        var sc = new CessnaScene_1.CessnaScene(this.game);
+        var sc = new CessnaScene_1.CessnaScene(this.game, "Chart");
     }
     actPI() {
         try {

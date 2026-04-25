@@ -1,10 +1,11 @@
+import { IAction } from "../../src/Library/Interfaces/IAction";
 import { IDataRuntime } from "../../src/Library/Interfaces/IDataRuntime";
 import { IDataConsumer } from "../../src/Library/Measurements/Interfaces/IDataConsumer";
 import { PerformerMeasuremets } from "../../src/Library/Measurements/PerformerMeasuremets";
 import { DataRuntimeConsumer } from "../../src/Library/Runtime/DataRuntimeConsumer";
 import { PI } from "../tests/PI";
 
-export class PIAct extends PI {
+export class PIAct extends PI implements IAction {
 
     dc! : IDataConsumer;
     constructor() {
@@ -19,6 +20,7 @@ export class PIAct extends PI {
   
         console.log(a);
     }
+    isEmptyAction(): boolean { return false }
 
     func(): boolean {
         return false;

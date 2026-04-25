@@ -60,6 +60,8 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         return this.isEvEnabled
     }
 
+    isEmptyAction(): boolean { return false }
+
     setEventEnabled(enabled: boolean): void {
         if (enabled == this.isEvEnabled) return
         this.isEvEnabled = enabled

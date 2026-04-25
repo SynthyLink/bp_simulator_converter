@@ -7,18 +7,24 @@ import { ScadaDesktop } from "../../Scada/ScadaDesktop";
 import { ScadaDesktopEngine } from "../../Scada/ScadaDesktopEngine";
 import { IGame } from "../Interfaces/IGame";
 import { AbstractScene } from "../Abstract/AbstractScene";
+import { IGameLoaderFactory } from "../Interfaces/IGameLoaderFactory";
 
 export class ScadaScene extends AbstractScene implements IScadaConsumer
 {
     constructor(game: IGame, collection: IComponentCollection, chart: string) {
         super(game, chart)
         this.collection = collection
-        
         var engine = this.performer.convertObject<IPlayEngine, IObject>(game, "IPlayEngine")
         if (engine.length > 0) this.scada = new ScadaDesktopEngine(collection, engine[0],
             this.factory, this.name)
         else this.scada = new ScadaDesktop(collection)
+        var lc = this.factory.getFactory<IGameLoaderFactory>("IGameLoaderFactory")
+        var loader = lc?.getLoader(this)
+        if (loader != undefined) {
+            this.performer.loadChildren(this, this.scada, loader, true)
+        }
     }
+
     protected collection !: IComponentCollection
     protected scada !: IScadaInterface;
     getConsumerScada(): IScadaInterface {

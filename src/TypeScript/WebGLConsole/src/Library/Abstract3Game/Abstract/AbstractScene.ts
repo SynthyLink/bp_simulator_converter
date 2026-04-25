@@ -3,19 +3,19 @@ import { IActionAddRemove } from "../../Interfaces/IActionAddRemove";
 import { IFactory } from "../../Interfaces/IFactory";
 import { IObject } from "../../Interfaces/IObject";
 import { ActionArray } from "../../Utilities/Generic/ActionArray";
-import { ResourceItem } from "../../Web/ResourceItem";
 import { IGame } from "../Interfaces/IGame";
 import { IScene } from "../Interfaces/IScene";
 import { ISceneObject } from "../Interfaces/ISceneObject";
-import { GamePerformer } from "../ScenePerformer";
+import { ScenePerformer } from "../ScenePerformer";
 
-export  class AbstractScene implements IScene {
+export class AbstractScene implements  IScene {
+
 
     constructor(game: IGame, name: string) {
         this.game = game;
         this.factory = game.getConsumerFactory()
         this.name = name;
-        this.performer = new GamePerformer(this)
+        this.performer = new ScenePerformer(this)
     }
 
     getSceneObject(name: string): ISceneObject | undefined {
@@ -37,7 +37,7 @@ export  class AbstractScene implements IScene {
 
     protected factory !: IFactory
 
-    protected performer !: GamePerformer
+    protected performer !: ScenePerformer
 
     protected externalAction: IActionAddRemove = new ActionArray();
 

@@ -5,7 +5,7 @@ import { Performer } from "../../Performer";
 
 export class ActionArrayT<T> implements IActionAddRemoveT<T>, IObject {
 
-    isEmptyAction(): boolean {
+    isEmptyActionT(): boolean {
         return this.actions.length == 0;
     }
     addActionT(action: IActionT<T> | undefined): void {

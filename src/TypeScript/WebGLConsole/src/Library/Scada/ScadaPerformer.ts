@@ -16,6 +16,8 @@ export class ScadaPerformer implements IActionT<IScadaConsumer>
         t.setConsumerScada(this.scada);
     }
 
+    isEmptyActionT(): boolean { return false }
+
     scada !: IScadaInterface;
 
 }

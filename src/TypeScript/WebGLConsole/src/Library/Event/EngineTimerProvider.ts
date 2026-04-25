@@ -5,7 +5,8 @@ import type { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeM
 import { PerformerEvents } from "./PerformerEvents";
 import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
 
-export class EngineTimerProvider implements IMeasurement, ITimeMeasurementProvider, IActionT<number> {
+export class EngineTimerProvider implements IMeasurement, ITimeMeasurementProvider,
+    IActionT<number> {
 
     timeScale: number = 1;
     constructor(playEngine: IPlayEngine) {
@@ -17,6 +18,8 @@ export class EngineTimerProvider implements IMeasurement, ITimeMeasurementProvid
     actionT(t: number): void {
         this.currentTime = t * this.timeScale
     }
+    isEmptyActionT(): boolean { return false }
+
 
     getTimeMeasurement(): IMeasurement {
         return this
