@@ -36,11 +36,11 @@ export class CategoryArrow implements ICategoryArrow, IObject
         return this.types.indexOf(type) >= 0;
     }
 
-    protected typeName: string = "CategoryArrow";
+    protected typeName: string = "CategoryArrow"
 
-    protected types: string[] = ["IObject", "ICategoryArrow", "CategoryArrow"];
+    protected types: string[] = ["IObject", "ICategoryArrow", "CategoryArrow"]
 
-    protected name : string = "";
+    protected name : string = ""
 
     protected desktop: IDesktop = new FictiveDesktop();
 

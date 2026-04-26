@@ -135,7 +135,7 @@ class PI_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaConsumer 
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_11());
+        x0?.setIValue(this.get_11());
     }
 }
 class PI_CategoryObject_3 extends RecursiveFormula_1.RecursiveFormula {
@@ -188,7 +188,7 @@ class PI_CategoryObject_3 extends RecursiveFormula_1.RecursiveFormula {
     save() {
         var v = this.variables;
         var x0 = v.get("a");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_2());
+        x0?.setIValue(this.get_2());
     }
 }
 class PI_CategoryObject_4 extends DataConsumer_1.DataConsumer {

@@ -1,13 +1,12 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
   <Project Path="../../Web/reactprojectgenerated/reactprojectgenerated.esproj">
     <Build />
     <Deploy />
   </Project>
   <Project Path="../WebGLConsole/WebGLConsole.esproj">
-    <Build />
-    <Deploy />
-  </Project>
-  <Project Path="TypeScriptLibrary.esproj">
     <Build />
     <Deploy />
   </Project>

@@ -270,7 +270,7 @@ export class Obj3DCreator extends LinesMeshCreator {
             let es = this.effectsPrivate.get(st);
             if (es != undefined) return es
         }
-        var s = st.replace("_", " ");
+        var s = st.replaceAll("_", " ");
         if (this.effectsPrivate.has(s)) {
             let es = this.effectsPrivate.get(st);
             if (es != undefined) return es

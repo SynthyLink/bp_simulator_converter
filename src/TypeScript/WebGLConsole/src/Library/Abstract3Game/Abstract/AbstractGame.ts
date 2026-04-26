@@ -73,8 +73,6 @@ export abstract class AbstractGame implements IGame
     }
 
 
-
-
     getExternalAction(): IActionAddRemove {
         return this.externalAction
     }
@@ -85,12 +83,14 @@ export abstract class AbstractGame implements IGame
     getConsumerFactory(): IFactory {
         return this.factory
     }
+
     startItself(start: boolean): boolean {
         if (this.isStarted == start) return false
         this.isStarted = start
         this.performer.startCollecion(start, this);
         return true;
     }
+
     addAction(action: IAction, add: boolean): void {
         if (add) this.externalAction.addAction(action)
         else this.externalAction.removeAction(action)
@@ -109,14 +109,18 @@ export abstract class AbstractGame implements IGame
 
         return true;
     }
-
   
     addChildT(child: IScene): void {
-        throw new OwnNotImplemented()
+        this.children.push(child)
+        this.objects.push(child)
+        var name = child.getName()
+        if (!this.scenes.has(name)) {
+            this.scenes.set(name, child)
+        }
     }
+
     removeChildT(child: IScene): void {
-        throw new OwnNotImplemented()
-   }
+    }
 
     getChildernT(): IScene[] {
         return this.children;

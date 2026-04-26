@@ -6,7 +6,7 @@ export class StreamReader extends LinesTextReader {
         super()
         this.typeName = "StreamReader"
         this.types.push("StreamReader")
-        this.text = fs.readFileSync(fullpath, "utf-8").replace("\r\n", "\n")
+        this.text = fs.readFileSync(fullpath, "utf-8").replaceAll("\r\n", "\n")
         this.split()
     }
 }

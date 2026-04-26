@@ -7,7 +7,6 @@ import { IObjectCollection } from "../../Interfaces/IObjectCollection";
 import { ISelfLoad } from "../../Interfaces/ISelfLoad";
 import { ISelfStart } from "../../Interfaces/ISelfStart";
 import { IChildrenT } from "../../NamedTree/Interfaces/IChildrenT";
-import { ResourceItem } from "../../Web/ResourceItem";
 import { IGame } from "./IGame";
 import { ISceneObject } from "./ISceneObject";
 

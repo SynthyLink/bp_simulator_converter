@@ -1,3 +1,4 @@
+import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
 import { IActionAddRemove } from "../Interfaces/IActionAddRemove";
 import { IActionT } from "../Interfaces/IActionT";
 import { IGameAction } from "./Interfaces/IGameAction";
@@ -19,8 +20,10 @@ export class SceneObjectAction implements IActionT<ISceneObject> {
         if (a != undefined) {
             this.gameAcion = a
         }
+        else {
+            throw new OwnNotImplemented()
+        }
         this.action = scene.getInternalAction()
-        this.action.clearActions()
     }
 
     isEmptyActionT(): boolean {

@@ -71,6 +71,6 @@ export class Converter3DPefrormer {
 
     public toShiftString(str: string, shift: string): string {
         var str = this.performer.toShiftString(str, shift)
-        return str.replace("/", "")
+        return str.replaceAll("/", "")
     }
 }

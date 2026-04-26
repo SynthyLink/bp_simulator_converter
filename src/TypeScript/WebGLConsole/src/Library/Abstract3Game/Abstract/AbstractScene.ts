@@ -9,13 +9,12 @@ import { ISceneObject } from "../Interfaces/ISceneObject";
 import { ScenePerformer } from "../ScenePerformer";
 
 export class AbstractScene implements  IScene {
-
-
     constructor(game: IGame, name: string) {
         this.game = game;
         this.factory = game.getConsumerFactory()
         this.name = name;
         this.performer = new ScenePerformer(this)
+        game.addChildT(this)
     }
 
     getSceneObject(name: string): ISceneObject | undefined {
@@ -88,12 +87,14 @@ export class AbstractScene implements  IScene {
         if (add) this.externalAction.addAction(action)
         else this.externalAction.removeAction(action)
     }
+
     loadItself(load: boolean): boolean {
         if (this.isLoaded == load) return false
         this.isLoaded = load
         this.performer.loadCollecion(load, this)
         return true
     }
+
     getChildernT(): ISceneObject[] {
         return this.children;
     }
@@ -116,6 +117,10 @@ export class AbstractScene implements  IScene {
             var name = child.getName()
             if (this.objectMap.has(name)) this.objectMap.delete(name)
         }
+    }
+
+    protected setFactoryToChildren(): void {
+        this.performer.setFactoryToObjectCollection(this, this.getConsumerFactory())
     }
 
     getName(): string {

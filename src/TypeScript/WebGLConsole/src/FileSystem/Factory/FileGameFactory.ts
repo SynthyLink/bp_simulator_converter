@@ -2,6 +2,7 @@ import { IMtlDetector } from "../../Library/Abstract3DConverters/Interfaces/IMtl
 import { MtlDetectorTextReader } from "../../Library/Abstract3DConverters/MeshCreators/MtlDetectorTextReader";
 import { BacicGameLoaderFactory } from "../../Library/Abstract3Game/Factory/BacicGameLoaderFactory";
 import { BasicGameLoader } from "../../Library/Abstract3Game/Factory/BasicGameLoader";
+import { IGameActionFactory } from "../../Library/Abstract3Game/Interfaces/IGameActionFactory";
 import { IGameLoaderFactory } from "../../Library/Abstract3Game/Interfaces/IGameLoaderFactory";
 import { IPath } from "../../Library/IO/Interfaces/IPath";
 import { Motion6DFactory } from "../../Library/Motion6DFactory";
@@ -14,7 +15,7 @@ export class FileGameFactory extends Motion6DFactory {
     rpath: string = ""
 
     path: IPath = new FilePath()
-    constructor(path: string) {
+    constructor(path: string, gameActionFactory: IGameActionFactory) {
         super()
         this.typeName = "RelativeFileSystemDirectory"
         this.types.push("RelativeFileSystemDirectory")
@@ -25,6 +26,7 @@ export class FileGameFactory extends Motion6DFactory {
         this.addFactory<IGameLoaderFactory>(new BacicGameLoaderFactory(), "IGameLoaderFactory")
         this.addFactory<IMtlDetector>(mtl, "IMtlDetector")
         this.addFactory<IStringSplitter>(new LineEndSplitter(), "IStringSplitter")
+        this.addFactory<IGameActionFactory>(gameActionFactory, "IGameActionFactory")
 
     }
 }

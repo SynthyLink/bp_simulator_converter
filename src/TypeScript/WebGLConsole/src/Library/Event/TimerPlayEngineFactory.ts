@@ -17,6 +17,7 @@ export class TimerPlayEngineFactory implements ITimerFactory, IActionT<number> {
             timer.setTime(t)
         }
     }
+
     isEmptyActionT(): boolean { return false }
 
     isTimerFactoryEnabled(): boolean {
@@ -24,6 +25,7 @@ export class TimerPlayEngineFactory implements ITimerFactory, IActionT<number> {
     }
     setTimerFactoryEnabled(enabled: boolean): void {
     }
+
     getTimerFromFactory(timeSpan: TimeSpan): ITimer {
         var t = new Timer(this, timeSpan)
         this.timers.push(t)

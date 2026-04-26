@@ -19,6 +19,9 @@ export abstract class EngineGame extends AbstractGame implements IPlayEngine {
     startItself(start: boolean): boolean {
         if (!super.startItself(start)) return false
         this.setEngineEnabled(start)
+        if (start) {
+            this.run()
+        }
         return true;
     }
 

@@ -714,7 +714,6 @@ export class Performer
         if (arr == undefined) return false
         return arr.isEmptyAction()
     }
-
   
 
     public convertArrayT<T, S>(collection: IObjectCollection, f: IFuncT<T, S>, type: string): T[] {
@@ -732,6 +731,7 @@ export class Performer
             if (x.length > 0) action.actionT(x[0])
         }
     }
+
     public loadChildren(object: IObject, collection:
         IObjectCollection, loader: ILoader, load: boolean): void {
         var lc = new LoadChild(object, loader, load)
@@ -765,7 +765,6 @@ export class Performer
         }
         else {
             this.forEach<ISelfLoad>(collection, this.unload, "ISelfLoad")
-
         }
     }
 
@@ -922,6 +921,7 @@ class FactorySetter implements IActionT<IFactoryConsumer>
     actionT(t: IFactoryConsumer): void {
       t.setConsumerFactory(this.factory)
     }
+
     isEmptyActionT(): boolean { return false }
 
 

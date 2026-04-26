@@ -79,7 +79,7 @@ class Airplane_CategoryObject_4 extends VectorFormulaConsumer_1.VectorFormulaCon
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_0());
+        x0?.setIValue(this.get_0());
     }
 }
 class Airplane_CategoryObject_5 extends DataConsumer_1.DataConsumer {
@@ -139,6 +139,7 @@ class Airplane extends Desktop_1.Desktop {
         new Airplane_CategoryArrow_4(this, "");
         new Airplane_CategoryArrow_5(this, "");
         new Airplane_CategoryArrow_6(this, "");
+        this.finish();
     }
     finish() {
         let objects = this.getCategoryObjects();

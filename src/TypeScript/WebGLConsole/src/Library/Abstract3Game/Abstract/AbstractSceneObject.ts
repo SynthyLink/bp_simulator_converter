@@ -1,3 +1,4 @@
+import { IFactory } from "../../Interfaces/IFactory";
 import type { IScene } from "../Interfaces/IScene";
 import type { ISceneObject } from "../Interfaces/ISceneObject";
 
@@ -10,24 +11,37 @@ export class AbstractSceneObject implements ISceneObject {
         
     }
 
+    setConsumerFactory(factory: IFactory): void {
+        this.factory = factory
+    }
+
+    getConsumerFactory(): IFactory {
+        return this.factory
+    }
+
+    protected factory !: IFactory;
     protected scene !: IScene
     protected typeName: string = "AbstractSceneObject";
 
-    protected types: string[] = ["IObject", "ISceneObject", "AbstractSceneObject"];
+    protected types: string[] = ["IObject", "ISceneObject", "IFactoryConsumer", "AbstractSceneObject"];
 
     protected name: string = "";
 
     getScene(): IScene {
         return this.scene
     }
-    getClassName(): string {
-        throw new Error("Method not implemented.");
-    }
-    imlplementsType(type: string): boolean {
-        throw new Error("Method not implemented.");
-    }
+
     getName(): string {
-        throw new Error("Method not implemented.");
+        return this.name;
     }
 
+
+    getClassName(): string {
+        return this.typeName;
+    }
+
+    imlplementsType(type: string): boolean {
+        var b = this.types.includes(type)
+        return b
+    }
 }

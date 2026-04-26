@@ -46,7 +46,8 @@ export abstract class AbstractMeshCreator implements IMeshCreator {
             this.directoryio = td.createDirectoryFactory(obj)
         }
         let idt = factory.getFactory<IImageDetectorFactory>("IImageDetectorFactory")
-        if (idt != undefined) this.imageDetector = idt.getImageDetector(obj)
+        if (idt != undefined)
+            this.imageDetector = idt.getImageDetector(obj)
     }
 
     getMeshCreatorDirectory(): string {
@@ -128,8 +129,6 @@ export abstract class AbstractMeshCreator implements IMeshCreator {
     protected toFloat(s: string): number {
         return this.performer.convert<string, number>(s)
     }
-
-
 
 
     protected effects: Map<string, EffectTexture> = new Map()
