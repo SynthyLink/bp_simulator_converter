@@ -6,7 +6,8 @@ import { ISceneObject } from "../Interfaces/ISceneObject";
 import { IFindFrame } from "./Interfaces/IFindFrame";
 import { ReferenceFrameGameAction } from "./ReferenceFrameGameAction";
 
-export class ReferenceFrameGameActionFactory extends AbstractGameActionFactory implements IGameAction {
+export class ReferenceFrameGameActionFactory extends AbstractGameActionFactory
+    implements IGameAction {
     constructor(find: IFindFrame) {
         super()
         this.typeName = "ReferenceFrameGameActionFactory"

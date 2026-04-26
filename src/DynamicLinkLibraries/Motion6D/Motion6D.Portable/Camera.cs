@@ -397,7 +397,11 @@ namespace Motion6D.Portable
             }
         }
 
-        string INamed.Name { get => performer.GetAssociatedName(this); set =>new  ErrorHandler.WriteProhibitedException(); }
+        string INamed.Name 
+        { 
+            get => performer.GetAssociatedName(this); 
+            set => new  ErrorHandler.WriteProhibitedException(); 
+        }
        
 
         /// <summary>

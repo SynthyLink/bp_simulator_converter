@@ -1,21 +1,21 @@
 import type { IFactory } from "../../Interfaces/IFactory";
 import type { IMtlDetector } from "../Interfaces/IMtlDetector"
+import type { IEffectDitionary } from "../Interfaces/IEffectDitionary";
+import type { IMaterialCreator } from "../Interfaces/IMaterialCreator";
+import type { ITextureIndex } from "../Interfaces/ITextureIndex";
+import type { IMesh } from "../Interfaces/IMesh";
+import { Converter3DPefrormer } from "../Converter3DPerformer";
+import { Performer } from "../../Performer";
 import { ColorTexture } from "../ColorTexture";
 import { EffectTexture } from "../EffectTexture";
 import { ImageTexture } from "../ImageTexture";
 import { DiffuseMaterial } from "../Materials/DiffuseMaterial";
 import { MaterialGroup } from "../Materials/MaterialGroup";
 import { LinesMeshCreator } from "./LinesMeshCreator";
-import type { IEffectDitionary } from "../Interfaces/IEffectDitionary";
-import { Converter3DPefrormer } from "../Converter3DPerformer";
-import { Performer } from "../../Performer";
-import type { IMaterialCreator } from "../Interfaces/IMaterialCreator";
 import { EmissiveMaterial } from "../Materials/EmissiveMaterial";
 import { Material } from "../Materials/Material";
 import { PhongMaterial } from "../Materials/PhongMaterial";
 import { SpecularMaterial } from "../Materials/SpecularMaterial";
-import type { ITextureIndex } from "../Interfaces/ITextureIndex";
-import type { IMesh } from "../Interfaces/IMesh";
 import { AbstractMeshObj } from "../Meshes/AbstractMeshObj";
 
 export class Obj3DCreator extends LinesMeshCreator {

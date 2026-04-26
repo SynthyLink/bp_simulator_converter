@@ -34,6 +34,7 @@ export class ReferenceFrameArrow extends CategoryArrow {
 
             p.addNodeT(this.positionNode);
         }
+        this.position.setParentFrame(f)
     }
 
 
