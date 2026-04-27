@@ -1,7 +1,7 @@
-import { Performer } from "../Performer";
-import { IScadaConsumer } from "../Scada/Interfaces/IScadaConsumer";
-import { IScadaInterface } from "../Scada/Interfaces/IScadaInterface";
-import { IScene } from "./Interfaces/IScene";
+import { IScene } from "../Game/Interfaces/IScene"
+import { Performer } from "../Performer"
+import { IScadaConsumer } from "../Scada/Interfaces/IScadaConsumer"
+import { IScadaInterface } from "../Scada/Interfaces/IScadaInterface"
 
 export class GamePerformer extends Performer {
     public sceneToScada(scene: IScene): IScadaInterface | undefined{

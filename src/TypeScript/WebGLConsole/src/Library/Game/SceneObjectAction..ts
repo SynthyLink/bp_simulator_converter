@@ -1,12 +1,13 @@
 import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
+import { IGameAction } from "../Game/Interfaces/IGameAction";
+import { IGameActionFactory } from "../Game/Interfaces/IGameActionFactory";
+import { IScene } from "../Game/Interfaces/IScene";
+import { ISceneObject } from "../Game/Interfaces/ISceneObject";
 import { IActionAddRemove } from "../Interfaces/IActionAddRemove";
 import { IActionT } from "../Interfaces/IActionT";
-import { IGameAction } from "./Interfaces/IGameAction";
-import { IGameActionFactory } from "./Interfaces/IGameActionFactory";
-import { IScene } from "./Interfaces/IScene";
-import { ISceneObject } from "./Interfaces/ISceneObject";
 
 export class SceneObjectAction implements IActionT<ISceneObject> {
+
     actionT(t: ISceneObject): void {
         var a = this.gameAcion.functT(t)
         this.action.addAction(a)

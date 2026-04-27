@@ -1,7 +1,7 @@
+import { IGameAction } from "../../Game/Interfaces/IGameAction";
+import { ISceneObject } from "../../Game/Interfaces/ISceneObject";
 import { IAction } from "../../Interfaces/IAction";
 import { IObject } from "../../Interfaces/IObject";
-import { IGameAction } from "../Interfaces/IGameAction";
-import { ISceneObject } from "../Interfaces/ISceneObject";
 
 export abstract class AbstractGameAction implements IObject, IGameAction {
     abstract functT(s: ISceneObject): IAction | undefined

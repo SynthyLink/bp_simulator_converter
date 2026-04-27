@@ -1,6 +1,6 @@
+import { IScene } from "../../Game/Interfaces/IScene";
+import { ISceneObject } from "../../Game/Interfaces/ISceneObject";
 import { IFactory } from "../../Interfaces/IFactory";
-import type { IScene } from "../Interfaces/IScene";
-import type { ISceneObject } from "../Interfaces/ISceneObject";
 
 export class AbstractSceneObject implements ISceneObject {
 

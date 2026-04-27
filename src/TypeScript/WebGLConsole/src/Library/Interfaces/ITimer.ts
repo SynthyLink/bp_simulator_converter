@@ -1,5 +1,6 @@
 import type { TimeSpan } from "../Utilities/DateTime/TimeSpan";
 import type { IActionAddRemove } from "./IActionAddRemove";
+import { IActionT } from "./IActionT";
 
 export interface ITimer  {
 
@@ -11,6 +12,7 @@ export interface ITimer  {
 
     getTimerEvent(): IActionAddRemove
 
+    setTimerEventT(action: IActionT<number>): void
 
 }
 

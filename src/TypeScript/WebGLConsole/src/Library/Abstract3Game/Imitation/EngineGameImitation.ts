@@ -1,5 +1,5 @@
+import { EngineGame } from "../../Game/Abstract/EngineGame";
 import { IFactory } from "../../Interfaces/IFactory";
-import { EngineGame } from "../Abstract/EngineGame";
 
 export class EngineGameImitation extends EngineGame {
     constructor(name: string, factory: IFactory) {
@@ -15,13 +15,13 @@ export class EngineGameImitation extends EngineGame {
     protected begin: number = 0;
 
     public setImitation(steps: number, step: number, begin: number): void {
-        this.steps = step
+        this.steps = steps
         this.step = step
         this.begin = begin
     }
 
-
     run(): void {
+        let a = 0
         for (var i = 0; i < this.steps; i++) {
             this.cycle(i * this.step + this.begin)
         }

@@ -1,6 +1,6 @@
+import { IGameAction } from "../../Game/Interfaces/IGameAction";
+import { IGameActionFactory } from "../../Game/Interfaces/IGameActionFactory";
 import { IObject } from "../../Interfaces/IObject";
-import { IGameAction } from "../Interfaces/IGameAction";
-import { IGameActionFactory } from "../Interfaces/IGameActionFactory";
 
 export abstract class AbstractGameActionFactory implements IObject, IGameActionFactory {
     abstract getGameAction(object: any): IGameAction | undefined

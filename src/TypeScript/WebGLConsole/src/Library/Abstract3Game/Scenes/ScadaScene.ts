@@ -1,13 +1,13 @@
-import { IComponentCollection } from "../../Interfaces/IComponentCollection";
-import { IObject } from "../../Interfaces/IObject";
-import { IPlayEngine } from "../../Interfaces/IPlayEngine";
-import { IScadaConsumer } from "../../Scada/Interfaces/IScadaConsumer";
-import { IScadaInterface } from "../../Scada/Interfaces/IScadaInterface";
-import { ScadaDesktop } from "../../Scada/ScadaDesktop";
-import { ScadaDesktopEngine } from "../../Scada/ScadaDesktopEngine";
-import { IGame } from "../Interfaces/IGame";
-import { AbstractScene } from "../Abstract/AbstractScene";
-import { IGameLoaderFactory } from "../Interfaces/IGameLoaderFactory";
+import { AbstractScene } from "../../Game/Abstract/AbstractScene"
+import { IGame } from "../../Game/Interfaces/IGame"
+import { IGameLoaderFactory } from "../../Game/Interfaces/IGameLoaderFactory"
+import { IComponentCollection } from "../../Interfaces/IComponentCollection"
+import { IObject } from "../../Interfaces/IObject"
+import { IPlayEngine } from "../../Interfaces/IPlayEngine"
+import { IScadaConsumer } from "../../Scada/Interfaces/IScadaConsumer"
+import { IScadaInterface } from "../../Scada/Interfaces/IScadaInterface"
+import { ScadaDesktop } from "../../Scada/ScadaDesktop"
+import { ScadaDesktopEngine } from "../../Scada/ScadaDesktopEngine"
 
 export class ScadaScene extends AbstractScene implements IScadaConsumer
 {
@@ -46,7 +46,7 @@ export class ScadaScene extends AbstractScene implements IScadaConsumer
     startItself(start: boolean): boolean {
         if (this.isStarted == start) return false
         this.isStarted = start
-        this.scada.setScadaEnabled(true)
+        this.scada.setScadaEnabled(start)
         this.performer.startCollecion(start, this);
         return true;
     }

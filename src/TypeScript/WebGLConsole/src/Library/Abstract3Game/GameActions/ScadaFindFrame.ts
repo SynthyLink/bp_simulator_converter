@@ -1,8 +1,6 @@
-import { IObject } from "../../Interfaces/IObject";
+import { IScene } from "../../Game/Interfaces/IScene";
 import { IPosition } from "../../Motion6D/Interfaces/IPosition";
 import { IReferenceFrame } from "../../Motion6D/Interfaces/IReferenceFrame";
-import { IScadaConsumer } from "../../Scada/Interfaces/IScadaConsumer";
-import { IScene } from "../Interfaces/IScene";
 import { AbstractFindFrame } from "./AbstractFindFrame";
 
 export class ScadaFindFrame extends AbstractFindFrame {

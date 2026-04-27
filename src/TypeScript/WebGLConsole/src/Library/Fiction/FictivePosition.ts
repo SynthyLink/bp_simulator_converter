@@ -3,7 +3,16 @@ import type { IPosition } from "../Motion6D/Interfaces/IPosition";
 import type { IReferenceFrame } from "../Motion6D/Interfaces/IReferenceFrame";
 import type { INodeT } from "../NamedTree/Interfaces/INodeT";
 
-export class FictivePosition implements IPosition { 
+export class FictivePosition implements IPosition {
+    getClassName(): string {
+        throw new OwnNotImplemented();
+    }
+    imlplementsType(type: string): boolean {
+        throw new OwnNotImplemented();
+    }
+    getName(): string {
+        throw new OwnNotImplemented();
+    } 
     getPosition(): number[] {
         throw new OwnNotImplemented();
     }

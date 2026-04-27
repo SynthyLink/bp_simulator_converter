@@ -1,6 +1,6 @@
+import { IScene } from "../../Game/Interfaces/IScene";
 import { IObject } from "../../Interfaces/IObject";
 import { Performer } from "../../Performer";
-import { IScene } from "../Interfaces/IScene";
 
 export class SceneHolder implements IObject {
 

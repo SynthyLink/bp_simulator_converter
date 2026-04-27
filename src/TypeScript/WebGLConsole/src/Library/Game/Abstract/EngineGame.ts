@@ -31,7 +31,6 @@ export abstract class EngineGame extends AbstractGame implements IPlayEngine {
     setEngineEnabled(enabled: boolean): boolean {
         if (enabled == this.engineIsRunning) return false
         this.engineIsRunning = enabled
-        if (enabled) this.run();
         return true;
     }
 
@@ -42,7 +41,6 @@ export abstract class EngineGame extends AbstractGame implements IPlayEngine {
     cycle(time: number): void {
         if (!this.isStarted) return
         this.engineAction.actionT(time)
-        this.externalAction.action()
-        this.internalAction.action()
+        super.cycle(time)
     }
 }

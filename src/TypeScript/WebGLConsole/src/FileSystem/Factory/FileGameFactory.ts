@@ -1,15 +1,15 @@
-import { IMtlDetector } from "../../Library/Abstract3DConverters/Interfaces/IMtlDetector";
-import { MtlDetectorTextReader } from "../../Library/Abstract3DConverters/MeshCreators/MtlDetectorTextReader";
-import { BacicGameLoaderFactory } from "../../Library/Abstract3Game/Factory/BacicGameLoaderFactory";
-import { BasicGameLoader } from "../../Library/Abstract3Game/Factory/BasicGameLoader";
-import { IGameActionFactory } from "../../Library/Abstract3Game/Interfaces/IGameActionFactory";
-import { IGameLoaderFactory } from "../../Library/Abstract3Game/Interfaces/IGameLoaderFactory";
-import { IPath } from "../../Library/IO/Interfaces/IPath";
-import { Motion6DFactory } from "../../Library/Motion6DFactory";
-import { IStringSplitter } from "../../Library/Utilities/String/Interfaces/IStringSplitter";
-import { LineEndSplitter } from "../../Library/Utilities/String/LineEndSplitter";
-import { FilePath } from "../IO/FilePath";
-import { RelativeFileSystemFactory } from "../IO/RelativeFileSystemFactory";
+import { IMtlDetector } from "../../Library/Abstract3DConverters/Interfaces/IMtlDetector"
+import { MtlDetectorTextReader } from "../../Library/Abstract3DConverters/MeshCreators/MtlDetectorTextReader"
+import { BacicGameLoaderFactory } from "../../Library/Abstract3Game/Factory/BacicGameLoaderFactory"
+import { IGameActionFactory } from "../../Library/Game/Interfaces/IGameActionFactory"
+import { IGameLoaderFactory } from "../../Library/Game/Interfaces/IGameLoaderFactory"
+import { IPath } from "../../Library/IO/Interfaces/IPath"
+import { Motion6DFactory } from "../../Library/Motion6DFactory"
+import { IStringSplitter } from "../../Library/Utilities/String/Interfaces/IStringSplitter"
+import { LineEndSplitter } from "../../Library/Utilities/String/LineEndSplitter"
+import { FilePath } from "../IO/FilePath"
+import { RelativeFileSystemFactory } from "../IO/RelativeFileSystemFactory"
+
 
 export class FileGameFactory extends Motion6DFactory {
     rpath: string = ""

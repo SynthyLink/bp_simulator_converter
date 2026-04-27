@@ -2,14 +2,14 @@ import { IMesh } from "../../Abstract3DConverters/Interfaces/IMesh";
 import { IMeshHolder } from "../../Abstract3DConverters/Interfaces/IMeshHolder";
 import { Obj3DCreator } from "../../Abstract3DConverters/MeshCreators/Obj3DCreator";
 import { OwnNotImplemented } from "../../ErrorHandler/OwnNotImplemented";
+import { AssociatedSceneObject } from "../../Game/Abstract/AssociatedSceneObject";
+import { IScene } from "../../Game/Interfaces/IScene";
 import { IFactory } from "../../Interfaces/IFactory";
 import { ISelfLoad } from "../../Interfaces/ISelfLoad";
 import { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
 import { Basic3DShape } from "../../Motion6D/Objects/Shapes/Basic3DShape";
 import { IURLResourceHolder } from "../../Web/Interface/IURLResourseHolder";
 import { ResourceItem } from "../../Web/ResourceItem";
-import { AssociatedSceneObject } from "../Abstract/AssociatedSceneObject";
-import { IScene } from "../Interfaces/IScene";
 
 export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
     IURLResourceHolder, ISelfLoad {

@@ -1,13 +1,11 @@
-import { IAction } from "../../Interfaces/IAction";
-import { IActionAddRemove } from "../../Interfaces/IActionAddRemove";
-import { IFactory } from "../../Interfaces/IFactory";
-import { IObject } from "../../Interfaces/IObject";
-import { IGame } from "../Interfaces/IGame";
-import { IScene } from "../Interfaces/IScene";
-import { ActionArray } from "../../Utilities/Generic/ActionArray";
-import { OwnNotImplemented } from "../../ErrorHandler/OwnNotImplemented";
-import { Performer } from "../../Performer";
-
+import { IGame } from "../../Game/Interfaces/IGame"
+import { IScene } from "../../Game/Interfaces/IScene"
+import { IAction } from "../../Interfaces/IAction"
+import { IActionAddRemove } from "../../Interfaces/IActionAddRemove"
+import { IFactory } from "../../Interfaces/IFactory"
+import { IObject } from "../../Interfaces/IObject"
+import { Performer } from "../../Performer"
+import { ActionArray } from "../../Utilities/Generic/ActionArray"
 
 export abstract class AbstractGame implements IGame
 {
@@ -15,6 +13,9 @@ export abstract class AbstractGame implements IGame
         this.factory = factory
         this.name = name
     }
+
+    abstract run(): void 
+
     addScene(name: string, scene: IScene): void {
         this.scenes.set(name, scene)
         this.objects.push(scene)
@@ -46,6 +47,8 @@ export abstract class AbstractGame implements IGame
 
     protected isLoaded: boolean = false
 
+    protected intAct: IActionAddRemove = new ActionArray()
+
 
     getName(): string {
         return this.name;
@@ -64,14 +67,17 @@ export abstract class AbstractGame implements IGame
         return this.scenes
     }
 
-    abstract run(): void
-
-    abstract cycle(time: number): void
+ 
+    cycle(time: number): void {
+        if (!this.isStarted) return
+        this.intAct.action()
+        this.externalAction.action()
+        this.internalAction.action()
+    }
 
     getObjectCollection(): IObject[] {
         return this.objects;
     }
-
 
     getExternalAction(): IActionAddRemove {
         return this.externalAction
@@ -88,6 +94,10 @@ export abstract class AbstractGame implements IGame
         if (this.isStarted == start) return false
         this.isStarted = start
         this.performer.startCollecion(start, this);
+        this.intAct.clearActions();
+        for (var scene of this.scenes) {
+            this.intAct.addAction(scene[1].getExternalAction())
+        }
         return true;
     }
 
@@ -125,5 +135,5 @@ export abstract class AbstractGame implements IGame
     getChildernT(): IScene[] {
         return this.children;
     }
-
+ 
 }

@@ -6,6 +6,7 @@
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { EmptyObject } from "./EmptyObject";
 import { FictiveCategoryObject } from "./Fiction/FictiveCategoryObject";
 import { FictiveDesktop } from "./Fiction/FictiveDesktop";
 import type { ICategoryArrow } from "./Interfaces/ICategoryArrow";
@@ -14,34 +15,19 @@ import type { IDesktop } from "./Interfaces/IDesktop";
 import type { IObject } from "./Interfaces/IObject";
 import { Performer } from "./Performer";
 
-export class CategoryArrow implements ICategoryArrow, IObject
+export class CategoryArrow extends EmptyObject implements ICategoryArrow
 {
     constructor(desktop: IDesktop, name: string) {
+        super(name)
+        this.typeName = "CategoryArrow"
+        this.types.push("ICategoryArrow")
+        this.types.push("CategoryArrow")
         this.desktop = desktop;
         this.name = name;
         desktop.addCategoryArrow(this);
         desktop.addObject(this);
     }
-
-    getName(): string {
-        return this.name;
-    }
-
-
-    getClassName(): string {
-        return this.typeName;
-    }
-
-    imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
-    }
-
-    protected typeName: string = "CategoryArrow"
-
-    protected types: string[] = ["IObject", "ICategoryArrow", "CategoryArrow"]
-
-    protected name : string = ""
-
+ 
     protected desktop: IDesktop = new FictiveDesktop();
 
     protected source: ICategoryObject = new FictiveCategoryObject();

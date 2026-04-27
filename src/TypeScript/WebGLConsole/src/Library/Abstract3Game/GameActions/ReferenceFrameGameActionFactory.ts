@@ -1,8 +1,8 @@
+import { AbstractGameActionFactory } from "../../Game/Abstract/AbstractGameActionFactory";
+import { IGameAction } from "../../Game/Interfaces/IGameAction";
+import { IScene } from "../../Game/Interfaces/IScene";
+import { ISceneObject } from "../../Game/Interfaces/ISceneObject";
 import { IAction } from "../../Interfaces/IAction";
-import { AbstractGameActionFactory } from "../Abstract/AbstractGameActionFactory";
-import { IGameAction } from "../Interfaces/IGameAction";
-import { IScene } from "../Interfaces/IScene";
-import { ISceneObject } from "../Interfaces/ISceneObject";
 import { IFindFrame } from "./Interfaces/IFindFrame";
 import { ReferenceFrameGameAction } from "./ReferenceFrameGameAction";
 

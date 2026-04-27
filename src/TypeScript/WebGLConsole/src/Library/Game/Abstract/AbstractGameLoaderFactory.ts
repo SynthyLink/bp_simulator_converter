@@ -1,6 +1,6 @@
+import { IGameLoaderFactory } from "../../Game/Interfaces/IGameLoaderFactory";
 import { ILoader } from "../../Interfaces/ILoader";
 import { IObject } from "../../Interfaces/IObject";
-import { IGameLoaderFactory } from "../Interfaces/IGameLoaderFactory";
 
 export abstract class AbstractGameLoaderFactory implements IObject, IGameLoaderFactory {
     abstract getLoader(object: any): ILoader

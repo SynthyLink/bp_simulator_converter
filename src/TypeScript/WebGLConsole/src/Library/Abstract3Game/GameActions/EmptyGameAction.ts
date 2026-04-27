@@ -1,5 +1,5 @@
-import { AbstractGameAction } from "../Abstract/AbstractGameAction";
-import { ISceneObject } from "../Interfaces/ISceneObject";
+import { AbstractGameAction } from "../../Game/Abstract/AbstractGameAction";
+import { ISceneObject } from "../../Game/Interfaces/ISceneObject";
 import { IAction } from "../../Interfaces/IAction";
 
 export class EmptyGameAction extends AbstractGameAction implements IAction {

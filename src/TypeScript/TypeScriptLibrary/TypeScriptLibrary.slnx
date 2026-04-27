@@ -10,4 +10,8 @@
     <Build />
     <Deploy />
   </Project>
+  <Project Path="TypeScriptLibrary.esproj">
+    <Build />
+    <Deploy />
+  </Project>
 </Solution>

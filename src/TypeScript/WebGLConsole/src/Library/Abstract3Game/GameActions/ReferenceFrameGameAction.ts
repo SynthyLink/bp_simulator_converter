@@ -1,44 +1,67 @@
-import { IMeshAction } from "../../Abstract3DConverters/Interfaces/IMeshAction";
+import { EmptyObject } from "../../EmptyObject";
+import { AbstractGameAction } from "../../Game/Abstract/AbstractGameAction";
+import { ISceneObjectActionHolder } from "../../Game/Interfaces/ISceneObejctActionHolder";
+import { ISceneObject } from "../../Game/Interfaces/ISceneObject";
+import { ISceneObjectAction } from "../../Game/Interfaces/ISceneObjectAction";
 import { IAction } from "../../Interfaces/IAction";
-import { IActionAddRemove } from "../../Interfaces/IActionAddRemove";
-import { IObject } from "../../Interfaces/IObject";
+import { IAssociatedObject } from "../../Interfaces/IAssociatedObject";
 import { IReferenceFrame } from "../../Motion6D/Interfaces/IReferenceFrame";
 import { Motion6DPerformer } from "../../Motion6D/Motion6DPerformer";
-import { ActionArray } from "../../Utilities/Generic/ActionArray";
-import { AbstractGameAction } from "../Abstract/AbstractGameAction";
-import { IMeshActionFactory } from "../Interfaces/IMeshActionFactory";
-import { ISceneObject } from "../Interfaces/ISceneObject";
+import { ReferenceFrame } from "../../Motion6D/ReferenceFrame";
+import { AbstractSceneGameAction } from "./AbstractSceneGameAction";
 
 export class ReferenceFrameGameAction extends AbstractGameAction
-    implements IMeshActionFactory {
-    constructor(frame : IReferenceFrame) {
+    implements ISceneObjectActionHolder {
+    constructor(frame: IReferenceFrame) {
         super()
         this.typeName = "ReferenceFrameGameAction"
-        this.types.push("IMeshActionFactory")
+        this.types.push("ISceneObjectActionHolder")
         this.types.push("ReferenceFrameGameAction")
         this.frame = frame
     }
-    createMeshActions(object: ISceneObject): IMeshAction[] {
-        return []
+    getSceneObjectAction(): ISceneObjectAction {
+        return this.holder
     }
 
+    protected createHolder(obj: ISceneObject) {
+        this.holder = new RotationAction(obj, this.frame)
+    }
   
     frame !: IReferenceFrame;
-
+    holder !: ISceneObjectAction
 
 
     mPerformer: Motion6DPerformer = new Motion6DPerformer()
 
     functT(s: ISceneObject): IAction | undefined {
-        var cc = this.createMeshActions(s)
-        if (cc == undefined) return undefined
-        if (cc.length == 0) return undefined
-        if (cc.length == 1) return cc[0].action
-        let act: IActionAddRemove = new ActionArray(); 
-        for (var c of cc) {
-            act.addAction(c.action)
-        }
-        return act;
+        this.createHolder(s)
+        return this.getSceneObjectAction()
+    }
+}
+
+class RotationAction extends AbstractSceneGameAction {
+    frame !: IReferenceFrame
+    target !: IReferenceFrame
+    rf : ReferenceFrame = new ReferenceFrame()
+    constructor(object: ISceneObject, frame: IReferenceFrame | undefined) {
+        super(object, frame)
+        this.typeName = "RotationAction"
+        this.types.push("RotationAction")
+        this.object = object;
+        if (frame != undefined) this.frame = frame
+        var ao = object as unknown as IAssociatedObject
+        var ass = ao.getAssociatedObject()
+        var ps = ass as unknown as IReferenceFrame
+        this.target = ps
+
+    }
+
+    action(): void {
+    }
+
+    isEmptyAction(): boolean {
+        return (this.frame == undefined) || (this.target == undefined)
     }
 
 }
+

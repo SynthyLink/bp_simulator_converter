@@ -1,7 +1,7 @@
-import { IAssociatedObject } from "../../Interfaces/IAssociatedObject";
-import { IObject } from "../../Interfaces/IObject";
-import { IScene } from "../Interfaces/IScene";
-import { AbstractSceneObject } from "./AbstractSceneObject";
+import { IScene } from "../../Game/Interfaces/IScene"
+import { IAssociatedObject } from "../../Interfaces/IAssociatedObject"
+import { IObject } from "../../Interfaces/IObject"
+import { AbstractSceneObject } from "./AbstractSceneObject"
 
 export class AssociatedSceneObject extends AbstractSceneObject implements IAssociatedObject {
 
@@ -11,6 +11,7 @@ export class AssociatedSceneObject extends AbstractSceneObject implements IAssoc
         this.types.push("IAssociatedObject")
         this.types.push("AbstractSceneObject")
         this.typeName = "AbstractSceneObject"
+        this.object = object
  }
 
     getAssociatedObject(): IObject {

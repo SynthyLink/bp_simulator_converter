@@ -8,6 +8,8 @@ import type { ITimer } from "../../Interfaces/ITimer";
 import type { ITimerConsumer } from "../../Interfaces/ITimerConsumer";
 import type { ITimerFactory } from "../../Interfaces/ITimerFactory";
 import type { IPostSetArrow } from "../../Interfaces/IPostSetArrow";
+import { IActionAddRemoveT } from "../../Interfaces/IActionAddRemoveT";
+import { ActionArrayT } from "../../Utilities/Generic/ActionArrayT";
 
 export class TimerObject extends CategoryObject implements IEvent, ITimerConsumer, IPostSetArrow {
 
@@ -17,9 +19,11 @@ export class TimerObject extends CategoryObject implements IEvent, ITimerConsume
         this.types.push("IEvent")
         this.types.push("ITimerConsumer")
         this.types.push("IPostSetArrow")
+        this.types.push("TimerObject")
     }
     postSetArrow(): void {
     }
+
     getTimeSpan(): TimeSpan {
         return this.span;
     }
@@ -27,12 +31,18 @@ export class TimerObject extends CategoryObject implements IEvent, ITimerConsume
     setTimer(timerFactory: ITimerFactory): void {
         this.timer = timerFactory.getTimerFromFactory(this.span)
         this.timer.getTimerEvent().addAction(this.action)
-    }
+        this.timer.setTimerEventT(this.eventActionT())
+ }
 
 
     eventAction(): IActionAddRemove {
         return this.action;
     }
+
+    public eventActionT(): IActionAddRemoveT<number> {
+        return this.actionT;
+    }
+
 
     isEventEnabled(): boolean {
         return this.isEnabled;
@@ -46,7 +56,10 @@ export class TimerObject extends CategoryObject implements IEvent, ITimerConsume
     }
 
 
+
     action: IActionAddRemove = new ActionArray();
+
+    actionT: IActionAddRemoveT<number> = new ActionArrayT<number>();
 
     timer !: ITimer;
 

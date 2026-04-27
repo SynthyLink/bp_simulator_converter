@@ -1,5 +1,5 @@
-import { AbstractGameActionFactory } from "../Abstract/AbstractGameActionFactory";
-import { IGameAction } from "../Interfaces/IGameAction";
+import { AbstractGameActionFactory } from "../../Game/Abstract/AbstractGameActionFactory";
+import { IGameAction } from "../../Game/Interfaces/IGameAction";
 import { EmptyGameAction } from "./EmptyGameAction";
 
 export class EmptyGameActionFactory extends AbstractGameActionFactory {

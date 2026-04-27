@@ -1,6 +1,6 @@
-import { ILoader } from "../../Interfaces/ILoader";
-import { AbstractGameLoaderFactory } from "../Abstract/AbstractGameLoaderFactory";
-import { Object3DLoader } from "./Object3DLoader";
+import { AbstractGameLoaderFactory } from "../../Game/Abstract/AbstractGameLoaderFactory"
+import { ILoader } from "../../Interfaces/ILoader"
+import { Object3DLoader } from "./Object3DLoader"
 
 export class BacicGameLoaderFactory extends AbstractGameLoaderFactory {
 

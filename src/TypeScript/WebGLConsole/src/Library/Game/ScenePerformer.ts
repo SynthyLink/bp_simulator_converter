@@ -1,9 +1,8 @@
+import { IScene } from "../Game/Interfaces/IScene";
+import { ISceneObject } from "../Game/Interfaces/ISceneObject";
 import { IFactory } from "../Interfaces/IFactory";
 import { Performer } from "../Performer";
-import { IScene } from "./Interfaces/IScene";
-import { ISceneObject } from "./Interfaces/ISceneObject";
 import { SceneObjectAction } from "./SceneObjectAction.";
-
 
 export class ScenePerformer extends Performer {
     scene!: IScene;

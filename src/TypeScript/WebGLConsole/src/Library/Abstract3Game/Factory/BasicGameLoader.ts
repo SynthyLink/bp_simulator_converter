@@ -1,6 +1,6 @@
+import { IScene } from "../../Game/Interfaces/IScene";
 import type { ILoader } from "../../Interfaces/ILoader";
 import type { IObject } from "../../Interfaces/IObject";
-import type { IScene } from "../Interfaces/IScene";
 import { Performer } from "../../Performer";
 
 export class BasicGameLoader extends Performer implements ILoader

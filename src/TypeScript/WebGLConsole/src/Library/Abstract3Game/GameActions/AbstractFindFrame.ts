@@ -1,7 +1,7 @@
 import { EmptyObject } from "../../EmptyObject";
+import { GamePerformer } from "../../Game/GamePerformer";
+import { IScene } from "../../Game/Interfaces/IScene";
 import { IReferenceFrame } from "../../Motion6D/Interfaces/IReferenceFrame";
-import { GamePerformer } from "../GamePerformer";
-import { IScene } from "../Interfaces/IScene";
 import { IFindFrame } from "./Interfaces/IFindFrame";
 
 

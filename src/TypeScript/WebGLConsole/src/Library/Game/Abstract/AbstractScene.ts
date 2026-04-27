@@ -1,11 +1,11 @@
+import { IGame } from "../../Game/Interfaces/IGame";
+import { IScene } from "../../Game/Interfaces/IScene";
+import { ISceneObject } from "../../Game/Interfaces/ISceneObject";
 import { IAction } from "../../Interfaces/IAction";
 import { IActionAddRemove } from "../../Interfaces/IActionAddRemove";
 import { IFactory } from "../../Interfaces/IFactory";
 import { IObject } from "../../Interfaces/IObject";
 import { ActionArray } from "../../Utilities/Generic/ActionArray";
-import { IGame } from "../Interfaces/IGame";
-import { IScene } from "../Interfaces/IScene";
-import { ISceneObject } from "../Interfaces/ISceneObject";
 import { ScenePerformer } from "../ScenePerformer";
 
 export class AbstractScene implements  IScene {
@@ -141,7 +141,7 @@ export class AbstractScene implements  IScene {
     protected typeName: string = "AbstractScene";
 
     protected types: string[] = ["IObject", "IChildrenT<ISceneObject>", "ISelfLoad",
-        "IAddAction", "SelfStart", "IObjectCollection", "IExternalAction",
+        "IAddAction", "ISelfStart", "IObjectCollection", "IExternalAction",
         "IFactoryConsumer", "IScene", "AbstractScene"];
 
     protected name: string = "";
