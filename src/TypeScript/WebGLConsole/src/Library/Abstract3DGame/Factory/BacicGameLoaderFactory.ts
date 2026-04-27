@@ -2,12 +2,12 @@ import { AbstractGameLoaderFactory } from "../../Game/Abstract/AbstractGameLoade
 import { ILoader } from "../../Interfaces/ILoader"
 import { Object3DLoader } from "./Object3DLoader"
 
-export class BacicGameLoaderFactory extends AbstractGameLoaderFactory {
+export class BasicGameLoaderFactory extends AbstractGameLoaderFactory {
 
     constructor() {
         super()
-        this.typeName = "BacicGameLoaderFactory"
-        this.types.push("BacicGameLoaderFactory")
+        this.typeName = "BasicGameLoaderFactory"
+        this.types.push("BasicGameLoaderFactory")
     }
     getLoader(object: any): ILoader {
         return new Object3DLoader()

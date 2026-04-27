@@ -1,10 +1,10 @@
 import { IScene } from "../Game/Interfaces/IScene";
 import { ISceneObject } from "../Game/Interfaces/ISceneObject";
 import { IFactory } from "../Interfaces/IFactory";
-import { Performer } from "../Performer";
+import { GamePerformer } from "./GamePerformer";
 import { SceneObjectAction } from "./SceneObjectAction.";
 
-export class ScenePerformer extends Performer {
+export class ScenePerformer extends GamePerformer {
     scene!: IScene;
     factory!: IFactory;
 

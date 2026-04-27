@@ -1,8 +1,8 @@
 import { AirplaneScene } from "./scenes/AirplaneScene";
 import { FileGameFactory } from "./src/FileSystem/Factory/FileGameFactory";
-import { ReferenceFrameGameActionFactory } from "./src/Library/Abstract3Game/GameActions/ReferenceFrameGameActionFactory";
-import { ScadaFind3dFrame } from "./src/Library/Abstract3Game/GameActions/ScadaFind3DFrame";
-import { EngineGameImitation } from "./src/Library/Abstract3Game/Imitation/EngineGameImitation";
+import { ReferenceFrameGameActionFactory } from "./src/Library/Abstract3DGame/GameActions/ReferenceFrameGameActionFactory";
+import { ScadaFind3dFrame } from "./src/Library/Abstract3DGame/GameActions/ScadaFind3DFrame";
+import { EngineGameImitation } from "./src/Library/Abstract3DGame/Imitation/EngineGameImitation";
 import { AbstractAction } from "./src/Library/Event/Objects/AbstractAction";
 import { AbstractActionT } from "./src/Library/Event/Objects/AbstractActionT";
 import { TimerObject } from "./src/Library/Event/Objects/TimerObject";
