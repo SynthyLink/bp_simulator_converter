@@ -21,6 +21,7 @@ import type { ITimeMeasurementConsumer } from "./Interfaces/ITimeMeasurementCons
 import type { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProvider";
 import type { IEventStart } from "../Interfaces/IEventStart";
 import type { IExternalUpdateClient } from "../Interfaces/IExternalUpdateClient";
+import { IObject } from "../Interfaces/IObject";
 
 export class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow,
     ITimeMeasurementConsumer, IPrintedObject, ICheckHolder, IIteratorConsumer, IEventHandler, IAddRemove, IAction,
@@ -44,7 +45,7 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         this.dataConsumer = this;
         this.currentAction = this.fictiveAvtion;
     }
-
+ 
     setExternalUpdate(action: IActionAddRemove | undefined): void {
         this.eventAction.clearActions();
         if (action === null) {
@@ -153,6 +154,16 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     addMeasurements(item: IMeasurements): void {
         this.measurements.push(item);
     }
+
+    addRemoveObject(object: ICategoryObject, add: boolean): boolean {
+        if (add) this.addRemoveobjects.push(object)
+        return true
+    }
+    getAddRemoveObjects(): ICategoryObject[] {
+        return this.addRemoveobjects;
+    }
+
+    addRemoveobjects: ICategoryObject[] = []
 
 
     private measurements: IMeasurements[] = [];

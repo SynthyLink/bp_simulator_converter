@@ -1,19 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Actor = void 0;
-const AirplaneScene_1 = require("../scenes/AirplaneScene");
-const FileGameFactory_1 = require("../src/FileSystem/Factory/FileGameFactory");
-const ReferenceFrameGameActionFactory_1 = require("../src/Library/Abstract3Game/GameActions/ReferenceFrameGameActionFactory");
-const ScadaFindFrame_1 = require("../src/Library/Abstract3Game/GameActions/ScadaFindFrame");
-const EngineGameImitation_1 = require("../src/Library/Abstract3Game/Imitation/EngineGameImitation");
-const AbstractAction_1 = require("../src/Library/Event/Objects/AbstractAction");
-const AbstractActionT_1 = require("../src/Library/Event/Objects/AbstractActionT");
-const PIAct_1 = require("./wrappers/PIAct");
+exports.A = exports.Actor = void 0;
+const AirplaneScene_1 = require("./scenes/AirplaneScene");
+const FileGameFactory_1 = require("./src/FileSystem/Factory/FileGameFactory");
+const ReferenceFrameGameActionFactory_1 = require("./src/Library/Abstract3Game/GameActions/ReferenceFrameGameActionFactory");
+const ScadaFind3DFrame_1 = require("./src/Library/Abstract3Game/GameActions/ScadaFind3DFrame");
+const EngineGameImitation_1 = require("./src/Library/Abstract3Game/Imitation/EngineGameImitation");
+const AbstractAction_1 = require("./src/Library/Event/Objects/AbstractAction");
+const AbstractActionT_1 = require("./src/Library/Event/Objects/AbstractActionT");
+const PIAct_1 = require("./test/wrappers/PIAct");
 class Actor {
     constructor() {
-        this.dir = "C:\\AUsers\\1MySoft\\CSharp\\src\\TypeScript\\WebGLConsole\\models\\";
+        this.dir = "C:\\AUsers\\1MySoft\\CSharp\\src\\TypeScript\\WebGLConsole/static/models";
         this.dir = this.dir.replaceAll("\\", "/");
-        var find = new ScadaFindFrame_1.ScadaFindFrame("Camera");
+        var find = new ScadaFind3DFrame_1.ScadaFind3dFrame("Camera");
         var ga = new ReferenceFrameGameActionFactory_1.ReferenceFrameGameActionFactory(find);
         this.factory = new FileGameFactory_1.FileGameFactory(this.dir, ga);
         var g = new EngineGameImitation_1.EngineGameImitation("", this.factory);
@@ -23,7 +23,7 @@ class Actor {
         var sc = new AirplaneScene_1.AirplaneScene(this.game, "Chart");
         var ea = sc.getExternalAction();
         ea.addAction(new A("scene"));
-        ea.addAction(new B(sc));
+        ea.addAction(new B(sc, g));
     }
     loadGame() {
         this.game.loadItself(true);
@@ -54,14 +54,16 @@ class A extends AbstractAction_1.AbstractAction {
         console.log(this.s + " " + this.i);
     }
 }
+exports.A = A;
 class B extends AbstractAction_1.AbstractAction {
-    constructor(scene) {
+    constructor(scene, game) {
         super();
+        this.game = game;
         let scada = scene.getConsumerScada();
         let dc = scada.getScadaObject("Chart", "IDataConsumer");
         this.dataConsumer = dc[0];
         let timer = scada.getScadaObject("Timer", "TimerObject");
-        timer[0].eventActionT().addActionT(new TA());
+        timer[0].eventActionT().addActionT(new TA(this.game));
     }
     action() {
         var mmm = this.dataConsumer.getAllMeasurements();
@@ -72,8 +74,15 @@ class B extends AbstractAction_1.AbstractAction {
     }
 }
 class TA extends AbstractActionT_1.AbstractActionT {
+    constructor(game) {
+        super();
+        this.game = game;
+    }
     actionT(t) {
         console.log("time " + t);
+        if (t > 5) {
+            this.game.startItself(false);
+        }
     }
 }
 //# sourceMappingURL=Actor.js.map

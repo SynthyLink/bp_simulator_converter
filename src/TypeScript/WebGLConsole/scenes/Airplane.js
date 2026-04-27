@@ -51,11 +51,11 @@ class Airplane_CategoryObject_3 extends RigidReferenceFrame_1.RigidReferenceFram
         this.relativePosition.push(40);
         this.relativePosition.push(40);
         this.relativePosition.push(40);
-        this.relativePosition = [];
-        this.relativePosition.push(0.88047623921714935);
-        this.relativePosition.push(-0.27984814233312139);
-        this.relativePosition.push(0.36470519963100095);
-        this.relativePosition.push(0.11591689595929504);
+        this.relativeQuaternion = [];
+        this.relativeQuaternion.push(0.88047623921714935);
+        this.relativeQuaternion.push(-0.27984814233312139);
+        this.relativeQuaternion.push(0.36470519963100095);
+        this.relativeQuaternion.push(0.11591689595929504);
     }
 }
 class Airplane_CategoryObject_4 extends VectorFormulaConsumer_1.VectorFormulaConsumer {

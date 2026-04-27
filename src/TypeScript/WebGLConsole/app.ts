@@ -1,4 +1,4 @@
-import { Actor } from "./test/Actor";
+import { Actor } from "./Actor";
 
 let act = new Actor()
 act.loadGame()

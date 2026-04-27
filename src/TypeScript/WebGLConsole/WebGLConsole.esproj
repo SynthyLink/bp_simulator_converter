@@ -1,10 +1,12 @@
 ﻿<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.2752196">
   <ItemGroup>
     <None Remove="src\ExternalObjects\**" />
+    <None Remove="src\Library\Abstract3DGame\**" />
     <TypeScriptConfiguration Remove="src\ExternalObjects\**" />
+    <TypeScriptConfiguration Remove="src\Library\Abstract3DGame\**" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="models\" />
     <Folder Include="src\Library\Runtime\Interfaces\" />
+    <Folder Include="static\models\" />
   </ItemGroup>
 </Project>

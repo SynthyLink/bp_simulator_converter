@@ -46,14 +46,12 @@ export class PerformerMeasuremets {
         this.realtimeEventFactory = f;
     }
 
-    public createUpdateMeasurementsAction(collection: IObjectCollection): IActionAddRemove {
-        let act = new ActionArray();
+    public createUpdateMeasurementsAction(collection: IObjectCollection, act : IActionAddRemove) : void {
         let mea = this.performer.getAll<IMeasurements>(collection, "IMeasurements")
         let mm = this.performer.sortMeasurements(mea);
         for (let m of mm) {
             act.addAction(new UpdateMeasurementsAction(m))
         }
-        return act;
     }
 
     constructor() {

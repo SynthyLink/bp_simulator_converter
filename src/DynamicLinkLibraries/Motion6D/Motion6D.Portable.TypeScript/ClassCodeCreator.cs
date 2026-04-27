@@ -78,7 +78,7 @@ namespace Motion6D.Portable.TypeScript
             l.Add("\t\tthis.relativeQuaternion = []");
             var ll = Get("relativePosition", frame.RelativePosition);
             Add(l, ll, 1);
-            ll = Get("relativePosition", frame.RelativeQuaternion);
+            ll = Get("relativeQuaternion", frame.RelativeQuaternion);
             Add(l, ll, 1);
             l.Add("\t}");
             l.Add("}");

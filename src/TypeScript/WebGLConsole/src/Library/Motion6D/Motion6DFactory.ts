@@ -15,6 +15,5 @@ export class Motion6DFactory extends UniversalFactory {
         this.addFactory<IRealtimeCollectionFactory>(f, "IRealtimeCollectionFactory")
         this.types.push("Motion6DFactory")
         this.typeName = "Motion6DFactory"
-
     }
 }

@@ -36,7 +36,7 @@ export class DataConsumerMeasurements extends DataConsumer
 
     protected performer: Performer = new Performer();
 
-    protected variable: any;
+    protected dataVariable: any;
 
     protected alias !: IAlias;
 

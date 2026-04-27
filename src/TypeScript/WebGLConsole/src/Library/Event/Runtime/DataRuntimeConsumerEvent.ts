@@ -12,9 +12,11 @@ import type { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurement
 import type { ITimerFactory } from "../../Interfaces/ITimerFactory";
 import type { IDataConsumer } from "../../Measurements/Interfaces/IDataConsumer";
 import { DataRuntimeConsumerODE } from "../../Runtime/DataRuntimeConsumerODE";
+import { ActionArray } from "../../Utilities/Generic/ActionArray";
 import { PerformerEvents } from "../PerformerEvents";
 
-export class DataRuntimeConsumerEvent extends DataRuntimeConsumerODE implements IRealtimeCollection, IExternalUpdate
+export class DataRuntimeConsumerEvent extends DataRuntimeConsumerODE implements IRealtimeCollection,
+    IExternalUpdate
 {
 
     protected ePerformer: PerformerEvents = new PerformerEvents()
@@ -29,11 +31,15 @@ export class DataRuntimeConsumerEvent extends DataRuntimeConsumerODE implements 
         this.types.push("DataRuntimeConsumerEvent")
         var up = this.dataConsumer as unknown as IExternalUpdateClient
         var ob = this.dataConsumer as unknown as IObject;
-        up.setExternalUpdate(this.getExtenalUpdate(ob, this))
+        let a: IActionAddRemove = new ActionArray()
+        this.getExtenalUpdate(ob, this, a)
+        up.setExternalUpdate(a)
     }
 
-    getExtenalUpdate(obj: IObject | undefined, realime: IRealtimeCollection): IActionAddRemove {
-        return  this.mPerformer.createUpdateMeasurementsAction(this)
+
+
+    getExtenalUpdate(obj: IObject | undefined, realime: IRealtimeCollection, act: IActionAddRemove): void {
+       this.mPerformer.createUpdateMeasurementsAction(this, act)
     }
 
     protected prepare(dataConsumer: IDataConsumer) {

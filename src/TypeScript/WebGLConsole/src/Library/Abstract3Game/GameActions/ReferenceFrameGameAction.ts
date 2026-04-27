@@ -1,14 +1,13 @@
-import { EmptyObject } from "../../EmptyObject";
+import type { ISceneObjectActionHolder } from "../../Game/Interfaces/ISceneObejctActionHolder";
+import type { ISceneObject } from "../../Game/Interfaces/ISceneObject";
+import type { ISceneObjectAction } from "../../Game/Interfaces/ISceneObjectAction";
+import type { IAction } from "../../Interfaces/IAction";
+import type { IObject } from "../../Interfaces/IObject";
+import type { IReferenceFrame } from "../../Motion6D/Interfaces/IReferenceFrame";
 import { AbstractGameAction } from "../../Game/Abstract/AbstractGameAction";
-import { ISceneObjectActionHolder } from "../../Game/Interfaces/ISceneObejctActionHolder";
-import { ISceneObject } from "../../Game/Interfaces/ISceneObject";
-import { ISceneObjectAction } from "../../Game/Interfaces/ISceneObjectAction";
-import { IAction } from "../../Interfaces/IAction";
-import { IAssociatedObject } from "../../Interfaces/IAssociatedObject";
-import { IReferenceFrame } from "../../Motion6D/Interfaces/IReferenceFrame";
-import { Motion6DPerformer } from "../../Motion6D/Motion6DPerformer";
+import { AbstractSceneGameAction } from "../../Game/GameActions/AbstractSceneGameAction";
 import { ReferenceFrame } from "../../Motion6D/ReferenceFrame";
-import { AbstractSceneGameAction } from "./AbstractSceneGameAction";
+import { Game3DPerformer } from "../Game3DPerformer";
 
 export class ReferenceFrameGameAction extends AbstractGameAction
     implements ISceneObjectActionHolder {
@@ -28,10 +27,10 @@ export class ReferenceFrameGameAction extends AbstractGameAction
     }
   
     frame !: IReferenceFrame;
+
     holder !: ISceneObjectAction
 
-
-    mPerformer: Motion6DPerformer = new Motion6DPerformer()
+    mPerformer: Game3DPerformer = new Game3DPerformer()
 
     functT(s: ISceneObject): IAction | undefined {
         this.createHolder(s)
@@ -40,28 +39,32 @@ export class ReferenceFrameGameAction extends AbstractGameAction
 }
 
 class RotationAction extends AbstractSceneGameAction {
-    frame !: IReferenceFrame
-    target !: IReferenceFrame
-    rf : ReferenceFrame = new ReferenceFrame()
+    baseFrame !: ReferenceFrame
+    target !: ReferenceFrame
+    relative: ReferenceFrame = new ReferenceFrame()
+    motionPerformer: Game3DPerformer = new Game3DPerformer()
     constructor(object: ISceneObject, frame: IReferenceFrame | undefined) {
-        super(object, frame)
+        super(object)
         this.typeName = "RotationAction"
         this.types.push("RotationAction")
         this.object = object;
-        if (frame != undefined) this.frame = frame
-        var ao = object as unknown as IAssociatedObject
-        var ass = ao.getAssociatedObject()
-        var ps = ass as unknown as IReferenceFrame
-        this.target = ps
+        if (frame != undefined) {
+            var fr = this.motionPerformer.getOwnFrame(frame)
+            if (fr != undefined) this.baseFrame = fr
+        }
+        var bf = this.motionPerformer.getOwnFrame(object)
+        if (bf != undefined) this.target = bf
 
     }
 
     action(): void {
+        this.motionPerformer.getRelativeFrame(this.baseFrame, this.target, this.relative)
     }
 
     isEmptyAction(): boolean {
-        return (this.frame == undefined) || (this.target == undefined)
+        return (this.baseFrame == undefined) || (this.target == undefined)
     }
-
+    getActionSceneAdditionalObject(): IObject | undefined {
+        return this.relative
+    }
 }
-

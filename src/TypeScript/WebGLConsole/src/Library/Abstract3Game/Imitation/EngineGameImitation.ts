@@ -24,6 +24,8 @@ export class EngineGameImitation extends EngineGame {
         let a = 0
         for (var i = 0; i < this.steps; i++) {
             this.cycle(i * this.step + this.begin)
+            if (!this.isRunning())
+                return
         }
     }
 

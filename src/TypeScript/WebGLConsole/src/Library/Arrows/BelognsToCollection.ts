@@ -24,7 +24,7 @@ export class BelongsToCollection extends CategoryArrow
 
     setTarget(target: ICategoryObject): void {
         this.target = target;
-        this.ar.addChildT(target)
+        this.ar.addRemoveObject(target, true)
     }
 
     protected ar !: IAddRemove

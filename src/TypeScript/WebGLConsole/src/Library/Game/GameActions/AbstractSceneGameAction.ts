@@ -6,7 +6,7 @@ import { IObject } from "../../Interfaces/IObject"
 export abstract class AbstractSceneGameAction extends EmptyObject implements ISceneObjectAction {
     object!: ISceneObject
     add !: IObject
-    constructor(object: ISceneObject, add: IObject | undefined) {
+    constructor(object: ISceneObject) {
         super("")
         this.typeName = "AbstractSceneGameAction"
         this.types.push("ISceneObjectAction")
@@ -18,10 +18,9 @@ export abstract class AbstractSceneGameAction extends EmptyObject implements ISc
     getActionSceneObject(): ISceneObject {
         return this.object;
     }
-    getActionSceneAdditionalObject(): IObject | undefined {
-        return this.add;
-    }
 
+    abstract getActionSceneAdditionalObject(): IObject | undefined
+  
     abstract action(): void 
 
     isEmptyAction(): boolean {

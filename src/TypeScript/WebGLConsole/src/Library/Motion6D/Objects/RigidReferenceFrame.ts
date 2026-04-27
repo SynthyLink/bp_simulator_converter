@@ -32,6 +32,8 @@ export class RigidReferenceFrame extends CategoryObject implements IReferenceFra
         this.types.push("RigidReferenceFrame");
     }
 
+    
+
 
 
     /// </summary>
@@ -96,7 +98,9 @@ export class RigidReferenceFrame extends CategoryObject implements IReferenceFra
 
     postSetArrow(): void {
         this.setParameters(this.parameters)
-            this.createFrame();
+        this.createFrame();
+        this.relative.copyReferenceFrameFromPositionQuatetnion(this.relativePosition, this.relativeQuaternion)
+        this.own.copyReferenceFrameFromPositionQuatetnion(this.relativePosition, this.relativeQuaternion)
     }
 
 
@@ -197,8 +201,6 @@ export class RigidReferenceFrame extends CategoryObject implements IReferenceFra
         this.own = new ReferenceFrame();
     }
 
-
-
     getNodeValueT(): IPosition {
         return this;
     }
@@ -247,16 +249,15 @@ export class RigidReferenceFrame extends CategoryObject implements IReferenceFra
     updateReferenceFrame(): void {
         let own = this.getOwnFrame()
         let b = this.getBaseFrame();
-        if (b === null) {
+        if (b === undefined)
+        {
+            this.relative.copyReferenceFrameFrom(own)
         }
-        else {
+        else
+        {
             own.setReferenceFrame(b as ReferenceFrame, this.relative);
         }
     }
-
-
-
-
 
     protected getBaseFrame(): ReferenceFrame | undefined {
         if (this.parent === undefined) {

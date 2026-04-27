@@ -17,6 +17,10 @@ export class AbstractScene implements  IScene {
         game.addChildT(this)
     }
 
+    isRunning(): boolean {
+        return this.isStarted;
+    }
+
     getSceneObject(name: string): ISceneObject | undefined {
         if (this.objectMap.has(name)) return this.objectMap.get(name)
         return undefined
@@ -48,9 +52,6 @@ export class AbstractScene implements  IScene {
     protected children: ISceneObject[] = []
 
     protected objectMap: Map<string, ISceneObject> = new Map()
-
-    
-
 
     protected isStarted: boolean = false
 

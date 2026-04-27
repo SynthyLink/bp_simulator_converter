@@ -3,5 +3,5 @@ import { IObject } from "./IObject";
 import { IRealtimeCollection } from "./IRealtimeCollection";
 
 export interface IExternalUpdate {
-    getExtenalUpdate(obj : IObject | undefined, realime: IRealtimeCollection): IActionAddRemove 
+    getExtenalUpdate(obj: IObject | undefined, realime: IRealtimeCollection, action: IActionAddRemove): void 
 }

@@ -6,20 +6,44 @@ import type { IObject } from "../../../Interfaces/IObject";
 import type { IRealtimeCollection } from "../../../Interfaces/IRealtimeCollection";
 import type { IDataConsumer } from "../../../Measurements/Interfaces/IDataConsumer";
 import type { IFactory } from "../../../Interfaces/IFactory";
+import { IReferenceFrame } from "../../Interfaces/IReferenceFrame";
+import { ICategoryObject } from "../../../Interfaces/ICategoryObject";
 
 export class DataRuntimeConsumerMotion6DEvent extends DataRuntimeConsumerEvent {
 
-    protected motionPefromer: Motion6DPerformer = new Motion6DPerformer();
+    protected motionPeformer: Motion6DPerformer = new Motion6DPerformer();
     constructor(dataConsumer: IDataConsumer, factory: IFactory) {
         super(dataConsumer, factory);
+        if (this.motionPeformer === undefined) {
+            this.motionPeformer = new Motion6DPerformer()
+        }
+        
     }
 
-    getExtenalUpdate(obj: IObject | undefined, realime: IRealtimeCollection): IActionAddRemove {
-        var a = super.getExtenalUpdate(obj, realime)
-        this.motionPefromer = new Motion6DPerformer()
-        var act = this.motionPefromer.createUpdateFramesAction(this);
-        a.addAction(act);
-        return a;
+    protected prepare(dataConsumer: IDataConsumer) {
+        super.prepare(dataConsumer)
+        var ar = this.addRemove
+        for (var co of ar) {
+            var fr = this.performer.convertObject<IReferenceFrame, ICategoryObject>(co, "IReferenceFrame")
+            if (fr.length > 0) {
+                if (!this.categoryObjects.includes(co)) {
+                    this.categoryObjects.push(co)
+                }
+
+            }
+        }
+    }
+
+
+   
+
+    getExtenalUpdate(obj: IObject | undefined, realime: IRealtimeCollection, act : IActionAddRemove) : void {
+        super.getExtenalUpdate(obj, realime, act)
+        if (this.motionPeformer === undefined) {
+            this.motionPeformer = new Motion6DPerformer()
+        }
+        var a = this.motionPeformer.createUpdateFramesAction(this);
+        act.addAction(a);
     }
 
 }

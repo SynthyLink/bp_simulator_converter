@@ -36,7 +36,7 @@ export class DataConsumerVariableMeasurements extends DataConsumer implements
 
     protected aliasNames: string[] = [];
 
-    protected variable: any;
+    protected dataVariable: any;
 
     protected alias !: IAlias;
 

@@ -4,6 +4,7 @@ import { IAction } from "../../Interfaces/IAction";
 import { IObject } from "../../Interfaces/IObject";
 
 export abstract class AbstractGameAction implements IObject, IGameAction {
+
     abstract functT(s: ISceneObject): IAction | undefined
 
     getName(): string {

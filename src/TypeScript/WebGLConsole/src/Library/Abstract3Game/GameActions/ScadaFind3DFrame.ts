@@ -3,7 +3,7 @@ import { IPosition } from "../../Motion6D/Interfaces/IPosition";
 import { IReferenceFrame } from "../../Motion6D/Interfaces/IReferenceFrame";
 import { AbstractFindFrame } from "./AbstractFindFrame";
 
-export class ScadaFindFrame extends AbstractFindFrame {
+export class ScadaFind3dFrame extends AbstractFindFrame {
     constructor(name: string) {
         super(name)
         this.types.push("ScadaFindFrame")

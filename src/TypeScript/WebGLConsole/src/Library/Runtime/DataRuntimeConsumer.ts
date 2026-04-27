@@ -15,6 +15,7 @@ import type { ICategoryObject } from "../Interfaces/ICategoryObject";
 import type { IDataRuntime } from "../Interfaces/IDataRuntime";
 import type { IComponentCollection } from "../Interfaces/IComponentCollection";
 import type { IObject } from "../Interfaces/IObject";
+import { IAddRemove } from "../Interfaces/IAddRemove";
 
 export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, IObject
 {
@@ -38,7 +39,7 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
 
     protected name: string = "";
 
-
+    protected addRemove: ICategoryObject[] = []
 
     protected performer: Performer = new Performer();
 
@@ -71,6 +72,10 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
     }
 
     protected prepare(dataConsumer: IDataConsumer): void {
+        let arem = this.performer.convertObject<IAddRemove, IDataConsumer>(dataConsumer, "IAddRemove");
+        if (arem.length > 0) {
+            this.addRemove = arem[0].getAddRemoveObjects()
+        }
         let nm: IMeasurements[] = [];
         this.addDataConsumer(dataConsumer, nm);
         for (let i = nm.length - 1; i >= 0; i--) {

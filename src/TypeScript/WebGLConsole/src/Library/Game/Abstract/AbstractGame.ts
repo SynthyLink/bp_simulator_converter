@@ -16,6 +16,11 @@ export abstract class AbstractGame implements IGame
 
     abstract run(): void 
 
+    isRunning(): boolean {
+        return this.isStarted;
+    }
+
+
     addScene(name: string, scene: IScene): void {
         this.scenes.set(name, scene)
         this.objects.push(scene)
