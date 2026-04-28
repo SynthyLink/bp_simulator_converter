@@ -23,5 +23,4 @@ export class GameAcionConverterFactory extends AbstractGameAcionConverterFactory
         }
         return this.conv
     }
-
 }

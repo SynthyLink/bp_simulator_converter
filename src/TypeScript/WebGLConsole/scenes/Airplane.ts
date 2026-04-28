@@ -42,6 +42,9 @@ class Airplane_CategoryObject_1 extends BasicCamera
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
+		this.fieldOfView = 30
+		this.nearDistance = 1
+		this.farDistance = 200
 	}
 }
 

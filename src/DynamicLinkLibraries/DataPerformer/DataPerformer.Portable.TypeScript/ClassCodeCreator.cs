@@ -33,9 +33,13 @@ namespace DataPerformer.Portable.TypeScript
          };
             this.AddClassCodeCreator();
         }
+
         #endregion
 
-
+        protected string DoubleToString(double d)
+        {
+            return performer.DoubleToString(d);
+        }
 
         protected override List<string> CreateCode(string preffix, object obj, string volume)
         {

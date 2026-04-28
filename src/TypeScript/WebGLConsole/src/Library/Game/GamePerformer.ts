@@ -15,7 +15,7 @@ export class GamePerformer extends Performer {
         if (sh.length == 0) return undefined
         return sh[0].getConsumerScada()
     }
-
+/*
     public getGameAcionConverterFactory(factory: IFactory, object: IObject): IGameAcionConverter | undefined {
         var f = factory.getFactory<IGameAcionConverterFactory>("IGameAcionConverterFactory")
         if (f === undefined) return undefined
@@ -27,5 +27,5 @@ export class GamePerformer extends Performer {
         var o = this.convertObject<ISceneObject, IObject>(object, "ISceneObject")
         if (o.length > 0) return f.getGameAcionConverter(o[0].getScene().getGame())
         return undefined
-    }
+    }*/
 }

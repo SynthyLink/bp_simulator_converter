@@ -1,10 +1,10 @@
-import { CategoryObject } from "../../CategoryObject";
-import { Performer } from "../../Performer";
 import type { IPosition } from "../Interfaces/IPosition";
 import type { IReferenceFrame } from "../Interfaces/IReferenceFrame";
 import type { IDesktop } from "../../Interfaces/IDesktop";
 import type { INodeT } from "../../NamedTree/Interfaces/INodeT";
 import { ReferenceFrame } from "../ReferenceFrame";
+import { CategoryObject } from "../../CategoryObject";
+import { Performer } from "../../Performer";
 
 export class BasicPosition extends CategoryObject implements IPosition {
 

@@ -7,6 +7,7 @@ import { IActionAddRemove } from "../Interfaces/IActionAddRemove";
 import { IActionT } from "../Interfaces/IActionT";
 import { GamePerformer } from "./GamePerformer";
 import { IGameAcionConverter } from "./Interfaces/IGameAcionConverter";
+import { IGameAcionConverterFactory } from "./Interfaces/IGameAcionConverterFactory";
 
 export class SceneObjectAction implements IActionT<ISceneObject> {
 
@@ -14,24 +15,23 @@ export class SceneObjectAction implements IActionT<ISceneObject> {
 
     conv !: IGameAcionConverter;
 
-    actionT(t: ISceneObject): void {
+    current !: IActionT<ISceneObject>
+
+  
+    
+
+    actionT(t: ISceneObject): void
+    {
         var a = this.gameAcion.functT(t)
         if (this.conv != undefined) {
             if (a != undefined) {
                 var b = this.conv.functT(a)
-                this.action.addAction(a)
-                return
+                this.action.addAction(b)
+                return;
             }
+
         }
-        var c = this.performer.getGameAcionConverterFactory(t.getConsumerFactory(),t)
-        if (c != undefined) {
-            this.conv = c
-            if (a != undefined) {
-                var b = c.functT(a)
-                this.action.addAction(a)
-                return
-            }
-        }
+        var f = t.getConsumerFactory()
         this.action.addAction(a)
     }
 
@@ -45,6 +45,26 @@ export class SceneObjectAction implements IActionT<ISceneObject> {
         }
         else {
             throw new OwnNotImplemented()
+        }
+        
+        var conv = f.getFactory<IGameAcionConverter>("IGameAcionConverter")
+        if (conv != undefined) {
+            this.conv = conv
+        }
+        else
+        {
+            var fff = f.getFactory<IGameAcionConverterFactory>("IGameAcionConverterFactory")
+            var frc = fff as unknown as ISceneObject
+            if (frc != undefined) {
+                frc.setScene(scene)
+            }
+            if (fff != undefined) {
+                var cc = fff.getGameAcionConverter(scene.getGame())
+                if (cc != undefined) {
+                    this.conv = cc
+                    f.addFactory<IGameAcionConverter>(cc, "IGameAcionConverter")
+                }
+            }
         }
         this.action = scene.getInternalAction()
     }

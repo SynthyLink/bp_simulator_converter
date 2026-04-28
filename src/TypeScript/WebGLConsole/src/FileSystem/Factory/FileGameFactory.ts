@@ -1,7 +1,8 @@
 import { IMtlDetector } from "../../Library/Abstract3DConverters/Interfaces/IMtlDetector"
 import { MtlDetectorTextReader } from "../../Library/Abstract3DConverters/MeshCreators/MtlDetectorTextReader"
 import { BasicGameLoaderFactory } from "../../Library/Abstract3DGame/Factory/BacicGameLoaderFactory"
-import { GameAcionConverterFactory } from "../../Library/Game/GameActions/GameAcionConverterFactory"
+import { CameraActionConveretFactory } from "../../Library/Abstract3DGame/Factory/CameraActionConveretFactory"
+import { CameraMeshDrawing } from "../../Library/Abstract3DGame/Factory/CameraMeshDrawing"
 import { IGameAcionConverterFactory } from "../../Library/Game/Interfaces/IGameAcionConverterFactory"
 import { IGameActionFactory } from "../../Library/Game/Interfaces/IGameActionFactory"
 import { IGameLoaderFactory } from "../../Library/Game/Interfaces/IGameLoaderFactory"
@@ -29,8 +30,11 @@ export class FileGameFactory extends Motion6DFactory {
         this.addFactory<IMtlDetector>(mtl, "IMtlDetector")
         this.addFactory<IStringSplitter>(new LineEndSplitter(), "IStringSplitter")
         this.addFactory<IGameActionFactory>(gameActionFactory, "IGameActionFactory")
-        this.addFactory<IGameAcionConverterFactory>(new GameAcionConverterFactory(),
-            "IGameAcionConverterFactory")
+        var cc = new CameraMeshDrawing();
+        var ccc = new CameraActionConveretFactory("Camera", cc)
+        this.addFactory<IGameAcionConverterFactory>(ccc, "IGameAcionConverterFactory")
+    //    this.addFactory<IGameAcionConverterFactory>(new GameAcionConverterFactory(),
+    //        "IGameAcionConverterFactory")
 
     }
 }

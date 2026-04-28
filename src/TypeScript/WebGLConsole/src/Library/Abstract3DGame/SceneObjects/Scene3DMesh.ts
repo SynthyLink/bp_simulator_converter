@@ -13,6 +13,8 @@ import { ResourceItem } from "../../Web/ResourceItem";
 
 export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
     IURLResourceHolder, ISelfLoad {
+    setScene(scene: IScene): void {
+    }
     shape !: Basic3DShape
     meshes: IMesh[] = []
     isLoaded: boolean = false

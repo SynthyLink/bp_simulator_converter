@@ -67,7 +67,6 @@ namespace Motion6D.Portable.TypeScript
 
         List<string> CreateReferenceFrame(string preffix, object obj)
         {
-
             var l = new List<string>();
             var frame = obj as RigidReferenceFrame;
             var s = performer.ClassString(preffix, "RigidReferenceFrame");
@@ -84,6 +83,7 @@ namespace Motion6D.Portable.TypeScript
             l.Add("}");
             return l;
         }
+
 
         List<string> CreateReferenceFrameData(string preffix, object obj)
         {
@@ -137,9 +137,23 @@ namespace Motion6D.Portable.TypeScript
 
         List<string> CreateCamera(string preffix, object obj)
         {
-            return CreatePure(preffix, "BasicCamera");
+            var l = new List<string>();
+            var c = obj as Camera;
+            var fov = DoubleToString(c.FieldOfView);
+            var nd = DoubleToString(c.NearPlaneDistance);
+            var fd = DoubleToString(c.FarPlaneDistance);
+            var s = performer.ClassString(preffix, "BasicCamera");
+            l.Add(s);
+            l.Add("{");
+            performer.AddObjectConstructor(l);
+            l.Add("\t\tthis.fieldOfView = " + fov);
+            l.Add("\t\tthis.nearDistance = " + nd);
+            l.Add("\t\tthis.farDistance = " + fd);
+            l.Add("\t}");
+            l.Add("}");
+            return l;
         }
-
+ 
         List<string> CreateReferenceFrameArrow(string preffix, object obj)
         {
             return CreatePure(preffix, "ReferenceFrameArrow");

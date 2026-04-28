@@ -34,6 +34,9 @@ class Airplane_CategoryObject_0 extends SerializablePosition_1.SerializablePosit
 class Airplane_CategoryObject_1 extends BasicCamera_1.BasicCamera {
     constructor(desktop, name) {
         super(desktop, name);
+        this.fieldOfView = 30;
+        this.nearDistance = 1;
+        this.farDistance = 200;
     }
 }
 class Airplane_CategoryObject_2 extends TimerObject_1.TimerObject {

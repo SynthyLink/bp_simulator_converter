@@ -4,15 +4,18 @@ import { IAction } from "../../Interfaces/IAction"
 import { IActionAddRemove } from "../../Interfaces/IActionAddRemove"
 import { IFactory } from "../../Interfaces/IFactory"
 import { IObject } from "../../Interfaces/IObject"
-import { Performer } from "../../Performer"
 import { ActionArray } from "../../Utilities/Generic/ActionArray"
+import { TrivialGameAcionConverter } from "../GameActions/TrivialGameAcionConverter"
 import { GamePerformer } from "../GamePerformer"
+import { IGameAcionConverter } from "../Interfaces/IGameAcionConverter"
+import { IGameAcionConverterFactory } from "../Interfaces/IGameAcionConverterFactory"
 
 export abstract class AbstractGame implements IGame
 {
     constructor(name: string, factory: IFactory) {
         this.factory = factory
         this.name = name
+        
     }
 
     abstract run(): void 
@@ -55,6 +58,7 @@ export abstract class AbstractGame implements IGame
 
     protected intAct: IActionAddRemove = new ActionArray()
 
+ 
 
     getName(): string {
         return this.name;

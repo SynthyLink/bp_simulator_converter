@@ -1,21 +1,39 @@
-import { CategoryObject } from "../../CategoryObject";
-import { Performer } from "../../Performer";
 import { IDesktop } from "../../Interfaces/IDesktop";
-import { INodeT } from "../../NamedTree/Interfaces/INodeT";
-import { IPosition } from "../Interfaces/IPosition";
-import { IReferenceFrame } from "../Interfaces/IReferenceFrame";
 import { IVisibleConsumer } from "./Interfaces/IVisibleConsumer";
 import { BasicPosition } from "../Objects/BasicPosition";
 import { IVisible } from "./Interfaces/IVisible";
+import { ICamera } from "../Interfaces/ICamera";
+import { CameraType } from "../Interfaces/CameraType";
 
-export class BasicCamera extends BasicPosition implements IVisibleConsumer {
+export class BasicCamera extends BasicPosition implements IVisibleConsumer, ICamera {
 
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name);
         this.typeName = "BasicCamera";
         this.types.push("IVisibleConsumer");
+        this.types.push("ICamera");
         this.types.push("BasicCamera");
     }
+    getCameraType(): CameraType {
+        return CameraType.Projection
+    }
+    getFieldOfView(): number {
+        return this.fieldOfView;
+    }
+    getNearDistance(): number {
+        return this.nearDistance;
+    }
+    getFarDistance(): number {
+        return this.farDistance;
+    }
+
+    protected fieldOfView: number = 0;
+
+    protected nearDistance: number = 0;
+
+    protected farDistance: number = 0;
+
+
     addVisibleObject(object: IVisible): void {
         this.visible.push(object)
     }

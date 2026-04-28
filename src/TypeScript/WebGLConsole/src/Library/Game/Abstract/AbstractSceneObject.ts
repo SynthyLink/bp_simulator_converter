@@ -2,7 +2,7 @@ import { IScene } from "../../Game/Interfaces/IScene";
 import { ISceneObject } from "../../Game/Interfaces/ISceneObject";
 import { IFactory } from "../../Interfaces/IFactory";
 
-export class AbstractSceneObject implements ISceneObject {
+export abstract class AbstractSceneObject implements ISceneObject {
 
     constructor(scene: IScene, name: string) {
         this.scene = scene
@@ -10,6 +10,7 @@ export class AbstractSceneObject implements ISceneObject {
         this.name = name;
         
     }
+    abstract setScene(scene: IScene): void
 
     setConsumerFactory(factory: IFactory): void {
         this.factory = factory
