@@ -34,6 +34,13 @@ export class ActionArray implements IActionAddRemove, IObject {
             action.action();
     }
 
+    addActionArray(actions: IAction[]): void {
+        for (let action of actions) {
+            this.addAction(action)
+        }
+    }
+
+
     protected actions: IAction[] = [];
 
     protected typeName: string = "ActionArray";

@@ -1,9 +1,9 @@
-import { EmptyObject } from "../../EmptyObject"
 import { ISceneObject } from "../../Game/Interfaces/ISceneObject"
 import { ISceneObjectAction } from "../../Game/Interfaces/ISceneObjectAction"
 import { IObject } from "../../Interfaces/IObject"
+import { EmptyGameObject } from "../Abstract/EmptyGameObject"
 
-export abstract class AbstractSceneGameAction extends EmptyObject implements ISceneObjectAction {
+export abstract class AbstractSceneGameAction extends EmptyGameObject implements ISceneObjectAction {
     object!: ISceneObject
     add !: IObject
     constructor(object: ISceneObject) {

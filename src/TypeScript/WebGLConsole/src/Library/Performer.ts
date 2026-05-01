@@ -41,6 +41,7 @@ import type { IActionAddRemove } from "./Interfaces/IActionAddRemove";
 import type { IExternalAction } from "./Interfaces/IExternalAction";
 import type { IActionAddRemoveT } from "./Interfaces/IActionAddRemoveT";
 import { ResourceItem } from "./Web/ResourceItem";
+import { INodeT } from "./NamedTree/Interfaces/INodeT";
 
 
 export class Performer
@@ -71,6 +72,37 @@ export class Performer
     protected sorting: SortingAlgorithms = new SortingAlgorithms();
 
     protected mCompatator !: IComparator<IMeasurements>;
+
+    protected getActionArrayFromNode<T>(node: INodeT<T>, func: IFuncT<IAction, T>,
+        actions: IAction[]): void {
+        var act = func.functT(node.getNodeValueT())
+        var nodes = node.getNodesT()
+        if (nodes.length == 0) {
+            if (act != undefined) {
+                actions.push(act)
+                return;
+            }
+        }
+        for (var n of nodes) {
+            this.getActionArrayFromNode<T>(n, func, actions)
+        }
+        if (act != undefined) {
+            actions.push(act)
+            return;
+        }
+    }
+
+    public getActionFromNode<T>(node: INodeT<T>, func: IFuncT<IAction, T>): IAction | undefined {
+        let act: IAction[] = []
+        this.getActionArrayFromNode<T>(node, func, act);
+        if (act.length == 0) return undefined
+        if (act.length == 1) return act[0]
+        let action = new ActionArray()
+        action.addActionArray(act)
+        return action
+    }
+ 
+
 
    
     public addUnique<T>(list: T[], item: T): boolean {

@@ -1,13 +1,7 @@
 import { IScene } from "../Game/Interfaces/IScene"
-import { IFactory } from "../Interfaces/IFactory"
-import { IObject } from "../Interfaces/IObject"
 import { Performer } from "../Performer"
 import { IScadaConsumer } from "../Scada/Interfaces/IScadaConsumer"
 import { IScadaInterface } from "../Scada/Interfaces/IScadaInterface"
-import { IGame } from "./Interfaces/IGame"
-import { IGameAcionConverter } from "./Interfaces/IGameAcionConverter"
-import { IGameAcionConverterFactory } from "./Interfaces/IGameAcionConverterFactory"
-import { ISceneObject } from "./Interfaces/ISceneObject"
 
 export class GamePerformer extends Performer {
     public sceneToScada(scene: IScene): IScadaInterface | undefined {

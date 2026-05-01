@@ -1,8 +1,9 @@
-import { EmptyObject } from "../../EmptyObject";
 import { IAction } from "../../Interfaces/IAction";
-import { IGameAcionConverter } from "../Interfaces/IGameAcionConverter";
+import { EmptyGameObject } from "../Abstract/EmptyGameObject";
+import { IGameActionConverter } from "../Interfaces/IGameActionConverter";
 
-export abstract class AbstractGameAcionConverter extends EmptyObject implements IGameAcionConverter {
+export abstract class AbstractGameAcionConverter extends EmptyGameObject implements IGameActionConverter {
+
     abstract functT(s: IAction): IAction | undefined
 
     constructor() {

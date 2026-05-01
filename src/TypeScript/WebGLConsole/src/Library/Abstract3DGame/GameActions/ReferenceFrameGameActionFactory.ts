@@ -1,10 +1,10 @@
 import { AbstractGameActionFactory } from "../../Game/Abstract/AbstractGameActionFactory";
+import { ReferenceFrameGameAction } from "./ReferenceFrameGameAction";
 import { IGameAction } from "../../Game/Interfaces/IGameAction";
 import { IScene } from "../../Game/Interfaces/IScene";
 import { ISceneObject } from "../../Game/Interfaces/ISceneObject";
 import { IAction } from "../../Interfaces/IAction";
-import { IFindFrame } from "./Interfaces/IFindFrame";
-import { ReferenceFrameGameAction } from "./ReferenceFrameGameAction";
+import { IFindFrame } from "../Interfaces/IFindFrame";
 
 export class ReferenceFrameGameActionFactory extends AbstractGameActionFactory
     implements IGameAction {

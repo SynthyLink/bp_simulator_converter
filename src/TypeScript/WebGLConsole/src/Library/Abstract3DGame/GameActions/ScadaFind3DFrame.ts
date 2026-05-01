@@ -21,7 +21,6 @@ export class ScadaFind3dFrame extends AbstractFindFrame {
             return p.getParentFrame()
         }
         return undefined
-        
     }
 
 }

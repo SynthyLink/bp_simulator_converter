@@ -3,6 +3,9 @@ import { IEvent } from "../Interfaces/IEvent";
 import { IEventHandler } from "../Interfaces/IEventHandler";
 
 export class FictiveEventHandler implements IEventHandler {
+    addEventToHandler(event: IEvent): void {
+        throw new OwnNotImplemented();
+    }
     getChildernT(): IEvent[] {
         throw new OwnNotImplemented();
     }

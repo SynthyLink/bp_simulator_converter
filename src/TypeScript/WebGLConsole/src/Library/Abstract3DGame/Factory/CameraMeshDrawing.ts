@@ -1,14 +1,15 @@
 import { EmptyObject } from "../../EmptyObject";
-import { IGameAcionConverter } from "../../Game/Interfaces/IGameAcionConverter";
+import { IGameActionConverter } from "../../Game/Interfaces/IGameActionConverter";
 import { BasicCamera } from "../../Motion6D/Visible/BasicCamera";
-import { ICameraMeshDrawing } from "../GameActions/Interfaces/ICameraMeshDrawing";
+import { ICameraMeshDrawing } from "../Interfaces/ICameraMeshDrawing";
 
 export class CameraMeshDrawing extends EmptyObject implements ICameraMeshDrawing {
 
     constructor() {
         super("")
     }
-    functT(s: BasicCamera): IGameAcionConverter | undefined {
+
+    functT(s: BasicCamera): IGameActionConverter | undefined {
         return undefined
     }
 }

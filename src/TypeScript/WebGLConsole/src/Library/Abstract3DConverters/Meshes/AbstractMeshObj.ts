@@ -16,7 +16,32 @@ export class AbstractMeshObj extends AbstractMeshPolygon {
         super(parent, name, transformationMatrix, effect, polygons, vertices, textures, normals, tuple, creator);
         this.o3dCreator = creator;
         this.meshNumber = meshNumber
-        if (variant == 0) {
+        if (variant == 2) {
+            this.vertices = [];
+            this.textures = [];
+            this.normals = [];
+            this.intVertices = creator.getVertices();
+            this.intNormals = creator.getNormals();
+            this.intTextures = creator.getTextures();
+            this.polygons = []
+            let indexes = creator.getIndexes()[meshNumber]
+            for (var ii of indexes)
+            {
+             /*   for (var i of ii) {
+                    /*           this.vertices.push(this.intVertices[i[0]]);
+                               this.textures.push(this.intTextures[i[1]]);
+                               if (i.length > 2) {
+                                   if (i[2] >= 0) {
+                                       this.normals.push(this.intNormals[i[2]]);
+                                   }*
+                }*/
+            }
+            let np = 0;
+            var eff = tuple?.effect;
+            if (eff != undefined) this.effect = eff;
+        }
+    }
+     /*   if (variant == 0) {
             this.vertices = [];
             this.textures = [];
             this.normals = [];
@@ -69,7 +94,7 @@ export class AbstractMeshObj extends AbstractMeshPolygon {
                      {
                          Effect = el[number];
                      }
-                 }*/
+                 }
             this.intVertices = creator.getVertices()
             this.intTextures = creator.getTextures()
             this.intNormals = creator.getNormals()
@@ -93,7 +118,7 @@ export class AbstractMeshObj extends AbstractMeshPolygon {
                 }
             }
             if (this.iindexes != undefined) {
-            for (var tp of this.iindexes)
+ /*           for (var tp of this.iindexes)
             {
                 var iind = tp.indx
                 for (var ii of iind)
@@ -132,7 +157,7 @@ export class AbstractMeshObj extends AbstractMeshPolygon {
             }
 
         }
-    }
+    }*/
 
     createTriangles(): void {
     }

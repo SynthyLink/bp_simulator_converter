@@ -5,10 +5,7 @@ import { IActionAddRemove } from "../../Interfaces/IActionAddRemove"
 import { IFactory } from "../../Interfaces/IFactory"
 import { IObject } from "../../Interfaces/IObject"
 import { ActionArray } from "../../Utilities/Generic/ActionArray"
-import { TrivialGameAcionConverter } from "../GameActions/TrivialGameAcionConverter"
 import { GamePerformer } from "../GamePerformer"
-import { IGameAcionConverter } from "../Interfaces/IGameAcionConverter"
-import { IGameAcionConverterFactory } from "../Interfaces/IGameAcionConverterFactory"
 
 export abstract class AbstractGame implements IGame
 {

@@ -2,7 +2,10 @@ import { AirplaneScene } from "./scenes/AirplaneScene";
 import { FileGameFactory } from "./src/FileSystem/Factory/FileGameFactory";
 import { ReferenceFrameGameActionFactory } from "./src/Library/Abstract3DGame/GameActions/ReferenceFrameGameActionFactory";
 import { ScadaFind3dFrame } from "./src/Library/Abstract3DGame/GameActions/ScadaFind3DFrame";
-import { EngineGameImitation } from "./src/Library/Abstract3DGame/Imitation/EngineGameImitation";
+import { ScadaFindCamera } from "./src/Library/Abstract3DGame/GameActions/ScadaFindCamera";
+import { EngineGameImitationCameraAction } from "./src/Library/Abstract3DGame/Games/EngineGameImitationCameraAction";
+import { IFindCamera } from "./src/Library/Abstract3DGame/Interfaces/IFindCamera";
+import { IFindFrame } from "./src/Library/Abstract3DGame/Interfaces/IFindFrame";
 import { AbstractAction } from "./src/Library/Event/Objects/AbstractAction";
 import { AbstractActionT } from "./src/Library/Event/Objects/AbstractActionT";
 import { TimerObject } from "./src/Library/Event/Objects/TimerObject";
@@ -22,8 +25,11 @@ export class Actor {
         this.dir = this.dir.replaceAll("\\", "/");
         var find = new ScadaFind3dFrame("Camera");
         var ga = new ReferenceFrameGameActionFactory(find);
-        this.factory = new FileGameFactory(this.dir, ga);
-        var g = new EngineGameImitation("", this.factory);
+        var f = new FileGameFactory(this.dir, ga);
+        this.factory = f;
+        f.addFactory<IFindFrame>(new ScadaFind3dFrame("Camera"), "IFindFrame")
+        f.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")
+        var g = new EngineGameImitationCameraAction("", this.factory);
         g.getExternalAction().addAction(new A("game"));
         g.setImitation(10, 1, 0);
         this.game = g;

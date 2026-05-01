@@ -2,7 +2,7 @@ import { EmptyObject } from "../../EmptyObject";
 import { GamePerformer } from "../../Game/GamePerformer";
 import { IScene } from "../../Game/Interfaces/IScene";
 import { IReferenceFrame } from "../../Motion6D/Interfaces/IReferenceFrame";
-import { IFindFrame } from "./Interfaces/IFindFrame";
+import { IFindFrame } from "../Interfaces/IFindFrame";
 
 
 export abstract class AbstractFindFrame extends EmptyObject implements IFindFrame {

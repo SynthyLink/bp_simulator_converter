@@ -107,7 +107,7 @@ export class Obj3DCreator extends LinesMeshCreator {
     createMeshes(): void
     {
         if (this.effectList.length == 0) {
-            var m = new AbstractMeshObj(undefined, "", [], this.default, [], [], [], [], undefined, this, 1, 0)
+            var m = new AbstractMeshObj(undefined, "", [], this.default, [], [], [], [], undefined, this, 2, 0)
             this.meshes.push(m)
             return
         }

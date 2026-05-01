@@ -87,10 +87,14 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
 
     addChildT(child: IEvent): void
     {
-        var ev = this.performer.convertObject(child, "IEvent")
-        if (ev.length == 0) return
-        this.performer.addUnique(this.externalEvents, child)
     }
+
+    addEventToHandler(event: IEvent): void {
+        var ev = this.performer.convertObject(event, "IEvent")
+        if (ev.length == 0) return
+        this.performer.addUnique(this.externalEvents, event)
+    }
+
 
     removeChildT(child: IEvent): void {
         this.performer.remove(this.externalEvents, child)

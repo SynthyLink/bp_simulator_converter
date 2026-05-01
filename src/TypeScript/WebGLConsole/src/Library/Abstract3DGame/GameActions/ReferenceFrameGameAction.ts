@@ -38,7 +38,7 @@ export class ReferenceFrameGameAction extends AbstractGameAction
     }
 }
 
-class RotationAction extends AbstractSceneGameAction {
+class RotationAction extends AbstractSceneGameAction  {
     baseFrame !: ReferenceFrame
     target !: ReferenceFrame
     relative: ReferenceFrame = new ReferenceFrame()

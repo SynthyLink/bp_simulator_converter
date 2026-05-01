@@ -1,11 +1,10 @@
 import { AbstractAction } from "../../Event/Objects/AbstractAction";
 import { AbstractGameAcionConverter } from "../../Game/GameActions/AbstractGameAcionConverter";
-import { GamePerformer } from "../../Game/GamePerformer";
 import { IAction } from "../../Interfaces/IAction";
 import { IObject } from "../../Interfaces/IObject";
 import { ActionArray } from "../../Utilities/Generic/ActionArray";
 import { Game3DPerformer } from "../Game3DPerformer";
-import { IDrawMesh } from "../GameActions/Interfaces/IDrawMesh";
+import { IDrawMesh } from "../Interfaces/IDrawMesh";
 
 export class DrawMeshActionConverter extends AbstractGameAcionConverter  {
 

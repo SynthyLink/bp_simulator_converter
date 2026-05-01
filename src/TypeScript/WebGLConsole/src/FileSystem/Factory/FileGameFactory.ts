@@ -1,9 +1,7 @@
 import { IMtlDetector } from "../../Library/Abstract3DConverters/Interfaces/IMtlDetector"
 import { MtlDetectorTextReader } from "../../Library/Abstract3DConverters/MeshCreators/MtlDetectorTextReader"
 import { BasicGameLoaderFactory } from "../../Library/Abstract3DGame/Factory/BacicGameLoaderFactory"
-import { CameraActionConveretFactory } from "../../Library/Abstract3DGame/Factory/CameraActionConveretFactory"
 import { CameraMeshDrawing } from "../../Library/Abstract3DGame/Factory/CameraMeshDrawing"
-import { IGameAcionConverterFactory } from "../../Library/Game/Interfaces/IGameAcionConverterFactory"
 import { IGameActionFactory } from "../../Library/Game/Interfaces/IGameActionFactory"
 import { IGameLoaderFactory } from "../../Library/Game/Interfaces/IGameLoaderFactory"
 import { IPath } from "../../Library/IO/Interfaces/IPath"
@@ -14,7 +12,7 @@ import { FilePath } from "../IO/FilePath"
 import { RelativeFileSystemFactory } from "../IO/RelativeFileSystemFactory"
 
 
-export class FileGameFactory extends Motion6DFactory {
+export class FileGameFactory extends Motion6DFactory  {
     rpath: string = ""
 
     path: IPath = new FilePath()
@@ -22,6 +20,7 @@ export class FileGameFactory extends Motion6DFactory {
         super()
         this.typeName = "RelativeFileSystemDirectory"
         this.types.push("RelativeFileSystemDirectory")
+        this.types.push("IGameHolder")
         this.rpath = path;
         var f = new RelativeFileSystemFactory(path)
         f.setFactory(this)
@@ -31,10 +30,11 @@ export class FileGameFactory extends Motion6DFactory {
         this.addFactory<IStringSplitter>(new LineEndSplitter(), "IStringSplitter")
         this.addFactory<IGameActionFactory>(gameActionFactory, "IGameActionFactory")
         var cc = new CameraMeshDrawing();
-        var ccc = new CameraActionConveretFactory("Camera", cc)
-        this.addFactory<IGameAcionConverterFactory>(ccc, "IGameAcionConverterFactory")
-    //    this.addFactory<IGameAcionConverterFactory>(new GameAcionConverterFactory(),
-    //        "IGameAcionConverterFactory")
+        //var ccc = new CameraActionConveretFactory("Camera", cc)
+        //this.addFactory<IGameAcionConverterFactory>(ccc, "IGameAcionConverterFactory")
+        //    this.addFactory<IGameAcionConverterFactory>(new GameAcionConverterFactory(),
+        //        "IGameAcionConverterFactory")
 
     }
+
 }

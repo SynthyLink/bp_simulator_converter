@@ -6,14 +6,14 @@ import { ISceneObject } from "../Game/Interfaces/ISceneObject";
 import { IActionAddRemove } from "../Interfaces/IActionAddRemove";
 import { IActionT } from "../Interfaces/IActionT";
 import { GamePerformer } from "./GamePerformer";
-import { IGameAcionConverter } from "./Interfaces/IGameAcionConverter";
-import { IGameAcionConverterFactory } from "./Interfaces/IGameAcionConverterFactory";
+import { IGameActionConverter } from "./Interfaces/IGameActionConverter";
+import { IGameActionConverterFactory } from "./Interfaces/IGameActionConverterFactory";
 
 export class SceneObjectAction implements IActionT<ISceneObject> {
 
     performer: GamePerformer = new GamePerformer()
 
-    conv !: IGameAcionConverter;
+    conv !: IGameActionConverter;
 
     current !: IActionT<ISceneObject>
 
@@ -29,9 +29,7 @@ export class SceneObjectAction implements IActionT<ISceneObject> {
                 this.action.addAction(b)
                 return;
             }
-
         }
-        var f = t.getConsumerFactory()
         this.action.addAction(a)
     }
 
@@ -44,29 +42,21 @@ export class SceneObjectAction implements IActionT<ISceneObject> {
             this.gameAcion = a
         }
         else {
-            throw new OwnNotImplemented()
+            throw new OwnNotImplemented();
         }
-        
-        var conv = f.getFactory<IGameAcionConverter>("IGameAcionConverter")
+
+        var conv = f.getFactory<IGameActionConverter>("IGameActionConverter")
         if (conv != undefined) {
             this.conv = conv
         }
-        else
-        {
-            var fff = f.getFactory<IGameAcionConverterFactory>("IGameAcionConverterFactory")
-            var frc = fff as unknown as ISceneObject
-            if (frc != undefined) {
-                frc.setScene(scene)
-            }
-            if (fff != undefined) {
-                var cc = fff.getGameAcionConverter(scene.getGame())
-                if (cc != undefined) {
-                    this.conv = cc
-                    f.addFactory<IGameAcionConverter>(cc, "IGameAcionConverter")
-                }
+        var fc = f.getFactory<IGameActionConverterFactory>("IGameActionConverterFactory")
+        if (fc != undefined) {
+            var conv = fc.getGameActionConverter(scene)
+            if (conv != undefined) {
+                this.conv = conv
             }
         }
-        this.action = scene.getInternalAction()
+     this.action = scene.getInternalAction()
     }
 
     isEmptyActionT(): boolean {

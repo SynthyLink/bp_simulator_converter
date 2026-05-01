@@ -12,6 +12,7 @@ import { PurePathFactory } from "../../IO/PurePathFactory";
 import { Motion6DFactory } from "../../Motion6D/Motion6DFactory";
 import { IStringSplitter } from "../../Utilities/String/Interfaces/IStringSplitter";
 import { LineEndSplitter } from "../../Utilities/String/LineEndSplitter";
+import { IGame } from "../Interfaces/IGame";
 import { IGameLoaderFactory } from "../Interfaces/IGameLoaderFactory";
 
 export class FactoryGameImitation extends Motion6DFactory implements IIODirectoryFactory, IFileFactory, ITextReaderFactory {
@@ -61,7 +62,7 @@ class GameMtlDetector implements IMtlDetector, IObject {
     protected types: string[] = ["IObject", "IMtlDetector", "GameMtlDetector"];
 
     detectMtl(url: string, obj: any): string[] {
-        let game = obj as Game
+        let game = obj as unknown as IGame
         var str = game.loader.resources[url] as string
         return str.split('\n')
     }
