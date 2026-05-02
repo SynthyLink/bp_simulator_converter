@@ -16,6 +16,7 @@ export class Motion6DPerformer {
 
     constructor() {
     }
+
     static baseFrame: Motion6DFrame = new Motion6DFrame();
 
     public getBaseFrame(): ReferenceFrame {
@@ -107,6 +108,8 @@ export class Motion6DPerformer {
         frame.setReferenceFrame(baseFrame, relative);
         return frame;
     }
+
+    
    
 
     public getRelativeFrame(baseFrame: ReferenceFrame, targetFrame: ReferenceFrame, relative: ReferenceFrame): void

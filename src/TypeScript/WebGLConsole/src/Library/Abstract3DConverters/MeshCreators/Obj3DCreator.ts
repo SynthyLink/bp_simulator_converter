@@ -107,7 +107,7 @@ export class Obj3DCreator extends LinesMeshCreator {
     createMeshes(): void
     {
         if (this.effectList.length == 0) {
-            var m = new AbstractMeshObj(undefined, "", [], this.default, [], [], [], [], undefined, this, 2, 0)
+            var m = new AbstractMeshObj(undefined, "", [], this.default, [], [], [], [], undefined, this, 0, 0)
             this.meshes.push(m)
             return
         }
@@ -455,6 +455,7 @@ export class Obj3DCreator extends LinesMeshCreator {
 
     createUnNamedGeometry(): void {
         try {
+            let effect = this.getDefaultEffect();
             let indexes: ITextureIndex[] = []
             this.iindexes.push(indexes);
 
@@ -465,7 +466,10 @@ export class Obj3DCreator extends LinesMeshCreator {
                         if (mat == "_default_") {
                             continue;
                         }
-                        var effect = this.detect(mat);
+                        let eff = this.detect(mat);
+                        if (eff != undefined) {
+                            effect = eff
+                        }
                         if (!this.usedMaterials.includes(mat)) {
                             this.usedMaterials.push(mat);
                         }
@@ -474,7 +478,14 @@ export class Obj3DCreator extends LinesMeshCreator {
                         continue;
                     }
                 }
+                if (this.tuple === undefined) {
+                    this.tuple = {
+                        effect: effect, indx: []
+                    }
+                    indexes.push(this.tuple)
+                }
 
+  
                 if (line.indexOf("v ") == 0) {
                     var f = this.toRealArray(line.substring("v ".length).trim());
                     this.vertices.push(f);

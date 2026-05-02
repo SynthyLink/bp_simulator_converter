@@ -34,6 +34,43 @@ export class Game3DPerformer extends GamePerformer
     }
 
 
+    public setInvertedCoorfinates(x: number[], z: number[], frame: ReferenceFrame) {
+        let m = frame.getMatrix()
+        for (var i = 0; i < 3; i++) {
+            x[i] = 0
+            for (var j = 0; j < 3; j++) {
+                x[i] += m[j][i] * z[j]
+            }
+        }
+        let y = frame.getPosition();
+        for (var i = 0; i < 3; i++) {
+            x[i] -= y[i]
+        }
+    }
+
+
+    public setInvertedCoorfinates2(xx: number[][], zz: number[][], frame: ReferenceFrame) {
+        let m = frame.getMatrix()
+        let y = frame.getPosition();
+        for (var k = 0; k < xx.length; k++) {
+            let x = xx[k]
+            let z = zz[k]
+            for (var i = 0; i < 3; i++) {
+                x[i] = 0
+                for (var j = 0; j < 3; j++) {
+                    x[i] += m[j][i] * z[j]
+                }
+            }
+            for (var i = 0; i < 3; i++) {
+                x[i] -= y[i]
+            }
+        }
+
+    }
+
+
+
+
     public getOwnFrame(object: IObject): ReferenceFrame | undefined {
         var pos = this.convertObject<IPosition, IObject>(object, "IPosition")
         if (pos.length > 0) {

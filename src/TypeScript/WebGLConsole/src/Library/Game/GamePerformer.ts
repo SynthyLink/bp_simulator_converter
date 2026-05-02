@@ -9,17 +9,5 @@ export class GamePerformer extends Performer {
         if (sh.length == 0) return undefined
         return sh[0].getConsumerScada()
     }
-/*
-    public getGameAcionConverterFactory(factory: IFactory, object: IObject): IGameAcionConverter | undefined {
-        var f = factory.getFactory<IGameAcionConverterFactory>("IGameAcionConverterFactory")
-        if (f === undefined) return undefined
-        var game: IGame
-        var d = this.convertObject<IGame, IObject>(object, "IGame")
-        if (d.length > 0) return f.getGameAcionConverter(d[0])
-        var s = this.convertObject<IScene, IObject>(object, "IScene")
-        if (s.length > 0) return f.getGameAcionConverter(s[0].getGame())
-        var o = this.convertObject<ISceneObject, IObject>(object, "ISceneObject")
-        if (o.length > 0) return f.getGameAcionConverter(o[0].getScene().getGame())
-        return undefined
-    }*/
+
 }

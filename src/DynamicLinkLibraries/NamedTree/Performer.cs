@@ -51,13 +51,33 @@ namespace NamedTree
             l = l.ToList();
         }
 
+        /// <summary>
+        /// Recursive action
+        /// </summary>
+        /// <typeparam name="T">Type of node</typeparam>
+        /// <param name="node">The node</param>
+        /// <param name="action">The action</param>
+        public void Recursive<T>(INode<T> node, Action<T> action) where T : class
+        {
+            var children = node.Nodes;
+            foreach (var child in children)
+            {
+                Recursive(child, action);
+            }
+            action(node.Value);
+        }
 
+        /// <summary>
+        /// Whites a string
+        /// </summary>
+        /// <param name="s">The string</param>
+        /// <param name="w">Ther whiter</param>
+        /// <returns>True</returns>
         public bool Write(string s, TextWriter w)
         {
             w.WriteLine(s);
             return true;
         }
-
     
         /// <summary>
         /// Generates long string
@@ -146,9 +166,6 @@ namespace NamedTree
             return "\"" + o.ToString() + "\"";
         }
 
-
-
-
         /// <summary>
         /// Converts to string
         /// </summary>
@@ -205,7 +222,6 @@ namespace NamedTree
 
         }
 
-
         /// <summary>
         /// Sorts py name
         /// </summary>
@@ -235,17 +251,6 @@ namespace NamedTree
             return from n in GetAll(node)  select n.Value;
         }
 
-        public void Perform<T>(INode<T> node, Action<T> action) where T : class
-        {
-            var nodes = node.Nodes;
-            foreach (var child in nodes)
-            {
-                Perform(child, action);
-            }
-            action(node.Value);
-        }
-
-
         public IEnumerable<INode<T>> GetAll<T>(INode<T> node) where T : class
         {
             yield return node;
@@ -273,13 +278,10 @@ namespace NamedTree
             return IsParent(parent, p);
   
         }
-
         public bool IsLeaf<T>(INode<T> node) where T : class
         {
             return GetAttribute<LeafAttribute<T>>(node) != null;
         }
-
-
 
         public void AddChildrenNodes<T>(INode<T> parent, IEnumerable<INode<T>> children) where T : class
         {

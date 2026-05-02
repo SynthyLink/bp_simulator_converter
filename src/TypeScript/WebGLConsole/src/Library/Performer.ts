@@ -40,12 +40,18 @@ import type { IFuncT } from "./Interfaces/IFuncT";
 import type { IActionAddRemove } from "./Interfaces/IActionAddRemove";
 import type { IExternalAction } from "./Interfaces/IExternalAction";
 import type { IActionAddRemoveT } from "./Interfaces/IActionAddRemoveT";
-import { ResourceItem } from "./Web/ResourceItem";
-import { INodeT } from "./NamedTree/Interfaces/INodeT";
+import type { INodeT } from "./NamedTree/Interfaces/INodeT";
+
 
 
 export class Performer
 {
+
+    public  getObjectArrayFromNode<T, S>(node: INodeT<T>, func: IFuncT<S | undefined, T>): S[] {
+        let a = new ArrayOfObjects<T, S>(func, this)
+        return a.getArray(node)
+    }
+
     constructor() {
         this.mCompatator = new MeasurementsComparator(this);
     }
@@ -73,36 +79,40 @@ export class Performer
 
     protected mCompatator !: IComparator<IMeasurements>;
 
-    protected getActionArrayFromNode<T>(node: INodeT<T>, func: IFuncT<IAction, T>,
-        actions: IAction[]): void {
-        var act = func.functT(node.getNodeValueT())
-        var nodes = node.getNodesT()
-        if (nodes.length == 0) {
-            if (act != undefined) {
-                actions.push(act)
-                return;
-            }
-        }
-        for (var n of nodes) {
-            this.getActionArrayFromNode<T>(n, func, actions)
-        }
-        if (act != undefined) {
-            actions.push(act)
-            return;
+    public createMirrorArray<T>(x: T[], y: T[], d: T): void {
+        for (var i = 0; i < y.length; i++) {
+            x.push(d)
         }
     }
 
-    public getActionFromNode<T>(node: INodeT<T>, func: IFuncT<IAction, T>): IAction | undefined {
-        let act: IAction[] = []
-        this.getActionArrayFromNode<T>(node, func, act);
+    public createMirrorArray2<T>(x: T[][], y: T[][], d: T): void {
+        for (var i = 0; i < y.length; i++) {
+            let z: T[] = []
+            let xx = y[i]
+            this.createMirrorArray(z, xx, d)
+            x.push(z)
+        }
+    }
+
+    public getActionFromNode<T>(node: INodeT<T>, func: IFuncT<IAction | undefined, T>): IAction | undefined {
+        let act = this.getObjectArrayFromNode(node, func)
         if (act.length == 0) return undefined
         if (act.length == 1) return act[0]
         let action = new ActionArray()
         action.addActionArray(act)
         return action
     }
- 
 
+    //Recursive action
+    public recursiveNodeAction<T>(node: INodeT<T>, action: IActionT<T>): void
+    {
+        let children = node.getNodesT()
+        for (let child of children) {
+            this.recursiveNodeAction<T>(child, action)
+        }
+        let t = node.getNodeValueT()
+        action.actionT(t)
+    }
 
    
     public addUnique<T>(list: T[], item: T): boolean {
@@ -973,4 +983,29 @@ class ResourceSetter implements IActionT<IResourceCollection> {
     isEmptyActionT(): boolean { return false }
 
     collection: IResourceCollection
+}
+
+class ArrayOfObjects<T, S> implements IActionT<T> {
+    f !: IFuncT<S | undefined, T>
+    s: S[] = []
+
+    performer !: Performer
+    constructor(func: IFuncT<S | undefined, T>, performer: Performer) {
+        this.performer = performer;
+        this.f = func
+    }
+    actionT(t: T): void {
+        let s = this.f.functT(t)
+        if (s != undefined) {
+            this.s.push(s)
+        }
+    }
+    isEmptyActionT(): boolean {
+        return false
+    }
+
+    public getArray(node: INodeT<T>): S[] {
+        this.performer.recursiveNodeAction(node, this)
+        return this.s
+    }
 }
