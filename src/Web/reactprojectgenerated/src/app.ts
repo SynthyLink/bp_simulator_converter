@@ -137,6 +137,6 @@ class InputController implements IAction{
 
 }
 
-func()
+//func()
 
-//funcAirplane()
+funcAirplane()

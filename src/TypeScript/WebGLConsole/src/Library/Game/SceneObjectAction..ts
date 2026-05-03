@@ -16,8 +16,6 @@ export class SceneObjectAction implements IActionT<ISceneObject> {
     conv !: IGameActionConverter;
 
     current !: IActionT<ISceneObject>
-
-  
     
 
     actionT(t: ISceneObject): void

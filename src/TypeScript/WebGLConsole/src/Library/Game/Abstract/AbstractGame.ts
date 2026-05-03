@@ -14,6 +14,9 @@ export abstract class AbstractGame implements IGame
         this.name = name
         
     }
+    loadResources(load: boolean): Promise<boolean> | undefined {
+        return undefined
+    }
 
     abstract run(): void 
 
@@ -53,7 +56,9 @@ export abstract class AbstractGame implements IGame
 
     protected isLoaded: boolean = false
 
-    protected intAct: IActionAddRemove = new ActionArray()
+    protected intAct: IActionAddRemove = new ActionArray
+
+    protected areResourcesLoaded: boolean = false
 
  
 
@@ -123,7 +128,6 @@ export abstract class AbstractGame implements IGame
                 this.internalAction.addAction(s[1].getInternalAction())
             }
         }
-
         return true;
     }
   

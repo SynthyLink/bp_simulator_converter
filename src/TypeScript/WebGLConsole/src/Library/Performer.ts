@@ -41,6 +41,7 @@ import type { IActionAddRemove } from "./Interfaces/IActionAddRemove";
 import type { IExternalAction } from "./Interfaces/IExternalAction";
 import type { IActionAddRemoveT } from "./Interfaces/IActionAddRemoveT";
 import type { INodeT } from "./NamedTree/Interfaces/INodeT";
+import { IResourceItem } from "./Interfaces/IResourceItem";
 
 
 
@@ -973,16 +974,35 @@ class FactorySetter implements IActionT<IFactoryConsumer>
 class ResourceSetter implements IActionT<IResourceCollection> {
 
     constructor(t: IResourceCollection) {
-        this.collection = t;
+        this.collection = t
+        var c = t.getResources()
+        this.res = c;
+        for (let x of c) {
+            let url = x.url
+            if (this.map.has(url)) {
+                continue
+            }
+            this.map.set(url, x)
+        }
     }
 
     actionT(t: IResourceCollection): void {
-        var rr = t.getResources()
-        for (var s of rr) this.collection.addResource(s);
+        var rr = this.res
+        for (let x of rr) {
+            let url = x.url
+            if (this.map.has(url)) {
+                continue
+            }
+            this.map.set(url, x)
+        }
     }
     isEmptyActionT(): boolean { return false }
 
+    res: IResourceItem[] = []
+
     collection: IResourceCollection
+
+    map: Map<string, IResourceItem> = new Map()
 }
 
 class ArrayOfObjects<T, S> implements IActionT<T> {

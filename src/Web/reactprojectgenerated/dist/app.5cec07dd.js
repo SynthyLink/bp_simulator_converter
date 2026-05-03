@@ -22558,9 +22558,8 @@ var InputController = /*#__PURE__*/function () {
       }
     }
   }]);
-}();
-func();
-//funcAirplane()
+}(); //func()
+funcAirplane();
 },{"./scenes/SpaceTrippers":"src/scenes/SpaceTrippers.tsx","./common/game":"src/common/game.ts","./Library/Event/PerformerEvents":"src/Library/Event/PerformerEvents.ts","./Tests/Actor/ActorWebNEW":"src/Tests/Actor/ActorWebNEW.ts","./common/GameFactory":"src/common/GameFactory.ts","./scenes/AirplanePage":"src/scenes/AirplanePage.tsx","./common/camera-controllers/fly-camera-controller":"src/common/camera-controllers/fly-camera-controller.ts","./common/input":"src/common/input.ts"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -22586,7 +22585,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61401" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63269" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

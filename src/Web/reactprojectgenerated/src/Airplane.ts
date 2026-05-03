@@ -1,3 +1,20 @@
+import { BelongsToCollection } from "./Library/Arrows/BelognsToCollection";
+import { Desktop } from "./Library/Desktop";
+import { EventLink } from "./Library/Event/Objects/EventLink";
+import { TimerObject } from "./Library/Event/Objects/TimerObject";
+import { IDesktop } from "./Library/Interfaces/IDesktop";
+import { IPostSetArrow } from "./Library/Interfaces/IPostSetArrow";
+import { DataLink } from "./Library/Measurements/Arrows/DataLink";
+import { DataConsumer } from "./Library/Measurements/DataConsumer";
+import { VectorFormulaConsumer } from "./Library/Measurements/VectorFormulaConsumer";
+import { ReferenceFrameArrow } from "./Library/Motion6D/Arrows/ReferenceFrameArrow";
+import { RigidReferenceFrame } from "./Library/Motion6D/Objects/RigidReferenceFrame";
+import { SerializablePosition } from "./Library/Motion6D/Objects/SerializablePosition";
+import { Basic3DShape } from "./Library/Motion6D/Objects/Shapes/Basic3DShape";
+import { BasicCamera } from "./Library/Motion6D/Visible/BasicCamera";
+import { VisibleConsumerLink } from "./Library/Motion6D/Visible/VisibleConsumerLink";
+import { TimeSpan } from "./Library/Utilities/DateTime/TimeSpan";
+
 class Airplane_CategoryObject_0_Visible0 extends Basic3DShape
 {
 	constructor(desktop: IDesktop, name: string)
