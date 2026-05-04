@@ -204,6 +204,13 @@ namespace Motion6D.Portable.TypeScript
             return l;
         }
 
+        Dictionary<string, string> types = new Dictionary<string, string>()
+        {
+            { ".obj", "text"},
+              { ".mtl", "text"},
+                  { ".jpg", "image"}
+    };
+
         List<string> GetChild(string prefix, ICategoryObject obj)
         {
             var name = obj.Name; 
