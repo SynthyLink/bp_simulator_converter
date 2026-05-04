@@ -214,15 +214,19 @@ namespace Motion6D.Portable.TypeScript
             performer.AddObjectConstructor(l);
             if (obj is ISaveGrahicalData save)
             {
-                l.Add("\t\tlet map = this.getSaveGrahicalData()");
+                //l.Add("\t\tlet map = this.getSaveGrahicalData()");
                 var d = save.GetGraphicalData("");
                 foreach (var item in d)
                 {
                     var v = Path.Combine(name, item.Value);
+                    var ext = Path.GetExtension(v);
+                    var type = "\"" + types[ext] + "\"";
+                    var url = "\"" + v.Replace('\\', '/') + "\"";
                     var key = "\"" + item.Key + "\"";
-                    var val = "\"" + v + "\"";
-                    l.Add("\t\tmap.set(" + key + ", " + val.Replace('\\', '/') + ")");
-                } l.Add("\t\tthis.postCreateResources(map)");
+                    ext = "\"" + ext + "\"";
+                    var n = "\"" + item.Value + "\"";
+                    l.Add("\t\tthis.addResource(" + n + ", " + url + ", " + type + ", " + ext + ")");
+                }
             }
             l.Add("\t}");
             l.Add("}");

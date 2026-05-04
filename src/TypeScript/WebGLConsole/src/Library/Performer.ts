@@ -941,6 +941,7 @@ class LoadChild implements IActionT<IObject> {
 
     loader !: ILoader
 
+
     constructor(parent: IObject, loader : ILoader, load: boolean) {
         this.parent = parent;
         this.load = load;
@@ -950,6 +951,7 @@ class LoadChild implements IActionT<IObject> {
     actionT(t: IObject): void {
         this.loader.loadObject(this.parent, t)
     }
+
     isEmptyActionT(): boolean { return false }
 
 }

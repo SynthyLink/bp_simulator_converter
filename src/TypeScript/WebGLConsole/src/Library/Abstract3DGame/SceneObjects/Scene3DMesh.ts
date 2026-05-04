@@ -8,11 +8,11 @@ import { IFactory } from "../../Interfaces/IFactory";
 import { ISelfLoad } from "../../Interfaces/ISelfLoad";
 import { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
 import { Basic3DShape } from "../../Motion6D/Objects/Shapes/Basic3DShape";
-import { IURLResourceHolder } from "../../Web/Interface/IURLResourseHolder";
 import { ResourceItem } from "../../Web/ResourceItem";
 
 export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
-    IURLResourceHolder, ISelfLoad {
+    ISelfLoad
+{
     setScene(scene: IScene): void {
     }
     shape !: Basic3DShape
@@ -30,7 +30,6 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
         this.types.push("Scene3DMesh")
         this.typeName = "Scene3DMesh"
         this.shape = object
-        this.resources = object.getURLResources()
     }
 
     loadItself(load: boolean): boolean {
@@ -50,10 +49,7 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
     }
 
 
-    getURLResources(): ResourceItem[] {
-        return this.shape.getURLResources();
-    }
-
+ 
     addURLRource(name: string, url: string, type: string): void {
     }
 

@@ -1,1 +1,0 @@
-{"version":3,"file":"FictiveRelativeMeasurements.js","sourceRoot":"","sources":["FictiveRelativeMeasurements.ts"],"names":[],"mappings":";;;AACA,mFAAgF;AAEhF,MAAa,2BAA4B,SAAQ,2CAAoB;IAEjE,YAAY,OAAiB,EAAE,IAAY;QACvC,KAAK,CAAC,OAAO,EAAE,IAAI,CAAC,CAAC;QACrB,IAAI,CAAC,QAAQ,GAAG,6BAA6B,CAAC;QAC9C,IAAI,CAAC,KAAK,CAAC,IAAI,CAAC,6BAA6B,CAAC,CAAC;IACnD,CAAC;CACJ;AAPD,kEAOC"}

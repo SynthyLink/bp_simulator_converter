@@ -24,7 +24,6 @@ class Cessna_CategoryObject_0_Visible0 extends Basic3DShape
 		map.set("Cessna_208_Caravan.obj", "pLANE/Cessna_208_Caravan.obj")
 		map.set("master.mtl", "pLANE/master.mtl")
 		map.set("mat0_c.jpg", "pLANE/mat0_c.jpg")
-		this.postCreateResources(map)
 	}
 }
 
