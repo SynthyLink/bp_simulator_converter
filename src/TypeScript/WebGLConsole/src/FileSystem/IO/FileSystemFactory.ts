@@ -1,4 +1,3 @@
-import fs from 'fs';
 import { IFactory } from "../../Library/Interfaces/IFactory";
 import { IObject } from "../../Library/Interfaces/IObject";
 import { IFile } from "../../Library/IO/Interfaces/IFile";

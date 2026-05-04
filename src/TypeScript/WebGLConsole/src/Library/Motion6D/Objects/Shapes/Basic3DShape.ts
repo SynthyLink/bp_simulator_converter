@@ -1,11 +1,8 @@
 import { CategoryObject } from "../../../CategoryObject"
 import { IDesktop } from "../../../Interfaces/IDesktop"
-import { IResourceCollection } from "../../../Interfaces/IResouceCollection"
-import { IResourceItem } from "../../../Interfaces/IResourceItem"
+import { IResourceCollection } from "../../../Resources/Infrefaces/IResouceCollection"
+import { IResourceItem } from "../../../Resources/Infrefaces/IResourceItem"
 import { IStartPrimitive } from "../../../UI/IStartPrimitive"
-import { IURLResourceHolder } from "../../../Web/Interface/IURLResourseHolder"
-import { ResourceItem } from "../../../Web/ResourceItem"
-import { WebPerformer } from "../../../Web/WebPerformer"
 import { IPosition } from "../../Interfaces/IPosition"
 import { IVisible } from "../../Visible/Interfaces/IVisible"
 

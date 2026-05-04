@@ -32,7 +32,6 @@ import type { IObjectCollection } from "./Interfaces/IObjectCollection";
 import type { INamed } from "./NamedTree/Interfaces/INamed";
 import type { IFactory } from "./Interfaces/IFactory";
 import type { IFactoryConsumer } from "./Interfaces/IFactoryConsumer";
-import type { IResourceCollection } from "./Interfaces/IResouceCollection";
 import type { ISelfStart } from "./Interfaces/ISelfStart";
 import type { ILoader } from "./Interfaces/ILoader";
 import type { ISelfLoad } from "./Interfaces/ISelfLoad";
@@ -41,7 +40,8 @@ import type { IActionAddRemove } from "./Interfaces/IActionAddRemove";
 import type { IExternalAction } from "./Interfaces/IExternalAction";
 import type { IActionAddRemoveT } from "./Interfaces/IActionAddRemoveT";
 import type { INodeT } from "./NamedTree/Interfaces/INodeT";
-import { IResourceItem } from "./Interfaces/IResourceItem";
+import { IResourceItem } from "./Resources/Infrefaces/IResourceItem";
+import { IResourceCollection } from "./Resources/Infrefaces/IResouceCollection";
 
 
 

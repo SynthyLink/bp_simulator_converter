@@ -8,7 +8,6 @@ import { IFactory } from "../../Interfaces/IFactory";
 import { ISelfLoad } from "../../Interfaces/ISelfLoad";
 import { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
 import { Basic3DShape } from "../../Motion6D/Objects/Shapes/Basic3DShape";
-import { ResourceItem } from "../../Web/ResourceItem";
 
 export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
     ISelfLoad
@@ -18,7 +17,6 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
     shape !: Basic3DShape
     meshes: IMesh[] = []
     isLoaded: boolean = false
-    resources: ResourceItem[] = []
 
     textReader !: ITextReaderFactory;
 
@@ -59,9 +57,10 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
 
     loadMesh(load: boolean): void {
         if (!load) return
-        for (var r of this.resources) {
-            if (r.getType() == ".obj") {
-                var creator = new Obj3DCreator(r.getUrl(), "", this.scene, this.factory);
+        var res = this.shape.getResources()
+        for (var r of res) {
+            if (r.type == ".obj") {
+                var creator = new Obj3DCreator(r.url, "", this.scene, this.factory);
                 this.meshes = creator.getMeshCreatorMeshes()
                 break;
             }
