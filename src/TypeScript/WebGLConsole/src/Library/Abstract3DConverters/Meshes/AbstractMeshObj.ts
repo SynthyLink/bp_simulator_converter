@@ -9,7 +9,6 @@ import { AbstractMeshPolygon } from "./AbstractMeshPolygon";
 
 
 export class AbstractMeshObj extends AbstractMeshPolygon {
-
     constructor(parent: IMesh | undefined, name: string, transformationMatrix: number[], effect: EffectTexture, polygons: Polygon[],
         vertices: number[][], textures: number[][], normals: number[][], tuple: ITextureIndex | undefined,
         creator: Obj3DCreator, variant: number, meshNumber: number) {

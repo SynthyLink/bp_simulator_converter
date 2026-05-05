@@ -49,7 +49,7 @@ export class LinesTextReader implements IObject, ITextReader {
         return this.types.indexOf(type) >= 0;
     }
 
-    protected typeName: string = "CategoryArrow";
+    protected typeName: string = "LinesTextReader";
 
     protected types: string[] = ["IObject", "ITextReader", "LinesTextReader"];
 

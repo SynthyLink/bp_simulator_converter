@@ -5,24 +5,19 @@ import { OwnNotImplemented } from "../../ErrorHandler/OwnNotImplemented";
 import { AssociatedSceneObject } from "../../Game/Abstract/AssociatedSceneObject";
 import { IScene } from "../../Game/Interfaces/IScene";
 import { IFactory } from "../../Interfaces/IFactory";
+import { IFuncT } from "../../Interfaces/IFuncT";
 import { ISelfLoad } from "../../Interfaces/ISelfLoad";
+import { ITextReader } from "../../IO/Interfaces/ITextReader";
 import { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
 import { Basic3DShape } from "../../Motion6D/Objects/Shapes/Basic3DShape";
 import { IResourceCollection } from "../../Resources/Infrefaces/IResouceCollection";
+import { IResourceFunc } from "../../Resources/Infrefaces/IResourceFunc";
 import { IResourceItem } from "../../Resources/Infrefaces/IResourceItem";
+import { TextReaderFromResource } from "../../Resources/TextReaderFromResource";
 
 export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
     ISelfLoad, IResourceCollection
 {
-    setScene(scene: IScene): void {
-    }
-
-    shape !: Basic3DShape
-    meshes: IMesh[] = []
-    isLoaded: boolean = false
-
-    textReader !: ITextReaderFactory;
-
     constructor(scene: IScene, object: Basic3DShape) {
         super(scene, object)
         this.types.push("IMeshHolder")
@@ -31,7 +26,20 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
         this.types.push("IResourceCollection")
         this.typeName = "Scene3DMesh"
         this.shape = object
+        this.createTextReaderFactory()
     }
+
+    createTextReaderFactory(): void {
+        var f = this.factory.getFactory<IResourceFunc>("IResourceFunc")
+        if (f === undefined) return
+        this.func = new TextReaderFromResource(this.getResources(), f)
+    }
+
+    func !: IFuncT<ITextReader | undefined, string>
+    setScene(scene: IScene): void {
+
+    }
+
     getResources(): IResourceItem[] {
         return this.shape.getResources()
     }
@@ -51,8 +59,6 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
         }
         this.textReader = tr
     }
-
-
  
     addURLRource(name: string, url: string, type: string): void {
     }
@@ -66,10 +72,20 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
         var res = this.shape.getResources()
         for (var r of res) {
             if (r.ext == ".obj") {
-                var creator = new Obj3DCreator(r.url, "", this.scene, this.factory);
+                var creator = new Obj3DCreator(r.url, r.name,
+                    "", this.scene, this.factory, this.func);
                 this.meshes = creator.getMeshCreatorMeshes()
                 break;
             }
         }
     }
+
+ 
+    shape !: Basic3DShape
+    meshes: IMesh[] = []
+    isLoaded: boolean = false
+
+    textReader !: ITextReaderFactory;
+
+
 }

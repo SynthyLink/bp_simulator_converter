@@ -7,8 +7,9 @@ import { IResourceItem } from "../../Library/Resources/Infrefaces/IResourceItem"
 export abstract class FileResourceFunc extends EmptyObject implements IResourceFunc {
     constructor(directory: string) {
         super("")
-        this.types.push("FlileResourceFunc")
-        this.typeName = "FlileResourceFunc";
+        this.types.push("FileResourceFunc")
+        this.types.push("IResourceFunc")
+        this.typeName = "FileResourceFunc";
         this.directory = directory
     }
 
