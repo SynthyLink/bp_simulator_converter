@@ -7,7 +7,7 @@ export abstract class AbstractGameAcionConverter extends EmptyGameObject impleme
     abstract functT(s: IAction): IAction | undefined
 
     constructor() {
-        super("")
+        super("", undefined)
         this.typeName = "AbstractGameAcionConverter"
         this.types.push("IGameAcionConverter")
         this.types.push("AbstractGameAcionConverter")

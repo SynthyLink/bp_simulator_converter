@@ -1,5 +1,5 @@
 import { AirplaneScene } from "./scenes/AirplaneScene";
-import { FileGameFactory } from "./src/FileSystem/Factory/FileGameFactory";
+import { FileGameFactory } from "./src/Console/FileGameFactory";
 import { ReferenceFrameGameActionFactory } from "./src/Library/Abstract3DGame/GameActions/ReferenceFrameGameActionFactory";
 import { ScadaFind3dFrame } from "./src/Library/Abstract3DGame/GameActions/ScadaFind3DFrame";
 import { ScadaFindCamera } from "./src/Library/Abstract3DGame/GameActions/ScadaFindCamera";

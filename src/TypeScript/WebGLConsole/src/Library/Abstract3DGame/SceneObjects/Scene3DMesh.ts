@@ -8,12 +8,15 @@ import { IFactory } from "../../Interfaces/IFactory";
 import { ISelfLoad } from "../../Interfaces/ISelfLoad";
 import { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
 import { Basic3DShape } from "../../Motion6D/Objects/Shapes/Basic3DShape";
+import { IResourceCollection } from "../../Resources/Infrefaces/IResouceCollection";
+import { IResourceItem } from "../../Resources/Infrefaces/IResourceItem";
 
 export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
-    ISelfLoad
+    ISelfLoad, IResourceCollection
 {
     setScene(scene: IScene): void {
     }
+
     shape !: Basic3DShape
     meshes: IMesh[] = []
     isLoaded: boolean = false
@@ -23,11 +26,14 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
     constructor(scene: IScene, object: Basic3DShape) {
         super(scene, object)
         this.types.push("IMeshHolder")
-        this.types.push("IURLResourceHolder")
         this.types.push("ISelfLoad")
         this.types.push("Scene3DMesh")
+        this.types.push("IResourceCollection")
         this.typeName = "Scene3DMesh"
         this.shape = object
+    }
+    getResources(): IResourceItem[] {
+        return this.shape.getResources()
     }
 
     loadItself(load: boolean): boolean {
@@ -59,7 +65,7 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
         if (!load) return
         var res = this.shape.getResources()
         for (var r of res) {
-            if (r.type == ".obj") {
+            if (r.ext == ".obj") {
                 var creator = new Obj3DCreator(r.url, "", this.scene, this.factory);
                 this.meshes = creator.getMeshCreatorMeshes()
                 break;

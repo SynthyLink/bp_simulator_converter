@@ -46,7 +46,7 @@ export class DataRuntimeConsumerEvent extends DataRuntimeConsumerODE implements 
         super.prepare(dataConsumer)
         let x = this.performer.convertObject<IEventHandler, IDataConsumer>(dataConsumer, "IEventHandler")
         if (x.length == 0) return
-        let evetns = x[0].getChildernT();
+        let evetns = x[0].getEventHandlerEvents()
         for (let event of evetns) {
             let y = this.performer.convertObject<ICategoryObject, IEvent>(event, "ICategoryObject")
             if (y.length > 0) {

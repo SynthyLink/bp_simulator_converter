@@ -154,9 +154,6 @@ export class AbstractMeshObj extends AbstractMeshPolygon {
                                   var ik = (this.normals.length == 0) ? -1 : npp;
                                   var point = this.createPointTexture(this, npp, npp, ik);
                                   ++this.np;
-                                  if (point == null) {
-                                      throw new OwnError("AbstractMeshObj POINT ERROR", "", "");
-                                  }
                                   l.push(point);
                               }
                               var polygon = new Polygon(this, l, effect);

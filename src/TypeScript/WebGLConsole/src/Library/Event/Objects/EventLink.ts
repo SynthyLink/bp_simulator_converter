@@ -1,9 +1,7 @@
 import { CategoryArrow } from "../../CategoryArrow";
 import { OwnNotImplemented } from "../../ErrorHandler/OwnNotImplemented";
-import { FictiveEvent } from "../../Fiction/FictiveEvent";
-import { FictiveEventHandler } from "../../Fiction/FictiveEventHandler";
 import type { ICategoryObject } from "../../Interfaces/ICategoryObject";
-import { IDesktop } from "../../Interfaces/IDesktop";
+import type { IDesktop } from "../../Interfaces/IDesktop";
 import type { IEvent } from "../../Interfaces/IEvent";
 import type { IEventHandler } from "../../Interfaces/IEventHandler";
 
@@ -29,13 +27,13 @@ export class EventLink extends CategoryArrow
             throw new OwnNotImplemented();
         }
         this.event = e[0]
-        this.handler.addChildT(e[0])
+        this.handler.addEventToHandler(e[0])
         super.setTarget(target)
  }
 
-    event: IEvent = new FictiveEvent();
+    event !: IEvent
 
-    handler: IEventHandler = new FictiveEventHandler();
+    handler !: IEventHandler 
     /*
 
          public IEventHandler Source { get => source; }

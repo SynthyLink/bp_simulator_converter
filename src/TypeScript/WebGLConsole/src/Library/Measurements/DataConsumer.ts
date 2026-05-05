@@ -48,7 +48,7 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
  
     setExternalUpdate(action: IActionAddRemove | undefined): void {
         this.eventAction.clearActions();
-        if (action === null) {
+        if (action === undefined) {
             return;
         }
         this.eventAction.addAction(action)
@@ -81,7 +81,7 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         return ""
     }
 
-    getChildernT(): IEvent[] {
+    getEventHandlerEvents(): IEvent[] {
         return this.externalEvents
     }
 
@@ -95,10 +95,6 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         this.performer.addUnique(this.externalEvents, event)
     }
 
-
-    removeChildT(child: IEvent): void {
-        this.performer.remove(this.externalEvents, child)
-    }
 
     resetDataConsumer(): void {
     }

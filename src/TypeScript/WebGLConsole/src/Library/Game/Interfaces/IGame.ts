@@ -16,7 +16,6 @@ export interface IGame extends IObjectCollection,
 
     addScene(name: string, scene: IScene): void
 
-    loadResources(load: boolean): Promise<boolean> | undefined
 
     cycle(time: number): void
 

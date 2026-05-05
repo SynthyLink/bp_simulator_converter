@@ -772,6 +772,8 @@ export class Performer
         for (let o of obj) {
             var x = this.convertObject<T, IObject>(o, type)
             if (x.length > 0) action.actionT(x[0])
+            var y = this.convertObject<IObjectCollection, IObject>(o, "IObjectCollection")
+            if (y.length > 0) this.forEach(y[0], action, type)
         }
     }
 
@@ -964,7 +966,7 @@ class FactorySetter implements IActionT<IFactoryConsumer>
         this.factory = factory
   }
     actionT(t: IFactoryConsumer): void {
-      t.setConsumerFactory(this.factory)
+        t.setConsumerFactory(this.factory)
     }
 
     isEmptyActionT(): boolean { return false }
@@ -989,15 +991,18 @@ class ResourceSetter implements IActionT<IResourceCollection> {
     }
 
     actionT(t: IResourceCollection): void {
-        var rr = this.res
+        var rr = t.getResources()
+        var rs = this.collection.getResources()
         for (let x of rr) {
             let url = x.url
             if (this.map.has(url)) {
                 continue
             }
             this.map.set(url, x)
+            rs.push(x)
         }
     }
+
     isEmptyActionT(): boolean { return false }
 
     res: IResourceItem[] = []

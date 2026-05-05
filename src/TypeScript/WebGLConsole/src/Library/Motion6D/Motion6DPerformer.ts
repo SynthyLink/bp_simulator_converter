@@ -86,8 +86,7 @@ export class Motion6DPerformer {
         /// <returns>Parent frame</returns>
         static public ReferenceFrame GetParentFrame(this IPosition position)
         {
-            if (position.Parent == null)
-            {
+             {
                 return Motion6DFrame.Base;
             }
             return performer.GetParentOwn(position);

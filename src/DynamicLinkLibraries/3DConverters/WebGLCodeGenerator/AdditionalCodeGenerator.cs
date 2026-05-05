@@ -77,7 +77,7 @@ namespace WebGLCodeGenerator
                 if (s.Contains("LOAD"))
                 {
                     var ll = GetLoad();
-                    performer.Add(l, ll, 3);
+                 //   performer.Add(l, ll, 3);
                     continue;
                 }
                 l.Add(t);
