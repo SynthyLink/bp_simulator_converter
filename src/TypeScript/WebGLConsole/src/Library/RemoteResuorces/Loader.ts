@@ -41,6 +41,28 @@ export default class Loader {
         this.promises = [];
     }
 
+    public loadMap(resources: Map<string, ResourceInformation>): void {
+        for (let item of resources) {
+            let name = item[0]
+            let resource = item[1]
+            let promise = loadFunctions[resource.type](resource.url)
+                .then(
+                    data => {
+                        this.resources[name] = data;
+                        if (resource.success) resource.success(name, data, resource, this);
+                    }
+                ).catch(
+                    reason => {
+                        console.error(`Failed to load ${name}: ${reason}`);
+                        if (resource.failure) resource.failure(name, resource, this);
+                    }
+                )
+            this.promises.push(promise)
+        }
+    }
+
+
+
     public load(resources: { [name: string]: ResourceInformation }) {
         for (let name in resources) {
             let resource = resources[name];

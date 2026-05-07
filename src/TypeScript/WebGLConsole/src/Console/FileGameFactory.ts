@@ -9,7 +9,7 @@ import { IGameActionFactory } from "../Library/Game/Interfaces/IGameActionFactor
 import { IGameLoaderFactory } from "../Library/Game/Interfaces/IGameLoaderFactory"
 import { IPath } from "../Library/IO/Interfaces/IPath"
 import { Motion6DFactory } from "../Library/Motion6DFactory"
-import { IResourceFunc } from "../Library/Resources/Infrefaces/IResourceFunc"
+import { ResourceFuncFactory } from "../Library/Resources/ResourceFuncFactory"
 import { IStringSplitter } from "../Library/Utilities/String/Interfaces/IStringSplitter"
 import { LineEndSplitter } from "../Library/Utilities/String/LineEndSplitter"
 
@@ -30,7 +30,9 @@ export class FileGameFactory extends Motion6DFactory  {
         this.addFactory<IMtlDetector>(mtl, "IMtlDetector")
         this.addFactory<IStringSplitter>(new LineEndSplitter(), "IStringSplitter")
         this.addFactory<IGameActionFactory>(gameActionFactory, "IGameActionFactory")
-        this.addFactory<IResourceFunc>(new FileResourceFuncText(path), "IResourceFunc")
+        let rf = new ResourceFuncFactory("", undefined);
+        this.addFactory<ResourceFuncFactory>(rf, "IResourceFuncFactory")
+        rf.addFunction("text", new FileResourceFuncText(path))
         var cc = new CameraMeshDrawing();
         //var ccc = new CameraActionConveretFactory("Camera", cc)
         //this.addFactory<IGameAcionConverterFactory>(ccc, "IGameAcionConverterFactory")

@@ -1,1 +1,1 @@
-export interface IResourceItem { name : string, url : string, type : string, ext : string }
+export interface IResourceItem { name: string, url: string, type: 'text' | 'json' | 'image', ext : string }

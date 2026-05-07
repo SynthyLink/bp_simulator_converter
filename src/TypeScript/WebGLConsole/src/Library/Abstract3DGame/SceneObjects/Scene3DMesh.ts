@@ -12,6 +12,7 @@ import { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
 import { Basic3DShape } from "../../Motion6D/Objects/Shapes/Basic3DShape";
 import { IResourceCollection } from "../../Resources/Infrefaces/IResouceCollection";
 import { IResourceFunc } from "../../Resources/Infrefaces/IResourceFunc";
+import { IResourceFuncFactory } from "../../Resources/Infrefaces/IResourceFuncFactory";
 import { IResourceItem } from "../../Resources/Infrefaces/IResourceItem";
 import { TextReaderFromResource } from "../../Resources/TextReaderFromResource";
 
@@ -30,6 +31,15 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
     }
 
     createTextReaderFactory(): void {
+        var ff = this.factory.getFactory<IResourceFuncFactory>("IResourceFuncFactory")
+        if (ff != undefined) {
+            var fact = ff.functT("text")
+            if (fact != undefined) {
+                this.func = new TextReaderFromResource(this.getResources(), fact)
+                return
+            }
+        }
+
         var f = this.factory.getFactory<IResourceFunc>("IResourceFunc")
         if (f === undefined) return
         this.func = new TextReaderFromResource(this.getResources(), f)

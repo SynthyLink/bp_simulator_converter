@@ -38,7 +38,7 @@ export class Basic3DShape extends CategoryObject implements IVisible,
             }
         }
     }
-    protected addResource(name: string, url: string, type: string, ext: string): void {
+    protected addResource(name: string, url: string, type: 'text' | 'json' | 'image', ext: string): void {
         let r: IResourceItem = { name: name, type: type, ext: ext, url: url }
         this.resources.push(r)
     }

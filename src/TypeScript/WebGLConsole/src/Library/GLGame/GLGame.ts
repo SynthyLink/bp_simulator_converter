@@ -1,6 +1,8 @@
 import { EngineGameImitationCameraAction } from "../Abstract3DGame/Games/EngineGameImitationCameraAction";
 import { IFactory } from "../Interfaces/IFactory";
-import Loader from "../RemoteResuorces/Loader";
+import Loader, { ResourceInformation } from "../RemoteResuorces/Loader";
+import { IResourceFuncFactory } from "../Resources/Infrefaces/IResourceFuncFactory";
+import { GLGamePerformer } from "./GLGamePerformer";
 import { GameOptions } from "./interfaces/IGameOptions";
 import { IGLContext } from "./interfaces/IGLContext";
 
@@ -27,10 +29,60 @@ export class GLGame extends EngineGameImitationCameraAction implements IGLContex
             this.gl = gl
         }
         this.options = options
+        let loadFact = this.glGamePerformer.createFactory(this.loader, factory)
+        factory.addFactory<IResourceFuncFactory>(loadFact, "IResourceFuncFactory")
     }
     getGlContext(): WebGL2RenderingContext {
         return this.gl;
+        
     }
+
+    loadItself(load: boolean): boolean {
+        return true;
+    }
+
+    nextScene(): void {
+        super.loadItself(true)
+        super.startItself(true)
+
+    }
+
+    startItself(start: boolean): boolean {
+        if (this.isStarted == start) return false
+        this.loadProtected()
+        return true
+    }
+
+    loadProtected(): void {
+        this.nextSceneReady = false
+        this.resourcesI.clear()
+        this.performer.collectResources(this, this)
+        this.glGamePerformer.convertResourceInfo(this.resources, this.resourcesI)
+        this.loader.loadMap(this.resourcesI)
+        this.loader.wait().then(this.nextScene)
+        //this.loader.load()
+    }
+
+    run(): void {
+        this.loop(0)
+    }
+
+
+
+    protected loop(time: DOMHighResTimeStamp) {
+        if (!this.isStarted) return
+        requestAnimationFrame((time) => this.loop(time)); // Tell the browser to call this function again when the next frame needs to be drawn
+        if (this.options.maxfps) {
+            if (time - this.lastTick < (1000 / this.options.maxfps)) return;
+        }
+        if (!this.nextSceneReady) {
+            return
+        }
+        this.cycle(time)
+        this.lastTick = time
+    }
+
+
 
     protected loader: Loader = new Loader()
 
@@ -41,6 +93,10 @@ export class GLGame extends EngineGameImitationCameraAction implements IGLContex
     nextSceneReady: boolean = false; // Whether the files requested by the next scene has been loaded or not 
     lastTick: number = 0; // The time of the last frame in milliseconds (used to calculate delta time)
     options !: GameOptions;
+
+    resourcesI: Map<string, ResourceInformation> = new Map()
+
+    glGamePerformer: GLGamePerformer = new GLGamePerformer()
 
 
 }
