@@ -355,7 +355,6 @@ export class BasicCamera extends BasicPosition implements IVisibleConsumer, ICam
         /// <param name="p">The visible object for adding</param>
         public virtual void AddVisible(IPosition p)
         {
-            if (p == null)
             {
                 return;
             }
@@ -385,7 +384,6 @@ export class BasicCamera extends BasicPosition implements IVisibleConsumer, ICam
         /// <param name="p">The visible object for removing</param>
         public virtual void RemoveVisible(IPosition p)
         {
-            if (p == null)
             {
                 return;
             }

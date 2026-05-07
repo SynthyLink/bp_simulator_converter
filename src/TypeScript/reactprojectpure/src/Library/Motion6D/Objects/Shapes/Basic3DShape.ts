@@ -1,14 +1,13 @@
 import { CategoryObject } from "../../../CategoryObject"
 import { IDesktop } from "../../../Interfaces/IDesktop"
+import { IResourceCollection } from "../../../Resources/Infrefaces/IResouceCollection"
+import { IResourceItem } from "../../../Resources/Infrefaces/IResourceItem"
 import { IStartPrimitive } from "../../../UI/IStartPrimitive"
-import { IURLResourceHolder } from "../../../Web/Interface/IURLResourseHolder"
-import { ResourceItem } from "../../../Web/ResourceItem"
-import { WebPerformer } from "../../../Web/WebPerformer"
 import { IPosition } from "../../Interfaces/IPosition"
 import { IVisible } from "../../Visible/Interfaces/IVisible"
 
 export class Basic3DShape extends CategoryObject implements IVisible,
-    IStartPrimitive, IURLResourceHolder
+    IStartPrimitive, IResourceCollection
 {
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name)
@@ -19,15 +18,10 @@ export class Basic3DShape extends CategoryObject implements IVisible,
         this.types.push("ISaveGrahicalData")
         this.types.push("IStartPrimitive")
     }
-
-
-    getURLResources(): ResourceItem[] {
+    getResources(): IResourceItem[] {
         return this.resources
     }
-    addURLRource(name: string, url: string, type: string): void {
-        var r = new ResourceItem(name, url, type)
-        this.resources.push(r)
-    }
+
     startPrimitive(): void {
        
     }
@@ -44,20 +38,19 @@ export class Basic3DShape extends CategoryObject implements IVisible,
             }
         }
     }
-
-    wPerformer: WebPerformer = new WebPerformer();
-
-    protected postCreateResources(map: Map<string, string>): void {
-        this.resources = this.wPerformer.createResources(map)
+    protected addResource(name: string, url: string, type: 'text' | 'json' | 'image', ext: string): void {
+        let r: IResourceItem = { name: name, type: type, ext: ext, url: url }
+        this.resources.push(r)
     }
 
 
-    resources: ResourceItem[] = []
+    resources: IResourceItem[] = []
     grahicalData: Map<string, string> = new Map();
 
     position !: IPosition
 
-    size: number[][] = [[0, 0, 0], [0, 0, 0], [0, 0, 0], ]
+    size: number[][] = [[0, 0, 0], [0, 0, 0], [0, 0, 0],]
+
 
     getObjectPosition(): IPosition {
         return this.position

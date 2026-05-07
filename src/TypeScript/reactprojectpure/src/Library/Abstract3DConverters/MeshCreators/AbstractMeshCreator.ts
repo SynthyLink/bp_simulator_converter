@@ -1,54 +1,30 @@
 import type { IFactory } from "../../Interfaces/IFactory";
 import type { IFile } from "../../IO/Interfaces/IFile";
-import type { IFileFactory } from "../../IO/Interfaces/IFileFactory";
 import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
 import type { IMesh } from "../Interfaces/IMesh";
 import type { IMeshCreator } from "../Interfaces/IMeshCreator";
 import type { IPath } from "../../IO/Interfaces/IPath";
-import type { IPathFactory } from "../../IO/Interfaces/IPathFactory";
 import type { IIODirectory } from "../../IO/Interfaces/IIODirectory";
-import type { IIODirectoryFactory } from "../../IO/Interfaces/IIODirectoryFactory";
+import type { IImageDetector } from "../Interfaces/IImageDetector";
+import type { IStringSplitter } from "../../Utilities/String/Interfaces/IStringSplitter";
 import { Performer } from "../../Performer";
 import { Converter3DPefrormer } from "../Converter3DPerformer";
 import { EffectTexture } from "../EffectTexture";
-import { IImageDetector } from "../Interfaces/IImageDetector";
-import { IImageDetectorFactory } from "../Interfaces/IImageDetectorFactory";
-import { IStringSplitter } from "../../Utilities/String/Interfaces/IStringSplitter";
+import { FactoryObject } from "../../FactorytObject";
 
-export abstract class AbstractMeshCreator implements IMeshCreator {
 
-    constructor(url: string, directory: string, obj: any, factory: IFactory) {
+export abstract class AbstractMeshCreator extends FactoryObject implements IMeshCreator {
+
+    constructor(url: string, name: string, directory: string, obj: any, factory: IFactory) {
+        super(name, factory)
         this.url = url
         this.directory = directory
-        this.factory = factory
-        this.obj = obj;
-        let tc = factory.getFactory<IStringSplitter>("IStringSplitter")
-        let tf = factory.getFactory<ITextReaderFactory>("ITextReaderFactory")
-        if (tf != undefined) {
-            this.textReaderFactory = tf
-        }
-        if (tc != undefined) {
-            this.textConverter = tc
-        }
-        let tfile = factory.getFactory<IFileFactory>("IFileFactory")
-        if (tfile != undefined) {
-            this.fileio = tfile.createFile(obj)
-        }
-        let tpath = factory.getFactory<IPathFactory>("IPathFactory")
-        if (tpath != undefined) {
-            this.path = tpath.createPath(obj)
-        }
-        if (directory.length == 0) {
-            this.directory = this.path.getDirectoryName(url)
-        }
-        let td = factory.getFactory<IIODirectoryFactory>("IIODirectoryFactory")
-        if (td != undefined) {
-            this.directoryio = td.createDirectoryFactory(obj)
-        }
-        let idt = factory.getFactory<IImageDetectorFactory>("IImageDetectorFactory")
-        if (idt != undefined)
-            this.imageDetector = idt.getImageDetector(obj)
+        this.obj = obj
+        this.types.push("IMeshCreator")
+        this.types.push("AbstractMeshCreator")
+        this.typeName = "AbstractMeshCreator"
     }
+
 
     getMeshCreatorDirectory(): string {
         return this.directory

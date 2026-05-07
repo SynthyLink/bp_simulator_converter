@@ -1,5 +1,6 @@
 import { IScene } from "../../Game/Interfaces/IScene"
 import { IAssociatedObject } from "../../Interfaces/IAssociatedObject"
+import { IFactory } from "../../Interfaces/IFactory"
 import { IObject } from "../../Interfaces/IObject"
 import { AbstractSceneObject } from "./AbstractSceneObject"
 
@@ -12,12 +13,16 @@ export abstract class AssociatedSceneObject extends AbstractSceneObject implemen
         this.types.push("AbstractSceneObject")
         this.typeName = "AbstractSceneObject"
         this.object = object
- }
+        this.factory = scene.getConsumerFactory()
+    }
 
     getAssociatedObject(): IObject {
         return this.object
     }
     setAssociatedObject(obj: IObject): void {
     }
+
+    protected factory !: IFactory
+
 
 }

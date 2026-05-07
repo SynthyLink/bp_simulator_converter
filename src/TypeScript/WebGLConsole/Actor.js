@@ -18,7 +18,7 @@ class Actor {
         var ga = new ReferenceFrameGameActionFactory_1.ReferenceFrameGameActionFactory(find);
         var f = new FileGameFactory_1.FileGameFactory(this.dir, ga);
         this.factory = f;
-        f.addFactory(new ScadaFind3DFrame_1.ScadaFind3dFrame("Camera"), "IFindFrame");
+        f.addFactory(find, "IFindFrame");
         f.addFactory(new ScadaFindCamera_1.ScadaFindCamera("Camera"), "IFindCamera");
         var g = new EngineGameImitationCameraAction_1.EngineGameImitationCameraAction("", this.factory);
         g.getExternalAction().addAction(new A("game"));

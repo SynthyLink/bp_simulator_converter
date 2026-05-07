@@ -11,14 +11,18 @@
   <ItemGroup>
     <None Remove="src\Abstract3DConverters\**" />
     <None Remove="src\common\Factory\**" />
+    <None Remove="src\FileSystemWeb\**" />
     <None Remove="src\Library - Copy\**" />
     <TypeScriptConfiguration Remove="src\Abstract3DConverters\**" />
     <TypeScriptConfiguration Remove="src\common\Factory\**" />
+    <TypeScriptConfiguration Remove="src\FileSystemWeb\**" />
     <TypeScriptConfiguration Remove="src\Library - Copy\**" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\Library\Abstract3DConverters\Meshes\" />
     <Folder Include="src\Library\Runtime\Interfaces\" />
-    <Folder Include="src\FileSystemWeb\" />
+    <Folder Include="src\scenes\" />
+    <Folder Include="src\Tests\Wrappers\" />
+    <Folder Include="src\Web\" />
   </ItemGroup>
 </Project>

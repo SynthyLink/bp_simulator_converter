@@ -12,7 +12,7 @@ export  class ScadaFindCamera extends EmptyGameObject implements IFindCamera {
         return undefined
     }
     constructor(name: string) {
-        super(name)
+        super(name, undefined)
         this.types.push("IFindCamera")
         this.types.push("ScadaFindCamera")
         this.typeName = "ScadaFindCamera"

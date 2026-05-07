@@ -5,6 +5,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\Library\Runtime\Interfaces\" />
+    <Folder Include="src\scenes\" />
     <Folder Include="static\models\" />
   </ItemGroup>
 </Project>

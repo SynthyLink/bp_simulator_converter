@@ -4,17 +4,32 @@ import { IAction } from "../../Interfaces/IAction"
 import { IActionAddRemove } from "../../Interfaces/IActionAddRemove"
 import { IFactory } from "../../Interfaces/IFactory"
 import { IObject } from "../../Interfaces/IObject"
+import { IResourceCollection } from "../../Resources/Infrefaces/IResouceCollection"
+import { IResourceItem } from "../../Resources/Infrefaces/IResourceItem"
 import { ActionArray } from "../../Utilities/Generic/ActionArray"
 import { GamePerformer } from "../GamePerformer"
+import { EmptyGameObject } from "./EmptyGameObject"
 
-export abstract class AbstractGame implements IGame
-{
-    constructor(name: string, factory: IFactory) {
-        this.factory = factory
-        this.name = name
-        
+export abstract class AbstractGame extends EmptyGameObject implements IGame, IResourceCollection {
+
+    constructor(name: string, factory: IFactory | undefined) {
+        super(name, factory)
+        this.types.push("IGame")
+        this.types.push("IObjectCollection")
+        this.types.push("ISelfStart")
+        this.types.push("IAddAction")
+        this.types.push("ISelfLoad")
+        this.types.push("IExternalAction")
+        this.types.push("IResourceCollection")
+        this.types.push("AbstractGame")
+        this.typeName = "AbstractGame"
     }
 
+    getResources(): IResourceItem[] {
+        return this.resources
+    }
+
+  
     abstract run(): void 
 
     isRunning(): boolean {
@@ -26,34 +41,6 @@ export abstract class AbstractGame implements IGame
         this.scenes.set(name, scene)
         this.objects.push(scene)
     }
-    protected performer : GamePerformer = new GamePerformer()
-
-    protected typeName: string = "AbstractGame";
-
-    protected types: string[] = ["IObject", "IGame", "IChildrenT<IScene>", "ISelfLoad",
-        "IAddAction", "SelfStart", "IObjectCollection", "IExternalAction",
-        "IFactoryConsumer", "AbstractGame"];
-
-    protected name: string = "";
-
-    protected scenes: Map<string, IScene> = new Map()
-
-    protected children: IScene[] = []
-
-
-    protected objects: IObject[] = []
-
-    protected factory !: IFactory
-   
-    protected externalAction: IActionAddRemove = new ActionArray()
-
-    protected internalAction: IActionAddRemove = new ActionArray()
-   
-    protected isStarted: boolean = false
-
-    protected isLoaded: boolean = false
-
-    protected intAct: IActionAddRemove = new ActionArray()
 
  
 
@@ -90,11 +77,8 @@ export abstract class AbstractGame implements IGame
         return this.externalAction
     }
     setConsumerFactory(factory: IFactory): void {
-        this.factory = factory;
+        super.setConsumerFactory(factory)
         this.performer.setFactoryToObjectCollection(this, factory)
-    }
-    getConsumerFactory(): IFactory {
-        return this.factory
     }
 
     startItself(start: boolean): boolean {
@@ -119,11 +103,11 @@ export abstract class AbstractGame implements IGame
         this.performer.loadCollecion(load, this)
         this.internalAction.clearActions()
         if (load) {
-            for (var s of this.scenes) {
+            this.performer.collectResources(this, this)
+           for (var s of this.scenes) {
                 this.internalAction.addAction(s[1].getInternalAction())
             }
         }
-
         return true;
     }
   
@@ -142,5 +126,38 @@ export abstract class AbstractGame implements IGame
     getChildernT(): IScene[] {
         return this.children;
     }
+
+    protected performer: GamePerformer = new GamePerformer()
+
+    protected typeName: string = "AbstractGame";
+
+    protected types: string[] = ["IObject", "IGame", "IChildrenT<IScene>", "ISelfLoad",
+        "IAddAction", "SelfStart", "IObjectCollection", "IExternalAction",
+        "IFactoryConsumer", "AbstractGame"];
+
+    protected name: string = "";
+
+    protected scenes: Map<string, IScene> = new Map()
+
+    protected children: IScene[] = []
+
+
+    protected objects: IObject[] = []
+
+
+    protected externalAction: IActionAddRemove = new ActionArray()
+
+    protected internalAction: IActionAddRemove = new ActionArray()
+
+    protected isStarted: boolean = false
+
+    protected isLoaded: boolean = false
+
+    protected intAct: IActionAddRemove = new ActionArray
+
+    protected areResourcesLoaded: boolean = false
+
+    protected resources: IResourceItem[] = []
+
  
 }

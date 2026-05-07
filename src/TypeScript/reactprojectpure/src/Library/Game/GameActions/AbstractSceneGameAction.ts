@@ -7,7 +7,7 @@ export abstract class AbstractSceneGameAction extends EmptyGameObject implements
     object!: ISceneObject
     add !: IObject
     constructor(object: ISceneObject) {
-        super("")
+        super("", undefined)
         this.typeName = "AbstractSceneGameAction"
         this.types.push("ISceneObjectAction")
         this.types.push("IAction")

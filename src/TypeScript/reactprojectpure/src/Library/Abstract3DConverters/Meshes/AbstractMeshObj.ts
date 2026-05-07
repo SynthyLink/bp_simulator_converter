@@ -9,7 +9,6 @@ import { AbstractMeshPolygon } from "./AbstractMeshPolygon";
 
 
 export class AbstractMeshObj extends AbstractMeshPolygon {
-
     constructor(parent: IMesh | undefined, name: string, transformationMatrix: number[], effect: EffectTexture, polygons: Polygon[],
         vertices: number[][], textures: number[][], normals: number[][], tuple: ITextureIndex | undefined,
         creator: Obj3DCreator, variant: number, meshNumber: number) {
@@ -154,9 +153,6 @@ export class AbstractMeshObj extends AbstractMeshPolygon {
                                   var ik = (this.normals.length == 0) ? -1 : npp;
                                   var point = this.createPointTexture(this, npp, npp, ik);
                                   ++this.np;
-                                  if (point == null) {
-                                      throw new OwnError("AbstractMeshObj POINT ERROR", "", "");
-                                  }
                                   l.push(point);
                               }
                               var polygon = new Polygon(this, l, effect);

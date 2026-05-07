@@ -1,9 +1,9 @@
-import { OwnNotImplemented } from "../../ErrorHandler/OwnNotImplemented";
-import { IActionT } from "../../Interfaces/IActionT";
-import { IPlayEngine } from "../../Interfaces/IPlayEngine";
-import { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
-import { IMeasurement } from "../../Measurements/Interfaces/IMeasurement";
+import type { IActionT } from "../../Interfaces/IActionT";
+import type { IPlayEngine } from "../../Interfaces/IPlayEngine";
+import type { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
+import type { IMeasurement } from "../../Measurements/Interfaces/IMeasurement";
 import { PerformerEvents } from "../PerformerEvents";
+import { OwnNotImplemented } from "../../ErrorHandler/OwnNotImplemented";
 
 export class EngineTimerProvider implements IMeasurement, ITimeMeasurementProvider,
     IActionT<number> {

@@ -17,7 +17,7 @@ export class StopWatch {
      * start a task
      */
     start(taskName = ''): void {
-        this.currentTaskName !== null && this.throwError('Can\'t start StopWatch: it\'s already running');
+        this.currentTaskName !== undefined && this.throwError('Can\'t start StopWatch: it\'s already running');
         this.currentTaskName = taskName;
         this.startTimeMillis = Date.now();
     }
@@ -26,7 +26,7 @@ export class StopWatch {
      * stop the current task
      */
     stop(): void {
-        this.currentTaskName === null && this.throwError('Can\'t stop StopWatch: it\'s not running');
+        this.currentTaskName === undefined && this.throwError('Can\'t stop StopWatch: it\'s not running');
         const lastTime: number = Date.now() - this.startTimeMillis;
         this.totalTimeMillis += lastTime;
         const lastTaskInfo = new TaskInfo(this.currentTaskName!, lastTime);
@@ -87,7 +87,7 @@ export class StopWatch {
      * Return whether the stop watch is currently running
      */
     isRunning(): boolean {
-        return this.currentTaskName !== null;
+        return this.currentTaskName !== undefined;
     }
 
     /**

@@ -6,7 +6,7 @@
   "scripts": {
     "watch": "parcel index.html --port 8080",
     "build": "parcel build index.html --no-source-maps --no-content-hash --public-url ."
-  },
+  },    
   "start": "node src/app.ts",
   "staticFiles": {
     "staticPath": "static",

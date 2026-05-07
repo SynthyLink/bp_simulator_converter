@@ -27,7 +27,7 @@ export class Actor {
         var ga = new ReferenceFrameGameActionFactory(find);
         var f = new FileGameFactory(this.dir, ga);
         this.factory = f;
-        f.addFactory<IFindFrame>(new ScadaFind3dFrame("Camera"), "IFindFrame")
+        f.addFactory<IFindFrame>(find, "IFindFrame")
         f.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")
         var g = new EngineGameImitationCameraAction("", this.factory);
         g.getExternalAction().addAction(new A("game"));

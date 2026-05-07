@@ -1,0 +1,33 @@
+{
+  "name": "SpaceTrippers0",
+  "version": "1.0.0",
+  "description": "A WebGl 3D interactive game",
+  "main": "index.html",
+  "scripts": {
+    "watch": "parcel index.html --port 8080",
+    "build": "parcel build index.html"
+  },
+  "start": "node src/app.ts",
+  "staticFiles": {
+    "staticPath": "static",
+    "watcherGlob": "**"
+  },
+  "author": "Ahmed Ashraf",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/gl-matrix": "3.2.0",
+    "@types/webgl2": "0.0.12",
+    "cssnano": "^8.0.0",
+    "parcel": "^2.16.4",
+    "parcel-plugin-static-files-copy": "^1.2.4",
+    "postcss": "^8.5.14",
+    "sass": "^1.99.0",
+    "typescript": "6.0.3"
+  },
+  "dependencies": {
+    "gl-matrix": "3.4.4",
+    "ts-key-enum": "3.0.13",
+    "tsx-create-element": "2.3.0",
+    "webgl-obj-loader": "2.0.8"
+  }
+}

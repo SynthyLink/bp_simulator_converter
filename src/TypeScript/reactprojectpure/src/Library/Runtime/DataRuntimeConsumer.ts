@@ -16,6 +16,7 @@ import type { IDataRuntime } from "../Interfaces/IDataRuntime";
 import type { IComponentCollection } from "../Interfaces/IComponentCollection";
 import type { IObject } from "../Interfaces/IObject";
 import { IAddRemove } from "../Interfaces/IAddRemove";
+import { IEventHandler } from "../Interfaces/IEventHandler";
 
 export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, IObject
 {
@@ -94,6 +95,20 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
         }
 
         this.measurements = this.performer.sortMeasurements(this.measurements);
+        var ehc = dataConsumer as unknown as IEventHandler
+        if (ehc != undefined) {
+            var evs = ehc.getEventHandlerEvents()
+            for (let evt of evs) {
+                var cov = evt as unknown as ICategoryObject
+                if (cov != undefined) {
+                    if (!this.categoryObjects.includes(cov)) {
+                        this.categoryObjects.push(cov)
+                    }
+                }
+
+
+            }
+        }
         this.performer.addUnique(this.categoryObjects, dataConsumer as unknown as ICategoryObject)
 
     }

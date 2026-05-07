@@ -4,6 +4,8 @@ import type { IEffectDitionary } from "../Interfaces/IEffectDitionary";
 import type { IMaterialCreator } from "../Interfaces/IMaterialCreator";
 import type { ITextureIndex } from "../Interfaces/ITextureIndex";
 import type { IMesh } from "../Interfaces/IMesh";
+import type { IFuncT } from "../../Interfaces/IFuncT";
+import type { ITextReader } from "../../IO/Interfaces/ITextReader";
 import { Converter3DPefrormer } from "../Converter3DPerformer";
 import { Performer } from "../../Performer";
 import { ColorTexture } from "../ColorTexture";
@@ -19,47 +21,9 @@ import { SpecularMaterial } from "../Materials/SpecularMaterial";
 import { AbstractMeshObj } from "../Meshes/AbstractMeshObj";
 
 export class Obj3DCreator extends LinesMeshCreator {
-    effectsPrivate !: Map<string, EffectTexture>
-    ka !: ImageTexture
-    kd !: ImageTexture
-    ks !: ImageTexture
-
-    ambient !: ColorTexture
-    emissive !: ColorTexture
-    specular !: ColorTexture
-
-    ns: number = 0
-    ni: number = 0
-    d: number = 0
-    illum: number = 0
-
-    effect !: EffectTexture
-
-    default !: EffectTexture
-
-    nm: number = 0
-
-    usedMaterials !: string[]
-
-    objs: string = "# object "
-
-    fiction: string = "rrg5dvmg.bil";
-
-    names !: string[]
-
-
-    tuple !: ITextureIndex
-
-    mtlDetetctor !: IMtlDetector
-
-
-    materialLines !: string[];
-
-    mtll: string = "mtllib "
-
-
-    constructor(url: string, directory: string, obj: any, factory: IFactory) {
-        super(url, directory, obj, factory)
+    constructor(url: string, name: string, directory: string, obj: any,
+        factory: IFactory, func: IFuncT<ITextReader | undefined, string>) {
+        super(url, name, directory, obj, factory, func)
     }
 
     public getIndexes(): ITextureIndex[][] {
@@ -118,7 +82,6 @@ export class Obj3DCreator extends LinesMeshCreator {
 
     }
  
-
 
     createMaterialsFromLUrl(url: string, eff: EffectTexture[]): Map<string, EffectTexture> {
         let lines = this.loadStrings(url)
@@ -532,6 +495,47 @@ export class Obj3DCreator extends LinesMeshCreator {
         catch (e) {
         }
     }
+
+    effectsPrivate !: Map<string, EffectTexture>
+    ka !: ImageTexture
+    kd !: ImageTexture
+    ks !: ImageTexture
+
+    ambient !: ColorTexture
+    emissive !: ColorTexture
+    specular !: ColorTexture
+
+    ns: number = 0
+    ni: number = 0
+    d: number = 0
+    illum: number = 0
+
+    effect !: EffectTexture
+
+    default !: EffectTexture
+
+    nm: number = 0
+
+    usedMaterials !: string[]
+
+    objs: string = "# object "
+
+    fiction: string = "rrg5dvmg.bil";
+
+    names !: string[]
+
+
+    tuple !: ITextureIndex
+
+    mtlDetetctor !: IMtlDetector
+
+
+    materialLines !: string[];
+
+    mtll: string = "mtllib "
+
+
+
 }
 
 class MtlWrapper implements IEffectDitionary {

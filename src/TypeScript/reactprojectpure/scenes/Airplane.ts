@@ -20,11 +20,9 @@ class Airplane_CategoryObject_0_Visible0 extends Basic3DShape
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
-		let map = this.getSaveGrahicalData()
-		map.set("Cessna_208_Caravan.obj", "pLANE/Cessna_208_Caravan.obj")
-		map.set("master.mtl", "pLANE/master.mtl")
-		map.set("mat0_c.jpg", "pLANE/mat0_c.jpg")
-		this.postCreateResources(map)
+		this.addResource("Cessna_208_Caravan.obj", "pLANE/Cessna_208_Caravan.obj", "text", ".obj")
+		this.addResource("master.mtl", "pLANE/master.mtl", "text", ".mtl")
+		this.addResource("mat0_c.jpg", "pLANE/mat0_c.jpg", "image", ".jpg")
 	}
 }
 

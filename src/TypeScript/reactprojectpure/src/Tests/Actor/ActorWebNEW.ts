@@ -3,14 +3,8 @@ import { IDataConsumer } from '../../Library/Measurements/Interfaces/IDataConsum
 import { RungeProcessor } from '../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor';
 import { DataRuntimeConsumerODE } from '../../Library/Runtime/DataRuntimeConsumerODE';
 //import { toDateTime } from '../../Algorithms/OrbitalForecastCalculation/OrbitalData';
-import { CompositionAct } from '../Wrappers/ComposionAct';
-import { CompositionEvent } from '../Wrappers/CompositionEvent';
-
-import { PerformerMeasuremets } from '../../Library/Measurements/PerformerMeasuremets';
-import { Composition } from '../Composition';
 import { IFunc } from '../../Library/Interfaces/IFunc';
 import { IPlayEngine } from '../../Library/Interfaces/IPlayEngine';
-import { ScadaComposition } from '../Wrappers/ScadaComposion';
 
 
 
@@ -50,18 +44,19 @@ export class ActorWebNew {
 
  
     public actCompositionAct() {
-        var comp = new CompositionAct()
+   /*     var comp = new CompositionAct()
         comp.test();
+        */
 
     }
 
     public actCompositionScada(engine: IPlayEngine) {
-        new ScadaComposition(engine)
+        //new ScadaComposition(engine)
     }
 
     public actCompositionEvent(engine: IPlayEngine) {
-        var comp = new CompositionEvent(engine)
-        comp.test();
+      /*  var comp = new CompositionEvent(engine)
+        comp.test();*/
 
     }
 }

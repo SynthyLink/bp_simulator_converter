@@ -8,13 +8,14 @@ import type { ISelfStart } from "../../Interfaces/ISelfStart"
 import type { IChildrenT } from "../../NamedTree/Interfaces/IChildrenT"
 import type { IScene } from "./IScene"
 
-export interface IGame extends  IObjectCollection,
+export interface IGame extends IObjectCollection,
     ISelfStart, IAddAction, ISelfLoad, IFactoryConsumer, IExternalAction,
-    IChildrenT<IScene>, IObject
-{
+    IChildrenT<IScene>, IObject {
+
     getScenes(): Map<string, IScene>
 
     addScene(name: string, scene: IScene): void
+
 
     cycle(time: number): void
 

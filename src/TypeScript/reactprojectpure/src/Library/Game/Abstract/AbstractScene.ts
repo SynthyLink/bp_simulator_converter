@@ -26,36 +26,6 @@ export class AbstractScene implements  IScene {
         return undefined
     }
 
-    public addResource(resource: string): void {
-        this.resources.push(resource)
-    }
-
-    public getResources(): string[] {
-        return this.resources
-    }
-
-    protected resources: string[] = []
-
-    protected game !: IGame
-
-    protected factory !: IFactory
-
-    protected performer !: ScenePerformer
-
-    protected externalAction: IActionAddRemove = new ActionArray();
-
-    protected internalAction: IActionAddRemove = new ActionArray();
-
-
-    protected objects: IObject[] = []
-
-    protected children: ISceneObject[] = []
-
-    protected objectMap: Map<string, ISceneObject> = new Map()
-
-    protected isStarted: boolean = false
-
-    protected isLoaded: boolean = false
 
     getGame(): IGame {
         return this.game;
@@ -137,6 +107,27 @@ export class AbstractScene implements  IScene {
         return this.types.indexOf(type) >= 0;
     }
 
+
+    protected game !: IGame
+
+    protected factory !: IFactory
+
+    protected performer !: ScenePerformer
+
+    protected externalAction: IActionAddRemove = new ActionArray();
+
+    protected internalAction: IActionAddRemove = new ActionArray();
+
+
+    protected objects: IObject[] = []
+
+    protected children: ISceneObject[] = []
+
+    protected objectMap: Map<string, ISceneObject> = new Map()
+
+    protected isStarted: boolean = false
+
+    protected isLoaded: boolean = false
 
 
     protected typeName: string = "AbstractScene";
