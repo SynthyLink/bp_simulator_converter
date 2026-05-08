@@ -1,8 +1,8 @@
 import { EmptyObject } from "../../Library/EmptyObject";
-import { IPath } from "../../Library/IO/Interfaces/IPath";
+import type { IPath } from "../../Library/IO/Interfaces/IPath";
 import { PurePath } from "../../Library/IO/PurePath";
-import { IResourceFunc } from "../../Library/Resources/Infrefaces/IResourceFunc";
-import { IResourceItem } from "../../Library/Resources/Infrefaces/IResourceItem";
+import type { IResourceFunc } from "../../Library/Resources/Infrefaces/IResourceFunc";
+import type { IResourceItem } from "../../Library/Resources/Infrefaces/IResourceItem";
 
 export abstract class FileResourceFunc extends EmptyObject implements IResourceFunc {
     constructor(directory: string) {
