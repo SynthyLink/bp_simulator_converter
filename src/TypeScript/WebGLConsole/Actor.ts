@@ -3,16 +3,19 @@ import { FileGameFactory } from "./src/Console/FileGameFactory";
 import { ReferenceFrameGameActionFactory } from "./src/Library/Abstract3DGame/GameActions/ReferenceFrameGameActionFactory";
 import { ScadaFind3dFrame } from "./src/Library/Abstract3DGame/GameActions/ScadaFind3DFrame";
 import { ScadaFindCamera } from "./src/Library/Abstract3DGame/GameActions/ScadaFindCamera";
-import { EngineGameImitationCameraAction } from "./src/Library/Abstract3DGame/Games/EngineGameImitationCameraAction";
 import { IFindCamera } from "./src/Library/Abstract3DGame/Interfaces/IFindCamera";
 import { IFindFrame } from "./src/Library/Abstract3DGame/Interfaces/IFindFrame";
 import { AbstractAction } from "./src/Library/Event/Objects/AbstractAction";
 import { AbstractActionT } from "./src/Library/Event/Objects/AbstractActionT";
 import { TimerObject } from "./src/Library/Event/Objects/TimerObject";
+import { EngineGame } from "./src/Library/Game/Abstract/EngineGame";
 import { IGame } from "./src/Library/Game/Interfaces/IGame";
+import { IActionAddRemoveT } from "./src/Library/Interfaces/IActionAddRemoveT";
 import { IFactory } from "./src/Library/Interfaces/IFactory";
+import { IPlayEngine } from "./src/Library/Interfaces/IPlayEngine";
 import { IDataConsumer } from "./src/Library/Measurements/Interfaces/IDataConsumer";
 import { IScadaConsumer } from "./src/Library/Scada/Interfaces/IScadaConsumer";
+import { ActionArrayT } from "./src/Library/Utilities/Generic/ActionArrayT";
 import { PIAct } from "./test/wrappers/PIAct";
 
 
@@ -21,6 +24,8 @@ export class Actor {
 
     factory!: IFactory;
     game!: IGame;
+
+    engine: FictiveEngine = new FictiveEngine()
     constructor() {
         this.dir = this.dir.replaceAll("\\", "/");
         var find = new ScadaFind3dFrame("Camera");
@@ -29,12 +34,11 @@ export class Actor {
         this.factory = f;
         f.addFactory<IFindFrame>(find, "IFindFrame")
         f.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")
-        var g = new EngineGameImitationCameraAction("", this.factory);
+        var g = new EngineGame("", this.factory, this.engine);
         g.getExternalAction().addAction(new A("game"));
-        g.setImitation(10, 1, 0);
         this.game = g;
         var sc = new AirplaneScene(this.game, "Chart");
-        var ea = sc.getExternalAction();
+        var ea = sc.getInternalAction()
         ea.addAction(new A("scene"));
         ea.addAction(new B(sc, g));
     }
@@ -42,6 +46,10 @@ export class Actor {
     loadGame(): void {
         this.game.loadItself(true);
         this.game.startItself(true);
+        for (let i = 0; i < 10; i++) {
+            this.engine.setTime(i)
+        }
+
     }
 
 
@@ -110,6 +118,30 @@ class TA extends AbstractActionT<number> {
             this.game.startItself(false)
         }
     }
+}
+
+class FictiveEngine implements IPlayEngine {
+
+    isEngineEnabled(): boolean {
+        return this.enabled
+    }
+    setEngineEnabled(enabled: boolean): boolean {
+        if (enabled == this.enabled) return false;
+        this.enabled = enabled
+        return true
+    }
+    getEngineAction(): IActionAddRemoveT<number> {
+        return this.action;
+    }
+
+    public setTime(time: number): void {
+        if (this.enabled) this.action.actionT(time)
+    }
+
+    enabled: boolean = false
+
+    action: IActionAddRemoveT<number> = new ActionArrayT()
+
 }
 
 

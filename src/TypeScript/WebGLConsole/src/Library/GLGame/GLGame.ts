@@ -1,16 +1,18 @@
 import { EngineGameImitationCameraAction } from "../Abstract3DGame/Games/EngineGameImitationCameraAction";
+import { EngineGame } from "../Game/Abstract/EngineGame";
 import { IFactory } from "../Interfaces/IFactory";
+import { IPlayEngine } from "../Interfaces/IPlayEngine";
 import Loader, { ResourceInformation } from "../RemoteResuorces/Loader";
 import { IResourceFuncFactory } from "../Resources/Infrefaces/IResourceFuncFactory";
 import { GLGamePerformer } from "./GLGamePerformer";
 import { GameOptions } from "./interfaces/IGameOptions";
 import { IGLContext } from "./interfaces/IGLContext";
 
-export class GLGame extends EngineGameImitationCameraAction implements IGLContext {
+export class GLGame extends EngineGame implements IGLContext {
 
-    constructor(name: string, factory: IFactory,
-        canvas: HTMLCanvasElement, options : GameOptions) {
-        super(name, factory)
+    constructor(name: string, factory: IFactory, engine: IPlayEngine,
+        canvas: HTMLCanvasElement, options: GameOptions) {
+        super(name, factory, engine)
         this.types.push("IGLContext")
         this.types.push("GLGame")
         this.typeName = "GLGame"

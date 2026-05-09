@@ -11,6 +11,8 @@ import { TimerObject } from './Library/Event/Objects/TimerObject';
 import { PerformerEvents } from './Library/Event/PerformerEvents';
 import { IGame } from './Library/Game/Interfaces/IGame';
 import { GLGame } from './Library/GLGame/GLGame';
+import { IActionAddRemoveT } from './Library/Interfaces/IActionAddRemoveT';
+import { IPlayEngine } from './Library/Interfaces/IPlayEngine';
 import { IDataConsumer } from './Library/Measurements/Interfaces/IDataConsumer';
 import { IScadaConsumer } from './Library/Scada/Interfaces/IScadaConsumer';
 
@@ -29,8 +31,10 @@ function funcAirplane(): void {
     if (canv === undefined) return
     let canvas = canv as HTMLCanvasElement
 
+    let eng = new FictiveEngine()
+
     // Then we create an instance of the game class and give it the canvas
-    const game = new GLGame("", factory, canvas, { maxfps: 25 });
+    const game = new GLGame("", factory, eng, canvas, { maxfps: 25 });
 
     game.getExternalAction().addAction(new A("game"));
    // g.setImitation(10, 1, 0);
@@ -124,4 +128,17 @@ class TA extends AbstractActionT<number> {
 
 
 funcAirplane()
+
+class FictiveEngine implements IPlayEngine {
+    isEngineEnabled(): boolean {
+        throw new Error("Method not implemented.");
+    }
+    setEngineEnabled(enabled: boolean): boolean {
+        throw new Error("Method not implemented.");
+    }
+    getEngineAction(): IActionAddRemoveT<number> {
+        throw new Error("Method not implemented.");
+    }
+
+}
 

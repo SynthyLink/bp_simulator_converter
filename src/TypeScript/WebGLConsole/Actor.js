@@ -6,12 +6,14 @@ const FileGameFactory_1 = require("./src/Console/FileGameFactory");
 const ReferenceFrameGameActionFactory_1 = require("./src/Library/Abstract3DGame/GameActions/ReferenceFrameGameActionFactory");
 const ScadaFind3DFrame_1 = require("./src/Library/Abstract3DGame/GameActions/ScadaFind3DFrame");
 const ScadaFindCamera_1 = require("./src/Library/Abstract3DGame/GameActions/ScadaFindCamera");
-const EngineGameImitationCameraAction_1 = require("./src/Library/Abstract3DGame/Games/EngineGameImitationCameraAction");
 const AbstractAction_1 = require("./src/Library/Event/Objects/AbstractAction");
 const AbstractActionT_1 = require("./src/Library/Event/Objects/AbstractActionT");
+const EngineGame_1 = require("./src/Library/Game/Abstract/EngineGame");
+const ActionArrayT_1 = require("./src/Library/Utilities/Generic/ActionArrayT");
 const PIAct_1 = require("./test/wrappers/PIAct");
 class Actor {
     constructor() {
+        this.engine = new FictiveEngine();
         this.dir = "C:\\AUsers\\1MySoft\\CSharp\\src\\TypeScript\\WebGLConsole/static/models";
         this.dir = this.dir.replaceAll("\\", "/");
         var find = new ScadaFind3DFrame_1.ScadaFind3dFrame("Camera");
@@ -20,18 +22,20 @@ class Actor {
         this.factory = f;
         f.addFactory(find, "IFindFrame");
         f.addFactory(new ScadaFindCamera_1.ScadaFindCamera("Camera"), "IFindCamera");
-        var g = new EngineGameImitationCameraAction_1.EngineGameImitationCameraAction("", this.factory);
+        var g = new EngineGame_1.EngineGame("", this.factory, this.engine);
         g.getExternalAction().addAction(new A("game"));
-        g.setImitation(10, 1, 0);
         this.game = g;
         var sc = new AirplaneScene_1.AirplaneScene(this.game, "Chart");
-        var ea = sc.getExternalAction();
+        var ea = sc.getInternalAction();
         ea.addAction(new A("scene"));
         ea.addAction(new B(sc, g));
     }
     loadGame() {
         this.game.loadItself(true);
         this.game.startItself(true);
+        for (let i = 0; i < 10; i++) {
+            this.engine.setTime(i);
+        }
     }
     actPI() {
         try {
@@ -87,6 +91,28 @@ class TA extends AbstractActionT_1.AbstractActionT {
         if (t > 5) {
             this.game.startItself(false);
         }
+    }
+}
+class FictiveEngine {
+    constructor() {
+        this.enabled = false;
+        this.action = new ActionArrayT_1.ActionArrayT();
+    }
+    isEngineEnabled() {
+        return this.enabled;
+    }
+    setEngineEnabled(enabled) {
+        if (enabled == this.enabled)
+            return false;
+        this.enabled = enabled;
+        return true;
+    }
+    getEngineAction() {
+        return this.action;
+    }
+    setTime(time) {
+        if (this.enabled)
+            this.action.actionT(time);
     }
 }
 //# sourceMappingURL=Actor.js.map

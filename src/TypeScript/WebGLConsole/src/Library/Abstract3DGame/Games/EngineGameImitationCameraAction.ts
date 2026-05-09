@@ -1,18 +1,19 @@
-import { EngineGameImitation } from "../../Game/Imitatiom/EngineGameImitation";
+import { EngineGame } from "../../Game/Abstract/EngineGame";
 import { IGameActionConverter } from "../../Game/Interfaces/IGameActionConverter";
 import { IGameActionConverterFactory } from "../../Game/Interfaces/IGameActionConverterFactory";
 import { IScene } from "../../Game/Interfaces/IScene";
 import { IAction } from "../../Interfaces/IAction";
 import { IFactory } from "../../Interfaces/IFactory";
+import { IPlayEngine } from "../../Interfaces/IPlayEngine";
 import { BasicCamera } from "../../Motion6D/Visible/BasicCamera";
 import { IFindCamera } from "../Interfaces/IFindCamera";
 import { DrawMeshGameCameraAcionConverter } from "../Objects/DrawMeshGameCameraAcionConverter";
 
-export class EngineGameImitationCameraAction extends EngineGameImitation implements
+export class EngineGameImitationCameraAction extends EngineGame implements
     IGameActionConverterFactory {
 
-    constructor(name: string, factory: IFactory) {
-        super(name, factory)
+    constructor(name: string, factory: IFactory, engine: IPlayEngine) {
+        super(name, factory, engine)
         this.types.push("IGameActionConverterFactory")
         this.types.push("IGameActionConverter")
         this.types.push("EngineGameImitationCameraAction")
