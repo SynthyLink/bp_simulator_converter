@@ -5,7 +5,6 @@
 import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
 import { Performer } from "../Performer";
 import { PerformerMeasuremets } from "../Measurements/PerformerMeasuremets"
-import { FictiveCategoryObject } from "../Fiction/FictiveCategoryObject";
 import type { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
 import type { IMeasurements } from "../Measurements/Interfaces/IMeasurements";
 import type { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
@@ -123,10 +122,11 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
     getObjectCollection(): IObject[] {
         return this.objects;
     }
-    getCategoryObject(name: string): ICategoryObject {
+
+    getCategoryObject(name: string): ICategoryObject | undefined{
         let a = this.categoryObjectsMap.get(name)
         if (a != undefined) return a;
-        return new FictiveCategoryObject()
+        return undefined
     }
 
     addCategoryObjectToRuntime(object: ICategoryObject): void {

@@ -32,9 +32,11 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
     }
 
     getMeasurement(i: number): IMeasurement {
+        this.ficI = i
         return this;
     }
 
+    ficI: number = 0
 
     getMeasurementName(): string {
         return "Output";

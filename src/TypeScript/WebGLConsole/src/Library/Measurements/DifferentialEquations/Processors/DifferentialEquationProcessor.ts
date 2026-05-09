@@ -45,9 +45,13 @@ export class DifferentialEquationProcessor implements IDifferentialEquationProce
 
     stepDifferentialEquations(start: number, finish: number): void
     {
+        this.fstart = start
+        this.ffinish = finish
         throw new OwnNotImplemented();
     }
 
+    fstart: number = 0
+    ffinish: number = 0
     updateDimension(): void
     {
         this.dimension = 0;

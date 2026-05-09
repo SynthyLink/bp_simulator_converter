@@ -7,12 +7,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EmptyObject } from "./EmptyObject";
-import { FictiveCategoryObject } from "./Fiction/FictiveCategoryObject";
-import { FictiveDesktop } from "./Fiction/FictiveDesktop";
 import type { ICategoryArrow } from "./Interfaces/ICategoryArrow";
 import type { ICategoryObject } from "./Interfaces/ICategoryObject";
 import type { IDesktop } from "./Interfaces/IDesktop";
-import type { IObject } from "./Interfaces/IObject";
 import { Performer } from "./Performer";
 
 export class CategoryArrow extends EmptyObject implements ICategoryArrow
@@ -28,12 +25,12 @@ export class CategoryArrow extends EmptyObject implements ICategoryArrow
         desktop.addObject(this);
     }
  
-    protected desktop: IDesktop = new FictiveDesktop();
+    protected desktop: IDesktop
 
-    protected source: ICategoryObject = new FictiveCategoryObject();
+    protected source !: ICategoryObject
 
 
-    protected target: ICategoryObject = new FictiveCategoryObject();
+    protected target !: ICategoryObject
 
 
     protected performer: Performer = new Performer()

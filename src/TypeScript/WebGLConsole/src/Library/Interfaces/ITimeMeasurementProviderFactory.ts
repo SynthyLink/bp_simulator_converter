@@ -1,4 +1,3 @@
-import { TimeType } from "../Enums/TimeType";
 import type { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
 
 export interface ITimeMeasurementProviderFactory {
@@ -11,6 +10,6 @@ export interface ITimeMeasurementProviderFactory {
         /// <param name="log">log</param>
         /// <param name="reason">Reason</param>
     /// <returns>The Realtime provider</returns>
-    Create(isAbsolute: boolean, timeUnit: TimeType, reason: string): ITimeMeasurementProvider 
+    Create(isAbsolute: boolean, timeUnit: string, reason: string): ITimeMeasurementProvider 
 
     }

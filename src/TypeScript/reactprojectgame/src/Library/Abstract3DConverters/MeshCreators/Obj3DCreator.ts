@@ -169,16 +169,15 @@ export class Obj3DCreator extends LinesMeshCreator {
         try {
            // let def !: EffectTexture;
             let eff: EffectTexture[] = []
-            let mt: Map<string, EffectTexture> = new Map()
             if (this.materialLines.length > 0) {
-                mt = this.createMaterialsFromLines(this.materialLines, eff)
+              // const mt = this.createMaterialsFromLines(this.materialLines, eff)
                 if (eff.length > 0) this.default = eff[0]
             }
             else {
                 for (var line of this.lines) {
                     if (line.indexOf("mtllib ") == 0) {
                         var file = line.substring("mtllib ".length).trim();
-                        mt = this.createMaterialsFromLUrl(file, eff)
+                        let mt = this.createMaterialsFromLUrl(file, eff)
                         if (eff.length > 0) this.default = eff[0]
                     }
                 }

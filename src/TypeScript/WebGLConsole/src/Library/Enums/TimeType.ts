@@ -1,7 +1,7 @@
 /// <summary>
 /// Types of time
 /// </summary>
-export enum TimeType {
-    Second, // Second
-    Day     // Day
+export const  TimeType = {
+    Second:'Second', // Second
+    Day: 'Day'  // Day
 }

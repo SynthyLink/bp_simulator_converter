@@ -29,10 +29,12 @@ export class DifferentialEquationSolverFormula extends DataConsumerVariableMeasu
 
     startedStart(start: number): void
     {
+        this.fs = start
         this.initial.resetInitialValues();
         this.feedback.setFeedbacks();
     }
 
+    fs: number = 0
 
     calculateDerivations(): void
     {

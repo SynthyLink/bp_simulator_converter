@@ -54,11 +54,11 @@ export class DataConsumerVariableMeasurements extends DataConsumer implements
         return this.output[i];
     }
 
-  
-
+  fict !: IMeasurement
     
 
     addMeasurement(measurement: IMeasurement): void {
+        this.fict = measurement
     }
 
 
@@ -86,10 +86,6 @@ export class DataConsumerVariableMeasurements extends DataConsumer implements
         if (!this.aliasTypes.has(name))
         {
             this.performer.setAliasType(name, value, this.aliasTypes, this.aliasNames);
-        }
-        else
-        {
-            var i = 0;
         }
         this.aliasValues.set(name, value);
     }

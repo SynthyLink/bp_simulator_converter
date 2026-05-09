@@ -15,7 +15,7 @@ export class BasicCamera extends BasicPosition implements IVisibleConsumer, ICam
         this.types.push("ICamera");
         this.types.push("BasicCamera");
     }
-    getCameraType(): CameraType {
+    getCameraType(): string {
         return CameraType.Projection;
     }
     getFieldOfView(): number {

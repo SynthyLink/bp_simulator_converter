@@ -1,7 +1,6 @@
-import { CameraType } from "./CameraType";
 
 export interface ICamera {
-    getCameraType(): CameraType
+    getCameraType(): string
     getFieldOfView(): number
     getNearDistance(): number
     getFarDistance(): number

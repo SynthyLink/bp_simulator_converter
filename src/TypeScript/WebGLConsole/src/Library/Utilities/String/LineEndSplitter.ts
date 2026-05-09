@@ -27,6 +27,6 @@ export class LineEndSplitter implements IObject, IStringSplitter {
 
     protected name: string = "";
 
-    private object: any
+    protected object: any
 
 }

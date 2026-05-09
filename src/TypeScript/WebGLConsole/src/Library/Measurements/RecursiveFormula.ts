@@ -72,10 +72,12 @@ export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted im
 
     startedStart(start: number)
     {
+        this.fictiveStart = start
         this.initial.resetInitialValues();
         this.feedback.setFeedbacks();
     }
 
+    protected fictiveStart: number = 0
 
     updateMeasurements(): void {
         //this.performer.updateFeedbackData(this, this.feedback)

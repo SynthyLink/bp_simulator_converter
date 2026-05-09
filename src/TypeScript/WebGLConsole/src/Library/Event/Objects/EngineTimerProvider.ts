@@ -30,12 +30,14 @@ export class EngineTimerProvider implements IMeasurement, ITimeMeasurementProvid
     }
 
     setTime(time: number): void {
+        this.currentTime = time
     }
 
     getStep(): number {
         throw new OwnNotImplemented();
     }
     setStep(time: number): void {
+        this.currentTime = time
     }
 
 

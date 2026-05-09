@@ -1,3 +1,4 @@
+import type { IAction } from "../../Interfaces/IAction";
 import type { IActionAddRemove } from "../../Interfaces/IActionAddRemove";
 import type { ICategoryObject } from "../../Interfaces/ICategoryObject";
 import type { IComponentCollection } from "../../Interfaces/IComponentCollection";
@@ -39,8 +40,11 @@ export class DataRuntimeConsumerEvent extends DataRuntimeConsumerODE implements 
 
 
     getExtenalUpdate(obj: IObject | undefined, realime: IRealtimeCollection, act: IActionAddRemove): void {
-       this.mPerformer.createUpdateMeasurementsAction(this, act)
+        this.mPerformer.createUpdateMeasurementsAction(this, act)
+        this.act = act
     }
+
+    act !: IAction
 
     protected prepare(dataConsumer: IDataConsumer) {
         super.prepare(dataConsumer)

@@ -28,5 +28,5 @@ export class ReferenceFrameGameActionFactory extends AbstractGameActionFactory
 
     find !: IFindFrame
 
-    s : ISceneObject
+    s !: ISceneObject
 }

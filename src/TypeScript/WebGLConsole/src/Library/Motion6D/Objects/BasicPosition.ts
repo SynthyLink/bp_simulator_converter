@@ -68,12 +68,16 @@ export class BasicPosition extends CategoryObject implements IPosition {
         return this.nodes
     }
     addNodeT(node: INodeT<IPosition>): void {
+        this.current = node
     }
     removeNodeT(node: INodeT<IPosition>): void {
+        this.current = node
     }
     getNodeValueT(): IPosition {
         return this;
     }
+
+    current !: INodeT<IPosition>
 
     nodes: INodeT<IPosition>[] = []
 

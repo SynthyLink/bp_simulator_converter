@@ -47,7 +47,7 @@ export class Motion6DFrame extends RotatedFrame implements IVelocity
         let baseVelocity = this.performer.convertObject<IVelocity, ReferenceFrame>(baseFrame, "IVelocity")
         let relativeVelocity = this.performer.convertObject<IVelocity, ReferenceFrame>(relative, "IVelocity")
         let baseAngular = this.performer.convertObject<IAngularVelocityMotion6D, ReferenceFrame>(baseFrame, "IAngularVelocityMotion6D")
-        let ra = this.performer.convertObject<IAngularVelocityMotion6D, ReferenceFrame>(relative, "IAngularVelocityMotion6D")
+       // let ra = this.performer.convertObject<IAngularVelocityMotion6D, ReferenceFrame>(relative, "IAngularVelocityMotion6D")
         let velocityBase = baseVelocity[0].getVelocity();
         let velocityRelative = relativeVelocity[0].getVelocity();
         let mb = baseOrientation.getMatrix();

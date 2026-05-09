@@ -20,7 +20,6 @@ import type { IObjectCollection } from "../Interfaces/IObjectCollection";
 import { DataConsumerBoolFunc } from "./DataConsumerBoolFunc";
 import { Performer } from "../Performer";
 import { TimeMeasurementProvider } from "./TimeMeasurementProvider";
-import { ActionArray } from "../Utilities/Generic/ActionArray";
 import { UpdateMeasurementsAction } from "./UpdateMeasurementsAction";
 
 export class PerformerMeasuremets {
@@ -109,19 +108,12 @@ export class PerformerMeasuremets {
         let m = dataConsumer.getAllMeasurements();
         for (let i = 0; i < m.length; i++) {
             let mea = m[i];
-            if (measurements.find(mea => true) === undefined) {
 
-            }
-            else {
-                measurements.push(mea);
-                let dc = mea as unknown as IDataConsumer;
-                //     if (dc instanceof IDataConsumer)
-
-            }
+            measurements.push(mea);
+            // let dc = mea as unknown as IDataConsumer;
+            //     if (dc instanceof IDataConsumer)
         }
-
     }
-
 
     public peformCondDCFixedStepCalculation(runtime: IDataRuntime, dataConsumer: IDataConsumer,
         conditionName: string, stop: IFunc<boolean>, start: number,

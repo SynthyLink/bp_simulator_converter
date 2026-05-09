@@ -442,6 +442,7 @@ export class Performer
 
     public getCollectionObject<T>(collection: IComponentCollection, name: string, type: string): T[] {
         let o = collection.getCategoryObject(name)
+        if (o === undefined) return []
         return this.convertObject < T, ICategoryObject>(o, type)
     }
 

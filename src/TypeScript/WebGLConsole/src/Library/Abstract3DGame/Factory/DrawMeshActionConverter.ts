@@ -30,11 +30,3 @@ export class DrawMeshActionConverter extends AbstractGameAcionConverter  {
     drawMesh !: IDrawMesh
 }
 
-class DrawMeshAction extends AbstractAction
-{
-
-    action(): void {
-        throw new Error("Method not implemented.");
-    }
-
-}

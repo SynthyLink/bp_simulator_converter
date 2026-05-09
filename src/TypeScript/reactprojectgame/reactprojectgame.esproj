@@ -10,9 +10,8 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="src\Library\Library\**" />
+    <None Remove="src\Library\Runtime\Interfaces\**" />
     <TypeScriptConfiguration Remove="src\Library\Library\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\Library\Runtime\Interfaces\" />
+    <TypeScriptConfiguration Remove="src\Library\Runtime\Interfaces\**" />
   </ItemGroup>
 </Project>

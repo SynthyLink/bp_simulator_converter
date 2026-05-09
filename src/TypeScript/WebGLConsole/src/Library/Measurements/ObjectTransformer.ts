@@ -3,9 +3,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CategoryObject } from "../CategoryObject";
 import { OwnError } from "../ErrorHandler/OwnError";
+import { Performer } from "../Performer";
 import type { IDesktop } from "../Interfaces/IDesktop";
 import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
-import { Performer } from "../Performer";
 import type { IDataConsumer } from "./Interfaces/IDataConsumer";
 import type { IMeasurement } from "./Interfaces/IMeasurement";
 import type { IMeasurements } from "./Interfaces/IMeasurements";
@@ -178,6 +178,7 @@ export class ObjectTransformer extends CategoryObject implements IObjectTransfor
         var ent = this.links.entries();
         for (var [s, t] of ent)
         {
+            this.s = s
             var mt = mm.get(t);
             if (mt != undefined)
             {
@@ -185,6 +186,8 @@ export class ObjectTransformer extends CategoryObject implements IObjectTransfor
             }
         }
     }
+
+    s: string = ""
 
     getOutputType(i: number): any
     {

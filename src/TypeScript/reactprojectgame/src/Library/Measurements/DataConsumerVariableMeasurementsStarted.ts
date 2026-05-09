@@ -3,7 +3,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AliasInitialValueCollection } from "../AliasInitialValueCollection.";
 import { FeedbackAliasCollection } from "../FeedbackAliasCollection";
-import type { IAlias } from "../Interfaces/IAlias";
 import type { IDesktop } from "../Interfaces/IDesktop";
 import type { IFeedbackCollection } from "../Interfaces/IFeedbackCollection";
 import type { IInitialValueCollection } from "../Interfaces/IInitialValueCollection";
@@ -15,8 +14,6 @@ export class DataConsumerVariableMeasurementsStarted extends DataConsumerVariabl
 {
     protected initial !: IInitialValueCollection;
 
-
-    protected alias !: IAlias;
 
     constructor(desktop: IDesktop, name: string)
     {
@@ -32,8 +29,11 @@ export class DataConsumerVariableMeasurementsStarted extends DataConsumerVariabl
 
 
     startedStart(start: number): void {
+        this.fictiveStart = start
         this.initial.resetInitialValues();
     }
+
+    protected fictiveStart: number = 0
 
 
 

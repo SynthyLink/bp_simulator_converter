@@ -3,10 +3,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { IAlias } from "../Interfaces/IAlias";
 import type { IDesktop } from "../Interfaces/IDesktop";
-import { Performer } from "../Performer";
-import { DataConsumer } from "./DataConsumer";
 import type { IMeasurement } from "./Interfaces/IMeasurement";
 import type { IMeasurements } from "./Interfaces/IMeasurements";
+import { Performer } from "../Performer";
+import { DataConsumer } from "./DataConsumer";
 
 export class DataConsumerMeasurements extends DataConsumer
     implements IMeasurements, IAlias

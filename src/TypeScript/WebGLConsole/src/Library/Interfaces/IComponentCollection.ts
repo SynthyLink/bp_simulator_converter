@@ -1,6 +1,5 @@
 import type { ICategoryArrow } from "./ICategoryArrow";
 import type { ICategoryObject } from "./ICategoryObject";
-import type { IObject } from "./IObject";
 import type { IObjectCollection } from "./IObjectCollection";
 
 export interface IComponentCollection extends IObjectCollection {
@@ -9,5 +8,5 @@ export interface IComponentCollection extends IObjectCollection {
 
     getCategoryArrows(): ICategoryArrow[];
 
-    getCategoryObject(name: string): ICategoryObject;
+    getCategoryObject(name: string): ICategoryObject | undefined
 }

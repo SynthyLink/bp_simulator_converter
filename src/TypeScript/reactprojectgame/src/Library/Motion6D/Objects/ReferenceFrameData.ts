@@ -1,6 +1,3 @@
-import { FictiveAngularVelocity } from "../../Fiction/FictiveAngularVelocity";
-import { FictiveVelocity } from "../../Fiction/FictiveVelocity";
-import { FictiveMeasurement } from "../../Fiction/FicvtiveMeasurement";
 import { ReferenceFrame } from "../ReferenceFrame";
 import { RigidReferenceFrame } from "./RigidReferenceFrame";
 import { NumberMeasurement } from "../../Measurements/NumberMeasurement";
@@ -40,8 +37,7 @@ export class ReferenceFrameData extends RigidReferenceFrame implements IDataCons
     /// <summary>
     /// Measurementrs
     /// </summary>
-    protected measurements: IMeasurement[] = [new FictiveMeasurement(), new FictiveMeasurement(), new FictiveMeasurement(),
-    new FictiveMeasurement(), new FictiveMeasurement(), new FictiveMeasurement(), new FictiveMeasurement()];
+    protected measurements: IMeasurement[] = [];
 
     /// <summary>
     /// Second derivations
@@ -60,9 +56,9 @@ export class ReferenceFrameData extends RigidReferenceFrame implements IDataCons
 
     protected om: number[] = [0, 0, 0]
 
-    angularVelocity: IAngularVelocity = new FictiveAngularVelocity();
+    angularVelocity !: IAngularVelocity 
 
-    velocityObject: IVelocity = new FictiveVelocity();
+    velocityObject !: IVelocity 
 /*
     private coordDel: IFunc<any>[] = [];
 
@@ -324,7 +320,7 @@ class QuaternionMeasurement extends NumberMeasurement {
 }
 class Velocity extends NumberMeasurement {
     n: number = 0;
-    velocity: IVelocity = new FictiveVelocity();
+    velocity !: IVelocity 
     constructor(name: string, n: number, velocity: IVelocity) {
         super(name)
         this.n = n;
@@ -339,7 +335,7 @@ class Velocity extends NumberMeasurement {
 
 class AngularVelocity extends NumberMeasurement {
     n: number = 0;
-    velocity: IAngularVelocity = new FictiveAngularVelocity();
+    velocity!: IAngularVelocity
     constructor(name: string, n: number, velocity: IAngularVelocity) {
         super(name)
         this.n = n;

@@ -1,8 +1,8 @@
 /// <summary>
 /// Types of length
 /// </summary>
-export enum LengthType {
-    Meter,      // Meter
-    Centimeter, // Centimeter
-    Kilometer   // Kilometer
+export const LengthType = {
+    Meter: 'Meter',      // Meter
+    Centimeter: 'Centimeter', // Centimeter
+    Kilometer: 'Kilometer'  // Kilometer
 }
