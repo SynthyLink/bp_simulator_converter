@@ -1,27 +1,22 @@
 <p align="center">
-  <a href="" rel="noopener">
- <img width=400px height=210px src="https://github.com/aashrafh/SpaceTrippers/blob/Game/demo/SpaceTrippers.png" alt="SpaceTrippers logo"></a>
+  <a href="https://github.com/AbdallahHemdan/SpaceTrippers" rel="noopener">
+ 
+ ![Space trippers](https://user-images.githubusercontent.com/40190772/83947670-c79f2a80-a818-11ea-954d-d7692cf1c348.png)
+
+   </a>
 </p>
 
 <h3 align="center">Space Trippers</h3>
 
-<p align="center">
-  <a href="https://github.com/aashrafh/SpaceTrippers/graphs/contributors" alt="Contributors">
-        <img src="https://img.shields.io/github/contributors/aashrafh/SpaceTrippers" /></a>
-  
-   <a href="https://github.com/aashrafh/SpaceTrippers/issues" alt="Issues">
-        <img src="https://img.shields.io/github/issues/aashrafh/SpaceTrippers" /></a>
-  
-  <a href="https://github.com/aashrafh/SpaceTrippers/network" alt="Forks">
-        <img src="https://img.shields.io/github/forks/aashrafh/SpaceTrippers" /></a>
-        
-  <a href="https://github.com/aashrafh/SpaceTrippers/stargazers" alt="Stars">
-        <img src="https://img.shields.io/github/stars/aashrafh/SpaceTrippers" /></a>
-        
-  <a href="https://github.com/aashrafh/SpaceTrippers/blob/master/LICENSE" alt="License">
-        <img src="https://img.shields.io/github/license/aashrafh/SpaceTrippers" /></a>
-</p>
+<div align="center">
 
+[![GitHub contributors](https://img.shields.io/github/contributors/AbdallahHemdan/SpaceTrippers)](https://github.com/AbdallahHemdan/SpaceTrippers/contributors)
+[![GitHub issues](https://img.shields.io/github/issues/AbdallahHemdan/SpaceTrippers)](https://github.com/AbdallahHemdan/SpaceTrippers/issues)
+[![GitHub forks](https://img.shields.io/github/forks/AbdallahHemdan/SpaceTrippers)](https://github.com/AbdallahHemdan/SpaceTrippers/network)
+[![GitHub stars](https://img.shields.io/github/stars/AbdallahHemdan/SpaceTrippers)](https://github.com/AbdallahHemdan/SpaceTrippers/stargazers)
+[![GitHub license](https://img.shields.io/github/license/AbdallahHemdan/Sorting.Visualizer)](https://github.com/AbdallahHemdan/SpaceTrippers/blob/master/LICENSE)
+
+</div>
 
 ---
 
@@ -37,20 +32,7 @@
 - [Technology](#tech)
 
 ## 🧐 About <a name = "about"></a>
-A 3D space game. Traveling along the space trying to avoid rocks and obstacles. The ship can avoid the rocks by moving right, or left. Collision with the rocks affects its health by decreasing total health by ONE and every second with no collision with the rock your score increase by ONE.
-
-## 🎥 Demo 
-<div name="demo" align="center" width=1189px>
-  <p align="center">
-  <img src="https://github.com/aashrafh/SpaceTrippers/blob/Game/demo/demoGIF.gif" alt="GIF Demo">
-    <img src="https://github.com/aashrafh/SpaceTrippers/blob/Game/demo/demo-img-1.png" alt="Image Demo">
-    <img src="https://github.com/aashrafh/SpaceTrippers/blob/Game/demo/demo-img-4.png" alt="Image Demo">
-    <img src="https://github.com/aashrafh/SpaceTrippers/blob/Game/demo/demo-img-5.png" alt="Image Demo">
-    <img src="https://github.com/aashrafh/SpaceTrippers/blob/Game/demo/demo-img-6.png" alt="Image Demo">
-    <img src="https://github.com/aashrafh/SpaceTrippers/blob/Game/demo/demo-img-2.png" alt="Image Demo">
-    <img src="https://github.com/aashrafh/SpaceTrippers/blob/Game/demo/demo-img-3.png" alt="Image Demo">
-  </p>
-  </div>
+A 3D space game. Travelling along the space trying to avoid rocks and obstacles. The ship can avoid the rocks by moving right, or left. Collision with the rocks affects its health by decreasing total health by ONE and every second with no collision with the rock your score increase by ONE.
 
 ## 🏁 Install <a name = "Install"></a>
 1. Install [Node.js](https://nodejs.org/en/) and [Visual Studio Code](https://code.visualstudio.com/).
@@ -74,3 +56,24 @@ The aircraft is running "to infinity and beyond" :runner: so your job is to avoi
 - [glMatrix](http://glmatrix.net/) - Javascript Matrix and Vector library.
 - [WebGL](https://get.webgl.org/) - JavaScript API for rendering interactive 3D graphics.
 - [NodeJs](https://nodejs.org/en/) - Server Environment
+
+## 🎥 Demo 
+<div name = "demo" align="center" width=1189>
+
+![GIFDemo](https://github.com/AbdallahHemdan/SpaceTrippers/blob/master/demo/demoGIF.gif)
+
+</div>
+
+## 📷 Screenshots 
+
+<div name = "demo" align="center" width=1189>
+  
+![ImageDemo1](https://github.com/AbdallahHemdan/SpaceTrippers/blob/master/demo/demo-img-1.png)
+![ImageDemo4](https://github.com/AbdallahHemdan/SpaceTrippers/blob/master/demo/demo-img-4.png)
+![ImageDemo5](https://github.com/AbdallahHemdan/SpaceTrippers/blob/master/demo/demo-img-5.png)
+![ImageDemo6](https://github.com/AbdallahHemdan/SpaceTrippers/blob/master/demo/demo-img-6.png)
+![ImageDemo2](https://github.com/AbdallahHemdan/SpaceTrippers/blob/master/demo/demo-img-2.png)
+![ImageDemo3](https://github.com/AbdallahHemdan/SpaceTrippers/blob/master/demo/demo-img-3.png)
+ 
+</div>
+

@@ -1,11 +1,10 @@
-import { IMesh } from "../../Abstract3DConverters/Interfaces/IMesh";
+import type { IMesh } from "../../Abstract3DConverters/Interfaces/IMesh";
 import { EmptyObject } from "../../EmptyObject";
-import { IAction } from "../../Interfaces/IAction";
-import { IFuncT } from "../../Interfaces/IFuncT";
+import type { IAction } from "../../Interfaces/IAction";
+import type { IFuncT } from "../../Interfaces/IFuncT";
 import { ReferenceFrame } from "../../Motion6D/ReferenceFrame";
 import { BasicCamera } from "../../Motion6D/Visible/BasicCamera";
-import { ActionArray } from "../../Utilities/Generic/ActionArray";
-import { IDrawMesh } from "../Interfaces/IDrawMesh";
+import type { IDrawMesh } from "../Interfaces/IDrawMesh";
 import { DrawMeshAction } from "./DrawMeshAction";
 
 export  class DrawMesh extends EmptyObject implements IDrawMesh {

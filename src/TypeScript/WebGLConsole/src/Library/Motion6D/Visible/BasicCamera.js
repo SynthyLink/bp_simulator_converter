@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BasicCamera = void 0;
-const BasicPosition_1 = require("../Objects/BasicPosition");
 const CameraType_1 = require("../Interfaces/CameraType");
+const BasicPosition_1 = require("../Objects/BasicPosition");
 class BasicCamera extends BasicPosition_1.BasicPosition {
     constructor(desktop, name) {
         super(desktop, name);

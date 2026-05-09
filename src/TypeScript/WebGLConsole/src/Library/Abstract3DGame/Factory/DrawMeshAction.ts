@@ -1,5 +1,5 @@
-import { IMesh } from "../../Abstract3DConverters/Interfaces/IMesh";
-import { IAction } from "../../Interfaces/IAction";
+import type { IMesh } from "../../Abstract3DConverters/Interfaces/IMesh";
+import type { IAction } from "../../Interfaces/IAction";
 import { ReferenceFrame } from "../../Motion6D/ReferenceFrame";
 import { BasicCamera } from "../../Motion6D/Visible/BasicCamera";
 import { EmptyGame3DObject } from "../EmptyGame3DObject";

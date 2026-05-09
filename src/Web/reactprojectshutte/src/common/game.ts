@@ -23,21 +23,20 @@ interface GameOptions {
 //This class create the WebGL2 context, manages the scenes and handles the game loop
 export default class Game {
     canvas: HTMLCanvasElement; // The canvas on which we will draw
-    gl !: WebGL2RenderingContext; // The WebGL2 context of the canvas (we will use it to draw)
+    gl: WebGL2RenderingContext; // The WebGL2 context of the canvas (we will use it to draw)
     loader: Loader = new Loader(); // A loader to read files from the webserver
-    input !: Input; // A manager for user input (keyboard and mouse)
-    scenes: { [name: string]: Scene } = {}; // A dictionary of all available scenes
-    currentScene !: Scene; // The scene that is currently being drawn
-    nextScene: Scene | undefined; // The scene that will replace the current scene after its files have been loaded
+    input: Input; // A manager for user input (keyboard and mouse)
+    scenes: {[name: string]: Scene} = {}; // A dictionary of all available scenes
+    currentScene: Scene = null; // The scene that is currently being drawn
+    nextScene: Scene = null; // The scene that will replace the current scene after its files have been loaded
     nextSceneReady: boolean = false; // Whether the files requested by the next scene has been loaded or not 
-    lastTick: number = 0; // The time of the last frame in milliseconds (used to calculate delta time)
+    lastTick: number; // The time of the last frame in milliseconds (used to calculate delta time)
     options: GameOptions;
 
     constructor(canvas: HTMLCanvasElement, options?: GameOptions){
         this.canvas = canvas;
         this.options = options ?? {};
-        
-       let ct = this.canvas.getContext("webgl2", {
+        this.gl = this.canvas.getContext("webgl2", {
             preserveDrawingBuffer: true, // This will prevent the Browser from automatically clearing the frame buffer every frame
             alpha: true, // this will tell the browser that we want an alpha component in our frame buffer
             antialias: true, // this will tell the browser that we want antialiasing
@@ -45,9 +44,7 @@ export default class Game {
             powerPreference: "high-performance",
             premultipliedAlpha: false, // This can be used if the canvas are going to be blended with the rest of the webpage (transparency)
             stencil: true // this will tell the browser that we want a stencil buffer
-       }); // This command loads the WebGL2 context which we will use to draw
-        if (ct == undefined) return
-        this.gl = ct
+        }); // This command loads the WebGL2 context which we will use to draw
         this.input = new Input(this.canvas);
         this.lastTick = performance.now();
         this.loop(performance.now()); // Start the game loop
@@ -77,10 +74,10 @@ export default class Game {
         if(this.options.maxfps){
             if(time - this.lastTick < (1000/this.options.maxfps)) return;
         }
-        if (this.nextScene != undefined && this.nextSceneReady) { // If there is a next scene and it is ready, replace the current scene with it.
+        if(this.nextScene != null && this.nextSceneReady){ // If there is a next scene and it is ready, replace the current scene with it.
             if(this.currentScene != null) this.currentScene.end(); // If there was an old scene, tell it to free its memory
             this.currentScene = this.nextScene;
-            this.nextScene = undefined;
+            this.nextScene = null;
             this.currentScene.start(); // Tell the scene to initialize its objects
         }
         if(this.currentScene != null){

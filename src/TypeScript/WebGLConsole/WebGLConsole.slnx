@@ -1,12 +1,4 @@
 <Solution>
-  <Project Path="../reactproject/reactproject.esproj">
-    <Build />
-    <Deploy />
-  </Project>
-  <Project Path="../TestTimerEvent/TestTimerEvent.esproj">
-    <Build />
-    <Deploy />
-  </Project>
   <Project Path="WebGLConsole.esproj">
     <Build />
     <Deploy />

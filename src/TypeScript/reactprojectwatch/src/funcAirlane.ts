@@ -1,23 +1,22 @@
-import { GameGLFactory } from "./GLGameFactory/GameGLFactoty";
-import { ReferenceFrameGameActionFactory } from "./Library/Abstract3DGame/GameActions/ReferenceFrameGameActionFactory";
-import { ScadaFind3dFrame } from "./Library/Abstract3DGame/GameActions/ScadaFind3DFrame";
-import { ScadaFindCamera } from "./Library/Abstract3DGame/GameActions/ScadaFindCamera";
-import type { IFindCamera } from "./Library/Abstract3DGame/Interfaces/IFindCamera";
-import type { IFindFrame } from "./Library/Abstract3DGame/Interfaces/IFindFrame";
-import { AbstractAction } from "./Library/Event/Objects/AbstractAction";
-import { AbstractActionT } from "./Library/Event/Objects/AbstractActionT";
-import type { TimerObject } from "./Library/Event/Objects/TimerObject";
-import { PerformerEvents } from "./Library/Event/PerformerEvents";
-import type { IGame } from "./Library/Game/Interfaces/IGame";
-import { GLGame } from "./Library/GLGame/GLGame";
-import type { IDataConsumer } from "./Library/Measurements/Interfaces/IDataConsumer";
-import type { IScadaConsumer } from "./Library/Scada/Interfaces/IScadaConsumer";
-
-import { AirplaneScene } from "../scenes/AirplaneScene"
-
+import { AirplaneScene } from '../scenes/AirplaneScene';
+import { GameGLFactory } from './GLGameFactory/GameGLFactoty';
+import { ReferenceFrameGameActionFactory } from './Library/Abstract3DGame/GameActions/ReferenceFrameGameActionFactory';
+import { ScadaFind3dFrame } from './Library/Abstract3DGame/GameActions/ScadaFind3DFrame';
+import { ScadaFindCamera } from './Library/Abstract3DGame/GameActions/ScadaFindCamera';
+import type { IFindCamera } from './Library/Abstract3DGame/Interfaces/IFindCamera';
+import type { IFindFrame } from './Library/Abstract3DGame/Interfaces/IFindFrame';
+import { AbstractAction } from './Library/Event/Objects/AbstractAction';
+import { AbstractActionT } from './Library/Event/Objects/AbstractActionT';
+import { TimerObject } from './Library/Event/Objects/TimerObject';
+import { PerformerEvents } from './Library/Event/PerformerEvents';
+import type { IGame } from './Library/Game/Interfaces/IGame';
+import { GLGame } from './Library/GLGame/GLGame';
+import type { IDataConsumer } from './Library/Measurements/Interfaces/IDataConsumer';
+import type { IScadaConsumer } from './Library/Scada/Interfaces/IScadaConsumer';
+import { EngineWatch } from './Library/Utilities/Watch/EnfineWatch';
 
 PerformerEvents.setTimeScale(0.001)
-export default function funcAirplane(): void {
+export function funcAirplane(): void {
     var find = new ScadaFind3dFrame("Camera");
     var ga = new ReferenceFrameGameActionFactory(find);
 
@@ -31,11 +30,13 @@ export default function funcAirplane(): void {
     if (canv === undefined) return
     let canvas = canv as HTMLCanvasElement
 
+    let eng = new EngineWatch(500)
+
     // Then we create an instance of the game class and give it the canvas
-    const game = new GLGame("", factory, canvas, { maxfps: 25 });
+    const game = new GLGame("", factory, eng, canvas, { maxfps: 25 });
 
     game.getExternalAction().addAction(new A("game"));
-   // g.setImitation(10, 1, 0);
+    // g.setImitation(10, 1, 0);
 
 
     // Here we list all our scenes and our initial scene
@@ -49,7 +50,7 @@ export default function funcAirplane(): void {
     // Then we add those scenes to the game object and ask it to start the initial scene
     //var sc = type of SpaceTrippersScene
     //game.addScenes(scenes);
-   // game.addSceneObject("Game", new SpaceTrippersScene(game))
+    // game.addSceneObject("Game", new SpaceTrippersScene(game))
     game.addScene("Air", sc)
     game.startItself(true)
 
@@ -58,20 +59,20 @@ export default function funcAirplane(): void {
     if (sel === undefined) return
     // Here we setup a selector element to switch scenes from the webpage
     var selector = sel as HTMLSelectElement
-/*    for (let name in scenes) {
-        let option = document.createElement("option");
-        option.text = name;
-        option.value = name;
-        selector.add(option);
-    }
-    selector.value = initialScene;
-    selector.addEventListener("change", () => {
-     //   game.startScene(selector.value);
-    });
-    /*
-    let act = new ActorWebNew()
-    act.actCompositionEvent(game)
-    */
+    /*    for (let name in scenes) {
+            let option = document.createElement("option");
+            option.text = name;
+            option.value = name;
+            selector.add(option);
+        }
+        selector.value = initialScene;
+        selector.addEventListener("change", () => {
+         //   game.startScene(selector.value);
+        });
+        /*
+        let act = new ActorWebNew()
+        act.actCompositionEvent(game)
+        */
 }
 export class A extends AbstractAction {
     s: string = ""
@@ -125,5 +126,5 @@ class TA extends AbstractActionT<number> {
 }
 
 
-funcAirplane()
+
 

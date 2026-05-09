@@ -10,10 +10,11 @@ const AbstractAction_1 = require("./src/Library/Event/Objects/AbstractAction");
 const AbstractActionT_1 = require("./src/Library/Event/Objects/AbstractActionT");
 const EngineGame_1 = require("./src/Library/Game/Abstract/EngineGame");
 const ActionArrayT_1 = require("./src/Library/Utilities/Generic/ActionArrayT");
+const EnfineWatch_1 = require("./src/Library/Utilities/Watch/EnfineWatch");
 const PIAct_1 = require("./test/wrappers/PIAct");
 class Actor {
+    //engine: FictiveEngine = new FictiveEngine()
     constructor() {
-        this.engine = new FictiveEngine();
         this.dir = "C:\\AUsers\\1MySoft\\CSharp\\src\\TypeScript\\WebGLConsole/static/models";
         this.dir = this.dir.replaceAll("\\", "/");
         var find = new ScadaFind3DFrame_1.ScadaFind3dFrame("Camera");
@@ -22,7 +23,8 @@ class Actor {
         this.factory = f;
         f.addFactory(find, "IFindFrame");
         f.addFactory(new ScadaFindCamera_1.ScadaFindCamera("Camera"), "IFindCamera");
-        var g = new EngineGame_1.EngineGame("", this.factory, this.engine);
+        let engine = new EnfineWatch_1.EngineWatch(500);
+        var g = new EngineGame_1.EngineGame("", this.factory, engine);
         g.getExternalAction().addAction(new A("game"));
         this.game = g;
         var sc = new AirplaneScene_1.AirplaneScene(this.game, "Chart");
@@ -33,9 +35,9 @@ class Actor {
     loadGame() {
         this.game.loadItself(true);
         this.game.startItself(true);
-        for (let i = 0; i < 10; i++) {
-            this.engine.setTime(i);
-        }
+        /* for (let i = 0; i < 10; i++) {
+              this.engine.setTime(i)
+          }*/
     }
     actPI() {
         try {
@@ -93,7 +95,7 @@ class TA extends AbstractActionT_1.AbstractActionT {
         }
     }
 }
-class FictiveEngine {
+class FictiveEngine1 {
     constructor() {
         this.enabled = false;
         this.action = new ActionArrayT_1.ActionArrayT();

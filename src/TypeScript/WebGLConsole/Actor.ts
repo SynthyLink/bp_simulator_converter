@@ -16,6 +16,7 @@ import { IPlayEngine } from "./src/Library/Interfaces/IPlayEngine";
 import { IDataConsumer } from "./src/Library/Measurements/Interfaces/IDataConsumer";
 import { IScadaConsumer } from "./src/Library/Scada/Interfaces/IScadaConsumer";
 import { ActionArrayT } from "./src/Library/Utilities/Generic/ActionArrayT";
+import { EngineWatch } from "./src/Library/Utilities/Watch/EnfineWatch";
 import { PIAct } from "./test/wrappers/PIAct";
 
 
@@ -25,7 +26,7 @@ export class Actor {
     factory!: IFactory;
     game!: IGame;
 
-    engine: FictiveEngine = new FictiveEngine()
+    //engine: FictiveEngine = new FictiveEngine()
     constructor() {
         this.dir = this.dir.replaceAll("\\", "/");
         var find = new ScadaFind3dFrame("Camera");
@@ -34,7 +35,8 @@ export class Actor {
         this.factory = f;
         f.addFactory<IFindFrame>(find, "IFindFrame")
         f.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")
-        var g = new EngineGame("", this.factory, this.engine);
+        let engine = new EngineWatch(500)
+        var g = new EngineGame("", this.factory, engine);
         g.getExternalAction().addAction(new A("game"));
         this.game = g;
         var sc = new AirplaneScene(this.game, "Chart");
@@ -46,9 +48,9 @@ export class Actor {
     loadGame(): void {
         this.game.loadItself(true);
         this.game.startItself(true);
-        for (let i = 0; i < 10; i++) {
+      /* for (let i = 0; i < 10; i++) {
             this.engine.setTime(i)
-        }
+        }*/
 
     }
 
@@ -120,7 +122,7 @@ class TA extends AbstractActionT<number> {
     }
 }
 
-class FictiveEngine implements IPlayEngine {
+class FictiveEngine1 implements IPlayEngine {
 
     isEngineEnabled(): boolean {
         return this.enabled

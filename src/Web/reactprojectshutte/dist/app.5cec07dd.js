@@ -150,7 +150,7 @@ var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, gene
 var __generator = this && this.__generator || function (thisArg, body) {
   var _ = {
       label: 0,
-      sent: function sent() {
+      sent: function () {
         if (t[0] & 1) throw t[1];
         return t[1];
       },
@@ -245,7 +245,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 ;
 var loadFunctions = {
-  'text': function text(url) {
+  'text': function (url) {
     return __awaiter(void 0, void 0, Promise, function () {
       var response, data;
       return __generator(this, function (_a) {
@@ -262,7 +262,7 @@ var loadFunctions = {
       });
     });
   },
-  'json': function json(url) {
+  'json': function (url) {
     return __awaiter(void 0, void 0, Promise, function () {
       var response, data;
       return __generator(this, function (_a) {
@@ -279,7 +279,7 @@ var loadFunctions = {
       });
     });
   },
-  'image': function image(url) {
+  'image': function (url) {
     return __awaiter(void 0, void 0, Promise, function () {
       return __generator(this, function (_a) {
         return [2 /*return*/, new Promise(function (resolve, reject) {
@@ -307,7 +307,7 @@ var Loader = /** @class */function () {
   }
   Loader.prototype.load = function (resources) {
     var _this = this;
-    var _loop_1 = function _loop_1(name) {
+    var _loop_1 = function (name) {
       var resource = resources[name];
       var promise = loadFunctions[resource.type](resource.url).then(function (data) {
         _this.resources[name] = data;
@@ -9314,28 +9314,28 @@ var Input = /** @class */function () {
     return !this.currentButtons[button] && this.previousButtons[button];
   };
   Object.defineProperty(Input.prototype, "MousePosition", {
-    get: function get() {
+    get: function () {
       return gl_matrix_1.vec2.copy(gl_matrix_1.vec2.create(), this.currentMousePosition);
     },
     enumerable: false,
     configurable: true
   });
   Object.defineProperty(Input.prototype, "MouseDelta", {
-    get: function get() {
+    get: function () {
       return gl_matrix_1.vec2.sub(gl_matrix_1.vec2.create(), this.currentMousePosition, this.perviousMousePosition);
     },
     enumerable: false,
     configurable: true
   });
   Object.defineProperty(Input.prototype, "WheelPosition", {
-    get: function get() {
+    get: function () {
       return gl_matrix_1.vec3.copy(gl_matrix_1.vec3.create(), this.currentWheelPosition);
     },
     enumerable: false,
     configurable: true
   });
   Object.defineProperty(Input.prototype, "WheelDelta", {
-    get: function get() {
+    get: function () {
       return gl_matrix_1.vec3.sub(gl_matrix_1.vec3.create(), this.currentWheelPosition, this.previousWheelPosition);
     },
     enumerable: false,
@@ -9703,7 +9703,7 @@ var __createBinding = this && this.__createBinding || (Object.create ? function 
   if (k2 === undefined) k2 = k;
   Object.defineProperty(o, k2, {
     enumerable: true,
-    get: function get() {
+    get: function () {
       return m[k];
     }
   });
@@ -10061,14 +10061,14 @@ var Camera = /** @class */function () {
     this.far = 1000;
   }
   Object.defineProperty(Camera.prototype, "ViewMatrix", {
-    get: function get() {
+    get: function () {
       return gl_matrix_1.mat4.lookAt(gl_matrix_1.mat4.create(), this.position, gl_matrix_1.vec3.add(gl_matrix_1.vec3.create(), this.position, this.direction), this.up);
     },
     enumerable: false,
     configurable: true
   });
   Object.defineProperty(Camera.prototype, "ProjectionMatrix", {
-    get: function get() {
+    get: function () {
       if (this.type === 'orthographic') {
         var halfH = this.orthographicHeight / 2;
         var halfW = halfH * this.aspectRatio;
@@ -10081,7 +10081,7 @@ var Camera = /** @class */function () {
     configurable: true
   });
   Object.defineProperty(Camera.prototype, "ViewProjectionMatrix", {
-    get: function get() {
+    get: function () {
       var V = this.ViewMatrix,
         P = this.ProjectionMatrix;
       return gl_matrix_1.mat4.mul(P, P, V);
@@ -10093,7 +10093,7 @@ var Camera = /** @class */function () {
     gl_matrix_1.vec3.sub(this.direction, value, this.position);
   };
   Object.defineProperty(Camera.prototype, "right", {
-    get: function get() {
+    get: function () {
       var up = gl_matrix_1.vec3.normalize(gl_matrix_1.vec3.create(), this.up);
       return gl_matrix_1.vec3.cross(up, this.direction, up);
     },
@@ -10412,14 +10412,14 @@ exports.Vector = function (props) {
   var length = Math.min(4, (_b = props.length) !== null && _b !== void 0 ? _b : 4);
   var end = Math.min(start + length, props.vector.length);
   var components = [];
-  var _loop_1 = function _loop_1(i) {
+  var _loop_1 = function (i) {
     components.push(tsx_create_element_1.createElement("label", {
       className: "control-label"
     }, coordinates[i - start]), tsx_create_element_1.createElement("input", {
       type: "number",
       step: "0.05",
       value: props.vector[i],
-      onchange: function onchange(ev) {
+      onchange: function (ev) {
         props.vector[i] = Number.parseFloat(ev.target.value);
       }
     }));
@@ -10436,14 +10436,14 @@ exports.Color = function (props) {
   var length = Math.min(4, (_b = props.length) !== null && _b !== void 0 ? _b : 4);
   var end = Math.min(start + length, props.color.length);
   var components = [];
-  var _loop_2 = function _loop_2(i) {
+  var _loop_2 = function (i) {
     components.push(tsx_create_element_1.createElement("label", {
       className: "control-label"
     }, color_coordinates[i - start]), tsx_create_element_1.createElement("input", {
       type: "number",
       step: "0.05",
       value: props.color[i],
-      onchange: function onchange(ev) {
+      onchange: function (ev) {
         props.color[i] = Number.parseFloat(ev.target.value);
       }
     }));
@@ -10456,7 +10456,7 @@ exports.Color = function (props) {
 exports.Selector = function (props) {
   var value = props.value,
     options = props.options,
-    _onchange = props.onchange,
+    onchange = props.onchange,
     children = props.children,
     rest = __rest(props, ["value", "options", "onchange", "children"]);
   value = value !== null && value !== void 0 ? value : Object.keys(props.options)[0];
@@ -10471,22 +10471,22 @@ exports.Selector = function (props) {
     }, props.options[key]));
   }
   return tsx_create_element_1.createElement("select", __assign({
-    onchange: function onchange(ev) {
+    onchange: function (ev) {
       var e = ev.target;
-      _onchange(e.options[e.selectedIndex].value);
+      onchange(e.options[e.selectedIndex].value);
     }
   }, rest), optionsElements);
 };
 exports.CheckBox = function (props) {
   var value = props.value,
-    _onchange2 = props.onchange,
+    onchange = props.onchange,
     children = props.children,
     rest = __rest(props, ["value", "onchange", "children"]);
   return tsx_create_element_1.createElement("input", {
     type: "checkbox",
     checked: value ? true : undefined,
-    onchange: function onchange(ev) {
-      _onchange2(ev.target.checked);
+    onchange: function (ev) {
+      onchange(ev.target.checked);
     }
   });
 };
@@ -10494,18 +10494,18 @@ exports.CheckBox = function (props) {
 "use strict";
 
 var __extends = this && this.__extends || function () {
-  var _extendStatics = function extendStatics(d, b) {
-    _extendStatics = Object.setPrototypeOf || {
+  var extendStatics = function (d, b) {
+    extendStatics = Object.setPrototypeOf || {
       __proto__: []
     } instanceof Array && function (d, b) {
       d.__proto__ = b;
     } || function (d, b) {
       for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     };
-    return _extendStatics(d, b);
+    return extendStatics(d, b);
   };
   return function (d, b) {
-    _extendStatics(d, b);
+    extendStatics(d, b);
     function __() {
       this.constructor = d;
     }
@@ -10516,7 +10516,7 @@ var __createBinding = this && this.__createBinding || (Object.create ? function 
   if (k2 === undefined) k2 = k;
   Object.defineProperty(o, k2, {
     enumerable: true,
-    get: function get() {
+    get: function () {
       return m[k];
     }
   });
@@ -10938,7 +10938,7 @@ var SpaceTrippersScene = /** @class */function (_super) {
     }, "Lights"), this.lights.map(function (light) {
       return tsx_create_element_1.createElement(dom_utils_1.CheckBox, {
         value: light.enabled,
-        onchange: function onchange(v) {
+        onchange: function (v) {
           light.enabled = v;
         }
       });
@@ -11025,7 +11025,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55333" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53989" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

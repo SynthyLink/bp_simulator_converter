@@ -1,13 +1,13 @@
 {
-  "name": "SpaceTrippers0",
+  "name": "SpaceTrippers",
   "version": "1.0.0",
   "description": "A WebGl 3D interactive game",
   "main": "index.html",
   "scripts": {
-    "watch": "parcel index.html --port 8080",
-    "build": "parcel build index.html"
+    "watch": "parcel index.html",
+    "build": "parcel build index.html --no-source-maps --no-content-hash --public-url ."
   },
-  "start": "node src/app.ts",
+  "start": "node app.js",
   "staticFiles": {
     "staticPath": "static",
     "watcherGlob": "**"
@@ -15,19 +15,17 @@
   "author": "Ahmed Ashraf",
   "license": "MIT",
   "devDependencies": {
-    "@types/gl-matrix": "3.2.0",
-    "@types/webgl2": "0.0.12",
-    "cssnano": "^8.0.0",
-    "parcel": "^2.16.4",
-    "parcel-plugin-static-files-copy": "^1.2.4",
-    "postcss": "^8.5.14",
-    "sass": "^1.99.0",
-    "typescript": "6.0.3"
+    "@types/gl-matrix": "^2.4.5",
+    "@types/webgl2": "0.0.5",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.6.0",
+    "sass": "^1.26.5",
+    "typescript": "^3.9.2"
   },
   "dependencies": {
-    "gl-matrix": "3.4.4",
-    "ts-key-enum": "3.0.13",
-    "tsx-create-element": "2.3.0",
-    "webgl-obj-loader": "2.0.8"
+    "gl-matrix": "^3.3.0",
+    "ts-key-enum": "^2.0.2",
+    "tsx-create-element": "^2.1.0",
+    "webgl-obj-loader": "^2.0.8"
   }
 }

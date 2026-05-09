@@ -1,7 +1,7 @@
-import { IMeshHolder } from "../../Abstract3DConverters/Interfaces/IMeshHolder";
+import type { IMeshHolder } from "../../Abstract3DConverters/Interfaces/IMeshHolder";
 import { AbstractGameAcionConverter } from "../../Game/GameActions/AbstractGameAcionConverter";
-import { ISceneObjectAction } from "../../Game/Interfaces/ISceneObjectAction";
-import { IAction } from "../../Interfaces/IAction";
+import type { ISceneObjectAction } from "../../Game/Interfaces/ISceneObjectAction";
+import type { IAction } from "../../Interfaces/IAction";
 import { ReferenceFrame } from "../../Motion6D/ReferenceFrame";
 import { BasicCamera } from "../../Motion6D/Visible/BasicCamera";
 import { ActionArray } from "../../Utilities/Generic/ActionArray";

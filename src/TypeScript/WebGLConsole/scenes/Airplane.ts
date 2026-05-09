@@ -2,8 +2,8 @@ import { BelongsToCollection } from "../src/Library/Arrows/BelognsToCollection";
 import { Desktop } from "../src/Library/Desktop";
 import { EventLink } from "../src/Library/Event/Objects/EventLink";
 import { TimerObject } from "../src/Library/Event/Objects/TimerObject";
-import { IDesktop } from "../src/Library/Interfaces/IDesktop";
-import { IPostSetArrow } from "../src/Library/Interfaces/IPostSetArrow";
+import type { IDesktop } from "../src/Library/Interfaces/IDesktop";
+import type { IPostSetArrow } from "../src/Library/Interfaces/IPostSetArrow";
 import { DataLink } from "../src/Library/Measurements/Arrows/DataLink";
 import { DataConsumer } from "../src/Library/Measurements/DataConsumer";
 import { VectorFormulaConsumer } from "../src/Library/Measurements/VectorFormulaConsumer";
@@ -96,7 +96,7 @@ class Airplane_CategoryObject_4 extends VectorFormulaConsumer
 	
 	init() : void
 	{
-		var all = this.getAllMeasurements();
+	//	var all = this.getAllMeasurements();
 	}
 	
 	var_0 : number  = 0;

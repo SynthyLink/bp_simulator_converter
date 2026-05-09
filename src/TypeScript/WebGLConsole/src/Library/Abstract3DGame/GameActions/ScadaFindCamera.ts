@@ -1,7 +1,7 @@
 import { EmptyGameObject } from "../../Game/Abstract/EmptyGameObject";
-import { IScene } from "../../Game/Interfaces/IScene";
+import type { IScene } from "../../Game/Interfaces/IScene";
 import { BasicCamera } from "../../Motion6D/Visible/BasicCamera";
-import { IFindCamera } from "../Interfaces/IFindCamera";
+import type { IFindCamera } from "../Interfaces/IFindCamera";
 
 export  class ScadaFindCamera extends EmptyGameObject implements IFindCamera {
     functT(s: IScene): BasicCamera | undefined {

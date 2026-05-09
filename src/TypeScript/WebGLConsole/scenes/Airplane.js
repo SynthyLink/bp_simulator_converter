@@ -72,7 +72,7 @@ class Airplane_CategoryObject_4 extends VectorFormulaConsumer_1.VectorFormulaCon
         this.var_0 = this.getInternalTime();
     }
     init() {
-        var all = this.getAllMeasurements();
+        //	var all = this.getAllMeasurements();
     }
     get_0() {
         return this.success ? this.var_0 : undefined;

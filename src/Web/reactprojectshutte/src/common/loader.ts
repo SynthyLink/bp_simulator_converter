@@ -1,10 +1,10 @@
 import { reject, resolve } from "q";
 
-export interface ResourceInformation {
+export interface ResourceInfo {
     url: string,
     type: 'text' | 'json' | 'image',
-    success?: (name: string, data: any, resource: ResourceInformation, loader: Loader)=>void
-    failure?: (name: string, resource: ResourceInformation, loader: Loader)=>void
+    success?: (name: string, data: any, resource: ResourceInfo, loader: Loader)=>void
+    failure?: (name: string, resource: ResourceInfo, loader: Loader)=>void
 };
 
 const loadFunctions = {
@@ -41,7 +41,7 @@ export default class Loader {
         this.promises = [];
     }
 
-    public load(resources: { [name: string]: ResourceInformation }) {
+    public load(resources: {[name:string]:ResourceInfo}){
         for(let name in resources){
             let resource = resources[name];
             let promise = loadFunctions[resource.type](resource.url)
