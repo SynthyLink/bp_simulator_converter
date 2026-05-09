@@ -5,6 +5,7 @@ import { PurePath } from "./PurePath";
 
 export class PurePathFactory implements IPathFactory, IObject {
     createPath(obj: any): IPath {
+        this.any = obj
         return new PurePath();
     }
 
@@ -27,5 +28,7 @@ export class PurePathFactory implements IPathFactory, IObject {
     protected types: string[] = ["IObject", "IPathFactory", "PurePathFactory"];
 
     protected name: string = "";
+
+    protected any !: any
 
 }

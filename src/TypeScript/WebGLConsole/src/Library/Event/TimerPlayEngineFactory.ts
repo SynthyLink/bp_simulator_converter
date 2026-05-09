@@ -24,10 +24,14 @@ export class TimerPlayEngineFactory implements ITimerFactory {
     isEmptyActionT(): boolean { return false }
 
     isTimerFactoryEnabled(): boolean {
-       return true
+        return this.enabled
     }
+
     setTimerFactoryEnabled(enabled: boolean): void {
+        this.enabled = enabled
     }
+
+    enabled: boolean = false
 
     getTimerFromFactory(timeSpan: TimeSpan): ITimer {
         var t = new Timer(this, timeSpan)

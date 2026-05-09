@@ -23,7 +23,7 @@ export class DataRuntimeConsumerODE extends DataRuntimeConsumer
         
         let processor = factory.getFactory<IDifferentialEquationProcessor>("IDifferentialEquationProcessor")
         if (processor === undefined) {
-            throw new OwnNotImplemented()
+            throw new OwnNotImplemented("DataRuntimeConsumerODE")
         }
         this.processor = processor.newDifferentialEquations();
         let equations: IDifferentialEquationSolver[] = [];

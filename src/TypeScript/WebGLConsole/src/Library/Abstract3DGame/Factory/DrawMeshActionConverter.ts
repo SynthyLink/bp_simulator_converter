@@ -1,4 +1,3 @@
-import { AbstractAction } from "../../Event/Objects/AbstractAction";
 import { AbstractGameAcionConverter } from "../../Game/GameActions/AbstractGameAcionConverter";
 import type { IAction } from "../../Interfaces/IAction";
 import type { IObject } from "../../Interfaces/IObject";

@@ -95,7 +95,7 @@ export class Desktop implements IDesktop, IObject
                 return o;
             }
         }
-        throw new OwnNotImplemented();
+        throw new OwnNotImplemented("DESKTOP");
     }
 
     getCategoryObjects(): ICategoryObject[] {

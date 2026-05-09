@@ -33,18 +33,21 @@ export class DataRuntimeConsumerEvent extends DataRuntimeConsumerODE implements 
         var up = this.dataConsumer as unknown as IExternalUpdateClient
         var ob = this.dataConsumer as unknown as IObject;
         let a: IActionAddRemove = new ActionArray()
-        this.getExtenalUpdate(ob, this, a)
+        this.getExternalUpdate(ob, this, a)
         up.setExternalUpdate(a)
     }
 
-
-
-    getExtenalUpdate(obj: IObject | undefined, realime: IRealtimeCollection, act: IActionAddRemove): void {
-        this.mPerformer.createUpdateMeasurementsAction(this, act)
-        this.act = act
+    getExternalUpdate(obj: IObject | undefined, realime: IRealtimeCollection, action: IActionAddRemove): void {
+        this.mPerformer.createUpdateMeasurementsAction(this, action)
+        this.act = action
+        this.fo = obj
+        this.fre = realime
     }
 
     act !: IAction
+    fo !: IObject | undefined
+
+    fre !: IRealtimeCollection
 
     protected prepare(dataConsumer: IDataConsumer) {
         super.prepare(dataConsumer)
@@ -67,8 +70,11 @@ export class DataRuntimeConsumerEvent extends DataRuntimeConsumerODE implements 
         return this
     }
     setComponentCollection(collection: IComponentCollection): void {
-        
+        this.fc = collection
     }
+
+    protected fc !: IComponentCollection
+
     isComponentCollectionRunning(): boolean {
         return this.isEnabled
     }

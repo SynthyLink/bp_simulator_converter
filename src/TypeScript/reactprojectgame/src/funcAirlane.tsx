@@ -12,7 +12,7 @@ import { GLGame } from "./Library/GLGame/GLGame";
 import type { IDataConsumer } from "./Library/Measurements/Interfaces/IDataConsumer";
 import type { IScadaConsumer } from "./Library/Scada/Interfaces/IScadaConsumer";
 import { EngineWatch } from "./Library/Utilities/Watch/EnfineWatch";
-import  AirplaneScene  from "../scenes/AirplaneScene";
+import { AirplaneScene } from "../scenes/AirplaneScene";
 import { AbstractAction } from "./Library/Event/Objects/AbstractAction";
 
 

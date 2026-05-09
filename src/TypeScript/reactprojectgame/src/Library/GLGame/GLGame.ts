@@ -5,7 +5,7 @@ import Loader from "../RemoteResuorces/Loader";
 import type { ResourceInformation } from "../RemoteResuorces/Loader";
 import type { IResourceFuncFactory } from "../Resources/Infrefaces/IResourceFuncFactory";
 import { GLGamePerformer } from "./GLGamePerformer";
-import { GameOptions } from "./interfaces/IGameOptions";
+import type { GameOptions } from "./interfaces/IGameOptions";
 import type { IGLContext } from "./interfaces/IGLContext";
 
 export class GLGame extends EngineGame implements IGLContext {
@@ -40,6 +40,7 @@ export class GLGame extends EngineGame implements IGLContext {
     }
 
     loadItself(load: boolean): boolean {
+        this.fl = load
         return true;
     }
 
@@ -48,6 +49,8 @@ export class GLGame extends EngineGame implements IGLContext {
         super.startItself(true)
 
     }
+
+    fl: boolean = false
 
     startItself(start: boolean): boolean {
         if (this.isStarted == start) return false

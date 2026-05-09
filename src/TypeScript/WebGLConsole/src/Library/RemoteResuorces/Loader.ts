@@ -1,4 +1,3 @@
-import { reject, resolve } from "q";
 
 export interface ResourceInformation {
     url: string,

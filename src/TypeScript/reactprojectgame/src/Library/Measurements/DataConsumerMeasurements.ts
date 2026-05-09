@@ -86,6 +86,8 @@ export class DataConsumerMeasurements extends DataConsumer
 
     setExternalAliases(map: Map<string, string>): void
     {
-
+        this.fmap = map
     }
+
+    protected fmap: Map<string, string> = new Map()
 }

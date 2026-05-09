@@ -162,7 +162,7 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
     }
 
     refreshRuntime(): void {
-        throw new OwnNotImplemented();
+        throw new OwnNotImplemented("DataRuntimeConsumer");
     }
 
     startRuntime(time: number): void

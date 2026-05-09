@@ -13,7 +13,10 @@ export class EmptyGameActionFactory extends AbstractGameActionFactory {
     action: IGameAction = new EmptyGameAction();
 
     getGameAction(object: any): IGameAction | undefined {
+        this.any = object
         return this.action
     }
+
+    any : any
 
 }

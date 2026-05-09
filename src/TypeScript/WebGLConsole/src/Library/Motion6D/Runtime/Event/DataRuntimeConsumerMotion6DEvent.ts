@@ -34,11 +34,8 @@ export class DataRuntimeConsumerMotion6DEvent extends DataRuntimeConsumerEvent {
         }
     }
 
-
-   
-
-    getExtenalUpdate(obj: IObject | undefined, realime: IRealtimeCollection, act : IActionAddRemove) : void {
-        super.getExtenalUpdate(obj, realime, act)
+    getExternalUpdate(obj: IObject | undefined, realime: IRealtimeCollection, act: IActionAddRemove): void {
+        super.getExternalUpdate(obj, realime, act)
         if (this.motionPeformer === undefined) {
             this.motionPeformer = new Motion6DPerformer()
         }

@@ -713,7 +713,7 @@ class UpdateAct implements IAction {
         this.relative = relative;
     }
     action(): void {
-        throw new OwnNotImplemented();
+        throw new OwnNotImplemented("UpdateAct");
     }
     isEmptyAction(): boolean { return false }
 

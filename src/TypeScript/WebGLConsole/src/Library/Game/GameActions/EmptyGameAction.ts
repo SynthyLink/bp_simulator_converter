@@ -17,7 +17,10 @@ export class EmptyGameAction extends AbstractGameAction implements IAction {
         return false;
     }
     functT(s: ISceneObject): IAction | undefined {
+        this.s = s
         return this;
     }
+
+    protected s !: ISceneObject
 
 }

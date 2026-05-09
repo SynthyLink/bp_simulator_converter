@@ -40,7 +40,7 @@ export class SceneObjectAction implements IActionT<ISceneObject> {
             this.gameAcion = a
         }
         else {
-            throw new OwnNotImplemented();
+            throw new OwnNotImplemented("SCENE OBJECT ACTION");
         }
 
         var conv = f.getFactory<IGameActionConverter>("IGameActionConverter")

@@ -51,7 +51,7 @@ export class Converter3DPefrormer {
 
 
     public stringToColor(str: string, hex: boolean): ColorTexture {
-        if (hex) throw new OwnNotImplemented()
+        if (hex) throw new OwnNotImplemented("Converter3DPefrormer")
         let values: number[] = []
         for (var v of str) {
             if (v.length == 0) {

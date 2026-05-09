@@ -32,7 +32,9 @@ export class ScadaScene extends AbstractScene implements IScadaConsumer
     getConsumerScada(): IScadaInterface {
         return this.scada;
     }
+
     setConsumerScada(scada: IScadaInterface): boolean {
+        this.scada = scada
         return false
     }
 

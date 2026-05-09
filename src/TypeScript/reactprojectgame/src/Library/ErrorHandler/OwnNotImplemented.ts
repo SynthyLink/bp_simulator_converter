@@ -3,8 +3,8 @@ import { OwnError } from "./OwnError";
 
 export class OwnNotImplemented extends OwnError
 {
-    constructor()
+    constructor(m?: string | undefined)
     {
-        super("", "Method not implemented", undefined);
+        super(m, "Method not implemented", undefined);
     };
 }

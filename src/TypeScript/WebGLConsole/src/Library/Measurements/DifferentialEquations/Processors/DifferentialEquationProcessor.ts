@@ -47,7 +47,7 @@ export class DifferentialEquationProcessor implements IDifferentialEquationProce
     {
         this.fstart = start
         this.ffinish = finish
-        throw new OwnNotImplemented();
+        throw new OwnNotImplemented("DifferentialEquationProcessor");
     }
 
     fstart: number = 0
@@ -81,7 +81,7 @@ export class DifferentialEquationProcessor implements IDifferentialEquationProce
 
     newDifferentialEquations(): IDifferentialEquationProcessor
     {
-        throw new OwnNotImplemented();
+        throw new OwnNotImplemented("DifferentialEquationProcessor");
     }
 
     getDifferentialEquationsDimention(): number

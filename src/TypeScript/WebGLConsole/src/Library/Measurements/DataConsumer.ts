@@ -1,6 +1,5 @@
 import { CategoryObject } from "../CategoryObject";
 import { ActionArray } from "../Utilities/Generic/ActionArray";
-import { Performer } from "../Performer";
 import type { IAction } from "../Interfaces/IAction";
 import type { IActionAddRemove } from "../Interfaces/IActionAddRemove";
 import type { IAddRemove } from "../Interfaces/IAddRemove";
@@ -86,7 +85,11 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
 
     addChildT(child: IEvent): void
     {
+        this.fchild = child
     }
+
+    fchild !: IEvent
+
 
     addEventToHandler(event: IEvent): void {
         var ev = this.performer.convertObject(event, "IEvent")
@@ -101,7 +104,11 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         this.iterator = iterator;
     }
     removeIterator(iterator: IIterator): void {
+        this.fi = iterator
     }
+
+    fi !: IIterator
+
     getCheck(): ICheck {
         return this.checker;
     }

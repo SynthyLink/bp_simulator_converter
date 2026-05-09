@@ -6,7 +6,6 @@ import type { IStarted } from "../Measurements/Interfaces/IStarted";
 import type { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
 import type { ICategoryArrow } from "./ICategoryArrow";
 import type { ICategoryObject } from "./ICategoryObject";
-import type { ITimerFactory } from "./ITimerFactory";
 
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-unused-vars */

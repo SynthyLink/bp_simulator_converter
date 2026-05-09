@@ -66,7 +66,7 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
         super.setConsumerFactory(factory)
         let tr = factory.getFactory<ITextReaderFactory>("ITextReaderFactory")
         if (tr === undefined) {
-            throw new OwnNotImplemented()
+            throw new OwnNotImplemented("Text Reader Scene3DMesh")
         }
         this.textReader = tr
     }

@@ -64,10 +64,12 @@ export abstract class AbstractGame extends EmptyGameObject implements IGame, IRe
  
     cycle(time: number): void {
         if (!this.isStarted) return
+        this.ft = time
         this.intAct.action()
         this.externalAction.action()
         this.internalAction.action()
     }
+
 
     getObjectCollection(): IObject[] {
         return this.objects;
@@ -121,6 +123,7 @@ export abstract class AbstractGame extends EmptyGameObject implements IGame, IRe
     }
 
     removeChildT(child: IScene): void {
+        this.performer.remove(this.children, child)
     }
 
     getChildernT(): IScene[] {
@@ -158,6 +161,9 @@ export abstract class AbstractGame extends EmptyGameObject implements IGame, IRe
     protected areResourcesLoaded: boolean = false
 
     protected resources: IResourceItem[] = []
+
+    protected ft !: number
+
 
  
 }

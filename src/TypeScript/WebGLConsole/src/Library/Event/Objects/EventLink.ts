@@ -14,7 +14,7 @@ export class EventLink extends CategoryArrow
     setSource(source: ICategoryObject): void {
         var h = this.getObjectT<IEventHandler, ICategoryObject>(source, "IEventHandler")
         if (h.length == 0) {
-            throw new OwnNotImplemented();
+            throw new OwnNotImplemented("EVENT LINK");
         }
         this.handler = h[0]
         super.setSource(source)
@@ -24,7 +24,7 @@ export class EventLink extends CategoryArrow
         this.target = target;
         var e = this.getObjectT<IEvent, ICategoryObject>(target, "IEvent")
         if (e.length == 0) {
-            throw new OwnNotImplemented();
+            throw new OwnNotImplemented("Event link");
         }
         this.event = e[0]
         this.handler.addEventToHandler(e[0])

@@ -1,6 +1,5 @@
 import type { IScene } from "../../Game/Interfaces/IScene"
 import type { IAssociatedObject } from "../../Interfaces/IAssociatedObject"
-import type { IFactory } from "../../Interfaces/IFactory"
 import type { IObject } from "../../Interfaces/IObject"
 import { AbstractSceneObject } from "./AbstractSceneObject"
 
@@ -19,10 +18,11 @@ export abstract class AssociatedSceneObject extends AbstractSceneObject implemen
     getAssociatedObject(): IObject {
         return this.object
     }
+
     setAssociatedObject(obj: IObject): void {
+        this.object = obj
     }
 
-    protected factory !: IFactory
 
 
 }
