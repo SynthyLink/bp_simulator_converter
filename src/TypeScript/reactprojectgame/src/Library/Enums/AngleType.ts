@@ -1,6 +1,5 @@
-export enum AngleType {
-    Radian, // Radian
-    Circle, // Circle
-    Degree  // Degree
-
+export const  AngleType = {
+    Radian: 'Radian', // Radian
+    Circle: 'Circle', // Circle
+    Degree:  'Degree' // Degree
 }

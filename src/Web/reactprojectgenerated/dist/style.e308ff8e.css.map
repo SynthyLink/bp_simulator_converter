@@ -1,1 +1,0 @@
-{"version":3,"sources":["style.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"style.e308ff8e.css","sourceRoot":"..","sourcesContent":["#controls {\n    padding: 16px;\n}\n\n.control-label {\n    margin: 8px;\n}\n\n.control-row {\n    margin: 8px;\n}"]}

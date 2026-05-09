@@ -5,7 +5,7 @@ import type { IScene } from "../../Game/Interfaces/IScene";
 import type { IAction } from "../../Interfaces/IAction";
 import type { IFactory } from "../../Interfaces/IFactory";
 import type { IPlayEngine } from "../../Interfaces/IPlayEngine";
-import { BasicCamera } from "../../Motion6D/Visible/BasicCamera.1";
+import { BasicCamera } from "../../Motion6D/Visible/BasicCamera";
 import type { IFindCamera } from "../Interfaces/IFindCamera";
 import { DrawMeshGameCameraAcionConverter } from "../Objects/DrawMeshGameCameraAcionConverter";
 
@@ -43,6 +43,7 @@ export class EngineGameImitationCameraAction extends EngineGame implements
     }
 
     public getGameActionConverterCamera(camera: BasicCamera) {
+        console.log(camera)
 
     }
 

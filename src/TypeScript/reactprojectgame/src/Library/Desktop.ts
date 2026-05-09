@@ -54,7 +54,7 @@ export class Desktop implements IDesktop, IObject
         var ii = this.performer.getByInterface(this, "IInitializeTask");
         for (var i of ii) {
             var k = i as unknown as IInitializeTask;
-            var kk = k.initializeTaskAsync(cancel);
+            k.initializeTaskAsync(cancel);
             init.push(k);
         }
         await Promise.all(init);

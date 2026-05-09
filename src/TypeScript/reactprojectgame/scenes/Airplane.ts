@@ -4,6 +4,7 @@ import { EventLink } from "../src/Library/Event/Objects/EventLink";
 import { TimerObject } from "../src/Library/Event/Objects/TimerObject";
 import type { IDesktop } from "../src/Library/Interfaces/IDesktop";
 import type { IPostSetArrow } from "../src/Library/Interfaces/IPostSetArrow";
+import { BasicCamera } from "../src/Library/Motion6D/Visible/BasicCamera";
 import { DataLink } from "../src/Library/Measurements/Arrows/DataLink";
 import { DataConsumer } from "../src/Library/Measurements/DataConsumer";
 import { VectorFormulaConsumer } from "../src/Library/Measurements/VectorFormulaConsumer";
@@ -11,7 +12,6 @@ import { ReferenceFrameArrow } from "../src/Library/Motion6D/Arrows/ReferenceFra
 import { RigidReferenceFrame } from "../src/Library/Motion6D/Objects/RigidReferenceFrame";
 import { SerializablePosition } from "../src/Library/Motion6D/Objects/SerializablePosition";
 import { Basic3DShape } from "../src/Library/Motion6D/Objects/Shapes/Basic3DShape";
-import { BasicCamera } from "../src/Library/Motion6D/Visible/BasicCamera.1";
 import { VisibleConsumerLink } from "../src/Library/Motion6D/Visible/VisibleConsumerLink";
 import { TimeSpan } from "../src/Library/Utilities/DateTime/TimeSpan";
 

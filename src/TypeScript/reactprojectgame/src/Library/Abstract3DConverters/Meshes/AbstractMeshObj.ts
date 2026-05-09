@@ -36,7 +36,6 @@ export class AbstractMeshObj extends AbstractMeshPolygon {
                       }
                   }
               }*/
-            let np = 0;
             var eff = tuple?.effect;
             if (eff != undefined) this.effect = eff;
 

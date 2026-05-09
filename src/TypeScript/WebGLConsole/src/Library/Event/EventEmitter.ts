@@ -2,7 +2,7 @@
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+/*
 class EventEmitter1 {
     private listeners: { [key: string]: ((data: any) => void)[] } = {};
 
@@ -26,7 +26,7 @@ class EventEmitter1 {
     }
 }
 
-
+/*
 class MyComponent extends EventEmitter1 {  // Inherit from EventEmitter
     doSomething() {
         // ... some logic ...
@@ -53,3 +53,4 @@ myComponent.on('actionCompleted', () => {
 
 myComponent.doSomething();    // Output: Data changed: { value: 42 }
 myComponent.anotherAction();  // Output: Action completed!
+*/

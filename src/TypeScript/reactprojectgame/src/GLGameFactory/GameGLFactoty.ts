@@ -1,4 +1,4 @@
-import type { IMtlDetector } from "../Library/Abstract3DConverters/Interfaces/IMtlDetector";
+//import type { IMtlDetector } from "../Library/Abstract3DConverters/Interfaces/IMtlDetector";
 import { BasicGameLoaderFactory } from "../Library/Abstract3DGame/Factory/BacicGameLoaderFactory";
 import type { IGameActionFactory } from "../Library/Game/Interfaces/IGameActionFactory";
 import type  { IGameLoaderFactory } from "../Library/Game/Interfaces/IGameLoaderFactory";

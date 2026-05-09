@@ -5,7 +5,7 @@ import { EulerAngles } from "./EulerAngles";
 export class Vector3DProcessor {
 
 
-    private idQuaternion: number[] = [1, 0, 0, 0];
+   // private idQuaternion: number[] = [1, 0, 0, 0];
 
     protected realMatrix: RealMatrix = new RealMatrix();
 
@@ -125,7 +125,7 @@ export class Vector3DProcessor {
         m[2][2] = qq[0][0] - qq[1][1] - qq[2][2] + qq[3][3];
     }
 
-    public calculateDynamics(q: number[], der: number[], m: number[][], omega: number[],
+    public calculateDynamics(q: number[], der: number[],  omega: number[],
         qd: number[][]): void {
         let norm = 1 / Math.sqrt(q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]);
         for (let i = 0; i < 4; i++) {
@@ -147,7 +147,7 @@ export class Vector3DProcessor {
 
     public calculateDynamicsLong(q: number[], der: number[], m: number[][], omega: number[],
         qq: number[][], qd: number[][]): void {
-        this.calculateDynamics(q, der, m, omega, qd);
+        this.calculateDynamics(q, der,  omega, qd);
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j <= i; j++) {
                 qq[i][j] = q[i] * q[j];

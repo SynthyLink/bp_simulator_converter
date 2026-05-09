@@ -2,7 +2,8 @@
 //import React from 'react';
 
 import { useEffect } from "react";
-import funcAirplane from "./funcAirlane";
+import { funcAirplane } from "./funcAirlane";
+//import { funcAirplane } from "./funcAirlane";
 
 //import funcAirplane from './funcAirlane';
 export default function App() {
@@ -32,7 +33,14 @@ export default function App() {
             </span></>
     return contents
 }
+
+
 async function populateData() {
-    console.log('POP');
-    funcAirplane()
+    try {
+
+        funcAirplane()
+    }
+    catch (e) {
+        console.log(e)
+    }
 }

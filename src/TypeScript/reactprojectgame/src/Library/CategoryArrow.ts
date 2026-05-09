@@ -12,7 +12,6 @@ import { FictiveDesktop } from "./Fiction/FictiveDesktop";
 import type { ICategoryArrow } from "./Interfaces/ICategoryArrow";
 import type { ICategoryObject } from "./Interfaces/ICategoryObject";
 import type { IDesktop } from "./Interfaces/IDesktop";
-import type { IObject } from "./Interfaces/IObject";
 import { Performer } from "./Performer";
 
 export class CategoryArrow extends EmptyObject implements ICategoryArrow

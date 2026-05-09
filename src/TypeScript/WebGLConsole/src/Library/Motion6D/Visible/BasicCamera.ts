@@ -42,9 +42,11 @@ export class BasicCamera extends BasicPosition implements IVisibleConsumer, ICam
         this.performer.remove<IVisible>(this.visible, object);
     }
     postVisibleObject(object: IVisible): void {
+        console.log(object)
     }
 
 
     protected visible: IVisible[] = [];
 
 }
+

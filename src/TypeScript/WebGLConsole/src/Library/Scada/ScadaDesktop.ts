@@ -17,6 +17,7 @@ export  class ScadaDesktop extends ScadaInterface implements IComponentCollectio
         return this.componentCollection
     }
     setComponentCollection(collection: IComponentCollection): void {
+        this.componentCollection = collection
     }
     
     getObjectCollection(): IObject[] {

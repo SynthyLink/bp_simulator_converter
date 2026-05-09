@@ -46,8 +46,9 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
     }
 
     func !: IFuncT<ITextReader | undefined, string>
-    setScene(scene: IScene): void {
 
+    setScene(scene: IScene): void {
+        this.scene = scene
     }
 
     getResources(): IResourceItem[] {
@@ -70,8 +71,6 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
         this.textReader = tr
     }
  
-    addURLRource(name: string, url: string, type: string): void {
-    }
 
     getHolderMeshes(): IMesh[] {
         return this.meshes

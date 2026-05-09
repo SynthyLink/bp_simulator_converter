@@ -4,6 +4,7 @@ import type { IStringSplitter } from "./Interfaces/IStringSplitter";
 export class LineEndSplitter implements IObject, IStringSplitter {
 
     splitStrings(object: any, str: string): string[] {
+        this.object = object
         return str.split('\n')
     }
 
@@ -25,5 +26,7 @@ export class LineEndSplitter implements IObject, IStringSplitter {
     protected types: string[] = ["IObject", "IStringSplitter", "LineEndSplitter"];
 
     protected name: string = "";
+
+    private object: any
 
 }

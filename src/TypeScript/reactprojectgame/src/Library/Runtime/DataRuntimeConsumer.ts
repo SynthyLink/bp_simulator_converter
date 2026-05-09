@@ -157,7 +157,8 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
 
     stepRuntime(begin: number, end: number): void
     {
-
+        console.log(begin)
+        console.log(end)
     }
 
     refreshRuntime(): void {

@@ -113,6 +113,7 @@ export abstract class ScadaInterface implements IScadaInterface, IObject
         return this.dConstant.get(name)
     }
     getScadaOutputsFunc(name: string): IFunc<any[]> | undefined {
+        console.log(name)
         return undefined;
     }
 

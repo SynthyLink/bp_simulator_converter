@@ -762,7 +762,7 @@ export class Performer
     public convertArrayT<T, S>(collection: IObjectCollection, f: IFuncT<T, S>, type: string): T[] {
         let t: T[] = []
         let add = new AddTS<T, S>(t, f)
-        this.forEach<S>(collection, add, "type")
+        this.forEach<S>(collection, add, type)
         return t
     }
 
@@ -816,7 +816,7 @@ export class Performer
  
  
 
-    public createObjectCollectionAction<T, S>(collection: IObjectCollection,
+    public createObjectCollectionAction(collection: IObjectCollection,
         f:  IFuncT<IAction | undefined, IObject>): IActionAddRemove {
         var act = new ActionArray();
         var creator = new ActionCreator(f, act)

@@ -1,6 +1,6 @@
 import { EmptyObject } from "../../EmptyObject";
 import type { IGameActionConverter } from "../../Game/Interfaces/IGameActionConverter";
-import { BasicCamera } from "../../Motion6D/Visible/BasicCamera.1";
+import { BasicCamera } from "../../Motion6D/Visible/BasicCamera";
 import type { ICameraMeshDrawing } from "../Interfaces/ICameraMeshDrawing";
 
 export class CameraMeshDrawing extends EmptyObject implements ICameraMeshDrawing {
@@ -10,6 +10,7 @@ export class CameraMeshDrawing extends EmptyObject implements ICameraMeshDrawing
     }
 
     functT(s: BasicCamera): IGameActionConverter | undefined {
+        console.log(s)
         return undefined
     }
 }

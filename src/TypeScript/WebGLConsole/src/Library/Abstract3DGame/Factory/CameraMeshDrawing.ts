@@ -10,6 +10,7 @@ export class CameraMeshDrawing extends EmptyObject implements ICameraMeshDrawing
     }
 
     functT(s: BasicCamera): IGameActionConverter | undefined {
+        console.log(s)
         return undefined
     }
 }

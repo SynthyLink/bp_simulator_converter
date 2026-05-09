@@ -7,6 +7,7 @@ import type { IScadaInterface } from "./Interfaces/IScadaInterface";
 export class ScadaPerformer implements IActionT<IScadaConsumer>
 {
     public setScada(collection: IObjectCollection, scada: IScadaInterface): void {
+        this.scada = scada
         this.pefrormer.forEach<IScadaConsumer>(collection, this, "IScadaConsumer")
     }
 

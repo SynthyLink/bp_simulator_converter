@@ -121,8 +121,6 @@ export abstract class AbstractMeshCreator extends FactoryObject implements IMesh
 
     protected url: string = "";
 
-    protected factory !: IFactory
-
     protected obj: any
 
     protected typeName: string = "AbstractMeshCreator";

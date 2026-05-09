@@ -43,6 +43,7 @@ export class EngineGameImitationCameraAction extends EngineGame implements
     }
 
     public getGameActionConverterCamera(camera: BasicCamera) {
+        console.log(camera)
 
     }
 

@@ -1,7 +1,7 @@
 /// <summary>
 /// Types of mass
 /// </summary>
-export  enum MassType {
-    Kilogram,   // Kilogram
-    Gram        // Gram
+export  const MassType = {
+    Kilogram:'Kilogram',   // Kilogram
+    Gram: 'Gram'     // Gram
 }

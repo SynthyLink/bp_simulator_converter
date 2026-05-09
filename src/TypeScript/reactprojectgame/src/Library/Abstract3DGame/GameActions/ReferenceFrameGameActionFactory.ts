@@ -15,6 +15,7 @@ export class ReferenceFrameGameActionFactory extends AbstractGameActionFactory
         this.find = find;
     }
     functT(s: ISceneObject): IAction | undefined {
+        this.s = s
         return undefined;
     }
     getGameAction(object: any): IGameAction | undefined {
@@ -26,4 +27,6 @@ export class ReferenceFrameGameActionFactory extends AbstractGameActionFactory
     }
 
     find !: IFindFrame
+
+    s : ISceneObject
 }

@@ -1,5 +1,5 @@
-export enum CameraType {
-    Matrix,
-    Othoraphic,
-    Projection
+export const CameraType = {
+    Matrix:'Matrix',
+    Othoraphic:'Othoraphic',
+    Projection:'Projection'
 }

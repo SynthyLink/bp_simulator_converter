@@ -7,7 +7,6 @@ import { DataRuntimeConsumerMotion6DEvent } from "./DataRuntimeConsumerMotion6DE
 import { Performer } from "../../../Performer";
 import { PerformerMeasuremets } from "../../../Measurements/PerformerMeasuremets";
 import { FictiveRealtimeCollection } from "../../../Fiction/FictiveRealtimeCollection";
-import { RungeProcessor } from "../../../Measurements/DifferentialEquations/Processors/RungeProcessor";
 import { Motion6DFactory } from "../../Motion6DFactory";
 
 export class Motion6DRealtimeFactory implements IRealtimeCollectionFactory, IObject {
@@ -33,7 +32,8 @@ export class Motion6DRealtimeFactory implements IRealtimeCollectionFactory, IObj
 
 
     createRealtimeFromCollection(collection: IComponentCollection): IRealtimeCollection {
-        let processor = new RungeProcessor()
+        //  let processor = new RungeProcessor()
+        console.log(collection)
         return new FictiveRealtimeCollection()
     }
 

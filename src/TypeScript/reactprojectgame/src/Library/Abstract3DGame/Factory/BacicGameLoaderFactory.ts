@@ -10,7 +10,10 @@ export class BasicGameLoaderFactory extends AbstractGameLoaderFactory {
         this.types.push("BasicGameLoaderFactory")
     }
     getLoader(object: any): ILoader {
+        this.current = object
         return new Object3DLoader()
     }
+
+    current !: any
 
 }

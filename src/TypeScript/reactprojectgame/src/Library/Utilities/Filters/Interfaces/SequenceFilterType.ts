@@ -1,4 +1,4 @@
-export enum SequenceFilterType {
-    Donchian,
-    Avarage
+export const SequenceFilterType = {
+    Donchian: 'Donchian',
+    Avarage: 'Avarage'
 }

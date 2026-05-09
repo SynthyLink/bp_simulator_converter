@@ -8,7 +8,7 @@ import type { IMeasurement } from "./Interfaces/IMeasurement";
 
 export class SequenceFilterWrapper extends DataConsumerMeasurements implements IMeasurement {
 
-    protected type: SequenceFilterType = SequenceFilterType.Avarage;
+    protected type: string = SequenceFilterType.Avarage;
 
     protected mimax: boolean = true;
 

@@ -7,10 +7,13 @@ export class EmptyActionT<T> extends AbstractActionT<T> {
         this.types.push("EmptyActionT")
     }
 
-    actionT(t : T): void {
+    actionT(t: T): void {
+        this.t = t
     }
 
     isEmptyActionT(): boolean {
         return true
     }
+
+    t !: T
 }
