@@ -1,4 +1,4 @@
-import { GameGLFactory } from "./GLGameFactory/GameGLFactoty";
+import { GameGLFactory } from "./GLGameFactory/GameGLFactory";
 import { ReferenceFrameGameActionFactory } from "./Library/Abstract3DGame/GameActions/ReferenceFrameGameActionFactory";
 import { ScadaFind3dFrame } from "./Library/Abstract3DGame/GameActions/ScadaFind3DFrame";
 import { ScadaFindCamera } from "./Library/Abstract3DGame/GameActions/ScadaFindCamera";
@@ -16,24 +16,29 @@ import { AirplaneScene } from "../scenes/AirplaneScene";
 import { AbstractAction } from "./Library/Event/Objects/AbstractAction";
 
 
+let first = true;
+
+export const funcAirplane = (): void => {
+    console.log("First ", first)
+    if (!first) return
+    let canv = document.querySelector("#app");
+    if (canv === undefined) return
+    if (canv === null) return
+    const canvas: HTMLCanvasElement = canv as HTMLCanvasElement
+    if (canvas === undefined) return
+    if (canvas === null) return
+    first = false
 
 
-export const funcAirplane = () : void => {
     PerformerEvents.setTimeScale(0.001)
- var find = new ScadaFind3dFrame("Camera");
+    var find = new ScadaFind3dFrame("Camera");
     var ga = new ReferenceFrameGameActionFactory(find);
-
-
+    console.log("GA")
     let factory = new GameGLFactory(ga)
     const engine = new EngineWatch(500)
     factory.addFactory<IFindFrame>(find, "IFindFrame")
     factory.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")
 
-    // First thing we need is to get the canvas on which we draw our scenes
-    let canv = document.querySelector("#app");
-    if (canv === undefined) return
-    if (canv === null) return
-    const canvas: HTMLCanvasElement = canv as HTMLCanvasElement
     // Then we create an instance of the game class and give it the canvas
     const game = new GLGame("", factory, engine, canvas, { maxfps: 25 });
 

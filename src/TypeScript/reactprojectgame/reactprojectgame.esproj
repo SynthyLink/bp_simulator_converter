@@ -14,4 +14,7 @@
     <TypeScriptConfiguration Remove="src\Library\Library\**" />
     <TypeScriptConfiguration Remove="src\Library\Runtime\Interfaces\**" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="dist\assets\" />
+  </ItemGroup>
 </Project>

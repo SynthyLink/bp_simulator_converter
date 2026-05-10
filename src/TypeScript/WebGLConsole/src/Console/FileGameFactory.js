@@ -7,7 +7,7 @@ const RelativeFileSystemFactory_1 = require("../FileSystem/IO/RelativeFileSystem
 const MtlDetectorTextReader_1 = require("../Library/Abstract3DConverters/MeshCreators/MtlDetectorTextReader");
 const BacicGameLoaderFactory_1 = require("../Library/Abstract3DGame/Factory/BacicGameLoaderFactory");
 const CameraMeshDrawing_1 = require("../Library/Abstract3DGame/Factory/CameraMeshDrawing");
-const Motion6DFactory_1 = require("../Library/Motion6DFactory");
+const Motion6DFactory_1 = require("../Library/Motion6D/Motion6DFactory");
 const ResourceFuncFactory_1 = require("../Library/Resources/ResourceFuncFactory");
 const LineEndSplitter_1 = require("../Library/Utilities/String/LineEndSplitter");
 class FileGameFactory extends Motion6DFactory_1.Motion6DFactory {

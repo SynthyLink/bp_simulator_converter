@@ -7,6 +7,7 @@ export class FactoryObject extends EmptyObject implements IFactoryConsumer {
         super(name)
         this.types.push("IFactoryConsumer")
         this.types.push("FactoryObject")
+        this.typeName = "FactoryObject"
         if (factory === undefined) return
         this.factory = factory
         

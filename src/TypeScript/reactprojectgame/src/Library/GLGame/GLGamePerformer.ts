@@ -1,13 +1,13 @@
 import { EmptyObject } from "../EmptyObject";
 import { GamePerformer } from "../Game/GamePerformer";
+import Loader from "../RemoteResuorces/Loader";
+import { ResourceFuncFactory } from "../Resources/ResourceFuncFactory";
 import type { IFactory } from "../Interfaces/IFactory";
 import type { ILoadUrl } from "../RemoteResuorces/Interfaces/ILoadUrl";
-import Loader from "../RemoteResuorces/Loader";
 import type { ResourceInformation } from "../RemoteResuorces/Loader";
 import type { IResourceFunc } from "../Resources/Infrefaces/IResourceFunc";
 import type { IResourceFuncFactory } from "../Resources/Infrefaces/IResourceFuncFactory";
 import type { IResourceItem } from "../Resources/Infrefaces/IResourceItem";
-import { ResourceFuncFactory } from "../Resources/ResourceFuncFactory";
 
 export class GLGamePerformer extends GamePerformer {
 

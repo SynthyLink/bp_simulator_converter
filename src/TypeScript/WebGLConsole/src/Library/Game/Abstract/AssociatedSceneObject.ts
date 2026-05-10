@@ -1,6 +1,7 @@
 import type { IScene } from "../../Game/Interfaces/IScene"
 import type { IAssociatedObject } from "../../Interfaces/IAssociatedObject"
 import type { IObject } from "../../Interfaces/IObject"
+import type { IShowObject } from "../../Interfaces/IShowObject"
 import { AbstractSceneObject } from "./AbstractSceneObject"
 
 export abstract class AssociatedSceneObject extends AbstractSceneObject implements IAssociatedObject {
@@ -13,7 +14,17 @@ export abstract class AssociatedSceneObject extends AbstractSceneObject implemen
         this.typeName = "AbstractSceneObject"
         this.object = object
         this.factory = scene.getConsumerFactory()
+        this.show = this.factory.getFactory<IShowObject>("IShowObject")
+        console.log(this)
+
     }
+
+    protected showObject(object: any, str?: string | undefined): void {
+        if (this.show != undefined) this.show.show(object, str)
+    }
+
+    show: IShowObject | undefined = undefined
+
 
     getAssociatedObject(): IObject {
         return this.object

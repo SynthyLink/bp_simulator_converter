@@ -5,7 +5,7 @@ import { EmptyGameAction } from "./EmptyGameAction";
 export class EmptyGameActionFactory extends AbstractGameActionFactory {
 
     constructor() {
-        super()
+        super(undefined)
         this.typeName = "EmptyGameActionFactory"
         this.types.push("EmptyGameActionFactory")
     }

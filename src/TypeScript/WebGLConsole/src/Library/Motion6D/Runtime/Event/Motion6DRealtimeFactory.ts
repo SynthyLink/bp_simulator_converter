@@ -2,34 +2,18 @@ import type { IRealtimeCollectionFactory } from "../../../Interfaces/IRealtimeCo
 import type { IComponentCollection } from "../../../Interfaces/IComponentCollection";
 import type { IRealtimeCollection } from "../../../Interfaces/IRealtimeCollection";
 import type { IDataConsumer } from "../../../Measurements/Interfaces/IDataConsumer";
-import type { IObject } from "../../../Interfaces/IObject";
 import { DataRuntimeConsumerMotion6DEvent } from "./DataRuntimeConsumerMotion6DEvent";
-import { Performer } from "../../../Performer";
-import { PerformerMeasuremets } from "../../../Measurements/PerformerMeasuremets";
 import { Motion6DFactory } from "../../Motion6DFactory";
 import { EmptyRealtimeCollection } from "../../../Runtime/EmptyRealtimeCollection";
+import { FactoryObject } from "../../../FactorytObject";
 
-export class Motion6DRealtimeFactory implements IRealtimeCollectionFactory, IObject {
+export class Motion6DRealtimeFactory extends FactoryObject implements IRealtimeCollectionFactory {
     constructor() {
+        super("", undefined)
+        this.types.push("IRealtimeCollectionFactory")
+        this.types.push("Motion6DRealtimeFactory")
+        this.typeName = "Motion6DRealtimeFactory"
     }
-
-    protected performer: Performer = new Performer();
-
-    protected mPerformer: PerformerMeasuremets = new PerformerMeasuremets()
-
-    getName(): string {
-        return this.name;
-    }
-
-
-    getClassName(): string {
-        return this.typeName;
-    }
-
-    imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
-    }
-
 
     createRealtimeFromCollection(collection: IComponentCollection): IRealtimeCollection {
         this.collection = collection
@@ -42,10 +26,5 @@ export class Motion6DRealtimeFactory implements IRealtimeCollectionFactory, IObj
         return new DataRuntimeConsumerMotion6DEvent(consumer, new Motion6DFactory())
     }
 
-    protected typeName: string = "Motion6DRealtimeFactory";
-
-    protected types: string[] = ["IObject", "IRealtimeCollectionFactory", "Motion6DRealtimeFactory"];
-
-    protected name: string = "";
 
 }

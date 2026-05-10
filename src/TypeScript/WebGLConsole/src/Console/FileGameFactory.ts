@@ -8,7 +8,7 @@ import { CameraMeshDrawing } from "../Library/Abstract3DGame/Factory/CameraMeshD
 import { IGameActionFactory } from "../Library/Game/Interfaces/IGameActionFactory"
 import { IGameLoaderFactory } from "../Library/Game/Interfaces/IGameLoaderFactory"
 import { IPath } from "../Library/IO/Interfaces/IPath"
-import { Motion6DFactory } from "../Library/Motion6DFactory"
+import { Motion6DFactory } from "../Library/Motion6D/Motion6DFactory"
 import { ResourceFuncFactory } from "../Library/Resources/ResourceFuncFactory"
 import { IStringSplitter } from "../Library/Utilities/String/Interfaces/IStringSplitter"
 import { LineEndSplitter } from "../Library/Utilities/String/LineEndSplitter"

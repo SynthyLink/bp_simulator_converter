@@ -1,9 +1,17 @@
 import type { IFactory } from "./Interfaces/IFactory";
 import type { IObject } from "./Interfaces/IObject";
-import { Performer } from "./Performer";
 import { OwnError } from "./ErrorHandler/OwnError";
+import { FactoryObject } from "./FactorytObject";
 
-export class UniversalFactory implements IObject, IFactory {
+export class UniversalFactory extends FactoryObject implements IFactory {
+    constructor() {
+        super("", undefined)
+        this.factory = this;
+        this.types.push("IFactory")
+        this.types.push("UniversalFactory")
+        this.typeName = "UniversalFactory"
+    }
+    
     getFactory<T>(typeName: string): T | undefined {
         var p = this.factories.get(typeName)
         var pp = this.performer.convertObject<T, any>(p, typeName)
@@ -11,31 +19,12 @@ export class UniversalFactory implements IObject, IFactory {
     }
 
     addFactory<T>(t: T, type: string): void {
-        if (this.factories.has(type)) throw new OwnError("Factory", type, "aleady exists")
+   if (this.factories.has(type)) throw new OwnError("Factory", type, "aleady exists")
         var tt = this.performer.convertObject<IObject, T>(t, type)
         if (tt.length > 0) this.factories.set(type, tt[0])
-    }
-
-    getName(): string {
-        return this.name;
+        else console.log("FAIL")
     }
 
 
-    getClassName(): string {
-        return this.typeName;
-    }
-
-    imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
-    }
-
-    protected typeName: string = "UniversalFactory";
-
-    protected types: string[] = ["IObject", "IFactory", "UniversalFactory"];
-
-    protected name: string = "";
-
-
-    performer: Performer = new Performer()
-    factories: Map<string, IObject> = new Map();
+    protected factories: Map<string, IObject> = new Map();
 }

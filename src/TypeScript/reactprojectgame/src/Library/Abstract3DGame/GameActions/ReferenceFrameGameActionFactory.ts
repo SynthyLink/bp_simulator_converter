@@ -9,8 +9,9 @@ import type { IFindFrame } from "../Interfaces/IFindFrame";
 export class ReferenceFrameGameActionFactory extends AbstractGameActionFactory
     implements IGameAction {
     constructor(find: IFindFrame) {
-        super()
+        super(undefined)
         this.typeName = "ReferenceFrameGameActionFactory"
+        this.types.push("IGameAction")
         this.types.push("ReferenceFrameGameActionFactory")
         this.find = find;
     }
