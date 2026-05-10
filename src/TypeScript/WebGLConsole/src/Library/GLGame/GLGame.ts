@@ -1,10 +1,10 @@
+import { GLGamePerformer } from "./GLGamePerformer";
 import { EngineGame } from "../Game/Abstract/EngineGame";
+import Loader from "../RemoteResuorces/Loader";
 import type { IFactory } from "../Interfaces/IFactory";
 import type { IPlayEngine } from "../Interfaces/IPlayEngine";
-import Loader from "../RemoteResuorces/Loader";
 import type { ResourceInformation } from "../RemoteResuorces/Loader";
 import type { IResourceFuncFactory } from "../Resources/Infrefaces/IResourceFuncFactory";
-import { GLGamePerformer } from "./GLGamePerformer";
 import type { GameOptions } from "./interfaces/IGameOptions";
 import type { IGLContext } from "./interfaces/IGLContext";
 

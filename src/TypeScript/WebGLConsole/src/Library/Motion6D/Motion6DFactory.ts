@@ -11,7 +11,7 @@ export class Motion6DFactory extends UniversalFactory {
         this.typeName = "Motion6DFactory"
         let processor = new RungeProcessor();
         this.addFactory<IDifferentialEquationProcessor>(processor, "IDifferentialEquationProcessor")
-        let f = new Motion6DRealtimeFactory()
+        let f = new Motion6DRealtimeFactory(this)
         this.addFactory<IRealtimeCollectionFactory>(f, "IRealtimeCollectionFactory")
     }
 }

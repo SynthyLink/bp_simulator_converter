@@ -8,8 +8,9 @@ import { EmptyRealtimeCollection } from "../../../Runtime/EmptyRealtimeCollectio
 import { FactoryObject } from "../../../FactorytObject";
 
 export class Motion6DRealtimeFactory extends FactoryObject implements IRealtimeCollectionFactory {
-    constructor() {
+    constructor(mF : Motion6DFactory) {
         super("", undefined)
+        this.mF = mF;
         this.types.push("IRealtimeCollectionFactory")
         this.types.push("Motion6DRealtimeFactory")
         this.typeName = "Motion6DRealtimeFactory"
@@ -22,8 +23,10 @@ export class Motion6DRealtimeFactory extends FactoryObject implements IRealtimeC
 
     collection!: IComponentCollection
 
+    mF !: Motion6DFactory 
+
     createRealtimeFromDataConsumer(consumer: IDataConsumer): IRealtimeCollection {
-        return new DataRuntimeConsumerMotion6DEvent(consumer, new Motion6DFactory())
+        return new DataRuntimeConsumerMotion6DEvent(consumer, this.mF)
     }
 
 

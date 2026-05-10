@@ -4,8 +4,6 @@ import type { IEffectDitionary } from "../Interfaces/IEffectDitionary";
 import type { IMaterialCreator } from "../Interfaces/IMaterialCreator";
 import type { ITextureIndex } from "../Interfaces/ITextureIndex";
 import type { IMesh } from "../Interfaces/IMesh";
-import type { IFuncT } from "../../Interfaces/IFuncT";
-import type { ITextReader } from "../../IO/Interfaces/ITextReader";
 import { Converter3DPefrormer } from "../Converter3DPerformer";
 import { Performer } from "../../Performer";
 import { ColorTexture } from "../ColorTexture";
@@ -19,10 +17,11 @@ import { Material } from "../Materials/Material";
 import { PhongMaterial } from "../Materials/PhongMaterial";
 import { SpecularMaterial } from "../Materials/SpecularMaterial";
 import { AbstractMeshObj } from "../Meshes/AbstractMeshObj";
+import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
 
 export class Obj3DCreator extends LinesMeshCreator {
     constructor(url: string, name: string, directory: string, obj: any,
-        factory: IFactory, func: IFuncT<ITextReader | undefined, string>) {
+        factory: IFactory, func: ITextReaderFactory | undefined) {
         super(url, name, directory, obj, factory, func)
     }
 

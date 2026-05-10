@@ -1,8 +1,15 @@
-import type { IObject } from "../Interfaces/IObject";
+import { EmptyObject } from "../EmptyObject";
 import type { ITextReader } from "./Interfaces/ITextReader";
 
 
-export class LinesTextReader implements IObject, ITextReader {
+export class LinesTextReader extends EmptyObject implements ITextReader {
+
+    constructor() {
+        super("")
+        this.types.push("ITextReader")
+        this.types.push("EmptyObject")
+        this.typeName = "EmptyObject"
+    }
 
     getStrings(): string[] {
         return this.strings
@@ -36,18 +43,6 @@ export class LinesTextReader implements IObject, ITextReader {
         }
     }
 
-    getName(): string {
-        return this.name;
-    }
-
-
-    getClassName(): string {
-        return this.typeName;
-    }
-
-    imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
-    }
 
     protected typeName: string = "LinesTextReader";
 

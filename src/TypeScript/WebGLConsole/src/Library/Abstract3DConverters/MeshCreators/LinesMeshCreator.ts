@@ -1,17 +1,16 @@
 import type { IFactory } from "../../Interfaces/IFactory";
-import type { IFuncT } from "../../Interfaces/IFuncT";
-import type { ITextReader } from "../../IO/Interfaces/ITextReader";
+import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
 import type { IStringSplitter } from "../../Utilities/String/Interfaces/IStringSplitter";
 import { AbstractMeshCreator } from "./AbstractMeshCreator";
 
 export abstract class LinesMeshCreator extends AbstractMeshCreator
 {
     constructor(url: string, name: string, directory: string, obj: any, factory: IFactory,
-        func: IFuncT<ITextReader | undefined, string> | undefined) {
+        func: ITextReaderFactory | undefined) {
         super(url, name, directory, obj, factory)
         if (func == undefined) return
         this.func = func
-        var r = func.functT(url);
+        var r = func.getTextReader(obj, url)
         if (r === undefined) return;
         let tc = factory.getFactory<IStringSplitter>("IStringSplitter")
         if (tc != undefined) {
@@ -51,11 +50,12 @@ export abstract class LinesMeshCreator extends AbstractMeshCreator
 
     protected loadStrings(url: string): string[] {
         var r = this.textReaderFactory.getTextReader(this.obj, url)
+        if (r === undefined) return []
         return r.getStrings()
     }
 
-  
-    func !: IFuncT<ITextReader | undefined, string>
+
+    func !: ITextReaderFactory
 
 
     protected abstract loadLines(): void

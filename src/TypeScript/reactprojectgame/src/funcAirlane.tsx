@@ -19,7 +19,6 @@ import { AbstractAction } from "./Library/Event/Objects/AbstractAction";
 let first = true;
 
 export const funcAirplane = (): void => {
-    console.log("First ", first)
     if (!first) return
     let canv = document.querySelector("#app");
     if (canv === undefined) return
@@ -33,7 +32,6 @@ export const funcAirplane = (): void => {
     PerformerEvents.setTimeScale(0.001)
     var find = new ScadaFind3dFrame("Camera");
     var ga = new ReferenceFrameGameActionFactory(find);
-    console.log("GA")
     let factory = new GameGLFactory(ga)
     const engine = new EngineWatch(500)
     factory.addFactory<IFindFrame>(find, "IFindFrame")

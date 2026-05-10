@@ -10,7 +10,6 @@ export class UniversalFactory extends FactoryObject implements IFactory {
         this.types.push("IFactory")
         this.types.push("UniversalFactory")
         this.typeName = "UniversalFactory"
-        console.log("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
     }
     
     getFactory<T>(typeName: string): T | undefined {
@@ -20,9 +19,6 @@ export class UniversalFactory extends FactoryObject implements IFactory {
     }
 
     addFactory<T>(t: T, type: string): void {
-        console.log("Type ", type)
-        console.log("T ", t)
-        console.log("NUMBER ", this.factories.size)
    if (this.factories.has(type)) throw new OwnError("Factory", type, "aleady exists")
         var tt = this.performer.convertObject<IObject, T>(t, type)
         if (tt.length > 0) this.factories.set(type, tt[0])

@@ -11,6 +11,7 @@ export class MtlDetectorTextReader implements IMtlDetector
 
     detectMtl(url: string, obj: any): string[] {
         var reader = this.factory.getTextReader(obj, url);
+        if (reader === undefined) return []
         return reader.getStrings();
     }
     getName(): string {
