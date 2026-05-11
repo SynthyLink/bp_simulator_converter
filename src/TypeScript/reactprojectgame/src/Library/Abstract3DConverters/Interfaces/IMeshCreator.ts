@@ -1,15 +1,12 @@
 import type { IFactory } from "../../Interfaces/IFactory";
 import type { IObject } from "../../Interfaces/IObject";
-import { EffectTexture } from "../EffectTexture";
+import type { IUrlObject } from "../../IO/Interfaces/IUrlObject";
 import type { IMesh } from "./IMesh";
+import { EffectTexture } from "../EffectTexture";
 
 
-export interface IMeshCreator extends IObject {
+export interface IMeshCreator extends IObject, IUrlObject {
 
-    /// <summary>
-    /// Directory
-    /// </summary>
-    getMeshCreatorURL(): string
 
     /// <summary>
     /// Loads itself

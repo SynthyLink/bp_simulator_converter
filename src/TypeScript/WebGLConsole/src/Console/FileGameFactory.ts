@@ -7,9 +7,11 @@ import { BasicGameLoaderFactory } from "../Library/Abstract3DGame/Factory/BacicG
 import { CameraMeshDrawing } from "../Library/Abstract3DGame/Factory/CameraMeshDrawing"
 import { IGameActionFactory } from "../Library/Game/Interfaces/IGameActionFactory"
 import { IGameLoaderFactory } from "../Library/Game/Interfaces/IGameLoaderFactory"
+import type { IShowObject } from "../Library/Show/Interfaces/IShowObject"
 import { IPath } from "../Library/IO/Interfaces/IPath"
 import { Motion6DFactory } from "../Library/Motion6D/Motion6DFactory"
 import { ResourceFuncFactory } from "../Library/Resources/ResourceFuncFactory"
+import { EmptyShowObject } from "../Library/Show/EmptyShowObject"
 import { IStringSplitter } from "../Library/Utilities/String/Interfaces/IStringSplitter"
 import { LineEndSplitter } from "../Library/Utilities/String/LineEndSplitter"
 
@@ -33,6 +35,8 @@ export class FileGameFactory extends Motion6DFactory  {
         let rf = new ResourceFuncFactory("", undefined);
         this.addFactory<ResourceFuncFactory>(rf, "IResourceFuncFactory")
         rf.addFunction("text", new FileResourceFuncText(path))
+        let show = new EmptyShowObject(this)
+        this.addFactory<IShowObject>(show, "IShowObject")
         var cc = new CameraMeshDrawing();
         //var ccc = new CameraActionConveretFactory("Camera", cc)
         //this.addFactory<IGameAcionConverterFactory>(ccc, "IGameAcionConverterFactory")

@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="reactprojectgame.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+</Solution>

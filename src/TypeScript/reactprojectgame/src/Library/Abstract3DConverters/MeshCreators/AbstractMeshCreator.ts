@@ -24,6 +24,12 @@ export abstract class AbstractMeshCreator extends FactoryObject implements IMesh
         this.types.push("AbstractMeshCreator")
         this.typeName = "AbstractMeshCreator"
     }
+    getObjectUrl(): string {
+        return this.url
+    }
+    setObjecttUrl(url: string): void {
+        this.url = url
+    }
 
 
     getMeshCreatorDirectory(): string {

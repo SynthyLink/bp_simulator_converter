@@ -18,11 +18,13 @@ import { PhongMaterial } from "../Materials/PhongMaterial";
 import { SpecularMaterial } from "../Materials/SpecularMaterial";
 import { AbstractMeshObj } from "../Meshes/AbstractMeshObj";
 import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
+import { FactoryObject } from "../../FactorytObject";
 
 export class Obj3DCreator extends LinesMeshCreator {
     constructor(url: string, name: string, directory: string, obj: any,
         factory: IFactory, func: ITextReaderFactory | undefined) {
         super(url, name, directory, obj, factory, func)
+        this.showObject("C", "Obj3DCreator constructor")
     }
 
     public getIndexes(): ITextureIndex[][] {
@@ -93,7 +95,7 @@ export class Obj3DCreator extends LinesMeshCreator {
     }
 
     createMaterialsFromLines(lines: string[], eff: EffectTexture[]): Map<string, EffectTexture> {
-        console.log(eff)
+        this.showObject(eff, "EFF")
         let mtl = new MtlWrapper(this.obj, "", this.factory, 0, lines, this.dict, "")
         let et: EffectTexture[] = []
         let mt = mtl.createFromLines(lines, 0, et)
@@ -534,11 +536,10 @@ export class Obj3DCreator extends LinesMeshCreator {
 
 }
 
-class MtlWrapper implements IEffectDitionary {
+class MtlWrapper extends FactoryObject implements IEffectDitionary {
     effects: Map<string, EffectTexture> = new Map();
     name: string = "";
     obj: any;
-    factory!: IFactory;
     lines: string[] = [];
     directory: string = "";
     dict: Map<string, EffectTexture> = new Map();
@@ -569,7 +570,8 @@ class MtlWrapper implements IEffectDitionary {
 
     constructor(obj: any, name: string, factory: IFactory, start: number, lines: string[], effects: Map<string, EffectTexture>,
         directory: string) {
-        console.log(effects)
+        super(name, factory)
+        this.effects = effects
         this.name = name;
         this.factory = factory;
         this.obj = obj;

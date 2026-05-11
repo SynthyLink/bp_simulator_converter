@@ -9,7 +9,6 @@ import { useEffect } from "react";
 export default function App() {
 
     /* document.addEventListener('DOMContentLoaded', (event) => {
-         console.log('DOM fully loaded and parsed');
          // Your code here
       })*/
 

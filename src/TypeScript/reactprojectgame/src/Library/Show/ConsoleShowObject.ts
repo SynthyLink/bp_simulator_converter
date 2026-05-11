@@ -1,17 +1,10 @@
-import type { IFactory } from "../Interfaces/IFactory";
-import { EmptyShowObject } from "./EmptyShowObject";
+import { AbstractActionT } from "../Event/Objects/AbstractActionT";
+import type { IShowData } from "./Interfaces/IShowData";
 
-export class ConsoleShowObject extends EmptyShowObject {
-    constructor(factory: IFactory) {
-        super(factory)
-        this.types.push("ConsoleShowObject")
-        this.typeName = "ConsoleShowObject"
+export class ConsoleShowObject extends AbstractActionT<IShowData> {
+    actionT(t: IShowData): void {
+        console.log("Name ", t.name)
+        console.log("Object ", t.show)
     }
-
-    show(object: any, str?: string | undefined): void {
-        super.show(object, str)
-        console.log("STR ", str)
-        console.log("OBJ ", object)
-    }
-
+     
 }

@@ -6,7 +6,9 @@ import type { IFactory } from "../../Interfaces/IFactory"
 import type { IObject } from "../../Interfaces/IObject"
 import type { IResourceCollection } from "../../Resources/Infrefaces/IResouceCollection"
 import type { IResourceItem } from "../../Resources/Infrefaces/IResourceItem"
+import type { IGameDetector } from "../Interfaces/IGameDetector"
 import { ActionArray } from "../../Utilities/Generic/ActionArray"
+import { GameDetector } from "../GameDetector"
 import { GamePerformer } from "../GamePerformer"
 import { EmptyGameObject } from "./EmptyGameObject"
 
@@ -23,6 +25,9 @@ export abstract class AbstractGame extends EmptyGameObject implements IGame, IRe
         this.types.push("IResourceCollection")
         this.types.push("AbstractGame")
         this.typeName = "AbstractGame"
+        if (factory != undefined) {
+            factory.addFactory<IGameDetector>(new GameDetector(this, factory), "IGameDetector")
+        }
     }
 
     getResources(): IResourceItem[] {
