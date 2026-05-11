@@ -1,5 +1,4 @@
 import { GLGamePerformer } from "./GLGamePerformer";
-import { EngineGame } from "../Game/Abstract/EngineGame";
 import Loader from "../RemoteResuorces/Loader";
 import type { IFactory } from "../Interfaces/IFactory";
 import type { IPlayEngine } from "../Interfaces/IPlayEngine";
@@ -7,9 +6,9 @@ import type { ResourceInformation } from "../RemoteResuorces/Loader";
 import type { IResourceFuncFactory } from "../Resources/Infrefaces/IResourceFuncFactory";
 import type { GameOptions } from "./interfaces/IGameOptions";
 import type { IGLContext } from "./interfaces/IGLContext";
-import { EngineGameImitationCameraAction } from "../Abstract3DGame/Games/EngineGameCameraAction";
+import { EngineGameCameraAction } from "../Abstract3DGame/Games/EngineGameCameraAction";
 
-export class GLGame extends EngineGameImitationCameraAction implements IGLContext {
+export class GLGame extends EngineGameCameraAction implements IGLContext {
 
     constructor(name: string, factory: IFactory, engine: IPlayEngine,
         canvas: HTMLCanvasElement, options: GameOptions) {
@@ -59,14 +58,19 @@ export class GLGame extends EngineGameImitationCameraAction implements IGLContex
         return true
     }
 
-    loadProtected(): void {
+
+    async loadProtected(): Promise<void> {
+        console.log("LLLL")
         this.nextSceneReady = false
         this.resourcesI.clear()
         this.performer.collectResources(this, this)
         this.glGamePerformer.convertResourceInfo(this.resources, this.resourcesI)
         this.loader.loadMap(this.resourcesI)
-        this.loader.wait().then(this.nextScene)
-        //this.loader.load()
+        console.log(this.resourcesI)
+        await this.loader.wait()
+        console.log("WWWWLLLL")
+        console.log(this.loader)
+        this.nextScene()
     }
 
     run(): void {

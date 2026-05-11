@@ -1,13 +1,14 @@
 import type { ISceneObject } from "../../Game/Interfaces/ISceneObject"
 import type { ISceneObjectAction } from "../../Game/Interfaces/ISceneObjectAction"
+import type { IFactory } from "../../Interfaces/IFactory"
 import type { IObject } from "../../Interfaces/IObject"
-import { EmptyGameObject } from "../Abstract/EmptyGameObject"
+import { AbstractGameObject } from "../Abstract/AbstractGameObject"
 
-export abstract class AbstractSceneGameAction extends EmptyGameObject implements ISceneObjectAction {
+export abstract class AbstractSceneGameAction extends AbstractGameObject implements ISceneObjectAction {
     object!: ISceneObject
     add !: IObject
-    constructor(object: ISceneObject) {
-        super("", undefined)
+    constructor(object: ISceneObject, factory: IFactory | undefined) {
+        super("", factory)
         this.typeName = "AbstractSceneGameAction"
         this.types.push("ISceneObjectAction")
         this.types.push("IAction")

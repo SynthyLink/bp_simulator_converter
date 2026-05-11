@@ -4,6 +4,7 @@ import type { IEffectDitionary } from "../Interfaces/IEffectDitionary";
 import type { IMaterialCreator } from "../Interfaces/IMaterialCreator";
 import type { ITextureIndex } from "../Interfaces/ITextureIndex";
 import type { IMesh } from "../Interfaces/IMesh";
+import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
 import { Converter3DPefrormer } from "../Converter3DPerformer";
 import { Performer } from "../../Performer";
 import { ColorTexture } from "../ColorTexture";
@@ -17,14 +18,11 @@ import { Material } from "../Materials/Material";
 import { PhongMaterial } from "../Materials/PhongMaterial";
 import { SpecularMaterial } from "../Materials/SpecularMaterial";
 import { AbstractMeshObj } from "../Meshes/AbstractMeshObj";
-import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
-import { FactoryObject } from "../../FactorytObject";
-
 export class Obj3DCreator extends LinesMeshCreator {
     constructor(url: string, name: string, directory: string, obj: any,
         factory: IFactory, func: ITextReaderFactory | undefined) {
         super(url, name, directory, obj, factory, func)
-        this.showObject("C", "Obj3DCreator constructor")
+        this.showObject("C", "", "Obj3DCreator constructor")
     }
 
     public getIndexes(): ITextureIndex[][] {
@@ -35,8 +33,7 @@ export class Obj3DCreator extends LinesMeshCreator {
         return this.names
     }
 
-    loadLines(): void
-    {
+    loadLines(): void {
         this.materialLines = []
         this.effectsPrivate = new Map()
         this.usedMaterials = []
@@ -69,8 +66,7 @@ export class Obj3DCreator extends LinesMeshCreator {
         return this.meshes
     }
 
-    createMeshes(): void
-    {
+    createMeshes(): void {
         if (this.effectList.length == 0) {
             var m = new AbstractMeshObj(undefined, "", [], this.default, [], [], [], [], undefined, this, 0, 0)
             this.meshes.push(m)
@@ -82,7 +78,7 @@ export class Obj3DCreator extends LinesMeshCreator {
         }
 
     }
- 
+
 
     createMaterialsFromLUrl(url: string, eff: EffectTexture[]): Map<string, EffectTexture> {
         let lines = this.loadStrings(url)
@@ -94,8 +90,10 @@ export class Obj3DCreator extends LinesMeshCreator {
         return "Mesh_" + this.nm;
     }
 
+    efff: EffectTexture[] = []
+
     createMaterialsFromLines(lines: string[], eff: EffectTexture[]): Map<string, EffectTexture> {
-        this.showObject(eff, "EFF")
+        this.efff = eff
         let mtl = new MtlWrapper(this.obj, "", this.factory, 0, lines, this.dict, "")
         let et: EffectTexture[] = []
         let mt = mtl.createFromLines(lines, 0, et)
@@ -147,38 +145,37 @@ export class Obj3DCreator extends LinesMeshCreator {
         return new EffectTexture(this.effectsPrivate, inm, mat, image);
     }
 
- createGeometry() : void
- {
-     for (var line of this.lines) {
-         if (line.startsWith("usemtl")) {
-             this.createNamedGeometry()
-             return
-         }
-     }
+    createGeometry(): void {
+        for (var line of this.lines) {
+            if (line.startsWith("usemtl")) {
+                this.createNamedGeometry()
+                return
+            }
+        }
 
-     if (this.effectList.length == 0 && this.default != undefined) {
-        this.createDefaultGeometry();
-        return;
+        if (this.effectList.length == 0 && this.default != undefined) {
+            this.createDefaultGeometry();
+            return;
+        }
+        this.createUnNamedGeometry();
     }
-    this.createUnNamedGeometry();
-}
 
+    mttt: Map<string, EffectTexture> = new Map()
 
-
-    createMaterials(): void
-    {
+    createMaterials(): void {
         try {
-           // let def !: EffectTexture;
             let eff: EffectTexture[] = []
+            let mt: Map<string, EffectTexture> = new Map()
+            this.mttt = mt
             if (this.materialLines.length > 0) {
-              // const mt = this.createMaterialsFromLines(this.materialLines, eff)
+                mt = this.createMaterialsFromLines(this.materialLines, eff)
                 if (eff.length > 0) this.default = eff[0]
             }
             else {
                 for (var line of this.lines) {
                     if (line.indexOf("mtllib ") == 0) {
-                        //var file = line.substring("mtllib ".length).trim();
-                        //let mt = this.createMaterialsFromLUrl(file, eff)
+                        var file = line.substring("mtllib ".length).trim();
+                        mt = this.createMaterialsFromLUrl(file, eff)
                         if (eff.length > 0) this.default = eff[0]
                     }
                 }
@@ -200,7 +197,7 @@ export class Obj3DCreator extends LinesMeshCreator {
                 let files = this.directoryio.getDirectoryFiles(this.directory)
                 for (var f of files) {
                     if (this.path.getFileExtension(f) == ".mtl") {
-                       // let mp = this.createMaterialsFromLUrl(f, eff)
+                        this.createMaterialsFromLUrl(f, eff)
                         if (eff.length > 0) this.default = eff[0]
                         break;
                     }
@@ -213,8 +210,7 @@ export class Obj3DCreator extends LinesMeshCreator {
             }
 
         }
-        catch (e)
-        {
+        catch (e) {
         }
     }
 
@@ -249,7 +245,7 @@ export class Obj3DCreator extends LinesMeshCreator {
 
 
     getInitial(line: string): string | undefined {
-       // var n = this.toShiftString(line, this.objs);
+        this.toShiftString(line, this.objs);
         if (line.indexOf("usemtl ") == 0) {
             var mat = line.substring("usemtl ".length);
             var effect = this.detect(mat);
@@ -446,7 +442,7 @@ export class Obj3DCreator extends LinesMeshCreator {
                     indexes.push(this.tuple)
                 }
 
-  
+
                 if (line.indexOf("v ") == 0) {
                     var f = this.toRealArray(line.substring("v ".length).trim());
                     this.vertices.push(f);
@@ -536,10 +532,11 @@ export class Obj3DCreator extends LinesMeshCreator {
 
 }
 
-class MtlWrapper extends FactoryObject implements IEffectDitionary {
+class MtlWrapper implements IEffectDitionary {
     effects: Map<string, EffectTexture> = new Map();
     name: string = "";
     obj: any;
+    factory!: IFactory;
     lines: string[] = [];
     directory: string = "";
     dict: Map<string, EffectTexture> = new Map();
@@ -567,11 +564,10 @@ class MtlWrapper extends FactoryObject implements IEffectDitionary {
 
     newName: string = ""
 
-
+    eeef: Map<string, EffectTexture> = new Map()
     constructor(obj: any, name: string, factory: IFactory, start: number, lines: string[], effects: Map<string, EffectTexture>,
         directory: string) {
-        super(name, factory)
-        this.effects = effects
+        this.eeef = effects
         this.name = name;
         this.factory = factory;
         this.obj = obj;
@@ -610,7 +606,7 @@ class MtlWrapper extends FactoryObject implements IEffectDitionary {
             new MtlWrapper(this.obj, this.newName, this.factory, i + 1, this.lines, this.effects, this.directory);
         }
 
-}
+    }
     /* string str, int start, List<string> lines,
     Dictionary<string, Effect> effects, string directory*/
     getEffectDictionary(): Map<string, EffectTexture> {

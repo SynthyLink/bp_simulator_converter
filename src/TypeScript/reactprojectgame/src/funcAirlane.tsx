@@ -4,6 +4,7 @@ import { ScadaFind3dFrame } from "./Library/Abstract3DGame/GameActions/ScadaFind
 import { ScadaFindCamera } from "./Library/Abstract3DGame/GameActions/ScadaFindCamera";
 import type { IFindCamera } from "./Library/Abstract3DGame/Interfaces/IFindCamera";
 import type { IFindFrame } from "./Library/Abstract3DGame/Interfaces/IFindFrame";
+import { AbstractAction } from "./Library/Event/Objects/AbstractAction";
 import { AbstractActionT } from "./Library/Event/Objects/AbstractActionT";
 import type { TimerObject } from "./Library/Event/Objects/TimerObject";
 import { PerformerEvents } from "./Library/Event/PerformerEvents";
@@ -12,31 +13,31 @@ import { GLGame } from "./Library/GLGame/GLGame";
 import type { IDataConsumer } from "./Library/Measurements/Interfaces/IDataConsumer";
 import type { IScadaConsumer } from "./Library/Scada/Interfaces/IScadaConsumer";
 import { EngineWatch } from "./Library/Utilities/Watch/EnfineWatch";
-import { AirplaneScene } from "../scenes/AirplaneScene";
-import { AbstractAction } from "./Library/Event/Objects/AbstractAction";
+import { AirplaneScene } from "../scenes/AirplaneScene"
 
 
-let first = true;
+PerformerEvents.setTimeScale(0.001)
 
-export const funcAirplane = (): void => {
-    if (!first) return
-    let canv = document.querySelector("#app");
-    if (canv === undefined) return
-    if (canv === null) return
-    const canvas: HTMLCanvasElement = canv as HTMLCanvasElement
-    if (canvas === undefined) return
-    if (canvas === null) return
-    first = false
+export function funcGame() {
 
-
-    PerformerEvents.setTimeScale(0.001)
+}
+export function funcAirplane(): void {
     var find = new ScadaFind3dFrame("Camera");
-    var ga = new ReferenceFrameGameActionFactory(find);
+    var ga = new ReferenceFrameGameActionFactory(find, undefined);
+
+
     let factory = new GameGLFactory(ga)
+    ga.setConsumerFactory(factory)
+
     const engine = new EngineWatch(500)
     factory.addFactory<IFindFrame>(find, "IFindFrame")
     factory.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")
 
+    // First thing we need is to get the canvas on which we draw our scenes
+    let canv = document.querySelector("#app");
+    if (canv === undefined) return
+    if (canv === null) return
+    const canvas: HTMLCanvasElement = canv as HTMLCanvasElement
     // Then we create an instance of the game class and give it the canvas
     const game = new GLGame("", factory, engine, canvas, { maxfps: 25 });
 
