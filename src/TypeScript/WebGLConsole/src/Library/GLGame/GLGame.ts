@@ -1,5 +1,4 @@
 import { GLGamePerformer } from "./GLGamePerformer";
-import { EngineGame } from "../Game/Abstract/EngineGame";
 import Loader from "../RemoteResuorces/Loader";
 import type { IFactory } from "../Interfaces/IFactory";
 import type { IPlayEngine } from "../Interfaces/IPlayEngine";
@@ -7,8 +6,9 @@ import type { ResourceInformation } from "../RemoteResuorces/Loader";
 import type { IResourceFuncFactory } from "../Resources/Infrefaces/IResourceFuncFactory";
 import type { GameOptions } from "./interfaces/IGameOptions";
 import type { IGLContext } from "./interfaces/IGLContext";
+import { EngineGameCameraAction } from "../Abstract3DGame/Games/EngineGameCameraAction";
 
-export class GLGame extends EngineGame implements IGLContext {
+export class GLGame extends EngineGameCameraAction implements IGLContext {
 
     constructor(name: string, factory: IFactory, engine: IPlayEngine,
         canvas: HTMLCanvasElement, options: GameOptions) {

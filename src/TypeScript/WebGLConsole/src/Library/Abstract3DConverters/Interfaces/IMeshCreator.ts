@@ -1,8 +1,8 @@
 import type { IFactory } from "../../Interfaces/IFactory";
 import type { IObject } from "../../Interfaces/IObject";
-import { IUrlObject } from "../../IO/Interfaces/IUrlObject";
-import { EffectTexture } from "../EffectTexture";
+import type { IUrlObject } from "../../IO/Interfaces/IUrlObject";
 import type { IMesh } from "./IMesh";
+import { EffectTexture } from "../EffectTexture";
 
 
 export interface IMeshCreator extends IObject, IUrlObject {

@@ -11,9 +11,10 @@ import type { IShowObject } from "../Library/Show/Interfaces/IShowObject"
 import { IPath } from "../Library/IO/Interfaces/IPath"
 import { Motion6DFactory } from "../Library/Motion6D/Motion6DFactory"
 import { ResourceFuncFactory } from "../Library/Resources/ResourceFuncFactory"
-import { EmptyShowObject } from "../Library/Show/EmptyShowObject"
+import { ShowObject } from "../Library/Show/ShowObject"
 import { IStringSplitter } from "../Library/Utilities/String/Interfaces/IStringSplitter"
 import { LineEndSplitter } from "../Library/Utilities/String/LineEndSplitter"
+import { ConsoleShowObject } from "../Library/Show/ConsoleShowObject"
 
 export class FileGameFactory extends Motion6DFactory  {
     rpath: string = ""
@@ -35,9 +36,10 @@ export class FileGameFactory extends Motion6DFactory  {
         let rf = new ResourceFuncFactory("", undefined);
         this.addFactory<ResourceFuncFactory>(rf, "IResourceFuncFactory")
         rf.addFunction("text", new FileResourceFuncText(path))
-        let show = new EmptyShowObject(this)
+        let show = new ShowObject(this)
         this.addFactory<IShowObject>(show, "IShowObject")
         var cc = new CameraMeshDrawing();
+        show.addActionT(new ConsoleShowObject())
         //var ccc = new CameraActionConveretFactory("Camera", cc)
         //this.addFactory<IGameAcionConverterFactory>(ccc, "IGameAcionConverterFactory")
         //    this.addFactory<IGameAcionConverterFactory>(new GameAcionConverterFactory(),

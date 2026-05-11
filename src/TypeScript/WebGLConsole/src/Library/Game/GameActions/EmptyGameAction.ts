@@ -1,10 +1,11 @@
 import { AbstractGameAction } from "../../Game/Abstract/AbstractGameAction";
 import type { ISceneObject } from "../../Game/Interfaces/ISceneObject";
 import type { IAction } from "../../Interfaces/IAction";
+import type { IFactory } from "../../Interfaces/IFactory";
 
 export class EmptyGameAction extends AbstractGameAction implements IAction {
-    constructor() {
-        super()
+    constructor(name: string, factory: IFactory | undefined) {
+        super(name, factory)
         this.typeName = "EmptyGameAction"
         this.types.push("EmptyGameAction")
     }
@@ -16,6 +17,7 @@ export class EmptyGameAction extends AbstractGameAction implements IAction {
     isEmptyAction(): boolean {
         return false;
     }
+
     functT(s: ISceneObject): IAction | undefined {
         this.s = s
         return this;

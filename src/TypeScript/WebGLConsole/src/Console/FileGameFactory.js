@@ -9,7 +9,9 @@ const BacicGameLoaderFactory_1 = require("../Library/Abstract3DGame/Factory/Baci
 const CameraMeshDrawing_1 = require("../Library/Abstract3DGame/Factory/CameraMeshDrawing");
 const Motion6DFactory_1 = require("../Library/Motion6D/Motion6DFactory");
 const ResourceFuncFactory_1 = require("../Library/Resources/ResourceFuncFactory");
+const ShowObject_1 = require("../Library/Show/ShowObject");
 const LineEndSplitter_1 = require("../Library/Utilities/String/LineEndSplitter");
+const ConsoleShowObject_1 = require("../Library/Show/ConsoleShowObject");
 class FileGameFactory extends Motion6DFactory_1.Motion6DFactory {
     constructor(path, gameActionFactory) {
         super();
@@ -29,7 +31,10 @@ class FileGameFactory extends Motion6DFactory_1.Motion6DFactory {
         let rf = new ResourceFuncFactory_1.ResourceFuncFactory("", undefined);
         this.addFactory(rf, "IResourceFuncFactory");
         rf.addFunction("text", new FlleResourceFuncText_1.FileResourceFuncText(path));
+        let show = new ShowObject_1.ShowObject(this);
+        this.addFactory(show, "IShowObject");
         var cc = new CameraMeshDrawing_1.CameraMeshDrawing();
+        show.addActionT(new ConsoleShowObject_1.ConsoleShowObject());
         //var ccc = new CameraActionConveretFactory("Camera", cc)
         //this.addFactory<IGameAcionConverterFactory>(ccc, "IGameAcionConverterFactory")
         //    this.addFactory<IGameAcionConverterFactory>(new GameAcionConverterFactory(),

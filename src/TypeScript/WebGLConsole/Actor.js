@@ -18,8 +18,9 @@ class Actor {
         this.dir = "C:\\AUsers\\1MySoft\\CSharp\\src\\TypeScript\\WebGLConsole/static/models";
         this.dir = this.dir.replaceAll("\\", "/");
         var find = new ScadaFind3DFrame_1.ScadaFind3dFrame("Camera");
-        var ga = new ReferenceFrameGameActionFactory_1.ReferenceFrameGameActionFactory(find);
+        var ga = new ReferenceFrameGameActionFactory_1.ReferenceFrameGameActionFactory(find, undefined);
         var f = new FileGameFactory_1.FileGameFactory(this.dir, ga);
+        ga.setConsumerFactory(f);
         this.factory = f;
         f.addFactory(find, "IFindFrame");
         f.addFactory(new ScadaFindCamera_1.ScadaFindCamera("Camera"), "IFindCamera");

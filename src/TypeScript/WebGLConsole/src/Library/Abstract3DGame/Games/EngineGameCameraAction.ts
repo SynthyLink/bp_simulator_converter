@@ -9,7 +9,7 @@ import { BasicCamera } from "../../Motion6D/Visible/BasicCamera";
 import type { IFindCamera } from "../Interfaces/IFindCamera";
 import { DrawMeshGameCameraAcionConverter } from "../Objects/DrawMeshGameCameraAcionConverter";
 
-export class EngineGameImitationCameraAction extends EngineGame implements
+export class EngineGameCameraAction extends EngineGame implements
     IGameActionConverterFactory {
 
     constructor(name: string, factory: IFactory, engine: IPlayEngine) {

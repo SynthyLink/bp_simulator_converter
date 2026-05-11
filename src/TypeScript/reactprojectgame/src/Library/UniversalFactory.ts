@@ -22,7 +22,7 @@ export class UniversalFactory extends FactoryObject implements IFactory {
    if (this.factories.has(type)) throw new OwnError("Factory", type, "aleady exists")
         var tt = this.performer.convertObject<IObject, T>(t, type)
         if (tt.length > 0) this.factories.set(type, tt[0])
-        else console.log("FAIL")
+        else console.log("FAIL ", type)
     }
 
 

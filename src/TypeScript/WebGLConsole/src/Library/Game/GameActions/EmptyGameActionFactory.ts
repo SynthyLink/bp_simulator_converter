@@ -10,7 +10,7 @@ export class EmptyGameActionFactory extends AbstractGameActionFactory {
         this.types.push("EmptyGameActionFactory")
     }
 
-    action: IGameAction = new EmptyGameAction();
+    action !: IGameAction
 
     getGameAction(object: any): IGameAction | undefined {
         this.any = object

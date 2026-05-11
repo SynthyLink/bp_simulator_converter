@@ -1,4 +1,4 @@
-import { IUrlObject } from "../IO/Interfaces/IUrlObject";
+import type { IUrlObject } from "../IO/Interfaces/IUrlObject";
 
 export class ImageTexture implements IUrlObject {
 

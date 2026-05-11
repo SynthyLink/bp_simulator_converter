@@ -13,8 +13,9 @@ const GLGame_1 = require("./Library/GLGame/GLGame");
 PerformerEvents_1.PerformerEvents.setTimeScale(0.001);
 function funcAirplane() {
     var find = new ScadaFind3DFrame_1.ScadaFind3dFrame("Camera");
-    var ga = new ReferenceFrameGameActionFactory_1.ReferenceFrameGameActionFactory(find);
+    var ga = new ReferenceFrameGameActionFactory_1.ReferenceFrameGameActionFactory(find, undefined);
     let factory = new GameGLFactoty_1.GameGLFactory(ga);
+    ga.setConsumerFactory(factory);
     factory.addFactory(find, "IFindFrame");
     factory.addFactory(new ScadaFindCamera_1.ScadaFindCamera("Camera"), "IFindCamera");
     // First thing we need is to get the canvas on which we draw our scenes

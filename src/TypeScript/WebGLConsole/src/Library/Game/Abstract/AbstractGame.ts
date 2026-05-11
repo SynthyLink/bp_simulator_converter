@@ -10,9 +10,9 @@ import type { IGameDetector } from "../Interfaces/IGameDetector"
 import { ActionArray } from "../../Utilities/Generic/ActionArray"
 import { GameDetector } from "../GameDetector"
 import { GamePerformer } from "../GamePerformer"
-import { EmptyGameObject } from "./EmptyGameObject"
+import { AbstractGameObject } from "./AbstractGameObject"
 
-export abstract class AbstractGame extends EmptyGameObject implements IGame, IResourceCollection {
+export abstract class AbstractGame extends AbstractGameObject implements IGame, IResourceCollection {
 
     constructor(name: string, factory: IFactory | undefined) {
         super(name, factory)

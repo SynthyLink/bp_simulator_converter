@@ -15,8 +15,9 @@ const EnfineWatch_1 = require("./Library/Utilities/Watch/EnfineWatch");
 PerformerEvents_1.PerformerEvents.setTimeScale(0.001);
 function funcAirplane1(canvas) {
     var find = new ScadaFind3DFrame_1.ScadaFind3dFrame("Camera");
-    var ga = new ReferenceFrameGameActionFactory_1.ReferenceFrameGameActionFactory(find);
+    var ga = new ReferenceFrameGameActionFactory_1.ReferenceFrameGameActionFactory(find, undefined);
     let factory = new GameGLFactoty_1.GameGLFactory(ga);
+    ga.setConsumerFactory(factory);
     factory.addFactory(find, "IFindFrame");
     factory.addFactory(new ScadaFindCamera_1.ScadaFindCamera("Camera"), "IFindCamera");
     const engine = new EnfineWatch_1.EngineWatch(500);

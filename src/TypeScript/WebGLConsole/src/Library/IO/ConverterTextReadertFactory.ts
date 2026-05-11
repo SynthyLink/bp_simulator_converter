@@ -1,6 +1,6 @@
-import { IFuncT } from "../Interfaces/IFuncT";
-import { ITextReader } from "./Interfaces/ITextReader";
-import { ITextReaderFactory } from "./Interfaces/ITextReaderFactory";
+import type { IFuncT } from "../Interfaces/IFuncT";
+import type { ITextReader } from "./Interfaces/ITextReader";
+import type { ITextReaderFactory } from "./Interfaces/ITextReaderFactory";
 
 export class ConverterTextReadertFactory implements ITextReaderFactory {
     constructor(factory: ITextReaderFactory, func: IFuncT<string, string>) {

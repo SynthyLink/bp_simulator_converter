@@ -4,6 +4,7 @@ import type { ISceneObjectAction } from "../../Game/Interfaces/ISceneObjectActio
 import type { IAction } from "../../Interfaces/IAction";
 import type { IObject } from "../../Interfaces/IObject";
 import type { IReferenceFrame } from "../../Motion6D/Interfaces/IReferenceFrame";
+import type { IFactory } from "../../Interfaces/IFactory";
 import { AbstractGameAction } from "../../Game/Abstract/AbstractGameAction";
 import { AbstractSceneGameAction } from "../../Game/GameActions/AbstractSceneGameAction";
 import { ReferenceFrame } from "../../Motion6D/ReferenceFrame";
@@ -11,8 +12,8 @@ import { Game3DPerformer } from "../Game3DPerformer";
 
 export class ReferenceFrameGameAction extends AbstractGameAction
     implements ISceneObjectActionHolder {
-    constructor(frame: IReferenceFrame) {
-        super()
+    constructor(frame: IReferenceFrame, name: string, factory: IFactory | undefined) {
+        super(name, factory)
         this.typeName = "ReferenceFrameGameAction"
         this.types.push("ISceneObjectActionHolder")
         this.types.push("ReferenceFrameGameAction")
@@ -44,7 +45,7 @@ class RotationAction extends AbstractSceneGameAction  {
     relative: ReferenceFrame = new ReferenceFrame()
     motionPerformer: Game3DPerformer = new Game3DPerformer()
     constructor(object: ISceneObject, frame: IReferenceFrame | undefined) {
-        super(object)
+        super(object, object.getConsumerFactory())
         this.typeName = "RotationAction"
         this.types.push("RotationAction")
         this.object = object;
@@ -59,6 +60,7 @@ class RotationAction extends AbstractSceneGameAction  {
 
     action(): void {
         this.motionPerformer.getRelativeFrame(this.baseFrame, this.target, this.relative)
+        this.showObject("", this.relative, "RotationAction")
     }
 
     isEmptyAction(): boolean {

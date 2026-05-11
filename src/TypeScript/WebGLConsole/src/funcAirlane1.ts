@@ -20,10 +20,11 @@ import { EngineWatch } from "./Library/Utilities/Watch/EnfineWatch";
 PerformerEvents.setTimeScale(0.001)
 export default function funcAirplane1(canvas : HTMLCanvasElement): void {
     var find = new ScadaFind3dFrame("Camera");
-    var ga = new ReferenceFrameGameActionFactory(find);
+    var ga = new ReferenceFrameGameActionFactory(find, undefined);
 
 
     let factory = new GameGLFactory(ga)
+    ga.setConsumerFactory(factory)
     factory.addFactory<IFindFrame>(find, "IFindFrame")
     factory.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")
 

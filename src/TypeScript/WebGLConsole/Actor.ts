@@ -30,8 +30,9 @@ export class Actor {
     constructor() {
         this.dir = this.dir.replaceAll("\\", "/");
         var find = new ScadaFind3dFrame("Camera");
-        var ga = new ReferenceFrameGameActionFactory(find);
+        var ga = new ReferenceFrameGameActionFactory(find, undefined);
         var f = new FileGameFactory(this.dir, ga);
+        ga.setConsumerFactory(f)
         this.factory = f;
         f.addFactory<IFindFrame>(find, "IFindFrame")
         f.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")
@@ -122,28 +123,5 @@ class TA extends AbstractActionT<number> {
     }
 }
 
-class FictiveEngine1 implements IPlayEngine {
-
-    isEngineEnabled(): boolean {
-        return this.enabled
-    }
-    setEngineEnabled(enabled: boolean): boolean {
-        if (enabled == this.enabled) return false;
-        this.enabled = enabled
-        return true
-    }
-    getEngineAction(): IActionAddRemoveT<number> {
-        return this.action;
-    }
-
-    public setTime(time: number): void {
-        if (this.enabled) this.action.actionT(time)
-    }
-
-    enabled: boolean = false
-
-    action: IActionAddRemoveT<number> = new ActionArrayT()
-
-}
 
 

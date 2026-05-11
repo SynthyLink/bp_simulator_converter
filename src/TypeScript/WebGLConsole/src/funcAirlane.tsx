@@ -24,10 +24,12 @@ export function funcGame() {
 }
 export function funcAirplane(): void {
     var find = new ScadaFind3dFrame("Camera");
-    var ga = new ReferenceFrameGameActionFactory(find);
+    var ga = new ReferenceFrameGameActionFactory(find, undefined);
 
 
     let factory = new GameGLFactory(ga)
+    ga.setConsumerFactory(factory)
+
     const engine = new EngineWatch(500)
     factory.addFactory<IFindFrame>(find, "IFindFrame")
     factory.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")

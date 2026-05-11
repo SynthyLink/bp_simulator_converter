@@ -1,7 +1,7 @@
 import type { IScene } from "../../Game/Interfaces/IScene"
 import type { IAssociatedObject } from "../../Interfaces/IAssociatedObject"
 import type { IObject } from "../../Interfaces/IObject"
-import type { IShowObject } from "../../Interfaces/IShowObject"
+import type { IShowObject } from "../../Show/Interfaces/IShowObject"
 import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory"
 import type { IResourceFuncFactory } from "../../Resources/Infrefaces/IResourceFuncFactory"
 import type { IResourceItem } from "../../Resources/Infrefaces/IResourceItem"

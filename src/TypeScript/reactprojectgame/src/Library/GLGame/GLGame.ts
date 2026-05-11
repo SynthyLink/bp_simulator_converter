@@ -7,8 +7,9 @@ import type { ResourceInformation } from "../RemoteResuorces/Loader";
 import type { IResourceFuncFactory } from "../Resources/Infrefaces/IResourceFuncFactory";
 import type { GameOptions } from "./interfaces/IGameOptions";
 import type { IGLContext } from "./interfaces/IGLContext";
+import { EngineGameImitationCameraAction } from "../Abstract3DGame/Games/EngineGameCameraAction";
 
-export class GLGame extends EngineGame implements IGLContext {
+export class GLGame extends EngineGameImitationCameraAction implements IGLContext {
 
     constructor(name: string, factory: IFactory, engine: IPlayEngine,
         canvas: HTMLCanvasElement, options: GameOptions) {

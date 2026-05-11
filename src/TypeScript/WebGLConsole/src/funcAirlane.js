@@ -18,8 +18,9 @@ function funcGame() {
 }
 function funcAirplane() {
     var find = new ScadaFind3DFrame_1.ScadaFind3dFrame("Camera");
-    var ga = new ReferenceFrameGameActionFactory_1.ReferenceFrameGameActionFactory(find);
+    var ga = new ReferenceFrameGameActionFactory_1.ReferenceFrameGameActionFactory(find, undefined);
     let factory = new GameGLFactoty_1.GameGLFactory(ga);
+    ga.setConsumerFactory(factory);
     const engine = new EnfineWatch_1.EngineWatch(500);
     factory.addFactory(find, "IFindFrame");
     factory.addFactory(new ScadaFindCamera_1.ScadaFindCamera("Camera"), "IFindCamera");

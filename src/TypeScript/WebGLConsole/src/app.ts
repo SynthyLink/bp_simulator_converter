@@ -2,7 +2,7 @@ import { AirplaneScene } from '../scenes/AirplaneScene';
 import { GameGLFactory } from './GLGameFactory/GameGLFactoty';
 import { ReferenceFrameGameActionFactory } from './Library/Abstract3DGame/GameActions/ReferenceFrameGameActionFactory';
 import { ScadaFind3dFrame } from './Library/Abstract3DGame/GameActions/ScadaFind3DFrame';
-import { ScadaFindCamera } from './Library/Abstract3DGame/GameActions/ScadaFindCamera';
+import { ScadaFindCamera } from "./Library/Abstract3DGame/GameActions/ScadaFindCamera";
 import { IFindCamera } from './Library/Abstract3DGame/Interfaces/IFindCamera';
 import { IFindFrame } from './Library/Abstract3DGame/Interfaces/IFindFrame';
 import { AbstractAction } from './Library/Event/Objects/AbstractAction';
@@ -19,10 +19,11 @@ import { IScadaConsumer } from './Library/Scada/Interfaces/IScadaConsumer';
 PerformerEvents.setTimeScale(0.001)
 function funcAirplane(): void {
     var find = new ScadaFind3dFrame("Camera");
-    var ga = new ReferenceFrameGameActionFactory(find);
+    var ga = new ReferenceFrameGameActionFactory(find, undefined);
 
 
     let factory = new GameGLFactory(ga)
+    ga.setConsumerFactory(factory)
     factory.addFactory<IFindFrame>(find, "IFindFrame")
     factory.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")
 
