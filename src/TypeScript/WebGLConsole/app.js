@@ -8,6 +8,7 @@ console.log('Hello world');
 async function f() {
     await act.p();
 }
-f();
+//f()
+act.loadGame();
 console.log("");
 //# sourceMappingURL=app.js.map

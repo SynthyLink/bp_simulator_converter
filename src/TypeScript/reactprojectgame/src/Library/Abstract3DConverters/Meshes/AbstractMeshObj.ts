@@ -20,8 +20,9 @@ export class AbstractMeshObj extends AbstractMeshPolygon {
         this.intNormals = creator.getNormals();
         this.intTextures = creator.getTextures();
         this.polygons = []
-        console.log("CREATOR", creator)
-        let indexes = creator.getIndexes()[meshNumber]
+        let ind = creator.getIndexes();
+        console.log("IND ", ind)
+        let indexes = ind[meshNumber]
         if (variant == 0) {
             /*  for (let ii of indexes)
               {

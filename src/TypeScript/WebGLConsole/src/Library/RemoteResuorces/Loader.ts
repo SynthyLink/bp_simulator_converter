@@ -8,8 +8,14 @@ export interface ResourceInformation {
 
 const loadFunctions = {
     'text': async (url: string): Promise<any> => {
-        let response = await fetch(url);
+        //  var ss = "http://localhost:4173/static/models/" + url
+        const ss = "./static/models/" + url
+  //      new URL(ss)
+        let response = await fetch(ss)
+
         let data = await response.text();
+        if (response.ok) {
+        }
         return data;
     },
     'json': async (url: string): Promise<any> => {
@@ -18,12 +24,22 @@ const loadFunctions = {
         return data;
     },
     'image': async (url: string): Promise<any> => {
+        const ss = "./static/models/" + url
+      //  let ss = "/static/models/" + url1
         return new Promise((resolve, reject) => {
             let image = new Image();
-            try { if ((new URL(url)).origin !== window.origin) image.crossOrigin = ""; } catch { }
+            try {
+                let us = new URL(ss)
+            if (us.origin !== window.origin)
+                    image.crossOrigin = "";
+            }
+            catch
+            {
+                console.log("CATCH")
+            }
             image.onload = () => resolve(image);
             image.onerror = reject;
-            image.src = url;
+            image.src = ss;
         });
     }
 }
@@ -41,12 +57,14 @@ export default class Loader {
     }
 
     public loadMap(resources: Map<string, ResourceInformation>): void {
+        this.result.clear()
         for (let item of resources) {
-            let name = item[0]
             let resource = item[1]
+            let name = resource.url
             let promise = loadFunctions[resource.type](resource.url)
                 .then(
                     data => {
+                        this.result.set(name, data)
                         this.resources[name] = data;
                         if (resource.success) resource.success(name, data, resource, this);
                     }
@@ -99,5 +117,10 @@ export default class Loader {
             this.promises.splice(0, this.promises.length);
             await Promise.all(awaited);
         }
+    }
+    result: Map<string, any> = new Map()
+
+    public getResult(): Map<string, any> {
+        return this.result
     }
 }

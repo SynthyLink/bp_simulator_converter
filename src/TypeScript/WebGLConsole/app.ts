@@ -10,5 +10,6 @@ async function f() {
     await act.p()
 
 }
-f()
+//f()
+act.loadGame()
 console.log("")

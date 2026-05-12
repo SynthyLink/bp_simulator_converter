@@ -38,11 +38,13 @@ export class Obj3DCreator extends LinesMeshCreator {
         this.effectsPrivate = new Map()
         this.usedMaterials = []
         this.iindexes = []
+        console.log("III", this.iindexes)
         this.names = []
         this.name = ""
         this.createMaterials()
         this.createGeometry()
-    }
+        console.log("IIIIII", this.iindexes)
+   }
 
     iindexes !: ITextureIndex[][]
 
@@ -152,7 +154,6 @@ export class Obj3DCreator extends LinesMeshCreator {
                 return
             }
         }
-
         if (this.effectList.length == 0 && this.default != undefined) {
             this.createDefaultGeometry();
             return;
@@ -440,6 +441,7 @@ export class Obj3DCreator extends LinesMeshCreator {
                         effect: effect, indx: []
                     }
                     indexes.push(this.tuple)
+                    console.log("PUSH ", indexes, this.tuple)
                 }
 
 

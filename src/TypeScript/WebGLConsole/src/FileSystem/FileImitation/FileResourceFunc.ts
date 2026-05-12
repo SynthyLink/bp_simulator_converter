@@ -13,7 +13,7 @@ export abstract class FileResourceFunc extends EmptyObject implements IResourceF
         this.directory = directory
     }
 
-    abstract functT(s: IResourceItem) : any
+    abstract functT(s: string): any
 
     protected directory: string = "";
 

@@ -13,7 +13,7 @@ export class EngineGameCameraAction extends EngineGame implements
     IGameActionConverterFactory {
 
     constructor(name: string, factory: IFactory, engine: IPlayEngine, useLoader: boolean) {
-        super(name, factory, engine, false)
+        super(name, factory, engine, useLoader)
         this.types.push("IGameActionConverterFactory")
         this.types.push("IGameActionConverter")
         this.types.push("EngineGameImitationCameraAction")

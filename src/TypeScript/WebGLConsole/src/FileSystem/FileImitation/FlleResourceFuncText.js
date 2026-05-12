@@ -8,9 +8,9 @@ const fs_1 = __importDefault(require("fs"));
 const FileResourceFunc_1 = require("./FileResourceFunc");
 class FileResourceFuncText extends FileResourceFunc_1.FileResourceFunc {
     functT(s) {
-        if (s.ext.includes("jpg"))
+        if (s.includes(".jpg"))
             return undefined;
-        let path = this.getFillPath(s.url);
+        let path = this.getFillPath(s);
         return fs_1.default.readFileSync(path, "utf-8").replaceAll("\r\n", "\n");
     }
     constructor(directory) {

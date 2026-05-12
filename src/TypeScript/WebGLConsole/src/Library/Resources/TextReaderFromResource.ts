@@ -15,7 +15,7 @@ export class TextReaderFromResource implements ITextReaderFactory {
         for (let r of items) {
             if (r.type == "text") {
                 const url = r.url
-                const d = f.functT(r)
+                const d = f.functT(url)
                 this.map.set(url, d)
             }
         }
@@ -29,8 +29,7 @@ export class TextReaderFromResource implements ITextReaderFactory {
         if (!this.map.has(url)) return undefined
         let r = this.map.get(url)
         if (r != undefined) {
-            let any = this.func.functT(r)
-            console.log("ANY ", any)
+            let any = this.func.functT(url)
             return new LinesTextReaderFromAny(any)
         }
         return undefined
