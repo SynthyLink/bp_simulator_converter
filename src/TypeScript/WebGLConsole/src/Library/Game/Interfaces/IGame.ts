@@ -1,3 +1,6 @@
+import type { IAction } from "../../Interfaces/IAction"
+import type { IActionAddRemoveT } from "../../Interfaces/IActionAddRemoveT"
+import type { IActionT } from "../../Interfaces/IActionT"
 import type { IAddAction } from "../../Interfaces/IAddAction"
 import type { IExternalAction } from "../../Interfaces/IExternalAction"
 import type { IFactoryConsumer } from "../../Interfaces/IFactoryConsumer"
@@ -17,6 +20,12 @@ export interface IGame extends IObjectCollection,
     addScene(name: string, scene: IScene): void
 
     cycle(time: number): void
+
+    getTimeAction(): IActionAddRemoveT<number>
+
+    addTimeAction(action: IActionT<number>, add: boolean): void
+    
+    addPostLoadAction(action: IAction): void
 
     run() : void
 

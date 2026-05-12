@@ -8,11 +8,14 @@ import type { IResourceCollection } from "../../Resources/Infrefaces/IResouceCol
 import type { IResourceItem } from "../../Resources/Infrefaces/IResourceItem"
 import type { IGameDetector } from "../Interfaces/IGameDetector"
 import type { IResourceFuncFactory } from "../../Resources/Infrefaces/IResourceFuncFactory"
+import type { IActionAddRemoveT } from "../../Interfaces/IActionAddRemoveT"
+import type { IActionT } from "../../Interfaces/IActionT"
 import { ActionArray } from "../../Utilities/Generic/ActionArray"
 import { GameDetector } from "../GameDetector"
 import { GamePerformer } from "../GamePerformer"
 import { AbstractGameObject } from "./AbstractGameObject"
 import Loader, { type ResourceInformation } from "../../RemoteResuorces/Loader"
+import { ActionArrayT } from "../../Utilities/Generic/ActionArrayT"
 
 export abstract class AbstractGame extends AbstractGameObject implements IGame, IResourceCollection {
 
@@ -39,13 +42,19 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
             }
         }
     }
+    addAction(action: IAction, add: boolean): void {
+    }
+
+    getExternalAction(): IActionAddRemove {
+        return this.externalAction
+    }
 
     getResources(): IResourceItem[] {
         return this.resources
     }
 
-  
-    abstract run(): void 
+
+    abstract run(): void
 
     isRunning(): boolean {
         return this.isStarted;
@@ -57,7 +66,7 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         this.objects.push(scene)
     }
 
- 
+
 
     getName(): string {
         return this.name;
@@ -76,12 +85,12 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         return this.scenes
     }
 
- 
+
     cycle(time: number): void {
         if (!this.isStarted) return
-        this.ft = time
-        this.intAct.action()
         this.externalAction.action()
+        this.intAct.action()
+        this.timeAction.actionT(time)
         this.internalAction.action()
     }
 
@@ -89,9 +98,6 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         return this.objects;
     }
 
-    getExternalAction(): IActionAddRemove {
-        return this.externalAction
-    }
 
     setConsumerFactory(factory: IFactory): void {
         super.setConsumerFactory(factory)
@@ -109,13 +115,7 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         return true;
     }
 
-    addAction(action: IAction, add: boolean): void {
-        if (add) this.externalAction.addAction(action)
-        else this.externalAction.removeAction(action)
-    }
-
-    loadItself(load: boolean): boolean
-    {
+    loadItself(load: boolean): boolean {
         if (this.isLoaded == load) return false
         this.isLoaded = load
         if (load) {
@@ -128,13 +128,13 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         this.internalAction.clearActions()
         if (load) {
             this.performer.collectResources(this, this)
-           for (var s of this.scenes) {
+            for (var s of this.scenes) {
                 this.internalAction.addAction(s[1].getInternalAction())
             }
         }
         return true;
     }
-  
+
     addChildT(child: IScene): void {
         this.children.push(child)
         this.objects.push(child)
@@ -165,16 +165,30 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
             this.internalAction.addAction(s[1].getInternalAction())
         }
         this.onLoad.action()
-        console.log("PPPPP")
-}
+    }
 
-    public addLoad(action: IAction): void {
+    addPostLoadAction(action: IAction): void {
         this.onLoad.addAction(action)
     }
 
+    getTimeAction(): IActionAddRemoveT<number> {
+        return this.timeAction
+    }
+
+    addTimeAction(action: IActionT<number>, add: boolean): void {
+        if (add) {
+            this.timeAction.addActionT(action)
+            return
+        }
+        this.timeAction.removeActionT(action)
+    }
+
+
+
+
     public shouldStartAfterLoad(): void {
         const a = new StartAfrerLoad(this)
-        this.addLoad(a)
+        this.addPostLoadAction(a)
     }
 
     protected performer: GamePerformer = new GamePerformer()
@@ -195,7 +209,6 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
     protected objects: IObject[] = []
 
 
-    protected externalAction: IActionAddRemove = new ActionArray()
 
     protected internalAction: IActionAddRemove = new ActionArray()
 
@@ -219,6 +232,12 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
     protected resourcesI: Map<string, ResourceInformation> = new Map()
 
     protected onLoad: IActionAddRemove = new ActionArray();
+
+
+    protected timeAction: IActionAddRemoveT<number> = new ActionArrayT()
+
+    externalAction: IActionAddRemove = new ActionArray()
+
 
 }
 

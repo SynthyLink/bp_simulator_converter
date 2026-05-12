@@ -37,11 +37,11 @@ import type { ILoader } from "./Interfaces/ILoader";
 import type { ISelfLoad } from "./Interfaces/ISelfLoad";
 import type { IFuncT } from "./Interfaces/IFuncT";
 import type { IActionAddRemove } from "./Interfaces/IActionAddRemove";
-import type { IExternalAction } from "./Interfaces/IExternalAction";
 import type { IActionAddRemoveT } from "./Interfaces/IActionAddRemoveT";
 import type { INodeT } from "./NamedTree/Interfaces/INodeT";
 import type { IResourceItem } from "./Resources/Infrefaces/IResourceItem";
 import type { IResourceCollection } from "./Resources/Infrefaces/IResouceCollection";
+import type { IExternalAction } from "./Interfaces/IExternalAction";
 
 
 

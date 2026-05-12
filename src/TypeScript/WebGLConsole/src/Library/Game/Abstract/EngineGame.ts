@@ -53,17 +53,13 @@ export class EngineGame extends AbstractGame implements IPlayEngine, IActionT<nu
         return true;
     }
 
+ 
     getEngineAction(): IActionAddRemoveT<number> {
         return this.engineAction
     }
 
-    cycle(time: number): void {
-        if (!this.isStarted) return
-        this.engineAction.actionT(time)
-        this.internalAction.action()
-    }
-
     engineAction: IActionAddRemoveT<number> = new ActionArrayT()
+ 
     engine !: IPlayEngine
 }
 
