@@ -9,7 +9,6 @@ export class AbstractGameObject implements IObject, IFactoryConsumer {
     constructor(name: string, factory: IFactory | undefined) {
         this.name = name
         this.setFactory(factory)
-
     }
     setConsumerFactory(factory: IFactory): void {
         this.setFactory(factory)
@@ -34,6 +33,7 @@ export class AbstractGameObject implements IObject, IFactoryConsumer {
     protected setFactory(factory: IFactory | undefined) {
         if (factory == null) return
         this.factory = factory
+        this.detectShow()
     }
 
 

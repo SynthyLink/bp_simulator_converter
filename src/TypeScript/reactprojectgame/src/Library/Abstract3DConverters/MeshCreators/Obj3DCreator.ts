@@ -18,15 +18,29 @@ import { Material } from "../Materials/Material";
 import { PhongMaterial } from "../Materials/PhongMaterial";
 import { SpecularMaterial } from "../Materials/SpecularMaterial";
 import { AbstractMeshObj } from "../Meshes/AbstractMeshObj";
-export class Obj3DCreator extends LinesMeshCreator {
+export class Obj3DCreator extends LinesMeshCreator
+{
     constructor(url: string, name: string, directory: string, obj: any,
         factory: IFactory, func: ITextReaderFactory | undefined) {
         super(url, name, directory, obj, factory, func)
-        this.showObject("C", "", "Obj3DCreator constructor")
+        if (this.iindexes == undefined) {
+            this.iindexes = Obj3DCreator.siindexes
+        }
+        this.getIndexes()
     }
 
     public getIndexes(): ITextureIndex[][] {
+        this.showObject("GET", this.iindexes, "INDEXES")
         return this.iindexes
+    }
+
+    private pushIndex(index: ITextureIndex[]): void {
+        if (this.iindexes == undefined) {
+            this.iindexes = []
+            Obj3DCreator.siindexes = this.iindexes
+        }
+        this.showObject(this.iindexes, index, "PUSH")
+        this.iindexes.push(index)
     }
 
     public getNames(): string[] {
@@ -37,16 +51,15 @@ export class Obj3DCreator extends LinesMeshCreator {
         this.materialLines = []
         this.effectsPrivate = new Map()
         this.usedMaterials = []
-        this.iindexes = []
-        console.log("III", this.iindexes)
-        this.names = []
         this.name = ""
         this.createMaterials()
         this.createGeometry()
-        console.log("IIIIII", this.iindexes)
-   }
+ }
 
-    iindexes !: ITextureIndex[][]
+    private iindexes !: ITextureIndex[][]
+
+    private static siindexes : ITextureIndex[][]
+
 
     public getVertices(): number[][] {
         return this.vertices
@@ -264,7 +277,7 @@ export class Obj3DCreator extends LinesMeshCreator {
         try {
             var effect = this.default;
             let indexes: ITextureIndex[] = []
-            this.iindexes.push(indexes);
+            this.pushIndex(indexes);
             this.tuple = { effect: effect, indx: [] }
             indexes.push(this.tuple)
             for (var line of this.lines) {
@@ -326,7 +339,7 @@ export class Obj3DCreator extends LinesMeshCreator {
                     if (name != this.fiction) {
                         this.names.push(name);
                         indexes = [];
-                        this.iindexes.push(indexes);
+                        this.pushIndex(indexes);
                         if (line.indexOf("usemtl ") == 0) {
                             var mat = line.substring("usemtl ".length);
                             if (mat == "_default_") {
@@ -342,7 +355,7 @@ export class Obj3DCreator extends LinesMeshCreator {
                             if (effect != undefined) {
                                 this.tuple = { effect: effect, indx: [] }
                             }
-                            this.iindexes.push([this.tuple]);
+                            this.pushIndex([this.tuple]);
                             continue;
                         }
                         continue;
@@ -363,7 +376,7 @@ export class Obj3DCreator extends LinesMeshCreator {
                     if (effect != undefined) {
                         this.tuple = { effect: effect, indx: [] }
                     }
-                    this.iindexes.push([this.tuple]);
+                    this.pushIndex([this.tuple]);
                     continue;
                 }
 
@@ -415,7 +428,7 @@ export class Obj3DCreator extends LinesMeshCreator {
         try {
             let effect = this.getDefaultEffect();
             let indexes: ITextureIndex[] = []
-            this.iindexes.push(indexes);
+            this.pushIndex(indexes);
 
             for (var line of this.lines) {
                 if (line.startsWith("usemtl")) {
@@ -432,7 +445,7 @@ export class Obj3DCreator extends LinesMeshCreator {
                             this.usedMaterials.push(mat);
                         }
                         if (effect != undefined) this.tuple = { effect: effect, indx: [] }
-                        this.iindexes.push([this.tuple]);
+                        this.pushIndex([this.tuple]);
                         continue;
                     }
                 }
@@ -518,7 +531,7 @@ export class Obj3DCreator extends LinesMeshCreator {
 
     fiction: string = "rrg5dvmg.bil";
 
-    names !: string[]
+    names : string[] = []
 
 
     tuple !: ITextureIndex

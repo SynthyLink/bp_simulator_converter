@@ -9,19 +9,19 @@ import { AbstractMeshPolygon } from "./AbstractMeshPolygon";
 export class AbstractMeshObj extends AbstractMeshPolygon {
     constructor(parent: IMesh | undefined, name: string, transformationMatrix: number[], effect: EffectTexture, polygons: Polygon[],
         vertices: number[][], textures: number[][], normals: number[][], tuple: ITextureIndex | undefined,
-        creator: Obj3DCreator, variant: number, meshNumber: number) {
-        super(parent, name, transformationMatrix, effect, polygons, vertices, textures, normals, tuple, creator);
-        this.o3dCreator = creator;
+        creatorObj: Obj3DCreator, variant: number, meshNumber: number) {
+        super(parent, name, transformationMatrix, effect, polygons, vertices, textures, normals, tuple,
+            creatorObj);
+        this.o3dCreator = creatorObj;
         this.meshNumber = meshNumber
         this.vertices = [];
         this.textures = [];
         this.normals = [];
-        this.intVertices = creator.getVertices();
-        this.intNormals = creator.getNormals();
-        this.intTextures = creator.getTextures();
+        this.intVertices = this.o3dCreator.getVertices();
+        this.intNormals = this.o3dCreator.getNormals();
+        this.intTextures = this.o3dCreator.getTextures();
         this.polygons = []
-        let ind = creator.getIndexes();
-        console.log("IND ", ind)
+        let ind = this.o3dCreator.getIndexes();
         let indexes = ind[meshNumber]
         if (variant == 0) {
             /*  for (let ii of indexes)
@@ -41,16 +41,16 @@ export class AbstractMeshObj extends AbstractMeshPolygon {
             var eff = tuple?.effect;
             if (eff != undefined) this.effect = eff;
 
-            if (creator.getNames().length > meshNumber) {
-                this.name = creator.getNames()[meshNumber]
+            if (this.o3dCreator.getNames().length > meshNumber) {
+                this.name = this.o3dCreator.getNames()[meshNumber]
             }
             else {
-                this.name = creator.getMeshName();
+                this.name = this.o3dCreator.getMeshName();
             }
             let nm = 0
             for (let tuple of indexes) {
                 new AbstractMeshObj(this, "", [], effect, [], this.intVertices, this.intTextures, this.intNormals,
-                    tuple, creator, 1, nm)
+                    tuple, this.o3dCreator, 1, nm)
                 ++nm;
             }
             return

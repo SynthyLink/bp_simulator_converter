@@ -113,8 +113,6 @@ export class AbstractMesh implements IMesh {
         return this.performer.convert<string, number>(s)
     }
 
-
-
     cPerformer: Converter3DPefrormer = new Converter3DPefrormer()
 
 
@@ -132,6 +130,5 @@ export class AbstractMesh implements IMesh {
     normals: number[][] = []
     vertices: number[][] = []
     absolutevertices: number[][] = []
-
 
 }
