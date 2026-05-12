@@ -39,7 +39,9 @@ export function funcAirplane(): void {
     if (canv === null) return
     const canvas: HTMLCanvasElement = canv as HTMLCanvasElement
     // Then we create an instance of the game class and give it the canvas
-    const game = new GLGame("", factory, engine, canvas, { maxfps: 25 });
+    const game = new GLGame("", factory, engine, true, canvas, { maxfps: 25 });
+
+    game.shouldStartAfterLoad()
 
     game.getExternalAction().addAction(new A("game"));
    // g.setImitation(10, 1, 0);
@@ -58,7 +60,7 @@ export function funcAirplane(): void {
     //game.addScenes(scenes);
    // game.addSceneObject("Game", new SpaceTrippersScene(game))
     game.addScene("Air", sc)
-    game.startItself(true)
+    game.loadItself(true)
 
     var sel = document.querySelector("#scenes");
 
@@ -80,6 +82,8 @@ export function funcAirplane(): void {
     act.actCompositionEvent(game)
     */
 }
+
+
 export class A extends AbstractAction {
     s: string = ""
     i: number = 0

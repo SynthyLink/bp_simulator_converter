@@ -2,7 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Actor_1 = require("./Actor");
 let act = new Actor_1.Actor();
-act.loadGame();
+//
 //act.actPI()
 console.log('Hello world');
+async function f() {
+    await act.p();
+}
+f();
+console.log("");
 //# sourceMappingURL=app.js.map

@@ -10,9 +10,9 @@ import { EngineGameCameraAction } from "../Abstract3DGame/Games/EngineGameCamera
 
 export class GLGame extends EngineGameCameraAction implements IGLContext {
 
-    constructor(name: string, factory: IFactory, engine: IPlayEngine,
+    constructor(name: string, factory: IFactory, engine: IPlayEngine, useLoader: boolean,
         canvas: HTMLCanvasElement, options: GameOptions) {
-        super(name, factory, engine)
+        super(name, factory, engine, useLoader)
         this.types.push("IGLContext")
         this.types.push("GLGame")
         this.typeName = "GLGame"
@@ -31,8 +31,6 @@ export class GLGame extends EngineGameCameraAction implements IGLContext {
             this.gl = gl
         }
         this.options = options
-        let loadFact = this.glGamePerformer.createFactory(this.loader, factory)
-        factory.addFactory<IResourceFuncFactory>(loadFact, "IResourceFuncFactory")
     }
     getGlContext(): WebGL2RenderingContext {
         return this.gl;
@@ -58,14 +56,19 @@ export class GLGame extends EngineGameCameraAction implements IGLContext {
         return true
     }
 
-    loadProtected(): void {
+
+    async loadProtected(): Promise<void> {
+        console.log("LLLL")
         this.nextSceneReady = false
         this.resourcesI.clear()
         this.performer.collectResources(this, this)
         this.glGamePerformer.convertResourceInfo(this.resources, this.resourcesI)
         this.loader.loadMap(this.resourcesI)
-        this.loader.wait().then(this.nextScene)
-        //this.loader.load()
+        console.log(this.resourcesI)
+        await this.loader.wait()
+        console.log("WWWWLLLL")
+        console.log(this.loader)
+        this.nextScene()
     }
 
     run(): void {
@@ -87,9 +90,6 @@ export class GLGame extends EngineGameCameraAction implements IGLContext {
         this.lastTick = time
     }
 
-
-
-    protected loader: Loader = new Loader()
 
     canvas !: HTMLCanvasElement
 

@@ -11,10 +11,11 @@ import { ActionArray } from "../../Utilities/Generic/ActionArray"
 import { GameDetector } from "../GameDetector"
 import { GamePerformer } from "../GamePerformer"
 import { AbstractGameObject } from "./AbstractGameObject"
+import Loader from "../../RemoteResuorces/Loader"
 
 export abstract class AbstractGame extends AbstractGameObject implements IGame, IResourceCollection {
 
-    constructor(name: string, factory: IFactory | undefined) {
+    constructor(name: string, factory: IFactory | undefined, useLoader: boolean) {
         super(name, factory)
         this.types.push("IGame")
         this.types.push("IObjectCollection")
@@ -27,6 +28,10 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         this.typeName = "AbstractGame"
         if (factory != undefined) {
             factory.addFactory<IGameDetector>(new GameDetector(this, factory), "IGameDetector")
+        }
+        this.useLoader = useLoader;
+        if (useLoader) {
+            this.loader = new Loader()
         }
     }
 
@@ -168,6 +173,11 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
     protected resources: IResourceItem[] = []
 
     protected ft !: number
+
+
+    protected loader !: Loader;
+
+    protected useLoader: boolean = false;
 
 
  

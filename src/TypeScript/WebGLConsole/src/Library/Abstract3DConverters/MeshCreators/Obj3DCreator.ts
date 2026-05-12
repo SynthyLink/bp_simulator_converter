@@ -90,8 +90,10 @@ export class Obj3DCreator extends LinesMeshCreator {
         return "Mesh_" + this.nm;
     }
 
-    createMaterialsFromLines(lines: string[], eff: EffectTexture[]): Map<string, EffectTexture> {
+    efff: EffectTexture[] = []
 
+    createMaterialsFromLines(lines: string[], eff: EffectTexture[]): Map<string, EffectTexture> {
+        this.efff = eff
         let mtl = new MtlWrapper(this.obj, "", this.factory, 0, lines, this.dict, "")
         let et: EffectTexture[] = []
         let mt = mtl.createFromLines(lines, 0, et)
@@ -158,13 +160,13 @@ export class Obj3DCreator extends LinesMeshCreator {
         this.createUnNamedGeometry();
     }
 
-
+    mttt: Map<string, EffectTexture> = new Map()
 
     createMaterials(): void {
         try {
-            let def !: EffectTexture;
             let eff: EffectTexture[] = []
             let mt: Map<string, EffectTexture> = new Map()
+            this.mttt = mt
             if (this.materialLines.length > 0) {
                 mt = this.createMaterialsFromLines(this.materialLines, eff)
                 if (eff.length > 0) this.default = eff[0]
@@ -195,7 +197,7 @@ export class Obj3DCreator extends LinesMeshCreator {
                 let files = this.directoryio.getDirectoryFiles(this.directory)
                 for (var f of files) {
                     if (this.path.getFileExtension(f) == ".mtl") {
-                        let mp = this.createMaterialsFromLUrl(f, eff)
+                        this.createMaterialsFromLUrl(f, eff)
                         if (eff.length > 0) this.default = eff[0]
                         break;
                     }
@@ -209,7 +211,6 @@ export class Obj3DCreator extends LinesMeshCreator {
 
         }
         catch (e) {
-            var s = e + ""
         }
     }
 
@@ -244,7 +245,7 @@ export class Obj3DCreator extends LinesMeshCreator {
 
 
     getInitial(line: string): string | undefined {
-        var n = this.toShiftString(line, this.objs);
+        this.toShiftString(line, this.objs);
         if (line.indexOf("usemtl ") == 0) {
             var mat = line.substring("usemtl ".length);
             var effect = this.detect(mat);
@@ -310,7 +311,6 @@ export class Obj3DCreator extends LinesMeshCreator {
             }
         }
         catch (e) {
-            var me = e + ""
         }
     }
 
@@ -564,9 +564,10 @@ class MtlWrapper implements IEffectDitionary {
 
     newName: string = ""
 
-
+    eeef: Map<string, EffectTexture> = new Map()
     constructor(obj: any, name: string, factory: IFactory, start: number, lines: string[], effects: Map<string, EffectTexture>,
         directory: string) {
+        this.eeef = effects
         this.name = name;
         this.factory = factory;
         this.obj = obj;

@@ -1,10 +1,10 @@
-import { FactoryObject } from "../../FactorytObject"
 import type { ISceneObject } from "../../Game/Interfaces/ISceneObject"
 import type { ISceneObjectAction } from "../../Game/Interfaces/ISceneObjectAction"
-import { IFactory } from "../../Interfaces/IFactory"
+import type { IFactory } from "../../Interfaces/IFactory"
 import type { IObject } from "../../Interfaces/IObject"
+import { AbstractGameObject } from "../Abstract/AbstractGameObject"
 
-export abstract class AbstractSceneGameAction extends FactoryObject implements ISceneObjectAction {
+export abstract class AbstractSceneGameAction extends AbstractGameObject implements ISceneObjectAction {
     object!: ISceneObject
     add !: IObject
     constructor(object: ISceneObject, factory: IFactory | undefined) {

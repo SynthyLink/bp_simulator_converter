@@ -1,4 +1,4 @@
-import { IObject } from "../../Interfaces/IObject";
+import type { IObject } from "../../Interfaces/IObject";
 import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
 import type { IMtlDetector } from "../Interfaces/IMtlDetector";
 

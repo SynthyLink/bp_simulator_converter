@@ -12,8 +12,8 @@ import { DrawMeshGameCameraAcionConverter } from "../Objects/DrawMeshGameCameraA
 export class EngineGameCameraAction extends EngineGame implements
     IGameActionConverterFactory {
 
-    constructor(name: string, factory: IFactory, engine: IPlayEngine) {
-        super(name, factory, engine)
+    constructor(name: string, factory: IFactory, engine: IPlayEngine, useLoader: boolean) {
+        super(name, factory, engine, false)
         this.types.push("IGameActionConverterFactory")
         this.types.push("IGameActionConverter")
         this.types.push("EngineGameImitationCameraAction")

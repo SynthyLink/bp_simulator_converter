@@ -53,12 +53,15 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
     loadMesh(load: boolean): void {
         if (!load) return
         var res = this.shape.getResources()
+        console.log("TTTTTTTTTTTTTTTTTTT")
+        console.log(this.textReader)
         for (var r of res) {
             if (r.ext == ".obj") {
                 var creator = new Obj3DCreator(r.url, r.name,
                     "", this.scene, this.factory, this.textReader);
                 this.meshes = creator.getMeshCreatorMeshes()
-                break;
+                console.log(this.meshes)
+               break;
             }
         }
     }

@@ -35,7 +35,7 @@ function funcAirplane(): void {
     let eng = new FictiveEngine()
 
     // Then we create an instance of the game class and give it the canvas
-    const game = new GLGame("", factory, eng, canvas, { maxfps: 25 });
+    const game = new GLGame("", factory, eng, true, canvas, { maxfps: 25 });
 
     game.getExternalAction().addAction(new A("game"));
    // g.setImitation(10, 1, 0);

@@ -26,9 +26,21 @@ export class Actor {
     factory!: IFactory;
     game!: IGame;
 
+    url: string = "http://localhost:4173/static/models/pLANE/master.mtl"
+
+    async p(): Promise<void> {
+        let response = await fetch(this.url)
+        console.log("RESP", response)
+        console.log("BLOB", response.blob)
+
+        let data = await response.text();
+
+        console.log(data)
+    }
+
     //engine: FictiveEngine = new FictiveEngine()
     constructor() {
-        this.dir = this.dir.replaceAll("\\", "/");
+         this.dir = this.dir.replaceAll("\\", "/");
         var find = new ScadaFind3dFrame("Camera");
         var ga = new ReferenceFrameGameActionFactory(find, undefined);
         var f = new FileGameFactory(this.dir, ga);
@@ -37,7 +49,7 @@ export class Actor {
         f.addFactory<IFindFrame>(find, "IFindFrame")
         f.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")
         let engine = new EngineWatch(500)
-        var g = new EngineGame("", this.factory, engine);
+        var g = new EngineGame("", this.factory, engine, false);
         g.getExternalAction().addAction(new A("game"));
         this.game = g;
         var sc = new AirplaneScene(this.game, "Chart");

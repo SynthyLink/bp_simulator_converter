@@ -2,11 +2,11 @@ import type { IScene } from "../../Game/Interfaces/IScene"
 import type { IAssociatedObject } from "../../Interfaces/IAssociatedObject"
 import type { IObject } from "../../Interfaces/IObject"
 import type { IShowObject } from "../../Show/Interfaces/IShowObject"
-import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory"
 import type { IResourceFuncFactory } from "../../Resources/Infrefaces/IResourceFuncFactory"
-import type { IResourceItem } from "../../Resources/Infrefaces/IResourceItem"
-import { TextReaderFromResource } from "../../Resources/TextReaderFromResource"
 import { AbstractSceneObject } from "./AbstractSceneObject"
+import { TextReaderFromResource } from "../../Resources/TextReaderFromResource"
+import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory"
+import type { IResourceItem } from "../../Resources/Infrefaces/IResourceItem"
 
 export abstract class AssociatedSceneObject extends AbstractSceneObject implements IAssociatedObject {
 
@@ -22,7 +22,7 @@ export abstract class AssociatedSceneObject extends AbstractSceneObject implemen
         this.resourceFactory = this.factory.getFactory<IResourceFuncFactory>("IResourceFuncFactory")
 
     }
-
+    
     protected getTextFactory(f: ITextReaderFactory | undefined, items: IResourceItem[]): ITextReaderFactory | undefined {
         if (f != undefined) return f
         const ff = this.factory.getFactory<ITextReaderFactory>("ITextReaderFactory")
@@ -30,10 +30,9 @@ export abstract class AssociatedSceneObject extends AbstractSceneObject implemen
         if (this.resourceFactory != undefined) {
             const tt = new TextReaderFromResource(items, this.resourceFactory)
             return tt;
-
         }
     }
-
+    
 
     protected showObject(object: any, str?: string | undefined): void {
         if (this.show != undefined) this.show.show(object, str)

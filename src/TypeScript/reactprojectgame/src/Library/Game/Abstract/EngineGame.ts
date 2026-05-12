@@ -7,8 +7,9 @@ import { AbstractGame } from "./AbstractGame";
 
 export class EngineGame extends AbstractGame implements IPlayEngine, IActionT<number> {
 
-    constructor(name: string, factory: IFactory, engine: IPlayEngine) {
-        super(name, factory)
+    constructor(name: string, factory: IFactory, engine: IPlayEngine, useLoader: boolean)
+    {
+        super(name, factory, useLoader)
         this.types.push("IPlayEngine")
         this.types.push("EngineGame")
         this.typeName = "EngineGame"

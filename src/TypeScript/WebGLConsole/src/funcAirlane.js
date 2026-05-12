@@ -32,7 +32,7 @@ function funcAirplane() {
         return;
     const canvas = canv;
     // Then we create an instance of the game class and give it the canvas
-    const game = new GLGame_1.GLGame("", factory, engine, canvas, { maxfps: 25 });
+    const game = new GLGame_1.GLGame("", factory, engine, true, canvas, { maxfps: 25 });
     game.getExternalAction().addAction(new A("game"));
     // g.setImitation(10, 1, 0);
     // Here we list all our scenes and our initial scene

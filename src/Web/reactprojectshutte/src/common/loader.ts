@@ -9,6 +9,7 @@ export interface ResourceInfo {
 
 const loadFunctions = {
     'text': async (url: string): Promise<any> => {
+        console.log(url)
         let response = await fetch(url);
         let data = await response.text();
         return data;

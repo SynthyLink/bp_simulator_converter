@@ -20,7 +20,6 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
         this.types.push("IResourceCollection")
         this.typeName = "Scene3DMesh"
         this.shape = object
-        this.createTextReaderFactory()
     }
 
   
@@ -40,11 +39,10 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
     loadItself(load: boolean): boolean {
         if (load == this.isLoaded) return false
         this.isLoaded = load
+        this.createTextReaderFactory()
         this.loadMesh(load)
         return true;
     }
-
-
 
     getHolderMeshes(): IMesh[] {
         return this.meshes
@@ -53,14 +51,12 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
     loadMesh(load: boolean): void {
         if (!load) return
         var res = this.shape.getResources()
-        console.log("TTTTTTTTTTTTTTTTTTT")
-        console.log(this.textReader)
         for (var r of res) {
             if (r.ext == ".obj") {
                 var creator = new Obj3DCreator(r.url, r.name,
                     "", this.scene, this.factory, this.textReader);
                 this.meshes = creator.getMeshCreatorMeshes()
-                console.log(this.meshes)
+                console.log("MESHES", this.meshes)
                break;
             }
         }

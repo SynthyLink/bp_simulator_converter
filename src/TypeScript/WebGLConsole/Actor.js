@@ -9,12 +9,19 @@ const ScadaFindCamera_1 = require("./src/Library/Abstract3DGame/GameActions/Scad
 const AbstractAction_1 = require("./src/Library/Event/Objects/AbstractAction");
 const AbstractActionT_1 = require("./src/Library/Event/Objects/AbstractActionT");
 const EngineGame_1 = require("./src/Library/Game/Abstract/EngineGame");
-const ActionArrayT_1 = require("./src/Library/Utilities/Generic/ActionArrayT");
 const EnfineWatch_1 = require("./src/Library/Utilities/Watch/EnfineWatch");
 const PIAct_1 = require("./test/wrappers/PIAct");
 class Actor {
+    async p() {
+        let response = await fetch(this.url);
+        console.log("RESP", response);
+        console.log("BLOB", response.blob);
+        let data = await response.text();
+        console.log(data);
+    }
     //engine: FictiveEngine = new FictiveEngine()
     constructor() {
+        this.url = "http://localhost:4173/static/models/pLANE/master.mtl";
         this.dir = "C:\\AUsers\\1MySoft\\CSharp\\src\\TypeScript\\WebGLConsole/static/models";
         this.dir = this.dir.replaceAll("\\", "/");
         var find = new ScadaFind3DFrame_1.ScadaFind3dFrame("Camera");
@@ -25,7 +32,7 @@ class Actor {
         f.addFactory(find, "IFindFrame");
         f.addFactory(new ScadaFindCamera_1.ScadaFindCamera("Camera"), "IFindCamera");
         let engine = new EnfineWatch_1.EngineWatch(500);
-        var g = new EngineGame_1.EngineGame("", this.factory, engine);
+        var g = new EngineGame_1.EngineGame("", this.factory, engine, false);
         g.getExternalAction().addAction(new A("game"));
         this.game = g;
         var sc = new AirplaneScene_1.AirplaneScene(this.game, "Chart");
@@ -94,28 +101,6 @@ class TA extends AbstractActionT_1.AbstractActionT {
         if (t > 5) {
             this.game.startItself(false);
         }
-    }
-}
-class FictiveEngine1 {
-    constructor() {
-        this.enabled = false;
-        this.action = new ActionArrayT_1.ActionArrayT();
-    }
-    isEngineEnabled() {
-        return this.enabled;
-    }
-    setEngineEnabled(enabled) {
-        if (enabled == this.enabled)
-            return false;
-        this.enabled = enabled;
-        return true;
-    }
-    getEngineAction() {
-        return this.action;
-    }
-    setTime(time) {
-        if (this.enabled)
-            this.action.actionT(time);
     }
 }
 //# sourceMappingURL=Actor.js.map

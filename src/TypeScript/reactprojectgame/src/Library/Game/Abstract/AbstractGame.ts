@@ -7,14 +7,16 @@ import type { IObject } from "../../Interfaces/IObject"
 import type { IResourceCollection } from "../../Resources/Infrefaces/IResouceCollection"
 import type { IResourceItem } from "../../Resources/Infrefaces/IResourceItem"
 import type { IGameDetector } from "../Interfaces/IGameDetector"
+import type { IResourceFuncFactory } from "../../Resources/Infrefaces/IResourceFuncFactory"
 import { ActionArray } from "../../Utilities/Generic/ActionArray"
 import { GameDetector } from "../GameDetector"
 import { GamePerformer } from "../GamePerformer"
 import { AbstractGameObject } from "./AbstractGameObject"
+import Loader, { type ResourceInformation } from "../../RemoteResuorces/Loader"
 
 export abstract class AbstractGame extends AbstractGameObject implements IGame, IResourceCollection {
 
-    constructor(name: string, factory: IFactory | undefined) {
+    constructor(name: string, factory: IFactory | undefined, useLoader: boolean) {
         super(name, factory)
         this.types.push("IGame")
         this.types.push("IObjectCollection")
@@ -27,6 +29,14 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         this.typeName = "AbstractGame"
         if (factory != undefined) {
             factory.addFactory<IGameDetector>(new GameDetector(this, factory), "IGameDetector")
+        }
+        this.useLoader = useLoader;
+        if (useLoader) {
+            this.loader = new Loader()
+            if (factory != undefined) {
+                let loadFact = this.performer.createFactory(this.loader, factory)
+                factory.addFactory<IResourceFuncFactory>(loadFact, "IResourceFuncFactory")
+            }
         }
     }
 
@@ -75,7 +85,6 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         this.internalAction.action()
     }
 
-
     getObjectCollection(): IObject[] {
         return this.objects;
     }
@@ -83,6 +92,7 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
     getExternalAction(): IActionAddRemove {
         return this.externalAction
     }
+
     setConsumerFactory(factory: IFactory): void {
         super.setConsumerFactory(factory)
         this.performer.setFactoryToObjectCollection(this, factory)
@@ -104,9 +114,16 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         else this.externalAction.removeAction(action)
     }
 
-    loadItself(load: boolean): boolean {
+    loadItself(load: boolean): boolean
+    {
         if (this.isLoaded == load) return false
         this.isLoaded = load
+        if (load) {
+            if (this.loader != undefined) {
+                this.loadProtected()
+                return true
+            }
+        }
         this.performer.loadCollecion(load, this)
         this.internalAction.clearActions()
         if (load) {
@@ -133,6 +150,31 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
 
     getChildernT(): IScene[] {
         return this.children;
+    }
+
+    protected async loadProtected(): Promise<void> {
+        this.resourcesI.clear()
+        this.performer.collectResources(this, this)
+        this.performer.convertResourceInfo(this.resources, this.resourcesI)
+        this.loader.loadMap(this.resourcesI)
+        await this.loader.wait()
+        this.performer.loadCollecion(true, this)
+        this.internalAction.clearActions()
+        this.performer.collectResources(this, this)
+        for (var s of this.scenes) {
+            this.internalAction.addAction(s[1].getInternalAction())
+        }
+        this.onLoad.action()
+        console.log("PPPPP")
+}
+
+    public addLoad(action: IAction): void {
+        this.onLoad.addAction(action)
+    }
+
+    public shouldStartAfterLoad(): void {
+        const a = new StartAfrerLoad(this)
+        this.addLoad(a)
     }
 
     protected performer: GamePerformer = new GamePerformer()
@@ -170,5 +212,28 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
     protected ft !: number
 
 
- 
+    protected loader !: Loader;
+
+    protected useLoader: boolean = false;
+
+    protected resourcesI: Map<string, ResourceInformation> = new Map()
+
+    protected onLoad: IActionAddRemove = new ActionArray();
+
+}
+
+class StartAfrerLoad implements IAction {
+    constructor(game: IGame) {
+        this.game = game
+    }
+
+    action(): void {
+        this.game.startItself(true)
+    }
+    isEmptyAction(): boolean {
+        return false
+    }
+
+    game !: IGame
+
 }

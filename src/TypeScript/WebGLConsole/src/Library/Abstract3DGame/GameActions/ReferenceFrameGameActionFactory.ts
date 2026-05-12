@@ -5,7 +5,7 @@ import type { IScene } from "../../Game/Interfaces/IScene";
 import type { ISceneObject } from "../../Game/Interfaces/ISceneObject";
 import type { IAction } from "../../Interfaces/IAction";
 import type { IFindFrame } from "../Interfaces/IFindFrame";
-import { IFactory } from "../../Interfaces/IFactory";
+import type { IFactory } from "../../Interfaces/IFactory";
 
 export class ReferenceFrameGameActionFactory extends AbstractGameActionFactory
     implements IGameAction {

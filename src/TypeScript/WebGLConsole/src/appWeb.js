@@ -27,7 +27,7 @@ function funcAirplane() {
     let canvas = canv;
     let eng = new EnfineWatch_1.EngineWatch(500);
     // Then we create an instance of the game class and give it the canvas
-    const game = new GLGame_1.GLGame("", factory, eng, canvas, { maxfps: 25 });
+    const game = new GLGame_1.GLGame("", factory, eng, true, canvas, { maxfps: 25 });
     game.getExternalAction().addAction(new A("game"));
     // g.setImitation(10, 1, 0);
     // Here we list all our scenes and our initial scene
