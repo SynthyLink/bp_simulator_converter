@@ -43,7 +43,10 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         }
     }
     addAction(action: IAction, add: boolean): void {
+        this.actionF = action
+        this.addF = add
     }
+
 
     getExternalAction(): IActionAddRemove {
         return this.externalAction
@@ -238,6 +241,9 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
     protected timeAction: IActionAddRemoveT<number> = new ActionArrayT()
 
     externalAction: IActionAddRemove = new ActionArray()
+
+    protected actionF !: IAction
+    protected addF !: boolean
 
 
 }
