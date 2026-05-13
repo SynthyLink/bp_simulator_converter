@@ -34,7 +34,7 @@ class FileGameFactory extends Motion6DFactory_1.Motion6DFactory {
         let show = new ShowObject_1.ShowObject(this);
         this.addFactory(show, "IShowObject");
         var cc = new CameraMeshDrawing_1.CameraMeshDrawing();
-        show.addActionT(new ConsoleShowObject_1.ConsoleShowObject());
+        show.addActionT(new ConsoleShowObject_1.ConsoleShowObject(new Filrer()));
         //var ccc = new CameraActionConveretFactory("Camera", cc)
         //this.addFactory<IGameAcionConverterFactory>(ccc, "IGameAcionConverterFactory")
         //    this.addFactory<IGameAcionConverterFactory>(new GameAcionConverterFactory(),
@@ -42,4 +42,14 @@ class FileGameFactory extends Motion6DFactory_1.Motion6DFactory {
     }
 }
 exports.FileGameFactory = FileGameFactory;
+class Filrer {
+    functT(sd) {
+        var s = sd.name;
+        if (s == undefined)
+            return true;
+        if (s.includes("Rotation"))
+            return false;
+        return true;
+    }
+}
 //# sourceMappingURL=FileGameFactory.js.map

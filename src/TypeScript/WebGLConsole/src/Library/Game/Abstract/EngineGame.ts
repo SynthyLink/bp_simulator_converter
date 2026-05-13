@@ -17,9 +17,18 @@ export class EngineGame extends AbstractGame implements IPlayEngine, IActionT<nu
         engine.getEngineAction().addActionT(this)
     }
 
+
+    cycle(time: number): void {
+        if (!this.isStarted) return
+        super.cycle(time)
+        this.engineAction.actionT(time)
+    }
+
+
     actionT(t: number): void {
         this.cycle(t)
     }
+
     isEmptyActionT(): boolean {
         return false
     }

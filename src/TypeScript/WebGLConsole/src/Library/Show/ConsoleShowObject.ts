@@ -1,8 +1,14 @@
 import { AbstractActionT } from "../Event/Objects/AbstractActionT";
+import type { IFuncT } from "../Interfaces/IFuncT";
 import type { IShowData } from "./Interfaces/IShowData";
 
 export class ConsoleShowObject extends AbstractActionT<IShowData> {
+    constructor(func?: IFuncT<boolean, IShowData>) {
+        super(func)
+    }
+
     actionT(t: IShowData): void {
+        if (this.isProhibited(t)) return
         ++this.i
         console.log("\n")
         console.log("Name ", t.name)

@@ -92,6 +92,7 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         this.intAct.action()
         this.timeAction.actionT(time)
         this.internalAction.action()
+
     }
 
     getObjectCollection(): IObject[] {

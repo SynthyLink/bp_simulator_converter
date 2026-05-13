@@ -56,6 +56,8 @@ export class Actor {
         var ea = sc.getInternalAction()
         ea.addAction(new A("scene"));
         ea.addAction(new B(sc, g));
+        var ena = g.getEngineAction()
+        ena.addActionT(new TT())
     }
 
     loadGame(): void {
@@ -119,6 +121,13 @@ class B extends AbstractAction {
         var v = m.getMeasurementValue()
         console.log("Value " + v)
     }
+}
+
+class TT extends AbstractActionT<number> {
+    actionT(t: number): void {
+        console.log("2 * time " + 2 * t)
+    }
+
 }
 
 class TA extends AbstractActionT<number> {

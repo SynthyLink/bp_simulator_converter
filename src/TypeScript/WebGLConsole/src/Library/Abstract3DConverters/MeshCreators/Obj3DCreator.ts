@@ -30,7 +30,6 @@ export class Obj3DCreator extends LinesMeshCreator
     }
 
     public getIndexes(): ITextureIndex[][] {
-        this.showObject("GET", this.iindexes, "INDEXES")
         return this.iindexes
     }
 
@@ -39,7 +38,6 @@ export class Obj3DCreator extends LinesMeshCreator
             this.iindexes = []
             Obj3DCreator.siindexes = this.iindexes
         }
-        this.showObject(this.iindexes, index, "PUSH")
         this.iindexes.push(index)
     }
 
@@ -454,7 +452,6 @@ export class Obj3DCreator extends LinesMeshCreator
                         effect: effect, indx: []
                     }
                     indexes.push(this.tuple)
-                    console.log("PUSH ", indexes, this.tuple)
                 }
 
 

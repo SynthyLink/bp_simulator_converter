@@ -39,6 +39,8 @@ class Actor {
         var ea = sc.getInternalAction();
         ea.addAction(new A("scene"));
         ea.addAction(new B(sc, g));
+        var ena = g.getEngineAction();
+        ena.addActionT(new TT());
     }
     loadGame() {
         this.game.loadItself(true);
@@ -89,6 +91,11 @@ class B extends AbstractAction_1.AbstractAction {
         var m = mm.getMeasurement(0);
         var v = m.getMeasurementValue();
         console.log("Value " + v);
+    }
+}
+class TT extends AbstractActionT_1.AbstractActionT {
+    actionT(t) {
+        console.log("2 * time " + 2 * t);
     }
 }
 class TA extends AbstractActionT_1.AbstractActionT {

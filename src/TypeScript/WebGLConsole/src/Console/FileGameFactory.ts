@@ -15,6 +15,8 @@ import { ShowObject } from "../Library/Show/ShowObject"
 import { IStringSplitter } from "../Library/Utilities/String/Interfaces/IStringSplitter"
 import { LineEndSplitter } from "../Library/Utilities/String/LineEndSplitter"
 import { ConsoleShowObject } from "../Library/Show/ConsoleShowObject"
+import { IFuncT } from "../Library/Interfaces/IFuncT"
+import { IShowData } from "../Library/Show/Interfaces/IShowData"
 
 export class FileGameFactory extends Motion6DFactory  {
     rpath: string = ""
@@ -39,12 +41,23 @@ export class FileGameFactory extends Motion6DFactory  {
         let show = new ShowObject(this)
         this.addFactory<IShowObject>(show, "IShowObject")
         var cc = new CameraMeshDrawing();
-        show.addActionT(new ConsoleShowObject())
+        show.addActionT(new ConsoleShowObject(new Filrer()))
         //var ccc = new CameraActionConveretFactory("Camera", cc)
         //this.addFactory<IGameAcionConverterFactory>(ccc, "IGameAcionConverterFactory")
         //    this.addFactory<IGameAcionConverterFactory>(new GameAcionConverterFactory(),
         //        "IGameAcionConverterFactory")
 
+    }
+
+}
+
+class Filrer implements IFuncT<boolean, IShowData> {
+    functT(sd : IShowData): boolean | undefined {
+        var s = sd.name
+        if (s == undefined) return true
+        if (s.includes("Rotation")) return false
+        return true
+        
     }
 
 }
