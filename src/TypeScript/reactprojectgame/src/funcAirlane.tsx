@@ -53,6 +53,7 @@ export function funcAirplane(): void {
     var ea = sc.getExternalAction();
     ea.addAction(new A("scene"));
     ea.addAction(new B(sc, game));
+    game.getEngineAction().addActionT(new TT())
 
 
     // Then we add those scenes to the game object and ask it to start the initial scene
@@ -83,6 +84,12 @@ export function funcAirplane(): void {
     */
 }
 
+class TT extends AbstractActionT<number> {
+    actionT(t: number): void {
+        console.log("2 * time " + 2 * t)
+    }
+
+}
 
 export class A extends AbstractAction {
     s: string = ""
