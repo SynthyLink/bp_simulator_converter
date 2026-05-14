@@ -16,26 +16,16 @@ import type { IComponentCollection } from "../Interfaces/IComponentCollection";
 import type { IDataRuntime } from "../Interfaces/IDataRuntime";
 import type { IEventHandler } from "../Interfaces/IEventHandler";
 import type { IObject } from "../Interfaces/IObject";
+import type { IFactory } from "../Interfaces/IFactory";
+import type { IFactoryConsumer } from "../Interfaces/IFactoryConsumer";
 
-export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, IObject
+export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, IObject, IFactoryConsumer
 {
-
-    getName(): string {
-        return this.name;
-    }
-
-
-    getClassName(): string {
-        return this.typeName;
-    }
-
-    imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
-    }
 
     protected typeName: string = "CategoryArrow";
 
-    protected types: string[] = ["IObject", "IComponentCollection", "IDataRuntime", "DataRuntimeConsumer"];
+    protected types: string[] = ["IObject", "IComponentCollection", "IDataRuntime",
+        "DataRuntimeConsumer", "IFactoryConsumer"];
 
     protected name: string = "";
 
@@ -63,12 +53,35 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
 
     protected dataConsumer: IDataConsumer
 
-    constructor(dataConsumer: IDataConsumer)
+    protected factory !: IFactory
+
+    constructor(dataConsumer: IDataConsumer, factory: IFactory)
     {
+        this.factory = factory
         this.dataConsumer = dataConsumer;
         this.prepare(dataConsumer)
         this.objects = []
         this.performer.getAllIObjects(this.categoryObjects, this.categoryArrows, this.objects)
+    }
+
+    getName(): string {
+        return this.name;
+    }
+
+
+    getClassName(): string {
+        return this.typeName;
+    }
+
+    imlplementsType(type: string): boolean {
+        return this.types.includes(type)
+    }
+
+    setConsumerFactory(factory: IFactory): void {
+        this.factory = factory
+    }
+    getConsumerFactory(): IFactory {
+        return this.factory
     }
 
     protected prepare(dataConsumer: IDataConsumer): void {
@@ -104,17 +117,15 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
                         this.categoryObjects.push(cov)
                     }
                 }
-
-
             }
         }
         this.performer.addUnique(this.categoryObjects, dataConsumer as unknown as ICategoryObject)
-
     }
 
     getCategoryObjects(): ICategoryObject[] {
         return this.categoryObjects
     }
+
     getCategoryArrows(): ICategoryArrow[] {
         return this.categoryArrows;
     }

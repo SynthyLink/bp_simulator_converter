@@ -1,7 +1,10 @@
 import type { IComponentCollection } from "../Interfaces/IComponentCollection";
 import type { IComponentCollectionHolder } from "../Interfaces/IComponentCollectionHolder";
 import type { IObject } from "../Interfaces/IObject";
+import type { IObjectCollection } from "../Interfaces/IObjectCollection";
 import type { IRealtimeCollection } from "../Interfaces/IRealtimeCollection";
+import type { IStepAction } from "../Measurements/Interfaces/IStepAction";
+import type { IStepActionHolder } from "../Measurements/Interfaces/IStepActionHolder";
 import { ScadaInterface } from "./ScadaInterface";
 
 export  class ScadaDesktop extends ScadaInterface implements IComponentCollectionHolder {
@@ -12,7 +15,10 @@ export  class ScadaDesktop extends ScadaInterface implements IComponentCollectio
         this.types.push("IComponentCollectionHolder")
         this.typeName = "ScadaDesktop"
         this.componentCollection = componentCollection;
+        let oc = componentCollection as IObjectCollection
+        this.performer.getInputsFromCollection(oc, this.inputs)
     }
+
     getComponentCollection(): IComponentCollection {
         return this.componentCollection
     }
@@ -45,6 +51,10 @@ export  class ScadaDesktop extends ScadaInterface implements IComponentCollectio
 
     }
 
+    getStepAction(): IStepAction | undefined {
+        let l = this.performer.convertObject<IStepActionHolder, IRealtimeCollection>(this.runtime, "IStepActionHolder")
+        return l.length == 0 ? undefined : l[0].getStepAction()
 
+    }
 
 }

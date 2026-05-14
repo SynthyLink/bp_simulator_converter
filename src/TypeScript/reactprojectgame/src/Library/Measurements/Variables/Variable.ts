@@ -52,7 +52,7 @@ export class Variable implements IMeasurement, IObject, IValue, IDerivation
 
     imlplementsType(type: string): boolean
     {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
 
     getName(): string
@@ -87,6 +87,4 @@ export class Variable implements IMeasurement, IObject, IValue, IDerivation
     {
         this.derivation = variable;
     }
-
-
 }

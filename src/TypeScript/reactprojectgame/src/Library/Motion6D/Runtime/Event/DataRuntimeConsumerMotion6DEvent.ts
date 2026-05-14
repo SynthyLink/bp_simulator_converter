@@ -20,6 +20,7 @@ export class DataRuntimeConsumerMotion6DEvent extends DataRuntimeConsumerEvent {
         
     }
 
+
     protected prepare(dataConsumer: IDataConsumer) {
         super.prepare(dataConsumer)
         var ar = this.addRemove

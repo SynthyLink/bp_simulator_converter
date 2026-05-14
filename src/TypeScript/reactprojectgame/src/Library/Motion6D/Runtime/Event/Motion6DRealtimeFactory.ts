@@ -8,8 +8,8 @@ import { EmptyRealtimeCollection } from "../../../Runtime/EmptyRealtimeCollectio
 import { FactoryObject } from "../../../FactorytObject";
 
 export class Motion6DRealtimeFactory extends FactoryObject implements IRealtimeCollectionFactory {
-    constructor(mF : Motion6DFactory) {
-        super("", undefined)
+    constructor(mF: Motion6DFactory) {
+        super("", mF)
         this.mF = mF;
         this.types.push("IRealtimeCollectionFactory")
         this.types.push("Motion6DRealtimeFactory")

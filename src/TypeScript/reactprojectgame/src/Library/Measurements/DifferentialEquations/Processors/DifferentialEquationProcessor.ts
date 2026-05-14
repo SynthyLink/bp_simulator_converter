@@ -9,11 +9,16 @@ import type { INormalizable } from "../../Interfaces/INormalizable";
 import type { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
 import type { IDifferentialEquationProcessor } from "../Interfaces/IDifferentialEquationProcessor ";
 import type { IDifferentialEquationSolver } from "../Interfaces/IDifferentialEquationSolver";
-import type { IObject } from "../../../Interfaces/IObject";
 
 
-export class DifferentialEquationProcessor implements IDifferentialEquationProcessor, IObject
+export class DifferentialEquationProcessor implements IDifferentialEquationProcessor
 {
+    actionT2(t1: number, t2: number): void {
+        this.stepDifferentialEquations(t1, t2)
+    }
+    isEmptyActionT2(): boolean {
+        return false
+    }
      
     getName(): string {
         return this.name;
@@ -25,7 +30,7 @@ export class DifferentialEquationProcessor implements IDifferentialEquationProce
     }
 
     imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
 
   

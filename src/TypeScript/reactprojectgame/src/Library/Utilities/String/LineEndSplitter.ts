@@ -18,7 +18,7 @@ export class LineEndSplitter implements IObject, IStringSplitter {
     }
 
     imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
 
     protected typeName: string = "LineEndSplitter";

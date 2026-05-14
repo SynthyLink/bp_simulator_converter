@@ -18,7 +18,7 @@ export class Desktop implements IDesktop, IObject
     }
 
     imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
     protected typeName: string = "Desktop";
 

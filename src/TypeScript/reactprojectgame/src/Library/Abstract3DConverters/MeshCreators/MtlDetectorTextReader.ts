@@ -25,7 +25,7 @@ export class MtlDetectorTextReader implements IObject, IMtlDetector
     }
 
     imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type)
     }
 
     protected typeName: string = "MtlDetectorTextReader";

@@ -100,6 +100,7 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
 
     resetDataConsumer(): void {
     }
+
     addIterator(iterator: IIterator): void {
         this.iterator = iterator;
     }
@@ -133,7 +134,6 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     getInternalTime(): number
     {
         var tm = this.timeMeasurement;
-
         return tm.getTime();
     }
 

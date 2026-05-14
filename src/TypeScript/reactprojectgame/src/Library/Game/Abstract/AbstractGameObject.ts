@@ -27,7 +27,7 @@ export class AbstractGameObject implements IObject, IFactoryConsumer {
     }
 
     imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
 
     protected setFactory(factory: IFactory | undefined) {

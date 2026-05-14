@@ -6,19 +6,25 @@ import type { IFunc } from "../Interfaces/IFunc";
 import type { IScadaEvent } from "./Interfaces/IScadaEvent";
 import type { IScadaInterface } from "./Interfaces/IScadaInterface";
 import type { IObject } from "../Interfaces/IObject";
+import type { IInput } from "../Interfaces/IInput";
+import type { IStepActionHolder } from "../Measurements/Interfaces/IStepActionHolder";
+import type { IStepAction } from "../Measurements/Interfaces/IStepAction";
 import { ActionArray } from "../Utilities/Generic/ActionArray";
 import { Performer } from "../Performer";
 
-export abstract class ScadaInterface implements IScadaInterface, IObject
+export abstract class ScadaInterface implements IScadaInterface, IStepActionHolder, IObject
 {
     constructor() {
     }
+
+    abstract getStepAction(): IStepAction | undefined
+
 
     getClassName(): string {
         return this.typeName
     }
     imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
     getName(): string {
         return this.name
@@ -27,13 +33,14 @@ export abstract class ScadaInterface implements IScadaInterface, IObject
     protected name: string = "";
     protected typeName: string = "ScadaInterface";
 
-    protected types: string[] = ["IObject", "IScadaInterface", "IObjectCollection", "ScadaInterface"];
+    protected types: string[] = ["IObject", "IScadaInterface", "IObjectCollection", "ScadaInterface",
+        "IStepActionHolder"];
 
 
     performer: Performer = new Performer()
 
 
-    protected inputs: Map<string, any> = new Map();
+    protected inputs: IInput[] = [];
 
     protected outputs: Map<string, any> = new Map();
 
@@ -79,7 +86,7 @@ export abstract class ScadaInterface implements IScadaInterface, IObject
 
 
 
-    getScadaInputs(): Map<string, any> {
+    getScadaInputs(): IInput[] {
         return this.inputs
     }
     getScadaOutputs(): Map<string, any> {
@@ -124,10 +131,6 @@ export abstract class ScadaInterface implements IScadaInterface, IObject
         return this.dEvents.get(name)
     }
 
-    abstract getScadaObject<T>(name: string, type: string): T[]
-
-    abstract getObjectCollection(): IObject[]
-
    
     setScadaEnabled(enabled: boolean): void {
         this.isEnabled = enabled
@@ -158,5 +161,12 @@ export abstract class ScadaInterface implements IScadaInterface, IObject
     setNamedName(name: string): void {
         this.name = name
     }
+
+
+    abstract getScadaObject<T>(name: string, type: string): T[]
+
+    abstract getObjectCollection(): IObject[]
+
+
 
 }

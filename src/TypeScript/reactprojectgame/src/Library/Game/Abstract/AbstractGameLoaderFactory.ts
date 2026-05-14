@@ -15,7 +15,7 @@ export abstract class AbstractGameLoaderFactory implements IObject, IGameLoaderF
     }
 
     imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
 
     protected typeName: string = "AbstracGameLoaderFactory";

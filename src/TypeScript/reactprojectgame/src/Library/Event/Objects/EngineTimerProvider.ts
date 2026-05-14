@@ -1,9 +1,9 @@
 import { OwnNotImplemented } from "../../ErrorHandler/OwnNotImplemented";
+import { PerformerEvents } from "../PerformerEvents";
 import type { IActionT } from "../../Interfaces/IActionT";
 import type { IPlayEngine } from "../../Interfaces/IPlayEngine";
-import type { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
 import type { IMeasurement } from "../../Measurements/Interfaces/IMeasurement";
-import { PerformerEvents } from "../PerformerEvents";
+import type { ITimeMeasurementProvider } from "../../Measurements/Interfaces/ITimeMeasurementProvider";
 
 export class EngineTimerProvider implements IMeasurement, ITimeMeasurementProvider,
     IActionT<number> {
@@ -18,6 +18,7 @@ export class EngineTimerProvider implements IMeasurement, ITimeMeasurementProvid
     actionT(t: number): void {
         this.currentTime = t * this.timeScale
     }
+
     isEmptyActionT(): boolean { return false }
 
 
