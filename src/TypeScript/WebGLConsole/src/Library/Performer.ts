@@ -42,6 +42,9 @@ import type { INodeT } from "./NamedTree/Interfaces/INodeT";
 import type { IResourceItem } from "./Resources/Infrefaces/IResourceItem";
 import type { IResourceCollection } from "./Resources/Infrefaces/IResouceCollection";
 import type { IExternalAction } from "./Interfaces/IExternalAction";
+import type { IInput } from "./Interfaces/IInput";
+import type { IActionAddRemoveT2 } from "./Interfaces/IActionAddRemoveT2";
+import type { IActionT2 } from "./Interfaces/IActionT2";
 
 
 
@@ -750,6 +753,15 @@ export class Performer
         return arr.isEmptyActionT()
     }
 
+    public isEmptyActionT2<T1, T2>(action: IActionT2<T1, T2> | undefined): boolean {
+        if (action === undefined) return true;
+        let act: IActionT2<T1, T2> = action
+        let arr: IActionAddRemoveT2<T1, T2> = act as unknown as IActionAddRemoveT2<T1, T2>
+        if (arr == undefined) return false
+        return arr.isEmptyActionT2()
+    }
+
+
 
     public isEmptyAction(action: IAction | undefined): boolean {
         if (action === undefined) return true;
@@ -832,6 +844,11 @@ export class Performer
         return act
     }
 
+    public getInputsFromCollection(collection: IObjectCollection, inputs: IInput[]) {
+        let s = new InputSelect(inputs)
+        this.forEach<IInput>(collection, s, "IInput")
+    }
+
 
 
     measurements !: IMeasurements;
@@ -850,7 +867,20 @@ export class Performer
 
 }
 
+class InputSelect implements IActionT<IInput> {
 
+    constructor(inputs: IInput[]) {
+        this.inputs = inputs
+    }
+    actionT(t: IInput): void {
+        this.inputs.push(t)
+    }
+    isEmptyActionT(): boolean {
+        return false;
+    }
+
+    inputs !: IInput[]
+}
 
 class ExternalActionCreator implements IActionT<IExternalAction> {
     actionT(t: IExternalAction): void {

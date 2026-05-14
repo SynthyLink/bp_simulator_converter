@@ -1,7 +1,7 @@
 import type { IComponentCollection } from "../Interfaces/IComponentCollection";
 import type { IRealtimeCollection } from "../Interfaces/IRealtimeCollection";
-import type { ITimeMeasurementProvider } from "../Interfaces/ITimeMeasurementProvider";
 import type { ITimerFactory } from "../Interfaces/ITimerFactory";
+import type { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
 
 export class EmptyRealtimeCollection implements IRealtimeCollection {
     setComponentCollection(collection: IComponentCollection): void {

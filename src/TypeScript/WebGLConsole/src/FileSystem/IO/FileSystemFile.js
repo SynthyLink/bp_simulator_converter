@@ -21,7 +21,7 @@ class FileSystemFile {
         return this.typeName;
     }
     imlplementsType(type) {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
 }
 exports.FileSystemFile = FileSystemFile;

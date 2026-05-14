@@ -6,7 +6,7 @@ using Trading.Library.Objects;
 namespace Trading.TypeScript
 {
     [Language("TS")]
-    internal class ClassCodeCreator : Diagram.TypeScript.ClassCodeCreator
+    internal class ClassCodeCreator : Diagram.UI.TypeScript.ClassCodeCreator
     {
 
         internal ClassCodeCreator() : base(false)

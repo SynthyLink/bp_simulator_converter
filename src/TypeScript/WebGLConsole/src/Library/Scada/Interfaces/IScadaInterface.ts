@@ -5,10 +5,11 @@ import type { IFunc } from "../../Interfaces/IFunc";
 import type { INamed } from "../../NamedTree/Interfaces/INamed";
 import type { IScadaEvent } from "./IScadaEvent";
 import type { IObjectCollection } from "../../Interfaces/IObjectCollection";
+import { IInput } from "../../Interfaces/IInput";
 
 export interface IScadaInterface extends INamed, IObjectCollection {
 
-    getScadaInputs(): Map<string, any>
+    getScadaInputs(): IInput[]
 
     getScadaOutputs(): Map<string, any>
 

@@ -8,12 +8,7 @@ import { DifferentialEquationProcessor } from "./DifferentialEquationProcessor";
 
 export class RungeProcessor extends DifferentialEquationProcessor
 {
-    constructor() {
-        super()
-        this.typeName = "RungeProcessor"
-        this.types.push("RungeProcessor")
-    }
-
+  
     w: number[] = [];
     z: number[] = [];
     f: number[] = [];
@@ -129,13 +124,6 @@ export class RungeProcessor extends DifferentialEquationProcessor
 
 
     }
-
-
-
-
-   
-
-
 
     updateDimension(): void
     {

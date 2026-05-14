@@ -6,6 +6,7 @@
     <TypeScriptConfiguration Remove="src\scenes\**" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="scenes\" />
     <Folder Include="static\models\" />
   </ItemGroup>
 </Project>

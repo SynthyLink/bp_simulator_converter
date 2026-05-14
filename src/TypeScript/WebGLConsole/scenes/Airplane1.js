@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Airplane = void 0;
+exports.Airplane1 = void 0;
 const BelognsToCollection_1 = require("../src/Library/Arrows/BelognsToCollection");
 const Desktop_1 = require("../src/Library/Desktop");
 const Input_1 = require("../src/Library/Event/Input");
@@ -38,11 +38,11 @@ class Airplane_CategoryObject_1 extends DifferentialEquationSolverFormula_1.Diff
         this.var_5 = 0;
         let map = new Map([
             ["z", 0],
-            ["y", 0],
-            ["x", 0],
             ["v", 0],
-            ["w", 0],
             ["u", 0],
+            ["y", 0],
+            ["w", 0],
+            ["x", 0],
         ]);
         this.performer.setAliasMap(map, this);
         this.addVariableValue("u", 0, 0);
@@ -343,7 +343,7 @@ class Airplane_CategoryArrow_14 extends ReferenceFrameArrow_1.ReferenceFrameArro
         super(desktop, name);
     }
 }
-class Airplane extends Desktop_1.Desktop {
+class Airplane1 extends Desktop_1.Desktop {
     constructor() {
         super();
         this.name = "Airplane";
@@ -478,5 +478,5 @@ class Airplane extends Desktop_1.Desktop {
         objects[11].postSetArrow();
     }
 }
-exports.Airplane = Airplane;
-//# sourceMappingURL=Airplane.js.map
+exports.Airplane1 = Airplane1;
+//# sourceMappingURL=Airplane1.js.map

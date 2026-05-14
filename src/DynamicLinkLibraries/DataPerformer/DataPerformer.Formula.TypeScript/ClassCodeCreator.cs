@@ -31,10 +31,6 @@ namespace DataPerformer.Formula.TypeScript
         }
 
 
-
-
-
-
         static Diagram.UI.TypeScript.Performer performer = new();
 
         #region Ctor
@@ -132,7 +128,7 @@ namespace DataPerformer.Formula.TypeScript
         }
 
 
-        static List<string> CreateTreeCollection(string preffix, ITreeCollection obj, Diagram.TypeScript.CodeCreator creator)
+        static List<string> CreateTreeCollection(string preffix, ITreeCollection obj, Diagram.UI.TypeScript.CodeCreator creator)
         {
             var l = new List<string>();
             bool check = true;
@@ -197,13 +193,13 @@ namespace DataPerformer.Formula.TypeScript
             return l;
         }
 
-        static List<string> CreateRecursive(string preffix, object obj, Diagram.TypeScript.CodeCreator cc)
+        static List<string> CreateRecursive(string preffix, object obj, Diagram.UI.TypeScript.CodeCreator cc)
         {
             return CreateTreeCollection(preffix, obj as ITreeCollection, cc);
         }
 
 
-        static List<string> CreateDifferentialSolver(string preffix, object obj, Diagram.TypeScript.CodeCreator cc)
+        static List<string> CreateDifferentialSolver(string preffix, object obj, Diagram.UI.TypeScript.CodeCreator cc)
         {
             return CreateTreeCollection(preffix, obj as ITreeCollection, cc);
         }
@@ -222,7 +218,7 @@ namespace DataPerformer.Formula.TypeScript
         }
 
 
-        static List<string> CreateVectorConsumer(string preffix, object obj, Diagram.TypeScript.CodeCreator cc)
+        static List<string> CreateVectorConsumer(string preffix, object obj, Diagram.UI.TypeScript.CodeCreator cc)
         {
             return CreateTreeCollection(preffix, obj as ITreeCollection, cc);
         }

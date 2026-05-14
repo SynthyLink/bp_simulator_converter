@@ -22,7 +22,7 @@ class FileSystemFactory {
         return this.typeName;
     }
     imlplementsType(type) {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
     createDirectoryFactory(object) {
         return new FileSystemDirectory_1.FileSystemDirectory();

@@ -11,14 +11,15 @@ import { DataConsumer } from "../src/Library/Measurements/DataConsumer";
 import { DifferentialEquationSolverFormula } from "../src/Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula";
 import type { IMeasurement } from "../src/Library/Measurements/Interfaces/IMeasurement";
 import { VectorFormulaConsumer } from "../src/Library/Measurements/VectorFormulaConsumer";
-import { ReferenceFrameArrow } from "../src/Library/Motion6D/Arrows/ReferenceFrameArrow";
+import  { ReferenceFrameArrow } from "../src/Library/Motion6D/Arrows/ReferenceFrameArrow";
 import { ReferenceFrameData } from "../src/Library/Motion6D/Objects/ReferenceFrameData";
-import { RigidReferenceFrame } from "../src/Library/Motion6D/Objects/RigidReferenceFrame";
+import  { RigidReferenceFrame } from "../src/Library/Motion6D/Objects/RigidReferenceFrame";
 import { SerializablePosition } from "../src/Library/Motion6D/Objects/SerializablePosition";
 import { Basic3DShape } from "../src/Library/Motion6D/Objects/Shapes/Basic3DShape";
 import { BasicCamera } from "../src/Library/Motion6D/Visible/BasicCamera";
 import { VisibleConsumerLink } from "../src/Library/Motion6D/Visible/VisibleConsumerLink";
 import { TimeSpan } from "../src/Library/Utilities/DateTime/TimeSpan";
+
 class Airplane_CategoryObject_0 extends Input
 {
 	constructor(desktop: IDesktop, name: string)
@@ -39,11 +40,11 @@ class Airplane_CategoryObject_1 extends DifferentialEquationSolverFormula
 		let map = new Map<string, any>(
 		[
 			["z", 0 ],
-			["y", 0 ],
-			["x", 0 ],
 			["v", 0 ],
-			["w", 0 ],
 			["u", 0 ],
+			["y", 0 ],
+			["w", 0 ],
+			["x", 0 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("u", 0, 0);
@@ -460,7 +461,7 @@ class Airplane_CategoryArrow_14 extends ReferenceFrameArrow
 
 
 
-export class Airplane extends Desktop
+export class Airplane1 extends Desktop
 {
 	constructor()
 	{

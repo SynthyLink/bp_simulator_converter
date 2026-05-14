@@ -171,10 +171,7 @@ namespace Diagram.UI.TypeScript
             return l;
         }
 
-
-
-
-        public List<string> CreateTSAliasList(string id,  IAlias alias)
+       public List<string> CreateTSAliasList(string id,  IAlias alias)
         {
             List<string> l = new List<string>();
             var al = alias.AliasNames;

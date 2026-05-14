@@ -1,8 +1,12 @@
 import type { IComponentCollection } from "../Interfaces/IComponentCollection";
 import type { IObject } from "../Interfaces/IObject";
+import { IStepAction } from "../Measurements/Interfaces/ISterpAction";
 import { ScadaInterface } from "./ScadaInterface";
 
 export class ScadaDesktop extends ScadaInterface {
+    getStepAction(): IStepAction | undefined {
+        throw new Error("Method not implemented.");
+    }
 
     constructor(componentCollection: IComponentCollection) {
         super()

@@ -20,7 +20,7 @@ class FileSystemDirectory {
         return this.typeName;
     }
     imlplementsType(type) {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
     getDirectoryFiles(directory) {
         this.files = [];

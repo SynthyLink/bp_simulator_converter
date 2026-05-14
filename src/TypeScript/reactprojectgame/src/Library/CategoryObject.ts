@@ -25,6 +25,8 @@ export class CategoryObject implements ICategoryObject, IObject
 
     protected performer: Performer = new Performer();
 
+    protected fic !: any
+
     constructor(desktop: IDesktop, name: string) {
         this.desktop = desktop;
         this.name = name;

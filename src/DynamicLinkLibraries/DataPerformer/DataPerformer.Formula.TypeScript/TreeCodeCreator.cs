@@ -394,18 +394,6 @@ namespace DataPerformer.Formula.TypeScript
                 return (op as IStringConstantValue).Value;
             }
 
-            /* !!! DELETE          
-                  if (op is ElementaryRealConstant)
-                  {
-                      ElementaryRealConstant co = op as ElementaryRealConstant;
-                      return co.StringValue;
-                  }
-                  if (op is BooleanConstant)
-                  {
-                      BooleanConstant ce = op as BooleanConstant;
-                      return ce.StringValue;
-                  }
-            */
             if (op.ReturnType.Equals(""))
             {
                 return "\"\"";

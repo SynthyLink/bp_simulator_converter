@@ -8,4 +8,8 @@
     <PublishAot>true</PublishAot>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\DynamicLinkLibraries\Web.Interfaces\Web.Interfaces.UI\Web.Interfaces.UI.csproj" />
+  </ItemGroup>
+
 </Project>

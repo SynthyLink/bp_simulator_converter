@@ -81,7 +81,7 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
     }
 
     imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
 
     getScenes(): Map<string, IScene> {
@@ -90,7 +90,7 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
 
 
     cycle(time: number): void {
-        if (!this.isStarted) return
+        this.internaTimeAction.actionT(time)
         this.externalAction.action()
         this.intAct.action()
         this.timeAction.actionT(time)
@@ -113,8 +113,11 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         this.isStarted = start
         this.performer.startCollecion(start, this);
         this.intAct.clearActions();
+        this.internaTimeAction.clearActionsT()
         for (var scene of this.scenes) {
-            this.intAct.addAction(scene[1].getExternalAction())
+            let sc = scene[1]
+            this.intAct.addAction(sc.getExternalAction())
+            this.internaTimeAction.addActionT(sc)
         }
         return true;
     }
@@ -240,9 +243,14 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
 
     protected timeAction: IActionAddRemoveT<number> = new ActionArrayT()
 
+    protected internaTimeAction: IActionAddRemoveT<number> = new ActionArrayT()
+
+    
+
     externalAction: IActionAddRemove = new ActionArray()
 
     protected actionF !: IAction
+
     protected addF !: boolean
 
 

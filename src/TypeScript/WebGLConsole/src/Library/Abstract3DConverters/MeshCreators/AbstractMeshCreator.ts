@@ -47,7 +47,7 @@ export abstract class AbstractMeshCreator extends FactoryObject implements IMesh
     }
 
     imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
 
 

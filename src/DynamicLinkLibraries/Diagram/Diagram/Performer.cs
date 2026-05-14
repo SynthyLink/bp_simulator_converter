@@ -93,8 +93,6 @@ namespace Diagram.UI
             return d;
         }
 
-
-
         readonly Type tclassdcc = typeof(IDesktopCodeCreator);
 
 

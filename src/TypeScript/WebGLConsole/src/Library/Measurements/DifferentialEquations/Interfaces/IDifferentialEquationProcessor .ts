@@ -1,10 +1,11 @@
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { IStepAction } from "../../Interfaces/ISterpAction";
 import type { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
 import type { IDifferentialEquationSolver } from "./IDifferentialEquationSolver";
 
-export interface IDifferentialEquationProcessor
+export interface IDifferentialEquationProcessor extends IStepAction
 {
    // setDifferentialEquationProcessor(collection: any): void;
     getDifferentialEquations(): IDifferentialEquationSolver[];

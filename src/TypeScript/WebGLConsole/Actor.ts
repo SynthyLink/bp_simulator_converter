@@ -12,9 +12,11 @@ import { EngineGame } from "./src/Library/Game/Abstract/EngineGame";
 import { IGame } from "./src/Library/Game/Interfaces/IGame";
 import { IActionAddRemoveT } from "./src/Library/Interfaces/IActionAddRemoveT";
 import { IFactory } from "./src/Library/Interfaces/IFactory";
+import { IInput } from "./src/Library/Interfaces/IInput";
 import { IPlayEngine } from "./src/Library/Interfaces/IPlayEngine";
 import { IDataConsumer } from "./src/Library/Measurements/Interfaces/IDataConsumer";
 import { IScadaConsumer } from "./src/Library/Scada/Interfaces/IScadaConsumer";
+import { IScadaInterface } from "./src/Library/Scada/Interfaces/IScadaInterface";
 import { ActionArrayT } from "./src/Library/Utilities/Generic/ActionArrayT";
 import { EngineWatch } from "./src/Library/Utilities/Watch/EnfineWatch";
 import { PIAct } from "./test/wrappers/PIAct";
@@ -40,7 +42,7 @@ export class Actor {
 
     //engine: FictiveEngine = new FictiveEngine()
     constructor() {
-         this.dir = this.dir.replaceAll("\\", "/");
+        this.dir = this.dir.replaceAll("\\", "/");
         var find = new ScadaFind3dFrame("Camera");
         var ga = new ReferenceFrameGameActionFactory(find, undefined);
         var f = new FileGameFactory(this.dir, ga);
@@ -53,11 +55,13 @@ export class Actor {
         g.getExternalAction().addAction(new A("game"));
         this.game = g;
         var sc = new AirplaneScene(this.game, "Chart");
+        let scada = sc.getConsumerScada();
         var ea = sc.getInternalAction()
         ea.addAction(new A("scene"));
         ea.addAction(new B(sc, g));
         var ena = g.getEngineAction()
         ena.addActionT(new TT())
+    
     }
 
     loadGame(): void {
@@ -104,14 +108,18 @@ class B extends AbstractAction {
 
     game !: IGame
     dataConsumer !: IDataConsumer
+    scada !: IScadaInterface
+
+    inputs !: IInput[] 
     constructor(scene: IScadaConsumer, game: IGame) {
         super()
         this.game = game
         let scada = scene.getConsumerScada()
+        this.inputs = scada.getScadaInputs()
         let dc = scada.getScadaObject<IDataConsumer>("Chart", "IDataConsumer")
         this.dataConsumer = dc[0];
         let timer = scada.getScadaObject<TimerObject>("Timer", "TimerObject")
-        timer[0].eventActionT().addActionT(new TA(this.game))
+        timer[0].eventActionT().addActionT(new TA(this.game, this.inputs))
     }
 
     action(): void {
@@ -120,6 +128,11 @@ class B extends AbstractAction {
         var m = mm.getMeasurement(0)
         var v = m.getMeasurementValue()
         console.log("Value " + v)
+        mm = mmm[2]
+        m = mm.getMeasurement(3)
+        let n = m.getMeasurementName();
+        v = m.getMeasurementValue()
+        console.log(n + " " + v)
     }
 }
 
@@ -132,12 +145,20 @@ class TT extends AbstractActionT<number> {
 
 class TA extends AbstractActionT<number> {
     game !: IGame
-    constructor(game: IGame) {
+    inputs !: IInput[] 
+
+    constructor(game: IGame, inputs : IInput[]
+) {
         super()
         this.game = game
+        this.inputs = inputs
     }
     actionT(t: number): void {
         console.log("time " + t)
+        if (t > 2) {
+            console.log("FORCE")
+            this.inputs[0].setInputValue("X", 1)
+        }
         if (t > 5) {
             this.game.startItself(false)
         }

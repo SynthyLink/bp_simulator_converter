@@ -26,7 +26,8 @@ export class ScadaDesktopEngine extends ScadaDesktop {
         let co = this.componentCollection.getCategoryObject(this.chart);
         let dc = co as unknown as IDataConsumer;
         let eev = this.factory.createRealtimeFromDataConsumer(dc, this.uFactory);
-        eev.setTimeProvider(new EngineTimerProvider(this.engine));
+        let tp = new EngineTimerProvider(this.engine)
+        eev.setTimeProvider(tp);
         eev.setTimerFactory(new TimerPlayEngineFactory(this.engine));
         this.runtime = eev;
     }

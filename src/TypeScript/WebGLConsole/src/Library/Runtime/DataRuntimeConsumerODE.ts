@@ -7,18 +7,21 @@ import type { IFactory } from "../Interfaces/IFactory";
 import type { IDifferentialEquationProcessor } from "../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationProcessor ";
 import type { IDifferentialEquationSolver } from "../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationSolver";
 import type { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
+import type { IStepActionHolder } from "../Measurements/Interfaces/IStepActionHolder";
+import { IStepAction } from "../Measurements/Interfaces/ISterpAction";
 import type { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
 import { DataRuntimeConsumer } from "./DataRuntimeConsumer";
 
-export class DataRuntimeConsumerODE extends DataRuntimeConsumer
+export class DataRuntimeConsumerODE extends DataRuntimeConsumer implements IStepActionHolder
 {
     protected processor !: IDifferentialEquationProcessor;
 
     protected differentialEquations: IDifferentialEquationSolver[] = [];
 
     constructor(consumer: IDataConsumer, factory: IFactory) {
-        super(consumer)
+        super(consumer, factory)
         this.typeName = "DataRuntimeConsumerODE"
+        this.types.push("IStepActionHolder")
         this.types.push("DataRuntimeConsumerODE")
         
         let processor = factory.getFactory<IDifferentialEquationProcessor>("IDifferentialEquationProcessor")
@@ -36,6 +39,9 @@ export class DataRuntimeConsumerODE extends DataRuntimeConsumer
         this.processor.addRangeDifferentialEquations(equations);
         this.processor.updateDimension();
 
+    }
+    getStepAction(): IStepAction | undefined {
+        return this.processor
     }
 
     setTimeProvider(timeProvider: ITimeMeasurementProvider): void {

@@ -36,6 +36,7 @@ class Actor {
         g.getExternalAction().addAction(new A("game"));
         this.game = g;
         var sc = new AirplaneScene_1.AirplaneScene(this.game, "Chart");
+        let scada = sc.getConsumerScada();
         var ea = sc.getInternalAction();
         ea.addAction(new A("scene"));
         ea.addAction(new B(sc, g));
@@ -80,10 +81,11 @@ class B extends AbstractAction_1.AbstractAction {
         super();
         this.game = game;
         let scada = scene.getConsumerScada();
+        this.inputs = scada.getScadaInputs();
         let dc = scada.getScadaObject("Chart", "IDataConsumer");
         this.dataConsumer = dc[0];
         let timer = scada.getScadaObject("Timer", "TimerObject");
-        timer[0].eventActionT().addActionT(new TA(this.game));
+        timer[0].eventActionT().addActionT(new TA(this.game, this.inputs));
     }
     action() {
         var mmm = this.dataConsumer.getAllMeasurements();
@@ -91,6 +93,11 @@ class B extends AbstractAction_1.AbstractAction {
         var m = mm.getMeasurement(0);
         var v = m.getMeasurementValue();
         console.log("Value " + v);
+        mm = mmm[2];
+        m = mm.getMeasurement(3);
+        let n = m.getMeasurementName();
+        v = m.getMeasurementValue();
+        console.log(n + " " + v);
     }
 }
 class TT extends AbstractActionT_1.AbstractActionT {
@@ -99,12 +106,17 @@ class TT extends AbstractActionT_1.AbstractActionT {
     }
 }
 class TA extends AbstractActionT_1.AbstractActionT {
-    constructor(game) {
+    constructor(game, inputs) {
         super();
         this.game = game;
+        this.inputs = inputs;
     }
     actionT(t) {
         console.log("time " + t);
+        if (t > 2) {
+            console.log("FORCE");
+            this.inputs[0].setInputValue("X", 1);
+        }
         if (t > 5) {
             this.game.startItself(false);
         }

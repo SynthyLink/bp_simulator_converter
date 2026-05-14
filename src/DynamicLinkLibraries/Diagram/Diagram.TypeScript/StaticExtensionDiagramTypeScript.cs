@@ -1,5 +1,4 @@
 ﻿using AssemblyService.Attributes;
-using Diagram.TypeScript;
 
 namespace Diagram.UI.TypeScript
 {
@@ -8,6 +7,7 @@ namespace Diagram.UI.TypeScript
     {
         static StaticExtensionDiagramTypeScript()
         {
+            new CodeCreator();
             new ObjectContainerClassCodeCreator();
             new ClassCodeCreator();
             new DesktopCodeCreator();

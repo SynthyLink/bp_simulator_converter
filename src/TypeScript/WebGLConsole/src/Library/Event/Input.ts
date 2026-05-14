@@ -67,6 +67,7 @@ export class Input extends CategoryObject implements IInput, IMeasurements, ISta
             let n = x[0] as unknown as string 
             let type = x[0]
             let value = x[1]
+            this.num.set(n, i)
             this.inputtypes.set(n, type)
             this.inputconitions.set(n, value)
             this.idata.push(value)

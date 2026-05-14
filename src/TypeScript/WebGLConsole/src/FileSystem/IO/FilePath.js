@@ -39,7 +39,7 @@ class FilePath {
         return this.typeName;
     }
     imlplementsType(type) {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
 }
 exports.FilePath = FilePath;

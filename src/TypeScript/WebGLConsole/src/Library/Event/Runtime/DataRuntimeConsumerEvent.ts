@@ -9,9 +9,9 @@ import type { IExternalUpdateClient } from "../../Interfaces/IExternalUpdateClie
 import type { IFactory } from "../../Interfaces/IFactory";
 import type { IObject } from "../../Interfaces/IObject";
 import type { IRealtimeCollection } from "../../Interfaces/IRealtimeCollection";
-import type { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
 import type { ITimerFactory } from "../../Interfaces/ITimerFactory";
 import type { IDataConsumer } from "../../Measurements/Interfaces/IDataConsumer";
+import type { ITimeMeasurementProvider } from "../../Measurements/Interfaces/ITimeMeasurementProvider";
 import { DataRuntimeConsumerODE } from "../../Runtime/DataRuntimeConsumerODE";
 import { ActionArray } from "../../Utilities/Generic/ActionArray";
 import { PerformerEvents } from "../PerformerEvents";
@@ -91,5 +91,6 @@ export class DataRuntimeConsumerEvent extends DataRuntimeConsumerODE implements 
 
     public setTimeProvider(timeProvider: ITimeMeasurementProvider): void {
         this.mPerformer.setTimeProviderCollection(this, timeProvider)
+        this.processor.setDifferentialEquationsTimeProvider(timeProvider)
     }
 }

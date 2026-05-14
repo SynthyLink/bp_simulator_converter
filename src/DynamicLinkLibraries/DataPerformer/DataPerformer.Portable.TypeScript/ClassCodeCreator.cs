@@ -12,9 +12,9 @@ namespace DataPerformer.Portable.TypeScript
     /// Creator of TS code
     /// </summary>
     [Language("TS")]
-    public class ClassCodeCreator : Diagram.TypeScript.ClassCodeCreator
+    public class ClassCodeCreator : Diagram.UI.TypeScript.ClassCodeCreator
     {
-
+        
         protected Diagram.UI.TypeScript.Performer performer = new();
 
         #region Ctor

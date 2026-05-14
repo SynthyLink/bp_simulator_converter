@@ -1,7 +1,9 @@
 ﻿using BaseTypes.Attributes;
 using Diagram.UI;
+using Diagram.UI.Interfaces;
 using Event.Interfaces;
 using Event.Portable.Arrows;
+using Event.Portable.Events;
 
 namespace Event.Portable.TypeScript
 {
@@ -9,7 +11,7 @@ namespace Event.Portable.TypeScript
     /// Creator of TS code
     /// </summary>
     [Language("TS")]
-    public class ClassCodeCreator : Diagram.TypeScript.ClassCodeCreator
+    public class ClassCodeCreator : Diagram.UI.TypeScript.ClassCodeCreator
     {
         protected ClassCodeCreator(bool b) : base(b) { }
 
@@ -20,13 +22,9 @@ namespace Event.Portable.TypeScript
             dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
          {
                       { (object o) => { return o is Events.Timer; } , CreateTimer },
-                      { (object o) => { return o is EventLink; }, CreateEventLink}
-            /*      { (object o) => { return o is ReferenceFrameData; } , CreateReferenceFrameData},
-        /*        { (object o) => { return o is FilterWrapper; } ,CreateFilterWrapper},
-             { (object o) => { return o is DataLink; } ,CreateDataLink},
-              { (object o) => { return o is ObjectTransformerLink; } , CreateObjectTransformerLink},
-               { (object o) => { return o is IteratorConsumerLink; } , CreateIteratorConsumerLink},*/
-         };
+                      { (object o) => { return o is EventLink; }, CreateEventLink},
+                      { (object o) => { return o is ForcedEventData; }, CreateForced}
+           };
 
 
             this.AddClassCodeCreator();
@@ -61,6 +59,31 @@ namespace Event.Portable.TypeScript
             l.Add("}");
             return l;
         }
+
+        List<string> CreateForced(string preffix, object obj)
+        {
+            var tc = TypeCreator;
+            var l = new List<string>();
+            var forced = obj as ForcedEventData;
+            IAlias ali = forced;
+            var s = performer.ClassString(preffix, "Input");
+            l.Add(s);
+            l.Add("{");
+            performer.AddObjectConstructor(l);
+            foreach (var al in ali.AliasNames)
+            {
+                var t = "\t\tthis.array.push([ ";
+                t += tc.GetStringValue(al) + " ,";
+                t += tc.GetDefaultValue(ali.GetType(al)) + ", ";
+                t += tc.GetDefaultValue(ali[al]) + "])";
+                l.Add(t);
+            }
+            l.Add("\t\tthis.createAll()");
+            l.Add("\t}");
+            l.Add("}");
+            return l;
+        }
+
 
 
     }

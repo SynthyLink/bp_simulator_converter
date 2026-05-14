@@ -11,7 +11,7 @@ namespace DataPerformer.Formula.TypeScript
 {
 
 
-    public class CodeCreator : Diagram.TypeScript.CodeCreator, ITreeCollectionCodeCreator
+    public class CodeCreator : Diagram.UI.TypeScript.CodeCreator, ITreeCollectionCodeCreator
     {
         public CodeCreator() : base(false) { }
 
@@ -158,9 +158,13 @@ namespace DataPerformer.Formula.TypeScript
             }
             l.Add("init() : void");
             l.Add("{");
-            if (ob is IMeasurements)
+            if (ob is IMeasurements mm)
             {
-                l.Add("\tvar all = this.getAllMeasurements();");
+                if (mm.Count > 0)
+                {
+                    l.Add("\tvar all = this.getAllMeasurements()");
+                    l.Add("\tthis.fic = all");
+                }
             }
             performer.Add(l, initializers as List<string>, 1);
             l.Add("}");

@@ -1,4 +1,4 @@
-import { IGame } from "../src/Library/Game/Interfaces/IGame";
+import type { IGame } from "../src/Library/Game/Interfaces/IGame";
 import { ScadaScene } from "../src/Library/Game/Scenes/ScadaScene";
 import { Cessna } from "./Cessna";
 
