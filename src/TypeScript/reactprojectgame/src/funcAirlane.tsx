@@ -14,6 +14,7 @@ import type { IDataConsumer } from "./Library/Measurements/Interfaces/IDataConsu
 import type { IScadaConsumer } from "./Library/Scada/Interfaces/IScadaConsumer";
 import { EngineWatch } from "./Library/Utilities/Watch/EnfineWatch";
 import { AirplaneScene } from "../scenes/AirplaneScene"
+import type { IInput } from "./Library/Interfaces/IInput";
 
 
 PerformerEvents.setTimeScale(0.001)
@@ -115,8 +116,9 @@ class B extends AbstractAction {
         let scada = scene.getConsumerScada()
         let dc = scada.getScadaObject<IDataConsumer>("Chart", "IDataConsumer")
         this.dataConsumer = dc[0];
+        let inputs = scada.getScadaInputs()
         let timer = scada.getScadaObject<TimerObject>("Timer", "TimerObject")
-        timer[0].eventActionT().addActionT(new TA(this.game))
+        timer[0].eventActionT().addActionT(new TA(this.game, inputs))
     }
 
     action(): void {
@@ -125,22 +127,36 @@ class B extends AbstractAction {
         var m = mm.getMeasurement(0)
         var v = m.getMeasurementValue()
         console.log("Value " + v)
-    }
+        mm = mmm[2]
+        m = mm.getMeasurement(3)
+        let n = m.getMeasurementName();
+        v = m.getMeasurementValue()
+        console.log(n + " " + v)
+}
 }
 
 class TA extends AbstractActionT<number> {
     game !: IGame
-    constructor(game: IGame) {
+    inputs !: IInput[]
+
+    constructor(game: IGame, inputs: IInput[]
+    ) {
         super()
         this.game = game
+        this.inputs = inputs
     }
     actionT(t: number): void {
         console.log("time " + t)
+        if (t > 2) {
+            console.log("FORCE")
+            this.inputs[0].setInputValue("X", 1)
+        }
         if (t > 5) {
             this.game.startItself(false)
         }
     }
 }
+
 
 
 

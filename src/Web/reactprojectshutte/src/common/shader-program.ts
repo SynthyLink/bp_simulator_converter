@@ -18,6 +18,7 @@ export default class ShaderProgram {
     // type: the type of the shader, it can be gl.VERTEX_SHADER or gl.FRAGMENT_SHADER
     public attach(source: string, type: number): boolean {
         let shader = this.gl.createShader(type); // Create an empty shader of the given type
+        if (shader == null) return false
         this.gl.shaderSource(shader, source); // Add the source code to the shader
         this.gl.compileShader(shader); // Now, we compile the shader
         if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) { // If the shader failed to compile, we print the error messages, delete the shader and return 

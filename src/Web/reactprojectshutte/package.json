@@ -25,7 +25,6 @@
   "dependencies": {
     "gl-matrix": "^3.3.0",
     "ts-key-enum": "^2.0.2",
-    "tsx-create-element": "^2.1.0",
-    "webgl-obj-loader": "^2.0.8"
+    "tsx-create-element": "^2.1.0"
   }
 }

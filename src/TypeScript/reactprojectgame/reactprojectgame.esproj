@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.4902498">
+﻿<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.4902498">
   <PropertyGroup>
     <StartupCommand>npm run dev</StartupCommand>
     <JavaScriptTestRoot>src\</JavaScriptTestRoot>
@@ -16,5 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="dist\assets\" />
+    <Folder Include="src\Library\GLGame\common\" />
   </ItemGroup>
 </Project>
