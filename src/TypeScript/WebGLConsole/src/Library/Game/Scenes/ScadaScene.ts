@@ -4,7 +4,7 @@ import type { IComponentCollection } from "../../Interfaces/IComponentCollection
 import type { IObject } from "../../Interfaces/IObject"
 import type { IPlayEngine } from "../../Interfaces/IPlayEngine"
 import type { IStepActionHolder } from "../../Measurements/Interfaces/IStepActionHolder"
-import type { IStepAction } from "../../Measurements/Interfaces/ISterpAction"
+import type { IStepAction } from "../../Measurements/Interfaces/IStepAction"
 import type { IScadaConsumer } from "../../Scada/Interfaces/IScadaConsumer"
 import type { IScadaInterface } from "../../Scada/Interfaces/IScadaInterface"
 import { ScadaDesktop } from "../../Scada/ScadaDesktop"

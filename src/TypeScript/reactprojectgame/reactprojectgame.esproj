@@ -16,6 +16,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="dist\assets\" />
-    <Folder Include="src\Library\GLGame\common\" />
   </ItemGroup>
 </Project>

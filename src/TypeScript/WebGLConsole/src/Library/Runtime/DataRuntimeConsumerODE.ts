@@ -3,14 +3,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
+import { DataRuntimeConsumer } from "./DataRuntimeConsumer";
 import type { IFactory } from "../Interfaces/IFactory";
 import type { IDifferentialEquationProcessor } from "../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationProcessor ";
 import type { IDifferentialEquationSolver } from "../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationSolver";
 import type { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
 import type { IStepActionHolder } from "../Measurements/Interfaces/IStepActionHolder";
-import { IStepAction } from "../Measurements/Interfaces/ISterpAction";
+import type { IStepAction } from "../Measurements/Interfaces/IStepAction";
 import type { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
-import { DataRuntimeConsumer } from "./DataRuntimeConsumer";
 
 export class DataRuntimeConsumerODE extends DataRuntimeConsumer implements IStepActionHolder
 {

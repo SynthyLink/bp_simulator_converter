@@ -3,8 +3,8 @@ import type { IComponentCollectionHolder } from "../Interfaces/IComponentCollect
 import type { IObject } from "../Interfaces/IObject";
 import type { IObjectCollection } from "../Interfaces/IObjectCollection";
 import type { IRealtimeCollection } from "../Interfaces/IRealtimeCollection";
+import type { IStepAction } from "../Measurements/Interfaces/IStepAction";
 import type { IStepActionHolder } from "../Measurements/Interfaces/IStepActionHolder";
-import type { IStepAction } from "../Measurements/Interfaces/ISterpAction";
 import { ScadaInterface } from "./ScadaInterface";
 
 export  class ScadaDesktop extends ScadaInterface implements IComponentCollectionHolder {

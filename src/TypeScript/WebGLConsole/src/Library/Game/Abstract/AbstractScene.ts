@@ -5,7 +5,7 @@ import type { IAction } from "../../Interfaces/IAction";
 import type { IActionAddRemove } from "../../Interfaces/IActionAddRemove";
 import type { IFactory } from "../../Interfaces/IFactory";
 import type { IObject } from "../../Interfaces/IObject";
-import type { IStepAction } from "../../Measurements/Interfaces/ISterpAction";
+import type { IStepAction } from "../../Measurements/Interfaces/IStepAction";
 import { ActionArray } from "../../Utilities/Generic/ActionArray";
 import { ScenePerformer } from "../ScenePerformer";
 

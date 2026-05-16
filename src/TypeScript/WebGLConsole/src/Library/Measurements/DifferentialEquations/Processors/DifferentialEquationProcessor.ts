@@ -9,7 +9,6 @@ import type { INormalizable } from "../../Interfaces/INormalizable";
 import type { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
 import type { IDifferentialEquationProcessor } from "../Interfaces/IDifferentialEquationProcessor ";
 import type { IDifferentialEquationSolver } from "../Interfaces/IDifferentialEquationSolver";
-import type { IObject } from "../../../Interfaces/IObject";
 
 
 export class DifferentialEquationProcessor implements IDifferentialEquationProcessor

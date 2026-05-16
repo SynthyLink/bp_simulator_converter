@@ -8,7 +8,6 @@ import type { IObject } from "../../../Interfaces/IObject";
 import type { IRealtimeCollection } from "../../../Interfaces/IRealtimeCollection";
 import type { IDataConsumer } from "../../../Measurements/Interfaces/IDataConsumer";
 import type { IReferenceFrame } from "../../Interfaces/IReferenceFrame";
-import type { ITimeMeasurementProvider } from "../../../Measurements/Interfaces/ITimeMeasurementProvider";
 
 export class DataRuntimeConsumerMotion6DEvent extends DataRuntimeConsumerEvent {
 

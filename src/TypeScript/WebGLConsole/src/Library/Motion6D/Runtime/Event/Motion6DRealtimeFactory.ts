@@ -2,7 +2,6 @@ import type { IRealtimeCollectionFactory } from "../../../Interfaces/IRealtimeCo
 import type { IComponentCollection } from "../../../Interfaces/IComponentCollection";
 import type { IRealtimeCollection } from "../../../Interfaces/IRealtimeCollection";
 import type { IDataConsumer } from "../../../Measurements/Interfaces/IDataConsumer";
-import type { IFactory } from "../../../Interfaces/IFactory";
 import { DataRuntimeConsumerMotion6DEvent } from "./DataRuntimeConsumerMotion6DEvent";
 import { Motion6DFactory } from "../../Motion6DFactory";
 import { EmptyRealtimeCollection } from "../../../Runtime/EmptyRealtimeCollection";

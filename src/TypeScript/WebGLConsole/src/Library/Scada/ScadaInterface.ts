@@ -8,9 +8,9 @@ import type { IScadaInterface } from "./Interfaces/IScadaInterface";
 import type { IObject } from "../Interfaces/IObject";
 import type { IInput } from "../Interfaces/IInput";
 import type { IStepActionHolder } from "../Measurements/Interfaces/IStepActionHolder";
+import type { IStepAction } from "../Measurements/Interfaces/IStepAction";
 import { ActionArray } from "../Utilities/Generic/ActionArray";
 import { Performer } from "../Performer";
-import { IStepAction } from "../Measurements/Interfaces/ISterpAction";
 
 export abstract class ScadaInterface implements IScadaInterface, IStepActionHolder, IObject
 {
