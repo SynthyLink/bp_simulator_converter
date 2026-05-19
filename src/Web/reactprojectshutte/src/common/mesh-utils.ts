@@ -311,6 +311,7 @@ export function Sphere(gl: WebGL2RenderingContext, resolution: number | [number,
 
 export function LoadOBJMesh(gl: WebGL2RenderingContext, data: string){
     let obj = new OBJ.Mesh(data);
+    console.log(obj, data)
     let mesh = createEmptyMesh(gl);
     mesh.setBufferData("positions", new Float32Array(obj.vertices), gl.STATIC_DRAW);
     mesh.setBufferData("texcoords", new Float32Array(obj.textures), gl.STATIC_DRAW);
@@ -321,3 +322,5 @@ export function LoadOBJMesh(gl: WebGL2RenderingContext, data: string){
     mesh.setElementsData(new Uint32Array(obj.indices), gl.STATIC_DRAW);
     return mesh;
 }
+
+

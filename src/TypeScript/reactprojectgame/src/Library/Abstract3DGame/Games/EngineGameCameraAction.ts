@@ -1,13 +1,13 @@
-import { EngineGame } from "../../Game/Abstract/EngineGame";
 import type { IGameActionConverter } from "../../Game/Interfaces/IGameActionConverter";
 import type { IGameActionConverterFactory } from "../../Game/Interfaces/IGameActionConverterFactory";
 import type { IScene } from "../../Game/Interfaces/IScene";
 import type { IAction } from "../../Interfaces/IAction";
 import type { IFactory } from "../../Interfaces/IFactory";
 import type { IPlayEngine } from "../../Interfaces/IPlayEngine";
-import { BasicCamera } from "../../Motion6D/Visible/BasicCamera";
 import type { IFindCamera } from "../Interfaces/IFindCamera";
 import { DrawMeshGameCameraAcionConverter } from "../Objects/DrawMeshGameCameraAcionConverter";
+import { BasicCamera } from "../../Motion6D/Visible/BasicCamera";
+import { EngineGame } from "../../Game/Abstract/EngineGame";
 
 export class EngineGameCameraAction extends EngineGame implements
     IGameActionConverterFactory {
@@ -17,7 +17,7 @@ export class EngineGameCameraAction extends EngineGame implements
         this.types.push("IGameActionConverterFactory")
         this.types.push("IGameActionConverter")
         this.types.push("EngineGameImitationCameraAction")
-        factory.addFactory(this, "IGameActionConverterFactory")
+        factory.addFactory<IGameActionConverterFactory>(this, "IGameActionConverterFactory")
         var fc = factory.getFactory<IFindCamera>("IFindCamera")
         if (fc != undefined) {
             this.findCamera = fc;
@@ -38,14 +38,14 @@ export class EngineGameCameraAction extends EngineGame implements
         if (camera == undefined) {
             return undefined
         }
-        return new DrawMeshGameCameraAcionConverter(camera)
+        return this.getGameActionConverterCamera(camera)
         
     }
 
-    public getGameActionConverterCamera(camera: BasicCamera) {
-        console.log(camera)
 
-    }
+    protected getGameActionConverterCamera(camera: BasicCamera): IGameActionConverter {
+        return new DrawMeshGameCameraAcionConverter(camera)
+     }
 
     camera !: BasicCamera
 

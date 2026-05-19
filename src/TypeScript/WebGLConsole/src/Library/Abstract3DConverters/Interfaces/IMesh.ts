@@ -8,6 +8,10 @@ export interface IMesh extends IGeometry, INodeT<IMesh> {
 
     getEffect(): EffectTexture
 
-    calculateAbsolute() : void
+    calculateAbsolute(): void
+
+
+    getIndexes(): number[][][]
+
 
 }

@@ -1,5 +1,7 @@
 //This file contains a Mesh class (used to store Vertices and how to draw them)
 
+import type { IMesh } from "../../Abstract3DConverters/Interfaces/IMesh";
+
 // This is an interface to a vertex attribute descriptor in which we will describe how to read the data from the buffers
 export interface VertexDescriptor {
     attributeLocation: number,
@@ -19,6 +21,10 @@ export default class Mesh {
     VAO!: WebGLVertexArrayObject;
     elementCount: number = 0;
     elementType: number = 0;
+
+    mesh !: IMesh
+
+    meshes: Mesh[] = []
 
     // The constructor takes a WebGL context and a list of vertex attribute descriptors
     // It will get all the buffer names and create them then it will build the Vertex Array to read the attributes from them
@@ -49,6 +55,10 @@ export default class Mesh {
         this.gl.deleteBuffer(this.EBO);
         for (let bufferName in this.VBOs) this.gl.deleteBuffer(this.VBOs[bufferName]);
         this.VBOs = undefined;
+    }
+
+    public getChildren(): Mesh[] {
+        return this.meshes
     }
 
     // We will use this to fill the vertex buffer data

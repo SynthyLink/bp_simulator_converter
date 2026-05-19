@@ -5,7 +5,8 @@ import { BasicCamera } from "../../Motion6D/Visible/BasicCamera";
 import { EmptyGame3DObject } from "../EmptyGame3DObject";
 
 export class DrawMeshAction extends EmptyGame3DObject implements IAction {
-    constructor(camera: BasicCamera, mesh: IMesh, frame: ReferenceFrame) {
+    constructor(camera: BasicCamera, mesh: IMesh, frame: ReferenceFrame)
+    {
         super("")
         this.types.push("IAction")
         this.types.push("DrawMeshAction")

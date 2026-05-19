@@ -1,6 +1,6 @@
 import type { INodeT } from "../../NamedTree/Interfaces/INodeT";
-import { EffectTexture } from "../EffectTexture";
 import type { IGeometry } from "./IGeometry";
+import { EffectTexture } from "../EffectTexture";
 
 export interface IMesh extends IGeometry, INodeT<IMesh> {
 
@@ -8,6 +8,8 @@ export interface IMesh extends IGeometry, INodeT<IMesh> {
 
     getEffect(): EffectTexture
 
-    calculateAbsolute() : void
+    calculateAbsolute(): void
+
+    getIndexes(): number[][][]
 
 }

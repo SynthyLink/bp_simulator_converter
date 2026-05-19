@@ -1,3 +1,3 @@
 export interface IGLContext {
-    getGlContext(): WebGL2RenderingContext
+    getGLContext(): WebGL2RenderingContext
 }

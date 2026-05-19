@@ -60,7 +60,6 @@ class RotationAction extends AbstractSceneGameAction  {
 
     action(): void {
         this.motionPerformer.getRelativeFrame(this.baseFrame, this.target, this.relative)
-        this.showObject("", this.relative, "RotationAction")
     }
 
     isEmptyAction(): boolean {

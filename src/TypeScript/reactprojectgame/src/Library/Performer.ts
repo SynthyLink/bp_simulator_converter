@@ -83,6 +83,15 @@ export class Performer
 
     protected mCompatator !: IComparator<IMeasurements>;
 
+    public toOneDimensdional<T>(t: T[][]): T[] {
+        let x: T[] = []
+        for (let xx of t) {
+            x.concat(xx)
+        }
+        return x
+    }
+
+
     public createMirrorArray<T>(x: T[], y: T[], d: T): void {
         for (var i = 0; i < y.length; i++) {
             x.push(d)

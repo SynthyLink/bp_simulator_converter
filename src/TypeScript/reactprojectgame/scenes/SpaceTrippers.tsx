@@ -204,10 +204,8 @@ export default class SpaceTrippersScene extends Scene {
         }
 
         // Load the models
-        this.meshes['ground'] = MeshUtils.Plane(this.gl, { min: [0, 0], max: [50, 50] });
-        let sc = this.game.loader.resources["SpaceShuttle"])
-            console.log(sc)
-        this.meshes['SpaceShuttle'] = MeshUtils.LoadOBJMesh(this.gl, sc);
+        this.meshes['ground'] = MeshUtils.Plane(this.gl, {min:[0,0], max:[50,50]});
+        this.meshes['SpaceShuttle'] = MeshUtils.LoadOBJMesh(this.gl, this.game.loader.resources["SpaceShuttle"]);
         //stone meshes
         this.meshes['stone'] = MeshUtils.LoadOBJMesh(this.gl, this.game.loader.resources["stone-model"]);
         this.meshes['moon'] = MeshUtils.Sphere(this.gl);

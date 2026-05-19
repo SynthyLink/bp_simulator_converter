@@ -6,9 +6,9 @@ const FileGameFactory_1 = require("./src/Console/FileGameFactory");
 const ReferenceFrameGameActionFactory_1 = require("./src/Library/Abstract3DGame/GameActions/ReferenceFrameGameActionFactory");
 const ScadaFind3DFrame_1 = require("./src/Library/Abstract3DGame/GameActions/ScadaFind3DFrame");
 const ScadaFindCamera_1 = require("./src/Library/Abstract3DGame/GameActions/ScadaFindCamera");
+const EngineGameCameraAction_1 = require("./src/Library/Abstract3DGame/Games/EngineGameCameraAction");
 const AbstractAction_1 = require("./src/Library/Event/Objects/AbstractAction");
 const AbstractActionT_1 = require("./src/Library/Event/Objects/AbstractActionT");
-const EngineGame_1 = require("./src/Library/Game/Abstract/EngineGame");
 const EnfineWatch_1 = require("./src/Library/Utilities/Watch/EnfineWatch");
 const PIAct_1 = require("./test/wrappers/PIAct");
 class Actor {
@@ -32,7 +32,7 @@ class Actor {
         f.addFactory(find, "IFindFrame");
         f.addFactory(new ScadaFindCamera_1.ScadaFindCamera("Camera"), "IFindCamera");
         let engine = new EnfineWatch_1.EngineWatch(500);
-        var g = new EngineGame_1.EngineGame("", this.factory, engine, false);
+        var g = new EngineGameCameraAction_1.EngineGameCameraAction("", this.factory, engine, false);
         g.getExternalAction().addAction(new A("game"));
         this.game = g;
         var sc = new AirplaneScene_1.AirplaneScene(this.game, "Chart");

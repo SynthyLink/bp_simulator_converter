@@ -1,3 +1,5 @@
+import type { IMesh } from '../../Abstract3DConverters/Interfaces/IMesh';
+import { Performer } from '../../Performer';
 import Mesh from './mesh';
 import * as OBJ from 'webgl-obj-loader';
 
@@ -320,4 +322,27 @@ export function LoadOBJMesh(gl: WebGL2RenderingContext, data: string){
     mesh.setBufferData("colors", colors, gl.STATIC_DRAW);
     mesh.setElementsData(new Uint32Array(obj.indices), gl.STATIC_DRAW);
     return mesh;
+}
+
+const performer: Performer = new Performer()
+
+function toOneDimensdional<T>(t: T[][]): T[] {
+    return performer.toOneDimensdional(t)
+}
+
+export function LoadOBJMeshFromMesh(gl: WebGL2RenderingContext, obj: IMesh) {
+    let mesh = createEmptyMesh(gl);
+    let v = toOneDimensdional(obj.getVertices())
+    let t = toOneDimensdional(obj.getTextures())
+    let n = toOneDimensdional(obj.getNormals())
+    mesh.setBufferData("positions", new Float32Array(v), gl.STATIC_DRAW);
+    mesh.setBufferData("texcoords", new Float32Array(t), gl.STATIC_DRAW);
+    mesh.setBufferData("normals", new Float32Array(n), gl.STATIC_DRAW);
+    let colors = new Uint8Array(v.length * 4 / 3);
+    colors.fill(255);
+    let ind: number[] = [];
+    mesh.setBufferData("colors", colors, gl.STATIC_DRAW);
+    mesh.setElementsData(new Uint32Array(ind), gl.STATIC_DRAW);
+    return mesh;
+
 }

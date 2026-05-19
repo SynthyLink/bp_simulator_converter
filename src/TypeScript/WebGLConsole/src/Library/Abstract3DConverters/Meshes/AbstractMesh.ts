@@ -10,8 +10,6 @@ import { PointTexture } from "../Points/PointTexture";
 
 export class AbstractMesh implements IMesh {
 
-    // IMesh parent, string name,  float[] matrix, Effect effect, 
-    //List<Polygon> polygons, List<float[]> vertices, List < float[] > normals, IMeshCreator creator
 
     constructor(parent: IMesh | undefined, name: string, transformationMatrix: number[], effect: EffectTexture | undefined,
         vertices: number[][], textures: number[][], normals: number[][], tuple: ITextureIndex | undefined, creator: IMeshCreator)
@@ -28,6 +26,9 @@ export class AbstractMesh implements IMesh {
         this.textures = textures
         this.normals = normals
         this.creator = creator
+    }
+    getIndexes(): number[][][] {
+        return this.indexes
     }
     getAbsoluteVertices(): number[][] {
         return this.vertices;
@@ -129,6 +130,8 @@ export class AbstractMesh implements IMesh {
     textures: number[][] = []
     normals: number[][] = []
     vertices: number[][] = []
+    indexes: number[][][] = []
+
     absolutevertices: number[][] = []
 
 }

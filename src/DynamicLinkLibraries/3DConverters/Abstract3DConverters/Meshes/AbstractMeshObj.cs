@@ -28,7 +28,7 @@ namespace Abstract3DConverters.Meshes
             private set;
         }
 
-        List<Tuple<Effect, List<int[][]>>> Indexes
+        new List<Tuple<Effect, List<int[][]>>> Indexes
         {
             get;
             set;
