@@ -1,0 +1,45 @@
+type TimeSpanCtorArguments = number | [number, number, number] | [number, number, number, number] | [number, number, number, number, number];
+export declare class TimeSpan {
+    static readonly ticksPerMillisecond = 10000;
+    private static readonly millisecondsPerTick;
+    static readonly ticksPerSecond: number;
+    private static readonly secondsPerTick;
+    static readonly ticksPerMinute: number;
+    private static readonly minutesPerTick;
+    static readonly ticksPerHour: number;
+    private static readonly hoursPerTick;
+    static readonly ticksPerDay: number;
+    private static readonly daysPerTick;
+    static readonly zero: TimeSpan;
+    static readonly maxValue: TimeSpan;
+    static readonly minValue: TimeSpan;
+    private readonly _ticks;
+    constructor(args: TimeSpanCtorArguments);
+    get ticks(): number;
+    get days(): number;
+    get hours(): number;
+    get milliseconds(): number;
+    get minutes(): number;
+    get seconds(): number;
+    get totalDays(): number;
+    get totalHours(): number;
+    get totalMilliseconds(): number;
+    getTotalMilliseconds(): number;
+    get totalMinutes(): number;
+    get totalSeconds(): number;
+    add(ts: TimeSpan): TimeSpan;
+    subtract(ts: TimeSpan): TimeSpan;
+    multiply(factor: number): TimeSpan;
+    divide(divisor: number | TimeSpan): number | TimeSpan;
+    valueOf(): number;
+    toString(): string;
+    duration(): TimeSpan;
+    negate(): TimeSpan;
+    static fromDays(value: number): TimeSpan;
+    static fromHours(value: number): TimeSpan;
+    static fromMilliseconds(value: number): TimeSpan;
+    static fromMinutes(value: number): TimeSpan;
+    static fromSeconds(value: number): TimeSpan;
+}
+export {};
+//# sourceMappingURL=TimeSpan.d.ts.map
