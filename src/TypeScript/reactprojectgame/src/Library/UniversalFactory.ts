@@ -11,6 +11,10 @@ export class UniversalFactory extends FactoryObject implements IFactory {
         this.types.push("UniversalFactory")
         this.typeName = "UniversalFactory"
     }
+
+    removeFactory<T>(t: T, type: string): void {
+        this.factories.delete(type)
+    }
     
     getFactory<T>(typeName: string): T | undefined {
         var p = this.factories.get(typeName)

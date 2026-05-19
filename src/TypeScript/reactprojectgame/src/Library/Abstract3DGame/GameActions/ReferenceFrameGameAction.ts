@@ -65,6 +65,7 @@ class RotationAction extends AbstractSceneGameAction  {
     isEmptyAction(): boolean {
         return (this.baseFrame == undefined) || (this.target == undefined)
     }
+
     getActionSceneAdditionalObject(): IObject | undefined {
         return this.relative
     }

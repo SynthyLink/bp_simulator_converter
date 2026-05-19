@@ -20,11 +20,13 @@ export class GameGLFactory extends Motion6DFactory {
         this.typeName = "GameGLFactory"
         this.addFactory<IGameLoaderFactory>(new BasicGameLoaderFactory(), "IGameLoaderFactory")
         this.addFactory<IStringSplitter>(new LineEndSplitter(), "IStringSplitter")
-        this.addFactory<IGameActionFactory>(gameActionFactory, "IGameActionFactory")
+        this.any = gameActionFactory
+       // this.addFactory<IGameActionFactory>(gameActionFactory, "IGameActionFactory")
       /*  this.showO = new ShowObject(this)
         this.addFactory<IShowObject>(this.showO, "IShowObject")
         this.showO.addActionT(new ConsoleShowObject(new Filrer()))*/
     }
+    any : any
 
     showO !: ShowObject
 }

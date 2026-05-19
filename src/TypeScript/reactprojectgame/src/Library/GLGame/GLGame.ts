@@ -3,6 +3,7 @@ import type { IPlayEngine } from "../Interfaces/IPlayEngine";
 import type { IMesh } from "../Abstract3DConverters/Interfaces/IMesh";
 import type { GameOptions } from "./interfaces/IGameOptions";
 import type { IGameActionConverter } from "../Game/Interfaces/IGameActionConverter";
+import type { IGameActionConverterFactory } from "../Game/Interfaces/IGameActionConverterFactory";
 import { EngineGameCameraAction } from "../Abstract3DGame/Games/EngineGameCameraAction";
 import { DrawMeshAction } from "../Abstract3DGame/Factory/DrawMeshAction";
 import { ReferenceFrame } from "../Motion6D/ReferenceFrame";
@@ -34,6 +35,7 @@ export class GLGame extends EngineGameCameraAction  {
             this.gl = gl
         }
         this.options = options
+        factory.removeFactory<IGameActionConverterFactory>(this, "IGameActionConverterFactory")
     }
 
     cycle(time: number): void {
@@ -49,7 +51,7 @@ export class GLGame extends EngineGameCameraAction  {
         return new GLDrawMeshGameCameraAcionConverter(camera, this.gl, cam)
     }
 
-
+    
  
     canvas !: HTMLCanvasElement
 

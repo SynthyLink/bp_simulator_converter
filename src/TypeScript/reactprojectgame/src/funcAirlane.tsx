@@ -16,6 +16,7 @@ import { EngineWatch } from "./Library/Utilities/Watch/EnfineWatch";
 import { AirplaneScene } from "../scenes/AirplaneScene"
 import type { IInput } from "./Library/Interfaces/IInput";
 
+let first: boolean = true
 
 PerformerEvents.setTimeScale(0.001)
 
@@ -23,6 +24,10 @@ export function funcGame() {
 
 }
 export function funcAirplane(): void {
+    if (first) {
+        first = false
+    } else return
+
     var find = new ScadaFind3dFrame("Camera");
     var ga = new ReferenceFrameGameActionFactory(find, undefined);
 

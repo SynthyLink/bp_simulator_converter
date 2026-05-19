@@ -8,6 +8,8 @@ import type { IActionT } from "../Interfaces/IActionT";
 import type { IGameActionConverter } from "./Interfaces/IGameActionConverter";
 import type { IGameActionConverterFactory } from "./Interfaces/IGameActionConverterFactory";
 import { GamePerformer } from "./GamePerformer";
+import type { IAction } from "../Interfaces/IAction";
+import { EmptyAction } from "../Event/Objects/EmptyAcion";
 
 export class SceneObjectAction implements IActionT<ISceneObject> {
 
@@ -40,7 +42,7 @@ export class SceneObjectAction implements IActionT<ISceneObject> {
             this.gameAcion = a
         }
         else {
-            throw new OwnNotImplemented("SCENE OBJECT ACTION");
+            this.gameAcion = new EmptyGameAction
         }
 
         var conv = f.getFactory<IGameActionConverter>("IGameActionConverter")
@@ -66,5 +68,22 @@ export class SceneObjectAction implements IActionT<ISceneObject> {
     scene !: IScene;
 
     action !: IActionAddRemove
+
+}
+
+class EmptyGameAction implements IGameAction, IAction{
+    action(): void {
+    }
+
+    isEmptyAction(): boolean {
+        return true
+    }
+
+    functT(s: ISceneObject): IAction {
+        this.any = s;
+        return this
+    }
+
+    any : any
 
 }

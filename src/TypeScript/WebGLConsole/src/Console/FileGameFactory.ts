@@ -38,10 +38,10 @@ export class FileGameFactory extends Motion6DFactory  {
         let rf = new ResourceFuncFactory("", undefined);
         this.addFactory<ResourceFuncFactory>(rf, "IResourceFuncFactory")
         rf.addFunction("text", new FileResourceFuncText(path))
-        let show = new ShowObject(this)
-        this.addFactory<IShowObject>(show, "IShowObject")
-        var cc = new CameraMeshDrawing();
-        show.addActionT(new ConsoleShowObject(new Filrer()))
+    //    let show = new ShowObject(this)
+   //     this.addFactory<IShowObject>(show, "IShowObject")
+  //      var cc = new CameraMeshDrawing();
+   //     show.addActionT(new ConsoleShowObject(new Filrer()))
         //var ccc = new CameraActionConveretFactory("Camera", cc)
         //this.addFactory<IGameAcionConverterFactory>(ccc, "IGameAcionConverterFactory")
         //    this.addFactory<IGameAcionConverterFactory>(new GameAcionConverterFactory(),
