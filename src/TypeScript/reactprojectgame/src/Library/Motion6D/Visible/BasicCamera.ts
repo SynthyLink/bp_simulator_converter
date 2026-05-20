@@ -1,5 +1,4 @@
 import type { IDesktop } from "../../Interfaces/IDesktop";
-import { CameraType } from "../Interfaces/CameraType";
 import type { ICamera } from "../Interfaces/ICamera";
 import { BasicPosition } from "../Objects/BasicPosition";
 import type { IVisible } from "./Interfaces/IVisible";

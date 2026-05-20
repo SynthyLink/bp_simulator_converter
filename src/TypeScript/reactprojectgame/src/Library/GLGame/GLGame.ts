@@ -3,8 +3,6 @@ import type { IPlayEngine } from "../Interfaces/IPlayEngine";
 import type { IMesh } from "../Abstract3DConverters/Interfaces/IMesh";
 import type { GameOptions } from "./interfaces/IGameOptions";
 import type { IGameActionConverter } from "../Game/Interfaces/IGameActionConverter";
-import type { IGameActionConverterFactory } from "../Game/Interfaces/IGameActionConverterFactory";
-import { EngineGameCameraAction } from "../Abstract3DGame/Games/EngineGameCameraAction";
 import { DrawMeshAction } from "../Abstract3DGame/Factory/DrawMeshAction";
 import { ReferenceFrame } from "../Motion6D/ReferenceFrame";
 import { BasicCamera } from "../Motion6D/Visible/BasicCamera";
@@ -12,8 +10,9 @@ import { DrawMeshGameCameraAcionConverter } from "../Abstract3DGame/Objects/Draw
 import { DrawMesh } from "../Abstract3DGame/Factory/DrawMesh";
 import  Mesh from "./common/mesh";
 import { GLCamera } from "./GLCamera";
+import { EngineGame } from "../Game/Abstract/EngineGame";
 
-export class GLGame extends EngineGameCameraAction  {
+export class GLGame extends EngineGame  {
 
     constructor(name: string, factory: IFactory, engine: IPlayEngine, useLoader: boolean,
         canvas: HTMLCanvasElement, options: GameOptions) {
@@ -35,7 +34,6 @@ export class GLGame extends EngineGameCameraAction  {
             this.gl = gl
         }
         this.options = options
-        factory.removeFactory<IGameActionConverterFactory>(this, "IGameActionConverterFactory")
     }
 
     cycle(time: number): void {
@@ -60,7 +58,6 @@ export class GLGame extends EngineGameCameraAction  {
     nextSceneReady: boolean = false; // Whether the files requested by the next scene has been loaded or not 
     lastTick: number = 0; // The time of the last frame in milliseconds (used to calculate delta time)
     options !: GameOptions;
-
 }
 
 
@@ -76,8 +73,6 @@ class GLDrawMesh extends DrawMesh {
     protected createAction(camera: BasicCamera, mesh: IMesh, frame: ReferenceFrame): DrawMeshAction {
         return new GLDrawMeshAction(camera, mesh, frame, this.gl, this.glCamera)
     }
-
-
 
 }
 

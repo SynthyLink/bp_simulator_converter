@@ -1,5 +1,4 @@
 import { AbstractGameObject } from "../Abstract/AbstractGameObject"
-import type { ISceneObject } from "../../Game/Interfaces/ISceneObject"
 import type { IFactory } from "../../Interfaces/IFactory"
 import type { IObject } from "../../Interfaces/IObject"
 import type { ISceneAction } from "../Interfaces/ISceneAction"
@@ -7,24 +6,23 @@ import type { IAction } from "../../Interfaces/IAction"
 import type { IScene } from "../Interfaces/IScene"
 
 export abstract class AbstractSceneAction extends AbstractGameObject implements ISceneAction {
-    object!: ISceneObject
+    object!: IScene
     add !: IObject
-    constructor(object: ISceneObject, factory: IFactory | undefined) {
+    constructor(object: IScene, factory: IFactory | undefined) {
         super("", factory)
-        this.typeName = "AbstractSceneGameAction"
-        this.types.push("ISceneObjectAction")
+        this.typeName = "AbstractSceneAction"
+        this.types.push("ISceneAction")
         this.types.push("IAction")
-        this.types.push("AbstractSceneGameAction")
+        this.types.push("AbstractSceneAction")
         this.object = object;
     }
-
-    abstract functT(s: IScene): IAction | undefined 
-
-    getActionSceneObject(): ISceneObject {
-        return this.object;
+    getActionScene(): IScene {
+        return this.object
     }
 
-    abstract getActionSceneAdditionalObject(): IObject | undefined
+    abstract functT(s: IScene): IAction | undefined
+
+
   
     abstract action(): void 
 

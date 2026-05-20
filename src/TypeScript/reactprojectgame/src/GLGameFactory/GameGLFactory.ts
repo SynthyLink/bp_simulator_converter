@@ -3,24 +3,33 @@
 import { BasicGameLoaderFactory } from "../Library/Abstract3DGame/Factory/BacicGameLoaderFactory"
 import type { IGameActionFactory } from "../Library/Game/Interfaces/IGameActionFactory"
 import type { IGameLoaderFactory } from "../Library/Game/Interfaces/IGameLoaderFactory"
-import type { IFuncT } from "../Library/Interfaces/IFuncT"
+import type { ISceneAction } from "../Library/Game/Interfaces/ISceneAction"
 import { Motion6DFactory } from "../Library/Motion6D/Motion6DFactory"
-import { ConsoleShowObject } from "../Library/Show/ConsoleShowObject"
-import type { IShowData } from "../Library/Show/Interfaces/IShowData"
-import type { IShowObject } from "../Library/Show/Interfaces/IShowObject"
+//import { ConsoleShowObject } from "../Library/Show/ConsoleShowObject"
+//import type { IShowObject } from "../Library/Show/Interfaces/IShowObject"
 import  { ShowObject } from "../Library/Show/ShowObject"
 import type { IStringSplitter } from "../Library/Utilities/String/Interfaces/IStringSplitter"
 import { LineEndSplitter } from "../Library/Utilities/String/LineEndSplitter"
 
 export class GameGLFactory extends Motion6DFactory {
-    constructor(gameActionFactory: IGameActionFactory) {
+    constructor(gameActionFactory: IGameActionFactory | undefined,
+        sceneFactory: ISceneAction | undefined) {
         super()
 
         this.types.push("GameGLFactory")
         this.typeName = "GameGLFactory"
         this.addFactory<IGameLoaderFactory>(new BasicGameLoaderFactory(), "IGameLoaderFactory")
         this.addFactory<IStringSplitter>(new LineEndSplitter(), "IStringSplitter")
-        this.any = gameActionFactory
+        this.addFactory<IGameActionFactory>(gameActionFactory, "IGameActionFactory")
+        if (gameActionFactory != undefined) {
+            this.addFactory<IGameActionFactory>(gameActionFactory, "IGameActionFactory")
+        }
+        if (sceneFactory != undefined) {
+            this.addFactory<ISceneAction>(sceneFactory, "ISceneAction")
+        }
+
+
+
        // this.addFactory<IGameActionFactory>(gameActionFactory, "IGameActionFactory")
       /*  this.showO = new ShowObject(this)
         this.addFactory<IShowObject>(this.showO, "IShowObject")
@@ -30,7 +39,7 @@ export class GameGLFactory extends Motion6DFactory {
 
     showO !: ShowObject
 }
-
+/*
 class Filrer implements IFuncT<boolean, IShowData> {
     functT(sd: IShowData): boolean | undefined {
         var s = sd.name
@@ -39,5 +48,5 @@ class Filrer implements IFuncT<boolean, IShowData> {
         return true
 
     }
-
-}
+    
+}*/

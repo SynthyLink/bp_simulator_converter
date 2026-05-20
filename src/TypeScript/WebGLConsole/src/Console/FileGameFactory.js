@@ -10,7 +10,7 @@ const Motion6DFactory_1 = require("../Library/Motion6D/Motion6DFactory");
 const ResourceFuncFactory_1 = require("../Library/Resources/ResourceFuncFactory");
 const LineEndSplitter_1 = require("../Library/Utilities/String/LineEndSplitter");
 class FileGameFactory extends Motion6DFactory_1.Motion6DFactory {
-    constructor(path, gameActionFactory) {
+    constructor(path, gameActionFactory, sceneFactory) {
         super();
         this.rpath = "";
         this.path = new FilePath_1.FilePath();
@@ -24,7 +24,12 @@ class FileGameFactory extends Motion6DFactory_1.Motion6DFactory {
         this.addFactory(new BacicGameLoaderFactory_1.BasicGameLoaderFactory(), "IGameLoaderFactory");
         this.addFactory(mtl, "IMtlDetector");
         this.addFactory(new LineEndSplitter_1.LineEndSplitter(), "IStringSplitter");
-        this.addFactory(gameActionFactory, "IGameActionFactory");
+        if (gameActionFactory != undefined) {
+            this.addFactory(gameActionFactory, "IGameActionFactory");
+        }
+        if (sceneFactory != undefined) {
+            this.addFactory(sceneFactory, "ISceneAction");
+        }
         let rf = new ResourceFuncFactory_1.ResourceFuncFactory("", undefined);
         this.addFactory(rf, "IResourceFuncFactory");
         rf.addFunction("text", new FlleResourceFuncText_1.FileResourceFuncText(path));

@@ -13,6 +13,8 @@ export class UniversalFactory extends FactoryObject implements IFactory {
     }
 
     removeFactory<T>(t: T, type: string): void {
+        let x = this.factories.get(type)
+        if (x != t) throw new OwnError("Illegal delete factory", "", "")
         this.factories.delete(type)
     }
     

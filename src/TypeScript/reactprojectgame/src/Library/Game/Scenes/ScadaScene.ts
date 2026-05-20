@@ -55,7 +55,6 @@ export class ScadaScene extends AbstractScene implements IScadaConsumer
 
     loadItself(load: boolean): boolean {
         if (!super.loadItself(load)) return false
-        if (load) this.performer.createSceneAction()
         else this.internalAction.clearActions()
         return true;
         

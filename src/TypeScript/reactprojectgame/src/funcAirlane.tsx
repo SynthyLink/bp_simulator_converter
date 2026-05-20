@@ -1,5 +1,4 @@
 import { GameGLFactory } from "./GLGameFactory/GameGLFactory";
-import { ReferenceFrameGameActionFactory } from "./Library/Abstract3DGame/GameActions/ReferenceFrameGameActionFactory";
 import { ScadaFind3dFrame } from "./Library/Abstract3DGame/GameActions/ScadaFind3DFrame";
 import { ScadaFindCamera } from "./Library/Abstract3DGame/GameActions/ScadaFindCamera";
 import type { IFindCamera } from "./Library/Abstract3DGame/Interfaces/IFindCamera";
@@ -28,16 +27,12 @@ export function funcAirplane(): void {
         first = false
     } else return
 
-    var find = new ScadaFind3dFrame("Camera");
-    var ga = new ReferenceFrameGameActionFactory(find, undefined);
+    let find = new ScadaFind3dFrame("Camera");
+    let fc = new ScadaFindCamera("Camera")
 
-
-    let factory = new GameGLFactory(ga)
-    ga.setConsumerFactory(factory)
+    let factory = new GameGLFactory(find, fc)
 
     const engine = new EngineWatch(500)
-    factory.addFactory<IFindFrame>(find, "IFindFrame")
-    factory.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")
 
     // First thing we need is to get the canvas on which we draw our scenes
     let canv = document.querySelector("#app");

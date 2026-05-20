@@ -3,12 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.A = exports.Actor = void 0;
 const AirplaneScene_1 = require("./scenes/AirplaneScene");
 const FileGameFactory_1 = require("./src/Console/FileGameFactory");
-const ReferenceFrameGameActionFactory_1 = require("./src/Library/Abstract3DGame/GameActions/ReferenceFrameGameActionFactory");
+const ReferenceFrameSceneAction_1 = require("./src/Library/Abstract3DGame/GameActions/ReferenceFrameSceneAction");
 const ScadaFind3DFrame_1 = require("./src/Library/Abstract3DGame/GameActions/ScadaFind3DFrame");
 const ScadaFindCamera_1 = require("./src/Library/Abstract3DGame/GameActions/ScadaFindCamera");
-const EngineGameCameraAction_1 = require("./src/Library/Abstract3DGame/Games/EngineGameCameraAction");
 const AbstractAction_1 = require("./src/Library/Event/Objects/AbstractAction");
 const AbstractActionT_1 = require("./src/Library/Event/Objects/AbstractActionT");
+const EngineGame_1 = require("./src/Library/Game/Abstract/EngineGame");
 const EnfineWatch_1 = require("./src/Library/Utilities/Watch/EnfineWatch");
 const PIAct_1 = require("./test/wrappers/PIAct");
 class Actor {
@@ -24,20 +24,23 @@ class Actor {
         this.url = "http://localhost:4173/static/models/pLANE/master.mtl";
         this.dir = "C:\\AUsers\\1MySoft\\CSharp\\src\\TypeScript\\WebGLConsole/static/models";
         this.dir = this.dir.replaceAll("\\", "/");
-        var find = new ScadaFind3DFrame_1.ScadaFind3dFrame("Camera");
-        var ga = new ReferenceFrameGameActionFactory_1.ReferenceFrameGameActionFactory(find, undefined);
-        var f = new FileGameFactory_1.FileGameFactory(this.dir, ga);
-        ga.setConsumerFactory(f);
+        const find = new ScadaFind3DFrame_1.ScadaFind3dFrame("Camera");
+        const findCamera = new ScadaFindCamera_1.ScadaFindCamera("Camera");
+        //  var ga = new ReferenceFrameGameActionFactory(find, undefined);
+        var f = new FileGameFactory_1.FileGameFactory(this.dir, undefined, undefined);
+        //   ga.setConsumerFactory(f)
         this.factory = f;
-        f.addFactory(find, "IFindFrame");
-        f.addFactory(new ScadaFindCamera_1.ScadaFindCamera("Camera"), "IFindCamera");
+        let sf = new ReferenceFrameSceneAction_1.ReferenceFrameSceneAction(find, findCamera, f);
+        f.addFactory(sf, "ISceneAction");
+        /* f.addFactory<IFindFrame>(find, "IFindFrame")
+         f.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")*/
         let engine = new EnfineWatch_1.EngineWatch(500);
-        var g = new EngineGameCameraAction_1.EngineGameCameraAction("", this.factory, engine, false);
+        var g = new EngineGame_1.EngineGame("", this.factory, engine, false);
         g.getExternalAction().addAction(new A("game"));
         this.game = g;
         var sc = new AirplaneScene_1.AirplaneScene(this.game, "Chart");
         let scada = sc.getConsumerScada();
-        var ea = sc.getInternalAction();
+        var ea = sc.getExternalAction();
         ea.addAction(new A("scene"));
         ea.addAction(new B(sc, g));
         var ena = g.getEngineAction();

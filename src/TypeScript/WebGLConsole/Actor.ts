@@ -1,15 +1,16 @@
 import { AirplaneScene } from "./scenes/AirplaneScene";
 import { FileGameFactory } from "./src/Console/FileGameFactory";
-import { ReferenceFrameGameActionFactory } from "./src/Library/Abstract3DGame/GameActions/ReferenceFrameGameActionFactory";
+import { ReferenceFrameSceneAction } from "./src/Library/Abstract3DGame/GameActions/ReferenceFrameSceneAction";
 import { ScadaFind3dFrame } from "./src/Library/Abstract3DGame/GameActions/ScadaFind3DFrame";
 import { ScadaFindCamera } from "./src/Library/Abstract3DGame/GameActions/ScadaFindCamera";
-import { EngineGameCameraAction } from "./src/Library/Abstract3DGame/Games/EngineGameCameraAction";
 import { IFindCamera } from "./src/Library/Abstract3DGame/Interfaces/IFindCamera";
 import { IFindFrame } from "./src/Library/Abstract3DGame/Interfaces/IFindFrame";
 import { AbstractAction } from "./src/Library/Event/Objects/AbstractAction";
 import { AbstractActionT } from "./src/Library/Event/Objects/AbstractActionT";
 import { TimerObject } from "./src/Library/Event/Objects/TimerObject";
+import { EngineGame } from "./src/Library/Game/Abstract/EngineGame";
 import { IGame } from "./src/Library/Game/Interfaces/IGame";
+import { ISceneAction } from "./src/Library/Game/Interfaces/ISceneAction";
 import { IFactory } from "./src/Library/Interfaces/IFactory";
 import { IInput } from "./src/Library/Interfaces/IInput";
 import { IDataConsumer } from "./src/Library/Measurements/Interfaces/IDataConsumer";
@@ -40,20 +41,25 @@ export class Actor {
     //engine: FictiveEngine = new FictiveEngine()
     constructor() {
         this.dir = this.dir.replaceAll("\\", "/");
-        var find = new ScadaFind3dFrame("Camera");
-        var ga = new ReferenceFrameGameActionFactory(find, undefined);
-        var f = new FileGameFactory(this.dir, ga);
-        ga.setConsumerFactory(f)
+        const find = new ScadaFind3dFrame("Camera");
+        const findCamera = new ScadaFindCamera("Camera")
+        
+        //  var ga = new ReferenceFrameGameActionFactory(find, undefined);
+       
+        var f = new FileGameFactory(this.dir, undefined, undefined);
+     //   ga.setConsumerFactory(f)
         this.factory = f;
-        f.addFactory<IFindFrame>(find, "IFindFrame")
-        f.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")
+        let sf = new ReferenceFrameSceneAction(find, findCamera, f)
+        f.addFactory<ISceneAction>(sf, "ISceneAction")
+       /* f.addFactory<IFindFrame>(find, "IFindFrame")
+        f.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")*/
         let engine = new EngineWatch(500)
-        var g = new EngineGameCameraAction("", this.factory, engine, false);
+        var g = new EngineGame("", this.factory, engine, false);
         g.getExternalAction().addAction(new A("game"));
         this.game = g;
         var sc = new AirplaneScene(this.game, "Chart");
         let scada = sc.getConsumerScada();
-        var ea = sc.getInternalAction()
+        var ea = sc.getExternalAction()
         ea.addAction(new A("scene"));
         ea.addAction(new B(sc, g));
         var ena = g.getEngineAction()

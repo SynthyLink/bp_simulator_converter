@@ -1,4 +1,8 @@
 <Solution>
+  <Project Path="../TypeScriptBackup/TypeScriptBackup.esproj">
+    <Build />
+    <Deploy />
+  </Project>
   <Project Path="WebGLConsole.esproj">
     <Build />
     <Deploy />

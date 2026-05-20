@@ -6,6 +6,7 @@ import type { IActionAddRemove } from "../../Interfaces/IActionAddRemove";
 import type { IFactory } from "../../Interfaces/IFactory";
 import type { IObject } from "../../Interfaces/IObject";
 import type { IStepAction } from "../../Measurements/Interfaces/IStepAction";
+import type { ISceneAction } from "../Interfaces/ISceneAction";
 import { ActionArray } from "../../Utilities/Generic/ActionArray";
 import { ScenePerformer } from "../ScenePerformer";
 
@@ -15,8 +16,11 @@ export abstract class AbstractScene implements IScene {
         this.factory = game.getConsumerFactory()
         this.name = name;
         this.performer = new ScenePerformer(this)
+        let saf = this.factory.getFactory<ISceneAction>("ISceneAction")
+        if (saf != undefined) this.sceneAction = saf
         game.addChildT(this)
     }
+
     actionT(t: number): void {
         if (this.stepAction === undefined) return
         if (this.currentTime > t) {
@@ -49,6 +53,7 @@ export abstract class AbstractScene implements IScene {
     }
 
     getInternalAction(): IActionAddRemove {
+        this.createInternalAction()
         return this.internalAction
     }
 
@@ -121,12 +126,20 @@ export abstract class AbstractScene implements IScene {
         return this.types.includes(type);
     }
 
+    protected createInternalAction(): void {
+        if (this.sceneAction == undefined) return
+        if (!this.internalAction.isEmptyAction()) return
+        let act = this.sceneAction.functT(this)
+        if (act != undefined) this.internalAction.addAction(act)
+    }
 
     protected game !: IGame
 
     protected factory !: IFactory
 
     protected performer !: ScenePerformer
+
+    protected sceneAction !: ISceneAction
 
     protected externalAction: IActionAddRemove = new ActionArray();
 
