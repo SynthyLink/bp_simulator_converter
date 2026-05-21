@@ -9,7 +9,7 @@ export class DrawMeshActionConverter extends AbstractGameAcionConverter  {
 
     protected game3DPerformer : Game3DPerformer  = new Game3DPerformer()
     constructor(drawMesh: IDrawMesh) {
-        super()
+        super(undefined)
         this.types.push("IGameAcionConverter")
         this.types.push("DrawMeshActionConverter")
         this.typeName = "DrawMeshActionConverter"

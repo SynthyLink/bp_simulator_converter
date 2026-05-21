@@ -1,15 +1,17 @@
-import type { IAction } from "../../Interfaces/IAction";
+import type { IFactory } from "../../Interfaces/IFactory";
 import { AbstractGameObject } from "../Abstract/AbstractGameObject";
+import type { IGameAction } from "../Interfaces/IGameAction";
 import type { IGameActionConverter } from "../Interfaces/IGameActionConverter";
 
-export abstract class AbstractGameAcionConverter extends AbstractGameObject implements IGameActionConverter {
+export abstract class AbstractGameAcionConverter extends AbstractGameObject
+    implements IGameActionConverter {
 
-    abstract functT(s: IAction): IAction | undefined
+    abstract functT(s: IGameAction): IGameAction | undefined
 
-    constructor() {
-        super("", undefined)
+    constructor(factory: IFactory | undefined) {
+        super("", factory)
         this.typeName = "AbstractGameAcionConverter"
-        this.types.push("IGameAcionConverter")
+        this.types.push("IGameActionConverter")
         this.types.push("AbstractGameAcionConverter")
     }
 }

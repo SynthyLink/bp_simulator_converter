@@ -21,10 +21,6 @@ export class ReferenceFrameSceneAction extends AbstracSceneAction {
         if (camera != undefined)
             if (frame != undefined) {
                 let l = new CameraFrameAction(camera, frame, s, this.factory)
-                if (this.converter != undefined) {
-                    let r = this.converter.functT(l)
-                    if (r === undefined) return l
-                }
                 return l
             }
         return undefined

@@ -7,6 +7,7 @@ import type { IFactory } from "../../Interfaces/IFactory";
 import type { IObject } from "../../Interfaces/IObject";
 import type { IStepAction } from "../../Measurements/Interfaces/IStepAction";
 import type { ISceneAction } from "../Interfaces/ISceneAction";
+import type { IGameActionConverter } from "../Interfaces/IGameActionConverter";
 import { ActionArray } from "../../Utilities/Generic/ActionArray";
 import { ScenePerformer } from "../ScenePerformer";
 
@@ -18,6 +19,8 @@ export abstract class AbstractScene implements IScene {
         this.performer = new ScenePerformer(this)
         let saf = this.factory.getFactory<ISceneAction>("ISceneAction")
         if (saf != undefined) this.sceneAction = saf
+        let conv = this.factory.getFactory<IGameActionConverter>("IGameActionConverter")
+        if (conv != undefined) this.converter = conv
         game.addChildT(this)
     }
 
@@ -130,7 +133,15 @@ export abstract class AbstractScene implements IScene {
         if (this.sceneAction == undefined) return
         if (!this.internalAction.isEmptyAction()) return
         let act = this.sceneAction.functT(this)
-        if (act != undefined) this.internalAction.addAction(act)
+        if (act === undefined) return
+        if (this.converter !== undefined) {
+            let ca = this.converter.functT(act)
+            if (ca != undefined) {
+                this.internalAction.addAction(ca)
+                return
+            }
+        }
+        this.internalAction.addAction(act)
     }
 
     protected game !: IGame
@@ -140,6 +151,9 @@ export abstract class AbstractScene implements IScene {
     protected performer !: ScenePerformer
 
     protected sceneAction !: ISceneAction
+
+    protected converter !: IGameActionConverter
+
 
     protected externalAction: IActionAddRemove = new ActionArray();
 

@@ -1,7 +1,7 @@
 import type { IMeshHolder } from "../../Abstract3DConverters/Interfaces/IMeshHolder";
-import { AbstractGameAcionConverter } from "../../Game/GameActions/AbstractGameAcionConverter";
 import type { ISceneObjectAction } from "../../Game/Interfaces/ISceneObjectAction";
 import type { IAction } from "../../Interfaces/IAction";
+import { AbstractGameAcionConverter } from "../../Game/GameActions/AbstractGameAcionConverter";
 import { ReferenceFrame } from "../../Motion6D/ReferenceFrame";
 import { BasicCamera } from "../../Motion6D/Visible/BasicCamera";
 import { ActionArray } from "../../Utilities/Generic/ActionArray";
@@ -9,7 +9,7 @@ import { DrawMesh } from "../Factory/DrawMesh";
 
 export class DrawMeshGameCameraAcionConverter extends AbstractGameAcionConverter {
     constructor(camera: BasicCamera) {
-        super()
+        super(undefined)
         this.typeName = "DrawMeshGameCameraAcionConverter"
         this.types.push("DrawMeshGameCameraAcionConverter")
         this.camera = camera

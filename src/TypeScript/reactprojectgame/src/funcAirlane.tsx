@@ -1,8 +1,6 @@
 import { GameGLFactory } from "./GLGameFactory/GameGLFactory";
 import { ScadaFind3dFrame } from "./Library/Abstract3DGame/GameActions/ScadaFind3DFrame";
 import { ScadaFindCamera } from "./Library/Abstract3DGame/GameActions/ScadaFindCamera";
-import type { IFindCamera } from "./Library/Abstract3DGame/Interfaces/IFindCamera";
-import type { IFindFrame } from "./Library/Abstract3DGame/Interfaces/IFindFrame";
 import { AbstractAction } from "./Library/Event/Objects/AbstractAction";
 import { AbstractActionT } from "./Library/Event/Objects/AbstractActionT";
 import type { TimerObject } from "./Library/Event/Objects/TimerObject";
@@ -14,6 +12,10 @@ import type { IScadaConsumer } from "./Library/Scada/Interfaces/IScadaConsumer";
 import { EngineWatch } from "./Library/Utilities/Watch/EnfineWatch";
 import { AirplaneScene } from "../scenes/AirplaneScene"
 import type { IInput } from "./Library/Interfaces/IInput";
+import { ReferenceFrameSceneAction } from "./Library/Abstract3DGame/GameActions/ReferenceFrameSceneAction";
+import type { ISceneAction } from "./Library/Game/Interfaces/ISceneAction";
+import type { IGameActionConverter } from "./Library/Game/Interfaces/IGameActionConverter";
+import { GLActionConverter } from "./Library/GLGame/GLActionConverter";
 
 let first: boolean = true
 
@@ -30,7 +32,11 @@ export function funcAirplane(): void {
     let find = new ScadaFind3dFrame("Camera");
     let fc = new ScadaFindCamera("Camera")
 
-    let factory = new GameGLFactory(find, fc)
+    let factory = new GameGLFactory
+    let sf = new ReferenceFrameSceneAction(find, fc, factory)
+    factory.addFactory<ISceneAction>(sf, "ISceneAction")
+    let conv = new GLActionConverter(factory)
+    factory.addFactory<IGameActionConverter>(conv, "IGameActionConverter")
 
     const engine = new EngineWatch(500)
 

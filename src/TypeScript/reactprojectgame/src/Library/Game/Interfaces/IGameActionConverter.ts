@@ -1,7 +1,7 @@
-import type { IAction } from "../../Interfaces/IAction";
 import type { IFuncT } from "../../Interfaces/IFuncT";
+import type { IGameAction } from "./IGameAction";
 
-export interface IGameActionConverter extends IFuncT<IAction, IAction>
+export interface IGameActionConverter extends IFuncT<IGameAction | undefined, IGameAction>
 {
 
 }

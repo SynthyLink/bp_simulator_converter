@@ -1,8 +1,8 @@
-import type { IAction } from "../../Interfaces/IAction";
+import type { IGameAction } from "../Interfaces/IGameAction";
 import { AbstractGameAcionConverter } from "./AbstractGameAcionConverter";
 
 export class TrivialGameAcionConverter extends AbstractGameAcionConverter {
-    functT(s: IAction): IAction | undefined {
+    functT(s: IGameAction): IGameAction | undefined{
         return s;
     }
 
