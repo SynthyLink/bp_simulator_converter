@@ -16,6 +16,7 @@ import { ReferenceFrameSceneAction } from "./Library/Abstract3DGame/GameActions/
 import type { ISceneAction } from "./Library/Game/Interfaces/ISceneAction";
 import type { IGameActionConverter } from "./Library/Game/Interfaces/IGameActionConverter";
 import { GLActionConverter } from "./Library/GLGame/GLActionConverter";
+import type { IResourceItem } from "./Library/Resources/Infrefaces/IResourceItem";
 
 let first: boolean = true
 
@@ -46,7 +47,13 @@ export function funcAirplane(): void {
     if (canv === null) return
     const canvas: HTMLCanvasElement = canv as HTMLCanvasElement
     // Then we create an instance of the game class and give it the canvas
-    const game = new GLGame("", factory, engine, true, canvas, { maxfps: 25 });
+    let res: IResourceItem[] = []
+    res.push({ name: "ambient.frag", url: "shaders/phong/textured-materials/ambient.frag", ext: ".fraq", type: "text" })
+    res.push({ name: "directional.frag", url: "shaders/phong/textured-materials/directional.frag", ext: ".fraq", type: "text" })
+    res.push({ name: "light.vert", url: "shaders/phong/textured-materials/light.vert", ext: ".vert", type: "text" })
+    res.push({ name: "point.frag", url: "shaders/phong/textured-materials/point.frag", ext: ".fraq", type: "text" })
+    res.push({ name: "spot.frag", url: "shaders/phong/textured-materials/spot.frag", ext: ".fraq", type: "text" })
+    const game = new GLGame("", factory, engine, true, canvas, { maxfps: 25 }, res);
 
     game.shouldStartAfterLoad()
 

@@ -2,14 +2,16 @@ import type { IActionAddRemoveT } from "../../Interfaces/IActionAddRemoveT";
 import type { IActionT } from "../../Interfaces/IActionT";
 import type { IFactory } from "../../Interfaces/IFactory";
 import type { IPlayEngine } from "../../Interfaces/IPlayEngine";
+import type { IResourceItem } from "../../Resources/Infrefaces/IResourceItem";
 import { ActionArrayT } from "../../Utilities/Generic/ActionArrayT";
 import { AbstractGame } from "./AbstractGame";
 
 export class EngineGame extends AbstractGame implements IPlayEngine, IActionT<number> {
 
-    constructor(name: string, factory: IFactory, engine: IPlayEngine, useLoader: boolean)
+    constructor(name: string, factory: IFactory, engine: IPlayEngine, useLoader: boolean,
+        resources: IResourceItem[])
     {
-        super(name, factory, useLoader)
+        super(name, factory, useLoader, resources)
         this.types.push("IPlayEngine")
         this.types.push("EngineGame")
         this.typeName = "EngineGame"

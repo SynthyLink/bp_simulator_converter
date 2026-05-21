@@ -11,12 +11,13 @@ import { DrawMesh } from "../Abstract3DGame/Factory/DrawMesh";
 import  Mesh from "./common/mesh";
 import { GLCamera } from "./GLCamera";
 import { EngineGame } from "../Game/Abstract/EngineGame";
+import type { IResourceItem } from "../Resources/Infrefaces/IResourceItem";
 
 export class GLGame extends EngineGame  {
 
     constructor(name: string, factory: IFactory, engine: IPlayEngine, useLoader: boolean,
-        canvas: HTMLCanvasElement, options: GameOptions) {
-        super(name, factory, engine, useLoader)
+        canvas: HTMLCanvasElement, options: GameOptions, resources: IResourceItem[]) {
+        super(name, factory, engine, useLoader, resources)
         this.types.push("IGLContext")
         this.types.push("GLGame")
         this.typeName = "GLGame"

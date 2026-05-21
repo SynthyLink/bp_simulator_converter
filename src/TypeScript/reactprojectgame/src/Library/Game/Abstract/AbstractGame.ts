@@ -19,7 +19,8 @@ import { ActionArrayT } from "../../Utilities/Generic/ActionArrayT"
 
 export abstract class AbstractGame extends AbstractGameObject implements IGame, IResourceCollection {
 
-    constructor(name: string, factory: IFactory | undefined, useLoader: boolean) {
+    constructor(name: string, factory: IFactory | undefined, useLoader: boolean,
+        resources: IResourceItem[]) {
         super(name, factory)
         this.types.push("IGame")
         this.types.push("IObjectCollection")
@@ -32,6 +33,9 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         this.typeName = "AbstractGame"
         if (factory != undefined) {
             factory.addFactory<IGameDetector>(new GameDetector(this, factory), "IGameDetector")
+        }
+        for (let r of resources) {
+            this.resources.push(r)
         }
         this.useLoader = useLoader;
         if (useLoader) {
