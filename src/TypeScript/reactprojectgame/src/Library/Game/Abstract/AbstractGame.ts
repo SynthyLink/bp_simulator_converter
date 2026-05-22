@@ -169,6 +169,7 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         this.performer.convertResourceInfo(this.resources, this.resourcesI)
         this.loader.loadMap(this.resourcesI)
         await this.loader.wait()
+        this.postLoadResourcelAction.action()
         this.performer.loadCollecion(true, this)
         this.internalAction.clearActions()
         this.performer.collectResources(this, this)
@@ -194,7 +195,21 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         this.timeAction.removeActionT(action)
     }
 
+    public getPostLoadResourceAction(): IActionAddRemove {
+        return this.postLoadResourcelAction
+    }
 
+    public getResourceByUrl(url: string)  {
+        const r = this.loader.getResult();
+        return r.get(url)
+    }
+    public getResourceByName(name: string) {
+        for (let r of this.resources) {
+            if (r.name === name) {
+                return this.getResourceByUrl(r.url)
+            }
+        }
+    }
 
 
     public shouldStartAfterLoad(): void {
@@ -252,6 +267,9 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
     
 
     externalAction: IActionAddRemove = new ActionArray()
+
+    postLoadResourcelAction: IActionAddRemove = new ActionArray()
+
 
     protected actionF !: IAction
 

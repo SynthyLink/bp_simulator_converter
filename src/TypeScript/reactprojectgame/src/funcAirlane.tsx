@@ -3,20 +3,20 @@ import { ScadaFind3dFrame } from "./Library/Abstract3DGame/GameActions/ScadaFind
 import { ScadaFindCamera } from "./Library/Abstract3DGame/GameActions/ScadaFindCamera";
 import { AbstractAction } from "./Library/Event/Objects/AbstractAction";
 import { AbstractActionT } from "./Library/Event/Objects/AbstractActionT";
-import type { TimerObject } from "./Library/Event/Objects/TimerObject";
 import { PerformerEvents } from "./Library/Event/PerformerEvents";
-import type { IGame } from "./Library/Game/Interfaces/IGame";
 import { GLGame } from "./Library/GLGame/GLGame";
-import type { IDataConsumer } from "./Library/Measurements/Interfaces/IDataConsumer";
-import type { IScadaConsumer } from "./Library/Scada/Interfaces/IScadaConsumer";
 import { EngineWatch } from "./Library/Utilities/Watch/EnfineWatch";
 import { AirplaneScene } from "../scenes/AirplaneScene"
-import type { IInput } from "./Library/Interfaces/IInput";
 import { ReferenceFrameSceneAction } from "./Library/Abstract3DGame/GameActions/ReferenceFrameSceneAction";
-import type { ISceneAction } from "./Library/Game/Interfaces/ISceneAction";
-import type { IGameActionConverter } from "./Library/Game/Interfaces/IGameActionConverter";
 import { GLActionConverter } from "./Library/GLGame/GLActionConverter";
 import type { IResourceItem } from "./Library/Resources/Infrefaces/IResourceItem";
+import type { ISceneAction } from "./Library/Game/Interfaces/ISceneAction";
+import type { IGameActionConverter } from "./Library/Game/Interfaces/IGameActionConverter";
+import type { IInput } from "./Library/Interfaces/IInput";
+import type { IGame } from "./Library/Game/Interfaces/IGame";
+import type { IDataConsumer } from "./Library/Measurements/Interfaces/IDataConsumer";
+import type { IScadaConsumer } from "./Library/Scada/Interfaces/IScadaConsumer";
+import type { TimerObject } from "./Library/Event/Objects/TimerObject";
 
 let first: boolean = true
 
@@ -54,7 +54,7 @@ export function funcAirplane(): void {
     res.push({ name: "point.frag", url: "shaders/phong/textured-materials/point.frag", ext: ".fraq", type: "text" })
     res.push({ name: "spot.frag", url: "shaders/phong/textured-materials/spot.frag", ext: ".fraq", type: "text" })
     const game = new GLGame("", factory, engine, true, canvas, { maxfps: 25 }, res);
-
+    new PosloadResources(game)
     game.shouldStartAfterLoad()
 
     game.getExternalAction().addAction(new A("game"));
@@ -98,6 +98,39 @@ export function funcAirplane(): void {
     */
 }
 
+class PosloadResources extends AbstractAction {
+    game !: GLGame
+    gl !: WebGL2RenderingContext
+
+    constructor(game: GLGame) {
+        super()
+        game.getPostLoadResourceAction().addAction(this)
+        this.game = game
+        this.gl = game.gl
+    }
+
+    action(): void {
+        let r = this.game.getResources()
+        for (let type of ['ambient', 'directional', 'spot']) {
+            let p = this.game.createShader(type)
+            let lv = this.game.getResourceByName("light.vert")
+            p.attach(lv, this.gl.VERTEX_SHADER)
+            lv = this.game.getResourceByName(`${type}.frag`)
+            p.attach(lv, this.gl.FRAGMENT_SHADER);
+            p.link();
+        }
+    }        /*
+    for(let type of ['ambient', 'directional', 'spot']){
+            this.programs[type] = new ShaderProgram(this.gl);
+            this.programs[type].attach(this.game.loader.resources[''], this.gl.VERTEX_SHADER);
+            this.programs[type].attach(this.game.loader.resources[`${type}.frag`], this.gl.FRAGMENT_SHADER);
+            this.programs[type].link();
+        }
+        */
+
+
+}
+
 class TT extends AbstractActionT<number> {
     actionT(t: number): void {
         console.log("2 * time " + 2 * t)
@@ -105,7 +138,7 @@ class TT extends AbstractActionT<number> {
 
 }
 
-export class A extends AbstractAction {
+class A extends AbstractAction {
     s: string = ""
     i: number = 0
     constructor(s: string) {

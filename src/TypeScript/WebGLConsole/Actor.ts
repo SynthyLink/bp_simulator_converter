@@ -54,7 +54,7 @@ export class Actor {
        /* f.addFactory<IFindFrame>(find, "IFindFrame")
         f.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")*/
         let engine = new EngineWatch(500)
-        var g = new EngineGame("", this.factory, engine, false);
+        var g = new EngineGame("", this.factory, engine, false, []);
         g.getExternalAction().addAction(new A("game"));
         this.game = g;
         var sc = new AirplaneScene(this.game, "Chart");

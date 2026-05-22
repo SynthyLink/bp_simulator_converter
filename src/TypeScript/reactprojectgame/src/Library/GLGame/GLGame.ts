@@ -3,6 +3,7 @@ import type { IPlayEngine } from "../Interfaces/IPlayEngine";
 import type { IMesh } from "../Abstract3DConverters/Interfaces/IMesh";
 import type { GameOptions } from "./interfaces/IGameOptions";
 import type { IGameActionConverter } from "../Game/Interfaces/IGameActionConverter";
+import type { IResourceItem } from "../Resources/Infrefaces/IResourceItem";
 import { DrawMeshAction } from "../Abstract3DGame/Factory/DrawMeshAction";
 import { ReferenceFrame } from "../Motion6D/ReferenceFrame";
 import { BasicCamera } from "../Motion6D/Visible/BasicCamera";
@@ -11,7 +12,7 @@ import { DrawMesh } from "../Abstract3DGame/Factory/DrawMesh";
 import  Mesh from "./common/mesh";
 import { GLCamera } from "./GLCamera";
 import { EngineGame } from "../Game/Abstract/EngineGame";
-import type { IResourceItem } from "../Resources/Infrefaces/IResourceItem";
+import ShaderProgram from "./common/shader-program";
 
 export class GLGame extends EngineGame  {
 
@@ -50,7 +51,13 @@ export class GLGame extends EngineGame  {
         return new GLDrawMeshGameCameraAcionConverter(camera, this.gl, cam)
     }
 
-    
+    createShader(name: string): ShaderProgram {
+        let s = new ShaderProgram(this.gl)
+        this.programs.set(name, s)
+        return s;
+    }
+
+    programs: Map<string, ShaderProgram> = new Map()
  
     canvas !: HTMLCanvasElement
 
