@@ -6,7 +6,7 @@ import { AbstractActionT } from "./Library/Event/Objects/AbstractActionT";
 import { PerformerEvents } from "./Library/Event/PerformerEvents";
 import { GLGame } from "./Library/GLGame/GLGame";
 import { EngineWatch } from "./Library/Utilities/Watch/EnfineWatch";
-import { AirplaneScene } from "../scenes/AirplaneScene"
+import { ShuttleScene } from "../scenes/ShuttleScene"
 import { ReferenceFrameSceneAction } from "./Library/Abstract3DGame/GameActions/ReferenceFrameSceneAction";
 import { GLActionConverter } from "./Library/GLGame/GLActionConverter";
 import type { IResourceItem } from "./Library/Resources/Infrefaces/IResourceItem";
@@ -63,7 +63,7 @@ export function funcAirplane(): void {
 
     // Here we list all our scenes and our initial scene
    // const initialScene = "Game";
-    var sc = new AirplaneScene(game, "Chart")
+    var sc = new ShuttleScene(game, "Chart")
     var ea = sc.getExternalAction();
     ea.addAction(new A("scene"));
     ea.addAction(new B(sc, game));
@@ -110,7 +110,7 @@ class PosloadResources extends AbstractAction {
     }
 
     action(): void {
-        let r = this.game.getResources()
+    //    let r = this.game.getResources()
         for (let type of ['ambient', 'directional', 'spot']) {
             let p = this.game.createShader(type)
             let lv = this.game.getResourceByName("light.vert")

@@ -208,7 +208,8 @@ namespace Motion6D.Portable.TypeScript
         {
             { ".obj", "text"},
               { ".mtl", "text"},
-                  { ".jpg", "image"}
+                  { ".jpg", "image"},
+                  { ".png", "image"},
     };
 
         List<string> GetChild(string prefix, ICategoryObject obj)

@@ -6,8 +6,13 @@ using Abstract3DConverters.ErrorHandlers;
 
 Console.WriteLine("Hello, World!");
 var dir = @"c:\AUsers\1MySoft\CSharp\03D\GOOD";
+dir = @"c:\AUsers\1MySoft\CSharp\03D\pLANE";
+if (!Directory.Exists(dir))
+{
+    return;
+}
 
-var writer = new StreamWriter(Path.Combine(dir, "1.log"), false);
+var writer = new StreamWriter(Path.Combine(dir, "1.log"), true);
 
 var a = (Exception e, TextWriter t) =>
 {
@@ -39,11 +44,8 @@ StaticExtensionAbstract3DConverters.CheckFile = CheckFile.Check;
 
 try
 {
-    // dir = @"c:\";
-    // dir.TestACTetxures();
-    //  @"c:\0\1.txt".Finish();
 
-    dir.TestDirectory(true);
+    //dir.TestDirectory(true);
     dir.TestDirectory(false);
 
 }

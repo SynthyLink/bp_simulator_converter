@@ -88,10 +88,8 @@ namespace Abstract3DConverters.Meshes
         private AbstractMesh()
         {
             mesh = this;
-            //GetAbsolute = GetStart;
             GetRelativeMatrix = GetRelativeMatrixStart;
             GetAbsoluteMatrix = GetAbsoluteMatrixStart;
-         //   GetAbsolutePolygons = GetPolygonStart;
          }
 
         /// <summary>

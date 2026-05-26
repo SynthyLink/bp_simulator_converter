@@ -1,6 +1,6 @@
-import { EffectTexture } from "../EffectTexture";
 import type { IMesh } from "../Interfaces/IMesh";
 import type { ITextureIndex } from "../Interfaces/ITextureIndex";
+import { EffectTexture } from "../EffectTexture";
 import { Obj3DCreator } from "../MeshCreators/Obj3DCreator";
 import { Polygon } from "../Points/Polygon";
 import { AbstractMeshPolygon } from "./AbstractMeshPolygon";
@@ -24,20 +24,6 @@ export class AbstractMeshObj extends AbstractMeshPolygon {
         let ind = this.o3dCreator.getIndexes();
         let indexes = ind[meshNumber]
         if (variant == 0) {
-            /*  for (let ii of indexes)
-              {
-                /*  var idxx = ii.indx
-                  for (var i of idxx) {
-                      {
-                   /*   this.vertices.push(this.intVertices[i[0]]);
-                      this.textures.push(this.intTextures[i[1]]);
-                      if (i.length > 2) {
-                          if (i[2] >= 0) {
-                              this.normals.push(this.intNormals[i[2]]);
-                          }
-                      }
-                  }
-              }*/
             var eff = tuple?.effect;
             if (eff != undefined) this.effect = eff;
 

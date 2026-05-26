@@ -54,7 +54,7 @@ export class Obj3DCreator extends LinesMeshCreator
         this.createGeometry()
  }
 
-    private iindexes !: ITextureIndex[][]
+    private iindexes: ITextureIndex[][] = []
 
     private static siindexes : ITextureIndex[][]
 
@@ -185,7 +185,7 @@ export class Obj3DCreator extends LinesMeshCreator
             }
             else {
                 for (var line of this.lines) {
-                    if (line.indexOf("mtllib ") == 0) {
+                    if (line.startsWith("mtllib ")) {
                         var file = line.substring("mtllib ".length).trim();
                         mt = this.createMaterialsFromLUrl(file, eff)
                         if (eff.length > 0) this.default = eff[0]
@@ -258,7 +258,7 @@ export class Obj3DCreator extends LinesMeshCreator
 
     getInitial(line: string): string | undefined {
         this.toShiftString(line, this.objs);
-        if (line.indexOf("usemtl ") == 0) {
+        if (line.startsWith("usemtl ")) {
             var mat = line.substring("usemtl ".length);
             var effect = this.detect(mat);
             if (effect != undefined) this.effectList.push(effect);
@@ -267,7 +267,12 @@ export class Obj3DCreator extends LinesMeshCreator
             }
             return this.getMeshName();
         }
-        return undefined
+        if (line.startsWith("g ")) {
+            var name = this.performer.toShidtedString(line, "g");
+            this.matExists = false;
+            return name;
+        }
+    return undefined
 
     }
 
@@ -338,7 +343,7 @@ export class Obj3DCreator extends LinesMeshCreator
                         this.names.push(name);
                         indexes = [];
                         this.pushIndex(indexes);
-                        if (line.indexOf("usemtl ") == 0) {
+                        if (line.includes("usemtl ")) {
                             var mat = line.substring("usemtl ".length);
                             if (mat == "_default_") {
                                 continue;
@@ -361,7 +366,7 @@ export class Obj3DCreator extends LinesMeshCreator
                     else {
                     }
                 }
-                if (line.indexOf("usemtl ") == 0) {
+                if (line.includes("usemtl ")) {
                     var mat = line.substring("usemtl ".length);
                     if (mat == "_default_") {
                         continue;
@@ -540,7 +545,7 @@ export class Obj3DCreator extends LinesMeshCreator
 
     mtll: string = "mtllib "
 
-
+    matExists: boolean = false
 
 }
 
@@ -585,6 +590,10 @@ class MtlWrapper implements IEffectDitionary {
         this.obj = obj;
         this.lines = lines;
         this.directory = directory;
+        if (start == 0) {
+            return;
+        }
+        
         var i = start;
         var list: string[] = []
         for (; i < lines.length; i++) {
@@ -619,9 +628,7 @@ class MtlWrapper implements IEffectDitionary {
         }
 
     }
-    /* string str, int start, List<string> lines,
-    Dictionary<string, Effect> effects, string directory*/
-    getEffectDictionary(): Map<string, EffectTexture> {
+     getEffectDictionary(): Map<string, EffectTexture> {
         return this.effects;
     }
     public сreateFromMaterials(keyValuePairs: Map<string, Material>,
@@ -639,13 +646,13 @@ class MtlWrapper implements IEffectDitionary {
         if (defaultEffect.length > 0) {
             defaultEffect.pop();
         }
-        var name = "";
-        var i = start;
+        let name = "";
+        let i = start;
         for (; i < lines.length; i++) {
             var line = lines[i];
             if (line.startsWith("newmtl")) {
                 var ss = line.split(" ");
-                name = ss[ss.length - 1];
+                this.name = ss[ss.length - 1];
                 break;
             }
 
@@ -684,7 +691,7 @@ class MtlWrapper implements IEffectDitionary {
             mat.addChildT(spec);
         }
         let dn: Map<string, EffectTexture> = new Map()
-        this.effect = new EffectTexture(dn, this.name, mat as Material, this.kd)
+        this.effect = new EffectTexture(dn, this.newName, mat as Material, this.kd)
 
     }
 

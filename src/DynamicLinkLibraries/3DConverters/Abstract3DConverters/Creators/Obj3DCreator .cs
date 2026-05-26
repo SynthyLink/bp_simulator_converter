@@ -186,22 +186,6 @@ namespace Abstract3DConverters.Creators
                 }
                 return MeshName;
             }
-            /*             if (MatExists)
-                         {
-                             return MeshName;
-                         }
-                   //      MatExists = true;
-                         return Fiction;
-                     /*        if (line.Contains(objs) | line.StartsWith("g "))
-                             {
-                                 var name = s.ToString(line, "g");
-                                 if (name == null)
-                                 {
-                                     name = s.ToString(line, objs);
-                                 }
-                                 MatExists = false;
-                                 return name;
-                             }*/
             if (line.StartsWith("g "))
             {
                 var name = s.ToString(line, "g");
@@ -941,187 +925,16 @@ namespace Abstract3DConverters.Creators
 
         public class MtlWrapper : IEffectDictionary
         {
+            #region Ctor
             public MtlWrapper(string directory)
             {
                 Directory = directory;
                 dict = new Dictionary<string, Effect>();
             }
 
-            Dictionary<string, Effect> dict;
-
-            private string Directory
-            {
-                get;
-                set;
-            }
-
-
-
-            public Dictionary<string, object> Create(Dictionary<string, Material> keyValuePairs,
-                IMaterialCreator creator)
-            {
-                Dictionary<string, object> d = new Dictionary<string, object>();
-                foreach (var pair in keyValuePairs)
-                {
-                    Material mat = pair.Value;
-                    var v = creator.Create(mat);
-                    d[pair.Key] = v;
-                }
-                return d;
-            }
-
-            internal Dictionary<string, Effect> Create(List<string> lines, int start, out Effect defaulEffect)
-            {
-                try
-                {
-                    defaulEffect = null;
-                    var name = "";
-                    var i = start;
-                    for (; i < lines.Count; i++)
-                    {
-                        var line = lines[i];
-                        if (line.Contains("newmtl"))
-                        {
-                            var ss = line.Split(" ".ToCharArray());
-                            name = ss[ss.Length - 1];
-                            break;
-                        }
-
-                    }
-                    new MtlWrapper(name, i + 1, lines, dict, Directory);
-                    return dict;
-                }
-                catch (Exception e)
-                {
-                    e.HandleExceptionDouble("Create OBJ material");
-                }
-                defaulEffect = null;
-                return null;
-            }
-
-            public Dictionary<string, Effect> Create(string filename, string directory, out Effect defaultEffect)
-            {
-                defaultEffect = null;
-                using (var reader = new StreamReader(Path.Combine(directory, filename)))
-                {
-
-                    var name = "";
-                    do
-                    {
-                        var line = reader.ReadLine();
-                        if (line.Contains("newmtl"))
-                        {
-                            var ss = line.Split(" ".ToCharArray());
-                            name = ss[ss.Length - 1];
-                            break;
-                        }
-
-                    }
-                    while (!reader.EndOfStream);
-                    new MtlWrapper(name, directory, reader, dict);
-
-                }
-                return dict;
-
-            }
-
-            public Dictionary<string, Effect> Create(string filename)
-            {
-                dict.Clear();
-                using (var reader = new StreamReader(filename))
-                {
-                    do
-                    {
-                        var line = reader.ReadLine();
-                        if (line.Contains("newmtl"))
-                        {
-                            var ss = line.Split(" ".ToCharArray());
-                            var name = ss[ss.Length - 1];
-                            new MtlWrapper(name, Path.GetDirectoryName(filename), reader, dict);
-                        }
-                    }
-                    while (!reader.EndOfStream);
-                }
-                return dict;
-            }
-
-
-            public Image Ka { get; private set; }
-            public Image Kd { get; private set; }
-            public Image Ks { get; private set; }
-
-            public string Name { get; private set; }
-
-            public Color Ambient { get; private set; }
-
-            public Color Emissive { get; private set; }
-
-
-            public Color Diffuse { get; private set; }
-
-            public Color Specular { get; private set; }
-
-
-            public float Ns { get; private set; }
-            public float Ni { get; private set; }
-            public float d { get; private set; } = 1;
-            public int illum { get; private set; }
-
-
-            private Effect effect;
-            public Effect Effect
-            {
-                get
-                {
-                    Create();
-                    return effect;
-                }
-            }
-
-            Dictionary<string, Effect> IEffectDictionary.Effects => throw new IllegalSetPropetryException("Dictionary of effects is not supported ");
-
-            void Create()
-            {
-                if (effect != null)
-                {
-                    return;
-                }
-                if (Diffuse == null)
-                {
-                    Diffuse = new Color(new float[] { 1, 1, 1 });
-                }
-                IChildren<SimpleMaterial> mat = new PhongMaterial(Name, null);
-                if (Diffuse != null)
-                {
-                    if (Ambient == null)
-                    {
-                        Ambient = new Color(new float[] { 1, 1, 1 });
-                    }
-                    var diffuse = new DiffuseMaterial(Diffuse, Ambient, d);
-                    //diffuse.Texture = Kd;
-                    mat.AddChild(diffuse);
-                }
-                if (Emissive == null)
-                {
-                    Emissive = new Color(new float[] { 1, 1, 1 });
-                }
-                if (Emissive != null)
-                {
-                    var emissive = new EmissiveMaterial(Emissive, Ka);
-                    mat.AddChild(emissive);
-                }
-                if (Specular != null)
-                {
-                    var specular = new SpecularMaterial(Specular, Ns);
-                    mat.AddChild(specular);
-                }
-                Dictionary<string, Effect> dn = null;
-                effect = new Effect(dn, Name, mat as Material, Kd);
-            }
-
-
             private MtlWrapper(string str, int start, List<string> lines,
-                Dictionary<string, Effect> effects, string directory) : this(directory)
+       Dictionary<string, Effect> effects, string directory) : 
+                this(directory)
 
             {
                 try
@@ -1216,6 +1029,189 @@ namespace Abstract3DConverters.Creators
                 }
 
             }
+
+            #endregion
+
+
+            Dictionary<string, Effect> dict;
+
+            private string Directory
+            {
+                get;
+                set;
+            }
+
+
+
+            public Dictionary<string, object> Create(Dictionary<string, Material> keyValuePairs,
+                IMaterialCreator creator)
+            {
+                Dictionary<string, object> d = new Dictionary<string, object>();
+                foreach (var pair in keyValuePairs)
+                {
+                    Material mat = pair.Value;
+                    var v = creator.Create(mat);
+                    d[pair.Key] = v;
+                }
+                return d;
+            }
+
+            internal Dictionary<string, Effect> Create(List<string> lines, 
+                int start, 
+                out Effect defaulEffect)
+            {
+                try
+                {
+                    defaulEffect = null;
+                    var name = "";
+                    var i = start;
+                    for (; i < lines.Count; i++)
+                    {
+                        var line = lines[i];
+                        if (line.Contains("newmtl"))
+                        {
+                            var ss = line.Split(" ".ToCharArray());
+                            name = ss[ss.Length - 1];
+                            break;
+                        }
+
+                    }
+                    new MtlWrapper(name, i + 1, lines, dict, Directory);
+                    return dict;
+                }
+                catch (Exception e)
+                {
+                    e.HandleExceptionDouble("Create OBJ material");
+                }
+                defaulEffect = null;
+                return null;
+            }
+
+            public Dictionary<string, Effect> Create(string filename, string directory, out Effect defaultEffect)
+            {
+                defaultEffect = null;
+                using (var reader = new StreamReader(Path.Combine(directory, filename)))
+                {
+
+                    var name = "";
+                    do
+                    {
+                        var line = reader.ReadLine();
+                        if (line.Contains("newmtl"))
+                        {
+                            var ss = line.Split(" ".ToCharArray());
+                            name = ss[ss.Length - 1];
+                            break;
+                        }
+
+                    }
+                    while (!reader.EndOfStream);
+                    new MtlWrapper(name, directory, reader, dict);
+
+                }
+                return dict;
+
+            }
+
+            public Dictionary<string, Effect> Create(string filename)
+            {
+                dict.Clear();
+                using (var reader = new StreamReader(filename))
+                {
+                    do
+                    {
+                        var line = reader.ReadLine();
+                        if (line.Contains("newmtl"))
+                        {
+                            var ss = line.Split(" ".ToCharArray());
+                            var name = ss[ss.Length - 1];
+                            new MtlWrapper(name, Path.GetDirectoryName(filename), reader, dict);
+                        }
+                    }
+                    while (!reader.EndOfStream);
+                }
+                return dict;
+            }
+
+
+            public Image Ka { get; private set; }
+            public Image Kd { get; private set; }
+            public Image Ks { get; private set; }
+
+            public string Name 
+            { 
+                get; 
+                private set; 
+            }
+
+            public Color Ambient { get; private set; }
+
+            public Color Emissive { get; private set; }
+
+
+            public Color Diffuse { get; private set; }
+
+            public Color Specular { get; private set; }
+
+
+            public float Ns { get; private set; }
+            public float Ni { get; private set; }
+            public float d { get; private set; } = 1;
+            public int illum { get; private set; }
+
+
+            private Effect effect;
+
+            public Effect Effect
+            {
+                get
+                {
+                    Create();
+                    return effect;
+                }
+            }
+
+            Dictionary<string, Effect> IEffectDictionary.Effects => throw new IllegalSetPropetryException("Dictionary of effects is not supported ");
+
+            void Create()
+            {
+                if (effect != null)
+                {
+                    return;
+                }
+                if (Diffuse == null)
+                {
+                    Diffuse = new Color(new float[] { 1, 1, 1 });
+                }
+                IChildren<SimpleMaterial> mat = new PhongMaterial(Name, null);
+                if (Diffuse != null)
+                {
+                    if (Ambient == null)
+                    {
+                        Ambient = new Color(new float[] { 1, 1, 1 });
+                    }
+                    var diffuse = new DiffuseMaterial(Diffuse, Ambient, d);
+                    //diffuse.Texture = Kd;
+                    mat.AddChild(diffuse);
+                }
+                if (Emissive == null)
+                {
+                    Emissive = new Color(new float[] { 1, 1, 1 });
+                }
+                if (Emissive != null)
+                {
+                    var emissive = new EmissiveMaterial(Emissive, Ka);
+                    mat.AddChild(emissive);
+                }
+                if (Specular != null)
+                {
+                    var specular = new SpecularMaterial(Specular, Ns);
+                    mat.AddChild(specular);
+                }
+                Dictionary<string, Effect> dn = null;
+                effect = new Effect(dn, Name, mat as Material, Kd);
+            }
+
 
             private float ToFloat(string str)
             {

@@ -16,5 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="dist\assets\" />
+    <Folder Include="public\scenes\" />
   </ItemGroup>
 </Project>

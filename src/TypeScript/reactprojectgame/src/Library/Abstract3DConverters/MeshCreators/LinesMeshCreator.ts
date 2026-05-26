@@ -1,6 +1,10 @@
 import type { IFactory } from "../../Interfaces/IFactory";
+import type { IFileFactory } from "../../IO/Interfaces/IFileFactory";
+import type { IIODirectoryFactory } from "../../IO/Interfaces/IIODirectoryFactory";
+import type { IPathFactory } from "../../IO/Interfaces/IPathFactory";
 import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
 import type { IStringSplitter } from "../../Utilities/String/Interfaces/IStringSplitter";
+import type { IImageDetectorFactory } from "../Interfaces/IImageDetectorFactory";
 import { AbstractMeshCreator } from "./AbstractMeshCreator";
 
 export abstract class LinesMeshCreator extends AbstractMeshCreator
@@ -9,16 +13,18 @@ export abstract class LinesMeshCreator extends AbstractMeshCreator
         func: ITextReaderFactory | undefined) {
         super(url, name, directory, obj, factory)
         if (func == undefined) return
-        this.func = func
+        this.textReaderFactory = func
         var r = func.getTextReader(obj, url)
         if (r === undefined) return;
         let tc = factory.getFactory<IStringSplitter>("IStringSplitter")
         if (tc != undefined) {
             this.textConverter = tc
         }
- /*    let tf = factory.getFactory<ITextReaderFactory>("ITextReaderFactory")
-        if (tf != undefined) {
-            this.textReaderFactory = tf
+        if (func === undefined) {
+            let tf = factory.getFactory<ITextReaderFactory>("ITextReaderFactory")
+            if (tf != undefined) {
+                this.textReaderFactory = tf
+            }
         }
         let tfile = factory.getFactory<IFileFactory>("IFileFactory")
         if (tfile != undefined) {
@@ -29,7 +35,9 @@ export abstract class LinesMeshCreator extends AbstractMeshCreator
             this.path = tpath.createPath(obj)
         }
         if (directory.length == 0) {
-            this.directory = this.path.getDirectoryName(url)
+            if (this.path != undefined) {
+                this.directory = this.path.getDirectoryName(url)
+            }
         }
         let td = factory.getFactory<IIODirectoryFactory>("IIODirectoryFactory")
         if (td != undefined) {
@@ -37,7 +45,7 @@ export abstract class LinesMeshCreator extends AbstractMeshCreator
         }
         let idt = factory.getFactory<IImageDetectorFactory>("IImageDetectorFactory")
         if (idt != undefined)
-            this.imageDetector = idt.getImageDetector(obj)*/
+            this.imageDetector = idt.getImageDetector(obj)
 
         this.globalString = r.readToEnd();
         this.loadMeshCreator()
@@ -49,14 +57,16 @@ export abstract class LinesMeshCreator extends AbstractMeshCreator
     }
 
     protected loadStrings(url: string): string[] {
-        var r = this.textReaderFactory.getTextReader(this.obj, url)
+        let s = url
+        if (this.directory != undefined) {
+            if (!s.startsWith(this.directory)) {
+                s = this.path.pathCombine(this.directory, s)
+            }
+        }
+        var r = this.textReaderFactory.getTextReader(this.obj, s)
         if (r === undefined) return []
         return r.getStrings()
     }
-
-
-    func !: ITextReaderFactory
-
 
     protected abstract loadLines(): void
 

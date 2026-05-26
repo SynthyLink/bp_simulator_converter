@@ -2,6 +2,8 @@
 
 import { BasicGameLoaderFactory } from "../Library/Abstract3DGame/Factory/BacicGameLoaderFactory"
 import type { IGameLoaderFactory } from "../Library/Game/Interfaces/IGameLoaderFactory"
+import type { IPathFactory } from "../Library/IO/Interfaces/IPathFactory"
+import { PurePathFactory } from "../Library/IO/PurePathFactory"
 import { Motion6DFactory } from "../Library/Motion6D/Motion6DFactory"
 //import { ConsoleShowObject } from "../Library/Show/ConsoleShowObject"
 //import type { IShowObject } from "../Library/Show/Interfaces/IShowObject"
@@ -17,6 +19,7 @@ export class GameGLFactory extends Motion6DFactory {
         this.typeName = "GameGLFactory"
         this.addFactory<IGameLoaderFactory>(new BasicGameLoaderFactory(), "IGameLoaderFactory")
         this.addFactory<IStringSplitter>(new LineEndSplitter(), "IStringSplitter")
+        this.addFactory<IPathFactory>(new PurePathFactory(), "IPathFactory")
 
 
        // this.addFactory<IGameActionFactory>(gameActionFactory, "IGameActionFactory")
