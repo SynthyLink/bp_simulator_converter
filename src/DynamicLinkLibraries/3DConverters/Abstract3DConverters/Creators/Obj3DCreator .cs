@@ -932,13 +932,16 @@ namespace Abstract3DConverters.Creators
                 dict = new Dictionary<string, Effect>();
             }
 
-            private MtlWrapper(string str, int start, List<string> lines,
-       Dictionary<string, Effect> effects, string directory) : 
-                this(directory)
+            #endregion
+
+
+            private void Create(string str, int start, List<string> lines,
+       Dictionary<string, Effect> effects, string directory)
 
             {
                 try
                 {
+                    this.Directory = directory;
                     Name = str;
                     string newName = "";
                     var i = start;
@@ -978,7 +981,7 @@ namespace Abstract3DConverters.Creators
 
                     if (i + 1 < lines.Count)
                     {
-                        new MtlWrapper(newName, i + 1, lines, effects, directory);
+                        Create(newName, i + 1, lines, effects, directory);
                     }
                 }
                 catch (Exception e)
@@ -987,7 +990,7 @@ namespace Abstract3DConverters.Creators
                 }
             }
 
-            private MtlWrapper(string str, string directory, StreamReader reader, Dictionary<string, Effect> effects)
+            private void Create(string str, string directory, StreamReader reader, Dictionary<string, Effect> effects)
             {
                 Name = str;
                 string newName = "";
@@ -1025,12 +1028,11 @@ namespace Abstract3DConverters.Creators
 
                 if (!reader.EndOfStream)
                 {
-                    new MtlWrapper(newName, directory, reader, effects);
+                    Create(newName, directory, reader, effects);
                 }
 
             }
 
-            #endregion
 
 
             Dictionary<string, Effect> dict;
@@ -1076,7 +1078,7 @@ namespace Abstract3DConverters.Creators
                         }
 
                     }
-                    new MtlWrapper(name, i + 1, lines, dict, Directory);
+                    Create(name, i + 1, lines, dict, Directory);
                     return dict;
                 }
                 catch (Exception e)
@@ -1106,7 +1108,7 @@ namespace Abstract3DConverters.Creators
 
                     }
                     while (!reader.EndOfStream);
-                    new MtlWrapper(name, directory, reader, dict);
+                    Create(name, directory, reader, dict);
 
                 }
                 return dict;
@@ -1125,7 +1127,7 @@ namespace Abstract3DConverters.Creators
                         {
                             var ss = line.Split(" ".ToCharArray());
                             var name = ss[ss.Length - 1];
-                            new MtlWrapper(name, Path.GetDirectoryName(filename), reader, dict);
+                            Create(name, Path.GetDirectoryName(filename), reader, dict);
                         }
                     }
                     while (!reader.EndOfStream);

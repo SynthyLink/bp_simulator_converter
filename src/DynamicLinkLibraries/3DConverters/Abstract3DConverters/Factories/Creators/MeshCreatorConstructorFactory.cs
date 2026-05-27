@@ -2,7 +2,7 @@
 
 using Abstract3DConverters.Interfaces;
 
-namespace Abstract3DConverters.Fartories.Creators
+namespace Abstract3DConverters.Factories.Creators
 {
     public class MeshCreatorConstructorFactory : AbstractMeshCreatorFactory
     {

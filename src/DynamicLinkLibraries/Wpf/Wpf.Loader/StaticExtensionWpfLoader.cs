@@ -508,7 +508,7 @@ namespace Wpf.Loader
                     int i = 0;
                     foreach (string sppp in ppp)
                     {
-                        s += ((Double.Parse(sppp.Replace(".", ",")) * scale) + "").Replace(",", ".");
+                        s += ((double.Parse(sppp.Replace(".", ",")) * scale) + "").Replace(",", ".");
                         if (i < 2)
                         {
                             s += ",";

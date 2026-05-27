@@ -383,7 +383,7 @@ namespace DataTableSelection
                         {
                             ex.HandleException(10);
                             string s = o + "";
-                            a = Double.Parse(s);
+                            a = double.Parse(s);
                         }
                         /*                     if (dc.DataType.Equals(it))
                                              {

@@ -2327,7 +2327,7 @@ namespace Diagram.UI
         /// <returns>Double</returns>
         public static double ParseDouble(this string str)
         {
-            return Double.Parse(str, 
+            return double.Parse(str, 
                 System.Globalization.CultureInfo.InvariantCulture);
         }
 

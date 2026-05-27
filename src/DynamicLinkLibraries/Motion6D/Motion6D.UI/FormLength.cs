@@ -67,7 +67,7 @@ namespace Motion6D.UI
         {
             try
             {
-                length.Length = Double.Parse(textBoxLength.Text);
+                length.Length = double.Parse(textBoxLength.Text);
             }
             catch (Exception e)
             {

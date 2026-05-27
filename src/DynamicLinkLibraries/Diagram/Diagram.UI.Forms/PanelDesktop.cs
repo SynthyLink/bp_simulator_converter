@@ -2015,7 +2015,7 @@ namespace Diagram.UI
         {
             try
             {
-                a = Double.Parse(c.Text);
+                a = double.Parse(c.Text);
             }
             catch (Exception ex)
             {

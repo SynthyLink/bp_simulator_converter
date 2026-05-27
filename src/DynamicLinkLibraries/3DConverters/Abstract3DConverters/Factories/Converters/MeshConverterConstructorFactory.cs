@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Abstract3DConverters.Interfaces;
 
-namespace Abstract3DConverters.Fartories.Converters
+namespace Abstract3DConverters.Factories.Converters
 {
     public class MeshConverterConstructorFactory : IMeshConverterFactory
     {

@@ -493,8 +493,8 @@ namespace DataPerformer.UI.UserControls
         {
             get
             {
-                double start = Double.Parse(calculatorBoxStart.Text);
-                double step = Double.Parse(calculatorBoxStep.Text);
+                double start = double.Parse(calculatorBoxStart.Text);
+                double step = double.Parse(calculatorBoxStep.Text);
 
                 int steps = (int)numericUpDownStepCount.Value;
                 IGraphLabel l = this;
@@ -1748,7 +1748,7 @@ Func<bool> stop)
                 text = false;
                 ActParent(ActionType.Start, global::Animation.Interfaces.Enums.ActionType.Calculation);
            /*     IDataRuntime runtime = consumer.CreateRuntime(StaticExtensionDataPerformerInterfaces.Calculation);
-                double st = Double.Parse(calculatorBoxStart.Text);
+                double st = double.Parse(calculatorBoxStart.Text);
                 runtime.StartAll(st);
                 consumer.FullReset();
               /* !!! MAY BE DELETE  for (int i = 0; i < 10; i++)
@@ -1950,9 +1950,9 @@ Func<bool> stop)
             XmlDocument doc = new XmlDocument();
             doc.LoadXml("<WriteText/>");
             string[] sa = new string[] { "Start", "Step", "Finish" };
-            double ss = Double.Parse(calculatorBoxStart.Text);
+            double ss = double.Parse(calculatorBoxStart.Text);
             string sta = ss.StringValue();
-            double ff = ss + (Double.Parse(calculatorBoxStep.Text) * (double)numericUpDownStepCount.Value);
+            double ff = ss + (double.Parse(calculatorBoxStep.Text) * (double)numericUpDownStepCount.Value);
             string fin = ff.StringValue();
             string[] sp = [ sta, numericUpDownStepCount.Value + "", fin ];
             XmlElement inter = doc.CreateElement("Interval");
@@ -3047,7 +3047,7 @@ Func<bool> stop)
 
                         dicText.Clear();
                         consumer.StartTime = double.Parse(calculatorBoxStart.Text);
-                        consumer.Step = Double.Parse(calculatorBoxStep.Text);
+                        consumer.Step = double.Parse(calculatorBoxStep.Text);
                         consumer.Steps = (int)numericUpDownStepCount.Value;
                     };
                     this.InvokeIfNeeded(p);

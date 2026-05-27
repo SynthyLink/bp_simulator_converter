@@ -1078,7 +1078,7 @@ namespace Diagram.UI.Utils
             double[] arr = new double[boxes.Length];
             for (int i = 0; i < boxes.Length; i++)
             {
-                double a = Double.Parse(boxes[i].Text);
+                double a = double.Parse(boxes[i].Text);
                 arr[i] = a;
             }
             return arr;
