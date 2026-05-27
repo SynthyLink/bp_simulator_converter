@@ -51,6 +51,14 @@ import type { IActionT2 } from "./Interfaces/IActionT2";
 export class Performer
 {
 
+    public toShidtedString(str: string, shift : string) {
+        if (str.startsWith(shift)) {
+            return str.substring(shift.length).replace("\"", "").trim();
+        }
+        return undefined
+    }
+
+
     public  getObjectArrayFromNode<T, S>(node: INodeT<T>, func: IFuncT<S | undefined, T>): S[] {
         let a = new ArrayOfObjects<T, S>(func, this)
         return a.getArray(node)
@@ -531,7 +539,7 @@ export class Performer
             throw new OwnError("Type conversion", "Performer undefined. NULL OBJECT", undefined);
         }
         if (tt === "string") {
-            if ((null as any as S) instanceof String) { //VERY LIMITED AND UNSAFE EXAMPLE.
+            if ((t as any as S) instanceof String) { //VERY LIMITED AND UNSAFE EXAMPLE.
                 return t as any as S; // Force the type assertion (VERY UNSAFE)
             }
         }
@@ -552,6 +560,7 @@ export class Performer
         if (typeof t === 'number' && (null as any as S) as any === Number) {
             return t as any as S;
         }
+        return t as any as S
         console.warn(t, typeof t)
         throw new OwnError("Type conversion", "Performer", undefined);
 
@@ -791,7 +800,6 @@ export class Performer
 
     public forEach<T>(collection: IObjectCollection, action: IActionT<T>, type: string) {
         let obj = collection.getObjectCollection()
-        if (obj === undefined) return
         for (let o of obj) {
             var x = this.convertObject<T, IObject>(o, type)
             if (x.length > 0) action.actionT(x[0])
@@ -1007,7 +1015,7 @@ class FactorySetter implements IActionT<IFactoryConsumer>
         this.factory = factory
   }
     actionT(t: IFactoryConsumer): void {
-        t.ConsumerFactory = this.factory
+        t.setConsumerFactory(this.factory)
     }
 
     isEmptyActionT(): boolean { return false }

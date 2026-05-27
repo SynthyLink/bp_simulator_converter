@@ -1,11 +1,20 @@
 import type { IFactory } from "../Interfaces/IFactory";
 import type { IPlayEngine } from "../Interfaces/IPlayEngine";
+import type { IMesh } from "../Abstract3DConverters/Interfaces/IMesh";
 import type { GameOptions } from "./interfaces/IGameOptions";
+import type { IGameActionConverter } from "../Game/Interfaces/IGameActionConverter";
 import type { IResourceItem } from "../Resources/Infrefaces/IResourceItem";
+import { DrawMeshAction } from "../Abstract3DGame/Factory/DrawMeshAction";
+import { ReferenceFrame } from "../Motion6D/ReferenceFrame";
+import { BasicCamera } from "../Motion6D/Visible/BasicCamera";
+import { DrawMeshGameCameraAcionConverter } from "../Abstract3DGame/Objects/DrawMeshGameCameraAcionConverter";
+import { DrawMesh } from "../Abstract3DGame/Factory/DrawMesh";
+import  Mesh from "./common/mesh";
+import { GLCamera } from "./GLCamera";
 import { EngineGame } from "../Game/Abstract/EngineGame";
-import type ShaderProgram from "./common/shader-program";
+import ShaderProgram from "./common/shader-program";
 
-export class GLGame extends EngineGame {
+export class GLGame extends EngineGame  {
 
     constructor(name: string, factory: IFactory, engine: IPlayEngine, useLoader: boolean,
         canvas: HTMLCanvasElement, options: GameOptions, resources: IResourceItem[]) {
@@ -35,16 +44,21 @@ export class GLGame extends EngineGame {
         super.cycle(time)
     }
 
-    /*
-       protected getGameActionConverterCamera(camera: BasicCamera): IGameActionConverter {
-           let cam = new GLCamera(camera.getFieldOfView(),
-               camera.getNearDistance(), camera.getFarDistance(), camera.getCameraType())
-           return new GLDrawMeshGameCameraAcionConverter(camera, this.gl, cam)
-       }
-       */
+ 
+    protected getGameActionConverterCamera(camera: BasicCamera): IGameActionConverter {
+        let cam = new GLCamera(camera.getFieldOfView(),
+            camera.getNearDistance(), camera.getFarDistance(), camera.getCameraType())
+        return new GLDrawMeshGameCameraAcionConverter(camera, this.gl, cam)
+    }
 
+    createShader(name: string): ShaderProgram {
+        let s = new ShaderProgram(this.gl)
+        this.programs.set(name, s)
+        return s;
+    }
 
-
+    programs: Map<string, ShaderProgram> = new Map()
+ 
     canvas !: HTMLCanvasElement
 
     gl !: WebGL2RenderingContext
@@ -52,11 +66,9 @@ export class GLGame extends EngineGame {
     nextSceneReady: boolean = false; // Whether the files requested by the next scene has been loaded or not 
     lastTick: number = 0; // The time of the last frame in milliseconds (used to calculate delta time)
     options !: GameOptions;
-
-    protected programs : ShaderProgram[] = []
 }
 
-/*
+
 class GLDrawMesh extends DrawMesh {
     gl !: WebGL2RenderingContext
     glCamera !: GLCamera
@@ -71,7 +83,15 @@ class GLDrawMesh extends DrawMesh {
     }
 
 }
-*/
+
+function createEmptyMesh(gl: WebGL2RenderingContext): Mesh {
+    return new Mesh(gl, [
+        { attributeLocation: 0, buffer: "positions", size: 3, type: gl.FLOAT, normalized: false, stride: 0, offset: 0 },
+        { attributeLocation: 1, buffer: "colors", size: 4, type: gl.UNSIGNED_BYTE, normalized: true, stride: 0, offset: 0 },
+        { attributeLocation: 2, buffer: "texcoords", size: 2, type: gl.FLOAT, normalized: false, stride: 0, offset: 0 },
+        { attributeLocation: 3, buffer: "normals", size: 3, type: gl.FLOAT, normalized: false, stride: 0, offset: 0 }
+    ]);
+}
 /*
    glCamera !: GLCamera
     constructor(camera: BasicCamera, glCamera : GLCamera, gl: WebGL2RenderingContext) {
@@ -80,7 +100,6 @@ class GLDrawMesh extends DrawMesh {
         this.glCamera = glCamera
     }
 */
-/*
 class GLDrawMeshAction extends DrawMeshAction {
     gl!: WebGL2RenderingContext;
     glCamera !: GLCamera
@@ -139,4 +158,4 @@ class GLDrawMeshGameCameraAcionConverter extends DrawMeshGameCameraAcionConverte
 
 
 }
-*/
+

@@ -12,10 +12,10 @@ export class FactoryObject extends EmptyObject implements IFactoryConsumer {
         this.setFactory(factory)
     }
 
-    set ConsumerFactory(factory: IFactory) {
+    setConsumerFactory(factory: IFactory): void {
         this.setFactory(factory)
     }
-    get ConsumerFactory(): IFactory {
+    getConsumerFactory(): IFactory {
         return this.factory
     }
 

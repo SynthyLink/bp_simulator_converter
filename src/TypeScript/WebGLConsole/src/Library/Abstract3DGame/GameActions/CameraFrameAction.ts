@@ -13,6 +13,8 @@ export class CameraFrameAction extends AbstractGameAction implements ISceneHolde
         factory: IFactory) {
         super("", factory)
         this.types.push("ISceneHolder")
+        this.types.push("CameraFrameAction")
+        this.typeName = "CameraFrameAction"
         this.camera = camera
         this.frame = frame
         this.scene = scene

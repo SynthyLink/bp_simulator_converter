@@ -9,6 +9,6 @@ export class ScenePerformer extends GamePerformer {
     constructor(scene: IScene) {
         super();
         this.scene = scene;
-        this.factory = scene.ConsumerFactory
+        this.factory = scene.getConsumerFactory();
     }
 }

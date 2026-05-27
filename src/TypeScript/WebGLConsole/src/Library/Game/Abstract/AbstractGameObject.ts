@@ -8,13 +8,12 @@ export class AbstractGameObject implements IObject, IFactoryConsumer {
     protected performer: GamePerformer = new GamePerformer()
     constructor(name: string, factory: IFactory | undefined) {
         this.name = name
-        if (factory === undefined) return
-        this.ConsumerFactory = factory
-    }
-    set ConsumerFactory(factory: IFactory) {
         this.setFactory(factory)
     }
-    get ConsumerFactory(): IFactory {
+    setConsumerFactory(factory: IFactory): void {
+        this.setFactory(factory)
+    }
+    getConsumerFactory(): IFactory {
         return this.factory
     }
 

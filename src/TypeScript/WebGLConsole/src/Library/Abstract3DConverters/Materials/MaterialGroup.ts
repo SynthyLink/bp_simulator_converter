@@ -1,7 +1,7 @@
 import type { IChildrenT } from "../../NamedTree/Interfaces/IChildrenT";
-import { Material } from "./Material";
+import { MaterialTexture } from "./MaterialTexture";
 
-export class MaterialGroup extends Material implements IChildrenT<Material>
+export class MaterialGroup extends MaterialTexture implements IChildrenT<MaterialTexture>
 {
     constructor(name: string) {
         super(name)
@@ -9,18 +9,18 @@ export class MaterialGroup extends Material implements IChildrenT<Material>
         this.types.push("MaterialGroup")
         this.typeName = "MaterialGroup"
     }
-    getChildernT(): Material[] {
+    getChildernT(): MaterialTexture[] {
         return this.materials;
     }
-    addChildT(child: Material): void {
+    addChildT(child: MaterialTexture): void {
         this.materials.push(child)
     }
-    removeChildT(child: Material): void {
-        this.performer.remove<Material>(this.materials, child)
+    removeChildT(child: MaterialTexture): void {
+        this.performer.remove<MaterialTexture>(this.materials, child)
     }
 
     
 
 
-    materials: Material[] = []
+    materials: MaterialTexture[] = []
 }

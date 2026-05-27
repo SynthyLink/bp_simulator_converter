@@ -69,10 +69,6 @@ export class EngineGame extends AbstractGame implements IPlayEngine, IActionT<nu
         return this.engineAction
     }
 
-    get ConsumerFactory(): IFactory {
-        return super.ConsumerFactory
-    }
-
     engineAction: IActionAddRemoveT<number> = new ActionArrayT()
  
     engine !: IPlayEngine

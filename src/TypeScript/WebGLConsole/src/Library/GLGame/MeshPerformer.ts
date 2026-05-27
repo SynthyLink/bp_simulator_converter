@@ -330,8 +330,24 @@ export class MeshPerformer extends GamePerformer {
         mesh.setBufferData("normals", new Float32Array(n), gl.STATIC_DRAW);
         let colors = new Uint8Array(v.length * 4 / 3);
         colors.fill(255);
-        let ind: number[] = [];
         mesh.setBufferData("colors", colors, gl.STATIC_DRAW);
+        let ind: number[] = []
+        const indx = obj.getIndexes()
+        if (indx.length === 0) {
+            const count = v.length
+            for (let i = 0; i < count; i++) {
+                ind.push(i)
+            }
+        }
+        else {
+            for (let ii of indx) {
+                for (let iii of ii) {
+                    for (const iiii of iii) {
+                        ind.push(iiii)
+                    }
+                }
+            }
+        }
         mesh.setElementsData(new Uint32Array(ind), gl.STATIC_DRAW);
         return mesh;
 

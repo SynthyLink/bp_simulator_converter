@@ -42,7 +42,6 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
             this.loader = new Loader()
             if (factory != undefined) {
                 let loadFact = this.performer.createFactory(this.loader, factory)
-                this.resourceFactory = loadFact
                 factory.addFactory<IResourceFuncFactory>(loadFact, "IResourceFuncFactory")
             }
         }
@@ -61,9 +60,6 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         return this.resources
     }
 
-    public getPostLoadResourceAction(): IActionAddRemove {
-        return this.postloadResourceAction
-    }
 
     abstract run(): void
 
@@ -111,14 +107,9 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
     }
 
 
-    set ConsumerFactory(factory: IFactory)
-    {
-        super.ConsumerFactory = factory
+    setConsumerFactory(factory: IFactory): void {
+        super.setConsumerFactory(factory)
         this.performer.setFactoryToObjectCollection(this, factory)
-    }
-
-    get ConsumerFactory(): IFactory {
-        return super.ConsumerFactory
     }
 
     startItself(start: boolean): boolean {
@@ -178,7 +169,7 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         this.performer.convertResourceInfo(this.resources, this.resourcesI)
         this.loader.loadMap(this.resourcesI)
         await this.loader.wait()
-        this.postloadResourceAction.action()
+        this.postLoadResourcelAction.action()
         this.performer.loadCollecion(true, this)
         this.internalAction.clearActions()
         this.performer.collectResources(this, this)
@@ -204,7 +195,21 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         this.timeAction.removeActionT(action)
     }
 
+    public getPostLoadResourceAction(): IActionAddRemove {
+        return this.postLoadResourcelAction
+    }
 
+    public getResourceByUrl(url: string)  {
+        const r = this.loader.getResult();
+        return r.get(url)
+    }
+    public getResourceByName(name: string) {
+        for (let r of this.resources) {
+            if (r.name === name) {
+                return this.getResourceByUrl(r.url)
+            }
+        }
+    }
 
 
     public shouldStartAfterLoad(): void {
@@ -263,14 +268,12 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
 
     externalAction: IActionAddRemove = new ActionArray()
 
-    postloadResourceAction: IActionAddRemove = new ActionArray
+    postLoadResourcelAction: IActionAddRemove = new ActionArray()
+
 
     protected actionF !: IAction
 
     protected addF !: boolean
-
-    protected resourceFactory: IResourceFuncFactory | undefined = undefined
-
 
 
 }

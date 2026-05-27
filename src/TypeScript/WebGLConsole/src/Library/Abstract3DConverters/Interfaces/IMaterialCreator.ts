@@ -2,7 +2,7 @@ import { ColorTexture } from "../ColorTexture";
 import { ImageTexture } from "../ImageTexture";
 import { DiffuseMaterial } from "../Materials/DiffuseMaterial";
 import { EmissiveMaterial } from "../Materials/EmissiveMaterial";
-import { Material } from "../Materials/Material";
+import { MaterialTexture } from "../Materials/MaterialTexture";
 import { MaterialGroup } from "../Materials/MaterialGroup";
 import { SpecularMaterial } from "../Materials/SpecularMaterial";
 
@@ -37,9 +37,9 @@ export interface IMaterialCreator {
 
     createFromEmissiveMaterial(material: EmissiveMaterial): any
 
-    createFromMaterial(material: Material): any
+    createFromMaterial(material: MaterialTexture): any
 
-    createFromEffect(effecty: Material): any
+    createFromEffect(effecty: MaterialTexture): any
 
     addMaterialToGroup(group: any, material: any): void
 

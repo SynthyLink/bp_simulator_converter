@@ -7,7 +7,7 @@ using Abstract3DConverters.ErrorHandlers;
 Console.WriteLine("Hello, World!");
 var dir = @"c:\AUsers\1MySoft\CSharp\03D\GOOD";
 dir = @"c:\AUsers\1MySoft\CSharp\03D\pLANE\";
-dir = @"c:\AUsers\1MySoft\CSharp\03D\GOOD\OBJ\";
+//dir = @"c:\AUsers\1MySoft\CSharp\03D\GOOD\OBJ\";
 if (!Directory.Exists(dir))
 {
     return;

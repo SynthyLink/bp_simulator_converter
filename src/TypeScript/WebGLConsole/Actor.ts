@@ -1,4 +1,4 @@
-import { AirplaneScene } from "./scenes/AirplaneScene";
+import { ShuttleScene } from "./scenes/ShuttleScene";
 import { FileGameFactory } from "./src/Console/FileGameFactory";
 import { ReferenceFrameSceneAction } from "./src/Library/Abstract3DGame/GameActions/ReferenceFrameSceneAction";
 import { ScadaFind3dFrame } from "./src/Library/Abstract3DGame/GameActions/ScadaFind3DFrame";
@@ -57,7 +57,7 @@ export class Actor {
         var g = new EngineGame("", this.factory, engine, false, []);
         g.getExternalAction().addAction(new A("game"));
         this.game = g;
-        var sc = new AirplaneScene(this.game, "Chart");
+        var sc = new ShuttleScene(this.game, "Chart");
         let scada = sc.getConsumerScada();
         var ea = sc.getExternalAction()
         ea.addAction(new A("scene"));

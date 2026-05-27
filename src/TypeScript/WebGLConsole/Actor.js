@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.A = exports.Actor = void 0;
-const AirplaneScene_1 = require("./scenes/AirplaneScene");
+const ShuttleScene_1 = require("./scenes/ShuttleScene");
 const FileGameFactory_1 = require("./src/Console/FileGameFactory");
 const ReferenceFrameSceneAction_1 = require("./src/Library/Abstract3DGame/GameActions/ReferenceFrameSceneAction");
 const ScadaFind3DFrame_1 = require("./src/Library/Abstract3DGame/GameActions/ScadaFind3DFrame");
@@ -38,7 +38,7 @@ class Actor {
         var g = new EngineGame_1.EngineGame("", this.factory, engine, false, []);
         g.getExternalAction().addAction(new A("game"));
         this.game = g;
-        var sc = new AirplaneScene_1.AirplaneScene(this.game, "Chart");
+        var sc = new ShuttleScene_1.ShuttleScene(this.game, "Chart");
         let scada = sc.getConsumerScada();
         var ea = sc.getExternalAction();
         ea.addAction(new A("scene"));

@@ -12,11 +12,11 @@ export abstract class AbstractSceneObject implements ISceneObject {
     }
     abstract setScene(scene: IScene): void
 
-    set ConsumerFactory(factory: IFactory) {
+    setConsumerFactory(factory: IFactory): void {
         this.factory = factory
     }
 
-    get ConsumerFactory(): IFactory {
+    getConsumerFactory(): IFactory {
         return this.factory
     }
 

@@ -17,9 +17,10 @@ export abstract class AssociatedSceneObject extends AbstractSceneObject implemen
         this.types.push("AbstractSceneObject")
         this.typeName = "AbstractSceneObject"
         this.object = object
-        this.factory = scene.ConsumerFactory
+        this.factory = scene.getConsumerFactory()
         this.show = this.factory.getFactory<IShowObject>("IShowObject")
         this.resourceFactory = this.factory.getFactory<IResourceFuncFactory>("IResourceFuncFactory")
+
     }
     
     protected getTextFactory(f: ITextReaderFactory | undefined, items: IResourceItem[]): ITextReaderFactory | undefined {

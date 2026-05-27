@@ -14,7 +14,7 @@ import { ScenePerformer } from "../ScenePerformer";
 export abstract class AbstractScene implements IScene {
     constructor(game: IGame, name: string) {
         this.game = game;
-        this.factory = game.ConsumerFactory
+        this.factory = game.getConsumerFactory()
         this.name = name;
         this.performer = new ScenePerformer(this)
         let saf = this.factory.getFactory<ISceneAction>("ISceneAction")
@@ -63,12 +63,11 @@ export abstract class AbstractScene implements IScene {
     getExternalAction(): IActionAddRemove {
         return this.externalAction
     }
-    set ConsumerFactory(factory: IFactory) {
+    setConsumerFactory(factory: IFactory): void {
         this.factory = factory;
         this.performer.setFactoryToObjectCollection(this, factory)
     }
-
-    get ConsumerFactory(): IFactory {
+    getConsumerFactory(): IFactory {
         return this.factory
     }
     startItself(start: boolean): boolean {
@@ -114,7 +113,7 @@ export abstract class AbstractScene implements IScene {
     }
 
     protected setFactoryToChildren(): void {
-        this.performer.setFactoryToObjectCollection(this, this.ConsumerFactory)
+        this.performer.setFactoryToObjectCollection(this, this.getConsumerFactory())
     }
 
     getName(): string {

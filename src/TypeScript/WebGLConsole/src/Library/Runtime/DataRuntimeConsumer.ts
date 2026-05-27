@@ -77,11 +77,10 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
         return this.types.includes(type)
     }
 
-    set ConsumerFactory(factory: IFactory) {
+    setConsumerFactory(factory: IFactory): void {
         this.factory = factory
     }
-
-    get ConsumerFactory(): IFactory {
+    getConsumerFactory(): IFactory {
         return this.factory
     }
 
