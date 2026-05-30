@@ -14,10 +14,10 @@ import { DiffuseMaterial } from "../Materials/DiffuseMaterial";
 import { MaterialGroup } from "../Materials/MaterialGroup";
 import { LinesMeshCreator } from "./LinesMeshCreator";
 import { EmissiveMaterial } from "../Materials/EmissiveMaterial";
+import { Material } from "../Materials/Material";
 import { PhongMaterial } from "../Materials/PhongMaterial";
 import { SpecularMaterial } from "../Materials/SpecularMaterial";
 import { AbstractMeshObj } from "../Meshes/AbstractMeshObj";
-import { MaterialTexture } from "../Materials/MaterialTexture";
 export class Obj3DCreator extends LinesMeshCreator
 {
     constructor(url: string, name: string, directory: string, obj: any,
@@ -54,7 +54,7 @@ export class Obj3DCreator extends LinesMeshCreator
         this.createGeometry()
  }
 
-    private iindexes !: ITextureIndex[][] 
+    private iindexes: ITextureIndex[][] = []
 
     private static siindexes : ITextureIndex[][]
 
@@ -105,10 +105,9 @@ export class Obj3DCreator extends LinesMeshCreator
 
     efff: EffectTexture[] = []
 
-
     createMaterialsFromLines(lines: string[], eff: EffectTexture[]): Map<string, EffectTexture> {
         this.efff = eff
-        let mtl = new MtlWrapper(this.obj, "", this.factory,  this.dict, "")
+        let mtl = new MtlWrapper(this.obj, "", this.factory, 0, lines, this.dict, "")
         let et: EffectTexture[] = []
         let mt = mtl.createFromLines(lines, 0, et)
         if (mt.has("Default")) {
@@ -273,7 +272,7 @@ export class Obj3DCreator extends LinesMeshCreator
             this.matExists = false;
             return name;
         }
-        return undefined
+    return undefined
 
     }
 
@@ -341,9 +340,6 @@ export class Obj3DCreator extends LinesMeshCreator
                 var name = this.getInitial(line);
                 if (name != undefined) {
                     if (name != this.fiction) {
-                        if (this.names == undefined) {
-                            this.names = []
-                        }
                         this.names.push(name);
                         indexes = [];
                         this.pushIndex(indexes);
@@ -586,18 +582,20 @@ class MtlWrapper implements IEffectDitionary {
     newName: string = ""
 
     eeef: Map<string, EffectTexture> = new Map()
-    constructor(obj: any, name: string, factory: IFactory, effects: Map<string, EffectTexture>,
+    constructor(obj: any, name: string, factory: IFactory, start: number, lines: string[], effects: Map<string, EffectTexture>,
         directory: string) {
         this.eeef = effects
         this.name = name;
         this.factory = factory;
         this.obj = obj;
-    }
-
-    create(name: string, start: number, lines: string[], effects: Map<string, EffectTexture>): void {
-
-        let i = start;
-        let list: string[] = []
+        this.lines = lines;
+        this.directory = directory;
+        if (start == 0) {
+            return;
+        }
+        
+        var i = start;
+        var list: string[] = []
         for (; i < lines.length; i++) {
             var line = lines[i];
             if (line == undefined) {
@@ -624,16 +622,16 @@ class MtlWrapper implements IEffectDitionary {
         if (mat != undefined) {
             this.effects.set(this.newName, this.effect)
         }
-/*
+
         if (i + 1 < lines.length) {
             new MtlWrapper(this.obj, this.newName, this.factory, i + 1, this.lines, this.effects, this.directory);
-        }*/
+        }
 
     }
      getEffectDictionary(): Map<string, EffectTexture> {
         return this.effects;
     }
-    public сreateFromMaterials(keyValuePairs: Map<string, MaterialTexture>,
+    public сreateFromMaterials(keyValuePairs: Map<string, Material>,
         creator: IMaterialCreator): Map<string, any> {
         let d: Map<string, any> = new Map();
         for (var pair of keyValuePairs.entries()) {
@@ -659,8 +657,8 @@ class MtlWrapper implements IEffectDitionary {
             }
 
         }
-        this.create(name,  i, this.lines, this.dict);
-        var eff = this.getEffectDictionary();
+        var mt = new MtlWrapper(this.obj, name, this.factory, i, this.lines, this.dict, this.directory);
+        var eff = mt.getEffectDictionary();
         return eff;
 
     }
@@ -693,7 +691,7 @@ class MtlWrapper implements IEffectDitionary {
             mat.addChildT(spec);
         }
         let dn: Map<string, EffectTexture> = new Map()
-        this.effect = new EffectTexture(dn, this.newName, mat as MaterialTexture, this.kd)
+        this.effect = new EffectTexture(dn, this.newName, mat as Material, this.kd)
 
     }
 

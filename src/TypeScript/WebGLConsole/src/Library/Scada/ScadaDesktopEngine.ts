@@ -10,7 +10,8 @@ import { ScadaDesktop } from "./ScadaDesktop";
 
 export class ScadaDesktopEngine extends ScadaDesktop {
 
-    constructor(componentCollection: IComponentCollection, engine: IPlayEngine, factory: IFactory, chart: string) {
+	constructor(componentCollection: IComponentCollection, engine:
+		IPlayEngine, factory: IFactory, chart: string) {
         super(componentCollection);
         this.engine = engine;
         this.chart = chart;

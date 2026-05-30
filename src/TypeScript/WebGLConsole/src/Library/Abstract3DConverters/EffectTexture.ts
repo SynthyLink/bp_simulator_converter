@@ -1,9 +1,9 @@
 import { ImageTexture } from "./ImageTexture";
-import { MaterialTexture } from "./Materials/MaterialTexture";
+import { Material } from "./Materials/Material";
 
 export class EffectTexture {
 
-    constructor(effects: Map<string, EffectTexture>, name: string, material: MaterialTexture, image: ImageTexture) {
+    constructor(effects: Map<string, EffectTexture>, name: string, material: Material, image: ImageTexture) {
         this.name = name
         this.material = material
         this.image = image
@@ -12,7 +12,7 @@ export class EffectTexture {
         }
     }
 
-    material !: MaterialTexture
+    material !: Material
 
     image !: ImageTexture
 

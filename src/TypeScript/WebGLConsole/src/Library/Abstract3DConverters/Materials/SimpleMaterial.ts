@@ -1,8 +1,8 @@
 import { ColorTexture } from "../ColorTexture";
 import { ImageTexture } from "../ImageTexture";
-import { MaterialTexture } from "./MaterialTexture";
+import { Material } from "./Material";
 
-export class SimpleMaterial extends MaterialTexture {
+export class SimpleMaterial extends Material {
 
     constructor(name : string, color: ColorTexture) {
         super(name)

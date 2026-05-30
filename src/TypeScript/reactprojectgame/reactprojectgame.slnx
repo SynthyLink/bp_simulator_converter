@@ -1,8 +1,4 @@
 <Solution>
-  <Project Path="../reactprojectshutte/reactprojectshutte.esproj">
-    <Build />
-    <Deploy />
-  </Project>
   <Project Path="reactprojectgame.esproj">
     <Build />
     <Deploy />

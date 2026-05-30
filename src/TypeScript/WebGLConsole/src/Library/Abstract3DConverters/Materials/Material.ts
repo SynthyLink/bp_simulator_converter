@@ -2,7 +2,7 @@ import type { IObject } from "../../Interfaces/IObject";
 import type { INamed } from "../../NamedTree/Interfaces/INamed";
 import { Performer } from "../../Performer";
 
-export class MaterialTexture implements INamed, IObject {
+export class Material implements INamed, IObject {
 
     constructor(name: string) {
         this.namedName = name;

@@ -55,7 +55,7 @@ export class Performer
         if (str.startsWith(shift)) {
             return str.substring(shift.length).replace("\"", "").trim();
         }
-        return undefined
+        return null;
     }
 
 
