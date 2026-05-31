@@ -1,4 +1,4 @@
-import type { IAction } from "../../Interfaces/IAction";
+import  { type IAction } from "../../Interfaces/IAction";
 import type { IActionAddRemove } from "../../Interfaces/IActionAddRemove";
 import type { IObject } from "../../Interfaces/IObject";
 import { Performer } from "../../Performer";

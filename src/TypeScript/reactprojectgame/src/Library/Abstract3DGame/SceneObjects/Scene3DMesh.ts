@@ -5,13 +5,12 @@ import type { ISelfLoad } from "../../Interfaces/ISelfLoad";
 import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
 import type { IResourceCollection } from "../../Resources/Infrefaces/IResouceCollection";
 import type { IResourceItem } from "../../Resources/Infrefaces/IResourceItem";
-import { Obj3DCreator } from "../../Abstract3DConverters/MeshCreators/Obj3DCreator";
+//import { Obj3DCreator } from "../../Abstract3DConverters/MeshCreators/Obj3DCreator";
 import { AssociatedSceneObject } from "../../Game/Abstract/AssociatedSceneObject";
 import { Basic3DShape } from "../../Motion6D/Objects/Shapes/Basic3DShape";
 
 export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
-    ISelfLoad, IResourceCollection
-{
+    ISelfLoad, IResourceCollection {
     constructor(scene: IScene, object: Basic3DShape) {
         super(scene, object)
         this.types.push("IMeshHolder")
@@ -22,7 +21,7 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
         this.shape = object
     }
 
-  
+
     createTextReaderFactory(): void {
         this.textReader = this.getTextFactory(this.textReader, this.getResources())
     }
@@ -51,6 +50,8 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
     loadMesh(load: boolean): void {
         if (!load) return
         var res = this.shape.getResources()
+        this.any = res
+        /*
         for (var r of res) {
             if (r.ext == ".obj") {
                 var creator = new Obj3DCreator(r.url, r.name,
@@ -58,16 +59,13 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
                 this.meshes = creator.getMeshCreatorMeshes()
                break;
             }
-        }
+        }*/
     }
 
- 
+    any: any
     shape !: Basic3DShape
     meshes: IMesh[] = []
     isLoaded: boolean = false
 
     textReader !: ITextReaderFactory | undefined
-
-
-
 }

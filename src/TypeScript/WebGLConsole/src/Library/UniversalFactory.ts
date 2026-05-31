@@ -1,7 +1,7 @@
 import type { IFactory } from "./Interfaces/IFactory";
 import type { IObject } from "./Interfaces/IObject";
 import { OwnError } from "./ErrorHandler/OwnError";
-import { FactoryObject } from "./FactorytObject";
+import { FactoryObject } from "./FactoryObject";
 
 export class UniversalFactory extends FactoryObject implements IFactory {
     constructor() {

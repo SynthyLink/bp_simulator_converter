@@ -17,7 +17,6 @@ export abstract class AbstractEngine implements IPlayEngine {
 		return this.actionT;
 	}
 
-
 	public setTime(time: number): void {
 		if (this.enabled) this.actionT.actionT(time)
 	}
@@ -26,7 +25,6 @@ export abstract class AbstractEngine implements IPlayEngine {
 		const date = new Date()
 		const t = date.getTime()
 		return 0.001 * t
-
 	}
 
 

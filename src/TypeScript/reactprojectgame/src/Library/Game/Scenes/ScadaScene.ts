@@ -3,8 +3,6 @@ import type { IGameLoaderFactory } from "../../Game/Interfaces/IGameLoaderFactor
 import type { IComponentCollection } from "../../Interfaces/IComponentCollection"
 import type { IObject } from "../../Interfaces/IObject"
 import type { IPlayEngine } from "../../Interfaces/IPlayEngine"
-import type { IStepActionHolder } from "../../Measurements/Interfaces/IStepActionHolder"
-import type { IStepAction } from "../../Measurements/Interfaces/IStepAction"
 import type { IScadaConsumer } from "../../Scada/Interfaces/IScadaConsumer"
 import type { IScadaInterface } from "../../Scada/Interfaces/IScadaInterface"
 import { ScadaDesktop } from "../../Scada/ScadaDesktop"
@@ -28,21 +26,21 @@ export class ScadaScene extends AbstractScene implements IScadaConsumer
             this.performer.loadChildren(this, this.scada, loader, true)
         }
         this.setFactoryToChildren()
-        let sa = this.getStepAction()
+   /*     let sa = this.getStepAction()
         if (sa != undefined) {
             this.stepAction = sa
-        }
+        }*/
     }
 
     protected collection !: IComponentCollection
     protected scada !: IScadaInterface
-
+/*
     getStepAction(): IStepAction | undefined {
         let sh = this.scada as unknown as IStepActionHolder
         if (sh === undefined) return undefined
         return sh.getStepAction()
     }
-
+    */
 
     getConsumerScada(): IScadaInterface {
         return this.scada;

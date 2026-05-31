@@ -6,8 +6,9 @@ import type { INamed } from "../../NamedTree/Interfaces/INamed";
 import type { IScadaEvent } from "./IScadaEvent";
 import type { IObjectCollection } from "../../Interfaces/IObjectCollection";
 import type { IInput } from "../../Interfaces/IInput";
+import type { IActionT } from "../../Interfaces/IActionT";
 
-export interface IScadaInterface extends INamed, IObjectCollection {
+export interface IScadaInterface extends INamed, IObjectCollection, IActionT<number> {
 
     getScadaInputs(): IInput[]
 
@@ -27,7 +28,6 @@ export interface IScadaInterface extends INamed, IObjectCollection {
 
 
     getScadaConstantEvent(name: string): IActionAddRemoveT<any> | undefined
-
 
 
     getScadaOutputFunc(name: string): IFunc<any> | undefined
@@ -51,6 +51,7 @@ export interface IScadaInterface extends INamed, IObjectCollection {
     refreshScada(): void
 
     getScadaRefresh(): IActionAddRemove
+
 
 }
 

@@ -1,17 +1,73 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.A = exports.Actor = void 0;
-const ShuttleScene_1 = require("./scenes/ShuttleScene");
-const FileGameFactory_1 = require("./src/Console/FileGameFactory");
-const ReferenceFrameSceneAction_1 = require("./src/Library/Abstract3DGame/GameActions/ReferenceFrameSceneAction");
-const ScadaFind3DFrame_1 = require("./src/Library/Abstract3DGame/GameActions/ScadaFind3DFrame");
-const ScadaFindCamera_1 = require("./src/Library/Abstract3DGame/GameActions/ScadaFindCamera");
+const Airplane_1 = require("./scenes/Airplane");
 const AbstractAction_1 = require("./src/Library/Event/Objects/AbstractAction");
 const AbstractActionT_1 = require("./src/Library/Event/Objects/AbstractActionT");
-const EngineGame_1 = require("./src/Library/Game/Abstract/EngineGame");
-const EnfineWatch_1 = require("./src/Library/Utilities/Watch/EnfineWatch");
+const ActionTAction_1 = require("./src/Library/Event/Objects/ActionTAction");
+const Motion6DFactory_1 = require("./src/Library/Motion6D/Motion6DFactory");
+const ScadaPerformer_1 = require("./src/Library/Scada/ScadaPerformer");
+const TestObject_1 = require("./src/Library/TestObject");
+const ActionArray_1 = require("./src/Library/Utilities/Generic/ActionArray");
+const EngineWatch_1 = require("./src/Library/Utilities/Watch/EngineWatch");
 const PIAct_1 = require("./test/wrappers/PIAct");
 class Actor {
+    constructor() {
+        this.url = "http://localhost:4173/static/models/pLANE/master.mtl";
+        //engine: FictiveEngine = new FictiveEngine()
+        this.performer = new ScadaPerformer_1.ScadaPerformer();
+        this.dir = "C:\\AUsers\\1MySoft\\CSharp\\src\\TypeScript\\WebGLConsole/static/models";
+        this.dir = this.dir.replaceAll("\\", "/");
+        new TestObject_1.TestObject;
+        //   ga.setConsumerFactory(f)
+        this.factory = new Motion6DFactory_1.Motion6DFactory();
+        let ap = new Airplane_1.Airplane();
+        this.createActionScada(ap);
+    }
+    createEngineScada(collection) {
+        let tm = new EngineWatch_1.EngineWatch(100);
+        let scada = this.performer.createScadaDesktopEngine(collection, tm, this.factory, "Chart");
+        let sc = scada;
+        sc.setScadaEnabled(true);
+        let ea = tm.getEngineAction();
+        ea.addActionT(new ActionTAction_1.ActionTAction(scada));
+        scada.addAction(new A("I = "));
+        scada.addAction(new B(sc, tm));
+        ea.addActionT(new TT());
+        tm.setEngineEnabled(true);
+        return scada;
+    }
+    createActionScada(collection) {
+        let tm = new EngineWatch_1.EngineWatch(10);
+        let act = new ActionArray_1.ActionArray;
+        let actT = new ActionTAction_1.ActionTAction(act);
+        tm.getEngineAction().addActionT(actT);
+        let scada = this.performer.createScadaDesktopAction(collection, act, 1, this.factory, "Chart");
+        let sc = scada;
+        let ea = tm.getEngineAction();
+        ea.addActionT(new ActionTAction_1.ActionTAction(scada));
+        scada.addAction(new A("I = "));
+        scada.addAction(new B(sc, tm));
+        ea.addActionT(new TT());
+        sc.setScadaEnabled(true);
+        tm.setEngineEnabled(true);
+        return scada;
+    }
+    createActionScadaScada(collection) {
+        let tm = new EngineWatch_1.EngineWatch(10);
+        let act = new ActionArray_1.ActionArray;
+        let scada = this.performer.createScadaDesktopAction(collection, act, 1, this.factory, "Chart");
+        let sc = scada;
+        let ea = tm.getEngineAction();
+        ea.addActionT(new ActionTAction_1.ActionTAction(scada));
+        scada.addAction(new A("I = "));
+        scada.addAction(new B(sc, tm));
+        ea.addActionT(new TT());
+        tm.getEngineAction().addActionT(new ActionTAction_1.ActionTAction(scada));
+        sc.setScadaEnabled(true);
+        tm.setEngineEnabled(true);
+        return scada;
+    }
     async p() {
         let response = await fetch(this.url);
         console.log("RESP", response);
@@ -19,36 +75,9 @@ class Actor {
         let data = await response.text();
         console.log(data);
     }
-    //engine: FictiveEngine = new FictiveEngine()
-    constructor() {
-        this.url = "http://localhost:4173/static/models/pLANE/master.mtl";
-        this.dir = "C:\\AUsers\\1MySoft\\CSharp\\src\\TypeScript\\WebGLConsole/static/models";
-        this.dir = this.dir.replaceAll("\\", "/");
-        const find = new ScadaFind3DFrame_1.ScadaFind3dFrame("Camera");
-        const findCamera = new ScadaFindCamera_1.ScadaFindCamera("Camera");
-        //  var ga = new ReferenceFrameGameActionFactory(find, undefined);
-        var f = new FileGameFactory_1.FileGameFactory(this.dir, undefined, undefined);
-        //   ga.setConsumerFactory(f)
-        this.factory = f;
-        let sf = new ReferenceFrameSceneAction_1.ReferenceFrameSceneAction(find, findCamera, f);
-        f.addFactory(sf, "ISceneAction");
-        /* f.addFactory<IFindFrame>(find, "IFindFrame")
-         f.addFactory<IFindCamera>(new ScadaFindCamera("Camera"), "IFindCamera")*/
-        let engine = new EnfineWatch_1.EngineWatch(500);
-        var g = new EngineGame_1.EngineGame("", this.factory, engine, false, []);
-        g.getExternalAction().addAction(new A("game"));
-        this.game = g;
-        var sc = new ShuttleScene_1.ShuttleScene(this.game, "Chart");
-        let scada = sc.getConsumerScada();
-        var ea = sc.getExternalAction();
-        ea.addAction(new A("scene"));
-        ea.addAction(new B(sc, g));
-        var ena = g.getEngineAction();
-        ena.addActionT(new TT());
-    }
     loadGame() {
-        this.game.loadItself(true);
-        this.game.startItself(true);
+        //    this.game.loadItself(true);
+        //    this.game.startItself(true);
         /* for (let i = 0; i < 10; i++) {
               this.engine.setTime(i)
           }*/
@@ -80,15 +109,13 @@ class A extends AbstractAction_1.AbstractAction {
 }
 exports.A = A;
 class B extends AbstractAction_1.AbstractAction {
-    constructor(scene, game) {
+    constructor(scada, engine) {
         super();
-        this.game = game;
-        let scada = scene.getConsumerScada();
         this.inputs = scada.getScadaInputs();
         let dc = scada.getScadaObject("Chart", "IDataConsumer");
         this.dataConsumer = dc[0];
         let timer = scada.getScadaObject("Timer", "TimerObject");
-        timer[0].eventActionT().addActionT(new TA(this.game, this.inputs));
+        timer[0].eventActionT().addActionT(new TA(this.inputs, engine, scada));
     }
     action() {
         var mmm = this.dataConsumer.getAllMeasurements();
@@ -109,10 +136,11 @@ class TT extends AbstractActionT_1.AbstractActionT {
     }
 }
 class TA extends AbstractActionT_1.AbstractActionT {
-    constructor(game, inputs) {
+    constructor(inputs, timer, scada) {
         super();
-        this.game = game;
         this.inputs = inputs;
+        this.timer = timer;
+        this.scada = scada;
     }
     actionT(t) {
         console.log("time " + t);
@@ -121,7 +149,8 @@ class TA extends AbstractActionT_1.AbstractActionT {
             this.inputs[0].setInputValue("X", 1);
         }
         if (t > 5) {
-            this.game.startItself(false);
+            this.scada.setScadaEnabled(false);
+            this.timer.setEngineEnabled(false);
         }
     }
 }

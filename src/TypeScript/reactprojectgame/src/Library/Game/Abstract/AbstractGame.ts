@@ -121,7 +121,6 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame, 
         for (var scene of this.scenes) {
             let sc = scene[1]
             this.intAct.addAction(sc.getExternalAction())
-            this.internaTimeAction.addActionT(sc)
         }
         return true;
     }

@@ -3,9 +3,12 @@ import type { IFactory } from "../Interfaces/IFactory";
 import type { IPlayEngine } from "../Interfaces/IPlayEngine";
 import type { IRealtimeCollectionFactory } from "../Interfaces/IRealtimeCollectionFactory";
 import type { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
+import type { IActionAddRemove } from "../Interfaces/IActionAddRemove";
+import type { IAction } from "../Interfaces/IAction";
 import { EngineTimerProvider } from "../Event/Objects/EngineTimerProvider";
 import { TimerPlayEngineFactory } from "../Event/TimerPlayEngineFactory";
 import { ScadaDesktop } from "./ScadaDesktop";
+import { ActionArray } from "../Utilities/Generic/ActionArray";
 
 
 export class ScadaDesktopEngine extends ScadaDesktop {
@@ -22,7 +25,9 @@ export class ScadaDesktopEngine extends ScadaDesktop {
         this.factory = f;
         this.uFactory = factory;
         this.createRuntime();
+        engine.getEngineAction().addActionT(this)
     }
+
     public createRuntime(): void {
         let co = this.componentCollection.getCategoryObject(this.chart);
         let dc = co as unknown as IDataConsumer;
@@ -32,6 +37,30 @@ export class ScadaDesktopEngine extends ScadaDesktop {
         eev.setTimerFactory(new TimerPlayEngineFactory(this.engine));
         this.runtime = eev;
     }
+
+    addAction(action: IAction | undefined): void {
+        this.actionr.addAction(action);
+    }
+    removeAction(action: IAction | undefined): void {
+        this.actionr.removeAction(action);
+    }
+    clearActions(): void {
+        this.actionr.clearActions()
+    }
+    action(): void {
+        this.actionr.action();
+    }
+    isEmptyAction(): boolean {
+        return this.actionr.isEmptyAction()
+    }
+
+    setScadaEnabled(enabled: boolean): void {
+        super.setScadaEnabled(enabled)
+        this.engine.setEngineEnabled(enabled)
+    }
+
+
+    actionr: IActionAddRemove = new ActionArray
 
     engine!: IPlayEngine;
 

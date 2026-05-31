@@ -1,5 +1,0 @@
-import type { AmbientLight } from "./AmbientLight";
-import type { DirectionalLight } from "./DirectionalLight";
-import type { SpotLight } from "./SpotLight";
-
-type Light = AmbientLight | DirectionalLight | SpotLight;

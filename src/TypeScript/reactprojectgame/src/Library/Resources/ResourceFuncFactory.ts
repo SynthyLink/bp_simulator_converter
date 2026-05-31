@@ -1,4 +1,4 @@
-import { FactoryObject } from "../FactorytObject"
+import { FactoryObject } from "../FactoryObject"
 import type { IFactory } from "../Interfaces/IFactory"
 import type { IResourceFunc } from "./Infrefaces/IResourceFunc"
 import type { IResourceFuncFactory } from "./Infrefaces/IResourceFuncFactory"

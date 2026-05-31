@@ -40,6 +40,7 @@ export  class ScadaDesktop extends ScadaInterface implements IComponentCollectio
 
 
     setScadaEnabled(enabled: boolean): void {
+        super.setScadaEnabled(enabled)
         this.runtime.setComponentCollectionRunning(enabled);
     }
 
@@ -54,7 +55,6 @@ export  class ScadaDesktop extends ScadaInterface implements IComponentCollectio
     getStepAction(): IStepAction | undefined {
         let l = this.performer.convertObject<IStepActionHolder, IRealtimeCollection>(this.runtime, "IStepActionHolder")
         return l.length == 0 ? undefined : l[0].getStepAction()
-
     }
 
 }

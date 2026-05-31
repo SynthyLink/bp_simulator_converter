@@ -5,9 +5,10 @@ import type { IFactory } from "../Interfaces/IFactory";
 import type { IObjectCollection } from "../Interfaces/IObjectCollection";
 import type { IScadaConsumer } from "./Interfaces/IScadaConsumer";
 import type { IScadaInterface } from "./Interfaces/IScadaInterface";
+import type { IPlayEngine } from "../Interfaces/IPlayEngine";
 import { Performer } from "../Performer";
-import { ActionArray } from "../Utilities/Generic/ActionArray";
-import { ScadaActionInterval } from "./ScadaActionInterval";
+import { ScadaDesktopEngine } from "./ScadaDesktopEngine";
+import { ActionWatch } from "../Utilities/Watch/ActionWatch";
 
 export class ScadaPerformer extends Performer implements IActionT<IScadaConsumer>
 {
@@ -23,10 +24,19 @@ export class ScadaPerformer extends Performer implements IActionT<IScadaConsumer
 
 	isEmptyActionT(): boolean { return false }
 
-	public createScadaDesktopAction(componentCollection: IComponentCollection, interval: number, factory: IFactory, chart: string): IActionAddRemove {
-		let action = new ActionArray
-		return new ScadaActionInterval(componentCollection, action, interval, factory, chart);
-	}
+    public createScadaDesktopEngine(componentCollection: IComponentCollection,
+        engine: IPlayEngine, factory: IFactory, chart: string): IActionAddRemove
+    {
+        return new ScadaDesktopEngine(componentCollection, engine, factory, chart)
+    }
+
+    public createScadaDesktopAction(componentCollection: IComponentCollection,
+        action: IActionAddRemove, interval: number, factory: IFactory, chart: string): IActionAddRemove {
+        let engine = new ActionWatch(interval, action)
+        return new ScadaDesktopEngine(componentCollection, engine, factory, chart)
+    }
+
+
 
     scada !: IScadaInterface;
 

@@ -5,7 +5,6 @@ import type { IAction } from "../../Interfaces/IAction";
 import type { IActionAddRemove } from "../../Interfaces/IActionAddRemove";
 import type { IFactory } from "../../Interfaces/IFactory";
 import type { IObject } from "../../Interfaces/IObject";
-import type { IStepAction } from "../../Measurements/Interfaces/IStepAction";
 import type { ISceneAction } from "../Interfaces/ISceneAction";
 import type { IGameActionConverter } from "../Interfaces/IGameActionConverter";
 import { ActionArray } from "../../Utilities/Generic/ActionArray";
@@ -21,23 +20,12 @@ export abstract class AbstractScene implements IScene {
         if (saf != undefined) this.sceneAction = saf
         let conv = this.factory.getFactory<IGameActionConverter>("IGameActionConverter")
         if (conv != undefined) this.converter = conv
-        game.addChildT(this)
     }
 
-    actionT(t: number): void {
-        if (this.stepAction === undefined) return
-        if (this.currentTime > t) {
-            this.currentTime = t
-            return
-        }
-        this.stepAction.actionT2(this.currentTime, t)
-        this.currentTime = t;
-    }
+   
     isEmptyActionT(): boolean {
         return false
     }
-    abstract getStepAction(): IStepAction | undefined
-
     isRunning(): boolean {
         return this.isStarted;
     }
@@ -170,7 +158,7 @@ export abstract class AbstractScene implements IScene {
 
     protected isLoaded: boolean = false
 
-    protected stepAction !: IStepAction
+  //  protected stepAction !: IStepAction
 
 
     protected currentTime: number = Number.MAX_VALUE

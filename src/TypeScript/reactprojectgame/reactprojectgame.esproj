@@ -9,13 +9,14 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="public\scenes\**" />
     <None Remove="src\Library\Library\**" />
     <None Remove="src\Library\Runtime\Interfaces\**" />
+    <TypeScriptConfiguration Remove="public\scenes\**" />
     <TypeScriptConfiguration Remove="src\Library\Library\**" />
     <TypeScriptConfiguration Remove="src\Library\Runtime\Interfaces\**" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="dist\assets\" />
-    <Folder Include="public\scenes\" />
   </ItemGroup>
 </Project>

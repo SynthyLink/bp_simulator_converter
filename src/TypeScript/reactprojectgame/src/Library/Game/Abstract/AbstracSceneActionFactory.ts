@@ -1,4 +1,4 @@
-import { FactoryObject } from "../../FactorytObject"
+import { FactoryObject } from "../../FactoryObject"
 import type { IFactory } from "../../Interfaces/IFactory"
 import type { ISceneAction } from "../Interfaces/ISceneAction"
 import type { IScene } from "../Interfaces/IScene"

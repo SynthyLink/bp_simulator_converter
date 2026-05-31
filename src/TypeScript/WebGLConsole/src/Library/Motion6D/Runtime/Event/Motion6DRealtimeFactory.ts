@@ -5,7 +5,7 @@ import type { IDataConsumer } from "../../../Measurements/Interfaces/IDataConsum
 import { DataRuntimeConsumerMotion6DEvent } from "./DataRuntimeConsumerMotion6DEvent";
 import { Motion6DFactory } from "../../Motion6DFactory";
 import { EmptyRealtimeCollection } from "../../../Runtime/EmptyRealtimeCollection";
-import { FactoryObject } from "../../../FactorytObject";
+import { FactoryObject } from "../../../FactoryObject";
 
 export class Motion6DRealtimeFactory extends FactoryObject implements IRealtimeCollectionFactory {
     constructor(mF: Motion6DFactory) {

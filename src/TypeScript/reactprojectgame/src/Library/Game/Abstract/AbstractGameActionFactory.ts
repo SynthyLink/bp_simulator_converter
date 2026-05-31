@@ -1,4 +1,4 @@
-import { FactoryObject } from "../../FactorytObject";
+import { FactoryObject } from "../../FactoryObject";
 import type { IGameAction } from "../../Game/Interfaces/IGameAction";
 import type { IGameActionFactory } from "../../Game/Interfaces/IGameActionFactory";
 import type { IFactory } from "../../Interfaces/IFactory";

@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.5171056">
   <ItemGroup>
     <None Remove="src\ExternalObjects\**" />
+    <None Remove="src\Library\Abstract3DConverters\**" />
     <None Remove="src\scenes\**" />
     <TypeScriptConfiguration Remove="src\ExternalObjects\**" />
+    <TypeScriptConfiguration Remove="src\Library\Abstract3DConverters\**" />
     <TypeScriptConfiguration Remove="src\scenes\**" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="scenes\" />
-    <Folder Include="src\Library\Abstract3DConverters\Splitters\" />
     <Folder Include="static\models\" />
   </ItemGroup>
 </Project>

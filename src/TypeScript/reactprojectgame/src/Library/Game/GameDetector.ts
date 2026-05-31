@@ -1,4 +1,4 @@
-import { FactoryObject } from "../FactorytObject";
+import { FactoryObject } from "../FactoryObject";
 import type { IFactory } from "../Interfaces/IFactory";
 import type { IGame } from "./Interfaces/IGame";
 import type{ IGameDetector } from "./Interfaces/IGameDetector";

@@ -107,7 +107,7 @@ export class Obj3DCreator extends LinesMeshCreator
 
     createMaterialsFromLines(lines: string[], eff: EffectTexture[]): Map<string, EffectTexture> {
         this.efff = eff
-        let mtl = new MtlWrapper(this.obj, "", this.factory, 0, lines, this.dict, "")
+        let mtl = new MtlWrapper(this.obj, "", this.factory, lines, this.dict, "")
         let et: EffectTexture[] = []
         let mt = mtl.createFromLines(lines, 0, et)
         if (mt.has("Default")) {
@@ -270,10 +270,9 @@ export class Obj3DCreator extends LinesMeshCreator
         if (line.startsWith("g ")) {
             var name = this.performer.toShidtedString(line, "g");
             this.matExists = false;
-            return name;
+            if (name != undefined) return name
         }
-    return undefined
-
+        return undefined
     }
 
     createDefaultGeometry(): void {
@@ -582,7 +581,7 @@ class MtlWrapper implements IEffectDitionary {
     newName: string = ""
 
     eeef: Map<string, EffectTexture> = new Map()
-    constructor(obj: any, name: string, factory: IFactory, start: number, lines: string[], effects: Map<string, EffectTexture>,
+    constructor(obj: any, name: string, factory: IFactory,  lines: string[], effects: Map<string, EffectTexture>,
         directory: string) {
         this.eeef = effects
         this.name = name;
@@ -590,11 +589,7 @@ class MtlWrapper implements IEffectDitionary {
         this.obj = obj;
         this.lines = lines;
         this.directory = directory;
-        if (start == 0) {
-            return;
-        }
-        
-        var i = start;
+        var i = 0;
         var list: string[] = []
         for (; i < lines.length; i++) {
             var line = lines[i];
@@ -622,10 +617,10 @@ class MtlWrapper implements IEffectDitionary {
         if (mat != undefined) {
             this.effects.set(this.newName, this.effect)
         }
-
+        /*
         if (i + 1 < lines.length) {
             new MtlWrapper(this.obj, this.newName, this.factory, i + 1, this.lines, this.effects, this.directory);
-        }
+        }*/
 
     }
      getEffectDictionary(): Map<string, EffectTexture> {
@@ -655,14 +650,16 @@ class MtlWrapper implements IEffectDitionary {
                 this.name = ss[ss.length - 1];
                 break;
             }
-
+            this.any = name
         }
-        var mt = new MtlWrapper(this.obj, name, this.factory, i, this.lines, this.dict, this.directory);
-        var eff = mt.getEffectDictionary();
-        return eff;
+       // var mt = new MtlWrapper(this.obj, name, this.factory, i, this.lines, this.dict, this.directory);
+      //  var eff = mt.getEffectDictionary();
+        // return eff;
+        return new Map
 
     }
 
+    any: any
     createEmpty(): void {
         if (this.effect != undefined) {
             return;

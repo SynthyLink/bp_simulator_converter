@@ -1,7 +1,7 @@
 
 
 //import { funcAirplane } from "./funcAirlane";
-import { funcAirplane } from "./funcAirlane.js";
+import { funcAirplane } from "./funcAirplane.js";
 
 import { useEffect } from "react";
 

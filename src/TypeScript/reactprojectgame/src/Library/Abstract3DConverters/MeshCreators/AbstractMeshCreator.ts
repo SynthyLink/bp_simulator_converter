@@ -10,7 +10,7 @@ import type { IStringSplitter } from "../../Utilities/String/Interfaces/IStringS
 import { Performer } from "../../Performer";
 import { Converter3DPefrormer } from "../Converter3DPerformer";
 import { EffectTexture } from "../EffectTexture";
-import { FactoryObject } from "../../FactorytObject";
+import { FactoryObject } from "../../FactoryObject";
 
 
 export abstract class AbstractMeshCreator extends FactoryObject implements IMeshCreator {
