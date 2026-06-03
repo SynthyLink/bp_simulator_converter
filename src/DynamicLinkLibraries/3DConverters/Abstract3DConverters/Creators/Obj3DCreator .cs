@@ -643,6 +643,10 @@ namespace Abstract3DConverters.Creators
                             Effect deff = null;
                             var file = line.Substring("mtllib ".Length).Trim();
                             CreateMaterials(file, out deff);
+                            if (EffectsPrivate.Count > 0)
+                            {
+                                EffectList.AddRange(EffectsPrivate.Values);
+                            }
                             break;
                         }
                     }

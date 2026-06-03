@@ -13,7 +13,6 @@ import { ActionArray } from "../Utilities/Generic/ActionArray";
 
 export class ScadaDesktopEngine extends ScadaDesktop
 {
-
 	constructor(componentCollection: IComponentCollection, engine:
 		IPlayEngine, factory: IFactory, chart: string) {
         super(componentCollection);

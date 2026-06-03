@@ -5,7 +5,7 @@ import type { ISelfLoad } from "../../Interfaces/ISelfLoad";
 import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
 import type { IResourceCollection } from "../../Resources/Infrefaces/IResouceCollection";
 import type { IResourceItem } from "../../Resources/Infrefaces/IResourceItem";
-//import { Obj3DCreator } from "../../Abstract3DConverters/MeshCreators/Obj3DCreator";
+import { Obj3DCreator } from "../../Abstract3DConverters/MeshCreators/Obj3DCreator";
 import { AssociatedSceneObject } from "../../Game/Abstract/AssociatedSceneObject";
 import { Basic3DShape } from "../../Motion6D/Objects/Shapes/Basic3DShape";
 
@@ -51,7 +51,7 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
         if (!load) return
         var res = this.shape.getResources()
         this.any = res
-        /*
+        
         for (var r of res) {
             if (r.ext == ".obj") {
                 var creator = new Obj3DCreator(r.url, r.name,
@@ -59,7 +59,7 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
                 this.meshes = creator.getMeshCreatorMeshes()
                break;
             }
-        }*/
+        }
     }
 
     any: any

@@ -43,11 +43,7 @@ namespace Abstract3DConverters.Creators
             Extension = Path.GetExtension(Filename);
         }
 
-
         string IMeshCreator.Directory => Directory;
-
-
- 
 
         IEnumerable<IMesh> IMeshCreator.Meshes => Meshes;
 

@@ -74,7 +74,6 @@ export class Obj3DCreator extends LinesMeshCreator
     }
 
     getMeshCreatorMeshes(): IMesh[] {
-
         if (this.meshes.length == 0) this.createMeshes()
         return this.meshes
     }
@@ -123,6 +122,7 @@ export class Obj3DCreator extends LinesMeshCreator
             }
             if (!this.effectsPrivate.has(key)) {
                 this.effectsPrivate.set(key, item[1])
+                this.effectList.push(item[1])
             }
 
         }
@@ -189,6 +189,7 @@ export class Obj3DCreator extends LinesMeshCreator
                         var file = line.substring("mtllib ".length).trim();
                         mt = this.createMaterialsFromLUrl(file, eff)
                         if (eff.length > 0) this.default = eff[0]
+                        return
                     }
                 }
                 if (this.effectsPrivate.size == 0 && this.default == undefined) {
@@ -581,7 +582,11 @@ class MtlWrapper implements IEffectDitionary {
     newName: string = ""
 
     eeef: Map<string, EffectTexture> = new Map()
-    constructor(obj: any, name: string, factory: IFactory,  lines: string[], effects: Map<string, EffectTexture>,
+
+    any: any
+
+
+    constructor(obj: any, name: string, factory: IFactory, lines: string[], effects: Map<string, EffectTexture>,
         directory: string) {
         this.eeef = effects
         this.name = name;
@@ -589,6 +594,8 @@ class MtlWrapper implements IEffectDitionary {
         this.obj = obj;
         this.lines = lines;
         this.directory = directory;
+    }
+    /*
         var i = 0;
         var list: string[] = []
         for (; i < lines.length; i++) {
@@ -622,7 +629,8 @@ class MtlWrapper implements IEffectDitionary {
             new MtlWrapper(this.obj, this.newName, this.factory, i + 1, this.lines, this.effects, this.directory);
         }*/
 
-    }
+//}*/
+
      getEffectDictionary(): Map<string, EffectTexture> {
         return this.effects;
     }
@@ -655,11 +663,80 @@ class MtlWrapper implements IEffectDitionary {
        // var mt = new MtlWrapper(this.obj, name, this.factory, i, this.lines, this.dict, this.directory);
       //  var eff = mt.getEffectDictionary();
         // return eff;
-        return new Map
+        return this.createDictionary(lines, i, defaultEffect)
 
     }
 
-    any: any
+    createDictionary(lines: string[], start: number, defaultEffect: EffectTexture[]): Map<string, EffectTexture> {
+        let dict: Map<string, EffectTexture> = new Map
+        try {
+            var name = "";
+            var i = start;
+            for (; i < lines.length; i++) {
+                var line = lines[i];
+                if (line.includes("newmtl")) {
+                    var ss = line.split(" ")
+                    name = ss[ss.length - 1];
+                    break;
+                }
+
+            }
+            this.any = defaultEffect
+            this.createDict(name, lines, i, dict, defaultEffect);
+            return dict;
+        }
+        catch (e) {
+          this.any = e
+        }
+        return map;
+    }
+
+
+    createDict(name: string, lines: string[], start: number, dict: Map<string, EffectTexture>, defaultEffect: EffectTexture[]): void {
+        try {
+            this.name = name
+            let newName = "";
+            var i = start;
+            var list: string[] = [];
+            for (; i < lines.length; i++) {
+                var line = lines[i];
+                if (line == null) {
+                    break;
+                }
+                if (line.length == 0) {
+                    continue;
+                }
+                list.push(line)
+                if (line.includes("newmtl")) {
+                    var ss = line.split(" ");
+                    newName = ss[ss.length - 1];
+                    break;
+                }
+
+            }
+            if (list.length == 0) {
+                return;
+            }
+            if (newName.length == 0) return
+
+            this.finalize(list, this.directory);
+            this.createEmpty();
+            var mat = this.effect;
+            if (mat != undefined) {
+                this.effects.set(this.name, this.effect)
+                dict.set(this.name, this.effect)
+            }
+
+            if (i + 1 < lines.length) {
+                this.createDict(newName, lines, i + 1, dict, defaultEffect)
+            }
+        }
+        catch (e) {
+           this.any = e
+        }
+    }
+
+
     createEmpty(): void {
         if (this.effect != undefined) {
             return;
