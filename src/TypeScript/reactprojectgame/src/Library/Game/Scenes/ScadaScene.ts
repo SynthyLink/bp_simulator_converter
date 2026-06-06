@@ -26,21 +26,7 @@ export class ScadaScene extends AbstractScene implements IScadaConsumer
             this.performer.loadChildren(this, this.scada, loader, true)
         }
         this.setFactoryToChildren()
-   /*     let sa = this.getStepAction()
-        if (sa != undefined) {
-            this.stepAction = sa
-        }*/
     }
-
-    protected collection !: IComponentCollection
-    protected scada !: IScadaInterface
-/*
-    getStepAction(): IStepAction | undefined {
-        let sh = this.scada as unknown as IStepActionHolder
-        if (sh === undefined) return undefined
-        return sh.getStepAction()
-    }
-    */
 
     getConsumerScada(): IScadaInterface {
         return this.scada;
@@ -55,8 +41,8 @@ export class ScadaScene extends AbstractScene implements IScadaConsumer
         if (!super.loadItself(load)) return false
         else this.internalAction.clearActions()
         return true;
-        
     }
+
     startItself(start: boolean): boolean {
         if (this.isStarted == start) return false
         this.isStarted = start
@@ -66,5 +52,8 @@ export class ScadaScene extends AbstractScene implements IScadaConsumer
         return true;
     }
 
+    protected collection !: IComponentCollection
+
+    protected scada !: IScadaInterface
 
 }

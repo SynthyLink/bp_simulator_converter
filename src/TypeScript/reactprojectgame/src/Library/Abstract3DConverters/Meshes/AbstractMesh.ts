@@ -14,7 +14,7 @@ export class AbstractMesh implements IMesh {
     constructor(parent: IMesh | undefined, name: string, transformationMatrix: number[], effect: EffectTexture | undefined,
         vertices: number[][], textures: number[][], normals: number[][], tuple: ITextureIndex | undefined, creator: IMeshCreator)
     {
-        if (tuple != null) this.tuple = tuple
+        if (tuple != undefined) this.tuple = tuple
         if (parent != undefined) {
             this.parent = parent
             parent.addNodeT(this)
@@ -26,6 +26,9 @@ export class AbstractMesh implements IMesh {
         this.textures = textures
         this.normals = normals
         this.creator = creator
+        if (tuple != undefined) {
+            this.indexes = tuple.indx
+        }
     }
     getIndexes(): number[][][] {
         return this.indexes

@@ -57,7 +57,7 @@ export class Scene3DMesh extends AssociatedSceneObject implements IMeshHolder,
                 var creator = new Obj3DCreator(r.url, r.name,
                     "", this.scene, this.factory, this.textReader);
                 this.meshes = creator.getMeshCreatorMeshes()
-               break;
+                break;
             }
         }
     }

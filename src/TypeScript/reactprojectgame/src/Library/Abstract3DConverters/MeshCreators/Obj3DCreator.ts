@@ -30,6 +30,9 @@ export class Obj3DCreator extends LinesMeshCreator
     }
 
     public getIndexes(): ITextureIndex[][] {
+        if (this.iindexes.length == 0) {
+            if (Obj3DCreator.siindexes.length > 0) this.iindexes = Obj3DCreator.siindexes
+        }
         return this.iindexes
     }
 
@@ -85,8 +88,11 @@ export class Obj3DCreator extends LinesMeshCreator
             return
         }
         for (var i = 0; i < this.iindexes.length; i++) {
-            var m = new AbstractMeshObj(undefined, "", [], this.default, [], [], [], [], undefined, this, 1, i)
-            this.meshes.push(m)
+            let t = this.iindexes[i]
+            if (t.length > 0) {
+                var m = new AbstractMeshObj(undefined, "", [], this.default, [], [], [], [], t[0], this, 1, i)
+                this.meshes.push(m)
+            }
         }
 
     }
@@ -334,15 +340,14 @@ export class Obj3DCreator extends LinesMeshCreator
     createNamedGeometry(): void {
         // GetName = GetInititial;
         try {
-            let indexes: ITextureIndex[] = []
+         //   let indexes: ITextureIndex[] = []
             for (let k = 0; k < this.lines.length; k++) {
                 var line = this.lines[k];
                 var name = this.getInitial(line);
                 if (name != undefined) {
                     if (name != this.fiction) {
+                        if (this.names === undefined) this.names = []
                         this.names.push(name);
-                        indexes = [];
-                        this.pushIndex(indexes);
                         if (line.includes("usemtl ")) {
                             var mat = line.substring("usemtl ".length);
                             if (mat == "_default_") {
@@ -398,7 +403,7 @@ export class Obj3DCreator extends LinesMeshCreator
                     this.normals.push(f);
                     continue;
                 }
-                if (line.indexOf("f ") == 0) {
+                if (line.startsWith("f ")) {
                     var s = line.substring("f ".length).trim();
                     var ss = s.split(" ");
                     var ind: number[][] = []
@@ -688,7 +693,7 @@ class MtlWrapper implements IEffectDitionary {
         catch (e) {
           this.any = e
         }
-        return map;
+        return new Map;
     }
 
 

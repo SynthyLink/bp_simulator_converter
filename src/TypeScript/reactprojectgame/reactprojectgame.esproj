@@ -19,4 +19,8 @@
   <ItemGroup>
     <Folder Include="dist\assets\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="reactprojecttree.esproj" />
+    <None Include="reactprojecttree.esproj.user" />
+  </ItemGroup>
 </Project>

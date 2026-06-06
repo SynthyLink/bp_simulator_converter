@@ -35,8 +35,10 @@ export class AbstractMeshObj extends AbstractMeshPolygon {
             }
             let nm = 0
             for (let tuple of indexes) {
-                new AbstractMeshObj(this, "", [], effect, [], this.intVertices, this.intTextures, this.intNormals,
-                    tuple, this.o3dCreator, 1, nm)
+                if (tuple.indx.length > 0) {
+                    new AbstractMeshObj(this, "", [], effect, [], this.intVertices, this.intTextures, this.intNormals,
+                        tuple, this.o3dCreator, 1, nm)
+                }
                 ++nm;
             }
             return
