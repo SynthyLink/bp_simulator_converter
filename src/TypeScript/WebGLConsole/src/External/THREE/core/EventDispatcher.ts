@@ -102,6 +102,7 @@ export class EventDispatcher {
 				let a = array[i];
 
 				a(this, event);
+
 			}
 
 			event.target = null;

@@ -1,5 +1,9 @@
 import { clamp } from './MathUtils';
 import { warn } from '../utils';
+import { Vector3 } from './Vector3';
+import { Euler } from './Euler';
+import { Matrix4 } from './Matrix4';
+import { BufferAttribute } from '../core/BufferAttribute';
 
 /**
  * Class for representing a Quaternion. Quaternions are used in three.js to represent rotations.
@@ -310,7 +314,7 @@ isQuaternion: boolean = true;
 	 * @param {boolean} [update=true] - Whether the internal `onChange` callback should be executed or not.
 	 * @return {Quaternion} A reference to this quaternion.
 	 */
-	setFromEuler( euler, update = true ) {
+	setFromEuler(euler: Euler, update: boolean = true) {
 
 		const x = euler._x, y = euler._y, z = euler._z, order = euler._order;
 
@@ -391,7 +395,7 @@ isQuaternion: boolean = true;
 	 * @param {number} angle - The angle in radians.
 	 * @return {Quaternion} A reference to this quaternion.
 	 */
-	setFromAxisAngle( axis, angle ) {
+	setFromAxisAngle(axis: Vector3, angle: number) {
 
 		// http://www.euclideanspace.com/maths/geometry/rotations/conversions/angleToQuaternion/index.htm
 
@@ -414,7 +418,7 @@ isQuaternion: boolean = true;
 	 * @param {Matrix4} m - A 4x4 matrix of which the upper 3x3 of matrix is a pure rotation matrix (i.e. unscaled).
 	 * @return {Quaternion} A reference to this quaternion.
 	 */
-	setFromRotationMatrix( m ) {
+	setFromRotationMatrix(m: Matrix4): Quaternion{
 
 		// http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm
 
@@ -480,7 +484,7 @@ isQuaternion: boolean = true;
 	 * @param {Vector3} vTo - The second (normalized) direction vector.
 	 * @return {Quaternion} A reference to this quaternion.
 	 */
-	setFromUnitVectors( vFrom, vTo ) {
+	setFromUnitVectors(vFrom: Vector3, vTo: Vector3): Quaternion{
 
 		// assumes direction vectors vFrom and vTo are normalized
 
@@ -529,7 +533,7 @@ isQuaternion: boolean = true;
 	 * @param {Quaternion} q - The quaternion to compute the angle with.
 	 * @return {number} The angle in radians.
 	 */
-	angleTo( q ) {
+	angleTo(q: Quaternion): number {
 
 		return 2 * Math.acos( Math.abs( clamp( this.dot( q ), - 1, 1 ) ) );
 
@@ -543,7 +547,7 @@ isQuaternion: boolean = true;
 	 * @param {number} step - The angular step in radians.
 	 * @return {Quaternion} A reference to this quaternion.
 	 */
-	rotateTowards( q, step ) {
+	rotateTowards(q: Quaternion, step: number): Quaternion{
 
 		const angle = this.angleTo( q );
 
@@ -563,7 +567,7 @@ isQuaternion: boolean = true;
 	 *
 	 * @return {Quaternion} A reference to this quaternion.
 	 */
-	identity() {
+	identity(): Quaternion {
 
 		return this.set( 0, 0, 0, 1 );
 
@@ -606,7 +610,7 @@ isQuaternion: boolean = true;
 	 * @param {Quaternion} v - The quaternion to compute the dot product with.
 	 * @return {number} The result of the dot product.
 	 */
-	dot( v ) {
+	dot(v: Quaternion): number {
 
 		return this._x * v._x + this._y * v._y + this._z * v._z + this._w * v._w;
 
@@ -678,7 +682,7 @@ isQuaternion: boolean = true;
 	 * @param {Quaternion} q - The quaternion.
 	 * @return {Quaternion} A reference to this quaternion.
 	 */
-	multiply( q ) {
+	multiply(q: Quaternion): Quaternion {
 
 		return this.multiplyQuaternions( this, q );
 
@@ -690,7 +694,7 @@ isQuaternion: boolean = true;
 	 * @param {Quaternion} q - The quaternion.
 	 * @return {Quaternion} A reference to this quaternion.
 	 */
-	premultiply( q ) {
+	premultiply(q: Quaternion): Quaternion{
 
 		return this.multiplyQuaternions( q, this );
 
@@ -703,7 +707,7 @@ isQuaternion: boolean = true;
 	 * @param {Quaternion} b - The second quaternion.
 	 * @return {Quaternion} A reference to this quaternion.
 	 */
-	multiplyQuaternions( a, b ) {
+	multiplyQuaternions(a: Quaternion, b: Quaternion): Quaternion {
 
 		// from http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/code/index.htm
 
@@ -728,7 +732,7 @@ isQuaternion: boolean = true;
 	 * @param {number} t - The interpolation factor. A value in the range `[0,1]` will interpolate. A value outside the range `[0,1]` will extrapolate.
 	 * @return {Quaternion} A reference to this quaternion.
 	 */
-	slerp( qb, t ) {
+	slerp(qb: Quaternion, t: number): Quaternion {
 
 		let x = qb._x, y = qb._y, z = qb._z, w = qb._w;
 
@@ -790,7 +794,7 @@ isQuaternion: boolean = true;
 	 * @param {number} t - The interpolation factor in the closed interval `[0, 1]`.
 	 * @return {Quaternion} A reference to this quaternion.
 	 */
-	slerpQuaternions( qa, qb, t ) {
+	slerpQuaternions(qa: Quaternion, qb: Quaternion, t: number): Quaternion{
 
 		return this.copy( qa ).slerp( qb, t );
 
@@ -829,7 +833,7 @@ isQuaternion: boolean = true;
 	 * @param {Quaternion} quaternion - The quaternion to test for equality.
 	 * @return {boolean} Whether this quaternion is equal with the given one.
 	 */
-	equals( quaternion ) {
+	equals(quaternion: Quaternion): boolean {
 
 		return ( quaternion._x === this._x ) && ( quaternion._y === this._y ) && ( quaternion._z === this._z ) && ( quaternion._w === this._w );
 
@@ -842,7 +846,7 @@ isQuaternion: boolean = true;
 	 * @param {number} [offset=0] - The offset into the array.
 	 * @return {Quaternion} A reference to this quaternion.
 	 */
-	fromArray( array, offset = 0 ) {
+	fromArray(array: number[], offset: number = 0) {
 
 		this._x = array[ offset ];
 		this._y = array[ offset + 1 ];
@@ -863,7 +867,7 @@ isQuaternion: boolean = true;
 	 * @param {number} [offset=0] - Index of the first element in the array.
 	 * @return {Array<number>} The quaternion components.
 	 */
-	toArray( array = [], offset = 0 ) {
+	toArray(array: number[] = [], offset = 0) {
 
 		array[ offset ] = this._x;
 		array[ offset + 1 ] = this._y;
@@ -881,7 +885,7 @@ isQuaternion: boolean = true;
 	 * @param {number} index - The index into the attribute.
 	 * @return {Quaternion} A reference to this quaternion.
 	 */
-	fromBufferAttribute( attribute, index ) {
+	fromBufferAttribute(attribute: BufferAttribute, index: number): Quaternion {
 
 		this._x = attribute.getX( index );
 		this._y = attribute.getY( index );
@@ -906,7 +910,7 @@ isQuaternion: boolean = true;
 
 	}
 
-	_onChange( callback ) {
+	_onChange( callback : any) {
 
 		this._onChangeCallback = callback;
 

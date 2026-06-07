@@ -2,6 +2,7 @@ import { Quaternion } from './Quaternion';
 import { Matrix4 } from './Matrix4';
 import { clamp } from './MathUtils';
 import { warn } from '../utils';
+import { Vector3 } from './Vector3';
 
 const _matrix: Matrix4 = /*@__PURE__*/ new Matrix4();
 const _quaternion: Quaternion = /*@__PURE__*/ new Quaternion();
@@ -349,7 +350,7 @@ class Euler {
 	 * @param {string} [order] - A string representing the order that the rotations are applied.
 	 * @return {Euler} A reference to this Euler instance.
 	 */
-	setFromVector3( v, order = this._order ) {
+	setFromVector3(v: Vector3, order : 'XYZ' | 'YXZ' | 'ZXY' | 'ZYX' | 'YZX' | 'XZY' = this._order) {
 
 		return this.set( v.x, v.y, v.z, order );
 

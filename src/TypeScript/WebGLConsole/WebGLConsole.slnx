@@ -1,4 +1,8 @@
 <Solution>
+  <Project Path="../../../../../../0/0/reactprojectTree/reactprojecttree/reactprojecttree.esproj">
+    <Build />
+    <Deploy />
+  </Project>
   <Project Path="WebGLConsole.esproj">
     <Build />
     <Deploy />

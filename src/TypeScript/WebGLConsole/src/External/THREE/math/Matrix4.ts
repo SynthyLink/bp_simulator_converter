@@ -681,26 +681,15 @@ class Matrix4 {
 	 * @param {number} z - The z component of the vector.
 	 * @return {Matrix4} A reference to this matrix.
 	 */
-	setPosition(x: number | Vector3, y: number, z: number) : Matrix4 {
+	setPosition(x: number , y: number, z: number) : Matrix4 {
 
 		const te = this.elements;
-		let v = x as undefined as Vector3
 
-		if (v != undefined) {
 
-			te[ 12 ] = v.x;
-			te[ 13 ] = v.y;
-			te[ 14 ] = v.z;
-
-		} else {
-			let n = x as undefined as number
-			if (n === undefined) return
-
-			te[ 12 ] = n;
+			te[ 12 ] = x;
 			te[ 13 ] = y;
 			te[ 14 ] = z;
 
-		}
 
 		return this;
 
@@ -811,33 +800,15 @@ class Matrix4 {
 	 * @param {number} z - The amount to translate in the z axis.
 	 * @return {Matrix4} A reference to this matrix.
 	 */
-	makeTranslation(x: number | Vector3, y, z): Matrix4{
-		let v = x as undefined as Vector3
-		if (v !== undefined) {
-
+	makeTranslation(x: number, y: number, z: number): Matrix4 {
 			this.set(
 
-				1, 0, 0, v.x,
-				0, 1, 0, v.y,
-				0, 0, 1, v.z,
-				0, 0, 0, 1
-
-			);
-
-		} else {
-			let n = x as undefined as number
-			if (n === undefined) return
-			this.set(
-
-				1, 0, 0, n,
+				1, 0, 0, x,
 				0, 1, 0, y,
 				0, 0, 1, z,
 				0, 0, 0, 1
 
 			);
-
-		}
-
 		return this;
 
 	}
@@ -1124,7 +1095,9 @@ class Matrix4 {
 	 * @param {boolean} [reversedDepth=false] - Whether to use a reversed depth.
 	 * @return {Matrix4} A reference to this matrix.
 	 */
-	makePerspective( left, right, top, bottom, near, far, coordinateSystem = WebGLCoordinateSystem, reversedDepth = false ) {
+	makePerspective(left: number, right: number, top: number,
+		bottom: number, near: number, far: number,
+		coordinateSystem: WebGLCoordinateSystem | WebGPUCoordinateSystem = WebGLCoordinateSystem, reversedDepth = false) {
 
 		const te = this.elements;
 
@@ -1236,7 +1209,7 @@ class Matrix4 {
 	 * @param {Matrix4} matrix - The matrix to test for equality.
 	 * @return {boolean} Whether this matrix is equal with the given one.
 	 */
-	equals( matrix ) {
+	equals(matrix: Matrix4): boolean {
 
 		const te = this.elements;
 		const me = matrix.elements;
@@ -1258,7 +1231,7 @@ class Matrix4 {
 	 * @param {number} [offset=0] - Index of the first element in the array.
 	 * @return {Matrix4} A reference to this matrix.
 	 */
-	fromArray( array, offset = 0 ) {
+	fromArray(array: number[], offset: number = 0) {
 
 		for ( let i = 0; i < 16; i ++ ) {
 
@@ -1278,7 +1251,7 @@ class Matrix4 {
 	 * @param {number} [offset=0] - Index of the first element in the array.
 	 * @return {Array<number>} The matrix elements in column-major order.
 	 */
-	toArray( array = [], offset = 0 ) {
+	toArray(array: number[] = [], offset: number = 0) {
 
 		const te = this.elements;
 
