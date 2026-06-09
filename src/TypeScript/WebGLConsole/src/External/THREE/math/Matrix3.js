@@ -348,12 +348,27 @@ class Matrix3 {
      * @return {Matrix3} A reference to this matrix.
      */
     makeTranslation(x, y) {
-        if (x.isVector2) {
-            this.set(1, 0, x.x, 0, 1, x.y, 0, 0, 1);
-        }
-        else {
-            this.set(1, 0, x, 0, 1, y, 0, 0, 1);
-        }
+        /*	if ( x.isVector2 ) {
+    
+                this.set(
+    
+                    1, 0, x.x,
+                    0, 1, x.y,
+                    0, 0, 1
+    
+                );
+    
+            } else {
+    
+                this.set(
+    
+                    1, 0, x,
+                    0, 1, y,
+                    0, 0, 1
+    
+                );
+    
+            }*/
         return this;
     }
     /**
@@ -435,10 +450,10 @@ class Matrix3 {
      * @return {Matrix3} A clone of this instance.
      */
     clone() {
-        return new this.constructor().fromArray(this.elements);
+        return new Matrix3(this.elements);
     }
 }
 exports.Matrix3 = Matrix3;
 Matrix3.isMatrix3 = true;
-const _m3 = /*@__PURE__*/ new Matrix3();
+const _m3 = /*@__PURE__*/ new Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1);
 //# sourceMappingURL=Matrix3.js.map

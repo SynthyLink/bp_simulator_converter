@@ -556,20 +556,9 @@ class Matrix4 {
      */
     setPosition(x, y, z) {
         const te = this.elements;
-        let v = x;
-        if (v != undefined) {
-            te[12] = v.x;
-            te[13] = v.y;
-            te[14] = v.z;
-        }
-        else {
-            let n = x;
-            if (n === undefined)
-                return;
-            te[12] = n;
-            te[13] = y;
-            te[14] = z;
-        }
+        te[12] = x;
+        te[13] = y;
+        te[14] = z;
         return this;
     }
     /**
@@ -648,16 +637,7 @@ class Matrix4 {
      * @return {Matrix4} A reference to this matrix.
      */
     makeTranslation(x, y, z) {
-        let v = x;
-        if (v !== undefined) {
-            this.set(1, 0, 0, v.x, 0, 1, 0, v.y, 0, 0, 1, v.z, 0, 0, 0, 1);
-        }
-        else {
-            let n = x;
-            if (n === undefined)
-                return;
-            this.set(1, 0, 0, n, 0, 1, 0, y, 0, 0, 1, z, 0, 0, 0, 1);
-        }
+        this.set(1, 0, 0, x, 0, 1, 0, y, 0, 0, 1, z, 0, 0, 0, 1);
         return this;
     }
     /**

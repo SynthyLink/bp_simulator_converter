@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Vector3 = void 0;
-const MathUtils_js_1 = require("./MathUtils.js");
-const Quaternion_js_1 = require("./Quaternion.js");
+const MathUtils_1 = require("./MathUtils");
+const Quaternion_1 = require("./Quaternion");
 /**
  * Class representing a 3D vector. A 3D vector is an ordered triplet of numbers
  * (labeled x, y and z), which can be used to represent a number of things, such as:
@@ -103,7 +103,7 @@ class Vector3 {
      * @param {number} y - The value to set.
      * @return {Vector3} A reference to this vector.
      */
-    setY(y) {
+    setY(yx) {
         this.y = y;
         return this;
     }
@@ -472,9 +472,9 @@ class Vector3 {
      */
     clamp(min, max) {
         // assumes min < max, componentwise
-        this.x = (0, MathUtils_js_1.clamp)(this.x, min.x, max.x);
-        this.y = (0, MathUtils_js_1.clamp)(this.y, min.y, max.y);
-        this.z = (0, MathUtils_js_1.clamp)(this.z, min.z, max.z);
+        this.x = (0, MathUtils_1.clamp)(this.x, min.x, max.x);
+        this.y = (0, MathUtils_1.clamp)(this.y, min.y, max.y);
+        this.z = (0, MathUtils_1.clamp)(this.z, min.z, max.z);
         return this;
     }
     /**
@@ -488,9 +488,9 @@ class Vector3 {
      * @return {Vector3} A reference to this vector.
      */
     clampScalar(minVal, maxVal) {
-        this.x = (0, MathUtils_js_1.clamp)(this.x, minVal, maxVal);
-        this.y = (0, MathUtils_js_1.clamp)(this.y, minVal, maxVal);
-        this.z = (0, MathUtils_js_1.clamp)(this.z, minVal, maxVal);
+        this.x = (0, MathUtils_1.clamp)(this.x, minVal, maxVal);
+        this.y = (0, MathUtils_1.clamp)(this.y, minVal, maxVal);
+        this.z = (0, MathUtils_1.clamp)(this.z, minVal, maxVal);
         return this;
     }
     /**
@@ -505,7 +505,7 @@ class Vector3 {
      */
     clampLength(min, max) {
         const length = this.length();
-        return this.divideScalar(length || 1).multiplyScalar((0, MathUtils_js_1.clamp)(length, min, max));
+        return this.divideScalar(length || 1).multiplyScalar((0, MathUtils_1.clamp)(length, min, max));
     }
     /**
      * The components of this vector are rounded down to the nearest integer value.
@@ -718,7 +718,7 @@ class Vector3 {
             return Math.PI / 2;
         const theta = this.dot(v) / denominator;
         // clamp, to handle numerical problems
-        return Math.acos((0, MathUtils_js_1.clamp)(theta, -1, 1));
+        return Math.acos((0, MathUtils_1.clamp)(theta, -1, 1));
     }
     /**
      * Computes the distance from the given vector to this instance.
@@ -756,9 +756,11 @@ class Vector3 {
      * @param {Spherical} s - The spherical coordinates.
      * @return {Vector3} A reference to this vector.
      */
-    setFromSpherical(s) {
-        return this.setFromSphericalCoords(s.radius, s.phi, s.theta);
-    }
+    /*setFromSpherical( s ) {
+
+        return this.setFromSphericalCoords( s.radius, s.phi, s.theta );
+
+    }*/
     /**
      * Sets the vector components from the given spherical coordinates.
      *
@@ -957,5 +959,5 @@ class Vector3 {
 }
 exports.Vector3 = Vector3;
 const _vector = /*@__PURE__*/ new Vector3();
-const _quaternion = /*@__PURE__*/ new Quaternion_js_1.Quaternion();
+const _quaternion = /*@__PURE__*/ new Quaternion_1.Quaternion();
 //# sourceMappingURL=Vector3.js.map

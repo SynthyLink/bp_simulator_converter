@@ -1157,7 +1157,8 @@ class Matrix4 {
 	 * @param {boolean} [reversedDepth=false] - Whether to use a reversed depth.
 	 * @return {Matrix4} A reference to this matrix.
 	 */
-	makeOrthographic( left, right, top, bottom, near, far, coordinateSystem = WebGLCoordinateSystem, reversedDepth = false ) {
+	makeOrthographic(left: number, right: number,
+		top: number, bottom: number, near: null, far: number, coordinateSystem = WebGLCoordinateSystem, reversedDepth = false) {
 
 		const te = this.elements;
 

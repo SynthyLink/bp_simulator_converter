@@ -32,6 +32,8 @@ class Euler {
 	_z: number = 0
 	_order: 'XYZ' | 'YXZ' | 'ZXY' | 'ZYX' | 'YZX' | 'XZY' = 'XYZ'
 
+
+
 	/**
 	 * Constructs a new euler instance.
 	 *
@@ -95,6 +97,8 @@ class Euler {
 		this._onChangeCallback();
 
 	}
+
+	_onChangeCallback !: () => void
 
 	/**
 	 * The angle of the z axis in radians.
@@ -380,7 +384,7 @@ class Euler {
 	 * @param {Euler} euler - The Euler instance to test for equality.
 	 * @return {boolean} Whether this Euler instance is equal with the given one.
 	 */
-	equals( euler ) {
+	equals(euler: Euler): boolean{
 
 		return ( euler._x === this._x ) && ( euler._y === this._y ) && ( euler._z === this._z ) && ( euler._order === this._order );
 
@@ -426,7 +430,7 @@ class Euler {
 
 	}
 
-	_onChange( callback ) {
+	_onChange(callback: any): Euler{
 
 		this._onChangeCallback = callback;
 
@@ -434,7 +438,6 @@ class Euler {
 
 	}
 
-	_onChangeCallback() {}
 
 	*[ Symbol.iterator ]() {
 

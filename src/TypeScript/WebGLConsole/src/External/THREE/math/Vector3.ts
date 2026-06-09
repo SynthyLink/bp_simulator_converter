@@ -408,7 +408,7 @@ class Vector3 {
 	 * @param {Matrix3} m - The 3x3 matrix.
 	 * @return {Vector3} A reference to this vector.
 	 */
-	applyMatrix3(m: Matrix3): Quaternion{
+	applyMatrix3(m: Matrix3): Vector3 {
 
 		const x = this.x, y = this.y, z = this.z;
 		const e = m.elements;
@@ -984,11 +984,11 @@ class Vector3 {
 	 * @param {Spherical} s - The spherical coordinates.
 	 * @return {Vector3} A reference to this vector.
 	 */
-	setFromSpherical( s ) {
+	/*setFromSpherical( s ) {
 
 		return this.setFromSphericalCoords( s.radius, s.phi, s.theta );
 
-	}
+	}*/
 
 	/**
 	 * Sets the vector components from the given spherical coordinates.

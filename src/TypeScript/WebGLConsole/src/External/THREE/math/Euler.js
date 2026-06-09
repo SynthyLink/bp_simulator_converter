@@ -308,7 +308,6 @@ class Euler {
         this._onChangeCallback = callback;
         return this;
     }
-    _onChangeCallback() { }
     *[Symbol.iterator]() {
         yield this._x;
         yield this._y;

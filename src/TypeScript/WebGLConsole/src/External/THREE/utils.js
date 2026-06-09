@@ -18,7 +18,7 @@ exports.yieldToMain = yieldToMain;
 exports.toNormalizedProjectionMatrix = toNormalizedProjectionMatrix;
 exports.toReversedProjectionMatrix = toReversedProjectionMatrix;
 exports.isTypedArray = isTypedArray;
-const constants_js_1 = require("./constants.js");
+const constants_1 = require("./constants");
 /**
  * Finds the minimum value in an array.
  *
@@ -152,7 +152,7 @@ const _cache = {};
  * @private
  * @type {Function|null}
  */
-let _setConsoleFunction = null;
+//let _setConsoleFunction = null;
 /**
  * Sets a custom function to handle console output.
  *
@@ -186,12 +186,14 @@ function getConsoleFunction() {
  */
 function log(...params) {
     const message = 'THREE.' + params.shift();
-    if (_setConsoleFunction) {
-        _setConsoleFunction('log', message, ...params);
-    }
-    else {
-        console.log(message, ...params);
-    }
+    /*
+        if ( _setConsoleFunction ) {
+    
+            //_setConsoleFunction( 'log', message, ...params );
+    
+        } else {*/
+    console.log(message, ...params);
+    //	}
 }
 /**
  * Enhances log/warn/error messages related to TSL.
@@ -251,17 +253,20 @@ function warn(...params) {
 function error(...params) {
     params = enhanceLogMessage(params);
     const message = 'THREE.' + params.shift();
-    if (_setConsoleFunction) {
-        _setConsoleFunction('error', message, ...params);
+    /*
+        if ( _setConsoleFunction ) {
+    
+            _setConsoleFunction( 'error', message, ...params );
+    
+        } else {
+        */
+    const stackTrace = params[0];
+    if (stackTrace && stackTrace.isStackTrace) {
+        console.error(stackTrace.getError(message));
     }
     else {
-        const stackTrace = params[0];
-        if (stackTrace && stackTrace.isStackTrace) {
-            console.error(stackTrace.getError(message));
-        }
-        else {
-            console.error(message, ...params);
-        }
+        console.error(message, ...params);
+        //		}
     }
 }
 /**
@@ -277,7 +282,7 @@ function warnOnce(...params) {
     const message = params.join(' ');
     if (message in _cache)
         return;
-    _cache[message] = true;
+    //_cache[ message ] = true;
     warn(...params);
 }
 /**
@@ -367,14 +372,14 @@ function toReversedProjectionMatrix(projectionMatrix) {
  * @type {Object}
  */
 const ReversedDepthFuncs = {
-    [constants_js_1.NeverDepth]: constants_js_1.AlwaysDepth,
-    [constants_js_1.LessDepth]: constants_js_1.GreaterDepth,
-    [constants_js_1.EqualDepth]: constants_js_1.NotEqualDepth,
-    [constants_js_1.LessEqualDepth]: constants_js_1.GreaterEqualDepth,
-    [constants_js_1.AlwaysDepth]: constants_js_1.NeverDepth,
-    [constants_js_1.GreaterDepth]: constants_js_1.LessDepth,
-    [constants_js_1.NotEqualDepth]: constants_js_1.EqualDepth,
-    [constants_js_1.GreaterEqualDepth]: constants_js_1.LessEqualDepth,
+    [constants_1.NeverDepth]: constants_1.AlwaysDepth,
+    [constants_1.LessDepth]: constants_1.GreaterDepth,
+    [constants_1.EqualDepth]: constants_1.NotEqualDepth,
+    [constants_1.LessEqualDepth]: constants_1.GreaterEqualDepth,
+    [constants_1.AlwaysDepth]: constants_1.NeverDepth,
+    [constants_1.GreaterDepth]: constants_1.LessDepth,
+    [constants_1.NotEqualDepth]: constants_1.EqualDepth,
+    [constants_1.GreaterEqualDepth]: constants_1.LessEqualDepth,
 };
 exports.ReversedDepthFuncs = ReversedDepthFuncs;
 function yieldToMain() {

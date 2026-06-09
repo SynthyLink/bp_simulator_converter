@@ -406,7 +406,7 @@ class Vector2 {
 	 * @param {Vector2} v - The vector.
 	 * @return {Vector2} A reference to this vector.
 	 */
-	min( v ) {
+	min(v: Vector2): Vector2{
 
 		this.x = Math.min( this.x, v.x );
 		this.y = Math.min( this.y, v.y );
@@ -422,7 +422,7 @@ class Vector2 {
 	 * @param {Vector2} v - The vector.
 	 * @return {Vector2} A reference to this vector.
 	 */
-	max( v ) {
+	max(v: Vector2): Vector2 {
 
 		this.x = Math.max( this.x, v.x );
 		this.y = Math.max( this.y, v.y );
@@ -566,7 +566,7 @@ class Vector2 {
 	 * @param {Vector2} v - The vector to compute the dot product with.
 	 * @return {number} The result of the dot product.
 	 */
-	dot( v ) {
+	dot(v: Vector2): number{
 
 		return this.x * v.x + this.y * v.y;
 
@@ -578,7 +578,7 @@ class Vector2 {
 	 * @param {Vector2} v - The vector to compute the cross product with.
 	 * @return {number} The result of the cross product.
 	 */
-	cross( v ) {
+	cross(v: Vector2): number {
 
 		return this.x * v.y - this.y * v.x;
 
@@ -650,7 +650,7 @@ class Vector2 {
 	 * @param {Vector2} v - The vector to compute the angle with.
 	 * @return {number} The angle in radians.
 	 */
-	angleTo( v ) {
+	angleTo(v: Vector2): number {
 
 		const denominator = Math.sqrt( this.lengthSq() * v.lengthSq() );
 
@@ -670,7 +670,7 @@ class Vector2 {
 	 * @param {Vector2} v - The vector to compute the distance to.
 	 * @return {number} The distance.
 	 */
-	distanceTo( v ) {
+	distanceTo(v: Vector2): number {
 
 		return Math.sqrt( this.distanceToSquared( v ) );
 
@@ -684,7 +684,7 @@ class Vector2 {
 	 * @param {Vector2} v - The vector to compute the squared distance to.
 	 * @return {number} The squared distance.
 	 */
-	distanceToSquared( v ) {
+	distanceToSquared(vv: Vector2): number {
 
 		const dx = this.x - v.x, dy = this.y - v.y;
 		return dx * dx + dy * dy;
@@ -697,7 +697,7 @@ class Vector2 {
 	 * @param {Vector2} v - The vector to compute the Manhattan distance to.
 	 * @return {number} The Manhattan distance.
 	 */
-	manhattanDistanceTo( v ) {
+	manhattanDistanceTo(v: Vector2): number {
 
 		return Math.abs( this.x - v.x ) + Math.abs( this.y - v.y );
 
@@ -759,7 +759,7 @@ class Vector2 {
 	 * @param {Vector2} v - The vector to test for equality.
 	 * @return {boolean} Whether this vector is equal with the given one.
 	 */
-	equals( v ) {
+	equals(v: Vector2): boolean {
 
 		return ( ( v.x === this.x ) && ( v.y === this.y ) );
 
