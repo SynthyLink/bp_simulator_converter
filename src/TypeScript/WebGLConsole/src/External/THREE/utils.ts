@@ -4,6 +4,9 @@ import {
 } from './constants';
 import { Matrix4 } from './math/Matrix4';
 
+let _setConsoleFunction: () => void
+
+
 /**
  * Finds the minimum value in an array.
  *
@@ -116,7 +119,7 @@ function getTypedArray(type: string, buffer) {
  * @param {any} array - The object to check.
  * @return {boolean} Whether the given object is a typed array.
  */
-function isTypedArray(array) : boolean {
+function isTypedArray(array : any) : boolean {
 
 	return ArrayBuffer.isView( array ) && ! ( array instanceof DataView );
 
@@ -181,7 +184,7 @@ const _cache = {};
  * @param {Function} fn - The function to handle console output. Should accept
  *                        (type, message, ...params) where type is 'log', 'warn', or 'error'.
  */
-function setConsoleFunction( fn ) {
+function setConsoleFunction(fn : () => void) {
 
 	_setConsoleFunction = fn;
 
@@ -474,19 +477,20 @@ const ReversedDepthFuncs = {
 
 
 function yieldToMain(): Promise<void> {
-	let w = this as unknown as Window;
+	let w = self as unknown as Window;
 	if (w !== undefined) {
 
 		if ('scheduler' in w) {
 
 			if (typeof w.scheduler !== undefined) {
 
-				let s = w.scheduler as undefined as object;
+				let s = w.scheduler;
 				if (s !== undefined) {
 					if ('yield' in s) {
-						let y = s.yield as undefined as () => void
-						if (typeof y !== undefined) {
-							y()
+						let y = s.yield
+						let f = y as () => void
+						if (typeof f !== undefined) {
+							f()
 						}
 					}
 				}

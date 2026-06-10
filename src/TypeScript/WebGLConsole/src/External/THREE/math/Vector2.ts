@@ -441,7 +441,7 @@ class Vector2 {
 	 * @param {Vector2} max - The maximum x and y values in the desired range.
 	 * @return {Vector2} A reference to this vector.
 	 */
-	clamp( min, max ) {
+	clamp(min: Vector2, max: Vector2): Vector2{
 
 		// assumes min < max, componentwise
 
@@ -462,7 +462,7 @@ class Vector2 {
 	 * @param {number} maxVal - The maximum value the components will be clamped to.
 	 * @return {Vector2} A reference to this vector.
 	 */
-	clampScalar( minVal, maxVal ) {
+	clampScalar(minVal: number, maxVal: number): Vector2 {
 
 		this.x = clamp( this.x, minVal, maxVal );
 		this.y = clamp( this.y, minVal, maxVal );
@@ -481,7 +481,7 @@ class Vector2 {
 	 * @param {number} max - The maximum value the vector length will be clamped to.
 	 * @return {Vector2} A reference to this vector.
 	 */
-	clampLength( min, max ) {
+	clampLength(min: number, max: number): Vector2 {
 
 		const length = this.length();
 
@@ -684,7 +684,7 @@ class Vector2 {
 	 * @param {Vector2} v - The vector to compute the squared distance to.
 	 * @return {number} The squared distance.
 	 */
-	distanceToSquared(vv: Vector2): number {
+	distanceToSquared(v: Vector2): number {
 
 		const dx = this.x - v.x, dy = this.y - v.y;
 		return dx * dx + dy * dy;
@@ -710,7 +710,7 @@ class Vector2 {
 	 * @param {number} length - The new length of this vector.
 	 * @return {Vector2} A reference to this vector.
 	 */
-	setLength( length ) {
+	setLength(length: number) {
 
 		return this.normalize().multiplyScalar( length );
 

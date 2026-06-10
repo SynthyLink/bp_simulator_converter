@@ -79,9 +79,9 @@ class Matrix4 {
 	 * @param {number} [n43] - 4-3 matrix element.
 	 * @param {number} [n44] - 4-4 matrix element.
 	 */
-	constructor(n11?: number, n12?: number, n13?: number, n14?: number,
-		n21?: number, n22?: number, n23?: number, n24?: number, n31?: number,
-		n32?: number, n33?: number, n34?: number, n41?: number, n42?: number, n43?: number, n44?: number) {
+	constructor(n11: number, n12: number, n13: number, n14: number,
+		n21: number, n22: number, n23: number, n24: number, n31: number,
+		n32: number, n33: number, n34: number, n41: number, n42: number, n43: number, n44: number) {
 
 		/**
 		 * A column-major list of matrix values.
@@ -161,7 +161,7 @@ class Matrix4 {
 	 */
 	clone() {
 
-		return new Matrix4().fromArray( this.elements );
+		return new Matrix4(1, 0, 0, 0,  0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1).fromArray( this.elements );
 
 	}
 
@@ -1097,7 +1097,7 @@ class Matrix4 {
 	 */
 	makePerspective(left: number, right: number, top: number,
 		bottom: number, near: number, far: number,
-		coordinateSystem: WebGLCoordinateSystem | WebGPUCoordinateSystem = WebGLCoordinateSystem, reversedDepth = false) {
+		coordinateSystem: number = WebGLCoordinateSystem, reversedDepth = false) {
 
 		const te = this.elements;
 
@@ -1158,7 +1158,7 @@ class Matrix4 {
 	 * @return {Matrix4} A reference to this matrix.
 	 */
 	makeOrthographic(left: number, right: number,
-		top: number, bottom: number, near: null, far: number, coordinateSystem = WebGLCoordinateSystem, reversedDepth = false) {
+		top: number, bottom: number, near: number, far: number, coordinateSystem = WebGLCoordinateSystem, reversedDepth = false) {
 
 		const te = this.elements;
 
@@ -1283,7 +1283,7 @@ class Matrix4 {
 }
 
 const _v1 = /*@__PURE__*/ new Vector3();
-const _m1 = /*@__PURE__*/ new Matrix4();
+const _m1 = /*@__PURE__*/ new Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 const _zero = /*@__PURE__*/ new Vector3( 0, 0, 0 );
 const _one = /*@__PURE__*/ new Vector3( 1, 1, 1 );
 const _x = /*@__PURE__*/ new Vector3();
