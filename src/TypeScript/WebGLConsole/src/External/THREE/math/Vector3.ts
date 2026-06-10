@@ -490,7 +490,7 @@ class Vector3 {
 	 * @param {Camera} camera - The camera.
 	 * @return {Vector3} A reference to this vector.
 	 */
-	project( camera ) {
+	project(camera: Camera): Vector3 {
 
 		return this.applyMatrix4( camera.matrixWorldInverse ).applyMatrix4( camera.projectionMatrix );
 
@@ -1100,7 +1100,7 @@ class Vector3 {
 	 * @param {number} index - The column index.
 	 * @return {Vector3} A reference to this vector.
 	 */
-	setFromMatrix3Column( m, index ) {
+	setFromMatrix3Column(m: Matrix3, index: number): Vector3{
 
 		return this.fromArray( m.elements, index * 3 );
 
@@ -1194,7 +1194,7 @@ class Vector3 {
 	 * @param {number} index - The index into the attribute.
 	 * @return {Vector3} A reference to this vector.
 	 */
-	fromBufferAttribute( attribute, index ) {
+	fromBufferAttribute(attribute: BufferAttribute, index: number): Vector3 {
 
 		this.x = attribute.getX( index );
 		this.y = attribute.getY( index );

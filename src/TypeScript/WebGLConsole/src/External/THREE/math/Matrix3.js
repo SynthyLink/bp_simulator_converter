@@ -450,7 +450,8 @@ class Matrix3 {
      * @return {Matrix3} A clone of this instance.
      */
     clone() {
-        return new Matrix3(this.elements);
+        let x = this.elements;
+        return new Matrix3(x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8]);
     }
 }
 exports.Matrix3 = Matrix3;

@@ -1,8 +1,8 @@
-import { WebGLCoordinateSystem, WebGPUCoordinateSystem } from '../constants.js';
-import type { Euler } from './Euler.js';
-import type { Matrix3 } from './Matrix3.js';
-import type { Quaternion } from './Quaternion.js';
-import { Vector3 } from './Vector3.js';
+import { WebGLCoordinateSystem, WebGPUCoordinateSystem } from '../constants'
+import type { Euler } from './Euler'
+import type { Matrix3 } from './Matrix3'
+import type { Quaternion } from './Quaternion'
+import { Vector3 } from './Vector3'
 
 /**
  * Represents a 4x4 matrix.

@@ -5,7 +5,7 @@ const Quaternion_1 = require("./Quaternion");
 const Matrix4_1 = require("./Matrix4");
 const MathUtils_1 = require("./MathUtils");
 const utils_1 = require("../utils");
-const _matrix = /*@__PURE__*/ new Matrix4_1.Matrix4();
+const _matrix = /*@__PURE__*/ new Matrix4_1.Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 const _quaternion = /*@__PURE__*/ new Quaternion_1.Quaternion();
 /**
  * A class representing Euler angles.

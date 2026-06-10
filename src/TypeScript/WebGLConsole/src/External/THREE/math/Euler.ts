@@ -4,7 +4,7 @@ import { clamp } from './MathUtils';
 import { warn } from '../utils';
 import { Vector3 } from './Vector3';
 
-const _matrix: Matrix4 = /*@__PURE__*/ new Matrix4();
+const _matrix: Matrix4 = /*@__PURE__*/ new Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 const _quaternion: Quaternion = /*@__PURE__*/ new Quaternion();
 
 

@@ -19,6 +19,7 @@ exports.toNormalizedProjectionMatrix = toNormalizedProjectionMatrix;
 exports.toReversedProjectionMatrix = toReversedProjectionMatrix;
 exports.isTypedArray = isTypedArray;
 const constants_1 = require("./constants");
+let _setConsoleFunction;
 /**
  * Finds the minimum value in an array.
  *
@@ -383,7 +384,7 @@ const ReversedDepthFuncs = {
 };
 exports.ReversedDepthFuncs = ReversedDepthFuncs;
 function yieldToMain() {
-    let w = this;
+    let w = self;
     if (w !== undefined) {
         if ('scheduler' in w) {
             if (typeof w.scheduler !== undefined) {
@@ -391,8 +392,9 @@ function yieldToMain() {
                 if (s !== undefined) {
                     if ('yield' in s) {
                         let y = s.yield;
-                        if (typeof y !== undefined) {
-                            y();
+                        let f = y;
+                        if (typeof f !== undefined) {
+                            f();
                         }
                     }
                 }

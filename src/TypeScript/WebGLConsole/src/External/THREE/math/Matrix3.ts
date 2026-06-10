@@ -1,3 +1,4 @@
+import { Matrix4 } from "./Matrix4";
 import type { Vector3 } from "./Vector3";
 
 /**
@@ -164,7 +165,7 @@ class Matrix3 {
 	 * @param {Matrix4} m - The 4x4 matrix.
 	 * @return {Matrix3} A reference to this matrix.
 	 */
-	setFromMatrix4( m ) {
+	setFromMatrix4(m: Matrix4): Matrix3{
 
 		const me = m.elements;
 
@@ -186,7 +187,8 @@ class Matrix3 {
 	 * @param {Matrix3} m - The matrix to multiply with.
 	 * @return {Matrix3} A reference to this matrix.
 	 */
-	multiply( m ) {
+	multiply(m: Matrix3): Matrix3
+	{
 
 		return this.multiplyMatrices( this, m );
 
@@ -198,7 +200,7 @@ class Matrix3 {
 	 * @param {Matrix3} m - The matrix to multiply with.
 	 * @return {Matrix3} A reference to this matrix.
 	 */
-	premultiply( m ) {
+	premultiply(m: Matrix3): Matrix3 {
 
 		return this.multiplyMatrices( m, this );
 
@@ -343,7 +345,7 @@ class Matrix3 {
 	 * @param {Matrix4} matrix4 - The 4x4 matrix.
 	 * @return {Matrix3} A reference to this matrix.
 	 */
-	getNormalMatrix( matrix4 ) {
+	getNormalMatrix(matrix4: Matrix4): Matrix3{
 
 		return this.setFromMatrix4( matrix4 ).invert().transpose();
 
@@ -601,8 +603,8 @@ class Matrix3 {
 	 * @return {Matrix3} A clone of this instance.
 	 */
 	clone() {
-
-		return new Matrix3(this.elements);
+		let x = this.elements
+		return new Matrix3(x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8]);
 
 	}
 

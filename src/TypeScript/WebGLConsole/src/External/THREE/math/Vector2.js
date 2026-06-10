@@ -515,7 +515,7 @@ class Vector2 {
      * @param {Vector2} v - The vector to compute the squared distance to.
      * @return {number} The squared distance.
      */
-    distanceToSquared(vv) {
+    distanceToSquared(v) {
         const dx = this.x - v.x, dy = this.y - v.y;
         return dx * dx + dy * dy;
     }

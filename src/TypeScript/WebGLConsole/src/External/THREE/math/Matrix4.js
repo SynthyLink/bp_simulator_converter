@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Matrix4 = void 0;
-const constants_js_1 = require("../constants.js");
-const Vector3_js_1 = require("./Vector3.js");
+const constants_1 = require("../constants");
+const Vector3_1 = require("./Vector3");
 /**
  * Represents a 4x4 matrix.
  *
@@ -137,7 +137,7 @@ class Matrix4 {
      * @return {Matrix4} A clone of this instance.
      */
     clone() {
-        return new Matrix4().fromArray(this.elements);
+        return new Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1).fromArray(this.elements);
     }
     /**
      * Copies the values of the given matrix to this instance.
@@ -823,7 +823,7 @@ class Matrix4 {
      * @param {boolean} [reversedDepth=false] - Whether to use a reversed depth.
      * @return {Matrix4} A reference to this matrix.
      */
-    makePerspective(left, right, top, bottom, near, far, coordinateSystem = constants_js_1.WebGLCoordinateSystem, reversedDepth = false) {
+    makePerspective(left, right, top, bottom, near, far, coordinateSystem = constants_1.WebGLCoordinateSystem, reversedDepth = false) {
         const te = this.elements;
         const x = 2 * near / (right - left);
         const y = 2 * near / (top - bottom);
@@ -835,11 +835,11 @@ class Matrix4 {
             d = (far * near) / (far - near);
         }
         else {
-            if (coordinateSystem === constants_js_1.WebGLCoordinateSystem) {
+            if (coordinateSystem === constants_1.WebGLCoordinateSystem) {
                 c = -(far + near) / (far - near);
                 d = (-2 * far * near) / (far - near);
             }
-            else if (coordinateSystem === constants_js_1.WebGPUCoordinateSystem) {
+            else if (coordinateSystem === constants_1.WebGPUCoordinateSystem) {
                 c = -far / (far - near);
                 d = (-far * near) / (far - near);
             }
@@ -879,7 +879,7 @@ class Matrix4 {
      * @param {boolean} [reversedDepth=false] - Whether to use a reversed depth.
      * @return {Matrix4} A reference to this matrix.
      */
-    makeOrthographic(left, right, top, bottom, near, far, coordinateSystem = constants_js_1.WebGLCoordinateSystem, reversedDepth = false) {
+    makeOrthographic(left, right, top, bottom, near, far, coordinateSystem = constants_1.WebGLCoordinateSystem, reversedDepth = false) {
         const te = this.elements;
         const x = 2 / (right - left);
         const y = 2 / (top - bottom);
@@ -891,11 +891,11 @@ class Matrix4 {
             d = far / (far - near);
         }
         else {
-            if (coordinateSystem === constants_js_1.WebGLCoordinateSystem) {
+            if (coordinateSystem === constants_1.WebGLCoordinateSystem) {
                 c = -2 / (far - near);
                 d = -(far + near) / (far - near);
             }
-            else if (coordinateSystem === constants_js_1.WebGPUCoordinateSystem) {
+            else if (coordinateSystem === constants_1.WebGPUCoordinateSystem) {
                 c = -1 / (far - near);
                 d = -near / (far - near);
             }
@@ -980,11 +980,11 @@ class Matrix4 {
 }
 exports.Matrix4 = Matrix4;
 Matrix4.isMatrix4 = true;
-const _v1 = /*@__PURE__*/ new Vector3_js_1.Vector3();
-const _m1 = /*@__PURE__*/ new Matrix4();
-const _zero = /*@__PURE__*/ new Vector3_js_1.Vector3(0, 0, 0);
-const _one = /*@__PURE__*/ new Vector3_js_1.Vector3(1, 1, 1);
-const _x = /*@__PURE__*/ new Vector3_js_1.Vector3();
-const _y = /*@__PURE__*/ new Vector3_js_1.Vector3();
-const _z = /*@__PURE__*/ new Vector3_js_1.Vector3();
+const _v1 = /*@__PURE__*/ new Vector3_1.Vector3();
+const _m1 = /*@__PURE__*/ new Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+const _zero = /*@__PURE__*/ new Vector3_1.Vector3(0, 0, 0);
+const _one = /*@__PURE__*/ new Vector3_1.Vector3(1, 1, 1);
+const _x = /*@__PURE__*/ new Vector3_1.Vector3();
+const _y = /*@__PURE__*/ new Vector3_1.Vector3();
+const _z = /*@__PURE__*/ new Vector3_1.Vector3();
 //# sourceMappingURL=Matrix4.js.map
