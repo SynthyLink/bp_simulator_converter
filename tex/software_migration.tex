@@ -1,0 +1,125 @@
+%%%%%%%%%%%%%%%%%%%%%%% file template.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is a template file for the global option of the SVJour class
+%
+% Copy it to a new file with a new name and use it as the basis
+% for your article
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% First comes an example EPS file -- just ignore it and
+% proceed on the \documentclass line
+%
+% Choose either the first of the next two \documentclass lines for one
+% column journals or the second for two column journals.
+\documentclass[global,referee]{svjour}
+%\documentclass[global,twocolumn,referee]{svjour}
+% Remove option referee for final version
+%
+% Remove any % below to load the required packages
+%\usepackage{latexsym}
+\usepackage{graphics}
+% etc
+%
+% Insert the name of "your" journal with the command below:
+\journalname{myjournal}
+%
+\begin{document}
+%
+\title{Component principle of software migration}
+\subtitle{Backend - frontend conversion}
+\author{Petr Ivankov\inst{1} \and Max Shestov\inst{2}% etc
+% \thanks is optional - remove next line if not needed
+\thanks{\emph{Present address:} Insert the address here if needed}%
+}                     % Do not remove
+%
+\offprints{}          % Insert a name or remove this line
+%
+\institute{Insert the first address here \and the second here}
+%
+\date{Received: date / Revised version: date}
+% The correct dates will be entered by the editor
+%
+\maketitle
+%
+\begin{abstract}
+The software migration  allows to expand the applicability of existing developments. There are several methods of software migration. Here we consider the component principle of migration. A complicated software is decomposed into simple components. There are different platform implementation of the components. The migration procedure  is the replacement of one platform  components with another one. As main example we consider the backend - frontend conversion which enables export/import backend to frontend and vice versa. To prove the universality of this approach we show examples of its application to trading forecast and aerospace technology.
+\end{abstract}
+%
+\section{Introduction}
+\label{intro}
+	The software migration  allows to expand the applicability of existing developments. There are several methods of software migration.
+\section{Section title}
+\label{sec:1}
+and \cite{RefJ}
+\subsection{Subsection title}
+\label{sec:2}
+as required. Don't forget to give each section
+and subsection a unique label (see Sect.~\ref{sec:1}).
+%
+% For one-column wide figures use
+\begin{figure}
+% Use the relevant command for your figure-insertion program
+% to insert the figure file.
+% For example, with the option graphics use
+\resizebox{0.75\textwidth}{!}{%
+  \includegraphics{example.eps}
+}
+% If not, use
+%\vspace{5cm}       % Give the correct figure height in cm
+\caption{Please write your figure caption here}
+\label{fig:1}       % Give a unique label
+\end{figure}
+%
+% For two-column wide figures use
+\begin{figure*}
+% Use the relevant command for your figure-insertion program
+% to insert the figure file. See example above.
+% If not, use
+\vspace*{5cm}       % Give the correct figure height in cm
+\caption{Please write your figure caption here}
+\label{fig:2}       % Give a unique label
+\end{figure*}
+%
+% For tables use
+\begin{table}
+\caption{Please write your table caption here}
+\label{tab:1}       % Give a unique label
+% For LaTeX tables use
+\begin{tabular}{lll}
+\hline\noalign{\smallskip}
+first & second & third  \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+number & number & number \\
+number & number & number \\
+\noalign{\smallskip}\hline
+\end{tabular}
+% Or use
+\vspace*{5cm}  % with the correct table height
+\end{table}
+%
+% BibTeX users please use
+% \bibliographystyle{}
+% \bibliography{}
+%
+% Non-BibTeX users please use
+\begin{thebibliography}{}
+%
+% and use \bibitem to create references.
+%
+\bibitem{RefJ}
+% Format for Journal Reference
+	The software migration  allows to expand the applicability of existing developments. There are several methods of software migration.
+
+% Format for books
+\bibitem{RefB}
+	
+\bibitem{elliot:gps} Elliott D. Kaplan, Christopher J. Hegarty.  Understanding GPS/GNSS Principles and Applications. Artech House, Boston. 2017
+% etc
+\end{thebibliography}
+
+
+\end{document}
+
+% end of file template.tex
+
