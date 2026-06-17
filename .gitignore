@@ -1,4 +1,6 @@
 *.suo
+bin/
+obj/
 *.backup.json
 *.v9.bin
 *.props
