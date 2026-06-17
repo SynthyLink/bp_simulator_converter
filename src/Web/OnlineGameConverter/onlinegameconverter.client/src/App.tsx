@@ -82,6 +82,7 @@ function App() {
   };
 
   const [forecast, setForecast] = useState<OrbitalForecastItemNumber[]>();
+  const [clientError, setClientError] = useState<string>();
 
   useEffect(() => {
     populateData();
@@ -112,6 +113,7 @@ function App() {
   const btnClick = async () => {
     setClient(undefined);
     setForecast(undefined);
+    setClientError(undefined);
 
     if (begin === undefined) {
       return;
@@ -151,7 +153,15 @@ function App() {
     if (init === undefined) {
       return;
     }
-    await clientCalc(init);
+    try {
+      await clientCalc(init);
+    } catch (error) {
+      const message =
+        error && typeof error === "object" && "message" in error
+          ? String(error.message)
+          : "Client calculation failed";
+      setClientError(message);
+    }
     await serverCalc(init);
   };
 
@@ -275,7 +285,11 @@ function App() {
     </table>
   );
 
-  const contentsC = load(client, "Client calculation...");
+  const contentsC = clientError ? (
+    <em className="important-message">{clientError}</em>
+  ) : (
+    load(client, "Client calculation...")
+  );
   const contentsF = load(forecast, "Loading from the ASP.NET backend...");
 
   return (

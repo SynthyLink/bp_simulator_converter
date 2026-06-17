@@ -35,7 +35,7 @@ export class HttpCommunication {
         const response = await fetch(request, { signal });
 
         if (response.ok) {
-            const body = await response.json();
+            const body = await this.readBody<RESB>(response);
             return { ok: response.ok, body };
         } else {
             await this.logError(request, response);
@@ -58,13 +58,26 @@ export class HttpCommunication {
         const response = await fetch(request);
 
         if (response.ok) {
-            const body = await response.json();
+            const body = await this.readBody<RESB>(response);
             return { ok: response.ok, body };
         } else {
             await this.logError(request, response);
             return { ok: response.ok };
         }
     };
+
+    private async readBody<RESB>(response: Response): Promise<RESB | undefined> {
+        if (response.status === 204) {
+            return undefined;
+        }
+
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.indexOf('application/json') !== -1) {
+            return await response.json();
+        }
+
+        return await response.text() as RESB;
+    }
 
     async logError(request: Request, response: Response)
     {
