@@ -26,7 +26,7 @@ Instead of full source-to-source translation, it uses a **component-based approa
 
 ### Prerequisites
 
-- .NET 8 SDK
+- .NET 10 SDK
 - Node.js 18+ and npm
 
 ### React app with ASP.NET backend
