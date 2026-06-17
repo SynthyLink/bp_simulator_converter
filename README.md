@@ -29,15 +29,20 @@ Instead of full source-to-source translation, it uses a **component-based approa
 - .NET 8 SDK
 - Node.js 18+ and npm
 
-### Backend
+### React app with ASP.NET backend
+
+The React client proxies API calls like `/weatherforecast` to the ASP.NET Core
+server in `src/Web/ReactApp/ReactApp.Server`.
+
+Run the ASP.NET API server in one terminal:
 
 ```bash
-cd src/Web/WebApplicationRest
+cd src/Web/ReactApp/ReactApp.Server
 dotnet restore
-dotnet run
+dotnet run --launch-profile http
 ```
 
-### Frontend
+Then start Vite in a second terminal:
 
 ```bash
 cd src/Web/ReactApp/reactapp.client
@@ -45,7 +50,9 @@ npm install
 npm run dev
 ```
 
-Open the web app in your browser to test orbital forecasting with both server-side C# and client-side TypeScript execution.
+Open `https://localhost:58472/` in your browser. If the backend is not running
+on `http://localhost:5059`, Vite will report `ECONNREFUSED` for proxied API
+requests such as `/weatherforecast`.
 
 ## Main Case Study
 
