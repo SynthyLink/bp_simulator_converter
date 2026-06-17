@@ -1,5 +1,5 @@
-import { IAction } from "../Interfaces/IAction";
-import { IPosition } from "./Interfaces/IPosition";
+import type { IAction } from "../Interfaces/IAction";
+import type { IPosition } from "./Interfaces/IPosition";
 
 export class UpdatePositionAction implements IAction
 {

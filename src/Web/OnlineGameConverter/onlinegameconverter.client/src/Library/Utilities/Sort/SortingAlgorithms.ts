@@ -1,4 +1,4 @@
-import { IComparator } from "./Interfaces/IComparator";
+import type { IComparator } from "./Interfaces/IComparator";
 
 export class SortingAlgorithms {
 

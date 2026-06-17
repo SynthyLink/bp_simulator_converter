@@ -1,5 +1,5 @@
 import { Performer } from "../Performer";
-import { IComparator } from "../Utilities/Sort/Interfaces/IComparator";
+import type { IComparator } from "../Utilities/Sort/Interfaces/IComparator";
 import type { IDataConsumer } from "./Interfaces/IDataConsumer";
 import type { IMeasurements } from "./Interfaces/IMeasurements";
 

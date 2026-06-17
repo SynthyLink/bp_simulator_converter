@@ -1,7 +1,7 @@
-import { IRealtimeCollection } from "../Interfaces/IRealtimeCollection";
-import { IComponentCollection } from "../Interfaces/IComponentCollection";
-import { ITimerFactory } from "../Interfaces/ITimerFactory";
-import { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
+import type { IRealtimeCollection } from "../Interfaces/IRealtimeCollection";
+import type { IComponentCollection } from "../Interfaces/IComponentCollection";
+import type { ITimerFactory } from "../Interfaces/ITimerFactory";
+import type { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
 
 export class FictiveRealtimeCollection implements IRealtimeCollection {
     setComponentCollection(collection: IComponentCollection): void {

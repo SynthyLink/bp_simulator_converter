@@ -1,6 +1,6 @@
 import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
-import { ICategoryObject } from "../Interfaces/ICategoryObject";
-import { IDesktop } from "../Interfaces/IDesktop";
+import type { ICategoryObject } from "../Interfaces/ICategoryObject";
+import type { IDesktop } from "../Interfaces/IDesktop";
 
 export class FictiveCategoryObject implements ICategoryObject {
     getObject(): Object {

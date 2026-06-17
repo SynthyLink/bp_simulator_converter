@@ -1,5 +1,5 @@
-import { IActionAddRemove } from "../Interfaces/IActionAddRemove";
-import { IObjectCollection } from "../Interfaces/IObjectCollection";
+import type { IActionAddRemove } from "../Interfaces/IActionAddRemove";
+import type { IObjectCollection } from "../Interfaces/IObjectCollection";
 import { UpdateMeasurementsAction } from "../Measurements/UpdateMeasurementsAction";
 import { Performer } from "../Performer";
 import { ActionArray } from "../Utilities/Generic/ActionArray";
