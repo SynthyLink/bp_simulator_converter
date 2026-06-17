@@ -1,12 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-
-interface Forecast {
-    date: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
-}
+import { type Forecast, getWeatherForecasts } from './api/weatherForecast';
 
 function App() {
     const [forecasts, setForecasts] = useState<Forecast[]>();
@@ -47,11 +41,8 @@ function App() {
     );
 
     async function populateWeatherData() {
-        const response = await fetch('/weatherforecast');
-        if (response.ok) {
-            const data = await response.json();
-            setForecasts(data);
-        }
+        const data = await getWeatherForecasts();
+        setForecasts(data);
     }
 }
 
