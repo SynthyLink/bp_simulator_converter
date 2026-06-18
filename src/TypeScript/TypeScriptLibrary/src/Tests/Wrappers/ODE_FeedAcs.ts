@@ -14,6 +14,9 @@ export class ODE_FeedAct extends ODE_Feed implements IAction {
         super();
         this.dc = this.getCategoryObject("Chart") as unknown as IDataConsumer;
     }
+    isEmptyAction(): boolean {
+        return false
+    }
 
     action(): void {
         this.performer.print(this.dc);

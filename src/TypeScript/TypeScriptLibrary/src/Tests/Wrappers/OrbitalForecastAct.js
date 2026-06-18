@@ -7,10 +7,14 @@ const DataRuntimeConsumerODE_1 = require("../../Library/Runtime/DataRuntimeConsu
 const OrbitalForecast_1 = require("../../Algorithms/OrbitalForecastCalculation/OrbitalForecast");
 const Motion6DFactory_1 = require("../../Library/Motion6D/Motion6DFactory");
 class OrbitaForecasAct extends OrbitalForecast_1.OrbitalForecast {
+    dc;
     constructor() {
         super();
         var o = this.getCategoryObjects();
         this.dc = this.getCategoryObject("Chart");
+    }
+    isEmptyAction() {
+        return false;
     }
     action() {
         var k = this.dc.getAllMeasurements()[0];

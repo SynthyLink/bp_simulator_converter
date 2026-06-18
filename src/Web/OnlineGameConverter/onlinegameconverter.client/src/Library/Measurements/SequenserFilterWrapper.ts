@@ -1,14 +1,14 @@
-import { IDesktop } from "../Interfaces/IDesktop";
+import type { IDesktop } from "../Interfaces/IDesktop";
 import { AverageSequenceFilter } from "../Utilities/Filters/AverageSequenceFilter";
 import { DonchianSequenceFilter } from "../Utilities/Filters/DonchianSequenceFilter";
-import { ISequenceFilter } from "../Utilities/Filters/Interfaces/ISequenceFilter";
+import type { ISequenceFilter } from "../Utilities/Filters/Interfaces/ISequenceFilter";
 import { SequenceFilterType } from "../Utilities/Filters/Interfaces/SequenceFilterType";
 import { DataConsumerMeasurements } from "./DataConsumerMeasurements";
-import { IMeasurement } from "./Interfaces/IMeasurement";
+import type { IMeasurement } from "./Interfaces/IMeasurement";
 
 export class SequenceFilterWrapper extends DataConsumerMeasurements implements IMeasurement {
 
-    protected type: SequenceFilterType = SequenceFilterType.Avarage;
+    protected type: string = SequenceFilterType.Avarage;
 
     protected mimax: boolean = true;
 
@@ -32,9 +32,11 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
     }
 
     getMeasurement(i: number): IMeasurement {
+        this.ficI = i
         return this;
     }
 
+    ficI: number = 0
 
     getMeasurementName(): string {
         return "Output";

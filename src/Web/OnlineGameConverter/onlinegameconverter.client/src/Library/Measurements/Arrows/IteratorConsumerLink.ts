@@ -1,5 +1,5 @@
 import { CategoryArrow } from "../../CategoryArrow";
-import { ICategoryObject } from "../../Interfaces/ICategoryObject";
+import type { ICategoryObject } from "../../Interfaces/ICategoryObject";
 import type { IIterator } from "../Interfaces/IIterator";
 import type { IIteratorConsumer } from "../Interfaces/IIteratorConsumer";
 

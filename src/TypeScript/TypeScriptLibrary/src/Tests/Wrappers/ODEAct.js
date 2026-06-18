@@ -7,10 +7,14 @@ const Motion6DFactory_1 = require("../../Library/Motion6D/Motion6DFactory");
 const DataRuntimeConsumerODE_1 = require("../../Library/Runtime/DataRuntimeConsumerODE");
 const ODE_1 = require("../ODE");
 class ODEAct extends ODE_1.ODE {
+    dc;
     constructor() {
         super();
         var o = this.getCategoryObjects();
         this.dc = o[2];
+    }
+    isEmptyAction() {
+        return false;
     }
     action() {
         var k = this.dc.getAllMeasurements()[0];

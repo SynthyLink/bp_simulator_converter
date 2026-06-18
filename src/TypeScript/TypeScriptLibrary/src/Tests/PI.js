@@ -21,18 +21,6 @@ class PI_CategoryObject_1 extends RandomGenerator_1.RandomGenerator {
 class PI_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 2;
-        this.var_2 = 0;
-        this.var_3 = 0;
-        this.var_4 = 2;
-        this.var_5 = 0;
-        this.var_6 = 0;
-        this.var_7 = 1;
-        this.var_8 = false;
-        this.var_9 = 0;
-        this.var_10 = 0;
-        this.var_11 = 0;
         let map = new Map([
             ["f", 0.0040000000000000001]
         ]);
@@ -96,6 +84,21 @@ class PI_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaConsumer 
         this.measurement3 = all[1].getMeasurement(0);
         this.aliasName10 = new AliasName_1.AliasName(this.alias, "f");
     }
+    measurement0;
+    measurement3;
+    aliasName10;
+    var_0 = 0;
+    var_1 = 2;
+    var_2 = 0;
+    var_3 = 0;
+    var_4 = 2;
+    var_5 = 0;
+    var_6 = 0;
+    var_7 = 1;
+    var_8 = false;
+    var_9 = 0;
+    var_10 = 0;
+    var_11 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -135,15 +138,12 @@ class PI_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaConsumer 
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_11());
+        x0?.setIValue(this.get_11());
     }
 }
 class PI_CategoryObject_3 extends RecursiveFormula_1.RecursiveFormula {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = 0;
         let map = new Map([
             ["a", 0]
         ]);
@@ -176,6 +176,11 @@ class PI_CategoryObject_3 extends RecursiveFormula_1.RecursiveFormula {
         this.value0 = this.output[0];
         this.measurement1 = all[0].getMeasurement(0);
     }
+    measurement1;
+    value0;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -188,7 +193,7 @@ class PI_CategoryObject_3 extends RecursiveFormula_1.RecursiveFormula {
     save() {
         var v = this.variables;
         var x0 = v.get("a");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_2());
+        x0?.setIValue(this.get_2());
     }
 }
 class PI_CategoryObject_4 extends DataConsumer_1.DataConsumer {

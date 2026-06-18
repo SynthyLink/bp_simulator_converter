@@ -1,6 +1,6 @@
 import { CategoryArrow } from "../CategoryArrow";
 import { OwnError } from "../ErrorHandler/OwnError";
-import { IAddRemove } from "../Interfaces/IAddRemove";
+import type { IAddRemove } from "../Interfaces/IAddRemove";
 import type { ICategoryObject } from "../Interfaces/ICategoryObject";
 import type { IDesktop } from "../Interfaces/IDesktop";
 
@@ -24,7 +24,7 @@ export class BelongsToCollection extends CategoryArrow
 
     setTarget(target: ICategoryObject): void {
         this.target = target;
-        this.ar.addChildT(target)
+        this.ar.addRemoveObject(target, true)
     }
 
     protected ar !: IAddRemove

@@ -2,6 +2,20 @@ import { OwnError } from "../ErrorHandler/OwnError";
 
 export class RealMatrix {
 
+    public createDiagonal(n: number, diag: number) {
+        let m: number[][] = []
+        for (var i = 0; i < n; i++) {
+            let x: number[] = []
+            m.push(x)
+            for (var j = 0; j < n; j++) {
+                x.push(0)
+            }
+
+        }
+        for (var i = 0; i < n; i++)  m[i][i] = diag
+        return m
+    }
+
     public partialSquare(x: number[], startIndex: number, length: number): number {
         let a = 0;
         for (let i = 0; i < length; i++)

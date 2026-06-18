@@ -14,6 +14,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\ExternalObjects\Libraries\Web\Interfaces\" />
-    <Folder Include="src\Library\Abstract3DConverters\Meshes\" />
   </ItemGroup>
 </Project>

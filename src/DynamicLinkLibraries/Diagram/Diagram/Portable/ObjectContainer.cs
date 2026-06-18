@@ -180,7 +180,7 @@ namespace Diagram.UI.Portable
         /// Loads itself
         /// </summary>
         /// <returns>True in success</returns>
-        public virtual Task<bool> LoadAsync(CancellationToken token)
+        public virtual Task<bool> LoadAsync(CancellationToken ? token)
         {
             if (isLoaded)
             {
@@ -279,7 +279,6 @@ namespace Diagram.UI.Portable
 
 
         #endregion
-
 
         #region Public Members
 

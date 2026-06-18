@@ -28,10 +28,11 @@ import { Composition } from '../Composition';
 import { IFunc } from '../../Library/Interfaces/IFunc';
 import { Obj3DCreator } from '../../Library/Abstract3DConverters/MeshCreators/Obj3DCreator';
 import { UniversalFactory } from '../../Library/UniversalFactory';
-import { StreamReader } from '../../Library/IO/StreamReader';
-import { FileSystemFactory } from '../../Library/IO/FileSystemFactory';
 import { LineEndSplitter } from '../../Library/Utilities/String/LineEndSplitter';
 import type { IStringSplitter } from '../../Library/Utilities/String/Interfaces/IStringSplitter';
+import { IFactory } from '../../Library/Interfaces/IFactory';
+import { Motion6DFactory } from '../../Library/Motion6D/Motion6DFactory';
+import { StreamReader } from '../../FileSystem/IO/StreamReader';
 
 //import { Airplane } from '../../Airplane';
 
@@ -55,6 +56,8 @@ function finish(e : any) {
    */
 }
 export class Actor {
+
+    factory: IFactory = new Motion6DFactory()
     constructor()
     {
 
@@ -74,7 +77,7 @@ export class Actor {
             rl.close();
         });*/
     }
-
+/*
     public loadObj(filename: string): void {
         var fact = new UniversalFactory()
         var ff = new FileSystemFactory()
@@ -87,7 +90,7 @@ export class Actor {
     }
 
 
-
+    */
     public readTest(f: string): void {
         let reader = new StreamReader(f)
         let s = reader.readToEnd()

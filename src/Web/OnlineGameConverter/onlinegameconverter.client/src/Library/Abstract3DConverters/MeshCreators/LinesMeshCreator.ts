@@ -1,42 +1,82 @@
-import { IFactory } from "../../Interfaces/IFactory";
-import { Effect } from "../Effect";
-import { IMesh } from "../Intersaces/IMesh";
-import { IMeshCreator } from "../Intersaces/IMeshCreator";
+import type { IFactory } from "../../Interfaces/IFactory";
+import type { IFileFactory } from "../../IO/Interfaces/IFileFactory";
+import type { IIODirectoryFactory } from "../../IO/Interfaces/IIODirectoryFactory";
+import type { IPathFactory } from "../../IO/Interfaces/IPathFactory";
+import type { ITextReaderFactory } from "../../IO/Interfaces/ITextReaderFactory";
+import type { IStringSplitter } from "../../Utilities/String/Interfaces/IStringSplitter";
+import type { IImageDetectorFactory } from "../Interfaces/IImageDetectorFactory";
+import { AbstractMeshCreator } from "./AbstractMeshCreator";
 
-export abstract class LinesMeshCreator implements IMeshCreator {
+export abstract class LinesMeshCreator extends AbstractMeshCreator
+{
+    constructor(url: string, name: string, directory: string, obj: any, factory: IFactory,
+        func: ITextReaderFactory | undefined) {
+        super(url, name, directory, obj, factory)
+        if (func == undefined) return
+        this.textReaderFactory = func
+        var r = func.getTextReader(obj, url)
+        if (r === undefined) return;
+        let tc = factory.getFactory<IStringSplitter>("IStringSplitter")
+        if (tc != undefined) {
+            this.textConverter = tc
+        }
+        if (func === undefined) {
+            let tf = factory.getFactory<ITextReaderFactory>("ITextReaderFactory")
+            if (tf != undefined) {
+                this.textReaderFactory = tf
+            }
+        }
+        let tfile = factory.getFactory<IFileFactory>("IFileFactory")
+        if (tfile != undefined) {
+            this.fileio = tfile.createFile(obj)
+        }
+        let tpath = factory.getFactory<IPathFactory>("IPathFactory")
+        if (tpath != undefined) {
+            this.path = tpath.createPath(obj)
+        }
+        if (directory.length == 0) {
+            if (this.path != undefined) {
+                this.directory = this.path.getDirectoryName(url)
+            }
+        }
+        let td = factory.getFactory<IIODirectoryFactory>("IIODirectoryFactory")
+        if (td != undefined) {
+            this.directoryio = td.createDirectoryFactory(obj)
+        }
+        let idt = factory.getFactory<IImageDetectorFactory>("IImageDetectorFactory")
+        if (idt != undefined)
+            this.imageDetector = idt.getImageDetector(obj)
 
-    constructor(url: string, sep: string, obj: any, factory: IFactory) {
-        this.url = url
-        this.sep = sep;
-        this.factory = factory
-        this.obj = obj;
+        this.globalString = r.readToEnd();
+        this.loadMeshCreator()
     }
 
-    getURL(): string {
-        return this.url;
+    loadMeshCreator(): void {
+        this.lines = this.textConverter.splitStrings(this.obj, this.globalString)
+        this.loadLines()
     }
 
-    load(obj: any): void {
-        let s = obj as string
-        let text = s.split(this.sep)
-        this.loadText(text)
+    protected loadStrings(url: string): string[] {
+        let s = url
+        if (this.directory != undefined) {
+            if (!s.startsWith(this.directory)) {
+                s = this.path.pathCombine(this.directory, s)
+            }
+        }
+        var r = this.textReaderFactory.getTextReader(this.obj, s)
+        if (r === undefined) return []
+        return r.getStrings()
     }
 
-    abstract loadText(text: string[]): void
+    protected abstract loadLines(): void
 
-    abstract getMeshes(): IMesh[];
+    getName(): string {
+        return this.name;
+    }
 
-    abstract getEffects(): Map<string, Effect>
 
+    lines: string[] = []
 
-    protected sep: string;
-
-    protected text: string[] = []
-
-    protected url: string = "";
-
-    protected factory: IFactory
-
-    protected obj : any
-
+    globalString: string = ""
+  
 }

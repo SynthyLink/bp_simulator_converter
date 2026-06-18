@@ -5,7 +5,7 @@ let a = new Actor()
 var mtl = "c:\\AUsers\\1MySoft\\CSharp\\src\\Web\\reactprojectgenerated\\static\\models\\pLANE\\master.mtl"
 var caravan = "c:\\AUsers\\1MySoft\\CSharp\\src\\Web\\reactprojectgenerated\\static\\models\\pLANE\\Cessna_208_Caravan.obj"
 
-a.loadObj(caravan)
+//a.loadObj(caravan)
 //a.readTest(mtl)
 //a.actAirplane()
 
@@ -17,7 +17,7 @@ a.loadObj(caravan)
 
 //a.actTime();
 
-//a.actOrbitCalculation(true);// 1770457504
+a.actOrbitCalculation(true);// 1770457504
 
 //a.actDensity();
 

@@ -41,7 +41,6 @@ const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_H
 export default defineConfig({
     plugins: [plugin()],
     resolve: {
-        extensions: ['.ts', '.tsx', '.mjs', '.js', '.mts', '.jsx', '.json'],
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
         }

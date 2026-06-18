@@ -1,4 +1,4 @@
-import { IVelocity } from "./Interfaces/IVelocity";
+import type { IVelocity } from "./Interfaces/IVelocity";
 import { ReferenceFrame } from "./ReferenceFrame";
 
 export class MovedFrame extends ReferenceFrame implements IVelocity {

@@ -4,7 +4,6 @@ exports.ActorWebNew = void 0;
 //import { toDateTime } from '../../Algorithms/OrbitalForecastCalculation/OrbitalData';
 const ComposionAct_1 = require("../Wrappers/ComposionAct");
 const CompositionEvent_1 = require("../Wrappers/CompositionEvent");
-const ScadaComposion_1 = require("../Wrappers/ScadaComposion");
 function finish(e) {
     console.log(e);
     /* rl.question('Is this example useful? [y/n] ', (answer) => {
@@ -41,9 +40,6 @@ class ActorWebNew {
     actCompositionAct() {
         var comp = new ComposionAct_1.CompositionAct();
         comp.test();
-    }
-    actCompositionScada(engine) {
-        new ScadaComposion_1.ScadaComposition(engine);
     }
     actCompositionEvent(engine) {
         var comp = new CompositionEvent_1.CompositionEvent(engine);

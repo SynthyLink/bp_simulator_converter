@@ -10,8 +10,6 @@ const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaCo
 class ConditionTest_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
         let map = new Map([]);
         this.performer.setAliasMap(map, this);
         this.addVariable(new Variable_1.Variable("Formula_1", 0, 0));
@@ -29,6 +27,8 @@ class ConditionTest_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormu
     init() {
         var all = this.getAllMeasurements();
     }
+    var_0 = 0;
+    var_1 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -38,7 +38,7 @@ class ConditionTest_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormu
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_1());
+        x0?.setIValue(this.get_1());
     }
     setFeedback() {
         let map = new Map([]);
@@ -47,9 +47,6 @@ class ConditionTest_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormu
 class ConditionTest_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = false;
         let map = new Map([
             ["a", 0.995]
         ]);
@@ -82,6 +79,11 @@ class ConditionTest_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormu
         this.measurement0 = all[0].getMeasurement(0);
         this.aliasName1 = new AliasName_1.AliasName(this.alias, "a");
     }
+    measurement0;
+    aliasName1;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = false;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -94,7 +96,7 @@ class ConditionTest_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormu
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_2());
+        x0?.setIValue(this.get_2());
     }
     setFeedback() {
         let map = new Map([]);

@@ -1,43 +1,73 @@
 import type { IComponentCollection } from "../Interfaces/IComponentCollection";
+import type { IFactory } from "../Interfaces/IFactory";
 import type { IPlayEngine } from "../Interfaces/IPlayEngine";
-import type { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
 import type { IRealtimeCollectionFactory } from "../Interfaces/IRealtimeCollectionFactory";
-import { EngineTimerProvider } from "../Event/EngineTimerProvider";
+import type { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
+import type { IActionAddRemove } from "../Interfaces/IActionAddRemove";
+import type { IAction } from "../Interfaces/IAction";
+import { EngineTimerProvider } from "../Event/Objects/EngineTimerProvider";
 import { TimerPlayEngineFactory } from "../Event/TimerPlayEngineFactory";
 import { ScadaDesktop } from "./ScadaDesktop";
-import { IFactory } from "../Interfaces/IFactory";
+import { ActionArray } from "../Utilities/Generic/ActionArray";
 
-export class ScadaDesktopEngine extends ScadaDesktop {
 
-    constructor(componentCollection: IComponentCollection, engine: IPlayEngine, factory: IFactory, chart: string) {
-        super(componentCollection)
-        console.log("UUUUUUUUUUUUUU")
-        this.engine = engine
+export class ScadaDesktopEngine extends ScadaDesktop
+{
+	constructor(componentCollection: IComponentCollection, engine:
+		IPlayEngine, factory: IFactory, chart: string) {
+        super(componentCollection);
+        this.engine = engine;
         this.chart = chart;
-        var f = factory.getFactory<IRealtimeCollectionFactory>("IRealtimeCollectionFactory")
+        var f = factory.getFactory<IRealtimeCollectionFactory>("IRealtimeCollectionFactory");
         if (f === undefined) {
             return;
         }
-        this.factory = f
+        this.factory = f;
         this.uFactory = factory;
-        this.createRuntime()
+        this.createRuntime();
+        engine.getEngineAction().addActionT(this)
     }
+
     public createRuntime(): void {
-        let co = this.componentCollection.getCategoryObject(this.chart)
-        let dc = co as unknown as IDataConsumer
-        console.log(dc)
+        let co = this.componentCollection.getCategoryObject(this.chart);
+        let dc = co as unknown as IDataConsumer;
         let eev = this.factory.createRealtimeFromDataConsumer(dc, this.uFactory);
-        eev.setTimeProvider(new EngineTimerProvider(this.engine))
-        eev.setTimerFactory(new TimerPlayEngineFactory(this.engine))
-        this.runtime = eev
- }
+        let tp = new EngineTimerProvider(this.engine)
+        eev.setTimeProvider(tp);
+        eev.setTimerFactory(new TimerPlayEngineFactory(this.engine));
+        this.runtime = eev;
+    }
 
-    engine !: IPlayEngine
+    addAction(action: IAction | undefined): void {
+        this.actionr.addAction(action);
+    }
+    removeAction(action: IAction | undefined): void {
+        this.actionr.removeAction(action);
+    }
+    clearActions(): void {
+        this.actionr.clearActions()
+    }
+    action(): void {
+        this.actionr.action();
+    }
+    isEmptyAction(): boolean {
+        return this.actionr.isEmptyAction()
+    }
 
-    chart: string = ""
+    setScadaEnabled(enabled: boolean): void {
+        super.setScadaEnabled(enabled)
+        this.engine.setEngineEnabled(enabled)
+    }
 
-    factory !: IRealtimeCollectionFactory;
 
-    uFactory !: IFactory
+    actionr: IActionAddRemove = new ActionArray
+
+    engine!: IPlayEngine;
+
+    chart: string = "";
+
+    factory!: IRealtimeCollectionFactory;
+
+    uFactory!: IFactory;
 
 }

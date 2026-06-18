@@ -1,4 +1,4 @@
-import { IArray } from "./Interfaces/IArray";
+import type { IArray } from "./Interfaces/IArray";
 import type { IQueue } from "./Interfaces/IQueue";
 
 export class FastQueue<T> implements IQueue<T>, IArray<T>{

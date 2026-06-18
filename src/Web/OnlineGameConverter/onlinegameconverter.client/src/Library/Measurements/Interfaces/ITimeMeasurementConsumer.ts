@@ -1,4 +1,4 @@
-import { ITimeMeasurementProvider } from "./ITimeMeasurementProvider";
+import type { ITimeMeasurementProvider } from "./ITimeMeasurementProvider";
 
 export interface ITimeMeasurementConsumer
 {

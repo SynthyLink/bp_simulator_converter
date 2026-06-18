@@ -1,7 +1,7 @@
-import { IActionAddRemove } from "./IActionAddRemove";
-import { IObject } from "./IObject";
-import { IRealtimeCollection } from "./IRealtimeCollection";
+import type { IActionAddRemove } from "./IActionAddRemove";
+import type { IObject } from "./IObject";
+import type { IRealtimeCollection } from "./IRealtimeCollection";
 
 export interface IExternalUpdate {
-    getExtenalUpdate(obj : IObject | undefined, realime: IRealtimeCollection): IActionAddRemove 
+    getExternalUpdate(obj: IObject | undefined, realime: IRealtimeCollection, action: IActionAddRemove): void 
 }

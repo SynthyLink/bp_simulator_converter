@@ -1,8 +1,8 @@
 import { CategoryArrow } from "../../CategoryArrow";
 import type { ICategoryObject } from "../../Interfaces/ICategoryObject";
 import type { IDesktop } from "../../Interfaces/IDesktop";
-import { INodeT } from "../../NamedTree/Interfaces/INodeT";
-import { IPosition } from "../Interfaces/IPosition";
+import type { INodeT } from "../../NamedTree/Interfaces/INodeT";
+import type { IPosition } from "../Interfaces/IPosition";
 import type { IReferenceFrame } from "../Interfaces/IReferenceFrame";
 
 
@@ -34,6 +34,7 @@ export class ReferenceFrameArrow extends CategoryArrow {
 
             p.addNodeT(this.positionNode);
         }
+        this.position.setParentFrame(f)
     }
 
 

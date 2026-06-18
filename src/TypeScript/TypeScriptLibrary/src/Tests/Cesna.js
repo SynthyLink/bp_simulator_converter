@@ -56,7 +56,6 @@ class Cesna_CategoryObject_4 extends RigidReferenceFrame_1.RigidReferenceFrame {
 class Cesna_CategoryObject_5 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
         let map = new Map([]);
         this.performer.setAliasMap(map, this);
         this.addVariableValue("Formula_1", 0, 0);
@@ -68,13 +67,14 @@ class Cesna_CategoryObject_5 extends VectorFormulaConsumer_1.VectorFormulaConsum
     init() {
         var all = this.getAllMeasurements();
     }
+    var_0 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_0());
+        x0?.setIValue(this.get_0());
     }
 }
 class Cesna_CategoryObject_6 extends DataConsumer_1.DataConsumer {

@@ -22,6 +22,32 @@ class Camera extends Object3D_1.Object3D {
      */
     constructor() {
         super();
+        this.type = 'Camera';
+        /**
+         * The inverse of the camera's world matrix.
+         *
+         * @type {Matrix4}
+         */
+        this.matrixWorldInverse = new Matrix4_1.Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        /**
+         * The camera's projection matrix.
+         *
+         * @type {Matrix4}
+         */
+        this.projectionMatrix = new Matrix4_1.Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        /**
+         * The inverse of the camera's projection matrix.
+         *
+         * @type {Matrix4}
+         */
+        this.projectionMatrixInverse = new Matrix4_1.Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        /**
+         * The coordinate system in which the camera is used.
+         *
+         * @type {(WebGLCoordinateSystem|WebGPUCoordinateSystem)}
+         */
+        this.coordinateSystem = constants_1.WebGLCoordinateSystem;
+        this._reversedDepth = false;
         /**
          * This flag can be used for type testing.
          *
@@ -29,7 +55,6 @@ class Camera extends Object3D_1.Object3D {
          * @readonly
          * @default true
          */
-        this.isCamera = true;
         this.type = 'Camera';
         /**
          * The inverse of the camera's world matrix.

@@ -1,20 +1,14 @@
-import { FictiveAngularVelocity } from "../../Fiction/FictiveAngularVelocity";
-import { FictiveVelocity } from "../../Fiction/FictiveVelocity";
-import { FictiveMeasurement } from "../../Fiction/FicvtiveMeasurement";
 import { ReferenceFrame } from "../ReferenceFrame";
 import { RigidReferenceFrame } from "./RigidReferenceFrame";
 import { NumberMeasurement } from "../../Measurements/NumberMeasurement";
 import type { IDesktop } from "../../Interfaces/IDesktop";
-import type { IFunc } from "../../Interfaces/IFunc";
 import type { IDataConsumer } from "../../Measurements/Interfaces/IDataConsumer";
 import type { IMeasurement } from "../../Measurements/Interfaces/IMeasurement";
 import type { IMeasurements } from "../../Measurements/Interfaces/IMeasurements";
 import type { IAngularVelocity } from "../../Vector3D/Interfaces/IAngularVelocity";
 import type { IVelocity } from "../Interfaces/IVelocity";
 import type { IDerivation } from "../../Measurements/Interfaces/IDerivation";
-import type { IOrientation } from "../Interfaces/IOrientation";
 import type { IAcceleration } from "../Interfaces/IAcceleration";
-import type { IAngularAcceleration } from "../Interfaces/IAngularAcceleration";
 
 
 export class ReferenceFrameData extends RigidReferenceFrame implements IDataConsumer, IMeasurements, IMeasurement {
@@ -43,8 +37,7 @@ export class ReferenceFrameData extends RigidReferenceFrame implements IDataCons
     /// <summary>
     /// Measurementrs
     /// </summary>
-    protected measurements: IMeasurement[] = [new FictiveMeasurement(), new FictiveMeasurement(), new FictiveMeasurement(),
-    new FictiveMeasurement(), new FictiveMeasurement(), new FictiveMeasurement(), new FictiveMeasurement()];
+    protected measurements: IMeasurement[] = [];
 
     /// <summary>
     /// Second derivations
@@ -63,10 +56,10 @@ export class ReferenceFrameData extends RigidReferenceFrame implements IDataCons
 
     protected om: number[] = [0, 0, 0]
 
-    angularVelocity: IAngularVelocity = new FictiveAngularVelocity();
+    angularVelocity !: IAngularVelocity 
 
-    velocityObject: IVelocity = new FictiveVelocity();
-
+    velocityObject !: IVelocity 
+/*
     private coordDel: IFunc<any>[] = [];
 
     private oriDel: IFunc<any>[] = [];
@@ -75,7 +68,7 @@ export class ReferenceFrameData extends RigidReferenceFrame implements IDataCons
 
     private angularDel: IFunc<any>[] = [];
 
-    private isReset: boolean = false;
+    private isReset: boolean = false;*/
 
 
     private names: string[] = [
@@ -120,7 +113,7 @@ export class ReferenceFrameData extends RigidReferenceFrame implements IDataCons
         this.measuremrntPerformrer.fullReset(this);
         var rel = this.relative;
         var x = rel.getPosition();
-        var parent = this.getParentFrame();
+       // var parent = this.getParentFrame();
         for (let i = 0; i < 3; i++) {
             var o = this.measurements[i].getMeasurementValue();
             if (o === undefined) {
@@ -154,15 +147,15 @@ export class ReferenceFrameData extends RigidReferenceFrame implements IDataCons
 
         }
         rel.setMatrix();
-        var matrix = rel.getMatrix()
+       // var matrix = rel.getMatrix()
         var anga = this.performer.convertObject<IAngularVelocity, ReferenceFrame>(rel, "IAngularVelocity");
         if (anga.length > 0) {
             let ang = anga[0];
             this.om[0] = ang.getAngularVelocityX()
             this.om[1] = ang.getAngularVelocityY()
             this.om[2] = ang.getAngularVelocityZ()
-            var ora = this.performer.convertObject<IOrientation, ReferenceFrame>(rel, "IOrientation");
-            var or = ora[0];
+         //   var ora = this.performer.convertObject<IOrientation, ReferenceFrame>(rel, "IOrientation");
+       //     var or = ora[0];
             for (let i = 0; i < 4; i++) {
                 let m = this.measurements[i + 3];
                 var dd = this.performer.convertObject<IDerivation, IMeasurement>(m, "IDerivation");
@@ -172,14 +165,14 @@ export class ReferenceFrameData extends RigidReferenceFrame implements IDataCons
                 var y = this.performer.convert<number, number>(val);
                 this.der[i] = y
             }
-            this.vp.calculateDynamics(qua, this.der, matrix, this.om, this.qd)
+            this.vp.calculateDynamics(qua, this.der, this.om, this.qd)
         }
         if (vela.length > 0) {
             let aa = this.performer.convertObject<IAcceleration, ReferenceFrame>(rel, "IAcceleration");
             if (aa.length > 0) {
                 var acc = aa[0];
-                var anc = this.performer.convertObject<IAngularAcceleration, ReferenceFrame>(rel, "IAngularAcceleration");
-                var angacc = anc[0].getAngularAcceleration();
+               // var anc = this.performer.convertObject<IAngularAcceleration, ReferenceFrame>(rel, "IAngularAcceleration");
+               // var angacc = anc[0].getAngularAcceleration();
                 var linacc = acc.getRelativeAcceleration();
                 for (let i = 0; i < 3; i++) {
                     let sd = this.secondDeriM[i].getMeasurementValue();
@@ -194,7 +187,7 @@ export class ReferenceFrameData extends RigidReferenceFrame implements IDataCons
                 this.om[1] = av.getAngularVelocityY()
                 this.om[2] = av.getAngularVelocityZ()
                 var rq = rel.getQuaternion();
-                this.vp.calculateDynamics(rq, this.der, matrix, this.om, this.qd);
+                this.vp.calculateDynamics(rq, this.der,  this.om, this.qd);
 
             }
         }
@@ -202,6 +195,7 @@ export class ReferenceFrameData extends RigidReferenceFrame implements IDataCons
     }  
 
     addMeasurement(measurement: IMeasurement): void {
+        console.log(measurement)
     }
 
 
@@ -326,7 +320,7 @@ class QuaternionMeasurement extends NumberMeasurement {
 }
 class Velocity extends NumberMeasurement {
     n: number = 0;
-    velocity: IVelocity = new FictiveVelocity();
+    velocity !: IVelocity 
     constructor(name: string, n: number, velocity: IVelocity) {
         super(name)
         this.n = n;
@@ -341,7 +335,7 @@ class Velocity extends NumberMeasurement {
 
 class AngularVelocity extends NumberMeasurement {
     n: number = 0;
-    velocity: IAngularVelocity = new FictiveAngularVelocity();
+    velocity!: IAngularVelocity
     constructor(name: string, n: number, velocity: IAngularVelocity) {
         super(name)
         this.n = n;

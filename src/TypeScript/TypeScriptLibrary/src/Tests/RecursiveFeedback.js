@@ -11,16 +11,6 @@ const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaCo
 class RecursiveFeedback_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = 0;
-        this.var_3 = 0;
-        this.var_4 = 0;
-        this.var_5 = 0;
-        this.var_6 = 0;
-        this.var_7 = 0;
-        this.var_8 = 0;
-        this.var_9 = 0;
         let map = new Map([
             ["c", 3],
             ["a", 7.1237279830727527],
@@ -96,6 +86,20 @@ class RecursiveFeedback_CategoryObject_0 extends VectorFormulaConsumer_1.VectorF
         this.aliasName3 = new AliasName_1.AliasName(this.alias, "c");
         this.aliasName8 = new AliasName_1.AliasName(this.alias, "f");
     }
+    aliasName0;
+    aliasName1;
+    aliasName3;
+    aliasName8;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = 0;
+    var_3 = 0;
+    var_4 = 0;
+    var_5 = 0;
+    var_6 = 0;
+    var_7 = 0;
+    var_8 = 0;
+    var_9 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -129,19 +133,14 @@ class RecursiveFeedback_CategoryObject_0 extends VectorFormulaConsumer_1.VectorF
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_7());
+        x0?.setIValue(this.get_7());
         var x1 = v.get("Formula_2");
-        x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_9());
+        x1?.setIValue(this.get_9());
     }
 }
 class RecursiveFeedback_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = 0;
-        this.var_3 = 0;
-        this.var_4 = 0;
         let map = new Map([
             ["k", 1]
         ]);
@@ -188,6 +187,14 @@ class RecursiveFeedback_CategoryObject_1 extends VectorFormulaConsumer_1.VectorF
         this.measurement3 = all[0].getMeasurement(1);
         this.aliasName0 = new AliasName_1.AliasName(this.alias, "k");
     }
+    measurement1;
+    measurement3;
+    aliasName0;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = 0;
+    var_3 = 0;
+    var_4 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -206,22 +213,14 @@ class RecursiveFeedback_CategoryObject_1 extends VectorFormulaConsumer_1.VectorF
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_2());
+        x0?.setIValue(this.get_2());
         var x1 = v.get("Formula_2");
-        x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_4());
+        x1?.setIValue(this.get_4());
     }
 }
 class RecursiveFeedback_CategoryObject_2 extends RecursiveFormula_1.RecursiveFormula {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = 0;
-        this.var_3 = 0;
-        this.var_4 = 0;
-        this.var_5 = 0;
-        this.var_6 = 0;
-        this.var_7 = 0;
         let map = new Map([
             ["k", 1],
             ["a", 0],
@@ -290,6 +289,19 @@ class RecursiveFeedback_CategoryObject_2 extends RecursiveFormula_1.RecursiveFor
         this.measurement5 = all[0].getMeasurement(1);
         this.aliasName3 = new AliasName_1.AliasName(this.alias, "k");
     }
+    measurement1;
+    measurement5;
+    value0;
+    aliasName3;
+    value4;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = 0;
+    var_3 = 0;
+    var_4 = 0;
+    var_5 = 0;
+    var_6 = 0;
+    var_7 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -317,9 +329,9 @@ class RecursiveFeedback_CategoryObject_2 extends RecursiveFormula_1.RecursiveFor
     save() {
         var v = this.variables;
         var x0 = v.get("a");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_2());
+        x0?.setIValue(this.get_2());
         var x1 = v.get("b");
-        x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_7());
+        x1?.setIValue(this.get_7());
     }
     setFeedback() {
         let map = new Map([

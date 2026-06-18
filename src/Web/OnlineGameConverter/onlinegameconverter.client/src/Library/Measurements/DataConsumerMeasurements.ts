@@ -3,10 +3,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { IAlias } from "../Interfaces/IAlias";
 import type { IDesktop } from "../Interfaces/IDesktop";
-import { Performer } from "../Performer";
-import { DataConsumer } from "./DataConsumer";
 import type { IMeasurement } from "./Interfaces/IMeasurement";
 import type { IMeasurements } from "./Interfaces/IMeasurements";
+import { Performer } from "../Performer";
+import { DataConsumer } from "./DataConsumer";
 
 export class DataConsumerMeasurements extends DataConsumer
     implements IMeasurements, IAlias
@@ -36,7 +36,7 @@ export class DataConsumerMeasurements extends DataConsumer
 
     protected performer: Performer = new Performer();
 
-    protected variable: any;
+    protected dataVariable: any;
 
     protected alias !: IAlias;
 
@@ -86,6 +86,8 @@ export class DataConsumerMeasurements extends DataConsumer
 
     setExternalAliases(map: Map<string, string>): void
     {
-
+        this.fmap = map
     }
+
+    protected fmap: Map<string, string> = new Map()
 }

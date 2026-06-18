@@ -9,11 +9,16 @@ import type { INormalizable } from "../../Interfaces/INormalizable";
 import type { ITimeMeasurementProvider } from "../../Interfaces/ITimeMeasurementProvider";
 import type { IDifferentialEquationProcessor } from "../Interfaces/IDifferentialEquationProcessor ";
 import type { IDifferentialEquationSolver } from "../Interfaces/IDifferentialEquationSolver";
-import type { IObject } from "../../../Interfaces/IObject";
 
 
-export class DifferentialEquationProcessor implements IDifferentialEquationProcessor, IObject
+export class DifferentialEquationProcessor implements IDifferentialEquationProcessor
 {
+    actionT2(t1: number, t2: number): void {
+        this.stepDifferentialEquations(t1, t2)
+    }
+    isEmptyActionT2(): boolean {
+        return false
+    }
      
     getName(): string {
         return this.name;
@@ -25,7 +30,7 @@ export class DifferentialEquationProcessor implements IDifferentialEquationProce
     }
 
     imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
 
   
@@ -45,9 +50,13 @@ export class DifferentialEquationProcessor implements IDifferentialEquationProce
 
     stepDifferentialEquations(start: number, finish: number): void
     {
-        throw new OwnNotImplemented();
+        this.fstart = start
+        this.ffinish = finish
+        throw new OwnNotImplemented("DifferentialEquationProcessor");
     }
 
+    fstart: number = 0
+    ffinish: number = 0
     updateDimension(): void
     {
         this.dimension = 0;
@@ -77,7 +86,7 @@ export class DifferentialEquationProcessor implements IDifferentialEquationProce
 
     newDifferentialEquations(): IDifferentialEquationProcessor
     {
-        throw new OwnNotImplemented();
+        throw new OwnNotImplemented("DifferentialEquationProcessor");
     }
 
     getDifferentialEquationsDimention(): number

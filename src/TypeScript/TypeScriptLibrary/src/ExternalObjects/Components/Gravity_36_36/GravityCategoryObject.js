@@ -9,17 +9,6 @@ const Gravity_1 = require("./Gravity.");
 class GravityCategoryObject extends Gravity_1.Gravity {
     constructor(desktop, name) {
         super();
-        this.performer = new Performer_1.Performer();
-        this.obj = new Object();
-        this.name = "";
-        this.types = ["IObject", "ICategoryObject", "IObjectTransformer", "GravityCategoryObject"];
-        this.typeName = "GravityCategoryObject";
-        this.a = 0;
-        this.inp = ["x", "y", "z"];
-        this.ooutp = ["Gx", "Gy", "Gz"];
-        this.fx = new Array(1);
-        this.fy = new Array(1);
-        this.fz = new Array(1);
         this.desktop = desktop;
         this.name = name;
         desktop.addCategoryObject(this);
@@ -72,6 +61,18 @@ class GravityCategoryObject extends Gravity_1.Gravity {
     convert(x) {
         return this.performer.convertFromAny(x);
     }
+    performer = new Performer_1.Performer();
+    obj = new Object();
+    name = "";
+    desktop;
+    types = ["IObject", "ICategoryObject", "IObjectTransformer", "GravityCategoryObject"];
+    typeName = "GravityCategoryObject";
+    a = 0;
+    inp = ["x", "y", "z"];
+    ooutp = ["Gx", "Gy", "Gz"];
+    fx = new Array(1);
+    fy = new Array(1);
+    fz = new Array(1);
 }
 exports.GravityCategoryObject = GravityCategoryObject;
 //# sourceMappingURL=GravityCategoryObject.js.map

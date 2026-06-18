@@ -22,6 +22,11 @@ export class ODE_FeedbackAct extends ODE_Feedback
         console.log(a, b);
     }
 
+    isEmptyAction(): boolean {
+        return false
+    }
+
+
     func(): boolean {
         return false;
     }

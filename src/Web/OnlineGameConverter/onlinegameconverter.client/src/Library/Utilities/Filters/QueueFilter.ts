@@ -2,7 +2,7 @@ import { Performer } from "../../Performer";
 import { FastQueue } from "../Collections/FastQueue";
 import type { IQueue } from "../Collections/Interfaces/IQueue";
 import type { IArray } from "../Collections/Interfaces/IArray";
-import { ISequenceFilter } from "./Interfaces/ISequenceFilter";
+import type { ISequenceFilter } from "./Interfaces/ISequenceFilter";
 
 
 

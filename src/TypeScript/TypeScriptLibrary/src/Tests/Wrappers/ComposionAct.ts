@@ -1,12 +1,16 @@
 import type { IAction } from "../../Library/Interfaces/IAction";
 import type { IDataRuntime } from "../../Library/Interfaces/IDataRuntime";
+import { IFactory } from "../../Library/Interfaces/IFactory";
 import type { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
 import { PerformerMeasuremets } from "../../Library/Measurements/PerformerMeasuremets";
+import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
 import { DataRuntimeConsumer } from "../../Library/Runtime/DataRuntimeConsumer";
 import { Composition } from "../Composition";
 
 export class CompositionAct extends Composition implements IAction {
     dc!: IDataConsumer;
+    factory: IFactory = new Motion6DFactory
+
     constructor() {
         super();
         var co = this.getCategoryObject("Chart")
@@ -18,12 +22,17 @@ export class CompositionAct extends Composition implements IAction {
         var a = k[0].getMeasurement(0).getMeasurementValue();
         console.log(a);
     }
+
+    isEmptyAction(): boolean {
+        return false
+    }
+
     func(): boolean {
         return false;
     }
 
     public test(): void {
-        var runtime: IDataRuntime = new DataRuntimeConsumer(this.dc);
+        var runtime: IDataRuntime = new DataRuntimeConsumer(this.dc, this.factory);
         var p = new PerformerMeasuremets();
         p.performFixedStepCalculation(runtime, 0, 1, 1000, this, this);
     }

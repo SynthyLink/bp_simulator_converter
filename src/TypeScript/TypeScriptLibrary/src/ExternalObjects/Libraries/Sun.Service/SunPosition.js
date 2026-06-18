@@ -2,10 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SunPosition = void 0;
 class SunPosition {
-    constructor() {
-        this.dEarthMeanRadius = 6371.01; // In km
-        this.dAstronomicalUnit = 149597890; // In km
-    }
     convertToJulian(date) {
         let Day = date.getDate();
         let Month = date.getMonth() + 1;
@@ -94,6 +90,8 @@ class SunPosition {
             + dParallax;
         udtSunCoordinates.setZenithAngle(za);
     }
+    dEarthMeanRadius = 6371.01; // In km
+    dAstronomicalUnit = 149597890; // In km
 }
 exports.SunPosition = SunPosition;
 //# sourceMappingURL=SunPosition.js.map

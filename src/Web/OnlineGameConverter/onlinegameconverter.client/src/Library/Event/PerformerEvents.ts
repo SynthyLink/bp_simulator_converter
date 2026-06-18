@@ -34,16 +34,20 @@ export class PerformerEvents implements IActionT<IEventStart> {
     }
 
     public setComponentCollectionTimer(collection: IComponentCollection, factory: ITimerFactory) {
-        if (factory === null) return
+        if (factory === undefined) return
         this.timerAction.set(factory)
         this.performer.forEach<ITimerConsumer>(collection, this.timerAction, "ITimerConsumer")
     }
+
+    isEmptyActionT(): boolean { return false }
+
 }
 
 class TimerAction implements IActionT<ITimerConsumer> {
     actionT(t: ITimerConsumer): void {
         t.setTimer(this.factory)
     }
+    isEmptyActionT(): boolean { return false }
 
     set(factory: ITimerFactory) {
         this.factory = factory;

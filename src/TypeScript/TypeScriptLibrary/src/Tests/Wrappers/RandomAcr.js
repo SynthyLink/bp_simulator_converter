@@ -2,13 +2,19 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RandomAct = void 0;
 const PerformerMeasuremets_1 = require("../../Library/Measurements/PerformerMeasuremets");
+const Motion6DFactory_1 = require("../../Library/Motion6D/Motion6DFactory");
 const DataRuntimeConsumer_1 = require("../../Library/Runtime/DataRuntimeConsumer");
 const Random_1 = require("../Random");
 class RandomAct extends Random_1.Random {
+    dc;
+    factory = new Motion6DFactory_1.Motion6DFactory;
     constructor() {
         super();
         var co = this.getCategoryObject("Chart");
         this.dc = co;
+    }
+    isEmptyAction() {
+        return false;
     }
     action() {
         var k = this.dc.getAllMeasurements()[0];
@@ -19,7 +25,7 @@ class RandomAct extends Random_1.Random {
         return false;
     }
     test() {
-        var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc);
+        var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc, this.factory);
         var p = new PerformerMeasuremets_1.PerformerMeasuremets();
         p.performFixedStepCalculation(runtime, 0, 1, 1000, this, this);
     }

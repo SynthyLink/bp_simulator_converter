@@ -11,5 +11,6 @@ export class UpdatePositionAction implements IAction
     action(): void {
         this.position.updateReferenceFrame()
     }
+    isEmptyAction(): boolean { return false }
 
 }

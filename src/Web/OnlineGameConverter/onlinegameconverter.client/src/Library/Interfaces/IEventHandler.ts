@@ -1,6 +1,7 @@
-import { IChildrenT } from "../NamedTree/Interfaces/IChildrenT";
-import { IEvent } from "./IEvent";
+import type { IEvent } from "./IEvent";
 
-export interface IEventHandler extends IChildrenT<IEvent> {
-
+export interface IEventHandler
+{
+    addEventToHandler(event: IEvent): void
+    getEventHandlerEvents(): IEvent[]
 }

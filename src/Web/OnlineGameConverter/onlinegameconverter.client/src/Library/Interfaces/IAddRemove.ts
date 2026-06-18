@@ -1,5 +1,7 @@
-import { IChildrenT } from "../NamedTree/Interfaces/IChildrenT";
+import type { ICategoryObject } from "./ICategoryObject";
 
-export interface IAddRemove extends IChildrenT<any> {
-    getAddRemoveType(): string;
+export interface IAddRemove
+{
+    addRemoveObject(object: ICategoryObject, add: boolean): boolean
+    getAddRemoveObjects(): ICategoryObject[]
 }

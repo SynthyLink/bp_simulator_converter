@@ -32,6 +32,73 @@ class PerspectiveCamera extends Camera_1.Camera {
      */
     constructor(fov = 50, aspect = 1, near = 0.1, far = 2000) {
         super();
+        this.type = 'PerspectiveCamera';
+        /**
+         * The vertical field of view, from bottom to top of view,
+         * in degrees.
+         *
+         * @type {number}
+         * @default 50
+         */
+        this.fov = 50;
+        /**
+         * The zoom factor of the camera.
+         *
+         * @type {number}
+         * @default 1
+         */
+        this.zoom = 1;
+        /**
+         * The camera's near plane. The valid range is greater than `0`
+         * and less than the current value of {@link PerspectiveCamera#far}.
+         *
+         * Note that, unlike for the {@link OrthographicCamera}, `0` is <em>not</em> a
+         * valid value for a perspective camera's near plane.
+         *
+         * @type {number}
+         * @default 0.1
+         */
+        this.near = 0.1;
+        /**
+         * The camera's far plane. Must be greater than the
+         * current value of {@link PerspectiveCamera#near}.
+         *
+         * @type {number}
+         * @default 2000
+         */
+        this.far = 2000;
+        /**
+         * Object distance used for stereoscopy and depth-of-field effects. This
+         * parameter does not influence the projection matrix unless a
+         * {@link StereoCamera} is being used.
+         *
+         * @type {number}
+         * @default 10
+         */
+        this.focus = 10;
+        /**
+         * The aspect ratio, usually the canvas width / canvas height.
+         *
+         * @type {number}
+         * @default 1
+         */
+        this.aspect = 1;
+        /**
+         * Film size used for the larger axis. Default is `35` (millimeters). This
+         * parameter does not influence the projection matrix unless {@link PerspectiveCamera#filmOffset}
+         * is set to a nonzero value.
+         *
+         * @type {number}
+         * @default 35
+         */
+        this.filmGauge = 35;
+        /**
+         * Horizontal off-center offset in the same unit as {@link PerspectiveCamera#filmGauge}.
+         *
+         * @type {number}
+         * @default 0
+         */
+        this.filmOffset = 0;
         /**
          * This flag can be used for type testing.
          *
@@ -39,7 +106,6 @@ class PerspectiveCamera extends Camera_1.Camera {
          * @readonly
          * @default true
          */
-        this.isPerspectiveCamera = true;
         this.type = 'PerspectiveCamera';
         /**
          * The vertical field of view, from bottom to top of view,

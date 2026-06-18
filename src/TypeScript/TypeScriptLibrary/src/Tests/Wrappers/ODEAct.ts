@@ -1,3 +1,4 @@
+import { IAction } from "../../Library/Interfaces/IAction";
 import { RungeProcessor } from "../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor";
 import { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
 import { PerformerMeasuremets } from "../../Library/Measurements/PerformerMeasuremets";
@@ -5,7 +6,7 @@ import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
 import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
 import { ODE } from "../ODE";
 
-export class ODEAct extends ODE
+export class ODEAct extends ODE implements IAction
 {
 
     dc! : IDataConsumer;
@@ -14,6 +15,9 @@ export class ODEAct extends ODE
         super();
         var o = this.getCategoryObjects();
         this.dc = o[2] as unknown as IDataConsumer;
+    }
+    isEmptyAction(): boolean {
+        return false
     }
 
     action(): void

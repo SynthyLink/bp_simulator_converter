@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Actor = void 0;
 const ConditionTestAct_1 = require("../Wrappers/ConditionTestAct");
@@ -30,11 +21,8 @@ const OrbitalData_1 = require("../../Algorithms/OrbitalForecastCalculation/Orbit
 const Donchian_1 = require("../Donchian");
 const ComposionAct_1 = require("../Wrappers/ComposionAct");
 const PerformerMeasuremets_1 = require("../../Library/Measurements/PerformerMeasuremets");
-const Obj3DCreator_1 = require("../../Library/Abstract3DConverters/MeshCreators/Obj3DCreator");
-const UniversalFactory_1 = require("../../Library/UniversalFactory");
-const StreamReader_1 = require("../../Library/IO/StreamReader");
-const FileSystemFactory_1 = require("../../Library/IO/FileSystemFactory");
-const LineEndSplitter_1 = require("../../Library/Utilities/String/LineEndSplitter");
+const Motion6DFactory_1 = require("../../Library/Motion6D/Motion6DFactory");
+const StreamReader_1 = require("../../FileSystem/IO/StreamReader");
 //import { Airplane } from '../../Airplane';
 function finish(e) {
     console.log(e);
@@ -54,6 +42,7 @@ function finish(e) {
      */
 }
 class Actor {
+    factory = new Motion6DFactory_1.Motion6DFactory();
     constructor() {
     }
     finish(e) {
@@ -71,27 +60,29 @@ class Actor {
                rl.close();
            });*/
     }
-    loadObj(filename) {
-        var fact = new UniversalFactory_1.UniversalFactory();
-        var ff = new FileSystemFactory_1.FileSystemFactory();
-        ff.setFactory(fact);
-        var ss = new LineEndSplitter_1.LineEndSplitter();
-        fact.addFactory(ss, "IStringSplitter");
-        var creator = new Obj3DCreator_1.Obj3DCreator(filename, "", undefined, fact);
-        var m = creator.getMeshCreatorMeshes();
-        console.log(m);
-    }
+    /*
+        public loadObj(filename: string): void {
+            var fact = new UniversalFactory()
+            var ff = new FileSystemFactory()
+            ff.setFactory(fact)
+            var ss = new LineEndSplitter()
+            fact.addFactory<IStringSplitter>(ss, "IStringSplitter")
+            var creator = new Obj3DCreator(filename, "", undefined, fact)
+            var m = creator.getMeshCreatorMeshes()
+            console.log(m)
+        }
+    
+    
+        */
     readTest(f) {
         let reader = new StreamReader_1.StreamReader(f);
         let s = reader.readToEnd();
         console.log(s);
     }
-    actDonchianLoad() {
-        return __awaiter(this, void 0, void 0, function* () {
-            var d = new Donchian_1.Donchian();
-            var ac = new AbortController();
-            yield d.loadAsync(ac);
-        });
+    async actDonchianLoad() {
+        var d = new Donchian_1.Donchian();
+        var ac = new AbortController();
+        await d.loadAsync(ac);
     }
     actCompositionAct() {
         var comp = new ComposionAct_1.CompositionAct();
@@ -107,34 +98,32 @@ class Actor {
     testDate() {
         var dt = new DateTimeConverter_1.DateTimeConverter();
     }
-    actOrbitCalculation(b) {
-        return __awaiter(this, void 0, void 0, function* () {
-            var o = new OrbitalForecastCalculation_1.OrbitalForecastCalculation();
-            var bb = 1770457504;
-            const cond = {
-                begin: bb, end: bb + 18000, x: -5448.34815324, y: -4463.93698421, z: 0, vx: -0.98539477743, vy: 1.21681893834, vz: 7.45047785592
-            };
+    async actOrbitCalculation(b) {
+        var o = new OrbitalForecastCalculation_1.OrbitalForecastCalculation();
+        var bb = 1770457504;
+        const cond = {
+            begin: bb, end: bb + 18000, x: -5448.34815324, y: -4463.93698421, z: 0, vx: -0.98539477743, vy: 1.21681893834, vz: 7.45047785592
+        };
+        o.set(cond);
+        if (b) {
+            var ab = new AbortController();
+            const t = await o.calculate(cond, ab);
+            for (var x of t) {
+                var y = (0, OrbitalData_1.toDateTime)(x);
+                console.log(y);
+            }
+        }
+        else {
+            let dc = o.getCategoryObject("Chart");
+            let p = new PerformerMeasuremets_1.PerformerMeasuremets();
             o.set(cond);
-            if (b) {
-                var ab = new AbortController();
-                const t = yield o.calculate(cond, ab);
-                for (var x of t) {
-                    var y = (0, OrbitalData_1.toDateTime)(x);
-                    console.log(y);
-                }
-            }
-            else {
-                let dc = o.getCategoryObject("Chart");
-                let p = new PerformerMeasuremets_1.PerformerMeasuremets();
-                o.set(cond);
-                o.performFixedStepCalculation();
-                const list = o.getResult();
-                console.log(list);
-                //    let m = this.getCategoryObject("A-transformation") as unknown as IMeasurements;
-                //   this.measurement = m.getMeasurement(0);
-            }
-            console.log("finish");
-        });
+            o.performFixedStepCalculation();
+            const list = o.getResult();
+            console.log(list);
+            //    let m = this.getCategoryObject("A-transformation") as unknown as IMeasurements;
+            //   this.measurement = m.getMeasurement(0);
+        }
+        console.log("finish");
     }
     actDensity() {
         try {

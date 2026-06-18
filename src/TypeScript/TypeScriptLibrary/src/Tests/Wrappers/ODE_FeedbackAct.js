@@ -8,6 +8,7 @@ const Motion6DFactory_1 = require("../../Library/Motion6D/Motion6DFactory");
 const DataRuntimeConsumerODE_1 = require("../../Library/Runtime/DataRuntimeConsumerODE");
 const ODE_Feedback_1 = require("../ODE_Feedback");
 class ODE_FeedbackAct extends ODE_Feedback_1.ODE_Feedback {
+    dc;
     constructor() {
         super();
         var o = this.getCategoryObjects();
@@ -18,6 +19,9 @@ class ODE_FeedbackAct extends ODE_Feedback_1.ODE_Feedback {
         var a = k.getMeasurement(0).getMeasurementValue();
         var b = k.getMeasurement(1).getMeasurementValue();
         console.log(a, b);
+    }
+    isEmptyAction() {
+        return false;
     }
     func() {
         return false;

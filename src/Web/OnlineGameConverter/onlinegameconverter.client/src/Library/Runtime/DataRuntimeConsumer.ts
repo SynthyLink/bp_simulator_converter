@@ -5,40 +5,31 @@
 import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
 import { Performer } from "../Performer";
 import { PerformerMeasuremets } from "../Measurements/PerformerMeasuremets"
-import { FictiveCategoryObject } from "../Fiction/FictiveCategoryObject";
 import type { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
 import type { IMeasurements } from "../Measurements/Interfaces/IMeasurements";
 import type { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
 import type { IStarted } from "../Measurements/Interfaces/IStarted";
+import type { IAddRemove } from "../Interfaces/IAddRemove";
 import type { ICategoryArrow } from "../Interfaces/ICategoryArrow";
 import type { ICategoryObject } from "../Interfaces/ICategoryObject";
-import type { IDataRuntime } from "../Interfaces/IDataRuntime";
 import type { IComponentCollection } from "../Interfaces/IComponentCollection";
+import type { IDataRuntime } from "../Interfaces/IDataRuntime";
+import type { IEventHandler } from "../Interfaces/IEventHandler";
 import type { IObject } from "../Interfaces/IObject";
+import type { IFactory } from "../Interfaces/IFactory";
+import type { IFactoryConsumer } from "../Interfaces/IFactoryConsumer";
 
-export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, IObject
+export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, IObject, IFactoryConsumer
 {
-
-    getName(): string {
-        return this.name;
-    }
-
-
-    getClassName(): string {
-        return this.typeName;
-    }
-
-    imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
-    }
 
     protected typeName: string = "CategoryArrow";
 
-    protected types: string[] = ["IObject", "IComponentCollection", "IDataRuntime", "DataRuntimeConsumer"];
+    protected types: string[] = ["IObject", "IComponentCollection", "IDataRuntime",
+        "DataRuntimeConsumer", "IFactoryConsumer"];
 
     protected name: string = "";
 
-
+    protected addRemove: ICategoryObject[] = []
 
     protected performer: Performer = new Performer();
 
@@ -62,16 +53,42 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
 
     protected dataConsumer: IDataConsumer
 
-    constructor(dataConsumer: IDataConsumer)
+    protected factory !: IFactory
+
+    constructor(dataConsumer: IDataConsumer, factory: IFactory)
     {
-        console.log("DataRuntimeConsumerTTT")
+        this.factory = factory
         this.dataConsumer = dataConsumer;
         this.prepare(dataConsumer)
         this.objects = []
         this.performer.getAllIObjects(this.categoryObjects, this.categoryArrows, this.objects)
     }
 
+    getName(): string {
+        return this.name;
+    }
+
+
+    getClassName(): string {
+        return this.typeName;
+    }
+
+    imlplementsType(type: string): boolean {
+        return this.types.includes(type)
+    }
+
+    setConsumerFactory(factory: IFactory): void {
+        this.factory = factory
+    }
+    getConsumerFactory(): IFactory {
+        return this.factory
+    }
+
     protected prepare(dataConsumer: IDataConsumer): void {
+        let arem = this.performer.convertObject<IAddRemove, IDataConsumer>(dataConsumer, "IAddRemove");
+        if (arem.length > 0) {
+            this.addRemove = arem[0].getAddRemoveObjects()
+        }
         let nm: IMeasurements[] = [];
         this.addDataConsumer(dataConsumer, nm);
         for (let i = nm.length - 1; i >= 0; i--) {
@@ -90,13 +107,25 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
         }
 
         this.measurements = this.performer.sortMeasurements(this.measurements);
+        var ehc = dataConsumer as unknown as IEventHandler
+        if (ehc != undefined) {
+            var evs = ehc.getEventHandlerEvents()
+            for (let evt of evs) {
+                var cov = evt as unknown as ICategoryObject
+                if (cov != undefined) {
+                    if (!this.categoryObjects.includes(cov)) {
+                        this.categoryObjects.push(cov)
+                    }
+                }
+            }
+        }
         this.performer.addUnique(this.categoryObjects, dataConsumer as unknown as ICategoryObject)
-
     }
 
     getCategoryObjects(): ICategoryObject[] {
         return this.categoryObjects
     }
+
     getCategoryArrows(): ICategoryArrow[] {
         return this.categoryArrows;
     }
@@ -104,10 +133,11 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
     getObjectCollection(): IObject[] {
         return this.objects;
     }
-    getCategoryObject(name: string): ICategoryObject {
+
+    getCategoryObject(name: string): ICategoryObject | undefined{
         let a = this.categoryObjectsMap.get(name)
         if (a != undefined) return a;
-        return new FictiveCategoryObject()
+        return undefined
     }
 
     addCategoryObjectToRuntime(object: ICategoryObject): void {
@@ -138,11 +168,12 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
 
     stepRuntime(begin: number, end: number): void
     {
-
+        console.log(begin)
+        console.log(end)
     }
 
     refreshRuntime(): void {
-        throw new OwnNotImplemented();
+        throw new OwnNotImplemented("DataRuntimeConsumer");
     }
 
     startRuntime(time: number): void

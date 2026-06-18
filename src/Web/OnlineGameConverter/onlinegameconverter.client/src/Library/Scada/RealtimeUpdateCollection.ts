@@ -20,6 +20,7 @@ export class RealtimeUpdateCollection implements IRealtimeUpdate, IActionT<IReal
     actionT(t: IRealtimeUpdate): void {
         this.action.addActionT(t.getRealtimeUpdate())
     }
+    isEmptyActionT(): boolean { return false }
 
 
     action: IActionAddRemoveT<number> = new ActionArrayT()

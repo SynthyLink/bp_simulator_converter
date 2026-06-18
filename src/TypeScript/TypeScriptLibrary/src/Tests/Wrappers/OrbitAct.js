@@ -2,12 +2,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrbitAct = void 0;
 const PerformerMeasuremets_1 = require("../../Library/Measurements/PerformerMeasuremets");
+const Motion6DFactory_1 = require("../../Library/Motion6D/Motion6DFactory");
 const DataRuntimeConsumer_1 = require("../../Library/Runtime/DataRuntimeConsumer");
 const Orbital_1 = require("../Orbital");
 class OrbitAct extends Orbital_1.Orbital {
+    dc;
+    factory = new Motion6DFactory_1.Motion6DFactory;
     constructor() {
         super();
         this.dc = this.getCategoryObjects()[1];
+    }
+    isEmptyAction() {
+        return false;
     }
     action() {
         var k = this.dc.getAllMeasurements()[0];
@@ -19,7 +25,7 @@ class OrbitAct extends Orbital_1.Orbital {
         return false;
     }
     test() {
-        var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc);
+        var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc, this.factory);
         var p = new PerformerMeasuremets_1.PerformerMeasuremets();
         p.performFixedStepCalculation(runtime, 0, 1, 10, this, this);
     }

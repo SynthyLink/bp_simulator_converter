@@ -1,5 +1,5 @@
-import { CategoryObject } from "../../../CategoryObject";
-import { IDesktop } from "../../../Interfaces/IDesktop";
+import { CategoryObject } from "../../../CategoryObject"
+import type { IDesktop } from "../../../Interfaces/IDesktop"
 
 export class Rigig3DShape extends CategoryObject  {
     constructor(desktop: IDesktop, name: string) {

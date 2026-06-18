@@ -1,8 +1,8 @@
-import { ICategoryObject } from "../../Interfaces/ICategoryObject";
-import { IDesktop } from "../../Interfaces/IDesktop";
-import { IPostSetArrow } from "../../Interfaces/IPostSetArrow";
-import { IChildrenT } from "../../NamedTree/Interfaces/IChildrenT";
-import { IPositionObject } from "../Interfaces/IPositionObject";
+import type { ICategoryObject } from "../../Interfaces/ICategoryObject";
+import type { IDesktop } from "../../Interfaces/IDesktop";
+import type { IPostSetArrow } from "../../Interfaces/IPostSetArrow";
+import type { IChildrenT } from "../../NamedTree/Interfaces/IChildrenT";
+import type { IPositionObject } from "../Interfaces/IPositionObject";
 import { BasicPosition } from "./BasicPosition";
 
 export class SerializablePosition extends BasicPosition

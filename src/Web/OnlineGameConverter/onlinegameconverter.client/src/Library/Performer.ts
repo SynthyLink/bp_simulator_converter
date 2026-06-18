@@ -32,10 +32,38 @@ import type { IObjectCollection } from "./Interfaces/IObjectCollection";
 import type { INamed } from "./NamedTree/Interfaces/INamed";
 import type { IFactory } from "./Interfaces/IFactory";
 import type { IFactoryConsumer } from "./Interfaces/IFactoryConsumer";
+import type { ISelfStart } from "./Interfaces/ISelfStart";
+import type { ILoader } from "./Interfaces/ILoader";
+import type { ISelfLoad } from "./Interfaces/ISelfLoad";
+import type { IFuncT } from "./Interfaces/IFuncT";
+import type { IActionAddRemove } from "./Interfaces/IActionAddRemove";
+import type { IActionAddRemoveT } from "./Interfaces/IActionAddRemoveT";
+import type { INodeT } from "./NamedTree/Interfaces/INodeT";
+import type { IResourceItem } from "./Resources/Infrefaces/IResourceItem";
+import type { IResourceCollection } from "./Resources/Infrefaces/IResouceCollection";
+import type { IExternalAction } from "./Interfaces/IExternalAction";
+import type { IInput } from "./Interfaces/IInput";
+import type { IActionAddRemoveT2 } from "./Interfaces/IActionAddRemoveT2";
+import type { IActionT2 } from "./Interfaces/IActionT2";
+
 
 
 export class Performer
 {
+
+    public toShidtedString(str: string, shift : string) {
+        if (str.startsWith(shift)) {
+            return str.substring(shift.length).replace("\"", "").trim();
+        }
+        return null;
+    }
+
+
+    public  getObjectArrayFromNode<T, S>(node: INodeT<T>, func: IFuncT<S | undefined, T>): S[] {
+        let a = new ArrayOfObjects<T, S>(func, this)
+        return a.getArray(node)
+    }
+
     constructor() {
         this.mCompatator = new MeasurementsComparator(this);
     }
@@ -63,6 +91,51 @@ export class Performer
 
     protected mCompatator !: IComparator<IMeasurements>;
 
+    public toOneDimensdional<T>(t: T[][]): T[] {
+        let x: T[] = []
+        for (let xx of t) {
+            x.concat(xx)
+        }
+        return x
+    }
+
+
+    public createMirrorArray<T>(x: T[], y: T[], d: T): void {
+        for (var i = 0; i < y.length; i++) {
+            x.push(d)
+        }
+    }
+
+    public createMirrorArray2<T>(x: T[][], y: T[][], d: T): void {
+        for (var i = 0; i < y.length; i++) {
+            let z: T[] = []
+            let xx = y[i]
+            this.createMirrorArray(z, xx, d)
+            x.push(z)
+        }
+    }
+
+    public getActionFromNode<T>(node: INodeT<T>, func: IFuncT<IAction | undefined, T>): IAction | undefined {
+        let act = this.getObjectArrayFromNode(node, func)
+        if (act.length == 0) return undefined
+        if (act.length == 1) return act[0]
+        let action = new ActionArray()
+        action.addActionArray(act)
+        return action
+    }
+
+    //Recursive action
+    public recursiveNodeAction<T>(node: INodeT<T>, action: IActionT<T>): void
+    {
+        let children = node.getNodesT()
+        for (let child of children) {
+            this.recursiveNodeAction<T>(child, action)
+        }
+        let t = node.getNodeValueT()
+        action.actionT(t)
+    }
+
+   
     public addUnique<T>(list: T[], item: T): boolean {
         for (let x of list) {
             if (x == item) {
@@ -73,10 +146,32 @@ export class Performer
         return true;
     }
 
-    public setFactoryToObjectCollection(collection: IObjectCollection, factory: IFactory) {
-        let setter = new FactorySetter(factory)
-        this.forEach<IFactoryConsumer>(collection, setter, "IFactoryConsumer")
+    public toShiftString(str: string, shift: string): string {
+        {
+            if (str.indexOf(shift) == 0) {
+                return str.substring(shift.length)
+            }
+            return "";
+        }
     }
+
+    public cut<T>(t: T[], n: number): T[] {
+        let s: T[] = []
+        for (let i = 0; i < n; i++) {
+            s.push(t[i])
+        }
+        return s
+    }
+
+    public addCut<T>(list: T[][], t: T[], n: number): void {
+        var tt = t;
+        if (t.length > n) {
+            tt = this.cut(t, n);
+        }
+        list.push(tt);
+    }
+
+
 
     public getAllIObjects(categoryObjects: ICategoryObject[], arrows: ICategoryArrow[], objects: IObject[]): void {
         for (let o of categoryObjects) {
@@ -98,15 +193,6 @@ export class Performer
         this.printer = printer;
     }
 
-
-    public forEach<T>(collection: IObjectCollection, action: IActionT<T>, type: string) {
-        let obj = collection.getObjectCollection()
-        for (let o of obj) {
-
-            var x = this.convertObject<T, IObject>(o, type)
-            if (x.length > 0) action.actionT(x[0])
-        }
-    }
 
     public getAll<T>(collection: IObjectCollection, type: string) {
         let t : T[] = []
@@ -335,6 +421,9 @@ export class Performer
     public convertObject<T, S>(s: S, type: string): T[] {
         let ob = s as unknown as IObject;
         var t: T[] = [];
+        if (ob === undefined) {
+            return t;
+        }
         if (ob.imlplementsType(type))
         {
             var x = s as unknown as  T;
@@ -373,6 +462,7 @@ export class Performer
 
     public getCollectionObject<T>(collection: IComponentCollection, name: string, type: string): T[] {
         let o = collection.getCategoryObject(name)
+        if (o === undefined) return []
         return this.convertObject < T, ICategoryObject>(o, type)
     }
 
@@ -432,6 +522,9 @@ export class Performer
         return this.convert<any, T>(t);
     }
 
+    public toNumber(s: any): number {
+        return Number(s)
+    }
 
     public convert<T, S>(t: T): S {
         // Typeof checks against string representations of types. S is a generic type,
@@ -441,29 +534,33 @@ export class Performer
         // A very limited approach would be to use type guards, but that means
         // you'd have to know what type S *could* be in advance. This is not
         // really a general solution.
+        const tt = typeof t
         if (t === undefined) {
             throw new OwnError("Type conversion", "Performer undefined. NULL OBJECT", undefined);
         }
-        if (typeof t === "string" && (null as any as S) instanceof String) { //VERY LIMITED AND UNSAFE EXAMPLE.
-            return t as any as S; // Force the type assertion (VERY UNSAFE)
+        if (tt === "string") {
+            if ((t as any as S) instanceof String) { //VERY LIMITED AND UNSAFE EXAMPLE.
+                return t as any as S; // Force the type assertion (VERY UNSAFE)
+            }
         }
 
-        if (typeof t === "number") { // } && (t as unknown as S) instanceof Number) {  //VERY LIMITED AND UNSAFE EXAMPLE.
+        if (tt === "number") { // } && (t as unknown as S) instanceof Number) {  //VERY LIMITED AND UNSAFE EXAMPLE.
             return t as unknown as S; // Force the type assertion (VERY UNSAFE)
         }
 
-        if (typeof t === "boolean") { //VERY LIMITED AND UNSAFE EXAMPLE.
+        if (tt === "boolean") { //VERY LIMITED AND UNSAFE EXAMPLE.
             return t as any as S; // Force the type assertion (VERY UNSAFE)
         }
 
         //This is better, but assumes S is a string or number
-        if (typeof t === 'string' && (null as any as S) as any === String) {
+        if (tt === 'string' && (null as any as S) as any === String) {
             return t as any as S;
         }
 
         if (typeof t === 'number' && (null as any as S) as any === Number) {
             return t as any as S;
         }
+        return t as any as S
         console.warn(t, typeof t)
         throw new OwnError("Type conversion", "Performer", undefined);
 
@@ -664,25 +761,327 @@ export class Performer
         var t = name.substring(0, n);
         var al = this.getAlias(desktop, t);
         return new AliasName(al, s);
+
     }
+    public isEmptyActionT<T>(action: IActionT<T> | undefined): boolean {
+        if (action === undefined) return true;
+        let act: IActionT<T> = action
+        let arr: IActionAddRemoveT<T> = act as unknown as IActionAddRemoveT<T>
+        if (arr == undefined) return false
+        return arr.isEmptyActionT()
+    }
+
+    public isEmptyActionT2<T1, T2>(action: IActionT2<T1, T2> | undefined): boolean {
+        if (action === undefined) return true;
+        let act: IActionT2<T1, T2> = action
+        let arr: IActionAddRemoveT2<T1, T2> = act as unknown as IActionAddRemoveT2<T1, T2>
+        if (arr == undefined) return false
+        return arr.isEmptyActionT2()
+    }
+
+
+
+    public isEmptyAction(action: IAction | undefined): boolean {
+        if (action === undefined) return true;
+        let act: IAction = action
+        let arr: IActionAddRemove = act as unknown as IActionAddRemove
+        if (arr == undefined) return false
+        return arr.isEmptyAction()
+    }
+  
+
+    public convertArrayT<T, S>(collection: IObjectCollection, f: IFuncT<T, S>, type: string): T[] {
+        let t: T[] = []
+        let add = new AddTS<T, S>(t, f)
+        this.forEach<S>(collection, add, type)
+        return t
+    }
+
+
+    public forEach<T>(collection: IObjectCollection, action: IActionT<T>, type: string) {
+        let obj = collection.getObjectCollection()
+        for (let o of obj) {
+            var x = this.convertObject<T, IObject>(o, type)
+            if (x.length > 0) action.actionT(x[0])
+            var y = this.convertObject<IObjectCollection, IObject>(o, "IObjectCollection")
+            if (y.length > 0) this.forEach(y[0], action, type)
+        }
+    }
+
+    public loadChildren(object: IObject, collection:
+        IObjectCollection, loader: ILoader, load: boolean): void {
+        var lc = new LoadChild(object, loader, load)
+        this.forEach<IObject>(collection, lc, "IObject")
+    }
+
+
+    public setFactoryToObjectCollection(collection: IObjectCollection, factory: IFactory) {
+        let setter = new FactorySetter(factory)
+        this.forEach<IFactoryConsumer>(collection, setter, "IFactoryConsumer")
+    }
+
+    public collectResources(res: IResourceCollection, collection: IObjectCollection) {
+        var rs = new ResourceSetter(res)
+        this.forEach<IResourceCollection>(collection, rs, "IResourceCollection")
+    }
+
+    public startCollecion(start: boolean, collection: IObjectCollection) {
+        if (start) {
+            this.forEach<ISelfStart>(collection, this.start, "ISelfStart")
+        }
+        else {
+            this.forEach<ISelfStart>(collection, this.stop, "ISelfStart")
+
+        }
+    }
+
+    public loadCollecion(load: boolean, collection: IObjectCollection) {
+        if (load) {
+            this.forEach<ISelfLoad>(collection, this.load, "ISelfLoad")
+        }
+        else {
+            this.forEach<ISelfLoad>(collection, this.unload, "ISelfLoad")
+        }
+    }
+
+ 
+ 
+
+    public createObjectCollectionAction(collection: IObjectCollection,
+        f:  IFuncT<IAction | undefined, IObject>): IActionAddRemove {
+        var act = new ActionArray();
+        var creator = new ActionCreator(f, act)
+        this.forEach<IObject>(collection, creator, "IObject")
+        return act 
+    }
+
+    public createObjectCollectionExternalAction(collection: IObjectCollection): IActionAddRemove {
+        var act = new ActionArray();
+        var creator = new ExternalActionCreator(act)
+        this.forEach<IExternalAction>(collection, creator, "IExternalAction")
+        return act
+    }
+
+    public getInputsFromCollection(collection: IObjectCollection, inputs: IInput[]) {
+        let s = new InputSelect(inputs)
+        this.forEach<IInput>(collection, s, "IInput")
+    }
+
+
 
     measurements !: IMeasurements;
 
     measurement !: IMeasurement;
 
-
-
     alias !: IAlias;
 
+    start: Start = new Start()
+
+    stop: Stop = new Stop()
+
+    load: Load = new Load()
+
+    unload: Unload = new Unload()
+
 }
+
+class InputSelect implements IActionT<IInput> {
+
+    constructor(inputs: IInput[]) {
+        this.inputs = inputs
+    }
+    actionT(t: IInput): void {
+        this.inputs.push(t)
+    }
+    isEmptyActionT(): boolean {
+        return false;
+    }
+
+    inputs !: IInput[]
+}
+
+class ExternalActionCreator implements IActionT<IExternalAction> {
+    actionT(t: IExternalAction): void {
+        this.action.addAction(t.getExternalAction())
+    }
+    isEmptyActionT(): boolean { return false }
+
+    action !: IActionAddRemove
+    
+    constructor(action: IActionAddRemove) {
+        this.action = action
+    }
+
+}
+
+class ActionCreator implements IActionT<IObject> {
+    actionT(t: IObject): void {
+        var act = this.functT.functT(t)
+        if (act != undefined) this.action.addAction(act)
+    }
+    isEmptyActionT(): boolean { return false }
+
+    functT !: IFuncT<IAction | undefined, IObject>
+    action !: IActionAddRemove
+    constructor(functT: IFuncT<IAction | undefined, IObject>, action: IActionAddRemove) {
+        this.functT = functT
+        this.action = action
+    }
+
+}
+
+class AddTS<T, S> implements IActionT<S>{
+
+    funcT !: IFuncT<T, S>
+
+    array: T[] = []
+
+    constructor(array: T[], funcT : IFuncT<T, S>) {
+        this.array = array
+        this.funcT = funcT
+    }
+    actionT(s: S): void {
+        let t = this.funcT.functT(s)
+        if (t != undefined) this.array.push(t)
+    }
+    isEmptyActionT(): boolean { return false }
+
+}
+
+
+
+class Start implements IActionT<ISelfStart> {
+    actionT(t: ISelfStart): void {
+        t.startItself(true)
+    }
+    isEmptyActionT(): boolean { return false }
+
+}
+
+class Stop implements IActionT<ISelfStart> {
+    actionT(t: ISelfStart): void {
+        t.startItself(false)
+    }
+    isEmptyActionT(): boolean { return false }
+
+}
+
+class Load implements IActionT<ISelfLoad> {
+    actionT(t: ISelfLoad): void {
+        t.loadItself(true)
+    }
+    isEmptyActionT(): boolean { return false }
+
+}
+
+class Unload implements IActionT<ISelfLoad> {
+    actionT(t: ISelfLoad): void {
+        t.loadItself(false)
+    }
+    isEmptyActionT(): boolean { return false }
+
+}
+
+
+
+class LoadChild implements IActionT<IObject> {
+
+    parent !: IObject;
+
+    load: boolean = false
+
+    loader !: ILoader
+
+
+    constructor(parent: IObject, loader : ILoader, load: boolean) {
+        this.parent = parent;
+        this.load = load;
+        this.loader = loader
+    }
+
+    actionT(t: IObject): void {
+        this.loader.loadObject(this.parent, t)
+    }
+
+    isEmptyActionT(): boolean { return false }
+
+}
+
+
 
 class FactorySetter implements IActionT<IFactoryConsumer>
 {
     constructor(factory: IFactory) {
         this.factory = factory
-    }
+  }
     actionT(t: IFactoryConsumer): void {
         t.setConsumerFactory(this.factory)
     }
+
+    isEmptyActionT(): boolean { return false }
+
+
     factory: IFactory
+}
+
+class ResourceSetter implements IActionT<IResourceCollection> {
+
+    constructor(t: IResourceCollection) {
+        this.collection = t
+        var c = t.getResources()
+        this.res = c;
+        for (let x of c) {
+            let url = x.url
+            if (this.map.has(url)) {
+                continue
+            }
+            this.map.set(url, x)
+        }
+    }
+
+    actionT(t: IResourceCollection): void {
+        var rr = t.getResources()
+        var rs = this.collection.getResources()
+        for (let x of rr) {
+            let url = x.url
+            if (this.map.has(url)) {
+                continue
+            }
+            this.map.set(url, x)
+            rs.push(x)
+        }
+    }
+
+    isEmptyActionT(): boolean { return false }
+
+    res: IResourceItem[] = []
+
+    collection: IResourceCollection
+
+    map: Map<string, IResourceItem> = new Map()
+}
+
+class ArrayOfObjects<T, S> implements IActionT<T> {
+    f !: IFuncT<S | undefined, T>
+    s: S[] = []
+
+    performer !: Performer
+    constructor(func: IFuncT<S | undefined, T>, performer: Performer) {
+        this.performer = performer;
+        this.f = func
+    }
+    actionT(t: T): void {
+        let s = this.f.functT(t)
+        if (s != undefined) {
+            this.s.push(s)
+        }
+    }
+    isEmptyActionT(): boolean {
+        return false
+    }
+
+    public getArray(node: INodeT<T>): S[] {
+        this.performer.recursiveNodeAction(node, this)
+        return this.s
+    }
 }

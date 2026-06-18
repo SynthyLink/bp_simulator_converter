@@ -7,12 +7,18 @@ const PerformerMeasuremets_1 = require("../../Library/Measurements/PerformerMeas
 const DataRuntimeConsumerODE_1 = require("../../Library/Runtime/DataRuntimeConsumerODE");
 const Motion6DFactory_1 = require("../../Library/Motion6D/Motion6DFactory");
 class DensityAct extends Density_1.Density {
+    dc;
+    factory = new Motion6DFactory_1.Motion6DFactory;
+    measurement;
     constructor() {
         super();
         var o = this.getCategoryObjects();
         this.dc = this.getCategoryObject("Chart");
         let m = this.getCategoryObject("A-transformation");
         this.measurement = m.getMeasurement(0);
+    }
+    isEmptyAction() {
+        return false;
     }
     action() {
         /*       var k = this.dc.getAllMeasurements()[0];

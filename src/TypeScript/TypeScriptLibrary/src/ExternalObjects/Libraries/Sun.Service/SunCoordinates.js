@@ -2,10 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SunCoordinates = void 0;
 class SunCoordinates {
-    constructor() {
-        this.azimuth = 0;
-        this.zenithAngle = 0;
-    }
+    azimuth = 0;
+    zenithAngle = 0;
     getAzimuth() {
         return this.azimuth;
     }

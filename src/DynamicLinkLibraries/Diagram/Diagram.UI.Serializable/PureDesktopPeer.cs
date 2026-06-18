@@ -441,7 +441,7 @@ namespace Diagram.UI
         /// <param name="binder">Serialization binder</param>
         /// <param name="post">The "post" sign</param>
         /// <returns>True in success and false otherwise</returns>
-        public async Task<bool> Load(Stream stream, SerializationBinder binder, bool post, CancellationToken token)
+        public async Task<bool> Load(Stream stream, SerializationBinder binder, bool post, CancellationToken ? token = null)
         {
             var b = await loadBinder(stream, binder, post, token);
             if (!b)
@@ -468,7 +468,7 @@ namespace Diagram.UI
         /// </summary>
         /// <param name="stream">The stream</param>
         /// <returns>True in success and false otherwise</returns>
-        public async Task<bool> Load(Stream stream, CancellationToken token)
+        public async Task<bool> Load(Stream stream, CancellationToken ? token = null)
         {
             return await Load(stream, StaticExtensionSerializationInterface.Binder, true, token);
         }
@@ -478,7 +478,7 @@ namespace Diagram.UI
         /// </summary>
         /// <param name="buffer">Buffer</param>
         /// <returns>True in success and false otherwise</returns>
-        public async Task<bool> Load(byte[] buffer, CancellationToken token)
+        public async Task<bool> Load(byte[] buffer, CancellationToken? token = null)
         {
             return await Load(buffer, true, token);
         }
@@ -853,23 +853,23 @@ namespace Diagram.UI
 
         #region Internal Members
 
-        internal async Task<bool> Load(byte[] buffer, SerializationBinder binder, bool post, CancellationToken token)
+        internal async Task<bool> Load(byte[] buffer, SerializationBinder binder, bool post, CancellationToken ? token = null)
         {
             MemoryStream stream = new MemoryStream(buffer);
             return await Load(stream, binder, post, token);
         }
 
-        internal async Task<bool> Load(Stream stream, bool post, CancellationToken token)
+        internal async Task<bool> Load(Stream stream, bool post, CancellationToken ? token = null)
         {
             return await Load(stream, StaticExtensionSerializationInterface.Binder, post, token);
         }
 
-        internal async Task<bool> Load(byte[] buffer, bool post, CancellationToken token)
+        internal async Task<bool> Load(byte[] buffer, bool post, CancellationToken? token = null)
         {
             return await Load(buffer, StaticExtensionSerializationInterface.Binder, post, token);
         }
 
-        internal async Task<bool> loadBinder(Stream stream, SerializationBinder binder, bool post, CancellationToken token)
+        internal async Task<bool> loadBinder(Stream stream, SerializationBinder binder, bool post, CancellationToken? token = null)
         {
             var b = true;
             if (binder == null)
@@ -895,11 +895,12 @@ namespace Diagram.UI
             return false;
         }
    
-        private async Task<bool> load(Stream stream, SerializationBinder binder, bool post, CancellationToken token)
+        private async Task<bool> load(Stream stream, SerializationBinder binder, bool post, CancellationToken? token = null)
         {
             stream.Position = 0;
+            var tok = (token.HasValue) ? new CancellationToken() : token.Value;
             var tasks = new List<Task>();
-            BinaryFormatter bformatter = new BinaryFormatter();
+            var bformatter = new BinaryFormatter();
             if (binder != null)
             {
                 bformatter.Binder = binder;
@@ -916,9 +917,12 @@ namespace Diagram.UI
                     foreach (IObjectLabel l in objs)
                     {
                         var ob = l.Object;
-                        if (ob is IInitializeTask it)
+                        if (token != null)
                         {
-                            tasks.Add(it.InitializeAsync(token));
+                            if (ob is IInitializeTask it)
+                            {
+                                tasks.Add(it.InitializeAsync(tok));
+                            }
                         }
                         objects.Add(l);
                     }
@@ -929,14 +933,20 @@ namespace Diagram.UI
                     foreach (IArrowLabel l in arrs)
                     {
                         var ar = l.Arrow;
-                        if (ar is IInitializeTask it)
+                        if (token != null)
                         {
-                            tasks.Add(it.InitializeAsync(token));
+                            if (ar is IInitializeTask it)
+                            {
+                                tasks.Add(it.InitializeAsync(tok));
+                            }
                         }
                         arrows.Add(l);
                     }
                 }
-                await Task.WhenAll(tasks);
+                if (token != null)
+                {
+                    await Task.WhenAll(tasks);
+                }
                 foreach (object o in objects)
                 {
                     if (o is INamedComponent)

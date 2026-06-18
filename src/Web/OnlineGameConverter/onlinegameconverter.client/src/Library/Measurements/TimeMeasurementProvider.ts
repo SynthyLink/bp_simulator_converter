@@ -35,6 +35,7 @@ export class TimeMeasurementProvider implements ITimeMeasurementProvider, IMeasu
 
     setStep(time: number): void
     {
+        this.step = time
     }
 
     getTime() : any
@@ -43,4 +44,6 @@ export class TimeMeasurementProvider implements ITimeMeasurementProvider, IMeasu
     }
 
     time: number = 0;
+
+    step: number = 0
 }

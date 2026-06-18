@@ -5,8 +5,6 @@ import { IEvent } from "../../Library/Interfaces/IEvent";
 import { IAction } from "../../Library/Interfaces/IAction";
 import { IFunc } from "../../Library/Interfaces/IFunc";
 import { IPlayEngine } from "../../Library/Interfaces/IPlayEngine";
-import { TimerPlayEngineFactory } from "../../Library/Event/TimerPlayEngineFactory";
-import { EngineTimerProvider } from "../../Library/Event/EngineTimerProvider";
 
 
 export class CompositionEvent extends Composition {
@@ -47,11 +45,16 @@ class Action implements IAction {
         var y = [x.getMeasurement(0).getMeasurementValue(), x.getMeasurement(1).getMeasurementValue()]
         console.log(y)
     }
+isEmptyAction(): boolean {
+    return false
+}
+
     dc!: IDataConsumer;
 
     constructor(dc: IDataConsumer, event: IEvent) {
         this.dc = dc;
         event.eventAction().addAction(this)
     }
+
 
 }

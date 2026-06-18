@@ -29,6 +29,61 @@ class OrthographicCamera extends Camera_1.Camera {
      */
     constructor(left = -1, right = 1, top = 1, bottom = -1, near = 0.1, far = 2000) {
         super();
+        this.type = 'OrthographicCamera';
+        /**
+         * The zoom factor of the camera.
+         *
+         * @type {number}
+         * @default 1
+         */
+        this.zoom = 1;
+        /**
+         * The left plane of the camera's frustum.
+         *
+         * @type {number}
+         * @default -1
+         */
+        this.left = -1;
+        /**
+         * The right plane of the camera's frustum.
+         *
+         * @type {number}
+         * @default 1
+         */
+        this.right = 1;
+        /**
+         * The top plane of the camera's frustum.
+         *
+         * @type {number}
+         * @default 1
+         */
+        this.top = 1;
+        /**
+         * The bottom plane of the camera's frustum.
+         *
+         * @type {number}
+         * @default -1
+         */
+        this.bottom = -1;
+        /**
+         * The camera's near plane. The valid range is greater than `0`
+         * and less than the current value of {@link OrthographicCamera#far}.
+         *
+         * Note that, unlike for the {@link PerspectiveCamera}, `0` is a
+         * valid value for an orthographic camera's near plane.
+         *
+         * @type {number}
+         * @default 0.1
+         */
+        this.near = 0.1;
+        /**
+         * The camera's far plane. Must be greater than the
+         * current value of {@link OrthographicCamera#near}.
+         *
+         * @type {number}
+         * @default 2000
+         */
+        this.far = 2000;
         /**
          * This flag can be used for type testing.
          *
@@ -36,7 +91,6 @@ class OrthographicCamera extends Camera_1.Camera {
          * @readonly
          * @default true
          */
-        this.isOrthographicCamera = true;
         this.type = 'OrthographicCamera';
         /**
          * The zoom factor of the camera.

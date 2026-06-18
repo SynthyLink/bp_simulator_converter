@@ -6,6 +6,7 @@ const Motion6DFactory_1 = require("../../Library/Motion6D/Motion6DFactory");
 const Cessna_1 = require("../../scenes/Cessna");
 //import { GameFactory } from "../../common/GameFactory";
 class ScadaComposition {
+    scada;
     constructor(engine) {
         console.log("AAAPPPm");
         let a = new Cessna_1.Cessna();
@@ -26,6 +27,10 @@ class Action {
         var x = m[0];
         var y = [x.getMeasurement(0).getMeasurementValue(), x.getMeasurement(0).getMeasurementValue()];
         console.log(y);
+    }
+    dc;
+    isEmptyAction() {
+        return false;
     }
     constructor(dc, event) {
         this.dc = dc;

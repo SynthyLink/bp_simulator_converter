@@ -5,25 +5,34 @@ import type { ITimer } from "../Interfaces/ITimer";
 import type { ITimerFactory } from "../Interfaces/ITimerFactory";
 import { TimeSpan } from "../Utilities/DateTime/TimeSpan";
 import { ActionArray } from "../Utilities/Generic/ActionArray";
+import { EmptyActionT } from "./Objects/EmptyActionT";
 
-export class TimerPlayEngineFactory implements ITimerFactory, IActionT<number> {
+export class TimerPlayEngineFactory implements ITimerFactory {
 
     constructor(engine: IPlayEngine) {
         this.engine = engine;
         engine.getEngineAction().addActionT(this);
     }
+
+ 
     actionT(t: number): void {
         for (let timer of this.timers) {
             timer.setTime(t)
         }
     }
 
+    isEmptyActionT(): boolean { return false }
+
     isTimerFactoryEnabled(): boolean {
-        throw new Error("Method not implemented.");
+        return this.enabled
     }
+
     setTimerFactoryEnabled(enabled: boolean): void {
-        throw new Error("Method not implemented.");
+        this.enabled = enabled
     }
+
+    enabled: boolean = false
+
     getTimerFromFactory(timeSpan: TimeSpan): ITimer {
         var t = new Timer(this, timeSpan)
         this.timers.push(t)
@@ -38,10 +47,15 @@ export class TimerPlayEngineFactory implements ITimerFactory, IActionT<number> {
 
 
 class Timer implements ITimer {
+
+    actionT: IActionT<number> = new EmptyActionT < number>()
     constructor(factory: TimerPlayEngineFactory, span: TimeSpan) {
         this.span = span
         this.factory = factory
-        this.interval = span.getTotalMilliseconds()
+        this.interval = span.getTotalMilliseconds() / 1000
+    }
+    setTimerEventT(action: IActionT<number>): void {
+        this.actionT = action;
     }
 
     getTimerTimeSpan(): TimeSpan {
@@ -68,6 +82,7 @@ class Timer implements ITimer {
         }
         if (time > this.last + this.interval) {
             this.action.action();
+            this.actionT.actionT(time)
             this.last = time
         }
     }

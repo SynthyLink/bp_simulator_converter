@@ -20,10 +20,10 @@ export class TimeSpan {
     public static readonly ticksPerDay = TimeSpan.ticksPerHour * 24;          // 864,000,000,000
     private static readonly daysPerTick = 1.0 / TimeSpan.ticksPerDay; // 1.1574074074074074074e-12
 
-    private static readonly millisPerSecond = 1000;
-    private static readonly millisPerMinute = TimeSpan.millisPerSecond * 60; //     60,000
-    private static readonly millisPerHour = TimeSpan.millisPerMinute * 60;   //  3,600,000
-    private static readonly millisPerDay = TimeSpan.millisPerHour * 24;      // 86,400,000
+    //private static readonly millisPerSecond = 1000;
+   // private static readonly millisPerMinute = TimeSpan.millisPerSecond * 60; //     60,000
+   // private static readonly millisPerHour = TimeSpan.millisPerMinute * 60;   //  3,600,000
+   /* private static readonly millisPerDay = TimeSpan.millisPerHour * 24;      // 86,400,000
 
     private static readonly maxSeconds = Number.MAX_VALUE / TimeSpan.ticksPerSecond;
     private static readonly minSeconds = Number.MIN_VALUE / TimeSpan.ticksPerSecond;
@@ -31,7 +31,7 @@ export class TimeSpan {
     private static readonly maxMilliseconds = Number.MAX_VALUE / TimeSpan.ticksPerMillisecond;
     private static readonly minMilliseconds = Number.MIN_VALUE / TimeSpan.ticksPerMillisecond;
 
-    private static readonly ticksPerTenthSecond = TimeSpan.ticksPerMillisecond * 100;
+    private static readonly ticksPerTenthSecond = TimeSpan.ticksPerMillisecond * 100;// */
 
     public static readonly zero = new TimeSpan(0);
     public static readonly maxValue = new TimeSpan(Number.MAX_VALUE);
@@ -139,12 +139,12 @@ export class TimeSpan {
  //   static parse(s: string) {
  //       return new TimeSpan(undefined);
    // }
-    static tryParse(s: string) {
+    /*static tryParse(s: string) {
         return {
             success: true,
             value: TimeSpan.zero
         };
-    }
+    }*/
 
     static fromDays(value: number) {
         return new TimeSpan(value * TimeSpan.ticksPerDay);

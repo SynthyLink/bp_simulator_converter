@@ -23,7 +23,7 @@ export class Measurement implements IMeasurement {
     }
 
     getMeasurementValue() {
-        throw new OwnNotImplemented();
+        throw new OwnNotImplemented("Measurement");
     }
 
 }

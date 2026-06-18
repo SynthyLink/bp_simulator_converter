@@ -2,10 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GeoCoordinates = void 0;
 class GeoCoordinates {
-    constructor() {
-        this.longitude = 0;
-        this.latitude = 0;
-    }
+    longitude = 0;
+    latitude = 0;
     getLongitude() {
         return this.longitude;
     }

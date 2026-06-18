@@ -41,6 +41,11 @@ class Action implements IAction {
         this.p.print(this.dc);
     }
 
+    isEmptyAction(): boolean {
+        return false
+    }
+
+
     dc !: IDataConsumer;
     p !: Performer;
 }
@@ -60,6 +65,9 @@ export class OrbitalForecastCalculation extends OrbitalForecast implements IActi
         this.performer.setCheker(this, check);
         this.act = new Action(this.dc, this.performer);
 
+    }
+    isEmptyAction(): boolean {
+        return false
     }
 
     func(): boolean {

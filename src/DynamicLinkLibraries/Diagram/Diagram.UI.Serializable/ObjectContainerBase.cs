@@ -100,7 +100,7 @@ namespace Diagram.UI
         /// </summary>
         /// <param name="bytes">Soure bytes</param>
         /// <returns>Thrue in success and false otherwise</returns>
-        protected abstract  Task< bool> LoadDesktop(byte[] bytes, CancellationToken cancellation);
+        protected abstract  Task< bool> LoadDesktop(byte[] bytes, CancellationToken ? cancellation);
 
         #endregion
 
@@ -123,7 +123,7 @@ namespace Diagram.UI
         /// Loads itself
         /// </summary>
         /// <returns>True in success</returns>
-        public override async Task<bool> LoadAsync(CancellationToken token)
+        public override async Task<bool> LoadAsync(CancellationToken ? token)
         {
             if (isLoaded)
             {

@@ -1,11 +1,5 @@
 import { CategoryObject } from "../../CategoryObject";
 import { OwnError } from "../../ErrorHandler/OwnError";
-import { FictiveAction } from "../../Fiction/FictiveAction";
-import { FictiveAngularVelocityMotion6D } from "../../Fiction/FictiveAngularVelocityMotion6D";
-import { FictiveOrientation } from "../../Fiction/FictiveOrientation";
-import { FictivePosition } from "../../Fiction/FictivePosition";
-import { FictiveVelocity } from "../../Fiction/FictiveVelocity";
-import { FictiveMeasurement } from "../../Fiction/FicvtiveMeasurement";
 import { MeasurementDerivation } from "../../Measurements/MeasurementDerivation";
 import { RealMatrix } from "../../RealMatrixProcessor/RealMatrix";
 import { EulerAngles } from "../../Vector3D/EulerAngles";
@@ -125,22 +119,22 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
         this.performer.executeAction(this.updFrame);
     }
 
-    protected source: IPosition = new FictivePosition();
+    protected source!: IPosition
 
-    protected target: IPosition = new FictivePosition();
+    protected target!: IPosition 
 
-    protected vSource: IVelocity = new FictiveVelocity();
+    protected vSource!: IVelocity 
 
-    protected vTarget: IVelocity = new FictiveVelocity();
+    protected vTarget!: IVelocity 
 
-    protected oSource: IOrientation = new FictiveOrientation();
+    protected oSource!: IOrientation
 
-    protected oTarget: IOrientation = new FictiveOrientation();
+    protected oTarget!: IOrientation 
 
-    protected aSource: IAngularVelocityMotion6D = new FictiveAngularVelocityMotion6D();
+    protected aSource!: IAngularVelocityMotion6D 
 
 
-    protected aTarget: IAngularVelocityMotion6D = new FictiveAngularVelocityMotion6D();
+    protected aTarget !: IAngularVelocityMotion6D 
 
     protected relativePos: number[] = [0, 0, 0];
 
@@ -151,11 +145,11 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
 
     protected quaternion: number[] = [0, 0, 0, 0];
 
-    protected measurementFrame: IMeasurement = new FictiveMeasurement();
+    protected measurementFrame!: IMeasurement;
 
-    protected velocityScalar: IMeasurement = new FictiveMeasurement();
+    protected velocityScalar!: IMeasurement;
 
-    protected distanceScalar: IMeasurement = new FictiveMeasurement();
+    protected distanceScalar!: IMeasurement
 
 
     protected measurements: IMeasurement[] = [];
@@ -177,31 +171,31 @@ export class RelativeMeasurements extends CategoryObject implements IMeasurement
     protected omegaRelative: number[] = [0, 0, 0];
     protected aux: number[] = [0, 0, 0];
 
-    private angularVelocity: IAngularVelocityMotion6D = new FictiveAngularVelocityMotion6D();
+    private angularVelocity!: IAngularVelocityMotion6D;
 
-    private ivelocity: IVelocity = new FictiveVelocity();
-
-
-
-    updFrame: IAction = new FictiveAction();
+    private ivelocity!: IVelocity
 
 
-    updateAll: IAction = new FictiveAction();
+
+    updFrame!: IAction
 
 
-    updateFrameAct: IAction = new FictiveAction();
+    updateAll!: IAction
 
-    updateFrameAngularVelocityAct: IAction = new FictiveAction();
 
-    updateAngularVelocityAct: IAction = new FictiveAction();
-    updateCoinVelocityAct: IAction = new FictiveAction();
-    updateCoinDistanceAct: IAction = new FictiveAction();
-    updateRelativePositionAct: IAction = new FictiveAction();
-    updateOrientationCoordinatesAct: IAction = new FictiveAction();
-    updateOrientationVelocityAct: IAction = new FictiveAction();
-    updateQuaternionAct: IAction = new FictiveAction();
-    addAngularVelocityAct: IAction = new FictiveAction();
-    updateVelocityRotationAct: IAction = new FictiveAction();
+    updateFrameAct!: IAction 
+
+    updateFrameAngularVelocityAct!: IAction
+
+    updateAngularVelocityAct!: IAction
+    updateCoinVelocityAct!: IAction
+    updateCoinDistanceAct!: IAction
+    updateRelativePositionAct!: IAction
+    updateOrientationCoordinatesAct!: IAction
+    updateOrientationVelocityAct!: IAction
+    updateQuaternionAct!: IAction
+    addAngularVelocityAct!: IAction
+    updateVelocityRotationAct!: IAction
 
     createActions(): void {
         this.updateFrameAct = new UpdateFrameAct(this);
@@ -719,8 +713,9 @@ class UpdateAct implements IAction {
         this.relative = relative;
     }
     action(): void {
-        throw new OwnNotImplemented();
+        throw new OwnNotImplemented("UpdateAct");
     }
+    isEmptyAction(): boolean { return false }
 
 }
 

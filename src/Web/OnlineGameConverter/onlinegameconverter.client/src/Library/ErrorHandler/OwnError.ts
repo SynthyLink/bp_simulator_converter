@@ -3,8 +3,8 @@ export class OwnError implements Error {
     name: string = "";
     message: string = "";
     stack?: string | undefined;
-    constructor(name: string, message: string, stack?: string | undefined) {
-        this.name = name;
+    constructor(name: string | undefined, message: string, stack?: string | undefined) {
+        if (name != undefined) this.name = name;
         this.message = message;
         this.stack = stack;
         this.init();

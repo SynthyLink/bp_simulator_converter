@@ -1,4 +1,4 @@
-import { IIterator } from "./IIterator";
+import type { IIterator } from "./IIterator";
 
 export interface IIteratorConsumer {
        /// <summary>

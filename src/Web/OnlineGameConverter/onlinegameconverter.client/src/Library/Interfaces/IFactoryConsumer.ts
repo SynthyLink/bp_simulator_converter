@@ -1,7 +1,7 @@
-import { IFactory } from "./IFactory";
+import type { IFactory } from "./IFactory";
 
 export interface IFactoryConsumer {
-    setConsumerFactory(facrory: IFactory): void
+    setConsumerFactory(factory: IFactory): void
     getConsumerFactory(): IFactory
 
 }

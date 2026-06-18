@@ -10,12 +10,6 @@ const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaCo
 class Transformer_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = 0;
-        this.var_3 = 0;
-        this.var_4 = 0;
-        this.var_5 = 0;
         let map = new Map([
             ["a", 1],
             ["b", 1],
@@ -62,6 +56,14 @@ class Transformer_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormula
         this.aliasName0 = new AliasName_1.AliasName(this.alias, "a");
         this.aliasName1 = new AliasName_1.AliasName(this.alias, "b");
     }
+    aliasName0;
+    aliasName1;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = 0;
+    var_3 = 0;
+    var_4 = 0;
+    var_5 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -83,20 +85,12 @@ class Transformer_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormula
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_5());
+        x0?.setIValue(this.get_5());
     }
 }
 class Transformer_CategoryObject_1 extends DifferentialEquationSolverFormula_1.DifferentialEquationSolverFormula {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = 0;
-        this.var_3 = 0;
-        this.var_4 = 0;
-        this.var_5 = 0;
-        this.var_6 = 0;
-        this.var_7 = 0;
         let map = new Map([
             ["x", 0],
             ["a", 1],
@@ -164,6 +158,18 @@ class Transformer_CategoryObject_1 extends DifferentialEquationSolverFormula_1.D
         this.measurement6 = all[0].getMeasurement(0);
         this.aliasName0 = new AliasName_1.AliasName(this.alias, "a");
     }
+    value2;
+    value4;
+    measurement6;
+    aliasName0;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = 0;
+    var_3 = 0;
+    var_4 = 0;
+    var_5 = 0;
+    var_6 = 0;
+    var_7 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -191,9 +197,9 @@ class Transformer_CategoryObject_1 extends DifferentialEquationSolverFormula_1.D
     save() {
         var v = this.derivations;
         var x0 = v.get("y");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_7());
+        x0?.setIValue(this.get_7());
         var x1 = v.get("x");
-        x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_3());
+        x1?.setIValue(this.get_3());
     }
 }
 class Transformer_CategoryObject_2 extends DataConsumer_1.DataConsumer {

@@ -10,18 +10,6 @@ const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaCo
 class ODE_Feedback_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = 0;
-        this.var_3 = 0;
-        this.var_4 = 0;
-        this.var_5 = 0;
-        this.var_6 = 0;
-        this.var_7 = 0;
-        this.var_8 = 0;
-        this.var_9 = 0;
-        this.var_10 = 0;
-        this.var_11 = 0;
         let map = new Map([
             ["a", 1],
             ["k", 2],
@@ -113,6 +101,23 @@ class ODE_Feedback_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormul
         this.aliasName7 = new AliasName_1.AliasName(this.alias, "c");
         this.aliasName8 = new AliasName_1.AliasName(this.alias, "d");
     }
+    aliasName0;
+    aliasName1;
+    aliasName6;
+    aliasName7;
+    aliasName8;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = 0;
+    var_3 = 0;
+    var_4 = 0;
+    var_5 = 0;
+    var_6 = 0;
+    var_7 = 0;
+    var_8 = 0;
+    var_9 = 0;
+    var_10 = 0;
+    var_11 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -152,26 +157,18 @@ class ODE_Feedback_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormul
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_11());
+        x0?.setIValue(this.get_11());
         var x1 = v.get("Formula_2");
-        x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_7());
+        x1?.setIValue(this.get_7());
         var x2 = v.get("Formula_3");
-        x2 === null || x2 === void 0 ? void 0 : x2.setIValue(this.get_8());
+        x2?.setIValue(this.get_8());
         var x3 = v.get("Formula_4");
-        x3 === null || x3 === void 0 ? void 0 : x3.setIValue(this.get_6());
+        x3?.setIValue(this.get_6());
     }
 }
 class ODE_Feedback_CategoryObject_1 extends DifferentialEquationSolverFormula_1.DifferentialEquationSolverFormula {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = 0;
-        this.var_3 = 0;
-        this.var_4 = 0;
-        this.var_5 = 0;
-        this.var_6 = 0;
-        this.var_7 = 0;
         let map = new Map([
             ["a", 1],
             ["y", 1],
@@ -239,6 +236,18 @@ class ODE_Feedback_CategoryObject_1 extends DifferentialEquationSolverFormula_1.
         this.measurement6 = all[0].getMeasurement(0);
         this.aliasName0 = new AliasName_1.AliasName(this.alias, "a");
     }
+    value2;
+    value4;
+    measurement6;
+    aliasName0;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = 0;
+    var_3 = 0;
+    var_4 = 0;
+    var_5 = 0;
+    var_6 = 0;
+    var_7 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -266,9 +275,9 @@ class ODE_Feedback_CategoryObject_1 extends DifferentialEquationSolverFormula_1.
     save() {
         var v = this.derivations;
         var x0 = v.get("y");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_7());
+        x0?.setIValue(this.get_7());
         var x1 = v.get("x");
-        x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_3());
+        x1?.setIValue(this.get_3());
     }
 }
 class ODE_Feedback_CategoryObject_2 extends DataConsumer_1.DataConsumer {

@@ -10,11 +10,6 @@ const VectorFormulaConsumer_1 = require("../Library/Measurements/VectorFormulaCo
 class SimpleFeed_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = 0;
-        this.var_3 = 0;
-        this.var_4 = 0;
         let map = new Map([
             ["a", 0.0089878549198011051],
             ["b", 0.0089878549198011051],
@@ -66,6 +61,15 @@ class SimpleFeed_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaC
         this.aliasName3 = new AliasName_1.AliasName(this.alias, "b");
         this.aliasName4 = new AliasName_1.AliasName(this.alias, "c");
     }
+    aliasName0;
+    aliasName1;
+    aliasName3;
+    aliasName4;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = 0;
+    var_3 = 0;
+    var_4 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -84,11 +88,11 @@ class SimpleFeed_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaC
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_2());
+        x0?.setIValue(this.get_2());
         var x1 = v.get("Formula_2");
-        x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_3());
+        x1?.setIValue(this.get_3());
         var x2 = v.get("Formula_3");
-        x2 === null || x2 === void 0 ? void 0 : x2.setIValue(this.get_4());
+        x2?.setIValue(this.get_4());
     }
     setFeedback() {
         let map = new Map([]);
@@ -97,11 +101,6 @@ class SimpleFeed_CategoryObject_0 extends VectorFormulaConsumer_1.VectorFormulaC
 class SimpleFeed_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = 0;
-        this.var_3 = 0;
-        this.var_4 = 0;
         let map = new Map([
             ["k", 0.10000000000000001]
         ]);
@@ -142,6 +141,13 @@ class SimpleFeed_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormulaC
         this.measurement4 = all[0].getMeasurement(0);
         this.aliasName0 = new AliasName_1.AliasName(this.alias, "k");
     }
+    measurement4;
+    aliasName0;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = 0;
+    var_3 = 0;
+    var_4 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -160,9 +166,9 @@ class SimpleFeed_CategoryObject_1 extends VectorFormulaConsumer_1.VectorFormulaC
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_3());
+        x0?.setIValue(this.get_3());
         var x1 = v.get("Formula_2");
-        x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_4());
+        x1?.setIValue(this.get_4());
     }
     setFeedback() {
         let map = new Map([

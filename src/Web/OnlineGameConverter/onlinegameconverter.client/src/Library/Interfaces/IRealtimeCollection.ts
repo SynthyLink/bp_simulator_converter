@@ -3,6 +3,7 @@ import type { ITimerFactory } from "./ITimerFactory";
 import type { ITimeMeasurementProvider } from "../Measurements/Interfaces/ITimeMeasurementProvider";
 
 export interface IRealtimeCollection {
+
     setComponentCollection(collection: IComponentCollection): void
 
     getComponentCollection(): IComponentCollection

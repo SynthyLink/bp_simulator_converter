@@ -20,7 +20,6 @@ import type { IObjectCollection } from "../Interfaces/IObjectCollection";
 import { DataConsumerBoolFunc } from "./DataConsumerBoolFunc";
 import { Performer } from "../Performer";
 import { TimeMeasurementProvider } from "./TimeMeasurementProvider";
-import { ActionArray } from "../Utilities/Generic/ActionArray";
 import { UpdateMeasurementsAction } from "./UpdateMeasurementsAction";
 
 export class PerformerMeasuremets {
@@ -34,9 +33,8 @@ export class PerformerMeasuremets {
         return this.processor
     }
 
-    public  setDifferentialEquationProcessor(p: IDifferentialEquationProcessor): void { 
+    public setDifferentialEquationProcessor(p: IDifferentialEquationProcessor): void {
         this.processor = p;
-        console.log(this.processor)
     }
 
     public  getRealtimeEventFactory(): IRealtimeCollectionFactory {
@@ -47,14 +45,12 @@ export class PerformerMeasuremets {
         this.realtimeEventFactory = f;
     }
 
-    public createUpdateMeasurementsAction(collection: IObjectCollection): IActionAddRemove {
-        let act = new ActionArray();
+    public createUpdateMeasurementsAction(collection: IObjectCollection, act : IActionAddRemove) : void {
         let mea = this.performer.getAll<IMeasurements>(collection, "IMeasurements")
         let mm = this.performer.sortMeasurements(mea);
         for (let m of mm) {
             act.addAction(new UpdateMeasurementsAction(m))
         }
-        return act;
     }
 
     constructor() {
@@ -112,19 +108,12 @@ export class PerformerMeasuremets {
         let m = dataConsumer.getAllMeasurements();
         for (let i = 0; i < m.length; i++) {
             let mea = m[i];
-            if (measurements.find(mea => true) === undefined) {
 
-            }
-            else {
-                measurements.push(mea);
-                let dc = mea as unknown as IDataConsumer;
-                //     if (dc instanceof IDataConsumer)
-
-            }
+            measurements.push(mea);
+            // let dc = mea as unknown as IDataConsumer;
+            //     if (dc instanceof IDataConsumer)
         }
-
     }
-
 
     public peformCondDCFixedStepCalculation(runtime: IDataRuntime, dataConsumer: IDataConsumer,
         conditionName: string, stop: IFunc<boolean>, start: number,

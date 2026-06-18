@@ -2143,25 +2143,6 @@ class Density_CategoryObject_1 extends GravityCategoryObject_1.GravityCategoryOb
 class Density_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = 0;
-        this.var_3 = 0;
-        this.var_4 = 0;
-        this.var_5 = 0;
-        this.var_6 = 0;
-        this.var_7 = 2;
-        this.var_8 = 0;
-        this.var_9 = 0;
-        this.var_10 = 2;
-        this.var_11 = 0;
-        this.var_12 = 0;
-        this.var_13 = 0;
-        this.var_14 = 2;
-        this.var_15 = 0;
-        this.var_16 = 0;
-        this.var_17 = 0;
-        this.var_18 = 0;
         let map = new Map([
             ["v", 1.7737490756446463],
             ["y", 4112.9884575937604],
@@ -2286,6 +2267,34 @@ class Density_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaCons
         this.aliasName9 = new AliasName_1.AliasName(this.alias, "v");
         this.aliasName13 = new AliasName_1.AliasName(this.alias, "w");
     }
+    aliasName0;
+    aliasName1;
+    aliasName2;
+    aliasName3;
+    aliasName4;
+    aliasName5;
+    aliasName6;
+    aliasName9;
+    aliasName13;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = 0;
+    var_3 = 0;
+    var_4 = 0;
+    var_5 = 0;
+    var_6 = 0;
+    var_7 = 2;
+    var_8 = 0;
+    var_9 = 0;
+    var_10 = 2;
+    var_11 = 0;
+    var_12 = 0;
+    var_13 = 0;
+    var_14 = 2;
+    var_15 = 0;
+    var_16 = 0;
+    var_17 = 0;
+    var_18 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -2346,21 +2355,21 @@ class Density_CategoryObject_2 extends VectorFormulaConsumer_1.VectorFormulaCons
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_0());
+        x0?.setIValue(this.get_0());
         var x1 = v.get("Formula_2");
-        x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_1());
+        x1?.setIValue(this.get_1());
         var x2 = v.get("Formula_3");
-        x2 === null || x2 === void 0 ? void 0 : x2.setIValue(this.get_2());
+        x2?.setIValue(this.get_2());
         var x3 = v.get("Formula_4");
-        x3 === null || x3 === void 0 ? void 0 : x3.setIValue(this.get_3());
+        x3?.setIValue(this.get_3());
         var x4 = v.get("Formula_5");
-        x4 === null || x4 === void 0 ? void 0 : x4.setIValue(this.get_4());
+        x4?.setIValue(this.get_4());
         var x5 = v.get("Formula_6");
-        x5 === null || x5 === void 0 ? void 0 : x5.setIValue(this.get_5());
+        x5?.setIValue(this.get_5());
         var x6 = v.get("Formula_7");
-        x6 === null || x6 === void 0 ? void 0 : x6.setIValue(this.get_17());
+        x6?.setIValue(this.get_17());
         var x7 = v.get("Formula_8");
-        x7 === null || x7 === void 0 ? void 0 : x7.setIValue(this.get_18());
+        x7?.setIValue(this.get_18());
     }
 }
 class Density_CategoryObject_3 extends ObjectTransformer_1.ObjectTransformer {
@@ -2389,39 +2398,6 @@ class Density_CategoryObject_4 extends ObjectTransformer_1.ObjectTransformer {
 class Density_CategoryObject_5 extends DifferentialEquationSolverFormula_1.DifferentialEquationSolverFormula {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = 0;
-        this.var_3 = 0;
-        this.var_4 = 0;
-        this.var_5 = 0;
-        this.var_6 = 0;
-        this.var_7 = 0;
-        this.var_8 = 0;
-        this.var_9 = 0;
-        this.var_10 = 0;
-        this.var_11 = 0;
-        this.var_12 = 0;
-        this.var_13 = 0;
-        this.var_14 = 0;
-        this.var_15 = 0;
-        this.var_16 = 0;
-        this.var_17 = 0;
-        this.var_18 = 0;
-        this.var_19 = 0;
-        this.var_20 = 0;
-        this.var_21 = 0;
-        this.var_22 = 0;
-        this.var_23 = 0;
-        this.var_24 = 0;
-        this.var_25 = 0;
-        this.var_26 = 0;
-        this.var_27 = 0;
-        this.var_28 = 0;
-        this.var_29 = 0;
-        this.var_30 = 0;
-        this.var_31 = 0;
-        this.var_32 = 0;
         let map = new Map([
             ["x", -5448.3481532400001],
             ["o", 0.00014584231700000001],
@@ -2658,6 +2634,52 @@ class Density_CategoryObject_5 extends DifferentialEquationSolverFormula_1.Diffe
         this.aliasName4 = new AliasName_1.AliasName(this.alias, "s");
         this.aliasName13 = new AliasName_1.AliasName(this.alias, "o");
     }
+    measurement0;
+    value2;
+    measurement5;
+    measurement7;
+    value9;
+    value14;
+    measurement17;
+    value18;
+    measurement27;
+    value30;
+    aliasName1;
+    aliasName4;
+    aliasName13;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = 0;
+    var_3 = 0;
+    var_4 = 0;
+    var_5 = 0;
+    var_6 = 0;
+    var_7 = 0;
+    var_8 = 0;
+    var_9 = 0;
+    var_10 = 0;
+    var_11 = 0;
+    var_12 = 0;
+    var_13 = 0;
+    var_14 = 0;
+    var_15 = 0;
+    var_16 = 0;
+    var_17 = 0;
+    var_18 = 0;
+    var_19 = 0;
+    var_20 = 0;
+    var_21 = 0;
+    var_22 = 0;
+    var_23 = 0;
+    var_24 = 0;
+    var_25 = 0;
+    var_26 = 0;
+    var_27 = 0;
+    var_28 = 0;
+    var_29 = 0;
+    var_30 = 0;
+    var_31 = 0;
+    var_32 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -2760,17 +2782,17 @@ class Density_CategoryObject_5 extends DifferentialEquationSolverFormula_1.Diffe
     save() {
         var v = this.derivations;
         var x0 = v.get("v");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_26());
+        x0?.setIValue(this.get_26());
         var x1 = v.get("u");
-        x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_16());
+        x1?.setIValue(this.get_16());
         var x2 = v.get("z");
-        x2 === null || x2 === void 0 ? void 0 : x2.setIValue(this.get_30());
+        x2?.setIValue(this.get_30());
         var x3 = v.get("y");
-        x3 === null || x3 === void 0 ? void 0 : x3.setIValue(this.get_14());
+        x3?.setIValue(this.get_14());
         var x4 = v.get("x");
-        x4 === null || x4 === void 0 ? void 0 : x4.setIValue(this.get_9());
+        x4?.setIValue(this.get_9());
         var x5 = v.get("w");
-        x5 === null || x5 === void 0 ? void 0 : x5.setIValue(this.get_32());
+        x5?.setIValue(this.get_32());
     }
     setFeedback() {
         let map = new Map([
@@ -2787,13 +2809,6 @@ class Density_CategoryObject_5 extends DifferentialEquationSolverFormula_1.Diffe
 class Density_CategoryObject_6 extends RecursiveFormula_1.RecursiveFormula {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = false;
-        this.var_3 = 0;
-        this.var_4 = 0;
-        this.var_5 = false;
-        this.var_6 = false;
         let map = new Map([
             ["x", 0],
             ["y", false],
@@ -2840,6 +2855,15 @@ class Density_CategoryObject_6 extends RecursiveFormula_1.RecursiveFormula {
         this.measurement0 = all[0].getMeasurement(5);
         this.value3 = this.output[0];
     }
+    measurement0;
+    value3;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = false;
+    var_3 = 0;
+    var_4 = 0;
+    var_5 = false;
+    var_6 = false;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -2864,9 +2888,9 @@ class Density_CategoryObject_6 extends RecursiveFormula_1.RecursiveFormula {
     save() {
         var v = this.variables;
         var x0 = v.get("x");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_0());
+        x0?.setIValue(this.get_0());
         var x1 = v.get("y");
-        x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_6());
+        x1?.setIValue(this.get_6());
     }
 }
 class Density_CategoryObject_7 extends DataConsumer_1.DataConsumer {

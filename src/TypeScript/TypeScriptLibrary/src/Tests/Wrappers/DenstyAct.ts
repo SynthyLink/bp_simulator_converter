@@ -8,11 +8,13 @@ import { IMeasurement } from "../../Library/Measurements/Interfaces/IMeasurement
 import { IMeasurements } from "../../Library/Measurements/Interfaces/IMeasurements";
 import { IFunc } from "../../Library/Interfaces/IFunc";
 import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
+import { IFactory } from "../../Library/Interfaces/IFactory";
 
 
 export class DensityAct extends Density implements IAction, IFunc<boolean> {
 
     dc !: IDataConsumer;
+    factory: IFactory = new Motion6DFactory
 
     measurement !: IMeasurement;
     constructor() {
@@ -21,6 +23,9 @@ export class DensityAct extends Density implements IAction, IFunc<boolean> {
         this.dc = this.getCategoryObject("Chart") as unknown as IDataConsumer;
         let m = this.getCategoryObject("A-transformation") as unknown as IMeasurements;
         this.measurement = m.getMeasurement(0);
+    }
+    isEmptyAction(): boolean {
+        return false
     }
 
     action(): void {

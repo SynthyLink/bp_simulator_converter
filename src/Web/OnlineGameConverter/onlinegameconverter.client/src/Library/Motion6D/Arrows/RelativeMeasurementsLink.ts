@@ -1,7 +1,7 @@
 import { CategoryArrow } from "../../CategoryArrow";
 import { OwnError } from "../../ErrorHandler/OwnError";
-import { IDesktop } from "../../Interfaces/IDesktop";
-import { IPosition } from "../Interfaces/IPosition";
+import type { IDesktop } from "../../Interfaces/IDesktop";
+import type { IPosition } from "../Interfaces/IPosition";
 import { RelativeMeasurements } from "../Objects/RelativeMeasurements";
 import type { ICategoryObject } from "../../Interfaces/ICategoryObject";
 

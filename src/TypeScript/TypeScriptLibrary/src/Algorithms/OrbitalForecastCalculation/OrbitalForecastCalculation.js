@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrbitalForecastCalculation = void 0;
 const RungeProcessor_1 = require("../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor");
@@ -35,25 +26,17 @@ class Action {
     action() {
         this.p.print(this.dc);
     }
+    isEmptyAction() {
+        return false;
+    }
+    dc;
+    p;
 }
 class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
+    condition;
+    act;
     constructor() {
         super();
-        this.calculate = (condition, controller) => __awaiter(this, void 0, void 0, function* () {
-            this.contoller = controller;
-            this.set(condition);
-            let p = new PerformerMeasuremets_1.PerformerMeasuremets();
-            this.stopWatch = new StopWatch_1.StopWatch();
-            this.stopWatch.start();
-            var count = Math.floor(condition.end - condition.begin);
-            p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, condition.begin, 1, count, this);
-            this.stopWatch.stop();
-            return this.list;
-        });
-        this.list = [];
-        this.contoller = new AbortController();
-        this.performer = new Performer_1.Performer();
-        this.map = new Map();
         this.dc = this.getCategoryObject("Chart");
         this.alias = this.getCategoryObject("Motion equations");
         this.measurements = this.alias;
@@ -62,6 +45,9 @@ class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
         this.setCheck(check);
         this.performer.setCheker(this, check);
         this.act = new Action(this.dc, this.performer);
+    }
+    isEmptyAction() {
+        return false;
     }
     func() {
         return this.contoller.signal.aborted;
@@ -99,6 +85,17 @@ class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
         let processor = new RungeProcessor_1.RungeProcessor();
         this.runtime = new DataRuntimeConsumerODE_1.DataRuntimeConsumerODE(this.dc, new Motion6DFactory_1.Motion6DFactory());
     }
+    calculate = async (condition, controller) => {
+        this.contoller = controller;
+        this.set(condition);
+        let p = new PerformerMeasuremets_1.PerformerMeasuremets();
+        this.stopWatch = new StopWatch_1.StopWatch();
+        this.stopWatch.start();
+        var count = Math.floor(condition.end - condition.begin);
+        p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, condition.begin, 1, count, this);
+        this.stopWatch.stop();
+        return this.list;
+    };
     performFixedStepCalculation() {
         this.stopWatch = new StopWatch_1.StopWatch();
         this.stopWatch.start();
@@ -107,8 +104,17 @@ class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
     }
     get(i) {
         let variable = this.map.get(i);
-        return this.performer.convertFromAny(variable === null || variable === void 0 ? void 0 : variable.getMeasurementValue());
+        return this.performer.convertFromAny(variable?.getMeasurementValue());
     }
+    list = [];
+    contoller = new AbortController();
+    alias;
+    measurements;
+    dc;
+    runtime;
+    performer = new Performer_1.Performer();
+    map = new Map();
+    stopWatch;
 }
 exports.OrbitalForecastCalculation = OrbitalForecastCalculation;
 ;

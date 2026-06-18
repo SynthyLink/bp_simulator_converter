@@ -1,6 +1,5 @@
 import { CategoryObject } from "../CategoryObject";
 import { ActionArray } from "../Utilities/Generic/ActionArray";
-import { Performer } from "../Performer";
 import type { IAction } from "../Interfaces/IAction";
 import type { IActionAddRemove } from "../Interfaces/IActionAddRemove";
 import type { IAddRemove } from "../Interfaces/IAddRemove";
@@ -44,10 +43,10 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         this.dataConsumer = this;
         this.currentAction = this.fictiveAvtion;
     }
-
+ 
     setExternalUpdate(action: IActionAddRemove | undefined): void {
         this.eventAction.clearActions();
-        if (action === null) {
+        if (action === undefined) {
             return;
         }
         this.eventAction.addAction(action)
@@ -59,6 +58,8 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     isEventEnabled(): boolean {
         return this.isEvEnabled
     }
+
+    isEmptyAction(): boolean { return false }
 
     setEventEnabled(enabled: boolean): void {
         if (enabled == this.isEvEnabled) return
@@ -78,28 +79,37 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         return ""
     }
 
-    getChildernT(): IEvent[] {
+    getEventHandlerEvents(): IEvent[] {
         return this.externalEvents
     }
 
     addChildT(child: IEvent): void
     {
-        var ev = this.performer.convertObject(child, "IEvent")
-        if (ev.length == 0) return
-        this.performer.addUnique(this.externalEvents, child)
+        this.fchild = child
     }
 
-    removeChildT(child: IEvent): void {
-        this.performer.remove(this.externalEvents, child)
+    fchild !: IEvent
+
+
+    addEventToHandler(event: IEvent): void {
+        var ev = this.performer.convertObject(event, "IEvent")
+        if (ev.length == 0) return
+        this.performer.addUnique(this.externalEvents, event)
     }
+
 
     resetDataConsumer(): void {
     }
+
     addIterator(iterator: IIterator): void {
         this.iterator = iterator;
     }
     removeIterator(iterator: IIterator): void {
+        this.fi = iterator
     }
+
+    fi !: IIterator
+
     getCheck(): ICheck {
         return this.checker;
     }
@@ -124,7 +134,6 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     getInternalTime(): number
     {
         var tm = this.timeMeasurement;
-
         return tm.getTime();
     }
 
@@ -151,6 +160,16 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
     addMeasurements(item: IMeasurements): void {
         this.measurements.push(item);
     }
+
+    addRemoveObject(object: ICategoryObject, add: boolean): boolean {
+        if (add) this.addRemoveobjects.push(object)
+        return true
+    }
+    getAddRemoveObjects(): ICategoryObject[] {
+        return this.addRemoveobjects;
+    }
+
+    addRemoveobjects: ICategoryObject[] = []
 
 
     private measurements: IMeasurements[] = [];

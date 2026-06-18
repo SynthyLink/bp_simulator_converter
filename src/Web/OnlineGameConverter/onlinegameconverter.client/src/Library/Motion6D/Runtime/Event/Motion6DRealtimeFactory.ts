@@ -2,49 +2,32 @@ import type { IRealtimeCollectionFactory } from "../../../Interfaces/IRealtimeCo
 import type { IComponentCollection } from "../../../Interfaces/IComponentCollection";
 import type { IRealtimeCollection } from "../../../Interfaces/IRealtimeCollection";
 import type { IDataConsumer } from "../../../Measurements/Interfaces/IDataConsumer";
-import type { IObject } from "../../../Interfaces/IObject";
 import { DataRuntimeConsumerMotion6DEvent } from "./DataRuntimeConsumerMotion6DEvent";
-import { Performer } from "../../../Performer";
-import { PerformerMeasuremets } from "../../../Measurements/PerformerMeasuremets";
-import { FictiveRealtimeCollection } from "../../../Fiction/FictiveRealtimeCollection";
-import { RungeProcessor } from "../../../Measurements/DifferentialEquations/Processors/RungeProcessor";
 import { Motion6DFactory } from "../../Motion6DFactory";
+import { EmptyRealtimeCollection } from "../../../Runtime/EmptyRealtimeCollection";
+import { FactoryObject } from "../../../FactoryObject";
 
-export class Motion6DRealtimeFactory implements IRealtimeCollectionFactory, IObject {
-    constructor() {
+export class Motion6DRealtimeFactory extends FactoryObject implements IRealtimeCollectionFactory {
+    constructor(mF: Motion6DFactory) {
+        super("", mF)
+        this.mF = mF;
+        this.types.push("IRealtimeCollectionFactory")
+        this.types.push("Motion6DRealtimeFactory")
+        this.typeName = "Motion6DRealtimeFactory"
     }
-
-    protected performer: Performer = new Performer();
-
-    protected mPerformer: PerformerMeasuremets = new PerformerMeasuremets()
-
-    getName(): string {
-        return this.name;
-    }
-
-
-    getClassName(): string {
-        return this.typeName;
-    }
-
-    imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
-    }
-
 
     createRealtimeFromCollection(collection: IComponentCollection): IRealtimeCollection {
-        let processor = new RungeProcessor()
-        return new FictiveRealtimeCollection()
+        this.collection = collection
+        return new EmptyRealtimeCollection()
     }
+
+    collection!: IComponentCollection
+
+    mF !: Motion6DFactory 
 
     createRealtimeFromDataConsumer(consumer: IDataConsumer): IRealtimeCollection {
-        return new DataRuntimeConsumerMotion6DEvent(consumer, new Motion6DFactory())
+        return new DataRuntimeConsumerMotion6DEvent(consumer, this.mF)
     }
 
-    protected typeName: string = "Motion6DRealtimeFactory";
-
-    protected types: string[] = ["IObject", "IRealtimeCollectionFactory", "Motion6DRealtimeFactory"];
-
-    protected name: string = "";
 
 }

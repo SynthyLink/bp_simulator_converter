@@ -2,9 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompositionAct = void 0;
 const PerformerMeasuremets_1 = require("../../Library/Measurements/PerformerMeasuremets");
+const Motion6DFactory_1 = require("../../Library/Motion6D/Motion6DFactory");
 const DataRuntimeConsumer_1 = require("../../Library/Runtime/DataRuntimeConsumer");
 const Composition_1 = require("../Composition");
 class CompositionAct extends Composition_1.Composition {
+    dc;
+    factory = new Motion6DFactory_1.Motion6DFactory;
     constructor() {
         super();
         var co = this.getCategoryObject("Chart");
@@ -15,11 +18,14 @@ class CompositionAct extends Composition_1.Composition {
         var a = k[0].getMeasurement(0).getMeasurementValue();
         console.log(a);
     }
+    isEmptyAction() {
+        return false;
+    }
     func() {
         return false;
     }
     test() {
-        var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc);
+        var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc, this.factory);
         var p = new PerformerMeasuremets_1.PerformerMeasuremets();
         p.performFixedStepCalculation(runtime, 0, 1, 1000, this, this);
     }

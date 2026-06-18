@@ -2,12 +2,17 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TwoAct = void 0;
 const PerformerMeasuremets_1 = require("../../Library/Measurements/PerformerMeasuremets");
+const Motion6DFactory_1 = require("../../Library/Motion6D/Motion6DFactory");
 const DataRuntimeConsumer_1 = require("../../Library/Runtime/DataRuntimeConsumer");
 const Two_1 = require("../Two");
 class TwoAct extends Two_1.Two {
+    dc;
     constructor() {
         super();
         this.dc = this.getCategoryObjects()[1];
+    }
+    isEmptyAction() {
+        return false;
     }
     action() {
         var k = this.dc.getAllMeasurements()[0];
@@ -18,8 +23,9 @@ class TwoAct extends Two_1.Two {
     func() {
         return false;
     }
+    factory = new Motion6DFactory_1.Motion6DFactory;
     test() {
-        var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc);
+        var runtime = new DataRuntimeConsumer_1.DataRuntimeConsumer(this.dc, this.factory);
         var p = new PerformerMeasuremets_1.PerformerMeasuremets();
         p.performFixedStepCalculation(runtime, 0, 1, 10, this, this);
     }

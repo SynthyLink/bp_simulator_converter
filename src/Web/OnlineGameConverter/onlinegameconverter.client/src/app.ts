@@ -35,7 +35,10 @@ function funcAirplane() {
     game.startScene("Air");
 
     // Here we setup a selector element to switch scenes from the webpage
-    const selector : HTMLSelectElement = document.querySelector("#scenes");
+ /*   let sel = document.querySelector("#scenes");
+    if (sel !== undefined && sel != null) {
+        let selector : HTMLSelectElement = sel
+    
     for (let name in scenes) {
         let option = document.createElement("option");
         option.text = name;

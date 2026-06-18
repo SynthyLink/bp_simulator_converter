@@ -9,13 +9,6 @@ const Performer_1 = require("../../../Library/Performer");
 class AtmosphereCategoryObject extends AtmospherePure_1.AtmospherePure {
     constructor(desktop, name) {
         super();
-        this.name = "";
-        this.types = ["IObject", "ICategoryObject", "IObjectTransformer", "AtmospherePure", "AtmosphereCategoryObject"];
-        this.inp = ["t", "x", "y", "z"];
-        this.ooutp = ["Density"];
-        this.a = 0;
-        this.x = [0, 0, 0];
-        this.performer = new Performer_1.Performer();
         this.desktop = desktop;
         this.name = name;
         desktop.addCategoryObject(this);
@@ -63,6 +56,15 @@ class AtmosphereCategoryObject extends AtmospherePure_1.AtmospherePure {
     getDesktop() {
         return this.desktop;
     }
+    name = "";
+    types = ["IObject", "ICategoryObject", "IObjectTransformer", "AtmospherePure", "AtmosphereCategoryObject"];
+    desktop;
+    checker;
+    inp = ["t", "x", "y", "z"];
+    ooutp = ["Density"];
+    a = 0;
+    x = [0, 0, 0];
+    performer = new Performer_1.Performer();
 }
 exports.AtmosphereCategoryObject = AtmosphereCategoryObject;
 //# sourceMappingURL=AtmosphereCategoryObject.js.map

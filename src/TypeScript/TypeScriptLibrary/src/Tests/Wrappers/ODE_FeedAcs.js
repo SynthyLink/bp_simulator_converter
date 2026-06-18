@@ -8,10 +8,13 @@ const Performer_1 = require("../../Library/Performer");
 const DataRuntimeConsumerODE_1 = require("../../Library/Runtime/DataRuntimeConsumerODE");
 const ODE_Feed_1 = require("../ODE_Feed");
 class ODE_FeedAct extends ODE_Feed_1.ODE_Feed {
+    dc;
     constructor() {
         super();
-        this.performer = new Performer_1.Performer();
         this.dc = this.getCategoryObject("Chart");
+    }
+    isEmptyAction() {
+        return false;
     }
     action() {
         this.performer.print(this.dc);
@@ -31,6 +34,7 @@ class ODE_FeedAct extends ODE_Feed_1.ODE_Feed {
             //    throw new OwnNotImplemented();
         }
     }
+    performer = new Performer_1.Performer();
 }
 exports.ODE_FeedAct = ODE_FeedAct;
 //# sourceMappingURL=ODE_FeedAcs.js.map

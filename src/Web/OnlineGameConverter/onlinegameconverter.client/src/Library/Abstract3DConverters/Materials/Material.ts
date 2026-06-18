@@ -1,8 +1,12 @@
-import { IObject } from "../../Interfaces/IObject";
-import { INamed } from "../../NamedTree/Interfaces/INamed";
+import type { IObject } from "../../Interfaces/IObject";
+import type { INamed } from "../../NamedTree/Interfaces/INamed";
 import { Performer } from "../../Performer";
 
 export class Material implements INamed, IObject {
+
+    constructor(name: string) {
+        this.namedName = name;
+    }
 
     getNamedName(): string {
         return this.namedName
@@ -21,7 +25,7 @@ export class Material implements INamed, IObject {
     }
 
     imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
 
     protected typeName: string = "Material";

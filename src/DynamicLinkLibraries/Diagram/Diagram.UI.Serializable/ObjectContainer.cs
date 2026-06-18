@@ -62,7 +62,7 @@ namespace Diagram.UI
         /// </summary>
         /// <param name="bytes">Soure bytes</param>
         /// <returns>Thrue in success and false otherwise</returns>
-        protected override async Task<bool> LoadDesktop(byte[] bytes, CancellationToken token)
+        protected override async Task<bool> LoadDesktop(byte[] bytes, CancellationToken ? token)
         {
             return await (desktop as PureDesktopPeer).Load(bytes, false, token);
         }

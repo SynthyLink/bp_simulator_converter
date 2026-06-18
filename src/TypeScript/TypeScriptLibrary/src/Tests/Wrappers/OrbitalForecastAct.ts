@@ -15,6 +15,9 @@ export class OrbitaForecasAct extends OrbitalForecast implements IAction {
         var o = this.getCategoryObjects();
         this.dc = this.getCategoryObject("Chart") as unknown as IDataConsumer;
     }
+    isEmptyAction(): boolean {
+        return false
+    }
 
     action(): void {
         var k = this.dc.getAllMeasurements()[0];

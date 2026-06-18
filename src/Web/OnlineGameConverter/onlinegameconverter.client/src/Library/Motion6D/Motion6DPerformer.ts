@@ -1,6 +1,5 @@
 import type { IActionAddRemove } from "../Interfaces/IActionAddRemove";
 import type { IObjectCollection } from "../Interfaces/IObjectCollection";
-import { UpdateMeasurementsAction } from "../Measurements/UpdateMeasurementsAction";
 import { Performer } from "../Performer";
 import { ActionArray } from "../Utilities/Generic/ActionArray";
 import { SortingAlgorithms } from "../Utilities/Sort/SortingAlgorithms";
@@ -16,6 +15,7 @@ export class Motion6DPerformer {
 
     constructor() {
     }
+
     static baseFrame: Motion6DFrame = new Motion6DFrame();
 
     public getBaseFrame(): ReferenceFrame {
@@ -40,7 +40,6 @@ export class Motion6DPerformer {
         let act = new ActionArray();
         let mea = this.performer.getAll<IPosition>(collection, "IPosition")
         let mm = this.sorting.mergesort(mea, this.comparer)
-        console.log(mm)
         for (let m of mm) {
             act.addAction(new UpdatePositionAction(m))
         }
@@ -86,8 +85,7 @@ export class Motion6DPerformer {
         /// <returns>Parent frame</returns>
         static public ReferenceFrame GetParentFrame(this IPosition position)
         {
-            if (position.Parent == null)
-            {
+             {
                 return Motion6DFrame.Base;
             }
             return performer.GetParentOwn(position);
@@ -108,6 +106,8 @@ export class Motion6DPerformer {
         frame.setReferenceFrame(baseFrame, relative);
         return frame;
     }
+
+    
    
 
     public getRelativeFrame(baseFrame: ReferenceFrame, targetFrame: ReferenceFrame, relative: ReferenceFrame): void

@@ -2,9 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SunTime = void 0;
 class SunTime {
-    constructor() {
-        this.coeff = Math.PI / 360.0;
-    }
     CalculateGreenwichSiderealTimeFromDate(dateTimeUtc) {
         let x = this.CalculateJulianDate(dateTimeUtc);
         x = this.CalculateJulianCentury(x);
@@ -50,6 +47,7 @@ class SunTime {
         }
         return gstDegrees;
     }
+    coeff = Math.PI / 360.0;
 }
 exports.SunTime = SunTime;
 //# sourceMappingURL=SunTime.js.map

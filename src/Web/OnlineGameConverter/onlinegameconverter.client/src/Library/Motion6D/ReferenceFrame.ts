@@ -1,11 +1,11 @@
 import type { IObject } from "../Interfaces/IObject";
 import type { INodeT } from "../NamedTree/Interfaces/INodeT";
-import { Performer } from "../Performer";
-import { RealMatrix } from "../RealMatrixProcessor/RealMatrix";
-import { Vector3DProcessor } from "../Vector3D/Vector3DProcessor";
 import type { IOrientation } from "./Interfaces/IOrientation";
 import type { IPosition } from "./Interfaces/IPosition";
 import type { IReferenceFrame } from "./Interfaces/IReferenceFrame";
+import { Performer } from "../Performer";
+import { RealMatrix } from "../RealMatrixProcessor/RealMatrix";
+import { Vector3DProcessor } from "../Vector3D/Vector3DProcessor";
 
 export class ReferenceFrame implements IPosition, IOrientation, IObject {
     setParameters(parameters: any): void {
@@ -28,6 +28,38 @@ export class ReferenceFrame implements IPosition, IOrientation, IObject {
     }
     getNodeValueT(): IPosition {
         return this;
+    }
+
+    public copyReferenceFrameFromArrays(m: number[][], p: number[]): void {
+        var mm = this.matrix;
+        for (var i = 0; i < m.length; i++) {
+            var c = m[i]
+            var cc = mm[i]
+            for (var j = 0; j < cc.length; j++) {
+                cc[j] = c[i]
+            }
+        }
+        var pp = this.position
+        for (var i = 0; i < p.length; i++) {
+            pp[i] = p[i]
+        }
+    }
+
+    public copyReferenceFrameFromPositionQuatetnion(position: number[], quaternion: number[]): void {
+        var p = this.position
+        for (var i = 0; i < p.length; i++) {
+            p[i] = position[i]
+        }
+        var q = this.quaternion
+        for (var i = 0; i < q.length; i++) {
+            q[i] = quaternion[i]
+        }
+        this.setMatrix()
+    }
+
+
+    public copyReferenceFrameFrom(frame: ReferenceFrame): void {
+        this.copyReferenceFrameFromArrays(frame.matrix, frame.position)
     }
 
 

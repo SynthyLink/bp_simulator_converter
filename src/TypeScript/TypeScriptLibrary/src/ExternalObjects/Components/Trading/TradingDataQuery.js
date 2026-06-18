@@ -1,27 +1,13 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TradingDataQuery = void 0;
 const CategoryObject_1 = require("../../../Library/CategoryObject");
 const TradinHistoryDatabse_1 = require("./TradinHistoryDatabse");
 class TradingDataQuery extends CategoryObject_1.CategoryObject {
+    inter = (0, TradinHistoryDatabse_1.getHistoryDatabase)();
+    symbols = new Map();
     constructor(desktop, name) {
         super(desktop, name);
-        this.inter = (0, TradinHistoryDatabse_1.getHistoryDatabase)();
-        this.symbols = new Map();
-        this.begin = 0;
-        this.end = 0;
-        this.period = "";
-        this.data = [];
-        this.step = 0;
         this.typeName = "TradingDataQuery";
         this.types.push("TradingDataQuery");
         this.types.push("IInitializeTask");
@@ -46,12 +32,17 @@ class TradingDataQuery extends CategoryObject_1.CategoryObject {
     resetIterator() {
         this.step = 0;
     }
-    initializeTaskAsync(controller) {
-        return __awaiter(this, void 0, void 0, function* () {
-            var sym = yield this.inter.getSymbolsAsync(controller);
-            this.performer.copyMap(sym, this.symbols);
-        });
+    async initializeTaskAsync(controller) {
+        var sym = await this.inter.getSymbolsAsync(controller);
+        this.performer.copyMap(sym, this.symbols);
     }
+    id;
+    begin = 0;
+    end = 0;
+    period = "";
+    data = [];
+    current;
+    step = 0;
 }
 exports.TradingDataQuery = TradingDataQuery;
 //# sourceMappingURL=TradingDataQuery.js.map

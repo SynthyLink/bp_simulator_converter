@@ -10,7 +10,6 @@ import { PerformerMeasuremets } from '../../Library/Measurements/PerformerMeasur
 import { Composition } from '../Composition';
 import { IFunc } from '../../Library/Interfaces/IFunc';
 import { IPlayEngine } from '../../Library/Interfaces/IPlayEngine';
-import { ScadaComposition } from '../Wrappers/ScadaComposion';
 
 
 
@@ -55,10 +54,7 @@ export class ActorWebNew {
 
     }
 
-    public actCompositionScada(engine: IPlayEngine) {
-        new ScadaComposition(engine)
-    }
-
+  
     public actCompositionEvent(engine: IPlayEngine) {
         var comp = new CompositionEvent(engine)
         comp.test();

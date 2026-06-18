@@ -50,8 +50,6 @@ class Donchian_CategoryObject_4 extends SequenserFilterWrapper_1.SequenceFilterW
 class Donchian_CategoryObject_5 extends RecursiveFormula_1.RecursiveFormula {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
         let map = new Map([
             ["t", 0],
             ["x", 0],
@@ -81,6 +79,10 @@ class Donchian_CategoryObject_5 extends RecursiveFormula_1.RecursiveFormula {
         this.value0 = this.output[1];
         this.aliasName1 = new AliasName_1.AliasName(this.alias, "t");
     }
+    value0;
+    aliasName1;
+    var_0 = 0;
+    var_1 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -90,30 +92,14 @@ class Donchian_CategoryObject_5 extends RecursiveFormula_1.RecursiveFormula {
     save() {
         var v = this.variables;
         var x0 = v.get("x");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_0());
+        x0?.setIValue(this.get_0());
         var x1 = v.get("y");
-        x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_1());
+        x1?.setIValue(this.get_1());
     }
 }
 class Donchian_CategoryObject_6 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = false;
-        this.var_3 = 0;
-        this.var_4 = 0;
-        this.var_5 = false;
-        this.var_6 = 0;
-        this.var_7 = 0;
-        this.var_8 = false;
-        this.var_9 = 0;
-        this.var_10 = 0;
-        this.var_11 = false;
-        this.var_12 = 1;
-        this.var_13 = false;
-        this.var_14 = 2;
-        this.var_15 = false;
         let map = new Map([]);
         this.performer.setAliasMap(map, this);
         this.addVariableValue("Formula_1", false, false);
@@ -215,6 +201,29 @@ class Donchian_CategoryObject_6 extends VectorFormulaConsumer_1.VectorFormulaCon
         this.measurement7 = all[3].getMeasurement(0);
         this.measurement9 = all[1].getMeasurement(1);
     }
+    measurement0;
+    measurement1;
+    measurement3;
+    measurement4;
+    measurement6;
+    measurement7;
+    measurement9;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = false;
+    var_3 = 0;
+    var_4 = 0;
+    var_5 = false;
+    var_6 = 0;
+    var_7 = 0;
+    var_8 = false;
+    var_9 = 0;
+    var_10 = 0;
+    var_11 = false;
+    var_12 = 1;
+    var_13 = false;
+    var_14 = 2;
+    var_15 = false;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -266,71 +275,24 @@ class Donchian_CategoryObject_6 extends VectorFormulaConsumer_1.VectorFormulaCon
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_2());
+        x0?.setIValue(this.get_2());
         var x1 = v.get("Formula_2");
-        x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_5());
+        x1?.setIValue(this.get_5());
         var x2 = v.get("Formula_3");
-        x2 === null || x2 === void 0 ? void 0 : x2.setIValue(this.get_8());
+        x2?.setIValue(this.get_8());
         var x3 = v.get("Formula_4");
-        x3 === null || x3 === void 0 ? void 0 : x3.setIValue(this.get_9());
+        x3?.setIValue(this.get_9());
         var x4 = v.get("Formula_5");
-        x4 === null || x4 === void 0 ? void 0 : x4.setIValue(this.get_11());
+        x4?.setIValue(this.get_11());
         var x5 = v.get("Formula_6");
-        x5 === null || x5 === void 0 ? void 0 : x5.setIValue(this.get_13());
+        x5?.setIValue(this.get_13());
         var x6 = v.get("Formula_7");
-        x6 === null || x6 === void 0 ? void 0 : x6.setIValue(this.get_15());
+        x6?.setIValue(this.get_15());
     }
 }
 class Donchian_CategoryObject_7 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = false;
-        this.var_1 = 0;
-        this.var_2 = 0;
-        this.var_3 = false;
-        this.var_4 = false;
-        this.var_5 = false;
-        this.var_6 = false;
-        this.var_7 = false;
-        this.var_8 = 2;
-        this.var_9 = false;
-        this.var_10 = false;
-        this.var_11 = false;
-        this.var_12 = false;
-        this.var_13 = 1;
-        this.var_14 = false;
-        this.var_15 = false;
-        this.var_16 = false;
-        this.var_17 = 0;
-        this.var_18 = false;
-        this.var_19 = false;
-        this.var_20 = false;
-        this.var_21 = false;
-        this.var_22 = false;
-        this.var_23 = 1;
-        this.var_24 = false;
-        this.var_25 = false;
-        this.var_26 = 0;
-        this.var_27 = 0;
-        this.var_28 = 0;
-        this.var_29 = false;
-        this.var_30 = 2;
-        this.var_31 = false;
-        this.var_32 = false;
-        this.var_33 = 0;
-        this.var_34 = 0;
-        this.var_35 = 0;
-        this.var_36 = 0;
-        this.var_37 = 1;
-        this.var_38 = 0;
-        this.var_39 = 0;
-        this.var_40 = 1;
-        this.var_41 = 0;
-        this.var_42 = 0;
-        this.var_43 = 1;
-        this.var_44 = 0;
-        this.var_45 = 0;
-        this.var_46 = 0;
         let map = new Map([]);
         this.performer.setAliasMap(map, this);
         this.addVariableValue("Formula_1", false, false);
@@ -553,6 +515,61 @@ class Donchian_CategoryObject_7 extends VectorFormulaConsumer_1.VectorFormulaCon
         this.measurement31 = all[0].getMeasurement(6);
         this.measurement46 = all[0].getMeasurement(3);
     }
+    measurement0;
+    measurement1;
+    measurement5;
+    measurement15;
+    measurement21;
+    measurement24;
+    measurement31;
+    measurement46;
+    var_0 = false;
+    var_1 = 0;
+    var_2 = 0;
+    var_3 = false;
+    var_4 = false;
+    var_5 = false;
+    var_6 = false;
+    var_7 = false;
+    var_8 = 2;
+    var_9 = false;
+    var_10 = false;
+    var_11 = false;
+    var_12 = false;
+    var_13 = 1;
+    var_14 = false;
+    var_15 = false;
+    var_16 = false;
+    var_17 = 0;
+    var_18 = false;
+    var_19 = false;
+    var_20 = false;
+    var_21 = false;
+    var_22 = false;
+    var_23 = 1;
+    var_24 = false;
+    var_25 = false;
+    var_26 = 0;
+    var_27 = 0;
+    var_28 = 0;
+    var_29 = false;
+    var_30 = 2;
+    var_31 = false;
+    var_32 = false;
+    var_33 = 0;
+    var_34 = 0;
+    var_35 = 0;
+    var_36 = 0;
+    var_37 = 1;
+    var_38 = 0;
+    var_39 = 0;
+    var_40 = 1;
+    var_41 = 0;
+    var_42 = 0;
+    var_43 = 1;
+    var_44 = 0;
+    var_45 = 0;
+    var_46 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -697,44 +714,24 @@ class Donchian_CategoryObject_7 extends VectorFormulaConsumer_1.VectorFormulaCon
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_12());
+        x0?.setIValue(this.get_12());
         var x1 = v.get("Formula_2");
-        x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_20());
+        x1?.setIValue(this.get_20());
         var x2 = v.get("Formula_3");
-        x2 === null || x2 === void 0 ? void 0 : x2.setIValue(this.get_36());
+        x2?.setIValue(this.get_36());
         var x3 = v.get("Formula_4");
-        x3 === null || x3 === void 0 ? void 0 : x3.setIValue(this.get_39());
+        x3?.setIValue(this.get_39());
         var x4 = v.get("Formula_5");
-        x4 === null || x4 === void 0 ? void 0 : x4.setIValue(this.get_42());
+        x4?.setIValue(this.get_42());
         var x5 = v.get("Formula_6");
-        x5 === null || x5 === void 0 ? void 0 : x5.setIValue(this.get_45());
+        x5?.setIValue(this.get_45());
         var x6 = v.get("Formula_7");
-        x6 === null || x6 === void 0 ? void 0 : x6.setIValue(this.get_46());
+        x6?.setIValue(this.get_46());
     }
 }
 class Donchian_CategoryObject_8 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = false;
-        this.var_1 = 1;
-        this.var_2 = 0;
-        this.var_3 = 0;
-        this.var_4 = false;
-        this.var_5 = 1;
-        this.var_6 = 0;
-        this.var_7 = 0;
-        this.var_8 = false;
-        this.var_9 = 1;
-        this.var_10 = 0;
-        this.var_11 = 0;
-        this.var_12 = false;
-        this.var_13 = 1;
-        this.var_14 = 0;
-        this.var_15 = 0;
-        this.var_16 = false;
-        this.var_17 = 1;
-        this.var_18 = 0;
-        this.var_19 = 0;
         let map = new Map([]);
         this.performer.setAliasMap(map, this);
         this.addVariableValue("Formula_1", 0, 0);
@@ -814,6 +811,31 @@ class Donchian_CategoryObject_8 extends VectorFormulaConsumer_1.VectorFormulaCon
         this.measurement12 = all[1].getMeasurement(5);
         this.measurement16 = all[1].getMeasurement(6);
     }
+    measurement0;
+    measurement4;
+    measurement8;
+    measurement12;
+    measurement16;
+    var_0 = false;
+    var_1 = 1;
+    var_2 = 0;
+    var_3 = 0;
+    var_4 = false;
+    var_5 = 1;
+    var_6 = 0;
+    var_7 = 0;
+    var_8 = false;
+    var_9 = 1;
+    var_10 = 0;
+    var_11 = 0;
+    var_12 = false;
+    var_13 = 1;
+    var_14 = 0;
+    var_15 = 0;
+    var_16 = false;
+    var_17 = 1;
+    var_18 = 0;
+    var_19 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -877,27 +899,20 @@ class Donchian_CategoryObject_8 extends VectorFormulaConsumer_1.VectorFormulaCon
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_3());
+        x0?.setIValue(this.get_3());
         var x1 = v.get("Formula_2");
-        x1 === null || x1 === void 0 ? void 0 : x1.setIValue(this.get_7());
+        x1?.setIValue(this.get_7());
         var x2 = v.get("Formula_3");
-        x2 === null || x2 === void 0 ? void 0 : x2.setIValue(this.get_11());
+        x2?.setIValue(this.get_11());
         var x3 = v.get("Formula_4");
-        x3 === null || x3 === void 0 ? void 0 : x3.setIValue(this.get_15());
+        x3?.setIValue(this.get_15());
         var x4 = v.get("Formula_5");
-        x4 === null || x4 === void 0 ? void 0 : x4.setIValue(this.get_19());
+        x4?.setIValue(this.get_19());
     }
 }
 class Donchian_CategoryObject_9 extends VectorFormulaConsumer_1.VectorFormulaConsumer {
     constructor(desktop, name) {
         super(desktop, name);
-        this.var_0 = 0;
-        this.var_1 = 0;
-        this.var_2 = false;
-        this.var_3 = 0;
-        this.var_4 = 3;
-        this.var_5 = 0;
-        this.var_6 = 0;
         let map = new Map([]);
         this.performer.setAliasMap(map, this);
         this.addVariableValue("Formula_1", 0, 0);
@@ -933,6 +948,14 @@ class Donchian_CategoryObject_9 extends VectorFormulaConsumer_1.VectorFormulaCon
         var all = this.getAllMeasurements();
         this.measurement0 = all[0].getMeasurement(2);
     }
+    measurement0;
+    var_0 = 0;
+    var_1 = 0;
+    var_2 = false;
+    var_3 = 0;
+    var_4 = 3;
+    var_5 = 0;
+    var_6 = 0;
     get_0() {
         return this.success ? this.var_0 : undefined;
     }
@@ -957,7 +980,7 @@ class Donchian_CategoryObject_9 extends VectorFormulaConsumer_1.VectorFormulaCon
     save() {
         var v = this.variables;
         var x0 = v.get("Formula_1");
-        x0 === null || x0 === void 0 ? void 0 : x0.setIValue(this.get_6());
+        x0?.setIValue(this.get_6());
     }
 }
 class Donchian_CategoryObject_10 extends TradingOrder_1.TradingOrder {

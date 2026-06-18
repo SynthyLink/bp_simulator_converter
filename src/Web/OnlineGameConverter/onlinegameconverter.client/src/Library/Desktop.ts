@@ -18,7 +18,7 @@ export class Desktop implements IDesktop, IObject
     }
 
     imlplementsType(type: string): boolean {
-        return this.types.indexOf(type) >= 0;
+        return this.types.includes(type);
     }
     protected typeName: string = "Desktop";
 
@@ -54,7 +54,7 @@ export class Desktop implements IDesktop, IObject
         var ii = this.performer.getByInterface(this, "IInitializeTask");
         for (var i of ii) {
             var k = i as unknown as IInitializeTask;
-            var kk = k.initializeTaskAsync(cancel);
+            k.initializeTaskAsync(cancel);
             init.push(k);
         }
         await Promise.all(init);
@@ -95,7 +95,7 @@ export class Desktop implements IDesktop, IObject
                 return o;
             }
         }
-        throw new OwnNotImplemented();
+        throw new OwnNotImplemented("DESKTOP");
     }
 
     getCategoryObjects(): ICategoryObject[] {
