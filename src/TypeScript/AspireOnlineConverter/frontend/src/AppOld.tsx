@@ -19,12 +19,13 @@ function AppOld() {
     setLoading(true);
     setError(null);
     
-    try {
-      const response = await fetch('/api/weatherforecast');
+      try {
+        const response = await fetch('/api/weatherforecast');
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
-      }
+        }
+        console.log(response)
       
       const data: WeatherForecast[] = await response.json();
       setWeatherData(data);

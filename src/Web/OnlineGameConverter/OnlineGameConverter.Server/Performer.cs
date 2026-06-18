@@ -85,12 +85,6 @@ namespace OnlineGameConverter.Server
         }
 
 
-
-
-
-
-
-
         Func<DateTime, double> dateToDouble;
 
         Func<double, DateTime> doubleToDate;

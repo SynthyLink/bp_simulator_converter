@@ -2,10 +2,6 @@
 
 export class DateTimeConverter {
 
-    baseOADate: Date = new Date(1899, 12, 30, 0, 0, 0, 0);
-
-    baseDate: Date = new Date(0);
-
     baseDays: number = 25569;
 
     coeff: number = 86400000;
@@ -15,7 +11,9 @@ export class DateTimeConverter {
     off: number = 0;
 
     constructor() {
-        this.off = this.baseDate.getTimezoneOffset() * 60000;
+      //  this.baseOADate = new Date(1899, 12, 30, 0, 0, 0, 0);
+        const baseDate = new Date(0)
+        this.off = baseDate.getTimezoneOffset() * 60000;
     }
 
 

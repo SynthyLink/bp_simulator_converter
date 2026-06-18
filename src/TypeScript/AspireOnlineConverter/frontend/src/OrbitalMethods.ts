@@ -2,10 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 
+import  { OrbitalCommunication } from "./Algorithms/OrbitalForecastCalculation/OrbitalCommunication";
 import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./Algorithms/OrbitalForecastCalculation/OrbitalData";
-import { OrbitalCommunication } from "./Algorithms/OrbitalForecastCalculation/OrbitalCommunication";
 
-let orbitalCommunication = new OrbitalCommunication();
+let orbitalCommunication : OrbitalCommunication = new OrbitalCommunication
+let any: any = ""
 
 export async function actOrbitCalculation(): Promise<void> {
     await orbitalCommunication.actOrbitCalculation();
@@ -15,8 +16,13 @@ export async function actOrbitCalculation(): Promise<void> {
 
    export async function orbitCalculation(condition: OrbitalForecastConditionNumber,
    ): Promise<OrbitalForecastItemNumber[] | undefined> {
-       const t = await orbitalCommunication.orbitCalculation(condition);
-       return t;
+       //const t = fetch("");
+       let a = any as string
+       if (a.length == 0) {
+           return undefined
+       }
+       any = condition.begin
+       return undefined;
    }
 
 
@@ -31,7 +37,7 @@ export const getOrbitalForecastFromNumber = async (
 
 
 
-export const getOrbitalInitialCancel = async (): Promise<OrbitalForecastConditionNumber | null> => {
+export const getOrbitalInitialCancel = async (): Promise<OrbitalForecastConditionNumber | undefined> => {
     return await orbitalCommunication.getOrbitalInitialCancel();
 };
 

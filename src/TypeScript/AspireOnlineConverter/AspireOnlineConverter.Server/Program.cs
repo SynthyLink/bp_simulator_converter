@@ -1,4 +1,8 @@
+using AspireOnlineConverter.Server.Classes;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
@@ -21,7 +25,7 @@ if (app.Environment.IsDevelopment())
 
 
 string[] summaries = ["Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"];
-
+var performer = new Performer();
 var api = app.MapGroup("/api");
 api.MapGet("weatherforecast", () =>
 {
@@ -36,10 +40,18 @@ api.MapGet("weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+api.MapGet("initial", () =>
+{
+    var init = performer.GetInitial();
+    return init;
+})
+.WithName("GetInitial");
 
 app.MapDefaultEndpoints();
 
 app.UseFileServer();
+
+//app.UseStaticFiles();
 
 app.Run();
 

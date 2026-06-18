@@ -2,7 +2,6 @@ import { useEffect, useState,  type ReactNode } from 'react';
 import './App.css';
 import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from './Algorithms/OrbitalForecastCalculation/OrbitalData';
 import { getOrbitalInitialCancel, getOrbitalForecastFromNumber, orbitCalculation } from './OrbitalMethods';
-import { OrbitalCommunication } from './Algorithms/OrbitalForecastCalculation/OrbitalCommunication';
 import { DateTimeConverter } from './Library/Utilities/DateTime/DateTimeConverter';
 
 let dt = new DateTimeConverter();
@@ -12,7 +11,6 @@ function get(x: any): number {
     return Number(x);
 }
 
-let orbiral = new OrbitalCommunication();
 
 
 function datePure(x: number): string {
@@ -316,11 +314,13 @@ function App() {
 
 
     async function populateData() {
-        await orbiral.setServer();
+     //   await orbiral.setServer();
  
         if (initial === undefined) {
             let init = await getOrbitalInitialCancel();
+            if (init === undefined) return
             var res = init as unknown as OrbitalForecastConditionNumber;
+            if (res === undefined) return
             var b = datePure(res.begin)
             var e = datePure(res.end)
             setBegin(b);
