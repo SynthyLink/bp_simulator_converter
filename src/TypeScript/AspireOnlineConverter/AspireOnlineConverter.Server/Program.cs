@@ -1,6 +1,10 @@
 using AspireOnlineConverter.Server.Classes;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//builder.Logging.AddFile("Logs/myapp-{Date}.txt");
+
 
 
 
@@ -47,6 +51,12 @@ api.MapGet("initial", () =>
 })
 .WithName("GetInitial");
 
+api.MapPost("forecastfromnumber", ([FromBody] OrbitalForecastConditionNumber condition, CancellationToken token)
+    =>
+{
+    return PostForecastFromNumber(condition, token);
+}).WithName("PostForecastFromNumber");
+
 app.MapDefaultEndpoints();
 
 app.UseFileServer();
@@ -54,6 +64,23 @@ app.UseFileServer();
 //app.UseStaticFiles();
 
 app.Run();
+
+
+//[HttpPost(Name = "forecastfromnumber")]
+async Task<OrbitalForecastItemNumber[]> PostForecastFromNumber([FromBody] OrbitalForecastConditionNumber condition, CancellationToken token)
+{
+
+    if (condition == null || condition.Begin >= condition.End)
+    {
+        return Enumerable.Empty<OrbitalForecastItemNumber>().ToArray();
+    }
+    var result = await performer.CalculateOrbitalForecastFromNubmerAsync(condition, token);
+    if (result == null || !result.Any())
+    {
+        return Enumerable.Empty<OrbitalForecastItemNumber>().ToArray();
+    }
+    return result.ToArray();
+}
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {

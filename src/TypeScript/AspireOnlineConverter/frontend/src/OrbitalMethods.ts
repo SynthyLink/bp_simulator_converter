@@ -16,13 +16,7 @@ export async function actOrbitCalculation(): Promise<void> {
 
    export async function orbitCalculation(condition: OrbitalForecastConditionNumber,
    ): Promise<OrbitalForecastItemNumber[] | undefined> {
-       //const t = fetch("");
-       let a = any as string
-       if (a.length == 0) {
-           return undefined
-       }
-       any = condition.begin
-       return undefined;
+       return orbitalCommunication.orbitCalculation(condition)
    }
 
 

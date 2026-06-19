@@ -1,0 +1,6 @@
+2026-06-19T04:59:10.0625436+03:00  [INF] Now listening on: "https://localhost:7304" (d826f4b8)
+2026-06-19T04:59:10.0663349+03:00  [INF] Now listening on: "http://localhost:5408" (d826f4b8)
+2026-06-19T04:59:10.0758287+03:00  [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts (903d179d)
+2026-06-19T04:59:10.2479490+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2026-06-19T04:59:10.2489302+03:00  [INF] Hosting environment: "Development" (bc5a1a4e)
+2026-06-19T04:59:10.2493613+03:00  [INF] Content root path: "C:\AUsers\1MySoft\CSharp\src\TypeScript\AspireOnlineConverter\AspireOnlineConverter.Server" (cc26f24e)

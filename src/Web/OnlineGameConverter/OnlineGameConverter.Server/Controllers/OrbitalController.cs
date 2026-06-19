@@ -37,8 +37,7 @@ namespace OnlineGameConverter.Server.Controllers
                 return Enumerable.Empty<OrbitalForecastItemNumber>().ToArray();
             }
             return result.ToArray();
-
-        }
+       }
 
 /*
         [HttpPost(Name = "forecastfromnumber")]
