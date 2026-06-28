@@ -1,5 +1,5 @@
 import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./OrbitalData";
-import { OrbitalForecastCalculation } from "./OrbitalForecastCalculation";
+import { OrbitalForecastCalculation } from "./OrbitalForecastCalculation.ts";
 import { HttpCommunication } from "../../Library/Communications/http/http_interface";
 import { getOrbitalInitialCancel, getOrbitalForecastFromNumber } from "../../OrbitalMethods";
 import { setCommunicationServer } from "../../Library/Communications/http/AppSettings"
@@ -33,7 +33,7 @@ export class OrbitalCommunication extends HttpCommunication {
     ): Promise<OrbitalForecastItemNumber[] | undefined> {
         const controller = new AbortController();
         const result = await this.http_cancel<OrbitalForecastItemNumber[], OrbitalForecastConditionNumber>({
-            path: `api/forecastfromnumber`,
+            path: `/orbital/forecastfromnumber`,
             method: "post",
             body: condition,
         }, controller);

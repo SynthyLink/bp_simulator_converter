@@ -3,10 +3,10 @@ import { GravityCategoryObject } from "../../ExternalObjects/Components/Gravity_
 import { AliasName } from "../../Library/AliasName";
 import { Desktop } from "../../Library/Desktop";
 import { FeedbackAliasCollection } from "../../Library/FeedbackAliasCollection";
-import { IAliasName } from "../../Library/Interfaces/IAliasName";
-import { IDesktop } from "../../Library/Interfaces/IDesktop";
-import { IPostSetArrow } from "../../Library/Interfaces/IPostSetArrow";
-import { IValue } from "../../Library/Interfaces/IValue";
+import type { IAliasName } from "../../Library/Interfaces/IAliasName";
+import type { IDesktop } from "../../Library/Interfaces/IDesktop";
+import type { IPostSetArrow } from "../../Library/Interfaces/IPostSetArrow";
+import type { IValue } from "../../Library/Interfaces/IValue";
 import { DataLink } from "../../Library/Measurements/Arrows/DataLink";
 import { ObjectTransformerLink } from "../../Library/Measurements/Arrows/ObjectTransformerLink";
 import { DataConsumer } from "../../Library/Measurements/DataConsumer";

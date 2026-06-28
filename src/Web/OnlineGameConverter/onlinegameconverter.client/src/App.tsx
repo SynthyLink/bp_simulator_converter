@@ -4,6 +4,8 @@ import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from '
 import { getOrbitalInitialCancel, getOrbitalForecastFromNumber, orbitCalculation } from './OrbitalMethods';
 import { DateTimeConverter } from './Library/Utilities/DateTime/DateTimeConverter';
 import { OrbitalCommunication } from './Algorithms/OrbitalForecastCalculation/OrbitalCommunication';
+import { ServerClientComparisonChart } from './Visualization/ServerClientComparisonChart';
+import { createServerClientComparisonData } from './Visualization/orbitalComparisonData';
 
 let dt = new DateTimeConverter();
 
@@ -234,14 +236,18 @@ function App() {
     
     const contentsC = load(client, "Client calculation..." );
     const contentsF = load(forecast, "Loading from the ASP.NET backend...");
+    const comparisonData =
+        client !== undefined && forecast !== undefined
+            ? createServerClientComparisonData(forecast, client)
+            : [];
 
 
     return (
         <div className="body-main">
             <h1 id="tableLabel">Orbital forecast</h1>
             <h2>This component calculation of orbit forecast</h2>
-          <div>  {contents} </div>
-            <div>
+            <div className="orbital-parameters">  {contents} </div>
+            <div className="orbital-results">
                 <button onClick={btnClick}>Start</button>
                <table>
                     <thead>
@@ -261,6 +267,9 @@ function App() {
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div className="orbital-chart">
+                <ServerClientComparisonChart data={comparisonData} />
             </div>
 
         </div>

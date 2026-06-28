@@ -1,0 +1,16 @@
+{
+  "name": "bp-simulator-converter",
+  "private": true,
+  "workspaces": [
+    "src/Web/OnlineGameConverter/onlinegameconverter.client"
+  ],
+  "scripts": {
+    "build:orbital": "npm run build --workspace onlinegameconverter.client"
+  },
+  "dependencies": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-is": "19.1.0",
+    "recharts": "3.8.1"
+  }
+}
