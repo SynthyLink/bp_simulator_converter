@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TradingDataQuery = void 0;
 const CategoryObject_1 = require("../../../Library/CategoryObject");
-const TradinHistoryDatabse_1 = require("./TradinHistoryDatabse");
+const Measurement_1 = require("../../../Library/Measurements/Measurement");
 class TradingDataQuery extends CategoryObject_1.CategoryObject {
-    inter = (0, TradinHistoryDatabse_1.getHistoryDatabase)();
+    static inter;
     symbols = new Map();
     constructor(desktop, name) {
         super(desktop, name);
@@ -33,7 +33,7 @@ class TradingDataQuery extends CategoryObject_1.CategoryObject {
         this.step = 0;
     }
     async initializeTaskAsync(controller) {
-        var sym = await this.inter.getSymbolsAsync(controller);
+        var sym = await TradingDataQuery.inter.getSymbolsAsync(controller);
         this.performer.copyMap(sym, this.symbols);
     }
     id;
@@ -45,4 +45,16 @@ class TradingDataQuery extends CategoryObject_1.CategoryObject {
     step = 0;
 }
 exports.TradingDataQuery = TradingDataQuery;
+class BasicMeasurement extends Measurement_1.Measurement {
+    query;
+    constructor(name, query, type) {
+        super(name, type);
+        this.query = query;
+    }
+    getAssociatedObject() {
+        return this.query;
+    }
+    setAssociatedObject(obj) {
+    }
+}
 //# sourceMappingURL=TradingDataQuery.js.map

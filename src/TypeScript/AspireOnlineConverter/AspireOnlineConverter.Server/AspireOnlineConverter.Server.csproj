@@ -32,6 +32,10 @@
     <ProjectReference Include="..\..\..\ExternalLibraries\Atmosphere\DinAtm\DinAtm.Pure\DinAtm.Pure.csproj" />
     <ProjectReference Include="..\..\..\ExternalLibraries\Gravity\Gravity_36_36\Gravity_36_36.Wrapper\Gravity_36_36.Wrapper.csproj" />
     <ProjectReference Include="..\..\..\ExternalLibraries\Gravity\Gravity_36_36\Gravity_36_36\Gravity_36_36.csproj" />
+    <ProjectReference Include="..\..\..\ExternalLibraries\Trading\CSharpAPI\CSharpAPI.csproj" />
+    <ProjectReference Include="..\..\..\ExternalLibraries\Trading\Trading.Database.SqlServer\Trading.Database.SqlServer.csproj" />
+    <ProjectReference Include="..\..\..\ExternalLibraries\Trading\Trading.Database\Trading.Database.csproj" />
+    <ProjectReference Include="..\..\..\ExternalLibraries\Trading\Trading.Library\Trading.Library.csproj" />
   </ItemGroup>
 
   <ItemGroup>

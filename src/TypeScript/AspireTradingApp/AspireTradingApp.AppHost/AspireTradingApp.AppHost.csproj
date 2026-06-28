@@ -1,0 +1,18 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.4.0">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>8d2ffe0b-2ea5-45e7-a9de-17aa9a4f9cd4</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AspireTradingApp.Server\AspireTradingApp.Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.JavaScript" Version="13.4.0" />
+  </ItemGroup>
+</Project>

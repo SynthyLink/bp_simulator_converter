@@ -6,7 +6,7 @@ using DataPerformer.Interfaces;
 using Diagram.UI;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
-
+using ErrorHandler;
 using FormulaEditor.Interfaces;
 
 namespace DataPerformer.Formula.TypeScript
@@ -102,7 +102,14 @@ namespace DataPerformer.Formula.TypeScript
             var l = new List<string>();
             if (measurements is IStarted start)
             {
-                start.Start(0);
+                try
+                {
+                    start.Start(0);
+                }
+                catch (Exception e)
+                {
+                    e.HandleFictionException();
+                }
             }
             var n = measurements.Count;
             for (int i = 0; i < n; i++)

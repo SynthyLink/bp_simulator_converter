@@ -323,7 +323,8 @@ namespace Trading.Library.Objects
             public CloseMeasurement(DataQuery query) : base("Close", query)
             {
 
-                func = () => query.message.close;
+                func = () => 
+                query.message.close;
             }
         }
 

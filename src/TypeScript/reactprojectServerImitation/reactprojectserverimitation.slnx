@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="reactprojectserverimitation.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+</Solution>

@@ -91,8 +91,6 @@ function App() {
 
         let fore = await getOrbitalForecastFromNumber(initial);
         var r = fore as unknown as OrbitalForecastItemNumber[];
-        console.log(fore)
-        console.log(r)
 
         if (r === undefined)
         {
@@ -105,7 +103,6 @@ function App() {
     }
 
     const clientCalc = async (initial: OrbitalForecastConditionNumber): Promise<void> => {
-        console.log(initial)
         let fore = await orbitCalculation(initial);
         var r = fore as unknown as OrbitalForecastItemNumber[];
 
@@ -151,8 +148,9 @@ function App() {
         if (init === undefined) {
             return;
         }
-        await serverCalc(init);
-        await clientCalc(init);
+        let t1 = serverCalc(init)
+        let t2 = clientCalc(init)
+        Promise.all([t1, t2])
     }
 
     const b = initial === undefined;

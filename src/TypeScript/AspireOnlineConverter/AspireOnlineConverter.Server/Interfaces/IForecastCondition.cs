@@ -1,4 +1,4 @@
-﻿using AspireOnlineConverter.Server.Classes;
+﻿using AspireOnlineConverter.Server.Classes.Orbital;
 
 namespace AspireOnlineConverter.Server.Interfaces
 {

@@ -2,14 +2,14 @@ import { TradingDataQuery } from "../ExternalObjects/Components/Trading/TradingD
 import { TradingOrder } from "../ExternalObjects/Components/Trading/TradingOrder";
 import { AliasName } from "../Library/AliasName";
 import { Desktop } from "../Library/Desktop";
-import { IAliasName } from "../Library/Interfaces/IAliasName";
-import { IDesktop } from "../Library/Interfaces/IDesktop";
-import { IPostSetArrow } from "../Library/Interfaces/IPostSetArrow";
-import { IValue } from "../Library/Interfaces/IValue";
+import type { IAliasName } from "../Library/Interfaces/IAliasName";
+import type { IDesktop } from "../Library/Interfaces/IDesktop";
+import type { IPostSetArrow } from "../Library/Interfaces/IPostSetArrow";
+import type { IValue } from "../Library/Interfaces/IValue";
 import { DataLink } from "../Library/Measurements/Arrows/DataLink";
 import { IteratorConsumerLink } from "../Library/Measurements/Arrows/IteratorConsumerLink";
 import { DataConsumer } from "../Library/Measurements/DataConsumer";
-import { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement";
+import type { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement";
 import { RecursiveFormula } from "../Library/Measurements/RecursiveFormula";
 import { SequenceFilterWrapper } from "../Library/Measurements/SequenserFilterWrapper";
 import { VectorFormulaConsumer } from "../Library/Measurements/VectorFormulaConsumer";
@@ -95,9 +95,12 @@ class Donchian_CategoryObject_5 extends RecursiveFormula
 	init() : void
 	{
 		var all = this.getAllMeasurements();
+		this.any = all
 		this.value0 = this.output[1];
 		this.aliasName1 = new AliasName(this.alias, "t");
 	}
+
+	any : any
 	
 	value0 ! : IValue;
 	aliasName1 ! : IAliasName;

@@ -21,8 +21,10 @@ import type { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProv
 import type { IEventStart } from "../Interfaces/IEventStart";
 import type { IExternalUpdateClient } from "../Interfaces/IExternalUpdateClient";
 
-export class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow,
-    ITimeMeasurementConsumer, IPrintedObject, ICheckHolder, IIteratorConsumer, IEventHandler, IAddRemove, IAction,
+export class DataConsumer extends CategoryObject implements IDataConsumer,
+    IPostSetArrow,
+    ITimeMeasurementConsumer, IPrintedObject, ICheckHolder, IIteratorConsumer, IEventHandler,
+    IAddRemove, IAction,
     IEventStart, IExternalUpdateClient
 {
     constructor(desktop: IDesktop, name: string)

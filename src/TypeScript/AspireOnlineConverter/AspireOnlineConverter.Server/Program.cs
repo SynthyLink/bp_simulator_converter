@@ -1,4 +1,3 @@
-using AspireOnlineConverter.Server.Classes;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,35 +26,12 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+//OrbitalInit.Create(app);
 
-string[] summaries = ["Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"];
-var performer = new Performer();
-var api = app.MapGroup("/api");
-api.MapGet("weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
-api.MapGet("initial", () =>
-{
-    var init = performer.GetInitial();
-    return init;
-})
-.WithName("GetInitial");
 
-api.MapPost("forecastfromnumber", ([FromBody] OrbitalForecastConditionNumber condition, CancellationToken token)
-    =>
-{
-    return PostForecastFromNumber(condition, token);
-}).WithName("PostForecastFromNumber");
+var t = TradingInit.Create(app);
+
+await t;
 
 app.MapDefaultEndpoints();
 
@@ -67,22 +43,3 @@ app.Run();
 
 
 //[HttpPost(Name = "forecastfromnumber")]
-async Task<OrbitalForecastItemNumber[]> PostForecastFromNumber([FromBody] OrbitalForecastConditionNumber condition, CancellationToken token)
-{
-
-    if (condition == null || condition.Begin >= condition.End)
-    {
-        return Enumerable.Empty<OrbitalForecastItemNumber>().ToArray();
-    }
-    var result = await performer.CalculateOrbitalForecastFromNubmerAsync(condition, token);
-    if (result == null || !result.Any())
-    {
-        return Enumerable.Empty<OrbitalForecastItemNumber>().ToArray();
-    }
-    return result.ToArray();
-}
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

@@ -61,7 +61,8 @@ namespace Trading.Library.Objects
         public event Action<Order, PositionDirection> OrderChanged
         {
             add { orderChanged += value; }
-            remove { orderChanged -= value; }
+
+            remove => orderChanged -= value;
         }
 
         public double EnterPrice
@@ -88,6 +89,7 @@ namespace Trading.Library.Objects
             get; 
             private set; 
         } = 0;
+
 
         double? dateValue;
 

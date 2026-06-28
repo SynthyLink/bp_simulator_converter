@@ -499,8 +499,6 @@ namespace DataWarehouse.Classes.Abstract
             RemoveItself();
         }
 
-
-
         event Action<IDirectory> IChildren<IDirectory>.OnAdd
         {
             add

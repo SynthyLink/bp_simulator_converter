@@ -23,6 +23,8 @@ const ComposionAct_1 = require("../Wrappers/ComposionAct");
 const PerformerMeasuremets_1 = require("../../Library/Measurements/PerformerMeasuremets");
 const Motion6DFactory_1 = require("../../Library/Motion6D/Motion6DFactory");
 const StreamReader_1 = require("../../FileSystem/IO/StreamReader");
+const TradingDataQuery_1 = require("../../ExternalObjects/Components/Trading/TradingDataQuery");
+const TradingHistoryFetchDatabase_1 = require("../../ExternalObjects/Libraries/Trading/Database/TradingHistoryFetchDatabase");
 //import { Airplane } from '../../Airplane';
 function finish(e) {
     console.log(e);
@@ -80,6 +82,7 @@ class Actor {
         console.log(s);
     }
     async actDonchianLoad() {
+        TradingDataQuery_1.TradingDataQuery.inter = new TradingHistoryFetchDatabase_1.TradingHistoryFetchDatabase();
         var d = new Donchian_1.Donchian();
         var ac = new AbortController();
         await d.loadAsync(ac);

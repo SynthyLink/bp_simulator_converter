@@ -1,5 +1,5 @@
 
-import { HttpCommunication, setCommunicationServer } from "../../Library/Communications/http/http_interface";
+import { HttpCommunication } from "../../Library/Communications/http/http_interface";
 import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./OrbitalData";
 import { OrbitalForecastCalculation } from "./OrbitalForecastCalculation";
 
@@ -25,7 +25,7 @@ export class OrbitalCommunication extends HttpCommunication {
         this.any = condition
         const controller = new AbortController();
         const result = await this.http_cancel<OrbitalForecastItemNumber[], OrbitalForecastConditionNumber>({
-            path: "/api/forecastfromnumber",
+            path: "/api/orbital/forecastfromnumber",
             method: "post",
             body: condition,
         }, controller);
@@ -39,16 +39,17 @@ export class OrbitalCommunication extends HttpCommunication {
 
     public async getOrbitalInitialCancel(): Promise<OrbitalForecastConditionNumber | undefined>  {
         try {
-            let s = "/api/initial"
+            let s = "/api/orbital/initial"
             const response = await fetch(s)
             if (!response.ok) {
                 console.log(response)
             }
             else {
                 let u = response.url;
+                console.log(response)
                 this.url = u.substring(0, u.length - s.length)
                 console.log(this.url)
-                setCommunicationServer(this.url)
+                this.setCommunicationServer(this.url)
                 const data = await response.json();
                 return data
             }

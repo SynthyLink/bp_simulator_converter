@@ -33,6 +33,8 @@ import type { IStringSplitter } from '../../Library/Utilities/String/Interfaces/
 import { IFactory } from '../../Library/Interfaces/IFactory';
 import { Motion6DFactory } from '../../Library/Motion6D/Motion6DFactory';
 import { StreamReader } from '../../FileSystem/IO/StreamReader';
+import { TradingDataQuery } from '../../ExternalObjects/Components/Trading/TradingDataQuery';
+import { TradingHistoryFetchDatabase } from '../../ExternalObjects/Libraries/Trading/Database/TradingHistoryFetchDatabase';
 
 //import { Airplane } from '../../Airplane';
 
@@ -98,6 +100,7 @@ export class Actor {
     }
 
     public async actDonchianLoad(): Promise<void> {
+        TradingDataQuery.inter = new TradingHistoryFetchDatabase();
         var d = new Donchian();
         var ac = new AbortController();
         await d.loadAsync(ac);
