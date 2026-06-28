@@ -59,7 +59,7 @@ td {
   vertical-align: text-top;
 }
 
-.my-table {
+.parametr-table {
   border-collapse: collapse;
   width: 100%;
   vertical-align: text-top;
@@ -124,15 +124,15 @@ td {
     flex-direction: column;
   }
 }
-.my-table th,
-.my-table td {
+.parametr-table th,
+.parametr-table td {
   border: 1px solid #ddd;
-  padding: 1px;
+  padding: 4px 6px;
   vertical-align: text-top;
   text-align: left;
 }
 
-.my-table th {
+.parametr-table th {
   text-align: center; /* Default header alignment */
 }
 
