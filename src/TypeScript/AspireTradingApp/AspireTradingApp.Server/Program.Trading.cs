@@ -1,9 +1,8 @@
-﻿using AspireTradingApp.Server.Classes.Trading;
-using AspireTradingApp.Server.Trading;
-using IronPython.Runtime;
-using System.Security.AccessControl;
-using Trading.Database;
+﻿using AspireTradingApp.Server.Trading;
 using Trading.Library;
+using Microsoft.AspNetCore.Mvc;
+using Trading.Database;
+using Trading.Library.Classes;
 using Trading.Library.Objects;
 
 static class TradingInit
@@ -17,15 +16,17 @@ static class TradingInit
         var cs = application.Configuration["ConnectionStrings:Trading"];
         StaticExtensionTradingDatabase.ConnectionString = cs;
         await performer.Load(new CancellationToken());
-        api.MapGet("tradingsymbols",  () =>
+        api.MapGet("tradingsymbols", () =>
         {
-            string[][] s = null;
-            s = [["x"], ["y"]];
-            //return s;
             return GetSymbols();
         })
    .WithName("GetTradingSymbols");
 
+        api.MapPost("tradinghistory", () =>
+        {
+            return GetSymbols();
+        })
+.WithName("GetTradingHistory");
     }
 
     public static async Task<string[][]> GetSymbols()
@@ -53,6 +54,13 @@ static class TradingInit
         return symbols;
     }
 
-
+    public static  async Task<List<HistoricalDataMessageNumber>> GetHistory([FromBody] DataQueryInit init,
+      CancellationToken token)
+    {
+        var query = await DataQuery.Create(init, token);
+        var dt = await query.GetHistoricalDataMessageDateTimes(token);
+        var s = from hist in dt select hist.Convert();
+        return s.ToList();
+    }
 
 }

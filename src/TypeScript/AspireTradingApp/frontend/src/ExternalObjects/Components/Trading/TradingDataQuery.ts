@@ -5,7 +5,7 @@ import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMea
 import type { IMeasurements } from "../../../Library/Measurements/Interfaces/IMeasurements";
 import type { ITradingDatabaseHistoryInterface } from "../../Libraries/Trading/Database/ITradingDatabaseHistoryInterface";
 import { CategoryObject } from "../../../Library/CategoryObject";
-import { HistoricalDataMessageDateTime } from "../../Libraries/Trading/Database/HistoricalDataMessageDateTime";
+import type { HistoricalDataMessageDateTime } from "../../Libraries/Trading/Database/HistoricalDataMessageDateTime";
 
 export class TradingDataQuery extends CategoryObject implements IInitializeTask, IIterator, IMeasurements
 {

@@ -6,11 +6,9 @@ using Diagram.UI;
 using Diagram.UI.Interfaces;
 using ErrorHandler;
 using ResourceService;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Resources;
-using Vector3D;
 
 namespace BP_Simulator.UI
 {

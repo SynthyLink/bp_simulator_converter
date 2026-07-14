@@ -23,7 +23,7 @@ namespace OnlineGameConverter.Server.Controllers
             return result;
         }
 
-        [HttpPost("forecastfromnumber", Name = "forecastfromnumber")]
+        [HttpPost(Name = "forecastfromnumber")]
         public async Task<OrbitalForecastItemNumber[]> PostForecastFromNumber([FromBody] OrbitalForecastConditionNumber condition, CancellationToken token)
         {
 
