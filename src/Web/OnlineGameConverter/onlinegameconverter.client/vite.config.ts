@@ -41,6 +41,9 @@ const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_H
 export default defineConfig({
     plugins: [plugin()],
     resolve: {
+        // The repository contains generated CommonJS .js files beside their
+        // TypeScript sources. Prefer source files during Vite development.
+        extensions: ['.ts', '.tsx', '.mjs', '.js', '.mts', '.jsx', '.json'],
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
         }

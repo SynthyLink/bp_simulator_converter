@@ -16,7 +16,7 @@ import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsume
 import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./OrbitalData";
 import { OrbitalForecast } from "./OrbitalForecast";
 import { StopWatch } from "../../Library/Utilities/DateTime/StopWatch";
-import { IDataRuntime } from "../../Library/Interfaces/IDataRuntime";
+import type { IDataRuntime } from "../../Library/Interfaces/IDataRuntime";
 import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
 class Check implements ICheck {
     check(o: any): boolean {
@@ -154,5 +154,4 @@ export class OrbitalForecastCalculation extends OrbitalForecast implements IActi
 };
 
     
-
 

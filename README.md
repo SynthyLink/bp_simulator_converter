@@ -31,28 +31,27 @@ Instead of full source-to-source translation, it uses a **component-based approa
 
 ### React app with ASP.NET backend
 
-The React client proxies API calls like `/weatherforecast` to the ASP.NET Core
-server in `src/Web/ReactApp/ReactApp.Server`.
+The orbital forecast React client and ASP.NET Core server are located under
+`src/Web/OnlineGameConverter`.
 
 Run the ASP.NET API server in one terminal:
 
 ```bash
-cd src/Web/ReactApp/ReactApp.Server
+cd src/Web/OnlineGameConverter/OnlineGameConverter.Server
 dotnet restore
 dotnet run --launch-profile http
 ```
 
-Then start Vite in a second terminal:
+Then install the shared repository dependencies and start Vite from the
+repository root in a second terminal:
 
 ```bash
-cd src/Web/ReactApp/reactapp.client
 npm install
-npm run dev
+npm run dev --workspace onlinegameconverter.client
 ```
 
-Open `https://localhost:58472/` in your browser. If the backend is not running
-on `http://localhost:5059`, Vite will report `ECONNREFUSED` for proxied API
-requests such as `/weatherforecast`.
+Open `https://localhost:57169/` in your browser. The HTTP backend launch
+profile listens on `http://localhost:5218`.
 
 ## Main Case Study
 
