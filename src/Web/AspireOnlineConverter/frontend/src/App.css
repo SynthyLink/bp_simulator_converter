@@ -64,6 +64,9 @@ td {
   width: 100%;
   vertical-align: text-top;
 }
+.parametr-table caption {
+  line-height: 1.9;
+}
 
 .input-filter-index {
   width: auto;
