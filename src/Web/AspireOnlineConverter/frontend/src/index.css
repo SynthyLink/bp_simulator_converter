@@ -42,6 +42,23 @@ h1 {
 button {
   font-family: inherit;
   cursor: pointer;
+  font-family: inherit;
+  cursor: pointer;
+  min-height: 45px;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  display: flex;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  transition: background-color 0.3s ease;
+  min-width: 100px;
+  text-transform: uppercase;
+  margin-block: 10px;
 }
 
 @media (prefers-reduced-motion: reduce) {
