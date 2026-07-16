@@ -6,7 +6,6 @@ import { Performer } from './Library/Performer';
 import { ServerClientComparisonChart } from './Visualization/ServerClientComparisonChart';
 import { createServerClientComparisonData } from './Visualization/orbitalComparisonData';
 import "./App.css"
-import React from 'react';
 
 let dt = new DateTimeConverter();
 

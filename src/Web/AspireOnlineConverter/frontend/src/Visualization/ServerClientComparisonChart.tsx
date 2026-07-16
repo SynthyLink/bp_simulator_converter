@@ -10,7 +10,6 @@ import {
   YAxis,
 } from "recharts";
 import type { ServerClientComparisonPoint } from "./orbitalComparisonData";
-import React from "react";
 
 interface ServerClientComparisonChartProps {
   data: ServerClientComparisonPoint[];
@@ -89,8 +88,8 @@ export function ServerClientComparisonChart({
                 backgroundColor:
                   "color-mix(in oklab, var(--background-color) 90%, #000000)",
               }}
-              labelFormatter={(label : any) => `Sample ${String(label)}`}
-              formatter={(value : any) => formatNumber(Number(value))}
+              labelFormatter={(label) => `Sample ${String(label)}`}
+              formatter={(value) => formatNumber(Number(value))}
             />
             <Legend />
             <Line
