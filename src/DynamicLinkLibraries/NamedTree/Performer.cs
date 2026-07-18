@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using System.Xml;
-
+using System.Xml.Linq;
 using ErrorHandler;
 using NamedTree.Interfaces;
 
@@ -548,6 +548,45 @@ namespace NamedTree
                 }
             }
             return null;
+        }
+
+        private string Convert(object o, Func<object, string> converter = null)
+        {
+            if (o == null) return "null";
+            return (converter == null) ? o + "" : converter(o);
+        }
+
+        /// <summary>
+        /// Creates XML 
+        /// </summary>
+        /// <param name="nodes">Nodee</param>
+        /// <param name="root">Root name</param>
+        /// <param name="group">Group name</param>
+        /// <param name="item">Item name</param>
+        /// <param name="converter">Converter</param>
+        /// <returns>XElement</returns>
+        public XElement CreateXML(List<Dictionary<string, object>> nodes, string root, string group,
+            string item, Func<object, string> converter = null)
+        {
+            XName xr =  XName.Get(root);
+            XName gr = XName.Get(group);
+            XName it = XName.Get(item);
+            XName id = XName.Get("id");
+            var e = new  XElement(xr);
+            foreach (var i in nodes)
+            {
+                var c = new XElement(gr);
+                e.Add(c);
+                foreach (var k in i)
+                {
+                    var ite = new XElement(it);
+                    c.Add(ite);
+                    ite.SetAttributeValue(id, k.Key);
+                    var s = Convert(k.Value, converter);
+                    ite.Add(s);
+                }
+            }
+            return e;
         }
 
         

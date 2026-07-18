@@ -68,7 +68,7 @@ namespace DataPerformer.UI
         static IAsynchronousCalculation currentCalculation;
 
         static IDisassemblyObject disassembly =
-            new BaseTypes.DisassemblyObjectList();
+            new DisassemblyObjectList();
 
         static internal DataPerformer.Interfaces.Objects.MeasurementObjectFactoryCollection GraphCollection =
             new ();

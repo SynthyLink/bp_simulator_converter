@@ -1,22 +1,28 @@
-﻿using Chart.DataPerformer.Interfaces;
+﻿using BaseTypes;
+using BaseTypes.Interfaces;
+using CategoryTheory;
+using Chart.DataPerformer.Interfaces;
 using DataPerformer.Interfaces;
 using DataPerformer.Portable;
-using DataPerformer.Portable.Wrappers;
 using Diagram.UI;
-using Diagram.UI.Interfaces;
+using System.Xml;
+using System.Xml.Linq;
 
 
 namespace Chart.DataPerformer
 {
     public static class StaticExtensionDataPerformerChart
     {
+        static IDisassemblyObject disassembly =
+         new DisassemblyObjectList();
+
         /// <summary>
         /// Attached to point factory
         /// </summary>
         static public IAttachedToPointFactory AttachedToPointFactory
         { get; set; } = null;
 
-   
+
         public static object AttachedToPoint(this object value)
         {
             if (AttachedToPointFactory == null)
@@ -70,20 +76,20 @@ namespace Chart.DataPerformer
         }
 
         public static Dictionary<string, object> PerformFixed(this IDataConsumer consumer,
-         double start, double step, int count,  string argument, string[] values,
+         double start, double step, int count, string argument, string[] values,
      out MeasurementSeries[] series,
          Func<bool> stop)
         {
-            
+
             MeasurementSeries[] ss = null;
 
             var dic = consumer.CreateMeasurements(argument, values, out ss);
-        //    consumer.PerformFixed()
+            //    consumer.PerformFixed()
             series = ss;
             return dic;
         }
 
- 
+
         /// <summary>
         /// Performs iterator
         /// </summary>
@@ -91,11 +97,9 @@ namespace Chart.DataPerformer
         /// <param name="iterator">Iterator</param>
         /// <param name="argument">Argument</param>
         /// <param name="values">Values</param>
-        /// <param name="series">Series</param>
         /// <param name="stop">Stop funcion</param>
         /// <returns>Output</returns>
-        public static async Task<Tuple<Dictionary<string, object>, MeasurementSeries[]>
-> PerformIterator(
+        public static async Task<Tuple<Dictionary<string, object>, MeasurementSeries[]>> PerformIteratorAsync(
             this IDataConsumer consumer,
          IIterator iterator, CancellationToken cancellationToken, string argument, string[] values,
          Func<bool> stop)
@@ -106,7 +110,7 @@ namespace Chart.DataPerformer
             {
                 dic = consumer.CreateMeasurements(argument, values, out ss);
             };
-            await consumer.PerformIterator(iterator, () =>
+            await consumer.PerformIteratorAsync(iterator, () =>
             {
                 foreach (var s in ss)
                 {
@@ -117,6 +121,5 @@ namespace Chart.DataPerformer
             return new Tuple<Dictionary<string, object>, MeasurementSeries[]>(dic, ss);
         }
 
-   }
-
+    }
 }

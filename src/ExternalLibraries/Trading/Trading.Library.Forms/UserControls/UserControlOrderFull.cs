@@ -72,7 +72,7 @@ namespace Trading.Library.Forms.UserControls
             //  order.Date, ct, str,  () => ctx.Token.IsCancellationRequested; );
             //         dictionary = t.
             //order.PerformIterator(order.Iterator, () => { }, ct, order.Date, str,  () => ctx.Token.IsCancellationRequested);
-            var t  = await order.PerformIterator(order.Iterator, ct,
+            var t  = await order.PerformIteratorAsync(order.Iterator, ct,
     order.Date, str,   () => ctx.Token.IsCancellationRequested);
             m = t.Item2;
             dictionary = t.Item1;
