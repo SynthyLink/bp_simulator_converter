@@ -3,7 +3,4 @@
     <ShouldRunNpmInstall>false</ShouldRunNpmInstall>
     <ShouldRunBuildScript>false</ShouldRunBuildScript>
   </PropertyGroup>
-  <ItemGroup>
-    <Folder Include="src\ExternalObjects\Libraries\Web\Interfaces\" />
-  </ItemGroup>
 </Project>

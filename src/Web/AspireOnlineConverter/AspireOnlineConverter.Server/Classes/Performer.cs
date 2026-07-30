@@ -36,12 +36,12 @@ namespace AspireOnlineConverter.Server.Classes
 
 
 
-            public Task<OrbitalForecastItemNumberPure> GetInitialAsync()
+            public Task<OrbitalForecastItemNumberPure> GetInitialAsync(CancellationToken token)
             {
-                return Task.FromResult(GetInitial());
+                return Task.FromResult(GetInitial(token));
             }
 
-            public OrbitalForecastItemNumberPure GetInitial()
+            public OrbitalForecastItemNumberPure GetInitial(CancellationToken token)
             {
                 var dt = DateTime.Now;
                 var b = dt.ToOADate() * 86400;

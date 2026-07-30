@@ -31,9 +31,9 @@ if (app.Environment.IsDevelopment())
 
 var performer = new Performer();
 var api = app.MapGroup("/api/orbital");
-api.MapGet("initial", () =>
+api.MapGet("initial", (CancellationToken token) =>
 {
-    var init = performer.GetInitial();
+    var init = performer.GetInitial(token);
     return init;
 })
 .WithName("GetInitial");

@@ -1,6 +1,6 @@
-﻿using AspireTradingApp.Server.Trading;
+﻿using Microsoft.AspNetCore.Mvc;
+using AspireTradingApp.Server.Trading;
 using Trading.Library;
-using Microsoft.AspNetCore.Mvc;
 using Trading.Database;
 using Trading.Library.Classes;
 using Trading.Library.Objects;
@@ -9,6 +9,8 @@ static class TradingInit
 {
     static Performer performer = new Performer();
 
+    static Dictionary<string, object> symbols = null;
+
 
     internal static async Task Create(WebApplication application)
     {
@@ -16,22 +18,37 @@ static class TradingInit
         var cs = application.Configuration["ConnectionStrings:Trading"];
         StaticExtensionTradingDatabase.ConnectionString = cs;
         await performer.Load(new CancellationToken());
-        api.MapGet("tradingsymbols", () =>
+        api.MapGet("tradingsymbols", (CancellationToken token) =>
         {
-            return GetSymbols();
+            return GetSymbols(token);
         })
    .WithName("GetTradingSymbols");
 
-        api.MapPost("tradinghistory", () =>
+
+        api.MapGet("initial", (CancellationToken token) =>
         {
-            return GetSymbols();
+            return GetSymbols(token);
+        })
+.WithName("GetTradingInitial");
+
+
+        api.MapPost("tradinghistory", (CancellationToken token) =>
+        {
+            return GetSymbols(token);
         })
 .WithName("GetTradingHistory");
     }
 
-    public static async Task<string[][]> GetSymbols()
+    public static async Task<string> GetInitial(CancellationToken token)
     {
-        return await GetTradingHistorucalSrtingSymbolsArray(new CancellationToken());
+        await performer.Load(token);
+        return performer.Initial;
+    }
+
+
+    public static async Task<string[][]> GetSymbols(CancellationToken token)
+    {
+        return await GetTradingHistorucalSrtingSymbolsArray(token);
     }
 
     public static async Task<string[][]> GetTradingHistorucalSrtingSymbolsArray(CancellationToken cancellationToken)
@@ -42,7 +59,6 @@ static class TradingInit
 
     }
 
-    static Dictionary<string, object> symbols = null;
 
     public static async Task<Dictionary<string, object>> GetTradingHistoricalSymbols(CancellationToken cancellationToken)
     {

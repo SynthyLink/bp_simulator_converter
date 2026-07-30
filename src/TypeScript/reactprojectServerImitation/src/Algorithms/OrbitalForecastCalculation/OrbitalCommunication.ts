@@ -39,8 +39,10 @@ export class OrbitalCommunication extends HttpCommunication {
 
     public async getOrbitalInitialCancel(): Promise<OrbitalForecastConditionNumber | undefined>  {
         try {
+            const controller = new AbortController();
+            let signal = controller.signal
             let s = "/api/initial"
-            const response = await fetch(s)
+            const response = await fetch(s, { signal })
             if (!response.ok) {
                 console.log(response)
             }

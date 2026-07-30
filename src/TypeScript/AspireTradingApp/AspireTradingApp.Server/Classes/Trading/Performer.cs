@@ -26,6 +26,14 @@ namespace AspireTradingApp.Server.Trading
             return s.ToList();
         }
 
+        public string Initial
+        {
+            get
+            {
+                return "";
+            }
+        }
+
         public HistoricalDataMessageNumber Convert(HistoricalDataMessageDateTime message)
         {
             return new HistoricalDataMessageNumber

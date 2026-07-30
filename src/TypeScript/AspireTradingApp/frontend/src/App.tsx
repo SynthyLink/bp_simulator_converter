@@ -11,6 +11,8 @@ let communication = new TradingCommunication()
 
 let map: Map<string, any> = new Map
 
+let init : any
+
 
 function App() {
     let [symbols, setSymbols] = useState<Map<string, any>>();
@@ -36,9 +38,6 @@ function App() {
             if (sele !== null) {
                 const select = sele as HTMLSelectElement
                 let n = select.size
-                console.log(select)
-                console.log(n)
-                console.log(map)
              if (n === 0) {
                     for (let ss of map) {
                         let opt = document.createElement("option");

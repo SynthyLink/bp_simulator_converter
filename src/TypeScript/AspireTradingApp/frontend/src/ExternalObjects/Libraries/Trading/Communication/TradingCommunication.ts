@@ -8,6 +8,36 @@ export class TradingCommunication extends HttpCommunication {
 
     first: boolean = true;
 
+    initial: string = ""
+
+    public async getInitial(): Promise<string> {
+        if (this.initial.length > 0) return this.initial
+        if (this.url.length === 0) return "";
+        try {
+            let s = "/api/trading/initial"
+            const response = await fetch(s)
+            if (!response.ok) {
+                console.log(response)
+            }
+            else {
+                let u = response.url;
+                this.url = u.substring(0, u.length - s.length)
+                this.setCommunicationServer(this.url)
+                const data = await response.json();
+                this.symbols = data
+                return data
+            }
+        }
+        catch (err) {
+            // setError(err instanceof Error ? err.message : 'Failed to fetch weather data');
+            console.error('Error fetching trading symbols:', err);
+            // console.log(err)
+        } finally {
+            //setLoading(false);
+        }
+        return ""
+    }
+
     public async getSymbols(): Promise<string[][]>
     {
         if (this.first) {
@@ -39,5 +69,7 @@ export class TradingCommunication extends HttpCommunication {
         this.first = true
         return[]
     }
+
+
 
 }
