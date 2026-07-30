@@ -112,8 +112,6 @@ namespace Diagram.UI
 
 
 
-
-
         #region Ctor
 
         /// <summary>
@@ -226,6 +224,10 @@ namespace Diagram.UI
 
         #region IComponentCollection Members
 
+        T IComponentCollection.Get<T>(string name)
+        {
+            return performer.GetObject<T>(this, name);
+        }
 
 
         IEnumerable<object> IComponentCollection.AllComponents

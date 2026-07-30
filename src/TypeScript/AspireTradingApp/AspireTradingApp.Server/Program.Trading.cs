@@ -27,7 +27,7 @@ static class TradingInit
 
         api.MapGet("initial", (CancellationToken token) =>
         {
-            return GetSymbols(token);
+            return GetInitial(token);
         })
 .WithName("GetTradingInitial");
 

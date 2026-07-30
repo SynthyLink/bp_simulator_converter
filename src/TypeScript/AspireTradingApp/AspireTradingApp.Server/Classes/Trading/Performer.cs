@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Trading.Database.Classes;
 using Trading.Library.Classes;
 using Trading.Library.Objects;
+using static IronPython.Modules._ast;
 
 namespace AspireTradingApp.Server.Trading
 {
@@ -30,7 +31,14 @@ namespace AspireTradingApp.Server.Trading
         {
             get
             {
-                return "";
+                var q = desktop.Get<DataQuery>("Trading");
+                var d = new Dictionary<string, object>();
+                d["b"] = q.Begin.ToOADate();
+                d["e"] = q.End.ToOADate();
+                d["p"] = q.Period;
+                d["s"] = q.Symbol;
+                var json = System.Text.Json.JsonSerializer.Serialize(d);
+                return json;
             }
         }
 

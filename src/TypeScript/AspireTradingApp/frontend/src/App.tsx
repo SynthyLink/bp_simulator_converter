@@ -2,20 +2,31 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import { TradingCommunication } from './ExternalObjects/Libraries/Trading/Communication/TradingCommunication';
 import React from 'react';
+import type { Initial } from './ExternalObjects/Libraries/Trading/Initial';
+//import { Initial } from './ExternalObjects/Libraries/Trading/Initial';
 
 
 
 let communication = new TradingCommunication()
 
+let controller: AbortController | undefined
+
 
 
 let map: Map<string, any> = new Map
 
-let init : any
+let init: string = ""
 
 
 function App() {
     let [symbols, setSymbols] = useState<Map<string, any>>();
+    let [begin, setBegin] = useState<number>();
+
+    let [end, setEnd] = useState < number >();
+
+    let [period, setPeriod] = useState < string >();
+
+
     useEffect(() => {
         populateData();
     }, []);
@@ -54,7 +65,31 @@ function App() {
                 <><select id="symbol" />
                 </> : ""
 
- 
+            if (init.length == 0) {
+                controller = new AbortController();
+                init = await communication.getInitial(controller)
+                console.log(init)
+                //let mp = new  Map<string, any> 
+                //JSON.parse(init, (key, value) =>
+                //    mp.set(key, value)
+                // )
+                try {
+                    let i: Initial = init as unknown as Initial
+                    //console.log(mp, "MP")
+                    console.log(i, "III")
+                    setBegin(i.b)
+                    setEnd(i.e)
+                    setPeriod(i.p)
+                }
+                catch (error) {
+                    if (error instanceof SyntaxError) {
+                        console.error('Invalid JSON:', error.message);
+                    }
+                }
+                //setBegin(init.b)
+                 //console.log(m, "Init")
+                controller = undefined
+            }
         }
     }
         const  page = (

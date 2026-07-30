@@ -192,8 +192,13 @@ namespace Diagram.UI
 
         #endregion
 
-
         #region IComponentCollection Members
+
+        T IComponentCollection.Get<T>(string name)
+        {
+            return performer.GetObject<T>(this, name);
+        }
+
 
         IEnumerable<object> IComponentCollection.AllComponents
         {
@@ -238,8 +243,6 @@ namespace Diagram.UI
 
 
         #endregion
-
-
 
         #region IDesktop Members
 

@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "react": "^19.2.1",
-    "react-dom": "^19.2.1"
+    "react-dom": "^19.2.1",
+    "reflect-metadata": "^0.2.2",
+    "ts-serializable": "^4.5.10"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
@@ -22,7 +24,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.0",
-    "eslint": "^9.39.1",
+    "eslint": "^10.8.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",

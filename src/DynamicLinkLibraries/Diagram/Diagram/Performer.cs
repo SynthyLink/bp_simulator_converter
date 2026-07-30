@@ -44,7 +44,8 @@ namespace Diagram.UI
         /// <param name="saver"></param>
         /// <param name="components"></param>
         /// <param name="url"></param>
-        public void Save(ISaveDesktopInformation saver, IComponentCollection components, string url)
+        public void Save(ISaveDesktopInformation saver, IComponentCollection components, 
+            string url)
         {
             if (saver == null)
             {

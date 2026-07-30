@@ -10,22 +10,20 @@ export class TradingCommunication extends HttpCommunication {
 
     initial: string = ""
 
-    public async getInitial(): Promise<string> {
+    public async getInitial(controller: AbortController): Promise<string> {
         if (this.initial.length > 0) return this.initial
         if (this.url.length === 0) return "";
         try {
-            let s = "/api/trading/initial"
-            const response = await fetch(s)
-            if (!response.ok) {
-                console.log(response)
+            const result = await this.http_cancel<string>({
+                path: "/api/trading/initial",
+                method: "get",
+                body: undefined,
+            }, controller);
+            if (result.ok && result.body) {
+                return result.body;
             }
             else {
-                let u = response.url;
-                this.url = u.substring(0, u.length - s.length)
-                this.setCommunicationServer(this.url)
-                const data = await response.json();
-                this.symbols = data
-                return data
+                return "";
             }
         }
         catch (err) {

@@ -115,6 +115,12 @@ namespace Diagram.UI.Portable
 
         #region IComponentCollection Members
 
+        T IComponentCollection.Get<T>(string name)
+        {
+            return perf.GetObject<T>(this, name);
+        }
+
+
         IEnumerable<T> IComponentCollection.Get<T>() where T : class
         {
             return performer.GetObjectsAndArrows<T>(this);
