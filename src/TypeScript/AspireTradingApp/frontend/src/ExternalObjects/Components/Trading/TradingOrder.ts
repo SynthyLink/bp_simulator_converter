@@ -1,8 +1,8 @@
-import { IAssociatedObject } from "../../../Library/Interfaces/IAssociatedObject";
-import { IDesktop } from "../../../Library/Interfaces/IDesktop";
-import { IObject } from "../../../Library/Interfaces/IObject";
-import { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
-import { IMeasurements } from "../../../Library/Measurements/Interfaces/IMeasurements";
+import type { IAssociatedObject } from "../../../Library/Interfaces/IAssociatedObject";
+import type { IDesktop } from "../../../Library/Interfaces/IDesktop";
+import type { IObject } from "../../../Library/Interfaces/IObject";
+import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
+import type { IMeasurements } from "../../../Library/Measurements/Interfaces/IMeasurements";
 import { Measurement } from "../../../Library/Measurements/Measurement";
 import { DataConsumer } from "../../../Library/Measurements/DataConsumer";
 
@@ -63,6 +63,8 @@ export class TradingOrder extends DataConsumer implements IMeasurements
 
 
     exitDate: number = 0
+
+    any: any
 
 
 
@@ -134,6 +136,7 @@ class BasicMeasurement extends Measurement implements IAssociatedObject {
 
     protected order: TradingOrder;
 
+    any : any
 
     constructor(name: string, order: TradingOrder, type : any) {
         super(name, type)
@@ -143,6 +146,7 @@ class BasicMeasurement extends Measurement implements IAssociatedObject {
         return this.order
     }
     setAssociatedObject(obj: IObject): void {
+        this.any = obj
     }
 
 }

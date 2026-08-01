@@ -31,6 +31,11 @@ export class DateTimeConverter {
         var x = date - this.baseDays;
         x *= this.coeff;
         return  new Date(x + this.off);
-     }
+    }
+
+
+    public fromSrting(s: string): number {
+        return Date.parse(s)
+    }
 
 }

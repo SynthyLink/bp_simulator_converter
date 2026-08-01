@@ -1,9 +1,10 @@
 ﻿
+using Diagram.UI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.ObjectPool;
 using Trading.Database.Classes;
 using Trading.Library.Classes;
 using Trading.Library.Objects;
-using static IronPython.Modules._ast;
 
 namespace AspireTradingApp.Server.Trading
 {
@@ -27,19 +28,48 @@ namespace AspireTradingApp.Server.Trading
             return s.ToList();
         }
 
+        DataQuery DataQuery => desktop.Get<DataQuery>("Trading");
+
         public string Initial
         {
             get
             {
-                var q = desktop.Get<DataQuery>("Trading");
+                var q = DataQuery;
                 var d = new Dictionary<string, object>();
-                d["b"] = q.Begin.ToOADate();
-                d["e"] = q.End.ToOADate();
+                d["b"] = q.Begin.ToOADate() * 86400;
+                d["e"] = q.End.ToOADate() * 86400;
                 d["p"] = q.Period;
                 d["s"] = q.Symbol;
                 var json = System.Text.Json.JsonSerializer.Serialize(d);
                 return json;
             }
+        }
+
+        public async Task<HistoricalDataMessageNumber[]> GetHistoryNumber(double begin, double end, string period, string s, CancellationToken token)
+        {
+            var q = new DataQuery();
+            IInitializeTask it = q;
+            await it.InitializeAsync(token);
+            q.Begin = DateTime.FromOADate(begin / 86400);
+            q.End = DateTime.FromOADate(end / 86400);
+
+            q.Period = period;
+            q.Symbol = s;
+            var st = await q.GetHistoricalDataMessageDateTimes(token);
+            var h = from hist in st select Convert(hist);
+            return h.ToArray();
+        }
+
+        public async Task<HistoricalDataMessageNumber[]> GetHistoryNumber(string json, CancellationToken token)
+            { 
+            var q = new DataQuery();
+            var o =
+                    System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(json);
+            var b = double.Parse(o.GetProperty("b") + "");
+            var e = double.Parse(o.GetProperty("e") + "");
+            var sym = o.GetProperty("s") + "";
+            var p = o.GetProperty("p") + "";
+            return await GetHistoryNumber(b, e, p, sym, token);
         }
 
         public HistoricalDataMessageNumber Convert(HistoricalDataMessageDateTime message)

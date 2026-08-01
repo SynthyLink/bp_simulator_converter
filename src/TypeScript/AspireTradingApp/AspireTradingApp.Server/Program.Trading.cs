@@ -32,11 +32,13 @@ static class TradingInit
 .WithName("GetTradingInitial");
 
 
-        api.MapPost("tradinghistory", (CancellationToken token) =>
+        api.MapPost("tradinghistory", async ([FromBody] string s, CancellationToken token) =>
         {
-            return GetSymbols(token);
+            var o = await performer.GetHistoryNumber(s, token);
+            var st = System.Text.Json.JsonSerializer.Serialize(o);
+            return st;
         })
-.WithName("GetTradingHistory");
+.WithName("PostTradingHistory");
     }
 
     public static async Task<string> GetInitial(CancellationToken token)

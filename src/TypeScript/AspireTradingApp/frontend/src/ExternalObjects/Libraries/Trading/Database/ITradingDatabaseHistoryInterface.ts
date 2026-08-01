@@ -1,7 +1,7 @@
 
 export interface ITradingDatabaseHistoryInterface {
 
-    getSymbolsAsync(cancel: AbortController): Promise<Map<String, any>>
+    getSymbolsAsync(): Promise<string[][]>
 
     getHistoricalDataMessageDateTimesAsync(id: any, begin: number,
         end: number, cancellation: AbortController): Promise<[]>;

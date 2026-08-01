@@ -1,15 +1,15 @@
-import type { ITradingDatabaseHistoryInterfaceFacrory } from "./ITradingDatabaseHistoryInterfaceFactory";
+import type { ITradingDatabaseHistoryInterfaceFactory } from "./ITradingDatabaseHistoryInterfaceFactory";
 
 export class TradingDatabaseHistoryInterfaceHolder {
 
-    setITradingDatabaseHistoryInterfaceFacrory(factory: ITradingDatabaseHistoryInterfaceFacrory) {
+    setITradingDatabaseHistoryInterfaceFacrory(factory: ITradingDatabaseHistoryInterfaceFactory) {
         this.factory = factory;
     }
 
-    getITradingDatabaseHistoryInterfaceFacrory(): ITradingDatabaseHistoryInterfaceFacrory {
+    getITradingDatabaseHistoryInterfaceFacrory(): ITradingDatabaseHistoryInterfaceFactory {
         return this.factory;
     }
 
 
-    factory !: ITradingDatabaseHistoryInterfaceFacrory;
+    factory !: ITradingDatabaseHistoryInterfaceFactory;
 }

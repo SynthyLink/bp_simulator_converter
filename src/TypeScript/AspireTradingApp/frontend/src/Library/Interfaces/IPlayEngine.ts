@@ -4,7 +4,7 @@ export interface IPlayEngine {
 
     isEngineEnabled(): boolean
 
-    setEngineEnabled(enabled: boolean): boolean
+    setEngineEnabled(enabled: boolean): void
 
     getEngineAction(): IActionAddRemoveT<number>
 }

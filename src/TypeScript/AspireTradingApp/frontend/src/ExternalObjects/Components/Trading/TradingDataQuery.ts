@@ -31,6 +31,7 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
     }
 
     getMeasurement(i: number): IMeasurement {
+        this.any = i;
         throw new Error("Method not implemented.");
     }
 
@@ -39,7 +40,7 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
     }
 
     addMeasurement(measurement: IMeasurement): void {
-        throw new Error("Method not implemented.");
+        this.any = measurement
     }
 
     nextIterator(): void {
@@ -52,12 +53,15 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
     }
 
    async initializeTaskAsync(controller: AbortController): Promise<void> {
-       var sym = await TradingDataQuery.inter.getSymbolsAsync(controller);
-       this.performer.copyMap(sym, this.symbols);
+       var sym = await TradingDataQuery.inter.getSymbolsAsync();
+       for (let i of sym) {
+           this.symbols.set(i[0], i[1])
+       }
+       this.any = controller
     }
 
 
-
+    any : any
  
     protected id !: any;
 
