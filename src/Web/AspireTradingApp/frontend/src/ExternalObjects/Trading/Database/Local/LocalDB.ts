@@ -30,40 +30,47 @@ export class LocalDB  implements ILocalDB {
         return r;
     }
 
+    dbacess: DBAccess = new DBAccess()
+
     async writeHistoryAsync(symbol: string, history: HistoryMessage[]): Promise<void> {
         if (history.length != 0) {
-            let da = new DataAccess<ItemHistory>("Trading", symbol)
-            await da.create()
            // let b = history[0].date;
            // let e = history[history.length - 1].date
             let init = []
             let i = 0;
+            let dba = this.dbacess.instance;
+           // await dba.connect("Trading", symbol)
+            let da = new DataAccess<ItemHistory>("Trading", symbol)
             for (var h of history) {
                 let hh = new ItemHistory(i + "", h);
                 ++i;
                 let pr = da.add(hh)
                 init.push(pr)
+                if (i < 10) {
+                    console.log(hh)
+                    console.log(da, "DA")
+                }
             }
             Promise.all(init)
-
-        }
+            console.log(da, "DAA")
+     }
     }
 
     async clearHistoryAsync(symbol: string): Promise<void> {
         this.any = symbol
-        let da = new DataAccess<ItemHistory>("Trading", symbol)
-        await da.delete()
+   //     let da = new DataAccess<ItemHistory>("Trading", symbol)
         
     }
 
 
-    readHistoryAsync(symbol: string, begin: number, end: number): Promise<HistoryMessage[]> {
+    async readHistoryAsync(symbol: string, begin: number, end: number): Promise<HistoryMessage[]> {
         this.any = symbol
         this.any = begin
         this.any = end
- 
-        throw new Error("Method not implemented.");
-        
+        let da = new DataAccess<ItemHistory>("Trading", symbol)
+        console.log(da)
+        let p = await da.retrieve()
+        return p;
     }
 
     any: any

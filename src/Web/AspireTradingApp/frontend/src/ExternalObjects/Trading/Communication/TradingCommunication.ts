@@ -47,8 +47,11 @@ export class TradingCommunication extends HttpCommunication {
         let e = Number(map.get("e"))
         let sym = map.get("s") + "";
       //  let p = map.get("p") + "";
-        let r = await this.tPerformrer.readHistory(sym, b, e);
-        if (r.length > 0) return r;
+   /*     let r = await this.tPerformrer.readHistory(sym, b, e)
+        if (r.length > 0) {
+            console.log(r[0], "ro")
+            return r;
+        }*/
         let json = JSON.stringify(Object.fromEntries(map))
         let s = "";
         if (json !== undefined) {
@@ -79,6 +82,7 @@ export class TradingCommunication extends HttpCommunication {
         return undefined
     }
 
+    
 
     public async getSymbolsAsync(): Promise<string[][]>
     {

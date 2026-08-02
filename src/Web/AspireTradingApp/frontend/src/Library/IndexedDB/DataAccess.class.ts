@@ -12,17 +12,6 @@ export class DataAccess<T extends Item> implements IDataAccess<T> {
     this.connection = new DBAccess().instance.connect(dbName, storeName);
     }
 
-    public async delete(): Promise<void> {
-        let c = await this.connection
-        if (c.objectStoreNames.contains(this.storeName))  c.deleteObjectStore(this.storeName)
-    }
-
-    public async create(): Promise<void> {
-        let c = await this.connection
-        if (!c.objectStoreNames.contains(this.storeName)) c.createObjectStore(this.storeName)
-    }
-
-
 
   async add(item: T) {
     const db = await this.connection;
@@ -34,9 +23,10 @@ export class DataAccess<T extends Item> implements IDataAccess<T> {
   }
 
   async retrieve() {
-    const db = await this.connection;
-    const store = db.transaction([this.storeName], 'readonly')
-      .objectStore(this.storeName);
+      const db = await this.connection;
+      console.log(db)
+      const st = db.transaction([this.storeName], 'readonly')
+      const store = st.objectStore(this.storeName);
 
       return new Promise<T[]>((resolve, reject) => {
           this.any = reject
