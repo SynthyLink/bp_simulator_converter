@@ -47,11 +47,12 @@ export class TradingCommunication extends HttpCommunication {
         let e = Number(map.get("e"))
         let sym = map.get("s") + "";
       //  let p = map.get("p") + "";
-   /*     let r = await this.tPerformrer.readHistory(sym, b, e)
+        let r = await this.tPerformrer.readHistory(sym, b, e)
+        console.log(r.length)
         if (r.length > 0) {
             console.log(r[0], "ro")
             return r;
-        }*/
+        }
         let json = JSON.stringify(Object.fromEntries(map))
         let s = "";
         if (json !== undefined) {
@@ -82,6 +83,52 @@ export class TradingCommunication extends HttpCommunication {
         return undefined
     }
 
+    deleteDb(): void {
+        var req = indexedDB.deleteDatabase("Trading");
+        req.onsuccess = () => {
+            console.log("Deleted database successfully");
+        };
+        req.onerror = () => {
+            console.log("Couldn't delete database");
+        };
+        req.onblocked = () => {
+            console.log("Couldn't delete database due to the operation being blocked");
+        };
+
+    }
+
+
+    createDb(): void {
+        var req = indexedDB.open("Trading", 1);
+        req.onsuccess = () => {
+            console.log("Open database successfully");
+        };
+        req.onerror = () => {
+            console.log("Couldn't open database");
+        };
+        req.onblocked = () => {
+            console.log("Couldn't open database due to the operation being blocked");
+        };
+
+        req.onupgradeneeded = () => {
+            console.log("UPGRADE");
+            let db = req.result
+            let n = db.objectStoreNames
+            if (n.length > 0) return;
+            db.createObjectStore("Interval", { keyPath: 'uid' })
+            for (let s of this.symbols) {
+                db.createObjectStore(s[0], { keyPath: 'uid' })
+            }
+            console.log(db)
+     };
+
+
+    }
+
+
+
+   
+
     
 
     public async getSymbolsAsync(): Promise<string[][]>
@@ -89,6 +136,8 @@ export class TradingCommunication extends HttpCommunication {
         if (this.first) {
             this.first = false
             if (this.symbols.length > 0) return this.symbols
+           // this.deleteDb()
+          // return []
             try {
                 let s = "/api/trading/tradingsymbols"
                 const response = await fetch(s)
@@ -100,6 +149,7 @@ export class TradingCommunication extends HttpCommunication {
                     this.setCommunicationServer(this.url)
                     const data = await response.json();
                     this.symbols = data
+                    this.createDb()
                     return data
                 }
             }

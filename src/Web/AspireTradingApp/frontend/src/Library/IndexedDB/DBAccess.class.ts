@@ -12,7 +12,7 @@ export class DBAccess implements IDBAccess {
     }
 
     let attempts = 3;
-    const request = indexedDB.open(dbName, 4);
+    const request = indexedDB.open(dbName, 1);
 
     return new Promise<IDBDatabase>((resolve, reject) => {
       request.onerror = error => {
@@ -25,12 +25,8 @@ export class DBAccess implements IDBAccess {
       request.onsuccess = () => {
           this.db = request.result;
           if (!this.db.objectStoreNames.contains(storeName)) {
-              console.log(storeName, "STORENAME")
-              let rr = this.db.createObjectStore(storeName, { keyPath: 'uid' });
-              console.log(rr, "STORENAMERR")
       }
         resolve(this.db);
-          console.log(this.db, "SUCCESS")
    };
       request.onupgradeneeded = () => {
         this.db = request.result;

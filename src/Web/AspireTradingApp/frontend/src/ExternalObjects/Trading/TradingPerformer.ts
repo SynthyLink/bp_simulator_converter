@@ -15,7 +15,6 @@ export class TradingPerformer {
     }
 
     async readHistory(symbol: string, begin: number, end: number): Promise<HistoryMessage[]> {
-        console.log("RH")
        /* let p = await this.local.getIntervalAsync(symbol);
         if (p.length === 0) return []
         if (p[0] > begin) return []

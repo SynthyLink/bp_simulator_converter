@@ -44,14 +44,14 @@ export class LocalDB  implements ILocalDB {
             for (var h of history) {
                 let hh = new ItemHistory(i + "", h);
                 ++i;
-                let pr = da.add(hh)
+                let pr = await da.add(hh)
                 init.push(pr)
                 if (i < 10) {
                     console.log(hh)
                     console.log(da, "DA")
                 }
             }
-            Promise.all(init)
+          //  Promise.all(init)
             console.log(da, "DAA")
      }
     }
@@ -68,8 +68,9 @@ export class LocalDB  implements ILocalDB {
         this.any = begin
         this.any = end
         let da = new DataAccess<ItemHistory>("Trading", symbol)
-        console.log(da)
+        console.log(da, "RTH")
         let p = await da.retrieve()
+        console.log(p.length, "PPP")
         return p;
     }
 
