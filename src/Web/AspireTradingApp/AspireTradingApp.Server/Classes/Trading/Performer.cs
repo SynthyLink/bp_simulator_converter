@@ -50,8 +50,8 @@ namespace AspireTradingApp.Server.Trading
             var q = new DataQuery();
             IInitializeTask it = q;
             await it.InitializeAsync(token);
-            q.Begin = DateTime.FromOADate(begin / 86400);
-            q.End = DateTime.FromOADate(end / 86400);
+            q.Begin = DateTime.FromOADate(begin);
+            q.End = DateTime.FromOADate(end);
 
             q.Period = period;
             q.Symbol = s;

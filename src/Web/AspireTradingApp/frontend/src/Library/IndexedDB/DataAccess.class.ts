@@ -12,6 +12,18 @@ export class DataAccess<T extends Item> implements IDataAccess<T> {
     this.connection = new DBAccess().instance.connect(dbName, storeName);
     }
 
+    async close(): Promise<void> {
+        const db = await this.connection;
+        db.close()
+    }
+
+    async clear() :Promise<void>{
+        const db = await this.connection;
+        const req = db.transaction([this.storeName], 'readwrite')
+        const store = req.objectStore(this.storeName)
+        store.clear();
+    }
+
 
   async add(item: T) {
     const db = await this.connection;

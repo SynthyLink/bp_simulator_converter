@@ -1,6 +1,6 @@
 import { HttpCommunication } from "../../../Library/Communications/http/http_interface";
 import type { HistoryMessage } from "../Database/HistoryMessage";
-import { LocalDB } from "../Database/Local/LocalDB";
+import { MemoryDB } from "../Database/Local/MemoryDB";
 import type { Initial } from "../Initial";
 import { TradingPerformer } from "../TradingPerformer";
 
@@ -12,7 +12,7 @@ export class TradingCommunication extends HttpCommunication {
 
     first: boolean = true;
 
-    tPerformrer: TradingPerformer = new TradingPerformer(new LocalDB())
+    tPerformrer: TradingPerformer = new TradingPerformer(new MemoryDB())
 
     initial !: Initial;
 
@@ -46,7 +46,8 @@ export class TradingCommunication extends HttpCommunication {
         let b = Number(map.get("b"))
         let e = Number(map.get("e"))
         let sym = map.get("s") + "";
-      //  let p = map.get("p") + "";
+        //  let p = map.get("p") + "";
+     //   await this.createDb()
         let r = await this.tPerformrer.readHistory(sym, b, e)
         console.log(r.length)
         if (r.length > 0) {
@@ -83,7 +84,7 @@ export class TradingCommunication extends HttpCommunication {
         return undefined
     }
 
-    deleteDb(): void {
+    public deleteDb1(): void {
         var req = indexedDB.deleteDatabase("Trading");
         req.onsuccess = () => {
             console.log("Deleted database successfully");
@@ -98,7 +99,7 @@ export class TradingCommunication extends HttpCommunication {
     }
 
 
-    createDb(): void {
+    createDb1(): void {
         var req = indexedDB.open("Trading", 1);
         req.onsuccess = () => {
             console.log("Open database successfully");
@@ -120,6 +121,7 @@ export class TradingCommunication extends HttpCommunication {
                 db.createObjectStore(s[0], { keyPath: 'uid' })
             }
             console.log(db)
+            
      };
 
 
@@ -149,7 +151,6 @@ export class TradingCommunication extends HttpCommunication {
                     this.setCommunicationServer(this.url)
                     const data = await response.json();
                     this.symbols = data
-                    this.createDb()
                     return data
                 }
             }

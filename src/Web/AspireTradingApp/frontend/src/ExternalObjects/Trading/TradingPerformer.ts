@@ -15,10 +15,15 @@ export class TradingPerformer {
     }
 
     async readHistory(symbol: string, begin: number, end: number): Promise<HistoryMessage[]> {
-       /* let p = await this.local.getIntervalAsync(symbol);
-        if (p.length === 0) return []
-        if (p[0] > begin) return []
-        if (p[1] > end) return []*/
+        let p = await this.local.getIntervalAsync(symbol);
+        console.log(p, "Interval")
+        let b = p.length === 0 || p[0] > begin || p[1] < end
+        console.log(p)
+        console.log(p[0], begin, p[1], end)
+        if (b) {
+            await this.local.clearHistoryAsync(symbol)
+            return [];
+        }
         return await this.local.readHistoryAsync(symbol, begin, end)
     }
 

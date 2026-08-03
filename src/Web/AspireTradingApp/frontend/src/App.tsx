@@ -67,6 +67,9 @@ function App() {
         setEnd(event.target.value);
     };
 
+    const delClick = async () => {
+        communication.deleteDb()
+    }
 
     const btnClick = async () => {
         if (begin === undefined) return
@@ -210,6 +213,7 @@ function App() {
                 <div> <input className="input-filter-index" type='datetime-local' value={end} onInput={handleEndChange} /></div>
                 <div>
                     <button onClick={btnClick}>Start</button>
+                    <button onClick={delClick} > Delete database</button>
                     <table>
                         <thead>
                             <tr>
