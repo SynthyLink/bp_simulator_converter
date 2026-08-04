@@ -17,12 +17,10 @@ export class LocalDB  implements ILocalDB {
     }
     async getIntervalAsync(symbol: string): Promise<number[]> {
         let da = new DataAccess<ItemInterval>("Trading", "Interval")
-        console.log(da, "SD")
         let r: number[] = []
         try {
             let d = await da.get(symbol);
             if (d !== undefined) {
-                console.log(d, "d")
                 r.push(d.begin)
                 r.push(d.end)
             }
@@ -33,7 +31,10 @@ export class LocalDB  implements ILocalDB {
     }
 //    dbacess: DBAccess = new DBAccess()
 
-    async writeHistoryAsync(symbol: string, history: HistoryMessage[]): Promise<void> {
+    async writeHistoryAsync(symbol: string, begin: number, end: number, history: HistoryMessage[]): Promise<void> {
+        this.any = begin
+        this.any = end
+
         if (history.length != 0) {
             // let b = history[0].date;
             // let e = history[history.length - 1].date
@@ -45,9 +46,6 @@ export class LocalDB  implements ILocalDB {
                 ++i;
                 let pr = da.add(hh)
                 init.push(pr)
-                if (i < 7) {
-                    console.log(hh, "DA")
-                }
             }
             console.log("FINISH", init.length)
             await Promise.all(init)
@@ -60,8 +58,6 @@ export class LocalDB  implements ILocalDB {
             let ii = new ItemInterval(symbol, b, e)
             let db = new DataAccess<ItemInterval>("Trading", "Interval")
             await db.add(ii)
-            console.log(ii, "IIII")
-            console.log(db, "IIIIh")
             await db.close()
         }
     }
@@ -86,8 +82,6 @@ export class LocalDB  implements ILocalDB {
         let p = await da.retrieve()
         let ii = p.length
         if (ii > 3) ii = 3;
-        for (let x = 0; x < ii; ii++)
-            console.log(p[x], "p")
         await da.close()
         return p;
     }

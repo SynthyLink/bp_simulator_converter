@@ -1,7 +1,10 @@
+import { DateTimeConverter } from "../../../../Library/Utilities/DateTime/DateTimeConverter";
 import type { HistoryMessage } from "../HistoryMessage";
 import type { ILocalDB } from "./Interfaces/ILocalDB";
 
 export class MemoryDB implements ILocalDB {
+
+    converter: DateTimeConverter = new DateTimeConverter()
     getIntervalAsync(symbol: string): Promise<number[]> {
         let n: number[] = [];
         if (this.map.has(symbol)) {
@@ -17,7 +20,6 @@ export class MemoryDB implements ILocalDB {
     }
     setIntervalAsync(symbol: string, i: number[]): Promise<void> {
         this.map.set(symbol, i)
-        console.log(this.map, "map")
         return new Promise<void>((resolve, reject) => {
             resolve()
             this.any = reject
@@ -25,12 +27,10 @@ export class MemoryDB implements ILocalDB {
         )
     }
 
-    writeHistoryAsync(symbol: string, history: HistoryMessage[]): Promise<void> {
-        console.log(history.length)
+    writeHistoryAsync(symbol: string, begin: number, end: number, history: HistoryMessage[]): Promise<void> {
         if (history.length > 0) {
             this.maph.set(symbol, history)
-            this.map.set(symbol, [history[0].date, history[history.length - 1].date])
-            console.log(this.map)
+            this.map.set(symbol, [begin, end])
         }
         return new Promise<void>((resolve, reject) => {
             resolve();
@@ -54,14 +54,15 @@ export class MemoryDB implements ILocalDB {
     readHistoryAsync(symbol: string, begin: number, end: number): Promise<HistoryMessage[]> {
         let h: HistoryMessage[] = []
         console.log("READ")
+      //  let be = this.converter.fromOADate(begin).getSeconds() * 10000000
+      //  let en = this.converter.fromOADate(end).getSeconds() * 10000000
         if (this.maph.has(symbol))
         {
             let hh = this.maph.get(symbol)
             if (hh != null) {
                 let b = hh[0].date
                 let e = hh[hh.length - 1].date
-                let cond = b >= begin || e <= end
-                console.log(cond)
+                let cond = b >= begin && e <= end
                 if (cond) {
                     for (let x of hh) {
                         if (x.date < begin) continue
@@ -76,7 +77,6 @@ export class MemoryDB implements ILocalDB {
             }
 
         }
-        console.log(h.length, "hhhhhHH")
   
 
         return new Promise<HistoryMessage[]>((resolve, reject) => {

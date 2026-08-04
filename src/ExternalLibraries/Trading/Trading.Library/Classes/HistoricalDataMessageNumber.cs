@@ -4,7 +4,7 @@ namespace Trading.Library.Classes
     public record class HistoricalDataMessageNumber
     {
         public int requestId { get; init; }
-        public long? date { get; init; }
+        public double? date { get; init; }
         public double open { get; init; }
         public double high { get; init; }
         public double low { get; init; }

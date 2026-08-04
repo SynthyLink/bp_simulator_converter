@@ -527,8 +527,8 @@ export class Performer
     public dateNumber(x: string): number {
         var d = new Date(x);
         var y = this.dt.toOADate(d);
-        var z = y * 86400;
-        return z;
+        //var z = y * 86400;
+        return y;
     }
 
     protected dt: DateTimeConverter = new DateTimeConverter();

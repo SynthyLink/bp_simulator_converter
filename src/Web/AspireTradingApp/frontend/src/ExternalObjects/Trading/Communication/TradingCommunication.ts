@@ -49,7 +49,6 @@ export class TradingCommunication extends HttpCommunication {
         //  let p = map.get("p") + "";
      //   await this.createDb()
         let r = await this.tPerformrer.readHistory(sym, b, e)
-        console.log(r.length)
         if (r.length > 0) {
             console.log(r[0], "ro")
             return r;
@@ -67,7 +66,7 @@ export class TradingCommunication extends HttpCommunication {
             }, controller);
             if (result.ok && result.body) {
                 let res = result.body as unknown as HistoryMessage[];
-                await this.tPerformrer.writeHistoryAsync(sym, res)
+                await this.tPerformrer.writeHistoryAsync(sym,b,e, res)
                 return res;
             }
             else {
@@ -120,7 +119,6 @@ export class TradingCommunication extends HttpCommunication {
             for (let s of this.symbols) {
                 db.createObjectStore(s[0], { keyPath: 'uid' })
             }
-            console.log(db)
             
      };
 

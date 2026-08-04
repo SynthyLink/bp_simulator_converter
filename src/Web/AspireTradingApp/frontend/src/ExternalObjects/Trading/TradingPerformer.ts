@@ -6,20 +6,17 @@ export class TradingPerformer {
         this.local = local;
     }
 
-    async writeHistoryAsync(symbol: string, history: HistoryMessage[]): Promise<void> {
+    async writeHistoryAsync(symbol: string, begin: number, end: number, history: HistoryMessage[]): Promise<void> {
         console.log("WH")
        let p = await this.local.getIntervalAsync(symbol);
         if (p.length === 0)
             this.local.clearHistoryAsync(symbol)
-        await this.local.writeHistoryAsync(symbol, history)
+        await this.local.writeHistoryAsync(symbol, begin, end, history)
     }
 
     async readHistory(symbol: string, begin: number, end: number): Promise<HistoryMessage[]> {
         let p = await this.local.getIntervalAsync(symbol);
-        console.log(p, "Interval")
         let b = p.length === 0 || p[0] > begin || p[1] < end
-        console.log(p)
-        console.log(p[0], begin, p[1], end)
         if (b) {
             await this.local.clearHistoryAsync(symbol)
             return [];

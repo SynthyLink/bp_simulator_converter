@@ -77,7 +77,7 @@ namespace AspireTradingApp.Server.Trading
             return new HistoricalDataMessageNumber
             {
                 requestId = message.requestId,
-                date = message.date == null ? null : message.date.Value.Ticks,
+                date = message.date == null ? null : message.date.Value.ToOADate(),
                 open = message.open,
                 high = message.high,
                 low = message.low,
