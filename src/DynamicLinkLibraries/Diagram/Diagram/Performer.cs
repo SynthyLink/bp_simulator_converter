@@ -170,9 +170,6 @@ namespace Diagram.UI
             return att.Language;
         }
 
-
-
-
         /// <summary>
         /// Gets relative name
         /// </summary>

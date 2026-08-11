@@ -46,7 +46,7 @@ namespace Diagram.UI
         #region Fields
 
 
-        Diagram.UI.Performer performer = new Diagram.UI.Performer();
+        Performer performer = new ();
 
         IComponentCollection collection;
 
@@ -2654,6 +2654,12 @@ namespace Diagram.UI
         {
           return  performer.GetObjectsAndArrows<T>(this);
         }
+
+        T IComponentCollection.Get<T>(string name)
+        {
+            return performer.GetObject<T>(this, name);
+        }
+
         #endregion
 
         #endregion
@@ -2807,5 +2813,6 @@ namespace Diagram.UI
             cancellationToken = new CancellationToken();
             return cancellationToken; 
         }
+
     }
 }

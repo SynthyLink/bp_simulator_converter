@@ -1,8 +1,8 @@
 export interface IIterator {
     /// Next operation
-    nextIterator() : void;
+    nextIterator(): boolean;
 
-/// Reset operation
-resetIterator() : void;
+    /// Reset operation
+    resetIterator(): void;
 
 }

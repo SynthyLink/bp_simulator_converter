@@ -46,6 +46,7 @@ import type { IExternalAction } from "./Interfaces/IExternalAction";
 import type { IInput } from "./Interfaces/IInput";
 import type { IActionAddRemoveT2 } from "./Interfaces/IActionAddRemoveT2";
 import type { IActionT2 } from "./Interfaces/IActionT2";
+import type { IStartTask } from "./Interfaces/IStartTask";
 
 
 
@@ -77,6 +78,17 @@ export class Performer
 
     public static setCurrentDesktop(desktop: IDesktop): void {
         this.desktop = desktop
+    }
+
+    public async startAsync(collection: IComponentCollection, controller: AbortController): Promise<void>
+    {
+        let r: Promise<void>[] = []
+        let t = this.getAll<IStartTask>(collection, "IStartTask")
+        for (let task of t) {
+            r.push(task.startAsync(controller))
+        }
+        await Promise.all(r)
+
     }
 
 

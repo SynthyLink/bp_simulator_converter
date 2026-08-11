@@ -45,9 +45,11 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
         throw new Error("Method not implemented.");
     }
 
-    nextIterator(): void {
+    nextIterator(): boolean {
         ++this.step;
+        if (this.data.length <= this.step) return false
         this.current = this.data[this.step];
+        return true
     }
 
     resetIterator(): void {
