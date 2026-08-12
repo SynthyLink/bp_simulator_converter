@@ -171,12 +171,27 @@ export class PerformerMeasuremets extends Performer {
 
     }
 
-    public async performIteratorDataConsumerMapAsync(dataConsumer: IDataConsumer,
+    public async performIteratorDataConsumerMapArrayAsync(dataConsumer: IDataConsumer,
         iterator: IIterator, abort: AbortController, meaurements: string[],
         preparation?: IAction | undefined): Promise<Map<string, any>[]> {
         let map = new Map<string, IMeasurement>()
         for (var s of meaurements) {
             map.set(s, this.getMeasurementDC(dataConsumer, s))
+        }
+
+        let action = new MeasurementWrite(map)
+        await this.performIteratorDataConsumerAsync(dataConsumer, iterator, abort, action, preparation)
+        return action.getData()
+    }
+
+
+
+    public async performIteratorDataConsumerMapAsync(dataConsumer: IDataConsumer,
+        iterator: IIterator, abort: AbortController, meaurements: Map<string, string>,
+        preparation?: IAction | undefined): Promise<Map<string, any>[]> {
+        let map = new Map<string, IMeasurement>()
+        for (var [key, value] of meaurements) {
+            map.set(key, this.getMeasurementDC(dataConsumer, value))
         }
 
         let action = new MeasurementWrite(map)

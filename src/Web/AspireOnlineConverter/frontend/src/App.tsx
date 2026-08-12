@@ -134,8 +134,11 @@ function App() {
     if (init === undefined) {
       return;
     }
-    await clientCalc(init);
-    await serverCalc(init);
+      let promises: Promise<void>[] = []
+      let promises: Promise<void>[] = []
+       promises.push(clientCalc(init))
+      promises.push(serverCalc(init))
+      Promise.all(promises)
   };
 
   const b = initial === undefined;

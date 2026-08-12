@@ -83,53 +83,27 @@ function App() {
         map.set("e", e)
         map.set("p", p)
         map.set("s", s)
+        let promises: Promise<void>[] = []
+        promises.push(fillClient(map))
+        promises.push(fillServer(map))
+        await Promise.all(promises);
+    };
+
+    const fillClient = async (map: Map<string, any>): Promise<void> =>
+    {
         let h = await communication.getHistoryAsync(map, getAbortController())
         fillHistory(h)
-   /*      setClient(undefined);
-        setForecast(undefined);
 
-        if (begin === undefined) {
-            return;
-        }
-        if (end === undefined) {
-            return;
-        }
-        if (x === undefined) {
-            return;
-        }
-        if (y === undefined) {
-            return;
-        }
-        if (z === undefined) {
-            return;
-        }
-        if (vx === undefined) {
-            return;
-        }
-        if (vy === undefined) {
-            return;
-        }
-        if (vz === undefined) {
-            return;
-        }
+    }
 
-        const init: OrbitalForecastConditionNumber = {
-            begin: performer.dateNumber(begin),
-            end: performer.dateNumber(end),
-            x: x,
-            y: y,
-            z: z,
-            vx: vx,
-            vy: vy,
-            vz: vz,
-        };
-        if (init === undefined) {
-            return;
-        }
-        await clientCalc(init);
-        await serverCalc(init);
-        */
-    };
+    const fillServer = async (map: Map<string, any>): Promise<void> => {
+      //  let h = await communication.getHistoryAsync(map, getAbortController())
+      //  fillHistory(h)
+
+    }
+
+
+
 
     function fillHistory(m: HistoryMessage[] | undefined): void{
         if (m === undefined) return
