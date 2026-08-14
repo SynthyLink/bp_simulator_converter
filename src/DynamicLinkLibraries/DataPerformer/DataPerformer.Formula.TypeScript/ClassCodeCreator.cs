@@ -6,7 +6,9 @@ using DataPerformer.Interfaces;
 using Diagram.UI;
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
+
 using ErrorHandler;
+
 using FormulaEditor.Interfaces;
 
 namespace DataPerformer.Formula.TypeScript

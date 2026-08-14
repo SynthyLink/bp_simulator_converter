@@ -6,14 +6,14 @@ import type { IPostSetArrow } from "../../../Library/Interfaces/IPostSetArrow";
 import type { IValue } from "../../../Library/Interfaces/IValue";
 import { DataLink } from "../../../Library/Measurements/Arrows/DataLink";
 import { IteratorConsumerLink } from "../../../Library/Measurements/Arrows/IteratorConsumerLink";
+import { DataConsumer } from "../../../Library/Measurements/DataConsumer";
 import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
 import { RecursiveFormula } from "../../../Library/Measurements/RecursiveFormula";
 import { SequenceFilterWrapper } from "../../../Library/Measurements/SequenserFilterWrapper";
 import { VectorFormulaConsumer } from "../../../Library/Measurements/VectorFormulaConsumer";
-import  { SequenceFilterType } from "../../../Library/Utilities/Filters/Interfaces/SequenceFilterType";
+import { SequenceFilterType } from "../../../Library/Utilities/Filters/Interfaces/SequenceFilterType";
 import { TradingDataQuery } from "../Components/TradingDataQuery";
 import { TradingOrder } from "../Components/TradingOrder";
-
 class Donchian_CategoryObject_0 extends TradingDataQuery
 {
 	constructor(desktop: IDesktop, name: string)
@@ -867,8 +867,8 @@ class Donchian_CategoryObject_13 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["c", 145 ],
 			["d", 135 ],
+			["c", 145 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", false, false);
@@ -1094,10 +1094,10 @@ class Donchian_CategoryObject_15 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["c", 129 ],
+			["d", 107 ],
 			["a", 20 ],
 			["b", 105 ],
-			["d", 107 ],
+			["c", 129 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", 0, 0);
@@ -1219,6 +1219,14 @@ class Donchian_CategoryObject_15 extends VectorFormulaConsumer
 }
 
 class Donchian_CategoryObject_16 extends TradingOrder
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
+class Donchian_CategoryObject_17 extends DataConsumer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -1570,6 +1578,78 @@ class Donchian_CategoryArrow_42 extends DataLink
 	}
 }
 
+class Donchian_CategoryArrow_43 extends DataLink
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
+class Donchian_CategoryArrow_44 extends DataLink
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
+class Donchian_CategoryArrow_45 extends DataLink
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
+class Donchian_CategoryArrow_46 extends DataLink
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
+class Donchian_CategoryArrow_47 extends DataLink
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
+class Donchian_CategoryArrow_48 extends DataLink
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
+class Donchian_CategoryArrow_49 extends DataLink
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
+class Donchian_CategoryArrow_50 extends DataLink
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
+class Donchian_CategoryArrow_51 extends IteratorConsumerLink
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
 
 
 export class Donchian extends Desktop
@@ -1597,6 +1677,7 @@ export class Donchian extends Desktop
 		this.mapObjects.set("Donchian_CategoryObject_14", new Donchian_CategoryObject_14(this, "Position"))
 		this.mapObjects.set("Donchian_CategoryObject_15", new Donchian_CategoryObject_15(this, "Indicator"))
 		this.mapObjects.set("Donchian_CategoryObject_16", new Donchian_CategoryObject_16(this, "Order"))
+		this.mapObjects.set("Donchian_CategoryObject_17", new Donchian_CategoryObject_17(this, "Chart"))
 		new Donchian_CategoryArrow_0(this, "");
 		new Donchian_CategoryArrow_1(this, "");
 		new Donchian_CategoryArrow_2(this, "");
@@ -1640,6 +1721,15 @@ export class Donchian extends Desktop
 		new Donchian_CategoryArrow_40(this, "");
 		new Donchian_CategoryArrow_41(this, "");
 		new Donchian_CategoryArrow_42(this, "");
+		new Donchian_CategoryArrow_43(this, "");
+		new Donchian_CategoryArrow_44(this, "");
+		new Donchian_CategoryArrow_45(this, "");
+		new Donchian_CategoryArrow_46(this, "");
+		new Donchian_CategoryArrow_47(this, "");
+		new Donchian_CategoryArrow_48(this, "");
+		new Donchian_CategoryArrow_49(this, "");
+		new Donchian_CategoryArrow_50(this, "");
+		new Donchian_CategoryArrow_51(this, "");
 }
 
 finish() : void
@@ -1819,6 +1909,42 @@ finish() : void
 		if(s42 != undefined)    arrows[42].setSource(s42);
 		let t42 = this.mapObjects.get("Donchian_CategoryObject_10")
 		if(t42 != undefined)    arrows[42].setTarget(t42);
+		let s43 = this.mapObjects.get("Donchian_CategoryObject_17")
+		if(s43 != undefined)    arrows[43].setSource(s43);
+		let t43 = this.mapObjects.get("Donchian_CategoryObject_0")
+		if(t43 != undefined)    arrows[43].setTarget(t43);
+		let s44 = this.mapObjects.get("Donchian_CategoryObject_17")
+		if(s44 != undefined)    arrows[44].setSource(s44);
+		let t44 = this.mapObjects.get("Donchian_CategoryObject_16")
+		if(t44 != undefined)    arrows[44].setTarget(t44);
+		let s45 = this.mapObjects.get("Donchian_CategoryObject_17")
+		if(s45 != undefined)    arrows[45].setSource(s45);
+		let t45 = this.mapObjects.get("Donchian_CategoryObject_2")
+		if(t45 != undefined)    arrows[45].setTarget(t45);
+		let s46 = this.mapObjects.get("Donchian_CategoryObject_17")
+		if(s46 != undefined)    arrows[46].setSource(s46);
+		let t46 = this.mapObjects.get("Donchian_CategoryObject_3")
+		if(t46 != undefined)    arrows[46].setTarget(t46);
+		let s47 = this.mapObjects.get("Donchian_CategoryObject_17")
+		if(s47 != undefined)    arrows[47].setSource(s47);
+		let t47 = this.mapObjects.get("Donchian_CategoryObject_7")
+		if(t47 != undefined)    arrows[47].setTarget(t47);
+		let s48 = this.mapObjects.get("Donchian_CategoryObject_17")
+		if(s48 != undefined)    arrows[48].setSource(s48);
+		let t48 = this.mapObjects.get("Donchian_CategoryObject_8")
+		if(t48 != undefined)    arrows[48].setTarget(t48);
+		let s49 = this.mapObjects.get("Donchian_CategoryObject_17")
+		if(s49 != undefined)    arrows[49].setSource(s49);
+		let t49 = this.mapObjects.get("Donchian_CategoryObject_5")
+		if(t49 != undefined)    arrows[49].setTarget(t49);
+		let s50 = this.mapObjects.get("Donchian_CategoryObject_17")
+		if(s50 != undefined)    arrows[50].setSource(s50);
+		let t50 = this.mapObjects.get("Donchian_CategoryObject_6")
+		if(t50 != undefined)    arrows[50].setTarget(t50);
+		let s51 = this.mapObjects.get("Donchian_CategoryObject_17")
+		if(s51 != undefined)    arrows[51].setSource(s51);
+		let t51 = this.mapObjects.get("Donchian_CategoryObject_0")
+		if(t51 != undefined)    arrows[51].setTarget(t51);
 		(objects[1] as unknown as IPostSetArrow).postSetArrow();
 		(objects[2] as unknown as IPostSetArrow).postSetArrow();
 		(objects[3] as unknown as IPostSetArrow).postSetArrow();
@@ -1835,5 +1961,6 @@ finish() : void
 		(objects[14] as unknown as IPostSetArrow).postSetArrow();
 		(objects[15] as unknown as IPostSetArrow).postSetArrow();
 		(objects[16] as unknown as IPostSetArrow).postSetArrow();
+		(objects[17] as unknown as IPostSetArrow).postSetArrow();
 	}
 }

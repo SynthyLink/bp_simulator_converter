@@ -3,6 +3,7 @@
 using CategoryTheory;
 
 using DataPerformer.Interfaces;
+
 using Diagram.UI.Interfaces;
 
 using ErrorHandler;
@@ -261,147 +262,8 @@ namespace Trading.Library.Objects
 
         #endregion
 
-        #region Measurements
-        class BasicMeasurement : IMeasurement, IAssociatedObject
-        {
-            protected object type;
-
-            string name;
-
-            protected DataQuery query;
-
-            protected Func<object> func;
-
-            public BasicMeasurement(string name, DataQuery query)
-            {
-                this.name = name;
-                this.query = query;
-                type = (double)0;
-            }
-
-
-            Func<object> IMeasurement.Parameter => func;
-
-            string IMeasurement.Name => name;
-
-            object IMeasurement.Type => type;
-
-            object IAssociatedObject.Object { get => query; set { } }
-        }
-
-
-        class LowMeasurement : BasicMeasurement
-        {
-            public LowMeasurement(DataQuery query) : base("Low", query)
-            {
-
-                func = () => query.message.low;
-            }
-        }
-
-
-        class HighMeasurement : BasicMeasurement
-        {
-            public HighMeasurement(DataQuery query) : base("High", query)
-            {
-
-                func = () => query.message.high;
-            }
-        }
-
-        class OpenMeasurement : BasicMeasurement
-        {
-            public OpenMeasurement(DataQuery query) : base("Open", query)
-            {
-
-                func = () => query.message.open;
-            }
-        }
-
-        class CloseMeasurement : BasicMeasurement
-        {
-            public CloseMeasurement(DataQuery query) : base("Close", query)
-            {
-
-                func = () => 
-                query.message.close;
-            }
-        }
-
-        class RealTimeMeasurement : BasicMeasurement, IAssociatedObject
-        {
-            Func<object, object>[] f;
-            public RealTimeMeasurement(DataQuery query) : base("RealTime", query)
-            {
-
-                func = () => query.realTime;
-                f = [query.CoordX, null];
-            }
-
-
-
-            object IAssociatedObject.Object { get => f; set { } }
-        }
-
-        class IntegerTimeMeasurement : BasicMeasurement
-        {
-            public IntegerTimeMeasurement(DataQuery query) : base("Step", query)
-            {
-                type = (int)0;
-                func = () => query.step;
-            }
-        }
-
-        class DateTimeMeasurement : BasicMeasurement
-        {
-            public DateTimeMeasurement(DataQuery query) : base("DateTime", query)
-            {
-                type = typeof(DateTime);
-                func = () => query.message.date;
-            }
-        }
-
-        class FullTimeMeasurement : BasicMeasurement
-        {
-            public FullTimeMeasurement(DataQuery query) : base("FullTime", query)
-            {
-                type = (double)0;
-
-                func = f;
-            }
-            object f()
-            {
-                var d = query.message.date;
-                if (d == null)
-                {
-                    return null;
-                }
-                return d.Value.ToOADate();
-            }
-        }
-
-
-
-
-
-        class CandleMeasurement : BasicMeasurement
-        {
-
-            public CandleMeasurement(DataQuery query) : base("Candle", query)
-            {
-                type = new ArrayReturnType((double)0, new int[4], false);
-                func = () =>
-                {
-                    return query.vector;
-                };
-            }
-
-        }
-
-
-        #endregion
-
-        public  object ToGuid(string symbol)
+        #region Public
+        public object ToGuid(string symbol)
         {
             return Symbols[symbol];
         }
@@ -469,7 +331,148 @@ namespace Trading.Library.Objects
             x.End = DateTime.FromOADate(init.end);
             return x;
         }
-      
+
+        #endregion
+
+        #region Measurements
+
+        class BasicMeasurement : IMeasurement, IAssociatedObject
+        {
+            protected object type;
+
+            string name;
+
+            protected DataQuery query;
+
+            protected Func<object> func;
+
+            public BasicMeasurement(string name, DataQuery query)
+            {
+                this.name = name;
+                this.query = query;
+                type = (double)0;
+            }
+
+
+            Func<object> IMeasurement.Parameter => func;
+
+            string IMeasurement.Name => name;
+
+            object IMeasurement.Type => type;
+
+            object IAssociatedObject.Object { get => Object; set { } }
+
+
+            protected virtual object Object => query;
+        }
+
+
+        class LowMeasurement : BasicMeasurement
+        {
+            public LowMeasurement(DataQuery query) : base("Low", query)
+            {
+
+                func = () => query.message.low;
+            }
+        }
+
+
+        class HighMeasurement : BasicMeasurement
+        {
+            public HighMeasurement(DataQuery query) : base("High", query)
+            {
+
+                func = () => query.message.high;
+            }
+        }
+
+        class OpenMeasurement : BasicMeasurement
+        {
+            public OpenMeasurement(DataQuery query) : base("Open", query)
+            {
+
+                func = () => query.message.open;
+            }
+        }
+
+        class CloseMeasurement : BasicMeasurement
+        {
+            public CloseMeasurement(DataQuery query) : base("Close", query)
+            {
+
+                func = () =>
+                query.message.close;
+            }
+        }
+
+        class RealTimeMeasurement : BasicMeasurement
+        {
+            Func<object, object>[] f;
+            public RealTimeMeasurement(DataQuery query) : base("RealTime", query)
+            {
+
+                func = () => query.realTime;
+                f = [query.CoordX, null];
+            }
+
+            protected override object Object => f;
+
+        }
+
+        class IntegerTimeMeasurement : BasicMeasurement
+        {
+            public IntegerTimeMeasurement(DataQuery query) : base("Step", query)
+            {
+                type = (int)0;
+                func = () => query.step;
+            }
+        }
+
+        class DateTimeMeasurement : BasicMeasurement
+        {
+            public DateTimeMeasurement(DataQuery query) : base("DateTime", query)
+            {
+                type = typeof(DateTime);
+                func = () => query.message.date;
+            }
+        }
+
+        class FullTimeMeasurement : BasicMeasurement
+        {
+            public FullTimeMeasurement(DataQuery query) : base("FullTime", query)
+            {
+                type = (double)0;
+
+                func = f;
+            }
+            object f()
+            {
+                var d = query.message.date;
+                if (d == null)
+                {
+                    return null;
+                }
+                return d.Value.ToOADate();
+            }
+        }
+        class CandleMeasurement : BasicMeasurement
+        {
+
+            public CandleMeasurement(DataQuery query) : base("Candle", query)
+            {
+                type = new ArrayReturnType((double)0, new int[4], false);
+                func = () =>
+                {
+                    return query.vector;
+                };
+            }
+
+        }
+
+
+        #endregion
+
+
     }
 }
 

@@ -88,7 +88,6 @@ export class Performer
             r.push(task.startAsync(controller))
         }
         await Promise.all(r)
-
     }
 
 

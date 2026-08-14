@@ -15,11 +15,16 @@ let dt = new DateTimeConverter();
 
 let performer = new Performer()
 
+let any: any = undefined
+
 
 
 let map: Map<string, any> = new Map
 
 let init: Initial | undefined
+
+let entered: boolean = false
+
 
 function datePure(x: number): string {
     let y = x / 86400;
@@ -72,6 +77,7 @@ function App() {
     }
 
     const btnClick = async () => {
+        let controller = getAbortController()
         if (begin === undefined) return
         let b = performer.dateNumber(begin);
         if (end === undefined) return
@@ -84,12 +90,12 @@ function App() {
         map.set("p", p)
         map.set("s", s)
         let promises: Promise<void>[] = []
-        promises.push(fillClient(map))
+        promises.push(fillClient(s, p, b, e, controller))
         promises.push(fillServer(map))
         await Promise.all(promises);
     };
 
-    const fillClient = async (map: Map<string, any>): Promise<void> =>
+    const fillClient = async (symblol: string, pretiod: string,  begin: number, end: number, controllor: AbortController): Promise<void> =>
     {
         let h = await communication.getHistoryAsync(map, getAbortController())
         fillHistory(h)
@@ -97,13 +103,11 @@ function App() {
     }
 
     const fillServer = async (map: Map<string, any>): Promise<void> => {
+        any = map
       //  let h = await communication.getHistoryAsync(map, getAbortController())
       //  fillHistory(h)
 
     }
-
-
-
 
     function fillHistory(m: HistoryMessage[] | undefined): void{
         if (m === undefined) return
@@ -116,17 +120,18 @@ function App() {
     }
 
 
-    async function populateData()
-    {
+    async function populateData() {
 
         if (symbols === undefined) {
+            if (entered) return
+            entered = true
             let s = await communication.getSymbolsAsync()
             for (let ss of s) {
                 map.set(ss[0], ss[1])
             }
             setSymbols(map)
+
         }
-        else map = symbols
         if (map.size >= 0) {
             const sele = document.querySelector("#symbol");
             if (sele !== null) {

@@ -3,19 +3,36 @@ import type { IInitializeTask } from "../../../Library/Interfaces/IInitializeTas
 import type { IIterator } from "../../../Library/Measurements/Interfaces/IIterator";
 import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
 import type { IMeasurements } from "../../../Library/Measurements/Interfaces/IMeasurements";
-import { CategoryObject } from "../../../Library/CategoryObject";
 import type { HistoricalDataMessageDateTime } from "../Database/HistoricalDataMessageDateTime";
 import type { ITradingDatabaseHistoryInterface } from "../Database/ITradingDatabaseHistoryInterface";
+import type { IAssociatedObject } from "../../../Library/Interfaces/IAssociatedObject";
+import type { IObject } from "../../../Library/Interfaces/IObject";
+import { CategoryObject } from "../../../Library/CategoryObject";
+import { TradingCommunication } from "../Communication/TradingCommunication";
+import { Measurement } from "../../../Library/Measurements/Measurement";
+import { DateTimeConverter } from "../../../Library/Utilities/DateTime/DateTimeConverter";
+import type { HistoryMessage } from "../Database/HistoryMessage";
+import type { IStartTask } from "../../../Library/Interfaces/IStartTask";
 
-export class TradingDataQuery extends CategoryObject implements IInitializeTask, IIterator, IMeasurements
+
+
+export class TradingDataQuery extends CategoryObject implements IInitializeTask, IStartTask,
+    IIterator, IMeasurements
 {
 
 
-    static  inter: ITradingDatabaseHistoryInterface 
+    inter !: ITradingDatabaseHistoryInterface 
+
+    vector : number[] = [0, 0, 0, 0]
 
 
-    symbols: Map<string, any> = new Map < string, any>()
-    
+    symbols: Map<string, any> = new Map<string, any>()
+
+    communication !: TradingCommunication
+
+    realTime: number = 0
+
+    measurements: IMeasurement[] = []
 
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name)
@@ -24,15 +41,36 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
         this.types.push("IInitializeTask");
         this.types.push("IIterator");
         this.types.push("IMeasurements");
+        this.measurements =
+            [
+                new RealTimeMeasurement(this),
+                new LowMeasurement(this),
+                new HighMeasurement(this),
+                new OpenMeasurement(this),
+                new CloseMeasurement(this),
+                new CandleMeasurement(this),
+                new IntegerTimeMeasurement(this),
+                new DateTimeMeasurement(this),
+                new FullTimeMeasurement(this)
+            ];
+
+    }
+    startAsync(controller: AbortController): Promise<void> {
+        let history = await this.inter.getHistoricalDataMessageDateTimesAsync("",
+        this)
+    }
+
+    public setCommunication(communication: TradingCommunication): void {
+        this.communication = communication
+        this.inter = new TradingDatabaseHistoryInterface(communication)
     }
 
     getMeasurementsCount(): number {
-        return 0
+        return this.measurements.length
     }
 
     getMeasurement(i: number): IMeasurement {
-        this.any = i;
-        throw new Error("Method not implemented.");
+        return this.measurements[i]
     }
 
     updateMeasurements(): void {
@@ -43,23 +81,45 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
         this.any = measurement
     }
 
-    nextIterator(): void {
+    nextIterator(): boolean {
         ++this.step;
-        this.current = this.data[this.step];
+        if (this.step >= this.data.length) return false
+        this.current = this.data[this.step]
+        this.fillVector()
+        return true
     }
 
     resetIterator(): void {
         this.step = 0;
     }
 
-   async initializeTaskAsync(controller: AbortController): Promise<void> {
-       var sym = await TradingDataQuery.inter.getSymbolsAsync();
+    fillVector(): void {
+        this.vector[0] = this.current.high
+        this.vector[1] = this.current.low
+        this.vector[2] = this.current.open
+        this.vector[3] = this.current.close
+    }
+
+    async initializeTaskAsync(controller: AbortController): Promise<void> {
+       var sym = await this.inter.getSymbolsAsync();
        for (let i of sym) {
            this.symbols.set(i[0], i[1])
        }
-       this.any = controller
+        this.symbolsstr = sym
+        this.any = controller
     }
 
+    public getSymbolsStr(): string[][] {
+        return this.symbolsstr
+    }
+
+    public setQueryParameters(symbol: string, period: string, begin: number, end: number): void {
+        this.symbol = symbol
+        this.period = period
+        this.begin = begin
+        this.end = end
+
+    }
 
     any : any
  
@@ -69,7 +129,9 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
 
     protected end: number = 0;
 
-    protected period : string = "";
+    protected period: string = "";
+
+    protected symbol: string = "";
 
     data: HistoricalDataMessageDateTime[] = [];
 
@@ -78,5 +140,176 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
 
     step: number = 0;
 
+    symbolsstr: string[][] = []
+
     
 }
+
+class TradingDatabaseHistoryInterface implements ITradingDatabaseHistoryInterface {
+
+    communication !: TradingCommunication
+    constructor(communication: TradingCommunication) {
+        this.communication = communication;
+    }
+
+    async getSymbolsAsync(): Promise<string[][]> {
+        return await this.communication.getSymbolsIntretrnalAsync();
+    }
+
+    async getHistoricalDataMessageDateTimesAsync(id: any, symbol: string, begin: number,
+        end: number, cancellation: AbortController): Promise<HistoryMessage[]> {
+        this.any = id
+        this.any = begin
+        this.any = end
+        this.any = cancellation
+        return this.communication.getHistoryAsync()
+    }
+
+    any : any
+
+}
+
+class BasicMeasurement extends Measurement implements IAssociatedObject {
+
+    query !: TradingDataQuery
+    constructor(name: string, type: any, query: TradingDataQuery) {
+        super(name, type)
+        this.query = query
+    }
+    getAssociatedObject(): IObject {
+        return this.query;
+    }
+    setAssociatedObject(obj: IObject): void {
+        this.any = obj;
+    }
+
+    any : any
+
+}
+
+class LowMeasurement extends BasicMeasurement {
+    constructor(query: TradingDataQuery) {
+        super("Low", 0, query)
+    }
+
+
+    getMeasurementValue() {
+        return this.query.current.low
+    }
+
+}
+
+class HighMeasurement extends BasicMeasurement {
+    constructor(query: TradingDataQuery) {
+        super("High", 0, query)
+    }
+
+
+    getMeasurementValue() {
+        return this.query.current.high
+    }
+
+}
+
+class OpenMeasurement extends BasicMeasurement {
+    constructor(query: TradingDataQuery) {
+        super("Open", 0, query)
+    }
+
+
+    getMeasurementValue() {
+        return this.query.current.open
+    }
+
+}
+
+
+class CloseMeasurement extends BasicMeasurement {
+    constructor(query: TradingDataQuery) {
+        super("Close", 0, query)
+    }
+
+
+    getMeasurementValue() {
+        return this.query.current.close
+    }
+
+}
+
+class RealTimeMeasurement extends BasicMeasurement {
+    constructor(query: TradingDataQuery) {
+        super("RealTime", 0, query)
+    }
+
+
+    getMeasurementValue() {
+        return this.query.realTime
+    }
+
+}
+
+class IntegerTimeMeasurement extends BasicMeasurement
+{
+    constructor(query: TradingDataQuery) {
+        super("Step", 0, query)
+    }
+
+
+    getMeasurementValue() {
+        return this.query.step
+    }
+
+
+}
+
+class DateTimeMeasurement extends BasicMeasurement
+{
+    constructor(query: TradingDataQuery) {
+        super("DateTime", 0, query)
+    }
+
+    getMeasurementValue() {
+        return this.query.current.date
+    }
+
+}
+
+class FullTimeMeasurement extends BasicMeasurement
+{
+
+    converter: DateTimeConverter = new DateTimeConverter
+    constructor(query: TradingDataQuery) {
+        super("FullTime", 0, query)
+    }
+    getMeasurementValue() {
+        var d = this.query.current.date;
+        if (d == undefined) {
+            return undefined;
+        }
+        return d
+    }
+}
+
+
+class CandleMeasurement extends BasicMeasurement
+{
+    constructor(query: TradingDataQuery) {
+        super("Candle", 0, query)
+        this.type = [0, 0, 0, 0]
+    }
+
+    getMeasurementValue() {
+        return this.query.vector
+   
+    }
+
+}
+
+
+
+
+
+
+
+
+

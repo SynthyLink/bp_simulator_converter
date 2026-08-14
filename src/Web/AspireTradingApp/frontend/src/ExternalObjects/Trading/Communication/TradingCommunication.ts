@@ -1,4 +1,6 @@
 import { HttpCommunication } from "../../../Library/Communications/http/http_interface";
+import { Donchian } from "../Algorithms/Donchian";
+import type { TradingDataQuery } from "../Components/TradingDataQuery";
 import type { HistoryMessage } from "../Database/HistoryMessage";
 import { MemoryDB } from "../Database/Local/MemoryDB";
 import type { Initial } from "../Initial";
@@ -10,9 +12,7 @@ export class TradingCommunication extends HttpCommunication {
 
     symbols: string[][] = [];
 
-    first: boolean = true;
-
-    tPerformrer: TradingPerformer = new TradingPerformer(new MemoryDB())
+    tPerformer!: TradingPerformer// = new TradingPerformer(new MemoryDB())
 
     initial !: Initial;
 
@@ -47,8 +47,8 @@ export class TradingCommunication extends HttpCommunication {
         let e = Number(map.get("e"))
         let sym = map.get("s") + "";
         //  let p = map.get("p") + "";
-     //   await this.createDb()
-        let r = await this.tPerformrer.readHistory(sym, b, e)
+        //   await this.createDb()
+        let r = await this.tPerformer.readHistory(sym, b, e)
         if (r.length > 0) {
             console.log(r[0], "ro")
             return r;
@@ -66,7 +66,7 @@ export class TradingCommunication extends HttpCommunication {
             }, controller);
             if (result.ok && result.body) {
                 let res = result.body as unknown as HistoryMessage[];
-                await this.tPerformrer.writeHistoryAsync(sym,b,e, res)
+                await this.tPerformer.writeHistoryAsync(sym, b, e, res)
                 return res;
             }
             else {
@@ -119,25 +119,19 @@ export class TradingCommunication extends HttpCommunication {
             for (let s of this.symbols) {
                 db.createObjectStore(s[0], { keyPath: 'uid' })
             }
-            
-     };
+
+        };
 
 
     }
 
 
+    public async getSymbolsIntretrnalAsync(): Promise<string[][]> {
+             if (this.symbols.length > 0) return this.symbols
 
-   
 
-    
-
-    public async getSymbolsAsync(): Promise<string[][]>
-    {
-        if (this.first) {
-            this.first = false
-            if (this.symbols.length > 0) return this.symbols
-           // this.deleteDb()
-          // return []
+            // this.deleteDb()
+            // return []
             try {
                 let s = "/api/trading/tradingsymbols"
                 const response = await fetch(s)
@@ -159,11 +153,23 @@ export class TradingCommunication extends HttpCommunication {
             } finally {
                 //setLoading(false);
             }
-        }
-        this.first = true
-        return[]
+        return []
     }
 
 
+
+
+    public async getSymbolsAsync(): Promise<string[][]> {
+        if (this.symbols.length > 0) return this.symbols
+        console.log("AAA")
+        let controller = new AbortController();
+        let desktop = new Donchian();
+        this.tPerformer = new TradingPerformer(new MemoryDB(), desktop, this)
+        await desktop.loadAsync(controller)
+        let q = desktop.getCategoryObject("Trading") as unknown as TradingDataQuery
+        console.log(q)
+        this.symbols = q.getSymbolsStr()
+        return this.symbols
+    }
 
 }

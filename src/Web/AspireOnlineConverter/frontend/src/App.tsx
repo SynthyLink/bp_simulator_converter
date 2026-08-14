@@ -135,7 +135,6 @@ function App() {
       return;
     }
       let promises: Promise<void>[] = []
-      let promises: Promise<void>[] = []
        promises.push(clientCalc(init))
       promises.push(serverCalc(init))
       Promise.all(promises)
