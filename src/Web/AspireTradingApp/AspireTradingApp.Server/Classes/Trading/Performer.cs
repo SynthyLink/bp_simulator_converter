@@ -1,22 +1,58 @@
 ﻿
+using DataPerformer.Base.Filters;
+using DataPerformer.Interfaces;
+using DataPerformer.Portable;
+using DataPerformer.Portable.Filters;
 using Diagram.UI.Interfaces;
+using IBApi;
+using IronPython.Runtime;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.ObjectPool;
+using SerializationInterface;
+using System.CodeDom.Compiler;
 using Trading.Database.Classes;
 using Trading.Library.Classes;
 using Trading.Library.Objects;
+using static IronPython.Modules._ast;
+using static Microsoft.Scripting.Hosting.Shell.ConsoleHostOptions;
 
 namespace AspireTradingApp.Server.Trading
 {
     public class Performer : Classes.Performer
     {
-        public Performer() {
+
+        string[] filtersN = ["Average Short", "Averge Long", "Donchian maximum long", "Donchian maximum short", "Donchian minimum long",
+            "Donchian minimum short"];
+        string[] del = ["a1", "a2", "d1", "d2", "d3", "d4"];
+
+        Dictionary<string, string> dp = new Dictionary<string, string>() {{"a", "Trading.RealTime"},
+        {"b", "Trading.Low"},
+         {"c", "Trading.High"},
+          {"d", "Trading.Open"},
+          {"e", "Trading.Close"},
+          {"f", "Trading.Candle"},
+          {"g", "Trading.Step"},
+          {"h", "Trading.DateTime"},
+          {"i", "Order.Position"},
+          {"j", "Order.Income"},
+          {"k", "Order.Sell Price"},
+          {"l", "Order.Buy Price"},
+          {"m", "Average Short.Output"},
+          {"n", "Averge Long.Output"},
+          {"o", "Donchian minimum long.Output"},
+          {"p", "Donchian minimum short.Output"},
+          {"q", "Donchian maximum long.Output"},
+          {"r", "Donchian maximum short.Output"} };
+
+
+        int[] k = [0, 0, 0, 0, 0, 0];
+         public Performer() {
         }
 
         internal async Task Load(CancellationToken token)
         {
             if (desktop != null) return;
-            desktop = await Generated.Donchian.GetDesktop(token);
+            desktop = await GeneratedProject.Donchian.GetDesktop(token);
         }
 
         public async Task<List<HistoricalDataMessageNumber>> GetHistory([FromBody] DataQueryInit init,
@@ -62,6 +98,7 @@ namespace AspireTradingApp.Server.Trading
 
         public async Task<HistoricalDataMessageNumber[]> GetHistoryNumber(string json, CancellationToken token)
             { 
+
             var q = new DataQuery();
             var o =
                     System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(json);
@@ -69,7 +106,36 @@ namespace AspireTradingApp.Server.Trading
             var e = double.Parse(o.GetProperty("e") + "");
             var sym = o.GetProperty("s") + "";
             var p = o.GetProperty("p") + "";
+ 
             return await GetHistoryNumber(b, e, p, sym, token);
+        }
+
+        public async Task<string> GetData(string input, CancellationToken token)
+        {
+            var desktop = await GeneratedProject.Donchian.GetDesktop(token);
+            var dataQuery = desktop.Get<DataQuery>("Trading");
+            var dataConsumer = desktop.Get<IDataConsumer>("Chart");
+
+
+
+            // var desktop = await GeneratedProject.Donchian.
+            var o =
+                    System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(input);
+            var b = double.Parse(o.GetProperty("b") + "");
+            var e = double.Parse(o.GetProperty("e") + "");
+            var sym = o.GetProperty("s") + "";
+            var p = o.GetProperty("p") + "";
+            dataQuery.Set(sym, p, b, e);
+            for (int i = 0; i < k.Length; i++)
+            {
+                var k  = int.Parse(o.GetProperty(del[i]) + "");
+                var s = desktop.Get<DataPerformer.Portable.FilterWrapper>(filtersN[i]);
+                s.Filter.Count = k;
+
+            }
+            var wrapper = new DataPerformer.Portable.Wrappers.DataConsumerWrapper(dataConsumer);
+            var t = await wrapper.PerformIteratorAsync(dataQuery, dp, token);
+            return System.Text.Json.JsonSerializer.Serialize(t);
         }
 
         public HistoricalDataMessageNumber Convert(HistoricalDataMessageDateTime message)

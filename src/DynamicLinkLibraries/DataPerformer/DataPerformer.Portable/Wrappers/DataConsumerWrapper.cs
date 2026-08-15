@@ -44,6 +44,32 @@ namespace DataPerformer.Portable.Wrappers
         /// Performs iterator
         /// </summary>
         /// <param name="iterator">The iterator</param>
+        /// <param name="output">The output map</param>
+        /// <param name="cancellation">Cancellation</param>
+        /// <param name="stop">Stop function</param>
+        /// <param name="preparation">Preparation</param>
+        /// <param name="errorHandler">Eroor handler</param>
+        /// <returns>Result</returns>
+        public async Task<List<Dictionary<string, object>>> PerformIteratorAsync(IIterator iterator,
+      Dictionary<string, string> output,
+      CancellationToken cancellation,
+      Func<bool> stop = null, Action preparation = null,
+       IExceptionHandler errorHandler = null)
+        {
+            var d = new Dictionary<string, IMeasurement>();
+            foreach (var entry in output)
+            {
+                d[entry.Key] = FindMeasurement(entry.Value);
+            }
+            return await PerformIteratorAsync(iterator, d, cancellation, stop, 
+                preparation, errorHandler);
+        }
+
+
+        /// <summary>
+        /// Performs iterator
+        /// </summary>
+        /// <param name="iterator">The iterator</param>
         /// <param name="output">The output</param>
         /// <param name="stop">The stop</param>
         /// <param name="preparation">The preparation action</param>

@@ -184,19 +184,18 @@ export class PerformerMeasuremets extends Performer {
         return action.getData()
     }
 
-
-
     public async performIteratorDataConsumerMapAsync(dataConsumer: IDataConsumer,
         iterator: IIterator, abort: AbortController, meaurements: Map<string, string>,
         preparation?: IAction | undefined): Promise<Map<string, any>[]> {
         let map = new Map<string, IMeasurement>()
         for (var [key, value] of meaurements) {
-            map.set(key, this.getMeasurementDC(dataConsumer, value))
+        let measurement = this.getMeasurementDC(dataConsumer, value)
+            map.set(key, measurement)
         }
-
         let action = new MeasurementWrite(map)
         await this.performIteratorDataConsumerAsync(dataConsumer, iterator, abort, action, preparation)
-        return action.getData()
+        let data = action.getData()
+        return data
     }
 
     public async performIteratorDataConsumerAsync(dataConsumer: IDataConsumer,

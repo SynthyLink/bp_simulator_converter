@@ -41,6 +41,7 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
         this.types.push("IInitializeTask");
         this.types.push("IIterator");
         this.types.push("IMeasurements");
+        this.types.push("IStartTask");
         this.measurements =
             [
                 new RealTimeMeasurement(this),
@@ -55,9 +56,12 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
             ];
 
     }
-    startAsync(controller: AbortController): Promise<void> {
-        let history = await this.inter.getHistoricalDataMessageDateTimesAsync("",
-        this)
+
+    async startAsync(controller: AbortController): Promise<void> {
+        let history = await this.inter.getHistoricalDataMessageDateTimesAsync("", this.symbol, this.begin,
+            this.end, controller)
+
+        console.log(history.length)
     }
 
     public setCommunication(communication: TradingCommunication): void {
@@ -159,10 +163,14 @@ class TradingDatabaseHistoryInterface implements ITradingDatabaseHistoryInterfac
     async getHistoricalDataMessageDateTimesAsync(id: any, symbol: string, begin: number,
         end: number, cancellation: AbortController): Promise<HistoryMessage[]> {
         this.any = id
-        this.any = begin
-        this.any = end
-        this.any = cancellation
-        return this.communication.getHistoryAsync()
+        let map = new Map<string, any>
+        map.set("s", symbol)
+        map.set("b", begin)
+        map.set("e", end)
+        map.set("p", "")
+        let h = await this.communication.getHistoryAsync(map, cancellation)
+        console.log(h.length)
+        return h
     }
 
     any : any

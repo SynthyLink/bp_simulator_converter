@@ -12,7 +12,6 @@ export class MemoryDB implements ILocalDB {
             if (m != undefined) n = m
         }
         return new Promise<number[]>((resolve, reject) => {
-            console.log("n", n)
             resolve(n)
             this.any = reject
         }
@@ -42,7 +41,6 @@ export class MemoryDB implements ILocalDB {
 
     clearHistoryAsync(symbol: string): Promise<void> {
         this.maph.set(symbol, [])
-        console.log("clear")
         if (this.map.has(symbol)) this.map.set(symbol, [])
         return new Promise<void>((resolve, reject) => {
             resolve()
@@ -53,7 +51,6 @@ export class MemoryDB implements ILocalDB {
 
     readHistoryAsync(symbol: string, begin: number, end: number): Promise<HistoryMessage[]> {
         let h: HistoryMessage[] = []
-        console.log("READ")
       //  let be = this.converter.fromOADate(begin).getSeconds() * 10000000
       //  let en = this.converter.fromOADate(end).getSeconds() * 10000000
         if (this.maph.has(symbol))

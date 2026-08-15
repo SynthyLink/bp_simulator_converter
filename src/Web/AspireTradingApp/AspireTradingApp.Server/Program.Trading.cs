@@ -7,7 +7,7 @@ using Trading.Library.Objects;
 
 static class TradingInit
 {
-    static Performer performer = new Performer();
+    static Performer performer = new ();
 
     static Dictionary<string, object> symbols = null;
 
@@ -38,8 +38,17 @@ static class TradingInit
             var st = System.Text.Json.JsonSerializer.Serialize(o);
             return st;
         })
-.WithName("PostTradingHistory");
+.WithName("PostTradingnAnalysis");
+        
+        api.MapPost("tradinganalysis", async ([FromBody] string s, CancellationToken token) =>
+        {
+            return await performer.GetData(s, token);
+        })
+.WithName("PostTradingAnalysis");
+
     }
+
+
 
     public static async Task<string> GetInitial(CancellationToken token)
     {

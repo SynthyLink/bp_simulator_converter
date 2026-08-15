@@ -108,8 +108,6 @@ namespace DataPerformer.Portable.Wrappers
 
         }
 
-
-
         /// Finds alias 
         /// </summary>
         /// <param name="consumer">Data consumer</param>

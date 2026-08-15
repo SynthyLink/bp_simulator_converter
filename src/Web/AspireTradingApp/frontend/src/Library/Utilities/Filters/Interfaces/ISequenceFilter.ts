@@ -1,4 +1,5 @@
 export interface ISequenceFilter {
+
     getFilterCount(): number
 
     setFilterCount(count: number): void

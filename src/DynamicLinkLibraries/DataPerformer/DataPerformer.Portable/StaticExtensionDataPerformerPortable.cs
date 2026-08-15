@@ -246,25 +246,6 @@ namespace DataPerformer.Portable
             return wrapper.Measurements;
         }
 
-        /// <summary>
-        /// Performs action with fixed step
-        /// </summary>
-        /// <param name="consumer">Data consumer</param>
-        /// <param name="start">Start</param>
-        /// <param name="step">Step</param>
-        /// <param name="count">Count of steps</param>
-        /// <param name="reason">Reason</param>
-        /// <param name="priority">Priority</param>
-        /// <param name="action">Additional action</param>
-        /*     public static void PerformFixed(this IDataConsumer consumer, double start, double step, int count, string reason,
-            int priority, Action action, Func<bool> stop = null,  IAsynchronousCalculation asynchronousCalculation = null, IErrorHandler errorHandler = null)
-         {
-             consumer.PerformFixed(start, step, count,
-                    StaticExtensionDataPerformerPortable.Factory.TimeProvider,
-                    DifferentialEquationProcessors.DifferentialEquationProcessor.Processor,
-                 reason, priority, action, stop, asynchronousCalculation, errorHandler);
-         }*/
-
 
         /// <summary>
         /// Performs action with fixed step

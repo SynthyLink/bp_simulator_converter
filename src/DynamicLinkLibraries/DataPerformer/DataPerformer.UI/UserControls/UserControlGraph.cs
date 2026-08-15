@@ -88,10 +88,10 @@ namespace DataPerformer.UI.UserControls
 
         OfficePickers.ColorPicker.ToolStripColorPicker pic = new OfficePickers.ColorPicker.ToolStripColorPicker();
 
-        private Dictionary<TextBox, IMeasurement> DictionaryMeasurements
+        private Dictionary<TextBox, Tuple<IMeasurement, string>> DictionaryMeasurements 
         {
             get;
-        } = new Dictionary<TextBox, IMeasurement>();
+        } = new ();
 
         IList<IParameterWriter> pw = new List<IParameterWriter>();
 
@@ -1303,8 +1303,8 @@ namespace DataPerformer.UI.UserControls
 
 
 
-        private async Task PerformIteratorAsync(IDataConsumer consumer, 
-            Mode mode, IIterator iterator, 
+        private async Task PerformIteratorAsync(IDataConsumer consumer,
+            Mode mode, IIterator iterator,
             CancellationToken ct)
         {
             globalArg = ArgumentString;
@@ -1343,22 +1343,20 @@ namespace DataPerformer.UI.UserControls
                 var fn = this.SaveJSONXml();
                 if (string.IsNullOrEmpty(fn)) return;
                 var d = new Dictionary<string, IMeasurement>();
+                var dn = new Dictionary<string, string>();
                 foreach (var tb in DictionaryMeasurements)
                 {
-                    //      public static async Task<List<Dictionary<string, object>>> PerformIteratorAsync(this IDataConsumer consumer, 
-              //      IIterator iterator,
-              //     Dictionary< string, IMeasurement > output, CancellationToken cancellation, Func< bool > stop = null, Action preparation = null,
-             //      IExceptionHandler errorHandler = null)
                     string key = tb.Key.Text;
                     if (!string.IsNullOrEmpty(key))
-                        {
-                        d[key] = tb.Value;
+                    {
+                        d[key] = tb.Value.Item1;
+                        dn[key] = tb.Value.Item2;
                     }
-                    var b = () => ct.IsCancellationRequested;
-                    var t = await consumer.PerformIteratorAsync(iterator, d, ct, b);
-                    Save(t, fn);
                 }
-            }    
+                var t = await consumer.PerformIteratorAsync(iterator, d, ct);
+                Save(t, fn);
+                WorkCompleted();
+            }
         }
 
         private void Save(object o, string fn)
@@ -1498,9 +1496,9 @@ Func<bool> stop)
                     string key = tb.Text;
                     if (key.Length > 0)
                     {
-                        d[key] = DictionaryMeasurements[tb];
+                        d[key] = DictionaryMeasurements[tb].Item1;
                         PanelMeasureText p = tb.Parent as PanelMeasureText;
-                        string n = p.MeasureName + "." + DictionaryMeasurements[tb].Name;
+                        string n = p.MeasureName + "." + DictionaryMeasurements[tb].Item1.Name;
                         data.Item3[n] = key;
                     }
                 }
@@ -1516,7 +1514,7 @@ Func<bool> stop)
                 string key = tb.Text;
                 if (key.Length > 0)
                 {
-                    dicText[key] = DictionaryMeasurements[tb].Parameter() + "";
+                    dicText[key] = DictionaryMeasurements[tb].Item1.Parameter() + "";
                 }
             }
             foreach (IParameterWriter wr in pw)
@@ -1534,7 +1532,7 @@ Func<bool> stop)
                 if (key.Length > 0)
                 {
                     PanelMeasureText p = tb.Parent as PanelMeasureText;
-                    string n = p.MeasureName + "." + DictionaryMeasurements[tb].Name;
+                    string n = p.MeasureName + "." + DictionaryMeasurements[tb].Item1.Name;
                     data.Item3[n] = key;
                 }
             }
@@ -1841,7 +1839,7 @@ Func<bool> stop)
                 string key = tb.Text;
                 if (key.Length > 0)
                 {
-                    list.Add(DictionaryMeasurements[tb].Parameter());
+                    list.Add(DictionaryMeasurements[tb].Item1.Parameter());
                 }
             }
             lists.Add(list);
@@ -2973,11 +2971,6 @@ Func<bool> stop)
             ActParent(ActionType.Stop, null);
         }
 
-        void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            WorkCompleted();
-        }
-
         private void WorkCompleted()
         {
             if (CommonComplete())
@@ -2991,38 +2984,42 @@ Func<bool> stop)
                     var coll = Consumer.GetDependentCollection();
                     coll.ForEach((IRunning s) => s.IsRunning = false);
                     bool pr = true;
-                    if (dicto.Count > 0)
+                    if (dicto != null)
                     {
-                        foreach (var kvp in dicto.Values)
+                        if (dicto.Count > 0)
                         {
-                            if (!(kvp is SeriesTypes.ParametrizedSeries))
+                            foreach (var kvp in dicto.Values)
                             {
-                                pr = false;
+                                if (!(kvp is SeriesTypes.ParametrizedSeries))
+                                {
+                                    pr = false;
+                                }
+                                break;
                             }
-                            break;
                         }
-                    }
-                    chartPerformer.RemoveAll();
-                    chartPerformer.Remove(typeof(DynamicSeriesAttribute));
-                    Dictionary<IMeasurement, Color[]> d = MeasureColorDictionary;
-                    Dictionary<string, IMeasurement> dd = MeasureByNameInternal;
-                    foreach (string key in dicto.Keys)
-                    {
-                        var mea = dd[key];
-
-                        if (pr)
+                        chartPerformer.RemoveAll();
+                        chartPerformer.Remove(typeof(DynamicSeriesAttribute));
+                        Dictionary<IMeasurement, Color[]> d = MeasureColorDictionary;
+                        Dictionary<string, IMeasurement> dd = MeasureByNameInternal;
+                        foreach (string key in dicto.Keys)
                         {
-                            SeriesTypes.ParametrizedSeries ps = dicto[key] as SeriesTypes.ParametrizedSeries;
-                            ParametrizedSeries series = new ParametrizedSeries(null, null);
-                            series.Add(ps);
-                            chartPerformer.AddSeries(series, d[dd[key]][0], mea);
-                            ownSeries.Add(series);
-                            continue;
+                            var mea = dd[key];
+
+                            if (pr)
+                            {
+                                SeriesTypes.ParametrizedSeries ps = dicto[key] as SeriesTypes.ParametrizedSeries;
+                                ParametrizedSeries series = new ParametrizedSeries(null, null);
+                                series.Add(ps);
+                                chartPerformer.AddSeries(series, d[dd[key]][0], mea);
+                                ownSeries.Add(series);
+                                continue;
+                            }
+                            ISeries s = dicto[key] as ISeries;
+                            chartPerformer.AddSeries(s, d[dd[key]][0], mea);
                         }
-                        ISeries s = dicto[key] as ISeries;
-                        chartPerformer.AddSeries(s, d[dd[key]][0], mea);
+                        chartPerformer.RefreshAll();
+                        dicto = null;
                     }
-                    chartPerformer.RefreshAll();
                 }
                 catch (Exception ex)
                 {
@@ -3214,13 +3211,6 @@ Func<bool> stop)
 
 
         }
-
-
-        private void backgroundWorkerText_DoWork(object sender, DoWorkEventArgs e)
-        {
-            Text_DoWork();
-        }
-
         private void toolStripButtonAnimation_Click(object sender, EventArgs e)
         {
             StartAnimation(AnimationType);

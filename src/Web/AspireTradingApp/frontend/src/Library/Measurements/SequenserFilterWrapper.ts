@@ -1,10 +1,10 @@
 import type { IDesktop } from "../Interfaces/IDesktop";
+import type { ISequenceFilter } from "../Utilities/Filters/Interfaces/ISequenceFilter";
+import type { IMeasurement } from "./Interfaces/IMeasurement";
 import { AverageSequenceFilter } from "../Utilities/Filters/AverageSequenceFilter";
 import { DonchianSequenceFilter } from "../Utilities/Filters/DonchianSequenceFilter";
-import type { ISequenceFilter } from "../Utilities/Filters/Interfaces/ISequenceFilter";
 import { SequenceFilterType } from "../Utilities/Filters/Interfaces/SequenceFilterType";
 import { DataConsumerMeasurements } from "./DataConsumerMeasurements";
-import type { IMeasurement } from "./Interfaces/IMeasurement";
 
 export class SequenceFilterWrapper extends DataConsumerMeasurements implements IMeasurement {
 
@@ -20,11 +20,13 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
 
     protected measurement !: IMeasurement;
 
-
     filter: ISequenceFilter = new DonchianSequenceFilter(2, true);
 
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name);
+        this.types.push("IMeasurement")
+        this.types.push("SequenceFilterWrapper")
+        this.typeName = "SequenceFilterWrapper"
     }
 
     getMeasurementsCount(): number {
@@ -58,6 +60,9 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
 
     }
 
+    public getFilter(): ISequenceFilter {
+        return this.filter
+    }
 
 
     protected setFilter(): void {

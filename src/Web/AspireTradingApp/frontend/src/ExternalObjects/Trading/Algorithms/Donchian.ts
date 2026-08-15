@@ -1,19 +1,19 @@
-import { AliasName } from "../../../Library/AliasName";
-import { Desktop } from "../../../Library/Desktop";
 import type { IAliasName } from "../../../Library/Interfaces/IAliasName";
 import type { IDesktop } from "../../../Library/Interfaces/IDesktop";
 import type { IPostSetArrow } from "../../../Library/Interfaces/IPostSetArrow";
+import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
 import type { IValue } from "../../../Library/Interfaces/IValue";
 import { DataLink } from "../../../Library/Measurements/Arrows/DataLink";
 import { IteratorConsumerLink } from "../../../Library/Measurements/Arrows/IteratorConsumerLink";
 import { DataConsumer } from "../../../Library/Measurements/DataConsumer";
-import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
 import { RecursiveFormula } from "../../../Library/Measurements/RecursiveFormula";
 import { SequenceFilterWrapper } from "../../../Library/Measurements/SequenserFilterWrapper";
 import { VectorFormulaConsumer } from "../../../Library/Measurements/VectorFormulaConsumer";
 import { SequenceFilterType } from "../../../Library/Utilities/Filters/Interfaces/SequenceFilterType";
 import { TradingDataQuery } from "../Components/TradingDataQuery";
 import { TradingOrder } from "../Components/TradingOrder";
+import { AliasName } from "../../../Library/AliasName";
+import { Desktop } from "../../../Library/Desktop";
 class Donchian_CategoryObject_0 extends TradingDataQuery
 {
 	constructor(desktop: IDesktop, name: string)

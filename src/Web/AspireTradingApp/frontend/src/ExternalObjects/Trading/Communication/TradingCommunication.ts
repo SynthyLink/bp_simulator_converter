@@ -6,18 +6,23 @@ import { MemoryDB } from "../Database/Local/MemoryDB";
 import type { Initial } from "../Initial";
 import { TradingPerformer } from "../TradingPerformer";
 
+
 export class TradingCommunication extends HttpCommunication {
 
     url: string = "";
 
     symbols: string[][] = [];
 
-    tPerformer!: TradingPerformer// = new TradingPerformer(new MemoryDB())
+    tPerformer!: TradingPerformer; // = new TradingPerformer(new MemoryDB())
 
-    initial !: Initial;
+    initial!: Initial;
+
+    public getTradingPerformer(): TradingPerformer {
+        return this.tPerformer;
+    }
 
     public async getInitialAsync(controller: AbortController): Promise<Initial | undefined> {
-        if (this.initial != undefined) return this.initial
+        if (this.initial != undefined) return this.initial;
         if (this.url.length === 0) return undefined;
         try {
             const result = await this.http_cancel<string>({
@@ -39,24 +44,44 @@ export class TradingCommunication extends HttpCommunication {
         } finally {
             //setLoading(false);
         }
-        return undefined
+        return undefined;
     }
 
-    public async getHistoryAsync(map: Map<string, any>, controller: AbortController): Promise<HistoryMessage[] | undefined> {
-        let b = Number(map.get("b"))
-        let e = Number(map.get("e"))
+    public async getAnalysisAsync(map: Map<string, any>, controller: AbortController):
+        Promise<Map<string, any>[] | undefined>
+
+ {
+        let json = JSON.stringify(Object.fromEntries(map));
+        let s = "";
+        if (json !== undefined) s = json;
+        const result = await this.http_cancel<string, string>({
+            path: "/api/trading/tradinganalysis",
+            method: "post",
+            body: s,
+        }, controller);
+        if (result.ok && result.body) {
+            let mp = result.body as unknown as Map<string, any>[]
+            console.log("mp", mp)
+            return mp;
+        }
+        return []
+    }
+
+    public async getHistoryAsync(map: Map<string, any>, controller: AbortController): Promise<HistoryMessage[]> {
+        let b = Number(map.get("b"));
+        let e = Number(map.get("e"));
         let sym = map.get("s") + "";
         //  let p = map.get("p") + "";
         //   await this.createDb()
-        let r = await this.tPerformer.readHistory(sym, b, e)
+        let r = await this.tPerformer.readHistory(sym, b, e);
         if (r.length > 0) {
-            console.log(r[0], "ro")
+            console.log(r[0], "ro");
             return r;
         }
-        let json = JSON.stringify(Object.fromEntries(map))
+        let json = JSON.stringify(Object.fromEntries(map));
         let s = "";
         if (json !== undefined) {
-            s = json
+            s = json;
         }
         try {
             const result = await this.http_cancel<string, string>({
@@ -66,11 +91,11 @@ export class TradingCommunication extends HttpCommunication {
             }, controller);
             if (result.ok && result.body) {
                 let res = result.body as unknown as HistoryMessage[];
-                await this.tPerformer.writeHistoryAsync(sym, b, e, res)
+                await this.tPerformer.writeHistoryAsync(sym, b, e, res);
                 return res;
             }
             else {
-                return undefined;
+                return [];
             }
         }
         catch (err) {
@@ -80,7 +105,7 @@ export class TradingCommunication extends HttpCommunication {
         } finally {
             //setLoading(false);
         }
-        return undefined
+        return [];
     }
 
     public deleteDb1(): void {
@@ -112,12 +137,12 @@ export class TradingCommunication extends HttpCommunication {
 
         req.onupgradeneeded = () => {
             console.log("UPGRADE");
-            let db = req.result
-            let n = db.objectStoreNames
+            let db = req.result;
+            let n = db.objectStoreNames;
             if (n.length > 0) return;
-            db.createObjectStore("Interval", { keyPath: 'uid' })
+            db.createObjectStore("Interval", { keyPath: 'uid' });
             for (let s of this.symbols) {
-                db.createObjectStore(s[0], { keyPath: 'uid' })
+                db.createObjectStore(s[0], { keyPath: 'uid' });
             }
 
         };
@@ -127,49 +152,44 @@ export class TradingCommunication extends HttpCommunication {
 
 
     public async getSymbolsIntretrnalAsync(): Promise<string[][]> {
-             if (this.symbols.length > 0) return this.symbols
+        if (this.symbols.length > 0) return this.symbols;
 
 
-            // this.deleteDb()
-            // return []
-            try {
-                let s = "/api/trading/tradingsymbols"
-                const response = await fetch(s)
-                if (!response.ok) {
-                }
-                else {
-                    let u = response.url;
-                    this.url = u.substring(0, u.length - s.length)
-                    this.setCommunicationServer(this.url)
-                    const data = await response.json();
-                    this.symbols = data
-                    return data
-                }
+        // this.deleteDb()
+        // return []
+        try {
+            let s = "/api/trading/tradingsymbols";
+            const response = await fetch(s);
+            if (!response.ok) {
             }
-            catch (err) {
-                // setError(err instanceof Error ? err.message : 'Failed to fetch weather data');
-                console.error('Error fetching trading symbols:', err);
-                // console.log(err)
-            } finally {
-                //setLoading(false);
+            else {
+                let u = response.url;
+                this.url = u.substring(0, u.length - s.length);
+                this.setCommunicationServer(this.url);
+                const data = await response.json();
+                this.symbols = data;
+                return data;
             }
-        return []
+        }
+        catch (err) {
+            // setError(err instanceof Error ? err.message : 'Failed to fetch weather data');
+            console.error('Error fetching trading symbols:', err);
+            // console.log(err)
+        } finally {
+            //setLoading(false);
+        }
+        return [];
     }
 
-
-
-
     public async getSymbolsAsync(): Promise<string[][]> {
-        if (this.symbols.length > 0) return this.symbols
-        console.log("AAA")
+        if (this.symbols.length > 0) return this.symbols;
         let controller = new AbortController();
         let desktop = new Donchian();
-        this.tPerformer = new TradingPerformer(new MemoryDB(), desktop, this)
-        await desktop.loadAsync(controller)
-        let q = desktop.getCategoryObject("Trading") as unknown as TradingDataQuery
-        console.log(q)
-        this.symbols = q.getSymbolsStr()
-        return this.symbols
+        this.tPerformer = new TradingPerformer(new MemoryDB(), desktop, this);
+        await desktop.loadAsync(controller);
+        let q = desktop.getCategoryObject("Trading") as unknown as TradingDataQuery;
+        this.symbols = q.getSymbolsStr();
+        return this.symbols;
     }
 
 }

@@ -268,6 +268,14 @@ namespace Trading.Library.Objects
             return Symbols[symbol];
         }
 
+        public void Set(string symbol, string period, double begin, double end)
+        {
+            this.Symbol = symbol;
+            this.Period = period;
+            this.Begin = DateTime.FromOADate(begin);
+            this.End = DateTime.FromOADate(end);
+        }
+
         public async Task<List<HistoricalDataMessageDateTime>> GetHistoricalDataMessageDateTimes(CancellationToken token)
         {
             var b = Begin.ToOADate();
