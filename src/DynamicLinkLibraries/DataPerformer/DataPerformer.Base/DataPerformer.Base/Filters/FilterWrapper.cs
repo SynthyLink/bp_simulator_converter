@@ -1,8 +1,4 @@
-﻿using DataPerformer.Portable.Filters;
-using Diagram.UI.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace DataPerformer.Base.Filters

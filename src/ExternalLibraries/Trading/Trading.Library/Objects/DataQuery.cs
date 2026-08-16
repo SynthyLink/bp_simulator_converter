@@ -110,8 +110,6 @@ namespace Trading.Library.Objects
         #endregion
 
         #region Ctor
-
-
         public DataQuery()
         {
             OwnException exc;

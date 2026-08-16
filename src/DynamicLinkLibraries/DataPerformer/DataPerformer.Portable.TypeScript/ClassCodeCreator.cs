@@ -65,7 +65,7 @@ namespace DataPerformer.Portable.TypeScript
             l.Add(s);
             l.Add("{");
             performer.AddObjectConstructor(l);
-            var count = filter.Count;
+            var count = filter.Filter.Count;
             l.Add("\t\tthis.count = " + count);
             var kind = filter.Kind;
             if (kind == 0)

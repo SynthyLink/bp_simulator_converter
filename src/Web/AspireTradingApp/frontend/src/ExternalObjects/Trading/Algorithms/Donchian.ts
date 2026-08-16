@@ -14,6 +14,7 @@ import { TradingDataQuery } from "../Components/TradingDataQuery";
 import { TradingOrder } from "../Components/TradingOrder";
 import { AliasName } from "../../../Library/AliasName";
 import { Desktop } from "../../../Library/Desktop";
+
 class Donchian_CategoryObject_0 extends TradingDataQuery
 {
 	constructor(desktop: IDesktop, name: string)
@@ -213,7 +214,7 @@ class Donchian_CategoryObject_5 extends SequenceFilterWrapper
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
-		this.count = 1
+		this.count = 20
 		this.type = SequenceFilterType.Donchian
 		this.mimax = true
 	}
@@ -224,7 +225,7 @@ class Donchian_CategoryObject_6 extends SequenceFilterWrapper
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
-		this.count = 1
+		this.count = 20
 		this.type = SequenceFilterType.Donchian
 		this.mimax = true
 	}
@@ -235,7 +236,7 @@ class Donchian_CategoryObject_7 extends SequenceFilterWrapper
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
-		this.count = 1
+		this.count = 20
 		this.type = SequenceFilterType.Donchian
 		this.mimax = false
 	}
@@ -246,7 +247,7 @@ class Donchian_CategoryObject_8 extends SequenceFilterWrapper
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
-		this.count = 1
+		this.count = 20
 		this.type = SequenceFilterType.Donchian
 		this.mimax = false
 	}
@@ -867,8 +868,8 @@ class Donchian_CategoryObject_13 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["d", 135 ],
 			["c", 145 ],
+			["d", 135 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", false, false);
@@ -1094,10 +1095,10 @@ class Donchian_CategoryObject_15 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["d", 107 ],
-			["a", 20 ],
-			["b", 105 ],
 			["c", 129 ],
+			["d", 107 ],
+			["b", 105 ],
+			["a", 20 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", 0, 0);

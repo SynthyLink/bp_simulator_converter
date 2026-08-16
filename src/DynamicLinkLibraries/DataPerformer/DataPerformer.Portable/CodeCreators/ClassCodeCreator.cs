@@ -1,8 +1,8 @@
 ﻿using BaseTypes.Attributes;
 
 using Diagram.UI;
-using System;
 using System.Collections.Generic;
+using System;
 
 namespace DataPerformer.Portable.CodeCreators
 {
@@ -31,6 +31,7 @@ namespace DataPerformer.Portable.CodeCreators
                 pr = pr + ".";
             }
             var fv = obj as FilterWrapper;
+            var count = fv.Filter.Count;
             l.Add("DataPerformer.Portable.FilterWrapper");
             l.Add("{");
             l.Add("");
@@ -39,7 +40,7 @@ namespace DataPerformer.Portable.CodeCreators
             l.Add("\t\tkind = " + fv.Kind + ";");
             l.Add("\t\tInput = \"" + fv.Input + "\";");
             l.Add("\t\tSetFilter();");
-            l.Add("\t\tfilter.Count = " + fv.Count + ";");
+            l.Add("\t\tfilter.Count = " + count + ";");
             l.Add("\t}");
             l.Add("}");
             return l;

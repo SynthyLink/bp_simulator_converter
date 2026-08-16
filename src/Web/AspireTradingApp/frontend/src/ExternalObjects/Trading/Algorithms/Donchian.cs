@@ -400,7 +400,7 @@ namespace GeneratedProject
 						kind = 0;
 						Input = "Trading.Close";
 						SetFilter();
-						filter.Count = 1;
+						filter.Count = 10;
 					}
 				}
 			}
@@ -422,7 +422,7 @@ namespace GeneratedProject
 						kind = 0;
 						Input = "Trading.Close";
 						SetFilter();
-						filter.Count = 1;
+						filter.Count = 80;
 					}
 				}
 			}
@@ -605,7 +605,7 @@ namespace GeneratedProject
 						kind = 1;
 						Input = "Trading.High";
 						SetFilter();
-						filter.Count = 1;
+						filter.Count = 20;
 					}
 				}
 			}
@@ -627,7 +627,7 @@ namespace GeneratedProject
 						kind = 1;
 						Input = "Trading.High";
 						SetFilter();
-						filter.Count = 1;
+						filter.Count = 20;
 					}
 				}
 			}
@@ -649,7 +649,7 @@ namespace GeneratedProject
 						kind = 2;
 						Input = "Trading.Low";
 						SetFilter();
-						filter.Count = 1;
+						filter.Count = 20;
 					}
 				}
 			}
@@ -671,7 +671,7 @@ namespace GeneratedProject
 						kind = 2;
 						Input = "Trading.Low";
 						SetFilter();
-						filter.Count = 1;
+						filter.Count = 20;
 					}
 				}
 			}
@@ -1524,8 +1524,8 @@ namespace GeneratedProject
 						};
 						parameters =new Dictionary<string, object>()
 						{
-							{"c", (double)145 },
-							{"d", (double)135 }
+							{"d", (double)135 },
+							{"c", (double)145 }
 						};
 						operationNames = new Dictionary<System.Int32,System.String>()
 						{
@@ -1867,10 +1867,10 @@ namespace GeneratedProject
 						};
 						parameters =new Dictionary<string, object>()
 						{
-							{"c", (double)129 },
-							{"d", (double)107 },
 							{"b", (double)105 },
-							{"a", (double)20 }
+							{"a", (double)20 },
+							{"d", (double)107 },
+							{"c", (double)129 }
 						};
 						operationNames = new Dictionary<System.Int32,System.String>()
 						{

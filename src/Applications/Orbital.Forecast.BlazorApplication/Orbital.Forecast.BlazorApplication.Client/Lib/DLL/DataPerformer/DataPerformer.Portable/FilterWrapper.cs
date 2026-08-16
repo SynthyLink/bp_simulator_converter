@@ -2,7 +2,6 @@
 using DataPerformer.Interfaces;
 using DataPerformer.Portable.Filters;
 using Diagram.Interfaces;
-using System;
 
 namespace DataPerformer.Portable
 {

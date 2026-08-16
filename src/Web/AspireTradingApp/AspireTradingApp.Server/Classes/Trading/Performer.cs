@@ -13,8 +13,7 @@ using System.CodeDom.Compiler;
 using Trading.Database.Classes;
 using Trading.Library.Classes;
 using Trading.Library.Objects;
-using static IronPython.Modules._ast;
-using static Microsoft.Scripting.Hosting.Shell.ConsoleHostOptions;
+
 
 namespace AspireTradingApp.Server.Trading
 {
@@ -46,13 +45,13 @@ namespace AspireTradingApp.Server.Trading
 
 
         int[] k = [0, 0, 0, 0, 0, 0];
-         public Performer() {
+        public Performer()
+        {
         }
 
         internal async Task Load(CancellationToken token)
         {
-            if (desktop != null) return;
-            desktop = await GeneratedProject.Donchian.GetDesktop(token);
+            var desktop = await Generated.Donchian.GetDesktop(token);
         }
 
         public async Task<List<HistoricalDataMessageNumber>> GetHistory([FromBody] DataQueryInit init,
@@ -112,7 +111,7 @@ namespace AspireTradingApp.Server.Trading
 
         public async Task<string> GetData(string input, CancellationToken token)
         {
-            var desktop = await GeneratedProject.Donchian.GetDesktop(token);
+            var desktop = await Generated.Donchian.GetDesktop(token);
             var dataQuery = desktop.Get<DataQuery>("Trading");
             var dataConsumer = desktop.Get<IDataConsumer>("Chart");
 

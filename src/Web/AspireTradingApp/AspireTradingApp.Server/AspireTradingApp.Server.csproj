@@ -26,10 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="GenreratedProject\Donchian.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
 	  <ProjectReference Include="..\..\..\DynamicLinkLibraries\BaseTypes\BaseTypes\BaseTypes.csproj" />
 	  <ProjectReference Include="..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Formula\DataPerformer.Formula.csproj" />
 	  <ProjectReference Include="..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Interfaces\DataPerformer.Interfaces.csproj" />
