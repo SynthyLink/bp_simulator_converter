@@ -52,6 +52,7 @@ namespace Diagram.UI.TypeScript
             string className, bool staticClass)
         {
             Exception ex;
+
             try
             {
                 Loaded.Clear();
@@ -93,13 +94,20 @@ namespace Diagram.UI.TypeScript
                 }
                 l.Add("");
                 l.Add("");
+
                 var s = p.ClassString(className, "Desktop");
                 l.Add("export " + s);
                 l.Add("{");
-                l.Add("\tconstructor()");
-
+                l.Add("");
+                l.Add("\tpublic static async getDesktop(controller : AbortController, factory?: IFactory): Promise<IDesktop> {");
+                l.Add("\t\tlet d = new " + className + "(factory)");
+                l.Add("\t\tawait d.loadAsync(controller)");
+                l.Add("\t\treturn d");
+                l.Add("\t}");
+                l.Add("");
+                l.Add("\tconstructor(factory? : IFactory)");
                 l.Add("\t{");
-                l.Add("\t\tsuper();");
+                l.Add("\t\tsuper(factory);");
                 l.Add("");
                 l.Add("\t\tthis.name = \"" + className + "\";");
                 l.Add("");

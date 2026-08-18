@@ -28,10 +28,12 @@ export class AtmosphereCategoryObject extends AtmospherePure implements ICategor
         return this.ooutp;
     }
     getInputType(i: number) {
+        this.any = i
         return this.a;
     }
     getOutputType(i: number) {
-        return this.a;
+        this.any = i
+       return this.a;
     }
     calculate(input: any[], output: any[]): void {
         var t = this.performer.convertFromAny<number>(input[0])
@@ -55,6 +57,7 @@ export class AtmosphereCategoryObject extends AtmospherePure implements ICategor
         throw new OwnNotImplemented();
     }
     setObject(obj: Object): void {
+        this.any = obj
         throw new OwnNotImplemented();
     }
     getCategoryObjectName(): string {
@@ -68,6 +71,7 @@ export class AtmosphereCategoryObject extends AtmospherePure implements ICategor
 
     protected types: string[] = ["IObject", "ICategoryObject", "IObjectTransformer", "AtmospherePure", "AtmosphereCategoryObject"];
 
+    any : any
 
     desktop !: IDesktop;
 

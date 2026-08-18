@@ -8,7 +8,7 @@ import { TwoAct } from '../Wrappers/TwoAct';
 import { ODE_FeedbackAct } from '../Wrappers/ODE_FeedbackAct';
 import { PIAct } from '../Wrappers/PIAct';
 import { OrbitaForecasAct } from '../Wrappers/OrbitalForecastAct';
-import { OrbitalForecastCalculation } from '../../Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation';
+import { OrbitalForecastCalculation } from '../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation';
 import { FeedBackFormulaAct } from '../Wrappers/FeedBackFormulaAct';
 import { RecursvieFeedbackAct } from '../Wrappers/RecursvieFeedbackAct';
 import { RecursiveFeedbackSimpleAct } from '../Wrappers/RecursiveFeedbackSimpleAct';
@@ -18,7 +18,7 @@ import { DensityAct } from '../Wrappers/DenstyAct';
 import { IDataConsumer } from '../../Library/Measurements/Interfaces/IDataConsumer';
 import { RungeProcessor } from '../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor';
 import { DataRuntimeConsumerODE } from '../../Library/Runtime/DataRuntimeConsumerODE';
-import { toDateTime } from '../../Algorithms/OrbitalForecastCalculation/OrbitalData';
+import { toDateTime } from '../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalData';
 import { Donchian } from '../Donchian';
 import { CompositionAct } from '../Wrappers/ComposionAct';
 import { CompositionEvent } from '../Wrappers/CompositionEvent';
@@ -26,15 +26,9 @@ import { CompositionEvent } from '../Wrappers/CompositionEvent';
 import { PerformerMeasuremets } from '../../Library/Measurements/PerformerMeasuremets';
 import { Composition } from '../Composition';
 import { IFunc } from '../../Library/Interfaces/IFunc';
-import { Obj3DCreator } from '../../Library/Abstract3DConverters/MeshCreators/Obj3DCreator';
-import { UniversalFactory } from '../../Library/UniversalFactory';
-import { LineEndSplitter } from '../../Library/Utilities/String/LineEndSplitter';
-import type { IStringSplitter } from '../../Library/Utilities/String/Interfaces/IStringSplitter';
 import { IFactory } from '../../Library/Interfaces/IFactory';
 import { Motion6DFactory } from '../../Library/Motion6D/Motion6DFactory';
 import { StreamReader } from '../../FileSystem/IO/StreamReader';
-import { TradingDataQuery } from '../../ExternalObjects/Components/Trading/TradingDataQuery';
-import { TradingHistoryFetchDatabase } from '../../ExternalObjects/Libraries/Trading/Database/TradingHistoryFetchDatabase';
 
 //import { Airplane } from '../../Airplane';
 
@@ -99,12 +93,13 @@ export class Actor {
         console.log(s)
     }
 
+    /*
     public async actDonchianLoad(): Promise<void> {
-        TradingDataQuery.inter = new TradingHistoryFetchDatabase();
+     /*   TradingDataQuery.inter = new TradingHistoryFetchDatabase();
         var d = new Donchian();
         var ac = new AbortController();
         await d.loadAsync(ac);
-    }
+    }*/
 
     public actCompositionAct() {
         var comp = new CompositionAct()

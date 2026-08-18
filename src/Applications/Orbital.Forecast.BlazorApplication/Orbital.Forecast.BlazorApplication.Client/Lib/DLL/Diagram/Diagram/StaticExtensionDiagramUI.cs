@@ -650,8 +650,12 @@ namespace Diagram.UI
                 l.Add("");
                 l.Add("\t\t static public bool SuccessLoad { get; private set; } = true;");
                 l.Add("");
-                l.Add("\t\tpublic static  Diagram.UI.Interfaces.IDesktop Desktop { get => new InternalDesktop(); }");
-                l.Add("");
+                l.Add("\t\tpublic public static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktop(System.Threading.CancellationToken token, ");
+                l.Add("\t\t\tNamedTree.Interfaces.IFactory factory)");
+                l.Add("\t\t\tvar desk = new InternalDesktop(true, factory);");
+                l.Add("\t\t\treturn await desk.GetDesktopAsync(desk, token);");
+                l.Add("\t\t}");
+                l.Add("\t\t}");
                 List<string> lt = (desktop as PureDesktop).CreateDesktopCode("", "InternalDesktop",
                     "SuccessLoad = pl & pd;\n\t\t\t\tPostLoad(this);\n\t\t\t\tName = \"" + className + "\"; ", true, "internal ");
                 l.Add("\t\tinternal class " + lt[0]);

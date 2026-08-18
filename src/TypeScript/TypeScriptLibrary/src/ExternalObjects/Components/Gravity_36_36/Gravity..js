@@ -137,9 +137,7 @@ class Gravity {
                     P20 = P30;
                     P30 = PN0;
                 }
-                var j = 0;
             }
-            var i = 0;
         }
         if (NK != 0) {
             LOG = (NK >= 3);

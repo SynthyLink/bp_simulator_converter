@@ -4,7 +4,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AtmospherePure = void 0;
-const RealMatrix_1 = require("../../../Library/RealMatrixProcessor/RealMatrix");
 const DateTimeConverter_1 = require("../../../Library/Utilities/DateTime/DateTimeConverter");
 const GeoCoordinates_1 = require("../../Libraries/Geography/GeoCoordinates");
 const SunCoordinates_1 = require("../../Libraries/Sun.Service/SunCoordinates");
@@ -79,7 +78,7 @@ class AtmospherePure {
     ff0 = [];
     ff1 = [];
     ome = 7.292115085E-5;
-    dd = [0, 0, 0, 0];
+    //private dd: number[] = [0, 0, 0, 0];
     xout = [0, 0, 0];
     alphastar = [0];
     h = [0];
@@ -134,7 +133,7 @@ class AtmospherePure {
         this.coordinates.setLongitude(lon);
         let tday = t / 86400;
         let dt = this.dateTimeConverter.fromOADate(tday);
-        var hh = this.realMatrix.normalize(x, this.y, 0);
+        // var hh = this.realMatrix.normalize(x, this.y, 0);
         let ho = dt.getHours();
         let mi = dt.getMinutes();
         let ss = dt.getSeconds();
@@ -147,11 +146,6 @@ class AtmospherePure {
         this.date[1] = dt.getMonth() + 1;
         this.date[2] = dt.getFullYear();
         var rho = this.atm(x, tt, this.DSoL[0], this.ASoL[0], alphastar, this.h, this.date);
-        var s = `${rho}`;
-        var b = s.includes("NaN");
-        if (b) {
-            var i = 0;
-        }
         return rho;
     }
     /// <summary>
@@ -163,7 +157,7 @@ class AtmospherePure {
     }
     rad(x) {
         let a = 0;
-        for (var i = 0; i < 3; i++) {
+        for (let i = 0; i < 3; i++) {
             a += x[i] * x[i];
         }
         return Math.sqrt(a);
@@ -211,7 +205,7 @@ class AtmospherePure {
     }
     coordinates = new GeoCoordinates_1.GeoCoordinates();
     sunCoordinates = new SunCoordinates_1.SunCoordinates();
-    realMatrix = new RealMatrix_1.RealMatrix();
+    //private realMatrix: RealMatrix = new RealMatrix();
     sunPosition = new SunPosition_1.SunPosition();
     sunTime = new SunTime_1.SunTime();
     dateTimeConverter = new DateTimeConverter_1.DateTimeConverter();

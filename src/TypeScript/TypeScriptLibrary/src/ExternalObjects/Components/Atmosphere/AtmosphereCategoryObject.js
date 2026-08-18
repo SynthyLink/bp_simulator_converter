@@ -22,9 +22,11 @@ class AtmosphereCategoryObject extends AtmospherePure_1.AtmospherePure {
         return this.ooutp;
     }
     getInputType(i) {
+        this.any = i;
         return this.a;
     }
     getOutputType(i) {
+        this.any = i;
         return this.a;
     }
     calculate(input, output) {
@@ -48,6 +50,7 @@ class AtmosphereCategoryObject extends AtmospherePure_1.AtmospherePure {
         throw new OwnNotImplemented_1.OwnNotImplemented();
     }
     setObject(obj) {
+        this.any = obj;
         throw new OwnNotImplemented_1.OwnNotImplemented();
     }
     getCategoryObjectName() {
@@ -58,6 +61,7 @@ class AtmosphereCategoryObject extends AtmospherePure_1.AtmospherePure {
     }
     name = "";
     types = ["IObject", "ICategoryObject", "IObjectTransformer", "AtmospherePure", "AtmosphereCategoryObject"];
+    any;
     desktop;
     checker;
     inp = ["t", "x", "y", "z"];

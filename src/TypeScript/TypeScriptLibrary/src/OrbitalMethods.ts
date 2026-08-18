@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 
-import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./Algorithms/OrbitalForecastCalculation/OrbitalData";
-import { OrbitalCommunication } from "./Algorithms/OrbitalForecastCalculation/OrbitalCommunication";
+import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "./ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalData";
+import { OrbitalCommunication } from "./ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalCommunication";
 
 let orbitalCommunication = new OrbitalCommunication();
 

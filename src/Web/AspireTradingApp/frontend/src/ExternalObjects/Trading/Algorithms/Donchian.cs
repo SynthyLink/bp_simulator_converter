@@ -11,20 +11,20 @@ namespace GeneratedProject
 
 		 static public bool SuccessLoad { get; private set; } = true;
 
-		public static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktop(System.Threading.CancellationToken token)
+		public static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktop(System.Threading.CancellationToken token, IFactory factory = null)
 		{
-			var desk = new InternalDesktop(true);
+			var desk = new InternalDesktop(factory);
 			return await desk.GetDesktopAsync(desk, token);
 		}
 
 		internal class InternalDesktop : Diagram.UI.PureDesktop
 		{
-			internal InternalDesktop() : this(false)
+			internal InternalDesktop(IFactory factory = null) : this(false, factory)
 			{
 		
 			}
 		
-			internal InternalDesktop(bool begin)
+			internal InternalDesktop(bool begin, IFactory factory = null) : base(factory)
 			{
 				objects.Add(new InternalDesktop.OblectLabel0("Trading", this));
 				objects.Add(new InternalDesktop.OblectLabel1("Current Position", this));
@@ -1867,10 +1867,10 @@ namespace GeneratedProject
 						};
 						parameters =new Dictionary<string, object>()
 						{
-							{"b", (double)105 },
-							{"a", (double)20 },
 							{"d", (double)107 },
-							{"c", (double)129 }
+							{"c", (double)129 },
+							{"b", (double)105 },
+							{"a", (double)20 }
 						};
 						operationNames = new Dictionary<System.Int32,System.String>()
 						{

@@ -572,12 +572,12 @@ namespace Diagram.UI
                 string preffixFull = pr + className;
                 l.Add(className + " : Diagram.UI.PureDesktop");
                 l.Add("{");
-                l.Add("\t" + constructorType + className + "() : this(false)");
+                l.Add("\t" + constructorType + className + "(IFactory factory = null) : this(false, factory)");
                 l.Add("\t{");
                 l.Add("");
                 l.Add("\t}");
                 l.Add("");
-                l.Add("\tinternal "  + className + "(bool begin)");
+                l.Add("\tinternal "  + className + "(bool begin, IFactory factory = null) : base(factory)");
                 l.Add("\t{");
                 int ko = 0;
                 var ignoredObjs = new List<IObjectLabel>();
@@ -710,7 +710,7 @@ namespace Diagram.UI
             Exception ex;
             try
             {
-                List<string> l = new List<string>();
+                var l = new List<string>();
                 l.Add(StandardHeader);
                 l.Add("namespace " + namespacE);
                 l.Add("{");
@@ -721,9 +721,9 @@ namespace Diagram.UI
                     l.Add("");
                     l.Add("\t\t static public bool SuccessLoad { get; private set; } = true;");
                     l.Add("");
-                    l.Add("\t\tpublic static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktop(System.Threading.CancellationToken token)");
+                    l.Add("\t\tpublic static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktop(System.Threading.CancellationToken token, IFactory factory = null)");
                     l.Add("\t\t{");
-                    l.Add("\t\t\tvar desk = new InternalDesktop(true);");
+                    l.Add("\t\t\tvar desk = new InternalDesktop(factory);");
                     l.Add("\t\t\treturn await desk.GetDesktopAsync(desk, token);");
                     l.Add("\t\t}");
                     l.Add("");

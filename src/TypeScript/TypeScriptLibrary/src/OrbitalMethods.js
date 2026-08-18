@@ -8,7 +8,7 @@ exports.orbitCalculation = orbitCalculation;
 exports.nodeWheatherForecastClick = nodeWheatherForecastClick;
 exports.nodeOrbitalIClickCanlel = nodeOrbitalIClickCanlel;
 exports.nodeOrbitalClick = nodeOrbitalClick;
-const OrbitalCommunication_1 = require("./Algorithms/OrbitalForecastCalculation/OrbitalCommunication");
+const OrbitalCommunication_1 = require("./ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalCommunication");
 let orbitalCommunication = new OrbitalCommunication_1.OrbitalCommunication();
 async function actOrbitCalculation() {
     await orbitalCommunication.actOrbitCalculation();

@@ -23,9 +23,17 @@ namespace Diagram.UI
     /// <summary>
     /// Base class of desktop
     /// </summary>
-    public class PureDesktop : IDesktop
+    public class PureDesktop : IDesktop, IFactoryConsumer
     {
+        /// <summary>
+        /// Collection
+        /// </summary>
         IComponentCollection collection;
+
+        /// <summary>
+        /// Factory
+        /// </summary>
+        protected IFactory factory;
 
         /// <summary>
         /// All objects
@@ -180,6 +188,11 @@ namespace Diagram.UI
         #endregion
 
         #region Ctor
+
+        public PureDesktop(IFactory factory) : this()
+        {
+            this.factory = factory;
+        }
 
         /// <summary>
         /// Default constructor
@@ -1233,7 +1246,11 @@ namespace Diagram.UI
             get;
             set;
         }
-       
+
+        protected virtual IFactory Factory { get => factory; set => factory = value; }
+
+       IFactory  IFactoryConsumer.Factory { get => Factory; set => Factory = value; }
+
 
         /// <summary>
         /// Gets all arrows and objects

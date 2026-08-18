@@ -4,7 +4,7 @@ import { RungeProcessor } from "../../Library/Measurements/DifferentialEquations
 import { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
 import { PerformerMeasuremets } from "../../Library/Measurements/PerformerMeasuremets";
 import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
-import { OrbitalForecast } from "../../Algorithms/OrbitalForecastCalculation/OrbitalForecast";
+import { OrbitalForecast } from "../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecast";
 import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
 
 export class OrbitaForecasAct extends OrbitalForecast implements IAction {

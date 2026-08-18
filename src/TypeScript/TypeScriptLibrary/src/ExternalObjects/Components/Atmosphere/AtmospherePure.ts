@@ -3,7 +3,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { RealMatrix } from "../../../Library/RealMatrixProcessor/RealMatrix";
 import { DateTimeConverter } from "../../../Library/Utilities/DateTime/DateTimeConverter";
 import { GeoCoordinates } from "../../Libraries/Geography/GeoCoordinates";
 import { SunCoordinates } from "../../Libraries/Sun.Service/SunCoordinates";
@@ -86,7 +85,7 @@ export class AtmospherePure {
     protected ff0: number[][] = [];
     protected ff1: number[][] = [];
     protected ome: number = 7.292115085E-5;
-    private dd: number[] = [0, 0, 0, 0];
+    //private dd: number[] = [0, 0, 0, 0];
     protected xout: number[] = [0, 0, 0];
     protected alphastar: number[] = [0];
     protected h: number[] = [0]
@@ -149,7 +148,7 @@ export class AtmospherePure {
         this.coordinates.setLongitude(lon);
         let tday = t / 86400;
         let dt = this.dateTimeConverter.fromOADate(tday);
-        var hh = this.realMatrix.normalize(x, this.y, 0);
+       // var hh = this.realMatrix.normalize(x, this.y, 0);
         let ho = dt.getHours();
         let mi = dt.getMinutes();
         let ss = dt.getSeconds();
@@ -162,11 +161,6 @@ export class AtmospherePure {
         this.date[1] = dt.getMonth() + 1;
         this.date[2] = dt.getFullYear();
         var rho = this.atm(x, tt, this.DSoL[0], this.ASoL[0], alphastar, this.h, this.date);
-        var s = `${rho}`;
-        var b = s.includes("NaN");
-        if (b) {
-            var i = 0;
-        }
 
         return rho;
     }
@@ -182,7 +176,7 @@ export class AtmospherePure {
 
     rad(x: number[]): number {
    let a = 0;
-        for (var i = 0; i < 3; i++) {
+        for (let i = 0; i < 3; i++) {
             a += x[i] * x[i];
         }
         return Math.sqrt(a);
@@ -243,7 +237,7 @@ export class AtmospherePure {
 
     private sunCoordinates: SunCoordinates = new SunCoordinates();
 
-    private realMatrix: RealMatrix = new RealMatrix();
+    //private realMatrix: RealMatrix = new RealMatrix();
 
     private sunPosition: SunPosition = new SunPosition();
 

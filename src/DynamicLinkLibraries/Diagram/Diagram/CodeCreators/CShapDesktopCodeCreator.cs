@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 
 using BaseTypes.Attributes;
+
 using CategoryTheory;
+
 using Diagram.UI.CodeCreators.Interfaces;
 using Diagram.UI.Interfaces;
 

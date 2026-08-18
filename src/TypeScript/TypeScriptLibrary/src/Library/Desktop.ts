@@ -10,19 +10,18 @@ import type { ICheck } from "./Interfaces/ICheck";
 import type { IDesktop } from "./Interfaces/IDesktop";
 import type { IObject } from "./Interfaces/IObject";
 import type { IInitializeTask } from "./Interfaces/IInitializeTask"
+import type { IFactory } from "./Interfaces/IFactory";
+import type { IFactoryConsumer } from "./Interfaces/IFactoryConsumer";
 
-export class Desktop implements IDesktop, IObject
+export class Desktop implements IDesktop, IObject, IFactoryConsumer
 {
-    getClassName(): string {
-        return this.typeName;
-    }
 
-    imlplementsType(type: string): boolean {
-        return this.types.includes(type);
-    }
+    protected factory !: IFactory
+
     protected typeName: string = "Desktop";
 
-    protected types: string[] = ["IObject", "IDesktop", "IComponentCollection", "IObjectCollection", "Desktop"];
+    protected types: string[] = ["IObject", "IDesktop"
+        , "IComponentCollection", "IObjectCollection", "Desktop", "IFactoryConsumer"];
 
     protected categoryObjects: ICategoryObject[] = [];
 
@@ -46,6 +45,14 @@ export class Desktop implements IDesktop, IObject
 
 
     protected performer: Performer = new Performer();
+
+    constructor(factory?: IFactory) {
+        if (factory !== undefined)  this.factory = factory
+    }
+
+    imlplementsType(type: string): boolean {
+        return this.types.includes(type);
+    }
 
 
      async initializeTaksAsync(cancel: AbortController): Promise<void> {
@@ -84,6 +91,16 @@ export class Desktop implements IDesktop, IObject
     }
     getCheck() {
         return this.check;
+    }
+
+    setConsumerFactory(factory: IFactory): void {
+        this.factory = factory
+    }
+    getConsumerFactory(): IFactory {
+        return this.factory;
+    }
+    getClassName(): string {
+        return this.typeName;
     }
 
 

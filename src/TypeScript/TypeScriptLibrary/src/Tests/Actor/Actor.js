@@ -10,21 +10,18 @@ const TwoAct_1 = require("../Wrappers/TwoAct");
 const ODE_FeedbackAct_1 = require("../Wrappers/ODE_FeedbackAct");
 const PIAct_1 = require("../Wrappers/PIAct");
 const OrbitalForecastAct_1 = require("../Wrappers/OrbitalForecastAct");
-const OrbitalForecastCalculation_1 = require("../../Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation");
+const OrbitalForecastCalculation_1 = require("../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation");
 const FeedBackFormulaAct_1 = require("../Wrappers/FeedBackFormulaAct");
 const RecursvieFeedbackAct_1 = require("../Wrappers/RecursvieFeedbackAct");
 const RecursiveFeedbackSimpleAct_1 = require("../Wrappers/RecursiveFeedbackSimpleAct");
 const ODE_FeedAcs_1 = require("../Wrappers/ODE_FeedAcs");
 const DateTimeConverter_1 = require("../../Library/Utilities/DateTime/DateTimeConverter");
 const DenstyAct_1 = require("../Wrappers/DenstyAct");
-const OrbitalData_1 = require("../../Algorithms/OrbitalForecastCalculation/OrbitalData");
-const Donchian_1 = require("../Donchian");
+const OrbitalData_1 = require("../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalData");
 const ComposionAct_1 = require("../Wrappers/ComposionAct");
 const PerformerMeasuremets_1 = require("../../Library/Measurements/PerformerMeasuremets");
 const Motion6DFactory_1 = require("../../Library/Motion6D/Motion6DFactory");
 const StreamReader_1 = require("../../FileSystem/IO/StreamReader");
-const TradingDataQuery_1 = require("../../ExternalObjects/Components/Trading/TradingDataQuery");
-const TradingHistoryFetchDatabase_1 = require("../../ExternalObjects/Libraries/Trading/Database/TradingHistoryFetchDatabase");
 //import { Airplane } from '../../Airplane';
 function finish(e) {
     console.log(e);
@@ -81,12 +78,13 @@ class Actor {
         let s = reader.readToEnd();
         console.log(s);
     }
-    async actDonchianLoad() {
-        TradingDataQuery_1.TradingDataQuery.inter = new TradingHistoryFetchDatabase_1.TradingHistoryFetchDatabase();
-        var d = new Donchian_1.Donchian();
+    /*
+    public async actDonchianLoad(): Promise<void> {
+     /*   TradingDataQuery.inter = new TradingHistoryFetchDatabase();
+        var d = new Donchian();
         var ac = new AbortController();
         await d.loadAsync(ac);
-    }
+    }*/
     actCompositionAct() {
         var comp = new ComposionAct_1.CompositionAct();
         comp.test();

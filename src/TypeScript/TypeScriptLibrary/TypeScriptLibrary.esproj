@@ -7,8 +7,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="models\" />
-    <Folder Include="src\ExternalObjects\Components\Trading\Components\" />
-    <Folder Include="src\ExternalObjects\Libraries\Web\Interfaces\" />
     <Folder Include="src\Library\Runtime\Interfaces\" />
   </ItemGroup>
 </Project>

@@ -23,9 +23,11 @@ class GravityCategoryObject extends Gravity_1.Gravity {
         return this.ooutp;
     }
     getInputType(i) {
+        this.any = i;
         return this.a;
     }
     getOutputType(i) {
+        this.any = i;
         return this.a;
     }
     calculate(input, output) {
@@ -62,6 +64,7 @@ class GravityCategoryObject extends Gravity_1.Gravity {
         return this.performer.convertFromAny(x);
     }
     performer = new Performer_1.Performer();
+    any;
     obj = new Object();
     name = "";
     desktop;

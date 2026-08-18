@@ -28,9 +28,11 @@ export class GravityCategoryObject extends Gravity implements ICategoryObject, I
         return this.ooutp;
     }
     getInputType(i: number) {
-        return this.a;
+        this.any = i
+       return this.a;
     }
     getOutputType(i: number) {
+        this.any = i
        return this.a;
     }
     calculate(input: any[], output: any[]): void
@@ -71,6 +73,8 @@ export class GravityCategoryObject extends Gravity implements ICategoryObject, I
     }
 
     performer: Performer = new Performer();
+
+    any : any
 
     obj: Object = new Object();
 
