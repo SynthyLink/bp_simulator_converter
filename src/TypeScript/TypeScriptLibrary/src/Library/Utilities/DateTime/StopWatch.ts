@@ -97,7 +97,7 @@ export class StopWatch {
         return this.taskList.length;
     }
 
-    private throwError(msg: string): never {
+    public throwError(msg: string): never {
         throw new Error(msg);
     }
 }

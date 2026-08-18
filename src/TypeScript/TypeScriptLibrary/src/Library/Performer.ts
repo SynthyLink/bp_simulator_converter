@@ -7,6 +7,7 @@ import { OwnError } from "./ErrorHandler/OwnError";
 import { MeasurementsComparator } from "./Measurements/MeasurementsComparator";
 import { SortingAlgorithms } from "./Utilities/Sort/SortingAlgorithms";
 import { ActionArray } from "./Utilities/Generic/ActionArray";
+import { DateTimeConverter } from "./Utilities/DateTime/DateTimeConverter";
 import type { IAction } from "./Interfaces/IAction";
 import type { IAlias } from "./Interfaces/IAlias";
 import type { IAliasName } from "./Interfaces/IAliasName";
@@ -45,6 +46,7 @@ import type { IExternalAction } from "./Interfaces/IExternalAction";
 import type { IInput } from "./Interfaces/IInput";
 import type { IActionAddRemoveT2 } from "./Interfaces/IActionAddRemoveT2";
 import type { IActionT2 } from "./Interfaces/IActionT2";
+import type { IStartTask } from "./Interfaces/IStartTask";
 
 
 
@@ -76,6 +78,16 @@ export class Performer
 
     public static setCurrentDesktop(desktop: IDesktop): void {
         this.desktop = desktop
+    }
+
+    public async startAsync(collection: IComponentCollection, controller: AbortController): Promise<void>
+    {
+        let r: Promise<void>[] = []
+        let t = this.getAll<IStartTask>(collection, "IStartTask")
+        for (let task of t) {
+            r.push(task.startAsync(controller))
+        }
+        await Promise.all(r)
     }
 
 
@@ -515,16 +527,33 @@ export class Performer
         this.setDerivationValue(d, value);
     }
 
+    public dateString(x: number): string {
+        let y = x / 86400;
+        var d = this.dt.fromOADate(y);
+        var s = d.toJSON();
+        s = s.substring(0, 19) + "." + d.getMilliseconds().toString();
+        return s;
+    }
 
+    public dateNumber(x: string): number {
+        var d = new Date(x);
+        var y = this.dt.toOADate(d);
+        //var z = y * 86400;
+        return y;
+    }
+
+    protected dt: DateTimeConverter = new DateTimeConverter();
 
 
     public convertFromAny<T>(t: any): T {
         return this.convert<any, T>(t);
     }
 
+
     public toNumber(s: any): number {
         return Number(s)
     }
+
 
     public convert<T, S>(t: T): S {
         // Typeof checks against string representations of types. S is a generic type,
@@ -545,7 +574,7 @@ export class Performer
         }
 
         if (tt === "number") { // } && (t as unknown as S) instanceof Number) {  //VERY LIMITED AND UNSAFE EXAMPLE.
-            return t as unknown as S; // Force the type assertion (VERY UNSAFE)
+            return Number(t) as S; // Force the type assertion (VERY UNSAFE)
         }
 
         if (tt === "boolean") { //VERY LIMITED AND UNSAFE EXAMPLE.

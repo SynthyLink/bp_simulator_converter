@@ -4,18 +4,18 @@ import type { IFactory } from "../../Library/Interfaces/IFactory";
 import type { HistoryMessage } from "./Database/HistoryMessage";
 import type { ILocalDB } from "./Database/Local/Interfaces/ILocalDB";
 import type { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
+import type { ISequenceFilter } from "../../Library/Utilities/Filters/Interfaces/ISequenceFilter";
 import { PerformerMeasuremets } from "../../Library/Measurements/PerformerMeasuremets";
 import { TradingCommunication } from "./Communication/TradingCommunication";
 import { TradingDataQuery } from "./Components/TradingDataQuery";
-import type { SequenceFilterWrapper } from "../../Library/Measurements/SequenserFilterWrapper";
-import type { ISequenceFilter } from "../../Library/Utilities/Filters/Interfaces/ISequenceFilter";
+import { SequenceFilterWrapper } from "../../Library/Measurements/SequenserFilterWrapper";
 
 export class TradingPerformer {
 
     pefrormer !: PerformerMeasuremets
 
     desktop !: IDesktop
-     
+
     query !: TradingDataQuery
 
 
@@ -25,10 +25,13 @@ export class TradingPerformer {
 
     filters: ISequenceFilter[] = []
 
+    client: Map<string, any>[] | undefined = undefined
+    server: Map<string, any>[] | undefined = undefined
 
-    
+    chartSym: string = "b"
 
-    constructor(local: ILocalDB, desktop: IDesktop, communication : TradingCommunication, factory?: IFactory) {
+
+    constructor(local: ILocalDB, desktop: IDesktop, communication: TradingCommunication, factory?: IFactory) {
         this.local = local;
         this.pefrormer = new PerformerMeasuremets(factory)
         this.desktop = desktop
@@ -46,7 +49,7 @@ export class TradingPerformer {
     }
 
     async writeHistoryAsync(symbol: string, begin: number, end: number, history: HistoryMessage[]): Promise<void> {
-       let p = await this.local.getIntervalAsync(symbol);
+        let p = await this.local.getIntervalAsync(symbol);
         if (p.length === 0)
             this.local.clearHistoryAsync(symbol)
         await this.local.writeHistoryAsync(symbol, begin, end, history)
@@ -68,9 +71,19 @@ export class TradingPerformer {
 
     }
 
+    public setClient(map: Map<string, any>[] | undefined): void {
+        this.client = map
+    }
+
+
+    public setServer(map: Map<string, any>[] | undefined): void {
+        this.server = map
+    }
+
+
     public async calculate(symblol: string, period: string, begin: number, end: number,
-        a1: number, a2: number, d1: number, d2: number, d3: number, d4: number, controller: AbortController): Promise<Map<string, any>[]>
-    {
+        a1: number, a2: number, d1: number, d2: number, d3: number, d4: number, controller: AbortController):
+        Promise<Map<string, any>[]> {
         this.query.setQueryParameters(symblol, period, begin, end)
         this.filters[0].setFilterCount(a1)
         this.filters[1].setFilterCount(a2)
@@ -84,10 +97,52 @@ export class TradingPerformer {
         return [x[0]]
     }
 
+    public setChart(s: string): void {
+        console.log(this.client)
+        this.x = undefined
+        this.yClient = undefined
+        this.yServer = undefined
+        if (this.client !== undefined) {
+            this.x = []
+            this.yClient = []
+            for (let i of this.client) {
+                let xx = i.get("a")
+                this.x.push(Number(xx))
+                let yy = i.get("s")
+                this.yClient.push(Number(yy))
+            }
+        }
+        if (this.x !== undefined)
+            if (this.yClient !== undefined)
+                console.log("x", this.x[0], this.yClient[0])
+    }
+
+
 
     local !: ILocalDB
 
     any: any
+
+    x: (number | undefined)[] | undefined = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+
+    yClient: (number | undefined)[] | undefined = [28.5, 70.5, undefined, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+
+    yServer: (number | undefined)[] | undefined = [226.9, 194.1, 95.6, 54.4, 29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5]
+
+
+    public getX(): (number | undefined)[] | undefined {
+        return this.x
+    }
+
+    public getYClient(): (number | undefined)[] | undefined {
+        return this.yClient
+    }
+
+    public getYServer(): (number | undefined)[] | undefined {
+        return this.yServer
+    }
+
 
     mmap = new Map<string, string>([
         ["a", "Trading.RealTime"],

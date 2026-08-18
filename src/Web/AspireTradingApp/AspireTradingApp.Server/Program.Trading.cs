@@ -53,7 +53,7 @@ static class TradingInit
     public static async Task<string> GetInitial(CancellationToken token)
     {
         await performer.Load(token);
-        return performer.Initial;
+        return await performer.Initial();
     }
 
 

@@ -1,15 +1,12 @@
 ﻿
-using DataPerformer.Base.Filters;
-using DataPerformer.Interfaces;
-using DataPerformer.Portable;
-using DataPerformer.Portable.Filters;
-using Diagram.UI.Interfaces;
-using IBApi;
 using IronPython.Runtime;
+
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.ObjectPool;
-using SerializationInterface;
-using System.CodeDom.Compiler;
+
+using DataPerformer.Interfaces;
+
+using Diagram.UI.Interfaces;
+
 using Trading.Database.Classes;
 using Trading.Library.Classes;
 using Trading.Library.Objects;
@@ -63,21 +60,17 @@ namespace AspireTradingApp.Server.Trading
             return s.ToList();
         }
 
-        DataQuery DataQuery => desktop.Get<DataQuery>("Trading");
-
-        public string Initial
+        public async Task<string> Initial()
         {
-            get
-            {
-                var q = DataQuery;
-                var d = new Dictionary<string, object>();
-                d["b"] = q.Begin.ToOADate() * 86400;
-                d["e"] = q.End.ToOADate() * 86400;
-                d["p"] = q.Period;
-                d["s"] = q.Symbol;
-                var json = System.Text.Json.JsonSerializer.Serialize(d);
-                return json;
-            }
+            var desktop = await Generated.Donchian.GetDesktop(CancellationToken.None);
+            var q = desktop.Get<DataQuery>("Trading");
+            var d = new Dictionary<string, object>();
+            d["b"] = q.Begin.ToOADate() * 86400;
+            d["e"] = q.End.ToOADate() * 86400;
+            d["p"] = q.Period;
+            d["s"] = q.Symbol;
+            var json = System.Text.Json.JsonSerializer.Serialize(d);
+            return json;
         }
 
         public async Task<HistoricalDataMessageNumber[]> GetHistoryNumber(double begin, double end, string period, string s, CancellationToken token)

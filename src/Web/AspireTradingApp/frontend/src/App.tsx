@@ -1,5 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './App.css';
+import * as echarts from 'echarts/core';
+import { LineChart } from 'echarts/charts';
+import { GridComponent, TooltipComponent, TitleComponent } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+import type { ComposeOption } from 'echarts/core';
+import type { LineSeriesOption } from 'echarts/charts';
+import type { GridComponentOption, TitleComponentOption, TooltipComponentOption } from 'echarts/components';
+
 import { DateTimeConverter } from './Library/Utilities/DateTime/DateTimeConverter';
 import { Performer } from './Library/Performer';
 import { TradingCommunication } from "./ExternalObjects/Trading/Communication/TradingCommunication";
@@ -45,8 +53,16 @@ function date(x: number): ReactNode {
     return d.toLocaleString();
 }
 */
+echarts.use([TitleComponent, TooltipComponent, GridComponent, LineChart, CanvasRenderer]);
 
-function App() {
+// Combine option types tightly to avoid bundle leaks
+type EChartsCombinedOption = ComposeOption<
+    TitleComponentOption | TooltipComponentOption | GridComponentOption | LineSeriesOption
+>;
+
+const App: React.FC = () => {
+    const chartRef = useRef<HTMLDivElement>(null);
+
     let [symbols, setSymbols] = useState<Map<string, any>>();
     let [begin, setBegin] = useState<string>();
 
@@ -62,11 +78,22 @@ function App() {
     let [donchian3, setDonchian3] = useState<number>()
     let [donchian4, setDonchian4] = useState<number>()
 
-    let [symbol, setSymbol] = useState < string > ();
+    let [symbol, setSymbol] = useState<string>();
+/*
+
+    let [chartX, setChartX] = useState<number[]>();
+    let [chartYClient, setChartYClient] = useState<number[]>();
+    let [chartYServer, setChartYServer] = useState<number[]>();
+    setChartX([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+    setChartYClient([28.5, 70.5, 108.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4])
+    setChartYServer([226.9, 194.1, 95.6, 54.4, 29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5])
+*/
 
     useEffect(() => {
-        populateData();
+      populateData();
     }, []);
+
+
 
     const handleBeginChange = (event: any) => {
         var s = event.target.value;
@@ -104,23 +131,27 @@ function App() {
         map.set("d4", f[5])
         let promises: Promise<void>[] = []
         if (s !== undefined)
-       //  promises.push(fillClient(s, p, b, e, f[0], f[1], f[2],
-        //        f[3], f[4], f[5], controller))
-        promises.push(fillServer(map, controller))
+         promises.push(fillClient(s, p, b, e, f[0], f[1], f[2],
+                f[3], f[4], f[5], controller))
+       // promises.push(fillServer(map, controller))
         await Promise.all(promises);
+        communication.tPerformer.setChart("j")
     };
 
     const fillServer = async(map : Map<string, any>, controller: AbortController): Promise<void> => {
 
         let h = await communication.getAnalysisAsync(map, controller)
-        console.log(h.length, "HHH")
+        communication.tPerformer.setServer(h)
+       
     }
 
     const fillClient = async (symbol: string, period: string, begin: number, end: number,
         a1: number, a2: number, d1: number, d2: number, d3: number, d4: number, controller: AbortController): Promise<void> => {
 
         let p = communication.getTradingPerformer()
-        await p.calculate(symbol, period, begin, end, a1, a2, d1, d2, d3, d4, controller)
+        let h = await p.calculate(symbol, period, begin, end, a1, a2, d1, d2, d3, d4, controller)
+        communication.tPerformer.setClient(h)
+
         //    let h = await communication.getHistoryAsync(map, getAbortController())
         // fillHistory(h)
 
@@ -132,20 +163,88 @@ function App() {
         return new AbortController()
     }
 
+    let first = true
 
+    const chartIinit = (): any => {
+        if (!chartRef.current) return;
+
+        // Initialize the custom instance
+        const chartInstance = echarts.init(chartRef.current);
+
+        const option: EChartsCombinedOption =
+        {
+            legend: {
+                left: 'center',
+                bottom: 'bottom'
+            },
+            xAxis: {
+                type: 'category',
+                data: communication.getTradingPerformer().getX(),
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name: 'line series 1',
+                    type: 'line',
+                    //      smooth: true,
+                    data: communication.getTradingPerformer().getYClient(),
+                    symbol: 'none',
+                    //  symbolSize: 10,
+                    //  symbol: 'square',
+                    emphasis: {
+                        focus: 'series',
+                        //  lineStyle: {
+                        //     width: 5
+                        // }
+                    }
+                },
+                {
+                    name: 'line series 2',
+                    type: 'line',
+                    //           smooth: true,
+                    data: communication.getTradingPerformer().getYServer(),
+                    //  symbolSize: 10,
+                    // symbol: 'circle',
+                    symbol: 'none',
+                    emphasis: {
+                        focus: 'series'
+                    }
+                }
+            ]
+        };
+
+        chartInstance.setOption(option);
+
+        // Handle responsiveness
+        const handleResize = () => chartInstance.resize();
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup on unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            chartInstance.dispose();
+        };
+
+    }
+  
     async function populateData() {
-        if (symbols === undefined) {
-            let s = await communication.getSymbolsAsync()
-            for (let ss of s) {
-                map.set(ss[0], ss[1])
+        if (first) {
+            first = false
+            if (symbols === undefined) {
+                let s = await communication.getSymbolsAsync()
+                for (let ss of s) {
+                    map.set(ss[0], ss[1])
+                }
+                setSymbols(map)
+                setAverage1(80)
+                setAverage2(20)
+                setDonchian1(20)
+                setDonchian2(20)
+                setDonchian3(20)
+                setDonchian4(20)
             }
-            setSymbols(map)
-            setAverage1(80)
-            setAverage2(20)
-            setDonchian1(20)
-            setDonchian2(20)
-            setDonchian3(20)
-            setDonchian4(20)
         }
 
         if (map.size >= 0) {
@@ -165,17 +264,17 @@ function App() {
 
             if (init === undefined) {
                 try {
-                controller = new AbortController();
-                    let i = await communication.getInitialAsync(controller)
-                    if (i === undefined) return
-                    init = i
-                    var b = datePure(i.b)
-                    var e = datePure(i.e)
-                    setBegin(b)
-                    setEnd(e)
-                 //   setPeriod(i.p)
-                    setSymbol(i.s)
-                }
+                        controller = new AbortController();
+                        let i = await communication.getInitialAsync(controller)
+                        if (i === undefined) return
+                        init = i
+                        var b = datePure(i.b)
+                        var e = datePure(i.e)
+                        setBegin(b)
+                        setEnd(e)
+                        //   setPeriod(i.p)
+                        setSymbol(i.s)
+                    }
                 catch (error) {
                     if (error instanceof SyntaxError) {
                         console.error('Invalid JSON:', error.message);
@@ -186,6 +285,10 @@ function App() {
             }
         }
     }
+
+    chartIinit()
+
+
         const  page = (
             <div className="body-main">
                 <h1 id="tableLabel">Trading forecast</h1>
@@ -219,9 +322,8 @@ function App() {
                         </tbody>
                     </table>
                 </div>
-
+                <div ref={chartRef} style={{ width: '100%', height: '400px' }} />
             </div>
-
     );
     return page
 

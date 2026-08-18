@@ -1,5 +1,5 @@
 import type { Performer } from '../../Performer';
-import { webAPIUrl } from './AppSettings';
+
 
 export interface HttpRequest<REQB> {
   path: string;
@@ -19,7 +19,7 @@ export class HttpCommunication {
     public async http_cancel<RESB, REQB = undefined>(
         config: HttpRequest<REQB>, controller: AbortController,
     ): Promise<HttpResponse<RESB>>  {
-        const request = new Request(`${webAPIUrl()}${config.path}`, {
+        const request = new Request(`${this.server}${config.path}`, {
             method: config.method || 'get',
             headers: {
                 'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ export class HttpCommunication {
     public  async http<RESB, REQB = undefined>(
         config: HttpRequest<REQB>,
     ): Promise<HttpResponse<RESB>>{
-        const request = new Request(`${webAPIUrl()}${config.path}`, {
+        const request = new Request(`${this.server}}${config.path}`, {
             method: config.method || 'get',
             headers: {
                 'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ export class HttpCommunication {
             body = await response.text();
         }
         console.error(`Error requesting ${request.method} ${request.url}`, body);
-    };
+    }
 
     public setPerformer(performer: Performer): void {
         this.performer = performer;
@@ -88,5 +88,12 @@ export class HttpCommunication {
     }
 
 
+    public setCommunicationServer(s: string): void {
+        this.server = s
+    }
+
+    protected server: string = ""
+
     protected performer !: Performer;
+
 }

@@ -2,7 +2,6 @@ import type { OrbitalForecastConditionNumber, OrbitalForecastItemNumber } from "
 import { OrbitalForecastCalculation } from "./OrbitalForecastCalculation";
 import { HttpCommunication } from "../../Library/Communications/http/http_interface";
 import { getOrbitalInitialCancel, getOrbitalForecastFromNumber } from "../../OrbitalMethods";
-import { setCommunicationServer } from "../../Library/Communications/http/AppSettings"
 import { server } from "../../RemoteServer";
 
 export class OrbitalCommunication extends HttpCommunication {

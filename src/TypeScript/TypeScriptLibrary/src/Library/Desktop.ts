@@ -49,15 +49,14 @@ export class Desktop implements IDesktop, IObject
 
 
      async initializeTaksAsync(cancel: AbortController): Promise<void> {
-
         var init = [];
         var ii = this.performer.getByInterface(this, "IInitializeTask");
         for (var i of ii) {
             var k = i as unknown as IInitializeTask;
-            k.initializeTaskAsync(cancel);
-            init.push(k);
-        }
-        await Promise.all(init);
+            let m = k.initializeTaskAsync(cancel);
+            init.push(m);
+         }
+         await Promise.any(init);
     }
 
     public async loadAsync(cancel: AbortController): Promise<void> {

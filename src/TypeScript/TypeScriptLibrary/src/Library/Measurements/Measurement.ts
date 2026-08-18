@@ -13,11 +13,12 @@ export class Measurement implements IMeasurement {
     constructor(name: string, type: any) {
         this.name = name;
         this.type = type;
-        
     }
+
     getMeasurementName(): string {
         return this.name;
     }
+
     getMeasurementType() {
         return this.type;
     }
