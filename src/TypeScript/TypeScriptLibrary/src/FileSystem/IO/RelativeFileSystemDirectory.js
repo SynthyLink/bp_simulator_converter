@@ -18,4 +18,3 @@ class RelativeFileSystemDirectory extends FileSystemDirectory_1.FileSystemDirect
     }
 }
 exports.RelativeFileSystemDirectory = RelativeFileSystemDirectory;
-//# sourceMappingURL=RelativeFileSystemDirectory.js.map

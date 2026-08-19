@@ -9,4 +9,3 @@ function toDateTime(time) {
         orbitalTime: converter.fromOADate(time.orbitalTime / 86400.), x: time.x, y: time.y, z: time.z, vx: time.vx, vy: time.vy, vz: time.vz, duration: time.duration
     };
 }
-//# sourceMappingURL=OrbitalData.js.map

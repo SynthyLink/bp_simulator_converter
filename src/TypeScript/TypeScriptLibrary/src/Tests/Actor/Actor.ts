@@ -1,96 +1,131 @@
 
-import { ConditionTestAct } from '../Wrappers/ConditionTestAct';
-import { ODEAct } from '../Wrappers/ODEAct';
-import { OrbitAct } from '../Wrappers/OrbitAct';
-import { RandomAct } from '../Wrappers/RandomAcr';
-import { SimpleFeedAct } from '../Wrappers/SimpleFeedAct';
-import { TwoAct } from '../Wrappers/TwoAct';
-import { ODE_FeedbackAct } from '../Wrappers/ODE_FeedbackAct';
-import { PIAct } from '../Wrappers/PIAct';
-import { OrbitaForecasAct } from '../Wrappers/OrbitalForecastAct';
-import { OrbitalForecastCalculation } from '../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation';
-import { FeedBackFormulaAct } from '../Wrappers/FeedBackFormulaAct';
-import { RecursvieFeedbackAct } from '../Wrappers/RecursvieFeedbackAct';
-import { RecursiveFeedbackSimpleAct } from '../Wrappers/RecursiveFeedbackSimpleAct';
-import { ODE_FeedAct } from '../Wrappers/ODE_FeedAcs';
-import { DateTimeConverter } from '../../Library/Utilities/DateTime/DateTimeConverter';
-import { DensityAct } from '../Wrappers/DenstyAct';
-import { IDataConsumer } from '../../Library/Measurements/Interfaces/IDataConsumer';
+
 import { RungeProcessor } from '../../Library/Measurements/DifferentialEquations/Processors/RungeProcessor';
 import { DataRuntimeConsumerODE } from '../../Library/Runtime/DataRuntimeConsumerODE';
-import { toDateTime } from '../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalData';
-import { Donchian } from '../Donchian';
-import { CompositionAct } from '../Wrappers/ComposionAct';
 import { CompositionEvent } from '../Wrappers/CompositionEvent';
 
-import { PerformerMeasuremets } from '../../Library/Measurements/PerformerMeasuremets';
 import { Composition } from '../Composition';
-import { IFunc } from '../../Library/Interfaces/IFunc';
-import { IFactory } from '../../Library/Interfaces/IFactory';
-import { Motion6DFactory } from '../../Library/Motion6D/Motion6DFactory';
-import { StreamReader } from '../../FileSystem/IO/StreamReader';
 
 //import { Airplane } from '../../Airplane';
 
+import * as fs from 'node:fs';
+import { toDateTime } from '../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalData';
+import { OrbitalForecastCalculation } from '../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation';
+import { ITradingDatabaseHistoryInterface } from '../../ExternalObjects/Components/Trading/Database/ITradingDatabaseHistoryInterface';
+import { MapTradingDatabaseHistoryInterface } from '../../ExternalObjects/Components/Trading/Database/MapTradingDatabaseHistoryInterface ';
+import { TradingDataQuery } from '../../ExternalObjects/Components/Trading/TradingDataQuery';
+import { StreamReader } from '../../FileSystem/IO/StreamReader';
+import { IFactory } from '../../Library/Interfaces/IFactory';
+import { IFunc } from '../../Library/Interfaces/IFunc';
+import { IDataConsumer } from '../../Library/Measurements/Interfaces/IDataConsumer';
+import { PerformerMeasuremets } from '../../Library/Measurements/PerformerMeasuremets';
+import { Motion6DFactory } from '../../Library/Motion6D/Motion6DFactory';
+import { UniversalFactory } from '../../Library/UniversalFactory';
+import { DateTimeConverter } from '../../Library/Utilities/DateTime/DateTimeConverter';
+import { Donchian } from '../Donchian';
+import { CompositionAct } from '../Wrappers/ComposionAct';
+import { ConditionTestAct } from '../Wrappers/ConditionTestAct';
+import { DensityAct } from '../Wrappers/DenstyAct';
+import { FeedBackFormulaAct } from '../Wrappers/FeedBackFormulaAct';
+import { ODE_FeedAct } from '../Wrappers/ODE_FeedAcs';
+import { ODE_FeedbackAct } from '../Wrappers/ODE_FeedbackAct';
+import { ODEAct } from '../Wrappers/ODEAct';
+import { OrbitAct } from '../Wrappers/OrbitAct';
+import { OrbitaForecasAct } from '../Wrappers/OrbitalForecastAct';
+import { PIAct } from '../Wrappers/PIAct';
+import { RandomAct } from '../Wrappers/RandomAcr';
+import { RecursiveFeedbackSimpleAct } from '../Wrappers/RecursiveFeedbackSimpleAct';
+import { RecursvieFeedbackAct } from '../Wrappers/RecursvieFeedbackAct';
+import { SimpleFeedAct } from '../Wrappers/SimpleFeedAct';
+import { TwoAct } from '../Wrappers/TwoAct';
+import { EmptyChecker } from '../../Library/EmptyChecker'
+import { ICheck } from '../../Library/Interfaces/ICheck';
 
-
-function finish(e : any) {
-    console.log(e);
-  /* rl.question('Is this example useful? [y/n] ', (answer) => {
-        switch (answer.toLowerCase()) {
-            case 'y':
-                console.log('Super!');
-                break;
-            case 'n':
-                console.log('Sorry! :(');
-                break;
-            default:
-                console.log('Invalid answer!');
-        }
-     //   rl.close();
-   // });
-   */
-}
 export class Actor {
 
-    factory: IFactory = new Motion6DFactory()
-    constructor()
-    {
-
+    async actDonchian(): Promise<void> {
+        let controller = new AbortController();
+        let db = this.getTradingFromFile("C:\\0\\0\\1.json");
+        let f = new UniversalFactory;
+        f.addFactory<ITradingDatabaseHistoryInterface>(db, "ITradingDatabaseHistoryInterface");
+        f.addFactory<ICheck>(new EmptyChecker(), "ICheck");
+        let desktop = await Donchian.getDesktop(controller, f);
+        let pefrormer = new PerformerMeasuremets(new UniversalFactory());
+        let query = desktop.getCategoryObject("Trading") as unknown as TradingDataQuery;
+        let dataConsumer = desktop.getCategoryObject("Chart") as unknown as IDataConsumer;
+        let mmap = new Map<string, string>([
+            ["a", "Trading.RealTime"],
+            ["b", "Trading.Low"],
+            ["c", "Trading.High"],
+            ["d", "Trading.Open"],
+            ["e", "Trading.Close"],
+            ["f", "Trading.Candle"],
+            ["g", "Trading.Step"],
+            ["h", "Trading.DateTime"],
+            ["i", "Order.Position"],
+            ["j", "Order.Income"],
+            ["k", "Order.Sell Price"],
+            ["l", "Order.Buy Price"],
+            ["m", "Average Short.Output"],
+            ["n", "Averge Long.Output"],
+            ["o", "Donchian minimum long.Output"],
+            ["p", "Donchian minimum short.Output"],
+            ["q", "Donchian maximum long.Output"],
+            ["r", "Donchian maximum short.Output"]
+        ]
+        );
+        let x = await pefrormer.performIteratorDataConsumerMapAsync(dataConsumer,
+            query, controller, mmap);
+        let y = x[0]
+        let z = x[x.length-1]
+        finish(desktop);
     }
-    finish(e : any): void {
-     /*   rl.question('Is this example useful? [y/n] ', (answer) => {
-            switch (answer.toLowerCase()) {
-                case 'y':
-                    console.log('Super!');
-                    break;
-                case 'n':
-                    console.log('Sorry! :(');
-                    break;
-                default:
-                    console.log('Invalid answer!');
-            }
-            rl.close();
-        });*/
-    }
-/*
-    public loadObj(filename: string): void {
-        var fact = new UniversalFactory()
-        var ff = new FileSystemFactory()
-        ff.setFactory(fact)
-        var ss = new LineEndSplitter()
-        fact.addFactory<IStringSplitter>(ss, "IStringSplitter")
-        var creator = new Obj3DCreator(filename, "", undefined, fact)
-        var m = creator.getMeshCreatorMeshes()
-        console.log(m)
-    }
 
-
-    */
+    factory: IFactory = new Motion6DFactory();
+    constructor() {
+    }
+    finish(e: any): void {
+        /*   rl.question('Is this example useful? [y/n] ', (answer) => {
+               switch (answer.toLowerCase()) {
+                   case 'y':
+                       console.log('Super!');
+                       break;
+                   case 'n':
+                       console.log('Sorry! :(');
+                       break;
+                   default:
+                       console.log('Invalid answer!');
+               }
+               rl.close();
+           });*/
+    }
+    /*
+        public loadObj(filename: string): void {
+            var fact = new UniversalFactory()
+            var ff = new FileSystemFactory()
+            ff.setFactory(fact)
+            var ss = new LineEndSplitter()
+            fact.addFactory<IStringSplitter>(ss, "IStringSplitter")
+            var creator = new Obj3DCreator(filename, "", undefined, fact)
+            var m = creator.getMeshCreatorMeshes()
+            console.log(m)
+        }
+    
+    
+        */
     public readTest(f: string): void {
-        let reader = new StreamReader(f)
-        let s = reader.readToEnd()
-        console.log(s)
+        let reader = new StreamReader(f);
+        let s = reader.readToEnd();
+        console.log(s);
+    }
+
+    public getTradingFromFile(f: string): ITradingDatabaseHistoryInterface {
+        MapTradingDatabaseHistoryInterface;
+        let text = fs.readFileSync(f, "utf-8");
+        let x = JSON.parse(text);
+        let y = x as unknown as Map<string, any>[];
+        return new MapTradingDatabaseHistoryInterface(y);
+
     }
 
     /*
@@ -100,20 +135,18 @@ export class Actor {
         var ac = new AbortController();
         await d.loadAsync(ac);
     }*/
-
     public actCompositionAct() {
-        var comp = new CompositionAct()
+        var comp = new CompositionAct();
         comp.test();
 
     }
 
     public actAirplane() {
-      //  new Airplane()
+        //  new Airplane()
     }
     public actCompositionEvent(stop: IFunc<boolean>) {
-      //  var comp = new CompositionEvent(stop)
-       // comp.test();
-
+        //  var comp = new CompositionEvent(stop)
+        // comp.test();
     }
 
 
@@ -146,8 +179,6 @@ export class Actor {
 
             //    let m = this.getCategoryObject("A-transformation") as unknown as IMeasurements;
             //   this.measurement = m.getMeasurement(0);
-
-
         }
         console.log("finish");
     }
@@ -252,8 +283,8 @@ export class Actor {
 
     actTransformerFeedback(): void {
         try {
-        //    var o = new TransformerRecursveAct();
-         //   o.test();
+            //    var o = new TransformerRecursveAct();
+            //   o.test();
         }
         catch (e) {
             finish(e);
@@ -325,7 +356,7 @@ export class Actor {
 
     public actComposition(): void {
         try {
-            var o = new CompositionAct()
+            var o = new CompositionAct();
             o.test();
         }
         catch (e) {
@@ -333,7 +364,7 @@ export class Actor {
         }
     }
 
-   
+
 
 
     actRandom(): void {
@@ -343,7 +374,7 @@ export class Actor {
         }
         catch (e) {
             console.log(e);
-          }
+        }
 
     }
 
@@ -356,4 +387,23 @@ export class Actor {
             var i = 0;
         }
     }
+}
+
+
+export function finish(e : any) {
+    console.log(e);
+  /* rl.question('Is this example useful? [y/n] ', (answer) => {
+        switch (answer.toLowerCase()) {
+            case 'y':
+                console.log('Super!');
+                break;
+            case 'n':
+                console.log('Sorry! :(');
+                break;
+            default:
+                console.log('Invalid answer!');
+        }
+     //   rl.close();
+   // });
+   */
 }

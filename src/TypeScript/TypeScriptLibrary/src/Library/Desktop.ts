@@ -33,7 +33,6 @@ export class Desktop implements IDesktop, IObject, IFactoryConsumer
 
     protected arrow!: ICategoryArrow;
 
-
     protected source!: ICategoryObject;
 
 
@@ -47,7 +46,10 @@ export class Desktop implements IDesktop, IObject, IFactoryConsumer
     protected performer: Performer = new Performer();
 
     constructor(factory?: IFactory) {
-        if (factory !== undefined)  this.factory = factory
+        if (factory === undefined) return
+        this.factory = factory
+        let c = factory.getFactory<ICheck>("ICheck")
+        if (c !== undefined) this.check = c
     }
 
     imlplementsType(type: string): boolean {

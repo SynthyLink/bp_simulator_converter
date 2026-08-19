@@ -189,4 +189,3 @@ class Cesna extends Desktop_1.Desktop {
     }
 }
 exports.Cesna = Cesna;
-//# sourceMappingURL=Cesna.js.map

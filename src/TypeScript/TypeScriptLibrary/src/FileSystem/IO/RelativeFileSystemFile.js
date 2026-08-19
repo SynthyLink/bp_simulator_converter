@@ -18,4 +18,3 @@ class RelativeFileSystemFile extends FileSystemFile_1.FileSystemFile {
     }
 }
 exports.RelativeFileSystemFile = RelativeFileSystemFile;
-//# sourceMappingURL=RelativeFileSystemFile.js.map

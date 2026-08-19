@@ -12,9 +12,9 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
 
     protected mimax: boolean = true;
 
-    protected count: number = 2;
+    protected count!: number
 
-    protected input: string = "";
+    protected input!: string 
 
     protected result: number | undefined = undefined;
 
@@ -27,6 +27,7 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
         this.types.push("IMeasurement")
         this.types.push("SequenceFilterWrapper")
         this.typeName = "SequenceFilterWrapper"
+        
     }
 
     getMeasurementsCount(): number {
@@ -53,8 +54,12 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
     updateMeasurements(): void {
         this.performer.updateChildrenData(this);
         var x = this.measurement.getMeasurementValue()
+        if (this.checker.check(x)) {
+            this.result = undefined
+            return
+        }
         if (typeof x === 'number') {
-            var a = x as any as number;
+            var a = Number(x)
             this.result = this.filter.getFilterValue(a);
         }
 
@@ -81,7 +86,5 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
         this.setFilter();
         this.setMeasurement();
     }
-
-    
 
 }

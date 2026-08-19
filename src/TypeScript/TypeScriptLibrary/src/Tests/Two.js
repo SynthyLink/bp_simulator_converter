@@ -241,4 +241,3 @@ class Two extends Desktop_1.Desktop {
     }
 }
 exports.Two = Two;
-//# sourceMappingURL=Two.js.map

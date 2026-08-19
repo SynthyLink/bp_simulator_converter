@@ -31,4 +31,3 @@ class TwoAct extends Two_1.Two {
     }
 }
 exports.TwoAct = TwoAct;
-//# sourceMappingURL=TwoAct.js.map

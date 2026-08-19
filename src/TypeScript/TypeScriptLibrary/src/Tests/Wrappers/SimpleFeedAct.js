@@ -32,4 +32,3 @@ class SimpleFeedAct extends SimpleFeed_1.SimpleFeed {
     }
 }
 exports.SimpleFeedAct = SimpleFeedAct;
-//# sourceMappingURL=SimpleFeedAct.js.map

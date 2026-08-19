@@ -31,4 +31,3 @@ class OrbitAct extends Orbital_1.Orbital {
     }
 }
 exports.OrbitAct = OrbitAct;
-//# sourceMappingURL=OrbitAct.js.map

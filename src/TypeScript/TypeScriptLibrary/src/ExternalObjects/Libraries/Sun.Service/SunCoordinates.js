@@ -18,4 +18,3 @@ class SunCoordinates {
     }
 }
 exports.SunCoordinates = SunCoordinates;
-//# sourceMappingURL=SunCoordinates.js.map

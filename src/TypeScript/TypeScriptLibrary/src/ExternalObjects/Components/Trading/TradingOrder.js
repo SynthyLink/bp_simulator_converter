@@ -132,4 +132,3 @@ class SellTaxMeasurement extends BasicMeasurement {
         return this.order.mSellPrice;
     }
 }
-//# sourceMappingURL=TradingOrder.js.map

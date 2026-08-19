@@ -38,4 +38,3 @@ class ODEAct extends ODE_1.ODE {
     }
 }
 exports.ODEAct = ODEAct;
-//# sourceMappingURL=ODEAct.js.map

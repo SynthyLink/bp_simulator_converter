@@ -221,6 +221,7 @@ export class PerformerMeasuremets extends Performer {
                 if (!iterator.nextIterator()) {
                     return;
                 }
+                this.updateChildrenData(dataConsumer)
                 action.action()
             }
         }

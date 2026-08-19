@@ -47,9 +47,7 @@ export class LocalDB  implements ILocalDB {
                 let pr = da.add(hh)
                 init.push(pr)
             }
-            console.log("FINISH", init.length)
             await Promise.all(init)
-            console.log("FINISH PROMISE")
 
 
             await da.close()

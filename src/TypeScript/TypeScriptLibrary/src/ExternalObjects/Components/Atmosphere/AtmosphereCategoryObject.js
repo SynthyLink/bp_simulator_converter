@@ -71,4 +71,3 @@ class AtmosphereCategoryObject extends AtmospherePure_1.AtmospherePure {
     performer = new Performer_1.Performer();
 }
 exports.AtmosphereCategoryObject = AtmosphereCategoryObject;
-//# sourceMappingURL=AtmosphereCategoryObject.js.map

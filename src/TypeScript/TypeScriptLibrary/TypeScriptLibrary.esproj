@@ -9,4 +9,7 @@
     <Folder Include="models\" />
     <Folder Include="src\Library\Runtime\Interfaces\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="tsconfig.json" />
+  </ItemGroup>
 </Project>

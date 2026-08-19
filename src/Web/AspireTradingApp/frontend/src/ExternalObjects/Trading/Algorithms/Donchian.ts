@@ -1,3 +1,21 @@
+import type { IAliasName } from "../../../Library/Interfaces/IAliasName";
+import type { IDesktop } from "../../../Library/Interfaces/IDesktop";
+import type { IFactory } from "../../../Library/Interfaces/IFactory";
+import type { IPostSetArrow } from "../../../Library/Interfaces/IPostSetArrow";
+import type { IValue } from "../../../Library/Interfaces/IValue";
+import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
+import { AliasName } from "../../../Library/AliasName";
+import { Desktop } from "../../../Library/Desktop";
+import { DataLink } from "../../../Library/Measurements/Arrows/DataLink";
+import { IteratorConsumerLink } from "../../../Library/Measurements/Arrows/IteratorConsumerLink";
+import { DataConsumer } from "../../../Library/Measurements/DataConsumer";
+import { RecursiveFormula } from "../../../Library/Measurements/RecursiveFormula";
+import { SequenceFilterWrapper } from "../../../Library/Measurements/SequenserFilterWrapper";
+import { VectorFormulaConsumer } from "../../../Library/Measurements/VectorFormulaConsumer";
+import { SequenceFilterType } from "../../../Library/Utilities/Filters/Interfaces/SequenceFilterType";
+import { TradingOrder } from "../Components/TradingOrder";
+import { TradingDataQuery } from "../Components/TradingDataQuery";
+
 class Donchian_CategoryObject_0 extends TradingDataQuery
 {
 	constructor(desktop: IDesktop, name: string)
@@ -71,6 +89,7 @@ class Donchian_CategoryObject_2 extends SequenceFilterWrapper
 	{
 		super(desktop, name);
 		this.count = 10
+		this.input = "Trading.Close"
 		this.type = SequenceFilterType.Avarage
 	}
 }
@@ -81,6 +100,7 @@ class Donchian_CategoryObject_3 extends SequenceFilterWrapper
 	{
 		super(desktop, name);
 		this.count = 80
+		this.input = "Trading.Close"
 		this.type = SequenceFilterType.Avarage
 	}
 }
@@ -198,6 +218,7 @@ class Donchian_CategoryObject_5 extends SequenceFilterWrapper
 	{
 		super(desktop, name);
 		this.count = 20
+		this.input = "Trading.High"
 		this.type = SequenceFilterType.Donchian
 		this.mimax = true
 	}
@@ -209,6 +230,7 @@ class Donchian_CategoryObject_6 extends SequenceFilterWrapper
 	{
 		super(desktop, name);
 		this.count = 20
+		this.input = "Trading.High"
 		this.type = SequenceFilterType.Donchian
 		this.mimax = true
 	}
@@ -220,6 +242,7 @@ class Donchian_CategoryObject_7 extends SequenceFilterWrapper
 	{
 		super(desktop, name);
 		this.count = 20
+		this.input = "Trading.Low"
 		this.type = SequenceFilterType.Donchian
 		this.mimax = false
 	}
@@ -231,6 +254,7 @@ class Donchian_CategoryObject_8 extends SequenceFilterWrapper
 	{
 		super(desktop, name);
 		this.count = 20
+		this.input = "Trading.Low"
 		this.type = SequenceFilterType.Donchian
 		this.mimax = false
 	}
@@ -1078,10 +1102,10 @@ class Donchian_CategoryObject_15 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["a", 20 ],
-			["d", 107 ],
 			["b", 105 ],
 			["c", 129 ],
+			["a", 20 ],
+			["d", 107 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", 0, 0);

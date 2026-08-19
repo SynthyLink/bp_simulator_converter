@@ -20,4 +20,3 @@ class FileResourceFuncText extends FileResourceFunc_1.FileResourceFunc {
     }
 }
 exports.FileResourceFuncText = FileResourceFuncText;
-//# sourceMappingURL=FlleResourceFuncText.js.map

@@ -13,9 +13,10 @@ export interface HttpResponse<RESB> {
 }
 
 export class HttpCommunication {
+    constructor() {
 
+    }
 
-    
     public async http_cancel<RESB, REQB = undefined>(
         config: HttpRequest<REQB>, controller: AbortController,
     ): Promise<HttpResponse<RESB>>  {

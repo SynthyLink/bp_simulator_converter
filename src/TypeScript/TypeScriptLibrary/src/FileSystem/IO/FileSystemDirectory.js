@@ -30,4 +30,3 @@ class FileSystemDirectory {
     files = [];
 }
 exports.FileSystemDirectory = FileSystemDirectory;
-//# sourceMappingURL=FileSystemDirectory.js.map

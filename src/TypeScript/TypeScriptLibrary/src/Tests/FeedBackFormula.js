@@ -256,4 +256,3 @@ class FeedBackFormula extends Desktop_1.Desktop {
     }
 }
 exports.FeedBackFormula = FeedBackFormula;
-//# sourceMappingURL=FeedBackFormula.js.map

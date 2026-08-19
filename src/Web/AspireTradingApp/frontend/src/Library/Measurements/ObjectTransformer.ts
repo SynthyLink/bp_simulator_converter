@@ -58,12 +58,12 @@ export class ObjectTransformer extends CategoryObject implements IObjectTransfor
     /// <summary>
     /// Single output
     /// </summary>
-    protected outS : [] = [];
+    protected outS : any[] = [];
 
     /// <summary>
     /// Single input
     /// </summary>
-    protected inS = [];
+    protected inS : any[] = [];
 
     /// <summary>
     /// The "is updated" sign

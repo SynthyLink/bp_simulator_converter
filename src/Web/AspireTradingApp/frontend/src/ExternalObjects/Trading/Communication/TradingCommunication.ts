@@ -1,10 +1,14 @@
 import { HttpCommunication } from "../../../Library/Communications/http/http_interface";
+import { EmptyChecker } from "../../../Library/EmptyChecker";
+import type { ICheck } from "../../../Library/Interfaces/ICheck";
+import { UniversalFactory } from "../../../Library/UniversalFactory";
 import { Donchian } from "../Algorithms/Donchian";
-import type { TradingDataQuery } from "../Components/TradingDataQuery";
 import type { HistoryMessage } from "../Database/HistoryMessage";
+import type { ITradingDatabaseHistoryInterface } from "../Database/ITradingDatabaseHistoryInterface";
 import { MemoryDB } from "../Database/Local/MemoryDB";
 import type { Initial } from "../Initial";
 import { TradingPerformer } from "../TradingPerformer";
+import { CommunicationTradingDatabaseHistoryInterface } from "./CommunicationTradingDatabaseHistoryInterface";
 
 
 export class TradingCommunication extends HttpCommunication {
@@ -17,10 +21,14 @@ export class TradingCommunication extends HttpCommunication {
 
     initial!: Initial;
 
+    constructor() {
+        super();
+    }
+/*
     public getTradingPerformer(): TradingPerformer {
         return this.tPerformer;
     }
-
+*/
     public async getInitialAsync(controller: AbortController): Promise<Initial | undefined> {
         if (this.initial != undefined) return this.initial;
         if (this.url.length === 0) return undefined;
@@ -61,7 +69,6 @@ export class TradingCommunication extends HttpCommunication {
         }, controller);
         if (result.ok && result.body) {
             let mp = result.body as unknown as Map<string, any>[]
-            console.log("mp", mp)
             return mp;
         }
         return []
@@ -73,17 +80,17 @@ export class TradingCommunication extends HttpCommunication {
         let sym = map.get("s") + "";
         //  let p = map.get("p") + "";
         //   await this.createDb()
-        let r = await this.tPerformer.readHistory(sym, b, e);
+     /*  let r = await this.tPerformer.readHistory(sym, b, e);
         if (r.length > 0) {
-            console.log(r[0], "ro");
             return r;
-        }
+        }*/
         let json = JSON.stringify(Object.fromEntries(map));
         let s = "";
         if (json !== undefined) {
             s = json;
         }
         try {
+            console.log("S", s)
             const result = await this.http_cancel<string, string>({
                 path: "/api/trading/tradinghistory",
                 method: "post",
@@ -91,7 +98,7 @@ export class TradingCommunication extends HttpCommunication {
             }, controller);
             if (result.ok && result.body) {
                 let res = result.body as unknown as HistoryMessage[];
-                await this.tPerformer.writeHistoryAsync(sym, b, e, res);
+              //  await this.tPerformer.writeHistoryAsync(sym, b, e, res);
                 return res;
             }
             else {
@@ -136,7 +143,6 @@ export class TradingCommunication extends HttpCommunication {
         };
 
         req.onupgradeneeded = () => {
-            console.log("UPGRADE");
             let db = req.result;
             let n = db.objectStoreNames;
             if (n.length > 0) return;
@@ -183,12 +189,15 @@ export class TradingCommunication extends HttpCommunication {
 
     public async getSymbolsAsync(): Promise<string[][]> {
         if (this.symbols.length > 0) return this.symbols;
-        let controller = new AbortController();
-        let desktop = new Donchian();
+        this.symbols = await this.getSymbolsIntretrnalAsync()
+        let factory = new UniversalFactory
+        factory.addFactory<ITradingDatabaseHistoryInterface>(new CommunicationTradingDatabaseHistoryInterface(new TradingCommunication()), "ITradingDatabaseHistoryInterface")
+        factory.addFactory<ICheck>(new EmptyChecker(), "ICheck");
+    let controller = new AbortController();
+        let desktop = await Donchian.getDesktop(controller, factory)
         this.tPerformer = new TradingPerformer(new MemoryDB(), desktop, this);
-        await desktop.loadAsync(controller);
-        let q = desktop.getCategoryObject("Trading") as unknown as TradingDataQuery;
-        this.symbols = q.getSymbolsStr();
+        //let q = desktop.getCategoryObject("Trading") as unknown as TradingDataQuery;
+       // this.symbols = q.getSymbolsStr();
         return this.symbols;
     }
 

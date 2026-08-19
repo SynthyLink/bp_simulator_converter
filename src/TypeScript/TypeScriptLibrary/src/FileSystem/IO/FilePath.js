@@ -41,4 +41,3 @@ class FilePath {
     name = "";
 }
 exports.FilePath = FilePath;
-//# sourceMappingURL=FilePath.js.map

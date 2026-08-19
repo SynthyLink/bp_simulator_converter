@@ -39,4 +39,3 @@ class OrbitaForecasAct extends OrbitalForecast_1.OrbitalForecast {
     }
 }
 exports.OrbitaForecasAct = OrbitaForecasAct;
-//# sourceMappingURL=OrbitalForecastAct.js.map

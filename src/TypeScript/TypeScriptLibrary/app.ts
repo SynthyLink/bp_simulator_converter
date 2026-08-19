@@ -1,4 +1,4 @@
-import { Actor } from "./src/Tests/Actor/Actor";
+import { Actor } from './src/Tests/Actor/Actor';
 
 let a = new Actor()
 
@@ -17,7 +17,7 @@ var caravan = "c:\\AUsers\\1MySoft\\CSharp\\src\\Web\\reactprojectgenerated\\sta
 
 //a.actTime();
 
-a.actOrbitCalculation(true);// 1770457504
+//a.actOrbitCalculation(true);// 1770457504
 
 //a.actDensity();
 
@@ -30,12 +30,13 @@ a.actOrbitCalculation(true);// 1770457504
 
 //a.actODE_FeedAct();
 
+//a.getTradingFromFile("C:\\0\\0\\1.json")
 
 async function test() {
-    await a.actDonchianLoad();
+    await a.actDonchian()
 }
 
-//test();
+test();
 
 a.finish(undefined);
 

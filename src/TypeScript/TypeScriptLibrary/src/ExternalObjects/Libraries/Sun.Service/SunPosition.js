@@ -94,4 +94,3 @@ class SunPosition {
     dAstronomicalUnit = 149597890; // In km
 }
 exports.SunPosition = SunPosition;
-//# sourceMappingURL=SunPosition.js.map

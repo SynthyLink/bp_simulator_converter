@@ -268,4 +268,3 @@ class Random extends Desktop_1.Desktop {
     }
 }
 exports.Random = Random;
-//# sourceMappingURL=Random.js.map

@@ -77,7 +77,6 @@ export class MemoryDB implements ILocalDB {
   
 
         return new Promise<HistoryMessage[]>((resolve, reject) => {
-            console.log(h.length, "hhhhh")
             resolve(h)
             this.any = reject
         }

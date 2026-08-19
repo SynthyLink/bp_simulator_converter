@@ -3,16 +3,16 @@ import type { IInitializeTask } from "../../../Library/Interfaces/IInitializeTas
 import type { IIterator } from "../../../Library/Measurements/Interfaces/IIterator";
 import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
 import type { IMeasurements } from "../../../Library/Measurements/Interfaces/IMeasurements";
-import type { HistoricalDataMessageDateTime } from "../Database/HistoricalDataMessageDateTime";
 import type { ITradingDatabaseHistoryInterface } from "../Database/ITradingDatabaseHistoryInterface";
 import type { IAssociatedObject } from "../../../Library/Interfaces/IAssociatedObject";
 import type { IObject } from "../../../Library/Interfaces/IObject";
+import type { IStartTask } from "../../../Library/Interfaces/IStartTask";
+import type { HistoricalDataMessageDateTime } from "../Database/HistoricalDataMessageDateTime";
+import type { IFactoryConsumer } from "../../../Library/Interfaces/IFactoryConsumer";
+import type { IFactory } from "../../../Library/Interfaces/IFactory";
 import { CategoryObject } from "../../../Library/CategoryObject";
-import { TradingCommunication } from "../Communication/TradingCommunication";
 import { Measurement } from "../../../Library/Measurements/Measurement";
 import { DateTimeConverter } from "../../../Library/Utilities/DateTime/DateTimeConverter";
-import type { HistoryMessage } from "../Database/HistoryMessage";
-import type { IStartTask } from "../../../Library/Interfaces/IStartTask";
 
 
 
@@ -28,14 +28,22 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
 
     symbols: Map<string, any> = new Map<string, any>()
 
-    communication !: TradingCommunication
-
     realTime: number = 0
 
     measurements: IMeasurement[] = []
 
+    factory !: IFactory
+
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name)
+        let t = this.performer.convertObject<IFactoryConsumer, any>(desktop, "IFactoryConsumer")
+        if (t.length > 0) {
+            this.factory = t[0].getConsumerFactory()
+            if (this.factory !== undefined) {
+                let i = this.factory.getFactory<ITradingDatabaseHistoryInterface>("ITradingDatabaseHistoryInterface")
+                if (i !== undefined) this.inter = i
+            }
+        }
         this.typeName = "TradingDataQuery"
         this.types.push("TradingDataQuery");
         this.types.push("IInitializeTask");
@@ -60,11 +68,6 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
     async startAsync(controller: AbortController): Promise<void> {
         this.data = await this.inter.getHistoricalDataMessageDateTimesAsync("", this.symbol, this.begin,
             this.end, controller)
-    }
-
-    public setCommunication(communication: TradingCommunication): void {
-        this.communication = communication
-        this.inter = new TradingDatabaseHistoryInterface(communication)
     }
 
     getMeasurementsCount(): number {
@@ -145,33 +148,6 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
     symbolsstr: string[][] = []
 
     
-}
-
-class TradingDatabaseHistoryInterface implements ITradingDatabaseHistoryInterface {
-
-    communication !: TradingCommunication
-    constructor(communication: TradingCommunication) {
-        this.communication = communication;
-    }
-
-    async getSymbolsAsync(): Promise<string[][]> {
-        return await this.communication.getSymbolsIntretrnalAsync();
-    }
-
-    async getHistoricalDataMessageDateTimesAsync(id: any, symbol: string, begin: number,
-        end: number, cancellation: AbortController): Promise<HistoryMessage[]> {
-        this.any = id
-        let map = new Map<string, any>
-        map.set("s", symbol)
-        map.set("b", begin)
-        map.set("e", end)
-        map.set("p", "")
-        let h = await this.communication.getHistoryAsync(map, cancellation)
-        return h
-    }
-
-    any : any
-
 }
 
 class BasicMeasurement extends Measurement implements IAssociatedObject {

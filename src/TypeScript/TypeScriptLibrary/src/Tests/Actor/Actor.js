@@ -1,46 +1,103 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Actor = void 0;
-const ConditionTestAct_1 = require("../Wrappers/ConditionTestAct");
-const ODEAct_1 = require("../Wrappers/ODEAct");
-const OrbitAct_1 = require("../Wrappers/OrbitAct");
-const RandomAcr_1 = require("../Wrappers/RandomAcr");
-const SimpleFeedAct_1 = require("../Wrappers/SimpleFeedAct");
-const TwoAct_1 = require("../Wrappers/TwoAct");
-const ODE_FeedbackAct_1 = require("../Wrappers/ODE_FeedbackAct");
-const PIAct_1 = require("../Wrappers/PIAct");
-const OrbitalForecastAct_1 = require("../Wrappers/OrbitalForecastAct");
-const OrbitalForecastCalculation_1 = require("../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation");
-const FeedBackFormulaAct_1 = require("../Wrappers/FeedBackFormulaAct");
-const RecursvieFeedbackAct_1 = require("../Wrappers/RecursvieFeedbackAct");
-const RecursiveFeedbackSimpleAct_1 = require("../Wrappers/RecursiveFeedbackSimpleAct");
-const ODE_FeedAcs_1 = require("../Wrappers/ODE_FeedAcs");
-const DateTimeConverter_1 = require("../../Library/Utilities/DateTime/DateTimeConverter");
-const DenstyAct_1 = require("../Wrappers/DenstyAct");
+exports.finish = finish;
+//import { Airplane } from '../../Airplane';
+const fs = __importStar(require("node:fs"));
 const OrbitalData_1 = require("../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalData");
-const ComposionAct_1 = require("../Wrappers/ComposionAct");
+const OrbitalForecastCalculation_1 = require("../../ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation");
+const MapTradingDatabaseHistoryInterface_1 = require("../../ExternalObjects/Components/Trading/Database/MapTradingDatabaseHistoryInterface ");
+const StreamReader_1 = require("../../FileSystem/IO/StreamReader");
 const PerformerMeasuremets_1 = require("../../Library/Measurements/PerformerMeasuremets");
 const Motion6DFactory_1 = require("../../Library/Motion6D/Motion6DFactory");
-const StreamReader_1 = require("../../FileSystem/IO/StreamReader");
-//import { Airplane } from '../../Airplane';
-function finish(e) {
-    console.log(e);
-    /* rl.question('Is this example useful? [y/n] ', (answer) => {
-          switch (answer.toLowerCase()) {
-              case 'y':
-                  console.log('Super!');
-                  break;
-              case 'n':
-                  console.log('Sorry! :(');
-                  break;
-              default:
-                  console.log('Invalid answer!');
-          }
-       //   rl.close();
-     // });
-     */
-}
+const UniversalFactory_1 = require("../../Library/UniversalFactory");
+const DateTimeConverter_1 = require("../../Library/Utilities/DateTime/DateTimeConverter");
+const Donchian_1 = require("../Donchian");
+const ComposionAct_1 = require("../Wrappers/ComposionAct");
+const ConditionTestAct_1 = require("../Wrappers/ConditionTestAct");
+const DenstyAct_1 = require("../Wrappers/DenstyAct");
+const FeedBackFormulaAct_1 = require("../Wrappers/FeedBackFormulaAct");
+const ODE_FeedAcs_1 = require("../Wrappers/ODE_FeedAcs");
+const ODE_FeedbackAct_1 = require("../Wrappers/ODE_FeedbackAct");
+const ODEAct_1 = require("../Wrappers/ODEAct");
+const OrbitAct_1 = require("../Wrappers/OrbitAct");
+const OrbitalForecastAct_1 = require("../Wrappers/OrbitalForecastAct");
+const PIAct_1 = require("../Wrappers/PIAct");
+const RandomAcr_1 = require("../Wrappers/RandomAcr");
+const RecursiveFeedbackSimpleAct_1 = require("../Wrappers/RecursiveFeedbackSimpleAct");
+const RecursvieFeedbackAct_1 = require("../Wrappers/RecursvieFeedbackAct");
+const SimpleFeedAct_1 = require("../Wrappers/SimpleFeedAct");
+const TwoAct_1 = require("../Wrappers/TwoAct");
+const EmptyChecker_1 = require("../../Library/EmptyChecker");
 class Actor {
+    async actDonchian() {
+        let controller = new AbortController();
+        let db = this.getTradingFromFile("C:\\0\\0\\1.json");
+        let f = new UniversalFactory_1.UniversalFactory;
+        f.addFactory(db, "ITradingDatabaseHistoryInterface");
+        f.addFactory(new EmptyChecker_1.EmptyChecker(), "ICheck");
+        let desktop = await Donchian_1.Donchian.getDesktop(controller, f);
+        let pefrormer = new PerformerMeasuremets_1.PerformerMeasuremets(new UniversalFactory_1.UniversalFactory());
+        let query = desktop.getCategoryObject("Trading");
+        let dataConsumer = desktop.getCategoryObject("Chart");
+        let mmap = new Map([
+            ["a", "Trading.RealTime"],
+            ["b", "Trading.Low"],
+            ["c", "Trading.High"],
+            ["d", "Trading.Open"],
+            ["e", "Trading.Close"],
+            ["f", "Trading.Candle"],
+            ["g", "Trading.Step"],
+            ["h", "Trading.DateTime"],
+            ["i", "Order.Position"],
+            ["j", "Order.Income"],
+            ["k", "Order.Sell Price"],
+            ["l", "Order.Buy Price"],
+            ["m", "Average Short.Output"],
+            ["n", "Averge Long.Output"],
+            ["o", "Donchian minimum long.Output"],
+            ["p", "Donchian minimum short.Output"],
+            ["q", "Donchian maximum long.Output"],
+            ["r", "Donchian maximum short.Output"]
+        ]);
+        let x = await pefrormer.performIteratorDataConsumerMapAsync(dataConsumer, query, controller, mmap);
+        let y = x[0];
+        let z = x[x.length - 1];
+        finish(desktop);
+    }
     factory = new Motion6DFactory_1.Motion6DFactory();
     constructor() {
     }
@@ -77,6 +134,13 @@ class Actor {
         let reader = new StreamReader_1.StreamReader(f);
         let s = reader.readToEnd();
         console.log(s);
+    }
+    getTradingFromFile(f) {
+        MapTradingDatabaseHistoryInterface_1.MapTradingDatabaseHistoryInterface;
+        let text = fs.readFileSync(f, "utf-8");
+        let x = JSON.parse(text);
+        let y = x;
+        return new MapTradingDatabaseHistoryInterface_1.MapTradingDatabaseHistoryInterface(y);
     }
     /*
     public async actDonchianLoad(): Promise<void> {
@@ -292,4 +356,20 @@ class Actor {
     }
 }
 exports.Actor = Actor;
-//# sourceMappingURL=Actor.js.map
+function finish(e) {
+    console.log(e);
+    /* rl.question('Is this example useful? [y/n] ', (answer) => {
+          switch (answer.toLowerCase()) {
+              case 'y':
+                  console.log('Super!');
+                  break;
+              case 'n':
+                  console.log('Sorry! :(');
+                  break;
+              default:
+                  console.log('Invalid answer!');
+          }
+       //   rl.close();
+     // });
+     */
+}

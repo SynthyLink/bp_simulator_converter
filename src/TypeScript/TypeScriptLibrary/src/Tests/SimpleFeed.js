@@ -211,4 +211,3 @@ class SimpleFeed extends Desktop_1.Desktop {
     }
 }
 exports.SimpleFeed = SimpleFeed;
-//# sourceMappingURL=SimpleFeed.js.map

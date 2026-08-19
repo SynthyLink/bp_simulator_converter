@@ -18,4 +18,3 @@ class GeoCoordinates {
     }
 }
 exports.GeoCoordinates = GeoCoordinates;
-//# sourceMappingURL=GeoCoordinates.js.map

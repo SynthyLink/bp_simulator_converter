@@ -16,4 +16,3 @@ class StreamReader extends LinesTextReader_1.LinesTextReader {
     }
 }
 exports.StreamReader = StreamReader;
-//# sourceMappingURL=StreamReader.js.map

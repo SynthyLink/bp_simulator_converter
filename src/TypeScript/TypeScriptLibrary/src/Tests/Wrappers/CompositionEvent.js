@@ -43,4 +43,3 @@ class Action {
         event.eventAction().addAction(this);
     }
 }
-//# sourceMappingURL=CompositionEvent.js.map

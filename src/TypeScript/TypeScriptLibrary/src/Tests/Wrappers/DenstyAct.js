@@ -44,4 +44,3 @@ class DensityAct extends Density_1.Density {
     }
 }
 exports.DensityAct = DensityAct;
-//# sourceMappingURL=DenstyAct.js.map

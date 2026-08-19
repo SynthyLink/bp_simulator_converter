@@ -47,4 +47,3 @@ import { IDesktop } from "../Library/Interfaces/IDesktop";
 import { IPostSetArrow } from "../Library/Interfaces/IPostSetArrow";
 import { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement";
 */ 
-//# sourceMappingURL=ComposionAct.js.map

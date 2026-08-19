@@ -118,4 +118,3 @@ class OrbitalForecastCalculation extends OrbitalForecast_1.OrbitalForecast {
 }
 exports.OrbitalForecastCalculation = OrbitalForecastCalculation;
 ;
-//# sourceMappingURL=OrbitalForecastCalculation.js.map

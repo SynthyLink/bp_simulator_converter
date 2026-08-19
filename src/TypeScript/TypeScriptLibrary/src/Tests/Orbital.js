@@ -229,4 +229,3 @@ class Orbital extends Desktop_1.Desktop {
     }
 }
 exports.Orbital = Orbital;
-//# sourceMappingURL=Orbital.js.map

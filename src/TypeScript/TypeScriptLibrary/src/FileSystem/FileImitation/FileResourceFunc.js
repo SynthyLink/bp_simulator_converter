@@ -18,4 +18,3 @@ class FileResourceFunc extends EmptyObject_1.EmptyObject {
     path = new PurePath_1.PurePath();
 }
 exports.FileResourceFunc = FileResourceFunc;
-//# sourceMappingURL=FileResourceFunc.js.map

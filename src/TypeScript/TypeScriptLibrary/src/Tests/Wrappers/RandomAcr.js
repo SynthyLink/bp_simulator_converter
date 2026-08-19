@@ -31,4 +31,3 @@ class RandomAct extends Random_1.Random {
     }
 }
 exports.RandomAct = RandomAct;
-//# sourceMappingURL=RandomAcr.js.map

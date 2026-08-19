@@ -145,4 +145,3 @@ class ConditionTest extends Desktop_1.Desktop {
     }
 }
 exports.ConditionTest = ConditionTest;
-//# sourceMappingURL=ConditionTest.js.map

@@ -1,4 +1,3 @@
-import type { IActionT } from "../../Library/Interfaces/IActionT";
 import type { IDesktop } from "../../Library/Interfaces/IDesktop";
 import type { IFactory } from "../../Library/Interfaces/IFactory";
 import type { HistoryMessage } from "./Database/HistoryMessage";
@@ -33,10 +32,10 @@ export class TradingPerformer {
 
     constructor(local: ILocalDB, desktop: IDesktop, communication: TradingCommunication, factory?: IFactory) {
         this.local = local;
+        communication.tPerformer = this
         this.pefrormer = new PerformerMeasuremets(factory)
         this.desktop = desktop
         this.communication = communication
-        this.setCommunication(communication, desktop)
         this.query = desktop.getCategoryObject("Trading") as unknown as TradingDataQuery
         this.dataConsumer = desktop.getCategoryObject("Chart") as unknown as IDataConsumer
         const filtersN = ["Average Short", "Averge Long", "Donchian maximum long", "Donchian maximum short", "Donchian minimum long",
@@ -65,11 +64,6 @@ export class TradingPerformer {
         return await this.local.readHistoryAsync(symbol, begin, end)
     }
 
-    public setCommunication(communication: TradingCommunication, desktop: IDesktop) {
-        let act = new SetCommunication(communication)
-        this.pefrormer.forEach<TradingDataQuery>(desktop, act, "TradingDataQuery")
-
-    }
 
     public setClient(map: Map<string, any>[] | undefined): void {
         this.client = map
@@ -87,18 +81,19 @@ export class TradingPerformer {
         this.query.setQueryParameters(symblol, period, begin, end)
         this.filters[0].setFilterCount(a1)
         this.filters[1].setFilterCount(a2)
-        this.filters[0].setFilterCount(d1)
-        this.filters[0].setFilterCount(d2)
-        this.filters[0].setFilterCount(d3)
-        this.filters[0].setFilterCount(d4)
+        this.filters[2].setFilterCount(d1)
+        this.filters[3].setFilterCount(d2)
+        this.filters[4].setFilterCount(d3)
+        this.filters[5].setFilterCount(d4)
         let x = await this.pefrormer.performIteratorDataConsumerMapAsync(this.dataConsumer,
             this.query, controller, this.mmap);
-        console.log(x[0])
-        return [x[0]]
+        return x
     }
 
     public setChart(s: string): void {
         console.log(this.client)
+        this.server = undefined
+        this.any = s
         this.x = undefined
         this.yClient = undefined
         this.yServer = undefined
@@ -108,14 +103,14 @@ export class TradingPerformer {
             for (let i of this.client) {
                 let xx = i.get("a")
                 this.x.push(Number(xx))
-                let yy = i.get("s")
-                this.yClient.push(Number(yy))
+                let yy = i.get(s)
+                let yyy = (yy == undefined) ? undefined : Number(yy)
+                this.yClient.push(yyy)
             }
         }
-        if (this.x !== undefined)
-            if (this.yClient !== undefined)
-                console.log("x", this.x[0], this.yClient[0])
-    }
+        console.log(this.getX())
+        console.log(this.getYClient())
+ }
 
 
 
@@ -123,7 +118,7 @@ export class TradingPerformer {
 
     any: any
 
-    x: (number | undefined)[] | undefined = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    x: number [] | undefined = []
 
 
     yClient: (number | undefined)[] | undefined = [28.5, 70.5, undefined, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
@@ -131,7 +126,7 @@ export class TradingPerformer {
     yServer: (number | undefined)[] | undefined = [226.9, 194.1, 95.6, 54.4, 29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5]
 
 
-    public getX(): (number | undefined)[] | undefined {
+    public getX(): number[] | undefined {
         return this.x
     }
 
@@ -164,20 +159,4 @@ export class TradingPerformer {
           ["q", "Donchian maximum long.Output"],
           ["r", "Donchian maximum short.Output"]]
         )
-}
-
-
-
-class SetCommunication implements IActionT<TradingDataQuery> {
-    communication !: TradingCommunication;
-    constructor(communication: TradingCommunication) {
-        this.communication = communication
-    }
-    actionT(t: TradingDataQuery): void {
-        t.setCommunication(this.communication)
-    }
-    isEmptyActionT(): boolean {
-        return false
-    }
-
 }

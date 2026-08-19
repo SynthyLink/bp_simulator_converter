@@ -211,4 +211,3 @@ class AtmospherePure {
     dateTimeConverter = new DateTimeConverter_1.DateTimeConverter();
 }
 exports.AtmospherePure = AtmospherePure;
-//# sourceMappingURL=AtmospherePure.js.map

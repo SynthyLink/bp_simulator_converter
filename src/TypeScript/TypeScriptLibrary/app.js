@@ -12,16 +12,16 @@ var caravan = "c:\\AUsers\\1MySoft\\CSharp\\src\\Web\\reactprojectgenerated\\sta
 //a.actPI()
 //a.testDate();
 //a.actTime();
-a.actOrbitCalculation(true); // 1770457504
+//a.actOrbitCalculation(true);// 1770457504
 //a.actDensity();
 //a.actODEFeedback();
 //a.actRecursiveFeedback();
 //a.actFeedbackFormula();
 //a.actRecursiveFeedbackSimplw();
 //a.actODE_FeedAct();
+//a.getTradingFromFile("C:\\0\\0\\1.json")
 async function test() {
-    await a.actDonchianLoad();
+    await a.actDonchian();
 }
-//test();
+test();
 a.finish(undefined);
-//# sourceMappingURL=app.js.map

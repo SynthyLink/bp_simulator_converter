@@ -395,6 +395,7 @@ export class Performer
                 let dc = child as unknown as IDataConsumer;
                 this.updateChildrenData(dc);
             }
+       //     console.log("CHILD", child)
             child.updateMeasurements();
         }
     }

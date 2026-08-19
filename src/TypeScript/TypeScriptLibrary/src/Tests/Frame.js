@@ -1458,4 +1458,3 @@ class Frame extends Desktop_1.Desktop {
     }
 }
 exports.Frame = Frame;
-//# sourceMappingURL=Frame.js.map

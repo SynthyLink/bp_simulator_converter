@@ -3059,4 +3059,3 @@ class OrbitalForecast extends Desktop_1.Desktop {
     }
 }
 exports.OrbitalForecast = OrbitalForecast;
-//# sourceMappingURL=OrbitalForecast.js.map

@@ -243,4 +243,3 @@ class ODE extends Desktop_1.Desktop {
     }
 }
 exports.ODE = ODE;
-//# sourceMappingURL=ODE.js.map

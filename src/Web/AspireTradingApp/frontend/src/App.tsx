@@ -22,9 +22,6 @@ let dt = new DateTimeConverter();
 
 let performer = new Performer()
 
-
-
-
 let map: Map<string, any> = new Map
 
 let init: Initial | undefined
@@ -138,17 +135,17 @@ const App: React.FC = () => {
         communication.tPerformer.setChart("j")
     };
 
-    const fillServer = async(map : Map<string, any>, controller: AbortController): Promise<void> => {
+/*    const fillServer = async(map : Map<string, any>, controller: AbortController): Promise<void> => {
 
         let h = await communication.getAnalysisAsync(map, controller)
         communication.tPerformer.setServer(h)
        
-    }
+    }*/
 
     const fillClient = async (symbol: string, period: string, begin: number, end: number,
         a1: number, a2: number, d1: number, d2: number, d3: number, d4: number, controller: AbortController): Promise<void> => {
 
-        let p = communication.getTradingPerformer()
+        let p = communication.tPerformer
         let h = await p.calculate(symbol, period, begin, end, a1, a2, d1, d2, d3, d4, controller)
         communication.tPerformer.setClient(h)
 
@@ -179,7 +176,7 @@ const App: React.FC = () => {
             },
             xAxis: {
                 type: 'category',
-                data: communication.getTradingPerformer().getX(),
+                data: communication.tPerformer.getX(),
             },
             yAxis: {
                 type: 'value'
@@ -189,7 +186,7 @@ const App: React.FC = () => {
                     name: 'line series 1',
                     type: 'line',
                     //      smooth: true,
-                    data: communication.getTradingPerformer().getYClient(),
+                    data: communication.tPerformer.getYClient(),
                     symbol: 'none',
                     //  symbolSize: 10,
                     //  symbol: 'square',
@@ -204,7 +201,7 @@ const App: React.FC = () => {
                     name: 'line series 2',
                     type: 'line',
                     //           smooth: true,
-                    data: communication.getTradingPerformer().getYServer(),
+                    data: communication.tPerformer.getYServer(),
                     //  symbolSize: 10,
                     // symbol: 'circle',
                     symbol: 'none',
@@ -261,11 +258,12 @@ const App: React.FC = () => {
                     }
                 }
             }
-
+            console.log(init)
             if (init === undefined) {
                 try {
                         controller = new AbortController();
-                        let i = await communication.getInitialAsync(controller)
+                    let i = await communication.getInitialAsync(controller)
+                        
                         if (i === undefined) return
                         init = i
                         var b = datePure(i.b)

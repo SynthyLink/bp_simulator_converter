@@ -50,4 +50,3 @@ class SunTime {
     coeff = Math.PI / 360.0;
 }
 exports.SunTime = SunTime;
-//# sourceMappingURL=SunTime.js.map

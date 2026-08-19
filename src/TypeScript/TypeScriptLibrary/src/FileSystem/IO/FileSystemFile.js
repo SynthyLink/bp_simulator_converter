@@ -23,4 +23,3 @@ class FileSystemFile {
     name = "";
 }
 exports.FileSystemFile = FileSystemFile;
-//# sourceMappingURL=FileSystemFile.js.map

@@ -4,4 +4,3 @@ exports.TestObjectTransformerSimpleAct = void 0;
 class TestObjectTransformerSimpleAct {
 }
 exports.TestObjectTransformerSimpleAct = TestObjectTransformerSimpleAct;
-//# sourceMappingURL=TestObjectTransformerSimpleAct.js.map

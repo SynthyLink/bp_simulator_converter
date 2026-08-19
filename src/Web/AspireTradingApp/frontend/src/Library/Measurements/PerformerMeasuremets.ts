@@ -43,8 +43,6 @@ export class PerformerMeasuremets extends Performer {
         if (rt !== undefined) this.realtimeEventFactory = rt;
         var e = factory.getFactory<IExceptionHandler>("IExceptionHandler")
         if (e !== undefined) this.errorHandler = e;
-
-
     }
 
 
@@ -221,6 +219,7 @@ export class PerformerMeasuremets extends Performer {
                 if (!iterator.nextIterator()) {
                     return;
                 }
+                this.updateChildrenData(dataConsumer)
                 action.action()
             }
         }

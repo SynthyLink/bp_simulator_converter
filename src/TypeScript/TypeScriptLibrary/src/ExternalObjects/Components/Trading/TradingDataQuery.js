@@ -8,11 +8,20 @@ class TradingDataQuery extends CategoryObject_1.CategoryObject {
     inter;
     vector = [0, 0, 0, 0];
     symbols = new Map();
-    communication;
     realTime = 0;
     measurements = [];
+    factory;
     constructor(desktop, name) {
         super(desktop, name);
+        let t = this.performer.convertObject(desktop, "IFactoryConsumer");
+        if (t.length > 0) {
+            this.factory = t[0].getConsumerFactory();
+            if (this.factory !== undefined) {
+                let i = this.factory.getFactory("ITradingDatabaseHistoryInterface");
+                if (i !== undefined)
+                    this.inter = i;
+            }
+        }
         this.typeName = "TradingDataQuery";
         this.types.push("TradingDataQuery");
         this.types.push("IInitializeTask");
@@ -34,10 +43,6 @@ class TradingDataQuery extends CategoryObject_1.CategoryObject {
     }
     async startAsync(controller) {
         this.data = await this.inter.getHistoricalDataMessageDateTimesAsync("", this.symbol, this.begin, this.end, controller);
-    }
-    setCommunication(communication) {
-        this.communication = communication;
-        this.inter = new TradingDatabaseHistoryInterface(communication);
     }
     getMeasurementsCount() {
         return this.measurements.length;
@@ -96,26 +101,6 @@ class TradingDataQuery extends CategoryObject_1.CategoryObject {
     symbolsstr = [];
 }
 exports.TradingDataQuery = TradingDataQuery;
-class TradingDatabaseHistoryInterface {
-    communication;
-    constructor(communication) {
-        this.communication = communication;
-    }
-    async getSymbolsAsync() {
-        return await this.communication.getSymbolsIntretrnalAsync();
-    }
-    async getHistoricalDataMessageDateTimesAsync(id, symbol, begin, end, cancellation) {
-        this.any = id;
-        let map = new Map;
-        map.set("s", symbol);
-        map.set("b", begin);
-        map.set("e", end);
-        map.set("p", "");
-        let h = await this.communication.getHistoryAsync(map, cancellation);
-        return h;
-    }
-    any;
-}
 class BasicMeasurement extends Measurement_1.Measurement {
     query;
     constructor(name, type, query) {
@@ -208,4 +193,3 @@ class CandleMeasurement extends BasicMeasurement {
         return this.query.vector;
     }
 }
-//# sourceMappingURL=TradingDataQuery.js.map

@@ -33,4 +33,3 @@ class RelativeFileSystemFactory extends FileSystemFactory_1.FileSystemFactory {
     }
 }
 exports.RelativeFileSystemFactory = RelativeFileSystemFactory;
-//# sourceMappingURL=RelativeFileSystemFactory.js.map

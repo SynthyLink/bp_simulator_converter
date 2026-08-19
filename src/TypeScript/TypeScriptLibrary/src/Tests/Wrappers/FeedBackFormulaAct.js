@@ -32,4 +32,3 @@ class FeedBackFormulaAct extends FeedBackFormula_1.FeedBackFormula {
     }
 }
 exports.FeedBackFormulaAct = FeedBackFormulaAct;
-//# sourceMappingURL=FeedBackFormulaAct.js.map

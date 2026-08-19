@@ -237,4 +237,3 @@ class Transformer extends Desktop_1.Desktop {
     }
 }
 exports.Transformer = Transformer;
-//# sourceMappingURL=Transformer.js.map

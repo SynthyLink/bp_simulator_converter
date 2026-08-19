@@ -78,4 +78,3 @@ class GravityCategoryObject extends Gravity_1.Gravity {
     fz = new Array(1);
 }
 exports.GravityCategoryObject = GravityCategoryObject;
-//# sourceMappingURL=GravityCategoryObject.js.map

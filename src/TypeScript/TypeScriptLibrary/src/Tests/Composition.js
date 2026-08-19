@@ -285,4 +285,3 @@ class Composition extends Desktop_1.Desktop {
     }
 }
 exports.Composition = Composition;
-//# sourceMappingURL=Composition.js.map
