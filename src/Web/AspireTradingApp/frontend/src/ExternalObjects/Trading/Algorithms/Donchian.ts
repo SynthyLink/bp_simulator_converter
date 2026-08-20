@@ -21,6 +21,10 @@ class Donchian_CategoryObject_0 extends TradingDataQuery
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
+		this.begin = 44566
+		this.end = 45323
+		this.period = "1 day"
+		this.symbol = "AAPL"
 	}
 }
 
@@ -112,8 +116,8 @@ class Donchian_CategoryObject_4 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["b", 90 ],
 			["a", 120 ],
+			["b", 90 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", false, false);
@@ -267,8 +271,8 @@ class Donchian_CategoryObject_9 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["b", 115 ],
 			["a", 140 ],
+			["b", 115 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", false, false);
@@ -418,8 +422,8 @@ class Donchian_CategoryObject_10 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["b", 125 ],
 			["a", 145 ],
+			["b", 125 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", false, false);
@@ -875,8 +879,8 @@ class Donchian_CategoryObject_13 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["d", 135 ],
 			["c", 145 ],
+			["d", 135 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", false, false);
@@ -1102,10 +1106,10 @@ class Donchian_CategoryObject_15 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["b", 105 ],
 			["c", 129 ],
 			["a", 20 ],
 			["d", 107 ],
+			["b", 105 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", 0, 0);
@@ -1231,6 +1235,10 @@ class Donchian_CategoryObject_16 extends TradingOrder
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
+		this.position = "Position.Formula_1"
+		this.buyPrice = "Trading.Close"
+		this.sellPrice = "Trading.Close"
+		this.date = "Trading.RealTime"
 	}
 }
 

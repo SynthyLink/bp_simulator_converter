@@ -45,6 +45,12 @@ export class PerformerMeasuremets extends Performer {
         if (e !== undefined) this.errorHandler = e;
     }
 
+    public toNullabeMeasurement<T>(m: IMeasurement): T | undefined {
+        let x = m.getMeasurementValue()
+        if (x === undefined) return undefined
+        return this.convert<any, T>(x)
+    }
+
 
 
     public  getDifferentialEquationProcessor(): IDifferentialEquationProcessor {

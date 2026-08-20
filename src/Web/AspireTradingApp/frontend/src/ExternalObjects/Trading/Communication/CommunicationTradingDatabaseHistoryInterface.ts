@@ -26,7 +26,7 @@ export class CommunicationTradingDatabaseHistoryInterface extends EmptyObject im
         map.set("s", symbol);
         map.set("b", begin);
         map.set("e", end);
-        map.set("p", "");
+        map.set("p", "1 day");
         let h = await this.communication.getHistoryAsync(map, cancellation);
         return h;
     }

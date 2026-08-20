@@ -21,7 +21,7 @@ namespace Trading.Library.Serializable.Objects
             }
             if (true)
             {
-                var p = this.Object.ToString();
+                var p = Object.ToString();
                 var b = Begin.ToOADate();
                 var e = End.ToOADate();
                 var tt = Period;

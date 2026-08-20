@@ -66,8 +66,6 @@ namespace DataPerformer.Formula.Java
             throw new OwnNotImplemented();
         }
 
-       
-
         Dictionary<string, List<string>> IVariablesCodeCreator.Create(IMeasurements measurements)
         {
             var d = new Dictionary<string, List<string>>();

@@ -8,6 +8,7 @@ import { PerformerMeasuremets } from "../../Library/Measurements/PerformerMeasur
 import { TradingCommunication } from "./Communication/TradingCommunication";
 import { TradingDataQuery } from "./Components/TradingDataQuery";
 import { SequenceFilterWrapper } from "../../Library/Measurements/SequenserFilterWrapper";
+import type { ChartDataTrading } from "./ChartDataTrading";
 
 export class TradingPerformer {
 
@@ -90,7 +91,7 @@ export class TradingPerformer {
         return x
     }
 
-    public setChart(s: string): void {
+    public setChart(s: string): ChartDataTrading {
         console.log(this.client)
         this.server = undefined
         this.any = s
@@ -108,8 +109,7 @@ export class TradingPerformer {
                 this.yClient.push(yyy)
             }
         }
-        console.log(this.getX())
-        console.log(this.getYClient())
+        return { x: this.x, yclient: this.yClient, yserver: undefined }
  }
 
 

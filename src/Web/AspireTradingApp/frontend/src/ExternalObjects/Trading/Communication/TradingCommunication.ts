@@ -90,7 +90,6 @@ export class TradingCommunication extends HttpCommunication {
             s = json;
         }
         try {
-            console.log("S", s)
             const result = await this.http_cancel<string, string>({
                 path: "/api/trading/tradinghistory",
                 method: "post",

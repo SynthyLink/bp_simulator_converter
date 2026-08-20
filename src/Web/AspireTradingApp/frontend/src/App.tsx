@@ -12,6 +12,7 @@ import { DateTimeConverter } from './Library/Utilities/DateTime/DateTimeConverte
 import { Performer } from './Library/Performer';
 import { TradingCommunication } from "./ExternalObjects/Trading/Communication/TradingCommunication";
 import type { Initial } from './ExternalObjects/Trading/Initial';
+import type { ChartDataTrading } from './ExternalObjects/Trading/ChartDataTrading';
 
 
 
@@ -76,6 +77,8 @@ const App: React.FC = () => {
     let [donchian4, setDonchian4] = useState<number>()
 
     let [symbol, setSymbol] = useState<string>();
+
+    let [chartDataTrading, setChartDataTrading] = useState<ChartDataTrading>()
 /*
 
     let [chartX, setChartX] = useState<number[]>();
@@ -84,8 +87,9 @@ const App: React.FC = () => {
     setChartX([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
     setChartYClient([28.5, 70.5, 108.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4])
     setChartYServer([226.9, 194.1, 95.6, 54.4, 29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5])
-*/
 
+*/
+ 
     useEffect(() => {
       populateData();
     }, []);
@@ -132,7 +136,9 @@ const App: React.FC = () => {
                 f[3], f[4], f[5], controller))
        // promises.push(fillServer(map, controller))
         await Promise.all(promises);
-        communication.tPerformer.setChart("j")
+        let chart = communication.tPerformer.setChart("j")
+        console.log(chart)
+        setChartDataTrading(chart)
     };
 
 /*    const fillServer = async(map : Map<string, any>, controller: AbortController): Promise<void> => {
@@ -176,7 +182,7 @@ const App: React.FC = () => {
             },
             xAxis: {
                 type: 'category',
-                data: communication.tPerformer.getX(),
+                data: (chartDataTrading == undefined) ? [] : chartDataTrading.x,
             },
             yAxis: {
                 type: 'value'
@@ -186,7 +192,7 @@ const App: React.FC = () => {
                     name: 'line series 1',
                     type: 'line',
                     //      smooth: true,
-                    data: communication.tPerformer.getYClient(),
+                    data: (chartDataTrading == undefined) ? [] : chartDataTrading.yclient,
                     symbol: 'none',
                     //  symbolSize: 10,
                     //  symbol: 'square',
@@ -201,7 +207,7 @@ const App: React.FC = () => {
                     name: 'line series 2',
                     type: 'line',
                     //           smooth: true,
-                    data: communication.tPerformer.getYServer(),
+                    data: (chartDataTrading == undefined) ? [] : chartDataTrading.yserver,
                     //  symbolSize: 10,
                     // symbol: 'circle',
                     symbol: 'none',
@@ -228,7 +234,17 @@ const App: React.FC = () => {
   
     async function populateData() {
         if (first) {
+
             first = false
+            let xc:  number[] | undefined =[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+            let yc: (number | undefined)[] | undefined = [28.5, 70.5, undefined, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+            let ys: (number | undefined)[] | undefined = [226.9, 194.1, 95.6, 54.4, 29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5]
+            let ch: ChartDataTrading = {
+                x: xc,
+                yclient: yc,
+                yserver: ys
+            }
+            setChartDataTrading(ch)
             if (symbols === undefined) {
                 let s = await communication.getSymbolsAsync()
                 for (let ss of s) {
@@ -258,7 +274,6 @@ const App: React.FC = () => {
                     }
                 }
             }
-            console.log(init)
             if (init === undefined) {
                 try {
                         controller = new AbortController();

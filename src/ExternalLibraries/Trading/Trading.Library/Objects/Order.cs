@@ -282,8 +282,6 @@ namespace Trading.Library.Objects
                 }
             }
         }
-        
-
         private double? CurrentPositionValue
         {
             get => currentPositionValue;
