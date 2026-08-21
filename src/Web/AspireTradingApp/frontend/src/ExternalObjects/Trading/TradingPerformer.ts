@@ -92,8 +92,6 @@ export class TradingPerformer {
     }
 
     public setChart(s: string): ChartDataTrading {
-        console.log(this.client)
-        this.server = undefined
         this.any = s
         this.x = undefined
         this.yClient = undefined
@@ -109,7 +107,19 @@ export class TradingPerformer {
                 this.yClient.push(yyy)
             }
         }
-        return { x: this.x, yclient: this.yClient, yserver: undefined }
+        if (this.server !== undefined) {
+            this.x = []
+            this.yServer = []
+            for (let i of this.server) {
+                let yy = i.get(s)
+                let yyy = (yy == undefined) ? undefined : Number(yy)
+                this.yServer.push(yyy)
+            }
+        }
+        let res = { x: this.x, yclient: this.yClient, yserver: this.yServer }
+        console.log("XXX", this.client)
+        console.log("YYY", this.server)
+        return res
  }
 
 

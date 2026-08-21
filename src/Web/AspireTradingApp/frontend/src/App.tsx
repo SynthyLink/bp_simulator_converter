@@ -134,19 +134,18 @@ const App: React.FC = () => {
         if (s !== undefined)
          promises.push(fillClient(s, p, b, e, f[0], f[1], f[2],
                 f[3], f[4], f[5], controller))
-       // promises.push(fillServer(map, controller))
+       promises.push(fillServer(map, controller))
         await Promise.all(promises);
         let chart = communication.tPerformer.setChart("j")
         console.log(chart)
         setChartDataTrading(chart)
     };
-
-/*    const fillServer = async(map : Map<string, any>, controller: AbortController): Promise<void> => {
+   const fillServer = async(map : Map<string, any>, controller: AbortController): Promise<void> => {
 
         let h = await communication.getAnalysisAsync(map, controller)
-        communication.tPerformer.setServer(h)
-       
-    }*/
+       communication.tPerformer.setServer(h)
+       console.log("HHH", h)
+    }
 
     const fillClient = async (symbol: string, period: string, begin: number, end: number,
         a1: number, a2: number, d1: number, d2: number, d3: number, d4: number, controller: AbortController): Promise<void> => {

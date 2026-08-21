@@ -9,7 +9,7 @@ namespace Generated
 
         static public bool SuccessLoad { get; private set; } = true;
 
-        public static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktop(System.Threading.CancellationToken token, IFactory factory = null)
+        public static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktopAsync(System.Threading.CancellationToken token, IFactory factory = null)
         {
             var desk = new InternalDesktop(factory);
             return await desk.GetDesktopAsync(desk, token);

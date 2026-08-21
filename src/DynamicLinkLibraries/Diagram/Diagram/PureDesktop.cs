@@ -87,11 +87,10 @@ namespace Diagram.UI
             }
         }
 
-        public async Task<IDesktop> GetDesktopAsync(PureDesktop desktop, CancellationToken token)
+        public async Task GetDesktopAsync(CancellationToken token)
         {
-            await desktop.FinalAsync(token);
-            desktop.Final();
-            return desktop;
+            await FinalAsync(token);
+            Final();
         }
 
         protected async Task FinalAsync(CancellationToken token)

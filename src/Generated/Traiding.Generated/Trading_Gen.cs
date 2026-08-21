@@ -14,10 +14,11 @@ namespace GeneratedProject
 		public static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktop(System.Threading.CancellationToken token)
 		{
 			var desk = new InternalDesktop(true);
-			return await desk.GetDesktopAsync(desk, token);
-		}
+            await desk.GetDesktopAsync(token);
+            return desk;
+        }
 
-		internal class InternalDesktop : Diagram.UI.PureDesktop
+        internal class InternalDesktop : Diagram.UI.PureDesktop
 		{
 			internal InternalDesktop() : this(false)
 			{

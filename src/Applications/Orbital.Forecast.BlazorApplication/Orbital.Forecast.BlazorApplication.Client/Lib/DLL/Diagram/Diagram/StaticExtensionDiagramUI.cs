@@ -650,7 +650,7 @@ namespace Diagram.UI
                 l.Add("");
                 l.Add("\t\t static public bool SuccessLoad { get; private set; } = true;");
                 l.Add("");
-                l.Add("\t\tpublic public static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktop(System.Threading.CancellationToken token, ");
+                l.Add("\t\tpublic public static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktopAsync(System.Threading.CancellationToken token, ");
                 l.Add("\t\t\tNamedTree.Interfaces.IFactory factory)");
                 l.Add("\t\t\tvar desk = new InternalDesktop(true, factory);");
                 l.Add("\t\t\treturn await desk.GetDesktopAsync(desk, token);");

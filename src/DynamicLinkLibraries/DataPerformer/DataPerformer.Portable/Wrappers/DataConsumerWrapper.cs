@@ -50,7 +50,7 @@ namespace DataPerformer.Portable.Wrappers
         /// <param name="preparation">Preparation</param>
         /// <param name="errorHandler">Eroor handler</param>
         /// <returns>Result</returns>
-        public async Task<List<Dictionary<string, object>>> PerformIteratorAsync(IIterator iterator,
+      public async Task<List<Dictionary<string, object>>> PerformIteratorAsync(IIterator iterator,
       Dictionary<string, string> output,
       CancellationToken cancellation,
       Func<bool> stop = null, Action preparation = null,

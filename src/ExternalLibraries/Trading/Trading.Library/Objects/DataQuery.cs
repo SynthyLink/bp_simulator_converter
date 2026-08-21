@@ -13,6 +13,7 @@ using NamedTree.Interfaces;
 using Trading.Database.Interfaces;
 using Trading.Database.Classes;
 using Trading.Library.Classes;
+using Diagram.UI;
 
 namespace Trading.Library.Objects
 {
@@ -52,7 +53,7 @@ namespace Trading.Library.Objects
 
         static public ITradingDatabaseHistoryIntefaceFactory Factrory { get; set; }
 
-        public ITradingDatabaseHistoryInterface Database { get; init; }
+        public ITradingDatabaseHistoryInterface Database { get; protected set; }
 
         public object Object { get; set; } = new object();
 
@@ -113,12 +114,8 @@ namespace Trading.Library.Objects
         public DataQuery()
         {
             OwnException exc;
-                try
-            {
-                task = this;
-                Database = Trading.Database.StaticExtensionTradingDatabase.Connect();
-                //     Symbols = Database.Symbols;
-                measurements =
+            //     Symbols = Database.Symbols;
+            measurements =
                    [
                    new RealTimeMeasurement(this),
                     new LowMeasurement(this),
@@ -130,15 +127,7 @@ namespace Trading.Library.Objects
                     new DateTimeMeasurement(this),
                     new FullTimeMeasurement(this)
                    ];
-            }
-            catch(Exception ex)
-            {
-                
-            }
-
-
         }
-        
 
         event Action<IMeasurement> IChildren<IMeasurement>.OnAdd
         {
@@ -309,6 +298,31 @@ namespace Trading.Library.Objects
 
         async Task IInitializeTask.InitializeAsync(CancellationToken cancellationToken)
         {
+            try
+            {
+                var desktop = this.GetDesktop();
+                if (desktop is IFactoryConsumer fc)
+                {
+                    var f = fc.Factory;
+                    if (f != null)
+                    {
+                        var d = f.Get<ITradingDatabaseHistoryInterface>();
+                        if (d != null)
+                        {
+                            Database = d;
+                        }
+                    }
+                }
+                if (Database == null)
+                {
+                    Database = Trading.Database.StaticExtensionTradingDatabase.Connect();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+  
             var dt = await Database.GetSymbolsAsync(cancellationToken);
             Symbols = dt;
         }

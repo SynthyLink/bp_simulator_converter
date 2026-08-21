@@ -373,17 +373,16 @@ class PositionMeasurement extends BasicMeasurement
 
 class IncomeMeasurement extends BasicMeasurement
 {
-    i: number = 0
     constructor(order: TradingOrder) {
         super("Income", order, 0)
     }
 
     getMeasurementValue() {
-        ++this.i
+     /*   ++this.i
         if (this.i < 100) {
             console.log(this.order.income)
         }
-
+*/
         return this.order.income
     }
 }

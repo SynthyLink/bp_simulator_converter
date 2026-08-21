@@ -724,7 +724,8 @@ namespace Diagram.UI
                     l.Add("\t\tpublic static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktop(System.Threading.CancellationToken token, IFactory factory = null)");
                     l.Add("\t\t{");
                     l.Add("\t\t\tvar desk = new InternalDesktop(factory);");
-                    l.Add("\t\t\treturn await desk.GetDesktopAsync(desk, token);");
+                    l.Add("\t\t\tawait desk.GetDesktopAsync(token);");
+                    l.Add("\t\t\treturn desk;");
                     l.Add("\t\t}");
                     l.Add("");
                     List<string> lt = (desktop as PureDesktop).CreateDesktopCode("", "InternalDesktop",
