@@ -65,6 +65,23 @@ namespace DataPerformer.Portable.Wrappers
                 preparation, errorHandler);
         }
 
+        /// <summary>
+        /// Performs iterator
+        /// </summary>
+        /// <param name="iterator">The iterator</param>
+        /// <param name="stop">The stop</param>
+        /// <param name="preparation">The preparation action</param>
+        /// <param name="errorHandler">The error handler</param>
+        public async Task<List<Dictionary<string, object>>> PerformIteratorAsync(IIterator iterator,
+          CancellationToken cancellation,
+          Func<bool> stop = null, Action preparation = null,
+           IExceptionHandler errorHandler = null)
+        {
+            var d = performer.GetMeasuremetDictionary(Consumer);
+            return await PerformIteratorAsync(iterator, d, cancellation,
+           stop, preparation,
+             errorHandler);
+        }
 
         /// <summary>
         /// Performs iterator
@@ -123,7 +140,10 @@ namespace DataPerformer.Portable.Wrappers
                 iterator.Reset();
                 Consumer.ResetAll();
                 var rt = Consumer.CreateRuntime(null);
-                Action act = () => { rt.UpdateAll(); };
+                Action act = () => 
+                { 
+                    rt.UpdateAll(); 
+                };
                 var attr = CustomAttributeExtensions.GetCustomAttribute<IteratorTypeAttribute>
                     (IntrospectionExtensions.GetTypeInfo(iterator.GetType()));
                 if (attr != null)
@@ -166,9 +186,6 @@ namespace DataPerformer.Portable.Wrappers
                 }
             }
         }
-
-
-        
 
 
         #endregion
@@ -238,40 +255,38 @@ namespace DataPerformer.Portable.Wrappers
             }
             try
             {
-                using (var backup = new TimeProviderBackup(Consumer, provider, processor, reason, priority))
+                using var backup = new TimeProviderBackup(Consumer, provider, processor, reason, priority);
+                var p = backup.Processor;
+                provider.Time = start;
+                IDataRuntime runtime = backup.Runtime;
+                runtime.TimeProvider = provider;
+                runtime.StartAll(start);
+                p.TimeProvider = provider;
+                IStep st = null;
+                if (runtime is IStep)
                 {
-                    var p = backup.Processor;
-                    provider.Time = start;
-                    IDataRuntime runtime = backup.Runtime;
-                    runtime.TimeProvider = provider;
-                    runtime.StartAll(start);
-                    p.TimeProvider = provider;
-                    IStep st = null;
-                    if (runtime is IStep)
+                    st = runtime as IStep;
+                }
+                provider.Time = start;
+                double t = start;
+                double last = t;
+                Action<double, double, long>
+                    act = runtime.Step(p,
+                    (time) =>
                     {
-                        st = runtime as IStep;
+                        provider.Time = time;
                     }
-                    provider.Time = start;
-                    double t = start;
-                    double last = t;
-                    Action<double, double, long>
-                        act = runtime.Step(p,
-                        (time) =>
-                        {
-                            provider.Time = time;
-                        }
-                        , reason, asynchronousCalculation);
-                    for (int i = 0; i < count; i++)
+                    , reason, asynchronousCalculation);
+                for (int i = 0; i < count; i++)
+                {
+                    if (stp())
                     {
-                        if (stp())
-                        {
-                            break;
-                        }
-                        t = start + i * step;
-                        act(last, t, i);
-                        last = t;
-                        acts?.Invoke();
+                        break;
                     }
+                    t = start + i * step;
+                    act(last, t, i);
+                    last = t;
+                    acts?.Invoke();
                 }
             }
             catch (Exception ex)
@@ -613,8 +628,9 @@ namespace DataPerformer.Portable.Wrappers
             getIterators(Consumer, iterators);
         }
 
-        #endregion 
+        #endregion
 
+        #region Private Members
         static void getIterators(IDataConsumer consumer, List<IIterator> list)
         {
             for (int i = 0; i < consumer.Count; i++)
@@ -635,6 +651,8 @@ namespace DataPerformer.Portable.Wrappers
                 }
             }
         }
+
+        #endregion
 
     }
 }

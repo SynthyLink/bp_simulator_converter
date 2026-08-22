@@ -13,7 +13,7 @@ async Task TaskAsync()
     ITradingDatabaseHistoryIntefaceFactory idb = new Trading.Database.SqlServer.Factory.TradingDatabaseHistoryIntefaceFactory();
     var database = idb.Create(ConsoleTradingTest.Properties.Resources.ConnectionString);
     factory.Set<ITradingDatabaseHistoryInterface>(database);
-    var desktop = await   DonchianDesktop.GetDesktopAsync(token, factory);
+    var desktop = await GeneratedProject.DonchianDesktop.GetDesktopAsync(token, factory);
     var dataQuery = desktop.Get<DataQuery>("Trading");
     var dataConsumer = desktop.Get<IDataConsumer>("Chart");
     var wrapper = new DataPerformer.Portable.Wrappers.DataConsumerWrapper(dataConsumer);
@@ -45,7 +45,7 @@ async Task TaskAsync()
 await  TaskAsync();
 
 //*/
-
+/*
 public static class DonchianDesktop
 {
 
@@ -2780,3 +2780,4 @@ public static class DonchianDesktop
     }
 
 }
+*/

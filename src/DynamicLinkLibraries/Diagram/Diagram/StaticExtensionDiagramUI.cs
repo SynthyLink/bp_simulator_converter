@@ -572,12 +572,12 @@ namespace Diagram.UI
                 string preffixFull = pr + className;
                 l.Add(className + " : Diagram.UI.PureDesktop");
                 l.Add("{");
-                l.Add("\t" + constructorType + className + "(IFactory factory = null) : this(false, factory)");
+                l.Add("\t" + constructorType + className + "(NamedTree.Interfaces.IFactory factory = null) : this(false, factory)");
                 l.Add("\t{");
                 l.Add("");
                 l.Add("\t}");
                 l.Add("");
-                l.Add("\tinternal "  + className + "(bool begin, IFactory factory = null) : base(factory)");
+                l.Add("\tinternal "  + className + "(bool begin, NamedTree.Interfaces.IFactory factory = null) : base(factory)");
                 l.Add("\t{");
                 int ko = 0;
                 var ignoredObjs = new List<IObjectLabel>();
@@ -712,6 +712,11 @@ namespace Diagram.UI
             {
                 var l = new List<string>();
                 l.Add(StandardHeader);
+                if (staticClass)
+                {
+                    l.Add("using System.Threading.Tasks;");
+                    l.Add("");
+                }
                 l.Add("namespace " + namespacE);
                 l.Add("{");
                 if (staticClass)
@@ -721,7 +726,7 @@ namespace Diagram.UI
                     l.Add("");
                     l.Add("\t\t static public bool SuccessLoad { get; private set; } = true;");
                     l.Add("");
-                    l.Add("\t\tpublic static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktop(System.Threading.CancellationToken token, IFactory factory = null)");
+                    l.Add("\t\tpublic static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktopAsync(System.Threading.CancellationToken token, NamedTree.Interfaces.IFactory factory = null)");
                     l.Add("\t\t{");
                     l.Add("\t\t\tvar desk = new InternalDesktop(factory);");
                     l.Add("\t\t\tawait desk.GetDesktopAsync(token);");

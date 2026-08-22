@@ -320,7 +320,7 @@ namespace DataPerformer.Portable
                 this.Throw("Measurements aldeady exists");
             }
             measurementsData.Add(measurements);
-            Performer.GetDependent(measurementsData, list, Dependent);
+            Performer.GetDependentMeasurements(measurementsData as List<IMeasurements>, list, Dependent);
             onChangeInput?.Invoke();
         }
 
@@ -331,7 +331,7 @@ namespace DataPerformer.Portable
         public void Remove(IMeasurements measurements)
         {
             measurementsData.Remove(measurements);
-            measurementsData.GetDependent(list, Dependent);
+            Performer.GetDependent(measurementsData, list, Dependent);
             onChangeInput?.Invoke();
         }
 

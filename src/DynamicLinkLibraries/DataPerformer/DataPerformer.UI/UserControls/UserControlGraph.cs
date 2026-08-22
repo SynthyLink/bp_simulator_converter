@@ -15,6 +15,7 @@ using DataPerformer.Interfaces.BufferedData.Interfaces;
 using DataPerformer.Portable;
 using DataPerformer.Portable.DifferentialEquationProcessors;
 using DataPerformer.UI.Interfaces;
+using DataPerformer.UI.Labels;
 using DataPerformer.UI.Objects;
 using Diagram.UI;
 using Diagram.UI.Interfaces;
@@ -26,7 +27,6 @@ using Event.Log.Database.Interfaces;
 using Event.Portable;
 using Event.UI;
 using NamedTree.Interfaces;
-using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,9 +34,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net.Http.Json;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -769,6 +766,12 @@ namespace DataPerformer.UI.UserControls
 
         internal void Init()
         {
+            var gl = this.FindParent<GraphLabel>();
+            if (gl != null)
+            {
+                checkBoxAllParameters.Checked = gl.AllVaues;
+                checkBoxAllParameters.CheckedChanged += CheckBoxAllParameters_CheckedChanged;
+            }
             var panel = new PanelChart(new int[,] { { 80, 30 }, { 10, 40 } });
             panel.Cursor = Cursors.Cross;
             chartPerformer = panel.Performer;
@@ -799,6 +802,15 @@ namespace DataPerformer.UI.UserControls
                     MoveToX(chartPerformer.CurrentX);
                 }
             };
+        }
+
+        private void CheckBoxAllParameters_CheckedChanged(object sender, EventArgs e)
+        {
+            var gl = this.FindParent<GraphLabel>();
+            if (gl != null)
+            {
+                gl.AllVaues = checkBoxAllParameters.Checked;
+            }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -1300,9 +1312,6 @@ namespace DataPerformer.UI.UserControls
             return i;
 
         }
-
-
-
         private async Task PerformIteratorAsync(IDataConsumer consumer,
             Mode mode, IIterator iterator,
             CancellationToken ct)
@@ -1344,17 +1353,25 @@ namespace DataPerformer.UI.UserControls
                 if (string.IsNullOrEmpty(fn)) return;
                 var d = new Dictionary<string, IMeasurement>();
                 var dn = new Dictionary<string, string>();
-                foreach (var tb in DictionaryMeasurements)
+                List<Dictionary<string, object>> l = null;
+                if (checkBoxAllParameters.Checked)
                 {
-                    string key = tb.Key.Text;
-                    if (!string.IsNullOrEmpty(key))
-                    {
-                        d[key] = tb.Value.Item1;
-                        dn[key] = tb.Value.Item2;
-                    }
+                    l = await consumer.PerformIteratorAsync(iterator, ct);
                 }
-                var t = await consumer.PerformIteratorAsync(iterator, d, ct);
-                Save(t, fn);
+                else
+                {
+                    foreach (var tb in DictionaryMeasurements)
+                    {
+                        string key = tb.Key.Text;
+                        if (!string.IsNullOrEmpty(key))
+                        {
+                            d[key] = tb.Value.Item1;
+                            dn[key] = tb.Value.Item2;
+                        }
+                    }
+                    l = await consumer.PerformIteratorAsync(iterator, d, ct);
+                }
+                Save(l, fn);
                 WorkCompleted();
             }
         }

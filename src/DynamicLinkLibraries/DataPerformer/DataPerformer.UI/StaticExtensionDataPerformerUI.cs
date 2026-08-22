@@ -49,10 +49,13 @@ namespace DataPerformer.UI
         static List<IDataConsumerCodeGenerator> dataConsumerCodeGenerators = new();
 
         /// <summary>
-        /// Buffer connection string
+        /// Performer
         /// </summary>
-     // !!!   static public readonly string BufferConnectionString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=BufferDatabase;Integrated Security=" +
-     // !!!       "True";
+        static Portable.Performer Performer
+        {
+            get;
+        } = new ();
+
 
         /// <summary>
         /// Modes for painting
@@ -284,7 +287,8 @@ namespace DataPerformer.UI
             IDataConsumer consumer)
         {
             var d = dictionary.ColorDictionary;
-            foreach (var measurements in consumer.GetMeasurements())
+            var meas = Performer.GetMeasurements(consumer);
+            foreach (var measurements in meas)
             {
                 var name = consumer.GetRelativeMeasurementsName(measurements);
                 if (d.ContainsKey(name)) yield return measurements;

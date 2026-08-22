@@ -16,7 +16,7 @@ namespace DataPerformer.Portable.Wrappers
     /// <summary>
     /// Performer of operations
     /// </summary>
-    public class Performer
+    public class Performer : Portable.Performer
     {
         /// <summary>
         /// Finds Alias name object

@@ -20,7 +20,7 @@ namespace DataPerformer.Portable.Wrappers
 
         readonly double a = 0;
 
-        protected Diagram.UI.Performer performer = new();
+        protected Performer performer = new();
 
 
         /// <summary>

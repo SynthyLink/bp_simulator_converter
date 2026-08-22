@@ -337,6 +337,27 @@ namespace DataPerformer.Portable
         }
 
 
+        /// <summary>
+        /// Performs iterator
+        /// </summary>
+        /// <param name="consumer">The Data Consumer</param>
+        /// <param name="iterator">The iterator</param>
+        /// <param name="output">The output</param>
+        /// <param name="stop">The stop</param>
+        /// <param name="preparation">The preparation action</param>
+        /// <param name="errorHandler">The error handler</param>
+        public static async Task<List<Dictionary<string, object>>>
+            PerformIteratorAsync(this IDataConsumer consumer,
+            IIterator iterator,
+            CancellationToken cancellation, Func<bool> stop = null, Action preparation = null,
+           IExceptionHandler errorHandler = null)
+        {
+            var wrapper = new Wrappers.DataConsumerWrapper(consumer);
+            var t = wrapper.PerformIteratorAsync(iterator,
+                cancellation, stop, preparation, errorHandler);
+            await t;
+            return t.Result;
+        }
 
 
 
@@ -837,75 +858,7 @@ namespace DataPerformer.Portable
             return () => wrapper.GetValue;
         }
 
-        /// <summary>
-        /// Gets dependent measurements
-        /// </summary>
-        /// <param name="measurements">Source</param>
-        /// <param name="list">Dependent objects</param>
-        /// <param name="dependent">Dependent measurements</param>
-        public static void GetDependent(this IEnumerable<IMeasurements> measurements,
-            List<object> list, List<IMeasurements> dependent)
-        {
-            performer.GetDependent(measurements, list, dependent);
-            dependent.Clear();
-            list.Clear();
-            foreach (IMeasurements m in measurements)
-            {
-                if (m is IRuntimeUpdate)
-                {
-                    if (!(m as IRuntimeUpdate).ShouldRuntimeUpdate)
-                    {
-                        continue;
-                    }
-                }
-                dependent.Insert(0, m);
-                if (m is IDataConsumer)
-                {
-                    (m as IDataConsumer).GetDependentObjects(list);
-                    foreach (object o in list)
-                    {
-                        if (o is IMeasurements)
-                        {
-                            IMeasurements mm = o as IMeasurements;
-                            if (!dependent.Contains(mm))
-                            {
-                                dependent.Insert(0, mm);
-                            }
-                        }
-                    }
-                }
-            }
-            dependent.SortMeasurements();
-        }
-
-        /// <summary>
-        /// Gets dependent objects
-        /// </summary>
-        /// <param name="consumer">Data consumer</param>
-        /// <param name="list">Objects</param>
-        /// <param name="dependent">Dependent objects</param>
-        public static void GetDependent(this IDataConsumer consumer,
-            List<object> list, List<IMeasurements> dependent)
-        {
-            consumer.GetMeasurements().GetDependent(list, dependent);
-        }
-
-        /// <summary>
-        /// Gets measurements of data consumer
-        /// </summary>
-        /// <param name="consumer">Consumer</param>
-        /// <returns>Measurements</returns>
-        public static List<IMeasurements> GetMeasurements(this IDataConsumer consumer)
-        {
-            int n = consumer.Count;
-            List<IMeasurements> l = new List<IMeasurements>();
-            for (int i = 0; i < n; i++)
-            {
-                l.Add(consumer[i]);
-            }
-            return l;
-        }
-
+ 
         /// <summary>
         /// Updates children data of consumer
         /// </summary>
@@ -2331,16 +2284,7 @@ namespace DataPerformer.Portable
             return processor.Variables.Count;
         }
 
-        /// <summary>
-        /// Sorts measurements
-        /// </summary>
-        /// <param name="measurements">Measurements for sort</param>
-        public static void SortMeasurements(this List<IMeasurements> measurements)
-        {
-            measurements.ClearDoubleObjectsFormList();
-            measurements.SortPatriallyOrderedSet(measurementsComparer);
-        }
-
+  
         /// <summary>
         /// Sorts started objects
         /// </summary>

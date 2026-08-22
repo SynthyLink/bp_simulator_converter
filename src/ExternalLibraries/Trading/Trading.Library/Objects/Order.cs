@@ -299,7 +299,11 @@ namespace Trading.Library.Objects
                 }
                 changed = true;
                 var type = value.ToPositionType();
-                if (LastPositionType == type) { changed = false; return; }
+                if (LastPositionType == type) 
+                { 
+                    changed = false; 
+                    return; 
+                }
                 PositionDirection = PositionDirection.ToDirection(type, LastPositionType);
                 currentPositionValue = value;
                 CurrentPositionType = type;

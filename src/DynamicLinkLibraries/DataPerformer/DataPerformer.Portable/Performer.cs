@@ -1,26 +1,109 @@
-﻿using System;
-using System.Collections.Generic;
-
-using BaseTypes.Interfaces;
-
+﻿using BaseTypes.Interfaces;
 using DataPerformer.Interfaces;
-
+using DataPerformer.Portable.Comparation;
 using Diagram.UI;
 using Diagram.UI.Aliases;
 using Diagram.UI.Attributes;
 using Diagram.UI.Interfaces;
 using Diagram.UI.Labels;
-
-using NamedTree;
-
 using ErrorHandler;
 using NamedTree.Interfaces;
+
+using System;
+using System.Collections.Generic;
 
 
 namespace DataPerformer.Portable
 {
     public class Performer : DataPerformer.Interfaces.Performer
     {
+        MeasurementsComparer measurementsComparer = new();
+
+        /// <summary>
+        /// Gets ditcionary of measurements
+        /// </summary>
+        /// <param name="consumer">The consumer</param>
+        /// <returns>The dictionary</returns>
+        public Dictionary<string, IMeasurement> GetMeasuremetDictionary(IDataConsumer consumer)
+        {
+            var d = new Dictionary<string, IMeasurement>();
+            for (var i = 0; i < consumer.Count; i++)
+            {
+                var mm = consumer[i];
+                var name = GetRelativeName(consumer as IAssociatedObject, mm as IAssociatedObject) + ".";
+                for (var j = 0; j < mm.Count; j++)
+                {
+                    var m = mm[j];
+                    d[name + m.Name] = m;
+                }
+            }
+            return d;
+        }
+
+        /// <summary>
+        /// Gets dependent measurements
+        /// </summary>
+        /// <param name="measurements">Source</param>
+        /// <param name="list">Dependent objects</param>
+        /// <param name="dependent">Dependent measurements</param>
+        public  void GetDependentMeasurements(IEnumerable<IMeasurements> measurements,
+            List<object> list, List<IMeasurements> dependent)
+        {
+            dependent.Clear();
+            list.Clear();
+            foreach (IMeasurements m in measurements)
+            {
+                if (m is IRuntimeUpdate)
+                {
+                    if (!(m as IRuntimeUpdate).ShouldRuntimeUpdate)
+                    {
+                        continue;
+                    }
+                }
+                dependent.Insert(0, m);
+                if (m is IDataConsumer)
+                {
+                    (m as IDataConsumer).GetDependentObjects(list);
+                    foreach (object o in list)
+                    {
+                        if (o is IMeasurements)
+                        {
+                            IMeasurements mm = o as IMeasurements;
+                            if (!dependent.Contains(mm))
+                            {
+                                dependent.Insert(0, mm);
+                            }
+                        }
+                    }
+                }
+            }
+            SortMeasurements(dependent);
+        }
+
+
+
+
+        /// <summary>
+        /// Gets dependent objects
+        /// </summary>
+        /// <param name="consumer">Data consumer</param>
+        /// <param name="list">Objects</param>
+        /// <param name="dependent">Dependent objects</param>
+        public void GetDependent(IDataConsumer consumer,
+            List<object> list, List<IMeasurements> dependent)
+        {
+           GetDependent(GetMeasurements(consumer), list, dependent);
+        }
+
+        /// <summary>
+        /// Sorts measurements
+        /// </summary>
+        /// <param name="measurements">Measurements for sort</param>
+        public void SortMeasurements(List<IMeasurements> measurements)
+        {
+            ClearDoubleObjectsFormList(measurements);
+            SortPatriallyOrderedSet(measurements, measurementsComparer);
+        }
 
         Type tvcc = typeof(IVariablesCodeCreator);
 
@@ -158,7 +241,23 @@ namespace DataPerformer.Portable
                     }
                 }
             }
-            dependent.SortMeasurements();
+            SortMeasurements(dependent);
+        }
+
+        /// <summary>
+        /// Gets measurements of data consumer
+        /// </summary>
+        /// <param name="consumer">Consumer</param>
+        /// <returns>Measurements</returns>
+        public  List<IMeasurements> GetMeasurements(IDataConsumer consumer)
+        {
+            int n = consumer.Count;
+            List<IMeasurements> l = new List<IMeasurements>();
+            for (int i = 0; i < n; i++)
+            {
+                l.Add(consumer[i]);
+            }
+            return l;
         }
 
 

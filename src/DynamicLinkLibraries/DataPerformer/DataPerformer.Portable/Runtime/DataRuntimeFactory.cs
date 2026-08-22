@@ -47,6 +47,16 @@ namespace DataPerformer.Portable.Runtime
         protected  ITimeMeasurementProvider provider = new TimeMeasurementProvider(null);
 
         /// <summary>
+        /// Performer
+        /// </summary>
+        protected virtual Performer Performer
+        {
+            get;
+        } = new Performer();
+
+
+
+        /// <summary>
         /// Check level
         /// </summary>
         protected int priority = 0;
@@ -208,7 +218,7 @@ namespace DataPerformer.Portable.Runtime
         {
             List<IMeasurements> lm = new List<IMeasurements>();
             List<object> l = new List<object>();
-            consumer.GetDependent(l, lm);
+         Performer.GetDependent(consumer, l, lm);
          List<IStarted> ls = new List<IStarted>();
          foreach (object o in l)
          {
@@ -235,7 +245,7 @@ namespace DataPerformer.Portable.Runtime
         {
             List<object> l = new List<object>();
             List<IMeasurements> lm = new List<IMeasurements>();
-            consumer.GetDependent(l, lm);
+            Performer.GetDependent(consumer, l, lm);
             return () =>
             {
                 foreach (IMeasurements m in lm)
@@ -245,7 +255,6 @@ namespace DataPerformer.Portable.Runtime
                 }
             };
         }
-
 
         /// <summary>
         /// Creates component collection

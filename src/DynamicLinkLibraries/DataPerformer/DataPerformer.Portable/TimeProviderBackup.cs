@@ -30,6 +30,11 @@ namespace DataPerformer.Portable
 
         List<IMeasurements> measurements = null;
 
+        /// <summary>
+        /// Performer
+        /// </summary>
+        protected Performer performer = new();
+
 
         #endregion
 
@@ -452,7 +457,7 @@ namespace DataPerformer.Portable
             List<IMeasurements> add = new List<IMeasurements>();
             l.Sort(StaticExtensionDiagramUI.ObjectComparer);
             measurements = l;
-            measurements.SortMeasurements();
+            performer.SortMeasurements(measurements);
         }
 
         #endregion

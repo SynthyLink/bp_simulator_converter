@@ -21,6 +21,13 @@ namespace DataPerformer.Portable.Time
     {
         #region Fields
 
+
+        /// <summary>
+        /// Performer
+        /// </summary>
+        protected Performer performer = new();
+
+
         Dictionary<ITimeMeasurementConsumer, IMeasurement> dictionary = new Dictionary<ITimeMeasurementConsumer, IMeasurement>();
 
         IDataConsumer consumer;
@@ -398,7 +405,7 @@ namespace DataPerformer.Portable.Time
             List<IMeasurements> add = new List<IMeasurements>();
             l.Sort(StaticExtensionDiagramUI.ObjectComparer);
             measurements = l;
-            measurements.SortMeasurements();
+            performer.SortMeasurements(measurements);
         }
 
         #endregion

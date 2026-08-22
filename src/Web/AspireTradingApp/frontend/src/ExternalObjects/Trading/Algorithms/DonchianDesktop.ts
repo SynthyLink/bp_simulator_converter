@@ -15,7 +15,7 @@ import { VectorFormulaConsumer } from "../../../Library/Measurements/VectorFormu
 import { SequenceFilterType } from "../../../Library/Utilities/Filters/Interfaces/SequenceFilterType";
 import { TradingOrder } from "../Components/TradingOrder";
 import { TradingDataQuery } from "../Components/TradingDataQuery";
-
+import { FeedbackAliasCollection } from "../../../Library/Measurements/FeedBack/FeedbackAliasCollection";
 class DonchianDesktop_CategoryObject_0 extends TradingDataQuery
 {
 	constructor(desktop: IDesktop, name: string)
@@ -23,7 +23,7 @@ class DonchianDesktop_CategoryObject_0 extends TradingDataQuery
 		super(desktop, name);
 		this.begin = 44566
 		this.end = 45323
-		this.period = "1 day"
+		this.period = "30 mins"
 		this.symbol = "AAPL"
 	}
 }
@@ -246,7 +246,7 @@ class DonchianDesktop_CategoryObject_7 extends SequenceFilterWrapper
 	{
 		super(desktop, name);
 		this.count = 20
-		this.input = "Trading.Low"
+		this.input = "Trading.RealTime"
 		this.type = SequenceFilterType.Donchian
 		this.mimax = false
 	}
@@ -986,6 +986,7 @@ class DonchianDesktop_CategoryObject_14 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
+			["x", 2 ]
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", 0, 0);
@@ -1003,8 +1004,8 @@ class DonchianDesktop_CategoryObject_14 extends VectorFormulaConsumer
 			this.variable = this.measurement4.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_4 = this.convert<boolean>(this.variable);
-			this.variable = this.measurement6.getMeasurementValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
+			this.variable = this.aliasName6.getAliasNameValue()
+			if (this.check(this.variable)) { this.success = false; return; }
 			this.var_6 = this.convert<number>(this.variable);
 			this.variable = (this.var_4) ? (this.var_5) : (this.var_6);
 			if (this.check(this.variable)) { this.success = false; return; } 
@@ -1024,13 +1025,13 @@ class DonchianDesktop_CategoryObject_14 extends VectorFormulaConsumer
 		this.measurement0 = all[4].getMeasurement(0);
 		this.measurement2 = all[3].getMeasurement(0);
 		this.measurement4 = all[2].getMeasurement(0);
-		this.measurement6 = all[0].getMeasurement(1);
+		this.aliasName6 = new AliasName(this.alias, "x");
 	}
 	
 	measurement0 ! : IMeasurement;
 	measurement2 ! : IMeasurement;
 	measurement4 ! : IMeasurement;
-	measurement6 ! : IMeasurement;
+	aliasName6 ! : IAliasName;
 	var_0 : boolean  = false;
 	var_1 : number  = 0;
 	var_2 : boolean  = false;
@@ -1106,10 +1107,10 @@ class DonchianDesktop_CategoryObject_15 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["a", 20 ],
+			["b", 105 ],
 			["d", 107 ],
 			["c", 129 ],
-			["b", 105 ],
+			["a", 20 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", 0, 0);
@@ -1230,7 +1231,72 @@ class DonchianDesktop_CategoryObject_15 extends VectorFormulaConsumer
 	
 }
 
-class DonchianDesktop_CategoryObject_16 extends TradingOrder
+class DonchianDesktop_CategoryObject_16 extends RecursiveFormula
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+		let map = new Map<string, any>(
+		[
+			["x", 0 ],
+			["y", 0 ],
+		]);
+		this.performer.setAliasMap(map, this);
+		this.addVariableValue("x", 0, 0);
+		this.addVariableValue("y", 0, 0);
+	}
+
+		calculateTree() : void
+		{
+			this.success = true;
+			this.variable = this.measurement0.getMeasurementValue();
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_0 = this.convert<number>(this.variable);
+			this.variable = this.value1.getIValue();
+			if (this.check(this.variable)) { this.success = false; return; }
+			this.var_1 = this.convert<number>(this.variable);
+		}
+	
+	init() : void
+	{
+		var all = this.getAllMeasurements()
+		this.fic = all
+		this.measurement0 = all[0].getMeasurement(0);
+		this.value1 = this.output[0];
+	}
+	
+	measurement0 ! : IMeasurement;
+	value1 ! : IValue;
+	var_0 : number  = 0;
+	var_1 : number  = 0;
+	
+	get_0() : any
+	{
+		return this.success ? this.var_0 : undefined;
+	}
+	
+	get_1() : any
+	{
+		return this.success ? this.var_1 : undefined;
+	}
+	save() : void {
+		var v = this.variables;
+		var x0 = v.get("x");
+		x0?.setIValue(this.get_0());
+		var x1 = v.get("y");
+		x1?.setIValue(this.get_1());
+	}
+	
+	setFeedback(): void {
+		let map = new Map<string, string>(
+		[
+			["x", "Position.x" ]
+		]);
+		this.feedback = new FeedbackAliasCollection(map, this, this);
+	}
+}
+
+class DonchianDesktop_CategoryObject_17 extends TradingOrder
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -1242,7 +1308,7 @@ class DonchianDesktop_CategoryObject_16 extends TradingOrder
 	}
 }
 
-class DonchianDesktop_CategoryObject_17 extends DataConsumer
+class DonchianDesktop_CategoryObject_18 extends DataConsumer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -1666,6 +1732,30 @@ class DonchianDesktop_CategoryArrow_51 extends IteratorConsumerLink
 	}
 }
 
+class DonchianDesktop_CategoryArrow_52 extends DataLink
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
+class DonchianDesktop_CategoryArrow_53 extends DataLink
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
+class DonchianDesktop_CategoryArrow_54 extends DataLink
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
 
 
 export class DonchianDesktop extends Desktop
@@ -1699,8 +1789,9 @@ export class DonchianDesktop extends Desktop
 		this.mapObjects.set("DonchianDesktop_CategoryObject_13", new DonchianDesktop_CategoryObject_13(this, "Exit Condition"))
 		this.mapObjects.set("DonchianDesktop_CategoryObject_14", new DonchianDesktop_CategoryObject_14(this, "Position"))
 		this.mapObjects.set("DonchianDesktop_CategoryObject_15", new DonchianDesktop_CategoryObject_15(this, "Indicator"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_16", new DonchianDesktop_CategoryObject_16(this, "Order"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_17", new DonchianDesktop_CategoryObject_17(this, "Chart"))
+		this.mapObjects.set("DonchianDesktop_CategoryObject_16", new DonchianDesktop_CategoryObject_16(this, "Delay Position"))
+		this.mapObjects.set("DonchianDesktop_CategoryObject_17", new DonchianDesktop_CategoryObject_17(this, "Order"))
+		this.mapObjects.set("DonchianDesktop_CategoryObject_18", new DonchianDesktop_CategoryObject_18(this, "Chart"))
 		new DonchianDesktop_CategoryArrow_0(this, "");
 		new DonchianDesktop_CategoryArrow_1(this, "");
 		new DonchianDesktop_CategoryArrow_2(this, "");
@@ -1753,6 +1844,9 @@ export class DonchianDesktop extends Desktop
 		new DonchianDesktop_CategoryArrow_49(this, "");
 		new DonchianDesktop_CategoryArrow_50(this, "");
 		new DonchianDesktop_CategoryArrow_51(this, "");
+		new DonchianDesktop_CategoryArrow_52(this, "");
+		new DonchianDesktop_CategoryArrow_53(this, "");
+		new DonchianDesktop_CategoryArrow_54(this, "");
 }
 
 finish() : void
@@ -1860,31 +1954,31 @@ finish() : void
 		if(s24 != undefined)    arrows[24].setSource(s24);
 		let t24 = this.mapObjects.get("DonchianDesktop_CategoryObject_12")
 		if(t24 != undefined)    arrows[24].setTarget(t24);
-		let s25 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		let s25 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
 		if(s25 != undefined)    arrows[25].setSource(s25);
 		let t25 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
 		if(t25 != undefined)    arrows[25].setTarget(t25);
-		let s26 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		let s26 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
 		if(s26 != undefined)    arrows[26].setSource(s26);
 		let t26 = this.mapObjects.get("DonchianDesktop_CategoryObject_14")
 		if(t26 != undefined)    arrows[26].setTarget(t26);
-		let s27 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		let s27 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
 		if(s27 != undefined)    arrows[27].setSource(s27);
 		let t27 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
 		if(t27 != undefined)    arrows[27].setTarget(t27);
-		let s28 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		let s28 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
 		if(s28 != undefined)    arrows[28].setSource(s28);
 		let t28 = this.mapObjects.get("DonchianDesktop_CategoryObject_2")
 		if(t28 != undefined)    arrows[28].setTarget(t28);
-		let s29 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		let s29 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
 		if(s29 != undefined)    arrows[29].setSource(s29);
 		let t29 = this.mapObjects.get("DonchianDesktop_CategoryObject_3")
 		if(t29 != undefined)    arrows[29].setTarget(t29);
-		let s30 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		let s30 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
 		if(s30 != undefined)    arrows[30].setSource(s30);
 		let t30 = this.mapObjects.get("DonchianDesktop_CategoryObject_8")
 		if(t30 != undefined)    arrows[30].setTarget(t30);
-		let s31 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		let s31 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
 		if(s31 != undefined)    arrows[31].setSource(s31);
 		let t31 = this.mapObjects.get("DonchianDesktop_CategoryObject_6")
 		if(t31 != undefined)    arrows[31].setTarget(t31);
@@ -1892,7 +1986,7 @@ finish() : void
 		if(s32 != undefined)    arrows[32].setSource(s32);
 		let t32 = this.mapObjects.get("DonchianDesktop_CategoryObject_11")
 		if(t32 != undefined)    arrows[32].setTarget(t32);
-		let s33 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		let s33 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
 		if(s33 != undefined)    arrows[33].setSource(s33);
 		let t33 = this.mapObjects.get("DonchianDesktop_CategoryObject_4")
 		if(t33 != undefined)    arrows[33].setTarget(t33);
@@ -1904,7 +1998,7 @@ finish() : void
 		if(s35 != undefined)    arrows[35].setSource(s35);
 		let t35 = this.mapObjects.get("DonchianDesktop_CategoryObject_12")
 		if(t35 != undefined)    arrows[35].setTarget(t35);
-		let s36 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		let s36 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
 		if(s36 != undefined)    arrows[36].setSource(s36);
 		let t36 = this.mapObjects.get("DonchianDesktop_CategoryObject_15")
 		if(t36 != undefined)    arrows[36].setTarget(t36);
@@ -1920,54 +2014,66 @@ finish() : void
 		if(s39 != undefined)    arrows[39].setSource(s39);
 		let t39 = this.mapObjects.get("DonchianDesktop_CategoryObject_13")
 		if(t39 != undefined)    arrows[39].setTarget(t39);
-		let s40 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		let s40 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
 		if(s40 != undefined)    arrows[40].setSource(s40);
 		let t40 = this.mapObjects.get("DonchianDesktop_CategoryObject_13")
 		if(t40 != undefined)    arrows[40].setTarget(t40);
-		let s41 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		let s41 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
 		if(s41 != undefined)    arrows[41].setSource(s41);
 		let t41 = this.mapObjects.get("DonchianDesktop_CategoryObject_9")
 		if(t41 != undefined)    arrows[41].setTarget(t41);
-		let s42 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		let s42 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
 		if(s42 != undefined)    arrows[42].setSource(s42);
 		let t42 = this.mapObjects.get("DonchianDesktop_CategoryObject_10")
 		if(t42 != undefined)    arrows[42].setTarget(t42);
-		let s43 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		let s43 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
 		if(s43 != undefined)    arrows[43].setSource(s43);
 		let t43 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
 		if(t43 != undefined)    arrows[43].setTarget(t43);
-		let s44 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		let s44 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
 		if(s44 != undefined)    arrows[44].setSource(s44);
-		let t44 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		let t44 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
 		if(t44 != undefined)    arrows[44].setTarget(t44);
-		let s45 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		let s45 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
 		if(s45 != undefined)    arrows[45].setSource(s45);
 		let t45 = this.mapObjects.get("DonchianDesktop_CategoryObject_2")
 		if(t45 != undefined)    arrows[45].setTarget(t45);
-		let s46 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		let s46 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
 		if(s46 != undefined)    arrows[46].setSource(s46);
 		let t46 = this.mapObjects.get("DonchianDesktop_CategoryObject_3")
 		if(t46 != undefined)    arrows[46].setTarget(t46);
-		let s47 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		let s47 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
 		if(s47 != undefined)    arrows[47].setSource(s47);
 		let t47 = this.mapObjects.get("DonchianDesktop_CategoryObject_7")
 		if(t47 != undefined)    arrows[47].setTarget(t47);
-		let s48 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		let s48 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
 		if(s48 != undefined)    arrows[48].setSource(s48);
 		let t48 = this.mapObjects.get("DonchianDesktop_CategoryObject_8")
 		if(t48 != undefined)    arrows[48].setTarget(t48);
-		let s49 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		let s49 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
 		if(s49 != undefined)    arrows[49].setSource(s49);
 		let t49 = this.mapObjects.get("DonchianDesktop_CategoryObject_5")
 		if(t49 != undefined)    arrows[49].setTarget(t49);
-		let s50 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		let s50 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
 		if(s50 != undefined)    arrows[50].setSource(s50);
 		let t50 = this.mapObjects.get("DonchianDesktop_CategoryObject_6")
 		if(t50 != undefined)    arrows[50].setTarget(t50);
-		let s51 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		let s51 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
 		if(s51 != undefined)    arrows[51].setSource(s51);
 		let t51 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
 		if(t51 != undefined)    arrows[51].setTarget(t51);
+		let s52 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		if(s52 != undefined)    arrows[52].setSource(s52);
+		let t52 = this.mapObjects.get("DonchianDesktop_CategoryObject_14")
+		if(t52 != undefined)    arrows[52].setTarget(t52);
+		let s53 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
+		if(s53 != undefined)    arrows[53].setSource(s53);
+		let t53 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		if(t53 != undefined)    arrows[53].setTarget(t53);
+		let s54 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		if(s54 != undefined)    arrows[54].setSource(s54);
+		let t54 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
+		if(t54 != undefined)    arrows[54].setTarget(t54);
 		(objects[1] as unknown as IPostSetArrow).postSetArrow();
 		(objects[2] as unknown as IPostSetArrow).postSetArrow();
 		(objects[3] as unknown as IPostSetArrow).postSetArrow();
@@ -1985,5 +2091,6 @@ finish() : void
 		(objects[15] as unknown as IPostSetArrow).postSetArrow();
 		(objects[16] as unknown as IPostSetArrow).postSetArrow();
 		(objects[17] as unknown as IPostSetArrow).postSetArrow();
+		(objects[18] as unknown as IPostSetArrow).postSetArrow();
 	}
 }

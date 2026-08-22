@@ -12,6 +12,40 @@ namespace NamedTree
     /// </summary>
     public class Performer
     {
+
+        /// <summary>
+        /// Clears double objects
+        /// </summary>
+        /// <typeparam name="T">Type of objects</typeparam>
+        /// <param name="objects">Objects</param>
+        /// <returns>Collection without double objects</returns>
+        public  IEnumerable<T> ClearDoubleObjects<T>(IEnumerable<T> objects)
+        {
+            List<T> l = new List<T>();
+            foreach (T t in objects)
+            {
+                if (l.Contains(t))
+                {
+                    continue;
+                }
+                l.Add(t);
+                yield return t;
+            }
+        }
+
+        /// <summary>
+        /// Clears doubling from list
+        /// </summary>
+        /// <typeparam name="T">Name of type</typeparam>
+        /// <param name="list">The list</param>
+        public  void ClearDoubleObjectsFormList<T>(List<T> list)
+        {
+            List<T> l = new List<T>(list);
+            IEnumerable<T> ex = ClearDoubleObjects<T>(l);
+            list.Clear();
+            list.AddRange(ex);
+        }
+
         /// <summary>
         /// Adds unique item to the list
         /// </summary>

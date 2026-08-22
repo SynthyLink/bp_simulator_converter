@@ -391,7 +391,6 @@ namespace CategoryTheory
                 l.Add(t);
                 yield return t;
             }
-
         }
 
         /// <summary>
