@@ -1,6 +1,5 @@
 ﻿using DataPerformer.Interfaces;
 using DataPerformer.Portable.DifferentialEquationProcessors;
-using DataPerformer.Portable.Wrappers;
 using Diagram.UI.Interfaces;
 using Diagram.UI;
 using DataPerformer.Portable;

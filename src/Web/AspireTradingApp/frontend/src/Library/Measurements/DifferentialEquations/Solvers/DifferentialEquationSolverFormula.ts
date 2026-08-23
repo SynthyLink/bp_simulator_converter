@@ -39,7 +39,7 @@ export class DifferentialEquationSolverFormula extends DataConsumerVariableMeasu
     calculateDerivations(): void
     {
         this.feedback.setFeedbacks();
-        this.performer.updateChildrenData(this);
+        //this.performer.updateChildrenData(this);
         this.calculateTree();
         this.save();
     }

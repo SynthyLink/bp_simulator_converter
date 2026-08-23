@@ -16,7 +16,7 @@ export class QueueFilter implements ISequenceFilter {
 
     protected a: number = 0;
 
-    protected b: number = 0;
+    protected b: number | undefined = undefined;
 
     protected performer: Performer = new Performer()
 
@@ -35,18 +35,17 @@ export class QueueFilter implements ISequenceFilter {
 
     getFilterValue(a: number): number | undefined {
         var c = this.queue.size();
-        var l = c == this.count;
+        var l = c >= this.count;
         this.a = a;
         if (l) {
             var x = this.queue.dequeue()
-            if (x !== undefined) {
                 this.b = x;
-            }
         }
         this.queue.enqueue(a);
-        return l ? 0 : undefined;
+        return l ? this.b : undefined;
 
     }
+
     resetFilter(): void {
         this.queue.clear()
     }

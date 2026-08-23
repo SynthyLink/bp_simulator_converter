@@ -52,7 +52,7 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
     }
 
     updateMeasurements(): void {
-        this.performer.updateChildrenData(this);
+       // this.performer.updateChildrenData(this);
         var x = this.measurement.getMeasurementValue()
         if (this.checker.check(x)) {
             this.result = undefined

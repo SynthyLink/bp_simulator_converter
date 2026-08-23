@@ -2,13 +2,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import type { IAliasName } from "../../Interfaces/IAliasName";
+import type { IFeedback } from "../../Interfaces/IFeedback";
+import type { IFeedbackAlias } from "../../Interfaces/IFeedbackAlias";
+import type { IValue } from "../../Interfaces/IValue";
+
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { IAliasName } from "./Interfaces/IAliasName";
-import type { IFeedback } from "./Interfaces/IFeedback";
-import type { IFeedbackAlias } from "./Interfaces/IFeedbackAlias";
-import type { IValue } from "./Interfaces/IValue";
 
 export class FeedbackAlias implements IFeedback, IFeedbackAlias
 {

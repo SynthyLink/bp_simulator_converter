@@ -6,8 +6,8 @@ import type { IDesktop } from "../Interfaces/IDesktop";
 import type { IMeasurements } from "./Interfaces/IMeasurements";
 import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import { DataConsumerVariableMeasurementsStarted } from "./DataConsumerVariableMeasurementsStarted";
-import { FeedbackAliasCollection } from "../FeedbackAliasCollection";
 import { Performer } from "../Performer";
+import { FeedbackAliasCollection } from "./FeedBack/FeedbackAliasCollection";
 
 
 export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted implements  IPostSetArrow

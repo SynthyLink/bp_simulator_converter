@@ -15,8 +15,7 @@ import { VectorFormulaConsumer } from "../../../Library/Measurements/VectorFormu
 import { SequenceFilterType } from "../../../Library/Utilities/Filters/Interfaces/SequenceFilterType";
 import { TradingOrder } from "../Components/TradingOrder";
 import { TradingDataQuery } from "../Components/TradingDataQuery";
-import { FeedbackAliasCollection } from "../../../Library/Measurements/FeedBack/FeedbackAliasCollection";
-class DonchianDesktop_CategoryObject_0 extends TradingDataQuery
+import { FeedbackAliasCollection } from "../../../Library/Measurements/FeedBack/FeedbackAliasCollection"; class DonchianDesktop_CategoryObject_0 extends TradingDataQuery
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -1108,9 +1107,9 @@ class DonchianDesktop_CategoryObject_15 extends VectorFormulaConsumer
 		let map = new Map<string, any>(
 		[
 			["b", 105 ],
+			["a", 20 ],
 			["d", 107 ],
 			["c", 129 ],
-			["a", 20 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", 0, 0);
@@ -1761,7 +1760,7 @@ class DonchianDesktop_CategoryArrow_54 extends DataLink
 export class DonchianDesktop extends Desktop
 {
 
-	public static async getDesktop(controller : AbortController, factory?: IFactory): Promise<IDesktop> {
+	public static async getDesktopAsync(controller : AbortController, factory?: IFactory): Promise<IDesktop> {
 		let d = new DonchianDesktop(factory)
 		await d.loadAsync(controller)
 		return d
@@ -1851,8 +1850,9 @@ export class DonchianDesktop extends Desktop
 
 finish() : void
 {
+
 		let objects = this.getCategoryObjects();
-		let arrows = this.getCategoryArrows();
+	let arrows = this.getCategoryArrows();
 
 		let s0 = this.mapObjects.get("DonchianDesktop_CategoryObject_2")
 		if(s0 != undefined)    arrows[0].setSource(s0);

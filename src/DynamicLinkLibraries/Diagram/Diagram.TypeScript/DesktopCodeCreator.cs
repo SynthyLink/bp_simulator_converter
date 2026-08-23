@@ -99,7 +99,7 @@ namespace Diagram.UI.TypeScript
                 l.Add("export " + s);
                 l.Add("{");
                 l.Add("");
-                l.Add("\tpublic static async getDesktop(controller : AbortController, factory?: IFactory): Promise<IDesktop> {");
+                l.Add("\tpublic static async getDesktopAsync(controller : AbortController, factory?: IFactory): Promise<IDesktop> {");
                 l.Add("\t\tlet d = new " + className + "(factory)");
                 l.Add("\t\tawait d.loadAsync(controller)");
                 l.Add("\t\treturn d");

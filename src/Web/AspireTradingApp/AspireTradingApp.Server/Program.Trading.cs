@@ -7,7 +7,7 @@ using Trading.Library.Objects;
 
 static class TradingInit
 {
-    static Performer performer = new ();
+    static Performer performer = new();
 
     static Dictionary<string, object> symbols = null;
 
@@ -39,15 +39,55 @@ static class TradingInit
             return st;
         })
 .WithName("PostTradingnAnalysis");
-        
+
         api.MapPost("tradinganalysis", async ([FromBody] string s, CancellationToken token) =>
         {
             return await performer.GetData(s, token);
         })
 .WithName("PostTradingAnalysis");
 
+
+
+        api.MapPost("tradingsavestring", async ([FromBody] string s, CancellationToken token) =>
+            {
+                return await SaveSrting(s, token);
+            })
+    .WithName("PostTradingSaveString");
+
+
+        api.MapPost("tradingsaveobject", async ([FromBody] string o) =>
+        {
+            return await SaveObject(o);
+        })
+    .WithName("PostTradingSaveObject");
+
+
     }
 
+    public static async Task<bool> SaveObject(string s)
+    {
+        using var wrirter = new StreamWriter(@"\0\0\3.json");
+        await wrirter.WriteAsync(s.ToString());
+        return true;
+
+    }
+
+
+    public static async Task<bool> SaveSrting(string s, CancellationToken token)
+        {
+        try
+        {
+            using var wrirter = new StreamWriter(@"\0\0\3.json");
+            await wrirter.WriteAsync(s);
+            return true;
+        }
+        catch (Exception ex)
+        {
+
+        }
+        return false;
+
+    }
 
 
     public static async Task<string> GetInitial(CancellationToken token)

@@ -182,18 +182,37 @@ export class PerformerMeasuremets extends Performer {
         for (var s of meaurements) {
             map.set(s, this.getMeasurementDC(dataConsumer, s))
         }
-
         let action = new MeasurementWrite(map)
         await this.performIteratorDataConsumerAsync(dataConsumer, iterator, abort, action, preparation)
         return action.getData()
     }
+
+ 
+    public async performIteratorDataConsumerFullAsync(dataConsumer: IDataConsumer,
+        iterator: IIterator, abort: AbortController,
+        preparation?: IAction | undefined): Promise<Map<string, any>[]> {
+        let map = new Map<string, string>()
+        let mm = dataConsumer.getAllMeasurements();
+        for (let m of mm) {
+            let o = m as unknown as IObject
+            let name = o.getName() + "."
+            let c = m.getMeasurementsCount()
+            for (var i = 0; i < c; i++) {
+                let ns = name + m.getMeasurement(i).getMeasurementName();
+                map.set(ns, ns)
+            }
+        }
+        let data = await this.performIteratorDataConsumerMapAsync(dataConsumer, iterator, abort, map, preparation)
+        return data
+    }
+
 
     public async performIteratorDataConsumerMapAsync(dataConsumer: IDataConsumer,
         iterator: IIterator, abort: AbortController, meaurements: Map<string, string>,
         preparation?: IAction | undefined): Promise<Map<string, any>[]> {
         let map = new Map<string, IMeasurement>()
         for (var [key, value] of meaurements) {
-        let measurement = this.getMeasurementDC(dataConsumer, value)
+            let measurement = this.getMeasurementDC(dataConsumer, value)
             map.set(key, measurement)
         }
         let action = new MeasurementWrite(map)

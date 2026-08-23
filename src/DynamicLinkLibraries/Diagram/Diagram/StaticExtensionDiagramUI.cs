@@ -734,7 +734,7 @@ namespace Diagram.UI
                     l.Add("\t\t}");
                     l.Add("");
                     List<string> lt = (desktop as PureDesktop).CreateDesktopCode("", "InternalDesktop",
-                        "if (!begin){ SuccessLoad = Final(); };\n\t\t\t\tName = \"" + className + "\"; ", true, "internal ");
+                        "if (begin){ SuccessLoad = Final(); };\n\t\t\t\tName = \"" + className + "\"; ", true, "internal ");
                     l.Add("\t\tinternal class " + lt[0]);
                     for (int i = 1; i < lt.Count; i++)
                     {

@@ -122,7 +122,7 @@ export class ObjectTransformer extends CategoryObject implements IObjectTransfor
 
     updateMeasurements(): void
     {
-        this.performer.updateChildrenData(this);
+        //this.performer.updateChildrenData(this);
         for (var i = 0; i < this.inO.length; i++)
         {
             var m = this.inMea[i];
