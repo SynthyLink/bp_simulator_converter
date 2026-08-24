@@ -87,22 +87,26 @@ export class TradingPerformer {
         a1: number, a2: number, d1: number, d2: number, d3: number, d4: number, controller: AbortController):
         Promise<Map<string, any>[]> {
         console.log("CALCULATE")
-        this.query.setQueryParameters(symblol, period, begin, end)
-        this.filters[0].setFilterCount(a1)
+        this.any = symblol
+        this.any = period
+        this.any = begin
+        this.any = end
+        this.any = a1
+        this.any = a2
+        this.any = d1
+        this.any = d2
+        this.any = d3
+        this.any = d4
+  //  this.query.setQueryParameters(symblol, period, begin, end)
+      /*  this.filters[0].setFilterCount(a1)
         this.filters[1].setFilterCount(a2)
         this.filters[2].setFilterCount(d1)
         this.filters[3].setFilterCount(d2)
         this.filters[4].setFilterCount(d3)
-        this.filters[5].setFilterCount(d4)
-<<<<<<< HEAD
+        this.filters[5].setFilterCount(d4)*/
         let x = await this.pefrormer.performIteratorDataConsumerMapAsync(this.dataConsumer,
             this.query, this.runtime, controller, this.mmap);
       /*  let z: Map<string, any>[] = []
-=======
-        let x = await this.pefrormer.performIteratorDataConsumerFullAsync(this.dataConsumer,
-            this.query, controller);
-        let z: Map<string, any>[] = []
->>>>>>> 560b0e856045e481c953baa09dc982db14c99fa7
         for (let i = 0; i < 100; i++) {
             z.push(x[i])
         }
@@ -110,13 +114,11 @@ export class TradingPerformer {
         let json = JSON.stringify(arrayOfObjects)
         console.log("JSON", json)
         await this.communication.saveStringAsync(json, new AbortController)
-<<<<<<< HEAD
       //  await this.communication.saveMapArray(json);*/
-=======
-      //  await this.communication.saveMapArray(json);
->>>>>>> 560b0e856045e481c953baa09dc982db14c99fa7
         return x
     }
+
+    any : any
 
     public setChart(s: string): ChartDataTrading {
         this.any = s
@@ -138,10 +140,7 @@ export class TradingPerformer {
             this.x = []
             this.yServer = []
             for (let ii of this.server) {
-<<<<<<< HEAD
                 this.any = ii
-=======
->>>>>>> 560b0e856045e481c953baa09dc982db14c99fa7
                 let yy = ii.j
                 let yyy = (yy == undefined) ? undefined : Number(yy)
                 this.yServer.push(yyy)
@@ -155,7 +154,6 @@ export class TradingPerformer {
 
     local !: ILocalDB
 
-    any: any
 
     x: number [] | undefined = []
 

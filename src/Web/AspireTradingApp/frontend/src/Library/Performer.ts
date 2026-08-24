@@ -287,17 +287,13 @@ export class Performer
         }, Infinity); // Start with -Infinity to ensure the first element is always greater
     }
 
-
-
     public calculateAverage(numbers: number[]): number {
         if (numbers.length === 0) {
             return 0; // Or throw an error, depending on your requirements
         }
-
-        const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        const sum = numbers.reduce((sum, p) => sum + p);
         return sum / numbers.length;
     }
-
 
     public calculateAverageRobust(data: any[]): number {
         const numbers = data.filter((item): item is number => typeof item === 'number'); // Type guard

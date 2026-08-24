@@ -34,6 +34,7 @@ export class QueueFilter implements ISequenceFilter {
     }
 
     getFilterValue(a: number): number | undefined {
+        this.queue.enqueue(a);
         var c = this.queue.size();
         var l = c >= this.count;
         this.a = a;
@@ -41,7 +42,6 @@ export class QueueFilter implements ISequenceFilter {
             var x = this.queue.dequeue()
                 this.b = x;
         }
-        this.queue.enqueue(a);
         return l ? this.b : undefined;
 
     }

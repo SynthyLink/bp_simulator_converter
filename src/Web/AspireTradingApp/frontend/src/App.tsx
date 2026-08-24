@@ -140,15 +140,9 @@ const App: React.FC = () => {
             promises.push(fillServer(map, controller))
             await Promise.all(promises);
             let chart = communication.tPerformer.setChart("j")
-<<<<<<< HEAD
             setChartDataTrading(chart)
         }
         setStarted(true)
-=======
-            console.log(chart)
-            setChartDataTrading(chart)
-        }
->>>>>>> 560b0e856045e481c953baa09dc982db14c99fa7
     };
    const fillServer = async(map : Map<string, any>, controller: AbortController): Promise<void> => {
 

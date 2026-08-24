@@ -1883,17 +1883,10 @@ namespace GeneratedProject
 						};
 						parameters =new Dictionary<string, object>()
 						{
-<<<<<<< HEAD
 							{"d", (double)107 },
 							{"c", (double)129 },
 							{"b", (double)105 },
 							{"a", (double)20 }
-=======
-							{"a", (double)20 },
-							{"c", (double)129 },
-							{"d", (double)107 },
-							{"b", (double)105 }
->>>>>>> 560b0e856045e481c953baa09dc982db14c99fa7
 						};
 						operationNames = new Dictionary<System.Int32,System.String>()
 						{

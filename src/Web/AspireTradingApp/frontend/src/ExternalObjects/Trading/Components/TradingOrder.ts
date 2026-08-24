@@ -82,17 +82,10 @@ export class TradingOrder extends DataConsumer implements IMeasurements
 
   //  private isOpened: boolean = false
 
-<<<<<<< HEAD
 //   private currentPositionType: string = TradingPositionType.None
 //   private closedPositionType: string = TradingPositionType.None
     private lastPositionType: string = TradingPositionType.None
  /*   
-=======
-   private currentPositionType: string = TradingPositionType.None
-   private closedPositionType: string = TradingPositionType.None
-    private lastPositionType: string = TradingPositionType.None
-    
->>>>>>> 560b0e856045e481c953baa09dc982db14c99fa7
     private setCurrentPositionType(type: string): void {
         this.currentPositionType = type
     }
@@ -106,11 +99,8 @@ export class TradingOrder extends DataConsumer implements IMeasurements
     private setLastPositionType(type: string): void {
         this.lastPositionType = type
     }
-<<<<<<< HEAD
     */
 
-=======
->>>>>>> 560b0e856045e481c953baa09dc982db14c99fa7
     
     public getEnterPrice(): number {
         return this.enterPrice
