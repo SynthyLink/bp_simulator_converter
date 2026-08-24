@@ -378,10 +378,10 @@ export class Performer
     }
 
 
-    public updateFeedbackData(dataConsumer: IDataConsumer, feedback: IFeedbackCollection): void {
+    public updateFeedbackData(feedback: IFeedbackCollection): void {
         if (feedback.isEmpty()) return;
         feedback.setFeedbacks();
-        this.updateChildrenData(dataConsumer);
+       // this.updateChildrenData(dataConsumer);
     }
 
     public updateChildrenData(dataConsumer: IDataConsumer): void

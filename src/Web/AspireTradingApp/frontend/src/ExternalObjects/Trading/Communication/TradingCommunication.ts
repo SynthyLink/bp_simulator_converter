@@ -1,8 +1,9 @@
+import axios from "axios";
 import { HttpCommunication } from "../../../Library/Communications/http/http_interface";
 import { EmptyChecker } from "../../../Library/EmptyChecker";
 import type { ICheck } from "../../../Library/Interfaces/ICheck";
 import { UniversalFactory } from "../../../Library/UniversalFactory";
-import { Donchian } from "../Algorithms/Donchian";
+import { DonchianDesktop } from "../Algorithms/DonchianDesktop";
 import type { HistoryMessage } from "../Database/HistoryMessage";
 import type { ITradingDatabaseHistoryInterface } from "../Database/ITradingDatabaseHistoryInterface";
 import { MemoryDB } from "../Database/Local/MemoryDB";
@@ -21,6 +22,7 @@ export class TradingCommunication extends HttpCommunication {
 
     initial!: Initial;
 
+    any: any
     constructor() {
         super();
     }
@@ -74,10 +76,43 @@ export class TradingCommunication extends HttpCommunication {
         return []
     }
 
+    public async saveMapArray(map: string): Promise<boolean> {
+        try {
+            let url = this.server + "/api/trading/tradingsaveobject"
+            this.any = axios.post(url, map)
+            return true
+        }
+        catch (ex) {
+        }
+        return false;
+
+    }
+
+    public async saveStringAsync(s: string, controller: AbortController):
+        Promise<boolean> {
+
+        const result = await this.http_cancel<boolean, string>({
+            path: "/api/trading/tradingsavestring",
+            method: "post",
+            body: s,
+        }, controller);
+        if (result.ok && result.body) {
+            let mp = result.body as boolean
+            return mp;
+        }
+        return false
+    }
+
+
+    an : any
+
     public async getHistoryAsync(map: Map<string, any>, controller: AbortController): Promise<HistoryMessage[]> {
         let b = Number(map.get("b"));
         let e = Number(map.get("e"));
         let sym = map.get("s") + "";
+        this.any = b
+        this.any = e
+        this.any = sym
         //  let p = map.get("p") + "";
         //   await this.createDb()
      /*  let r = await this.tPerformer.readHistory(sym, b, e);
@@ -192,8 +227,8 @@ export class TradingCommunication extends HttpCommunication {
         let factory = new UniversalFactory
         factory.addFactory<ITradingDatabaseHistoryInterface>(new CommunicationTradingDatabaseHistoryInterface(new TradingCommunication()), "ITradingDatabaseHistoryInterface")
         factory.addFactory<ICheck>(new EmptyChecker(), "ICheck");
-    let controller = new AbortController();
-        let desktop = await Donchian.getDesktop(controller, factory)
+        let controller = new AbortController();
+        let desktop = await DonchianDesktop.getDesktopAsync(controller, factory)
         this.tPerformer = new TradingPerformer(new MemoryDB(), desktop, this);
         //let q = desktop.getCategoryObject("Trading") as unknown as TradingDataQuery;
        // this.symbols = q.getSymbolsStr();

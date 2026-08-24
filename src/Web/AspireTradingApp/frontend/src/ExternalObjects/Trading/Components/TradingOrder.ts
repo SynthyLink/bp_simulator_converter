@@ -80,45 +80,52 @@ export class TradingOrder extends DataConsumer implements IMeasurements
 
     any: any
 
-    private isOpened: boolean = false
+  //  private isOpened: boolean = false
 
-    private currentPositionType: string = TradingPositionType.None
-    private closedPositionType: string = TradingPositionType.None
+//   private currentPositionType: string = TradingPositionType.None
+//   private closedPositionType: string = TradingPositionType.None
     private lastPositionType: string = TradingPositionType.None
-
+ /*   
     private setCurrentPositionType(type: string): void {
         this.currentPositionType = type
     }
+    */
+   /*
     private setClosedPositionType(type: string): void {
         this.closedPositionType = type
     }
+    */
+   /*
     private setLastPositionType(type: string): void {
         this.lastPositionType = type
     }
+    */
 
+    
     public getEnterPrice(): number {
         return this.enterPrice
     }
-
+/*
     private setEnterPrice(value: number): void {
         this.enterPrice = value
     }
-  
+  */
     public getTempIncome(): number {
         return this.tempIncome
     }
-
+    /*
     private setTempIncome(value: number): void {
         this.tempIncome = value
     }
+    */
     public geExitPrice(): number {
         return this.exitPrice
     }
-
+    /*
     private setExitPrice(value: number): void {
         this.exitPrice = value
     }
-
+    */
     public geExitDate(): number {
         return this.exitDate
     }
@@ -195,7 +202,7 @@ export class TradingOrder extends DataConsumer implements IMeasurements
         let d = this.getPositionDirection()
         this.setPositionDirection(TradingOrder.toDirection(d, type, t))
         if  (value !== undefined) this.currentPositionValue = value;
-        this.currentPositionType = type;
+     //   this.currentPositionType = type;
          this.lastPositionType = type;
     }
 

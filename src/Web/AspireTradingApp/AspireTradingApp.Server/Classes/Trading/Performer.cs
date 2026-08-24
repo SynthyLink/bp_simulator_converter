@@ -53,7 +53,7 @@ namespace AspireTradingApp.Server.Trading
 
         internal async Task Load(CancellationToken token)
         {
-            var desktop = await DonchianDesktop.GetDesktop(token);
+            var desktop = await DonchianDesktop.GetDesktopAsync(token);
         }
 
         public async Task<List<HistoricalDataMessageNumber>> GetHistory([FromBody] DataQueryInit init,
@@ -67,7 +67,7 @@ namespace AspireTradingApp.Server.Trading
 
         public async Task<string> Initial()
         {
-            var desktop = await DonchianDesktop.GetDesktop(CancellationToken.None);
+            var desktop = await DonchianDesktop.GetDesktopAsync(CancellationToken.None);
             var q = desktop.Get<DataQuery>("Trading");
             var d = new Dictionary<string, object>();
             d["b"] = q.Begin.ToOADate() * 86400;
@@ -111,7 +111,7 @@ namespace AspireTradingApp.Server.Trading
         {
             IFactory factory = new UniversalFactory();
           //  factory.Set<ITradingDatabaseHistoryIntefaceFactory>()
-            var desktop = await DonchianDesktop.GetDesktop(token);
+            var desktop = await DonchianDesktop.GetDesktopAsync(token);
             var dataQuery = desktop.Get<DataQuery>("Trading");
             var dataConsumer = desktop.Get<IDataConsumer>("Chart");
 

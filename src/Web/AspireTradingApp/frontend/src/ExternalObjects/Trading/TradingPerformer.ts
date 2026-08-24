@@ -9,6 +9,9 @@ import { TradingCommunication } from "./Communication/TradingCommunication";
 import { TradingDataQuery } from "./Components/TradingDataQuery";
 import { SequenceFilterWrapper } from "../../Library/Measurements/SequenserFilterWrapper";
 import type { ChartDataTrading } from "./ChartDataTrading";
+import type { IDataRuntime } from "../../Library/Interfaces/IDataRuntime";
+import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
+import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
 
 export class TradingPerformer {
 
@@ -20,6 +23,8 @@ export class TradingPerformer {
 
 
     dataConsumer !: IDataConsumer
+
+    runtime !: IDataRuntime
 
     communication!: TradingCommunication
 
@@ -39,6 +44,8 @@ export class TradingPerformer {
         this.communication = communication
         this.query = desktop.getCategoryObject("Trading") as unknown as TradingDataQuery
         this.dataConsumer = desktop.getCategoryObject("Chart") as unknown as IDataConsumer
+        this.runtime = new DataRuntimeConsumerODE(this.dataConsumer, new Motion6DFactory())
+
         const filtersN = ["Average Short", "Averge Long", "Donchian maximum long", "Donchian maximum short", "Donchian minimum long",
             "Donchian minimum short"]
         for (let fn of filtersN) {
@@ -79,6 +86,7 @@ export class TradingPerformer {
     public async calculate(symblol: string, period: string, begin: number, end: number,
         a1: number, a2: number, d1: number, d2: number, d3: number, d4: number, controller: AbortController):
         Promise<Map<string, any>[]> {
+        console.log("CALCULATE")
         this.query.setQueryParameters(symblol, period, begin, end)
         this.filters[0].setFilterCount(a1)
         this.filters[1].setFilterCount(a2)
@@ -87,7 +95,16 @@ export class TradingPerformer {
         this.filters[4].setFilterCount(d3)
         this.filters[5].setFilterCount(d4)
         let x = await this.pefrormer.performIteratorDataConsumerMapAsync(this.dataConsumer,
-            this.query, controller, this.mmap);
+            this.query, this.runtime, controller, this.mmap);
+      /*  let z: Map<string, any>[] = []
+        for (let i = 0; i < 100; i++) {
+            z.push(x[i])
+        }
+        const arrayOfObjects = z.map(map => Object.fromEntries(map))
+        let json = JSON.stringify(arrayOfObjects)
+        console.log("JSON", json)
+        await this.communication.saveStringAsync(json, new AbortController)
+      //  await this.communication.saveMapArray(json);*/
         return x
     }
 
@@ -110,15 +127,14 @@ export class TradingPerformer {
         if (this.server !== undefined) {
             this.x = []
             this.yServer = []
-            for (let i of this.server) {
-                let yy = i.get(s)
+            for (let ii of this.server) {
+                this.any = ii
+                let yy = ii.j
                 let yyy = (yy == undefined) ? undefined : Number(yy)
                 this.yServer.push(yyy)
             }
         }
         let res = { x: this.x, yclient: this.yClient, yserver: this.yServer }
-        console.log("XXX", this.client)
-        console.log("YYY", this.server)
         return res
  }
 

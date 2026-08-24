@@ -4,7 +4,7 @@ using System.Linq;
 
 
 
-System.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace GeneratedProject
 {
@@ -13,7 +13,7 @@ namespace GeneratedProject
 
 		 static public bool SuccessLoad { get; private set; } = true;
 
-		public static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktop(System.Threading.CancellationToken token, NamedTree.Interfaces.IFactory factory = null)
+		public static async Task<Diagram.UI.Interfaces.IDesktop> GetDesktopAsync(System.Threading.CancellationToken token, NamedTree.Interfaces.IFactory factory = null)
 		{
 			var desk = new InternalDesktop(factory);
 			await desk.GetDesktopAsync(token);
@@ -261,7 +261,7 @@ namespace GeneratedProject
 				arrows.Add(currALabel);
 				currALabel.SourceNumber = (int)16;
 				currALabel.TargetNumber = (int)14;
-				currALabel  = new InternalDesktop.ArrowLabel53("", this);
+				currALabel  = new InternalDesktop.ArrowLabel53("Last", this);
 				arrows.Add(currALabel);
 				currALabel.SourceNumber = (int)18;
 				currALabel.TargetNumber = (int)16;
@@ -269,7 +269,7 @@ namespace GeneratedProject
 				arrows.Add(currALabel);
 				currALabel.SourceNumber = (int)17;
 				currALabel.TargetNumber = (int)16;
-				if (!begin){ SuccessLoad = Final(); };
+				if (begin){ SuccessLoad = Final(); };
 				Name = "DonchianDesktop"; 
 			}
 		
@@ -1883,10 +1883,10 @@ namespace GeneratedProject
 						};
 						parameters =new Dictionary<string, object>()
 						{
-							{"b", (double)105 },
-							{"a", (double)20 },
+							{"d", (double)107 },
 							{"c", (double)129 },
-							{"d", (double)107 }
+							{"b", (double)105 },
+							{"a", (double)20 }
 						};
 						operationNames = new Dictionary<System.Int32,System.String>()
 						{
@@ -2172,7 +2172,7 @@ namespace GeneratedProject
 					obj.Object = this;
 				}
 		
-				internal class CategoryObject : DataPerformer.Portable.DataConsumer
+				internal class CategoryObject : DataPerformer.Portable.DataConsumerIterate
 				{
 				internal CategoryObject() : base(0)
 				{

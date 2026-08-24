@@ -113,6 +113,7 @@ namespace Trading.Library.Objects
         #region Ctor
         public DataQuery()
         {
+            task = this;
             OwnException exc;
             //     Symbols = Database.Symbols;
             measurements =
@@ -279,7 +280,6 @@ namespace Trading.Library.Objects
                 step = 0;
                 messages.Clear();
                 var bs = Period.ToBarSize();
-                var ct = new CancellationToken();
                 var dt = await GetHistoricalDataMessageDateTimes(cancellationToken);
                 enu = dt;
                 enumerator = enu.GetEnumerator();

@@ -2,11 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AliasInitialValueCollection } from "../AliasInitialValueCollection.";
-import { FeedbackAliasCollection } from "../FeedbackAliasCollection";
 import type { IDesktop } from "../Interfaces/IDesktop";
 import type { IFeedbackCollection } from "../Interfaces/IFeedbackCollection";
 import type { IInitialValueCollection } from "../Interfaces/IInitialValueCollection";
 import { DataConsumerVariableMeasurements } from "./DataConsumerVariableMeasurements";
+import { FeedbackAliasCollection } from "./FeedBack/FeedbackAliasCollection";
 import type { IFeedbackHolder } from "./Interfaces/IFeedbackHolder";
 import type { IStarted } from "./Interfaces/IStarted";
 

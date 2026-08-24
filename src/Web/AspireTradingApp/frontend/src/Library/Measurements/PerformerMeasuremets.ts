@@ -176,34 +176,54 @@ export class PerformerMeasuremets extends Performer {
     }
 
     public async performIteratorDataConsumerMapArrayAsync(dataConsumer: IDataConsumer,
-        iterator: IIterator, abort: AbortController, meaurements: string[],
+        iterator: IIterator, runtime: IDataRuntime, abort: AbortController, meaurements: string[],
         preparation?: IAction | undefined): Promise<Map<string, any>[]> {
         let map = new Map<string, IMeasurement>()
         for (var s of meaurements) {
             map.set(s, this.getMeasurementDC(dataConsumer, s))
         }
-
         let action = new MeasurementWrite(map)
-        await this.performIteratorDataConsumerAsync(dataConsumer, iterator, abort, action, preparation)
+        await this.performIteratorDataConsumerAsync(dataConsumer, iterator, runtime, abort, action, preparation)
         return action.getData()
     }
 
+ 
+    public async performIteratorDataConsumerFullAsync(dataConsumer: IDataConsumer,
+        iterator: IIterator, runtime: IDataRuntime, abort: AbortController,
+        preparation?: IAction | undefined): Promise<Map<string, any>[]> {
+        let map = new Map<string, string>()
+        let mm = dataConsumer.getAllMeasurements();
+        for (let m of mm) {
+            let o = m as unknown as IObject
+            let name = o.getName() + "."
+            let c = m.getMeasurementsCount()
+            for (var i = 0; i < c; i++) {
+                let ns = name + m.getMeasurement(i).getMeasurementName();
+                map.set(ns, ns)
+            }
+        }
+        let data = await this.performIteratorDataConsumerMapAsync(dataConsumer, iterator, runtime, abort, map, preparation)
+        return data
+    }
+
+
     public async performIteratorDataConsumerMapAsync(dataConsumer: IDataConsumer,
-        iterator: IIterator, abort: AbortController, meaurements: Map<string, string>,
+        iterator: IIterator, runtime: IDataRuntime, abort: AbortController, meaurements: Map<string, string>,
         preparation?: IAction | undefined): Promise<Map<string, any>[]> {
         let map = new Map<string, IMeasurement>()
         for (var [key, value] of meaurements) {
-        let measurement = this.getMeasurementDC(dataConsumer, value)
+            let measurement = this.getMeasurementDC(dataConsumer, value)
             map.set(key, measurement)
         }
+        console.log("MAP", map)
         let action = new MeasurementWrite(map)
-        await this.performIteratorDataConsumerAsync(dataConsumer, iterator, abort, action, preparation)
+        await this.performIteratorDataConsumerAsync(dataConsumer, iterator, runtime, abort, action, preparation)
         let data = action.getData()
         return data
     }
 
     public async performIteratorDataConsumerAsync(dataConsumer: IDataConsumer,
-        iterator: IIterator, abort: AbortController, action: IAction,
+        iterator: IIterator, runtime: IDataRuntime, abort: AbortController, action: IAction,
         preparation?: IAction | undefined): Promise<void> {
         try {
             if (preparation !== undefined) preparation.action();
@@ -225,7 +245,7 @@ export class PerformerMeasuremets extends Performer {
                 if (!iterator.nextIterator()) {
                     return;
                 }
-                this.updateChildrenData(dataConsumer)
+                runtime.updateRuntime();
                 action.action()
             }
         }
