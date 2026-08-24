@@ -94,9 +94,15 @@ export class TradingPerformer {
         this.filters[3].setFilterCount(d2)
         this.filters[4].setFilterCount(d3)
         this.filters[5].setFilterCount(d4)
+<<<<<<< HEAD
         let x = await this.pefrormer.performIteratorDataConsumerMapAsync(this.dataConsumer,
             this.query, this.runtime, controller, this.mmap);
       /*  let z: Map<string, any>[] = []
+=======
+        let x = await this.pefrormer.performIteratorDataConsumerFullAsync(this.dataConsumer,
+            this.query, controller);
+        let z: Map<string, any>[] = []
+>>>>>>> 560b0e856045e481c953baa09dc982db14c99fa7
         for (let i = 0; i < 100; i++) {
             z.push(x[i])
         }
@@ -104,7 +110,11 @@ export class TradingPerformer {
         let json = JSON.stringify(arrayOfObjects)
         console.log("JSON", json)
         await this.communication.saveStringAsync(json, new AbortController)
+<<<<<<< HEAD
       //  await this.communication.saveMapArray(json);*/
+=======
+      //  await this.communication.saveMapArray(json);
+>>>>>>> 560b0e856045e481c953baa09dc982db14c99fa7
         return x
     }
 
@@ -128,7 +138,10 @@ export class TradingPerformer {
             this.x = []
             this.yServer = []
             for (let ii of this.server) {
+<<<<<<< HEAD
                 this.any = ii
+=======
+>>>>>>> 560b0e856045e481c953baa09dc982db14c99fa7
                 let yy = ii.j
                 let yyy = (yy == undefined) ? undefined : Number(yy)
                 this.yServer.push(yyy)

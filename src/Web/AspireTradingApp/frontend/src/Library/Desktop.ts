@@ -74,6 +74,10 @@ export class Desktop implements IDesktop, IObject, IFactoryConsumer
     }
 
     public finish(): void {
+<<<<<<< HEAD
+=======
+        console.log("FFF")
+>>>>>>> 560b0e856045e481c953baa09dc982db14c99fa7
     }
 
     getObjectCollection(): IObject[] {

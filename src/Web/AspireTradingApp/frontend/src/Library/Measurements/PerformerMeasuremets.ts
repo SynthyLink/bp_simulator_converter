@@ -189,7 +189,11 @@ export class PerformerMeasuremets extends Performer {
 
  
     public async performIteratorDataConsumerFullAsync(dataConsumer: IDataConsumer,
+<<<<<<< HEAD
         iterator: IIterator, runtime: IDataRuntime, abort: AbortController,
+=======
+        iterator: IIterator, abort: AbortController,
+>>>>>>> 560b0e856045e481c953baa09dc982db14c99fa7
         preparation?: IAction | undefined): Promise<Map<string, any>[]> {
         let map = new Map<string, string>()
         let mm = dataConsumer.getAllMeasurements();
@@ -202,7 +206,11 @@ export class PerformerMeasuremets extends Performer {
                 map.set(ns, ns)
             }
         }
+<<<<<<< HEAD
         let data = await this.performIteratorDataConsumerMapAsync(dataConsumer, iterator, runtime, abort, map, preparation)
+=======
+        let data = await this.performIteratorDataConsumerMapAsync(dataConsumer, iterator, abort, map, preparation)
+>>>>>>> 560b0e856045e481c953baa09dc982db14c99fa7
         return data
     }
 

@@ -78,11 +78,23 @@ export class TradingCommunication extends HttpCommunication {
 
     public async saveMapArray(map: string): Promise<boolean> {
         try {
+<<<<<<< HEAD
             let url = this.server + "/api/trading/tradingsaveobject"
             this.any = axios.post(url, map)
             return true
         }
         catch (ex) {
+=======
+            console.log("axios", map)
+            let url = this.server + "/api/trading/tradingsaveobject"
+            console.log(url)
+            let r = await axios.post(url, map)
+            console.log("R", r)
+            return true
+        }
+        catch (ex) {
+            console.log("EX", ex)
+>>>>>>> 560b0e856045e481c953baa09dc982db14c99fa7
         }
         return false;
 
