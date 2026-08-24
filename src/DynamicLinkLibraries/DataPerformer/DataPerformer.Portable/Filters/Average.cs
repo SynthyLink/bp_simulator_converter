@@ -14,7 +14,7 @@ namespace DataPerformer.Portable.Filters
             {
                 data.Dequeue();
             }
-            if (data.Count == inter.Count)
+            if (data.Count >= inter.Count)
             {
                 return data.Average();
             }

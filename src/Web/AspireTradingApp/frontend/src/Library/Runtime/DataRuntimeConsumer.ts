@@ -19,7 +19,7 @@ import type { IObject } from "../Interfaces/IObject";
 import type { IFactory } from "../Interfaces/IFactory";
 import type { IFactoryConsumer } from "../Interfaces/IFactoryConsumer";
 
-export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, IObject, IFactoryConsumer
+export abstract class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, IObject, IFactoryConsumer
 {
 
     protected typeName: string = "CategoryArrow";
@@ -166,11 +166,7 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
         }
     }
 
-    stepRuntime(begin: number, end: number): void
-    {
-        console.log(begin)
-        console.log(end)
-    }
+    abstract stepRuntime(begin: number, end: number): void;
 
     refreshRuntime(): void {
         throw new OwnNotImplemented("DataRuntimeConsumer");

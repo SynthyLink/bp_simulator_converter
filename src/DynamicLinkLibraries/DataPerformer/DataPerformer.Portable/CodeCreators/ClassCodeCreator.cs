@@ -9,7 +9,6 @@ namespace DataPerformer.Portable.CodeCreators
     [Language("C#")]
     class ClassCodeCreator : Diagram.UI.CodeCreators.BaseClassCodeCreator
     {
-        
 
         internal ClassCodeCreator() : base(false)
         {
@@ -17,10 +16,31 @@ namespace DataPerformer.Portable.CodeCreators
             this.AddClassCodeCreator();
             dictionary = new Dictionary<Func<object, bool>, Func<string, object, List<string>>>()
             {
-                    { (o) => { return o is FilterWrapper; } , CreateFilter },
+                    { (o) => { return o is FilterWrapper & o.GetType().Name == "FilterWrapper"; } , CreateFilter },
              };
 
         }
+
+        List<string> CreateDataConsunerIterate(string preffix, object obj)
+        {
+            var l = new List<string>();
+            string pr = preffix;
+            if (pr[pr.Length - 1] != '.')
+            {
+                pr = pr + ".";
+            }
+            var str = "DataPerformer.Portable.DataConsumerIterate";
+            l.Add(str);
+            DataConsumer c = obj as DataConsumer;
+            l.Add("{");
+            l.Add("internal CategoryObject() : base(" + c.ConsumerType + ")");
+            l.Add("{");
+            l.Add("}");
+            l.Add("}");
+            return l;
+        }
+
+
 
         List<string> CreateFilter(string preffix, object obj)
         {
@@ -48,9 +68,6 @@ namespace DataPerformer.Portable.CodeCreators
 
     
         #region IClassCodeCreator Members
-
-
-
      
 
         protected override  List<string> CreateCode(string preffix, object obj, string volume)
@@ -79,8 +96,14 @@ namespace DataPerformer.Portable.CodeCreators
              if (str == null)
             {
                 string th = obj.GetType().Name;
+
                 if (th.Equals("DataConsumer"))
                 {
+                    if (obj is DataConsumerIterate)
+                    {
+
+                        return CreateDataConsunerIterate(preffix, obj);
+                    }
                     str = "DataPerformer.Portable.DataConsumer";
                     l.Add(str);
                     DataConsumer c = obj as DataConsumer;

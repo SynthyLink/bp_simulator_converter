@@ -10,8 +10,8 @@ using ErrorHandler;
 namespace Trading.Library.Objects
 {
    [InsertIntoChilldrenCollection(true)]
-    public class Order : DataConsumer, IPostSetArrow, 
-        IMeasurements, IRunning, IIteratorConsumer
+    public class Order : DataConsumerIterate, IPostSetArrow, 
+        IMeasurements, IRunning
     {
 
         #region Fields 
@@ -173,26 +173,7 @@ namespace Trading.Library.Objects
             }
         }
 
-        public IIterator Iterator
-        { get; private set; } = null;
-
-
-        void IIteratorConsumer.Add(IIterator iterator)
-        {
-            if (iterator == null) return;
-            if (Iterator != null)
-            {
-                throw new InvalidOperationException("Itertor already exists");
-            }
-            Iterator = iterator;
-        }
-
-        void IIteratorConsumer.Remove(IIterator iterator)
-        {
-            if (iterator == this.Iterator) this.Iterator = null;
-        }
-
-
+  
         #endregion
 
 

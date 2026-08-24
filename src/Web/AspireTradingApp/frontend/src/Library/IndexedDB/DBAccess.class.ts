@@ -32,7 +32,6 @@ export class DBAccess implements IDBAccess {
         this.db = request.result;
         request.result.createObjectStore(storeName, { keyPath: 'uid' });
           resolve(this.db);
-          console.log(this.db, "UPGRADE")
       }
     });
 
