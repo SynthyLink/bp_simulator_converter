@@ -175,18 +175,24 @@ export class PerformerMeasuremets extends Performer {
 
     }
 
+    public getMeasurementWrite(dataConsumer: IDataConsumer, meaurements: Map<string, string>, list: Map<string, any>[]): IAction {
+        let map = new Map<string, IMeasurement>()
+        for (var [key, value] of meaurements) {
+            map.set(key, this.getMeasurementDC(dataConsumer, value))
+        }
+        let action = new MeasurementWrite(map, list)
+        return action;
+    }
+/*
     public async performIteratorDataConsumerMapArrayAsync(dataConsumer: IDataConsumer,
         iterator: IIterator, runtime: IDataRuntime, abort: AbortController, meaurements: string[],
         preparation?: IAction | undefined): Promise<Map<string, any>[]> {
-        let map = new Map<string, IMeasurement>()
-        for (var s of meaurements) {
-            map.set(s, this.getMeasurementDC(dataConsumer, s))
-        }
-        let action = new MeasurementWrite(map)
+        let list: Map<string, any>[] = []
+        let action = this.getMeasurementWrite(dataConsumer, meaurements, list)
         await this.performIteratorDataConsumerAsync(dataConsumer, iterator, runtime, abort, action, preparation)
-        return action.getData()
+        return list
     }
-
+*/
  
     public async performIteratorDataConsumerFullAsync(dataConsumer: IDataConsumer,
         iterator: IIterator, runtime: IDataRuntime, abort: AbortController,
@@ -209,37 +215,33 @@ export class PerformerMeasuremets extends Performer {
 
     public async performIteratorDataConsumerMapAsync(dataConsumer: IDataConsumer,
         iterator: IIterator, runtime: IDataRuntime, abort: AbortController, meaurements: Map<string, string>,
-        preparation?: IAction | undefined): Promise<Map<string, any>[]> {
-        let map = new Map<string, IMeasurement>()
-        for (var [key, value] of meaurements) {
-            let measurement = this.getMeasurementDC(dataConsumer, value)
-            map.set(key, measurement)
-        }
-        console.log("MAP", map)
-        let action = new MeasurementWrite(map)
-        await this.performIteratorDataConsumerAsync(dataConsumer, iterator, runtime, abort, action, preparation)
-        let data = action.getData()
+        preparation?: IAction | undefined, errorHandler?: IExceptionHandler | undefined): Promise<Map<string, any>[]> {
+        let list: Map<string, any>[] = []
+        let action = this.getMeasurementWrite(dataConsumer, meaurements, list)
+        await this.performIteratorDataConsumerAsync(dataConsumer, iterator, runtime, abort, action, preparation, errorHandler)
+        let data = list
         return data
     }
 
     public async performIteratorDataConsumerAsync(dataConsumer: IDataConsumer,
         iterator: IIterator, runtime: IDataRuntime, abort: AbortController, action: IAction,
-        preparation?: IAction | undefined): Promise<void> {
+        preparation?: IAction | undefined, errorHandler?: IExceptionHandler | undefined): Promise<void> {
         try {
             if (preparation !== undefined) preparation.action();
-            var co = dataConsumer as unknown as ICategoryObject;
+             var co = dataConsumer as unknown as ICategoryObject;
             var d = co.getDesktop();
             await this.startAsync(d, abort);
-            var signal = abort.signal
-            if (signal.aborted) {
-                this.errorHandler.log("Start aborted")
+            if (abort.signal.aborted) {
+                if (errorHandler === undefined) return
+                errorHandler.log("Start aborted")
                 return
             }
             iterator.resetIterator()
             this.fullReset(dataConsumer)
             while (true) {
-                if (signal.aborted) {
-                    this.errorHandler.log("Iteration aborted")
+                if (abort.signal.aborted) {
+                    if (errorHandler === undefined) return
+                    errorHandler.log("Iteration aborted")
                     return
                 }
                 if (!iterator.nextIterator()) {
@@ -270,12 +272,9 @@ export class PerformerMeasuremets extends Performer {
 
 class MeasurementWrite implements IAction {
 
-    constructor(map: Map<string, IMeasurement>) {
+    constructor(map: Map<string, IMeasurement>, list : Map<string, any> []) {
         this.map = map;
-    }
-
-    public getData(): Map<string, any>[] {
-        return this.list
+        this.list = list;
     }
 
     action(): void {
@@ -290,5 +289,6 @@ class MeasurementWrite implements IAction {
         return false;
     }
     map !: Map<string, IMeasurement>
-    list: Map<string, any>[] = []
+    list !: Map<string, any>[]
 }
+

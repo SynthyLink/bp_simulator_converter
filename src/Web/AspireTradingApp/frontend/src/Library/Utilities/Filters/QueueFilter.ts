@@ -1,16 +1,12 @@
 import { Performer } from "../../Performer";
-import { FastQueue } from "../Collections/FastQueue";
-import type { IQueue } from "../Collections/Interfaces/IQueue";
-import type { IArray } from "../Collections/Interfaces/IArray";
 import type { ISequenceFilter } from "./Interfaces/ISequenceFilter";
 
 
 
-export class QueueFilter implements ISequenceFilter {
+export abstract class QueueFilter implements ISequenceFilter {
 
-    protected queue: IQueue<number> = new FastQueue();
 
-    protected arr !: IArray<number>
+    protected arr: number[] = []
 
     protected count: number = 2;
 
@@ -21,7 +17,6 @@ export class QueueFilter implements ISequenceFilter {
     protected performer: Performer = new Performer()
 
     constructor(count: number) {
-        this.arr = this.queue as unknown as IArray<number>
         this.count = count;
     }
 
@@ -33,25 +28,21 @@ export class QueueFilter implements ISequenceFilter {
         this.count = count;
     }
 
-    getFilterValue(a: number): number | undefined {
-        this.queue.enqueue(a);
-        var c = this.queue.size();
-        var l = c >= this.count;
-        this.a = a;
-        if (l) {
-            var x = this.queue.dequeue()
-                this.b = x;
-        }
-        return l ? this.b : undefined;
+    protected abstract getOwnValue(): number | undefined
 
+    getFilterValue(a: number): number | undefined {
+        this.arr.push(a)
+        var c = this.arr.length
+        var l = c >= this.count;
+        if (!l) return undefined;
+        this.b = this.getOwnValue();
+
+        this.arr.slice()
+        return this.b
     }
 
     resetFilter(): void {
-        this.queue.clear()
-    }
-
-    protected array(): number[] {
-        return this.arr.array()
+        this.arr = []
     }
 
 }

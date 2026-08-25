@@ -21,7 +21,7 @@ namespace DataPerformer.Portable.Filters
                 ret = Max ? data.Max() : data.Min();
             }
             var c = base[a];
-            if (a == null)
+            if (c == null)
             {
                 return null;
             }

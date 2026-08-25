@@ -12,6 +12,7 @@ import type { ChartDataTrading } from "./ChartDataTrading";
 import type { IDataRuntime } from "../../Library/Interfaces/IDataRuntime";
 import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
 import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
+import type { IExceptionHandler } from "../../Library/ErrorHandler/Interfaces/IExceptionHandler";
 
 export class TradingPerformer {
 
@@ -34,7 +35,6 @@ export class TradingPerformer {
     server: Map<string, any>[] | undefined = undefined
 
     chartSym: string = "b"
-
 
     constructor(local: ILocalDB, desktop: IDesktop, communication: TradingCommunication, factory?: IFactory) {
         this.local = local;
@@ -84,9 +84,8 @@ export class TradingPerformer {
 
 
     public async calculate(symblol: string, period: string, begin: number, end: number,
-        a1: number, a2: number, d1: number, d2: number, d3: number, d4: number, controller: AbortController):
+        a1: number, a2: number, d1: number, d2: number, d3: number, d4: number, controller: AbortController | undefined):
         Promise<Map<string, any>[]> {
-        console.log("CALCULATE")
         this.any = symblol
         this.any = period
         this.any = begin
@@ -104,8 +103,9 @@ export class TradingPerformer {
         this.filters[3].setFilterCount(d2)
         this.filters[4].setFilterCount(d3)
         this.filters[5].setFilterCount(d4)*/
+        if (controller === undefined) return []
         let x = await this.pefrormer.performIteratorDataConsumerMapAsync(this.dataConsumer,
-            this.query, this.runtime, controller, this.mmap);
+            this.query, this.runtime, controller, this.mmap, undefined, new ErrorH(controller))
       /*  let z: Map<string, any>[] = []
         for (let i = 0; i < 100; i++) {
             z.push(x[i])
@@ -196,4 +196,18 @@ export class TradingPerformer {
           ["q", "Donchian maximum long.Output"],
           ["r", "Donchian maximum short.Output"]]
         )
+}
+
+class ErrorH implements IExceptionHandler {
+    a!: AbortController
+    constructor(a: AbortController) {
+        this.a = a;
+    }
+    handleException(error: Error, obj?: any): void {
+        console.log("EEE", this.a, error, obj)
+    }
+    log(message: string, obj?: any): void {
+        console.log("AAA", this.a, message, obj)
+    }
+
 }

@@ -271,10 +271,8 @@ export class Performer
         if (numbers.length === 0) {
             return undefined;
         }
-
-        return numbers.reduce((max, current) => {
-            return current > max ? current : max;
-        }, -Infinity); // Start with -Infinity to ensure the first element is always greater
+        const maxNumber: number = numbers.reduce((max, current) => current > max ? current : max, numbers[0]);
+        return maxNumber
     }
 
     public findMinWithReduce(numbers: number[]): number | undefined {
@@ -282,10 +280,17 @@ export class Performer
             return undefined;
         }
 
-        return numbers.reduce((min, current) => {
-            return current > min ? current : min;
-        }, Infinity); // Start with -Infinity to ensure the first element is always greater
+        let minNumber = numbers.reduce(this.funcMin, numbers[0])
+        console.log(numbers, minNumber)
+        return minNumber
+
     }
+
+    funcMin(x: number, y: number): number {
+        return x < y ? x: y
+        
+    }
+    
 
     public calculateAverage(numbers: number[]): number {
         if (numbers.length === 0) {

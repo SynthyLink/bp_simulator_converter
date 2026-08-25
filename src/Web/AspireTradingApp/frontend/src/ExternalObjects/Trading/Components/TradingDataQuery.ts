@@ -87,7 +87,8 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
     }
 
     nextIterator(): boolean {
-        ++this.step;
+        this.realTime = this.step
+       ++this.step;
         if (this.step >= this.data.length) return false
         this.current = this.data[this.step]
         this.fillVector()

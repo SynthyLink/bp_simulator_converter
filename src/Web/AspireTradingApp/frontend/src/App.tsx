@@ -13,6 +13,7 @@ import { Performer } from './Library/Performer';
 import { TradingCommunication } from "./ExternalObjects/Trading/Communication/TradingCommunication";
 import type { Initial } from './ExternalObjects/Trading/Initial';
 import type { ChartDataTrading } from './ExternalObjects/Trading/ChartDataTrading';
+import { OwnError } from './Library/ErrorHandler/OwnError';
 
 
 
@@ -27,6 +28,7 @@ let map: Map<string, any> = new Map
 
 let init: Initial | undefined
 
+let globalAbort: AbortController | undefined = undefined
 
 
 function datePure(x: number): string {
@@ -80,6 +82,9 @@ const App: React.FC = () => {
     let [symbol, setSymbol] = useState<string>();
 
     let [chartDataTrading, setChartDataTrading] = useState<ChartDataTrading>()
+   // let [abort, setAbort] = useState<AbortController>()
+
+    
 /*
 
     let [chartX, setChartX] = useState<number[]>();
@@ -110,9 +115,26 @@ const App: React.FC = () => {
         //communication.deleteDb()
     }
 
+
+    const abortClick = async () => {
+        console.log("GA", globalAbort?.signal.aborted)
+        if (globalAbort === undefined) return
+        globalAbort.abort()
+        console.log("GAAAA", globalAbort.signal.aborted)
+        throw new OwnError("", "");
+        setStarted(true)
+    }
+
+    
+
     const btnClick = async () => {
+        await startClient()
+    }
+
+    const startClient = 
+        async () => {
         setStarted(false)
-        let controller = getAbortController()
+        setAbortController()
         if (begin === undefined) return
         let b = performer.dateNumber(begin);
         if (end === undefined) return
@@ -136,26 +158,26 @@ const App: React.FC = () => {
         if (s !== undefined)
         {
               promises.push(fillClient(s, p, b, e, f[0], f[1], f[2],
-                    f[3], f[4], f[5], controller))
-            promises.push(fillServer(map, controller))
+                    f[3], f[4], f[5]))
+        //    promises.push(fillServer(map))
             await Promise.all(promises);
             let chart = communication.tPerformer.setChart("j")
             setChartDataTrading(chart)
         }
         setStarted(true)
     };
-   const fillServer = async(map : Map<string, any>, controller: AbortController): Promise<void> => {
-
-       let h = await communication.getAnalysisAsync(map, controller)
+    const fillServer = async (map: Map<string, any>): Promise<void> => {
+        if (globalAbort == undefined) return
+        let h = await communication.getAnalysisAsync(map, globalAbort)
        console.log(h, "SSS")
        communication.tPerformer.setServer(h)
     }
 
     const fillClient = async (symbol: string, period: string, begin: number, end: number,
-        a1: number, a2: number, d1: number, d2: number, d3: number, d4: number, controller: AbortController): Promise<void> => {
+        a1: number, a2: number, d1: number, d2: number, d3: number, d4: number): Promise<void> => {
 
         let p = communication.tPerformer
-        let h = await p.calculate(symbol, period, begin, end, a1, a2, d1, d2, d3, d4, controller)
+        let h = await p.calculate(symbol, period, begin, end, a1, a2, d1, d2, d3, d4, globalAbort)
         console.log(h, "CCC")
         communication.tPerformer.setClient(h)
 
@@ -166,9 +188,10 @@ const App: React.FC = () => {
 //*/
   
   
-    function getAbortController(): AbortController {
-        return new AbortController()
-    }
+    function setAbortController(): void {
+        let ac = new AbortController()
+        globalAbort = ac
+ }
 
     let first = true
 
@@ -238,7 +261,7 @@ const App: React.FC = () => {
   
     async function populateData() {
         if (first) {
-            setStarted(true)
+            setStarted(false)
             first = false
             let xc:  number[] | undefined =[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
             let yc: (number | undefined)[] | undefined = [28.5, 70.5, undefined, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
@@ -248,6 +271,37 @@ const App: React.FC = () => {
                 yclient: yc,
                 yserver: ys
             }
+          /*  let p = new Performer()
+
+            let x = [226.9, 194.1, 95.6, 54.4, 29.9, 600.7, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5]
+            do {
+                console.log(x.shift())
+                
+            }
+            while (x.length > 0)  
+      /*      {
+/*           let queue = new FastQueue<number>
+            for (let xx of x) {
+                queue.enqueue(xx)
+            }
+
+            let v = 0;
+            do
+            {
+                let a = queue.array()
+                console.log(a)
+                let y = p.findMinWithReduce(a)
+                let z = p.findMaxWithReduce(a)
+                let b = queue.dequeue()
+                console.log(b)
+                console.log(y)
+                console.log(z)
+                ++v;
+                if (v > 30) return
+            }
+            while (!queue.isEmpty())
+   */
+
             setChartDataTrading(ch)
             if (symbols === undefined) {
                 let s = await communication.getSymbolsAsync()
@@ -290,7 +344,8 @@ const App: React.FC = () => {
                         setBegin(b)
                         setEnd(e)
                         //   setPeriod(i.p)
-                        setSymbol(i.s)
+                    setSymbol(i.s)
+                    setStarted(true)
                     }
                 catch (error) {
                     if (error instanceof SyntaxError) {
@@ -321,6 +376,7 @@ const App: React.FC = () => {
                 <div> <input className="input-filter-index" type='datetime-local' value={end} onInput={handleEndChange} /></div>
                 <div>
                     <button onClick={btnClick} disabled={!started} >Start</button>
+                    <button onClick={abortClick} disabled={started} >Abort</button>
                     <button onClick={delClick} hidden={true}> Delete database</button>
                     <table>
                         <thead>

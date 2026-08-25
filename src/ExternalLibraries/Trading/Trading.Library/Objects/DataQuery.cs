@@ -431,7 +431,7 @@ namespace Trading.Library.Objects
             public RealTimeMeasurement(DataQuery query) : base("RealTime", query)
             {
 
-                func = () => query.realTime;
+                func = () =>   query.realTime;
                 f = [query.CoordX, null];
             }
 
