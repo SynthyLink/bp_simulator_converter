@@ -15,7 +15,6 @@ import { VectorFormulaConsumer } from "../../../Library/Measurements/VectorFormu
 import { SequenceFilterType } from "../../../Library/Utilities/Filters/Interfaces/SequenceFilterType";
 import { TradingOrder } from "../Components/TradingOrder";
 import { TradingDataQuery } from "../Components/TradingDataQuery";
-import { FeedbackAliasCollection } from "../../../Library/Measurements/FeedBack/FeedbackAliasCollection";
 
 
 class DonchianDesktop_CategoryObject_0 extends TradingDataQuery

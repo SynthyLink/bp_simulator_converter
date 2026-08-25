@@ -51,7 +51,7 @@ namespace Trading.Library.Objects
 
         #region Proprerties
 
-        static public ITradingDatabaseHistoryIntefaceFactory Factrory { get; set; }
+        static public ITradingDatabaseHistoryIntefaceFactory Factory { get; set; }
 
         public ITradingDatabaseHistoryInterface Database { get; protected set; }
 
@@ -108,9 +108,23 @@ namespace Trading.Library.Objects
             return -1;
         }
 
+        IFactory factory;
+
         #endregion
 
         #region Ctor
+
+        public DataQuery(IFactory factory) : this()
+        {
+            this.factory = factory;
+        }
+
+
+        public DataQuery(ITradingDatabaseHistoryInterface database) : this()
+        {
+            this.Database = database;
+        }
+
         public DataQuery()
         {
             task = this;
@@ -300,22 +314,28 @@ namespace Trading.Library.Objects
         {
             try
             {
-                var desktop = this.GetDesktop();
-                if (desktop is IFactoryConsumer fc)
+                if (Database == null)
                 {
-                    var f = fc.Factory;
-                    if (f != null)
+                    if (factory == null)
                     {
-                        var d = f.Get<ITradingDatabaseHistoryInterface>();
+                        var desktop = this.GetDesktop();
+                        if (desktop is IFactoryConsumer fc)
+                        {
+                            factory = fc.Factory;
+                        }
+                    }
+                    if (factory != null)
+                    {
+                        var d = factory.Get<ITradingDatabaseHistoryInterface>();
                         if (d != null)
                         {
                             Database = d;
                         }
                     }
-                }
-                if (Database == null)
-                {
-                    Database = Trading.Database.StaticExtensionTradingDatabase.Connect();
+                    if (Database == null)
+                    {
+                        Database = Trading.Database.StaticExtensionTradingDatabase.Connect();
+                    }
                 }
             }
             catch (Exception ex)

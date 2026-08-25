@@ -178,8 +178,9 @@ export class PerformerMeasuremets extends Performer {
     public getMeasurementWrite(dataConsumer: IDataConsumer, meaurements: Map<string, string>, list: Map<string, any>[]): IAction {
         let map = new Map<string, IMeasurement>()
         for (var [key, value] of meaurements) {
-            map.set(key, this.getMeasurementDC(dataConsumer, value))
+             map.set(key, this.getMeasurementDC(dataConsumer, value))
         }
+        console.log("MAP", map)
         let action = new MeasurementWrite(map, list)
         return action;
     }

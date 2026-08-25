@@ -1,13 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using AspireTradingApp.Server.Trading;
-using Trading.Library;
+﻿using AspireTradingApp.Server.Trading;
+using Diagram.UI.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Trading.Database;
+using Trading.Database.Interfaces;
+using Trading.Library;
 using Trading.Library.Classes;
 using Trading.Library.Objects;
 
 static class TradingInit
 {
-    static Performer performer = new();
+    static AspireTradingApp.Server.Trading.Performer performer;// = new();
+
+    static ITradingDatabaseHistoryInterface inter;
 
     static Dictionary<string, object> symbols = null;
 
@@ -16,7 +20,9 @@ static class TradingInit
     {
         var api = application.MapGroup("/api/trading");
         var cs = application.Configuration["ConnectionStrings:Trading"];
-        StaticExtensionTradingDatabase.ConnectionString = cs;
+        inter =   new Trading.Database.SqlServer.Overriden.TradingHistory(cs);
+        //StaticExtensionTradingDatabase.ConnectionString = cs;
+        performer = new AspireTradingApp.Server.Trading.Performer(inter);
         await performer.Load(new CancellationToken());
         api.MapGet("tradingsymbols", (CancellationToken token) =>
         {
@@ -99,7 +105,15 @@ static class TradingInit
 
     public static async Task<string[][]> GetSymbols(CancellationToken token)
     {
-        return await GetTradingHistorucalSrtingSymbolsArray(token);
+        var ss = await inter.GetSymbolsAsync(token);
+        var l = new List<string[]>();
+        foreach (var i in ss)
+        {
+            var str = new string[] { i.Key, i.Value + "" };
+            l.Add(str);
+        }
+        return l.ToArray();
+       // return await GetTradingHistorucalSrtingSymbolsArray(token);
     }
 
     public static async Task<string[][]> GetTradingHistorucalSrtingSymbolsArray(CancellationToken cancellationToken)
@@ -115,8 +129,10 @@ static class TradingInit
     {
         if (symbols == null)
         {
-            var x = await DataQuery.Create(cancellationToken);
-            symbols = x.Symbols;
+            var dataQuery = new DataQuery(inter);
+            IInitializeTask it = dataQuery;
+            await it.InitializeAsync(cancellationToken);
+            symbols = dataQuery.Symbols;
         }
         return symbols;
     }

@@ -64,7 +64,7 @@ namespace BP_Simulator.Light
             /*     WpfInterface.StaticExtensionWebInterfaceUI.Init();*/
         }
 
-
+        /*
         static void TestType()
         {
             var dss = new Dictionary<string, DataSetService.Pure.Interfaces.ITable>();
@@ -105,9 +105,9 @@ namespace BP_Simulator.Light
                  var ggg = (Gravity_36_36.Wrapper.Gravity)gv;
                  var a = new Regression.AliasRegression();
                  var bb = a is Regression.Portable.AliasRegression;
-                 bb = false;*/
+                 bb = false;
         }
-
+        */
         static void SaveIcon()
         {/*
             var icon = BitmapConsumer.StaticExtensionBitmapConsumer.IconFromBitmap(ResourceImage.process_9912609);

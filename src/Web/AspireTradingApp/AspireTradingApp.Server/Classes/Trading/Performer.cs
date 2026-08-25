@@ -1,25 +1,24 @@
 ﻿
-using IronPython.Runtime;
-
-using Microsoft.AspNetCore.Mvc;
-
 using DataPerformer.Interfaces;
-
+using Diagram.UI.ExternalTools;
 using Diagram.UI.Interfaces;
-
-using Trading.Database.Classes;
-using Trading.Library.Classes;
-using Trading.Library.Objects;
+using GeneratedProject;
+using IronPython.Runtime;
+using Microsoft.AspNetCore.Mvc;
 using NamedTree;
 using NamedTree.Interfaces;
-using GeneratedProject;
+using Trading.Database.Classes;
+using Trading.Database.Interfaces;
+using Trading.Library.Classes;
+using Trading.Library.Objects;
+using static System.Net.Mime.MediaTypeNames;
 
 
 
 
 namespace AspireTradingApp.Server.Trading
 {
-    public class Performer : Classes.Performer
+    public class Performer 
     {
 
         string[] filtersN = ["Average Short", "Averge Long", "Donchian maximum long", "Donchian maximum short", "Donchian minimum long",
@@ -43,17 +42,33 @@ namespace AspireTradingApp.Server.Trading
           {"o", "Donchian minimum long.Output"},
           {"p", "Donchian minimum short.Output"},
           {"q", "Donchian maximum long.Output"},
-          {"r", "Donchian maximum short.Output"} };
+          {"r", "Donchian maximum short.Output"},
+          {"s", "Position.Formula_1"}
+};
 
 
-        int[] k = [0, 0, 0, 0, 0, 0];
-        public Performer()
+int[] k = [0, 0, 0, 0, 0, 0];
+
+        static NamedTree.Interfaces.IFactory Factory
         {
+            get;
+            set;
+        } = new UniversalFactory();
+        
+        static Performer()
+        {
+        }
+
+        public Performer(ITradingDatabaseHistoryInterface inter)
+        {
+   
+            Factory.Set(inter);
         }
 
         internal async Task Load(CancellationToken token)
         {
-            var desktop = await DonchianDesktop.GetDesktopAsync(token);
+            
+            var desktop = await DonchianDesktop.GetDesktopAsync(token, Factory);
         }
 
         public async Task<List<HistoricalDataMessageNumber>> GetHistory([FromBody] DataQueryInit init,
@@ -67,7 +82,7 @@ namespace AspireTradingApp.Server.Trading
 
         public async Task<string> Initial()
         {
-            var desktop = await DonchianDesktop.GetDesktopAsync(CancellationToken.None);
+            var desktop = await DonchianDesktop.GetDesktopAsync(CancellationToken.None, Factory);
             var q = desktop.Get<DataQuery>("Trading");
             var d = new Dictionary<string, object>();
             d["b"] = q.Begin.ToOADate() * 86400;
@@ -80,12 +95,11 @@ namespace AspireTradingApp.Server.Trading
 
         public async Task<HistoricalDataMessageNumber[]> GetHistoryNumber(double begin, double end, string period, string s, CancellationToken token)
         {
-            var q = new DataQuery();
+            var q = new DataQuery(Factory);
             IInitializeTask it = q;
             await it.InitializeAsync(token);
             q.Begin = DateTime.FromOADate(begin);
             q.End = DateTime.FromOADate(end);
-
             q.Period = period;
             q.Symbol = s;
             var st = await q.GetHistoricalDataMessageDateTimes(token);
@@ -95,9 +109,7 @@ namespace AspireTradingApp.Server.Trading
 
         public async Task<HistoricalDataMessageNumber[]> GetHistoryNumber(string json, CancellationToken token)
             { 
-
-            var q = new DataQuery();
-            var o =
+          var o =
                     System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(json);
             var b = double.Parse(o.GetProperty("b") + "");
             var e = double.Parse(o.GetProperty("e") + "");
@@ -109,9 +121,8 @@ namespace AspireTradingApp.Server.Trading
 
         public async Task<string> GetData(string input, CancellationToken token)
         {
-            IFactory factory = new UniversalFactory();
-          //  factory.Set<ITradingDatabaseHistoryIntefaceFactory>()
-            var desktop = await DonchianDesktop.GetDesktopAsync(token);
+               //  factory.Set<ITradingDatabaseHistoryIntefaceFactory>()
+            var desktop = await DonchianDesktop.GetDesktopAsync(token, Factory);
             var dataQuery = desktop.Get<DataQuery>("Trading");
             var dataConsumer = desktop.Get<IDataConsumer>("Chart");
 

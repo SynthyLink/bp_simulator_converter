@@ -269,6 +269,10 @@ namespace GeneratedProject
 				arrows.Add(currALabel);
 				currALabel.SourceNumber = (int)17;
 				currALabel.TargetNumber = (int)16;
+				currALabel  = new InternalDesktop.ArrowLabel55("", this);
+				arrows.Add(currALabel);
+				currALabel.SourceNumber = (int)18;
+				currALabel.TargetNumber = (int)14;
 				if (begin){ SuccessLoad = Final(); };
 				Name = "DonchianDesktop"; 
 			}
@@ -1540,8 +1544,8 @@ namespace GeneratedProject
 						};
 						parameters =new Dictionary<string, object>()
 						{
-							{"d", (double)135 },
-							{"c", (double)145 }
+							{"c", (double)145 },
+							{"d", (double)135 }
 						};
 						operationNames = new Dictionary<System.Int32,System.String>()
 						{
@@ -1885,8 +1889,8 @@ namespace GeneratedProject
 						{
 							{"d", (double)107 },
 							{"c", (double)129 },
-							{"b", (double)105 },
-							{"a", (double)20 }
+							{"a", (double)20 },
+							{"b", (double)105 }
 						};
 						operationNames = new Dictionary<System.Int32,System.String>()
 						{
@@ -2888,6 +2892,19 @@ namespace GeneratedProject
 				{
 					this.desktop = desktop;
 					arrow = new ArrowLabel54.CategoryArrow();
+				}
+		
+				internal class CategoryArrow : DataPerformer.DataLink
+				{
+				}
+			}
+		
+			internal class ArrowLabel55 : Diagram.UI.Labels.PureArrowLabel
+			{
+				internal ArrowLabel55(string name, Diagram.UI.Interfaces.IDesktop desktop) : base(name, "", "", 0, 0)
+				{
+					this.desktop = desktop;
+					arrow = new ArrowLabel55.CategoryArrow();
 				}
 		
 				internal class CategoryArrow : DataPerformer.DataLink

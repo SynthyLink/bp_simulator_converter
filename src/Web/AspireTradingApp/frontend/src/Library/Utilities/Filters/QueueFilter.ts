@@ -36,8 +36,7 @@ export abstract class QueueFilter implements ISequenceFilter {
         var l = c >= this.count;
         if (!l) return undefined;
         this.b = this.getOwnValue();
-
-        this.arr.slice()
+        this.arr.shift()
         return this.b
     }
 

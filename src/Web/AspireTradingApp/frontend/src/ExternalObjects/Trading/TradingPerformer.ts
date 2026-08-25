@@ -194,7 +194,10 @@ export class TradingPerformer {
           ["o", "Donchian minimum long.Output"],
           ["p", "Donchian minimum short.Output"],
           ["q", "Donchian maximum long.Output"],
-          ["r", "Donchian maximum short.Output"]]
+        ["r", "Donchian maximum short.Output"],
+        ["s", "Position.Formula_1"]
+
+    ]
         )
 }
 

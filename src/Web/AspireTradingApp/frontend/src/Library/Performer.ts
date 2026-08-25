@@ -275,13 +275,18 @@ export class Performer
         return maxNumber
     }
 
+ //   k: number = 0;
+
     public findMinWithReduce(numbers: number[]): number | undefined {
         if (numbers.length === 0) {
             return undefined;
         }
 
         let minNumber = numbers.reduce(this.funcMin, numbers[0])
-        console.log(numbers, minNumber)
+ /*       if (this.k < 300) {
+            console.log(numbers, minNumber)
+++this.k
+        }*/
         return minNumber
 
     }
@@ -717,6 +722,7 @@ export class Performer
     {
 
         var mm = consumer.getAllMeasurements();
+        console.log("MMM", mm)
         for (var mea of mm) {
             var co = mea as unknown as ICategoryObject;
             var nm = co.getCategoryObjectName();
