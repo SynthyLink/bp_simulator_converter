@@ -108,11 +108,9 @@ namespace Trading.Database.SqlServer.Overriden
 
         protected virtual async Task<Dictionary<string, object>> GetSymbols(CancellationToken token)
         {
-            var t = SelectSymbolsAsync(token);
-            await t;
-            var r = t.Result;
+            var t = await SelectSymbolsAsync(token);
             var d = new Dictionary<string,object>();
-            foreach (var j in r)
+            foreach (var j in t)
             {
                 d[j.Name] = j.Id;
             }

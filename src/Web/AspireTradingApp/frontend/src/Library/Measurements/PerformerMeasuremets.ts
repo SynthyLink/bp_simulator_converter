@@ -180,7 +180,6 @@ export class PerformerMeasuremets extends Performer {
         for (var [key, value] of meaurements) {
              map.set(key, this.getMeasurementDC(dataConsumer, value))
         }
-        console.log("MAP", map)
         let action = new MeasurementWrite(map, list)
         return action;
     }

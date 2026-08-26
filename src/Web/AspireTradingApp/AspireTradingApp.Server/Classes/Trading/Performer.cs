@@ -11,7 +11,6 @@ using Trading.Database.Classes;
 using Trading.Database.Interfaces;
 using Trading.Library.Classes;
 using Trading.Library.Objects;
-using static System.Net.Mime.MediaTypeNames;
 
 
 
@@ -24,6 +23,12 @@ namespace AspireTradingApp.Server.Trading
         string[] filtersN = ["Average Short", "Averge Long", "Donchian maximum long", "Donchian maximum short", "Donchian minimum long",
             "Donchian minimum short"];
         string[] del = ["a1", "a2", "d1", "d2", "d3", "d4"];
+
+        string ConnetionString
+        {
+            get;
+            set;
+        }
 
         Dictionary<string, string> dp = new Dictionary<string, string>() {{"a", "Trading.RealTime"},
         {"b", "Trading.Low"},
@@ -49,20 +54,37 @@ namespace AspireTradingApp.Server.Trading
 
 int[] k = [0, 0, 0, 0, 0, 0];
 
-        static NamedTree.Interfaces.IFactory Factory
+        public NamedTree.Interfaces.IFactory Factory
         {
-            get;
-            set;
-        } = new UniversalFactory();
-        
+            get
+            {
+                NamedTree.Interfaces.IFactory f = new UniversalFactory();
+                f.Set(Database);
+                return f;
+            }
+        }
+
+        ITradingDatabaseHistoryIntefaceFactory df;
+
+
         static Performer()
         {
         }
 
-        public Performer(ITradingDatabaseHistoryInterface inter)
+        public ITradingDatabaseHistoryInterface Database
         {
-   
-            Factory.Set(inter);
+            get
+            {
+                var database = df.Create(ConnetionString);
+                return database;
+            }
+        }
+
+        public Performer(string cs, ITradingDatabaseHistoryIntefaceFactory df)
+        {
+
+            ConnetionString = cs;
+            this.df = df;
         }
 
         internal async Task Load(CancellationToken token)
@@ -135,7 +157,7 @@ int[] k = [0, 0, 0, 0, 0, 0];
             var e = double.Parse(o.GetProperty("e") + "");
             var sym = o.GetProperty("s") + "";
             var p = o.GetProperty("p") + "";
-         //   dataQuery.Set(sym, p, b, e);
+            dataQuery.Set(sym, p, b, e);
          /*   for (int i = 0; i < k.Length; i++)
             {
                 var k  = int.Parse(o.GetProperty(del[i]) + "");

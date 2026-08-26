@@ -720,9 +720,7 @@ export class Performer
 
     public getMeasurementDC(consumer: IDataConsumer, name: string): IMeasurement
     {
-
         var mm = consumer.getAllMeasurements();
-        console.log("MMM", mm)
         for (var mea of mm) {
             var co = mea as unknown as ICategoryObject;
             var nm = co.getCategoryObjectName();

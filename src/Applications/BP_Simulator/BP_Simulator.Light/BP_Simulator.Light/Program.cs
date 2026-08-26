@@ -132,7 +132,7 @@ namespace BP_Simulator.Light
             Abstract3DConverters.StaticExtensionAbstract3DConverters.UseDirectory = true;
            // SaveIcon();
 
-            TestType();
+           // TestType();
 
             // FormulaMeasurement.CheckValue = (o)                            => o == null;
             FormulaEditor.StaticExtensionFormulaEditor.CheckValue = check;

@@ -11,8 +11,8 @@ static class TradingInit
 {
     static AspireTradingApp.Server.Trading.Performer performer;// = new();
 
-    static ITradingDatabaseHistoryInterface inter;
-
+    static ITradingDatabaseHistoryInterface Inter => performer.Database;
+ 
     static Dictionary<string, object> symbols = null;
 
 
@@ -20,9 +20,10 @@ static class TradingInit
     {
         var api = application.MapGroup("/api/trading");
         var cs = application.Configuration["ConnectionStrings:Trading"];
-        inter =   new Trading.Database.SqlServer.Overriden.TradingHistory(cs);
+        ITradingDatabaseHistoryIntefaceFactory idb = new Trading.Database.SqlServer.Factory.TradingDatabaseHistoryIntefaceFactory();
+   
         //StaticExtensionTradingDatabase.ConnectionString = cs;
-        performer = new AspireTradingApp.Server.Trading.Performer(inter);
+        performer = new AspireTradingApp.Server.Trading.Performer(cs, idb);
         await performer.Load(new CancellationToken());
         api.MapGet("tradingsymbols", (CancellationToken token) =>
         {
@@ -105,7 +106,7 @@ static class TradingInit
 
     public static async Task<string[][]> GetSymbols(CancellationToken token)
     {
-        var ss = await inter.GetSymbolsAsync(token);
+        var ss = await Inter.GetSymbolsAsync(token);
         var l = new List<string[]>();
         foreach (var i in ss)
         {
@@ -124,12 +125,11 @@ static class TradingInit
 
     }
 
-
     public static async Task<Dictionary<string, object>> GetTradingHistoricalSymbols(CancellationToken cancellationToken)
     {
         if (symbols == null)
         {
-            var dataQuery = new DataQuery(inter);
+            var dataQuery = new DataQuery(Inter);
             IInitializeTask it = dataQuery;
             await it.InitializeAsync(cancellationToken);
             symbols = dataQuery.Symbols;
