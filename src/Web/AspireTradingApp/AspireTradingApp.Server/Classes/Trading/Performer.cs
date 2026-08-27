@@ -20,9 +20,8 @@ namespace AspireTradingApp.Server.Trading
     public class Performer 
     {
 
-        string[] filtersN = ["Average Short", "Averge Long", "Donchian maximum long", "Donchian maximum short", "Donchian minimum long",
-            "Donchian minimum short"];
-        string[] del = ["a1", "a2", "d1", "d2", "d3", "d4"];
+        string[] filtersN = ["Average Short", "Average Long", "Donchian maximum", "Donchian maximum"];
+        string[] del = ["a1", "a2", "d1", "d2"];
 
         string ConnetionString
         {
@@ -43,12 +42,11 @@ namespace AspireTradingApp.Server.Trading
           {"k", "Order.Sell Price"},
           {"l", "Order.Buy Price"},
           {"m", "Average Short.Output"},
-          {"n", "Averge Long.Output"},
-          {"o", "Donchian minimum long.Output"},
-          {"p", "Donchian minimum short.Output"},
-          {"q", "Donchian maximum long.Output"},
-          {"r", "Donchian maximum short.Output"},
-          {"s", "Position.Formula_1"}
+          {"n", "Average Long.Output"},
+          {"o", "Donchian minimum.Output"},
+          {"q", "Donchian maximum.Output"},
+          {"s", "Position.Formula_1"},
+          {"Position_Formula_1", "Position.Formula_1"}
 };
 
 

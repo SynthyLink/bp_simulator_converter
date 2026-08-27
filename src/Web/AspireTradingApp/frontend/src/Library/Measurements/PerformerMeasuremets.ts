@@ -25,6 +25,7 @@ import { Performer } from "../Performer";
 import { TimeMeasurementProvider } from "./TimeMeasurementProvider";
 import { UpdateMeasurementsAction } from "./UpdateMeasurementsAction";
 import { EmptyExceptionHandler } from "../ErrorHandler/EmptyExceptionHandler";
+import type { IPrinter } from "../Interfaces/IPrinter";
 export class PerformerMeasuremets extends Performer {
 
      processor !: IDifferentialEquationProcessor
@@ -226,16 +227,19 @@ export class PerformerMeasuremets extends Performer {
     public async performIteratorDataConsumerAsync(dataConsumer: IDataConsumer,
         iterator: IIterator, runtime: IDataRuntime, abort: AbortController, action: IAction,
         preparation?: IAction | undefined, errorHandler?: IExceptionHandler | undefined): Promise<void> {
+        let desktop : IObjectCollection | undefined = undefined
         try {
             if (preparation !== undefined) preparation.action();
              var co = dataConsumer as unknown as ICategoryObject;
             var d = co.getDesktop();
+            desktop = d
             await this.startAsync(d, abort);
             if (abort.signal.aborted) {
                 if (errorHandler === undefined) return
                 errorHandler.log("Start aborted")
                 return
             }
+            this.setRunning(d, true)
             iterator.resetIterator()
             this.fullReset(dataConsumer)
             while (true) {
@@ -254,6 +258,8 @@ export class PerformerMeasuremets extends Performer {
         catch (error: any) {
             this.errorHandler.handleException(error)
         }
+        if (desktop != undefined) this.setRunning(desktop, false)
+
     }
 
 
@@ -268,7 +274,17 @@ export class PerformerMeasuremets extends Performer {
 
         }
     }
+
+    public printDataPerformerMeasurements(dataConsumer: IDataConsumer, printer: IPrinter): void {
+        let x = this.getMeasurementsDCMap(dataConsumer)
+        for (var [key, value] of x) {
+            printer.print(key)
+            printer.print(value.getMeasurementValue())
+            printer.print("\n");
+        }
+    }
 }
+
 
 class MeasurementWrite implements IAction {
 

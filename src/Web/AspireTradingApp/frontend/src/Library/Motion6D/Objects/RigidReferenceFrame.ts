@@ -108,7 +108,6 @@ export class RigidReferenceFrame extends CategoryObject implements IReferenceFra
         return this.aliasNames;
     }
     getAliasType(name: string) {
-        console.log(name)
         return 0;
     }
     getAliasValue(name: string) {

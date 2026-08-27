@@ -9,6 +9,20 @@ using Trading.Library.Objects;
 
 static class TradingInit
 {
+    static bool check(object o)
+    {
+        if (o == null)
+        {
+            return true;
+        }
+        return o == null;
+    }
+
+
+    static TradingInit()
+    {
+        FormulaEditor.StaticExtensionFormulaEditor.CheckValue = check;
+    }
     static AspireTradingApp.Server.Trading.Performer performer;// = new();
 
     static ITradingDatabaseHistoryInterface Inter => performer.Database;

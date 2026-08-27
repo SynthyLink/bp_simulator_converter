@@ -1318,8 +1318,8 @@ namespace DataPerformer.UI.UserControls
         {
             globalArg = ArgumentString;
             var mea = consumer.FindMeasurement(globalArg);
-            var coll = consumer.GetDependentCollection();
-            coll.ForEach((IRunning s) => s.IsRunning = true);
+      //      var coll = consumer.GetDependentCollection();
+      //      coll.ForEach((IRunning s) => s.IsRunning = true);
             if (mode == Mode.Chart)
             {
                 var coord = mea.CreateCoordinateFunctions();

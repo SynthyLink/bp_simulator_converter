@@ -5,6 +5,9 @@ import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMea
 import type { IMeasurements } from "../../../Library/Measurements/Interfaces/IMeasurements";
 import { Measurement } from "../../../Library/Measurements/Measurement";
 import { DataConsumer } from "../../../Library/Measurements/DataConsumer";
+import { IPrinter } from "../../../Library/Interfaces/IPrinter";
+import { IShowData } from "../../../Library/Show/Interfaces/IShowData";
+import { IFactory } from "../../../Library/Interfaces/IFactory";
 
 export class TradingOrder extends DataConsumer implements IMeasurements
 {
@@ -17,7 +20,6 @@ export class TradingOrder extends DataConsumer implements IMeasurements
             new IncomeMeasurement(this),
             new SellTaxMeasurement(this),
             new BuyTaxMeasurement(this)]
-
     }
 
     changed: boolean = false;
@@ -31,6 +33,7 @@ export class TradingOrder extends DataConsumer implements IMeasurements
     isMeaUpdated: boolean = false;
 
     income: number = 0;
+
 
 
     protected sellPrice: string = "";
@@ -65,6 +68,8 @@ export class TradingOrder extends DataConsumer implements IMeasurements
     exitDate: number = 0
 
     any: any
+
+    printer !: IPrinter
 
 
 
@@ -130,6 +135,7 @@ export class TradingOrder extends DataConsumer implements IMeasurements
         this.sellPriceM = this.performer.getMeasurementDC(this, this.sellPrice)
         this.currentDate = this.performer.getMeasurementDC(this, this.date)
     }
+
 }
 
 class BasicMeasurement extends Measurement implements IAssociatedObject {

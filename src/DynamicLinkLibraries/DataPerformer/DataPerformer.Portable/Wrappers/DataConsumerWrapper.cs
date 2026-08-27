@@ -127,12 +127,13 @@ namespace DataPerformer.Portable.Wrappers
         /// <param name="preparation">The preparation action</param>
         /// <param name="errorHandler">The error handler</param>
         public async Task PerformIteratorAsync(IIterator iterator,
-           Action action, CancellationToken cancellation, Func<bool> stop = null, 
+           Action action, CancellationToken cancellation, Func<bool> stop = null,
            Action preparation = null,
            IExceptionHandler errorHandler = null)
         {
             Func<bool> st = (stop == null) ? () => false : stop;
             var b = true;
+            IComponentCollection coll;
             try
             {
                 var d = Consumer.GetRootConsumerDesktop();
@@ -140,9 +141,12 @@ namespace DataPerformer.Portable.Wrappers
                 iterator.Reset();
                 Consumer.ResetAll();
                 var rt = Consumer.CreateRuntime(null);
-                Action act = () => 
-                { 
-                    rt.UpdateAll(); 
+                coll = Consumer.GetDependentCollection();
+                coll.ForEach((IRunning s) => s.IsRunning = true);
+
+                Action act = () =>
+                {
+                    rt.UpdateAll();
                 };
                 var attr = CustomAttributeExtensions.GetCustomAttribute<IteratorTypeAttribute>
                     (IntrospectionExtensions.GetTypeInfo(iterator.GetType()));
@@ -153,8 +157,6 @@ namespace DataPerformer.Portable.Wrappers
                         act = () => { };
                     }
                 }
-                var coll = Consumer.GetDependentCollection();
-                coll.ForEach((IRunning s) => s.IsRunning = true);
                 preparation?.Invoke();
                 while (true)
                 {
@@ -185,6 +187,8 @@ namespace DataPerformer.Portable.Wrappers
                     e.HandleException(null);
                 }
             }
+            coll = Consumer.GetDependentCollection();
+            coll.ForEach((IRunning s) => s.IsRunning = false);
         }
 
 

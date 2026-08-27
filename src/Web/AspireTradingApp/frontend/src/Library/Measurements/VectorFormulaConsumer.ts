@@ -6,15 +6,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { IDesktop } from "../Interfaces/IDesktop";
+import type { IFeedbackCollection } from "../Interfaces/IFeedbackCollection";
 import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
 import { DataConsumerVariableMeasurements } from "./DataConsumerVariableMeasurements";
 
 export class VectorFormulaConsumer extends DataConsumerVariableMeasurements implements IPostSetArrow
 {
-
-  //  protected arguments: string[] = [];
-
- //   protected operationNames: Map<number, string> = new Map();
 
     constructor(desktop: IDesktop, name: string)
     {
@@ -27,6 +24,7 @@ export class VectorFormulaConsumer extends DataConsumerVariableMeasurements impl
     updateMeasurements(): void {
         this.calculateTree();
         this.save();
+        this.feedback?.setFeedbacks()
     }
 
     calculateTree(): void
@@ -41,13 +39,18 @@ export class VectorFormulaConsumer extends DataConsumerVariableMeasurements impl
 
     }
 
+    setFeedback(): void {
+
+    }
 
 
     postSetArrow(): void
     {
         this.init();
+        this.setFeedback()
     }
 
+    feedback !: IFeedbackCollection;
 
 }
 

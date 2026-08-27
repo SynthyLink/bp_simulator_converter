@@ -8,7 +8,6 @@ import type { IAssociatedObject } from "../../../Library/Interfaces/IAssociatedO
 import type { IObject } from "../../../Library/Interfaces/IObject";
 import type { IStartTask } from "../../../Library/Interfaces/IStartTask";
 import type { HistoricalDataMessageDateTime } from "../Database/HistoricalDataMessageDateTime";
-import type { IFactoryConsumer } from "../../../Library/Interfaces/IFactoryConsumer";
 import type { IFactory } from "../../../Library/Interfaces/IFactory";
 import { CategoryObject } from "../../../Library/CategoryObject";
 import { Measurement } from "../../../Library/Measurements/Measurement";
@@ -36,13 +35,11 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
 
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name)
-        let t = this.performer.convertObject<IFactoryConsumer, any>(desktop, "IFactoryConsumer")
-        if (t.length > 0) {
-            this.factory = t[0].getConsumerFactory()
-            if (this.factory !== undefined) {
+        let f = this.performer.getFactoryFromDesktop(desktop)
+        if (f !== undefined) {
+            this.factory = f
                 let i = this.factory.getFactory<ITradingDatabaseHistoryInterface>("ITradingDatabaseHistoryInterface")
                 if (i !== undefined) this.inter = i
-            }
         }
         this.typeName = "TradingDataQuery"
         this.types.push("TradingDataQuery");

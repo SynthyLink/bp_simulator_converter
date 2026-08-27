@@ -59,12 +59,12 @@ namespace Chart.DataPerformer
                     continue;
                 }
                 object t = val.Type;
-                if (t.IsDoubleType())
+                var b = t.GetType() == typeof(bool);
+                if (t.IsDoubleType() | b)
                 {
 
                     var ps =
                         new MeasurementSeries(arg.ToValueHolder(), val);
-
                     d[key] = ps;
                     m.Add(ps);
                     o = ps;

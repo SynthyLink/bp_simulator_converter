@@ -111,13 +111,7 @@ namespace DataPerformer.UI.UserControls
                 userControlFeedBack.Reset();
                 userControlFeedBack.Set(consumer.Feedback);
                 userControlForward.Measurements = consumer;
-                userControlForward.Items = consumer.ForwardAliases;
-                userControlForward.OnChange += (Dictionary<int, string> d) =>
-                    {
-                        consumer.ForwardAliases = userControlForward.Items;
-                    };
                 IRuntimeUpdate start = consumer;
-
                 checkBoxRuntimeUpdate.Checked = start.ShouldRuntimeUpdate;
                 checkBoxRuntimeUpdate.CheckStateChanged += (object o, EventArgs e) =>
                     {

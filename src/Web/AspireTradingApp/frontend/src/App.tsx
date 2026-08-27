@@ -117,22 +117,14 @@ const App: React.FC = () => {
 
 
     const abortClick = async () => {
-        console.log("GA", globalAbort?.signal.aborted)
         if (globalAbort === undefined) return
         globalAbort.abort()
-        console.log("GAAAA", globalAbort.signal.aborted)
-        throw new OwnError("", "");
         setStarted(true)
     }
 
     
 
     const btnClick = async () => {
-        await startClient()
-    }
-
-    const startClient = 
-        async () => {
         setStarted(false)
         setAbortController()
         if (begin === undefined) return
@@ -152,8 +144,6 @@ const App: React.FC = () => {
         map.set("a2", f[1])
         map.set("d1", f[2])
         map.set("d2", f[3])
-        map.set("d3", f[4])
-        map.set("d4", f[5])
         let promises: Promise<void>[] = []
         if (s !== undefined)
         {
@@ -289,13 +279,9 @@ const App: React.FC = () => {
             do
             {
                 let a = queue.array()
-                console.log(a)
                 let y = p.findMinWithReduce(a)
                 let z = p.findMaxWithReduce(a)
                 let b = queue.dequeue()
-                console.log(b)
-                console.log(y)
-                console.log(z)
                 ++v;
                 if (v > 30) return
             }

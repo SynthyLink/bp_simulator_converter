@@ -46,8 +46,7 @@ export class TradingPerformer {
         this.dataConsumer = desktop.getCategoryObject("Chart") as unknown as IDataConsumer
         this.runtime = new DataRuntimeConsumerODE(this.dataConsumer, new Motion6DFactory())
 
-        const filtersN = ["Average Short", "Averge Long", "Donchian maximum long", "Donchian maximum short", "Donchian minimum long",
-            "Donchian minimum short"]
+        const filtersN = ["Average Short", "Average Long", "Donchian maximum", "Donchian minimum"]
         for (let fn of filtersN) {
             let o = desktop.getCategoryObject(fn);
             let f = o as unknown as SequenceFilterWrapper
@@ -84,7 +83,7 @@ export class TradingPerformer {
 
 
     public async calculate(symblol: string, period: string, begin: number, end: number,
-        a1: number, a2: number, d1: number, d2: number, d3: number, d4: number, controller: AbortController | undefined):
+        a1: number, a2: number, d1: number, d2: number, controller: AbortController | undefined):
         Promise<Map<string, any>[]> {
         this.any = symblol
         this.any = period
@@ -94,8 +93,6 @@ export class TradingPerformer {
         this.any = a2
         this.any = d1
         this.any = d2
-        this.any = d3
-        this.any = d4
   //  this.query.setQueryParameters(symblol, period, begin, end)
       /*  this.filters[0].setFilterCount(a1)
         this.filters[1].setFilterCount(a2)
@@ -106,16 +103,7 @@ export class TradingPerformer {
         if (controller === undefined) return []
         let x = await this.pefrormer.performIteratorDataConsumerMapAsync(this.dataConsumer,
             this.query, this.runtime, controller, this.mmap, undefined, new ErrorH(controller))
-      /*  let z: Map<string, any>[] = []
-        for (let i = 0; i < 100; i++) {
-            z.push(x[i])
-        }
-        const arrayOfObjects = z.map(map => Object.fromEntries(map))
-        let json = JSON.stringify(arrayOfObjects)
-        console.log("JSON", json)
-        await this.communication.saveStringAsync(json, new AbortController)
-      //  await this.communication.saveMapArray(json);*/
-        return x
+         return x
     }
 
     any : any
@@ -190,11 +178,9 @@ export class TradingPerformer {
           ["k", "Order.Sell Price"],
           ["l", "Order.Buy Price"],
           ["m", "Average Short.Output"],
-          ["n", "Averge Long.Output"],
-          ["o", "Donchian minimum long.Output"],
-          ["p", "Donchian minimum short.Output"],
-          ["q", "Donchian maximum long.Output"],
-        ["r", "Donchian maximum short.Output"],
+          ["n", "Average Long.Output"],
+          ["o", "Donchian minimum.Output"],
+          ["q", "Donchian maximum.Output"],
         ["s", "Position.Formula_1"]
 
     ]

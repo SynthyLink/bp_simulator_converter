@@ -80,6 +80,9 @@ export class TradingOrder extends DataConsumer implements IMeasurements
 
     any: any
 
+
+
+
   //  private isOpened: boolean = false
 
 //   private currentPositionType: string = TradingPositionType.None
@@ -256,10 +259,15 @@ export class TradingOrder extends DataConsumer implements IMeasurements
         this.mBuyPrice = undefined
     }
 
+    showThis(): void {
+        this.show?.show(this)
+    }
+
 
     closedIncome: number = 0
 
     update(): void {
+        this.showThis();
         this.zero()
         this.dateValue = this.toNullabe(this.currentDate)
         this.currentPositionValue = this.toNullabe(this.positionM)
@@ -387,7 +395,6 @@ class IncomeMeasurement extends BasicMeasurement
     getMeasurementValue() {
      /*   ++this.i
         if (this.i < 100) {
-            console.log(this.order.income)
         }
 */
         return this.order.income

@@ -22,13 +22,13 @@ import type { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProv
 import type { IEventStart } from "../Interfaces/IEventStart";
 import type { IExternalUpdateClient } from "../Interfaces/IExternalUpdateClient";
 import type { IMeasurement } from "./Interfaces/IMeasurement";
+import type { IShowObject } from "../Show/Interfaces/IShowObject";
 
 export class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow,
     ITimeMeasurementConsumer, IPrintedObject, ICheckHolder, IIteratorConsumer, IEventHandler, IAddRemove, IAction,
     IEventStart, IExternalUpdateClient
 {
-    constructor(desktop: IDesktop, name: string)
-    {
+    constructor(desktop: IDesktop, name: string) {
         super(desktop, name)
         this.typeName = "DataConsumer";
         this.types.push("DataConsumer");
@@ -47,8 +47,11 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         let f = this.detectFactory();
         if (f === undefined)
             this.pMeasurements = new PerformerMeasuremets()
-        else
+        else {
             this.pMeasurements = new PerformerMeasuremets(f)
+            let s = f.getFactory<IShowObject>("IShowObject")
+            if (s !== undefined) this.show = s;
+        }
     }
  
     setExternalUpdate(action: IActionAddRemove | undefined): void {
@@ -185,7 +188,7 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
 
     isEvEnabled: boolean = false;
 
-
+    show !: IShowObject
 
     tms!: ITimeMeasurementConsumer;
 

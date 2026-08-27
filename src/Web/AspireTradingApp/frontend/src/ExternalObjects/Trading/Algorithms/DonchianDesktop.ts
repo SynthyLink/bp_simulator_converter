@@ -1,3 +1,4 @@
+
 import type { IAliasName } from "../../../Library/Interfaces/IAliasName";
 import type { IDesktop } from "../../../Library/Interfaces/IDesktop";
 import type { IFactory } from "../../../Library/Interfaces/IFactory";
@@ -23,14 +24,60 @@ class DonchianDesktop_CategoryObject_0 extends TradingDataQuery
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
-		this.begin = 44566
-		this.end = 45323
-		this.period = "30 mins"
+		this.begin = 44929
+		this.end = 45260
+		this.period = "1 day"
 		this.symbol = "AAPL"
 	}
 }
 
-class DonchianDesktop_CategoryObject_1 extends RecursiveFormula
+class DonchianDesktop_CategoryObject_1 extends SequenceFilterWrapper
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+		this.count = 10
+		this.input = "Trading.Close"
+		this.type = SequenceFilterType.Avarage
+	}
+}
+
+class DonchianDesktop_CategoryObject_2 extends SequenceFilterWrapper
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+		this.count = 40
+		this.input = "Trading.Close"
+		this.type = SequenceFilterType.Avarage
+	}
+}
+
+class DonchianDesktop_CategoryObject_3 extends SequenceFilterWrapper
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+		this.count = 10
+		this.input = "Trading.High"
+		this.type = SequenceFilterType.Donchian
+		this.mimax = true
+	}
+}
+
+class DonchianDesktop_CategoryObject_4 extends SequenceFilterWrapper
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+		this.count = 10
+		this.input = "Trading.Low"
+		this.type = SequenceFilterType.Donchian
+		this.mimax = false
+	}
+}
+
+class DonchianDesktop_CategoryObject_5 extends RecursiveFormula
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -89,41 +136,22 @@ class DonchianDesktop_CategoryObject_1 extends RecursiveFormula
 	
 }
 
-class DonchianDesktop_CategoryObject_2 extends SequenceFilterWrapper
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-		this.count = 10
-		this.input = "Trading.Close"
-		this.type = SequenceFilterType.Avarage
-	}
-}
-
-class DonchianDesktop_CategoryObject_3 extends SequenceFilterWrapper
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-		this.count = 80
-		this.input = "Trading.Close"
-		this.type = SequenceFilterType.Avarage
-	}
-}
-
-class DonchianDesktop_CategoryObject_4 extends VectorFormulaConsumer
+class DonchianDesktop_CategoryObject_6 extends VectorFormulaConsumer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["a", 120 ],
-			["b", 90 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", false, false);
-		this.addVariableValue("Formula_2", 0, 0);
+		this.addVariableValue("Formula_2", false, false);
+		this.addVariableValue("Formula_3", false, false);
+		this.addVariableValue("Formula_4", 0, 0);
+		this.addVariableValue("Formula_5", false, false);
+		this.addVariableValue("Formula_6", false, false);
+		this.addVariableValue("Formula_7", false, false);
 	}
 
 		calculateTree() : void
@@ -135,517 +163,77 @@ class DonchianDesktop_CategoryObject_4 extends VectorFormulaConsumer
 			this.variable = this.measurement1.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_1 = this.convert<number>(this.variable);
-			this.variable = (this.var_0) > (this.var_1);
+			this.variable = (this.var_0) < (this.var_1);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_2 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_0) > (this.var_1);
+			this.variable = this.measurement3.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_3 = this.convert<boolean>(this.variable);
-			this.variable = this.aliasName4.getAliasNameValue()
-			if (this.check(this.variable)) { this.success = false; return; }
+			this.var_3 = this.convert<number>(this.variable);
+			this.variable = this.measurement4.getMeasurementValue();
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_4 = this.convert<number>(this.variable);
-			this.variable = this.aliasName5.getAliasNameValue()
-			if (this.check(this.variable)) { this.success = false; return; }
-			this.var_5 = this.convert<number>(this.variable);
-			this.variable = (this.var_3) ? (this.var_4) : (this.var_5);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_6 = this.convert<number>(this.variable);
-		}
-	
-	init() : void
-	{
-		var all = this.getAllMeasurements()
-		this.fic = all
-		this.measurement0 = all[1].getMeasurement(0);
-		this.measurement1 = all[0].getMeasurement(0);
-		this.aliasName4 = new AliasName(this.alias, "a");
-		this.aliasName5 = new AliasName(this.alias, "b");
-	}
-	
-	measurement0 ! : IMeasurement;
-	measurement1 ! : IMeasurement;
-	aliasName4 ! : IAliasName;
-	aliasName5 ! : IAliasName;
-	var_0 : number  = 0;
-	var_1 : number  = 0;
-	var_2 : boolean  = false;
-	var_3 : boolean  = false;
-	var_4 : number  = 0;
-	var_5 : number  = 0;
-	var_6 : number  = 0;
-	
-	get_0() : any
-	{
-		return this.success ? this.var_0 : undefined;
-	}
-	
-	get_1() : any
-	{
-		return this.success ? this.var_1 : undefined;
-	}
-	
-	get_2() : any
-	{
-		return this.success ? this.var_2 : undefined;
-	}
-	
-	get_3() : any
-	{
-		return this.success ? this.var_3 : undefined;
-	}
-	
-	get_4() : any
-	{
-		return this.success ? this.var_4 : undefined;
-	}
-	
-	get_5() : any
-	{
-		return this.success ? this.var_5 : undefined;
-	}
-	
-	get_6() : any
-	{
-		return this.success ? this.var_6 : undefined;
-	}
-	save() : void {
-		var v = this.variables;
-		var x0 = v.get("Formula_1");
-		x0?.setIValue(this.get_2());
-		var x1 = v.get("Formula_2");
-		x1?.setIValue(this.get_6());
-	}
-	
-}
-
-class DonchianDesktop_CategoryObject_5 extends SequenceFilterWrapper
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-		this.count = 20
-		this.input = "Trading.High"
-		this.type = SequenceFilterType.Donchian
-		this.mimax = true
-	}
-}
-
-class DonchianDesktop_CategoryObject_6 extends SequenceFilterWrapper
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-		this.count = 20
-		this.input = "Trading.High"
-		this.type = SequenceFilterType.Donchian
-		this.mimax = true
-	}
-}
-
-class DonchianDesktop_CategoryObject_7 extends SequenceFilterWrapper
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-		this.count = 20
-		this.input = "Trading.RealTime"
-		this.type = SequenceFilterType.Donchian
-		this.mimax = false
-	}
-}
-
-class DonchianDesktop_CategoryObject_8 extends SequenceFilterWrapper
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-		this.count = 20
-		this.input = "Trading.Low"
-		this.type = SequenceFilterType.Donchian
-		this.mimax = false
-	}
-}
-
-class DonchianDesktop_CategoryObject_9 extends VectorFormulaConsumer
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-		let map = new Map<string, any>(
-		[
-			["a", 140 ],
-			["b", 115 ],
-		]);
-		this.performer.setAliasMap(map, this);
-		this.addVariableValue("Formula_1", false, false);
-		this.addVariableValue("Formula_2", false, false);
-		this.addVariableValue("Formula_3", 0, 0);
-		this.addVariableValue("Formula_4", 0, 0);
-	}
-
-		calculateTree() : void
-		{
-			this.success = true;
-			this.variable = this.measurement0.getMeasurementValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_0 = this.convert<number>(this.variable);
-			this.variable = this.measurement1.getMeasurementValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_1 = this.convert<number>(this.variable);
-			this.variable = (this.var_0) < (this.var_1);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_2 = this.convert<boolean>(this.variable);
-			this.variable = this.measurement3.getMeasurementValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_3 = this.convert<number>(this.variable);
-			this.variable = (this.var_0) > (this.var_3);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_4 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_0) < (this.var_1);
+			this.variable = (this.var_3) < (this.var_4);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_5 = this.convert<boolean>(this.variable);
-			this.variable = this.aliasName6.getAliasNameValue()
-			if (this.check(this.variable)) { this.success = false; return; }
+			this.variable = this.measurement6.getMeasurementValue();
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_6 = this.convert<number>(this.variable);
-			this.variable = this.aliasName7.getAliasNameValue()
-			if (this.check(this.variable)) { this.success = false; return; }
+			this.variable = this.measurement7.getMeasurementValue();
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_7 = this.convert<number>(this.variable);
-			this.variable = (this.var_5) ? (this.var_6) : (this.var_7);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_8 = this.convert<number>(this.variable);
-			this.variable = (this.var_0) > (this.var_3);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_9 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_9) ? (this.var_6) : (this.var_7);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_10 = this.convert<number>(this.variable);
-		}
-	
-	init() : void
-	{
-		var all = this.getAllMeasurements()
-		this.fic = all
-		this.measurement0 = all[0].getMeasurement(4);
-		this.measurement1 = all[2].getMeasurement(0);
-		this.measurement3 = all[1].getMeasurement(0);
-		this.aliasName6 = new AliasName(this.alias, "a");
-		this.aliasName7 = new AliasName(this.alias, "b");
-	}
-	
-	measurement0 ! : IMeasurement;
-	measurement1 ! : IMeasurement;
-	measurement3 ! : IMeasurement;
-	aliasName6 ! : IAliasName;
-	aliasName7 ! : IAliasName;
-	var_0 : number  = 0;
-	var_1 : number  = 0;
-	var_2 : boolean  = false;
-	var_3 : number  = 0;
-	var_4 : boolean  = false;
-	var_5 : boolean  = false;
-	var_6 : number  = 0;
-	var_7 : number  = 0;
-	var_8 : number  = 0;
-	var_9 : boolean  = false;
-	var_10 : number  = 0;
-	
-	get_0() : any
-	{
-		return this.success ? this.var_0 : undefined;
-	}
-	
-	get_1() : any
-	{
-		return this.success ? this.var_1 : undefined;
-	}
-	
-	get_2() : any
-	{
-		return this.success ? this.var_2 : undefined;
-	}
-	
-	get_3() : any
-	{
-		return this.success ? this.var_3 : undefined;
-	}
-	
-	get_4() : any
-	{
-		return this.success ? this.var_4 : undefined;
-	}
-	
-	get_5() : any
-	{
-		return this.success ? this.var_5 : undefined;
-	}
-	
-	get_6() : any
-	{
-		return this.success ? this.var_6 : undefined;
-	}
-	
-	get_7() : any
-	{
-		return this.success ? this.var_7 : undefined;
-	}
-	
-	get_8() : any
-	{
-		return this.success ? this.var_8 : undefined;
-	}
-	
-	get_9() : any
-	{
-		return this.success ? this.var_9 : undefined;
-	}
-	
-	get_10() : any
-	{
-		return this.success ? this.var_10 : undefined;
-	}
-	save() : void {
-		var v = this.variables;
-		var x0 = v.get("Formula_1");
-		x0?.setIValue(this.get_2());
-		var x1 = v.get("Formula_2");
-		x1?.setIValue(this.get_4());
-		var x2 = v.get("Formula_3");
-		x2?.setIValue(this.get_8());
-		var x3 = v.get("Formula_4");
-		x3?.setIValue(this.get_10());
-	}
-	
-}
-
-class DonchianDesktop_CategoryObject_10 extends VectorFormulaConsumer
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-		let map = new Map<string, any>(
-		[
-			["a", 145 ],
-			["b", 125 ],
-		]);
-		this.performer.setAliasMap(map, this);
-		this.addVariableValue("Formula_1", false, false);
-		this.addVariableValue("Formula_2", false, false);
-		this.addVariableValue("Formula_3", 0, 0);
-		this.addVariableValue("Formula_4", 0, 0);
-	}
-
-		calculateTree() : void
-		{
-			this.success = true;
-			this.variable = this.measurement0.getMeasurementValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_0 = this.convert<number>(this.variable);
-			this.variable = this.measurement1.getMeasurementValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_1 = this.convert<number>(this.variable);
-			this.variable = (this.var_0) < (this.var_1);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_2 = this.convert<boolean>(this.variable);
-			this.variable = this.measurement3.getMeasurementValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_3 = this.convert<number>(this.variable);
-			this.variable = (this.var_0) > (this.var_3);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_4 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_0) < (this.var_1);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_5 = this.convert<boolean>(this.variable);
-			this.variable = this.aliasName6.getAliasNameValue()
-			if (this.check(this.variable)) { this.success = false; return; }
-			this.var_6 = this.convert<number>(this.variable);
-			this.variable = this.aliasName7.getAliasNameValue()
-			if (this.check(this.variable)) { this.success = false; return; }
-			this.var_7 = this.convert<number>(this.variable);
-			this.variable = (this.var_5) ? (this.var_6) : (this.var_7);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_8 = this.convert<number>(this.variable);
-			this.variable = (this.var_0) > (this.var_3);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_9 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_9) ? (this.var_6) : (this.var_7);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_10 = this.convert<number>(this.variable);
-		}
-	
-	init() : void
-	{
-		var all = this.getAllMeasurements()
-		this.fic = all
-		this.measurement0 = all[0].getMeasurement(4);
-		this.measurement1 = all[2].getMeasurement(0);
-		this.measurement3 = all[1].getMeasurement(0);
-		this.aliasName6 = new AliasName(this.alias, "a");
-		this.aliasName7 = new AliasName(this.alias, "b");
-	}
-	
-	measurement0 ! : IMeasurement;
-	measurement1 ! : IMeasurement;
-	measurement3 ! : IMeasurement;
-	aliasName6 ! : IAliasName;
-	aliasName7 ! : IAliasName;
-	var_0 : number  = 0;
-	var_1 : number  = 0;
-	var_2 : boolean  = false;
-	var_3 : number  = 0;
-	var_4 : boolean  = false;
-	var_5 : boolean  = false;
-	var_6 : number  = 0;
-	var_7 : number  = 0;
-	var_8 : number  = 0;
-	var_9 : boolean  = false;
-	var_10 : number  = 0;
-	
-	get_0() : any
-	{
-		return this.success ? this.var_0 : undefined;
-	}
-	
-	get_1() : any
-	{
-		return this.success ? this.var_1 : undefined;
-	}
-	
-	get_2() : any
-	{
-		return this.success ? this.var_2 : undefined;
-	}
-	
-	get_3() : any
-	{
-		return this.success ? this.var_3 : undefined;
-	}
-	
-	get_4() : any
-	{
-		return this.success ? this.var_4 : undefined;
-	}
-	
-	get_5() : any
-	{
-		return this.success ? this.var_5 : undefined;
-	}
-	
-	get_6() : any
-	{
-		return this.success ? this.var_6 : undefined;
-	}
-	
-	get_7() : any
-	{
-		return this.success ? this.var_7 : undefined;
-	}
-	
-	get_8() : any
-	{
-		return this.success ? this.var_8 : undefined;
-	}
-	
-	get_9() : any
-	{
-		return this.success ? this.var_9 : undefined;
-	}
-	
-	get_10() : any
-	{
-		return this.success ? this.var_10 : undefined;
-	}
-	save() : void {
-		var v = this.variables;
-		var x0 = v.get("Formula_1");
-		x0?.setIValue(this.get_2());
-		var x1 = v.get("Formula_2");
-		x1?.setIValue(this.get_4());
-		var x2 = v.get("Formula_3");
-		x2?.setIValue(this.get_8());
-		var x3 = v.get("Formula_4");
-		x3?.setIValue(this.get_10());
-	}
-	
-}
-
-class DonchianDesktop_CategoryObject_11 extends VectorFormulaConsumer
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-		let map = new Map<string, any>(
-		[
-		]);
-		this.performer.setAliasMap(map, this);
-		this.addVariableValue("Formula_1", false, false);
-		this.addVariableValue("Formula_2", false, false);
-	}
-
-		calculateTree() : void
-		{
-			this.success = true;
-			this.variable = this.measurement0.getMeasurementValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_0 = this.convert<number>(this.variable);
-			this.variable = (this.var_0) === (this.var_1);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_2 = this.convert<boolean>(this.variable);
-			this.variable = this.measurement3.getMeasurementValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_3 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_2) && (this.var_3);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_4 = this.convert<boolean>(this.variable);
-			this.variable = this.measurement5.getMeasurementValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_5 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_4) && (this.var_5);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_6 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_0) === (this.var_7);
+			this.variable = (this.var_6) > (this.var_7);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_8 = this.convert<boolean>(this.variable);
-			this.variable = !this.var_3;
+			this.variable = this.measurement9.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_9 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_8) && (this.var_9);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_10 = this.convert<boolean>(this.variable);
-			this.variable = this.measurement11.getMeasurementValue();
+			this.var_9 = this.convert<number>(this.variable);
+			this.variable = (this.var_9) === (this.var_10);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_11 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_10) && (this.var_11);
+			this.variable = (this.var_9) === (this.var_12);
 			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_12 = this.convert<boolean>(this.variable);
+			this.var_13 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_9) === (this.var_14);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_15 = this.convert<boolean>(this.variable);
 		}
 	
 	init() : void
 	{
 		var all = this.getAllMeasurements()
 		this.fic = all
-		this.measurement0 = all[2].getMeasurement(0);
-		this.measurement3 = all[0].getMeasurement(0);
-		this.measurement5 = all[1].getMeasurement(0);
-		this.measurement11 = all[1].getMeasurement(1);
+		this.measurement0 = all[5].getMeasurement(0);
+		this.measurement1 = all[4].getMeasurement(0);
+		this.measurement3 = all[0].getMeasurement(1);
+		this.measurement4 = all[2].getMeasurement(0);
+		this.measurement6 = all[0].getMeasurement(2);
+		this.measurement7 = all[3].getMeasurement(0);
+		this.measurement9 = all[1].getMeasurement(1);
 	}
 	
 	measurement0 ! : IMeasurement;
+	measurement1 ! : IMeasurement;
 	measurement3 ! : IMeasurement;
-	measurement5 ! : IMeasurement;
-	measurement11 ! : IMeasurement;
+	measurement4 ! : IMeasurement;
+	measurement6 ! : IMeasurement;
+	measurement7 ! : IMeasurement;
+	measurement9 ! : IMeasurement;
 	var_0 : number  = 0;
 	var_1 : number  = 0;
 	var_2 : boolean  = false;
-	var_3 : boolean  = false;
-	var_4 : boolean  = false;
+	var_3 : number  = 0;
+	var_4 : number  = 0;
 	var_5 : boolean  = false;
-	var_6 : boolean  = false;
-	var_7 : number  = 1;
+	var_6 : number  = 0;
+	var_7 : number  = 0;
 	var_8 : boolean  = false;
-	var_9 : boolean  = false;
-	var_10 : boolean  = false;
+	var_9 : number  = 0;
+	var_10 : number  = 0;
 	var_11 : boolean  = false;
-	var_12 : boolean  = false;
+	var_12 : number  = 1;
+	var_13 : boolean  = false;
+	var_14 : number  = 2;
+	var_15 : boolean  = false;
 	
 	get_0() : any
 	{
@@ -711,17 +299,42 @@ class DonchianDesktop_CategoryObject_11 extends VectorFormulaConsumer
 	{
 		return this.success ? this.var_12 : undefined;
 	}
+	
+	get_13() : any
+	{
+		return this.success ? this.var_13 : undefined;
+	}
+	
+	get_14() : any
+	{
+		return this.success ? this.var_14 : undefined;
+	}
+	
+	get_15() : any
+	{
+		return this.success ? this.var_15 : undefined;
+	}
 	save() : void {
 		var v = this.variables;
 		var x0 = v.get("Formula_1");
-		x0?.setIValue(this.get_6());
+		x0?.setIValue(this.get_2());
 		var x1 = v.get("Formula_2");
-		x1?.setIValue(this.get_12());
+		x1?.setIValue(this.get_5());
+		var x2 = v.get("Formula_3");
+		x2?.setIValue(this.get_8());
+		var x3 = v.get("Formula_4");
+		x3?.setIValue(this.get_9());
+		var x4 = v.get("Formula_5");
+		x4?.setIValue(this.get_11());
+		var x5 = v.get("Formula_6");
+		x5?.setIValue(this.get_13());
+		var x6 = v.get("Formula_7");
+		x6?.setIValue(this.get_15());
 	}
 	
 }
 
-class DonchianDesktop_CategoryObject_12 extends VectorFormulaConsumer
+class DonchianDesktop_CategoryObject_7 extends VectorFormulaConsumer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -732,6 +345,11 @@ class DonchianDesktop_CategoryObject_12 extends VectorFormulaConsumer
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", false, false);
 		this.addVariableValue("Formula_2", false, false);
+		this.addVariableValue("Formula_3", 0, 0);
+		this.addVariableValue("Formula_4", 0, 0);
+		this.addVariableValue("Formula_5", 0, 0);
+		this.addVariableValue("Formula_6", 0, 0);
+		this.addVariableValue("Formula_7", 0, 0);
 	}
 
 		calculateTree() : void
@@ -739,56 +357,130 @@ class DonchianDesktop_CategoryObject_12 extends VectorFormulaConsumer
 			this.success = true;
 			this.variable = this.measurement0.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_0 = this.convert<number>(this.variable);
-			this.variable = (this.var_0) === (this.var_1);
+			this.var_0 = this.convert<boolean>(this.variable);
+			this.variable = this.measurement1.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_2 = this.convert<boolean>(this.variable);
-			this.variable = this.measurement3.getMeasurementValue();
+			this.var_1 = this.convert<number>(this.variable);
+			this.variable = (this.var_1) === (this.var_2);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_3 = this.convert<boolean>(this.variable);
-			this.variable = !this.var_3;
+			this.variable = (this.var_0) && (this.var_3);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_4 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_2) && (this.var_4);
+			this.variable = this.measurement5.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_5 = this.convert<boolean>(this.variable);
-			this.variable = this.measurement6.getMeasurementValue();
+			this.variable = (this.var_4) && (this.var_5);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_6 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_5) && (this.var_6);
+			this.variable = !this.var_0;
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_7 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_0) === (this.var_8);
+			this.variable = (this.var_1) === (this.var_8);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_9 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_9) && (this.var_3);
+			this.variable = (this.var_7) && (this.var_9);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_10 = this.convert<boolean>(this.variable);
-			this.variable = this.measurement11.getMeasurementValue();
+			this.variable = (this.var_10) && (this.var_5);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_11 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_10) && (this.var_11);
+			this.variable = (this.var_6) || (this.var_11);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_12 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_1) === (this.var_13);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_14 = this.convert<boolean>(this.variable);
+			this.variable = this.measurement15.getMeasurementValue();
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_15 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_14) && (this.var_15);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_16 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_1) === (this.var_17);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_18 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_18) && (this.var_15);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_19 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_0) ? (this.var_16) : (this.var_19);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_20 = this.convert<boolean>(this.variable);
+			this.variable = this.measurement21.getMeasurementValue();
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_21 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_21) && (this.var_5);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_22 = this.convert<boolean>(this.variable);
+			this.variable = this.measurement24.getMeasurementValue();
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_24 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_24) && (this.var_15);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_25 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_25) ? (this.var_26) : (this.var_1);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_27 = this.convert<number>(this.variable);
+			this.variable = (this.var_22) ? (this.var_23) : (this.var_27);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_28 = this.convert<number>(this.variable);
+			this.variable = (this.var_21) && (this.var_15);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_29 = this.convert<boolean>(this.variable);
+			this.variable = this.measurement31.getMeasurementValue();
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_31 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_31) && (this.var_5);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_32 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_32) ? (this.var_33) : (this.var_1);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_34 = this.convert<number>(this.variable);
+			this.variable = (this.var_29) ? (this.var_30) : (this.var_34);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_35 = this.convert<number>(this.variable);
+			this.variable = (this.var_0) ? (this.var_28) : (this.var_35);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_36 = this.convert<number>(this.variable);
+			this.variable = (this.var_0) ? (this.var_37) : (this.var_38);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_39 = this.convert<number>(this.variable);
+			this.variable = (this.var_5) ? (this.var_40) : (this.var_41);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_42 = this.convert<number>(this.variable);
+			this.variable = (this.var_15) ? (this.var_43) : (this.var_44);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_45 = this.convert<number>(this.variable);
+			this.variable = this.measurement46.getMeasurementValue();
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_46 = this.convert<number>(this.variable);
 		}
 	
 	init() : void
 	{
 		var all = this.getAllMeasurements()
 		this.fic = all
-		this.measurement0 = all[1].getMeasurement(0);
-		this.measurement3 = all[0].getMeasurement(0);
-		this.measurement6 = all[2].getMeasurement(0);
-		this.measurement11 = all[2].getMeasurement(1);
+		this.measurement0 = all[0].getMeasurement(0);
+		this.measurement1 = all[1].getMeasurement(1);
+		this.measurement5 = all[0].getMeasurement(1);
+		this.measurement15 = all[0].getMeasurement(2);
+		this.measurement21 = all[0].getMeasurement(4);
+		this.measurement24 = all[0].getMeasurement(5);
+		this.measurement31 = all[0].getMeasurement(6);
+		this.measurement46 = all[0].getMeasurement(3);
 	}
 	
 	measurement0 ! : IMeasurement;
-	measurement3 ! : IMeasurement;
-	measurement6 ! : IMeasurement;
-	measurement11 ! : IMeasurement;
-	var_0 : number  = 0;
+	measurement1 ! : IMeasurement;
+	measurement5 ! : IMeasurement;
+	measurement15 ! : IMeasurement;
+	measurement21 ! : IMeasurement;
+	measurement24 ! : IMeasurement;
+	measurement31 ! : IMeasurement;
+	measurement46 ! : IMeasurement;
+	var_0 : boolean  = false;
 	var_1 : number  = 0;
-	var_2 : boolean  = false;
+	var_2 : number  = 0;
 	var_3 : boolean  = false;
 	var_4 : boolean  = false;
 	var_5 : boolean  = false;
@@ -799,6 +491,40 @@ class DonchianDesktop_CategoryObject_12 extends VectorFormulaConsumer
 	var_10 : boolean  = false;
 	var_11 : boolean  = false;
 	var_12 : boolean  = false;
+	var_13 : number  = 1;
+	var_14 : boolean  = false;
+	var_15 : boolean  = false;
+	var_16 : boolean  = false;
+	var_17 : number  = 0;
+	var_18 : boolean  = false;
+	var_19 : boolean  = false;
+	var_20 : boolean  = false;
+	var_21 : boolean  = false;
+	var_22 : boolean  = false;
+	var_23 : number  = 1;
+	var_24 : boolean  = false;
+	var_25 : boolean  = false;
+	var_26 : number  = 0;
+	var_27 : number  = 0;
+	var_28 : number  = 0;
+	var_29 : boolean  = false;
+	var_30 : number  = 2;
+	var_31 : boolean  = false;
+	var_32 : boolean  = false;
+	var_33 : number  = 0;
+	var_34 : number  = 0;
+	var_35 : number  = 0;
+	var_36 : number  = 0;
+	var_37 : number  = 1;
+	var_38 : number  = 0;
+	var_39 : number  = 0;
+	var_40 : number  = 1;
+	var_41 : number  = 0;
+	var_42 : number  = 0;
+	var_43 : number  = 1;
+	var_44 : number  = 0;
+	var_45 : number  = 0;
+	var_46 : number  = 0;
 	
 	get_0() : any
 	{
@@ -864,134 +590,217 @@ class DonchianDesktop_CategoryObject_12 extends VectorFormulaConsumer
 	{
 		return this.success ? this.var_12 : undefined;
 	}
+	
+	get_13() : any
+	{
+		return this.success ? this.var_13 : undefined;
+	}
+	
+	get_14() : any
+	{
+		return this.success ? this.var_14 : undefined;
+	}
+	
+	get_15() : any
+	{
+		return this.success ? this.var_15 : undefined;
+	}
+	
+	get_16() : any
+	{
+		return this.success ? this.var_16 : undefined;
+	}
+	
+	get_17() : any
+	{
+		return this.success ? this.var_17 : undefined;
+	}
+	
+	get_18() : any
+	{
+		return this.success ? this.var_18 : undefined;
+	}
+	
+	get_19() : any
+	{
+		return this.success ? this.var_19 : undefined;
+	}
+	
+	get_20() : any
+	{
+		return this.success ? this.var_20 : undefined;
+	}
+	
+	get_21() : any
+	{
+		return this.success ? this.var_21 : undefined;
+	}
+	
+	get_22() : any
+	{
+		return this.success ? this.var_22 : undefined;
+	}
+	
+	get_23() : any
+	{
+		return this.success ? this.var_23 : undefined;
+	}
+	
+	get_24() : any
+	{
+		return this.success ? this.var_24 : undefined;
+	}
+	
+	get_25() : any
+	{
+		return this.success ? this.var_25 : undefined;
+	}
+	
+	get_26() : any
+	{
+		return this.success ? this.var_26 : undefined;
+	}
+	
+	get_27() : any
+	{
+		return this.success ? this.var_27 : undefined;
+	}
+	
+	get_28() : any
+	{
+		return this.success ? this.var_28 : undefined;
+	}
+	
+	get_29() : any
+	{
+		return this.success ? this.var_29 : undefined;
+	}
+	
+	get_30() : any
+	{
+		return this.success ? this.var_30 : undefined;
+	}
+	
+	get_31() : any
+	{
+		return this.success ? this.var_31 : undefined;
+	}
+	
+	get_32() : any
+	{
+		return this.success ? this.var_32 : undefined;
+	}
+	
+	get_33() : any
+	{
+		return this.success ? this.var_33 : undefined;
+	}
+	
+	get_34() : any
+	{
+		return this.success ? this.var_34 : undefined;
+	}
+	
+	get_35() : any
+	{
+		return this.success ? this.var_35 : undefined;
+	}
+	
+	get_36() : any
+	{
+		return this.success ? this.var_36 : undefined;
+	}
+	
+	get_37() : any
+	{
+		return this.success ? this.var_37 : undefined;
+	}
+	
+	get_38() : any
+	{
+		return this.success ? this.var_38 : undefined;
+	}
+	
+	get_39() : any
+	{
+		return this.success ? this.var_39 : undefined;
+	}
+	
+	get_40() : any
+	{
+		return this.success ? this.var_40 : undefined;
+	}
+	
+	get_41() : any
+	{
+		return this.success ? this.var_41 : undefined;
+	}
+	
+	get_42() : any
+	{
+		return this.success ? this.var_42 : undefined;
+	}
+	
+	get_43() : any
+	{
+		return this.success ? this.var_43 : undefined;
+	}
+	
+	get_44() : any
+	{
+		return this.success ? this.var_44 : undefined;
+	}
+	
+	get_45() : any
+	{
+		return this.success ? this.var_45 : undefined;
+	}
+	
+	get_46() : any
+	{
+		return this.success ? this.var_46 : undefined;
+	}
 	save() : void {
 		var v = this.variables;
 		var x0 = v.get("Formula_1");
-		x0?.setIValue(this.get_7());
+		x0?.setIValue(this.get_12());
 		var x1 = v.get("Formula_2");
-		x1?.setIValue(this.get_12());
+		x1?.setIValue(this.get_20());
+		var x2 = v.get("Formula_3");
+		x2?.setIValue(this.get_36());
+		var x3 = v.get("Formula_4");
+		x3?.setIValue(this.get_39());
+		var x4 = v.get("Formula_5");
+		x4?.setIValue(this.get_42());
+		var x5 = v.get("Formula_6");
+		x5?.setIValue(this.get_45());
+		var x6 = v.get("Formula_7");
+		x6?.setIValue(this.get_46());
 	}
 	
-}
-
-class DonchianDesktop_CategoryObject_13 extends VectorFormulaConsumer
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-		let map = new Map<string, any>(
+	setFeedback(): void {
+		let map = new Map<string, string>(
 		[
-			["c", 145 ],
-			["d", 135 ],
+			["Formula_3", "Current Position.t" ]
 		]);
-		this.performer.setAliasMap(map, this);
-		this.addVariableValue("Formula_1", false, false);
-		this.addVariableValue("Formula_2", 0, 0);
+		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
-
-		calculateTree() : void
-		{
-			this.success = true;
-			this.variable = this.measurement0.getMeasurementValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_0 = this.convert<boolean>(this.variable);
-			this.variable = this.measurement1.getMeasurementValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_1 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_0) || (this.var_1);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_2 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_0) || (this.var_1);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_3 = this.convert<boolean>(this.variable);
-			this.variable = this.aliasName4.getAliasNameValue()
-			if (this.check(this.variable)) { this.success = false; return; }
-			this.var_4 = this.convert<number>(this.variable);
-			this.variable = this.aliasName5.getAliasNameValue()
-			if (this.check(this.variable)) { this.success = false; return; }
-			this.var_5 = this.convert<number>(this.variable);
-			this.variable = (this.var_3) ? (this.var_4) : (this.var_5);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_6 = this.convert<number>(this.variable);
-		}
-	
-	init() : void
-	{
-		var all = this.getAllMeasurements()
-		this.fic = all
-		this.measurement0 = all[0].getMeasurement(1);
-		this.measurement1 = all[1].getMeasurement(1);
-		this.aliasName4 = new AliasName(this.alias, "c");
-		this.aliasName5 = new AliasName(this.alias, "d");
-	}
-	
-	measurement0 ! : IMeasurement;
-	measurement1 ! : IMeasurement;
-	aliasName4 ! : IAliasName;
-	aliasName5 ! : IAliasName;
-	var_0 : boolean  = false;
-	var_1 : boolean  = false;
-	var_2 : boolean  = false;
-	var_3 : boolean  = false;
-	var_4 : number  = 0;
-	var_5 : number  = 0;
-	var_6 : number  = 0;
-	
-	get_0() : any
-	{
-		return this.success ? this.var_0 : undefined;
-	}
-	
-	get_1() : any
-	{
-		return this.success ? this.var_1 : undefined;
-	}
-	
-	get_2() : any
-	{
-		return this.success ? this.var_2 : undefined;
-	}
-	
-	get_3() : any
-	{
-		return this.success ? this.var_3 : undefined;
-	}
-	
-	get_4() : any
-	{
-		return this.success ? this.var_4 : undefined;
-	}
-	
-	get_5() : any
-	{
-		return this.success ? this.var_5 : undefined;
-	}
-	
-	get_6() : any
-	{
-		return this.success ? this.var_6 : undefined;
-	}
-	save() : void {
-		var v = this.variables;
-		var x0 = v.get("Formula_1");
-		x0?.setIValue(this.get_2());
-		var x1 = v.get("Formula_2");
-		x1?.setIValue(this.get_6());
-	}
-	
 }
 
-class DonchianDesktop_CategoryObject_14 extends VectorFormulaConsumer
+class DonchianDesktop_CategoryObject_8 extends VectorFormulaConsumer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["x", 2 ]
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", 0, 0);
+		this.addVariableValue("Formula_2", 0, 0);
+		this.addVariableValue("Formula_3", 0, 0);
+		this.addVariableValue("Formula_4", 0, 0);
+		this.addVariableValue("Formula_5", 0, 0);
 	}
 
 		calculateTree() : void
@@ -1000,50 +809,71 @@ class DonchianDesktop_CategoryObject_14 extends VectorFormulaConsumer
 			this.variable = this.measurement0.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_0 = this.convert<boolean>(this.variable);
-			this.variable = this.measurement2.getMeasurementValue();
+			this.variable = (this.var_0) ? (this.var_1) : (this.var_2);
 			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_2 = this.convert<boolean>(this.variable);
+			this.var_3 = this.convert<number>(this.variable);
 			this.variable = this.measurement4.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_4 = this.convert<boolean>(this.variable);
-			this.variable = this.aliasName6.getAliasNameValue()
-			if (this.check(this.variable)) { this.success = false; return; }
-			this.var_6 = this.convert<number>(this.variable);
 			this.variable = (this.var_4) ? (this.var_5) : (this.var_6);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_7 = this.convert<number>(this.variable);
-			this.variable = (this.var_2) ? (this.var_3) : (this.var_7);
+			this.variable = this.measurement8.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_8 = this.convert<number>(this.variable);
-			this.variable = (this.var_0) ? (this.var_1) : (this.var_8);
+			this.var_8 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_8) ? (this.var_9) : (this.var_10);
 			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_9 = this.convert<number>(this.variable);
+			this.var_11 = this.convert<number>(this.variable);
+			this.variable = this.measurement12.getMeasurementValue();
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_12 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_12) ? (this.var_13) : (this.var_14);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_15 = this.convert<number>(this.variable);
+			this.variable = this.measurement16.getMeasurementValue();
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_16 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_16) ? (this.var_17) : (this.var_18);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_19 = this.convert<number>(this.variable);
 		}
 	
 	init() : void
 	{
 		var all = this.getAllMeasurements()
 		this.fic = all
-		this.measurement0 = all[4].getMeasurement(0);
-		this.measurement2 = all[3].getMeasurement(0);
-		this.measurement4 = all[2].getMeasurement(0);
-		this.aliasName6 = new AliasName(this.alias, "x");
+		this.measurement0 = all[0].getMeasurement(0);
+		this.measurement4 = all[0].getMeasurement(1);
+		this.measurement8 = all[1].getMeasurement(4);
+		this.measurement12 = all[1].getMeasurement(5);
+		this.measurement16 = all[1].getMeasurement(6);
 	}
 	
 	measurement0 ! : IMeasurement;
-	measurement2 ! : IMeasurement;
 	measurement4 ! : IMeasurement;
-	aliasName6 ! : IAliasName;
+	measurement8 ! : IMeasurement;
+	measurement12 ! : IMeasurement;
+	measurement16 ! : IMeasurement;
 	var_0 : boolean  = false;
-	var_1 : number  = 0;
-	var_2 : boolean  = false;
-	var_3 : number  = 2;
+	var_1 : number  = 1;
+	var_2 : number  = 0;
+	var_3 : number  = 0;
 	var_4 : boolean  = false;
 	var_5 : number  = 1;
 	var_6 : number  = 0;
 	var_7 : number  = 0;
-	var_8 : number  = 0;
-	var_9 : number  = 0;
+	var_8 : boolean  = false;
+	var_9 : number  = 1;
+	var_10 : number  = 0;
+	var_11 : number  = 0;
+	var_12 : boolean  = false;
+	var_13 : number  = 1;
+	var_14 : number  = 0;
+	var_15 : number  = 0;
+	var_16 : boolean  = false;
+	var_17 : number  = 1;
+	var_18 : number  = 0;
+	var_19 : number  = 0;
 	
 	get_0() : any
 	{
@@ -1094,90 +924,116 @@ class DonchianDesktop_CategoryObject_14 extends VectorFormulaConsumer
 	{
 		return this.success ? this.var_9 : undefined;
 	}
+	
+	get_10() : any
+	{
+		return this.success ? this.var_10 : undefined;
+	}
+	
+	get_11() : any
+	{
+		return this.success ? this.var_11 : undefined;
+	}
+	
+	get_12() : any
+	{
+		return this.success ? this.var_12 : undefined;
+	}
+	
+	get_13() : any
+	{
+		return this.success ? this.var_13 : undefined;
+	}
+	
+	get_14() : any
+	{
+		return this.success ? this.var_14 : undefined;
+	}
+	
+	get_15() : any
+	{
+		return this.success ? this.var_15 : undefined;
+	}
+	
+	get_16() : any
+	{
+		return this.success ? this.var_16 : undefined;
+	}
+	
+	get_17() : any
+	{
+		return this.success ? this.var_17 : undefined;
+	}
+	
+	get_18() : any
+	{
+		return this.success ? this.var_18 : undefined;
+	}
+	
+	get_19() : any
+	{
+		return this.success ? this.var_19 : undefined;
+	}
 	save() : void {
 		var v = this.variables;
 		var x0 = v.get("Formula_1");
-		x0?.setIValue(this.get_9());
+		x0?.setIValue(this.get_3());
+		var x1 = v.get("Formula_2");
+		x1?.setIValue(this.get_7());
+		var x2 = v.get("Formula_3");
+		x2?.setIValue(this.get_11());
+		var x3 = v.get("Formula_4");
+		x3?.setIValue(this.get_15());
+		var x4 = v.get("Formula_5");
+		x4?.setIValue(this.get_19());
 	}
 	
 }
 
-class DonchianDesktop_CategoryObject_15 extends VectorFormulaConsumer
+class DonchianDesktop_CategoryObject_9 extends VectorFormulaConsumer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["d", 107 ],
-			["c", 129 ],
-			["a", 20 ],
-			["b", 105 ],
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", 0, 0);
-		this.addVariableValue("Formula_2", 0, 0);
 	}
 
 		calculateTree() : void
 		{
 			this.success = true;
-			this.variable = this.aliasName0.getAliasNameValue()
-			if (this.check(this.variable)) { this.success = false; return; }
+			this.variable = this.measurement0.getMeasurementValue();
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_0 = this.convert<number>(this.variable);
-			this.variable = this.measurement1.getMeasurementValue();
+			this.variable = (this.var_0) === (this.var_1);
 			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_1 = this.convert<number>(this.variable);
-			this.variable = (this.var_0) * (this.var_1);
+			this.var_2 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_4) - (this.var_0);
 			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_2 = this.convert<number>(this.variable);
-			this.variable = this.aliasName3.getAliasNameValue()
-			if (this.check(this.variable)) { this.success = false; return; }
-			this.var_3 = this.convert<number>(this.variable);
-			this.variable = (this.var_2) + (this.var_3);
+			this.var_5 = this.convert<number>(this.variable);
+			this.variable = (this.var_2) ? (this.var_3) : (this.var_5);
 			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_4 = this.convert<number>(this.variable);
-			this.variable = this.measurement5.getMeasurementValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_5 = this.convert<boolean>(this.variable);
-			this.variable = this.aliasName6.getAliasNameValue()
-			if (this.check(this.variable)) { this.success = false; return; }
 			this.var_6 = this.convert<number>(this.variable);
-			this.variable = this.aliasName7.getAliasNameValue()
-			if (this.check(this.variable)) { this.success = false; return; }
-			this.var_7 = this.convert<number>(this.variable);
-			this.variable = (this.var_5) ? (this.var_6) : (this.var_7);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_8 = this.convert<number>(this.variable);
 		}
 	
 	init() : void
 	{
 		var all = this.getAllMeasurements()
 		this.fic = all
-		this.measurement1 = all[0].getMeasurement(0);
-		this.measurement5 = all[3].getMeasurement(0);
-		this.aliasName0 = new AliasName(this.alias, "a");
-		this.aliasName3 = new AliasName(this.alias, "b");
-		this.aliasName6 = new AliasName(this.alias, "c");
-		this.aliasName7 = new AliasName(this.alias, "d");
+		this.measurement0 = all[0].getMeasurement(2);
 	}
 	
-	measurement1 ! : IMeasurement;
-	measurement5 ! : IMeasurement;
-	aliasName0 ! : IAliasName;
-	aliasName3 ! : IAliasName;
-	aliasName6 ! : IAliasName;
-	aliasName7 ! : IAliasName;
+	measurement0 ! : IMeasurement;
 	var_0 : number  = 0;
 	var_1 : number  = 0;
-	var_2 : number  = 0;
+	var_2 : boolean  = false;
 	var_3 : number  = 0;
-	var_4 : number  = 0;
-	var_5 : boolean  = false;
+	var_4 : number  = 3;
+	var_5 : number  = 0;
 	var_6 : number  = 0;
-	var_7 : number  = 0;
-	var_8 : number  = 0;
 	
 	get_0() : any
 	{
@@ -1213,104 +1069,34 @@ class DonchianDesktop_CategoryObject_15 extends VectorFormulaConsumer
 	{
 		return this.success ? this.var_6 : undefined;
 	}
-	
-	get_7() : any
-	{
-		return this.success ? this.var_7 : undefined;
-	}
-	
-	get_8() : any
-	{
-		return this.success ? this.var_8 : undefined;
-	}
 	save() : void {
 		var v = this.variables;
 		var x0 = v.get("Formula_1");
-		x0?.setIValue(this.get_4());
-		var x1 = v.get("Formula_2");
-		x1?.setIValue(this.get_8());
-	}
-	
-}
-
-class DonchianDesktop_CategoryObject_16 extends RecursiveFormula
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-		let map = new Map<string, any>(
-		[
-			["x", 0 ],
-			["y", 0 ],
-		]);
-		this.performer.setAliasMap(map, this);
-		this.addVariableValue("x", 0, 0);
-		this.addVariableValue("y", 0, 0);
-	}
-
-		calculateTree() : void
-		{
-			this.success = true;
-			this.variable = this.measurement0.getMeasurementValue();
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_0 = this.convert<number>(this.variable);
-			this.variable = this.value1.getIValue();
-			if (this.check(this.variable)) { this.success = false; return; }
-			this.var_1 = this.convert<number>(this.variable);
-		}
-	
-	init() : void
-	{
-		var all = this.getAllMeasurements()
-		this.fic = all
-		this.measurement0 = all[0].getMeasurement(0);
-		this.value1 = this.output[0];
-	}
-	
-	measurement0 ! : IMeasurement;
-	value1 ! : IValue;
-	var_0 : number  = 0;
-	var_1 : number  = 0;
-	
-	get_0() : any
-	{
-		return this.success ? this.var_0 : undefined;
-	}
-	
-	get_1() : any
-	{
-		return this.success ? this.var_1 : undefined;
-	}
-	save() : void {
-		var v = this.variables;
-		var x0 = v.get("x");
-		x0?.setIValue(this.get_0());
-		var x1 = v.get("y");
-		x1?.setIValue(this.get_1());
+		x0?.setIValue(this.get_6());
 	}
 	
 	setFeedback(): void {
 		let map = new Map<string, string>(
 		[
-			["x", "Position.x" ]
+			["Formula_1", "Current Position.t" ]
 		]);
 		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
 }
 
-class DonchianDesktop_CategoryObject_17 extends TradingOrder
+class DonchianDesktop_CategoryObject_10 extends TradingOrder
 {
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
-		this.position = "Position.Formula_1"
+		this.position = "Sell Buy.Formula_3"
 		this.buyPrice = "Trading.Close"
 		this.sellPrice = "Trading.Close"
-		this.date = "Trading.RealTime"
+		this.date = "Trading.FullTime"
 	}
 }
 
-class DonchianDesktop_CategoryObject_18 extends DataConsumer
+class DonchianDesktop_CategoryObject_11 extends DataConsumer
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -1454,7 +1240,7 @@ class DonchianDesktop_CategoryArrow_16 extends DataLink
 	}
 }
 
-class DonchianDesktop_CategoryArrow_17 extends DataLink
+class DonchianDesktop_CategoryArrow_17 extends IteratorConsumerLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -1534,7 +1320,7 @@ class DonchianDesktop_CategoryArrow_26 extends DataLink
 	}
 }
 
-class DonchianDesktop_CategoryArrow_27 extends IteratorConsumerLink
+class DonchianDesktop_CategoryArrow_27 extends DataLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -1558,207 +1344,7 @@ class DonchianDesktop_CategoryArrow_29 extends DataLink
 	}
 }
 
-class DonchianDesktop_CategoryArrow_30 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_31 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_32 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_33 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_34 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_35 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_36 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_37 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_38 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_39 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_40 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_41 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_42 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_43 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_44 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_45 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_46 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_47 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_48 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_49 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_50 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_51 extends IteratorConsumerLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_52 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_53 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_54 extends DataLink
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class DonchianDesktop_CategoryArrow_55 extends DataLink
+class DonchianDesktop_CategoryArrow_30 extends IteratorConsumerLink
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -1784,24 +1370,17 @@ export class DonchianDesktop extends Desktop
 		this.name = "DonchianDesktop";
 
 		this.mapObjects.set("DonchianDesktop_CategoryObject_0", new DonchianDesktop_CategoryObject_0(this, "Trading"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_1", new DonchianDesktop_CategoryObject_1(this, "Current Position"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_2", new DonchianDesktop_CategoryObject_2(this, "Average Short"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_3", new DonchianDesktop_CategoryObject_3(this, "Averge Long"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_4", new DonchianDesktop_CategoryObject_4(this, "Condition 1"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_5", new DonchianDesktop_CategoryObject_5(this, "Donchian maximum long"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_6", new DonchianDesktop_CategoryObject_6(this, "Donchian maximum short"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_7", new DonchianDesktop_CategoryObject_7(this, "Donchian minimum long"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_8", new DonchianDesktop_CategoryObject_8(this, "Donchian minimum short"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_9", new DonchianDesktop_CategoryObject_9(this, "Long conditions"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_10", new DonchianDesktop_CategoryObject_10(this, "Short conditions"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_11", new DonchianDesktop_CategoryObject_11(this, "Enter Exit Short"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_12", new DonchianDesktop_CategoryObject_12(this, "Enter Exit Long"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_13", new DonchianDesktop_CategoryObject_13(this, "Exit Condition"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_14", new DonchianDesktop_CategoryObject_14(this, "Position"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_15", new DonchianDesktop_CategoryObject_15(this, "Indicator"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_16", new DonchianDesktop_CategoryObject_16(this, "Delay Position"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_17", new DonchianDesktop_CategoryObject_17(this, "Order"))
-		this.mapObjects.set("DonchianDesktop_CategoryObject_18", new DonchianDesktop_CategoryObject_18(this, "Chart"))
+		this.mapObjects.set("DonchianDesktop_CategoryObject_1", new DonchianDesktop_CategoryObject_1(this, "Average Short"))
+		this.mapObjects.set("DonchianDesktop_CategoryObject_2", new DonchianDesktop_CategoryObject_2(this, "Average Long"))
+		this.mapObjects.set("DonchianDesktop_CategoryObject_3", new DonchianDesktop_CategoryObject_3(this, "Donchian maximum"))
+		this.mapObjects.set("DonchianDesktop_CategoryObject_4", new DonchianDesktop_CategoryObject_4(this, "Donchian minimum"))
+		this.mapObjects.set("DonchianDesktop_CategoryObject_5", new DonchianDesktop_CategoryObject_5(this, "Current Position"))
+		this.mapObjects.set("DonchianDesktop_CategoryObject_6", new DonchianDesktop_CategoryObject_6(this, "Conditions"))
+		this.mapObjects.set("DonchianDesktop_CategoryObject_7", new DonchianDesktop_CategoryObject_7(this, "Sell Buy"))
+		this.mapObjects.set("DonchianDesktop_CategoryObject_8", new DonchianDesktop_CategoryObject_8(this, "Additional"))
+		this.mapObjects.set("DonchianDesktop_CategoryObject_9", new DonchianDesktop_CategoryObject_9(this, "Position"))
+		this.mapObjects.set("DonchianDesktop_CategoryObject_10", new DonchianDesktop_CategoryObject_10(this, "Order"))
+		this.mapObjects.set("DonchianDesktop_CategoryObject_11", new DonchianDesktop_CategoryObject_11(this, "Chart"))
 		new DonchianDesktop_CategoryArrow_0(this, "");
 		new DonchianDesktop_CategoryArrow_1(this, "");
 		new DonchianDesktop_CategoryArrow_2(this, "");
@@ -1833,31 +1412,6 @@ export class DonchianDesktop extends Desktop
 		new DonchianDesktop_CategoryArrow_28(this, "");
 		new DonchianDesktop_CategoryArrow_29(this, "");
 		new DonchianDesktop_CategoryArrow_30(this, "");
-		new DonchianDesktop_CategoryArrow_31(this, "");
-		new DonchianDesktop_CategoryArrow_32(this, "");
-		new DonchianDesktop_CategoryArrow_33(this, "");
-		new DonchianDesktop_CategoryArrow_34(this, "");
-		new DonchianDesktop_CategoryArrow_35(this, "");
-		new DonchianDesktop_CategoryArrow_36(this, "");
-		new DonchianDesktop_CategoryArrow_37(this, "");
-		new DonchianDesktop_CategoryArrow_38(this, "");
-		new DonchianDesktop_CategoryArrow_39(this, "");
-		new DonchianDesktop_CategoryArrow_40(this, "");
-		new DonchianDesktop_CategoryArrow_41(this, "");
-		new DonchianDesktop_CategoryArrow_42(this, "");
-		new DonchianDesktop_CategoryArrow_43(this, "");
-		new DonchianDesktop_CategoryArrow_44(this, "");
-		new DonchianDesktop_CategoryArrow_45(this, "");
-		new DonchianDesktop_CategoryArrow_46(this, "");
-		new DonchianDesktop_CategoryArrow_47(this, "");
-		new DonchianDesktop_CategoryArrow_48(this, "");
-		new DonchianDesktop_CategoryArrow_49(this, "");
-		new DonchianDesktop_CategoryArrow_50(this, "");
-		new DonchianDesktop_CategoryArrow_51(this, "");
-		new DonchianDesktop_CategoryArrow_52(this, "");
-		new DonchianDesktop_CategoryArrow_53(this, "Last");
-		new DonchianDesktop_CategoryArrow_54(this, "");
-		new DonchianDesktop_CategoryArrow_55(this, "");
 }
 
 finish() : void
@@ -1865,230 +1419,130 @@ finish() : void
 		let objects = this.getCategoryObjects();
 		let arrows = this.getCategoryArrows();
 
-		let s0 = this.mapObjects.get("DonchianDesktop_CategoryObject_2")
+		let s0 = this.mapObjects.get("DonchianDesktop_CategoryObject_6")
 		if(s0 != undefined)    arrows[0].setSource(s0);
 		let t0 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
 		if(t0 != undefined)    arrows[0].setTarget(t0);
-		let s1 = this.mapObjects.get("DonchianDesktop_CategoryObject_3")
+		let s1 = this.mapObjects.get("DonchianDesktop_CategoryObject_7")
 		if(s1 != undefined)    arrows[1].setSource(s1);
-		let t1 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
+		let t1 = this.mapObjects.get("DonchianDesktop_CategoryObject_6")
 		if(t1 != undefined)    arrows[1].setTarget(t1);
-		let s2 = this.mapObjects.get("DonchianDesktop_CategoryObject_4")
+		let s2 = this.mapObjects.get("DonchianDesktop_CategoryObject_8")
 		if(s2 != undefined)    arrows[2].setSource(s2);
-		let t2 = this.mapObjects.get("DonchianDesktop_CategoryObject_3")
+		let t2 = this.mapObjects.get("DonchianDesktop_CategoryObject_7")
 		if(t2 != undefined)    arrows[2].setTarget(t2);
-		let s3 = this.mapObjects.get("DonchianDesktop_CategoryObject_4")
+		let s3 = this.mapObjects.get("DonchianDesktop_CategoryObject_8")
 		if(s3 != undefined)    arrows[3].setSource(s3);
-		let t3 = this.mapObjects.get("DonchianDesktop_CategoryObject_2")
+		let t3 = this.mapObjects.get("DonchianDesktop_CategoryObject_6")
 		if(t3 != undefined)    arrows[3].setTarget(t3);
-		let s4 = this.mapObjects.get("DonchianDesktop_CategoryObject_5")
+		let s4 = this.mapObjects.get("DonchianDesktop_CategoryObject_7")
 		if(s4 != undefined)    arrows[4].setSource(s4);
-		let t4 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
+		let t4 = this.mapObjects.get("DonchianDesktop_CategoryObject_5")
 		if(t4 != undefined)    arrows[4].setTarget(t4);
 		let s5 = this.mapObjects.get("DonchianDesktop_CategoryObject_6")
 		if(s5 != undefined)    arrows[5].setSource(s5);
-		let t5 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
+		let t5 = this.mapObjects.get("DonchianDesktop_CategoryObject_5")
 		if(t5 != undefined)    arrows[5].setTarget(t5);
-		let s6 = this.mapObjects.get("DonchianDesktop_CategoryObject_7")
+		let s6 = this.mapObjects.get("DonchianDesktop_CategoryObject_3")
 		if(s6 != undefined)    arrows[6].setSource(s6);
 		let t6 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
 		if(t6 != undefined)    arrows[6].setTarget(t6);
-		let s7 = this.mapObjects.get("DonchianDesktop_CategoryObject_8")
+		let s7 = this.mapObjects.get("DonchianDesktop_CategoryObject_4")
 		if(s7 != undefined)    arrows[7].setSource(s7);
 		let t7 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
 		if(t7 != undefined)    arrows[7].setTarget(t7);
-		let s8 = this.mapObjects.get("DonchianDesktop_CategoryObject_9")
+		let s8 = this.mapObjects.get("DonchianDesktop_CategoryObject_1")
 		if(s8 != undefined)    arrows[8].setSource(s8);
 		let t8 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
 		if(t8 != undefined)    arrows[8].setTarget(t8);
-		let s9 = this.mapObjects.get("DonchianDesktop_CategoryObject_9")
+		let s9 = this.mapObjects.get("DonchianDesktop_CategoryObject_6")
 		if(s9 != undefined)    arrows[9].setSource(s9);
-		let t9 = this.mapObjects.get("DonchianDesktop_CategoryObject_5")
+		let t9 = this.mapObjects.get("DonchianDesktop_CategoryObject_3")
 		if(t9 != undefined)    arrows[9].setTarget(t9);
-		let s10 = this.mapObjects.get("DonchianDesktop_CategoryObject_9")
+		let s10 = this.mapObjects.get("DonchianDesktop_CategoryObject_6")
 		if(s10 != undefined)    arrows[10].setSource(s10);
-		let t10 = this.mapObjects.get("DonchianDesktop_CategoryObject_8")
+		let t10 = this.mapObjects.get("DonchianDesktop_CategoryObject_4")
 		if(t10 != undefined)    arrows[10].setTarget(t10);
-		let s11 = this.mapObjects.get("DonchianDesktop_CategoryObject_10")
+		let s11 = this.mapObjects.get("DonchianDesktop_CategoryObject_2")
 		if(s11 != undefined)    arrows[11].setSource(s11);
 		let t11 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
 		if(t11 != undefined)    arrows[11].setTarget(t11);
-		let s12 = this.mapObjects.get("DonchianDesktop_CategoryObject_10")
+		let s12 = this.mapObjects.get("DonchianDesktop_CategoryObject_8")
 		if(s12 != undefined)    arrows[12].setSource(s12);
-		let t12 = this.mapObjects.get("DonchianDesktop_CategoryObject_5")
+		let t12 = this.mapObjects.get("DonchianDesktop_CategoryObject_2")
 		if(t12 != undefined)    arrows[12].setTarget(t12);
-		let s13 = this.mapObjects.get("DonchianDesktop_CategoryObject_10")
+		let s13 = this.mapObjects.get("DonchianDesktop_CategoryObject_8")
 		if(s13 != undefined)    arrows[13].setSource(s13);
-		let t13 = this.mapObjects.get("DonchianDesktop_CategoryObject_7")
+		let t13 = this.mapObjects.get("DonchianDesktop_CategoryObject_1")
 		if(t13 != undefined)    arrows[13].setTarget(t13);
-		let s14 = this.mapObjects.get("DonchianDesktop_CategoryObject_14")
+		let s14 = this.mapObjects.get("DonchianDesktop_CategoryObject_6")
 		if(s14 != undefined)    arrows[14].setSource(s14);
-		let t14 = this.mapObjects.get("DonchianDesktop_CategoryObject_1")
+		let t14 = this.mapObjects.get("DonchianDesktop_CategoryObject_2")
 		if(t14 != undefined)    arrows[14].setTarget(t14);
-		let s15 = this.mapObjects.get("DonchianDesktop_CategoryObject_14")
+		let s15 = this.mapObjects.get("DonchianDesktop_CategoryObject_6")
 		if(s15 != undefined)    arrows[15].setSource(s15);
-		let t15 = this.mapObjects.get("DonchianDesktop_CategoryObject_4")
+		let t15 = this.mapObjects.get("DonchianDesktop_CategoryObject_1")
 		if(t15 != undefined)    arrows[15].setTarget(t15);
-		let s16 = this.mapObjects.get("DonchianDesktop_CategoryObject_15")
+		let s16 = this.mapObjects.get("DonchianDesktop_CategoryObject_11")
 		if(s16 != undefined)    arrows[16].setSource(s16);
-		let t16 = this.mapObjects.get("DonchianDesktop_CategoryObject_14")
+		let t16 = this.mapObjects.get("DonchianDesktop_CategoryObject_7")
 		if(t16 != undefined)    arrows[16].setTarget(t16);
 		let s17 = this.mapObjects.get("DonchianDesktop_CategoryObject_11")
 		if(s17 != undefined)    arrows[17].setSource(s17);
-		let t17 = this.mapObjects.get("DonchianDesktop_CategoryObject_4")
+		let t17 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
 		if(t17 != undefined)    arrows[17].setTarget(t17);
 		let s18 = this.mapObjects.get("DonchianDesktop_CategoryObject_11")
 		if(s18 != undefined)    arrows[18].setSource(s18);
-		let t18 = this.mapObjects.get("DonchianDesktop_CategoryObject_10")
+		let t18 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
 		if(t18 != undefined)    arrows[18].setTarget(t18);
-		let s19 = this.mapObjects.get("DonchianDesktop_CategoryObject_11")
+		let s19 = this.mapObjects.get("DonchianDesktop_CategoryObject_10")
 		if(s19 != undefined)    arrows[19].setSource(s19);
-		let t19 = this.mapObjects.get("DonchianDesktop_CategoryObject_1")
+		let t19 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
 		if(t19 != undefined)    arrows[19].setTarget(t19);
-		let s20 = this.mapObjects.get("DonchianDesktop_CategoryObject_12")
+		let s20 = this.mapObjects.get("DonchianDesktop_CategoryObject_10")
 		if(s20 != undefined)    arrows[20].setSource(s20);
-		let t20 = this.mapObjects.get("DonchianDesktop_CategoryObject_4")
+		let t20 = this.mapObjects.get("DonchianDesktop_CategoryObject_7")
 		if(t20 != undefined)    arrows[20].setTarget(t20);
-		let s21 = this.mapObjects.get("DonchianDesktop_CategoryObject_12")
+		let s21 = this.mapObjects.get("DonchianDesktop_CategoryObject_11")
 		if(s21 != undefined)    arrows[21].setSource(s21);
-		let t21 = this.mapObjects.get("DonchianDesktop_CategoryObject_1")
+		let t21 = this.mapObjects.get("DonchianDesktop_CategoryObject_5")
 		if(t21 != undefined)    arrows[21].setTarget(t21);
-		let s22 = this.mapObjects.get("DonchianDesktop_CategoryObject_12")
+		let s22 = this.mapObjects.get("DonchianDesktop_CategoryObject_10")
 		if(s22 != undefined)    arrows[22].setSource(s22);
-		let t22 = this.mapObjects.get("DonchianDesktop_CategoryObject_9")
+		let t22 = this.mapObjects.get("DonchianDesktop_CategoryObject_5")
 		if(t22 != undefined)    arrows[22].setTarget(t22);
-		let s23 = this.mapObjects.get("DonchianDesktop_CategoryObject_14")
+		let s23 = this.mapObjects.get("DonchianDesktop_CategoryObject_11")
 		if(s23 != undefined)    arrows[23].setSource(s23);
-		let t23 = this.mapObjects.get("DonchianDesktop_CategoryObject_11")
+		let t23 = this.mapObjects.get("DonchianDesktop_CategoryObject_3")
 		if(t23 != undefined)    arrows[23].setTarget(t23);
-		let s24 = this.mapObjects.get("DonchianDesktop_CategoryObject_14")
+		let s24 = this.mapObjects.get("DonchianDesktop_CategoryObject_11")
 		if(s24 != undefined)    arrows[24].setSource(s24);
-		let t24 = this.mapObjects.get("DonchianDesktop_CategoryObject_12")
+		let t24 = this.mapObjects.get("DonchianDesktop_CategoryObject_4")
 		if(t24 != undefined)    arrows[24].setTarget(t24);
-		let s25 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		let s25 = this.mapObjects.get("DonchianDesktop_CategoryObject_11")
 		if(s25 != undefined)    arrows[25].setSource(s25);
-		let t25 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
+		let t25 = this.mapObjects.get("DonchianDesktop_CategoryObject_2")
 		if(t25 != undefined)    arrows[25].setTarget(t25);
-		let s26 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		let s26 = this.mapObjects.get("DonchianDesktop_CategoryObject_11")
 		if(s26 != undefined)    arrows[26].setSource(s26);
-		let t26 = this.mapObjects.get("DonchianDesktop_CategoryObject_14")
+		let t26 = this.mapObjects.get("DonchianDesktop_CategoryObject_1")
 		if(t26 != undefined)    arrows[26].setTarget(t26);
-		let s27 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		let s27 = this.mapObjects.get("DonchianDesktop_CategoryObject_11")
 		if(s27 != undefined)    arrows[27].setSource(s27);
-		let t27 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
+		let t27 = this.mapObjects.get("DonchianDesktop_CategoryObject_10")
 		if(t27 != undefined)    arrows[27].setTarget(t27);
-		let s28 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		let s28 = this.mapObjects.get("DonchianDesktop_CategoryObject_9")
 		if(s28 != undefined)    arrows[28].setSource(s28);
-		let t28 = this.mapObjects.get("DonchianDesktop_CategoryObject_2")
+		let t28 = this.mapObjects.get("DonchianDesktop_CategoryObject_7")
 		if(t28 != undefined)    arrows[28].setTarget(t28);
-		let s29 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		let s29 = this.mapObjects.get("DonchianDesktop_CategoryObject_10")
 		if(s29 != undefined)    arrows[29].setSource(s29);
-		let t29 = this.mapObjects.get("DonchianDesktop_CategoryObject_3")
+		let t29 = this.mapObjects.get("DonchianDesktop_CategoryObject_9")
 		if(t29 != undefined)    arrows[29].setTarget(t29);
-		let s30 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
+		let s30 = this.mapObjects.get("DonchianDesktop_CategoryObject_10")
 		if(s30 != undefined)    arrows[30].setSource(s30);
-		let t30 = this.mapObjects.get("DonchianDesktop_CategoryObject_8")
+		let t30 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
 		if(t30 != undefined)    arrows[30].setTarget(t30);
-		let s31 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
-		if(s31 != undefined)    arrows[31].setSource(s31);
-		let t31 = this.mapObjects.get("DonchianDesktop_CategoryObject_6")
-		if(t31 != undefined)    arrows[31].setTarget(t31);
-		let s32 = this.mapObjects.get("DonchianDesktop_CategoryObject_15")
-		if(s32 != undefined)    arrows[32].setSource(s32);
-		let t32 = this.mapObjects.get("DonchianDesktop_CategoryObject_11")
-		if(t32 != undefined)    arrows[32].setTarget(t32);
-		let s33 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
-		if(s33 != undefined)    arrows[33].setSource(s33);
-		let t33 = this.mapObjects.get("DonchianDesktop_CategoryObject_4")
-		if(t33 != undefined)    arrows[33].setTarget(t33);
-		let s34 = this.mapObjects.get("DonchianDesktop_CategoryObject_15")
-		if(s34 != undefined)    arrows[34].setSource(s34);
-		let t34 = this.mapObjects.get("DonchianDesktop_CategoryObject_9")
-		if(t34 != undefined)    arrows[34].setTarget(t34);
-		let s35 = this.mapObjects.get("DonchianDesktop_CategoryObject_15")
-		if(s35 != undefined)    arrows[35].setSource(s35);
-		let t35 = this.mapObjects.get("DonchianDesktop_CategoryObject_12")
-		if(t35 != undefined)    arrows[35].setTarget(t35);
-		let s36 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
-		if(s36 != undefined)    arrows[36].setSource(s36);
-		let t36 = this.mapObjects.get("DonchianDesktop_CategoryObject_15")
-		if(t36 != undefined)    arrows[36].setTarget(t36);
-		let s37 = this.mapObjects.get("DonchianDesktop_CategoryObject_13")
-		if(s37 != undefined)    arrows[37].setSource(s37);
-		let t37 = this.mapObjects.get("DonchianDesktop_CategoryObject_11")
-		if(t37 != undefined)    arrows[37].setTarget(t37);
-		let s38 = this.mapObjects.get("DonchianDesktop_CategoryObject_13")
-		if(s38 != undefined)    arrows[38].setSource(s38);
-		let t38 = this.mapObjects.get("DonchianDesktop_CategoryObject_12")
-		if(t38 != undefined)    arrows[38].setTarget(t38);
-		let s39 = this.mapObjects.get("DonchianDesktop_CategoryObject_14")
-		if(s39 != undefined)    arrows[39].setSource(s39);
-		let t39 = this.mapObjects.get("DonchianDesktop_CategoryObject_13")
-		if(t39 != undefined)    arrows[39].setTarget(t39);
-		let s40 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
-		if(s40 != undefined)    arrows[40].setSource(s40);
-		let t40 = this.mapObjects.get("DonchianDesktop_CategoryObject_13")
-		if(t40 != undefined)    arrows[40].setTarget(t40);
-		let s41 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
-		if(s41 != undefined)    arrows[41].setSource(s41);
-		let t41 = this.mapObjects.get("DonchianDesktop_CategoryObject_9")
-		if(t41 != undefined)    arrows[41].setTarget(t41);
-		let s42 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
-		if(s42 != undefined)    arrows[42].setSource(s42);
-		let t42 = this.mapObjects.get("DonchianDesktop_CategoryObject_10")
-		if(t42 != undefined)    arrows[42].setTarget(t42);
-		let s43 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
-		if(s43 != undefined)    arrows[43].setSource(s43);
-		let t43 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
-		if(t43 != undefined)    arrows[43].setTarget(t43);
-		let s44 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
-		if(s44 != undefined)    arrows[44].setSource(s44);
-		let t44 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
-		if(t44 != undefined)    arrows[44].setTarget(t44);
-		let s45 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
-		if(s45 != undefined)    arrows[45].setSource(s45);
-		let t45 = this.mapObjects.get("DonchianDesktop_CategoryObject_2")
-		if(t45 != undefined)    arrows[45].setTarget(t45);
-		let s46 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
-		if(s46 != undefined)    arrows[46].setSource(s46);
-		let t46 = this.mapObjects.get("DonchianDesktop_CategoryObject_3")
-		if(t46 != undefined)    arrows[46].setTarget(t46);
-		let s47 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
-		if(s47 != undefined)    arrows[47].setSource(s47);
-		let t47 = this.mapObjects.get("DonchianDesktop_CategoryObject_7")
-		if(t47 != undefined)    arrows[47].setTarget(t47);
-		let s48 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
-		if(s48 != undefined)    arrows[48].setSource(s48);
-		let t48 = this.mapObjects.get("DonchianDesktop_CategoryObject_8")
-		if(t48 != undefined)    arrows[48].setTarget(t48);
-		let s49 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
-		if(s49 != undefined)    arrows[49].setSource(s49);
-		let t49 = this.mapObjects.get("DonchianDesktop_CategoryObject_5")
-		if(t49 != undefined)    arrows[49].setTarget(t49);
-		let s50 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
-		if(s50 != undefined)    arrows[50].setSource(s50);
-		let t50 = this.mapObjects.get("DonchianDesktop_CategoryObject_6")
-		if(t50 != undefined)    arrows[50].setTarget(t50);
-		let s51 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
-		if(s51 != undefined)    arrows[51].setSource(s51);
-		let t51 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
-		if(t51 != undefined)    arrows[51].setTarget(t51);
-		let s52 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
-		if(s52 != undefined)    arrows[52].setSource(s52);
-		let t52 = this.mapObjects.get("DonchianDesktop_CategoryObject_14")
-		if(t52 != undefined)    arrows[52].setTarget(t52);
-		let s53 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
-		if(s53 != undefined)    arrows[53].setSource(s53);
-		let t53 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
-		if(t53 != undefined)    arrows[53].setTarget(t53);
-		let s54 = this.mapObjects.get("DonchianDesktop_CategoryObject_17")
-		if(s54 != undefined)    arrows[54].setSource(s54);
-		let t54 = this.mapObjects.get("DonchianDesktop_CategoryObject_16")
-		if(t54 != undefined)    arrows[54].setTarget(t54);
-		let s55 = this.mapObjects.get("DonchianDesktop_CategoryObject_18")
-		if(s55 != undefined)    arrows[55].setSource(s55);
-		let t55 = this.mapObjects.get("DonchianDesktop_CategoryObject_14")
-		if(t55 != undefined)    arrows[55].setTarget(t55);
 		(objects[1] as unknown as IPostSetArrow).postSetArrow();
 		(objects[2] as unknown as IPostSetArrow).postSetArrow();
 		(objects[3] as unknown as IPostSetArrow).postSetArrow();
@@ -2100,12 +1554,5 @@ finish() : void
 		(objects[9] as unknown as IPostSetArrow).postSetArrow();
 		(objects[10] as unknown as IPostSetArrow).postSetArrow();
 		(objects[11] as unknown as IPostSetArrow).postSetArrow();
-		(objects[12] as unknown as IPostSetArrow).postSetArrow();
-		(objects[13] as unknown as IPostSetArrow).postSetArrow();
-		(objects[14] as unknown as IPostSetArrow).postSetArrow();
-		(objects[15] as unknown as IPostSetArrow).postSetArrow();
-		(objects[16] as unknown as IPostSetArrow).postSetArrow();
-		(objects[17] as unknown as IPostSetArrow).postSetArrow();
-		(objects[18] as unknown as IPostSetArrow).postSetArrow();
 	}
 }

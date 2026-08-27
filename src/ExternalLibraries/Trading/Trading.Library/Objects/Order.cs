@@ -327,10 +327,6 @@ namespace Trading.Library.Objects
         {
             Zero();
             dateValue = currentDate.ToNullable<double>();
-            if (dateValue == 200 | dateValue == 199)
-            {
-
-            }
             CurrentPositionValue = positionM.ToNullable<double>();
             if (!changed)
             {

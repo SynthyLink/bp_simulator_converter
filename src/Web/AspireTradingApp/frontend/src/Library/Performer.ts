@@ -47,6 +47,7 @@ import type { IInput } from "./Interfaces/IInput";
 import type { IActionAddRemoveT2 } from "./Interfaces/IActionAddRemoveT2";
 import type { IActionT2 } from "./Interfaces/IActionT2";
 import type { IStartTask } from "./Interfaces/IStartTask";
+import type { IRunning } from "./Interfaces/IRunning";
 
 
 
@@ -855,6 +856,15 @@ export class Performer
         this.forEach<IFactoryConsumer>(collection, setter, "IFactoryConsumer")
     }
 
+    public getFactoryFromDesktop(desktop: IDesktop): IFactory | undefined {
+        let t = this.convertObject<IFactoryConsumer, any>(desktop, "IFactoryConsumer")
+        if (t.length > 0) {
+            return t[0].getConsumerFactory()
+        }
+        return undefined;
+    }
+
+
     public collectResources(res: IResourceCollection, collection: IObjectCollection) {
         var rs = new ResourceSetter(res)
         this.forEach<IResourceCollection>(collection, rs, "IResourceCollection")
@@ -878,8 +888,6 @@ export class Performer
             this.forEach<ISelfLoad>(collection, this.unload, "ISelfLoad")
         }
     }
-
- 
  
 
     public createObjectCollectionAction(collection: IObjectCollection,
@@ -902,7 +910,10 @@ export class Performer
         this.forEach<IInput>(collection, s, "IInput")
     }
 
-
+    public setRunning(collection: IObjectCollection, running: boolean): void {
+        let r = new Running(running)
+        this.forEach<IRunning>(collection, r, "IRunning")
+    }
 
     measurements !: IMeasurements;
 
@@ -917,6 +928,8 @@ export class Performer
     load: Load = new Load()
 
     unload: Unload = new Unload()
+
+
 
 }
 
@@ -1119,4 +1132,21 @@ class ArrayOfObjects<T, S> implements IActionT<T> {
         this.performer.recursiveNodeAction(node, this)
         return this.s
     }
+
 }
+
+class Running implements IActionT<IRunning> {
+    constructor(running: boolean) {
+        this.running = running
+    }
+    running: boolean = false
+    actionT(t: IRunning): void {
+        t.setRunning(this.running)
+    }
+    isEmptyActionT(): boolean {
+        return false;
+    }
+
+
+}
+

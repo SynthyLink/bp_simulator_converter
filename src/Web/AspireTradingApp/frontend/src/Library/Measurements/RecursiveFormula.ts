@@ -5,17 +5,21 @@
 import type { IDesktop } from "../Interfaces/IDesktop";
 import type { IMeasurements } from "./Interfaces/IMeasurements";
 import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
+import type { IRunning } from "../Interfaces/IRunning";
 import { DataConsumerVariableMeasurementsStarted } from "./DataConsumerVariableMeasurementsStarted";
 import { Performer } from "../Performer";
 import { FeedbackAliasCollection } from "./FeedBack/FeedbackAliasCollection";
 
 
-export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted implements  IPostSetArrow
+export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted
+    implements IPostSetArrow, IRunning
 {
     protected inputs: IMeasurements[] = [];
 
 
     protected arguments: string[] = [];
+
+    protected running: boolean = false
 
   //  protected initial: Map<string, any> = new Map();
 
@@ -29,8 +33,20 @@ export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted im
         super(desktop, name);
         this.typeName = "RecursiveFormula";
         this.types.push("IPostSetArrow");
+        this.types.push("IRunning");
         this.types.push("RecursiveFormula");
+    }
 
+    setRunning(running: boolean): void {
+        if (running === this.running) return
+        this.running = running
+        if (!running) return
+        this.initial.resetInitialValues();
+        this.feedback.setFeedbacks();
+        console.log("RUNNING", this)
+  }
+    getRunning(): boolean {
+        return this.running
     }
 
  
@@ -84,5 +100,6 @@ export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted im
         this.calculateTree();
         this.save();
         this.feedback.setFeedbacks();
+        this.show?.show(this)
     }
 }

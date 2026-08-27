@@ -16,6 +16,7 @@ import type { IExceptionHandler } from "../ErrorHandler/Interfaces/IExceptionHan
 import type { IFactory } from "../Interfaces/IFactory";
 import { Performer } from "../Performer";
 export declare class PerformerMeasuremets extends Performer {
+
     processor: IDifferentialEquationProcessor;
     realtimeEventFactory: IRealtimeCollectionFactory;
     errorHandler: IExceptionHandler;

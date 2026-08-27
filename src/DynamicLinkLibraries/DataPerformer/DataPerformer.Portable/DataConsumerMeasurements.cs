@@ -311,8 +311,6 @@ namespace DataPerformer.Portable
 
         }
 
-
-
         /// <summary>
         /// Updates measurements data
         /// </summary>

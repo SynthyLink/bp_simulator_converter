@@ -10,6 +10,8 @@ import { MemoryDB } from "../Database/Local/MemoryDB";
 import type { Initial } from "../Initial";
 import { TradingPerformer } from "../TradingPerformer";
 import { CommunicationTradingDatabaseHistoryInterface } from "./CommunicationTradingDatabaseHistoryInterface";
+import type { IShowObject } from "../../../Library/Show/Interfaces/IShowObject";
+import { TradingOrderShow } from "../Components/TradingOrderShow";
 
 
 export class TradingCommunication extends HttpCommunication {
@@ -227,11 +229,11 @@ export class TradingCommunication extends HttpCommunication {
         let factory = new UniversalFactory
         factory.addFactory<ITradingDatabaseHistoryInterface>(new CommunicationTradingDatabaseHistoryInterface(new TradingCommunication()), "ITradingDatabaseHistoryInterface")
         factory.addFactory<ICheck>(new EmptyChecker(), "ICheck");
+        factory.addFactory<IShowObject>(new TradingOrderShow(), "IShowObject");
+
         let controller = new AbortController();
         let desktop = await DonchianDesktop.getDesktopAsync(controller, factory)
         this.tPerformer = new TradingPerformer(new MemoryDB(), desktop, this);
-        //let q = desktop.getCategoryObject("Trading") as unknown as TradingDataQuery;
-       // this.symbols = q.getSymbolsStr();
         return this.symbols;
     }
 
