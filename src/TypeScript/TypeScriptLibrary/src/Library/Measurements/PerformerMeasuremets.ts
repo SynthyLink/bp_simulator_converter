@@ -178,7 +178,6 @@ export class PerformerMeasuremets extends Performer {
         for (var s of meaurements) {
             map.set(s, this.getMeasurementDC(dataConsumer, s))
         }
-
         let action = new MeasurementWrite(map)
         await this.performIteratorDataConsumerAsync(dataConsumer, iterator, abort, action, preparation)
         return action.getData()

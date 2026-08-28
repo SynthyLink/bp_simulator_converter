@@ -13,8 +13,10 @@ import type { IDataRuntime } from "../../Library/Interfaces/IDataRuntime";
 import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
 import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
 import type { IExceptionHandler } from "../../Library/ErrorHandler/Interfaces/IExceptionHandler";
+import type { IActionT2 } from "../../Library/Interfaces/IActionT2";
+import { TradingOrder } from "./Components/TradingOrder";
 
-export class TradingPerformer {
+export class TradingPerformer implements IActionT2<any, string> {
 
     pefrormer !: PerformerMeasuremets
 
@@ -24,6 +26,8 @@ export class TradingPerformer {
 
 
     dataConsumer !: IDataConsumer
+
+    order !: TradingOrder
 
     runtime !: IDataRuntime
 
@@ -44,6 +48,9 @@ export class TradingPerformer {
         this.communication = communication
         this.query = desktop.getCategoryObject("Trading") as unknown as TradingDataQuery
         this.dataConsumer = desktop.getCategoryObject("Chart") as unknown as IDataConsumer
+        this.order = desktop.getCategoryObject("Order") as unknown as TradingOrder
+        this.order.addActionT2(this)
+
         this.runtime = new DataRuntimeConsumerODE(this.dataConsumer, new Motion6DFactory())
 
         const filtersN = ["Average Short", "Average Long", "Donchian maximum", "Donchian minimum"]
@@ -52,6 +59,17 @@ export class TradingPerformer {
             let f = o as unknown as SequenceFilterWrapper
             this.filters.push(f.getFilter())
         }
+    }
+    first: boolean = true;
+
+    actionT2(t1: any, t2: string): void {
+        if (this.first) {
+            console.log(t1, t2)
+        }
+        this.first = false;
+    }
+    isEmptyActionT2(): boolean {
+        return false
     }
 
     async writeHistoryAsync(symbol: string, begin: number, end: number, history: HistoryMessage[]): Promise<void> {
@@ -93,14 +111,12 @@ export class TradingPerformer {
         this.any = a2
         this.any = d1
         this.any = d2
-  //  this.query.setQueryParameters(symblol, period, begin, end)
-      /*  this.filters[0].setFilterCount(a1)
+    this.query.setQueryParameters(symblol, period, begin, end)
+        this.filters[0].setFilterCount(a1)
         this.filters[1].setFilterCount(a2)
         this.filters[2].setFilterCount(d1)
         this.filters[3].setFilterCount(d2)
-        this.filters[4].setFilterCount(d3)
-        this.filters[5].setFilterCount(d4)*/
-        if (controller === undefined) return []
+         if (controller === undefined) return []
         let x = await this.pefrormer.performIteratorDataConsumerMapAsync(this.dataConsumer,
             this.query, this.runtime, controller, this.mmap, undefined, new ErrorH(controller))
          return x

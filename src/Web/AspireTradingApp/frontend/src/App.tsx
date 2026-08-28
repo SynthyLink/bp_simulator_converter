@@ -13,7 +13,6 @@ import { Performer } from './Library/Performer';
 import { TradingCommunication } from "./ExternalObjects/Trading/Communication/TradingCommunication";
 import type { Initial } from './ExternalObjects/Trading/Initial';
 import type { ChartDataTrading } from './ExternalObjects/Trading/ChartDataTrading';
-import { OwnError } from './Library/ErrorHandler/OwnError';
 
 
 
@@ -76,8 +75,6 @@ const App: React.FC = () => {
 
     let [donchian1, setDonchian1] = useState<number>()
     let [donchian2, setDonchian2] = useState<number>()
-    let [donchian3, setDonchian3] = useState<number>()
-    let [donchian4, setDonchian4] = useState<number>()
 
     let [symbol, setSymbol] = useState<string>();
 
@@ -135,7 +132,7 @@ const App: React.FC = () => {
         let s = symbol;
         let map = new Map<string, any>()
         let f = [Number(average1), Number(average2), Number(donchian1),
-        Number(donchian2), Number(donchian3), Number(donchian4)]
+        Number(donchian2)]
         map.set("b", b)
         map.set("e", e)
         map.set("p", p)
@@ -148,7 +145,7 @@ const App: React.FC = () => {
         if (s !== undefined)
         {
               promises.push(fillClient(s, p, b, e, f[0], f[1], f[2],
-                    f[3], f[4], f[5]))
+                    f[3]))
             promises.push(fillServer(map))
             await Promise.all(promises);
             let chart = communication.tPerformer.setChart("j")
@@ -164,10 +161,10 @@ const App: React.FC = () => {
     }
 
     const fillClient = async (symbol: string, period: string, begin: number, end: number,
-        a1: number, a2: number, d1: number, d2: number, d3: number, d4: number): Promise<void> => {
+        a1: number, a2: number, d1: number, d2: number): Promise<void> => {
 
         let p = communication.tPerformer
-        let h = await p.calculate(symbol, period, begin, end, a1, a2, d1, d2, d3, d4, globalAbort)
+        let h = await p.calculate(symbol, period, begin, end, a1, a2, d1, d2, globalAbort)
         console.log(h, "CCC")
         communication.tPerformer.setClient(h)
 
@@ -295,12 +292,10 @@ const App: React.FC = () => {
                     map.set(ss[0], ss[1])
                 }
                 setSymbols(map)
-                setAverage1(80)
-                setAverage2(20)
+                setAverage1(10)
+                setAverage2(40)
                 setDonchian1(20)
                 setDonchian2(20)
-                setDonchian3(20)
-                setDonchian4(20)
             }
         }
 

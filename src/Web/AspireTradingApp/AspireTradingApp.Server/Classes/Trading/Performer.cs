@@ -20,6 +20,8 @@ namespace AspireTradingApp.Server.Trading
     public class Performer 
     {
 
+        static DataPerformer.Portable.Performer performer = new DataPerformer.Portable.Performer();
+
         string[] filtersN = ["Average Short", "Average Long", "Donchian maximum", "Donchian maximum"];
         string[] del = ["a1", "a2", "d1", "d2"];
 
@@ -29,7 +31,7 @@ namespace AspireTradingApp.Server.Trading
             set;
         }
 
-        Dictionary<string, string> dp = new Dictionary<string, string>() {{"a", "Trading.RealTime"},
+        Dictionary<string, string> dp = new () {{"a", "Trading.RealTime"},
         {"b", "Trading.Low"},
          {"c", "Trading.High"},
           {"d", "Trading.Open"},
@@ -52,12 +54,17 @@ namespace AspireTradingApp.Server.Trading
 
 int[] k = [0, 0, 0, 0, 0, 0];
 
+        static IShowObject show = new ShowsObject();
+
+        ShowsObject so;
+
         public NamedTree.Interfaces.IFactory Factory
         {
             get
             {
                 NamedTree.Interfaces.IFactory f = new UniversalFactory();
                 f.Set(Database);
+                f.Set(show);
                 return f;
             }
         }
@@ -83,6 +90,7 @@ int[] k = [0, 0, 0, 0, 0, 0];
 
             ConnetionString = cs;
             this.df = df;
+            so = show as ShowsObject;
         }
 
         internal async Task Load(CancellationToken token)
@@ -145,7 +153,9 @@ int[] k = [0, 0, 0, 0, 0, 0];
             var desktop = await DonchianDesktop.GetDesktopAsync(token, Factory);
             var dataQuery = desktop.Get<DataQuery>("Trading");
             var dataConsumer = desktop.Get<IDataConsumer>("Chart");
-
+            var order = desktop.Get<Order>("Order");
+            order.OrderChanged += Order_OrderChanged;
+            order.OnChangeInput += Order_OnChangeInput;
 
 
             // var desktop = await GeneratedProject.Donchian.
@@ -166,6 +176,15 @@ int[] k = [0, 0, 0, 0, 0, 0];
             var wrapper = new DataPerformer.Portable.Wrappers.DataConsumerWrapper(dataConsumer);
             var t = await wrapper.PerformIteratorAsync(dataQuery, dp, token);
             return System.Text.Json.JsonSerializer.Serialize(t);
+        }
+
+        private void Order_OnChangeInput()
+        {
+        }
+
+        private void Order_OrderChanged(Order arg1, global::Trading.Library.Enums.PositionDirection arg2)
+        {
+            
         }
 
         public HistoricalDataMessageNumber Convert(HistoricalDataMessageDateTime message)

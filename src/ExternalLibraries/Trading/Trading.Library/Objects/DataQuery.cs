@@ -221,7 +221,9 @@ namespace Trading.Library.Objects
         bool IIterator.Next()
         {
             if (!enumerator.MoveNext())
-            { return false; }
+            { 
+                return false; 
+            }
             message = enumerator.Current;
             Set();
             ++step;
@@ -451,7 +453,8 @@ namespace Trading.Library.Objects
             public RealTimeMeasurement(DataQuery query) : base("RealTime", query)
             {
 
-                func = () =>   query.realTime;
+                func = () =>   
+                query.realTime;
                 f = [query.CoordX, null];
             }
 

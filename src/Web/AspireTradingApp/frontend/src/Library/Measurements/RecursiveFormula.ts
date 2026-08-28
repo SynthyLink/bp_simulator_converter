@@ -43,8 +43,8 @@ export class RecursiveFormula extends DataConsumerVariableMeasurementsStarted
         if (!running) return
         this.initial.resetInitialValues();
         this.feedback.setFeedbacks();
-        console.log("RUNNING", this)
-  }
+    }
+
     getRunning(): boolean {
         return this.running
     }

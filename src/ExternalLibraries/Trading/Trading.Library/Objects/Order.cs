@@ -26,7 +26,11 @@ namespace Trading.Library.Objects
 
         bool isMeaUpdated = false;
 
-        double income = 0;
+        public double Income
+        {
+            get;
+            set;
+        } = 0;
 
         IMeasurement[] measurements = [];
 
@@ -46,6 +50,8 @@ namespace Trading.Library.Objects
 
         IMeasurement currentDate = null;
 
+        IShowObject showObject;
+ 
 
         double? mSellPrice = null;
 
@@ -56,13 +62,13 @@ namespace Trading.Library.Objects
 
         #region Propreties
 
-        Action<Order, PositionDirection> orderChanged;
+        event Action<Order, PositionDirection> orderChanged;
 
         public event Action<Order, PositionDirection> OrderChanged
         {
             add { orderChanged += value; }
 
-            remove => orderChanged -= value;
+            remove { orderChanged -= value; }
         }
 
         public double EnterPrice
@@ -119,6 +125,8 @@ namespace Trading.Library.Objects
         {
             isPost = false;
             Find();
+            var f = Performer.GetFactory(this);
+            showObject = f.Get<IShowObject>();
         }
 
         IMeasurement IMeasurements.this[int number] => measurements[number];
@@ -294,8 +302,9 @@ namespace Trading.Library.Objects
 
         void Start(bool value)
         {
+            step = 0;
             isRunning = value;
-            income = 0;
+            Income = 0;
             ClosedIncome = 0;
             TempIncome = 0;
             EnterPrice = 0;
@@ -325,6 +334,7 @@ namespace Trading.Library.Objects
 
         void Update()
         {
+            showObject?.Show(this, "before");
             Zero();
             dateValue = currentDate.ToNullable<double>();
             CurrentPositionValue = positionM.ToNullable<double>();
@@ -343,14 +353,14 @@ namespace Trading.Library.Objects
                     mSellPrice = sellPriceM.ToNullable<double>();
                     ExitPrice = mSellPrice.Value;
                     ClosedIncome = TempIncome + ExitPrice;
-                    income += ClosedIncome;
+                    Income += ClosedIncome;
                 }
                 else
                 {
                     mBuyPrice = buyPriceM.ToNullable<double>();
                     ExitPrice = mBuyPrice.Value;
                     ClosedIncome = TempIncome - ExitPrice;
-                    income += ClosedIncome;
+                    Income += ClosedIncome;
                 }
             }
             else
@@ -373,6 +383,7 @@ namespace Trading.Library.Objects
             {
                 orderChanged?.Invoke(this, PositionDirection);
             }
+            showObject?.Show(this, "after");
         }
 
         void Find()
@@ -447,7 +458,7 @@ namespace Trading.Library.Objects
 
             object f()
             {
-                return order.income;
+                return order.Income;
             }
         }
 

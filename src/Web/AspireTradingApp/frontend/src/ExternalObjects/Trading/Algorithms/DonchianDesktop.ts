@@ -18,7 +18,6 @@ import { TradingOrder } from "../Components/TradingOrder";
 import { TradingDataQuery } from "../Components/TradingDataQuery";
 import { FeedbackAliasCollection } from "../../../Library/Measurements/FeedBack/FeedbackAliasCollection";
 
-
 class DonchianDesktop_CategoryObject_0 extends TradingDataQuery
 {
 	constructor(desktop: IDesktop, name: string)
@@ -1008,15 +1007,6 @@ class DonchianDesktop_CategoryObject_9 extends VectorFormulaConsumer
 			this.variable = this.measurement0.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_0 = this.convert<number>(this.variable);
-			this.variable = (this.var_0) === (this.var_1);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_2 = this.convert<boolean>(this.variable);
-			this.variable = (this.var_4) - (this.var_0);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_5 = this.convert<number>(this.variable);
-			this.variable = (this.var_2) ? (this.var_3) : (this.var_5);
-			if (this.check(this.variable)) { this.success = false; return; } 
-			this.var_6 = this.convert<number>(this.variable);
 		}
 	
 	init() : void
@@ -1028,51 +1018,15 @@ class DonchianDesktop_CategoryObject_9 extends VectorFormulaConsumer
 	
 	measurement0 ! : IMeasurement;
 	var_0 : number  = 0;
-	var_1 : number  = 0;
-	var_2 : boolean  = false;
-	var_3 : number  = 0;
-	var_4 : number  = 3;
-	var_5 : number  = 0;
-	var_6 : number  = 0;
 	
 	get_0() : any
 	{
 		return this.success ? this.var_0 : undefined;
 	}
-	
-	get_1() : any
-	{
-		return this.success ? this.var_1 : undefined;
-	}
-	
-	get_2() : any
-	{
-		return this.success ? this.var_2 : undefined;
-	}
-	
-	get_3() : any
-	{
-		return this.success ? this.var_3 : undefined;
-	}
-	
-	get_4() : any
-	{
-		return this.success ? this.var_4 : undefined;
-	}
-	
-	get_5() : any
-	{
-		return this.success ? this.var_5 : undefined;
-	}
-	
-	get_6() : any
-	{
-		return this.success ? this.var_6 : undefined;
-	}
 	save() : void {
 		var v = this.variables;
 		var x0 = v.get("Formula_1");
-		x0?.setIValue(this.get_6());
+		x0?.setIValue(this.get_0());
 	}
 	
 	setFeedback(): void {
@@ -1089,7 +1043,7 @@ class DonchianDesktop_CategoryObject_10 extends TradingOrder
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
-		this.position = "Sell Buy.Formula_3"
+		this.position = "Position.Formula_1"
 		this.buyPrice = "Trading.Close"
 		this.sellPrice = "Trading.Close"
 		this.date = "Trading.FullTime"
@@ -1352,6 +1306,22 @@ class DonchianDesktop_CategoryArrow_30 extends IteratorConsumerLink
 	}
 }
 
+class DonchianDesktop_CategoryArrow_31 extends DataLink
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
+class DonchianDesktop_CategoryArrow_32 extends DataLink
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
 
 
 export class DonchianDesktop extends Desktop
@@ -1412,6 +1382,8 @@ export class DonchianDesktop extends Desktop
 		new DonchianDesktop_CategoryArrow_28(this, "");
 		new DonchianDesktop_CategoryArrow_29(this, "");
 		new DonchianDesktop_CategoryArrow_30(this, "");
+		new DonchianDesktop_CategoryArrow_31(this, "");
+		new DonchianDesktop_CategoryArrow_32(this, "");
 }
 
 finish() : void
@@ -1543,6 +1515,14 @@ finish() : void
 		if(s30 != undefined)    arrows[30].setSource(s30);
 		let t30 = this.mapObjects.get("DonchianDesktop_CategoryObject_0")
 		if(t30 != undefined)    arrows[30].setTarget(t30);
+		let s31 = this.mapObjects.get("DonchianDesktop_CategoryObject_11")
+		if(s31 != undefined)    arrows[31].setSource(s31);
+		let t31 = this.mapObjects.get("DonchianDesktop_CategoryObject_9")
+		if(t31 != undefined)    arrows[31].setTarget(t31);
+		let s32 = this.mapObjects.get("DonchianDesktop_CategoryObject_9")
+		if(s32 != undefined)    arrows[32].setSource(s32);
+		let t32 = this.mapObjects.get("DonchianDesktop_CategoryObject_5")
+		if(t32 != undefined)    arrows[32].setTarget(t32);
 		(objects[1] as unknown as IPostSetArrow).postSetArrow();
 		(objects[2] as unknown as IPostSetArrow).postSetArrow();
 		(objects[3] as unknown as IPostSetArrow).postSetArrow();

@@ -7,8 +7,11 @@ import { Measurement } from "../../../Library/Measurements/Measurement";
 import { DataConsumer } from "../../../Library/Measurements/DataConsumer";
 import { TradingPositionDirection, TradingPositionType } from "./TradingPositionEnums";
 import { OwnError } from "../../../Library/ErrorHandler/OwnError";
+import type { IActionAddRemoveT2 } from "../../../Library/Interfaces/IActionAddRemoveT2";
+import type { IActionT2 } from "../../../Library/Interfaces/IActionT2";
+import { ActionArrayT2 } from "../../../Library/Utilities/Generic/ActionArrayT2";
 
-export class TradingOrder extends DataConsumer implements IMeasurements
+export class TradingOrder extends DataConsumer implements IMeasurements, IActionAddRemoveT2<any, string>
 {
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name)
@@ -20,6 +23,21 @@ export class TradingOrder extends DataConsumer implements IMeasurements
             new SellTaxMeasurement(this),
             new BuyTaxMeasurement(this)]
 
+    }
+    addActionT2(action: IActionT2<any, string> | undefined): void {
+        this.changePosition.addActionT2(action)
+    }
+    removeActionT2(action: IActionT2<any, string> | undefined): void {
+        this.changePosition.removeActionT2(action)
+    }
+    clearActionsT2(): void {
+        this.changePosition.clearActionsT2()
+    }
+    actionT2(t1: any, t2: string): void {
+        this.changePosition.actionT2(t1, t2)
+    }
+    isEmptyActionT2(): boolean {
+        return false;
     }
 
     changed: boolean = false;
@@ -33,6 +51,8 @@ export class TradingOrder extends DataConsumer implements IMeasurements
     isMeaUpdated: boolean = false;
 
     income: number = 0;
+
+    changePosition: IActionAddRemoveT2<any, string> = new  ActionArrayT2<any, string>()
 
 
     protected sellPrice: string = "";
@@ -199,8 +219,13 @@ export class TradingOrder extends DataConsumer implements IMeasurements
         }
         this.changed = true;
 
-        let type = TradingOrder.toPositionType(value);
-        if (this.lastPositionType == type) { this.changed = false; return; }
+        let type = this.toPositionType(value);
+        if (this.lastPositionType == type)
+        {
+            this.changed = false;
+            return;
+        }
+        this.actionT2(this, type)
         let t = this.lastPositionType
         let d = this.getPositionDirection()
         this.setPositionDirection(TradingOrder.toDirection(d, type, t))
@@ -209,18 +234,24 @@ export class TradingOrder extends DataConsumer implements IMeasurements
          this.lastPositionType = type;
     }
 
-    public static  toPositionType(position: number | undefined): string {
+    public  toPositionType(position: number | undefined): string {
         if (position === undefined) {
             return TradingPositionType.None;
         }
         else {
 
             let a = position
+            let s = "";
             switch (a) {
-                case 0: return TradingPositionType.None;
-                case 1: return TradingPositionType.Short;
-                case 2: return TradingPositionType.Long;
-
+                case 0: s = TradingPositionType.None;
+                    break
+                case 1: s = TradingPositionType.Short;
+                    break;
+                case 2: s = TradingPositionType.Long;
+            }
+            if (s.length > 0) {
+                this.actionT2(this, s)
+                return s
             }
             throw new OwnError("Illegal position type", " " + a);
         }
@@ -259,15 +290,15 @@ export class TradingOrder extends DataConsumer implements IMeasurements
         this.mBuyPrice = undefined
     }
 
-    showThis(): void {
-        this.show?.show(this)
+    showThis(s: string): void {
+        this.show?.show(this, s)
     }
 
 
     closedIncome: number = 0
 
     update(): void {
-        this.showThis();
+        this.showThis("before");
         this.zero()
         this.dateValue = this.toNullabe(this.currentDate)
         this.currentPositionValue = this.toNullabe(this.positionM)
@@ -295,6 +326,7 @@ export class TradingOrder extends DataConsumer implements IMeasurements
                 }
             }
         }
+        this.showThis("after")
 
   }
     /*

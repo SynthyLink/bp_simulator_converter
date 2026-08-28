@@ -166,6 +166,14 @@ namespace GeneratedProject
 				arrows.Add(currALabel);
 				currALabel.SourceNumber = (int)10;
 				currALabel.TargetNumber = (int)0;
+				currALabel  = new InternalDesktop.ArrowLabel31("", this);
+				arrows.Add(currALabel);
+				currALabel.SourceNumber = (int)11;
+				currALabel.TargetNumber = (int)9;
+				currALabel  = new InternalDesktop.ArrowLabel32("", this);
+				arrows.Add(currALabel);
+				currALabel.SourceNumber = (int)9;
+				currALabel.TargetNumber = (int)5;
 				if (begin){ SuccessLoad = Final(); };
 				Name = "DonchianDesktop"; 
 			}
@@ -1412,7 +1420,7 @@ namespace GeneratedProject
 				
 						formulaString = new string[]
 						{
-							"<Root>  <F>    <S type=\"FormulaEditor.Symbols.BracketsSymbol\" symbol=\"P\" S=\"( )\" Type=\"2\" Index=\"1\" Level=\"0\" DoubleValue=\"0\" UlongValue=\"0\" BoolValue=\"False\" Italic=\"1\" Bold=\"1\" Sb=\"P\">      <F>        <S type=\"FormulaEditor.Symbols.SimpleSymbol\" symbol=\"a\" S=\"a\" Type=\"1\" Index=\"1\" Level=\"0\" DoubleValue=\"0\" UlongValue=\"0\" BoolValue=\"False\" Italic=\"1\" Bold=\"1\" Sb=\"\">          <F />        </S>        <S type=\"FormulaEditor.Symbols.BinarySymbol\" symbol=\"=\" S=\"=\" Type=\"3\" Index=\"1\" Level=\"0\" DoubleValue=\"0\" UlongValue=\"0\" BoolValue=\"False\" Italic=\"0\" Bold=\"1\" Sb=\"\" />        <S type=\"FormulaEditor.Symbols.SimpleSymbol\" symbol=\"0\" S=\"0\" Type=\"5\" Index=\"1\" Level=\"0\" DoubleValue=\"0\" UlongValue=\"0\" BoolValue=\"False\" Italic=\"0\" Bold=\"1\" Sb=\"\">          <F />        </S>      </F>      <F />    </S>    <S type=\"FormulaEditor.Symbols.BinarySymbol\" symbol=\"?\" S=\"?\" Type=\"3\" Index=\"1\" Level=\"0\" DoubleValue=\"0\" UlongValue=\"0\" BoolValue=\"False\" Italic=\"0\" Bold=\"1\" Sb=\"\" />    <S type=\"FormulaEditor.Symbols.SimpleSymbol\" symbol=\"0\" S=\"0\" Type=\"5\" Index=\"1\" Level=\"0\" DoubleValue=\"0\" UlongValue=\"0\" BoolValue=\"False\" Italic=\"0\" Bold=\"1\" Sb=\"\">      <F />    </S>    <S type=\"FormulaEditor.Symbols.BinarySymbol\" symbol=\":\" S=\":\" Type=\"3\" Index=\"1\" Level=\"0\" DoubleValue=\"0\" UlongValue=\"0\" BoolValue=\"False\" Italic=\"0\" Bold=\"1\" Sb=\"\" />    <S type=\"FormulaEditor.Symbols.BracketsSymbol\" symbol=\"P\" S=\"( )\" Type=\"2\" Index=\"1\" Level=\"0\" DoubleValue=\"0\" UlongValue=\"0\" BoolValue=\"False\" Italic=\"1\" Bold=\"1\" Sb=\"P\">      <F>        <S type=\"FormulaEditor.Symbols.SimpleSymbol\" symbol=\"3\" S=\"3\" Type=\"5\" Index=\"1\" Level=\"0\" DoubleValue=\"0\" UlongValue=\"0\" BoolValue=\"False\" Italic=\"0\" Bold=\"1\" Sb=\"\">          <F />        </S>        <S type=\"FormulaEditor.Symbols.BinarySymbol\" symbol=\"-\" S=\"-\" Type=\"3\" Index=\"1\" Level=\"0\" DoubleValue=\"0\" UlongValue=\"0\" BoolValue=\"False\" Italic=\"0\" Bold=\"1\" Sb=\"\" />        <S type=\"FormulaEditor.Symbols.SimpleSymbol\" symbol=\"a\" S=\"a\" Type=\"1\" Index=\"1\" Level=\"0\" DoubleValue=\"0\" UlongValue=\"0\" BoolValue=\"False\" Italic=\"1\" Bold=\"1\" Sb=\"\">          <F />        </S>      </F>      <F />    </S>  </F></Root>"
+							"<Root>  <F>    <S type=\"FormulaEditor.Symbols.SimpleSymbol\" symbol=\"a\" S=\"a\" Type=\"1\" Index=\"1\" Level=\"0\" DoubleValue=\"0\" UlongValue=\"0\" BoolValue=\"False\" Italic=\"1\" Bold=\"1\" Sb=\"\">      <F />    </S>  </F></Root>"
 						};
 						isSerialized = true;
 						calculateDerivation = false;
@@ -1450,9 +1458,6 @@ namespace GeneratedProject
 							variable = measurement0.Parameter();
 							if (checkValue(variable)) { success = false; return; }
 							var_0 = (double)variable;
-							var_2 = (var_0).Equals(var_1);
-							var_5 = (var_4) - (var_0);
-							var_6 = (var_2) ? (var_3) : (var_5);
 						}
 						
 						internal  Calculation(FormulaEditor.ObjectFormulaTree[] trees, Func<object, bool> checkValue, DataPerformer.Formula.DataPerformerFormula dataPerformerFormula)
@@ -1463,12 +1468,6 @@ namespace GeneratedProject
 							this.dataPerformerFormula = dataPerformerFormula;
 							measurement0 = dataPerformerFormula.ToMeasurement(trees[0]);
 							dictionary[trees[0]] = Get_0;
-							dictionary[trees[1]] = Get_1;
-							dictionary[trees[2]] = Get_2;
-							dictionary[trees[3]] = Get_3;
-							dictionary[trees[4]] = Get_4;
-							dictionary[trees[5]] = Get_5;
-							dictionary[trees[6]] = Get_6;
 						}
 						
 						public Func<object> this[FormulaEditor.ObjectFormulaTree tree]
@@ -1482,46 +1481,10 @@ namespace GeneratedProject
 						double doubleValue = 0;
 						FormulaEditor.ObjectFormulaTree[] trees = null;
 						double var_0 = 0;
-						double var_1 = 0;
-						bool var_2 = false;
-						double var_3 = 0;
-						double var_4 = 3;
-						double var_5 = 0;
-						double var_6 = 0;
 						
 						object Get_0()
 						{
 							return success ? var_0 : null;
-						}
-						
-						object Get_1()
-						{
-							return success ? var_1 : null;
-						}
-						
-						object Get_2()
-						{
-							return success ? var_2 : null;
-						}
-						
-						object Get_3()
-						{
-							return success ? var_3 : null;
-						}
-						
-						object Get_4()
-						{
-							return success ? var_4 : null;
-						}
-						
-						object Get_5()
-						{
-							return success ? var_5 : null;
-						}
-						
-						object Get_6()
-						{
-							return success ? var_6 : null;
 						}
 						
 						Func<object, bool> checkValue = (o) => false;
@@ -1549,7 +1512,7 @@ namespace GeneratedProject
 					{
 						buyPrice = "Trading.Close";
 						sellPrice = "Trading.Close";
-						position = "Sell Buy.Formula_3";
+						position = "Position.Formula_1";
 						date = "Trading.FullTime";
 					}
 				}
@@ -1971,6 +1934,32 @@ namespace GeneratedProject
 				}
 		
 				internal class CategoryArrow : DataPerformer.IteratorConsumerLink
+				{
+				}
+			}
+		
+			internal class ArrowLabel31 : Diagram.UI.Labels.PureArrowLabel
+			{
+				internal ArrowLabel31(string name, Diagram.UI.Interfaces.IDesktop desktop) : base(name, "", "", 0, 0)
+				{
+					this.desktop = desktop;
+					arrow = new ArrowLabel31.CategoryArrow();
+				}
+		
+				internal class CategoryArrow : DataPerformer.DataLink
+				{
+				}
+			}
+		
+			internal class ArrowLabel32 : Diagram.UI.Labels.PureArrowLabel
+			{
+				internal ArrowLabel32(string name, Diagram.UI.Interfaces.IDesktop desktop) : base(name, "", "", 0, 0)
+				{
+					this.desktop = desktop;
+					arrow = new ArrowLabel32.CategoryArrow();
+				}
+		
+				internal class CategoryArrow : DataPerformer.DataLink
 				{
 				}
 			}
