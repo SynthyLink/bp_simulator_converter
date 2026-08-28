@@ -12,6 +12,10 @@ namespace AspireTradingApp.Server
 
         DataPerformer.Portable.Wrappers.DataConsumerWrapper wrapper;
 
+        double currentTime;
+
+
+
         IMeasurement dt;
         public ShowsObject()
         {
@@ -34,7 +38,11 @@ namespace AspireTradingApp.Server
                 wrapper = new DataPerformer.Portable.Wrappers.DataConsumerWrapper(sender);
                 dt = wrapper.FindMeasurement("Trading.RealTime");
             }
-            var time = (double)dt.Parameter();
+            currentTime = (double)dt.Parameter();
+            if (currentTime < 38)
+            {
+                return false;
+            }
             var open = sender.IsOpened;
             if (open != null)
             {
@@ -42,6 +50,11 @@ namespace AspireTradingApp.Server
             }
             var inc = sender.ClosedIncome;
             return true;
+        }
+
+        public void Order_OrderChanged(Order arg1, global::Trading.Library.Enums.PositionDirection arg2)
+        {
+
         }
     }
 }

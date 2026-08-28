@@ -4,17 +4,19 @@ import type { HistoryMessage } from "./Database/HistoryMessage";
 import type { ILocalDB } from "./Database/Local/Interfaces/ILocalDB";
 import type { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
 import type { ISequenceFilter } from "../../Library/Utilities/Filters/Interfaces/ISequenceFilter";
+import type { ChartDataTrading } from "./ChartDataTrading";
+import type { IDataRuntime } from "../../Library/Interfaces/IDataRuntime";
+import type { IExceptionHandler } from "../../Library/ErrorHandler/Interfaces/IExceptionHandler";
+import type { IActionT2 } from "../../Library/Interfaces/IActionT2";
 import { PerformerMeasuremets } from "../../Library/Measurements/PerformerMeasuremets";
 import { TradingCommunication } from "./Communication/TradingCommunication";
 import { TradingDataQuery } from "./Components/TradingDataQuery";
 import { SequenceFilterWrapper } from "../../Library/Measurements/SequenserFilterWrapper";
-import type { ChartDataTrading } from "./ChartDataTrading";
-import type { IDataRuntime } from "../../Library/Interfaces/IDataRuntime";
 import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
 import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
-import type { IExceptionHandler } from "../../Library/ErrorHandler/Interfaces/IExceptionHandler";
-import type { IActionT2 } from "../../Library/Interfaces/IActionT2";
 import { TradingOrder } from "./Components/TradingOrder";
+import type { IShowObject } from "../../Library/Show/Interfaces/IShowObject";
+import type { TradingOrderShow } from "./Components/TradingOrderShow";
 
 export class TradingPerformer implements IActionT2<any, string> {
 
@@ -40,8 +42,11 @@ export class TradingPerformer implements IActionT2<any, string> {
 
     chartSym: string = "b"
 
-    constructor(local: ILocalDB, desktop: IDesktop, communication: TradingCommunication, factory?: IFactory) {
+    show!: IShowObject
+
+    constructor(local: ILocalDB, desktop: IDesktop, communication: TradingCommunication, factory?: IFactory, show?: IShowObject) {
         this.local = local;
+        if (show !== undefined)   this.show = show;
         communication.tPerformer = this
         this.pefrormer = new PerformerMeasuremets(factory)
         this.desktop = desktop
@@ -63,10 +68,8 @@ export class TradingPerformer implements IActionT2<any, string> {
     first: boolean = true;
 
     actionT2(t1: any, t2: string): void {
-        if (this.first) {
-            console.log(t1, t2)
-        }
-        this.first = false;
+        let s = this.show as unknown as TradingOrderShow
+        s.showEvent(t1, t2)
     }
     isEmptyActionT2(): boolean {
         return false

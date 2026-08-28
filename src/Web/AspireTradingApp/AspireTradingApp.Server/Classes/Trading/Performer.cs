@@ -184,7 +184,7 @@ int[] k = [0, 0, 0, 0, 0, 0];
 
         private void Order_OrderChanged(Order arg1, global::Trading.Library.Enums.PositionDirection arg2)
         {
-            
+           so.Order_OrderChanged(arg1, arg2); 
         }
 
         public HistoricalDataMessageNumber Convert(HistoricalDataMessageDateTime message)

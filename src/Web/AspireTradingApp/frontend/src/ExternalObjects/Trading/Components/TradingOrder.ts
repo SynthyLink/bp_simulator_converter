@@ -24,6 +24,56 @@ export class TradingOrder extends DataConsumer implements IMeasurements, IAction
             new BuyTaxMeasurement(this)]
 
     }
+
+    update(): void {
+        this.showThis("before");
+        this.zero()
+        this.dateValue = this.toNullabe(this.currentDate)
+        this.setCurrentPositionValue(this.toNullabe(this.positionM))
+        if (!this.changed) {
+            return;
+        }
+        if (this.positionDirection == TradingPositionDirection.Closed) {
+            if (this.tempIncome == 0) {
+                return;
+            }
+            if (this.tempIncome < 0) {
+                this.mSellPrice = this.toNullabe(this.sellPriceM)
+                if (this.mSellPrice !== undefined) {
+                    this.exitPrice = this.mSellPrice
+                    this.closedIncome = this.tempIncome + this.exitPrice;
+                    this.income += this.closedIncome;
+                }
+            }
+            else {
+                this.mBuyPrice = this.toNullabe(this.buyPriceM)
+                if (this.mBuyPrice !== undefined) {
+                    this.exitPrice = this.mBuyPrice
+                    this.closedIncome = this.tempIncome - this.exitPrice;
+                    this.income += this.closedIncome;
+                }
+            }
+        }
+        else
+        {
+            this.closedPositionType = this.currentPositionType;
+            if (this.currentPositionType == TradingPositionType.Long) {
+                this.mBuyPrice = this.toNullabe(this.buyPriceM)
+                if (this.mBuyPrice !== undefined) this.enterPrice = this.mBuyPrice
+                this.setTempIncome(-this.enterPrice)
+            }
+            else {
+                this.mSellPrice = this.toNullabe(this.sellPriceM)
+                if (this.mSellPrice !== undefined) this.enterPrice = this.mSellPrice
+
+                this.setTempIncome(this.enterPrice)
+            }
+
+        }
+        this.showThis("after")
+
+    }
+
     addActionT2(action: IActionT2<any, string> | undefined): void {
         this.changePosition.addActionT2(action)
     }
@@ -105,50 +155,50 @@ export class TradingOrder extends DataConsumer implements IMeasurements, IAction
 
   //  private isOpened: boolean = false
 
-//   private currentPositionType: string = TradingPositionType.None
-//   private closedPositionType: string = TradingPositionType.None
+   private currentPositionType: string = TradingPositionType.None
+   private closedPositionType: string = TradingPositionType.None
     private lastPositionType: string = TradingPositionType.None
- /*   
+    
     private setCurrentPositionType(type: string): void {
         this.currentPositionType = type
     }
-    */
-   /*
+    
+   
     private setClosedPositionType(type: string): void {
         this.closedPositionType = type
     }
-    */
-   /*
+   
+   
     private setLastPositionType(type: string): void {
         this.lastPositionType = type
     }
-    */
+    
 
     
     public getEnterPrice(): number {
         return this.enterPrice
     }
-/*
+
     private setEnterPrice(value: number): void {
         this.enterPrice = value
     }
-  */
+  
     public getTempIncome(): number {
         return this.tempIncome
     }
-    /*
+    
     private setTempIncome(value: number): void {
         this.tempIncome = value
     }
-    */
+    
     public geExitPrice(): number {
         return this.exitPrice
     }
-    /*
-    private setExitPrice(value: number): void {
+    
+    public  setExitPrice(value: number): void {
         this.exitPrice = value
     }
-    */
+    
     public geExitDate(): number {
         return this.exitDate
     }
@@ -165,8 +215,9 @@ export class TradingOrder extends DataConsumer implements IMeasurements, IAction
     private setEnterDate(value: number): void {
         this.enterDate = value
     }
-
-
+    public getCurrentPositionType(): string {
+        return this.currentPositionType
+    }
 
 
 
@@ -230,8 +281,9 @@ export class TradingOrder extends DataConsumer implements IMeasurements, IAction
         let d = this.getPositionDirection()
         this.setPositionDirection(TradingOrder.toDirection(d, type, t))
         if  (value !== undefined) this.currentPositionValue = value;
-     //   this.currentPositionType = type;
-         this.lastPositionType = type;
+        this.currentPositionType = type;
+        this.lastPositionType = type;
+        this.actionT2(this, this.currentPositionType)
     }
 
     public  toPositionType(position: number | undefined): string {
@@ -297,93 +349,7 @@ export class TradingOrder extends DataConsumer implements IMeasurements, IAction
 
     closedIncome: number = 0
 
-    update(): void {
-        this.showThis("before");
-        this.zero()
-        this.dateValue = this.toNullabe(this.currentDate)
-        this.currentPositionValue = this.toNullabe(this.positionM)
-        if (!this.changed) {
-            return;
-        }
-        if (this.positionDirection == TradingPositionDirection.Closed) {
-            if (this.tempIncome == 0) {
-                return;
-            }
-            if (this.tempIncome < 0) {
-                this.mSellPrice = this.toNullabe(this.sellPriceM)
-                if (this.mSellPrice !== undefined) {
-                    this.exitPrice = this.mSellPrice
-                    this.closedIncome = this.tempIncome + this.exitPrice;
-                    this.income += this.closedIncome;
-                }
-            }
-            else {
-                this.mBuyPrice = this.toNullabe(this.buyPriceM)
-                if (this.mBuyPrice !== undefined) {
-                    this.exitPrice = this.mBuyPrice
-                    this.closedIncome = this.tempIncome - this.exitPrice;
-                    this.income += this.closedIncome;
-                }
-            }
-        }
-        this.showThis("after")
 
-  }
-    /*
-
-           void Update()
-        {
-            Zero();
-            dateValue = currentDate.ToNullable<double>();
-            CurrentPositionValue = positionM.ToNullable<double>();
-            if (!changed)
-            {
-                return;
-            }
-            if (PositionDirection == PositionDirection.Closed)
-            {
-                if (TempIncome == 0)
-                {
-                    return;
-                }
-                if (TempIncome < 0)
-                {
-                    mSellPrice = sellPriceM.ToNullable<double>();
-                    ExitPrice = mSellPrice.Value;
-                    ClosedIncome = TempIncome + ExitPrice;
-                    income += ClosedIncome;
-                }
-                else
-                {
-                    mBuyPrice = buyPriceM.ToNullable<double>();
-                    ExitPrice = mBuyPrice.Value;
-                    ClosedIncome = TempIncome - ExitPrice;
-                    income += ClosedIncome;
-                }
-            }
-            else
-            {
-                ClosedPositionType = CurrentPositionType;
-                if (CurrentPositionType == PositionType.Long)
-                {
-                    mBuyPrice = buyPriceM.ToNullable<double>();
-                    EnterPrice = mBuyPrice.Value;
-                    TempIncome = -EnterPrice;
-                }
-                else
-                {
-                    mSellPrice = sellPriceM.ToNullable<double>();
-                    EnterPrice = mSellPrice.Value;
-                    TempIncome = EnterPrice;
-                }
-            }
-            if (posChanged)
-            {
-                orderChanged?.Invoke(this, PositionDirection);
-            }
-        }
-
-    */
 }
 
 class BasicMeasurement extends Measurement implements IAssociatedObject {

@@ -297,6 +297,7 @@ namespace Trading.Library.Objects
                 currentPositionValue = value;
                 CurrentPositionType = type;
                 LastPositionType = type;
+                orderChanged(this, PositionDirection);
             }
         }
 

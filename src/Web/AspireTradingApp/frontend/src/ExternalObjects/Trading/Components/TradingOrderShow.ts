@@ -10,13 +10,21 @@ export class TradingOrderShow extends EmptyObject implements IShowObject {
         this.types.push("IShowObject")
     }
 
-    x: number = 0;
+    currentTime: number = 0;
+
+    currentPos: number = 0;
 
     map: Map<string, IMeasurement> = new Map
 
     dt!: IMeasurement;
 
+    dp!: IMeasurement;
+
+
     first: boolean = true;
+
+    order !: TradingOrder
+   
 
 
     performer: PerformerMeasuremets = new PerformerMeasuremets()
@@ -34,29 +42,38 @@ export class TradingOrderShow extends EmptyObject implements IShowObject {
 
     showTO(to: TradingOrder, s: string): boolean {
         if (this.first) {
+            this.order = to;
             this.first = false
             this.map = this.performer.getMeasurementsDCMap(to);
             let dd = this.map.get("Trading.RealTime")
             if (dd !== undefined) this.dt = dd
-            console.log(this.dt)
-        }
+            dd = this.map.get("Position.Formula_1")
+            if (dd !== undefined) this.dp = dd
+  }
         let y = this.dt.getMeasurementValue()
-        this.x = Number(y)
+        this.currentTime = Number(y)
+        y = this.dp.getMeasurementValue()
+        this.currentPos = Number(y)
 
-        if (this.x > 38)
-            if (this.x < 50) {
-                console.log(s)
-                console.log(this.x)
-                console.log(to.income, "III")
+        if (this.currentTime > 38)
+            if (this.currentTime < 50) {
                 for (var [key, value] of this.map) {
                     let val = value.getMeasurementValue()
                     this.any = key
                     this.any = val
-                   // console.log(key, val)
                 }
                 return true
             }
         return false
+    }
+
+    count: number = 0;
+    public showEvent(t1: any, t2: string): void {
+        if (this.count > 10) return
+        console.log("EVENT", this.currentTime, this.currentPos, t2)
+        console.log(this.order.getPositionDirection(), this.order.getCurrentPositionValue(),
+            this.order.getCurrentPositionType())
+        ++this.count;
     }
 
     any : any
