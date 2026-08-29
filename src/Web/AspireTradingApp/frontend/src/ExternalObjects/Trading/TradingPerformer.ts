@@ -17,6 +17,7 @@ import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsume
 import { TradingOrder } from "./Components/TradingOrder";
 import type { IShowObject } from "../../Library/Show/Interfaces/IShowObject";
 import type { TradingOrderShow } from "./Components/TradingOrderShow";
+import type { IActionT4 } from "../../Library/Interfaces/IActionT4";
 
 export class TradingPerformer implements IActionT2<any, string> {
 
@@ -55,6 +56,10 @@ export class TradingPerformer implements IActionT2<any, string> {
         this.dataConsumer = desktop.getCategoryObject("Chart") as unknown as IDataConsumer
         this.order = desktop.getCategoryObject("Order") as unknown as TradingOrder
         this.order.addActionT2(this)
+        let act4 = show as unknown as IActionT4<any, string, number, number>
+        if (act4 != undefined) {
+            this.order.addActionT4(act4)
+        }
 
         this.runtime = new DataRuntimeConsumerODE(this.dataConsumer, new Motion6DFactory())
 
@@ -153,6 +158,18 @@ export class TradingPerformer implements IActionT2<any, string> {
                 this.yServer.push(yyy)
             }
         }
+        if (this.yClient != undefined) {
+            if (this.yServer != undefined) {
+                let n = this.yClient.length
+                console.log(n, this.yServer.length)
+                for (var i = 0; i < n; i++) {
+                    if (this.yClient[i] != this.yServer[i]) {
+                        console.log("III", i)
+                        break
+                    }
+                }
+            }
+        }
         let res = { x: this.x, yclient: this.yClient, yserver: this.yServer }
         return res
  }
@@ -198,9 +215,11 @@ export class TradingPerformer implements IActionT2<any, string> {
           ["l", "Order.Buy Price"],
           ["m", "Average Short.Output"],
           ["n", "Average Long.Output"],
-          ["o", "Donchian minimum.Output"],
-          ["q", "Donchian maximum.Output"],
-        ["s", "Position.Formula_1"]
+        ["o", "Donchian minimum.Output"],
+        ["q", "Donchian maximum.Output"],
+        ["s", "Position.Formula_1"],
+        ["u", "Current Position.x"],
+        ["w", "Current Position.y"],
 
     ]
         )

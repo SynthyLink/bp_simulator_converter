@@ -1,4 +1,3 @@
-
 import type { IAliasName } from "../../../Library/Interfaces/IAliasName";
 import type { IDesktop } from "../../../Library/Interfaces/IDesktop";
 import type { IFactory } from "../../../Library/Interfaces/IFactory";
@@ -17,6 +16,8 @@ import { SequenceFilterType } from "../../../Library/Utilities/Filters/Interface
 import { TradingOrder } from "../Components/TradingOrder";
 import { TradingDataQuery } from "../Components/TradingDataQuery";
 import { FeedbackAliasCollection } from "../../../Library/Measurements/FeedBack/FeedbackAliasCollection";
+import type { ICategoryObject } from "../../../Library/Interfaces/ICategoryObject";
+import type { IMeasurements } from "../../../Library/Measurements/Interfaces/IMeasurements";
 
 class DonchianDesktop_CategoryObject_0 extends TradingDataQuery
 {
@@ -91,16 +92,40 @@ class DonchianDesktop_CategoryObject_5 extends RecursiveFormula
 		this.addVariableValue("x", 0, 0);
 		this.addVariableValue("y", 0, 0);
 	}
+	a: number = 805
+	b: number = 815
 
-		calculateTree() : void
-		{
+	
+	setAliasValue(name: string, value: any) {
+		if (this.kkk >= this.a && this.kkk <= this.b){
+			console.log(value, name)
+		}
+	this.performer.setAliasType(name, value, this.aliasTypes, this.aliasNames);
+		this.aliasValues.set(name, value);
+		if (this.kkk >= this.a && this.kkk <= this.b) {
+		//	for (let [k, v] of this.aliasValues) console.log(k, v)
+		}
+
+}
+
+
+	kkk: number = 0;
+
+	calculateTree(): void {
+			++this.kkk
 			this.success = true;
 			this.variable = this.value0.getIValue();
 			if (this.check(this.variable)) { this.success = false; return; }
 			this.var_0 = this.convert<number>(this.variable);
 			this.variable = this.aliasName1.getAliasNameValue()
 			if (this.check(this.variable)) { this.success = false; return; }
-			this.var_1 = this.convert<number>(this.variable);
+		this.var_1 = this.convert<number>(this.variable);
+		if (this.kkk >= this.a && this.kkk <= this.b) {
+			console.log("KKK", this.kkk - 1, "x", this.var_1, "y", this.var_0)
+		}
+
+	
+			
 		}
 	
 	init() : void
@@ -1007,7 +1032,14 @@ class DonchianDesktop_CategoryObject_9 extends VectorFormulaConsumer
 			this.variable = this.measurement0.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_0 = this.convert<number>(this.variable);
-		}
+	}
+
+	updateMeasurements(): void {
+		this.calculateTree();
+		this.save();
+		this.feedback?.setFeedbacks()
+	}
+
 	
 	init() : void
 	{
@@ -1034,7 +1066,7 @@ class DonchianDesktop_CategoryObject_9 extends VectorFormulaConsumer
 		[
 			["Formula_1", "Current Position.t" ]
 		]);
-		this.feedback = new FeedbackAliasCollection(map, this, this);
+		this.feedback = new Fed(map, this, this);
 	}
 }
 
@@ -1535,4 +1567,23 @@ finish() : void
 		(objects[10] as unknown as IPostSetArrow).postSetArrow();
 		(objects[11] as unknown as IPostSetArrow).postSetArrow();
 	}
+}
+
+class Fed extends FeedbackAliasCollection {
+	constructor(map: Map<string, string>, measurements: IMeasurements, obj: ICategoryObject) {
+		super(map, measurements, obj)
+	}
+
+	k: number = 0;
+	setFeedbacks(): void {
+		for (let feedback of this.feedbacks) {
+			feedback.setFeedback();
+		}
+
+		if (this.k >= 804 && this.k < 820) {
+			console.log((this.k -1), this.feedbacks)
+			}
+	++this.k
+	}
+
 }

@@ -63,7 +63,8 @@ static class TradingInit
 
         api.MapPost("tradinganalysis", async ([FromBody] string s, CancellationToken token) =>
         {
-            return await performer.GetData(s, token);
+            var o =  await performer.GetData(s, token);
+            return o;
         })
 .WithName("PostTradingAnalysis");
 

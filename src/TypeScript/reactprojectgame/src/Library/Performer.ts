@@ -650,10 +650,6 @@ export class Performer
 
     public setAliasMap(map: Map<string, any>, alias: IAlias): void {
         var keys = map.keys();
-        /*    keys.foreach(
-                key => alias.setAliasValue(key, map.get(key));
-            );
-            return;*/
         for (var key of keys) {
             alias.setAliasValue(key, map.get(key));
         }

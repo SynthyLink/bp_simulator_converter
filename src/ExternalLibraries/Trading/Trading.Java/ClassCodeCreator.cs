@@ -14,7 +14,6 @@ namespace Trading.Java
          {
                    { (object o) => { return o is DataQuery; } , CreateDataQuery },
                    { (object o) => { return o is Order; } , CreateOrder },
-                   { (object o) => { return o is Fiction; } , CreateFiction},
               };
 
             classes = new Dictionary<string, string>()
@@ -59,15 +58,6 @@ namespace Trading.Java
             return l;
         }
 
-
-        List<string> CreateFiction(string preffix, object obj)
-        {
-            var fiction = obj as Fiction;
-            var l = new List<string>();
-            l.Add("}");
-            l.Add("}");
-            return l;
-        }
 
 
 

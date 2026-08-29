@@ -48,6 +48,10 @@ import type { IActionAddRemoveT2 } from "./Interfaces/IActionAddRemoveT2";
 import type { IActionT2 } from "./Interfaces/IActionT2";
 import type { IStartTask } from "./Interfaces/IStartTask";
 import type { IRunning } from "./Interfaces/IRunning";
+import type { IActionT3 } from "./Interfaces/IActionT3";
+import type { IActionAddRemoveT3 } from "./Interfaces/IActionAddRemoveT3";
+import type { IActionT4 } from "./Interfaces/IActionT4";
+import type { IActionAddRemoveT4 } from "./Interfaces/IActionAddRemoveT4";
 
 
 
@@ -687,10 +691,6 @@ export class Performer
 
     public setAliasMap(map: Map<string, any>, alias: IAlias): void {
         var keys = map.keys();
-        /*    keys.foreach(
-                key => alias.setAliasValue(key, map.get(key));
-            );
-            return;*/
         for (var key of keys) {
             alias.setAliasValue(key, map.get(key));
         }
@@ -814,6 +814,26 @@ export class Performer
         if (arr == undefined) return false
         return arr.isEmptyActionT2()
     }
+
+
+    public isEmptyActionT3<T1, T2, T3>(action: IActionT3<T1, T2, T3> | undefined): boolean {
+        if (action === undefined) return true;
+        let act: IActionT3<T1, T2, T3> = action
+        let arr: IActionAddRemoveT3<T1, T2, T3> = act as unknown as IActionAddRemoveT3<T1, T2, T3>
+        if (arr == undefined) return false
+        return arr.isEmptyActionT3()
+    }
+
+
+    public isEmptyActionT4<T1, T2, T3, T4>(action: IActionT4<T1, T2, T3, T4> | undefined): boolean {
+        if (action === undefined) return true;
+        let act: IActionT4<T1, T2, T3, T4> = action
+        let arr: IActionAddRemoveT4<T1, T2, T3, T4> = act as unknown as IActionAddRemoveT4<T1, T2, T3, T4>
+        if (arr == undefined) return false
+        return arr.isEmptyActionT4()
+    }
+
+
 
 
 

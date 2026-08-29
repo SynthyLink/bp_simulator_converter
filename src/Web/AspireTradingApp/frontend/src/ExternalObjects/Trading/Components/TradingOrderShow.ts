@@ -3,11 +3,29 @@ import type { IShowObject } from "../../../Library/Show/Interfaces/IShowObject";
 import { TradingOrder } from "./TradingOrder";
 import { EmptyObject } from "../../../Library/EmptyObject";
 import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
+import type { IActionT4 } from "../../../Library/Interfaces/IActionT4";
 
-export class TradingOrderShow extends EmptyObject implements IShowObject {
+export class TradingOrderShow extends EmptyObject implements IShowObject,
+    IActionT4<any, string, number, number>
+{
     constructor() {
         super("")
         this.types.push("IShowObject")
+    }
+
+    t4: number = 0;
+
+    actionT4(t1: any, t2: string, t3: number, t4: number): void {
+        if (this.t4 >= 5) return
+        let ct = this.currentTime
+        if (ct >= 805) {
+            console.log(ct, t2, t3, t4)
+            ++this.t4
+        }
+        
+    }
+    isEmptyActionT4(): boolean {
+        return false;
     }
 
     currentTime: number = 0;
@@ -54,7 +72,7 @@ export class TradingOrderShow extends EmptyObject implements IShowObject {
         this.currentTime = Number(y)
         y = this.dp.getMeasurementValue()
         this.currentPos = Number(y)
-
+/*
         if (this.currentTime > 38)
             if (this.currentTime < 50) {
                 for (var [key, value] of this.map) {
@@ -64,15 +82,25 @@ export class TradingOrderShow extends EmptyObject implements IShowObject {
                 }
                 return true
             }
+            */
+        if (this.currentTime == 808) {
+            for (var [key, value] of this.map) {
+                let val = value.getMeasurementValue()
+        //        console.log(key, val)
+            }
+            return true
+
+        }
         return false
+      
     }
 
     count: number = 0;
     public showEvent(t1: any, t2: string): void {
-        if (this.count > 10) return
-        console.log("EVENT", this.currentTime, this.currentPos, t2)
-        console.log(this.order.getPositionDirection(), this.order.getCurrentPositionValue(),
-            this.order.getCurrentPositionType())
+        if (this.count > -1) return
+      //  console.log("EVENT", this.currentTime, this.currentPos, t2)
+      //  console.log(this.order.getPositionDirection(), this.order.getCurrentPositionValue(),
+       //     this.order.getCurrentPositionType())
         ++this.count;
     }
 

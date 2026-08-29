@@ -26,6 +26,7 @@ export class FeedbackCollection implements IFeedbackCollection
     {
         for (let feedback of this.feedbacks)
         {
+            console.log("FFFFF", feedback)
             feedback.setFeedback();
         }
     }

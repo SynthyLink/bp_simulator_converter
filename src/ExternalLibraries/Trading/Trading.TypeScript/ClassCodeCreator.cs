@@ -17,7 +17,6 @@ namespace Trading.TypeScript
             {
                       { (object o) => { return o is DataQuery; } , CreateDataQuery },
               { (object o) => { return o is Order; }, CreateOrder},
-                   { (object o) => { return o is Fiction; } , CreateFiction},
           };
 
         }

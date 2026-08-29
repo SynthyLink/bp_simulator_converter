@@ -27,6 +27,7 @@ export class AliasName implements IAliasName
 
     setAliasNameValue(value: any): void
     {
+
         if (value != undefined)
         {
             this.alias.setAliasValue(this.name, value);

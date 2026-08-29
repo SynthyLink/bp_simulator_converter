@@ -299,8 +299,31 @@ namespace GeneratedProject
 		
 				internal class CategoryObject : DataPerformer.Formula.Recursive, FormulaEditor.Interfaces.ITreeCollectionProxyFactory
 				{
-				
-					internal CategoryObject()
+
+                    /// <summary>
+                    /// Sets alias
+                    /// </summary>
+                    /// <param name="alias">Name</param>
+                    /// <param name="value">Value</param>
+                    protected override void SetAlias(string alias, object value)
+                    {
+						if (k >= 807 & k < 809)
+						{
+
+						}
+	                     if (aliases.ContainsKey(alias[0]))
+                        {
+                            aliases[alias[0]] = value;
+                            return;
+                        }
+                        object[] o = vars[alias[0]] as object[];
+                        o[2] = value;
+
+                    }
+
+					int k = 0;
+
+                    internal CategoryObject()
 					{
 						proxyFactory = this;
 						vars = new Dictionary<object, object>()
@@ -334,17 +357,23 @@ namespace GeneratedProject
 				
 					internal class Calculation : FormulaEditor.Interfaces.ITreeCollectionProxy
 					{
+						int k = 0;
 						public bool Success { get => success; }
 						
 						public void Update()
 						{
-							success = true;
+                            if (k >= 807 & k < 809)
+                            {
+
+                            }
+                            success = true;
 							variable = measurement0.Parameter();
 							if (checkValue(variable)) { success = false; return; }
 							var_0 = (double)variable;
 							variable = aliasName1.Value;
 							if (checkValue(variable)) { success = false; return; }
 							var_1 = (double)variable;
+							++k;
 						}
 						
 						internal  Calculation(FormulaEditor.ObjectFormulaTree[] trees, Func<object, bool> checkValue, DataPerformer.Formula.DataPerformerFormula dataPerformerFormula)

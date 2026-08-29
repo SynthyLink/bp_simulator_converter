@@ -20,10 +20,7 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="GeneratedProject\DonchianDesktop.cs" />
-  </ItemGroup>
-
+ 
   <ItemGroup>
 	  <ProjectReference Include="..\..\..\DynamicLinkLibraries\BaseTypes\BaseTypes\BaseTypes.csproj" />
 	  <ProjectReference Include="..\..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Formula\DataPerformer.Formula.csproj" />

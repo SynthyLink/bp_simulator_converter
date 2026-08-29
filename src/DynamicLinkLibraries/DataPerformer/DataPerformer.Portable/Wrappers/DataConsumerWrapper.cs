@@ -57,9 +57,22 @@ namespace DataPerformer.Portable.Wrappers
        IExceptionHandler errorHandler = null)
         {
             var d = new Dictionary<string, IMeasurement>();
-            foreach (var entry in output)
+            try
             {
-                d[entry.Key] = FindMeasurement(entry.Value);
+                foreach (var entry in output)
+                {
+                    var m = FindMeasurement(entry.Value);
+                    if (m == null)
+                    {
+                        return null;
+                    }
+                    d[entry.Key] = FindMeasurement(entry.Value);
+                }
+            }
+            catch (Exception ex)
+            {
+                errorHandler.HandleException(ex);
+                return null;
             }
             return await PerformIteratorAsync(iterator, d, cancellation, stop, 
                 preparation, errorHandler);

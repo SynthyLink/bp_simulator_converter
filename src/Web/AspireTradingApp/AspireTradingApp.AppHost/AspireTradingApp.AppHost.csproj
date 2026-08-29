@@ -5,7 +5,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <UserSecretsId>8d2ffe0b-2ea5-45e7-a9de-17aa9a4f9cd4</UserSecretsId>
+    <UserSecretsId>8dfaf33f-7ee9-4054-ae4d-7e19f7b70de1</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +14,5 @@
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.JavaScript" Version="13.4.0" />
-	  <PackageReference Include="EnvDTE" Version="17.14.40260" />
   </ItemGroup>
 </Project>

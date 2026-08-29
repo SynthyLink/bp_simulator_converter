@@ -3,9 +3,11 @@ using DataPerformer.Interfaces;
 using DataPerformer.Portable;
 using Diagram.UI.Interfaces;
 using DataPerformer.Interfaces.Attributes;
-using Trading.Library.Enums;
 using NamedTree.Interfaces;
 using ErrorHandler;
+
+using Trading.Library.Enums;
+
 
 namespace Trading.Library.Objects
 {
@@ -63,6 +65,16 @@ namespace Trading.Library.Objects
         #region Propreties
 
         event Action<Order, PositionDirection> orderChanged;
+
+        event Action<Order, string, double, double> sellBuyChanged;
+
+        public event Action<Order, string, double, double> SellBuyChanged
+        {
+            add { sellBuyChanged += value; }
+
+            remove { sellBuyChanged -= value; }
+
+        }
 
         public event Action<Order, PositionDirection> OrderChanged
         {
@@ -126,7 +138,10 @@ namespace Trading.Library.Objects
             isPost = false;
             Find();
             var f = Performer.GetFactory(this);
-            showObject = f.Get<IShowObject>();
+            if (f != null)
+            {
+                showObject = f.Get<IShowObject>();
+            }
         }
 
         IMeasurement IMeasurements.this[int number] => measurements[number];
@@ -297,7 +312,7 @@ namespace Trading.Library.Objects
                 currentPositionValue = value;
                 CurrentPositionType = type;
                 LastPositionType = type;
-                orderChanged(this, PositionDirection);
+                orderChanged?.Invoke(this, PositionDirection);
             }
         }
 
@@ -354,6 +369,7 @@ namespace Trading.Library.Objects
                     mSellPrice = sellPriceM.ToNullable<double>();
                     ExitPrice = mSellPrice.Value;
                     ClosedIncome = TempIncome + ExitPrice;
+                    sellBuyChanged?.Invoke(this, "+", ClosedIncome, Income);
                     Income += ClosedIncome;
                 }
                 else
@@ -361,6 +377,7 @@ namespace Trading.Library.Objects
                     mBuyPrice = buyPriceM.ToNullable<double>();
                     ExitPrice = mBuyPrice.Value;
                     ClosedIncome = TempIncome - ExitPrice;
+                    sellBuyChanged?.Invoke(this, "-", ClosedIncome, Income);
                     Income += ClosedIncome;
                 }
             }

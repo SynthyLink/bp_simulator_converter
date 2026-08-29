@@ -10,8 +10,12 @@ import { OwnError } from "../../../Library/ErrorHandler/OwnError";
 import type { IActionAddRemoveT2 } from "../../../Library/Interfaces/IActionAddRemoveT2";
 import type { IActionT2 } from "../../../Library/Interfaces/IActionT2";
 import { ActionArrayT2 } from "../../../Library/Utilities/Generic/ActionArrayT2";
+import type { IActionAddRemoveT4 } from "../../../Library/Interfaces/IActionAddRemoveT4";
+import type { IActionT4 } from "../../../Library/Interfaces/IActionT4";
+import { ActionArrayT4 } from "../../../Library/Utilities/Generic/ActionArrayT4";
 
-export class TradingOrder extends DataConsumer implements IMeasurements, IActionAddRemoveT2<any, string>
+export class TradingOrder extends DataConsumer implements IMeasurements,
+    IActionAddRemoveT2<any, string>, IActionAddRemoveT4<any, string, number, number>
 {
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name)
@@ -24,7 +28,6 @@ export class TradingOrder extends DataConsumer implements IMeasurements, IAction
             new BuyTaxMeasurement(this)]
 
     }
-
     update(): void {
         this.showThis("before");
         this.zero()
@@ -34,7 +37,7 @@ export class TradingOrder extends DataConsumer implements IMeasurements, IAction
             return;
         }
         if (this.positionDirection == TradingPositionDirection.Closed) {
-            if (this.tempIncome == 0) {
+            if (this.getTempIncome() == 0) {
                 return;
             }
             if (this.tempIncome < 0) {
@@ -42,6 +45,7 @@ export class TradingOrder extends DataConsumer implements IMeasurements, IAction
                 if (this.mSellPrice !== undefined) {
                     this.exitPrice = this.mSellPrice
                     this.closedIncome = this.tempIncome + this.exitPrice;
+                    this.sellBuy.actionT4(this, "+", this.income, this.closedIncome)
                     this.income += this.closedIncome;
                 }
             }
@@ -50,7 +54,9 @@ export class TradingOrder extends DataConsumer implements IMeasurements, IAction
                 if (this.mBuyPrice !== undefined) {
                     this.exitPrice = this.mBuyPrice
                     this.closedIncome = this.tempIncome - this.exitPrice;
+                    this.sellBuy.actionT4(this, "-", this.income, this.closedIncome)
                     this.income += this.closedIncome;
+                    
                 }
             }
         }
@@ -59,13 +65,14 @@ export class TradingOrder extends DataConsumer implements IMeasurements, IAction
             this.closedPositionType = this.currentPositionType;
             if (this.currentPositionType == TradingPositionType.Long) {
                 this.mBuyPrice = this.toNullabe(this.buyPriceM)
-                if (this.mBuyPrice !== undefined) this.enterPrice = this.mBuyPrice
+                if (this.mBuyPrice !== undefined)
+                    this.enterPrice = this.mBuyPrice
                 this.setTempIncome(-this.enterPrice)
             }
             else {
                 this.mSellPrice = this.toNullabe(this.sellPriceM)
-                if (this.mSellPrice !== undefined) this.enterPrice = this.mSellPrice
-
+                if (this.mSellPrice !== undefined)
+                    this.enterPrice = this.mSellPrice
                 this.setTempIncome(this.enterPrice)
             }
 
@@ -89,6 +96,23 @@ export class TradingOrder extends DataConsumer implements IMeasurements, IAction
     isEmptyActionT2(): boolean {
         return false;
     }
+    addActionT4(action: IActionT4<any, string, number, number> | undefined): void {
+        this.sellBuy.addActionT4(action)
+    }
+
+    removeActionT4(action: IActionT4<any, string, number, number> | undefined): void {
+        this.sellBuy.removeActionT4(action)
+    }
+    clearActionsT4(): void {
+        this.sellBuy.clearActionsT4()
+    }
+    actionT4(t1: any, t2: string, t3: number, t4: number): void {
+        this.sellBuy.actionT4(t1, t2, t3, t4)
+    }
+    isEmptyActionT4(): boolean {
+        return false;
+    }
+
 
     changed: boolean = false;
 
@@ -104,6 +128,7 @@ export class TradingOrder extends DataConsumer implements IMeasurements, IAction
 
     changePosition: IActionAddRemoveT2<any, string> = new  ActionArrayT2<any, string>()
 
+    sellBuy: IActionAddRemoveT4<any, string, number, number> = new ActionArrayT4<any, string, number, number>()
 
     protected sellPrice: string = "";
 

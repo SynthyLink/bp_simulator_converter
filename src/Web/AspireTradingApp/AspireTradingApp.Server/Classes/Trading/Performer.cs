@@ -1,6 +1,5 @@
 ﻿
 using DataPerformer.Interfaces;
-using Diagram.UI.ExternalTools;
 using Diagram.UI.Interfaces;
 using GeneratedProject;
 using IronPython.Runtime;
@@ -31,7 +30,7 @@ namespace AspireTradingApp.Server.Trading
             set;
         }
 
-        Dictionary<string, string> dp = new () {{"a", "Trading.RealTime"},
+        Dictionary<string, string> dp = new() {{"a", "Trading.RealTime"},
         {"b", "Trading.Low"},
          {"c", "Trading.High"},
           {"d", "Trading.Open"},
@@ -48,8 +47,9 @@ namespace AspireTradingApp.Server.Trading
           {"o", "Donchian minimum.Output"},
           {"q", "Donchian maximum.Output"},
           {"s", "Position.Formula_1"},
-          {"Position_Formula_1", "Position.Formula_1"}
-};
+           { "u", "Current Position.x" },
+          { "w", "Current Position.y" },
+            };
 
 
 int[] k = [0, 0, 0, 0, 0, 0];
@@ -156,6 +156,7 @@ int[] k = [0, 0, 0, 0, 0, 0];
             var order = desktop.Get<Order>("Order");
             order.OrderChanged += Order_OrderChanged;
             order.OnChangeInput += Order_OnChangeInput;
+            order.SellBuyChanged += Order_SellBuyChanged;
 
 
             // var desktop = await GeneratedProject.Donchian.
@@ -176,6 +177,11 @@ int[] k = [0, 0, 0, 0, 0, 0];
             var wrapper = new DataPerformer.Portable.Wrappers.DataConsumerWrapper(dataConsumer);
             var t = await wrapper.PerformIteratorAsync(dataQuery, dp, token);
             return System.Text.Json.JsonSerializer.Serialize(t);
+        }
+
+        private void Order_SellBuyChanged(Order arg1, string arg2, double arg3, double arg4)
+        {
+            so.Order_SellBuyChanged(arg1, arg2, arg3, arg4);
         }
 
         private void Order_OnChangeInput()

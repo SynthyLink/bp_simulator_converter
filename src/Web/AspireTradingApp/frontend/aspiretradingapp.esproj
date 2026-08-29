@@ -4,7 +4,10 @@
     <ShouldRunBuildScript>false</ShouldRunBuildScript>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="dist\assets\" />
+    <None Remove="dist\**" />
+    <TypeScriptConfiguration Remove="dist\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="src\ExternalObjects\Trading\Algorithms\" />
   </ItemGroup>
 </Project>

@@ -39,7 +39,11 @@ namespace AspireTradingApp.Server
                 dt = wrapper.FindMeasurement("Trading.RealTime");
             }
             currentTime = (double)dt.Parameter();
-            if (currentTime < 38)
+            if (currentTime == 808)
+            {
+
+            }
+            if (currentTime < 808)
             {
                 return false;
             }
@@ -54,6 +58,23 @@ namespace AspireTradingApp.Server
 
         public void Order_OrderChanged(Order arg1, global::Trading.Library.Enums.PositionDirection arg2)
         {
+            if (currentTime < 805)
+            {
+                return;
+            }
+            
+        }
+
+        public void Order_SellBuyChanged(Order arg1, string arg2, double arg3, double arg4)
+        {
+            if (this.currentTime < 805)
+            {
+                return;
+            }
+            else
+            {
+
+            }
 
         }
     }
