@@ -164,7 +164,7 @@ export class TradingPerformer implements IActionT2<any, string> {
                 console.log(n, this.yServer.length)
                 for (var i = 0; i < n; i++) {
                     if (this.yClient[i] != this.yServer[i]) {
-                        console.log("III", i)
+                        console.log("COMPARE SERVER CLIENT", i)
                         break
                     }
                 }

@@ -19,7 +19,7 @@ export class TradingOrderShow extends EmptyObject implements IShowObject,
         if (this.t4 >= 5) return
         let ct = this.currentTime
         if (ct >= 805) {
-            console.log(ct, t2, t3, t4)
+           // console.log(ct, t2, t3, t4)
             ++this.t4
         }
         

@@ -194,10 +194,10 @@ namespace DataPerformer.Formula.TypeScript
             if (obj is IFeedbackCollectionHolder feedback)
             {
                 var dcc = creator as IFeedbackCollectionCodeCreator;
-                var ll = dcc.Create(feedback).Values.ToArray()[0];
+                var ddd = dcc.Create(feedback);
+                var ll = ddd["code"];
                 performer.Add(l, ll, 1);
             }
-
             l.Add("}");
             return l;
         }
@@ -231,9 +231,6 @@ namespace DataPerformer.Formula.TypeScript
         {
             return CreateTreeCollection(preffix, obj as ITreeCollection, cc);
         }
-
-  
-   
 
         public static Dictionary<string, List<string>> Create(string id, Dictionary<string, string> dictionary)
         {
