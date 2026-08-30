@@ -6,6 +6,7 @@ import { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsum
 import { PerformerMeasuremets } from "../../Library/Measurements/PerformerMeasuremets";
 import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
 import { DataRuntimeConsumer } from "../../Library/Runtime/DataRuntimeConsumer";
+import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
 import { ConditionTest } from "../ConditionTest";
 
 export class ConditionTestAct extends ConditionTest implements IAction, IFunc<boolean>
@@ -35,7 +36,7 @@ export class ConditionTestAct extends ConditionTest implements IAction, IFunc<bo
 
 
     public test(): void {
-        var runtime: IDataRuntime = new DataRuntimeConsumer(this.dc, this.factory);
+        var runtime: IDataRuntime = new DataRuntimeConsumerODE(this.dc, this.factory);
         var p: PerformerMeasuremets = new PerformerMeasuremets();
         p.peformCondDCFixedStepCalculation(runtime, this.dc, "Condition.Formula_1", this, 0, 0.01, 500, this);
     }

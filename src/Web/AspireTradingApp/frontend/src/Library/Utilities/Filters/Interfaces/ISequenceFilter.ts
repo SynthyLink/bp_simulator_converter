@@ -7,4 +7,6 @@ export interface ISequenceFilter {
     getFilterValue(a: number): number | undefined
 
     resetFilter(): void
+
+    getFilterData() : any
 }

@@ -10,6 +10,10 @@ namespace DataPerformer.Portable.Filters
         double ?Calculate(double? a)
         {
             var c = base[a];
+            if (c == null)
+            {
+                return null;
+            }
             if (data.Count > inter.Count)
             {
                 data.Dequeue();

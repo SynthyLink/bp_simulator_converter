@@ -40,8 +40,14 @@ import { SimpleFeedAct } from '../Wrappers/SimpleFeedAct';
 import { TwoAct } from '../Wrappers/TwoAct';
 import { EmptyChecker } from '../../Library/EmptyChecker'
 import { ICheck } from '../../Library/Interfaces/ICheck';
+import { DonchianDesktopAct } from '../Wrappers/DonchianDesktopAct';
 
 export class Actor {
+
+    testRecursive(): void {
+        var r = new DonchianDesktopAct()
+        r.test();
+    }
 
     async actDonchian(): Promise<void> {
         let controller = new AbortController();
@@ -74,11 +80,11 @@ export class Actor {
             ["r", "Donchian maximum short.Output"]
         ]
         );
-        let x = await pefrormer.performIteratorDataConsumerMapAsync(dataConsumer,
+       /* let x = await pefrormer.performIteratorDataConsumerMapAsync(dataConsumer,
             query, controller, mmap);
         let y = x[0]
         let z = x[x.length-1]
-        finish(desktop);
+        finish(desktop);*/
     }
 
     factory: IFactory = new Motion6DFactory();

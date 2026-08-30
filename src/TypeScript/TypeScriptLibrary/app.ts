@@ -28,7 +28,7 @@ var caravan = "c:\\AUsers\\1MySoft\\CSharp\\src\\Web\\reactprojectgenerated\\sta
 //a.actFeedbackFormula();
 //a.actRecursiveFeedbackSimplw();
 
-//a.actODE_FeedAct();
+a.testRecursive();
 
 //a.getTradingFromFile("C:\\0\\0\\1.json")
 
@@ -36,7 +36,7 @@ async function test() {
     await a.actDonchian()
 }
 
-test();
+//test();
 
 a.finish(undefined);
 

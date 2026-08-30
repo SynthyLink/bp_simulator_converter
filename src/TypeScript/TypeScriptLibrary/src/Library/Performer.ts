@@ -47,6 +47,11 @@ import type { IInput } from "./Interfaces/IInput";
 import type { IActionAddRemoveT2 } from "./Interfaces/IActionAddRemoveT2";
 import type { IActionT2 } from "./Interfaces/IActionT2";
 import type { IStartTask } from "./Interfaces/IStartTask";
+import type { IRunning } from "./Interfaces/IRunning";
+import type { IActionT3 } from "./Interfaces/IActionT3";
+import type { IActionAddRemoveT3 } from "./Interfaces/IActionAddRemoveT3";
+import type { IActionT4 } from "./Interfaces/IActionT4";
+import type { IActionAddRemoveT4 } from "./Interfaces/IActionAddRemoveT4";
 
 
 
@@ -271,33 +276,39 @@ export class Performer
         if (numbers.length === 0) {
             return undefined;
         }
-
-        return numbers.reduce((max, current) => {
-            return current > max ? current : max;
-        }, -Infinity); // Start with -Infinity to ensure the first element is always greater
+        const maxNumber: number = numbers.reduce((max, current) => current > max ? current : max, numbers[0]);
+        return maxNumber
     }
+
+ //   k: number = 0;
 
     public findMinWithReduce(numbers: number[]): number | undefined {
         if (numbers.length === 0) {
             return undefined;
         }
 
-        return numbers.reduce((min, current) => {
-            return current > min ? current : min;
-        }, Infinity); // Start with -Infinity to ensure the first element is always greater
+        let minNumber = numbers.reduce(this.funcMin, numbers[0])
+ /*       if (this.k < 300) {
+            console.log(numbers, minNumber)
+++this.k
+        }*/
+        return minNumber
+
     }
 
-
+    funcMin(x: number, y: number): number {
+        return x < y ? x: y
+        
+    }
+    
 
     public calculateAverage(numbers: number[]): number {
         if (numbers.length === 0) {
             return 0; // Or throw an error, depending on your requirements
         }
-
-        const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        const sum = numbers.reduce((sum, p) => sum + p);
         return sum / numbers.length;
     }
-
 
     public calculateAverageRobust(data: any[]): number {
         const numbers = data.filter((item): item is number => typeof item === 'number'); // Type guard
@@ -378,10 +389,10 @@ export class Performer
     }
 
 
-    public updateFeedbackData(dataConsumer: IDataConsumer, feedback: IFeedbackCollection): void {
+    public updateFeedbackData(feedback: IFeedbackCollection): void {
         if (feedback.isEmpty()) return;
         feedback.setFeedbacks();
-        this.updateChildrenData(dataConsumer);
+       // this.updateChildrenData(dataConsumer);
     }
 
     public updateChildrenData(dataConsumer: IDataConsumer): void
@@ -395,6 +406,7 @@ export class Performer
                 let dc = child as unknown as IDataConsumer;
                 this.updateChildrenData(dc);
             }
+       //     console.log("CHILD", child)
             child.updateMeasurements();
         }
     }
@@ -679,10 +691,6 @@ export class Performer
 
     public setAliasMap(map: Map<string, any>, alias: IAlias): void {
         var keys = map.keys();
-        /*    keys.foreach(
-                key => alias.setAliasValue(key, map.get(key));
-            );
-            return;*/
         for (var key of keys) {
             alias.setAliasValue(key, map.get(key));
         }
@@ -713,7 +721,6 @@ export class Performer
 
     public getMeasurementDC(consumer: IDataConsumer, name: string): IMeasurement
     {
-
         var mm = consumer.getAllMeasurements();
         for (var mea of mm) {
             var co = mea as unknown as ICategoryObject;
@@ -809,6 +816,26 @@ export class Performer
     }
 
 
+    public isEmptyActionT3<T1, T2, T3>(action: IActionT3<T1, T2, T3> | undefined): boolean {
+        if (action === undefined) return true;
+        let act: IActionT3<T1, T2, T3> = action
+        let arr: IActionAddRemoveT3<T1, T2, T3> = act as unknown as IActionAddRemoveT3<T1, T2, T3>
+        if (arr == undefined) return false
+        return arr.isEmptyActionT3()
+    }
+
+
+    public isEmptyActionT4<T1, T2, T3, T4>(action: IActionT4<T1, T2, T3, T4> | undefined): boolean {
+        if (action === undefined) return true;
+        let act: IActionT4<T1, T2, T3, T4> = action
+        let arr: IActionAddRemoveT4<T1, T2, T3, T4> = act as unknown as IActionAddRemoveT4<T1, T2, T3, T4>
+        if (arr == undefined) return false
+        return arr.isEmptyActionT4()
+    }
+
+
+
+
 
     public isEmptyAction(action: IAction | undefined): boolean {
         if (action === undefined) return true;
@@ -849,6 +876,15 @@ export class Performer
         this.forEach<IFactoryConsumer>(collection, setter, "IFactoryConsumer")
     }
 
+    public getFactoryFromDesktop(desktop: IDesktop): IFactory | undefined {
+        let t = this.convertObject<IFactoryConsumer, any>(desktop, "IFactoryConsumer")
+        if (t.length > 0) {
+            return t[0].getConsumerFactory()
+        }
+        return undefined;
+    }
+
+
     public collectResources(res: IResourceCollection, collection: IObjectCollection) {
         var rs = new ResourceSetter(res)
         this.forEach<IResourceCollection>(collection, rs, "IResourceCollection")
@@ -872,8 +908,6 @@ export class Performer
             this.forEach<ISelfLoad>(collection, this.unload, "ISelfLoad")
         }
     }
-
- 
  
 
     public createObjectCollectionAction(collection: IObjectCollection,
@@ -896,7 +930,10 @@ export class Performer
         this.forEach<IInput>(collection, s, "IInput")
     }
 
-
+    public setRunning(collection: IObjectCollection, running: boolean): void {
+        let r = new Running(running)
+        this.forEach<IRunning>(collection, r, "IRunning")
+    }
 
     measurements !: IMeasurements;
 
@@ -911,6 +948,8 @@ export class Performer
     load: Load = new Load()
 
     unload: Unload = new Unload()
+
+
 
 }
 
@@ -1113,4 +1152,21 @@ class ArrayOfObjects<T, S> implements IActionT<T> {
         this.performer.recursiveNodeAction(node, this)
         return this.s
     }
+
 }
+
+class Running implements IActionT<IRunning> {
+    constructor(running: boolean) {
+        this.running = running
+    }
+    running: boolean = false
+    actionT(t: IRunning): void {
+        t.setRunning(this.running)
+    }
+    isEmptyActionT(): boolean {
+        return false;
+    }
+
+
+}
+

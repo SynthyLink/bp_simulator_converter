@@ -6,6 +6,7 @@ import { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsum
 import { PerformerMeasuremets } from "../../Library/Measurements/PerformerMeasuremets";
 import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
 import { DataRuntimeConsumer } from "../../Library/Runtime/DataRuntimeConsumer";
+import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
 import { Random } from "../Random";
 
 export class RandomAct extends Random implements IAction
@@ -32,7 +33,7 @@ export class RandomAct extends Random implements IAction
     }
 
     public test(): void {
-        var runtime: IDataRuntime = new DataRuntimeConsumer(this.dc, this.factory);
+        var runtime: IDataRuntime = new DataRuntimeConsumerODE(this.dc, this.factory);
         var p: PerformerMeasuremets = new PerformerMeasuremets();
         p.performFixedStepCalculation(runtime, 0, 1, 1000, this, this);
     }

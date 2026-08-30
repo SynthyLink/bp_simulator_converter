@@ -15,9 +15,10 @@ export class ShowObject extends FactoryObject implements IShowObject, IActionAdd
 
     }
 
-    show(sender: any, show: any, name?: string | undefined): void {
+    show(sender: any, show: any, name?: string | undefined): boolean {
         const data: IShowData = { sender: sender, show: show, name: name }
         this.actionT(data)
+        return true
     }
 
     addActionT(action: IActionT<IShowData> | undefined): void {

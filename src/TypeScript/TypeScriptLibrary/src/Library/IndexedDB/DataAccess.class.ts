@@ -36,7 +36,6 @@ export class DataAccess<T extends Item> implements IDataAccess<T> {
 
   async retrieve() {
       const db = await this.connection;
-      console.log(db)
       const st = db.transaction([this.storeName], 'readonly')
       const store = st.objectStore(this.storeName);
 

@@ -17,7 +17,6 @@ import { TradingOrder } from "../Components/TradingOrder";
 import { TradingDataQuery } from "../Components/TradingDataQuery";
 import { FeedbackAliasCollection } from "../../../Library/Measurements/FeedBack/FeedbackAliasCollection";
 
-
 class DonchianDesktop_CategoryObject_0 extends TradingDataQuery
 {
 	constructor(desktop: IDesktop, name: string)
@@ -777,6 +776,13 @@ class DonchianDesktop_CategoryObject_7 extends VectorFormulaConsumer
 		x6?.setIValue(this.get_46());
 	}
 	
+	setFeedback(): void {
+		let map = new Map<string, string>(
+		[
+			["Formula_3", "Current Position.t" ]
+		]);
+		this.feedback = new FeedbackAliasCollection(map, this, this);
+	}
 }
 
 class DonchianDesktop_CategoryObject_8 extends VectorFormulaConsumer

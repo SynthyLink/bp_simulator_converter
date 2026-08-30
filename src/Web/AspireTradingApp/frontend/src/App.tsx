@@ -156,7 +156,7 @@ const App: React.FC = () => {
     const fillServer = async (map: Map<string, any>): Promise<void> => {
         if (globalAbort == undefined) return
         let h = await communication.getAnalysisAsync(map, globalAbort)
-       console.log(h, "SSS")
+     //  console.log(h, "SSS")
        communication.tPerformer.setServer(h)
     }
 
@@ -293,8 +293,8 @@ const App: React.FC = () => {
                 setSymbols(map)
                 setAverage1(10)
                 setAverage2(40)
-                setDonchian1(20)
-                setDonchian2(20)
+                setDonchian1(10)
+                setDonchian2(10)
             }
         }
 

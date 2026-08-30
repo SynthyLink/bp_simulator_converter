@@ -9,7 +9,7 @@ export class EmptyChecker extends EmptyObject implements ICheck {
         this.typeName = "EmptyChecker"
     }
     check(o: any): boolean {
-        return o != undefined
+        return o == undefined
     }
 
 }

@@ -1,7 +1,6 @@
 import type { IDesktop } from "../Interfaces/IDesktop";
 import type { ISequenceFilter } from "../Utilities/Filters/Interfaces/ISequenceFilter";
 import type { IMeasurement } from "./Interfaces/IMeasurement";
-import type { ICheck } from "../Interfaces/ICheck";
 import { AverageSequenceFilter } from "../Utilities/Filters/AverageSequenceFilter";
 import { DonchianSequenceFilter } from "../Utilities/Filters/DonchianSequenceFilter";
 import { SequenceFilterType } from "../Utilities/Filters/Interfaces/SequenceFilterType";
@@ -53,9 +52,9 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
     }
 
     updateMeasurements(): void {
-        this.performer.updateChildrenData(this);
+       // this.performer.updateChildrenData(this);
         var x = this.measurement.getMeasurementValue()
-        if (!this.checker.check(x)) {
+        if (this.checker.check(x)) {
             this.result = undefined
             return
         }

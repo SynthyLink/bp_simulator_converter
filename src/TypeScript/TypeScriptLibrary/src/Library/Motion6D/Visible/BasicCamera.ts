@@ -5,7 +5,7 @@ import type { IVisible } from "./Interfaces/IVisible";
 import type { IVisibleConsumer } from "./Interfaces/IVisibleConsumer";
 
 
-export class BasicCamera extends BasicPosition implements IVisibleConsumer, ICamera {
+export abstract class BasicCamera extends BasicPosition implements IVisibleConsumer, ICamera {
 
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name);
@@ -27,12 +27,6 @@ export class BasicCamera extends BasicPosition implements IVisibleConsumer, ICam
         return this.farDistance;
     }
 
-    protected fieldOfView: number = 0;
-
-    protected nearDistance: number = 0;
-
-    protected farDistance: number = 0;
-
 
     addVisibleObject(object: IVisible): void {
         this.visible.push(object);
@@ -40,12 +34,18 @@ export class BasicCamera extends BasicPosition implements IVisibleConsumer, ICam
     removeVisibleObject(object: IVisible): void {
         this.performer.remove<IVisible>(this.visible, object);
     }
-    postVisibleObject(object: IVisible): void {
-        console.log(object)
-    }
+
+    abstract postVisibleObject(object: IVisible): void;
 
 
     protected visible: IVisible[] = [];
+
+    protected fieldOfView: number = 0;
+
+    protected nearDistance: number = 0;
+
+    protected farDistance: number = 0;
+
 
 }
 

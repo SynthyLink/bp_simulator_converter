@@ -21,7 +21,10 @@ export class FastQueue<T> implements IQueue<T>, IArray<T>{
         if (this.isEmpty()) {
             return undefined;
         }
-        const element = this.items[this.head];
+        //    let a = this.items[0]
+        this.items.shift()
+      //  return a
+        /*
         this.head++;
 
         // Optional: To prevent the array from growing indefinitely and consuming memory
@@ -32,7 +35,7 @@ export class FastQueue<T> implements IQueue<T>, IArray<T>{
             this.head = 0;
         }
 
-        return element;
+        return element;*/
     }
 
     // Returns the element at the front of the queue without removing it

@@ -6,7 +6,9 @@ export class AverageSequenceFilter extends QueueFilter {
         super(count);
     }
 
-    protected getOwnValue(): number | undefined {
-        return this.performer.calculateAverage(this.arr)
+    protected getOwnValue(l: boolean): number | undefined {
+        if (!l) return undefined
+        let a = this.queue.toArray()
+        return this.performer.calculateAverage(a)
     }
 }

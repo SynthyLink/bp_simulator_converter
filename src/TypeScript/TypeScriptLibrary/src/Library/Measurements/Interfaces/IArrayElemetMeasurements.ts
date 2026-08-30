@@ -6,7 +6,7 @@
 export interface IArrayElementMeasurement
 {
     getMeasurementNames(): string[];
-    getMeasurementTypes(): [];
-    getMeasurementValues(): [];
+    getMeasurementTypes(): any[];
+    getMeasurementValues(): any[];
 
 }

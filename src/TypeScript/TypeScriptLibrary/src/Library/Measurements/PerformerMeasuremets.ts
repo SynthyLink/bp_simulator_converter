@@ -25,6 +25,7 @@ import { Performer } from "../Performer";
 import { TimeMeasurementProvider } from "./TimeMeasurementProvider";
 import { UpdateMeasurementsAction } from "./UpdateMeasurementsAction";
 import { EmptyExceptionHandler } from "../ErrorHandler/EmptyExceptionHandler";
+import type { IPrinter } from "../Interfaces/IPrinter";
 export class PerformerMeasuremets extends Performer {
 
      processor !: IDifferentialEquationProcessor
@@ -43,8 +44,12 @@ export class PerformerMeasuremets extends Performer {
         if (rt !== undefined) this.realtimeEventFactory = rt;
         var e = factory.getFactory<IExceptionHandler>("IExceptionHandler")
         if (e !== undefined) this.errorHandler = e;
+    }
 
-
+    public toNullabeMeasurement<T>(m: IMeasurement): T | undefined {
+        let x = m.getMeasurementValue()
+        if (x === undefined) return undefined
+        return this.convert<any, T>(x)
     }
 
 
@@ -171,62 +176,80 @@ export class PerformerMeasuremets extends Performer {
 
     }
 
-    public async performIteratorDataConsumerMapArrayAsync(dataConsumer: IDataConsumer,
-        iterator: IIterator, abort: AbortController, meaurements: string[],
-        preparation?: IAction | undefined): Promise<Map<string, any>[]> {
-        let map = new Map<string, IMeasurement>()
-        for (var s of meaurements) {
-            map.set(s, this.getMeasurementDC(dataConsumer, s))
-        }
-        let action = new MeasurementWrite(map)
-        await this.performIteratorDataConsumerAsync(dataConsumer, iterator, abort, action, preparation)
-        return action.getData()
-    }
-
-    public async performIteratorDataConsumerMapAsync(dataConsumer: IDataConsumer,
-        iterator: IIterator, abort: AbortController, meaurements: Map<string, string>,
-        preparation?: IAction | undefined): Promise<Map<string, any>[]> {
+    public getMeasurementWrite(dataConsumer: IDataConsumer, meaurements: Map<string, string>, list: Map<string, any>[]): IAction {
         let map = new Map<string, IMeasurement>()
         for (var [key, value] of meaurements) {
-        let measurement = this.getMeasurementDC(dataConsumer, value)
-            map.set(key, measurement)
+             map.set(key, this.getMeasurementDC(dataConsumer, value))
         }
-        let action = new MeasurementWrite(map)
-        await this.performIteratorDataConsumerAsync(dataConsumer, iterator, abort, action, preparation)
-        let data = action.getData()
+        let action = new MeasurementWrite(map, list)
+        return action;
+    }
+
+    public async performIteratorDataConsumerFullAsync(dataConsumer: IDataConsumer,
+        iterator: IIterator, runtime: IDataRuntime, abort: AbortController,
+        preparation?: IAction | undefined): Promise<Map<string, any>[]> {
+        let map = new Map<string, string>()
+        let mm = dataConsumer.getAllMeasurements();
+        for (let m of mm) {
+            let o = m as unknown as IObject
+            let name = o.getName() + "."
+            let c = m.getMeasurementsCount()
+            for (var i = 0; i < c; i++) {
+                let ns = name + m.getMeasurement(i).getMeasurementName();
+                map.set(ns, ns)
+            }
+        }
+        let data = await this.performIteratorDataConsumerMapAsync(dataConsumer, iterator, runtime, abort, map, preparation)
+        return data
+    }
+
+
+    public async performIteratorDataConsumerMapAsync(dataConsumer: IDataConsumer,
+        iterator: IIterator, runtime: IDataRuntime, abort: AbortController, meaurements: Map<string, string>,
+        preparation?: IAction | undefined, errorHandler?: IExceptionHandler | undefined): Promise<Map<string, any>[]> {
+        let list: Map<string, any>[] = []
+        let action = this.getMeasurementWrite(dataConsumer, meaurements, list)
+        await this.performIteratorDataConsumerAsync(dataConsumer, iterator, runtime, abort, action, preparation, errorHandler)
+        let data = list
         return data
     }
 
     public async performIteratorDataConsumerAsync(dataConsumer: IDataConsumer,
-        iterator: IIterator, abort: AbortController, action: IAction,
-        preparation?: IAction | undefined): Promise<void> {
+        iterator: IIterator, runtime: IDataRuntime, abort: AbortController, action: IAction,
+        preparation?: IAction | undefined, errorHandler?: IExceptionHandler | undefined): Promise<void> {
+        let desktop : IObjectCollection | undefined = undefined
         try {
             if (preparation !== undefined) preparation.action();
-            var co = dataConsumer as unknown as ICategoryObject;
+             var co = dataConsumer as unknown as ICategoryObject;
             var d = co.getDesktop();
+            desktop = d
             await this.startAsync(d, abort);
-            var signal = abort.signal
-            if (signal.aborted) {
-                this.errorHandler.log("Start aborted")
+            if (abort.signal.aborted) {
+                if (errorHandler === undefined) return
+                errorHandler.log("Start aborted")
                 return
             }
+            this.setRunning(d, true)
             iterator.resetIterator()
             this.fullReset(dataConsumer)
             while (true) {
-                if (signal.aborted) {
-                    this.errorHandler.log("Iteration aborted")
+                if (abort.signal.aborted) {
+                    if (errorHandler === undefined) return
+                    errorHandler.log("Iteration aborted")
                     return
                 }
                 if (!iterator.nextIterator()) {
                     return;
                 }
-                this.updateChildrenData(dataConsumer)
+                runtime.updateRuntime();
                 action.action()
             }
         }
         catch (error: any) {
             this.errorHandler.handleException(error)
         }
+        if (desktop != undefined) this.setRunning(desktop, false)
+
     }
 
 
@@ -241,16 +264,23 @@ export class PerformerMeasuremets extends Performer {
 
         }
     }
+
+    public printDataPerformerMeasurements(dataConsumer: IDataConsumer, printer: IPrinter): void {
+        let x = this.getMeasurementsDCMap(dataConsumer)
+        for (var [key, value] of x) {
+            printer.print(key)
+            printer.print(value.getMeasurementValue())
+            printer.print("\n");
+        }
+    }
 }
+
 
 class MeasurementWrite implements IAction {
 
-    constructor(map: Map<string, IMeasurement>) {
+    constructor(map: Map<string, IMeasurement>, list : Map<string, any> []) {
         this.map = map;
-    }
-
-    public getData(): Map<string, any>[] {
-        return this.list
+        this.list = list;
     }
 
     action(): void {
@@ -265,5 +295,6 @@ class MeasurementWrite implements IAction {
         return false;
     }
     map !: Map<string, IMeasurement>
-    list: Map<string, any>[] = []
+    list !: Map<string, any>[]
 }
+

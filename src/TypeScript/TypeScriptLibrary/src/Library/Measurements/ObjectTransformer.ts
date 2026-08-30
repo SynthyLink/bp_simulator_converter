@@ -58,12 +58,12 @@ export class ObjectTransformer extends CategoryObject implements IObjectTransfor
     /// <summary>
     /// Single output
     /// </summary>
-    protected outS : [] = [];
+    protected outS : any[] = [];
 
     /// <summary>
     /// Single input
     /// </summary>
-    protected inS = [];
+    protected inS : any[] = [];
 
     /// <summary>
     /// The "is updated" sign
@@ -122,7 +122,7 @@ export class ObjectTransformer extends CategoryObject implements IObjectTransfor
 
     updateMeasurements(): void
     {
-        this.performer.updateChildrenData(this);
+        //this.performer.updateChildrenData(this);
         for (var i = 0; i < this.inO.length; i++)
         {
             var m = this.inMea[i];

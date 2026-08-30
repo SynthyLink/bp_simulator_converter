@@ -5,6 +5,7 @@ import type { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataC
 import { PerformerMeasuremets } from "../../Library/Measurements/PerformerMeasuremets";
 import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
 import { DataRuntimeConsumer } from "../../Library/Runtime/DataRuntimeConsumer";
+import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
 import { Composition } from "../Composition";
 
 export class CompositionAct extends Composition implements IAction {
@@ -32,7 +33,7 @@ export class CompositionAct extends Composition implements IAction {
     }
 
     public test(): void {
-        var runtime: IDataRuntime = new DataRuntimeConsumer(this.dc, this.factory);
+        var runtime: IDataRuntime = new DataRuntimeConsumerODE(this.dc, this.factory);
         var p = new PerformerMeasuremets();
         p.performFixedStepCalculation(runtime, 0, 1, 1000, this, this);
     }

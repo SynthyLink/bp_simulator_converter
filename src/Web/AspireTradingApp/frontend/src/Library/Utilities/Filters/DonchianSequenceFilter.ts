@@ -1,9 +1,10 @@
 import { QueueFilter } from "./QueueFilter";
 
 export class DonchianSequenceFilter extends QueueFilter {
-    protected getOwnValue(): number | undefined {
+    protected getOwnValue(l: boolean): number | undefined {
+        if (!l) return undefined
         var p = this.performer
-        var x = this.arr
+        var x = this.queue.toArray()
         var y = this.max ? p.findMaxWithReduce(x) : p.findMinWithReduce(x)
         return y
     }
@@ -15,6 +16,8 @@ export class DonchianSequenceFilter extends QueueFilter {
     }
 
     protected max: boolean = true
+
+    any : any
 
 
 

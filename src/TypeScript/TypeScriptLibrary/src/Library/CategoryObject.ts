@@ -4,6 +4,8 @@
 import type { ICategoryObject } from "./Interfaces/ICategoryObject";
 import type { ICheck } from "./Interfaces/ICheck";
 import type { IDesktop } from "./Interfaces/IDesktop";
+import type { IFactory } from "./Interfaces/IFactory";
+import type { IFactoryConsumer } from "./Interfaces/IFactoryConsumer";
 import type { IObject } from "./Interfaces/IObject";
 import { Performer } from "./Performer";
 
@@ -77,6 +79,12 @@ export class CategoryObject implements ICategoryObject, IObject
 
     protected getObjectT<T, S>(s: S, type: string): T[] {
         return this.performer.convertObject<T, S>(s, type)
+    }
+
+    public detectFactory(): IFactory | undefined {
+        let fc = this.desktop as unknown as IFactoryConsumer
+        if (fc === undefined) return undefined
+        return fc.getConsumerFactory()
     }
 
 }

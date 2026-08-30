@@ -3,6 +3,12 @@ import type { IActionAddRemoveT2 } from "../../Interfaces/IActionAddRemoveT2";
 import type { IActionT2 } from "../../Interfaces/IActionT2";
 
 export class ActionArrayT2<T1, T2> extends EmptyObject implements IActionAddRemoveT2<T1, T2> {
+    constructor() {
+        super("")
+        this.types.push("IActionAddRemoveT2")
+        this.types.push("ActionArrayT2")
+        this.typeName = "ActionArrayT2"
+    }
 
     isEmptyActionT2(): boolean {
         return this.actions.length == 0;

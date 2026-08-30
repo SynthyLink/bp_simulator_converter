@@ -43,8 +43,6 @@ export class DataConsumerVariableMeasurements extends DataConsumer implements
     protected pMeasurements: PerformerMeasuremets = new PerformerMeasuremets();
 
 
-
-
     getMeasurementsCount(): number
     {
         return this.output.length;

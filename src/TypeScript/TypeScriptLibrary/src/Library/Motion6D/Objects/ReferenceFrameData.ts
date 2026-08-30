@@ -59,6 +59,8 @@ export class ReferenceFrameData extends RigidReferenceFrame implements IDataCons
     angularVelocity !: IAngularVelocity 
 
     velocityObject !: IVelocity 
+
+    any : any
 /*
     private coordDel: IFunc<any>[] = [];
 
@@ -195,7 +197,7 @@ export class ReferenceFrameData extends RigidReferenceFrame implements IDataCons
     }  
 
     addMeasurement(measurement: IMeasurement): void {
-        console.log(measurement)
+        this.any = measurement
     }
 
 
@@ -205,8 +207,6 @@ export class ReferenceFrameData extends RigidReferenceFrame implements IDataCons
     addMeasurements(item: IMeasurements): void {
         this.measurementsData.push(item);
     }
-
-
 
     getFrame(): any {
         return this.own;

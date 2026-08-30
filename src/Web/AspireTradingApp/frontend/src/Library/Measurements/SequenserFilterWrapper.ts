@@ -1,12 +1,13 @@
 import type { IDesktop } from "../Interfaces/IDesktop";
 import type { ISequenceFilter } from "../Utilities/Filters/Interfaces/ISequenceFilter";
 import type { IMeasurement } from "./Interfaces/IMeasurement";
+import type { IRunning } from "../Interfaces/IRunning";
 import { AverageSequenceFilter } from "../Utilities/Filters/AverageSequenceFilter";
 import { DonchianSequenceFilter } from "../Utilities/Filters/DonchianSequenceFilter";
 import { SequenceFilterType } from "../Utilities/Filters/Interfaces/SequenceFilterType";
 import { DataConsumerMeasurements } from "./DataConsumerMeasurements";
 
-export class SequenceFilterWrapper extends DataConsumerMeasurements implements IMeasurement {
+export class SequenceFilterWrapper extends DataConsumerMeasurements implements IMeasurement, IRunning {
 
     protected type: string = SequenceFilterType.Avarage;
 
@@ -22,12 +23,23 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
 
     filter: ISequenceFilter = new DonchianSequenceFilter(2, true);
 
+    running: boolean = false
+
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name);
         this.types.push("IMeasurement")
         this.types.push("SequenceFilterWrapper")
         this.typeName = "SequenceFilterWrapper"
         
+    }
+    setRunning(running: boolean): void {
+        if (running == this.running) return
+        this.running = running;
+        this.filter.resetFilter()
+       
+    }
+    getRunning(): boolean {
+        return this.running
     }
 
     getMeasurementsCount(): number {
@@ -52,7 +64,6 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
     }
 
     updateMeasurements(): void {
-       // this.performer.updateChildrenData(this);
         var x = this.measurement.getMeasurementValue()
         if (this.checker.check(x)) {
             this.result = undefined
@@ -62,7 +73,6 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
             var a = Number(x)
             this.result = this.filter.getFilterValue(a);
         }
-
     }
 
     public getFilter(): ISequenceFilter {

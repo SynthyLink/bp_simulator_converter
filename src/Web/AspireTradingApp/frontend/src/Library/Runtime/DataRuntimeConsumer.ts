@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { OwnNotImplemented } from "../ErrorHandler/OwnNotImplemented";
 import { Performer } from "../Performer";
 import { PerformerMeasuremets } from "../Measurements/PerformerMeasuremets"
 import type { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
@@ -18,14 +17,10 @@ import type { IEventHandler } from "../Interfaces/IEventHandler";
 import type { IObject } from "../Interfaces/IObject";
 import type { IFactory } from "../Interfaces/IFactory";
 import type { IFactoryConsumer } from "../Interfaces/IFactoryConsumer";
+import { EmptyObject } from "../EmptyObject";
 
-export abstract class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, IObject, IFactoryConsumer
+export  class DataRuntimeConsumer extends EmptyObject implements IDataRuntime, IComponentCollection,  IFactoryConsumer
 {
-
-    protected typeName: string = "CategoryArrow";
-
-    protected types: string[] = ["IObject", "IComponentCollection", "IDataRuntime",
-        "DataRuntimeConsumer", "IFactoryConsumer"];
 
     protected name: string = "";
 
@@ -54,9 +49,15 @@ export abstract class DataRuntimeConsumer implements IDataRuntime, IComponentCol
     protected dataConsumer: IDataConsumer
 
     protected factory !: IFactory
-
     constructor(dataConsumer: IDataConsumer, factory: IFactory)
     {
+        super("")
+        this.typeName = "DataRuntimeConsumer"
+        let tt  : string[] = [ "IComponentCollection", "IDataRuntime",
+            "DataRuntimeConsumer", "IFactoryConsumer"];
+        for (let x of tt) {
+            this.types.push(x)
+        }
         this.factory = factory
         this.dataConsumer = dataConsumer;
         this.prepare(dataConsumer)
@@ -64,19 +65,7 @@ export abstract class DataRuntimeConsumer implements IDataRuntime, IComponentCol
         this.performer.getAllIObjects(this.categoryObjects, this.categoryArrows, this.objects)
     }
 
-    getName(): string {
-        return this.name;
-    }
-
-
-    getClassName(): string {
-        return this.typeName;
-    }
-
-    imlplementsType(type: string): boolean {
-        return this.types.includes(type)
-    }
-
+ 
     setConsumerFactory(factory: IFactory): void {
         this.factory = factory
     }
@@ -166,10 +155,12 @@ export abstract class DataRuntimeConsumer implements IDataRuntime, IComponentCol
         }
     }
 
-    abstract stepRuntime(begin: number, end: number): void;
+    stepRuntime(begin: number, end: number): void {
+        this.any = begin
+        this.any = end
+    }
 
     refreshRuntime(): void {
-        throw new OwnNotImplemented("DataRuntimeConsumer");
     }
 
     startRuntime(time: number): void
@@ -202,7 +193,7 @@ export abstract class DataRuntimeConsumer implements IDataRuntime, IComponentCol
         return this.categoryArrows;
     }
 
-
+    any : any
  
     addDataConsumer(dc: IDataConsumer, measurements: IMeasurements[]): void
     {

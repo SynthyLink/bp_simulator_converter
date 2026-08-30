@@ -18,14 +18,10 @@ import type { IEventHandler } from "../Interfaces/IEventHandler";
 import type { IObject } from "../Interfaces/IObject";
 import type { IFactory } from "../Interfaces/IFactory";
 import type { IFactoryConsumer } from "../Interfaces/IFactoryConsumer";
+import { EmptyObject } from "../EmptyObject";
 
-export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, IObject, IFactoryConsumer
+export  class DataRuntimeConsumer extends EmptyObject implements IDataRuntime, IComponentCollection,  IFactoryConsumer
 {
-
-    protected typeName: string = "CategoryArrow";
-
-    protected types: string[] = ["IObject", "IComponentCollection", "IDataRuntime",
-        "DataRuntimeConsumer", "IFactoryConsumer"];
 
     protected name: string = "";
 
@@ -54,9 +50,21 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
     protected dataConsumer: IDataConsumer
 
     protected factory !: IFactory
+    /*
+        protected typeName: string = "CategoryArrow";
 
+    protected types: string[] = ["IObject", "IComponentCollection", "IDataRuntime",
+        "DataRuntimeConsumer", "IFactoryConsumer"];
+*/
     constructor(dataConsumer: IDataConsumer, factory: IFactory)
     {
+        super("")
+        this.typeName = "DataRuntimeConsumer"
+        let tt  : string[] = [ "IComponentCollection", "IDataRuntime",
+            "DataRuntimeConsumer", "IFactoryConsumer"];
+        for (let x of tt) {
+            this.types.push(x)
+        }
         this.factory = factory
         this.dataConsumer = dataConsumer;
         this.prepare(dataConsumer)
@@ -64,19 +72,7 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
         this.performer.getAllIObjects(this.categoryObjects, this.categoryArrows, this.objects)
     }
 
-    getName(): string {
-        return this.name;
-    }
-
-
-    getClassName(): string {
-        return this.typeName;
-    }
-
-    imlplementsType(type: string): boolean {
-        return this.types.includes(type)
-    }
-
+ 
     setConsumerFactory(factory: IFactory): void {
         this.factory = factory
     }
@@ -166,14 +162,11 @@ export class DataRuntimeConsumer implements IDataRuntime, IComponentCollection, 
         }
     }
 
-    stepRuntime(begin: number, end: number): void
-    {
-        console.log(begin)
-        console.log(end)
+    stepRuntime(begin: number, end: number): void {
+
     }
 
     refreshRuntime(): void {
-        throw new OwnNotImplemented("DataRuntimeConsumer");
     }
 
     startRuntime(time: number): void

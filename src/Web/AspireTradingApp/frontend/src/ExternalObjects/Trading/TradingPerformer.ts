@@ -13,11 +13,11 @@ import { TradingCommunication } from "./Communication/TradingCommunication";
 import { TradingDataQuery } from "./Components/TradingDataQuery";
 import { SequenceFilterWrapper } from "../../Library/Measurements/SequenserFilterWrapper";
 import { Motion6DFactory } from "../../Library/Motion6D/Motion6DFactory";
-import { DataRuntimeConsumerODE } from "../../Library/Runtime/DataRuntimeConsumerODE";
 import { TradingOrder } from "./Components/TradingOrder";
 import type { IShowObject } from "../../Library/Show/Interfaces/IShowObject";
 import type { TradingOrderShow } from "./Components/TradingOrderShow";
 import type { IActionT4 } from "../../Library/Interfaces/IActionT4";
+import { DataConsumerRuntimeTest } from "../DataConsumerRuntimeTest";
 
 export class TradingPerformer implements IActionT2<any, string> {
 
@@ -26,6 +26,8 @@ export class TradingPerformer implements IActionT2<any, string> {
     desktop !: IDesktop
 
     query !: TradingDataQuery
+
+    globalMap: Map<string, any>[] = []
 
 
     dataConsumer !: IDataConsumer
@@ -61,7 +63,7 @@ export class TradingPerformer implements IActionT2<any, string> {
             this.order.addActionT4(act4)
         }
 
-        this.runtime = new DataRuntimeConsumerODE(this.dataConsumer, new Motion6DFactory())
+        this.runtime = new DataConsumerRuntimeTest(this.dataConsumer, new Motion6DFactory())
 
         const filtersN = ["Average Short", "Average Long", "Donchian maximum", "Donchian minimum"]
         for (let fn of filtersN) {
@@ -97,6 +99,26 @@ export class TradingPerformer implements IActionT2<any, string> {
         return await this.local.readHistoryAsync(symbol, begin, end)
     }
 
+    convertMap(map: Map<string, any>): Map<string, any> {
+        let m = new Map<string, any>()
+        m.set("a", map.a)
+        m.set("b", map.b)
+        m.set("c", map.c)
+        m.set("d", map.d)
+        m.set("g", map.g)
+        m.set("i", map.i)
+        m.set("j", map.j)
+        m.set("k", map.k)
+        m.set("l", map.l)
+        m.set("m", map.m)
+        m.set("n", map.n)
+        m.set("o", map.o)
+        m.set("s", map.s)
+        m.set("u", map.u)
+        m.set("w", map.w)
+        return m;
+    }
+
 
     public setClient(map: Map<string, any>[] | undefined): void {
         this.client = map
@@ -104,7 +126,13 @@ export class TradingPerformer implements IActionT2<any, string> {
 
 
     public setServer(map: Map<string, any>[] | undefined): void {
-        this.server = map
+        this.server = []
+        if (map === undefined) return
+        for (let x of map) {
+            let y = this.convertMap(x)
+            this.server.push(y)
+        }
+        console.log(map, "SSS")
     }
 
 
@@ -130,7 +158,11 @@ export class TradingPerformer implements IActionT2<any, string> {
          return x
     }
 
-    any : any
+    any: any
+
+    setMap(map: Map<string, any>): void {
+        
+    }
 
     public setChart(s: string): ChartDataTrading {
         this.any = s
@@ -140,39 +172,55 @@ export class TradingPerformer implements IActionT2<any, string> {
         if (this.client !== undefined) {
             this.x = []
             this.yClient = []
+            let kk: number = 0;
             for (let i of this.client) {
                 let xx = i.get("a")
-                this.x.push(Number(xx))
+                let xxx = Number(xx)
+                this.x.push(xxx)
+                if (kk < 100) {
+        //            console.log(this.x.length, xxx)
+                }
+                ++kk
                 let yy = i.get(s)
                 let yyy = (yy == undefined) ? undefined : Number(yy)
                 this.yClient.push(yyy)
             }
         }
         if (this.server !== undefined) {
-            this.x = []
             this.yServer = []
             for (let ii of this.server) {
                 this.any = ii
-                let yy = ii.j
+                let yy = ii.get("j")
                 let yyy = (yy == undefined) ? undefined : Number(yy)
                 this.yServer.push(yyy)
             }
         }
-        if (this.yClient != undefined) {
-            if (this.yServer != undefined) {
-                let n = this.yClient.length
-                console.log(n, this.yServer.length)
-                for (var i = 0; i < n; i++) {
-                    if (this.yClient[i] != this.yServer[i]) {
-                        console.log("COMPARE SERVER CLIENT", i)
-                        break
-                    }
+        this.compareServerClient()
+        
+        let res = { x: this.x, yclient: this.yClient, yserver: this.yServer }
+        console.log("Res", res)
+        return res
+    }
+
+    compareServerClient(): void {
+        console.log("C")
+        let n = this.server?.length
+        if (this.client == undefined) return
+        if (this.server == undefined) return
+        console.log(n, this.client.length)
+        for (var i = 0; i < n; i++) {
+            let x = this.server[i]
+            let y = this.client[i]
+            for (let [k, v] of x) {
+                let yy = y.get(k)
+                if (yy != v){
+                    console.log("COMPARE SERVER CLIENT", i, k, v, yy)
+                    return
+
                 }
             }
         }
-        let res = { x: this.x, yclient: this.yClient, yserver: this.yServer }
-        return res
- }
+    }
 
 
 

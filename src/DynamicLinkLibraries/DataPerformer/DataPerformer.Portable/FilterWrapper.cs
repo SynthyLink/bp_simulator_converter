@@ -140,8 +140,7 @@ namespace DataPerformer.Portable
 
         void IMeasurements.UpdateMeasurements()
         {
-            var a = measurement.ToNullable<double>();
-            @double = filter[a];
+            UpdateMeasurements();
         }
 
         #endregion
@@ -155,7 +154,9 @@ namespace DataPerformer.Portable
             {
                 isRunning = value;
                 if (value) filter.Reset();
+                @double = null;
                 running?.Invoke(this, value);
+                
             }
         }
 
@@ -210,6 +211,13 @@ namespace DataPerformer.Portable
         void IChildren<IMeasurement>.RemoveChild(IMeasurement child)
         {
         }
+
+        protected virtual void UpdateMeasurements()
+        {
+            var a = measurement.ToNullable<double>();
+            @double = filter[a];
+        }
+
 
         #region Measurement class
 

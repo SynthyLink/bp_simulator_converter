@@ -1,5 +1,6 @@
 import { CategoryObject } from "../CategoryObject";
 import { ActionArray } from "../Utilities/Generic/ActionArray";
+import { PerformerMeasuremets } from "./PerformerMeasuremets";
 import type { IAction } from "../Interfaces/IAction";
 import type { IActionAddRemove } from "../Interfaces/IActionAddRemove";
 import type { IAddRemove } from "../Interfaces/IAddRemove";
@@ -20,13 +21,14 @@ import type { ITimeMeasurementConsumer } from "./Interfaces/ITimeMeasurementCons
 import type { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProvider";
 import type { IEventStart } from "../Interfaces/IEventStart";
 import type { IExternalUpdateClient } from "../Interfaces/IExternalUpdateClient";
+import type { IMeasurement } from "./Interfaces/IMeasurement";
+import type { IShowObject } from "../Show/Interfaces/IShowObject";
 
 export class DataConsumer extends CategoryObject implements IDataConsumer, IPostSetArrow,
     ITimeMeasurementConsumer, IPrintedObject, ICheckHolder, IIteratorConsumer, IEventHandler, IAddRemove, IAction,
     IEventStart, IExternalUpdateClient
 {
-    constructor(desktop: IDesktop, name: string)
-    {
+    constructor(desktop: IDesktop, name: string) {
         super(desktop, name)
         this.typeName = "DataConsumer";
         this.types.push("DataConsumer");
@@ -42,6 +44,14 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         this.tms = this;
         this.dataConsumer = this;
         this.currentAction = this.fictiveAvtion;
+        let f = this.detectFactory();
+        if (f === undefined)
+            this.pMeasurements = new PerformerMeasuremets()
+        else {
+            this.pMeasurements = new PerformerMeasuremets(f)
+            let s = f.getFactory<IShowObject>("IShowObject")
+            if (s !== undefined) this.show = s;
+        }
     }
  
     setExternalUpdate(action: IActionAddRemove | undefined): void {
@@ -51,9 +61,6 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         }
         this.eventAction.addAction(action)
     }
-
-    isEvEnabled: boolean = false;
-
 
     isEventEnabled(): boolean {
         return this.isEvEnabled
@@ -169,11 +176,19 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
         return this.addRemoveobjects;
     }
 
+    public toNullabe(m: IMeasurement): number | undefined {
+        return this.pMeasurements.toNullabeMeasurement(m)
+    }
+
     addRemoveobjects: ICategoryObject[] = []
 
 
     private measurements: IMeasurements[] = [];
 
+
+    isEvEnabled: boolean = false;
+
+    show !: IShowObject
 
     tms!: ITimeMeasurementConsumer;
 
@@ -189,12 +204,13 @@ export class DataConsumer extends CategoryObject implements IDataConsumer, IPost
 
     protected basicAction: IActionAddRemove = new ActionArray()
 
-
     protected fictiveAvtion: IActionAddRemove = new ActionArray()
 
     protected currentAction: IActionAddRemove = new ActionArray()
 
     protected externalEvents: IEvent[] = []
+
+    protected pMeasurements !: PerformerMeasuremets
 
 
 }

@@ -6,12 +6,7 @@ export class AverageSequenceFilter extends QueueFilter {
         super(count);
     }
 
-
-    getFilterValue(a: number): number | undefined
-    {
-
-        var val = super.getFilterValue(a);
-        if (val === undefined) { return undefined }
-        return this.performer.calculateAverage(this.array())
+    protected getOwnValue(): number | undefined {
+        return this.performer.calculateAverage(this.arr)
     }
- }
+}

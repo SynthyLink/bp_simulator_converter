@@ -1,23 +1,34 @@
+
 import { Performer } from "../../Performer";
 import type { ISequenceFilter } from "./Interfaces/ISequenceFilter";
 
+import { Queue } from 'queue-typescript';
 
 
 export abstract class QueueFilter implements ISequenceFilter {
 
 
-    protected arr: number[] = []
+   // protected arr: number[] = []
+
+  //  protected copy: number[] = []
 
     protected count: number = 2;
 
-    protected a: number = 0;
 
-    protected b: number | undefined = undefined;
+    protected queue !: Queue<number> 
+
+   protected x : number[] = []
+
 
     protected performer: Performer = new Performer()
 
+
     constructor(count: number) {
         this.count = count;
+        this.queue = new Queue<number>()
+    }
+    getFilterData() {
+        return this.queue
     }
 
     getFilterCount(): number {
@@ -28,20 +39,18 @@ export abstract class QueueFilter implements ISequenceFilter {
         this.count = count;
     }
 
-    protected abstract getOwnValue(): number | undefined
+    protected abstract getOwnValue(b: boolean): number | undefined
 
     getFilterValue(a: number): number | undefined {
-        this.arr.push(a)
-        var c = this.arr.length
-        var l = c >= this.count;
-        if (!l) return undefined;
-        this.b = this.getOwnValue();
-        this.arr.shift()
-        return this.b
+        this.queue.enqueue(a)
+        let k = this.queue.length - this.count
+        if (k > 0) this.queue.dequeue()
+        let b = this.getOwnValue(k >= 0);
+        return b
     }
 
     resetFilter(): void {
-        this.arr = []
+        this.queue = new Queue<number>()
     }
 
 }

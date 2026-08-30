@@ -1,6 +1,5 @@
 import { AliasName } from "../../../Library/AliasName";
 import { Desktop } from "../../../Library/Desktop";
-import { FeedbackAliasCollection } from "../../../Library/FeedbackAliasCollection";
 import { IAliasName } from "../../../Library/Interfaces/IAliasName";
 import { IDesktop } from "../../../Library/Interfaces/IDesktop";
 import { IPostSetArrow } from "../../../Library/Interfaces/IPostSetArrow";
@@ -9,6 +8,7 @@ import { DataLink } from "../../../Library/Measurements/Arrows/DataLink";
 import { ObjectTransformerLink } from "../../../Library/Measurements/Arrows/ObjectTransformerLink";
 import { DataConsumer } from "../../../Library/Measurements/DataConsumer";
 import { DifferentialEquationSolverFormula } from "../../../Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula";
+import { FeedbackAliasCollection } from "../../../Library/Measurements/FeedBack/FeedbackAliasCollection";
 import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
 import { ObjectTransformer } from "../../../Library/Measurements/ObjectTransformer";
 import { RecursiveFormula } from "../../../Library/Measurements/RecursiveFormula";

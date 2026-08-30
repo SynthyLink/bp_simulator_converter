@@ -12,6 +12,7 @@ import { RigidReferenceFrame } from "../Library/Motion6D/Objects/RigidReferenceF
 import { SerializablePosition } from "../Library/Motion6D/Objects/SerializablePosition";
 import { Basic3DShape } from "../Library/Motion6D/Objects/Shapes/Basic3DShape";
 import { BasicCamera } from "../Library/Motion6D/Visible/BasicCamera";
+import { IVisible } from "../Library/Motion6D/Visible/Interfaces/IVisible";
 import { VisibleConsumerLink } from "../Library/Motion6D/Visible/VisibleConsumerLink";
 import { TimeSpan } from "../Library/Utilities/DateTime/TimeSpan";
 
@@ -33,6 +34,9 @@ class Cesna_CategoryObject_0 extends SerializablePosition
 
 class Cesna_CategoryObject_2 extends BasicCamera
 {
+    postVisibleObject(object: IVisible): void {
+        throw new Error("Method not implemented.");
+    }
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
