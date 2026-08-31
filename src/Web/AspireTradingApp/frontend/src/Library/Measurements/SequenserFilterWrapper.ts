@@ -27,6 +27,7 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
 
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name);
+        this.types.push("IRunning")
         this.types.push("IMeasurement")
         this.types.push("SequenceFilterWrapper")
         this.typeName = "SequenceFilterWrapper"
@@ -34,7 +35,7 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
     }
 
     setRunning(running: boolean): void {
-        if (running == this.running) return
+       // if (running == this.running) return
         this.running = running;
         this.result = undefined
         this.filter.resetFilter()
