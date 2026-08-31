@@ -1,5 +1,4 @@
 
-import type { ICategoryObject } from "../Library/Interfaces/ICategoryObject";
 import { DataRuntimeConsumer } from "../Library/Runtime/DataRuntimeConsumer";
 
 export class DataConsumerRuntimeTest extends DataRuntimeConsumer {

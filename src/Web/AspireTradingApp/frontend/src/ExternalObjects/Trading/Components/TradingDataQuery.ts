@@ -3,7 +3,7 @@ import type { IInitializeTask } from "../../../Library/Interfaces/IInitializeTas
 import type { IIterator } from "../../../Library/Measurements/Interfaces/IIterator";
 import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
 import type { IMeasurements } from "../../../Library/Measurements/Interfaces/IMeasurements";
-import type { ITradingDatabaseHistoryInterface } from "../Database/ITradingDatabaseHistoryInterface";
+import type { ITradingDatabaseHistoryInterface } from "../Interfaces/ITradingDatabaseHistoryInterface";
 import type { IAssociatedObject } from "../../../Library/Interfaces/IAssociatedObject";
 import type { IObject } from "../../../Library/Interfaces/IObject";
 import type { IStartTask } from "../../../Library/Interfaces/IStartTask";
@@ -63,7 +63,7 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
     }
 
     async startAsync(controller: AbortController): Promise<void> {
-        this.data = await this.inter.getHistoricalDataMessageDateTimesAsync("", this.symbol, this.begin,
+        this.data = await this.inter.getHistoricalDataMessageDateTimesAsync("", this.period, this.symbol, this.begin,
             this.end, controller)
     }
 

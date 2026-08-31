@@ -217,10 +217,10 @@ export class PerformerMeasuremets extends Performer {
     public async performIteratorDataConsumerAsync(dataConsumer: IDataConsumer,
         iterator: IIterator, runtime: IDataRuntime, abort: AbortController, action: IAction,
         preparation?: IAction | undefined, errorHandler?: IExceptionHandler | undefined): Promise<void> {
-        let desktop : IObjectCollection | undefined = undefined
+        let desktop: IObjectCollection | undefined = undefined
         try {
             if (preparation !== undefined) preparation.action();
-             var co = dataConsumer as unknown as ICategoryObject;
+            var co = dataConsumer as unknown as ICategoryObject;
             var d = co.getDesktop();
             desktop = d
             await this.startAsync(d, abort);
@@ -236,10 +236,10 @@ export class PerformerMeasuremets extends Performer {
                 if (abort.signal.aborted) {
                     if (errorHandler === undefined) return
                     errorHandler.log("Iteration aborted")
-                    return
+                    break
                 }
                 if (!iterator.nextIterator()) {
-                    return;
+                    break
                 }
                 runtime.updateRuntime();
                 action.action()
@@ -248,6 +248,7 @@ export class PerformerMeasuremets extends Performer {
         catch (error: any) {
             this.errorHandler.handleException(error)
         }
+        console.log("DDD", desktop)
         if (desktop != undefined) this.setRunning(desktop, false)
 
     }

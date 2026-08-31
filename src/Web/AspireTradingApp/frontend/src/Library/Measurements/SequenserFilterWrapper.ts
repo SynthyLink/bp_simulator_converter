@@ -32,12 +32,14 @@ export class SequenceFilterWrapper extends DataConsumerMeasurements implements I
         this.typeName = "SequenceFilterWrapper"
         
     }
+
     setRunning(running: boolean): void {
         if (running == this.running) return
         this.running = running;
+        this.result = undefined
         this.filter.resetFilter()
-       
     }
+
     getRunning(): boolean {
         return this.running
     }

@@ -1,7 +1,6 @@
 import type { IDesktop } from "../../Library/Interfaces/IDesktop";
 import type { IFactory } from "../../Library/Interfaces/IFactory";
 import type { HistoryMessage } from "./Database/HistoryMessage";
-import type { ILocalDB } from "./Database/Local/Interfaces/ILocalDB";
 import type { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
 import type { ISequenceFilter } from "../../Library/Utilities/Filters/Interfaces/ISequenceFilter";
 import type { ChartDataTrading } from "./ChartDataTrading";
@@ -47,8 +46,7 @@ export class TradingPerformer implements IActionT2<any, string> {
 
     show!: IShowObject
 
-    constructor(local: ILocalDB, desktop: IDesktop, communication: TradingCommunication, factory?: IFactory, show?: IShowObject) {
-        this.local = local;
+    constructor(desktop: IDesktop, communication: TradingCommunication, factory?: IFactory, show?: IShowObject) {
         if (show !== undefined)   this.show = show;
         communication.tPerformer = this
         this.pefrormer = new PerformerMeasuremets(factory)
@@ -224,7 +222,7 @@ export class TradingPerformer implements IActionT2<any, string> {
 
 
 
-    local !: ILocalDB
+  
 
 
     x: number [] | undefined = []

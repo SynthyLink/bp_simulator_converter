@@ -131,6 +131,16 @@ class DonchianDesktop_CategoryObject_5 extends RecursiveFormula
 		var x1 = v.get("y");
 		x1?.setIValue(this.get_1());
 	}
+
+	setRunning(running: boolean): void {
+		console.log("RUN", running, this.running)
+		if (running === this.running) return
+		this.running = running
+		if (!running) return
+		this.initial.resetInitialValues();
+		this.feedback.setFeedbacks();
+	}
+
 	
 }
 

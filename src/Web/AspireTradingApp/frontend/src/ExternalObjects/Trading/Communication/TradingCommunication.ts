@@ -5,14 +5,14 @@ import type { ICheck } from "../../../Library/Interfaces/ICheck";
 import { UniversalFactory } from "../../../Library/UniversalFactory";
 import { DonchianDesktop } from "../Algorithms/DonchianDesktop";
 import type { HistoryMessage } from "../Database/HistoryMessage";
-import type { ITradingDatabaseHistoryInterface } from "../Database/ITradingDatabaseHistoryInterface";
-import { MemoryDB } from "../Database/Local/MemoryDB";
 import type { Initial } from "../Initial";
 import { TradingPerformer } from "../TradingPerformer";
 import { CommunicationTradingDatabaseHistoryInterface } from "./CommunicationTradingDatabaseHistoryInterface";
 import type { IShowObject } from "../../../Library/Show/Interfaces/IShowObject";
 import { TradingOrderShow } from "../Components/TradingOrderShow";
-import { ShowObject } from "../../../Library/Show/ShowObject";
+import { MemorySaveTradingDatabase } from "../Database/MemorySaveTradingDatabase";
+import { HybridTradindDatabase } from "../Database/HybridTradingDatabase";
+import type { ITradingDatabaseHistoryInterface } from "../Interfaces/ITradingDatabaseHistoryInterface";
 
 
 export class TradingCommunication extends HttpCommunication {
@@ -227,15 +227,18 @@ export class TradingCommunication extends HttpCommunication {
     public async getSymbolsAsync(): Promise<string[][]> {
         if (this.symbols.length > 0) return this.symbols;
         this.symbols = await this.getSymbolsIntretrnalAsync()
+        let data = new CommunicationTradingDatabaseHistoryInterface(new TradingCommunication())
+        let mem = new MemorySaveTradingDatabase()
+        let hybrid = new HybridTradindDatabase(data, mem)
         let factory = new UniversalFactory
-        factory.addFactory<ITradingDatabaseHistoryInterface>(new CommunicationTradingDatabaseHistoryInterface(new TradingCommunication()), "ITradingDatabaseHistoryInterface")
+        factory.addFactory<ITradingDatabaseHistoryInterface>(hybrid, "ITradingDatabaseHistoryInterface")
         factory.addFactory<ICheck>(new EmptyChecker(), "ICheck");
         let so = new TradingOrderShow();
         factory.addFactory<IShowObject>(so, "IShowObject");
 
         let controller = new AbortController();
         let desktop = await DonchianDesktop.getDesktopAsync(controller, factory)
-        this.tPerformer = new TradingPerformer(new MemoryDB(), desktop, this, undefined, so);
+        this.tPerformer = new TradingPerformer(desktop, this, undefined, so);
         return this.symbols;
     }
 

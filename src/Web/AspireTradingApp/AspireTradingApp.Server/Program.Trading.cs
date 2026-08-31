@@ -1,7 +1,5 @@
-﻿using AspireTradingApp.Server.Trading;
-using Diagram.UI.Interfaces;
+﻿using Diagram.UI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Trading.Database;
 using Trading.Database.Interfaces;
 using Trading.Library;
 using Trading.Library.Classes;
