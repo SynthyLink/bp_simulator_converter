@@ -63,10 +63,12 @@ namespace DataPerformer.Formula.TypeScript
             this.trees = trees;
             IList<string> variables;
             IList<string> initializers;
+            IList<string> reset;
+            IList<string> print;
             List<string> l = new List<string>();
             //          l.Add(" : FormulaEditor.Interfaces.ITreeCollectionProxy");
             //        local = null;
-            var lt = PreCreateCode(obj, out local, out variables, out initializers,  className);
+            var lt = PreCreateCode(obj, out local, out variables, out initializers, out reset, out print,  className);
             List<string> ltt = PostCreateCode(local, obj, lt, variables, initializers,
                          constructorModifier + " " + className,
                          checkValue);
@@ -182,10 +184,10 @@ namespace DataPerformer.Formula.TypeScript
         }
 
         private List<string> PreCreateCode(object obj, out ITreeCodeCreator local,
-             out IList<string> variables, out IList<string> initializers,  string current)
+             out IList<string> variables, out IList<string> initializers, out IList<string> reset, out IList<string> print, string current)
         {
             var lcode = TypeScript.TreeCodeCreator.CreateCode(obj, trees, codeCreator,
-                out local, out variables, out initializers,  current);
+                out local, out variables, out initializers, out reset, out print, current);
             ObjectFormulaTree[] tr = local.Trees;
             foreach (ObjectFormulaTree tree in tr)
             {
@@ -207,11 +209,13 @@ namespace DataPerformer.Formula.TypeScript
         {
             IList<string> variables;
             IList<string> initializers;
+            IList<string> reset;
+            IList<string> print;
             List<string> l = new List<string>();
             l.Add(CSharpCodeCreator.StandardHeader);
             l.Add(CSharpCodeCreator.GetGuidClass(new Type[] { typeof(ITreeCollectionProxy) }));
             local = null;
-            IList<string> lt = PreCreateCode(obj, out local, out variables, out initializers,  current);
+            IList<string> lt = PreCreateCode(obj, out local, out variables, out initializers, out reset, out print, current);
             l.Add("\t\t");
             List<string> ltt = PostCreateCode(local, obj, lt, variables, initializers, "public Calculate", checkValue != null);
             StringBuilder sb = new StringBuilder();

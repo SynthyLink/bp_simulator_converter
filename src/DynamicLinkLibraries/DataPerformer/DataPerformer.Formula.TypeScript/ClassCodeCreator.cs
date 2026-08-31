@@ -175,8 +175,6 @@ namespace DataPerformer.Formula.TypeScript
                 var la = CreateTSVariableList(m);
                 performer.Add(l, la, 2);
             }
-
-
             if (obj is IInitialDictionary d) // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             {
 
@@ -189,7 +187,7 @@ namespace DataPerformer.Formula.TypeScript
             }
             l.Add("\t}");
             l.Add("");
-            performer.Add(l, lt.Values.ToArray()[0], 1);
+            performer.Add(l, lt["code"], 1);
             AddPost(l);
             if (obj is IFeedbackCollectionHolder feedback)
             {
@@ -198,6 +196,33 @@ namespace DataPerformer.Formula.TypeScript
                 var ll = ddd["code"];
                 performer.Add(l, ll, 1);
             }
+            if (lt.ContainsKey("reset"))
+            {
+                var rst = lt["reset"] as List<string>;
+                if (rst.Count > 0)
+                {
+                    l.Add("");
+                    l.Add("\treset() : void");
+                    l.Add("\t{");
+                    performer.Add(l, rst, 2);
+                    l.Add("\t}");
+                    l.Add("");
+                }
+            }
+            if (lt.ContainsKey("print"))
+            {
+                var rst = lt["print"] as List<string>;
+                if (rst.Count > 0)
+                {
+                    l.Add("");
+                    l.Add("\tprint(printer: IPrinter): void");
+                    l.Add("\t{");
+                    performer.Add(l, rst, 2);
+                    l.Add("\t}");
+                    l.Add("");
+                }
+            }
+
             l.Add("}");
             return l;
         }

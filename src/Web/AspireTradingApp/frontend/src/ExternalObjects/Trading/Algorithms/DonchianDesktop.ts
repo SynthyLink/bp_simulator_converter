@@ -4,6 +4,7 @@ import type { IFactory } from "../../../Library/Interfaces/IFactory";
 import type { IPostSetArrow } from "../../../Library/Interfaces/IPostSetArrow";
 import type { IValue } from "../../../Library/Interfaces/IValue";
 import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
+import type { IPrinter } from "../../../Library/Interfaces/IPrinter";
 import { AliasName } from "../../../Library/AliasName";
 import { Desktop } from "../../../Library/Desktop";
 import { DataLink } from "../../../Library/Measurements/Arrows/DataLink";
@@ -16,6 +17,9 @@ import { SequenceFilterType } from "../../../Library/Utilities/Filters/Interface
 import { TradingOrder } from "../Components/TradingOrder";
 import { TradingDataQuery } from "../Components/TradingDataQuery";
 import { FeedbackAliasCollection } from "../../../Library/Measurements/FeedBack/FeedbackAliasCollection";
+import { ConsolePrinter } from "../../../Library/Printers/ConsolePrinter";
+import { DataConsumerRuntimeTest } from "../../DataConsumerRuntimeTest";
+import { TradingPositionDirection, TradingPositionType } from "../Components/TradingPositionEnums";
 
 class DonchianDesktop_CategoryObject_0 extends TradingDataQuery
 {
@@ -112,8 +116,8 @@ class DonchianDesktop_CategoryObject_5 extends RecursiveFormula
 	
 	value0 ! : IValue;
 	aliasName1 ! : IAliasName;
-	var_0 : number  = 0;
-	var_1 : number  = 0;
+	var_0 : number  = 0
+	var_1 : number  = 0
 	
 	get_0() : any
 	{
@@ -131,17 +135,23 @@ class DonchianDesktop_CategoryObject_5 extends RecursiveFormula
 		var x1 = v.get("y");
 		x1?.setIValue(this.get_1());
 	}
+	
 
-	setRunning(running: boolean): void {
-		console.log("RUN", running, this.running)
-		if (running === this.running) return
-		this.running = running
-		if (!running) return
-		this.initial.resetInitialValues();
-		this.feedback.setFeedbacks();
+	reset() : void
+	{
+		this.var_0 = 0
+		this.var_1 = 0
 	}
 
-	
+
+	print(printer: IPrinter): void
+	{
+		printer.print("var_0")
+		printer.print(this.var_0)
+		printer.print("var_1")
+		printer.print(this.var_1)
+	}
+
 }
 
 class DonchianDesktop_CategoryObject_6 extends VectorFormulaConsumer
@@ -226,22 +236,22 @@ class DonchianDesktop_CategoryObject_6 extends VectorFormulaConsumer
 	measurement6 ! : IMeasurement;
 	measurement7 ! : IMeasurement;
 	measurement9 ! : IMeasurement;
-	var_0 : number  = 0;
-	var_1 : number  = 0;
-	var_2 : boolean  = false;
-	var_3 : number  = 0;
-	var_4 : number  = 0;
-	var_5 : boolean  = false;
-	var_6 : number  = 0;
-	var_7 : number  = 0;
-	var_8 : boolean  = false;
-	var_9 : number  = 0;
-	var_10 : number  = 0;
-	var_11 : boolean  = false;
-	var_12 : number  = 1;
-	var_13 : boolean  = false;
-	var_14 : number  = 2;
-	var_15 : boolean  = false;
+	var_0 : number  = 0
+	var_1 : number  = 0
+	var_2 : boolean  = false
+	var_3 : number  = 0
+	var_4 : number  = 0
+	var_5 : boolean  = false
+	var_6 : number  = 0
+	var_7 : number  = 0
+	var_8 : boolean  = false
+	var_9 : number  = 0
+	var_10 : number  = 0
+	var_11 : boolean  = false
+	var_12 : number  = 1
+	var_13 : boolean  = false
+	var_14 : number  = 2
+	var_15 : boolean  = false
 	
 	get_0() : any
 	{
@@ -340,6 +350,64 @@ class DonchianDesktop_CategoryObject_6 extends VectorFormulaConsumer
 		x6?.setIValue(this.get_15());
 	}
 	
+
+	reset() : void
+	{
+		this.var_0 = 0
+		this.var_1 = 0
+		this.var_2 = false
+		this.var_3 = 0
+		this.var_4 = 0
+		this.var_5 = false
+		this.var_6 = 0
+		this.var_7 = 0
+		this.var_8 = false
+		this.var_9 = 0
+		this.var_10 = 0
+		this.var_11 = false
+		this.var_12 = 1
+		this.var_13 = false
+		this.var_14 = 2
+		this.var_15 = false
+	}
+
+
+	print(printer: IPrinter): void
+	{
+		printer.print("var_0")
+		printer.print(this.var_0)
+		printer.print("var_1")
+		printer.print(this.var_1)
+		printer.print("var_2")
+		printer.print(this.var_2)
+		printer.print("var_3")
+		printer.print(this.var_3)
+		printer.print("var_4")
+		printer.print(this.var_4)
+		printer.print("var_5")
+		printer.print(this.var_5)
+		printer.print("var_6")
+		printer.print(this.var_6)
+		printer.print("var_7")
+		printer.print(this.var_7)
+		printer.print("var_8")
+		printer.print(this.var_8)
+		printer.print("var_9")
+		printer.print(this.var_9)
+		printer.print("var_10")
+		printer.print(this.var_10)
+		printer.print("var_11")
+		printer.print(this.var_11)
+		printer.print("var_12")
+		printer.print(this.var_12)
+		printer.print("var_13")
+		printer.print(this.var_13)
+		printer.print("var_14")
+		printer.print(this.var_14)
+		printer.print("var_15")
+		printer.print(this.var_15)
+	}
+
 }
 
 class DonchianDesktop_CategoryObject_7 extends VectorFormulaConsumer
@@ -359,8 +427,7 @@ class DonchianDesktop_CategoryObject_7 extends VectorFormulaConsumer
 		this.addVariableValue("Formula_6", 0, 0);
 		this.addVariableValue("Formula_7", 0, 0);
 	}
-
-		calculateTree() : void
+	calculateTree() : void
 		{
 			this.success = true;
 			this.variable = this.measurement0.getMeasurementValue();
@@ -462,7 +529,7 @@ class DonchianDesktop_CategoryObject_7 extends VectorFormulaConsumer
 			this.variable = this.measurement46.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_46 = this.convert<number>(this.variable);
-		}
+	}
 	
 	init() : void
 	{
@@ -486,53 +553,53 @@ class DonchianDesktop_CategoryObject_7 extends VectorFormulaConsumer
 	measurement24 ! : IMeasurement;
 	measurement31 ! : IMeasurement;
 	measurement46 ! : IMeasurement;
-	var_0 : boolean  = false;
-	var_1 : number  = 0;
-	var_2 : number  = 0;
-	var_3 : boolean  = false;
-	var_4 : boolean  = false;
-	var_5 : boolean  = false;
-	var_6 : boolean  = false;
-	var_7 : boolean  = false;
-	var_8 : number  = 2;
-	var_9 : boolean  = false;
-	var_10 : boolean  = false;
-	var_11 : boolean  = false;
-	var_12 : boolean  = false;
-	var_13 : number  = 1;
-	var_14 : boolean  = false;
-	var_15 : boolean  = false;
-	var_16 : boolean  = false;
-	var_17 : number  = 0;
-	var_18 : boolean  = false;
-	var_19 : boolean  = false;
-	var_20 : boolean  = false;
-	var_21 : boolean  = false;
-	var_22 : boolean  = false;
-	var_23 : number  = 1;
-	var_24 : boolean  = false;
-	var_25 : boolean  = false;
-	var_26 : number  = 0;
-	var_27 : number  = 0;
-	var_28 : number  = 0;
-	var_29 : boolean  = false;
-	var_30 : number  = 2;
-	var_31 : boolean  = false;
-	var_32 : boolean  = false;
-	var_33 : number  = 0;
-	var_34 : number  = 0;
-	var_35 : number  = 0;
-	var_36 : number  = 0;
-	var_37 : number  = 1;
-	var_38 : number  = 0;
-	var_39 : number  = 0;
-	var_40 : number  = 1;
-	var_41 : number  = 0;
-	var_42 : number  = 0;
-	var_43 : number  = 1;
-	var_44 : number  = 0;
-	var_45 : number  = 0;
-	var_46 : number  = 0;
+	var_0 : boolean  = false
+	var_1 : number  = 0
+	var_2 : number  = 0
+	var_3 : boolean  = false
+	var_4 : boolean  = false
+	var_5 : boolean  = false
+	var_6 : boolean  = false
+	var_7 : boolean  = false
+	var_8 : number  = 2
+	var_9 : boolean  = false
+	var_10 : boolean  = false
+	var_11 : boolean  = false
+	var_12 : boolean  = false
+	var_13 : number  = 1
+	var_14 : boolean  = false
+	var_15 : boolean  = false
+	var_16 : boolean  = false
+	var_17 : number  = 0
+	var_18 : boolean  = false
+	var_19 : boolean  = false
+	var_20 : boolean  = false
+	var_21 : boolean  = false
+	var_22 : boolean  = false
+	var_23 : number  = 1
+	var_24 : boolean  = false
+	var_25 : boolean  = false
+	var_26 : number  = 0
+	var_27 : number  = 0
+	var_28 : number  = 0
+	var_29 : boolean  = false
+	var_30 : number  = 2
+	var_31 : boolean  = false
+	var_32 : boolean  = false
+	var_33 : number  = 0
+	var_34 : number  = 0
+	var_35 : number  = 0
+	var_36 : number  = 0
+	var_37 : number  = 1
+	var_38 : number  = 0
+	var_39 : number  = 0
+	var_40 : number  = 1
+	var_41 : number  = 0
+	var_42 : number  = 0
+	var_43 : number  = 1
+	var_44 : number  = 0
+	var_45 : number  = 0
+	var_46 : number  = 0
 	
 	get_0() : any
 	{
@@ -793,6 +860,157 @@ class DonchianDesktop_CategoryObject_7 extends VectorFormulaConsumer
 		]);
 		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
+
+	reset() : void
+	{
+		this.var_0 = false
+		this.var_1 = 0
+		this.var_2 = 0
+		this.var_3 = false
+		this.var_4 = false
+		this.var_5 = false
+		this.var_6 = false
+		this.var_7 = false
+		this.var_8 = 2
+		this.var_9 = false
+		this.var_10 = false
+		this.var_11 = false
+		this.var_12 = false
+		this.var_13 = 1
+		this.var_14 = false
+		this.var_15 = false
+		this.var_16 = false
+		this.var_17 = 0
+		this.var_18 = false
+		this.var_19 = false
+		this.var_20 = false
+		this.var_21 = false
+		this.var_22 = false
+		this.var_23 = 1
+		this.var_24 = false
+		this.var_25 = false
+		this.var_26 = 0
+		this.var_27 = 0
+		this.var_28 = 0
+		this.var_29 = false
+		this.var_30 = 2
+		this.var_31 = false
+		this.var_32 = false
+		this.var_33 = 0
+		this.var_34 = 0
+		this.var_35 = 0
+		this.var_36 = 0
+		this.var_37 = 1
+		this.var_38 = 0
+		this.var_39 = 0
+		this.var_40 = 1
+		this.var_41 = 0
+		this.var_42 = 0
+		this.var_43 = 1
+		this.var_44 = 0
+		this.var_45 = 0
+		this.var_46 = 0
+	}
+
+
+	print(printer: IPrinter): void
+	{
+		printer.print("var_0")
+		printer.print(this.var_0)
+		printer.print("var_1")
+		printer.print(this.var_1)
+		printer.print("var_2")
+		printer.print(this.var_2)
+		printer.print("var_3")
+		printer.print(this.var_3)
+		printer.print("var_4")
+		printer.print(this.var_4)
+		printer.print("var_5")
+		printer.print(this.var_5)
+		printer.print("var_6")
+		printer.print(this.var_6)
+		printer.print("var_7")
+		printer.print(this.var_7)
+		printer.print("var_8")
+		printer.print(this.var_8)
+		printer.print("var_9")
+		printer.print(this.var_9)
+		printer.print("var_10")
+		printer.print(this.var_10)
+		printer.print("var_11")
+		printer.print(this.var_11)
+		printer.print("var_12")
+		printer.print(this.var_12)
+		printer.print("var_13")
+		printer.print(this.var_13)
+		printer.print("var_14")
+		printer.print(this.var_14)
+		printer.print("var_15")
+		printer.print(this.var_15)
+		printer.print("var_16")
+		printer.print(this.var_16)
+		printer.print("var_17")
+		printer.print(this.var_17)
+		printer.print("var_18")
+		printer.print(this.var_18)
+		printer.print("var_19")
+		printer.print(this.var_19)
+		printer.print("var_20")
+		printer.print(this.var_20)
+		printer.print("var_21")
+		printer.print(this.var_21)
+		printer.print("var_22")
+		printer.print(this.var_22)
+		printer.print("var_23")
+		printer.print(this.var_23)
+		printer.print("var_24")
+		printer.print(this.var_24)
+		printer.print("var_25")
+		printer.print(this.var_25)
+		printer.print("var_26")
+		printer.print(this.var_26)
+		printer.print("var_27")
+		printer.print(this.var_27)
+		printer.print("var_28")
+		printer.print(this.var_28)
+		printer.print("var_29")
+		printer.print(this.var_29)
+		printer.print("var_30")
+		printer.print(this.var_30)
+		printer.print("var_31")
+		printer.print(this.var_31)
+		printer.print("var_32")
+		printer.print(this.var_32)
+		printer.print("var_33")
+		printer.print(this.var_33)
+		printer.print("var_34")
+		printer.print(this.var_34)
+		printer.print("var_35")
+		printer.print(this.var_35)
+		printer.print("var_36")
+		printer.print(this.var_36)
+		printer.print("var_37")
+		printer.print(this.var_37)
+		printer.print("var_38")
+		printer.print(this.var_38)
+		printer.print("var_39")
+		printer.print(this.var_39)
+		printer.print("var_40")
+		printer.print(this.var_40)
+		printer.print("var_41")
+		printer.print(this.var_41)
+		printer.print("var_42")
+		printer.print(this.var_42)
+		printer.print("var_43")
+		printer.print(this.var_43)
+		printer.print("var_44")
+		printer.print(this.var_44)
+		printer.print("var_45")
+		printer.print(this.var_45)
+		printer.print("var_46")
+		printer.print(this.var_46)
+	}
+
 }
 
 class DonchianDesktop_CategoryObject_8 extends VectorFormulaConsumer
@@ -862,26 +1080,26 @@ class DonchianDesktop_CategoryObject_8 extends VectorFormulaConsumer
 	measurement8 ! : IMeasurement;
 	measurement12 ! : IMeasurement;
 	measurement16 ! : IMeasurement;
-	var_0 : boolean  = false;
-	var_1 : number  = 1;
-	var_2 : number  = 0;
-	var_3 : number  = 0;
-	var_4 : boolean  = false;
-	var_5 : number  = 1;
-	var_6 : number  = 0;
-	var_7 : number  = 0;
-	var_8 : boolean  = false;
-	var_9 : number  = 1;
-	var_10 : number  = 0;
-	var_11 : number  = 0;
-	var_12 : boolean  = false;
-	var_13 : number  = 1;
-	var_14 : number  = 0;
-	var_15 : number  = 0;
-	var_16 : boolean  = false;
-	var_17 : number  = 1;
-	var_18 : number  = 0;
-	var_19 : number  = 0;
+	var_0 : boolean  = false
+	var_1 : number  = 1
+	var_2 : number  = 0
+	var_3 : number  = 0
+	var_4 : boolean  = false
+	var_5 : number  = 1
+	var_6 : number  = 0
+	var_7 : number  = 0
+	var_8 : boolean  = false
+	var_9 : number  = 1
+	var_10 : number  = 0
+	var_11 : number  = 0
+	var_12 : boolean  = false
+	var_13 : number  = 1
+	var_14 : number  = 0
+	var_15 : number  = 0
+	var_16 : boolean  = false
+	var_17 : number  = 1
+	var_18 : number  = 0
+	var_19 : number  = 0
 	
 	get_0() : any
 	{
@@ -996,6 +1214,76 @@ class DonchianDesktop_CategoryObject_8 extends VectorFormulaConsumer
 		x4?.setIValue(this.get_19());
 	}
 	
+
+	reset() : void
+	{
+		this.var_0 = false
+		this.var_1 = 1
+		this.var_2 = 0
+		this.var_3 = 0
+		this.var_4 = false
+		this.var_5 = 1
+		this.var_6 = 0
+		this.var_7 = 0
+		this.var_8 = false
+		this.var_9 = 1
+		this.var_10 = 0
+		this.var_11 = 0
+		this.var_12 = false
+		this.var_13 = 1
+		this.var_14 = 0
+		this.var_15 = 0
+		this.var_16 = false
+		this.var_17 = 1
+		this.var_18 = 0
+		this.var_19 = 0
+	}
+
+
+	print(printer: IPrinter): void
+	{
+		printer.print("var_0")
+		printer.print(this.var_0)
+		printer.print("var_1")
+		printer.print(this.var_1)
+		printer.print("var_2")
+		printer.print(this.var_2)
+		printer.print("var_3")
+		printer.print(this.var_3)
+		printer.print("var_4")
+		printer.print(this.var_4)
+		printer.print("var_5")
+		printer.print(this.var_5)
+		printer.print("var_6")
+		printer.print(this.var_6)
+		printer.print("var_7")
+		printer.print(this.var_7)
+		printer.print("var_8")
+		printer.print(this.var_8)
+		printer.print("var_9")
+		printer.print(this.var_9)
+		printer.print("var_10")
+		printer.print(this.var_10)
+		printer.print("var_11")
+		printer.print(this.var_11)
+		printer.print("var_12")
+		printer.print(this.var_12)
+		printer.print("var_13")
+		printer.print(this.var_13)
+		printer.print("var_14")
+		printer.print(this.var_14)
+		printer.print("var_15")
+		printer.print(this.var_15)
+		printer.print("var_16")
+		printer.print(this.var_16)
+		printer.print("var_17")
+		printer.print(this.var_17)
+		printer.print("var_18")
+		printer.print(this.var_18)
+		printer.print("var_19")
+		printer.print(this.var_19)
+	}
+
 }
 
 class DonchianDesktop_CategoryObject_9 extends VectorFormulaConsumer
@@ -1026,7 +1314,7 @@ class DonchianDesktop_CategoryObject_9 extends VectorFormulaConsumer
 	}
 	
 	measurement0 ! : IMeasurement;
-	var_0 : number  = 0;
+	var_0 : number  = 0
 	
 	get_0() : any
 	{
@@ -1045,6 +1333,19 @@ class DonchianDesktop_CategoryObject_9 extends VectorFormulaConsumer
 		]);
 		this.feedback = new FeedbackAliasCollection(map, this, this);
 	}
+
+	reset() : void
+	{
+		this.var_0 = 0
+	}
+
+
+	print(printer: IPrinter): void
+	{
+		printer.print("var_0")
+		printer.print(this.var_0)
+	}
+
 }
 
 class DonchianDesktop_CategoryObject_10 extends TradingOrder
@@ -1057,6 +1358,78 @@ class DonchianDesktop_CategoryObject_10 extends TradingOrder
 		this.sellPrice = "Trading.Close"
 		this.date = "Trading.FullTime"
 	}
+
+	printer: IPrinter = new ConsolePrinter()
+/*
+	updateMeasurements(): void {
+		if (DataConsumerRuntimeTest.getk() == 0) {
+			this.print(this.printer)
+			console.log("+++++++++++++++++++++")
+		}
+		super.updateMeasurements()
+		if (DataConsumerRuntimeTest.getk() == 0) {
+			this.print(this.printer)
+		}
+	}*/
+
+	protected update(): void {
+		var b = DataConsumerRuntimeTest.getk() == 0
+		this.zero()
+		this.dateValue = this.toNullabe(this.currentDate)
+		var pos = this.toNullabe(this.positionM)
+		if (b) {
+			this.printer.print(pos)
+			this.printer.print(this.positionM)
+		}
+		this.setCurrentPositionValue(pos)
+		if (!this.changed) {
+			return;
+		}
+		if (this.positionDirection == TradingPositionDirection.Closed) {
+			if (this.getTempIncome() == 0) {
+				return;
+			}
+			if (this.tempIncome < 0) {
+				this.mSellPrice = this.toNullabe(this.sellPriceM)
+				if (this.mSellPrice !== undefined) {
+					this.exitPrice = this.mSellPrice
+					this.closedIncome = this.tempIncome + this.exitPrice;
+					this.sellBuy.actionT4(this, "+", this.income, this.closedIncome)
+					this.income += this.closedIncome;
+				}
+			}
+			else {
+				this.mBuyPrice = this.toNullabe(this.buyPriceM)
+				if (this.mBuyPrice !== undefined) {
+					this.exitPrice = this.mBuyPrice
+					this.closedIncome = this.tempIncome - this.exitPrice;
+					this.sellBuy.actionT4(this, "-", this.income, this.closedIncome)
+					this.income += this.closedIncome;
+
+				}
+			}
+		}
+		else {
+			this.closedPositionType = this.currentPositionType;
+			if (this.currentPositionType == TradingPositionType.Long) {
+				this.mBuyPrice = this.toNullabe(this.buyPriceM)
+				if (this.mBuyPrice !== undefined)
+					this.enterPrice = this.mBuyPrice
+				this.setTempIncome(-this.enterPrice)
+			}
+			else {
+				this.mSellPrice = this.toNullabe(this.sellPriceM)
+				if (this.mSellPrice !== undefined)
+					this.enterPrice = this.mSellPrice
+				this.setTempIncome(this.enterPrice)
+			}
+
+		}
+	}
+
+
+
+
 }
 
 class DonchianDesktop_CategoryObject_11 extends DataConsumer

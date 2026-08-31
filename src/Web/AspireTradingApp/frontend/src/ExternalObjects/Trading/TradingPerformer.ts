@@ -1,6 +1,5 @@
 import type { IDesktop } from "../../Library/Interfaces/IDesktop";
 import type { IFactory } from "../../Library/Interfaces/IFactory";
-import type { HistoryMessage } from "./Database/HistoryMessage";
 import type { IDataConsumer } from "../../Library/Measurements/Interfaces/IDataConsumer";
 import type { ISequenceFilter } from "../../Library/Utilities/Filters/Interfaces/ISequenceFilter";
 import type { ChartDataTrading } from "./ChartDataTrading";
@@ -80,22 +79,7 @@ export class TradingPerformer implements IActionT2<any, string> {
         return false
     }
 
-    async writeHistoryAsync(symbol: string, begin: number, end: number, history: HistoryMessage[]): Promise<void> {
-        let p = await this.local.getIntervalAsync(symbol);
-        if (p.length === 0)
-            this.local.clearHistoryAsync(symbol)
-        await this.local.writeHistoryAsync(symbol, begin, end, history)
-    }
-
-    async readHistory(symbol: string, begin: number, end: number): Promise<HistoryMessage[]> {
-        let p = await this.local.getIntervalAsync(symbol);
-        let b = p.length === 0 || p[0] > begin || p[1] < end
-        if (b) {
-            await this.local.clearHistoryAsync(symbol)
-            return [];
-        }
-        return await this.local.readHistoryAsync(symbol, begin, end)
-    }
+  
 
     convertMap(map: Map<string, any>): Map<string, any> {
         let m = new Map<string, any>()
@@ -145,12 +129,13 @@ export class TradingPerformer implements IActionT2<any, string> {
         this.any = a2
         this.any = d1
         this.any = d2
-    this.query.setQueryParameters(symblol, period, begin, end)
+        this.query.setQueryParameters(symblol, period, begin, end)
         this.filters[0].setFilterCount(a1)
         this.filters[1].setFilterCount(a2)
         this.filters[2].setFilterCount(d1)
         this.filters[3].setFilterCount(d2)
-         if (controller === undefined) return []
+        if (controller === undefined) return []
+        DataConsumerRuntimeTest.k = 0
         let x = await this.pefrormer.performIteratorDataConsumerMapAsync(this.dataConsumer,
             this.query, this.runtime, controller, this.mmap, undefined, new ErrorH(controller))
          return x
@@ -158,9 +143,6 @@ export class TradingPerformer implements IActionT2<any, string> {
 
     any: any
 
-    setMap(map: Map<string, any>): void {
-        
-    }
 
     public setChart(s: string): ChartDataTrading {
         this.any = s
@@ -196,28 +178,28 @@ export class TradingPerformer implements IActionT2<any, string> {
         this.compareServerClient()
         
         let res = { x: this.x, yclient: this.yClient, yserver: this.yServer }
-        console.log("Res", res)
         return res
     }
 
-    compareServerClient(): void {
+    compareServerClient(): boolean | undefined{
         console.log("C")
         let n = this.server?.length
-        if (this.client == undefined) return
-        if (this.server == undefined) return
-        console.log(n, this.client.length)
+        if (this.client == undefined) return undefined
+        if (this.server == undefined) return undefined
+        if (n == undefined) return undefined
+        console.log("Data length", n, this.client.length)
         for (var i = 0; i < n; i++) {
             let x = this.server[i]
             let y = this.client[i]
             for (let [k, v] of x) {
                 let yy = y.get(k)
                 if (yy != v){
-                    console.log("COMPARE SERVER CLIENT", i, k, v, yy)
-                    return
-
+                    console.log("COMPARE SERVER CLIENT", i, k, "SERVER= ", v, "CLIENT= ", yy)
+                    return true
                 }
             }
         }
+        console.log("SERVER EQUALS TO CLIENT")
     }
 
 

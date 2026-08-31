@@ -16,6 +16,10 @@ export class TradingOrderShow extends EmptyObject implements IShowObject,
     t4: number = 0;
 
     actionT4(t1: any, t2: string, t3: number, t4: number): void {
+        this.any = t2
+        this.any = t3
+        this.any = t4
+        this.any = t1
         if (this.t4 >= 5) return
         let ct = this.currentTime
         if (ct >= 805) {
@@ -60,6 +64,7 @@ export class TradingOrderShow extends EmptyObject implements IShowObject,
 
     showTO(to: TradingOrder, s: string): boolean {
         if (this.first) {
+            this.any = s
             this.order = to;
             this.first = false
             this.map = this.performer.getMeasurementsDCMap(to);
@@ -84,10 +89,10 @@ export class TradingOrderShow extends EmptyObject implements IShowObject,
             }
             */
         if (this.currentTime == 808) {
-            for (var [key, value] of this.map) {
+           /* for (var [key, value] of this.map) {
                 let val = value.getMeasurementValue()
         //        console.log(key, val)
-            }
+            }*/
             return true
 
         }
@@ -102,6 +107,8 @@ export class TradingOrderShow extends EmptyObject implements IShowObject,
       //  console.log(this.order.getPositionDirection(), this.order.getCurrentPositionValue(),
        //     this.order.getCurrentPositionType())
         ++this.count;
+        this.any = t1
+        this.any = t2
     }
 
     any : any

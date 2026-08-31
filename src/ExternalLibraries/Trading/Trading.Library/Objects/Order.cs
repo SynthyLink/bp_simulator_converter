@@ -316,7 +316,7 @@ namespace Trading.Library.Objects
             }
         }
 
-        void Start(bool value)
+        protected virtual void Start(bool value)
         {
             step = 0;
             isRunning = value;

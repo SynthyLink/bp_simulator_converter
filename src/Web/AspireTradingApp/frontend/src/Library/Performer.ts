@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AliasName } from "./AliasName";
-import { ConsolePrinter } from "./ConsolePrinter";
 import { OwnError } from "./ErrorHandler/OwnError";
 import { MeasurementsComparator } from "./Measurements/MeasurementsComparator";
 import { SortingAlgorithms } from "./Utilities/Sort/SortingAlgorithms";
@@ -102,11 +101,12 @@ export class Performer
 
     protected s: string = "";
 
-    protected printer: IPrinter = new ConsolePrinter();
-
     protected sorting: SortingAlgorithms = new SortingAlgorithms();
 
     protected mCompatator !: IComparator<IMeasurements>;
+
+    protected printer !: IPrinter
+
 
     public toOneDimensdional<T>(t: T[][]): T[] {
         let x: T[] = []

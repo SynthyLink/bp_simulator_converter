@@ -1,4 +1,4 @@
-import type { ITradingDatabaseHistoryInterfaceFactory } from "./ITradingDatabaseHistoryInterfaceFactory";
+import type { ITradingDatabaseHistoryInterfaceFactory } from "../Interfaces/ITradingDatabaseHistoryInterfaceFactory";
 
 export class TradingDatabaseHistoryInterfaceHolder {
 

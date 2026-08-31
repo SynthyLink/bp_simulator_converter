@@ -8,9 +8,11 @@
 import type { IDesktop } from "../Interfaces/IDesktop";
 import type { IFeedbackCollection } from "../Interfaces/IFeedbackCollection";
 import type { IPostSetArrow } from "../Interfaces/IPostSetArrow";
+import type { IPrintedObject } from "../Interfaces/IPrintedObject";
+import type { IRunning } from "../Interfaces/IRunning";
 import { DataConsumerVariableMeasurements } from "./DataConsumerVariableMeasurements";
 
-export class VectorFormulaConsumer extends DataConsumerVariableMeasurements implements IPostSetArrow
+export class VectorFormulaConsumer extends DataConsumerVariableMeasurements implements IPostSetArrow, IRunning
 {
 
     constructor(desktop: IDesktop, name: string)
@@ -19,6 +21,18 @@ export class VectorFormulaConsumer extends DataConsumerVariableMeasurements impl
         this.typeName = "VectorFormulaConsumer";
         this.types.push("VectorFormulaConsumer");
         this.types.push("IPostSetArrow");
+        this.types.push("IRunning");
+        this.types.push("IPrintedObject");
+
+    }
+
+    setRunning(running: boolean): void {
+        this.isRunning = running
+        this.reset()
+    }
+
+    getRunning(): boolean {
+        return this.isRunning
     }
 
     updateMeasurements(): void {
@@ -39,6 +53,10 @@ export class VectorFormulaConsumer extends DataConsumerVariableMeasurements impl
 
     }
 
+    protected reset(): void {
+
+    }
+
     setFeedback(): void {
 
     }
@@ -51,6 +69,8 @@ export class VectorFormulaConsumer extends DataConsumerVariableMeasurements impl
     }
 
     feedback !: IFeedbackCollection;
+
+    isRunning: boolean = false
 
 }
 

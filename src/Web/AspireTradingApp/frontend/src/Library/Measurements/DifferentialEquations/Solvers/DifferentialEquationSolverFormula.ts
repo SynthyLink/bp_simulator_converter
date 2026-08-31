@@ -70,8 +70,8 @@ export class DifferentialEquationSolverFormula extends DataConsumerVariableMeasu
 
     protected addVariableValue(name: string, type: any, value: any): void
     {
-        let variable = new Variable(name, type, value);
-        let derivation = new Variable("D" + name, 0, 0);
+        let variable = new Variable(name, type, value, this);
+        let derivation = new Variable("D" + name, 0, 0, this);
         variable.setDerivation(derivation);
         this.derivations.set(name, derivation);
         this.addVariable(variable);

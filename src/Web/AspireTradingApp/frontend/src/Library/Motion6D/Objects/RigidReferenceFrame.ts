@@ -94,6 +94,8 @@ export class RigidReferenceFrame extends CategoryObject implements IReferenceFra
 
     protected measuremrntPerformrer: PerformerMeasuremets = new PerformerMeasuremets();
 
+    protected any : any
+
     nodes: INodeT<IPosition>[] = [];
 
     postSetArrow(): void {
@@ -108,6 +110,7 @@ export class RigidReferenceFrame extends CategoryObject implements IReferenceFra
         return this.aliasNames;
     }
     getAliasType(name: string) {
+        this.any = name
         return 0;
     }
     getAliasValue(name: string) {

@@ -29,7 +29,6 @@ export class DataConsumerVariableMeasurements extends DataConsumer implements
 
     protected variables: Map<string, Variable> = new Map();
 
-
     protected aliasTypes: Map<string, any> = new Map();
 
     protected aliasValues: Map<string, any> = new Map();
@@ -74,7 +73,6 @@ export class DataConsumerVariableMeasurements extends DataConsumer implements
     }
 
 
-
     getAliasValue(name: string) {
         return this.aliasValues.get(name);
     }
@@ -88,11 +86,9 @@ export class DataConsumerVariableMeasurements extends DataConsumer implements
         this.aliasValues.set(name, value);
     }
 
-
-
     protected addVariableValue(name: string, type: any, value: any): void
     {
-        let variable = new Variable(name, type, value);
+        let variable = new Variable(name, type, value, this);
         this.addVariable(variable);
     }
 

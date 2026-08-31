@@ -248,9 +248,7 @@ export class PerformerMeasuremets extends Performer {
         catch (error: any) {
             this.errorHandler.handleException(error)
         }
-        console.log("DDD", desktop)
         if (desktop != undefined) this.setRunning(desktop, false)
-
     }
 
 

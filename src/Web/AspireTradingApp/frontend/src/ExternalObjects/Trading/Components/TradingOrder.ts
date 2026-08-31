@@ -3,36 +3,50 @@ import type { IDesktop } from "../../../Library/Interfaces/IDesktop";
 import type { IObject } from "../../../Library/Interfaces/IObject";
 import type { IMeasurement } from "../../../Library/Measurements/Interfaces/IMeasurement";
 import type { IMeasurements } from "../../../Library/Measurements/Interfaces/IMeasurements";
+import type { IActionAddRemoveT2 } from "../../../Library/Interfaces/IActionAddRemoveT2";
+import type { IActionT2 } from "../../../Library/Interfaces/IActionT2";
+import type { IActionAddRemoveT4 } from "../../../Library/Interfaces/IActionAddRemoveT4";
+import type { IActionT4 } from "../../../Library/Interfaces/IActionT4";
+import type { IRunning } from "../../../Library/Interfaces/IRunning";
 import { Measurement } from "../../../Library/Measurements/Measurement";
 import { DataConsumer } from "../../../Library/Measurements/DataConsumer";
 import { TradingPositionDirection, TradingPositionType } from "./TradingPositionEnums";
 import { OwnError } from "../../../Library/ErrorHandler/OwnError";
-import type { IActionAddRemoveT2 } from "../../../Library/Interfaces/IActionAddRemoveT2";
-import type { IActionT2 } from "../../../Library/Interfaces/IActionT2";
 import { ActionArrayT2 } from "../../../Library/Utilities/Generic/ActionArrayT2";
-import type { IActionAddRemoveT4 } from "../../../Library/Interfaces/IActionAddRemoveT4";
-import type { IActionT4 } from "../../../Library/Interfaces/IActionT4";
 import { ActionArrayT4 } from "../../../Library/Utilities/Generic/ActionArrayT4";
+import type { IPrinter } from "../../../Library/Interfaces/IPrinter";
 
-export class TradingOrder extends DataConsumer implements IMeasurements,
+export class TradingOrder extends DataConsumer implements IMeasurements, IRunning,
     IActionAddRemoveT2<any, string>, IActionAddRemoveT4<any, string, number, number>
 {
     constructor(desktop: IDesktop, name: string) {
         super(desktop, name)
         this.types.push("IMeasurements")
+        this.types.push("IRunning")
         this.types.push("TradingOrder")
         this.typeName = "TradingOrder"
         this.output = [new PositionMeasurement(this),
             new IncomeMeasurement(this),
             new SellTaxMeasurement(this),
             new BuyTaxMeasurement(this)]
+        this.resetAll()
 
     }
-    update(): void {
-        this.showThis("before");
+
+    setRunning(running: boolean): void {
+        this.isRunning = running
+        this.resetAll()
+    }
+
+    getRunning(): boolean {
+        return this.isRunning
+    }
+
+    protected update(): void {
         this.zero()
         this.dateValue = this.toNullabe(this.currentDate)
-        this.setCurrentPositionValue(this.toNullabe(this.positionM))
+        var pos = this.toNullabe(this.positionM)
+        this.setCurrentPositionValue(pos)
         if (!this.changed) {
             return;
         }
@@ -77,9 +91,57 @@ export class TradingOrder extends DataConsumer implements IMeasurements,
             }
 
         }
-        this.showThis("after")
-
     }
+
+    print(printer: IPrinter): void {
+        printer.print("CurrentPositionValue")
+        printer.print(this.currentPositionValue)
+        printer.print("EnterPrice")
+        printer.print(this.enterPrice)
+        printer.print("ExitPrice")
+        printer.print(this.currentPositionValue)
+        printer.print("TempIncome")
+        printer.print(this.tempIncome)
+        printer.print("ExitDate")
+        printer.print(this.exitDate)
+        printer.print("CurrentPositionType")
+        printer.print(this.currentPositionType)
+        printer.print("LastPositionType")
+        printer.print(this.lastPositionType)
+        printer.print("ClosedPositionType")
+        printer.print(this.closedPositionType)
+        printer.print("mSellPrice")
+        printer.print(this.mSellPrice)
+        printer.print("mBuyPrice")
+        printer.print(this.mBuyPrice)
+        printer.print("positionType")
+        printer.print(this.positionType)
+        printer.print("positionDirection")
+        printer.print(this.positionDirection)
+        printer.print("posChanged")
+        printer.print(this.posChanged)
+        printer.print("income")
+        printer.print(this.income)
+    }
+
+    protected resetAll(): void {
+        this.setCurrentPositionValue(undefined)
+        this.setEnterPrice(0)
+        this.setExitPrice(0)
+        this.setTempIncome(0)
+        this.setExitDate(0)
+        this.setCurrentPositionType(TradingPositionType.None)
+        this.setLastPositionType(TradingPositionType.None)
+        this.setClosedPositionType(TradingPositionType.None)
+        this.dateValue = undefined
+        this.mSellPrice = undefined
+        this.mBuyPrice = undefined
+        this.positionType = TradingPositionType.None
+        this.positionDirection = TradingPositionDirection.Closed
+        this.posChanged = false
+        this.income = 0
+    }
+
 
     addActionT2(action: IActionT2<any, string> | undefined): void {
         this.changePosition.addActionT2(action)
@@ -148,6 +210,7 @@ export class TradingOrder extends DataConsumer implements IMeasurements,
 
     output: IMeasurement[] = []
 
+  
 
     mSellPrice: number | undefined = undefined;
 
@@ -175,23 +238,26 @@ export class TradingOrder extends DataConsumer implements IMeasurements,
 
     any: any
 
-
+   
 
 
   //  private isOpened: boolean = false
 
-   private currentPositionType: string = TradingPositionType.None
-   private closedPositionType: string = TradingPositionType.None
-    private lastPositionType: string = TradingPositionType.None
+    protected currentPositionType: string = TradingPositionType.None
+    protected lastPositionType: string = TradingPositionType.None
+    protected closedPositionType: string = TradingPositionType.None
+
+
+
+    protected setClosedPositionType(type: string): void {
+        this.closedPositionType = type
+    }
+
     
     private setCurrentPositionType(type: string): void {
         this.currentPositionType = type
     }
     
-   
-    private setClosedPositionType(type: string): void {
-        this.closedPositionType = type
-    }
    
    
     private setLastPositionType(type: string): void {
@@ -211,8 +277,8 @@ export class TradingOrder extends DataConsumer implements IMeasurements,
     public getTempIncome(): number {
         return this.tempIncome
     }
-    
-    private setTempIncome(value: number): void {
+
+    protected setTempIncome(value: number): void {
         this.tempIncome = value
     }
     
@@ -374,7 +440,7 @@ export class TradingOrder extends DataConsumer implements IMeasurements,
 
     closedIncome: number = 0
 
-
+  
 }
 
 class BasicMeasurement extends Measurement implements IAssociatedObject {

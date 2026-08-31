@@ -60,19 +60,6 @@ export class ReferenceFrameData extends RigidReferenceFrame implements IDataCons
 
     velocityObject !: IVelocity 
 
-    any : any
-/*
-    private coordDel: IFunc<any>[] = [];
-
-    private oriDel: IFunc<any>[] = [];
-
-    private velocityDel: IFunc<any>[] = [];
-
-    private angularDel: IFunc<any>[] = [];
-
-    private isReset: boolean = false;*/
-
-
     private names: string[] = [
         "x", "y", "z",
         "Vx", "Vy", "Vz", "Q0", "Q1", "Q2", "Q3",
