@@ -17,9 +17,6 @@ import { SequenceFilterType } from "../../../Library/Utilities/Filters/Interface
 import { TradingOrder } from "../Components/TradingOrder";
 import { TradingDataQuery } from "../Components/TradingDataQuery";
 import { FeedbackAliasCollection } from "../../../Library/Measurements/FeedBack/FeedbackAliasCollection";
-import { ConsolePrinter } from "../../../Library/Printers/ConsolePrinter";
-import { DataConsumerRuntimeTest } from "../../DataConsumerRuntimeTest";
-import { TradingPositionDirection, TradingPositionType } from "../Components/TradingPositionEnums";
 
 class DonchianDesktop_CategoryObject_0 extends TradingDataQuery
 {
@@ -81,13 +78,6 @@ class DonchianDesktop_CategoryObject_4 extends SequenceFilterWrapper
 
 class DonchianDesktop_CategoryObject_5 extends RecursiveFormula
 {
-	k: number = 0;
-	printf(): void {
-		/*if (DataConsumerRuntimeTest.getk() > 0) return
-		console.log(this.k, this.variable)
-		++this.k*/
-	}
-
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
@@ -104,15 +94,12 @@ class DonchianDesktop_CategoryObject_5 extends RecursiveFormula
 
 		calculateTree() : void
 		{
-			this.k = 0
 			this.success = true;
 			this.variable = this.value0.getIValue();
-			this.printf()
 			if (this.check(this.variable)) { this.success = false; return; }
 			this.var_0 = this.convert<number>(this.variable);
 			this.variable = this.aliasName1.getAliasNameValue()
-			this.printf()
-		if (this.check(this.variable)) { this.success = false; return; }
+			if (this.check(this.variable)) { this.success = false; return; }
 			this.var_1 = this.convert<number>(this.variable);
 		}
 	
@@ -166,13 +153,6 @@ class DonchianDesktop_CategoryObject_5 extends RecursiveFormula
 
 class DonchianDesktop_CategoryObject_6 extends VectorFormulaConsumer
 {
-	k: number = 0;
-	printf(): void {
-		if (DataConsumerRuntimeTest.getk() > 0) return
-		//console.log(this.k, this.variable)
-		++this.k
-	}
-
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
@@ -191,57 +171,44 @@ class DonchianDesktop_CategoryObject_6 extends VectorFormulaConsumer
 
 		calculateTree() : void
 		{
-			this.k = 0
 			this.success = true;
 			this.variable = this.measurement0.getMeasurementValue();
-			this.printf()
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_0 = this.convert<number>(this.variable);
 			this.variable = this.measurement1.getMeasurementValue();
-			this.printf()
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_1 = this.convert<number>(this.variable);
 			this.variable = (this.var_0) < (this.var_1);
-			this.printf()
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_2 = this.convert<boolean>(this.variable);
 			this.variable = this.measurement3.getMeasurementValue();
-			this.printf()
-	if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_3 = this.convert<number>(this.variable);
 			this.variable = this.measurement4.getMeasurementValue();
-			this.printf()
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_4 = this.convert<number>(this.variable);
 			this.variable = (this.var_3) < (this.var_4);
-			this.printf()
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_5 = this.convert<boolean>(this.variable);
 			this.variable = this.measurement6.getMeasurementValue();
-			this.printf()
-	if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_6 = this.convert<number>(this.variable);
 			this.variable = this.measurement7.getMeasurementValue();
-			this.printf()
-	if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_7 = this.convert<number>(this.variable);
 			this.variable = (this.var_6) > (this.var_7);
-			this.printf()
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_8 = this.convert<boolean>(this.variable);
 			this.variable = this.measurement9.getMeasurementValue();
-			if (this.check(this.variable)) { this.success = false; return; }
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_9 = this.convert<number>(this.variable);
-			this.printf()
-this.variable = (this.var_9) === (this.var_10);
+			this.variable = (this.var_9) === (this.var_10);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_11 = this.convert<boolean>(this.variable);
 			this.variable = (this.var_9) === (this.var_12);
-			this.printf()
-	if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_13 = this.convert<boolean>(this.variable);
-			this.printf()
-		this.variable = (this.var_9) === (this.var_14);
+			this.variable = (this.var_9) === (this.var_14);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_15 = this.convert<boolean>(this.variable);
 		}
@@ -442,12 +409,6 @@ this.variable = (this.var_9) === (this.var_10);
 
 class DonchianDesktop_CategoryObject_7 extends VectorFormulaConsumer
 {
-	k: number = 0;
-	printf(): void {
-		if (DataConsumerRuntimeTest.getk() > 0) return
-		console.log(this.k, this.variable)
-		++this.k
-	}
 	constructor(desktop: IDesktop, name: string)
 	{
 		super(desktop, name);
@@ -463,143 +424,110 @@ class DonchianDesktop_CategoryObject_7 extends VectorFormulaConsumer
 		this.addVariableValue("Formula_6", 0, 0);
 		this.addVariableValue("Formula_7", 0, 0);
 	}
-	calculateTree() : void
-	{
-			this.k = 0
-		this.success = true;
-		if (DataConsumerRuntimeTest.getk() == 0) console.log(this.measurement0)
-		this.variable = this.measurement0.getMeasurementValue();
-		this.printf();
+
+		calculateTree() : void
+		{
+			this.success = true;
+			this.variable = this.measurement0.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
-		this.var_0 = this.convert<boolean>(this.variable);
-		this.variable = this.measurement1.getMeasurementValue();
-		this.printf();
+			this.var_0 = this.convert<boolean>(this.variable);
+			this.variable = this.measurement1.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
-		this.var_1 = this.convert<number>(this.variable);
-		this.variable = (this.var_1) === (this.var_2);
-		this.printf();
+			this.var_1 = this.convert<number>(this.variable);
+			this.variable = (this.var_1) === (this.var_2);
 			if (this.check(this.variable)) { this.success = false; return; } 
-		this.var_3 = this.convert<boolean>(this.variable);
-		this.variable = (this.var_0) && (this.var_3);
-		this.printf();
+			this.var_3 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_0) && (this.var_3);
 			if (this.check(this.variable)) { this.success = false; return; } 
-		this.var_4 = this.convert<boolean>(this.variable);
-		this.variable = this.measurement5.getMeasurementValue();
-		this.printf();
+			this.var_4 = this.convert<boolean>(this.variable);
+			this.variable = this.measurement5.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_5 = this.convert<boolean>(this.variable);
 			this.variable = (this.var_4) && (this.var_5);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_6 = this.convert<boolean>(this.variable);
 			this.variable = !this.var_0;
-		this.printf();
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_7 = this.convert<boolean>(this.variable);
 			this.variable = (this.var_1) === (this.var_8);
-		this.printf();
-		if (this.check(this.variable)) { this.success = false; return; } 
-		this.var_9 = this.convert<boolean>(this.variable);
-		this.variable = (this.var_7) && (this.var_9);
-		this.printf();
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_9 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_7) && (this.var_9);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_10 = this.convert<boolean>(this.variable);
 			this.variable = (this.var_10) && (this.var_5);
-		this.printf();
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_11 = this.convert<boolean>(this.variable);
 			this.variable = (this.var_6) || (this.var_11);
-		this.printf();
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_12 = this.convert<boolean>(this.variable);
 			this.variable = (this.var_1) === (this.var_13);
-		this.printf();
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_14 = this.convert<boolean>(this.variable);
 			this.variable = this.measurement15.getMeasurementValue();
-		this.printf();
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_15 = this.convert<boolean>(this.variable);
 			this.variable = (this.var_14) && (this.var_15);
-		this.printf();
-	if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_16 = this.convert<boolean>(this.variable);
 			this.variable = (this.var_1) === (this.var_17);
-		this.printf();
-	if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_18 = this.convert<boolean>(this.variable);
 			this.variable = (this.var_18) && (this.var_15);
-		this.printf();
-	if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_19 = this.convert<boolean>(this.variable);
 			this.variable = (this.var_0) ? (this.var_16) : (this.var_19);
-		this.printf();
-	if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_20 = this.convert<boolean>(this.variable);
 			this.variable = this.measurement21.getMeasurementValue();
-		this.printf();
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_21 = this.convert<boolean>(this.variable);
 			this.variable = (this.var_21) && (this.var_5);
-		this.printf();
-	if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_22 = this.convert<boolean>(this.variable);
 			this.variable = this.measurement24.getMeasurementValue();
-		this.printf();
-	if (this.check(this.variable)) { this.success = false; return; } 
-		this.var_24 = this.convert<boolean>(this.variable);
-		this.variable = (this.var_24) && (this.var_15);
-		this.printf();
 			if (this.check(this.variable)) { this.success = false; return; } 
-		this.var_25 = this.convert<boolean>(this.variable);
-		this.variable = (this.var_25) ? (this.var_26) : (this.var_1);
-		this.printf();
+			this.var_24 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_24) && (this.var_15);
 			if (this.check(this.variable)) { this.success = false; return; } 
-		this.var_27 = this.convert<number>(this.variable);
-		this.variable = (this.var_22) ? (this.var_23) : (this.var_27);
-		this.printf();
+			this.var_25 = this.convert<boolean>(this.variable);
+			this.variable = (this.var_25) ? (this.var_26) : (this.var_1);
+			if (this.check(this.variable)) { this.success = false; return; } 
+			this.var_27 = this.convert<number>(this.variable);
+			this.variable = (this.var_22) ? (this.var_23) : (this.var_27);
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_28 = this.convert<number>(this.variable);
 			this.variable = (this.var_21) && (this.var_15);
-		this.printf();
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_29 = this.convert<boolean>(this.variable);
 			this.variable = this.measurement31.getMeasurementValue();
-		this.printf();
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_31 = this.convert<boolean>(this.variable);
 			this.variable = (this.var_31) && (this.var_5);
-		this.printf();
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_32 = this.convert<boolean>(this.variable);
 			this.variable = (this.var_32) ? (this.var_33) : (this.var_1);
-		this.printf();
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_34 = this.convert<number>(this.variable);
 			this.variable = (this.var_29) ? (this.var_30) : (this.var_34);
-		this.printf();
-	if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_35 = this.convert<number>(this.variable);
 			this.variable = (this.var_0) ? (this.var_28) : (this.var_35);
-		this.printf();
-	if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_36 = this.convert<number>(this.variable);
 			this.variable = (this.var_0) ? (this.var_37) : (this.var_38);
-		this.printf();
-	if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_39 = this.convert<number>(this.variable);
 			this.variable = (this.var_5) ? (this.var_40) : (this.var_41);
-		this.printf();
-	if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_42 = this.convert<number>(this.variable);
 			this.variable = (this.var_15) ? (this.var_43) : (this.var_44);
-		this.printf();
-		if (this.check(this.variable)) { this.success = false; return; } 
+			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_45 = this.convert<number>(this.variable);
-		this.printf();
-		this.variable = this.measurement46.getMeasurementValue();
+			this.variable = this.measurement46.getMeasurementValue();
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_46 = this.convert<number>(this.variable);
-	}
+		}
 	
 	init() : void
 	{
@@ -1372,9 +1300,6 @@ class DonchianDesktop_CategoryObject_9 extends VectorFormulaConsumer
 		{
 			this.success = true;
 			this.variable = this.measurement0.getMeasurementValue();
-			if (DataConsumerRuntimeTest.getk() == 1) {
-				//console.log("MMM", this.variable, this.measurement0)
-			}
 			if (this.check(this.variable)) { this.success = false; return; } 
 			this.var_0 = this.convert<number>(this.variable);
 		}
@@ -1431,78 +1356,6 @@ class DonchianDesktop_CategoryObject_10 extends TradingOrder
 		this.sellPrice = "Trading.Close"
 		this.date = "Trading.FullTime"
 	}
-
-	printer: IPrinter = new ConsolePrinter()
-/*
-	updateMeasurements(): void {
-		if (DataConsumerRuntimeTest.getk() == 0) {
-			this.print(this.printer)
-			console.log("+++++++++++++++++++++")
-		}
-		super.updateMeasurements()
-		if (DataConsumerRuntimeTest.getk() == 0) {
-			this.print(this.printer)
-		}
-	}*/
-
-	protected update(): void {
-		var b = DataConsumerRuntimeTest.getk() == 0
-		this.zero()
-		this.dateValue = this.toNullabe(this.currentDate)
-		var pos = this.toNullabe(this.positionM)
-		if (b) {
-			this.printer.print(pos)
-			this.printer.print(this.positionM)
-		}
-		this.setCurrentPositionValue(pos)
-		if (!this.changed) {
-			return;
-		}
-		if (this.positionDirection == TradingPositionDirection.Closed) {
-			if (this.getTempIncome() == 0) {
-				return;
-			}
-			if (this.tempIncome < 0) {
-				this.mSellPrice = this.toNullabe(this.sellPriceM)
-				if (this.mSellPrice !== undefined) {
-					this.exitPrice = this.mSellPrice
-					this.closedIncome = this.tempIncome + this.exitPrice;
-					this.sellBuy.actionT4(this, "+", this.income, this.closedIncome)
-					this.income += this.closedIncome;
-				}
-			}
-			else {
-				this.mBuyPrice = this.toNullabe(this.buyPriceM)
-				if (this.mBuyPrice !== undefined) {
-					this.exitPrice = this.mBuyPrice
-					this.closedIncome = this.tempIncome - this.exitPrice;
-					this.sellBuy.actionT4(this, "-", this.income, this.closedIncome)
-					this.income += this.closedIncome;
-
-				}
-			}
-		}
-		else {
-			this.closedPositionType = this.currentPositionType;
-			if (this.currentPositionType == TradingPositionType.Long) {
-				this.mBuyPrice = this.toNullabe(this.buyPriceM)
-				if (this.mBuyPrice !== undefined)
-					this.enterPrice = this.mBuyPrice
-				this.setTempIncome(-this.enterPrice)
-			}
-			else {
-				this.mSellPrice = this.toNullabe(this.sellPriceM)
-				if (this.mSellPrice !== undefined)
-					this.enterPrice = this.mSellPrice
-				this.setTempIncome(this.enterPrice)
-			}
-
-		}
-	}
-
-
-
-
 }
 
 class DonchianDesktop_CategoryObject_11 extends DataConsumer
