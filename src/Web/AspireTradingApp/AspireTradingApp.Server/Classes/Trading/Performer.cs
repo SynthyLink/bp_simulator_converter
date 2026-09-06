@@ -24,6 +24,11 @@ namespace AspireTradingApp.Server.Trading
         string[] filtersN = ["Average Short", "Average Long", "Donchian maximum", "Donchian maximum"];
         string[] del = ["a1", "a2", "d1", "d2"];
 
+        Dictionary<string, double> periods = new Dictionary<string, double>()
+        {
+            {"1 day", 1}
+        };
+
         string ConnetionString
         {
             get;
@@ -135,6 +140,17 @@ int[] k = [0, 0, 0, 0, 0, 0];
             return h.ToArray();
         }
 
+        private bool Get(HistoricalDataMessageNumber n, double x, double p, ref int i)
+        {
+            double y = x + i * p;
+            if (n.date >= y)
+            {
+                ++i;
+                return true;
+            }
+            return false;
+        }
+
         public async Task<HistoricalDataMessageNumber[]> GetHistoryNumber(string json, CancellationToken token)
             { 
           var o =
@@ -143,8 +159,12 @@ int[] k = [0, 0, 0, 0, 0, 0];
             var e = double.Parse(o.GetProperty("e") + "");
             var sym = o.GetProperty("s") + "";
             var p = o.GetProperty("p") + "";
- 
-            return await GetHistoryNumber(b, e, p, sym, token);
+            var per = periods[p];
+            var r =  await GetHistoryNumber(b, e, p, sym, token);
+            var xx = r[0].date.Value;
+            int i = 0;
+            var y = from x in r  where Get(x, xx, per, ref i) select x;
+            return y.ToArray();
         }
 
         public async Task<string> GetData(string input, CancellationToken token)

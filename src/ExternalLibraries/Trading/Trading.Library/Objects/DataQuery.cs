@@ -23,6 +23,8 @@ namespace Trading.Library.Objects
 
         #region Fields
 
+        Performer performer = new ();
+
         public Dictionary<string, object> Symbols { get; protected set; }
 
 
@@ -282,9 +284,7 @@ namespace Trading.Library.Objects
 
         public async Task<List<HistoricalDataMessageDateTime>> GetHistoricalDataMessageDateTimes(CancellationToken token)
         {
-            var b = Begin.ToOADate();
-            var e = End.ToOADate();
-            return await  Database.GetHistoricalDataMessageDateTimesAsync(Object, Begin, End, token);
+            return await performer.Get(Database, Object, Begin, End, Period, token);
         }
 
 

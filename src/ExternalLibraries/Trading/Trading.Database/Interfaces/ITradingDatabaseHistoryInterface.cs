@@ -40,8 +40,6 @@ namespace Trading.Database.Interfaces
             DateTime begin, DateTime end);
 
 
-
-
         /// <summary>
         /// Symbols
         /// </summary>
