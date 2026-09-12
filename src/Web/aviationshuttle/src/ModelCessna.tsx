@@ -4,13 +4,17 @@ import { GLTF } from 'three-stdlib';
 import * as THREE from 'three'
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import { getActImmelman } from "./hooks";
-import { ActImmelman } from "./ActImmelman";
+import { getActor, usePersonControls } from "./hooks";
+import { Actor } from "./Actor";
 import { IUpdateRef } from './ReactWebGL/Interfaces/IUpdateRef';
+import { rollupVersion } from 'vite';
 
-let actImmelmann: ActImmelman = getActImmelman()
 
-let updateI: IUpdateRef = actImmelmann.getMeshUpdaterPositionCalibratedScene("Plane", -1, -1, 0, 0.01)
+let actor: Actor = getActor()
+
+let updateI: IUpdateRef = actor.getMeshUpdaterPositionCalibrated("pLANE", -3, 0, 0, 1)
+
+
 
 
 // 1. Define custom types for the GLTF result if you need strict typing for nodes/materials
@@ -32,14 +36,15 @@ interface ModelProps {
 }
 
 
-export const Model: React.FC<ModelProps> = ({ url }) => {
+export const ModelCessna: React.FC<ModelProps> = ({ url }) => {
+    const { forward, backward, left, right, jump } = usePersonControls();
+
     const modRef = useRef()
     useFrame((state) => {
+        
         if (modRef.current !== undefined) {
-         //   if (f) {
-         //       console.log(modRef.current)
-         //       f = false
-            //  }
+            actor.setMotion(forward, backward, left, right, jump)
+           
             updateI.updateRef(modRef)
         }
     })
@@ -49,9 +54,9 @@ export const Model: React.FC<ModelProps> = ({ url }) => {
 
     console.log(gltf)
     // 3. Render the scene using a primitive tag
-    let ret = <primitive ref={modRef} object={gltf.scene} scale={0.05} position={[0, 0, 0]} />;
+    let ret = <primitive ref={modRef} object={gltf.scene} scale={0.08} position={[0, 0, 0]} />;
     return ret;
 }
 
 // Optional: Preload the model asset to eliminate loading delays when the component mounts
-useGLTF.preload('./shuttle/SpaceShuttle.gltf');
+useGLTF.preload('./cessna/Cessna_208_Caravan.gltf');

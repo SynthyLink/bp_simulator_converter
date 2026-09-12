@@ -5,16 +5,17 @@ import { ReferenceFrame } from "../Library/Motion6D/ReferenceFrame";
 import { RealMatrix } from "../Library/RealMatrixProcessor/RealMatrix";
 
 export class UpdateMeshByPositionCalibrated implements IUpdateRef {
-    rmat: RealMatrix = new RealMatrix()
-    mp: Motion6DPerformer = new Motion6DPerformer
-    postition !: IPosition
-    i: number = 0
-    aux: number[] = [0, 0, 0]
-    a: number[] = [0, 0, 0]
-    x: number = 0;
-    y: number = 0;
-    z: number = 0;
-    scale: number = 0;
+    protected rmat: RealMatrix = new RealMatrix()
+    protected  mp: Motion6DPerformer = new Motion6DPerformer
+    protected postition !: IPosition
+    protected i: number = 0
+    protected aux: number[] = [0, 0, 0]
+    protected a: number[] = [0, 0, 0]
+    protected x: number = 0;
+    protected y: number = 0;
+    protected z: number = 0;
+    protected scale: number = 0;
+    protected r !: ReferenceFrame
     constructor(postition: IPosition, x: number, y: number, z: number, scale: number) {
         this.x = x
         this.y = y
@@ -24,27 +25,33 @@ export class UpdateMeshByPositionCalibrated implements IUpdateRef {
         this.postition = postition
     }
 
+    protected preUpdate(m: React.MutableRefObject<undefined>): boolean
+    {
+        if (m.current === undefined) return false
+        let r = this.mp.getOwnFrame(this.postition)
+        if (r === undefined) return false
+        this.r = r
+        let x = r.getPosition()
+        for (let i = 0; i < 3; i++) {
+            this.aux[i] = this.scale * x[i]
+            this.aux[i] += this.a[i]
+        }
+        return true
+
+    }
+
+
     updateRef(m: React.MutableRefObject<undefined>): void {
+        if (!this.preUpdate(m)) return
         if (m.current === undefined) return
-        try {
-            let r = this.mp.getOwnFrame(this.postition)
-            if (r === undefined) return
-            let x = r.getPosition()
-            for (let i = 0; i < 3; i++) {
-                this.aux[i] = this.scale * x[i]
-                this.aux[i] += this.a[i]
-            }
-            m.current.position.x = this.aux[0]
-            m.current.position.y = this.aux[1]
-            m.current.position.z = this.aux[2]
-            let q = r.getQuaternion()
-            m.current.quaternion.w = q[3]
-            m.current.quaternion.x = q[0]
-            m.current.quaternion.y = q[1]
-            m.current.quaternion.z = q[2]
-        }
-        catch (e) {
-        }
+        m.current.position.x = this.aux[0]
+        m.current.position.y = this.aux[1]
+        m.current.position.z = this.aux[2]
+        let q = this.r.getQuaternion()
+        m.current.quaternion.w = q[3]
+        m.current.quaternion.x = q[0]
+        m.current.quaternion.y = q[1]
+        m.current.quaternion.z = q[2]
     }
 
 }

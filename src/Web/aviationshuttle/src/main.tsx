@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.scss';
 import {Canvas} from "@react-three/fiber";
-import App from "./App";
+import UI from './UI/UI';
+import App from './App';
 //import UI from "@/UI/UI.tsx";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -12,9 +13,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <App />
         </Canvas>
     </div>
-    </React.StrictMode>,
+  </React.StrictMode>,
 )
+//npm install three@latest
 
-//npm create vite@latest
 // npm install three @react-three/fiber @react-three/drei @react-three/rapier zustand @tweenjs/tween.js
-// npm install --save-dev @types/three

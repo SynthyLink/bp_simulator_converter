@@ -14,17 +14,15 @@
     "@react-three/fiber": "^8.18.0",
     "@react-three/rapier": "^1.5.0",
     "@tweenjs/tween.js": "^21.1.1",
-    "queue": "^7.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "three": "^0.156.1",
+    "three": "^0.186.0",
     "zustand": "^4.5.7"
   },
   "devDependencies": {
     "@types/node": "^20.11.4",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
-    "@types/three": "^0.185.4",
     "@typescript-eslint/eslint-plugin": "^8.69.0",
     "@typescript-eslint/parser": "^8.69.0",
     "@vitejs/plugin-react": "^4.0.3",

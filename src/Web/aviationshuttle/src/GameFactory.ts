@@ -27,10 +27,9 @@ class GameMtlDetector implements IMtlDetector, IObject {
     protected types: string[] = ["IObject", "IMtlDetector", "GameMtlDetector"];
 
     detectMtl(url: string, obj: any): string[] {
-       // let game = obj as Game
-        //var str = game.loader.resources[url] as string
-        // return str.split('\n')
-        return ""
+        let game = obj as Game
+        var str = game.loader.resources[url] as string
+        return str.split('\n')
     }
 
 }

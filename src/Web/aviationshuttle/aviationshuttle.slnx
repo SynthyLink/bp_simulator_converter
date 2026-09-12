@@ -1,12 +1,4 @@
 <Solution>
-  <Project Path="../reactprojectsimplegame/reactprojectsimplegame.esproj">
-    <Build />
-    <Deploy />
-  </Project>
-  <Project Path="../reactprojectTreeEtalon/reactprojecttreeetalon.esproj">
-    <Build />
-    <Deploy />
-  </Project>
   <Project Path="aviationshuttle.esproj">
     <Build />
     <Deploy />

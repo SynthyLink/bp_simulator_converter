@@ -26,6 +26,12 @@ export class Game3DRealtimeReactGL extends Game3DRealtime {
         return new UpdateMeshByPositionCalibrated(rf, x, y, z, scale)
     }
 
+    public getMeshUpdaterPositionCalibratedScene(name: string, x: number, y: number, z: number, scale: number): IUpdateRef {
+        let rf = this.scada.getScadaObject<IPosition>(name, "IPosition")[0]
+        return new UpdateMeshByPositionCalibrated(rf, x, y, z, scale)
+    }
+
+
 
     public getMeshUpdater(name: string): IUpdateRef {
         let rf = this.scada.getScadaObject<IReferenceFrame>(name, "IReferenceFrame")[0]

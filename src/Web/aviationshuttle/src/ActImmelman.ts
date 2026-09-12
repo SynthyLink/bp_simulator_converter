@@ -5,7 +5,7 @@ import { Immelman } from "./scenes/Immelman";
 export class ActImmelman extends Game3DRealtimeReactGL {
 
     constructor() {
-        super(getFactory(), new Immelman, 0.5, "Consumer")
+        super(getFactory(), new Immelman, 0.05, "Consumer")
         this.loadGame()
     }
 }
