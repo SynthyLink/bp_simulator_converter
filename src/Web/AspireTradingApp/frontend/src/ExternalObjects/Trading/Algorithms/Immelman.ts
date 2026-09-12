@@ -1898,6 +1898,38 @@ class Immelman_CategoryArrow_13 extends BelongsToCollection
 	}
 }
 
+class Immelman_CategoryArrow_14 extends BelongsToCollection
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
+class Immelman_CategoryArrow_15 extends BelongsToCollection
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
+class Immelman_CategoryArrow_16 extends BelongsToCollection
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
+class Immelman_CategoryArrow_17 extends BelongsToCollection
+{
+	constructor(desktop: IDesktop, name: string)
+	{
+		super(desktop, name);
+	}
+}
+
 
 
 export class Immelman extends Desktop
@@ -1940,6 +1972,10 @@ export class Immelman extends Desktop
 		new Immelman_CategoryArrow_11(this, "");
 		new Immelman_CategoryArrow_12(this, "");
 		new Immelman_CategoryArrow_13(this, "");
+		new Immelman_CategoryArrow_14(this, "");
+		new Immelman_CategoryArrow_15(this, "");
+		new Immelman_CategoryArrow_16(this, "");
+		new Immelman_CategoryArrow_17(this, "");
 	this.finish()
 }
 
@@ -2004,6 +2040,22 @@ finish() : void
 		if(s13 != undefined)    arrows[13].setSource(s13);
 		let t13 = this.mapObjects.get("Immelman_CategoryObject_4")
 		if(t13 != undefined)    arrows[13].setTarget(t13);
+		let s14 = this.mapObjects.get("Immelman_CategoryObject_5")
+		if(s14 != undefined)    arrows[14].setSource(s14);
+		let t14 = this.mapObjects.get("Immelman_CategoryObject_9")
+		if(t14 != undefined)    arrows[14].setTarget(t14);
+		let s15 = this.mapObjects.get("Immelman_CategoryObject_5")
+		if(s15 != undefined)    arrows[15].setSource(s15);
+		let t15 = this.mapObjects.get("Immelman_CategoryObject_4")
+		if(t15 != undefined)    arrows[15].setTarget(t15);
+		let s16 = this.mapObjects.get("Immelman_CategoryObject_5")
+		if(s16 != undefined)    arrows[16].setSource(s16);
+		let t16 = this.mapObjects.get("Immelman_CategoryObject_8")
+		if(t16 != undefined)    arrows[16].setTarget(t16);
+		let s17 = this.mapObjects.get("Immelman_CategoryObject_5")
+		if(s17 != undefined)    arrows[17].setSource(s17);
+		let t17 = this.mapObjects.get("Immelman_CategoryObject_10")
+		if(t17 != undefined)    arrows[17].setTarget(t17);
 		(objects[0] as unknown as IPostSetArrow).postSetArrow();
 		(objects[1] as unknown as IPostSetArrow).postSetArrow();
 		(objects[3] as unknown as IPostSetArrow).postSetArrow();
