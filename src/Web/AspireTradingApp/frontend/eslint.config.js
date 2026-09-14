@@ -11,7 +11,12 @@ export default defineConfig(
     extends: [js.configs.recommended, tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      globals: globals.browser,
+        globals: globals.browser,
+        parserOptions: {
+            ecmaFeatures: {
+                jsx: true,
+            }
+
     },
     plugins: {
       'react-hooks': reactHooks,

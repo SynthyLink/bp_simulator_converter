@@ -20,13 +20,13 @@ import type { IIterator } from "./Interfaces/IIterator";
 import type { IExceptionHandler } from "../ErrorHandler/Interfaces/IExceptionHandler";
 import type { ICategoryObject } from "../Interfaces/ICategoryObject";
 import type { IFactory } from "../Interfaces/IFactory";
+import type { IPrinter } from "../Interfaces/IPrinter";
+import type { IFactoryConsumer } from "../Interfaces/IFactoryConsumer";
 import { DataConsumerBoolFunc } from "./DataConsumerBoolFunc";
 import { Performer } from "../Performer";
 import { TimeMeasurementProvider } from "./TimeMeasurementProvider";
 import { UpdateMeasurementsAction } from "./UpdateMeasurementsAction";
 import { EmptyExceptionHandler } from "../ErrorHandler/EmptyExceptionHandler";
-import type { IPrinter } from "../Interfaces/IPrinter";
-import { IFactoryConsumer } from "../Interfaces/IFactoryConsumer";
 export class PerformerMeasuremets extends Performer {
 
      processor !: IDifferentialEquationProcessor

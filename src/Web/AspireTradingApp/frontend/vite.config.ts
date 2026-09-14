@@ -9,6 +9,7 @@ const serverTarget =
 // https://vite.dev/config/
 export default defineConfig({
     plugins: [react()],
+
     server: {
         proxy: {
             // Proxy API calls to the app service

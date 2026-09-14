@@ -32,7 +32,7 @@ export class TimerObject extends CategoryObject implements IEvent, ITimerConsume
         this.timer = timerFactory.getTimerFromFactory(this.span)
         this.timer.getTimerEvent().addAction(this.action)
         this.timer.setTimerEventT(this.eventActionT())
- }
+    }
 
 
     eventAction(): IActionAddRemove {

@@ -177,9 +177,6 @@ int[] k = [0, 0, 0, 0, 0, 0];
             order.OrderChanged += Order_OrderChanged;
             order.OnChangeInput += Order_OnChangeInput;
             order.SellBuyChanged += Order_SellBuyChanged;
-
-
-            // var desktop = await GeneratedProject.Donchian.
             var o =
                     System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(input);
             var b = double.Parse(o.GetProperty("b") + "");
@@ -187,13 +184,6 @@ int[] k = [0, 0, 0, 0, 0, 0];
             var sym = o.GetProperty("s") + "";
             var p = o.GetProperty("p") + "";
             dataQuery.Set(sym, p, b, e);
-         /*   for (int i = 0; i < k.Length; i++)
-            {
-                var k  = int.Parse(o.GetProperty(del[i]) + "");
-                var s = desktop.Get<DataPerformer.Portable.FilterWrapper>(filtersN[i]);
-                s.Filter.Count = k;
-
-            }*/
             var wrapper = new DataPerformer.Portable.Wrappers.DataConsumerWrapper(dataConsumer);
             var t = await wrapper.PerformIteratorAsync(dataQuery, dp, token);
             return System.Text.Json.JsonSerializer.Serialize(t);

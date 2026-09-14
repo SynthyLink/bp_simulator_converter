@@ -1,6 +1,7 @@
 import { RealMatrix } from "../RealMatrixProcessor/RealMatrix";
 import { CollectionProcessor } from "../Utilities/Collections/CollectionProcessor";
 import { EulerAngles } from "./EulerAngles";
+import { Quaternion } from "./Quaternion";
 
 export class Vector3DProcessor {
 
@@ -22,13 +23,26 @@ export class Vector3DProcessor {
         }
     }
 
-    quaternionToeulerAngles(angles: EulerAngles, quaternion: number[]): void {
+ 
+
+
+    public quaternionNormalizeQ(quaternion: Quaternion): void {
+        let a = quaternion.W * quaternion.W + quaternion.X * quaternion.X + quaternion.Y * quaternion.Y + quaternion.Z * quaternion.Z
+        let b = 1 / Math.sqrt(a);
+        quaternion.W *= b
+        quaternion.X *= b
+        quaternion.Y *= b
+        quaternion.Z *= b
+    }
+
+
+    quaternionToEulerAngles(angles: EulerAngles, quaternion: number[]): void {
         this.quaternionToeulerAnglesXYZW(angles, quaternion[1], quaternion[2], quaternion[3], quaternion[0])
 
     }
 
 
-    quaternionToeulerAnglesXYZW(angles: EulerAngles, x: number, y: number, z: number, w: number): void {
+    quaternionToElerAnglesXYZW(angles: EulerAngles, x: number, y: number, z: number, w: number): void {
         // roll (x-axis rotation)
         let sinr_cosp = 2 * (w * x + y * z);
         let cosr_cosp = 1 - 2 * (x * x + y * y);
@@ -85,6 +99,17 @@ export class Vector3DProcessor {
         z[2] = x[0] * y[2] + x[2] * y[0] + x[3] * y[1] - x[1] * y[3];
         z[3] = x[0] * y[3] + x[3] * y[0] + x[1] * y[2] - x[2] * y[1];
     }
+
+
+    public quaternionMultiplyQ(x: Quaternion, y: Quaternion, z: Quaternion): void {
+        z.W = x.W * y.W - x.X * y.X - x.Y * y.Y - x.Z * y.Z
+        z.X = x.W * y.X + x.X * y.W + x.Y * y.Z - x.Z * y.Y
+        z.Y = x.W * y.Y + x.Y * y.W + x.Z * y.X - x.Z * y.Z
+        z.Z = x.W * y.Z + x.Z * y.W + x.X * y.Y - x.Y * y.X
+    }
+    
+
+
 
     public quaternionInvertMultiply(x: number[], y: number[], z: number[]): void {
         z[0] = x[0] * y[0] + x[1] * y[1] + x[2] * y[2] + x[3] * y[3];

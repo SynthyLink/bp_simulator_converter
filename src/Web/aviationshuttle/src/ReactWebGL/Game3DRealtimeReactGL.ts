@@ -7,6 +7,8 @@ import { UpdateMeshByReferenceFrame } from "./UpdateMeshByReferenceFrame";
 import { UpdateMeshByPosition } from "./UpdateMeshByPosition";
 import { UpdateMeshByPositionCalibrated } from "./UpdateMeshByPositionCalibrated";
 import { Game3DRealtime } from "../Library/Abstract3DGame/Game3DRealtime";
+import { Quaternion } from "../Library/Vector3D/Quaternion";
+import { UpdateQuaternionScene } from "./UpdateQuaternionScene";
 
 export class Game3DRealtimeReactGL extends Game3DRealtime {
     constructor(factory: IFactory, desktop: IDesktop, interval: number,
@@ -16,25 +18,35 @@ export class Game3DRealtimeReactGL extends Game3DRealtime {
         this.types.push("Geme3DRealtimeReactGL")
     }
 
-    public getMeshUpdaterPosition(name: string): IUpdateRef {
+
+    getPosition(name: string): IPosition {
         let rf = this.scada.getScadaObject<IPosition>(name, "IPosition")[0]
+        return rf
+    }
+
+    public getMeshUpdaterPosition(name: string): IUpdateRef {
+        let rf = this.getPosition(name)
         return new UpdateMeshByPosition(rf)
     }
 
     public getMeshUpdaterPositionCalibrated(name: string, x: number, y: number, z: number, scale: number): IUpdateRef {
-        let rf = this.scada.getScadaObject<IPosition>(name, "IPosition")[0]
+        let rf = this.getPosition(name)
         return new UpdateMeshByPositionCalibrated(rf, x, y, z, scale)
     }
 
     public getMeshUpdaterPositionCalibratedScene(name: string, x: number, y: number, z: number, scale: number): IUpdateRef {
-        let rf = this.scada.getScadaObject<IPosition>(name, "IPosition")[0]
+        let rf = this.getPosition(name)
         return new UpdateMeshByPositionCalibrated(rf, x, y, z, scale)
     }
 
-
+    public getQuaternionScene(name: string, x: number, y: number, z: number, scale: number,
+        quaternion: Quaternion) {
+        let rf = this.getPosition(name)
+        return new UpdateQuaternionScene(rf, x, y, z, scale, quaternion)
+    }
 
     public getMeshUpdater(name: string): IUpdateRef {
-        let rf = this.scada.getScadaObject<IReferenceFrame>(name, "IReferenceFrame")[0]
+        let rf = this.getPosition(name)
         return new UpdateMeshByReferenceFrame(rf)
     }
 

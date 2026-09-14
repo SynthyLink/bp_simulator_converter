@@ -20,12 +20,13 @@ import type { IIterator } from "./Interfaces/IIterator";
 import type { IExceptionHandler } from "../ErrorHandler/Interfaces/IExceptionHandler";
 import type { ICategoryObject } from "../Interfaces/ICategoryObject";
 import type { IFactory } from "../Interfaces/IFactory";
+import type { IPrinter } from "../Interfaces/IPrinter";
+import type { IFactoryConsumer } from "../Interfaces/IFactoryConsumer";
 import { DataConsumerBoolFunc } from "./DataConsumerBoolFunc";
 import { Performer } from "../Performer";
 import { TimeMeasurementProvider } from "./TimeMeasurementProvider";
 import { UpdateMeasurementsAction } from "./UpdateMeasurementsAction";
 import { EmptyExceptionHandler } from "../ErrorHandler/EmptyExceptionHandler";
-import type { IPrinter } from "../Interfaces/IPrinter";
 export class PerformerMeasuremets extends Performer {
 
      processor !: IDifferentialEquationProcessor
@@ -36,7 +37,9 @@ export class PerformerMeasuremets extends Performer {
 
 
     constructor(factory?: IFactory) {
-        super()
+        super(factory)
+        this.types.push("PerformerMeasuremets")
+        this.typeName = "PerformerMeasuremets"
         if (factory === undefined) return
         var p = factory.getFactory<IDifferentialEquationProcessor>("IDifferentialEquationProcessor")
         if (p !== undefined) this.processor = p;
@@ -96,6 +99,18 @@ export class PerformerMeasuremets extends Performer {
             }
         }
     }
+
+    public setTimeProviderFactoryCollection(objects: IComponentCollection): void {
+        let tm = this.convertObject<IFactoryConsumer, IComponentCollection>(objects, "IFactoryConsumer")
+        if (tm.length == 0) return
+        let fc = tm[0]
+        let f = fc.getConsumerFactory()
+        let tp = f.getFactory<ITimeMeasurementProvider>("ITimeMeasurementProvider")
+        if (tp == undefined) return
+        this.setTimeProviderCollection(objects, tp)
+    }
+
+    
 
     public getArrayMeasurements(array: IArrayElementMeasurement): IMeasurement[] {
         var n = array.getMeasurementNames().length;

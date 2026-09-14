@@ -1,10 +1,15 @@
+import { EmptyObject } from "../../EmptyObject";
 import type { IActionAddRemoveT } from "../../Interfaces/IActionAddRemoveT";
 import type { IPlayEngine } from "../../Interfaces/IPlayEngine";
 import { ActionArrayT } from "../Generic/ActionArrayT";
 
-export abstract class AbstractEngine implements IPlayEngine {
+export abstract class AbstractEngine extends EmptyObject implements IPlayEngine {
 	constructor(interval: number) {
+		super("")
 		this.interval = interval
+		this.typeName = "AbstractEngine"
+		this.types.push("IPlayEngine")
+		this.types.push("AbstractEngine")
 	}
 
 	isEngineEnabled(): boolean {
@@ -14,11 +19,11 @@ export abstract class AbstractEngine implements IPlayEngine {
 	abstract setEngineEnabled(enabled: boolean): boolean
 
 	getEngineAction(): IActionAddRemoveT<number> {
-		return this.actionT;
+		return this.actionTime;
 	}
 
 	public setTime(time: number): void {
-		if (this.enabled) this.actionT.actionT(time)
+		if (this.enabled) this.actionTime.actionT(time)
 	}
 
 	currentTime(): number {
@@ -31,7 +36,7 @@ export abstract class AbstractEngine implements IPlayEngine {
 
 	protected enabled: boolean = false
 
-	protected actionT: IActionAddRemoveT<number> = new ActionArrayT()
+	protected actionTime: IActionAddRemoveT<number> = new ActionArrayT()
 
 	protected start: number = 0
 

@@ -6,6 +6,9 @@ export class ActionWatch extends AbstractEngine implements IAction {
 	constructor(interval: number, external: IActionAddRemove) {
 		super(interval)
 		external.addAction(this)
+		this.typeName = "ActionWatch"
+		this.types.push("ActionWatch")
+
 	}
 
 	action(): void {

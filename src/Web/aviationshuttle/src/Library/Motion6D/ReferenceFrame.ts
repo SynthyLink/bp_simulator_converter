@@ -154,7 +154,6 @@ export class ReferenceFrame implements IPosition, IOrientation, IObject {
     }
 
     updateReferenceFrame(): void {
-        console.log("TTT", this)
         let p = this.getParentFrame();
         if (p === undefined) {
             return;

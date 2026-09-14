@@ -15,7 +15,6 @@ import type { Initial } from './ExternalObjects/Trading/Initial';
 import type { ChartDataTrading } from './ExternalObjects/Trading/ChartDataTrading';
 
 
-
 let communication = new TradingCommunication()
 
 let controller: AbortController | undefined
@@ -37,21 +36,7 @@ function datePure(x: number): string {
     s = s.substring(0, 19) + "." + d.getMilliseconds().toString();
     return s;
 }
-/*function dateValue(x: string): number {
-    var d = new Date(x);
-    var y = dt.toOADate(d);
-    var z = y * 86400;
-    return z;
-}*/
 
-
-/*
-function date(x: number): ReactNode {
-    let y = x / 86400;
-    var d = dt.fromOADate(y);
-    return d.toLocaleString();
-}
-*/
 echarts.use([TitleComponent, TooltipComponent, GridComponent, LineChart, CanvasRenderer]);
 
 // Combine option types tightly to avoid bundle leaks
@@ -77,6 +62,9 @@ const App: React.FC = () => {
     let [donchian2, setDonchian2] = useState<number>()
 
     let [symbol, setSymbol] = useState<string>();
+
+ 
+   
 
     let [chartDataTrading, setChartDataTrading] = useState<ChartDataTrading>()
    // let [abort, setAbort] = useState<AbortController>()
@@ -258,31 +246,6 @@ const App: React.FC = () => {
                 yclient: yc,
                 yserver: ys
             }
-          /*  let p = new Performer()
-
-            let x = [226.9, 194.1, 95.6, 54.4, 29.9, 600.7, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5]
-            do {
-                
-            }
-            while (x.length > 0)  
-      /*      {
-/*           let queue = new FastQueue<number>
-            for (let xx of x) {
-                queue.enqueue(xx)
-            }
-
-            let v = 0;
-            do
-            {
-                let a = queue.array()
-                let y = p.findMinWithReduce(a)
-                let z = p.findMaxWithReduce(a)
-                let b = queue.dequeue()
-                ++v;
-                if (v > 30) return
-            }
-            while (!queue.isEmpty())
-   */
 
             setChartDataTrading(ch)
             if (symbols === undefined) {
@@ -297,7 +260,6 @@ const App: React.FC = () => {
                 setDonchian2(10)
             }
         }
-
         if (map.size >= 0) {
             const sele = document.querySelector("#symbol");
             if (sele !== null) {
@@ -348,8 +310,10 @@ const App: React.FC = () => {
                 <div>  <select id="symbol">
                 </select>
                 </div>
-                <div>  <select id="pertiod">
-                    <option selected>1 day</option>
+                <div>
+                    <select id="pertiod">
+                    <option selected>1 min</option>
+                    <option>1 day</option>
                 </select>
                 </div>
                 <div> <input className="input-filter-index" type='datetime-local' value={begin} onInput={handleBeginChange} /></div>

@@ -4,7 +4,10 @@ export class EngineWatch extends AbstractEngine  {
 
 	constructor(interval: number) {
 		super(interval)
-    }
+        this.typeName = "EngineWatch"
+        this.types.push("EngineWatch")
+
+  }
 
 
     setEngineEnabled(enabled: boolean): boolean {

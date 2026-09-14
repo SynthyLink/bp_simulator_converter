@@ -51,5 +51,5 @@ export class DataConsumerRuntimeTest extends DataRuntimeConsumer implements IAct
     }
 
 
-
+	any : any
 }

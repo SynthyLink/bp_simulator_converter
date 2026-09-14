@@ -7,11 +7,20 @@ import { useRef } from "react";
 import { getActImmelman } from "./hooks";
 import { ActImmelman } from "./ActImmelman";
 import { IUpdateRef } from './ReactWebGL/Interfaces/IUpdateRef';
+import { Quaternion } from './Library/Vector3D/Quaternion';
 
 let actImmelmann: ActImmelman = getActImmelman()
 
 let updateI: IUpdateRef = actImmelmann.getMeshUpdaterPositionCalibratedScene("Plane", -1, -1, 0, 0.01)
 
+let q = new Quaternion
+
+q.W = 0
+q.X = 0
+q.Y = 0
+q.Z = 1
+
+//updateI = actImmelmann.getQuaternionScene("Plane", -1, -1, 0, 0.01, q)
 
 // 1. Define custom types for the GLTF result if you need strict typing for nodes/materials
 type GLTFResult = GLTF & {

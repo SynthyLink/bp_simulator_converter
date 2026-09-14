@@ -206,7 +206,9 @@ namespace Trading.Database.SqlServer
             return procResultData;
         }
 
-        public async Task<List<SelectHistoryByDateReturnModel>> SelectHistoryByDateAsync(Guid? id = null, DateTime? begin = null, DateTime? end = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<List<SelectHistoryByDateReturnModel>> SelectHistoryByDateAsync(Guid? id = null, 
+            DateTime? begin = null, 
+            DateTime? end = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             var idParam = new SqlParameter { ParameterName = "@Id", SqlDbType = SqlDbType.UniqueIdentifier, Direction = ParameterDirection.Input, Value = id.GetValueOrDefault() };
             if (!id.HasValue)

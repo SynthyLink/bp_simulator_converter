@@ -3,8 +3,10 @@ import type { IPosition } from "../Library/Motion6D/Interfaces/IPosition";
 import { Motion6DPerformer } from "../Library/Motion6D/Motion6DPerformer";
 import { ReferenceFrame } from "../Library/Motion6D/ReferenceFrame";
 import { RealMatrix } from "../Library/RealMatrixProcessor/RealMatrix";
+import { Vector3DProcessor } from "../Library/Vector3D/Vector3DProcessor";
 
 export class UpdateMeshByPositionCalibrated implements IUpdateRef {
+
     protected rmat: RealMatrix = new RealMatrix()
     protected  mp: Motion6DPerformer = new Motion6DPerformer
     protected postition !: IPosition
@@ -16,6 +18,8 @@ export class UpdateMeshByPositionCalibrated implements IUpdateRef {
     protected z: number = 0;
     protected scale: number = 0;
     protected r !: ReferenceFrame
+
+    protected processor: Vector3DProcessor = new Vector3DProcessor
     constructor(postition: IPosition, x: number, y: number, z: number, scale: number) {
         this.x = x
         this.y = y
