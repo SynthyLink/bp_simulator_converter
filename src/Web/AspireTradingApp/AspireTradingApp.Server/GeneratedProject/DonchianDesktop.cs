@@ -193,7 +193,7 @@ namespace GeneratedProject
 					internal CategoryObject()
 					{
 						Object = new Guid("34f44a39-a8ad-46b7-9c7c-4527ad1ce959");
-						Period = "1 day";
+						Period = "1 min";
 						Begin = System.DateTime.FromBinary(638083008000000000);
 						End = System.DateTime.FromBinary(638368992000000000);
 					}

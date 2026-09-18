@@ -18,6 +18,7 @@ import { TradingOrder } from "../Components/TradingOrder";
 import { TradingDataQuery } from "../Components/TradingDataQuery";
 import { FeedbackAliasCollection } from "../../../Library/Measurements/FeedBack/FeedbackAliasCollection";
 
+
 class DonchianDesktop_CategoryObject_0 extends TradingDataQuery
 {
 	constructor(desktop: IDesktop, name: string)
@@ -25,7 +26,7 @@ class DonchianDesktop_CategoryObject_0 extends TradingDataQuery
 		super(desktop, name);
 		this.begin = 44929
 		this.end = 45260
-		this.period = "1 day"
+		this.period = "1 min"
 		this.symbol = "AAPL"
 	}
 }

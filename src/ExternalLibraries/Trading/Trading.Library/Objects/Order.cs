@@ -378,7 +378,7 @@ namespace Trading.Library.Objects
                     ExitPrice = mBuyPrice.Value;
                     ClosedIncome = TempIncome - ExitPrice;
                     sellBuyChanged?.Invoke(this, "-", ClosedIncome, Income);
-                    Income += ClosedIncome;
+                    Income -= ClosedIncome;
                 }
             }
             else

@@ -69,7 +69,7 @@ export class TradingOrder extends DataConsumer implements IMeasurements, IRunnin
                     this.exitPrice = this.mBuyPrice
                     this.closedIncome = this.tempIncome - this.exitPrice;
                     this.sellBuy.actionT4(this, "-", this.income, this.closedIncome)
-                    this.income += this.closedIncome;
+                    this.income -= this.closedIncome;
                     
                 }
             }
