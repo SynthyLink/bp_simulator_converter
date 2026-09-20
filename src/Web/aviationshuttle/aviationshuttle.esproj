@@ -9,6 +9,7 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="src\Library\ReactControls\" />
+    <None Remove="src\Library\ReactControls\**" />
+    <TypeScriptConfiguration Remove="src\Library\ReactControls\**" />
   </ItemGroup>
 </Project>

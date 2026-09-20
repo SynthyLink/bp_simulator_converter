@@ -1,16 +1,19 @@
-import type { IAliasName } from "../Library/Interfaces/IAliasName";
 import type { IDesktop } from "../Library/Interfaces/IDesktop";
 import type { IFactory } from "../Library/Interfaces/IFactory";
 import type { IPostSetArrow } from "../Library/Interfaces/IPostSetArrow";
 import type { IPrinter } from "../Library/Interfaces/IPrinter";
+import type { IValue } from "../Library/Interfaces/IValue";
 import type { IMeasurement } from "../Library/Measurements/Interfaces/IMeasurement";
-import { AliasName } from "../Library/AliasName";
+import type { IAliasName } from "../Library/Interfaces/IAliasName"
+import {AliasName } from "../Library/AliasName"
 import { BelongsToCollection } from "../Library/Arrows/BelognsToCollection";
 import { Desktop } from "../Library/Desktop";
+import { Input } from "../Library/Event/Input";
 import { EventLink } from "../Library/Event/Objects/EventLink";
 import { TimerObject } from "../Library/Event/Objects/TimerObject";
 import { DataLink } from "../Library/Measurements/Arrows/DataLink";
 import { DataConsumer } from "../Library/Measurements/DataConsumer";
+import { DifferentialEquationSolverFormula } from "../Library/Measurements/DifferentialEquations/Solvers/DifferentialEquationSolverFormula";
 import { VectorFormulaConsumer } from "../Library/Measurements/VectorFormulaConsumer";
 import { ReferenceFrameArrow } from "../Library/Motion6D/Arrows/ReferenceFrameArrow";
 import { ReferenceFrameData } from "../Library/Motion6D/Objects/ReferenceFrameData";
@@ -20,8 +23,6 @@ import { Basic3DShape } from "../Library/Motion6D/Objects/Shapes/Basic3DShape";
 import { BasicCamera } from "../Library/Motion6D/Visible/BasicCamera";
 import { VisibleConsumerLink } from "../Library/Motion6D/Visible/VisibleConsumerLink";
 import { TimeSpan } from "../Library/Utilities/DateTime/TimeSpan";
-
-
 class Immelman_CategoryObject_0 extends VectorFormulaConsumer
 {
 	constructor(desktop: IDesktop, name: string)
@@ -29,7 +30,7 @@ class Immelman_CategoryObject_0 extends VectorFormulaConsumer
 		super(desktop, name);
 		let map = new Map<string, any>(
 		[
-			["a", 5 ]
+			["a", 10 ]
 		]);
 		this.performer.setAliasMap(map, this);
 		this.addVariableValue("Formula_1", 0, 0);
@@ -1714,8 +1715,8 @@ class Immelman_CategoryObject_4 extends RigidReferenceFrame
 	
 		this.relativeQuaternion = [];
 		this.relativeQuaternion.push(0.5);
-		this.relativeQuaternion.push(0.5);
-		this.relativeQuaternion.push(0.5);
+		this.relativeQuaternion.push(-0.5);
+		this.relativeQuaternion.push(-0.5);
 		this.relativeQuaternion.push(-0.5);
 	
 	}
@@ -1810,48 +1811,6 @@ class Immelman_CategoryObject_10 extends SerializablePosition
 	{
 		super(desktop, name);
 		this.addChildT(new Immelman_CategoryObject_10_Visible0(desktop, name))
-	}
-}
-
-class Immelman_CategoryObject_11 extends RigidReferenceFrame
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-		this.relativePosition = []
-		this.relativeQuaternion = []
-		this.relativePosition = [];
-		this.relativePosition.push(0);
-		this.relativePosition.push(0);
-		this.relativePosition.push(0);
-	
-		this.relativeQuaternion = [];
-		this.relativeQuaternion.push(0);
-		this.relativeQuaternion.push(0.70710678118654757);
-		this.relativeQuaternion.push(0.70710678118654746);
-		this.relativeQuaternion.push(0);
-	
-	}
-}
-
-class Immelman_CategoryObject_12 extends RigidReferenceFrame
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-		this.relativePosition = []
-		this.relativeQuaternion = []
-		this.relativePosition = [];
-		this.relativePosition.push(0);
-		this.relativePosition.push(0);
-		this.relativePosition.push(0);
-	
-		this.relativeQuaternion = [];
-		this.relativeQuaternion.push(0.70710678118654757);
-		this.relativeQuaternion.push(0);
-		this.relativeQuaternion.push(0.70710678118654746);
-		this.relativeQuaternion.push(0);
-	
 	}
 }
 
@@ -1951,7 +1910,7 @@ class Immelman_CategoryArrow_11 extends ReferenceFrameArrow
 	}
 }
 
-class Immelman_CategoryArrow_12 extends BelongsToCollection
+class Immelman_CategoryArrow_12 extends ReferenceFrameArrow
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -1991,39 +1950,7 @@ class Immelman_CategoryArrow_16 extends BelongsToCollection
 	}
 }
 
-class Immelman_CategoryArrow_17 extends ReferenceFrameArrow
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class Immelman_CategoryArrow_18 extends ReferenceFrameArrow
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class Immelman_CategoryArrow_19 extends ReferenceFrameArrow
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class Immelman_CategoryArrow_20 extends BelongsToCollection
-{
-	constructor(desktop: IDesktop, name: string)
-	{
-		super(desktop, name);
-	}
-}
-
-class Immelman_CategoryArrow_21 extends BelongsToCollection
+class Immelman_CategoryArrow_17 extends BelongsToCollection
 {
 	constructor(desktop: IDesktop, name: string)
 	{
@@ -2059,8 +1986,6 @@ export class Immelman extends Desktop
 		this.mapObjects.set("Immelman_CategoryObject_8", new Immelman_CategoryObject_8(this, "Left frame"))
 		this.mapObjects.set("Immelman_CategoryObject_9", new Immelman_CategoryObject_9(this, "Forward frame"))
 		this.mapObjects.set("Immelman_CategoryObject_10", new Immelman_CategoryObject_10(this, "Plane"))
-		this.mapObjects.set("Immelman_CategoryObject_11", new Immelman_CategoryObject_11(this, "Plane base"))
-		this.mapObjects.set("Immelman_CategoryObject_12", new Immelman_CategoryObject_12(this, "1"))
 		new Immelman_CategoryArrow_0(this, "");
 		new Immelman_CategoryArrow_1(this, "");
 		new Immelman_CategoryArrow_2(this, "");
@@ -2079,10 +2004,6 @@ export class Immelman extends Desktop
 		new Immelman_CategoryArrow_15(this, "");
 		new Immelman_CategoryArrow_16(this, "");
 		new Immelman_CategoryArrow_17(this, "");
-		new Immelman_CategoryArrow_18(this, "");
-		new Immelman_CategoryArrow_19(this, "");
-		new Immelman_CategoryArrow_20(this, "");
-		new Immelman_CategoryArrow_21(this, "");
 	this.finish()
 }
 
@@ -2139,13 +2060,13 @@ finish() : void
 		if(s11 != undefined)    arrows[11].setSource(s11);
 		let t11 = this.mapObjects.get("Immelman_CategoryObject_3")
 		if(t11 != undefined)    arrows[11].setTarget(t11);
-		let s12 = this.mapObjects.get("Immelman_CategoryObject_5")
+		let s12 = this.mapObjects.get("Immelman_CategoryObject_10")
 		if(s12 != undefined)    arrows[12].setSource(s12);
 		let t12 = this.mapObjects.get("Immelman_CategoryObject_4")
 		if(t12 != undefined)    arrows[12].setTarget(t12);
 		let s13 = this.mapObjects.get("Immelman_CategoryObject_5")
 		if(s13 != undefined)    arrows[13].setSource(s13);
-		let t13 = this.mapObjects.get("Immelman_CategoryObject_9")
+		let t13 = this.mapObjects.get("Immelman_CategoryObject_10")
 		if(t13 != undefined)    arrows[13].setTarget(t13);
 		let s14 = this.mapObjects.get("Immelman_CategoryObject_5")
 		if(s14 != undefined)    arrows[14].setSource(s14);
@@ -2157,28 +2078,12 @@ finish() : void
 		if(t15 != undefined)    arrows[15].setTarget(t15);
 		let s16 = this.mapObjects.get("Immelman_CategoryObject_5")
 		if(s16 != undefined)    arrows[16].setSource(s16);
-		let t16 = this.mapObjects.get("Immelman_CategoryObject_10")
+		let t16 = this.mapObjects.get("Immelman_CategoryObject_9")
 		if(t16 != undefined)    arrows[16].setTarget(t16);
-		let s17 = this.mapObjects.get("Immelman_CategoryObject_11")
+		let s17 = this.mapObjects.get("Immelman_CategoryObject_1")
 		if(s17 != undefined)    arrows[17].setSource(s17);
-		let t17 = this.mapObjects.get("Immelman_CategoryObject_3")
+		let t17 = this.mapObjects.get("Immelman_CategoryObject_1")
 		if(t17 != undefined)    arrows[17].setTarget(t17);
-		let s18 = this.mapObjects.get("Immelman_CategoryObject_12")
-		if(s18 != undefined)    arrows[18].setSource(s18);
-		let t18 = this.mapObjects.get("Immelman_CategoryObject_11")
-		if(t18 != undefined)    arrows[18].setTarget(t18);
-		let s19 = this.mapObjects.get("Immelman_CategoryObject_10")
-		if(s19 != undefined)    arrows[19].setSource(s19);
-		let t19 = this.mapObjects.get("Immelman_CategoryObject_12")
-		if(t19 != undefined)    arrows[19].setTarget(t19);
-		let s20 = this.mapObjects.get("Immelman_CategoryObject_5")
-		if(s20 != undefined)    arrows[20].setSource(s20);
-		let t20 = this.mapObjects.get("Immelman_CategoryObject_11")
-		if(t20 != undefined)    arrows[20].setTarget(t20);
-		let s21 = this.mapObjects.get("Immelman_CategoryObject_5")
-		if(s21 != undefined)    arrows[21].setSource(s21);
-		let t21 = this.mapObjects.get("Immelman_CategoryObject_12")
-		if(t21 != undefined)    arrows[21].setTarget(t21);
 		(objects[0] as unknown as IPostSetArrow).postSetArrow();
 		(objects[1] as unknown as IPostSetArrow).postSetArrow();
 		(objects[3] as unknown as IPostSetArrow).postSetArrow();
@@ -2187,7 +2092,5 @@ finish() : void
 		(objects[8] as unknown as IPostSetArrow).postSetArrow();
 		(objects[9] as unknown as IPostSetArrow).postSetArrow();
 		(objects[10] as unknown as IPostSetArrow).postSetArrow();
-		(objects[12] as unknown as IPostSetArrow).postSetArrow();
-		(objects[13] as unknown as IPostSetArrow).postSetArrow();
 	}
 }

@@ -57,7 +57,7 @@ export class Actor extends Game3DRealtimeReactGL {
         if (left) v = this.vel
         if (right) v = -this.vel
         this.inputs[0].setInputValue("Y", v)
-      //  if (v != 0) console.log("Y", v)
+        //if (v != 0) console.log("Y", v)
 
     }
 

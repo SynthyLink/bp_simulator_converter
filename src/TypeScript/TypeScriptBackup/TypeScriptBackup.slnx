@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="../../Web/aviationshuttle/aviationshuttle.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="TypeScriptBackup.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+</Solution>

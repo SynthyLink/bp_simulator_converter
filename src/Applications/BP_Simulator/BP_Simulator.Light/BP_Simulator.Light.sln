@@ -561,6 +561,8 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "reactprojectsimplegame", ".
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Database.Entity.SqlServer", "..\..\..\ExternalLibraries\Trading\Trading.Database.Entity.SqlServer\Trading.Database.Entity.SqlServer.csproj", "{EDDBB185-3FE7-47A4-971F-20A231DA1D56}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "TypeScriptBackup", "..\..\..\TypeScript\TypeScriptBackup\TypeScriptBackup.esproj", "{192F967A-1B9B-43F3-8EB8-297F1D1AF745}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -5909,6 +5911,36 @@ Global
 		{EDDBB185-3FE7-47A4-971F-20A231DA1D56}.Release|x64.Build.0 = Release|Any CPU
 		{EDDBB185-3FE7-47A4-971F-20A231DA1D56}.Release|x86.ActiveCfg = Release|Any CPU
 		{EDDBB185-3FE7-47A4-971F-20A231DA1D56}.Release|x86.Build.0 = Release|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Debug|Win32.Build.0 = Debug|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Debug|Win32.Deploy.0 = Debug|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Debug|x64.Build.0 = Debug|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Debug|x64.Deploy.0 = Debug|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Debug|x86.Build.0 = Debug|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Debug|x86.Deploy.0 = Debug|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Release|Any CPU.Build.0 = Release|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Release|Win32.ActiveCfg = Release|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Release|Win32.Build.0 = Release|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Release|Win32.Deploy.0 = Release|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Release|x64.ActiveCfg = Release|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Release|x64.Build.0 = Release|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Release|x64.Deploy.0 = Release|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Release|x86.ActiveCfg = Release|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Release|x86.Build.0 = Release|Any CPU
+		{192F967A-1B9B-43F3-8EB8-297F1D1AF745}.Release|x86.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

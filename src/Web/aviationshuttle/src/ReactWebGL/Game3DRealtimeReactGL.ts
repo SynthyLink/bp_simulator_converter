@@ -1,7 +1,6 @@
 import type { IDesktop } from "../Library/Interfaces/IDesktop";
 import type { IFactory } from "../Library/Interfaces/IFactory";
 import type { IUpdateRef } from "./Interfaces/IUpdateRef";
-import type { IReferenceFrame } from "../Library/Motion6D/Interfaces/IReferenceFrame";
 import type { IPosition } from "../Library/Motion6D/Interfaces/IPosition";
 import { UpdateMeshByReferenceFrame } from "./UpdateMeshByReferenceFrame";
 import { UpdateMeshByPosition } from "./UpdateMeshByPosition";
