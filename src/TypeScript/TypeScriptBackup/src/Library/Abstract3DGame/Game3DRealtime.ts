@@ -7,7 +7,7 @@ import type { IDesktop } from "../Interfaces/IDesktop"
 import type { IFactory } from "../Interfaces/IFactory"
 import type { IRealtimeCollectionFactory } from "../Interfaces/IRealtimeCollectionFactory"
 import type { IStringSplitter } from "../Utilities/String/Interfaces/IStringSplitter"
-import type { IDifferentialEquationProcessor } from "../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationProcessor "
+import type { IDifferentialEquationProcessor } from "../Measurements/DifferentialEquations/Interfaces/IDifferentialEquationProcessor"
 import { RungeProcessor } from "../Measurements/DifferentialEquations/Processors/RungeProcessor"
 import { Motion6DFactory } from "../Motion6D/Motion6DFactory"
 import { Motion6DRealtimeFactory } from "../Motion6D/Runtime/Event/Motion6DRealtimeFactory"
@@ -16,7 +16,7 @@ import { UniversalFactory } from "../UniversalFactory"
 import { LineEndSplitter } from "../Utilities/String/LineEndSplitter"
 import { BasicGameLoaderFactory } from "./Factory/BacicGameLoaderFactory"
 import { EmptyObject } from "../EmptyObject"
-import {GameRealtime } from "../Game/GameRealtime"
+import { GameRealtime } from "../Game/GameRealtime"
 
 export class Game3DRealtime extends GameRealtime {
 

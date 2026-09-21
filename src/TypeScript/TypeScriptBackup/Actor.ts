@@ -15,7 +15,6 @@ import { IDataConsumer } from "./src/Library/Measurements/Interfaces/IDataConsum
 import { IScadaConsumer } from "./src/Library/Scada/Interfaces/IScadaConsumer";
 import { IScadaInterface } from "./src/Library/Scada/Interfaces/IScadaInterface";
 import { ActionArray } from "./src/Library/Utilities/Generic/ActionArray";
-import { ActionArrayT } from "./src/Library/Utilities/Generic/ActionArrayT";
 import { EngineWatch } from "./src/Library/Utilities/Watch/EngineWatch";
 import { ExternalWatch } from "./src/Library/Utilities/Watch/ExternalWatch";
 import { PIAct } from "./test/wrappers/PIAct";

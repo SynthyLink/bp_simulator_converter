@@ -1,16 +1,16 @@
-import type { IComponentCollection } from "../../Interfaces/IComponentCollection";
-import type { IDesktop } from "../../Interfaces/IDesktop";
-import type { IFactory } from "../../Interfaces/IFactory";
-import type { IInput } from "../../Interfaces/IInput";
-import type { IDataConsumer } from "../../Measurements/Interfaces/IDataConsumer";
-import type { IActionT } from "../../Interfaces/IActionT";
-import type { IAction } from "../../Interfaces/IAction";
-import type { IScadaInterface } from "../../Scada/Interfaces/IScadaInterface";
-import { EngineGame } from "../../Game/Abstract/EngineGame";
-import { ScadaScene } from "../../Game/Scenes/ScadaScene";
-import { PerformerMeasuremets } from "../../Measurements/PerformerMeasuremets";
-import { ActionArray } from "../../Utilities/Generic/ActionArray";
-import { ExternalWatch } from "../../Utilities/Watch/ExternalWatch";
+import type { IComponentCollection } from "../Interfaces/IComponentCollection";
+import type { IDesktop } from "../Interfaces/IDesktop";
+import type { IFactory } from "../Interfaces/IFactory";
+import type { IInput } from "../Interfaces/IInput";
+import type { IDataConsumer } from "../Measurements/Interfaces/IDataConsumer";
+import type { IActionT } from "../Interfaces/IActionT";
+import type { IAction } from "../Interfaces/IAction";
+import type { IScadaInterface } from "../Scada/Interfaces/IScadaInterface";
+import { EngineGame } from "../Game/Abstract/EngineGame";
+import { ScadaScene } from "../Game/Scenes/ScadaScene";
+import { PerformerMeasuremets } from "../Measurements/PerformerMeasuremets";
+import { ActionArray } from "../Utilities/Generic/ActionArray";
+import { ExternalWatch } from "../Utilities/Watch/ExternalWatch";
 
 export abstract class GameRealtime extends PerformerMeasuremets implements IActionT<number>, IAction {
     constructor(factory: IFactory, desktop: IDesktop, interval: number, chart: string) {

@@ -1,11 +1,9 @@
-
 import type { IDataConsumer } from "./Library/Measurements/Interfaces/IDataConsumer";
 import type { IMeasurement } from "./Library/Measurements/Interfaces/IMeasurement";
-import { Game3DRealtimeReactGL } from "./ReactWebGL/Game3DRealtimeReactGL";
-import { getFactory } from "./Library/Abstract3DGame/Game3DRealtime";
+import { Game3DRealtime, getFactory } from "./Library/Abstract3DGame/Game3DRealtime";
 import { Cessna } from "./scenes/Cessna";
 
-export class Actor extends Game3DRealtimeReactGL {
+export class ActorCessna extends Game3DRealtime {
 
     constructor() {
         super(getFactory(), new Cessna, 0.05, "Chart")
@@ -52,5 +50,3 @@ export class Actor extends Game3DRealtimeReactGL {
     Y !: IMeasurement
 
 }
-
-

@@ -63,6 +63,8 @@ const App: React.FC = () => {
 
     let [symbol, setSymbol] = useState<string>();
 
+      let [period, setPeriod] = useState<string>();
+
  
    
 
@@ -116,7 +118,7 @@ const App: React.FC = () => {
         let b = performer.dateNumber(begin);
         if (end === undefined) return
         let e = performer.dateNumber(end);
-        let p = "1 day"
+        let p = period
         let s = symbol;
         let map = new Map<string, any>()
         let f = [Number(average1), Number(average2), Number(donchian1),
@@ -237,6 +239,7 @@ const App: React.FC = () => {
     async function populateData() {
         if (first) {
             setStarted(false)
+            setPeriod("1 min")
             first = false
             let xc:  number[] | undefined =[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
             let yc: (number | undefined)[] | undefined = [28.5, 70.5, undefined, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
@@ -285,7 +288,7 @@ const App: React.FC = () => {
                         var e = datePure(i.e)
                         setBegin(b)
                         setEnd(e)
-                        //   setPeriod(i.p)
+                        setPeriod(i.p)
                     setSymbol(i.s)
                     setStarted(true)
                     }

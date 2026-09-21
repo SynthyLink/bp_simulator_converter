@@ -26,7 +26,8 @@ namespace AspireTradingApp.Server.Trading
 
         Dictionary<string, double> periods = new Dictionary<string, double>()
         {
-            {"1 day", 1}
+            {"1 day", 24 * 60},
+            {"1 min", 1 / (24 * 80)}
         };
 
         string ConnetionString
@@ -143,7 +144,7 @@ int[] k = [0, 0, 0, 0, 0, 0];
         private bool Get(HistoricalDataMessageNumber n, double x, double p, ref int i)
         {
             double y = x + i * p;
-            if (n.date >= y)
+            if (n.date.Value  >= y - double.Epsilon)
             {
                 ++i;
                 return true;

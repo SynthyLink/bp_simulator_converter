@@ -146,18 +146,23 @@ export class TradingOrder extends DataConsumer implements IMeasurements, IRunnin
     addActionT2(action: IActionT2<any, string> | undefined): void {
         this.changePosition.addActionT2(action)
     }
+
     removeActionT2(action: IActionT2<any, string> | undefined): void {
         this.changePosition.removeActionT2(action)
     }
+
     clearActionsT2(): void {
         this.changePosition.clearActionsT2()
     }
+
     actionT2(t1: any, t2: string): void {
         this.changePosition.actionT2(t1, t2)
     }
+
     isEmptyActionT2(): boolean {
         return false;
     }
+
     addActionT4(action: IActionT4<any, string, number, number> | undefined): void {
         this.sellBuy.addActionT4(action)
     }
@@ -165,12 +170,14 @@ export class TradingOrder extends DataConsumer implements IMeasurements, IRunnin
     removeActionT4(action: IActionT4<any, string, number, number> | undefined): void {
         this.sellBuy.removeActionT4(action)
     }
+
     clearActionsT4(): void {
         this.sellBuy.clearActionsT4()
     }
     actionT4(t1: any, t2: string, t3: number, t4: number): void {
         this.sellBuy.actionT4(t1, t2, t3, t4)
     }
+
     isEmptyActionT4(): boolean {
         return false;
     }
