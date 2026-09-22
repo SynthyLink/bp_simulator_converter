@@ -107,6 +107,11 @@ export class TradingPerformer implements IActionT2<any, string> {
     }
 
 
+    public getServer(): Map<string, any>[] | undefined{
+
+        return this.server
+    }
+
     public setServer(map: Map<string, any>[] | undefined): void {
         this.server = []
         if (map === undefined) return

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, type MouseEventHandler } from 'react';
 import './App.css';
 import * as echarts from 'echarts/core';
 import { LineChart } from 'echarts/charts';
@@ -13,6 +13,7 @@ import { Performer } from './Library/Performer';
 import { TradingCommunication } from "./ExternalObjects/Trading/Communication/TradingCommunication";
 import type { Initial } from './ExternalObjects/Trading/Initial';
 import type { ChartDataTrading } from './ExternalObjects/Trading/ChartDataTrading';
+import { ReportExcelCreator } from './xslx/ReportExcelCreator';
 
 
 let communication = new TradingCommunication()
@@ -27,6 +28,13 @@ let map: Map<string, any> = new Map
 let init: Initial | undefined
 
 let globalAbort: AbortController | undefined = undefined
+
+let reportCreator :  ReportExcelCreator = new ReportExcelCreator(["a", "b", "c"],new Map<string, string>(
+		[
+			["a", "0" ],
+			["b", "0" ],
+			["c", ":0" ],
+		]))
 
 
 function datePure(x: number): string {
@@ -45,6 +53,14 @@ type EChartsCombinedOption = ComposeOption<
 >;
 
 const App: React.FC = () => {
+
+      const [serverReportUrl, setServerReportUrl] = useState<string>()
+
+  let createServerReport: MouseEventHandler = async (ev) => {
+          let data = await reportCreator.create("Server",communication.tPerformer.getServer())
+          if (data === undefined) return
+    setServerReportUrl(URL.createObjectURL(data))
+}
     const chartRef = useRef<HTMLDivElement>(null);
     const [started, setStarted] = useState<boolean>()
 
@@ -69,19 +85,6 @@ const App: React.FC = () => {
    
 
     let [chartDataTrading, setChartDataTrading] = useState<ChartDataTrading>()
-   // let [abort, setAbort] = useState<AbortController>()
-
-    
-/*
-
-    let [chartX, setChartX] = useState<number[]>();
-    let [chartYClient, setChartYClient] = useState<number[]>();
-    let [chartYServer, setChartYServer] = useState<number[]>();
-    setChartX([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-    setChartYClient([28.5, 70.5, 108.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4])
-    setChartYServer([226.9, 194.1, 95.6, 54.4, 29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5])
-
-*/
  
     useEffect(() => {
       populateData();
@@ -172,7 +175,7 @@ const App: React.FC = () => {
 
     let first = true
 
-    const chartIinit = (): any => {
+    const chartInit = (): any => {
         if (!chartRef.current) return;
 
         // Initialize the custom instance
@@ -303,7 +306,7 @@ const App: React.FC = () => {
         }
     }
 
-    chartIinit()
+    chartInit()
 
 
         const  page = (
@@ -321,6 +324,11 @@ const App: React.FC = () => {
                 </div>
                 <div> <input className="input-filter-index" type='datetime-local' value={begin} onInput={handleBeginChange} /></div>
                 <div> <input className="input-filter-index" type='datetime-local' value={end} onInput={handleEndChange} /></div>
+                   <div>
+      <input type="button" value="Create Report" onClick={createServerReport} />
+      <br />
+      {serverReportUrl && <a href={serverReportUrl} download="ServerReport.xlsx" >Download Server Report</a>}
+    </div>
                 <div>
                     <button onClick={btnClick} disabled={!started} >Start</button>
                     <button onClick={abortClick} disabled={started} >Abort</button>
