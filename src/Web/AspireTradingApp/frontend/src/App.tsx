@@ -29,12 +29,54 @@ let init: Initial | undefined
 
 let globalAbort: AbortController | undefined = undefined
 
-let reportCreator :  ReportExcelCreator = new ReportExcelCreator(["a", "b", "c"],new Map<string, string>(
+let reportCreator :  ReportExcelCreator = new ReportExcelCreator(["b", "c", "d", "j", "k", "l"],new Map<string, string>(
 		[
-			["a", "0" ],
-			["b", "0" ],
-			["c", ":0" ],
+       ["a", "Trading.RealTime"],
+        ["b", "Low"],
+         ["c", "High"],
+          ["d", "Open"],
+          ["e", "Close"],
+          ["f", "Trading.Candle"],
+          ["g", "Trading.Step"],
+          ["h", "Trading.DateTime"],
+          ["i", "Order.Position"],
+          ["j", "Income"],
+          ["k", "Sell Price"],
+          ["l", "Buy Price"],
+          ["m", "Average Short.Output"],
+          ["n", "Average Long.Output"],
+        ["o", "Donchian minimum.Output"],
+        ["q", "Donchian maximum.Output"],
+        ["s", "Position.Formula_1"],
+        ["u", "Current Position.x"],
+        ["w", "Current Position.y"],
 		]))
+
+        let reportCreatorClient :  ReportExcelCreator = new ReportExcelCreator(["b", "c", "d", "j", "k", "l"],new Map<string, string>(
+		[
+       ["a", "Trading.RealTime"],
+        ["b", "Low"],
+         ["c", "High"],
+          ["d", "Open"],
+          ["e", "Close"],
+          ["f", "Trading.Candle"],
+          ["g", "Trading.Step"],
+          ["h", "Trading.DateTime"],
+          ["i", "Order.Position"],
+          ["j", "Income"],
+          ["k", "Sell Price"],
+          ["l", "Buy Price"],
+          ["m", "Average Short.Output"],
+          ["n", "Average Long.Output"],
+        ["o", "Donchian minimum.Output"],
+        ["q", "Donchian maximum.Output"],
+        ["s", "Position.Formula_1"],
+        ["u", "Current Position.x"],
+        ["w", "Current Position.y"],
+		]))
+
+
+
 
 
 function datePure(x: number): string {
@@ -54,14 +96,28 @@ type EChartsCombinedOption = ComposeOption<
 
 const App: React.FC = () => {
 
-      const [serverReportUrl, setServerReportUrl] = useState<string>()
+   const [serverReportUrl, setServerReportUrl] = useState<string>()
+      const [clientReportUrl, setClientReportUrl] = useState<string>()
 
   let createServerReport: MouseEventHandler = async (ev) => {
           let data = await reportCreator.create("Server",communication.tPerformer.getServer())
           if (data === undefined) return
     setServerReportUrl(URL.createObjectURL(data))
 }
+  let createClientReport: MouseEventHandler = async (ev) => {
+          let data = await reportCreatorClient.create("Client",communication.tPerformer.getClient())
+          if (data === undefined) return
+    setClientReportUrl(URL.createObjectURL(data))
+}
     const chartRef = useRef<HTMLDivElement>(null);
+
+   const [serverReportEnabled, setServerReportEnabled] = useState<boolean>(false)
+
+      const [clientReportEnabled, setClientReportEnabled] = useState<boolean>(false)
+
+      const [diffHidden, setDiffHidden] = useState<boolean>(true)
+
+
     const [started, setStarted] = useState<boolean>()
 
     let [symbols, setSymbols] = useState<Map<string, any>>();
@@ -116,6 +172,8 @@ const App: React.FC = () => {
 
     const btnClick = async () => {
         setStarted(false)
+        setServerReportEnabled(false)
+        setClientReportEnabled(false)
         setAbortController()
         if (begin === undefined) return
         let b = performer.dateNumber(begin);
@@ -149,7 +207,7 @@ const App: React.FC = () => {
     const fillServer = async (map: Map<string, any>): Promise<void> => {
         if (globalAbort == undefined) return
         let h = await communication.getAnalysisAsync(map, globalAbort)
-     //  console.log(h, "SSS")
+        if (h?.length > 0) setServerReportEnabled(true)
        communication.tPerformer.setServer(h)
     }
 
@@ -158,14 +216,11 @@ const App: React.FC = () => {
 
         let p = communication.tPerformer
         let h = await p.calculate(symbol, period, begin, end, a1, a2, d1, d2, globalAbort)
-        console.log(h, "CCC")
+        if (h?.length > 0) setClientReportEnabled(true)
         communication.tPerformer.setClient(h)
 
-        //    let h = await communication.getHistoryAsync(map, getAbortController())
-        // fillHistory(h)
-
     }
-//*/
+
   
   
     function setAbortController(): void {
@@ -320,15 +375,17 @@ const App: React.FC = () => {
                     <select id="pertiod">
                     <option selected>1 min</option>
                     <option>1 day</option>
+                    <option>1 mim</option>
                 </select>
+                </div>
+                <div>
+                <table>
+                <tr><td>Average short</td><td></td>
+                </tr>
+                </table>
                 </div>
                 <div> <input className="input-filter-index" type='datetime-local' value={begin} onInput={handleBeginChange} /></div>
                 <div> <input className="input-filter-index" type='datetime-local' value={end} onInput={handleEndChange} /></div>
-                   <div>
-      <input type="button" value="Create Report" onClick={createServerReport} />
-      <br />
-      {serverReportUrl && <a href={serverReportUrl} download="ServerReport.xlsx" >Download Server Report</a>}
-    </div>
                 <div>
                     <button onClick={btnClick} disabled={!started} >Start</button>
                     <button onClick={abortClick} disabled={started} >Abort</button>
@@ -349,6 +406,26 @@ const App: React.FC = () => {
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div>
+                <table align="center">
+                <tr>
+                <td></td><td>Server</td><td>Client</td>
+                </tr>
+                               <tr  hidden={diffHidden}>
+                <td></td>Values<td>Server</td><td>Client</td>
+                </tr>
+                               <tr>
+                <td></td>Reports<td>      <input type="button" value="Create Report" disabled={!serverReportEnabled} onClick={createServerReport} />
+      <br />
+      {serverReportUrl && <a href={serverReportUrl} download="ServerReport.xlsx" >Download Report</a>}
+</td><td><input type="button" value="Create Report" onClick={createClientReport}  disabled={!clientReportEnabled}/>
+      <br />
+      {clientReportUrl && <a href={clientReportUrl} download="ClientReport.xlsx" >Download Report</a>}</td>
+                </tr>
+
+ 
+                </table>
                 </div>
                 <div ref={chartRef} style={{ width: '100%', height: '400px' }} />
             </div>

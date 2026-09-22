@@ -106,6 +106,11 @@ export class TradingPerformer implements IActionT2<any, string> {
         this.client = map
     }
 
+        public getClient(): Map<string, any>[] | undefined{
+
+        return this.client
+    }
+
 
     public getServer(): Map<string, any>[] | undefined{
 

@@ -52,10 +52,10 @@ export class UpdateMeshByPositionCalibrated implements IUpdateRef {
         m.current.position.y = this.aux[1]
         m.current.position.z = this.aux[2]
         let q = this.r.getQuaternion()
-        m.current.quaternion.w = q[3]
-        m.current.quaternion.x = q[0]
-        m.current.quaternion.y = q[1]
-        m.current.quaternion.z = q[2]
+        m.current.quaternion.w = q[0]
+        m.current.quaternion.x = q[1]
+        m.current.quaternion.y = q[2]
+        m.current.quaternion.z = q[3]
     }
 
 }

@@ -14,10 +14,10 @@ export class UpdateMeshByPositionCalibratedScene extends UpdateMeshByPositionCal
         m.current.scene.position.y = this.aux[1]
         m.current.scene.position.z = this.aux[2]
         let q = this.r.getQuaternion()
-        m.current.scene.quaternion.w = q[3]
-        m.current.scene.quaternion.x = q[0]
-        m.current.scene.quaternion.y = q[1]
-        m.current.scene.quaternion.z = q[2]
+        m.current.scene.quaternion.w = q[0]
+        m.current.scene.quaternion.x = q[1]
+        m.current.scene.quaternion.y = q[2]
+        m.current.scene.quaternion.z = q[3]
     }
 
 

@@ -33,9 +33,9 @@ export class ReportExcelCreator {
     const sheet = wb.addWorksheet('Report')
 
     let col : Partial<Column>[] = []
-        this.dic.forEach((k, v)=>
+        this.items.forEach((x)=>
     {
-        let c :  Partial<Column> = {header : v, key : k}
+        let c :  Partial<Column> = {header : this.dic.get(x), key : x}
 col.push(c)
     })
 
