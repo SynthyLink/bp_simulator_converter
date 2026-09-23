@@ -37,12 +37,12 @@ export class Vector3DProcessor {
 
 
     quaternionToEulerAngles(angles: EulerAngles, quaternion: number[]): void {
-        this.quaternionToeulerAnglesXYZW(angles, quaternion[1], quaternion[2], quaternion[3], quaternion[0])
+        this.quaternionToEulerAnglesXYZW(angles, quaternion[1], quaternion[2], quaternion[3], quaternion[0])
 
     }
 
 
-    quaternionToElerAnglesXYZW(angles: EulerAngles, x: number, y: number, z: number, w: number): void {
+    quaternionToEulerAnglesXYZW(angles: EulerAngles, x: number, y: number, z: number, w: number): void {
         // roll (x-axis rotation)
         let sinr_cosp = 2 * (w * x + y * z);
         let cosr_cosp = 1 - 2 * (x * x + y * y);

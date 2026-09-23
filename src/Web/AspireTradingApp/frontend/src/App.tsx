@@ -29,6 +29,9 @@ let init: Initial | undefined
 
 let globalAbort: AbortController | undefined = undefined
 
+const  filters : string[] = ["Average Short","Average Long", "Donchian maximum","Donchian minimum"];
+
+
 let reportCreator :  ReportExcelCreator = new ReportExcelCreator(["b", "c", "d", "j", "k", "l"],new Map<string, string>(
 		[
        ["a", "Trading.RealTime"],
@@ -96,9 +99,6 @@ type EChartsCombinedOption = ComposeOption<
 
 const App: React.FC = () => {
 
-   const [serverReportUrl, setServerReportUrl] = useState<string>()
-      const [clientReportUrl, setClientReportUrl] = useState<string>()
-
   let createServerReport: MouseEventHandler = async (ev) => {
           let data = await reportCreator.create("Server",communication.tPerformer.getServer())
           if (data === undefined) return
@@ -111,11 +111,35 @@ const App: React.FC = () => {
 }
     const chartRef = useRef<HTMLDivElement>(null);
 
+    const handleA1Change = (event: any) => {
+        setAverage1(performer.toIntegerNumber(event.target.value));
+    };
+
+    const handleA2Change = (event: any) => {
+        setAverage2(performer.toIntegerNumber(event.target.value));
+    };
+
+    const handleD1Change = (event: any) => {
+        setDonchian1(performer.toIntegerNumber(event.target.value));
+    };
+
+    const handleD2Change = (event: any) => {
+        setDonchian2(performer.toIntegerNumber(event.target.value));
+    };
+
+
+    const [serverReportUrl, setServerReportUrl] = useState<string>()
+      const [clientReportUrl, setClientReportUrl] = useState<string>()
+
+
    const [serverReportEnabled, setServerReportEnabled] = useState<boolean>(false)
 
       const [clientReportEnabled, setClientReportEnabled] = useState<boolean>(false)
 
-      const [diffHidden, setDiffHidden] = useState<boolean>(true)
+    const [diffHidden, setDiffHidden] = useState<boolean>(true)
+
+            const [diffString, setDiffString] = useState<string>("")
+
 
 
     const [started, setStarted] = useState<boolean>()
@@ -171,6 +195,7 @@ const App: React.FC = () => {
     
 
     const btnClick = async () => {
+        setDiffHidden(true)
         setStarted(false)
         setServerReportEnabled(false)
         setClientReportEnabled(false)
@@ -200,6 +225,11 @@ const App: React.FC = () => {
             promises.push(fillServer(map))
             await Promise.all(promises);
             let chart = communication.tPerformer.setChart("j")
+            let r = communication.tPerformer.getResult()
+            if (r.length > 0) {
+                setDiffHidden(false)
+                setDiffString(r)
+            }
             setChartDataTrading(chart)
         }
         setStarted(true)
@@ -365,12 +395,18 @@ const App: React.FC = () => {
 
 
         const  page = (
-            <div className="body-main">
+          <>  <div className="body-main">
                 <h1 id="tableLabel">Trading forecast</h1>
                 <h2>This component calculation of trading forecast</h2>
+       <div className="body-main">
+       <table align="center">
+<tr><td>Symbol</td><td>
                 <div>  <select id="symbol">
                 </select>
                 </div>
+                </td>
+                </tr>
+                <tr><td>Period</td><td>
                 <div>
                     <select id="pertiod">
                     <option selected>1 min</option>
@@ -378,57 +414,100 @@ const App: React.FC = () => {
                     <option>1 mim</option>
                 </select>
                 </div>
-                <div>
-                <table>
-                <tr><td>Average short</td><td></td>
+                </td>
                 </tr>
+                <tr><td>Begin</td><td>
+                <div> <input className="input-filter-index" type='datetime-local' value={begin} onInput={handleBeginChange} /></div>
+                </td>
+                </tr>
+                <tr><td>End</td><td>
+                <div> <input className="input-filter-index" type='datetime-local' value={end} onInput={handleEndChange} /></div>
+                </td>
+                </tr>
+              <tr>
+          <td>
+            <label>{filters[0]}</label>
+          </td>
+          <td>
+            <input
+              className="input-filter-index"
+              type="number"
+              value={average1}
+              onChange={handleA1Change}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>{filters[1]}</label>
+          </td>
+          <td>
+            <input
+              className="input-filter-index"
+              type="number"
+              value={average2}
+              onChange={handleA2Change}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label asp-for="Z">{filters[2]}</label>
+          </td>
+          <td>
+            <input
+              className="input-filter-index"
+              type="number"
+              value={donchian1}
+              onChange={handleD1Change}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label asp-for="Vx">{filters[3]}</label>
+          </td>
+          <td>
+            <input
+              className="input-filter-index"
+              type="number"
+              value={donchian2}
+              onChange={handleD2Change}
+            />
+          </td>
+        </tr>
                 </table>
                 </div>
-                <div> <input className="input-filter-index" type='datetime-local' value={begin} onInput={handleBeginChange} /></div>
-                <div> <input className="input-filter-index" type='datetime-local' value={end} onInput={handleEndChange} /></div>
                 <div>
                     <button onClick={btnClick} disabled={!started} >Start</button>
                     <button onClick={abortClick} disabled={started} >Abort</button>
                     <button onClick={delClick} hidden={true}> Delete database</button>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Server</td>
-                                <td>Client</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div>
-                <table align="center">
+                <table align="center" hidden={!clientReportEnabled && !serverReportEnabled}>
                 <tr>
                 <td></td><td>Server</td><td>Client</td>
                 </tr>
                                <tr  hidden={diffHidden}>
-                <td></td>Values<td>Server</td><td>Client</td>
                 </tr>
-                               <tr>
-                <td></td>Reports<td>      <input type="button" value="Create Report" disabled={!serverReportEnabled} onClick={createServerReport} />
+                        <tr   >
+                <td>Reports</td>  <td>    <input type="button" value="Create Report" disabled={!serverReportEnabled} onClick={createServerReport} />
       <br />
       {serverReportUrl && <a href={serverReportUrl} download="ServerReport.xlsx" >Download Report</a>}
-</td><td><input type="button" value="Create Report" onClick={createClientReport}  disabled={!clientReportEnabled}/>
+      </td>
+<td><input type="button" value="Create Report" onClick={createClientReport}  disabled={!clientReportEnabled}/>
       <br />
+      </td>
+      <td>
+
       {clientReportUrl && <a href={clientReportUrl} download="ClientReport.xlsx" >Download Report</a>}</td>
                 </tr>
 
  
                 </table>
                 </div>
+                <div hidden={diffHidden}  className="orbital-results">{diffString}</div>
                 <div ref={chartRef} style={{ width: '100%', height: '400px' }} />
             </div>
+            </>
     );
     return page
 

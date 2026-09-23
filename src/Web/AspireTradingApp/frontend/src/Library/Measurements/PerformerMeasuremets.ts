@@ -12,7 +12,7 @@ import type { ITimeMeasurementProvider } from "./Interfaces/ITimeMeasurementProv
 import type { IFunc } from "../Interfaces/IFunc";
 import type { IComponentCollection } from "../Interfaces/IComponentCollection";
 import type { IObject } from "../Interfaces/IObject";
-import type { IDifferentialEquationProcessor } from "./DifferentialEquations/Interfaces/IDifferentialEquationProcessor ";
+import type { IDifferentialEquationProcessor } from "./DifferentialEquations/Interfaces/IDifferentialEquationProcessor";
 import type { IRealtimeCollectionFactory } from "../Interfaces/IRealtimeCollectionFactory";
 import type { IActionAddRemove } from "../Interfaces/IActionAddRemove";
 import type { IObjectCollection } from "../Interfaces/IObjectCollection";

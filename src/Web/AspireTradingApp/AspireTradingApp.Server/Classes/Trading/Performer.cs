@@ -10,13 +10,14 @@ using Trading.Database.Classes;
 using Trading.Database.Interfaces;
 using Trading.Library.Classes;
 using Trading.Library.Objects;
+using static GeneratedProject.DonchianDesktop;
 
 
 
 
 namespace AspireTradingApp.Server.Trading
 {
-    public class Performer 
+    public class Performer
     {
 
         static DataPerformer.Portable.Performer performer = new DataPerformer.Portable.Performer();
@@ -58,7 +59,13 @@ namespace AspireTradingApp.Server.Trading
             };
 
 
-int[] k = [0, 0, 0, 0, 0, 0];
+        Dictionary<string, string> filters = new Dictionary<string, string>
+        {
+            {  "a1", "Average Short" }, { "a2", "Average Long" }, { "d1", "Donchian maximum" }, { "d2", "Donchian minimum" } 
+        };
+
+
+        int[] k = [0, 0, 0, 0, 0, 0];
 
         static IShowObject show = new ShowsObject();
 
@@ -101,7 +108,7 @@ int[] k = [0, 0, 0, 0, 0, 0];
 
         internal async Task Load(CancellationToken token)
         {
-            
+
             var desktop = await DonchianDesktop.GetDesktopAsync(token, Factory);
         }
 
@@ -114,9 +121,10 @@ int[] k = [0, 0, 0, 0, 0, 0];
             return s.ToList();
         }
 
+  
         public async Task<string> Initial()
         {
-            var desktop = await DonchianDesktop.GetDesktopAsync(CancellationToken.None, Factory);
+            var desktop = await GetDesktopAsync(CancellationToken.None, Factory);
             var q = desktop.Get<DataQuery>("Trading");
             var d = new Dictionary<string, object>();
             d["b"] = q.Begin.ToOADate() * 86400;
@@ -144,7 +152,7 @@ int[] k = [0, 0, 0, 0, 0, 0];
         private bool Get(HistoricalDataMessageNumber n, double x, double p, ref int i)
         {
             double y = x + i * p;
-            if (n.date.Value  >= y - double.Epsilon)
+            if (n.date.Value >= y - double.Epsilon)
             {
                 ++i;
                 return true;
@@ -153,25 +161,25 @@ int[] k = [0, 0, 0, 0, 0, 0];
         }
 
         public async Task<HistoricalDataMessageNumber[]> GetHistoryNumber(string json, CancellationToken token)
-            { 
-          var o =
-                    System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(json);
+        {
+            var o =
+                      System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(json);
             var b = double.Parse(o.GetProperty("b") + "");
             var e = double.Parse(o.GetProperty("e") + "");
             var sym = o.GetProperty("s") + "";
             var p = o.GetProperty("p") + "";
             var per = periods[p];
-            var r =  await GetHistoryNumber(b, e, p, sym, token);
+            var r = await GetHistoryNumber(b, e, p, sym, token);
             var xx = r[0].date.Value;
             int i = 0;
-            var y = from x in r  where Get(x, xx, per, ref i) select x;
+            var y = from x in r where Get(x, xx, per, ref i) select x;
             return y.ToArray();
         }
 
         public async Task<string> GetData(string input, CancellationToken token)
         {
-               //  factory.Set<ITradingDatabaseHistoryIntefaceFactory>()
-            var desktop = await DonchianDesktop.GetDesktopAsync(token, Factory);
+            //  factory.Set<ITradingDatabaseHistoryIntefaceFactory>()
+            var desktop = await GetDesktopAsync(token, Factory);
             var dataQuery = desktop.Get<DataQuery>("Trading");
             var dataConsumer = desktop.Get<IDataConsumer>("Chart");
             var order = desktop.Get<Order>("Order");
@@ -185,6 +193,12 @@ int[] k = [0, 0, 0, 0, 0, 0];
             var sym = o.GetProperty("s") + "";
             var p = o.GetProperty("p") + "";
             dataQuery.Set(sym, p, b, e);
+            foreach (var item in filters)
+            {
+                var cn = o.GetProperty(item.Key) + "";
+                var filter = desktop.Get<DataPerformer.Portable.FilterWrapper>(item.Value);
+                filter.Filter.Count = int.Parse(cn);
+            }
             var wrapper = new DataPerformer.Portable.Wrappers.DataConsumerWrapper(dataConsumer);
             var t = await wrapper.PerformIteratorAsync(dataQuery, dp, token);
             return System.Text.Json.JsonSerializer.Serialize(t);
@@ -201,7 +215,7 @@ int[] k = [0, 0, 0, 0, 0, 0];
 
         private void Order_OrderChanged(Order arg1, global::Trading.Library.Enums.PositionDirection arg2)
         {
-           so.Order_OrderChanged(arg1, arg2); 
+            so.Order_OrderChanged(arg1, arg2);
         }
 
         public HistoricalDataMessageNumber Convert(HistoricalDataMessageDateTime message)

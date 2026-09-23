@@ -593,6 +593,11 @@ export class Performer implements IObject,  IFactoryConsumer {
         return Number(s)
     }
 
+    public toIntegerNumber(s: any): number {
+        let num =  Number(s)
+        return Math.floor(num)
+    }
+
 
     public convert<T, S>(t: T): S {
         // Typeof checks against string representations of types. S is a generic type,

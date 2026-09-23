@@ -14,6 +14,8 @@ import { ServerClientComparisonChart } from "./Visualization/ServerClientCompari
 import { createServerClientComparisonData } from "./Visualization/orbitalComparisonData";
 import "./App.css";
 
+const filters : string[] = ["Average Short","Average Long", "Donchian maximum","Donchian minimum"];
+
 let dt = new DateTimeConverter();
 
 let performer = new Performer();
@@ -137,7 +139,7 @@ function App() {
       return;
     }
       let promises: Promise<void>[] = []
-       promises.push(clientCalc(init))
+      promises.push(clientCalc(init))
       promises.push(serverCalc(init))
       Promise.all(promises)
       setStarted(true)

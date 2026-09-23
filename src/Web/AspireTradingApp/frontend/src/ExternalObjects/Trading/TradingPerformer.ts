@@ -39,11 +39,19 @@ export class TradingPerformer implements IActionT2<any, string> {
     filters: ISequenceFilter[] = []
 
     client: Map<string, any>[] | undefined = undefined
+
     server: Map<string, any>[] | undefined = undefined
 
     chartSym: string = "b"
 
     show!: IShowObject
+
+
+    any: any
+
+    result : string = ""
+
+
 
     constructor(desktop: IDesktop, communication: TradingCommunication, factory?: IFactory, show?: IShowObject) {
         if (show !== undefined)   this.show = show;
@@ -124,7 +132,7 @@ export class TradingPerformer implements IActionT2<any, string> {
             let y = this.convertMap(x)
             this.server.push(y)
         }
-        console.log(map, "SSS")
+     //   console.log(map, "SSS")
     }
 
 
@@ -150,8 +158,6 @@ export class TradingPerformer implements IActionT2<any, string> {
             this.query, this.runtime, controller, this.mmap, undefined, new ErrorH(controller))
          return x
     }
-
-    any: any
 
 
     public setChart(s: string): ChartDataTrading {
@@ -185,31 +191,36 @@ export class TradingPerformer implements IActionT2<any, string> {
                 this.yServer.push(yyy)
             }
         }
-        this.compareServerClient()
+        let rr  = this.compareServerClient()
+        if (rr !== undefined) this.result = rr;
         
         let res = { x: this.x, yclient: this.yClient, yserver: this.yServer }
         return res
     }
 
-    compareServerClient(): boolean | undefined{
-        console.log("C")
+    getResult(): string {
+        return this.result
+    }
+
+    compareServerClient(): string | undefined {
         let n = this.server?.length
         if (this.client == undefined) return undefined
         if (this.server == undefined) return undefined
         if (n == undefined) return undefined
-        console.log("Data length", n, this.client.length)
         for (var i = 0; i < n; i++) {
             let x = this.server[i]
             let y = this.client[i]
             for (let [k, v] of x) {
                 let yy = y.get(k)
-                if (yy != v){
-                    console.log("COMPARE SERVER CLIENT", i, k, "SERVER= ", v, "CLIENT= ", yy)
-                    return true
+                if (yy != v) {
+                    let s = "COMPARE SERVER CLIENT" + i + " " + k + "SERVER= " + v + " CLIENT= " + yy
+                    //      console.log("COMPARE SERVER CLIENT", i, k, "SERVER= ", v, "CLIENT= ", yy)
+                    return s
                 }
             }
         }
-        console.log("SERVER EQUALS TO CLIENT")
+        let s = "Server equals to client"
+        return s
     }
 
 
