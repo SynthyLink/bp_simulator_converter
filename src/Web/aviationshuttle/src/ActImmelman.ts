@@ -4,8 +4,13 @@ import { Immelman } from "./scenes/Immelman";
 
 export class ActImmelman extends Game3DRealtimeReactGL {
 
+    stopped: boolean = true;
     constructor() {
-        super(getFactory(), new Immelman, 0.05, "Consumer")
+        super(getFactory(), new Immelman, 0.1, "Consumer")
         this.loadGame()
+    }
+
+    public stopItself(): void {
+        this.game.startItself(false)
     }
 }

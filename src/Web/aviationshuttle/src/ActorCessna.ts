@@ -29,7 +29,10 @@ export class ActorCessna extends Game3DRealtime {
 
     vel: number = 0.005
 
-    public setMotion(forward: boolean, backward: boolean, left: boolean, right: boolean, jump: boolean): void {
+    public setMotion(forward: boolean, backward: boolean, left: boolean, right: boolean, jump: boolean, stop: boolean): void {
+        if (stop) {
+            this.game.startItself(false)
+        }
         let v = 0;
         if (forward) v = this.vel
         if (backward) v = -this.vel

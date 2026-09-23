@@ -4,14 +4,14 @@ import { GLTF } from 'three-stdlib';
 import * as THREE from 'three'
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import { getActImmelman } from "./hooks";
+import { getActImmelman, usePersonControls } from "./hooks";
 import { ActImmelman } from "./ActImmelman";
 import { IUpdateRef } from './ReactWebGL/Interfaces/IUpdateRef';
 import { Quaternion } from './Library/Vector3D/Quaternion';
 
 let actImmelmann: ActImmelman = getActImmelman()
 
-let updateI: IUpdateRef = actImmelmann.getMeshUpdaterPositionCalibratedScene("Plane", -1, -1, 0, 0.01)
+let updateI: IUpdateRef = actImmelmann.getMeshUpdaterPositionCalibratedScene("Plane", -1, -4, 0, 0.03)
 
 let q = new Quaternion
 
@@ -43,6 +43,8 @@ interface ModelProps {
 
 export const Model: React.FC<ModelProps> = ({ url }) => {
     const modRef = useRef()
+    const { forward, backward, left, right, jump, stop } = usePersonControls();
+
     useFrame((state) => {
         if (modRef.current !== undefined) {
          //   if (f) {
@@ -50,6 +52,9 @@ export const Model: React.FC<ModelProps> = ({ url }) => {
          //       f = false
             //  }
             updateI.updateRef(modRef)
+            if (stop) {
+                modRef.current.stopItself()
+            }
         }
     })
 

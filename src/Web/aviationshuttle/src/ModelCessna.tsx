@@ -37,13 +37,15 @@ interface ModelProps {
 
 
 export const ModelCessna: React.FC<ModelProps> = ({ url }) => {
-    const { forward, backward, left, right, jump } = usePersonControls();
+    const { forward, backward, left, right, jump, stop } = usePersonControls();
 
     const modRef = useRef()
     useFrame((state) => {
+        if (stop) {
+        }
         
         if (modRef.current !== undefined) {
-            actor.setMotion(forward, backward, left, right, jump)
+            actor.setMotion(forward, backward, left, right, jump, stop)
            
             updateI.updateRef(modRef)
         }
