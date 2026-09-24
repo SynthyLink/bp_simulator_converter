@@ -7,13 +7,14 @@ import type { IStepActionHolder } from "../../Measurements/Interfaces/IStepActio
 import type { IStepAction } from "../../Measurements/Interfaces/IStepAction"
 import type { IScadaConsumer } from "../../Scada/Interfaces/IScadaConsumer"
 import type { IScadaInterface } from "../../Scada/Interfaces/IScadaInterface"
+import type { ISceneGame } from "../Interfaces/ISceneGame"
 import { ScadaDesktop } from "../../Scada/ScadaDesktop"
 import { ScadaDesktopEngine } from "../../Scada/ScadaDesktopEngine"
 import { AbstractScene } from "../../Game/Abstract/AbstractScene"
 
 export class ScadaScene extends AbstractScene implements IScadaConsumer
 {
-    constructor(game: IGame, collection: IComponentCollection, chart: string, engine?: IPlayEngine | undefined) {
+    constructor(game: ISceneGame, collection: IComponentCollection, chart: string, engine?: IPlayEngine | undefined) {
         super(game, chart)
         this.types.push("IScadaConsumer")
         this.collection = collection

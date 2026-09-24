@@ -21,13 +21,14 @@ import { PIAct } from "./test/wrappers/PIAct";
 import { ScadaScene } from "./src/Library/Game/Scenes/ScadaScene";
 import { Cessna } from "./src/scenes/Cessna"
 import type {IReferenceFrame} from "./src/Library/Motion6D/Interfaces/IReferenceFrame"
+import type { ISceneGame } from "./src/Library/Game/Interfaces/ISceneGame";
 
 
 
 export class Actor {
 
     factory!: IFactory;
-    game!: IGame;
+    game!: ISceneGame;
 
  
     //engine: FictiveEngine = new FictiveEngine()

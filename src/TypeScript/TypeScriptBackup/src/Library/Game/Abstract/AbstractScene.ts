@@ -6,11 +6,12 @@ import type { IActionAddRemove } from "../../Interfaces/IActionAddRemove";
 import type { IFactory } from "../../Interfaces/IFactory";
 import type { IObject } from "../../Interfaces/IObject";
 import type { IStepAction } from "../../Measurements/Interfaces/IStepAction";
+import type { ISceneGame } from "../Interfaces/ISceneGame";
 import { ActionArray } from "../../Utilities/Generic/ActionArray";
 import { ScenePerformer } from "../ScenePerformer";
 
 export abstract class AbstractScene implements IScene {
-    constructor(game: IGame, name: string) {
+    constructor(game: ISceneGame, name: string) {
         this.game = game;
         this.factory = game.getConsumerFactory()
         this.name = name;
