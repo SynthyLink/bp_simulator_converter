@@ -5,14 +5,16 @@ import type { IPosition } from "../Library/Motion6D/Interfaces/IPosition";
 import { UpdateMeshByReferenceFrame } from "./UpdateMeshByReferenceFrame";
 import { UpdateMeshByPosition } from "./UpdateMeshByPosition";
 import { UpdateMeshByPositionCalibrated } from "./UpdateMeshByPositionCalibrated";
-import { Game3DRealtime } from "../Library/Abstract3DGame/Game3DRealtime";
 import { Quaternion } from "../Library/Vector3D/Quaternion";
 import { UpdateQuaternionScene } from "./UpdateQuaternionScene";
+import { Scada3DGame } from "../Library/Abstract3DGame/Scada3DGame";
+import { IComponentCollection } from "../Library/Interfaces/IComponentCollection";
 
-export class Game3DRealtimeReactGL extends Game3DRealtime {
-    constructor(factory: IFactory, desktop: IDesktop, interval: number,
-         consumer: string) {
-        super(factory, desktop, interval, consumer)
+export class Game3DRealtimeReactGL extends Scada3DGame {
+    constructor(name : string, factory: IFactory, desktop: IComponentCollection,
+         consumer: string,  interval : number) 
+    {
+        super(name, factory, desktop, consumer, interval)
         this.typeName = "Geme3DRealtimeReactGL"
         this.types.push("Geme3DRealtimeReactGL")
     }

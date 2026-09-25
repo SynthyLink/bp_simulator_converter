@@ -67,6 +67,7 @@ export class ScadaScene extends AbstractScene implements IScadaConsumer
         return true;
         
     }
+    
     startItself(start: boolean): boolean {
         if (this.isStarted == start) return false
         this.isStarted = start

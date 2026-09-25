@@ -1,11 +1,14 @@
 import { Actor } from "./Actor";
 import { ActorCessna } from "./src/ActorCessna";
+import { ActorCessnaScada } from "./src/ActorCessnaScada";
 import { ActorGame } from "./src/ActorGame";
 import { ActorGameImmelman } from "./src/ActorGameImmelman";
 import { Quaternion } from "./src/Library/Vector3D/Quaternion";
 import { Vector3DProcessor } from "./src/Library/Vector3D/Vector3DProcessor";
 
-new ActorCessna
+//new ActorCessna
+
+new ActorCessnaScada
 
 //new ActorGameImmelman
  //new Actor(false)

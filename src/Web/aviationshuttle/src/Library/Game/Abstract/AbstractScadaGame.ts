@@ -10,6 +10,7 @@ import type { IScadaConsumer } from "../../Scada/Interfaces/IScadaConsumer";
 import type { IPlayEngine } from "../../Interfaces/IPlayEngine";
 import type { IObject } from "../../Interfaces/IObject";
 import type { IActionT } from "../../Interfaces/IActionT";
+import type { IInput } from "../../Interfaces/IInput";
 import { AbstractGame } from "./AbstractGame";
 import { EmptyObject } from "../../EmptyObject";
 import { PerformerMeasuremets } from "../../Measurements/PerformerMeasuremets";
@@ -70,7 +71,8 @@ export abstract class AbstractScadaGame extends AbstractGame implements  IScadaC
                 this.factory, this.chart)
             else this.scada = new ScadaDesktop(collection)
         }
-
+        let inp = this.scada.getScadaInputs()
+        inp.forEach((i) => {this.inputs.push(i) })
      }
 
     actionT(t: number): void {
@@ -117,7 +119,10 @@ export abstract class AbstractScadaGame extends AbstractGame implements  IScadaC
 
     protected interval : number = 0
 
-     
+
+    protected inputs: IInput[] = []
+
+
     protected engine !: ExternalWatch// ActionWatch = new ActionWatch(500, new ActionArray)
 
 

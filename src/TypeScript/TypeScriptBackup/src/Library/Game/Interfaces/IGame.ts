@@ -5,10 +5,11 @@ import type { IAddAction } from "../../Interfaces/IAddAction"
 import type { IExternalAction } from "../../Interfaces/IExternalAction"
 import type { IFactoryConsumer } from "../../Interfaces/IFactoryConsumer"
 import type { IObject } from "../../Interfaces/IObject"
+import { IObjectCollection } from "../../Interfaces/IObjectCollection"
 import type { ISelfLoad } from "../../Interfaces/ISelfLoad"
 import type { ISelfStart } from "../../Interfaces/ISelfStart"
 
-export interface IGame extends ISelfStart, IAddAction, ISelfLoad, IFactoryConsumer, IExternalAction, IObject {
+export interface IGame extends IObjectCollection, ISelfStart, IAddAction, ISelfLoad, IFactoryConsumer, IExternalAction, IObject {
 
     cycle(time: number): void
 

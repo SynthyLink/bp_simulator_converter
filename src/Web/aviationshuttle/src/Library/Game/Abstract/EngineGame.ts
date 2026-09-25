@@ -3,9 +3,9 @@ import type { IActionT } from "../../Interfaces/IActionT";
 import type { IFactory } from "../../Interfaces/IFactory";
 import type { IPlayEngine } from "../../Interfaces/IPlayEngine";
 import { ActionArrayT } from "../../Utilities/Generic/ActionArrayT";
-import { AbstractGame } from "./AbstractGame";
+import { AbstractSceneGame } from "./AbstractSceneGame";
 
-export class EngineGame extends AbstractGame implements IPlayEngine, IActionT<number> {
+export class EngineGame extends AbstractSceneGame implements IPlayEngine, IActionT<number> {
 
     constructor(name: string, factory: IFactory, engine: IPlayEngine, useLoader: boolean)
     {

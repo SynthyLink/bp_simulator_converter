@@ -1,16 +1,16 @@
-import { getFactory } from "./Library/Abstract3DGame/Game3DRealtime";
 import { Game3DRealtimeReactGL } from "./ReactWebGL/Game3DRealtimeReactGL";
 import { Immelman } from "./scenes/Immelman";
+import { getRungeFactory } from "./Library/Measurements/Factories"
 
 export class ActImmelman extends Game3DRealtimeReactGL {
 
     stopped: boolean = true;
     constructor() {
-        super(getFactory(), new Immelman, 0.1, "Consumer")
-        this.loadGame()
+        super("", getRungeFactory(), new Immelman,  "Consumer", 0.1)
+        this.startItself(true)
     }
 
     public stopItself(): void {
-        this.game.startItself(false)
+        this.startItself(false)
     }
 }

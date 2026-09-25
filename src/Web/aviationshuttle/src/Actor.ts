@@ -4,17 +4,19 @@ import type { IMeasurement } from "./Library/Measurements/Interfaces/IMeasuremen
 import { Game3DRealtimeReactGL } from "./ReactWebGL/Game3DRealtimeReactGL";
 import { getFactory } from "./Library/Abstract3DGame/Game3DRealtime";
 import { Cessna } from "./scenes/Cessna";
+import { getRungeFactory } from "./Library/Measurements/Factories"
 
 export class Actor extends Game3DRealtimeReactGL {
 
     constructor() {
-        super(getFactory(), new Cessna, 0.05, "Chart")
+        super("", getRungeFactory(), new Cessna, "Chart", 0.05)
         let dataConsumer = this.scada.getScadaObject<IDataConsumer>("Chart", "IDataConsumer")[0]
         var mmm = dataConsumer.getAllMeasurements()
         var mm = mmm[2];
         this.X = mm.getMeasurement(3)
         this.Y = mm.getMeasurement(4)
-        this.loadGame()
+        this.startItself(true)
+       
 
     }
 

@@ -3,7 +3,6 @@ import type { IAction } from "../../Interfaces/IAction"
 import type { IActionAddRemove } from "../../Interfaces/IActionAddRemove"
 import type { IFactory } from "../../Interfaces/IFactory"
 import type { IObject } from "../../Interfaces/IObject"
-import type { IResourceItem } from "../../Resources/Infrefaces/IResourceItem"
 import type { IGameDetector } from "../Interfaces/IGameDetector"
 import type { IActionAddRemoveT } from "../../Interfaces/IActionAddRemoveT"
 import type { IActionT } from "../../Interfaces/IActionT"
@@ -19,6 +18,7 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame {
         super(name, factory)
         this.types.push("IGame")
         this.types.push("IObjectCollection")
+        this.types.push("IObjectCollection")
         this.types.push("ISelfStart")
         this.types.push("IAddAction")
         this.types.push("ISelfLoad")
@@ -29,6 +29,11 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame {
         if (factory != undefined) {
             factory.addFactory<IGameDetector>(new GameDetector(this, factory), "IGameDetector")
         }
+    }
+    
+    getObjectCollection(): IObject[] 
+    {
+        return this.objects
     }
 
     addAction(action: IAction, add: boolean): void {
@@ -70,7 +75,6 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame {
         this.intAct.action()
         this.timeAction.actionT(time)
         this.internalAction.action()
-
     }
 
 
@@ -113,8 +117,6 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame {
 
     protected name: string = "";
 
-
-
     protected internalAction: IActionAddRemove = new ActionArray()
 
     protected isStarted: boolean = false
@@ -134,13 +136,16 @@ export abstract class AbstractGame extends AbstractGameObject implements IGame {
 
     protected internaTimeAction: IActionAddRemoveT<number> = new ActionArrayT()
 
-    
 
-    externalAction: IActionAddRemove = new ActionArray()
+    protected externalAction: IActionAddRemove = new ActionArray()
 
     protected actionF !: IAction
 
     protected addF !: boolean
+
+    protected any : any
+
+    protected objects : IObject[] = []
 
 
 }

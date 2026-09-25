@@ -105,28 +105,36 @@ export class Desktop implements IDesktop, IObject, IFactoryConsumer
     }
 
 
-    getCategoryObject(name: string): ICategoryObject {
-        for (var o of this.categoryObjects) {
+    getCategoryObject(name: string): ICategoryObject
+    {
+        for (var o of this.categoryObjects)
+        {
             var n = o.getCategoryObjectName();
-            if (n == name) {
+            if (n == name)
+            {
                 return o;
             }
         }
-        throw new OwnNotImplemented("DESKTOP");
+        throw new OwnNotImplemented("DESKTOP " + name);
     }
+
 
     getCategoryObjects(): ICategoryObject[] {
         return this.categoryObjects;
     }
+
     getCategoryArrows(): ICategoryArrow[] {
         return this.categoryArrows;
     }
+
     addCategoryObject(obj: ICategoryObject): void {
         this.categoryObjects.push(obj);
     }
+
     addCategoryArrow(arr: ICategoryArrow): void {
         this.categoryArrows.push(arr);
     }
+
     getName(): string {
         return this.name;
     }

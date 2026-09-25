@@ -5,7 +5,10 @@ import type { IShowObject } from "../../Show/Interfaces/IShowObject";
 import { GamePerformer } from "../GamePerformer";
 
 export class AbstractGameObject implements IObject, IFactoryConsumer {
+    
     protected performer: GamePerformer = new GamePerformer()
+
+    
     constructor(name: string, factory: IFactory | undefined) {
         this.name = name
         this.setFactory(factory)
