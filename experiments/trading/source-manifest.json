@@ -1,0 +1,7 @@
+{
+  "sourceSha256": "65101aaf5b1adfe4f7b351907319e68f56252ecba13bc6499bc45e8b15f1e020",
+  "fileCount": 7221,
+  "algorithm": "SHA-256 of JSON.stringify(sorted array of {file, sha256}); relative POSIX paths; UTF-8 source text with CRLF normalized to LF",
+  "scope": "global.json; tracked src/**/*.cs, src/**/*.csproj, src/**/*.ts; experiment .mjs/.ts/.cs/.csproj, config.json, package.json and package-lock.json; excludes node_modules, .build, bin, obj, data",
+  "reproduction": "node experiments/trading/run.mjs regenerates this fingerprint"
+}
