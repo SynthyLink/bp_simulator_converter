@@ -84,16 +84,16 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
     }
 
     nextIterator(): boolean {
-        this.realTime = this.step
        ++this.step;
         if (this.step >= this.data.length) return false
+        this.realTime = this.step
         this.current = this.data[this.step]
         this.fillVector()
         return true
     }
 
     resetIterator(): void {
-        this.step = 0;
+        this.step = -1;
     }
 
     fillVector(): void {
@@ -141,7 +141,7 @@ export class TradingDataQuery extends CategoryObject implements IInitializeTask,
     current !: HistoricalDataMessageDateTime;
 
 
-    step: number = 0;
+    step: number = -1;
 
     symbolsstr: string[][] = []
 
@@ -283,8 +283,6 @@ class CandleMeasurement extends BasicMeasurement
     }
 
 }
-
-
 
 
 

@@ -65,6 +65,9 @@ namespace Trading.Library.Objects
 
         public string Period { get; set; } = "1 day";
 
+        /// <summary>Read bars already aggregated to Period without legacy resampling.</summary>
+        public bool UsePreaggregatedBars { get; set; }
+
         object o = new object();
 
         public string Symbol
@@ -196,28 +199,10 @@ namespace Trading.Library.Objects
 
         void IIterator.Reset()
         {
-            return;
-            Exception exception;
-            try
-            {
-              /*  step = 0;
-                messages.Clear();
-                var bs = Period.ToBarSize();
-                var ct = new CancellationToken();
-                var dt = Database.GetHistoricalDataMessageDateTimes(Object, Begin, End);
-                enu = dt.Convert(bs);
-                enumerator = enu.GetEnumerator();
-                enumerator.MoveNext();
-                message = enumerator.Current;
-                messages[step] = message;
-                Set();
-                return;*/
-            }
-            catch (Exception ex)
-            {
-                exception = IncludedException.Get(ex);
-            }
-            throw exception;
+            enumerator?.Dispose();
+            enumerator = enu.GetEnumerator();
+            step = -1;
+            messages.Clear();
         }
 
         bool IIterator.Next()
@@ -227,8 +212,8 @@ namespace Trading.Library.Objects
                 return false; 
             }
             message = enumerator.Current;
-            Set();
             ++step;
+            Set();
             messages[step] = message;
             return true;
         }
@@ -284,6 +269,8 @@ namespace Trading.Library.Objects
 
         public async Task<List<HistoricalDataMessageDateTime>> GetHistoricalDataMessageDateTimes(CancellationToken token)
         {
+            if (UsePreaggregatedBars)
+                return await Database.GetHistoricalDataMessageDateTimesAsync(Object, Begin, End, token);
             return await performer.Get(Database, Object, Begin, End, Period, token);
         }
 
@@ -293,16 +280,12 @@ namespace Trading.Library.Objects
             Exception exception;
             try
             {
-                step = 0;
+                step = -1;
                 messages.Clear();
                 var bs = Period.ToBarSize();
                 var dt = await GetHistoricalDataMessageDateTimes(cancellationToken);
                 enu = dt;
                 enumerator = enu.GetEnumerator();
-                enumerator.MoveNext();
-                message = enumerator.Current;
-                messages[step] = message;
-                Set();
                 return;
             }
             catch (Exception ex)
@@ -518,4 +501,3 @@ namespace Trading.Library.Objects
 
     }
 }
-
