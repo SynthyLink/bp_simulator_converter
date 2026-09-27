@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "exactRecords": true,
+  "mismatchCount": 0,
+  "issues": [],
+  "symbol": "AAPL",
+  "interval": "1 day",
+  "firstDate": "2022-01-03",
+  "lastDate": "2023-12-29",
+  "tolerance": {
+    "absolute": 1e-10,
+    "relative": 1e-12,
+    "rule": "abs(a-b) <= absolute + relative * max(abs(a),abs(b))"
+  },
+  "maxAbsoluteError": {
+    "close": 0,
+    "buyPrice": 0,
+    "sellPrice": 0,
+    "income": 0,
+    "averageShort": 0,
+    "averageLong": 0,
+    "donchianHigh": 0,
+    "donchianLow": 0
+  },
+  "csharp": {
+    "rows": 501,
+    "buyEvents": 231,
+    "sellEvents": 231,
+    "firstEventDate": "2022-03-01",
+    "finalPosition": 1,
+    "finalModelIncome": -4.209953308105469
+  },
+  "typescript": {
+    "rows": 501,
+    "buyEvents": 231,
+    "sellEvents": 231,
+    "firstEventDate": "2022-03-01",
+    "finalPosition": 1,
+    "finalModelIncome": -4.209953308105469
+  },
+  "interpretation": "Runtime parity for the existing generated model; income is the legacy model accumulator, not independently validated portfolio P&L.",
+  "resultSha256": {
+    "CSharp": "3b0f98c55ab296afff9c78ac8f1e8af4210d8bd84a7a7008c8f955b0a9259bf0",
+    "TypeScript": "57684ceb6f34baa3afa718ccea43c8f8b9a2cbf163a6e80271705aabc21bccab"
+  },
+  "provenance": {
+    "commit": "bdfaed6fcf68ab6da6f9640082e3268bf1c42f1f",
+    "branch": "trading-xperiment",
+    "sourceDirty": false,
+    "sourceSha256": "65101aaf5b1adfe4f7b351907319e68f56252ecba13bc6499bc45e8b15f1e020",
+    "sourceManifest": "source-manifest.json",
+    "note": "Commit plus source fingerprint identify the implementation; sourceDirty excludes result artifacts."
+  }
+}
