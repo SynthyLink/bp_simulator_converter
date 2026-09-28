@@ -15,7 +15,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\DynamicLinkLibraries\ErrorHandler\ErrorHandler.csproj" />
+    <ProjectReference Include="..\..\..\runtimes\dotnet\DynamicLinkLibraries\ErrorHandler\ErrorHandler.csproj" />
   </ItemGroup>
   <ItemGroup>
     <ReferencePath Include="C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\9.0.10\ref\net9.0\Accessibility.dll" />

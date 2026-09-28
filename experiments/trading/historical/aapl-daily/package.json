@@ -1,0 +1,14 @@
+{
+  "name": "trading-reproducibility-experiment",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "experiment": "node run.mjs",
+    "compare": "node compare.mjs",
+    "test": "node --test tests.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.10",
+    "queue-typescript": "1.0.1"
+  }
+}

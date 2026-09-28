@@ -1,66 +1,40 @@
 # Backend–Frontend Converter
 
-A component-based tool for migrating .NET computational models to TypeScript web applications.
+Component-based migration of .NET computational models to TypeScript and other
+targets, with orbital and trading examples in one repository.
 
-## Purpose
+| Location | Purpose |
+| --- | --- |
+| `src/converter/` | Model editor hosts and code generators |
+| `src/runtimes/` | .NET libraries, standalone TypeScript runtime, Python library |
+| `examples/orbital/` | Orbital web apps and generated docking models |
+| `examples/trading/` | Trading web, console and desktop apps; generated models |
+| `experiments/orbital/` | Validation instructions and evidence limitations |
+| `experiments/trading/` | Historical outputs, data, harness and provenance |
+| `docs/` | Architecture, generated-code inventory, verification and paper sources |
 
-This tool helps move engineering and simulation models from .NET/C# backend environments to browser-executable TypeScript.
+Use .NET SDK **10.0.301** (`global.json`) and Node.js **24.12.0**. From root:
 
-Instead of full source-to-source translation, it uses a **component-based approach**: models are migrated by preserving structure (components, aliases, measurements, numerical processors, domain plugins) and providing matching TypeScript implementations.
-
-## Key Features
-
-- Dual execution: run the same model on C# server (reference) and in the browser (TypeScript)
-- TypeScript runtime with support for ODE integration, motion equations, vectors, and aliases
-- React web client for interactive testing and comparison
-- Orbital forecasting case study (main example)
-
-## Repository Structure
-
-- `src/` — Main source code
-  - Backend: ASP.NET Core + C# model implementations
-  - Frontend: React + TypeScript runtime
-- `tex/` — LaTeX sources for the research paper
-
-## Quick Start
-
-### Prerequisites
-
-- .NET 10 SDK
-- Node.js 18+ and npm
-
-### React app with ASP.NET backend
-
-The orbital forecast React client and ASP.NET Core server are located under
-`src/Web/OnlineGameConverter`.
-
-Run the ASP.NET API server in one terminal:
-
-```bash
-cd src/Web/OnlineGameConverter/OnlineGameConverter.Server
-dotnet restore
-dotnet run --launch-profile http
+```powershell
+npm ci
+npm run build:orbital
+dotnet build examples/orbital/OnlineGameConverter/OnlineGameConverter.Server/OnlineGameConverter.Server.csproj
+npm run check:layout
+npm run check:trading
 ```
 
-Then install the shared repository dependencies and start Vite from the
-repository root in a second terminal:
+The orbital builds have existing failures; see [verification](docs/verification.md).
+Once resolved, start the server with:
 
-```bash
-npm install
-npm run dev --workspace onlinegameconverter.client
+```powershell
+dotnet run --project examples/orbital/OnlineGameConverter/OnlineGameConverter.Server --launch-profile http
 ```
 
-Open `https://localhost:57169/` in your browser. The HTTP backend launch
-profile listens on `http://localhost:5218`.
+In a second terminal, run `npm run dev --workspace onlinegameconverter.client`.
+Configured addresses: `http://localhost:5218` and `https://localhost:57169`.
 
-## Main Case Study
+Read [architecture](docs/architecture.md), [generated code](docs/generated-code.md)
+and [experiment instructions](experiments/README.md) before regenerating outputs.
+Other legacy applications remain under `src/`; not all are supported build targets.
 
-**Orbital Forecasting Model**
-
-- Motion equations + fixed-step numerical integration (Runge)
-- Compares trajectory results between C# and TypeScript
-- Used for validation during migration
-
-## License
-
-MIT (see LICENSE file)
+MIT — see [LICENSE](LICENSE).

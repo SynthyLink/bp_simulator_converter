@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+	  <ProjectReference Include="..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\BaseTypes\BaseTypes\BaseTypes.csproj" />
+	  <ProjectReference Include="..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\DataPerformer\DataPerformer.Formula\DataPerformer.Formula.csproj" />
+	  <ProjectReference Include="..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\DataPerformer\DataPerformer.Interfaces\DataPerformer.Interfaces.csproj" />
+	  <ProjectReference Include="..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable\DataPerformer.Portable.csproj" />
+	  <ProjectReference Include="..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Diagram\Diagram\Diagram.csproj" />
+	  <ProjectReference Include="..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\ErrorHandler\ErrorHandler.csproj" />
+	  <ProjectReference Include="..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\FormulaEditor\FormulaEditor\FormulaEditor.csproj" />
+	  <ProjectReference Include="..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Web.Interfaces\Web.Interfaces\Web.Interfaces.csproj" />
+	  <ProjectReference Include="..\..\..\src\runtimes\dotnet\ExternalLibraries\Trading\CSharpAPI\CSharpAPI.csproj" />
+	  <ProjectReference Include="..\..\..\src\runtimes\dotnet\ExternalLibraries\Trading\Trading.Database.SqlServer\Trading.Database.SqlServer.csproj" />
+	  <ProjectReference Include="..\..\..\src\runtimes\dotnet\ExternalLibraries\Trading\Trading.Database\Trading.Database.csproj" />
+	  <ProjectReference Include="..\..\..\src\runtimes\dotnet\ExternalLibraries\Trading\Trading.Library\Trading.Library.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GeneratedProject\" />
+  </ItemGroup>
+
+</Project>

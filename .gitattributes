@@ -1,0 +1,13 @@
+# Evidence is byte-preserved; line-ending conversion would invalidate recorded hashes.
+experiments/trading/historical/** -text
+docs/paper/** -text
+
+# Checked-in generator output (not the emitter implementation).
+examples/**/GeneratedProject/*.cs linguist-generated=true
+examples/**/generated/** linguist-generated=true
+examples/trading/**/Algorithms/DonchianDesktop.ts linguist-generated=true
+examples/orbital/**/OrbitalForecastCalculator.cs linguist-generated=true
+examples/orbital/**/OrbitalForecast.ts linguist-generated=true
+src/Generated/** linguist-generated=true
+src/Python/Python.Generated/** linguist-generated=true
+**/*.js.map linguist-generated=true

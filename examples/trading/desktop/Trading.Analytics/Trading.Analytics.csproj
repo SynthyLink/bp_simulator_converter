@@ -1,0 +1,152 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>ib_data.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="ib_data.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\AliasRegression\AliasRegression.Portable\AliasRegression.Portable.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\AliasRegression\AliasRegression\AliasRegression.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\AnalyticPolynom\AnalyticPolynom.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Animation\Animation.Interfaces\Animation.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Animation\Animation\Animation.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\AssemblyService\AssemblyService.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Audio.Record\Audio.Record\Audio.Record.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\BaseTypes\BaseTypes.Extended\BaseTypes.Extended.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\BaseTypes\BaseTypes\BaseTypes.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\BasicEngineeringUIFactory\BasicEngineeringUIFactory.Advanced\BasicEngineering.UI.Factory.Advanced.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\BasicEngineeringUIFactory\BasicEngineeringUIFactory\BasicEngineering.UI.Factory.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\BitmapConsumer\Bitmap.FormulaEditior\Bitmap.FormulaEditior.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\BitmapConsumer\BitmapConsumer.TestInterface\BitmapConsumer.TestInterface.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\BitmapConsumer\BitmapConsumer\BitmapConsumer.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\BitmapIndicator\BitmapIndicator\BitmapIndicator.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\CategoryTheory\CategoryTheory\CategoryTheory\CategoryTheory.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Chart\Chart.DataPerformer\Chart.DataPerformer.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Chart\Chart.Drawing.Interfaces\Chart.Drawing.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Chart\Chart.Drawing\Chart.Drawing.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Chart\Chart.Objects\Chart.Objects.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Chart\Chart\Chart.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\ClassicalAlgebra\ClassicalAlgebra.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\ColorUI\ColorUI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Common.Engineering.Localization\Common.Engineering.Localization.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Common.UI.Resources\Common.UI.Resources.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Common.UI\Common.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\CommonControls\CommonControls.Interfaces\CommonControls.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\CommonMathOperations\CommonMathOperations\CommonMathOperations.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\CommonService\CommonService\CommonService.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\CompilerService\CompilerService.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Compilers\CodeAnalysis.Compilers\CodeAnalysis.Compilers.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Compilers\CompilerBridge\CompilerBridge.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\ControlSystems.Data.UI\ControlSystems.Data.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\ControlSystems.Data\ControlSystems.Data\ControlSystems.Data.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\ControlSystems.UI\ControlSystems.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\ControlSystemsWrapper\ControlSystemsWrapper.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\ControlSystems\ControlSystems\ControlSystems.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Database\Database.UI\Database.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Database\DataSetForm\DataSetForm\DataSetForm.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Database\DataSet\DataSetSerializable\DataSetSerializable.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Database\DataSet\DataSetService\DataSetService\DataSetService.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Database\DataSet\DataSetSevice.Add\DataSetSevice.Add.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Database\DataSet\DataTableSelection\DataTableSelection.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Database\DataWarehouse\DataWarehouse.Entity\DataWarehouse.Entity.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Database\DataWarehouse\DataWarehouseForm.Advanced\DataWarehouseForm.Advanced\DataWarehouse.Forms.Advanced.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Database\DataWarehouse\DataWarehouseForm\DataWarehouse.Forms.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Database\DataWarehouse\DataWarehouse\DataWarehouse.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Database\DataWarehouse\Drivers\SQLServerWarehouse\SQLServerWarehouse.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Database\Drivers\ODBCTableProvider\ODBCTableProvider.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\DataPerformer\DataPerformer.Base\DataPerformer.Base\DataPerformer.Base.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\DataPerformer\DataPerformer.Basic\DataPerformer.Basic.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\DataPerformer\DataPerformer.Event.Portable\DataPerformer.Event.Portable.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\DataPerformer\DataPerformer.Formula\DataPerformer.Formula.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\DataPerformer\DataPerformer.Interfaces\DataPerformer.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable.Basic\DataPerformer.Portable.Basic.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable\DataPerformer.Portable.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\DataPerformer\DataPerformer.UI\DataPerformer.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\DataPerformer\DataPerformer\DataPerformer.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Diagram\Diagram.Data.WpfData\Diagram.Data.WpfData.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Diagram\Diagram.Extended\Diagram.Extended.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Diagram\Diagram.UI.Components\Diagram.UI.Components\Diagram.UI.Components.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Diagram\Diagram.UI.Forms\Diagram.UI.Forms.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Diagram\Diagram.UI.Serializable\Diagram.UI.Serializable.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Diagram\Diagram.UI.Zip\Diagram.UI.Zip.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Diagram\Diagram.UI\Diagram.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Diagram\Diagram\Diagram.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\EngineeringInitializer\EngineeringInitializer.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Error.UI\Error.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Events\Event.Basic.Data\Event.Basic.Data.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Events\Event.Basic\Event.Basic.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Events\Event.Data.Interface\Event.Data.Interface.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Events\Event.Interfaces\Event.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Events\Event.Log.Database.UI\Event.Log.Database.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Events\Event.Log.Database\Event.Log.Database.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Events\Event.Portable\Event.Portable.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Events\Event.UI\Event.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Events\Event.Windows.Forms\Event.Windows.Forms.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\FormulaEditor\ExtendedFormulaEditor\ExtendedFormulaEditor.csproj" />
+    <ProjectReference Include="..\..\..\..\src\converter\generators\DynamicLinkLibraries\FormulaEditor\FormulaEditor.Compiler\FormulaEditor.Compiler.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\FormulaEditor\FormulaEditor.Drawing\FormulaEditor.Drawing.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\FormulaEditor\FormulaEditor.Forms\FormulaEditor.Forms.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\FormulaEditor\FormulaEditor.Serializable\FormulaEditor.Serializable.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\FormulaEditor\FormulaEditor.UI\FormulaEditor.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\FormulaEditor\FormulaEditor\FormulaEditor.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\GeneralLinearMethod\GeneralLinearMethod.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\GraphicsControls\GraphicsControls.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\ImageTransformation.UI\ImageTransformation.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\ImageTransformation\ImageTransformation.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Localization.Helper\Localization.Helper.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\MathStatistics\MathStatistics\MathStatistics.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Node\TreeNode.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\OrdinaryDifferentialEquations\OrdinaryDifferentialEquations\OrdinaryDifferentialEquations.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\PropertyGrid\CustomControls\CustomControls.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\RealMatrixProcessor\RealMatrixProcessor.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\ResourceService\ResourceService.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Scada\Scada.Desktop\Scada.Desktop.Serializable\Scada.Desktop.Serializable.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Scada\Scada.Desktop\Scada.Desktop\Scada.Desktop.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Scada\Scada.Interfaces\Scada.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\SerializationInterface\SerializationInterface.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\TestCategory\TestCategory.UI\TestCategory.UI\TestCategory.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\TestCategory\TestCategory\TestCategory.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\ToolBox\ToolBox.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Vector3D\Vector3D.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Web.Interfaces\Web.Interfaces.UI.Factory\Web.Interfaces.UI.Factory.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Web.Interfaces\Web.Interfaces.UI\Web.Interfaces.UI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Web.Interfaces\Web.Interfaces\Web.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\WindowsExtensions\WindowsExtensions.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Xml.DrawingLibrary\Xml.DrawingLibrary\Xml.Drawing.Library.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\XmlSelection\XmlSelection.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\DynamicLinkLibraries\Zip.Service\Zip.Service.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\ExternalLibraries\Trading\CSharpAPI\CSharpAPI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\ExternalLibraries\Trading\Trading.Charts\Trading.Charts.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\ExternalLibraries\Trading\Trading.Library.Serializable\Trading.Library.Serializable.csproj" />
+    <ProjectReference Include="..\..\..\..\src\runtimes\dotnet\ExternalLibraries\Trading\Trading.Library\Trading.Library.csproj" />
+    <ProjectReference Include="..\..\..\..\src\Samples\WindowsTemplates\WindowsTemplates.csproj" />
+    <ProjectReference Include="..\..\..\..\src\ThirdParty\OfficePickers\OfficePickers.csproj" />
+    <ProjectReference Include="..\..\..\..\src\ThirdParty\WinFormsUI\WinFormsUI.csproj" />
+    <ProjectReference Include="..\..\..\..\src\ThirdParty\ziplib\ZipUtils\ZipUtils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

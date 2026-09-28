@@ -2,10 +2,12 @@
   "name": "bp-simulator-converter",
   "private": true,
   "workspaces": [
-    "src/Web/OnlineGameConverter/onlinegameconverter.client"
+    "examples/orbital/OnlineGameConverter/onlinegameconverter.client"
   ],
   "scripts": {
-    "build:orbital": "npm run build --workspace onlinegameconverter.client"
+    "build:orbital": "npm run build --workspace onlinegameconverter.client",
+    "check:layout": "node scripts/check-layout.mjs",
+    "check:trading": "node experiments/trading/check.mjs"
   },
   "dependencies": {
     "react": "19.1.0",

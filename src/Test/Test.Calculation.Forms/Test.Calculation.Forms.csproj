@@ -8,14 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\DynamicLinkLibraries\CategoryTheory\CategoryTheory\CategoryTheory\CategoryTheory.csproj" />
-    <ProjectReference Include="..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable.Java\DataPerformer.Portable.Java.csproj" />
-    <ProjectReference Include="..\..\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable\DataPerformer.Portable.csproj" />
-    <ProjectReference Include="..\..\DynamicLinkLibraries\Diagram\Diagram.Java\Diagram.Java.csproj" />
-    <ProjectReference Include="..\..\DynamicLinkLibraries\Diagram\Diagram.TypeScript\Diagram.TypeScript.csproj" />
-    <ProjectReference Include="..\..\DynamicLinkLibraries\Diagram\Diagram.UI.Forms\Diagram.UI.Forms.csproj" />
-    <ProjectReference Include="..\..\DynamicLinkLibraries\Diagram\Diagram.UI\Diagram.UI.csproj" />
-    <ProjectReference Include="..\..\DynamicLinkLibraries\Diagram\Diagram\Diagram.csproj" />
+    <ProjectReference Include="..\..\runtimes\dotnet\DynamicLinkLibraries\CategoryTheory\CategoryTheory\CategoryTheory\CategoryTheory.csproj" />
+    <ProjectReference Include="..\..\converter\generators\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable.Java\DataPerformer.Portable.Java.csproj" />
+    <ProjectReference Include="..\..\runtimes\dotnet\DynamicLinkLibraries\DataPerformer\DataPerformer.Portable\DataPerformer.Portable.csproj" />
+    <ProjectReference Include="..\..\converter\generators\DynamicLinkLibraries\Diagram\Diagram.Java\Diagram.Java.csproj" />
+    <ProjectReference Include="..\..\converter\generators\DynamicLinkLibraries\Diagram\Diagram.TypeScript\Diagram.TypeScript.csproj" />
+    <ProjectReference Include="..\..\runtimes\dotnet\DynamicLinkLibraries\Diagram\Diagram.UI.Forms\Diagram.UI.Forms.csproj" />
+    <ProjectReference Include="..\..\runtimes\dotnet\DynamicLinkLibraries\Diagram\Diagram.UI\Diagram.UI.csproj" />
+    <ProjectReference Include="..\..\runtimes\dotnet\DynamicLinkLibraries\Diagram\Diagram\Diagram.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Runtime.Serialization.Formatters" Version="10.0.3" />

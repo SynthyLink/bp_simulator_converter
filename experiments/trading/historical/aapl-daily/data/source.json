@@ -1,0 +1,19 @@
+{
+  "provider": "Yahoo Finance",
+  "url": "https://query2.finance.yahoo.com/v8/finance/chart/AAPL?period1=1640995200&period2=1704067200&interval=1d",
+  "retrievedAtUtc": "2026-09-27T14:43:54.887Z",
+  "retrievalTimestampBasis": "Input file modification time",
+  "symbol": "AAPL",
+  "interval": "1 day",
+  "currency": "USD",
+  "exchangeTimezone": "America/New_York",
+  "prices": "Yahoo quote OHLC (split-adjusted); adjusted-close series is not used; no dividend adjustment or rounding is applied by this experiment",
+  "dateConversion": "Provider timestamps converted to America/New_York trading-session dates",
+  "rawFile": "data/AAPL_yahoo_raw.json",
+  "rawSha256": "261294768bdc6b3c1a2860975f2c3feb0a0ffb31f1a1216f4544d7cc49ef1def",
+  "dataFile": "data/AAPL_1d.json",
+  "dataSha256": "d099ed13ce8b6f494c50d0f77abf60e460c575c2f80811212e8768305fef11a2",
+  "rowCount": 501,
+  "firstDate": "2022-01-03",
+  "lastDate": "2023-12-29"
+}

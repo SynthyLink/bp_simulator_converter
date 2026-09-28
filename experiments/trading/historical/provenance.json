@@ -1,0 +1,110 @@
+{
+  "revision": "f40af51ce5e2629a9e26b89cdf036a864209f0b8",
+  "branch": "trading-xperiment",
+  "entries": [
+    {
+      "original": "experiments/trading/.gitignore",
+      "archived": "experiments/trading/historical/aapl-daily/.gitignore",
+      "blob": "a0bc78d79ea504a385440da90df7836f1ce3651f"
+    },
+    {
+      "original": "experiments/trading/CSharp/Program.cs",
+      "archived": "experiments/trading/historical/aapl-daily/CSharp/Program.cs",
+      "blob": "4d43e3cd10b30854dd6396d33e75872741232174"
+    },
+    {
+      "original": "experiments/trading/CSharp/TradingExperiment.csproj",
+      "archived": "experiments/trading/historical/aapl-daily/CSharp/TradingExperiment.csproj",
+      "blob": "7f5ac126cc535387aadca994c0d9f86f9ddc1eaf"
+    },
+    {
+      "original": "experiments/trading/README.md",
+      "archived": "experiments/trading/historical/aapl-daily/README.md",
+      "blob": "908fd32bb4b1a0931438a3077cb6731b1e9e1dde"
+    },
+    {
+      "original": "experiments/trading/Trading_CSharp.json",
+      "archived": "experiments/trading/historical/aapl-daily/Trading_CSharp.json",
+      "blob": "99f0774f4f1c1d1290b1b357858cf43948c9b6d7"
+    },
+    {
+      "original": "experiments/trading/Trading_TypeScript.json",
+      "archived": "experiments/trading/historical/aapl-daily/Trading_TypeScript.json",
+      "blob": "5a342184e9a6e5adcc00b842b837c8bb8a29f4c6"
+    },
+    {
+      "original": "experiments/trading/compare.mjs",
+      "archived": "experiments/trading/historical/aapl-daily/compare.mjs",
+      "blob": "1cdf4a84b1e2c9f8bedf2a5bd522ae203bc572c5"
+    },
+    {
+      "original": "experiments/trading/config.json",
+      "archived": "experiments/trading/historical/aapl-daily/config.json",
+      "blob": "65d8b4a70fb5dc1417999d7fc8cc12588ae68bce"
+    },
+    {
+      "original": "experiments/trading/data/AAPL_1d.json",
+      "archived": "experiments/trading/historical/aapl-daily/data/AAPL_1d.json",
+      "blob": "47327de77c378fd854f74676419ca9907460619e"
+    },
+    {
+      "original": "experiments/trading/data/AAPL_yahoo_raw.json",
+      "archived": "experiments/trading/historical/aapl-daily/data/AAPL_yahoo_raw.json",
+      "blob": "9af7716b0f514b712767f38a2384e5a4279b6fb3"
+    },
+    {
+      "original": "experiments/trading/data/source.json",
+      "archived": "experiments/trading/historical/aapl-daily/data/source.json",
+      "blob": "3871fd0fb40d520a46a6144b333e7fa17138e1f7"
+    },
+    {
+      "original": "experiments/trading/notes.md",
+      "archived": "experiments/trading/historical/aapl-daily/notes.md",
+      "blob": "f2ff5612667a9a382b7138a5e0382bd6fae48bc4"
+    },
+    {
+      "original": "experiments/trading/package-lock.json",
+      "archived": "experiments/trading/historical/aapl-daily/package-lock.json",
+      "blob": "1b316e13530d6daf5d9eb6eb028dcaafb6dbeeff"
+    },
+    {
+      "original": "experiments/trading/package.json",
+      "archived": "experiments/trading/historical/aapl-daily/package.json",
+      "blob": "ac937a463385c5b000761fd86fa207492e440911"
+    },
+    {
+      "original": "experiments/trading/prepare-data.mjs",
+      "archived": "experiments/trading/historical/aapl-daily/prepare-data.mjs",
+      "blob": "45e7e4f08ed5799a29620ee1acff21dd9feedd1a"
+    },
+    {
+      "original": "experiments/trading/run.mjs",
+      "archived": "experiments/trading/historical/aapl-daily/run.mjs",
+      "blob": "6b512ca61c3bcc6831816079d2d497cf13e7f68b"
+    },
+    {
+      "original": "experiments/trading/source-manifest.json",
+      "archived": "experiments/trading/historical/aapl-daily/source-manifest.json",
+      "blob": "bbcdb9228b9497710651ca8ce591b4259a734e01"
+    },
+    {
+      "original": "experiments/trading/summary.json",
+      "archived": "experiments/trading/historical/aapl-daily/summary.json",
+      "blob": "56e6117fc63f8fee0e18bade368e7cfb77e7b936"
+    },
+    {
+      "original": "experiments/trading/tests.mjs",
+      "archived": "experiments/trading/historical/aapl-daily/tests.mjs",
+      "blob": "d837ed46054d6b2af0a4d1bb052b27b73b854f90"
+    },
+    {
+      "original": "experiments/trading/typescript.ts",
+      "archived": "experiments/trading/historical/aapl-daily/typescript.ts",
+      "blob": "d6ba9deaa51228df7a7fd540e7c19ff960195a2c"
+    }
+  ],
+  "excludedBehaviorChanges": [
+    "src/ExternalLibraries/Trading/Trading.Library/Objects/DataQuery.cs",
+    "src/Web/AspireTradingApp/frontend/src/ExternalObjects/Trading/Components/TradingDataQuery.ts"
+  ]
+}
