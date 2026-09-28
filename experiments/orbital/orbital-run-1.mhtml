@@ -1,0 +1,2235 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: http://localhost:51613/
+Subject: Aspire Starter
+Date: Wed, 24 Jun 2026 06:50:59 +0300
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--cAkseu4Nrf776cmUO6DD0vhEcMaM6CDZ1BG5SodnF5----"
+
+
+------MultipartBoundary--cAkseu4Nrf776cmUO6DD0vhEcMaM6CDZ1BG5SodnF5----
+Content-Type: text/html
+Content-ID: <frame-71A71C4C21AE2A66911E392F181BAC15@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://localhost:51613/
+
+<!DOCTYPE html><html lang=3D"en"><head><meta http-equiv=3D"Content-Type" co=
+ntent=3D"text/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/=
+css" href=3D"cid:css-f0cbc79e-4196-4749-9023-b1be03f3cd33@mhtml.blink" /><l=
+ink rel=3D"stylesheet" type=3D"text/css" href=3D"cid:css-bd8c3f55-d277-4298=
+-8c0b-e2c0b3621d64@mhtml.blink" />
+   =20
+
+   =20
+
+   =20
+    <link rel=3D"icon" type=3D"image/svg+xml" href=3D"http://localhost:5161=
+3/Aspire.png">
+    <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=
+=3D1.0">
+    <title>Aspire Starter</title>
+  </head>
+  <body>
+    <div id=3D"root"><div class=3D"body-main"><h1 id=3D"tableLabel">Orbital=
+ forecast</h1><h2>This component calculation of orbit forecast</h2><div>  <=
+table class=3D"my-table"><thead><tr><th>Parameter</th><th>Value</th></tr></=
+thead><tbody><tr><td><label asp-for=3D"Begin">Begin</label></td><td><input =
+class=3D"input-filter-index" type=3D"datetime-local" value=3D"2026-06-24T03=
+:45:06.449"></td></tr><tr><td><label>End</label></td><td><input class=3D"in=
+put-filter-index" type=3D"datetime-local" value=3D"2026-06-30T09:18:30.449"=
+></td></tr><tr><td><label asp-for=3D"X">X</label></td><td><input class=3D"i=
+nput-filter-index" type=3D"number" value=3D"-5448.34815324"></td></tr><tr><=
+td><label asp-for=3D"Y">Y</label></td><td><input class=3D"input-filter-inde=
+x" type=3D"number" value=3D"-4463.93698421"></td></tr><tr><td><label asp-fo=
+r=3D"Z">Z</label></td><td><input class=3D"input-filter-index" type=3D"numbe=
+r" value=3D"0"></td></tr><tr><td><label asp-for=3D"Vx">Vx</label></td><td><=
+input class=3D"input-filter-index" type=3D"number" value=3D"-0.985394777432=
+"></td></tr><tr><td><label asp-for=3D"Vy">Vy</label></td><td><input class=
+=3D"input-filter-index" type=3D"number" value=3D"1.21681893834"></td></tr><=
+tr><td><label asp-for=3D"Vz">Vz</label></td><td><input class=3D"input-filte=
+r-index" type=3D"number" value=3D"7.45047785592"></td></tr></tbody></table>=
+ </div><div><button>Start</button><table><thead><tr><td>Server</td><td>Clie=
+nt</td></tr></thead><tbody><tr><td><table class=3D"my-table"><thead><tr><th=
+>Paramerter</th><th>Value</th></tr></thead><tbody><tr>                    <=
+td>Loop</td>                        <td>1</td></tr><tr>                    =
+<td>Time</td>                        <td>6/24/2026, 2:23:09 AM</td></tr><tr=
+>                    <td>X</td>                        <td>-6809.4548950986=
+92</td></tr><tr><td>Y</td><td>-1800.6851616672027</td></tr><tr><td>Z</td><t=
+d>2.80642240733558</td></tr><tr><td>Y</td><td>-1800.6851616672027</td></tr>=
+<tr><td>Vx</td><td>-0.3888544095241871</td></tr><tr><td>Vy</td><td>1.516921=
+5301090857</td></tr><tr><td>Vz</td><td>7.450461668079534</td></tr><tr><td>D=
+uration</td><td>1847</td></tr><tr class=3D"black-color"><td class=3D"black-=
+color"></td><td class=3D"black-color"></td></tr><tr>                    <td=
+>Loop</td>                        <td>2</td></tr><tr>                    <t=
+d>Time</td>                        <td>6/24/2026, 4:01:12 AM</td></tr><tr> =
+                   <td>X</td>                        <td>-6942.743126123797=
+</td></tr><tr><td>Y</td><td>1187.2993689925504</td></tr><tr><td>Z</td><td>5=
+.783912231076208</td></tr><tr><td>Y</td><td>1187.2993689925504</td></tr><tr=
+><td>Vx</td><td>0.278764102012415</td></tr><tr><td>Vy</td><td>1.54106691163=
+47635</td></tr><tr><td>Vz</td><td>7.450440789226366</td></tr><tr><td>Durati=
+on</td><td>3631</td></tr><tr class=3D"black-color"><td class=3D"black-color=
+"></td><td class=3D"black-color"></td></tr><tr>                    <td>Loop=
+</td>                        <td>3</td></tr><tr>                    <td>Tim=
+e</td>                        <td>6/24/2026, 5:39:14 AM</td></tr><tr>      =
+              <td>X</td>                        <td>-5825.093320401792</td>=
+</tr><tr><td>Y</td><td>3959.9461425775326</td></tr><tr><td>Z</td><td>1.4404=
+810336252112</td></tr><tr><td>Y</td><td>3959.9461425775326</td></tr><tr><td=
+>Vx</td><td>0.8889779656939226</td></tr><tr><td>Vy</td><td>1.28922829128882=
+5</td></tr><tr><td>Vz</td><td>7.450368442617858</td></tr><tr><td>Duration</=
+td><td>5412</td></tr><tr class=3D"black-color"><td class=3D"black-color"></=
+td><td class=3D"black-color"></td></tr><tr>                    <td>Loop</td=
+>                        <td>4</td></tr><tr>                    <td>Time</t=
+d>                        <td>6/24/2026, 7:17:17 AM</td></tr><tr>          =
+          <td>X</td>                        <td>-3656.875946491055</td></tr=
+><tr><td>Y</td><td>6020.167152657603</td></tr><tr><td>Z</td><td>4.329170111=
+246011</td></tr><tr><td>Y</td><td>6020.167152657603</td></tr><tr><td>Vx</td=
+><td>1.3452531209065948</td></tr><tr><td>Vy</td><td>0.8013926072136451</td>=
+</tr><tr><td>Vz</td><td>7.450207132880046</td></tr><tr><td>Duration</td><td=
+>7209</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td=
+ class=3D"black-color"></td></tr><tr>                    <td>Loop</td>     =
+                   <td>5</td></tr><tr>                    <td>Time</td>    =
+                    <td>6/24/2026, 8:55:20 AM</td></tr><tr>                =
+    <td>X</td>                        <td>-829.1434763175013</td></tr><tr><=
+td>Y</td><td>6994.882656469749</td></tr><tr><td>Z</td><td>6.640550932760642=
+</td></tr><tr><td>Y</td><td>6994.882656469749</td></tr><tr><td>Vx</td><td>1=
+.5565300161506865</td></tr><tr><td>Vy</td><td>0.16851215826053886</td></tr>=
+<tr><td>Vz</td><td>7.450123522921648</td></tr><tr><td>Duration</td><td>9001=
+</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td clas=
+s=3D"black-color"></td></tr><tr>                    <td>Loop</td>          =
+              <td>6</td></tr><tr>                    <td>Time</td>         =
+               <td>6/24/2026, 10:33:22 AM</td></tr><tr>                    =
+<td>X</td>                        <td>2146.5326105794834</td></tr><tr><td>Y=
+</td><td>6708.787822320145</td></tr><tr><td>Z</td><td>1.0888239552767214</t=
+d></tr><tr><td>Y</td><td>6708.787822320145</td></tr><tr><td>Vx</td><td>1.48=
+80098689588406</td></tr><tr><td>Vy</td><td>-0.4865714771803628</td></tr><tr=
+><td>Vz</td><td>7.4501290656127575</td></tr><tr><td>Duration</td><td>10906<=
+/td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td class=
+=3D"black-color"></td></tr><tr>                    <td>Loop</td>           =
+             <td>7</td></tr><tr>                    <td>Time</td>          =
+              <td>6/24/2026, 12:11:25 PM</td></tr><tr>                    <=
+td>X</td>                        <td>4736.661534274627</td></tr><tr><td>Y</=
+td><td>5213.324004988601</td></tr><tr><td>Z</td><td>3.1297042907071564</td>=
+</tr><tr><td>Y</td><td>5213.324004988601</td></tr><tr><td>Vx</td><td>1.1506=
+077097992577</td></tr><tr><td>Vy</td><td>-1.0618325849427852</td></tr><tr><=
+td>Vz</td><td>7.450194914554762</td></tr><tr><td>Duration</td><td>13251</td=
+></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D=
+"black-color"></td></tr><tr>                    <td>Loop</td>              =
+          <td>8</td></tr><tr>                    <td>Time</td>             =
+           <td>6/24/2026, 1:49:28 PM</td></tr><tr>                    <td>X=
+</td>                        <td>6472.820278946874</td></tr><tr><td>Y</td><=
+td>2777.955594164327</td></tr><tr><td>Z</td><td>5.660350625312155</td></tr>=
+<tr><td>Y</td><td>2777.955594164327</td></tr><tr><td>Vx</td><td>0.603853832=
+6862918</td></tr><tr><td>Vy</td><td>-1.4448489789796806</td></tr><tr><td>Vz=
+</td><td>7.4501891809308</td></tr><tr><td>Duration</td><td>15469</td></tr><=
+tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-=
+color"></td></tr><tr>                    <td>Loop</td>                     =
+   <td>9</td></tr><tr>                    <td>Time</td>                    =
+    <td>6/24/2026, 3:27:30 PM</td></tr><tr>                    <td>X</td>  =
+                      <td>7042.05837127175</td></tr><tr><td>Y</td><td>-156.=
+7078407513263</td></tr><tr><td>Z</td><td>1.292627657295915</td></tr><tr><td=
+>Y</td><td>-156.7078407513263</td></tr><tr><td>Vx</td><td>-0.04515691235508=
+2165</td></tr><tr><td>Vy</td><td>-1.5654030702165893</td></tr><tr><td>Vz</t=
+d><td>7.450142468937261</td></tr><tr><td>Duration</td><td>17381</td></tr><t=
+r class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-c=
+olor"></td></tr><tr>                    <td>Loop</td>                      =
+  <td>10</td></tr><tr>                    <td>Time</td>                    =
+    <td>6/24/2026, 5:05:33 PM</td></tr><tr>                    <td>X</td>  =
+                      <td>6342.205102040845</td></tr><tr><td>Y</td><td>-306=
+4.6412606973618</td></tr><tr><td>Z</td><td>4.3838364084697705</td></tr><tr>=
+<td>Y</td><td>-3064.6412606973618</td></tr><tr><td>Vx</td><td>-0.6936434164=
+197655</td></tr><tr><td>Vy</td><td>-1.404091520297694</td></tr><tr><td>Vz</=
+td><td>7.450088358685484</td></tr><tr><td>Duration</td><td>19128</td></tr><=
+tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-=
+color"></td></tr><tr>                    <td>Loop</td>                     =
+   <td>11</td></tr><tr>                    <td>Time</td>                   =
+     <td>6/24/2026, 6:43:35 PM</td></tr><tr>                    <td>X</td> =
+                       <td>4499.940348454746</td></tr><tr><td>Y</td><td>-54=
+19.171834378189</td></tr><tr><td>Z</td><td>0.04443052444893514</td></tr><tr=
+><td>Y</td><td>-5419.171834378189</td></tr><tr><td>Vx</td><td>-1.2104885412=
+87883</td></tr><tr><td>Vy</td><td>-0.993412456690484</td></tr><tr><td>Vz</t=
+d><td>7.449995620616568</td></tr><tr><td>Duration</td><td>20991</td></tr><t=
+r class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-c=
+olor"></td></tr><tr>                    <td>Loop</td>                      =
+  <td>12</td></tr><tr>                    <td>Time</td>                    =
+    <td>6/24/2026, 8:21:38 PM</td></tr><tr>                    <td>X</td>  =
+                      <td>1845.6244165505016</td></tr><tr><td>Y</td><td>-67=
+97.78628507765</td></tr><tr><td>Z</td><td>2.8775752817399223</td></tr><tr><=
+td>Y</td><td>-6797.78628507765</td></tr><tr><td>Vx</td><td>-1.5140937331538=
+276</td></tr><tr><td>Vy</td><td>-0.3986694358931209</td></tr><tr><td>Vz</td=
+><td>7.450121472705394</td></tr><tr><td>Duration</td><td>22820</td></tr><tr=
+ class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-co=
+lor"></td></tr><tr>                    <td>Loop</td>                       =
+ <td>13</td></tr><tr>                    <td>Time</td>                     =
+   <td>6/24/2026, 9:59:41 PM</td></tr><tr>                    <td>X</td>   =
+                     <td>-1141.1525519247484</td></tr><tr><td>Y</td><td>-69=
+50.688514032208</td></tr><tr><td>Z</td><td>4.923376406812976</td></tr><tr><=
+td>Y</td><td>-6950.688514032208</td></tr><tr><td>Vx</td><td>-1.542550851277=
+0507</td></tr><tr><td>Vy</td><td>0.26764305814139006</td></tr><tr><td>Vz</t=
+d><td>7.450269041441179</td></tr><tr><td>Duration</td><td>24603</td></tr><t=
+r class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-c=
+olor"></td></tr><tr>                    <td>Loop</td>                      =
+  <td>14</td></tr><tr>                    <td>Time</td>                    =
+    <td>6/24/2026, 11:37:44 PM</td></tr><tr>                    <td>X</td> =
+                       <td>-3922.2105364480913</td></tr><tr><td>Y</td><td>-=
+5850.524928623948</td></tr><tr><td>Z</td><td>6.967744378502851</td></tr><tr=
+><td>Y</td><td>-5850.524928623948</td></tr><tr><td>Vx</td><td>-1.2912729639=
+502734</td></tr><tr><td>Vy</td><td>0.8854466175944122</td></tr><tr><td>Vz</=
+td><td>7.450386856901511</td></tr><tr><td>Duration</td><td>26402</td></tr><=
+tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-=
+color"></td></tr><tr>                    <td>Loop</td>                     =
+   <td>15</td></tr><tr>                    <td>Time</td>                   =
+     <td>6/25/2026, 1:15:46 AM</td></tr><tr>                    <td>X</td> =
+                       <td>-5995.373065120087</td></tr><tr><td>Y</td><td>-3=
+696.8846904712477</td></tr><tr><td>Z</td><td>1.9623332681297825</td></tr><t=
+r><td>Y</td><td>-3696.8846904712477</td></tr><tr><td>Vx</td><td>-0.81240796=
+39984447</td></tr><tr><td>Vy</td><td>1.338608212020471</td></tr><tr><td>Vz<=
+/td><td>7.450453432429749</td></tr><tr><td>Duration</td><td>28170</td></tr>=
+<tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black=
+-color"></td></tr><tr>                    <td>Loop</td>                    =
+    <td>16</td></tr><tr>                    <td>Time</td>                  =
+      <td>6/25/2026, 2:53:49 AM</td></tr><tr>                    <td>X</td>=
+                        <td>-6988.886915735358</td></tr><tr><td>Y</td><td>-=
+875.7799053430252</td></tr><tr><td>Z</td><td>4.805605238196148</td></tr><tr=
+><td>Y</td><td>-875.7799053430252</td></tr><tr><td>Vx</td><td>-0.1807645581=
+4330056</td></tr><tr><td>Vy</td><td>1.5555704630989373</td></tr><tr><td>Vz<=
+/td><td>7.450420228526484</td></tr><tr><td>Duration</td><td>29951</td></tr>=
+<tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black=
+-color"></td></tr><tr>                    <td>Loop</td>                    =
+    <td>17</td></tr><tr>                    <td>Time</td>                  =
+      <td>6/25/2026, 4:31:51 AM</td></tr><tr>                    <td>X</td>=
+                        <td>-6722.68678777148</td></tr><tr><td>Y</td><td>21=
+01.790918588756</td></tr><tr><td>Z</td><td>0.44089156302544996</td></tr><tr=
+><td>Y</td><td>2101.790918588756</td></tr><tr><td>Vx</td><td>0.476255888406=
+27103</td></tr><tr><td>Vy</td><td>1.4918726366964803</td></tr><tr><td>Vz</t=
+d><td>7.450408070524693</td></tr><tr><td>Duration</td><td>31729</td></tr><t=
+r class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-c=
+olor"></td></tr><tr>                    <td>Loop</td>                      =
+  <td>18</td></tr><tr>                    <td>Time</td>                    =
+    <td>6/25/2026, 6:09:54 AM</td></tr><tr>                    <td>X</td>  =
+                      <td>-5244.540058279435</td></tr><tr><td>Y</td><td>470=
+1.97287182192</td></tr><tr><td>Z</td><td>3.5506666717214266</td></tr><tr><t=
+d>Y</td><td>4701.97287182192</td></tr><tr><td>Vx</td><td>1.0547800685811235=
+</td></tr><tr><td>Vy</td><td>1.157501297264944</td></tr><tr><td>Vz</td><td>=
+7.450303209147386</td></tr><tr><td>Duration</td><td>33530</td></tr><tr clas=
+s=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-color">=
+</td></tr><tr>                    <td>Loop</td>                        <td>=
+19</td></tr><tr>                    <td>Time</td>                        <t=
+d>6/25/2026, 7:47:57 AM</td></tr><tr>                    <td>X</td>        =
+                <td>-2820.727479141465</td></tr><tr><td>Y</td><td>6454.3768=
+33336566</td></tr><tr><td>Z</td><td>6.300624342801544</td></tr><tr><td>Y</t=
+d><td>6454.376833336566</td></tr><tr><td>Vx</td><td>1.4409720603340952</td>=
+</tr><tr><td>Vy</td><td>0.6126975879894312</td></tr><tr><td>Vz</td><td>7.45=
+0172046614393</td></tr><tr><td>Duration</td><td>35283</td></tr><tr class=3D=
+"black-color"><td class=3D"black-color"></td><td class=3D"black-color"></td=
+></tr><tr>                    <td>Loop</td>                        <td>20</=
+td></tr><tr>                    <td>Time</td>                        <td>6/=
+25/2026, 9:25:59 AM</td></tr><tr>                    <td>X</td>            =
+            <td>110.21837023879515</td></tr><tr><td>Y</td><td>7042.99504401=
+6899</td></tr><tr><td>Z</td><td>0.9946119775198428</td></tr><tr><td>Y</td><=
+td>7042.995044016899</td></tr><tr><td>Vx</td><td>1.5651906973515026</td></t=
+r><tr><td>Vy</td><td>-0.034431173715508814</td></tr><tr><td>Vz</td><td>7.45=
+0104476681095</td></tr><tr><td>Duration</td><td>37064</td></tr><tr class=3D=
+"black-color"><td class=3D"black-color"></td><td class=3D"black-color"></td=
+></tr><tr>                    <td>Loop</td>                        <td>21</=
+td></tr><tr>                    <td>Time</td>                        <td>6/=
+25/2026, 11:04:02 AM</td></tr><tr>                    <td>X</td>           =
+             <td>3022.6426885221617</td></tr><tr><td>Y</td><td>6362.2846523=
+64631</td></tr><tr><td>Z</td><td>2.9649840956156375</td></tr><tr><td>Y</td>=
+<td>6362.284652364631</td></tr><tr><td>Vx</td><td>1.4089363670579615</td></=
+tr><tr><td>Vy</td><td>-0.6826591146955023</td></tr><tr><td>Vz</td><td>7.450=
+159041228044</td></tr><tr><td>Duration</td><td>38883</td></tr><tr class=3D"=
+black-color"><td class=3D"black-color"></td><td class=3D"black-color"></td>=
+</tr><tr>                    <td>Loop</td>                        <td>22</t=
+d></tr><tr>                    <td>Time</td>                        <td>6/2=
+5/2026, 12:42:05 PM</td></tr><tr>                    <td>X</td>            =
+            <td>5390.0125102842485</td></tr><tr><td>Y</td><td>4534.54378515=
+7837</td></tr><tr><td>Z</td><td>5.123454387773281</td></tr><tr><td>Y</td><t=
+d>4534.543785157837</td></tr><tr><td>Vx</td><td>0.997001247362629</td></tr>=
+<tr><td>Vy</td><td>-1.2073897661254105</td></tr><tr><td>Vz</td><td>7.450208=
+9845699375</td></tr><tr><td>Duration</td><td>40642</td></tr><tr class=3D"bl=
+ack-color"><td class=3D"black-color"></td><td class=3D"black-color"></td></=
+tr><tr>                    <td>Loop</td>                        <td>23</td>=
+</tr><tr>                    <td>Time</td>                        <td>6/25/=
+2026, 2:20:07 PM</td></tr><tr>                    <td>X</td>               =
+         <td>6785.243659382166</td></tr><tr><td>Y</td><td>1890.767630571495=
+4</td></tr><tr><td>Z</td><td>0.41159719157486396</td></tr><tr><td>Y</td><td=
+>1890.7676305714954</td></tr><tr><td>Vx</td><td>0.411250171124341</td></tr>=
+<tr><td>Vy</td><td>-1.5110290195636236</td></tr><tr><td>Vz</td><td>7.450187=
+747044598</td></tr><tr><td>Duration</td><td>42469</td></tr><tr class=3D"bla=
+ck-color"><td class=3D"black-color"></td><td class=3D"black-color"></td></t=
+r><tr>                    <td>Loop</td>                        <td>24</td><=
+/tr><tr>                    <td>Time</td>                        <td>6/25/2=
+026, 3:58:10 PM</td></tr><tr>                    <td>X</td>                =
+        <td>6958.139643945382</td></tr><tr><td>Y</td><td>-1095.145792160133=
+</td></tr><tr><td>Z</td><td>3.60655103335543</td></tr><tr><td>Y</td><td>-10=
+95.145792160133</td></tr><tr><td>Vx</td><td>-0.2561843480236401</td></tr><t=
+r><td>Vy</td><td>-1.545010248110023</td></tr><tr><td>Vz</td><td>7.450138379=
+613854</td></tr><tr><td>Duration</td><td>44246</td></tr><tr class=3D"black-=
+color"><td class=3D"black-color"></td><td class=3D"black-color"></td></tr><=
+tr>                    <td>Loop</td>                        <td>25</td></tr=
+><tr>                    <td>Time</td>                        <td>6/25/2026=
+, 5:36:13 PM</td></tr><tr>                    <td>X</td>                   =
+     <td>5876.427235310708</td></tr><tr><td>Y</td><td>-3883.6976701555886</=
+td></tr><tr><td>Z</td><td>6.762042981739904</td></tr><tr><td>Y</td><td>-388=
+3.6976701555886</td></tr><tr><td>Vx</td><td>-0.8770083504977443</td></tr><t=
+r><td>Vy</td><td>-1.2975299099777409</td></tr><tr><td>Vz</td><td>7.45007573=
+8817678</td></tr><tr><td>Duration</td><td>46021</td></tr><tr class=3D"black=
+-color"><td class=3D"black-color"></td><td class=3D"black-color"></td></tr>=
+<tr>                    <td>Loop</td>                        <td>26</td></t=
+r><tr>                    <td>Time</td>                        <td>6/25/202=
+6, 7:14:15 PM</td></tr><tr>                    <td>X</td>                  =
+      <td>3736.382222222056</td></tr><tr><td>Y</td><td>-5971.268608693578</=
+td></tr><tr><td>Z</td><td>2.3885546616178193</td></tr><tr><td>Y</td><td>-59=
+71.268608693578</td></tr><tr><td>Vx</td><td>-1.3335859979735916</td></tr><t=
+r><td>Vy</td><td>-0.8208032520751216</td></tr><tr><td>Vz</td><td>7.45002109=
+6221185</td></tr><tr><td>Duration</td><td>47843</td></tr><tr class=3D"black=
+-color"><td class=3D"black-color"></td><td class=3D"black-color"></td></tr>=
+<tr>                    <td>Loop</td>                        <td>27</td></t=
+r><tr>                    <td>Time</td>                        <td>6/25/202=
+6, 8:52:18 PM</td></tr><tr>                    <td>X</td>                  =
+      <td>921.9403954655904</td></tr><tr><td>Y</td><td>-6983.225331201044</=
+td></tr><tr><td>Z</td><td>5.026632145898643</td></tr><tr><td>Y</td><td>-698=
+3.225331201044</td></tr><tr><td>Vx</td><td>-1.5540319162351763</td></tr><tr=
+><td>Vy</td><td>-0.19073318754770835</td></tr><tr><td>Vz</td><td>7.45017986=
+2528943</td></tr><tr><td>Duration</td><td>49638</td></tr><tr class=3D"black=
+-color"><td class=3D"black-color"></td><td class=3D"black-color"></td></tr>=
+<tr>                    <td>Loop</td>                        <td>28</td></t=
+r><tr>                    <td>Time</td>                        <td>6/25/202=
+6, 10:30:21 PM</td></tr><tr>                    <td>X</td>                 =
+       <td>-2058.512063830683</td></tr><tr><td>Y</td><td>-6736.163454635184=
+</td></tr><tr><td>Z</td><td>6.944804401028587</td></tr><tr><td>Y</td><td>-6=
+736.163454635184</td></tr><tr><td>Vx</td><td>-1.4924077527010593</td></tr><=
+tr><td>Vy</td><td>0.4732543589099767</td></tr><tr><td>Vz</td><td>7.45032305=
+2335454</td></tr><tr><td>Duration</td><td>51435</td></tr><tr class=3D"black=
+-color"><td class=3D"black-color"></td><td class=3D"black-color"></td></tr>=
+<tr>                    <td>Loop</td>                        <td>29</td></t=
+r><tr>                    <td>Time</td>                        <td>6/26/202=
+6, 12:08:23 AM</td></tr><tr>                    <td>X</td>                 =
+       <td>-4666.749589434006</td></tr><tr><td>Y</td><td>-5275.716279438047=
+</td></tr><tr><td>Z</td><td>1.7160295820111342</td></tr><tr><td>Y</td><td>-=
+5275.716279438047</td></tr><tr><td>Vx</td><td>-1.1654809331900282</td></tr>=
+<tr><td>Vy</td><td>1.0454960360102152</td></tr><tr><td>Vz</td><td>7.4504452=
+8312745</td></tr><tr><td>Duration</td><td>53373</td></tr><tr class=3D"black=
+-color"><td class=3D"black-color"></td><td class=3D"black-color"></td></tr>=
+<tr>                    <td>Loop</td>                        <td>30</td></t=
+r><tr>                    <td>Time</td>                        <td>6/26/202=
+6, 1:46:26 AM</td></tr><tr>                    <td>X</td>                  =
+      <td>-6435.12838174835</td></tr><tr><td>Y</td><td>-2863.6025270473133<=
+/td></tr><tr><td>Z</td><td>4.423886339878818</td></tr><tr><td>Y</td><td>-28=
+63.6025270473133</td></tr><tr><td>Vx</td><td>-0.6241138128719752</td></tr><=
+tr><td>Vy</td><td>1.4361888112026258</td></tr><tr><td>Vz</td><td>7.45046696=
+4007096</td></tr><tr><td>Duration</td><td>55205</td></tr><tr class=3D"black=
+-color"><td class=3D"black-color"></td><td class=3D"black-color"></td></tr>=
+<tr>                    <td>Loop</td>                        <td>31</td></t=
+r><tr>                    <td>Time</td>                        <td>6/26/202=
+6, 3:24:29 AM</td></tr><tr>                    <td>X</td>                  =
+      <td>-7043.229797819599</td></tr><tr><td>Y</td><td>64.88028378359559</=
+td></tr><tr><td>Z</td><td>7.350740576843932</td></tr><tr><td>Y</td><td>64.8=
+8028378359559</td></tr><tr><td>Vx</td><td>0.03119443477604037</td></tr><tr>=
+<td>Vy</td><td>1.565792393316471</td></tr><tr><td>Vz</td><td>7.450428295460=
+4975</td></tr><tr><td>Duration</td><td>56976</td></tr><tr class=3D"black-co=
+lor"><td class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr=
+>                    <td>Loop</td>                        <td>32</td></tr><=
+tr>                    <td>Time</td>                        <td>6/26/2026, =
+5:02:31 AM</td></tr><tr>                    <td>X</td>                     =
+   <td>-6382.0179931611965</td></tr><tr><td>Y</td><td>2980.289633092799</td=
+></tr><tr><td>Z</td><td>3.0814617426730875</td></tr><tr><td>Y</td><td>2980.=
+289633092799</td></tr><tr><td>Vx</td><td>0.6736551304964712</td></tr><tr><t=
+d>Vy</td><td>1.4137763313966312</td></tr><tr><td>Vz</td><td>7.4503941911113=
+465</td></tr><tr><td>Duration</td><td>58739</td></tr><tr class=3D"black-col=
+or"><td class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>=
+                    <td>Loop</td>                        <td>33</td></tr><t=
+r>                    <td>Time</td>                        <td>6/26/2026, 6=
+:40:34 AM</td></tr><tr>                    <td>X</td>                      =
+  <td>-4570.082799829556</td></tr><tr><td>Y</td><td>5359.921985301727</td><=
+/tr><tr><td>Z</td><td>6.1655334507092086</td></tr><tr><td>Y</td><td>5359.92=
+1985301727</td></tr><tr><td>Vx</td><td>1.2015971396689697</td></tr><tr><td>=
+Vy</td><td>1.004220426551887</td></tr><tr><td>Vz</td><td>7.4502497133067065=
+</td></tr><tr><td>Duration</td><td>60530</td></tr><tr class=3D"black-color"=
+><td class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>   =
+                 <td>Loop</td>                        <td>34</td></tr><tr> =
+                   <td>Time</td>                        <td>6/26/2026, 8:18=
+:36 AM</td></tr><tr>                    <td>X</td>                        <=
+td>-1935.518818678719</td></tr><tr><td>Y</td><td>6772.704935419881</td></tr=
+><tr><td>Z</td><td>1.343583736270734</td></tr><tr><td>Y</td><td>6772.704935=
+419881</td></tr><tr><td>Vx</td><td>1.5082341007541624</td></tr><tr><td>Vy</=
+td><td>0.42027380544256415</td></tr><tr><td>Vz</td><td>7.450155062247479</t=
+d></tr><tr><td>Duration</td><td>62623</td></tr><tr class=3D"black-color"><t=
+d class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>      =
+              <td>Loop</td>                        <td>35</td></tr><tr>    =
+                <td>Time</td>                        <td>6/26/2026, 9:56:39=
+ AM</td></tr><tr>                    <td>X</td>                        <td>=
+1049.246331159405</td></tr><tr><td>Y</td><td>6965.254883054082</td></tr><tr=
+><td>Z</td><td>3.3848106728570606</td></tr><tr><td>Y</td><td>6965.254883054=
+082</td></tr><tr><td>Vx</td><td>1.546218819241908</td></tr><tr><td>Vy</td><=
+td>-0.24550179643736522</td></tr><tr><td>Vz</td><td>7.450098522046174</td><=
+/tr><tr><td>Duration</td><td>64718</td></tr><tr class=3D"black-color"><td c=
+lass=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>         =
+           <td>Loop</td>                        <td>36</td></tr><tr>       =
+             <td>Time</td>                        <td>6/26/2026, 11:34:42 A=
+M</td></tr><tr>                    <td>X</td>                        <td>38=
+44.7389091734735</td></tr><tr><td>Y</td><td>5901.9304371533235</td></tr><tr=
+><td>Z</td><td>5.4319224661813665</td></tr><tr><td>Y</td><td>5901.930437153=
+3235</td></tr><tr><td>Vx</td><td>1.303839015895167</td></tr><tr><td>Vy</td>=
+<td>-0.8667870103814466</td></tr><tr><td>Vz</td><td>7.450177301346476</td><=
+/tr><tr><td>Duration</td><td>66605</td></tr><tr class=3D"black-color"><td c=
+lass=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>         =
+           <td>Loop</td>                        <td>37</td></tr><tr>       =
+             <td>Time</td>                        <td>6/26/2026, 1:12:44 PM=
+</td></tr><tr>                    <td>X</td>                        <td>594=
+6.16493547669</td></tr><tr><td>Y</td><td>3775.9075180060586</td></tr><tr><t=
+d>Z</td><td>0.2956101858606708</td></tr><tr><td>Y</td><td>3775.907518006058=
+6</td></tr><tr><td>Vx</td><td>0.8315950939810343</td></tr><tr><td>Vy</td><t=
+d>-1.3267859744164292</td></tr><tr><td>Vz</td><td>7.450212160148798</td></t=
+r><tr><td>Duration</td><td>68406</td></tr><tr class=3D"black-color"><td cla=
+ss=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>           =
+         <td>Loop</td>                        <td>38</td></tr><tr>         =
+           <td>Time</td>                        <td>6/26/2026, 2:50:47 PM</=
+td></tr><tr>                    <td>X</td>                        <td>6976.=
+9043617788375</td></tr><tr><td>Y</td><td>968.2473797813282</td></tr><tr><td=
+>Z</td><td>3.2031867317326146</td></tr><tr><td>Y</td><td>968.2473797813282<=
+/td></tr><tr><td>Vx</td><td>0.20301497433099439</td></tr><tr><td>Vy</td><td=
+>-1.5528289927978711</td></tr><tr><td>Vz</td><td>7.450173239745995</td></tr=
+><tr><td>Duration</td><td>70158</td></tr><tr class=3D"black-color"><td clas=
+s=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>            =
+        <td>Loop</td>                        <td>39</td></tr><tr>          =
+          <td>Time</td>                        <td>6/26/2026, 4:28:50 PM</t=
+d></tr><tr>                    <td>X</td>                        <td>6749.7=
+25371886404</td></tr><tr><td>Y</td><td>-2014.0466704744338</td></tr><tr><td=
+>Z</td><td>6.356568089349081</td></tr><tr><td>Y</td><td>-2014.0466704744338=
+</td></tr><tr><td>Vx</td><td>-0.4628736413301414</td></tr><tr><td>Vy</td><t=
+d>-1.4961456742936152</td></tr><tr><td>Vz</td><td>7.4501214540629155</td></=
+tr><tr><td>Duration</td><td>71936</td></tr><tr class=3D"black-color"><td cl=
+ass=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>          =
+          <td>Loop</td>                        <td>40</td></tr><tr>        =
+            <td>Time</td>                        <td>6/26/2026, 6:06:52 PM<=
+/td></tr><tr>                    <td>X</td>                        <td>5306=
+.524307350143</td></tr><tr><td>Y</td><td>-4632.161943766239</td></tr><tr><t=
+d>Z</td><td>2.0587043979495734</td></tr><tr><td>Y</td><td>-4632.16194376623=
+9</td></tr><tr><td>Vx</td><td>-1.0382514597435983</td></tr><tr><td>Vy</td><=
+td>-1.1723440050674598</td></tr><tr><td>Vz</td><td>7.450045697784152</td></=
+tr><tr><td>Duration</td><td>73725</td></tr><tr class=3D"black-color"><td cl=
+ass=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>          =
+          <td>Loop</td>                        <td>41</td></tr><tr>        =
+            <td>Time</td>                        <td>6/26/2026, 7:44:55 PM<=
+/td></tr><tr>                    <td>X</td>                        <td>2905=
+.959804033925</td></tr><tr><td>Y</td><td>-6416.517893202334</td></tr><tr><t=
+d>Z</td><td>5.015478695064158</td></tr><tr><td>Y</td><td>-6416.517893202334=
+</td></tr><tr><td>Vx</td><td>-1.432232426916584</td></tr><tr><td>Vy</td><td=
+>-0.632940267328186</td></tr><tr><td>Vz</td><td>7.450071782935423</td></tr>=
+<tr><td>Duration</td><td>75516</td></tr><tr class=3D"black-color"><td class=
+=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>             =
+       <td>Loop</td>                        <td>42</td></tr><tr>           =
+         <td>Time</td>                        <td>6/26/2026, 9:22:58 PM</td=
+></tr><tr>                    <td>X</td>                        <td>-18.265=
+297368682642</td></tr><tr><td>Y</td><td>-7043.738508710394</td></tr><tr><td=
+>Z</td><td>7.354556774314751</td></tr><tr><td>Y</td><td>-7043.738508710394<=
+/td></tr><tr><td>Vx</td><td>-1.5655430379724429</td></tr><tr><td>Vy</td><td=
+>0.020812994512708613</td></tr><tr><td>Vz</td><td>7.450234877577925</td></t=
+r><tr><td>Duration</td><td>77515</td></tr><tr class=3D"black-color"><td cla=
+ss=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>           =
+         <td>Loop</td>                        <td>43</td></tr><tr>         =
+           <td>Time</td>                        <td>6/26/2026, 11:01:00 PM<=
+/td></tr><tr>                    <td>X</td>                        <td>-293=
+7.678541627969</td></tr><tr><td>Y</td><td>-6401.776710677757</td></tr><tr><=
+td>Z</td><td>1.8339012526628622</td></tr><tr><td>Y</td><td>-6401.7767106777=
+57</td></tr><tr><td>Vx</td><td>-1.4183557282122519</td></tr><tr><td>Vy</td>=
+<td>0.662971806423524</td></tr><tr><td>Vz</td><td>7.450373372721373</td></t=
+r><tr><td>Duration</td><td>79759</td></tr><tr class=3D"black-color"><td cla=
+ss=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>           =
+         <td>Loop</td>                        <td>44</td></tr><tr>         =
+           <td>Time</td>                        <td>6/27/2026, 12:39:03 AM<=
+/td></tr><tr>                    <td>X</td>                        <td>-532=
+9.114494790179</td></tr><tr><td>Y</td><td>-4605.615502067936</td></tr><tr><=
+td>Z</td><td>4.208152193803498</td></tr><tr><td>Y</td><td>-4605.61550206793=
+6</td></tr><tr><td>Vx</td><td>-1.0136146076122967</td></tr><tr><td>Vy</td><=
+td>1.19343996033863</td></tr><tr><td>Vz</td><td>7.450476300803089</td></tr>=
+<tr><td>Duration</td><td>82037</td></tr><tr class=3D"black-color"><td class=
+=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>             =
+       <td>Loop</td>                        <td>45</td></tr><tr>           =
+         <td>Time</td>                        <td>6/27/2026, 2:17:06 AM</td=
+></tr><tr>                    <td>X</td>                        <td>-6759.7=
+54577521122</td></tr><tr><td>Y</td><td>-1979.0662780607222</td></tr><tr><td=
+>Z</td><td>7.013692173319374</td></tr><tr><td>Y</td><td>-1979.0662780607222=
+</td></tr><tr><td>Vx</td><td>-0.42426469420438573</td></tr><tr><td>Vy</td><=
+td>1.5074357511198313</td></tr><tr><td>Vz</td><td>7.450462937855774</td></t=
+r><tr><td>Duration</td><td>83907</td></tr><tr class=3D"black-color"><td cla=
+ss=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>           =
+         <td>Loop</td>                        <td>46</td></tr><tr>         =
+           <td>Time</td>                        <td>6/27/2026, 3:55:08 AM</=
+td></tr><tr>                    <td>X</td>                        <td>-6971=
+.7809761109565</td></tr><tr><td>Y</td><td>1002.8297236179931</td></tr><tr><=
+td>Z</td><td>2.530175210872949</td></tr><tr><td>Y</td><td>1002.829723617993=
+1</td></tr><tr><td>Vx</td><td>0.23446123858716697</td></tr><tr><td>Vy</td><=
+td>1.5483979883786785</td></tr><tr><td>Vz</td><td>7.4504441676592545</td></=
+tr><tr><td>Duration</td><td>85674</td></tr><tr class=3D"black-color"><td cl=
+ass=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>          =
+          <td>Loop</td>                        <td>47</td></tr><tr>        =
+            <td>Time</td>                        <td>6/27/2026, 5:33:11 AM<=
+/td></tr><tr>                    <td>X</td>                        <td>-592=
+7.163243009069</td></tr><tr><td>Y</td><td>3805.444260957193</td></tr><tr><t=
+d>Z</td><td>5.64744268581601</td></tr><tr><td>Y</td><td>3805.444260957193</=
+td></tr><tr><td>Vx</td><td>0.8585752561824618</td></tr><tr><td>Vy</td><td>1=
+.309723512647848</td></tr><tr><td>Vz</td><td>7.450372680164847</td></tr><tr=
+><td>Duration</td><td>87488</td></tr><tr class=3D"black-color"><td class=3D=
+"black-color"></td><td class=3D"black-color"></td></tr><tr>                =
+    <td>Loop</td>                        <td>48</td></tr><tr>              =
+      <td>Time</td>                        <td>6/27/2026, 7:11:13 AM</td></=
+tr><tr>                    <td>X</td>                        <td>-3815.1793=
+788145856</td></tr><tr><td>Y</td><td>5921.111121131167</td></tr><tr><td>Z</=
+td><td>1.1195116890812464</td></tr><tr><td>Y</td><td>5921.111121131167</td>=
+</tr><tr><td>Vx</td><td>1.3217336856989974</td></tr><tr><td>Vy</td><td>0.83=
+95982764473202</td></tr><tr><td>Vz</td><td>7.450213221151981</td></tr><tr><=
+td>Duration</td><td>89320</td></tr><tr class=3D"black-color"><td class=3D"b=
+lack-color"></td><td class=3D"black-color"></td></tr><tr>                  =
+  <td>Loop</td>                        <td>49</td></tr><tr>                =
+    <td>Time</td>                        <td>6/27/2026, 8:49:16 AM</td></tr=
+><tr>                    <td>X</td>                        <td>-1014.277889=
+50814</td></tr><tr><td>Y</td><td>6970.451995580596</td></tr><tr><td>Z</td><=
+td>3.4835632264407907</td></tr><tr><td>Y</td><td>6970.451995580596</td></tr=
+><tr><td>Vx</td><td>1.5510550144735065</td></tr><tr><td>Vy</td><td>0.212972=
+98907529483</td></tr><tr><td>Vz</td><td>7.4501281358969935</td></tr><tr><td=
+>Duration</td><td>91127</td></tr><tr class=3D"black-color"><td class=3D"bla=
+ck-color"></td><td class=3D"black-color"></td></tr><tr>                    =
+<td>Loop</td>                        <td>50</td></tr><tr>                  =
+  <td>Time</td>                        <td>6/27/2026, 10:27:19 AM</td></tr>=
+<tr>                    <td>X</td>                        <td>1969.44522688=
+86864</td></tr><tr><td>Y</td><td>6762.893098778027</td></tr><tr><td>Z</td><=
+td>5.392521579411985</td></tr><tr><td>Y</td><td>6762.893098778027</td></tr>=
+<tr><td>Vx</td><td>1.498997622799182</td></tr><tr><td>Vy</td><td>-0.4517077=
+637435538</td></tr><tr><td>Vz</td><td>7.450117820520713</td></tr><tr><td>Du=
+ration</td><td>92921</td></tr><tr class=3D"black-color"><td class=3D"black-=
+color"></td><td class=3D"black-color"></td></tr><tr>                    <td=
+>Loop</td>                        <td>51</td></tr><tr>                    <=
+td>Time</td>                        <td>6/27/2026, 12:05:22 PM</td></tr><tr=
+>                    <td>X</td>                        <td>4597.99021281349=
+9</td></tr><tr><td>Y</td><td>5336.024880019446</td></tr><tr><td>Z</td><td>7=
+.42684786371838</td></tr><tr><td>Y</td><td>5336.024880019446</td></tr><tr><=
+td>Vx</td><td>1.1751145427919667</td></tr><tr><td>Vy</td><td>-1.03468675023=
+96213</td></tr><tr><td>Vz</td><td>7.450186031768027</td></tr><tr><td>Durati=
+on</td><td>94646</td></tr><tr class=3D"black-color"><td class=3D"black-colo=
+r"></td><td class=3D"black-color"></td></tr><tr>                    <td>Loo=
+p</td>                        <td>52</td></tr><tr>                    <td>T=
+ime</td>                        <td>6/27/2026, 1:43:24 PM</td></tr><tr>    =
+                <td>X</td>                        <td>6396.912888088033</td=
+></tr><tr><td>Y</td><td>2948.5647216272446</td></tr><tr><td>Z</td><td>2.466=
+8892514363296</td></tr><tr><td>Y</td><td>2948.5647216272446</td></tr><tr><t=
+d>Vx</td><td>0.6449739026666365</td></tr><tr><td>Vy</td><td>-1.426921973955=
+6545</td></tr><tr><td>Vz</td><td>7.450191858101042</td></tr><tr><td>Duratio=
+n</td><td>96419</td></tr><tr class=3D"black-color"><td class=3D"black-color=
+"></td><td class=3D"black-color"></td></tr><tr>                    <td>Loop=
+</td>                        <td>53</td></tr><tr>                    <td>Ti=
+me</td>                        <td>6/27/2026, 3:21:27 PM</td></tr><tr>     =
+               <td>X</td>                        <td>7043.7371137899445</td=
+></tr><tr><td>Y</td><td>28.456209923487524</td></tr><tr><td>Z</td><td>5.517=
+152884733994</td></tr><tr><td>Y</td><td>28.456209923487524</td></tr><tr><td=
+>Vx</td><td>-0.008505218115933862</td></tr><tr><td>Vy</td><td>-1.5660614133=
+31415</td></tr><tr><td>Vz</td><td>7.450141133598073</td></tr><tr><td>Durati=
+on</td><td>98203</td></tr><tr class=3D"black-color"><td class=3D"black-colo=
+r"></td><td class=3D"black-color"></td></tr><tr>                    <td>Loo=
+p</td>                        <td>54</td></tr><tr>                    <td>T=
+ime</td>                        <td>6/27/2026, 4:59:29 PM</td></tr><tr>    =
+                <td>X</td>                        <td>6421.222899610584</td=
+></tr><tr><td>Y</td><td>-2895.439771036924</td></tr><tr><td>Z</td><td>1.158=
+7954308999295</td></tr><tr><td>Y</td><td>-2895.439771036924</td></tr><tr><t=
+d>Vx</td><td>-0.6530993305579762</td></tr><tr><td>Vy</td><td>-1.42336869447=
+96995</td></tr><tr><td>Vz</td><td>7.4500915245410715</td></tr><tr><td>Durat=
+ion</td><td>99971</td></tr><tr class=3D"black-color"><td class=3D"black-col=
+or"></td><td class=3D"black-color"></td></tr><tr>                    <td>Lo=
+op</td>                        <td>55</td></tr><tr>                    <td>=
+Time</td>                        <td>6/27/2026, 6:37:32 PM</td></tr><tr>   =
+                 <td>X</td>                        <td>4640.838883431777</t=
+d></tr><tr><td>Y</td><td>-5298.999997416552</td></tr><tr><td>Z</td><td>4.27=
+4373965600765</td></tr><tr><td>Y</td><td>-5298.999997416552</td></tr><tr><t=
+d>Vx</td><td>-1.1869356451618394</td></tr><tr><td>Vy</td><td>-1.02148932206=
+87493</td></tr><tr><td>Vz</td><td>7.449994742932456</td></tr><tr><td>Durati=
+on</td><td>101759</td></tr><tr class=3D"black-color"><td class=3D"black-col=
+or"></td><td class=3D"black-color"></td></tr><tr>                    <td>Lo=
+op</td>                        <td>56</td></tr><tr>                    <td>=
+Time</td>                        <td>6/27/2026, 8:15:35 PM</td></tr><tr>   =
+                 <td>X</td>                        <td>2023.6608140659657</=
+td></tr><tr><td>Y</td><td>-6746.925633200676</td></tr><tr><td>Z</td><td>7.1=
+31845553749137</td></tr><tr><td>Y</td><td>-6746.925633200676</td></tr><tr><=
+td>Vx</td><td>-1.5044146393700895</td></tr><tr><td>Vy</td><td>-0.4339750558=
+7353596</td></tr><tr><td>Vz</td><td>7.45010686571481</td></tr><tr><td>Durat=
+ion</td><td>103551</td></tr><tr class=3D"black-color"><td class=3D"black-co=
+lor"></td><td class=3D"black-color"></td></tr><tr>                    <td>L=
+oop</td>                        <td>57</td></tr><tr>                    <td=
+>Time</td>                        <td>6/27/2026, 9:53:37 PM</td></tr><tr>  =
+                  <td>X</td>                        <td>-956.5181875141856<=
+/td></tr><tr><td>Y</td><td>-6978.507340845148</td></tr><tr><td>Z</td><td>1.=
+7706529475998103</td></tr><tr><td>Y</td><td>-6978.507340845148</td></tr><tr=
+><td>Vx</td><td>-1.5495577263160805</td></tr><tr><td>Vy</td><td>0.223388694=
+49123017</td></tr><tr><td>Vz</td><td>7.450261428903841</td></tr><tr><td>Dur=
+ation</td><td>105289</td></tr><tr class=3D"black-color"><td class=3D"black-=
+color"></td><td class=3D"black-color"></td></tr><tr>                    <td=
+>Loop</td>                        <td>58</td></tr><tr>                    <=
+td>Time</td>                        <td>6/27/2026, 11:31:40 PM</td></tr><tr=
+>                    <td>X</td>                        <td>-3765.7528813214=
+835</td></tr><tr><td>Y</td><td>-5952.450586902915</td></tr><tr><td>Z</td><t=
+d>3.7955746966660984</td></tr><tr><td>Y</td><td>-5952.450586902915</td></tr=
+><tr><td>Vx</td><td>-1.3160645268543525</td></tr><tr><td>Vy</td><td>0.84810=
+54835015034</td></tr><tr><td>Vz</td><td>7.450380809438144</td></tr><tr><td>=
+Duration</td><td>107096</td></tr><tr class=3D"black-color"><td class=3D"bla=
+ck-color"></td><td class=3D"black-color"></td></tr><tr>                    =
+<td>Loop</td>                        <td>59</td></tr><tr>                  =
+  <td>Time</td>                        <td>6/28/2026, 1:09:43 AM</td></tr><=
+tr>                    <td>X</td>                        <td>-5896.11749615=
+8505</td></tr><tr><td>Y</td><td>-3853.202152231847</td></tr><tr><td>Z</td><=
+td>6.211079092233471</td></tr><tr><td>Y</td><td>-3853.202152231847</td></tr=
+><tr><td>Vx</td><td>-0.8435053635301324</td></tr><tr><td>Vy</td><td>1.31926=
+59042615575</td></tr><tr><td>Vz</td><td>7.45045014472434</td></tr><tr><td>D=
+uration</td><td>108878</td></tr><tr class=3D"black-color"><td class=3D"blac=
+k-color"></td><td class=3D"black-color"></td></tr><tr>                    <=
+td>Loop</td>                        <td>60</td></tr><tr>                   =
+ <td>Time</td>                        <td>6/28/2026, 2:47:45 AM</td></tr><t=
+r>                    <td>X</td>                        <td>-6963.218166957=
+91</td></tr><tr><td>Y</td><td>-1060.746476885824</td></tr><tr><td>Z</td><td=
+>1.5889031705411147</td></tr><tr><td>Y</td><td>-1060.746476885824</td></tr>=
+<tr><td>Vx</td><td>-0.22526209715229872</td></tr><tr><td>Vy</td><td>1.54971=
+41492567432</td></tr><tr><td>Vz</td><td>7.450424285684593</td></tr><tr><td>=
+Duration</td><td>110603</td></tr><tr class=3D"black-color"><td class=3D"bla=
+ck-color"></td><td class=3D"black-color"></td></tr><tr>                    =
+<td>Loop</td>                        <td>61</td></tr><tr>                  =
+  <td>Time</td>                        <td>6/28/2026, 4:25:48 AM</td></tr><=
+tr>                    <td>X</td>                        <td>-6775.60392390=
+6148</td></tr><tr><td>Y</td><td>1924.3365958764832</td></tr><tr><td>Z</td><=
+td>4.648085701401011</td></tr><tr><td>Y</td><td>1924.3365958764832</td></tr=
+><tr><td>Vx</td><td>0.44120408150690127</td></tr><tr><td>Vy</td><td>1.50264=
+2087129763</td></tr><tr><td>Vz</td><td>7.450410629489899</td></tr><tr><td>D=
+uration</td><td>112383</td></tr><tr class=3D"black-color"><td class=3D"blac=
+k-color"></td><td class=3D"black-color"></td></tr><tr>                    <=
+td>Loop</td>                        <td>62</td></tr><tr>                   =
+ <td>Time</td>                        <td>6/28/2026, 6:03:50 AM</td></tr><t=
+r>                    <td>X</td>                        <td>-5367.338510437=
+385</td></tr><tr><td>Y</td><td>4561.286986055437</td></tr><tr><td>Z</td><td=
+>0.30318765994538666</td></tr><tr><td>Y</td><td>4561.286986055437</td></tr>=
+<tr><td>Vx</td><td>1.0211420217498173</td></tr><tr><td>Vy</td><td>1.1872551=
+832923335</td></tr><tr><td>Vz</td><td>7.450315618749854</td></tr><tr><td>Du=
+ration</td><td>114169</td></tr><tr class=3D"black-color"><td class=3D"black=
+-color"></td><td class=3D"black-color"></td></tr><tr>                    <t=
+d>Loop</td>                        <td>63</td></tr><tr>                    =
+<td>Time</td>                        <td>6/28/2026, 7:41:53 AM</td></tr><tr=
+>                    <td>X</td>                        <td>-2990.8413741448=
+12</td></tr><tr><td>Y</td><td>6377.335599304627</td></tr><tr><td>Z</td><td>=
+3.0735609593465334</td></tr><tr><td>Y</td><td>6377.335599304627</td></tr><t=
+r><td>Vx</td><td>1.4228019898884847</td></tr><tr><td>Vy</td><td>0.653732897=
+2070545</td></tr><tr><td>Vz</td><td>7.450178662379529</td></tr><tr><td>Dura=
+tion</td><td>115929</td></tr><tr class=3D"black-color"><td class=3D"black-c=
+olor"></td><td class=3D"black-color"></td></tr><tr>                    <td>=
+Loop</td>                        <td>64</td></tr><tr>                    <t=
+d>Time</td>                        <td>6/28/2026, 9:19:56 AM</td></tr><tr> =
+                   <td>X</td>                        <td>-74.95823655657544=
+</td></tr><tr><td>Y</td><td>7043.454950814964</td></tr><tr><td>Z</td><td>5.=
+237141453063404</td></tr><tr><td>Y</td><td>7043.454950814964</td></tr><tr><=
+td>Vx</td><td>1.5655966277070235</td></tr><tr><td>Vy</td><td>0.002180149862=
+874863</td></tr><tr><td>Vz</td><td>7.45010558108637</td></tr><tr><td>Durati=
+on</td><td>117719</td></tr><tr class=3D"black-color"><td class=3D"black-col=
+or"></td><td class=3D"black-color"></td></tr><tr>                    <td>Lo=
+op</td>                        <td>65</td></tr><tr>                    <td>=
+Time</td>                        <td>6/28/2026, 10:57:59 AM</td></tr><tr>  =
+                  <td>X</td>                        <td>2854.3520751681513<=
+/td></tr><tr><td>Y</td><td>6439.539655025506</td></tr><tr><td>Z</td><td>7.1=
+79331227863084</td></tr><tr><td>Y</td><td>6439.539655025506</td></tr><tr><t=
+d>Vx</td><td>1.4245519825849107</td></tr><tr><td>Vy</td><td>-0.649508558470=
+7426</td></tr><tr><td>Vz</td><td>7.450149971974371</td></tr><tr><td>Duratio=
+n</td><td>119438</td></tr><tr class=3D"black-color"><td class=3D"black-colo=
+r"></td><td class=3D"black-color"></td></tr><tr>                    <td>Loo=
+p</td>                        <td>66</td></tr><tr>                    <td>T=
+ime</td>                        <td>6/28/2026, 12:36:01 PM</td></tr><tr>   =
+                 <td>X</td>                        <td>5267.918505840777</t=
+d></tr><tr><td>Y</td><td>4675.842068763268</td></tr><tr><td>Z</td><td>1.853=
+6899558421975</td></tr><tr><td>Y</td><td>4675.842068763268</td></tr><tr><td=
+>Vx</td><td>1.0311948981721162</td></tr><tr><td>Vy</td><td>-1.1782501559150=
+385</td></tr><tr><td>Vz</td><td>7.450208179454541</td></tr><tr><td>Duration=
+</td><td>121227</td></tr><tr class=3D"black-color"><td class=3D"black-color=
+"></td><td class=3D"black-color"></td></tr><tr>                    <td>Loop=
+</td>                        <td>67</td></tr><tr>                    <td>Ti=
+me</td>                        <td>6/28/2026, 2:14:04 PM</td></tr><tr>     =
+               <td>X</td>                        <td>6733.189653143593</td>=
+</tr><tr><td>Y</td><td>2068.479112988252</td></tr><tr><td>Z</td><td>4.55069=
+6382821434</td></tr><tr><td>Y</td><td>2068.479112988252</td></tr><tr><td>Vx=
+</td><td>0.4465904215567275</td></tr><tr><td>Vy</td><td>-1.5009823929088915=
+</td></tr><tr><td>Vz</td><td>7.4501865366991575</td></tr><tr><td>Duration</=
+td><td>122994</td></tr><tr class=3D"black-color"><td class=3D"black-color">=
+</td><td class=3D"black-color"></td></tr><tr>                    <td>Loop</=
+td>                        <td>68</td></tr><tr>                    <td>Time=
+</td>                        <td>6/28/2026, 3:52:06 PM</td></tr><tr>       =
+             <td>X</td>                        <td>6984.732406869196</td></=
+tr><tr><td>Y</td><td>-910.2985798835348</td></tr><tr><td>Z</td><td>0.283533=
+32037994416</td></tr><tr><td>Y</td><td>-910.2985798835348</td></tr><tr><td>=
+Vx</td><td>-0.21169024732125472</td></tr><tr><td>Vy</td><td>-1.551701467588=
+6271</td></tr><tr><td>Vz</td><td>7.450140067393329</td></tr><tr><td>Duratio=
+n</td><td>124717</td></tr><tr class=3D"black-color"><td class=3D"black-colo=
+r"></td><td class=3D"black-color"></td></tr><tr>                    <td>Loo=
+p</td>                        <td>69</td></tr><tr>                    <td>T=
+ime</td>                        <td>6/28/2026, 5:30:09 PM</td></tr><tr>    =
+                <td>X</td>                        <td>5977.330832282952</td=
+></tr><tr><td>Y</td><td>-3726.5392442885345</td></tr><tr><td>Z</td><td>3.42=
+4034664622324</td></tr><tr><td>Y</td><td>-3726.5392442885345</td></tr><tr><=
+td>Vx</td><td>-0.8393435675666178</td></tr><tr><td>Vy</td><td>-1.3221706750=
+284608</td></tr><tr><td>Vz</td><td>7.450081122869529</td></tr><tr><td>Durat=
+ion</td><td>126577</td></tr><tr class=3D"black-color"><td class=3D"black-co=
+lor"></td><td class=3D"black-color"></td></tr><tr>                    <td>L=
+oop</td>                        <td>70</td></tr><tr>                    <td=
+>Time</td>                        <td>6/28/2026, 7:08:12 PM</td></tr><tr>  =
+                  <td>X</td>                        <td>3892.06989223818</t=
+d></tr><tr><td>Y</td><td>-5870.97540109154</td></tr><tr><td>Z</td><td>6.511=
+92799186212</td></tr><tr><td>Y</td><td>-5870.97540109154</td></tr><tr><td>V=
+x</td><td>-1.3139929983199965</td></tr><tr><td>Vy</td><td>-0.85190221242870=
+16</td></tr><tr><td>Vz</td><td>7.4500098433292</td></tr><tr><td>Duration</t=
+d><td>128609</td></tr><tr class=3D"black-color"><td class=3D"black-color"><=
+/td><td class=3D"black-color"></td></tr><tr>                    <td>Loop</t=
+d>                        <td>71</td></tr><tr>                    <td>Time<=
+/td>                        <td>6/28/2026, 8:46:14 PM</td></tr><tr>        =
+            <td>X</td>                        <td>1106.7332861341772</td></=
+tr><tr><td>Y</td><td>-6956.349907159776</td></tr><tr><td>Z</td><td>1.748194=
+2136114768</td></tr><tr><td>Y</td><td>-6956.349907159776</td></tr><tr><td>V=
+x</td><td>-1.5478928296723728</td></tr><tr><td>Vy</td><td>-0.23524082322040=
+546</td></tr><tr><td>Vz</td><td>7.4501694907322</td></tr><tr><td>Duration</=
+td><td>130637</td></tr><tr class=3D"black-color"><td class=3D"black-color">=
+</td><td class=3D"black-color"></td></tr><tr>                    <td>Loop</=
+td>                        <td>72</td></tr><tr>                    <td>Time=
+</td>                        <td>6/28/2026, 10:24:17 PM</td></tr><tr>      =
+              <td>X</td>                        <td>-1879.2240179515359</td=
+></tr><tr><td>Y</td><td>-6788.3848317061675</td></tr><tr><td>Z</td><td>3.68=
+09432930825796</td></tr><tr><td>Y</td><td>-6788.3848317061675</td></tr><tr>=
+<td>Vx</td><td>-1.505327310718196</td></tr><tr><td>Vy</td><td>0.43023347808=
+85412</td></tr><tr><td>Vz</td><td>7.450314469947231</td></tr><tr><td>Durati=
+on</td><td>132504</td></tr><tr class=3D"black-color"><td class=3D"black-col=
+or"></td><td class=3D"black-color"></td></tr><tr>                    <td>Lo=
+op</td>                        <td>73</td></tr><tr>                    <td>=
+Time</td>                        <td>6/29/2026, 12:02:20 AM</td></tr><tr>  =
+                  <td>X</td>                        <td>-4526.445439137417<=
+/td></tr><tr><td>Y</td><td>-5396.580401820477</td></tr><tr><td>Z</td><td>5.=
+859886655056729</td></tr><tr><td>Y</td><td>-5396.580401820477</td></tr><tr>=
+<td>Vx</td><td>-1.1896953042643184</td></tr><tr><td>Vy</td><td>1.0178894384=
+721473</td></tr><tr><td>Vz</td><td>7.450432815251637</td></tr><tr><td>Durat=
+ion</td><td>134239</td></tr><tr class=3D"black-color"><td class=3D"black-co=
+lor"></td><td class=3D"black-color"></td></tr><tr>                    <td>L=
+oop</td>                        <td>74</td></tr><tr>                    <td=
+>Time</td>                        <td>6/29/2026, 1:40:22 AM</td></tr><tr>  =
+                  <td>X</td>                        <td>-6356.953248364659<=
+/td></tr><tr><td>Y</td><td>-3033.209855363194</td></tr><tr><td>Z</td><td>1.=
+067659594755078</td></tr><tr><td>Y</td><td>-3033.209855363194</td></tr><tr>=
+<td>Vx</td><td>-0.6651197339023702</td></tr><tr><td>Vy</td><td>1.4176211895=
+39228</td></tr><tr><td>Vz</td><td>7.450466436421508</td></tr><tr><td>Durati=
+on</td><td>136041</td></tr><tr class=3D"black-color"><td class=3D"black-col=
+or"></td><td class=3D"black-color"></td></tr><tr>                    <td>Lo=
+op</td>                        <td>75</td></tr><tr>                    <td>=
+Time</td>                        <td>6/29/2026, 3:18:25 AM</td></tr><tr>   =
+                 <td>X</td>                        <td>-7042.482734541123</=
+td></tr><tr><td>Y</td><td>-121.87827104606207</td></tr><tr><td>Z</td><td>3.=
+981433918069621</td></tr><tr><td>Y</td><td>-121.87827104606207</td></tr><tr=
+><td>Vx</td><td>-0.013839269212304607</td></tr><tr><td>Vy</td><td>1.5660042=
+123617424</td></tr><tr><td>Vz</td><td>7.450428474475391</td></tr><tr><td>Du=
+ration</td><td>137749</td></tr><tr class=3D"black-color"><td class=3D"black=
+-color"></td><td class=3D"black-color"></td></tr><tr>                    <t=
+d>Loop</td>                        <td>76</td></tr><tr>                    =
+<td>Time</td>                        <td>6/29/2026, 4:56:28 AM</td></tr><tr=
+>                    <td>X</td>                        <td>-6458.1520922623=
+75</td></tr><tr><td>Y</td><td>2811.4688723640925</td></tr><tr><td>Z</td><td=
+>7.156253383203063</td></tr><tr><td>Y</td><td>2811.4688723640925</td></tr><=
+tr><td>Vx</td><td>0.6402643645141841</td></tr><tr><td>Vy</td><td>1.42925810=
+22886346</td></tr><tr><td>Vz</td><td>7.450394522808438</td></tr><tr><td>Dur=
+ation</td><td>139481</td></tr><tr class=3D"black-color"><td class=3D"black-=
+color"></td><td class=3D"black-color"></td></tr><tr>                    <td=
+>Loop</td>                        <td>77</td></tr><tr>                    <=
+td>Time</td>                        <td>6/29/2026, 6:34:30 AM</td></tr><tr>=
+                    <td>X</td>                        <td>-4710.57198073753=
+9</td></tr><tr><td>Y</td><td>5236.874149630159</td></tr><tr><td>Z</td><td>2=
+.808174366515029</td></tr><tr><td>Y</td><td>5236.874149630159</td></tr><tr>=
+<td>Vx</td><td>1.1722231280849846</td></tr><tr><td>Vy</td><td>1.03833428749=
+1056</td></tr><tr><td>Vz</td><td>7.450263041552662</td></tr><tr><td>Duratio=
+n</td><td>141207</td></tr><tr class=3D"black-color"><td class=3D"black-colo=
+r"></td><td class=3D"black-color"></td></tr><tr>                    <td>Loo=
+p</td>                        <td>78</td></tr><tr>                    <td>T=
+ime</td>                        <td>6/29/2026, 8:12:33 AM</td></tr><tr>    =
+                <td>X</td>                        <td>-2112.900880627005</t=
+d></tr><tr><td>Y</td><td>6719.466841173622</td></tr><tr><td>Z</td><td>5.472=
+049027061225</td></tr><tr><td>Y</td><td>6719.466841173622</td></tr><tr><td>=
+Vx</td><td>1.498016940792621</td></tr><tr><td>Vy</td><td>0.4555559377707941=
+</td></tr><tr><td>Vz</td><td>7.450159539078458</td></tr><tr><td>Duration</t=
+d><td>143032</td></tr><tr class=3D"black-color"><td class=3D"black-color"><=
+/td><td class=3D"black-color"></td></tr><tr>                    <td>Loop</t=
+d>                        <td>79</td></tr><tr>                    <td>Time<=
+/td>                        <td>6/29/2026, 9:50:35 AM</td></tr><tr>        =
+            <td>X</td>                        <td>864.2203514300185</td></t=
+r><tr><td>Y</td><td>6990.627204083735</td></tr><tr><td>Z</td><td>0.09047673=
+030398684</td></tr><tr><td>Y</td><td>6990.627204083735</td></tr><tr><td>Vx<=
+/td><td>1.552612070138089</td></tr><tr><td>Vy</td><td>-0.2010248562945036</=
+td></tr><tr><td>Vz</td><td>7.450101114293438</td></tr><tr><td>Duration</td>=
+<td>145185</td></tr><tr class=3D"black-color"><td class=3D"black-color"></t=
+d><td class=3D"black-color"></td></tr><tr>                    <td>Loop</td>=
+                        <td>80</td></tr><tr>                    <td>Time</t=
+d>                        <td>6/29/2026, 11:28:38 AM</td></tr><tr>         =
+           <td>X</td>                        <td>3686.9272183342314</td></t=
+r><tr><td>Y</td><td>6001.783872013427</td></tr><tr><td>Z</td><td>2.13813680=
+48330334</td></tr><tr><td>Y</td><td>6001.783872013427</td></tr><tr><td>Vx</=
+td><td>1.328153594092016</td></tr><tr><td>Vy</td><td>-0.8289956706958554</t=
+d></tr><tr><td>Vz</td><td>7.4501794208707315</td></tr><tr><td>Duration</td>=
+<td>147335</td></tr><tr class=3D"black-color"><td class=3D"black-color"></t=
+d><td class=3D"black-color"></td></tr><tr>                    <td>Loop</td>=
+                        <td>81</td></tr><tr>                    <td>Time</t=
+d>                        <td>6/29/2026, 1:06:41 PM</td></tr><tr>          =
+          <td>X</td>                        <td>5844.8379970926035</td></tr=
+><tr><td>Y</td><td>3930.9116707661183</td></tr><tr><td>Z</td><td>4.42485060=
+4580949</td></tr><tr><td>Y</td><td>3930.9116707661183</td></tr><tr><td>Vx</=
+td><td>0.8625068160972846</td></tr><tr><td>Vy</td><td>-1.3069335722560569</=
+td></tr><tr><td>Vz</td><td>7.45021551277045</td></tr><tr><td>Duration</td><=
+td>149267</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td=
+><td class=3D"black-color"></td></tr><tr>                    <td>Loop</td> =
+                       <td>82</td></tr><tr>                    <td>Time</td=
+>                        <td>6/29/2026, 2:44:44 PM</td></tr><tr>           =
+         <td>X</td>                        <td>6949.022647380885</td></tr><=
+tr><td>Y</td><td>1151.3195945945797</td></tr><tr><td>Z</td><td>7.3061399720=
+244635</td></tr><tr><td>Y</td><td>1151.3195945945797</td></tr><tr><td>Vx</t=
+d><td>0.23941460160640174</td></tr><tr><td>Vy</td><td>-1.5476774683668013</=
+td></tr><tr><td>Vz</td><td>7.450178425805336</td></tr><tr><td>Duration</td>=
+<td>150958</td></tr><tr class=3D"black-color"><td class=3D"black-color"></t=
+d><td class=3D"black-color"></td></tr><tr>                    <td>Loop</td>=
+                        <td>83</td></tr><tr>                    <td>Time</t=
+d>                        <td>6/29/2026, 4:22:46 PM</td></tr><tr>          =
+          <td>X</td>                        <td>6800.743725946356</td></tr>=
+<tr><td>Y</td><td>-1834.3983983713115</td></tr><tr><td>Z</td><td>3.02717906=
+3698436</td></tr><tr><td>Y</td><td>-1834.3983983713115</td></tr><tr><td>Vx<=
+/td><td>-0.4197064725146694</td></tr><tr><td>Vy</td><td>-1.5088021860139016=
+</td></tr><tr><td>Vz</td><td>7.450132835530735</td></tr><tr><td>Duration</t=
+d><td>152690</td></tr><tr class=3D"black-color"><td class=3D"black-color"><=
+/td><td class=3D"black-color"></td></tr><tr>                    <td>Loop</t=
+d>                        <td>84</td></tr><tr>                    <td>Time<=
+/td>                        <td>6/29/2026, 6:00:49 PM</td></tr><tr>        =
+            <td>X</td>                        <td>5426.451157615169</td></t=
+r><tr><td>Y</td><td>-4491.038885030386</td></tr><tr><td>Z</td><td>6.1879618=
+41672806</td></tr><tr><td>Y</td><td>-4491.038885030386</td></tr><tr><td>Vx<=
+/td><td>-1.010507471441041</td></tr><tr><td>Vy</td><td>-1.196417070259176</=
+td></tr><tr><td>Vz</td><td>7.450057416600803</td></tr><tr><td>Duration</td>=
+<td>154477</td></tr><tr class=3D"black-color"><td class=3D"black-color"></t=
+d><td class=3D"black-color"></td></tr><tr>                    <td>Loop</td>=
+                        <td>85</td></tr><tr>                    <td>Time</t=
+d>                        <td>6/29/2026, 7:38:51 PM</td></tr><tr>          =
+          <td>X</td>                        <td>3075.041867282559</td></tr>=
+<tr><td>Y</td><td>-6337.2272933841</td></tr><tr><td>Z</td><td>1.72177871305=
+4734</td></tr><tr><td>Y</td><td>-6337.2272933841</td></tr><tr><td>Vx</td><t=
+d>-1.4134843212797035</td></tr><tr><td>Vy</td><td>-0.6737706885678698</td><=
+/tr><tr><td>Vz</td><td>7.450068845817117</td></tr><tr><td>Duration</td><td>=
+156278</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><t=
+d class=3D"black-color"></td></tr><tr>                    <td>Loop</td>    =
+                    <td>86</td></tr><tr>                    <td>Time</td>  =
+                      <td>6/29/2026, 9:16:54 PM</td></tr><tr>              =
+      <td>X</td>                        <td>168.4567868823622</td></tr><tr>=
+<td>Y</td><td>-7041.756181566411</td></tr><tr><td>Z</td><td>4.1189126692765=
+74</td></tr><tr><td>Y</td><td>-7041.756181566411</td></tr><tr><td>Vx</td><t=
+d>-1.5654748293671708</td></tr><tr><td>Vy</td><td>-0.02405595456662908</td>=
+</tr><tr><td>Vz</td><td>7.450234473252505</td></tr><tr><td>Duration</td><td=
+>158036</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><=
+td class=3D"black-color"></td></tr><tr>                    <td>Loop</td>   =
+                     <td>87</td></tr><tr>                    <td>Time</td> =
+                       <td>6/29/2026, 10:54:57 PM</td></tr><tr>            =
+        <td>X</td>                        <td>-2768.37590859465</td></tr><t=
+r><td>Y</td><td>-6476.782170097946</td></tr><tr><td>Z</td><td>6.03257174572=
+5484</td></tr><tr><td>Y</td><td>-6476.782170097946</td></tr><tr><td>Vx</td>=
+<td>-1.4335145766106792</td></tr><tr><td>Vy</td><td>0.6296036384631862</td>=
+</tr><tr><td>Vz</td><td>7.450371208513622</td></tr><tr><td>Duration</td><td=
+>159786</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><=
+td class=3D"black-color"></td></tr><tr>                    <td>Loop</td>   =
+                     <td>88</td></tr><tr>                    <td>Time</td> =
+                       <td>6/30/2026, 12:32:59 AM</td></tr><tr>            =
+        <td>X</td>                        <td>-5205.145505095338</td></tr><=
+tr><td>Y</td><td>-4745.275072646486</td></tr><tr><td>Z</td><td>0.9404967006=
+281737</td></tr><tr><td>Y</td><td>-4745.275072646486</td></tr><tr><td>Vx</t=
+d><td>-1.04739285925714</td></tr><tr><td>Vy</td><td>1.163855612827358</td><=
+/tr><tr><td>Vz</td><td>7.450482490742762</td></tr><tr><td>Duration</td><td>=
+161516</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><t=
+d class=3D"black-color"></td></tr><tr>                    <td>Loop</td>    =
+                    <td>89</td></tr><tr>                    <td>Time</td>  =
+                      <td>6/30/2026, 2:11:02 AM</td></tr><tr>              =
+      <td>X</td>                        <td>-6704.9098562284635</td></tr><t=
+r><td>Y</td><td>-2157.575719118035</td></tr><tr><td>Z</td><td>3.74263267329=
+88384</td></tr><tr><td>Y</td><td>-2157.575719118035</td></tr><tr><td>Vx</td=
+><td>-0.4673123081548395</td></tr><tr><td>Vy</td><td>1.4946104263195557</td=
+></tr><tr><td>Vz</td><td>7.450476006409192</td></tr><tr><td>Duration</td><t=
+d>163215</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td>=
+<td class=3D"black-color"></td></tr><tr>                    <td>Loop</td>  =
+                      <td>90</td></tr><tr>                    <td>Time</td>=
+                        <td>6/30/2026, 3:49:05 AM</td></tr><tr>            =
+        <td>X</td>                        <td>-6995.717568398269</td></tr><=
+tr><td>Y</td><td>819.2046168100417</td></tr><tr><td>Z</td><td>6.70187363030=
+69755</td></tr><tr><td>Y</td><td>819.2046168100417</td></tr><tr><td>Vx</td>=
+<td>0.19812690785038878</td></tr><tr><td>Vy</td><td>1.5535086070156177</td>=
+</tr><tr><td>Vz</td><td>7.450448340384377</td></tr><tr><td>Duration</td><td=
+>164937</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><=
+td class=3D"black-color"></td></tr><tr>                    <td>Loop</td>   =
+                     <td>91</td></tr><tr>                    <td>Time</td> =
+                       <td>6/30/2026, 5:27:07 AM</td></tr><tr>             =
+       <td>X</td>                        <td>-6025.954477383025</td></tr><t=
+r><td>Y</td><td>3646.9739013184494</td></tr><tr><td>Z</td><td>2.38369044890=
+2777</td></tr><tr><td>Y</td><td>3646.9739013184494</td></tr><tr><td>Vx</td>=
+<td>0.8206482467331969</td></tr><tr><td>Vy</td><td>1.3337903076112108</td><=
+/tr><tr><td>Vz</td><td>7.450387660277885</td></tr><tr><td>Duration</td><td>=
+166695</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><t=
+d class=3D"black-color"></td></tr></tbody></table></td><td><table class=3D"=
+my-table"><thead><tr><th>Paramerter</th><th>Value</th></tr></thead><tbody><=
+tr>                    <td>Loop</td>                        <td>1</td></tr>=
+<tr>                    <td>Time</td>                        <td>6/24/2026,=
+ 2:23:10 AM</td></tr><tr>                    <td>X</td>                    =
+    <td>-6809.454895098692</td></tr><tr><td>Y</td><td>-1800.6851616672027</=
+td></tr><tr><td>Z</td><td>2.80642240733558</td></tr><tr><td>Y</td><td>-1800=
+.6851616672027</td></tr><tr><td>Vx</td><td>-0.3888544095241871</td></tr><tr=
+><td>Vy</td><td>1.5169215301090857</td></tr><tr><td>Vz</td><td>7.4504616680=
+79534</td></tr><tr><td>Duration</td><td>568</td></tr><tr class=3D"black-col=
+or"><td class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>=
+                    <td>Loop</td>                        <td>2</td></tr><tr=
+>                    <td>Time</td>                        <td>6/24/2026, 4:=
+01:13 AM</td></tr><tr>                    <td>X</td>                       =
+ <td>-6942.743126123797</td></tr><tr><td>Y</td><td>1187.2993689925504</td><=
+/tr><tr><td>Z</td><td>5.783912231076208</td></tr><tr><td>Y</td><td>1187.299=
+3689925504</td></tr><tr><td>Vx</td><td>0.278764102012415</td></tr><tr><td>V=
+y</td><td>1.5410669116347635</td></tr><tr><td>Vz</td><td>7.450440789226366<=
+/td></tr><tr><td>Duration</td><td>1136</td></tr><tr class=3D"black-color"><=
+td class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>     =
+               <td>Loop</td>                        <td>3</td></tr><tr>    =
+                <td>Time</td>                        <td>6/24/2026, 5:39:15=
+ AM</td></tr><tr>                    <td>X</td>                        <td>=
+-5825.093320401792</td></tr><tr><td>Y</td><td>3959.9461425775326</td></tr><=
+tr><td>Z</td><td>1.4404810336252112</td></tr><tr><td>Y</td><td>3959.9461425=
+775326</td></tr><tr><td>Vx</td><td>0.8889779656939226</td></tr><tr><td>Vy</=
+td><td>1.2892282912888255</td></tr><tr><td>Vz</td><td>7.450368442617858</td=
+></tr><tr><td>Duration</td><td>1700</td></tr><tr class=3D"black-color"><td =
+class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>        =
+            <td>Loop</td>                        <td>4</td></tr><tr>       =
+             <td>Time</td>                        <td>6/24/2026, 7:17:18 AM=
+</td></tr><tr>                    <td>X</td>                        <td>-36=
+56.875946491059</td></tr><tr><td>Y</td><td>6020.167152657609</td></tr><tr><=
+td>Z</td><td>4.329170111240852</td></tr><tr><td>Y</td><td>6020.167152657609=
+</td></tr><tr><td>Vx</td><td>1.34525312090659</td></tr><tr><td>Vy</td><td>0=
+.8013926072136539</td></tr><tr><td>Vz</td><td>7.4502071328800445</td></tr><=
+tr><td>Duration</td><td>2262</td></tr><tr class=3D"black-color"><td class=
+=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>             =
+       <td>Loop</td>                        <td>5</td></tr><tr>            =
+        <td>Time</td>                        <td>6/24/2026, 8:55:21 AM</td>=
+</tr><tr>                    <td>X</td>                        <td>-829.143=
+4763175072</td></tr><tr><td>Y</td><td>6994.882656469696</td></tr><tr><td>Z<=
+/td><td>6.640550932706801</td></tr><tr><td>Y</td><td>6994.882656469696</td>=
+</tr><tr><td>Vx</td><td>1.5565300161506883</td></tr><tr><td>Vy</td><td>0.16=
+851215826057336</td></tr><tr><td>Vz</td><td>7.450123522921689</td></tr><tr>=
+<td>Duration</td><td>2825</td></tr><tr class=3D"black-color"><td class=3D"b=
+lack-color"></td><td class=3D"black-color"></td></tr><tr>                  =
+  <td>Loop</td>                        <td>6</td></tr><tr>                 =
+   <td>Time</td>                        <td>6/24/2026, 10:33:23 AM</td></tr=
+><tr>                    <td>X</td>                        <td>2146.5326105=
+794684</td></tr><tr><td>Y</td><td>6708.787822320066</td></tr><tr><td>Z</td>=
+<td>1.0888239554352372</td></tr><tr><td>Y</td><td>6708.787822320066</td></t=
+r><tr><td>Vx</td><td>1.4880098689587897</td></tr><tr><td>Vy</td><td>-0.4865=
+714771805361</td></tr><tr><td>Vz</td><td>7.450129065612821</td></tr><tr><td=
+>Duration</td><td>3387</td></tr><tr class=3D"black-color"><td class=3D"blac=
+k-color"></td><td class=3D"black-color"></td></tr><tr>                    <=
+td>Loop</td>                        <td>7</td></tr><tr>                    =
+<td>Time</td>                        <td>6/24/2026, 12:11:26 PM</td></tr><t=
+r>                    <td>X</td>                        <td>4736.6615342746=
+645</td></tr><tr><td>Y</td><td>5213.32400498859</td></tr><tr><td>Z</td><td>=
+3.1297042908927963</td></tr><tr><td>Y</td><td>5213.32400498859</td></tr><tr=
+><td>Vx</td><td>1.1506077097990854</td></tr><tr><td>Vy</td><td>-1.061832584=
+9429664</td></tr><tr><td>Vz</td><td>7.450194914554749</td></tr><tr><td>Dura=
+tion</td><td>3950</td></tr><tr class=3D"black-color"><td class=3D"black-col=
+or"></td><td class=3D"black-color"></td></tr><tr>                    <td>Lo=
+op</td>                        <td>8</td></tr><tr>                    <td>T=
+ime</td>                        <td>6/24/2026, 1:49:29 PM</td></tr><tr>    =
+                <td>X</td>                        <td>6472.820278946855</td=
+></tr><tr><td>Y</td><td>2777.9555941643466</td></tr><tr><td>Z</td><td>5.660=
+350625012015</td></tr><tr><td>Y</td><td>2777.9555941643466</td></tr><tr><td=
+>Vx</td><td>0.6038538326864895</td></tr><tr><td>Vy</td><td>-1.4448489789795=
+902</td></tr><tr><td>Vz</td><td>7.450189180930804</td></tr><tr><td>Duration=
+</td><td>4514</td></tr><tr class=3D"black-color"><td class=3D"black-color">=
+</td><td class=3D"black-color"></td></tr><tr>                    <td>Loop</=
+td>                        <td>9</td></tr><tr>                    <td>Time<=
+/td>                        <td>6/24/2026, 3:27:31 PM</td></tr><tr>        =
+            <td>X</td>                        <td>7042.058371271922</td></t=
+r><tr><td>Y</td><td>-156.7078407513062</td></tr><tr><td>Z</td><td>1.2926276=
+570568662</td></tr><tr><td>Y</td><td>-156.7078407513062</td></tr><tr><td>Vx=
+</td><td>-0.04515691235486108</td></tr><tr><td>Vy</td><td>-1.56540307021658=
+09</td></tr><tr><td>Vz</td><td>7.450142468937129</td></tr><tr><td>Duration<=
+/td><td>5077</td></tr><tr class=3D"black-color"><td class=3D"black-color"><=
+/td><td class=3D"black-color"></td></tr><tr>                    <td>Loop</t=
+d>                        <td>10</td></tr><tr>                    <td>Time<=
+/td>                        <td>6/24/2026, 5:05:34 PM</td></tr><tr>        =
+            <td>X</td>                        <td>6342.205102041226</td></t=
+r><tr><td>Y</td><td>-3064.6412606972076</td></tr><tr><td>Z</td><td>4.383836=
+4063104835</td></tr><tr><td>Y</td><td>-3064.6412606972076</td></tr><tr><td>=
+Vx</td><td>-0.6936434164177581</td></tr><tr><td>Vy</td><td>-1.4040915202986=
+47</td></tr><tr><td>Vz</td><td>7.450088358685321</td></tr><tr><td>Duration<=
+/td><td>5636</td></tr><tr class=3D"black-color"><td class=3D"black-color"><=
+/td><td class=3D"black-color"></td></tr><tr>                    <td>Loop</t=
+d>                        <td>11</td></tr><tr>                    <td>Time<=
+/td>                        <td>6/24/2026, 6:43:36 PM</td></tr><tr>        =
+            <td>X</td>                        <td>4499.940348455562</td></t=
+r><tr><td>Y</td><td>-5419.171834377995</td></tr><tr><td>Z</td><td>0.0444305=
+192197092</td></tr><tr><td>Y</td><td>-5419.171834377995</td></tr><tr><td>Vx=
+</td><td>-1.2104885412843696</td></tr><tr><td>Vy</td><td>-0.993412456694665=
+3</td></tr><tr><td>Vz</td><td>7.4499956206163365</td></tr><tr><td>Duration<=
+/td><td>6200</td></tr><tr class=3D"black-color"><td class=3D"black-color"><=
+/td><td class=3D"black-color"></td></tr><tr>                    <td>Loop</t=
+d>                        <td>12</td></tr><tr>                    <td>Time<=
+/td>                        <td>6/24/2026, 8:21:39 PM</td></tr><tr>        =
+            <td>X</td>                        <td>1845.6244165517505</td></=
+tr><tr><td>Y</td><td>-6797.78628507777</td></tr><tr><td>Z</td><td>2.8775752=
+73317417</td></tr><tr><td>Y</td><td>-6797.78628507777</td></tr><tr><td>Vx</=
+td><td>-1.5140937331514779</td></tr><tr><td>Vy</td><td>-0.3986694359016835<=
+/td></tr><tr><td>Vz</td><td>7.450121472705108</td></tr><tr><td>Duration</td=
+><td>6764</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td=
+><td class=3D"black-color"></td></tr><tr>                    <td>Loop</td> =
+                       <td>13</td></tr><tr>                    <td>Time</td=
+>                        <td>6/24/2026, 9:59:42 PM</td></tr><tr>           =
+         <td>X</td>                        <td>-1141.152551923249</td></tr>=
+<tr><td>Y</td><td>-6950.688514033027</td></tr><tr><td>Z</td><td>4.923376395=
+182625</td></tr><tr><td>Y</td><td>-6950.688514033027</td></tr><tr><td>Vx</t=
+d><td>-1.5425508512790385</td></tr><tr><td>Vy</td><td>0.2676430581291618</t=
+d></tr><tr><td>Vz</td><td>7.450269041440805</td></tr><tr><td>Duration</td><=
+td>7327</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><=
+td class=3D"black-color"></td></tr><tr>                    <td>Loop</td>   =
+                     <td>14</td></tr><tr>                    <td>Time</td> =
+                       <td>6/24/2026, 11:37:45 PM</td></tr><tr>            =
+        <td>X</td>                        <td>-3922.2105364466543</td></tr>=
+<tr><td>Y</td><td>-5850.524928625664</td></tr><tr><td>Z</td><td>6.967744363=
+058351</td></tr><tr><td>Y</td><td>-5850.524928625664</td></tr><tr><td>Vx</t=
+d><td>-1.2912729639594411</td></tr><tr><td>Vy</td><td>0.885446617580711</td=
+></tr><tr><td>Vz</td><td>7.450386856901099</td></tr><tr><td>Duration</td><t=
+d>7889</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><t=
+d class=3D"black-color"></td></tr><tr>                    <td>Loop</td>    =
+                    <td>15</td></tr><tr>                    <td>Time</td>  =
+                      <td>6/25/2026, 1:15:47 AM</td></tr><tr>              =
+      <td>X</td>                        <td>-5995.373065119172</td></tr><tr=
+><td>Y</td><td>-3696.8846904738584</td></tr><tr><td>Z</td><td>1.96233324886=
+30005</td></tr><tr><td>Y</td><td>-3696.8846904738584</td></tr><tr><td>Vx</t=
+d><td>-0.8124079640159502</td></tr><tr><td>Vy</td><td>1.3386082120096658</t=
+d></tr><tr><td>Vz</td><td>7.450453432429363</td></tr><tr><td>Duration</td><=
+td>8448</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><=
+td class=3D"black-color"></td></tr><tr>                    <td>Loop</td>   =
+                     <td>16</td></tr><tr>                    <td>Time</td> =
+                       <td>6/25/2026, 2:53:50 AM</td></tr><tr>             =
+       <td>X</td>                        <td>-6988.886915735564</td></tr><t=
+r><td>Y</td><td>-875.7799053462533</td></tr><tr><td>Z</td><td>4.80560521536=
+1662</td></tr><tr><td>Y</td><td>-875.7799053462533</td></tr><tr><td>Vx</td>=
+<td>-0.18076455816753778</td></tr><tr><td>Vy</td><td>1.5555704630958813</td=
+></tr><tr><td>Vz</td><td>7.450420228526122</td></tr><tr><td>Duration</td><t=
+d>9010</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><t=
+d class=3D"black-color"></td></tr><tr>                    <td>Loop</td>    =
+                    <td>17</td></tr><tr>                    <td>Time</td>  =
+                      <td>6/25/2026, 4:31:52 AM</td></tr><tr>              =
+      <td>X</td>                        <td>-6722.686787773118</td></tr><tr=
+><td>Y</td><td>2101.7909185854132</td></tr><tr><td>Z</td><td>0.440891536611=
+58775</td></tr><tr><td>Y</td><td>2101.7909185854132</td></tr><tr><td>Vx</td=
+><td>0.4762558883791978</td></tr><tr><td>Vy</td><td>1.4918726367049262</td>=
+</tr><tr><td>Vz</td><td>7.450408070524318</td></tr><tr><td>Duration</td><td=
+>9572</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td=
+ class=3D"black-color"></td></tr><tr>                    <td>Loop</td>     =
+                   <td>18</td></tr><tr>                    <td>Time</td>   =
+                     <td>6/25/2026, 6:09:55 AM</td></tr><tr>               =
+     <td>X</td>                        <td>-5244.5400582826815</td></tr><tr=
+><td>Y</td><td>4701.972871819261</td></tr><tr><td>Z</td><td>3.5506666419767=
+114</td></tr><tr><td>Y</td><td>4701.972871819261</td></tr><tr><td>Vx</td><t=
+d>1.0547800685572775</td></tr><tr><td>Vy</td><td>1.1575012972862957</td></t=
+r><tr><td>Vz</td><td>7.450303209147004</td></tr><tr><td>Duration</td><td>10=
+134</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td c=
+lass=3D"black-color"></td></tr><tr>                    <td>Loop</td>       =
+                 <td>19</td></tr><tr>                    <td>Time</td>     =
+                   <td>6/25/2026, 7:47:58 AM</td></tr><tr>                 =
+   <td>X</td>                        <td>-2820.727479145995</td></tr><tr><t=
+d>Y</td><td>6454.376833335248</td></tr><tr><td>Z</td><td>6.300624309326028<=
+/td></tr><tr><td>Y</td><td>6454.376833335248</td></tr><tr><td>Vx</td><td>1.=
+4409720603196137</td></tr><tr><td>Vy</td><td>0.6126975880224983</td></tr><t=
+r><td>Vz</td><td>7.45017204661404</td></tr><tr><td>Duration</td><td>10745</=
+td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td class=
+=3D"black-color"></td></tr><tr>                    <td>Loop</td>           =
+             <td>20</td></tr><tr>                    <td>Time</td>         =
+               <td>6/25/2026, 9:26:00 AM</td></tr><tr>                    <=
+td>X</td>                        <td>110.21837023368306</td></tr><tr><td>Y<=
+/td><td>7042.99504401766</td></tr><tr><td>Z</td><td>0.994611940897669</td><=
+/tr><tr><td>Y</td><td>7042.99504401766</td></tr><tr><td>Vx</td><td>1.565190=
+6973520717</td></tr><tr><td>Vy</td><td>-0.03443117367596542</td></tr><tr><t=
+d>Vz</td><td>7.45010447668064</td></tr><tr><td>Duration</td><td>11363</td><=
+/tr><tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"b=
+lack-color"></td></tr><tr>                    <td>Loop</td>                =
+        <td>21</td></tr><tr>                    <td>Time</td>              =
+          <td>6/25/2026, 11:04:03 AM</td></tr><tr>                    <td>X=
+</td>                        <td>3022.642688517365</td></tr><tr><td>Y</td><=
+td>6362.284652367682</td></tr><tr><td>Z</td><td>2.964984055276009</td></tr>=
+<tr><td>Y</td><td>6362.284652367682</td></tr><tr><td>Vx</td><td>1.408936367=
+0765989</td></tr><tr><td>Vy</td><td>-0.682659114656158</td></tr><tr><td>Vz<=
+/td><td>7.4501590412275895</td></tr><tr><td>Duration</td><td>12014</td></tr=
+><tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"blac=
+k-color"></td></tr><tr>                    <td>Loop</td>                   =
+     <td>22</td></tr><tr>                    <td>Time</td>                 =
+       <td>6/25/2026, 12:42:06 PM</td></tr><tr>                    <td>X</t=
+d>                        <td>5390.012510280839</td></tr><tr><td>Y</td><td>=
+4534.543785162884</td></tr><tr><td>Z</td><td>5.123454344493723</td></tr><tr=
+><td>Y</td><td>4534.543785162884</td></tr><tr><td>Vx</td><td>0.997001247398=
+4281</td></tr><tr><td>Vy</td><td>-1.2073897660952195</td></tr><tr><td>Vz</t=
+d><td>7.450208984569583</td></tr><tr><td>Duration</td><td>12681</td></tr><t=
+r class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-c=
+olor"></td></tr><tr>                    <td>Loop</td>                      =
+  <td>23</td></tr><tr>                    <td>Time</td>                    =
+    <td>6/25/2026, 2:20:08 PM</td></tr><tr>                    <td>X</td>  =
+                      <td>6785.243659380986</td></tr><tr><td>Y</td><td>1890=
+.7676305779937</td></tr><tr><td>Z</td><td>0.41159714448095297</td></tr><tr>=
+<td>Y</td><td>1890.7676305779937</td></tr><tr><td>Vx</td><td>0.411250171173=
+45425</td></tr><tr><td>Vy</td><td>-1.5110290195498652</td></tr><tr><td>Vz</=
+td><td>7.450187747044229</td></tr><tr><td>Duration</td><td>13270</td></tr><=
+tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-=
+color"></td></tr><tr>                    <td>Loop</td>                     =
+   <td>24</td></tr><tr>                    <td>Time</td>                   =
+     <td>6/25/2026, 3:58:11 PM</td></tr><tr>                    <td>X</td> =
+                       <td>6958.1396439471555</td></tr><tr><td>Y</td><td>-1=
+095.145792153228</td></tr><tr><td>Z</td><td>3.606550982539509</td></tr><tr>=
+<td>Y</td><td>-1095.145792153228</td></tr><tr><td>Vx</td><td>-0.25618434796=
+92551</td></tr><tr><td>Vy</td><td>-1.5450102481185002</td></tr><tr><td>Vz</=
+td><td>7.4501383796134615</td></tr><tr><td>Duration</td><td>13969</td></tr>=
+<tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black=
+-color"></td></tr><tr>                    <td>Loop</td>                    =
+    <td>25</td></tr><tr>                    <td>Time</td>                  =
+      <td>6/25/2026, 5:36:14 PM</td></tr><tr>                    <td>X</td>=
+                        <td>5876.427235315419</td></tr><tr><td>Y</td><td>-3=
+883.697670149659</td></tr><tr><td>Z</td><td>6.762042927769154</td></tr><tr>=
+<td>Y</td><td>-3883.697670149659</td></tr><tr><td>Vx</td><td>-0.87700835044=
+89409</td></tr><tr><td>Vy</td><td>-1.297529910009914</td></tr><tr><td>Vz</t=
+d><td>7.450075738817341</td></tr><tr><td>Duration</td><td>14529</td></tr><t=
+r class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-c=
+olor"></td></tr><tr>                    <td>Loop</td>                      =
+  <td>26</td></tr><tr>                    <td>Time</td>                    =
+    <td>6/25/2026, 7:14:16 PM</td></tr><tr>                    <td>X</td>  =
+                      <td>3736.3822222291046</td></tr><tr><td>Y</td><td>-59=
+71.268608689851</td></tr><tr><td>Z</td><td>2.3885546047025397</td></tr><tr>=
+<td>Y</td><td>-5971.268608689851</td></tr><tr><td>Vx</td><td>-1.33358599794=
+08307</td></tr><tr><td>Vy</td><td>-0.8208032521273435</td></tr><tr><td>Vz</=
+td><td>7.450021096220839</td></tr><tr><td>Duration</td><td>15227</td></tr><=
+tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-=
+color"></td></tr><tr>                    <td>Loop</td>                     =
+   <td>27</td></tr><tr>                    <td>Time</td>                   =
+     <td>6/25/2026, 8:52:19 PM</td></tr><tr>                    <td>X</td> =
+                       <td>921.9403954738518</td></tr><tr><td>Y</td><td>-69=
+83.225331200519</td></tr><tr><td>Z</td><td>5.026632086748695</td></tr><tr><=
+td>Y</td><td>-6983.225331200519</td></tr><tr><td>Vx</td><td>-1.554031916226=
+7326</td></tr><tr><td>Vy</td><td>-0.19073318761126548</td></tr><tr><td>Vz</=
+td><td>7.450179862528665</td></tr><tr><td>Duration</td><td>15789</td></tr><=
+tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-=
+color"></td></tr><tr>                    <td>Loop</td>                     =
+   <td>28</td></tr><tr>                    <td>Time</td>                   =
+     <td>6/25/2026, 10:30:22 PM</td></tr><tr>                    <td>X</td>=
+                        <td>-2058.5120638226635</td></tr><tr><td>Y</td><td>=
+-6736.163454638194</td></tr><tr><td>Z</td><td>6.944804339753587</td></tr><t=
+r><td>Y</td><td>-6736.163454638194</td></tr><tr><td>Vx</td><td>-1.492407752=
+7204125</td></tr><tr><td>Vy</td><td>0.47325435884649286</td></tr><tr><td>Vz=
+</td><td>7.450323052335189</td></tr><tr><td>Duration</td><td>16436</td></tr=
+><tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"blac=
+k-color"></td></tr><tr>                    <td>Loop</td>                   =
+     <td>29</td></tr><tr>                    <td>Time</td>                 =
+       <td>6/26/2026, 12:08:24 AM</td></tr><tr>                    <td>X</t=
+d>                        <td>-4666.749589427785</td></tr><tr><td>Y</td><td=
+>-5275.716279444376</td></tr><tr><td>Z</td><td>1.7160295184642846</td></tr>=
+<tr><td>Y</td><td>-5275.716279444376</td></tr><tr><td>Vx</td><td>-1.1654809=
+332356002</td></tr><tr><td>Vy</td><td>1.0454960359586345</td></tr><tr><td>V=
+z</td><td>7.45044528312708</td></tr><tr><td>Duration</td><td>17002</td></tr=
+><tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"blac=
+k-color"></td></tr><tr>                    <td>Loop</td>                   =
+     <td>30</td></tr><tr>                    <td>Time</td>                 =
+       <td>6/26/2026, 1:46:27 AM</td></tr><tr>                    <td>X</td=
+>                        <td>-6435.12838174515</td></tr><tr><td>Y</td><td>-=
+2863.602527055977</td></tr><tr><td>Z</td><td>4.423886273902972</td></tr><tr=
+><td>Y</td><td>-2863.602527055977</td></tr><tr><td>Vx</td><td>-0.6241138129=
+372323</td></tr><tr><td>Vy</td><td>1.4361888111735208</td></tr><tr><td>Vz</=
+td><td>7.450466964006754</td></tr><tr><td>Duration</td><td>17565</td></tr><=
+tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-=
+color"></td></tr><tr>                    <td>Loop</td>                     =
+   <td>31</td></tr><tr>                    <td>Time</td>                   =
+     <td>6/26/2026, 3:24:30 AM</td></tr><tr>                    <td>X</td> =
+                       <td>-7043.229797820378</td></tr><tr><td>Y</td><td>64=
+.88028377405664</td></tr><tr><td>Z</td><td>7.35074050852121</td></tr><tr><t=
+d>Y</td><td>64.88028377405664</td></tr><tr><td>Vx</td><td>0.031194434702064=
+608</td></tr><tr><td>Vy</td><td>1.5657923933170848</td></tr><tr><td>Vz</td>=
+<td>7.450428295460132</td></tr><tr><td>Duration</td><td>18129</td></tr><tr =
+class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-col=
+or"></td></tr><tr>                    <td>Loop</td>                        =
+<td>32</td></tr><tr>                    <td>Time</td>                      =
+  <td>6/26/2026, 5:02:32 AM</td></tr><tr>                    <td>X</td>    =
+                    <td>-6382.017993166011</td></tr><tr><td>Y</td><td>2980.=
+2896330841386</td></tr><tr><td>Z</td><td>3.0814616720131927</td></tr><tr><t=
+d>Y</td><td>2980.2896330841386</td></tr><tr><td>Vx</td><td>0.67365513042714=
+44</td></tr><tr><td>Vy</td><td>1.4137763314289211</td></tr><tr><td>Vz</td><=
+td>7.4503941911109</td></tr><tr><td>Duration</td><td>18693</td></tr><tr cla=
+ss=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-color"=
+></td></tr><tr>                    <td>Loop</td>                        <td=
+>33</td></tr><tr>                    <td>Time</td>                        <=
+td>6/26/2026, 6:40:35 AM</td></tr><tr>                    <td>X</td>       =
+                 <td>-4570.082799837733</td></tr><tr><td>Y</td><td>5359.921=
+9852956085</td></tr><tr><td>Z</td><td>6.165533377865026</td></tr><tr><td>Y<=
+/td><td>5359.9219852956085</td></tr><tr><td>Vx</td><td>1.2015971396177743</=
+td></tr><tr><td>Vy</td><td>1.0042204266118153</td></tr><tr><td>Vz</td><td>7=
+.450249713306357</td></tr><tr><td>Duration</td><td>19259</td></tr><tr class=
+=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-color"><=
+/td></tr><tr>                    <td>Loop</td>                        <td>3=
+4</td></tr><tr>                    <td>Time</td>                        <td=
+>6/26/2026, 8:18:37 AM</td></tr><tr>                    <td>X</td>         =
+               <td>-1935.5188186889748</td></tr><tr><td>Y</td><td>6772.7049=
+35417682</td></tr><tr><td>Z</td><td>1.343583661476087</td></tr><tr><td>Y</t=
+d><td>6772.704935417682</td></tr><tr><td>Vx</td><td>1.5082341007318485</td>=
+</tr><tr><td>Vy</td><td>0.42027380552039056</td></tr><tr><td>Vz</td><td>7.4=
+501550622470045</td></tr><tr><td>Duration</td><td>19826</td></tr><tr class=
+=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-color"><=
+/td></tr><tr>                    <td>Loop</td>                        <td>3=
+5</td></tr><tr>                    <td>Time</td>                        <td=
+>6/26/2026, 9:56:40 AM</td></tr><tr>                    <td>X</td>         =
+               <td>1049.2463311487677</td></tr><tr><td>Y</td><td>6965.25488=
+3056445</td></tr><tr><td>Z</td><td>3.3848105951788554</td></tr><tr><td>Y</t=
+d><td>6965.254883056445</td></tr><tr><td>Vx</td><td>1.5462188192543687</td>=
+</tr><tr><td>Vy</td><td>-0.24550179635421945</td></tr><tr><td>Vz</td><td>7.=
+4500985220457</td></tr><tr><td>Duration</td><td>20390</td></tr><tr class=3D=
+"black-color"><td class=3D"black-color"></td><td class=3D"black-color"></td=
+></tr><tr>                    <td>Loop</td>                        <td>36</=
+td></tr><tr>                    <td>Time</td>                        <td>6/=
+26/2026, 11:34:43 AM</td></tr><tr>                    <td>X</td>           =
+             <td>3844.738909164501</td></tr><tr><td>Y</td><td>5901.93043715=
+9932</td></tr><tr><td>Z</td><td>5.431922386573635</td></tr><tr><td>Y</td><t=
+d>5901.930437159932</td></tr><tr><td>Vx</td><td>1.303839015942116</td></tr>=
+<tr><td>Vy</td><td>-0.8667870103092375</td></tr><tr><td>Vz</td><td>7.450177=
+301346113</td></tr><tr><td>Duration</td><td>20954</td></tr><tr class=3D"bla=
+ck-color"><td class=3D"black-color"></td><td class=3D"black-color"></td></t=
+r><tr>                    <td>Loop</td>                        <td>37</td><=
+/tr><tr>                    <td>Time</td>                        <td>6/26/2=
+026, 1:12:45 PM</td></tr><tr>                    <td>X</td>                =
+        <td>5946.164935471257</td></tr><tr><td>Y</td><td>3775.907518015917<=
+/td></tr><tr><td>Z</td><td>0.2956101054216207</td></tr><tr><td>Y</td><td>37=
+75.907518015917</td></tr><tr><td>Vx</td><td>0.8315950940545361</td></tr><tr=
+><td>Vy</td><td>-1.3267859743696644</td></tr><tr><td>Vz</td><td>7.450212160=
+148252</td></tr><tr><td>Duration</td><td>21519</td></tr><tr class=3D"black-=
+color"><td class=3D"black-color"></td><td class=3D"black-color"></td></tr><=
+tr>                    <td>Loop</td>                        <td>38</td></tr=
+><tr>                    <td>Time</td>                        <td>6/26/2026=
+, 2:50:48 PM</td></tr><tr>                    <td>X</td>                   =
+     <td>6976.904361778089</td></tr><tr><td>Y</td><td>968.2473797928444</td=
+></tr><tr><td>Z</td><td>3.2031866492020056</td></tr><tr><td>Y</td><td>968.2=
+473797928444</td></tr><tr><td>Vx</td><td>0.2030149744194632</td></tr><tr><t=
+d>Vy</td><td>-1.5528289927855232</td></tr><tr><td>Vz</td><td>7.450173239745=
+4274</td></tr><tr><td>Duration</td><td>22084</td></tr><tr class=3D"black-co=
+lor"><td class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr=
+>                    <td>Loop</td>                        <td>39</td></tr><=
+tr>                    <td>Time</td>                        <td>6/26/2026, =
+4:28:51 PM</td></tr><tr>                    <td>X</td>                     =
+   <td>6749.725371890654</td></tr><tr><td>Y</td><td>-2014.0466704633684</td=
+></tr><tr><td>Z</td><td>6.356568004627247</td></tr><tr><td>Y</td><td>-2014.=
+0466704633684</td></tr><tr><td>Vx</td><td>-0.46287364124221103</td></tr><tr=
+><td>Vy</td><td>-1.49614567431977</td></tr><tr><td>Vz</td><td>7.45012145406=
+2369</td></tr><tr><td>Duration</td><td>22649</td></tr><tr class=3D"black-co=
+lor"><td class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr=
+>                    <td>Loop</td>                        <td>40</td></tr><=
+tr>                    <td>Time</td>                        <td>6/26/2026, =
+6:06:53 PM</td></tr><tr>                    <td>X</td>                     =
+   <td>5306.524307358683</td></tr><tr><td>Y</td><td>-4632.1619437576</td></=
+tr><tr><td>Z</td><td>2.0587043109777037</td></tr><tr><td>Y</td><td>-4632.16=
+19437576</td></tr><tr><td>Vx</td><td>-1.0382514596725934</td></tr><tr><td>V=
+y</td><td>-1.1723440051293588</td></tr><tr><td>Vz</td><td>7.450045697783628=
+</td></tr><tr><td>Duration</td><td>23214</td></tr><tr class=3D"black-color"=
+><td class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>   =
+                 <td>Loop</td>                        <td>41</td></tr><tr> =
+                   <td>Time</td>                        <td>6/26/2026, 7:44=
+:56 PM</td></tr><tr>                    <td>X</td>                        <=
+td>2905.9598040455267</td></tr><tr><td>Y</td><td>-6416.517893197968</td></t=
+r><tr><td>Z</td><td>5.015478606530348</td></tr><tr><td>Y</td><td>-6416.5178=
+93197968</td></tr><tr><td>Vx</td><td>-1.4322324268769373</td></tr><tr><td>V=
+y</td><td>-0.6329402674155575</td></tr><tr><td>Vz</td><td>7.450071782934944=
+</td></tr><tr><td>Duration</td><td>23775</td></tr><tr class=3D"black-color"=
+><td class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>   =
+                 <td>Loop</td>                        <td>42</td></tr><tr> =
+                   <td>Time</td>                        <td>6/26/2026, 9:22=
+:59 PM</td></tr><tr>                    <td>X</td>                        <=
+td>-18.26529735620264</td></tr><tr><td>Y</td><td>-7043.738508711039</td></t=
+r><tr><td>Z</td><td>7.354556685015273</td></tr><tr><td>Y</td><td>-7043.7385=
+08711039</td></tr><tr><td>Vx</td><td>-1.56554303797265</td></tr><tr><td>Vy<=
+/td><td>0.020812994415859928</td></tr><tr><td>Vz</td><td>7.450234877577623<=
+/td></tr><tr><td>Duration</td><td>24340</td></tr><tr class=3D"black-color">=
+<td class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>    =
+                <td>Loop</td>                        <td>43</td></tr><tr>  =
+                  <td>Time</td>                        <td>6/26/2026, 11:01=
+:01 PM</td></tr><tr>                    <td>X</td>                        <=
+td>-2937.6785416167986</td></tr><tr><td>Y</td><td>-6401.776710683511</td></=
+tr><tr><td>Z</td><td>1.833901162770883</td></tr><tr><td>Y</td><td>-6401.776=
+710683511</td></tr><tr><td>Vx</td><td>-1.4183557282528818</td></tr><tr><td>=
+Vy</td><td>0.6629718063348686</td></tr><tr><td>Vz</td><td>7.45037337272096<=
+/td></tr><tr><td>Duration</td><td>24903</td></tr><tr class=3D"black-color">=
+<td class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>    =
+                <td>Loop</td>                        <td>44</td></tr><tr>  =
+                  <td>Time</td>                        <td>6/27/2026, 12:39=
+:04 AM</td></tr><tr>                    <td>X</td>                        <=
+td>-5329.11449478248</td></tr><tr><td>Y</td><td>-4605.615502078087</td></tr=
+><tr><td>Z</td><td>4.208152102717533</td></tr><tr><td>Y</td><td>-4605.61550=
+2078087</td></tr><tr><td>Vx</td><td>-1.0136146076870525</td></tr><tr><td>Vy=
+</td><td>1.1934399602739751</td></tr><tr><td>Vz</td><td>7.450476300802572</=
+td></tr><tr><td>Duration</td><td>25468</td></tr><tr class=3D"black-color"><=
+td class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>     =
+               <td>Loop</td>                        <td>45</td></tr><tr>   =
+                 <td>Time</td>                        <td>6/27/2026, 2:17:0=
+7 AM</td></tr><tr>                    <td>X</td>                        <td=
+>-6759.75457751827</td></tr><tr><td>Y</td><td>-1979.0662780734274</td></tr>=
+<tr><td>Z</td><td>7.013692080413247</td></tr><tr><td>Y</td><td>-1979.066278=
+0734274</td></tr><tr><td>Vx</td><td>-0.4242646943011273</td></tr><tr><td>Vy=
+</td><td>1.5074357510914729</td></tr><tr><td>Vz</td><td>7.450462937855319</=
+td></tr><tr><td>Duration</td><td>26029</td></tr><tr class=3D"black-color"><=
+td class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>     =
+               <td>Loop</td>                        <td>46</td></tr><tr>   =
+                 <td>Time</td>                        <td>6/27/2026, 3:55:0=
+9 AM</td></tr><tr>                    <td>X</td>                        <td=
+>-6971.7809761136405</td></tr><tr><td>Y</td><td>1002.8297236049552</td></tr=
+><tr><td>Z</td><td>2.530175115850583</td></tr><tr><td>Y</td><td>1002.829723=
+6049552</td></tr><tr><td>Vx</td><td>0.23446123848509878</td></tr><tr><td>Vy=
+</td><td>1.5483979883933172</td></tr><tr><td>Vz</td><td>7.450444167658728</=
+td></tr><tr><td>Duration</td><td>26592</td></tr><tr class=3D"black-color"><=
+td class=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>     =
+               <td>Loop</td>                        <td>47</td></tr><tr>   =
+                 <td>Time</td>                        <td>6/27/2026, 5:33:1=
+2 AM</td></tr><tr>                    <td>X</td>                        <td=
+>-5927.163243017045</td></tr><tr><td>Y</td><td>3805.4442609461894</td></tr>=
+<tr><td>Z</td><td>5.6474425887094</td></tr><tr><td>Y</td><td>3805.444260946=
+1894</td></tr><tr><td>Vx</td><td>0.8585752560938149</td></tr><tr><td>Vy</td=
+><td>1.3097235127047302</td></tr><tr><td>Vz</td><td>7.450372680164413</td><=
+/tr><tr><td>Duration</td><td>27156</td></tr><tr class=3D"black-color"><td c=
+lass=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>         =
+           <td>Loop</td>                        <td>48</td></tr><tr>       =
+             <td>Time</td>                        <td>6/27/2026, 7:11:14 AM=
+</td></tr><tr>                    <td>X</td>                        <td>-38=
+15.179378826572</td></tr><tr><td>Y</td><td>5921.111121124285</td></tr><tr><=
+td>Z</td><td>1.1195115901279378</td></tr><tr><td>Y</td><td>5921.11112112428=
+5</td></tr><tr><td>Vx</td><td>1.3217336856408393</td></tr><tr><td>Vy</td><t=
+d>0.8395982765375094</td></tr><tr><td>Vz</td><td>7.4502132211515075</td></t=
+r><tr><td>Duration</td><td>27718</td></tr><tr class=3D"black-color"><td cla=
+ss=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>           =
+         <td>Loop</td>                        <td>49</td></tr><tr>         =
+           <td>Time</td>                        <td>6/27/2026, 8:49:17 AM</=
+td></tr><tr>                    <td>X</td>                        <td>-1014=
+.2778895220738</td></tr><tr><td>Y</td><td>6970.451995579198</td></tr><tr><t=
+d>Z</td><td>3.483563126207324</td></tr><tr><td>Y</td><td>6970.451995579198<=
+/td></tr><tr><td>Vx</td><td>1.55105501445784</td></tr><tr><td>Vy</td><td>0.=
+21297298918286298</td></tr><tr><td>Vz</td><td>7.450128135896613</td></tr><t=
+r><td>Duration</td><td>28283</td></tr><tr class=3D"black-color"><td class=
+=3D"black-color"></td><td class=3D"black-color"></td></tr><tr>             =
+       <td>Loop</td>                        <td>50</td></tr><tr>           =
+         <td>Time</td>                        <td>6/27/2026, 10:27:20 AM</t=
+d></tr><tr>                    <td>X</td>                        <td>1969.4=
+452268753698</td></tr><tr><td>Y</td><td>6762.89309878261</td></tr><tr><td>Z=
+</td><td>5.392521478617264</td></tr><tr><td>Y</td><td>6762.89309878261</td>=
+</tr><tr><td>Vx</td><td>1.4989976228297164</td></tr><tr><td>Vy</td><td>-0.4=
+517077636386069</td></tr><tr><td>Vz</td><td>7.450117820520288</td></tr><tr>=
+<td>Duration</td><td>28847</td></tr><tr class=3D"black-color"><td class=3D"=
+black-color"></td><td class=3D"black-color"></td></tr><tr>                 =
+   <td>Loop</td>                        <td>51</td></tr><tr>               =
+     <td>Time</td>                        <td>6/27/2026, 12:05:23 PM</td></=
+tr><tr>                    <td>X</td>                        <td>4597.99021=
+28032445</td></tr><tr><td>Y</td><td>5336.024880029093</td></tr><tr><td>Z</t=
+d><td>7.426847762980096</td></tr><tr><td>Y</td><td>5336.024880029093</td></=
+tr><tr><td>Vx</td><td>1.1751145428632772</td></tr><tr><td>Vy</td><td>-1.034=
+6867501568595</td></tr><tr><td>Vz</td><td>7.45018603176771</td></tr><tr><td=
+>Duration</td><td>29408</td></tr><tr class=3D"black-color"><td class=3D"bla=
+ck-color"></td><td class=3D"black-color"></td></tr><tr>                    =
+<td>Loop</td>                        <td>52</td></tr><tr>                  =
+  <td>Time</td>                        <td>6/27/2026, 1:43:25 PM</td></tr><=
+tr>                    <td>X</td>                        <td>6396.912888082=
+542</td></tr><tr><td>Y</td><td>2948.564721640272</td></tr><tr><td>Z</td><td=
+>2.4668891504192203</td></tr><tr><td>Y</td><td>2948.564721640272</td></tr><=
+tr><td>Vx</td><td>0.6449739027660794</td></tr><tr><td>Vy</td><td>-1.4269219=
+739098429</td></tr><tr><td>Vz</td><td>7.450191858100724</td></tr><tr><td>Du=
+ration</td><td>29971</td></tr><tr class=3D"black-color"><td class=3D"black-=
+color"></td><td class=3D"black-color"></td></tr><tr>                    <td=
+>Loop</td>                        <td>53</td></tr><tr>                    <=
+td>Time</td>                        <td>6/27/2026, 3:21:28 PM</td></tr><tr>=
+                    <td>X</td>                        <td>7043.73711379041<=
+/td></tr><tr><td>Y</td><td>28.45620993754139</td></tr><tr><td>Z</td><td>5.5=
+17152784285378</td></tr><tr><td>Y</td><td>28.45620993754139</td></tr><tr><t=
+d>Vx</td><td>-0.008505218007054276</td></tr><tr><td>Vy</td><td>-1.566061413=
+3310007</td></tr><tr><td>Vz</td><td>7.450141133597791</td></tr><tr><td>Dura=
+tion</td><td>30533</td></tr><tr class=3D"black-color"><td class=3D"black-co=
+lor"></td><td class=3D"black-color"></td></tr><tr>                    <td>L=
+oop</td>                        <td>54</td></tr><tr>                    <td=
+>Time</td>                        <td>6/27/2026, 4:59:30 PM</td></tr><tr>  =
+                  <td>X</td>                        <td>6421.222899616704</=
+td></tr><tr><td>Y</td><td>-2895.4397710243466</td></tr><tr><td>Z</td><td>1.=
+1587953308848125</td></tr><tr><td>Y</td><td>-2895.4397710243466</td></tr><t=
+r><td>Vx</td><td>-0.6530993304591574</td></tr><tr><td>Vy</td><td>-1.4233686=
+945242892</td></tr><tr><td>Vz</td><td>7.450091524540761</td></tr><tr><td>Du=
+ration</td><td>31094</td></tr><tr class=3D"black-color"><td class=3D"black-=
+color"></td><td class=3D"black-color"></td></tr><tr>                    <td=
+>Loop</td>                        <td>55</td></tr><tr>                    <=
+td>Time</td>                        <td>6/27/2026, 6:37:33 PM</td></tr><tr>=
+                    <td>X</td>                        <td>4640.838883442508=
+</td></tr><tr><td>Y</td><td>-5298.99999740768</td></tr><tr><td>Z</td><td>4.=
+274373866287103</td></tr><tr><td>Y</td><td>-5298.99999740768</td></tr><tr><=
+td>Vx</td><td>-1.1869356450909971</td></tr><tr><td>Vy</td><td>-1.0214893221=
+496923</td></tr><tr><td>Vz</td><td>7.449994742932209</td></tr><tr><td>Durat=
+ion</td><td>31659</td></tr><tr class=3D"black-color"><td class=3D"black-col=
+or"></td><td class=3D"black-color"></td></tr><tr>                    <td>Lo=
+op</td>                        <td>56</td></tr><tr>                    <td>=
+Time</td>                        <td>6/27/2026, 8:15:36 PM</td></tr><tr>   =
+                 <td>X</td>                        <td>2023.6608140792157</=
+td></tr><tr><td>Y</td><td>-6746.925633197174</td></tr><tr><td>Z</td><td>7.1=
+31845455753571</td></tr><tr><td>Y</td><td>-6746.925633197174</td></tr><tr><=
+td>Vx</td><td>-1.504414639339617</td></tr><tr><td>Vy</td><td>-0.43397505597=
+519953</td></tr><tr><td>Vz</td><td>7.4501068657146</td></tr><tr><td>Duratio=
+n</td><td>32221</td></tr><tr class=3D"black-color"><td class=3D"black-color=
+"></td><td class=3D"black-color"></td></tr><tr>                    <td>Loop=
+</td>                        <td>57</td></tr><tr>                    <td>Ti=
+me</td>                        <td>6/27/2026, 9:53:38 PM</td></tr><tr>     =
+               <td>X</td>                        <td>-956.5181875008464</td=
+></tr><tr><td>Y</td><td>-6978.507340847324</td></tr><tr><td>Z</td><td>1.770=
+6528510165178</td></tr><tr><td>Y</td><td>-6978.507340847324</td></tr><tr><t=
+d>Vx</td><td>-1.5495577263303308</td></tr><tr><td>Vy</td><td>0.223388694387=
+5092</td></tr><tr><td>Vz</td><td>7.4502614289036035</td></tr><tr><td>Durati=
+on</td><td>32786</td></tr><tr class=3D"black-color"><td class=3D"black-colo=
+r"></td><td class=3D"black-color"></td></tr><tr>                    <td>Loo=
+p</td>                        <td>58</td></tr><tr>                    <td>T=
+ime</td>                        <td>6/27/2026, 11:31:41 PM</td></tr><tr>   =
+                 <td>X</td>                        <td>-3765.7528813103545<=
+/td></tr><tr><td>Y</td><td>-5952.450586910318</td></tr><tr><td>Z</td><td>3.=
+795574601089144</td></tr><tr><td>Y</td><td>-5952.450586910318</td></tr><tr>=
+<td>Vx</td><td>-1.3160645269097657</td></tr><tr><td>Vy</td><td>0.8481054834=
+13967</td></tr><tr><td>Vz</td><td>7.450380809437955</td></tr><tr><td>Durati=
+on</td><td>33347</td></tr><tr class=3D"black-color"><td class=3D"black-colo=
+r"></td><td class=3D"black-color"></td></tr><tr>                    <td>Loo=
+p</td>                        <td>59</td></tr><tr>                    <td>T=
+ime</td>                        <td>6/28/2026, 1:09:44 AM</td></tr><tr>    =
+                <td>X</td>                        <td>-5896.117496151589</t=
+d></tr><tr><td>Y</td><td>-3853.2021522428913</td></tr><tr><td>Z</td><td>6.2=
+11078998836991</td></tr><tr><td>Y</td><td>-3853.2021522428913</td></tr><tr>=
+<td>Vx</td><td>-0.8435053636149064</td></tr><tr><td>Vy</td><td>1.3192659042=
+061867</td></tr><tr><td>Vz</td><td>7.450450144724223</td></tr><tr><td>Durat=
+ion</td><td>33910</td></tr><tr class=3D"black-color"><td class=3D"black-col=
+or"></td><td class=3D"black-color"></td></tr><tr>                    <td>Lo=
+op</td>                        <td>60</td></tr><tr>                    <td>=
+Time</td>                        <td>6/28/2026, 2:47:46 AM</td></tr><tr>   =
+                 <td>X</td>                        <td>-6963.218166956098</=
+td></tr><tr><td>Y</td><td>-1060.7464768984114</td></tr><tr><td>Z</td><td>1.=
+5889030793437096</td></tr><tr><td>Y</td><td>-1060.7464768984114</td></tr><t=
+r><td>Vx</td><td>-0.2252620972499971</td></tr><tr><td>Vy</td><td>1.54971414=
+92418838</td></tr><tr><td>Vz</td><td>7.45042428568448</td></tr><tr><td>Dura=
+tion</td><td>34476</td></tr><tr class=3D"black-color"><td class=3D"black-co=
+lor"></td><td class=3D"black-color"></td></tr><tr>                    <td>L=
+oop</td>                        <td>61</td></tr><tr>                    <td=
+>Time</td>                        <td>6/28/2026, 4:25:49 AM</td></tr><tr>  =
+                  <td>X</td>                        <td>-6775.603923909652<=
+/td></tr><tr><td>Y</td><td>1924.336595864616</td></tr><tr><td>Z</td><td>4.6=
+48085612617621</td></tr><tr><td>Y</td><td>1924.336595864616</td></tr><tr><t=
+d>Vx</td><td>0.44120408141438755</td></tr><tr><td>Vy</td><td>1.502642087156=
+0702</td></tr><tr><td>Vz</td><td>7.4504106294898484</td></tr><tr><td>Durati=
+on</td><td>35037</td></tr><tr class=3D"black-color"><td class=3D"black-colo=
+r"></td><td class=3D"black-color"></td></tr><tr>                    <td>Loo=
+p</td>                        <td>62</td></tr><tr>                    <td>T=
+ime</td>                        <td>6/28/2026, 6:03:51 AM</td></tr><tr>    =
+                <td>X</td>                        <td>-5367.338510445091</t=
+d></tr><tr><td>Y</td><td>4561.28698604631</td></tr><tr><td>Z</td><td>0.3031=
+875741881205</td></tr><tr><td>Y</td><td>4561.28698604631</td></tr><tr><td>V=
+x</td><td>1.0211420216789917</td></tr><tr><td>Vy</td><td>1.1872551833525462=
+</td></tr><tr><td>Vz</td><td>7.450315618749838</td></tr><tr><td>Duration</t=
+d><td>35603</td></tr><tr class=3D"black-color"><td class=3D"black-color"></=
+td><td class=3D"black-color"></td></tr><tr>                    <td>Loop</td=
+>                        <td>63</td></tr><tr>                    <td>Time</=
+td>                        <td>6/28/2026, 7:41:54 AM</td></tr><tr>         =
+           <td>X</td>                        <td>-2990.8413741552245</td></=
+tr><tr><td>Y</td><td>6377.33559929971</td></tr><tr><td>Z</td><td>3.07356087=
+66527145</td></tr><tr><td>Y</td><td>6377.33559929971</td></tr><tr><td>Vx</t=
+d><td>1.422801989850439</td></tr><tr><td>Vy</td><td>0.6537328972882213</td>=
+</tr><tr><td>Vz</td><td>7.45017866237957</td></tr><tr><td>Duration</td><td>=
+36169</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td=
+ class=3D"black-color"></td></tr><tr>                    <td>Loop</td>     =
+                   <td>64</td></tr><tr>                    <td>Time</td>   =
+                     <td>6/28/2026, 9:19:57 AM</td></tr><tr>               =
+     <td>X</td>                        <td>-74.95823656756518</td></tr><tr>=
+<td>Y</td><td>7043.454950814718</td></tr><tr><td>Z</td><td>5.23714137404220=
+1</td></tr><tr><td>Y</td><td>7043.454950814718</td></tr><tr><td>Vx</td><td>=
+1.5655966277061428</td></tr><tr><td>Vy</td><td>0.0021801499485740276</td></=
+tr><tr><td>Vz</td><td>7.4501055810865235</td></tr><tr><td>Duration</td><td>=
+36730</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td=
+ class=3D"black-color"></td></tr><tr>                    <td>Loop</td>     =
+                   <td>65</td></tr><tr>                    <td>Time</td>   =
+                     <td>6/28/2026, 10:58:00 AM</td></tr><tr>              =
+      <td>X</td>                        <td>2854.3520751585124</td></tr><tr=
+><td>Y</td><td>6439.539655029596</td></tr><tr><td>Z</td><td>7.1793311525147=
+05</td></tr><tr><td>Y</td><td>6439.539655029596</td></tr><tr><td>Vx</td><td=
+>1.4245519826180246</td></tr><tr><td>Vy</td><td>-0.6495085583961059</td></t=
+r><tr><td>Vz</td><td>7.450149971974571</td></tr><tr><td>Duration</td><td>37=
+292</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td c=
+lass=3D"black-color"></td></tr><tr>                    <td>Loop</td>       =
+                 <td>66</td></tr><tr>                    <td>Time</td>     =
+                   <td>6/28/2026, 12:36:02 PM</td></tr><tr>                =
+    <td>X</td>                        <td>5267.918505834111</td></tr><tr><t=
+d>Y</td><td>4675.842068770658</td></tr><tr><td>Z</td><td>1.8536898843087917=
+</td></tr><tr><td>Y</td><td>4675.842068770658</td></tr><tr><td>Vx</td><td>1=
+.031194898230142</td></tr><tr><td>Vy</td><td>-1.1782501558635454</td></tr><=
+tr><td>Vz</td><td>7.450208179454584</td></tr><tr><td>Duration</td><td>37856=
+</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td clas=
+s=3D"black-color"></td></tr><tr>                    <td>Loop</td>          =
+              <td>67</td></tr><tr>                    <td>Time</td>        =
+                <td>6/28/2026, 2:14:05 PM</td></tr><tr>                    =
+<td>X</td>                        <td>6733.189653140705</td></tr><tr><td>Y<=
+/td><td>2068.4791129972336</td></tr><tr><td>Z</td><td>4.55069631490612</td>=
+</tr><tr><td>Y</td><td>2068.4791129972336</td></tr><tr><td>Vx</td><td>0.446=
+5904216271321</td></tr><tr><td>Vy</td><td>-1.5009823928872814</td></tr><tr>=
+<td>Vz</td><td>7.4501865366992455</td></tr><tr><td>Duration</td><td>38421</=
+td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td class=
+=3D"black-color"></td></tr><tr>                    <td>Loop</td>           =
+             <td>68</td></tr><tr>                    <td>Time</td>         =
+               <td>6/28/2026, 3:52:07 PM</td></tr><tr>                    <=
+td>X</td>                        <td>6984.732406870236</td></tr><tr><td>Y</=
+td><td>-910.2985798747771</td></tr><tr><td>Z</td><td>0.28353325681775665</t=
+d></tr><tr><td>Y</td><td>-910.2985798747771</td></tr><tr><td>Vx</td><td>-0.=
+21169024725286006</td></tr><tr><td>Vy</td><td>-1.5517014675975476</td></tr>=
+<tr><td>Vz</td><td>7.45014006739329</td></tr><tr><td>Duration</td><td>38990=
+</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td clas=
+s=3D"black-color"></td></tr><tr>                    <td>Loop</td>          =
+              <td>69</td></tr><tr>                    <td>Time</td>        =
+                <td>6/28/2026, 5:30:10 PM</td></tr><tr>                    =
+<td>X</td>                        <td>5977.330832287169</td></tr><tr><td>Y<=
+/td><td>-3726.5392442814336</td></tr><tr><td>Z</td><td>3.424034605275672</t=
+d></tr><tr><td>Y</td><td>-3726.5392442814336</td></tr><tr><td>Vx</td><td>-0=
+.8393435675120124</td></tr><tr><td>Vy</td><td>-1.3221706750625277</td></tr>=
+<tr><td>Vz</td><td>7.4500811228695705</td></tr><tr><td>Duration</td><td>395=
+56</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td cl=
+ass=3D"black-color"></td></tr><tr>                    <td>Loop</td>        =
+                <td>70</td></tr><tr>                    <td>Time</td>      =
+                  <td>6/28/2026, 7:08:13 PM</td></tr><tr>                  =
+  <td>X</td>                        <td>3892.0698922443266</td></tr><tr><td=
+>Y</td><td>-5870.975401087255</td></tr><tr><td>Z</td><td>6.511927937874037<=
+/td></tr><tr><td>Y</td><td>-5870.975401087255</td></tr><tr><td>Vx</td><td>-=
+1.3139929982876846</td></tr><tr><td>Vy</td><td>-0.8519022124774962</td></tr=
+><tr><td>Vz</td><td>7.450009843329234</td></tr><tr><td>Duration</td><td>401=
+22</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td cl=
+ass=3D"black-color"></td></tr><tr>                    <td>Loop</td>        =
+                <td>71</td></tr><tr>                    <td>Time</td>      =
+                  <td>6/28/2026, 8:46:15 PM</td></tr><tr>                  =
+  <td>X</td>                        <td>1106.733286140731</td></tr><tr><td>=
+Y</td><td>-6956.349907158471</td></tr><tr><td>Z</td><td>1.7481941653108128<=
+/td></tr><tr><td>Y</td><td>-6956.349907158471</td></tr><tr><td>Vx</td><td>-=
+1.5478928296641934</td></tr><tr><td>Vy</td><td>-0.23524082327202728</td></t=
+r><tr><td>Vz</td><td>7.450169490732236</td></tr><tr><td>Duration</td><td>40=
+685</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td c=
+lass=3D"black-color"></td></tr><tr>                    <td>Loop</td>       =
+                 <td>72</td></tr><tr>                    <td>Time</td>     =
+                   <td>6/28/2026, 10:24:18 PM</td></tr><tr>                =
+    <td>X</td>                        <td>-1879.2240179457888</td></tr><tr>=
+<td>Y</td><td>-6788.384831707614</td></tr><tr><td>Z</td><td>3.6809432501055=
+674</td></tr><tr><td>Y</td><td>-6788.384831707614</td></tr><tr><td>Vx</td><=
+td>-1.5053273107306009</td></tr><tr><td>Vy</td><td>0.4302334780438033</td><=
+/tr><tr><td>Vz</td><td>7.4503144699471875</td></tr><tr><td>Duration</td><td=
+>41249</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><t=
+d class=3D"black-color"></td></tr><tr>                    <td>Loop</td>    =
+                    <td>73</td></tr><tr>                    <td>Time</td>  =
+                      <td>6/29/2026, 12:02:21 AM</td></tr><tr>             =
+       <td>X</td>                        <td>-4526.445439133432</td></tr><t=
+r><td>Y</td><td>-5396.580401823781</td></tr><tr><td>Z</td><td>5.85988661754=
+6956</td></tr><tr><td>Y</td><td>-5396.580401823781</td></tr><tr><td>Vx</td>=
+<td>-1.1896953042903733</td></tr><tr><td>Vy</td><td>1.0178894384410933</td>=
+</tr><tr><td>Vz</td><td>7.4504328152514905</td></tr><tr><td>Duration</td><t=
+d>41814</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><=
+td class=3D"black-color"></td></tr><tr>                    <td>Loop</td>   =
+                     <td>74</td></tr><tr>                    <td>Time</td> =
+                       <td>6/29/2026, 1:40:23 AM</td></tr><tr>             =
+       <td>X</td>                        <td>-6356.953248362703</td></tr><t=
+r><td>Y</td><td>-3033.209855367168</td></tr><tr><td>Z</td><td>1.06765956258=
+12242</td></tr><tr><td>Y</td><td>-3033.209855367168</td></tr><tr><td>Vx</td=
+><td>-0.6651197339337068</td></tr><tr><td>Vy</td><td>1.4176211895242672</td=
+></tr><tr><td>Vz</td><td>7.450466436421332</td></tr><tr><td>Duration</td><t=
+d>42375</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><=
+td class=3D"black-color"></td></tr><tr>                    <td>Loop</td>   =
+                     <td>75</td></tr><tr>                    <td>Time</td> =
+                       <td>6/29/2026, 3:18:26 AM</td></tr><tr>             =
+       <td>X</td>                        <td>-7042.482734541001</td></tr><t=
+r><td>Y</td><td>-121.8782710497831</td></tr><tr><td>Z</td><td>3.98143389079=
+9302</td></tr><tr><td>Y</td><td>-121.8782710497831</td></tr><tr><td>Vx</td>=
+<td>-0.013839269241734462</td></tr><tr><td>Vy</td><td>1.5660042123612106</t=
+d></tr><tr><td>Vz</td><td>7.450428474475251</td></tr><tr><td>Duration</td><=
+td>42938</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td>=
+<td class=3D"black-color"></td></tr><tr>                    <td>Loop</td>  =
+                      <td>76</td></tr><tr>                    <td>Time</td>=
+                        <td>6/29/2026, 4:56:29 AM</td></tr><tr>            =
+        <td>X</td>                        <td>-6458.152092263636</td></tr><=
+tr><td>Y</td><td>2811.468872361271</td></tr><tr><td>Z</td><td>7.15625336045=
+533</td></tr><tr><td>Y</td><td>2811.468872361271</td></tr><tr><td>Vx</td><t=
+d>0.6402643644916719</td></tr><tr><td>Vy</td><td>1.4292581022983935</td></t=
+r><tr><td>Vz</td><td>7.450394522808215</td></tr><tr><td>Duration</td><td>43=
+503</td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td c=
+lass=3D"black-color"></td></tr><tr>                    <td>Loop</td>       =
+                 <td>77</td></tr><tr>                    <td>Time</td>     =
+                   <td>6/29/2026, 6:34:31 AM</td></tr><tr>                 =
+   <td>X</td>                        <td>-4710.571980739229</td></tr><tr><t=
+d>Y</td><td>5236.874149628521</td></tr><tr><td>Z</td><td>2.80817434910841</=
+td></tr><tr><td>Y</td><td>5236.874149628521</td></tr><tr><td>Vx</td><td>1.1=
+722231280724362</td></tr><tr><td>Vy</td><td>1.0383342875049493</td></tr><tr=
+><td>Vz</td><td>7.450263041552485</td></tr><tr><td>Duration</td><td>44065</=
+td></tr><tr class=3D"black-color"><td class=3D"black-color"></td><td class=
+=3D"black-color"></td></tr><tr>                    <td>Loop</td>           =
+             <td>78</td></tr><tr>                    <td>Time</td>         =
+               <td>6/29/2026, 8:12:34 AM</td></tr><tr>                    <=
+td>X</td>                        <td>-2112.9008806284614</td></tr><tr><td>Y=
+</td><td>6719.466841173115</td></tr><tr><td>Z</td><td>5.472049015345306</td=
+></tr><tr><td>Y</td><td>6719.466841173115</td></tr><tr><td>Vx</td><td>1.498=
+0169407888033</td></tr><tr><td>Vy</td><td>0.4555559377827788</td></tr><tr><=
+td>Vz</td><td>7.45015953907825</td></tr><tr><td>Duration</td><td>44628</td>=
+</tr><tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"=
+black-color"></td></tr><tr>                    <td>Loop</td>               =
+         <td>79</td></tr><tr>                    <td>Time</td>             =
+           <td>6/29/2026, 9:50:36 AM</td></tr><tr>                    <td>X=
+</td>                        <td>864.2203514292861</td></tr><tr><td>Y</td><=
+td>6990.627204083812</td></tr><tr><td>Z</td><td>0.0904767243516984</td></tr=
+><tr><td>Y</td><td>6990.627204083812</td></tr><tr><td>Vx</td><td>1.55261207=
+01388222</td></tr><tr><td>Vy</td><td>-0.20102485628820002</td></tr><tr><td>=
+Vz</td><td>7.45010111429315</td></tr><tr><td>Duration</td><td>45195</td></t=
+r><tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"bla=
+ck-color"></td></tr><tr>                    <td>Loop</td>                  =
+      <td>80</td></tr><tr>                    <td>Time</td>                =
+        <td>6/29/2026, 11:28:39 AM</td></tr><tr>                    <td>X</=
+td>                        <td>3686.9272183342077</td></tr><tr><td>Y</td><t=
+d>6001.783872013443</td></tr><tr><td>Z</td><td>2.138136804059589</td></tr><=
+tr><td>Y</td><td>6001.783872013443</td></tr><tr><td>Vx</td><td>1.3281535940=
+923113</td></tr><tr><td>Vy</td><td>-0.8289956706952449</td></tr><tr><td>Vz<=
+/td><td>7.450179420870439</td></tr><tr><td>Duration</td><td>45757</td></tr>=
+<tr class=3D"black-color"><td class=3D"black-color"></td><td class=3D"black=
+-color"></td></tr><tr>                    <td>Loop</td>                    =
+    <td>81</td></tr><tr>                    <td>Time</td>                  =
+      <td>6/29/2026, 1:06:42 PM</td></tr><tr>                    <td>X</td>=
+                        <td>5844.83799709295</td></tr><tr><td>Y</td><td>393=
+0.911670765509</td></tr><tr><td>Z</td><td>4.424850609140829</td></tr><tr><t=
+d>Y</td><td>3930.911670765509</td></tr><tr><td>Vx</td><td>0.862506816092951=
+1</td></tr><tr><td>Vy</td><td>-1.3069335722589048</td></tr><tr><td>Vz</td><=
+td>7.450215512770171</td></tr><tr><td>Duration</td><td>46321</td></tr><tr c=
+lass=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-colo=
+r"></td></tr><tr>                    <td>Loop</td>                        <=
+td>82</td></tr><tr>                    <td>Time</td>                       =
+ <td>6/29/2026, 2:44:45 PM</td></tr><tr>                    <td>X</td>     =
+                   <td>6949.022647380976</td></tr><tr><td>Y</td><td>1151.31=
+9594592995</td></tr><tr><td>Z</td><td>7.30613998293702</td></tr><tr><td>Y</=
+td><td>1151.319594592995</td></tr><tr><td>Vx</td><td>0.23941460159444386</t=
+d></tr><tr><td>Vy</td><td>-1.5476774683687324</td></tr><tr><td>Vz</td><td>7=
+.450178425805099</td></tr><tr><td>Duration</td><td>46885</td></tr><tr class=
+=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-color"><=
+/td></tr><tr>                    <td>Loop</td>                        <td>8=
+3</td></tr><tr>                    <td>Time</td>                        <td=
+>6/29/2026, 4:22:47 PM</td></tr><tr>                    <td>X</td>         =
+               <td>6800.743725945536</td></tr><tr><td>Y</td><td>-1834.39839=
+83736762</td></tr><tr><td>Z</td><td>3.0271790811189456</td></tr><tr><td>Y</=
+td><td>-1834.3983983736762</td></tr><tr><td>Vx</td><td>-0.4197064725331959<=
+/td></tr><tr><td>Vy</td><td>-1.5088021860088372</td></tr><tr><td>Vz</td><td=
+>7.45013283553053</td></tr><tr><td>Duration</td><td>47449</td></tr><tr clas=
+s=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-color">=
+</td></tr><tr>                    <td>Loop</td>                        <td>=
+84</td></tr><tr>                    <td>Time</td>                        <t=
+d>6/29/2026, 6:00:50 PM</td></tr><tr>                    <td>X</td>        =
+                <td>5426.451157612936</td></tr><tr><td>Y</td><td>-4491.0388=
+85032789</td></tr><tr><td>Z</td><td>6.187961864797844</td></tr><tr><td>Y</t=
+d><td>-4491.038885032789</td></tr><tr><td>Vx</td><td>-1.0105074714605935</t=
+d></tr><tr><td>Vy</td><td>-1.1964170702428825</td></tr><tr><td>Vz</td><td>7=
+.45005741660058</td></tr><tr><td>Duration</td><td>48012</td></tr><tr class=
+=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-color"><=
+/td></tr><tr>                    <td>Loop</td>                        <td>8=
+5</td></tr><tr>                    <td>Time</td>                        <td=
+>6/29/2026, 7:38:52 PM</td></tr><tr>                    <td>X</td>         =
+               <td>3075.041867278676</td></tr><tr><td>Y</td><td>-6337.22729=
+3385791</td></tr><tr><td>Z</td><td>1.721778742755375</td></tr><tr><td>Y</td=
+><td>-6337.227293385791</td></tr><tr><td>Vx</td><td>-1.4134843212938062</td=
+></tr><tr><td>Vy</td><td>-0.6737706885385611</td></tr><tr><td>Vz</td><td>7.=
+450068845816942</td></tr><tr><td>Duration</td><td>48578</td></tr><tr class=
+=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-color"><=
+/td></tr><tr>                    <td>Loop</td>                        <td>8=
+6</td></tr><tr>                    <td>Time</td>                        <td=
+>6/29/2026, 9:16:55 PM</td></tr><tr>                    <td>X</td>         =
+               <td>168.4567868774105</td></tr><tr><td>Y</td><td>-7041.75618=
+1566437</td></tr><tr><td>Z</td><td>4.1189127040921765</td></tr><tr><td>Y</t=
+d><td>-7041.756181566437</td></tr><tr><td>Vx</td><td>-1.565474829367982</td=
+></tr><tr><td>Vy</td><td>-0.024055954528548903</td></tr><tr><td>Vz</td><td>=
+7.450234473252255</td></tr><tr><td>Duration</td><td>49139</td></tr><tr clas=
+s=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-color">=
+</td></tr><tr>                    <td>Loop</td>                        <td>=
+87</td></tr><tr>                    <td>Time</td>                        <t=
+d>6/29/2026, 10:54:58 PM</td></tr><tr>                    <td>X</td>       =
+                 <td>-2768.3759085997513</td></tr><tr><td>Y</td><td>-6476.7=
+82170095675</td></tr><tr><td>Z</td><td>6.032571784954777</td></tr><tr><td>Y=
+</td><td>-6476.782170095675</td></tr><tr><td>Vx</td><td>-1.4335145765937363=
+</td></tr><tr><td>Vy</td><td>0.6296036385025926</td></tr><tr><td>Vz</td><td=
+>7.45037120851335</td></tr><tr><td>Duration</td><td>49702</td></tr><tr clas=
+s=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-color">=
+</td></tr><tr>                    <td>Loop</td>                        <td>=
+88</td></tr><tr>                    <td>Time</td>                        <t=
+d>6/30/2026, 12:33:00 AM</td></tr><tr>                    <td>X</td>       =
+                 <td>-5205.145505099467</td></tr><tr><td>Y</td><td>-4745.27=
+5072641786</td></tr><tr><td>Z</td><td>0.9404967446165484</td></tr><tr><td>Y=
+</td><td>-4745.275072641786</td></tr><tr><td>Vx</td><td>-1.0473928592215378=
+</td></tr><tr><td>Vy</td><td>1.1638556128596866</td></tr><tr><td>Vz</td><td=
+>7.450482490742531</td></tr><tr><td>Duration</td><td>50265</td></tr><tr cla=
+ss=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-color"=
+></td></tr><tr>                    <td>Loop</td>                        <td=
+>89</td></tr><tr>                    <td>Time</td>                        <=
+td>6/30/2026, 2:11:03 AM</td></tr><tr>                    <td>X</td>       =
+                 <td>-6704.909856230454</td></tr><tr><td>Y</td><td>-2157.57=
+57191113316</td></tr><tr><td>Z</td><td>3.742632722333056</td></tr><tr><td>Y=
+</td><td>-2157.5757191113316</td></tr><tr><td>Vx</td><td>-0.467312308103794=
+2</td></tr><tr><td>Vy</td><td>1.4946104263358546</td></tr><tr><td>Vz</td><t=
+d>7.450476006408967</td></tr><tr><td>Duration</td><td>50831</td></tr><tr cl=
+ass=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-color=
+"></td></tr><tr>                    <td>Loop</td>                        <t=
+d>90</td></tr><tr>                    <td>Time</td>                        =
+<td>6/30/2026, 3:49:06 AM</td></tr><tr>                    <td>X</td>      =
+                  <td>-6995.717568397284</td></tr><tr><td>Y</td><td>819.204=
+6168176021</td></tr><tr><td>Z</td><td>6.701873683743319</td></tr><tr><td>Y<=
+/td><td>819.2046168176021</td></tr><tr><td>Vx</td><td>0.1981269079083881</t=
+d></tr><tr><td>Vy</td><td>1.5535086070086963</td></tr><tr><td>Vz</td><td>7.=
+450448340384093</td></tr><tr><td>Duration</td><td>51391</td></tr><tr class=
+=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-color"><=
+/td></tr><tr>                    <td>Loop</td>                        <td>9=
+1</td></tr><tr>                    <td>Time</td>                        <td=
+>6/30/2026, 5:27:08 AM</td></tr><tr>                    <td>X</td>         =
+               <td>-6025.954477378766</td></tr><tr><td>Y</td><td>3646.97390=
+13254457</td></tr><tr><td>Z</td><td>2.3836905064632843</td></tr><tr><td>Y</=
+td><td>3646.9739013254457</td></tr><tr><td>Vx</td><td>0.8206482467869007</t=
+d></tr><tr><td>Vy</td><td>1.3337903075785584</td></tr><tr><td>Vz</td><td>7.=
+450387660277591</td></tr><tr><td>Duration</td><td>51957</td></tr><tr class=
+=3D"black-color"><td class=3D"black-color"></td><td class=3D"black-color"><=
+/td></tr></tbody></table></td></tr></tbody></table></div></div></div>
+   =20
+ =20
+
+<div class=3D"modal-ct"><iframe sandbox=3D"allow-top-navigation allow-same-=
+origin allow-scripts" style=3D"display: none;" src=3D"cid:frame-1125E7A8B4F=
+4E0D39C48DFDDFF23A13E@mhtml.blink"></iframe></div></body></html>
+------MultipartBoundary--cAkseu4Nrf776cmUO6DD0vhEcMaM6CDZ1BG5SodnF5----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-bd8c3f55-d277-4298-8c0b-e2c0b3621d64@mhtml.blink
+
+@charset "utf-8";
+
+:root { --bg-gradient-start: #1a1a2e; --bg-gradient-end: #16213e; --card-bg=
+: rgba(30, 30, 46, 0.95); --card-hover-shadow: rgba(0, 0, 0, 0.3); --text-p=
+rimary: #ffffff; --text-secondary: #e2e8f0; --text-tertiary: #cbd5e0; --acc=
+ent-gradient-start: #7c92f5; --accent-gradient-end: #8b5ecf; --weather-card=
+-bg: rgba(45, 45, 60, 0.8); --weather-card-border: rgba(255, 255, 255, 0.1)=
+; --section-title-color: #f7fafc; --date-color: #cbd5e0; --summary-color: #=
+f7fafc; --temp-unit-color: #e2e8f0; --divider-color: #4a5568; --error-bg: r=
+gba(220, 38, 38, 0.1); --error-border: #ef4444; --error-text: #fca5a5; --sk=
+eleton-bg-1: rgba(255, 255, 255, 0.05); --skeleton-bg-2: rgba(255, 255, 255=
+, 0.1); --tile-min-height: 120px; --tile-gap: 0.75rem; --cta-height: 3rem; =
+--card-inner-gap: 1rem; --focus-color: #a78bfa; }
+
+@media (prefers-color-scheme: light) {
+  :root { --bg-gradient-start: #f0f4ff; --bg-gradient-end: #e0e7ff; --card-=
+bg: rgba(255, 255, 255, 0.98); --card-hover-shadow: rgba(0, 0, 0, 0.15); --=
+text-primary: #1a202c; --text-secondary: #2d3748; --text-tertiary: #4a5568;=
+ --accent-gradient-start: #5b6fd8; --accent-gradient-end: #6b46a3; --weathe=
+r-card-bg: rgba(255, 255, 255, 0.9); --weather-card-border: rgba(102, 126, =
+234, 0.15); --section-title-color: #1a202c; --date-color: #2d3748; --summar=
+y-color: #1a202c; --temp-unit-color: #4a5568; --divider-color: #cbd5e0; --e=
+rror-bg: #fee; --error-border: #dc2626; --error-text: #991b1b; --skeleton-b=
+g-1: #f0f0f0; --skeleton-bg-2: #e0e0e0; --tile-min-height: 120px; --tile-ga=
+p: 0.75rem; --cta-height: 3rem; --card-inner-gap: 1rem; --focus-color: #5b2=
+1b6; }
+}
+
+#root { width: 100%; min-height: 100vh; display: flex; flex-direction: colu=
+mn; overflow-x: hidden; max-width: 1280px; margin: 0px auto; padding: 2rem;=
+ text-align: center; }
+
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0p=
+x; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-sp=
+ace: nowrap; border-width: 0px; }
+
+.app-container { width: 100%; min-height: 100vh; display: flex; flex-direct=
+ion: column; background: linear-gradient(135deg, var(--bg-gradient-start) 0=
+%, var(--bg-gradient-end) 100%); color: var(--text-primary); }
+
+.app-header { padding: 2.5rem 2rem 1.5rem; text-align: center; animation: 0=
+.6s ease-out 0s 1 normal none running fadeInDown; }
+
+.logo-link { display: inline-block; border-radius: 0.5rem; }
+
+.logo-link:focus-visible { outline: 3px solid var(--accent-gradient-end); o=
+utline-offset: 8px; }
+
+.logo { height: 5rem; width: auto; transition: transform 300ms, filter 300m=
+s; filter: drop-shadow(rgba(0, 0, 0, 0.2) 0px 4px 8px); }
+
+.logo:hover { transform: scale(1.1) rotate(5deg); filter: drop-shadow(rgba(=
+0, 0, 0, 0.3) 0px 8px 16px); }
+
+.app-title { font-size: 2.75rem; font-weight: 700; margin: 1.25rem 0px 0.5r=
+em; background-image: ; background-position-x: ; background-position-y: ; b=
+ackground-size: ; background-repeat: ; background-attachment: ; background-=
+origin: ; background-color: ; -webkit-text-fill-color: transparent; backgro=
+und-clip: text; letter-spacing: -0.02em; }
+
+.app-subtitle { font-size: 1.05rem; color: var(--text-tertiary); margin: 0p=
+x; font-weight: 300; }
+
+.main-content { flex: 1 1 0%; max-width: 1400px; width: 100%; margin: 0px a=
+uto; padding: 0rem 2rem 2rem; display: flex; justify-content: center; align=
+-items: center; }
+
+.card { background: var(--card-bg); backdrop-filter: blur(10px); border-rad=
+ius: 1rem; padding: 1.25rem 1.5rem; box-shadow: rgba(0, 0, 0, 0.1) 0px 8px =
+32px; color: var(--text-primary); animation: 0.6s ease-out 0s 1 normal none=
+ running fadeInUp; border: 1px solid var(--weather-card-border); display: f=
+lex; flex-direction: column; gap: var(--card-inner-gap); }
+
+.demo-section { animation: 0.6s ease-out 0s 1 normal none running fadeInUp;=
+ }
+
+.weather-section { animation: 0.6s ease-out 0.1s 1 normal none running fade=
+InUp; flex: 1 1 0%; max-width: 1200px; width: 100%; }
+
+.section-header { display: flex; justify-content: space-between; align-item=
+s: flex-start; margin-bottom: 0px; flex-wrap: wrap; gap: 1rem; }
+
+.header-actions { display: flex; gap: 0.75rem; align-items: center; }
+
+.section-title { font-size: 1.25rem; font-weight: 600; margin: 0px; color: =
+var(--section-title-color); }
+
+.counter-card .section-header { margin-bottom: 0px; }
+
+.counter-panel { background: var(--weather-card-bg); border-radius: 0.75rem=
+; border: 1px solid var(--weather-card-border); padding: 1.25rem; display: =
+flex; flex-direction: column; gap: var(--tile-gap); min-height: var(--tile-=
+min-height); backdrop-filter: blur(10px); flex: 1 1 0%; }
+
+.counter-value-group { display: flex; flex-direction: column; align-items: =
+center; justify-content: center; gap: 0.25rem; flex: 1 1 0%; margin-bottom:=
+ var(--tile-gap); text-align: center; }
+
+.counter-label { font-size: 0.75rem; text-transform: uppercase; letter-spac=
+ing: 0.1em; color: var(--text-tertiary); font-weight: 600; }
+
+.counter-value { font-size: 2.25rem; font-weight: 700; line-height: 1; back=
+ground-image: ; background-position-x: ; background-position-y: ; backgroun=
+d-size: ; background-repeat: ; background-attachment: ; background-origin: =
+; background-color: ; -webkit-text-fill-color: transparent; background-clip=
+: text; }
+
+.increment-button { display: flex; align-items: center; justify-content: ce=
+nter; gap: 0.5rem; background: linear-gradient(135deg, var(--accent-gradien=
+t-start) 0%, var(--accent-gradient-end) 100%); color: white; border-width: =
+medium; border-style: none; border-color: currentcolor; border-image: initi=
+al; border-radius: 0.5rem; padding: 0px 1.5rem; height: var(--cta-height); =
+font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: 0.3s; b=
+ox-shadow: rgba(102, 126, 234, 0.3) 0px 2px 8px; width: 100%; margin-top: a=
+uto; }
+
+.increment-button:hover { transform: translateY(-1px); box-shadow: rgba(102=
+, 126, 234, 0.4) 0px 4px 12px; }
+
+.increment-button:active { transform: translateY(0px); }
+
+.increment-button:focus-visible { outline: 3px solid var(--accent-gradient-=
+end); outline-offset: 2px; }
+
+.increment-icon { transition: transform 0.3s; }
+
+.increment-button:hover .increment-icon { transform: scale(1.1); }
+
+.toggle-switch { display: flex; background: rgba(255, 255, 255, 0.1); borde=
+r-radius: 0.5rem; gap: 0.25rem; border: 1px solid var(--weather-card-border=
+); margin: 0px; padding: 0.25rem; min-width: 0px; }
+
+.toggle-switch legend { padding: 0px; }
+
+@media (prefers-color-scheme: light) {
+  .toggle-switch { background: rgba(102, 126, 234, 0.08); }
+}
+
+.toggle-option { display: flex; align-items: center; justify-content: cente=
+r; background: transparent; color: var(--text-secondary); border-width: med=
+ium; border-style: none; border-color: currentcolor; border-image: initial;=
+ border-radius: 0.375rem; padding: 0px 1rem; height: 2.5rem; font-size: 0.8=
+75rem; font-weight: 600; cursor: pointer; transition: 0.3s; min-width: 3rem=
+; position: relative; }
+
+.toggle-option[aria-pressed=3D"true"] { background: linear-gradient(135deg,=
+ var(--accent-gradient-start) 0%, var(--accent-gradient-end) 100%); color: =
+white; box-shadow: rgba(102, 126, 234, 0.3) 0px 2px 8px; }
+
+.toggle-option[aria-pressed=3D"false"]:hover { background: rgba(255, 255, 2=
+55, 0.05); color: var(--text-primary); }
+
+@media (prefers-color-scheme: light) {
+  .toggle-option[aria-pressed=3D"false"]:hover { background: rgba(102, 126,=
+ 234, 0.1); }
+}
+
+.toggle-option:focus-visible { outline: 3px solid var(--focus-color); outli=
+ne-offset: 2px; z-index: 1; }
+
+.refresh-button { display: flex; align-items: center; justify-content: cent=
+er; gap: 0.5rem; background: linear-gradient(135deg, var(--accent-gradient-=
+start) 0%, var(--accent-gradient-end) 100%); color: white; border-width: me=
+dium; border-style: none; border-color: currentcolor; border-image: initial=
+; border-radius: 0.5rem; padding: 0px 1.5rem; height: var(--cta-height); fo=
+nt-size: 0.875rem; font-weight: 600; cursor: pointer; transition: transform=
+ 0.3s, box-shadow 0.3s, opacity 0.3s; box-shadow: rgba(102, 126, 234, 0.3) =
+0px 2px 8px; min-width: 140px; white-space: nowrap; }
+
+.refresh-button:hover:not(:disabled) { transform: translateY(-1px); box-sha=
+dow: rgba(102, 126, 234, 0.4) 0px 4px 12px; }
+
+.refresh-button:disabled { opacity: 0.6; cursor: not-allowed; transform: no=
+ne; }
+
+.refresh-button:focus-visible { outline: 3px solid var(--focus-color); outl=
+ine-offset: 3px; }
+
+.refresh-icon { transition: transform 0.3s; }
+
+.refresh-icon.spinning { animation: 1s linear 0s infinite normal none runni=
+ng spin; }
+
+.error-message { display: flex; align-items: center; gap: 0.75rem; backgrou=
+nd-color: var(--error-bg); border-left: 4px solid var(--error-border); colo=
+r: var(--error-text); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0p=
+x; animation: 0.3s ease-out 0s 1 normal none running slideIn; }
+
+.loading-skeleton { display: flex; flex-direction: column; gap: 1rem; margi=
+n-top: 1rem; }
+
+.skeleton-row { height: 80px; background-image: ; background-position-x: ; =
+background-position-y: ; background-repeat: ; background-attachment: ; back=
+ground-origin: ; background-clip: ; background-color: ; background-size: 20=
+0% 100%; animation: 1.5s ease 0s infinite normal none running shimmer; bord=
+er-radius: 0.5rem; }
+
+.weather-grid { display: grid; grid-template-columns: repeat(auto-fill, min=
+max(200px, 1fr)); gap: 1rem; margin-top: 0.75rem; }
+
+.weather-card { background: var(--weather-card-bg); border-radius: 0.75rem;=
+ padding: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; tra=
+nsition: 0.3s; border: 1px solid var(--weather-card-border); backdrop-filte=
+r: blur(10px); min-height: var(--tile-min-height); }
+
+.weather-card:hover { transform: translateY(-4px); box-shadow: rgba(0, 0, 0=
+, 0.2) 0px 4px 16px; }
+
+.weather-card:focus-within { outline: 2px solid var(--focus-color); outline=
+-offset: 2px; }
+
+.weather-date { font-weight: 600; font-size: 0.875rem; color: var(--date-co=
+lor); text-transform: uppercase; letter-spacing: 0.05em; margin: 0px; }
+
+.weather-summary { font-size: 1.125rem; font-weight: 500; color: var(--summ=
+ary-color); min-height: 1.5rem; margin: 0px; }
+
+.weather-temps { display: flex; align-items: center; justify-content: cente=
+r; gap: 0.75rem; margin-top: 0.5rem; padding-top: 0.75rem; border-top: 1px =
+solid var(--weather-card-border); }
+
+.temp-group { display: flex; flex-direction: column; align-items: center; w=
+idth: 100%; }
+
+.temp-value { font-size: 1.5rem; font-weight: 700; background-image: ; back=
+ground-position-x: ; background-position-y: ; background-size: ; background=
+-repeat: ; background-attachment: ; background-origin: ; background-color: =
+; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.temp-unit { font-size: 0.75rem; color: var(--temp-unit-color); margin-top:=
+ 0.125rem; }
+
+@media (max-width: 1024px) {
+  .main-content { padding: 1rem; }
+}
+
+.app-footer { padding: 1.5rem; text-align: center; background: rgba(0, 0, 0=
+, 0.2); backdrop-filter: blur(10px); }
+
+.app-footer nav { display: flex; justify-content: center; align-items: cent=
+er; gap: 1.5rem; }
+
+.app-footer a { color: var(--text-secondary); text-decoration: none; font-w=
+eight: 500; transition: color 0.3s, border-color 0.3s; border-bottom: 2px s=
+olid transparent; font-size: 0.875rem; padding-bottom: 0.125rem; }
+
+.app-footer a:hover { color: var(--text-primary); border-bottom-color: var(=
+--text-primary); }
+
+.app-footer a:focus-visible { outline: 3px solid var(--focus-color); outlin=
+e-offset: 4px; border-radius: 4px; }
+
+@keyframes fadeInDown {=20
+  0% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0px); }
+}
+
+@keyframes fadeInUp {=20
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0px); }
+}
+
+@keyframes slideIn {=20
+  0% { opacity: 0; transform: translateX(-10px); }
+  100% { opacity: 1; transform: translateX(0px); }
+}
+
+@keyframes spin {=20
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {=20
+  0% { background-position: -200% 0px; }
+  100% { background-position: 200% 0px; }
+}
+
+@media (max-width: 1024px) {
+  .main-content { grid-template-columns: 1fr; padding: 1rem; gap: 1rem; }
+}
+
+.app-footer { padding: 1.5rem 0px; text-align: center; background: rgba(0, =
+0, 0, 0.2); backdrop-filter: blur(10px); display: flex; justify-content: ce=
+nter; align-items: center; }
+
+.app-footer > * { max-width: 1400px; width: 100%; display: flex; justify-co=
+ntent: space-between; align-items: center; padding: 0px 2rem; gap: 1rem; }
+
+.app-footer a { color: var(--text-secondary); text-decoration: none; font-w=
+eight: 500; transition: color 0.3s, transform 0.3s; border-bottom: 2px soli=
+d transparent; font-size: 0.875rem; }
+
+.app-footer a:hover { color: var(--text-primary); border-bottom-color: var(=
+--text-primary); }
+
+.app-footer a:focus-visible { outline: 2px solid var(--text-primary); outli=
+ne-offset: 4px; border-radius: 2px; }
+
+.github-link { display: inline-flex; align-items: center; gap: 0.5rem; bord=
+er-bottom-width: medium !important; border-bottom-style: none !important; b=
+order-bottom-color: currentcolor !important; }
+
+.github-link:focus-visible { outline: 3px solid var(--focus-color); outline=
+-offset: 4px; border-radius: 4px; }
+
+.github-link img { transition: transform 0.3s, opacity 0.3s; filter: bright=
+ness(0) invert(1); }
+
+@media (prefers-color-scheme: light) {
+  .github-link img { filter: brightness(0) invert(0); opacity: 0.7; }
+  .github-link:hover img { opacity: 1; }
+}
+
+.github-link:hover img { transform: scale(1.1); }
+
+@media (max-width: 768px) {
+  :root { --cta-height: 2.75rem; }
+  .app-header { padding: 1.5rem 1rem 1rem; }
+  .logo { height: 3rem; }
+  .app-title { font-size: 1.5rem; }
+  .app-subtitle { font-size: 0.875rem; }
+  .main-content { padding: 0.75rem; }
+  .card { padding: 1rem; }
+  .section-title { font-size: 1.125rem; }
+  .section-header { flex-direction: column; align-items: stretch; gap: 0.75=
+rem; }
+  .header-actions { width: 100%; }
+  .toggle-switch { flex: 1 1 0%; }
+  .toggle-option { flex: 1 1 0%; }
+  .refresh-button { flex: 1 1 0%; justify-content: center; padding: 0px 1.2=
+5rem; }
+  .weather-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+  .weather-card { padding: 1.25rem; }
+  .app-footer { padding: 1rem 0px; }
+  .app-footer > * { flex-direction: column; padding: 0px 1.5rem; }
+  .github-link { order: -1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after { animation-duration: 0.01ms !important; animation-i=
+teration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+@media (prefers-contrast: high) {
+  .card { border: 2px solid; }
+  .weather-card { border: 1px solid; }
+}
+
+:focus-visible { outline: 3px solid var(--accent-gradient-end); outline-off=
+set: 2px; }
+------MultipartBoundary--cAkseu4Nrf776cmUO6DD0vhEcMaM6CDZ1BG5SodnF5----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-f0cbc79e-4196-4749-9023-b1be03f3cd33@mhtml.blink
+
+@charset "utf-8";
+
+:root { font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; line-=
+height: 1.5; font-weight: 400; color-scheme: light dark; font-synthesis: no=
+ne; text-rendering: optimizelegibility; -webkit-font-smoothing: antialiased=
+; }
+
+*, ::before, ::after { box-sizing: border-box; }
+
+html { margin: 0px; padding: 0px; width: 100%; height: 100%; overflow-x: hi=
+dden; }
+
+body { margin: 0px; padding: 0px; width: 100%; min-height: 100vh; overflow-=
+x: hidden; }
+
+h1 { margin: 0px; }
+
+button { font-family: inherit; cursor: pointer; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after { animation-duration: 0.01ms !important; animation-i=
+teration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+------MultipartBoundary--cAkseu4Nrf776cmUO6DD0vhEcMaM6CDZ1BG5SodnF5----
+Content-Type: text/html
+Content-ID: <frame-1125E7A8B4F4E0D39C48DFDDFF23A13E@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://modal.style/global
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/css" href=3D"cid:css-0e2d15=
+36-8ee2-41f3-8366-3aa8cabc310a@mhtml.blink" />
+<meta name=3D"referrer" content=3D"no-referrer"><title>404 Not Found</title=
+>
+</head>
+<body>
+<h1>Not Found</h1>
+<p>The requested URL <span class=3D"url"></span> was not found on this serv=
+er.</p>
+
+
+
+
+</body></html>
+------MultipartBoundary--cAkseu4Nrf776cmUO6DD0vhEcMaM6CDZ1BG5SodnF5----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-0e2d1536-8ee2-41f3-8366-3aa8cabc310a@mhtml.blink
+
+@charset "utf-8";
+
+html { box-sizing: border-box; }
+
+*, ::before, ::after { box-sizing: inherit; }
+
+.container { width: 100%; padding-right: 15px; padding-left: 15px; margin-r=
+ight: auto; margin-left: auto; }
+
+@media (min-width: 576px) {
+  .container { max-width: 540px; }
+}
+
+@media (min-width: 768px) {
+  .container { max-width: 720px; }
+}
+
+@media (min-width: 992px) {
+  .container { max-width: 960px; }
+}
+
+@media (min-width: 1200px) {
+  .container { max-width: 1140px; }
+}
+
+.container-fluid { width: 100%; padding-right: 15px; padding-left: 15px; ma=
+rgin-right: auto; margin-left: auto; }
+
+.row { display: flex; flex-wrap: wrap; margin-right: -15px; margin-left: -1=
+5px; }
+
+.no-gutters { margin-right: 0px; margin-left: 0px; }
+
+.no-gutters > .col, .no-gutters > [class*=3D"col-"] { padding-right: 0px; p=
+adding-left: 0px; }
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .co=
+l-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .=
+col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10=
+, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col=
+-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .c=
+ol-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg=
+-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-=
+lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1,=
+ .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-=
+8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto { p=
+osition: relative; width: 100%; min-height: 1px; padding-right: 15px; paddi=
+ng-left: 15px; }
+
+.col { flex-basis: 0px; flex-grow: 1; max-width: 100%; }
+
+.col-auto { flex: 0 0 auto; width: auto; max-width: none; }
+
+.col-1 { flex: 0 0 8.33333%; max-width: 8.33333%; }
+
+.col-2 { flex: 0 0 16.6667%; max-width: 16.6667%; }
+
+.col-3 { flex: 0 0 25%; max-width: 25%; }
+
+.col-4 { flex: 0 0 33.3333%; max-width: 33.3333%; }
+
+.col-5 { flex: 0 0 41.6667%; max-width: 41.6667%; }
+
+.col-6 { flex: 0 0 50%; max-width: 50%; }
+
+.col-7 { flex: 0 0 58.3333%; max-width: 58.3333%; }
+
+.col-8 { flex: 0 0 66.6667%; max-width: 66.6667%; }
+
+.col-9 { flex: 0 0 75%; max-width: 75%; }
+
+.col-10 { flex: 0 0 83.3333%; max-width: 83.3333%; }
+
+.col-11 { flex: 0 0 91.6667%; max-width: 91.6667%; }
+
+.col-12 { flex: 0 0 100%; max-width: 100%; }
+
+.order-first { order: -1; }
+
+.order-last { order: 13; }
+
+.order-0 { order: 0; }
+
+.order-1 { order: 1; }
+
+.order-2 { order: 2; }
+
+.order-3 { order: 3; }
+
+.order-4 { order: 4; }
+
+.order-5 { order: 5; }
+
+.order-6 { order: 6; }
+
+.order-7 { order: 7; }
+
+.order-8 { order: 8; }
+
+.order-9 { order: 9; }
+
+.order-10 { order: 10; }
+
+.order-11 { order: 11; }
+
+.order-12 { order: 12; }
+
+.offset-1 { margin-left: 8.33333%; }
+
+.offset-2 { margin-left: 16.6667%; }
+
+.offset-3 { margin-left: 25%; }
+
+.offset-4 { margin-left: 33.3333%; }
+
+.offset-5 { margin-left: 41.6667%; }
+
+.offset-6 { margin-left: 50%; }
+
+.offset-7 { margin-left: 58.3333%; }
+
+.offset-8 { margin-left: 66.6667%; }
+
+.offset-9 { margin-left: 75%; }
+
+.offset-10 { margin-left: 83.3333%; }
+
+.offset-11 { margin-left: 91.6667%; }
+------MultipartBoundary--cAkseu4Nrf776cmUO6DD0vhEcMaM6CDZ1BG5SodnF5------
