@@ -11,6 +11,14 @@ const repo = fileURLToPath(new URL('../', import.meta.url));
 const read = file => readFileSync(path.join(repo, file));
 const git = (...args) => execFileSync('git', args, { cwd: repo, maxBuffer: 64 * 1024 * 1024 });
 const { base, moves } = JSON.parse(read('docs/layout-moves.json'));
+// Exact post-refactor corrections requested for reviewer usability. Pin the
+// complete corrected files instead of exempting arbitrary source/config edits.
+const operationalCorrections = new Map([
+  ['examples/orbital/OnlineGameConverter/onlinegameconverter.client/src/Algorithms/OrbitalForecastCalculation/OrbitalCommunication.ts',
+    '9cc866bcc0ad3787c5a9ecf6fe9d0676a853f654'], // /api base + /orbital controller route
+  ['src/converter/BP_Simulator/BP_Simulator.Light/BP_Simulator.Light/Properties/launchSettings.json',
+    'e5d0c5f1308aa05ea17f21a2273184dda9f72ffb'], // portable Project launch
+]);
 function moved(file) {
   const entry = moves.find(([old]) => file === old || file.startsWith(old + '/'));
   return entry ? entry[1] + file.slice(entry[0].length) : file;
@@ -34,10 +42,10 @@ for (const {file, blob} of entries) {
   const bytes = read(destination);
   const actual = createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
   if (actual === blob) unchanged++;
-  // Only project/solution paths and root documentation/workspace configuration
-  // were edited. In particular, preserve every algorithm and generated model.
+  // Preserve algorithms and generated models; allow only the two explicitly
+  // pinned operational corrections beyond the original refactor's path edits.
   const editable = /\.(csproj|sln)$/.test(file) || ['.gitignore', 'README.md', 'package.json', 'package-lock.json'].includes(file);
-  if (!editable) assert.equal(actual, blob, `Unexpected content change: ${destination}`);
+  if (!editable) assert.equal(actual, operationalCorrections.get(destination) ?? blob, `Unexpected content change: ${destination}`);
   if (/\.(csproj|esproj|sln|slnx)$/.test(file)) {
     const before = references(file, decode(git('show', `${base}:${file}`))).map(moved);
     const after = references(destination, decode(read(destination)));
@@ -58,6 +66,6 @@ for (const workspace of pkg.workspaces) {
   assert.equal(lock.packages['node_modules/' + name].resolved, workspace);
 }
 console.log(`Preserved ${entries.length} original files; ${projects} projects/solutions, ${edges} reference targets, ${preserved} historical blobs verified.`);
-console.log(`${unchanged} original files are byte-identical; only project/solution references and root documentation/configuration may differ.`);
+console.log(`${unchanged} original files are byte-identical; ${operationalCorrections.size} pinned operational corrections verified alongside project/solution and root documentation/configuration edits.`);
 console.log(`Existing unresolved project/solution references: ${missing.length} (unchanged from base).`);
 if (process.argv.includes('--details')) console.log(JSON.stringify(missing, null, 2));

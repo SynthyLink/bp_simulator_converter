@@ -33,7 +33,7 @@ export class OrbitalCommunication extends HttpCommunication {
     ): Promise<OrbitalForecastItemNumber[] | undefined> {
         const controller = new AbortController();
         const result = await this.http_cancel<OrbitalForecastItemNumber[], OrbitalForecastConditionNumber>({
-            path: `api/forecastfromnumber`,
+            path: '/orbital',
             method: "post",
             body: condition,
         }, controller);

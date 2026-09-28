@@ -22,3 +22,8 @@ No model graph or experimental output was regenerated. There is no verified
 one-command model-to-all-targets regeneration pipeline in this checkout. Preserve
 model inputs, generator revision and settings in a future regeneration; folder
 names alone do not establish provenance.
+
+The [FeedBackFormula walkthrough](../src/converter/README.md#walkthrough-feedbackformula-model-to-typescript)
+traces one existing input, the desktop Generate action, its emitter and runtime
+imports. It documents the current source path without claiming byte-identical
+regeneration of the older generated snapshot.

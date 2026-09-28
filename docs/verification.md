@@ -8,6 +8,7 @@ Node.js 24.12.0. No models were rerun to create new experimental results.
 | --- | --- |
 | `npm run check:layout` | All 9,619 original files present; 300 projects/solutions and 2,888 reference targets preserved; 37 historical blobs unchanged |
 | `npm run check:trading` | Archive/input hashes and saved comparison match; all 10 existing tests pass; no outputs written |
+| `npm run check:orbital` (after evidence commit `fb8fa694`) | All four supplied hashes match; each archive contains 91 server/client pairs with aligned Loops and a one-second displayed client-time offset; no models executed |
 | Diagram.TypeScript emitter build | Pass |
 | BP_Simulator.Light desktop converter build | Pass, with existing dependency/compiler warnings |
 | AspireTradingApp.Server build | Pass, with warnings |
@@ -38,7 +39,47 @@ occurrences already present at the base revision, largely in old UI/sample
 projects. Their targets were preserved; this refactor does not make all legacy
 projects buildable. The audit also verifies original source/model bytes and
 workspace lock paths. It is specifically an audit of this migration against its
-pinned base, not a general test suite for future algorithm changes.
+pinned base, not a general test suite for future algorithm changes. It predates
+the orbital evidence addition; `check:orbital` separately validates those files.
+The later finishing pass pins exact corrected contents for two files in the
+layout audit: the orbital HTTP request suffix and desktop launch profile. This
+keeps the working checks strict without exempting other source changes.
+
+The four historical orbital snapshots and supplied README were added in
+`fb8fa694d2a2d3fbeeb1a061dbc0bd3e36469458`, after the original refactor verification.
+They correct the earlier statement that no paired orbital outputs were available.
+Their hashes and saved table structure have now been checked; the original build
+verification above was not repeated for this documentation/archive-check update.
+The source build used for those historical runs remains unidentified.
+
+## Reviewer-facing finishing pass
+
+The root quick-start now begins with `check:layout`, `check:trading` and
+`check:orbital`; all three passed again. The orbital README incorporates the
+supplied supplement description and hashes while preserving `README.txt` and
+the four snapshots unchanged. A source-traced converter walkthrough and a nearby
+[paper version notice](paper/README.md) were added. Neither model execution nor
+UI regeneration was performed.
+
+Two operational corrections were verified:
+
+- The orbital client's request suffix is now `/orbital`. Its HTTP helper already
+  prefixes `http://localhost:5218/api`, so the final POST matches
+  `OrbitalController` at `/api/orbital`. The controller's `HttpPost(Name =
+  "forecastfromnumber")` names the route; it does not add a URL suffix. A mocked
+  `fetch` check using the actual transpiled client and HTTP helper verified the
+  final URL, method, JSON body, abort signal and response handling. The live
+  endpoint was not tested because the server still fails compilation.
+- The existing `Similation` launch profile now uses `commandName: "Project"`
+  instead of an author-specific executable path. JSON structure was checked;
+  the desktop converter built successfully with `dotnet build --no-restore`
+  and .NET SDK 10.0.301. The desktop UI was not launched.
+
+`npm run build:orbital` again produced exactly the same 493 TypeScript diagnostic
+lines as the original baseline. The server build was repeated with `--no-restore`
+and still fails with the same CS1501 overload error. These known failures remain
+listed separately from the working reviewer checks; no broader application
+repairs or dependency updates were made.
 
 No browser, broker, SQL Server, historical model replay, deployment or full
 repository-wide build was attempted. Aspire AppHost scaffolds lack tracked
