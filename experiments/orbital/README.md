@@ -2,7 +2,7 @@
 
 Four historical MHTML snapshots were added in commit
 [`fb8fa694d2a2d3fbeeb1a061dbc0bd3e36469458`](https://github.com/SynthyLink/bp_simulator_converter/commit/fb8fa694d2a2d3fbeeb1a061dbc0bd3e36469458).
-The supplied [README.txt](README.txt) identifies them as the original outputs used
+The supplied [provenance note](provenance.txt) identifies them as the original outputs used
 for Table 5 of the main paper, and records original filenames and SHA-256 hashes.
 The supplement is titled **Online Resource 2: Archived orbital forecasting
 outputs**, for *Backend-Frontend Converter: Component-Based Conversion of .NET
@@ -12,7 +12,9 @@ Georgia Institute of Technology, Atlanta, United States (`mshestov@gatech.edu`).
 
 That commit identifies when the evidence entered this repository, **not** the
 source build that produced the runs. The snapshots' save-date headers are June 24,
-2026. The supplied README and all four MHTML files are preserved byte-for-byte.
+2026. The original `README.txt` is now named `provenance.txt`; its contents and
+all four MHTML files are preserved byte-for-byte. This README is the single
+current guide; the text note remains an immutable record of the supplied metadata.
 
 | Snapshot | Original filename | C# server records | TypeScript client records |
 | --- | --- | --- | --- |
@@ -67,6 +69,7 @@ dotnet test src/runtimes/dotnet/DynamicLinkLibraries/TestCategory/TestProjectOrb
 
 This exercises .NET tests, not a cross-runtime comparison, and requires restoring
 transitive dependencies. See [verification](../../docs/verification.md) for actual
-results and blockers. `npm run build:orbital` checks the frontend; the archive
-check above is not a live orbital parity test. Browser comparison requires working app builds
-and the existing server connection settings.
+results and blockers. For the current Aspire application's build and startup
+commands, follow [orbital application instructions](../../examples/orbital/README.md).
+The root `npm run build:orbital` targets the legacy OnlineGameConverter frontend
+and still fails. The archive check above is not a live orbital parity test.

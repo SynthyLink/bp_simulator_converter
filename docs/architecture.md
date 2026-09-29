@@ -23,11 +23,24 @@ references were recalculated without changing assembly identities, package
 versions, formulas, controllers or numerical algorithms.
 
 Unrelated legacy applications, samples, third-party sources, alternative frontends
-and Java/Python generated snapshots remain at their original locations.
+and Java/Python generated snapshots remain at their original locations, except
+the aviation-shuttle app explicitly removed in cleanup commit `31f8c53c`.
+Five unused generated cache/temporary project files were subsequently removed.
 `docs/layout-moves.json` lists old/new prefixes, most specific first, and the base
 commit. After committing, `git log --follow -- <new-path>` follows individual moves.
+`docs/layout-adjustments.json` records those deliberate removals and pins reviewed
+frontend/build corrections, so `check:layout` still detects unexpected losses or
+source changes. Numerical model graphs and experimental results remain unchanged.
 Paper sources moved unchanged from `tex/` to `docs/paper/`; this is a historical
 draft, not a reproducibility manifest.
+
+The orbital chart UI from `chart-visualization-update` at
+`d92b34666db44e8bcb31a9b74fecaae1d37e90ed` was already merged into main.
+Its chart components, data adapter, theme and entry point are retained unchanged;
+newer main application logic was not replaced by the older branch. Frontend fixes
+remove unused declarations, correct JSON/async typing and Vite type declarations,
+and align the trading proxy port. Strict checking remains enabled; the trading
+build excludes only its unimported incomplete Immelman flight export.
 
 The trading branch was inspected at `f40af51ce5e2629a9e26b89cdf036a864209f0b8`
 (merge base `1a16a9f9fe35f5f45f806a185c940f1c91da1f80`). Only its 20 experiment files

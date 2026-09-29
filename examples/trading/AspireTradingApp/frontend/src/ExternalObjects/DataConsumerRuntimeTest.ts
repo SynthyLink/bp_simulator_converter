@@ -17,18 +17,6 @@ export class DataConsumerRuntimeTest extends DataRuntimeConsumer implements IAct
 	static first: boolean = true;
 	static any : any
 
-	private static get(s: string): boolean {
-		DataConsumerRuntimeTest.any = s
-		DataConsumerRuntimeTest.k++
-		let l = DataConsumerRuntimeTest.k
-		if (l == DataConsumerRuntimeTest.begin) DataConsumerRuntimeTest.first = true
-		if (l >= DataConsumerRuntimeTest.begin && l <= DataConsumerRuntimeTest.end) {
-			console.log("get " + s + " ", l)
-			return true
-		}
-		return false
-	}
-
 	public static getm(): boolean {
 		let l = DataConsumerRuntimeTest.k
 		if (l >= DataConsumerRuntimeTest.begin && l <= DataConsumerRuntimeTest.end) {
@@ -51,5 +39,5 @@ export class DataConsumerRuntimeTest extends DataRuntimeConsumer implements IAct
     }
 
 
-	any : any
+	declare any : any
 }

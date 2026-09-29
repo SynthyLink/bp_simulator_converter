@@ -1,7 +1,7 @@
 # Evidence is byte-preserved; line-ending conversion would invalidate recorded hashes.
 experiments/trading/historical/** -text
 experiments/orbital/*.mhtml -text
-experiments/orbital/README.txt -text
+experiments/orbital/provenance.txt -text
 docs/paper/** -text
 
 # Checked-in generator output (not the emitter implementation).

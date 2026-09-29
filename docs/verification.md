@@ -1,90 +1,89 @@
-# Refactor verification
+# Verification and remaining limits
 
-Base: `e87e166024aa90854f3621b8bb741ddfbe1c57c1`; local branch:
-`refactor/repository-layout`. Verified on Windows with .NET SDK 10.0.301 and
-Node.js 24.12.0. No models were rerun to create new experimental results.
+Verified on Windows with .NET SDK **10.0.301** and Node.js **24.12.0**.
+The migration audit compares against main before the refactor,
+`e87e166024aa90854f3621b8bb741ddfbe1c57c1`. No new numerical experiments were
+conducted, and no historical results were overwritten.
+
+## Current checks
+
+Run commands from the repository root. On Windows, use `npm.cmd` if PowerShell
+blocks `npm.ps1`. The first three checks need no dependency installation.
 
 | Check | Result |
 | --- | --- |
-| `npm run check:layout` | All 9,619 original files present; 300 projects/solutions and 2,888 reference targets preserved; 37 historical blobs unchanged |
-| `npm run check:trading` | Archive/input hashes and saved comparison match; all 10 existing tests pass; no outputs written |
-| `npm run check:orbital` (after evidence commit `fb8fa694`) | All four supplied hashes match; each archive contains 91 server/client pairs with aligned Loops and a one-second displayed client-time offset; no models executed |
+| `npm run check:layout` | Accounts for all 9,619 original files, including 458 deliberate retirements; checks project references, preserved source and historical blobs |
+| `npm run check:trading` | Archive/input hashes and saved comparison verified; all 10 existing tests pass without model execution |
+| `npm run check:orbital` | All four supplied hashes match; each archive contains 91 server/client pairs, aligned Loops and a one-second displayed client-time offset |
+| `npm run check:frontend` | Four tests pass: chart data alignment, trading JSON-to-Map conversion, in-memory spreadsheet export and development proxy configuration |
+| AspireOnlineConverter frontend production build | Pass: TypeScript and Vite |
+| AspireTradingApp frontend production build | Pass: TypeScript and Vite; existing ExcelJS direct-eval warning |
+| AspireOnlineConverter.Server build | Pass, with existing dependency/compiler warnings |
+| AspireTradingApp.Server build | Pass, with existing dependency/compiler warnings |
+
+Install dependencies and build both current applications using the
+[orbital](../examples/orbital/README.md) and
+[trading](../examples/trading/README.md) instructions. Then run
+`npm run check:frontend`; this additional check uses their installed TypeScript
+and ExcelJS dependencies. Its small fixtures exercise adapters and exports,
+not generated models. Server builds were verified with
+`dotnet build <project> --no-restore -v quiet` after dependencies were restored.
+No package versions were changed.
+
+The existing orbital chart UI from `chart-visualization-update` at
+`d92b34666db44e8bcb31a9b74fecaae1d37e90ed` was already merged into main.
+Its chart component, data adapter, stylesheet and entry point remain byte-identical
+to that branch. No additional merge was needed. Trading build corrections retain
+strict TypeScript checking, excluding only the unimported, incomplete Immelman
+flight export. The active Donchian graph remains checked.
+
+Earlier smoke checks in this work verified the orbital server's health and initial
+conditions, both Vite entry pages, and the orbital development proxy. No forecast
+request or **Start** action was invoked. Browser interaction and chart rendering
+were not visually tested. Trading server startup was not attempted: it loads a
+model and requires the configured SQL Server database. Passing archive checks
+does not establish that either application reproduces historical experiments.
+AppHost entry points are now present, but were not built or launched in this pass.
+
+## Legacy checks and known failures
+
+These outcomes were established earlier in the refactor; the current finishing
+pass rebuilt the two Aspire applications above, not every legacy project.
+
+| Check | Recorded result |
+| --- | --- |
 | Diagram.TypeScript emitter build | Pass |
-| BP_Simulator.Light desktop converter build | Pass, with existing dependency/compiler warnings |
-| AspireTradingApp.Server build | Pass, with warnings |
-| ConsoleTradingTest build | Pass, with warnings; application was not executed |
-| AspireOnlineConverter.Server build | Pass, with warnings |
-| Standalone TypeScriptLibrary `npm ci` then `npm run build` | Pass; newly emitted untracked JS removed after verification |
-| Orbital `npm run build:orbital` | Fails with the same 493 TypeScript diagnostics before and after relocation |
-| OnlineGameConverter.Server build | Same baseline CS1501: two-argument `GetDesktopAsync` call in `BusinessLogic/TradingStategy/DonchianTradingStrategy.cs:17` |
-| Orbital .NET tests | Build blocked by CS0234: missing `TestCategory.Standard` namespace in `StaticExtension.cs:2`; no tests executed |
-| Orbital `npm run lint --workspace onlinegameconverter.client` | Fails: 2,463 errors and 220 warnings across existing TS and checked-in JS |
+| BP_Simulator.Light desktop converter build | Pass, with warnings; desktop UI not launched |
+| ConsoleTradingTest build | Pass, with warnings; application not executed |
+| Standalone TypeScriptLibrary install/build | Pass; temporary emitted files removed afterward |
+| `npm run build:orbital` | Targets legacy OnlineGameConverter, not Aspire; same 493 TypeScript diagnostics before and after relocation |
+| OnlineGameConverter.Server build | Baseline CS1501: two-argument `GetDesktopAsync` call in `BusinessLogic/TradingStategy/DonchianTradingStrategy.cs:17` |
+| Orbital .NET tests | Build blocked by missing `TestCategory.Standard` namespace; no tests executed |
+| Legacy orbital frontend lint | 2,463 errors and 220 warnings in existing TS and checked-in JS |
 
-The initial `dotnet test --no-restore` returned zero without executing tests;
-it is not counted as a passing check. After restoring dependencies, the compile
-failure above was exposed. Initial sandbox NuGet connectivity failures were
-resolved by restoring with network access. No package versions were changed.
+An initial `dotnet test --no-restore` returned zero without executing tests; it
+is not counted as a pass. Restoring dependencies exposed the compile failure.
+The legacy orbital request route was corrected to `/api/orbital` and verified
+with mocked fetch, but its live endpoint remains blocked by server compilation.
+The desktop launch profile now uses portable `commandName: "Project"`.
 
-Builds were run with `dotnet build <project> -v quiet`; the desktop, emitter and
-server paths are documented in the converter/example READMEs. The orbital test
-command is in `experiments/orbital/README.md`. For the standalone TS library:
+## Preservation audit
 
-```powershell
-npm ci --prefix src/runtimes/typescript/TypeScriptLibrary --ignore-scripts --no-audit --no-fund
-npm run build --prefix src/runtimes/typescript/TypeScriptLibrary
-```
+`node scripts/check-layout.mjs --details` identifies unresolved legacy reference
+occurrences inherited from the base revision. This is a migration audit, not a
+claim that the entire repository builds. It checks every original file against
+[layout moves](layout-moves.json), with explicit retirement counts and exact
+reviewed source hashes in [layout adjustments](layout-adjustments.json).
+Retirements cover the aviation app deleted in user cleanup commit `31f8c53c` and
+five unused build-cache/temporary files. Its stale solution reference was removed.
+Unexpected file losses or changes to other original source/model bytes still fail.
 
-`node scripts/check-layout.mjs --details` lists 57 unresolved legacy reference
-occurrences already present at the base revision, largely in old UI/sample
-projects. Their targets were preserved; this refactor does not make all legacy
-projects buildable. The audit also verifies original source/model bytes and
-workspace lock paths. It is specifically an audit of this migration against its
-pinned base, not a general test suite for future algorithm changes. It predates
-the orbital evidence addition; `check:orbital` separately validates those files.
-The later finishing pass pins exact corrected contents for two files in the
-layout audit: the orbital HTTP request suffix and desktop launch profile. This
-keeps the working checks strict without exempting other source changes.
-
-The four historical orbital snapshots and supplied README were added in
-`fb8fa694d2a2d3fbeeb1a061dbc0bd3e36469458`, after the original refactor verification.
-They correct the earlier statement that no paired orbital outputs were available.
-Their hashes and saved table structure have now been checked; the original build
-verification above was not repeated for this documentation/archive-check update.
-The source build used for those historical runs remains unidentified.
-
-## Reviewer-facing finishing pass
-
-The root quick-start now begins with `check:layout`, `check:trading` and
-`check:orbital`; all three passed again. The orbital README incorporates the
-supplied supplement description and hashes while preserving `README.txt` and
-the four snapshots unchanged. A source-traced converter walkthrough and a nearby
-[paper version notice](paper/README.md) were added. Neither model execution nor
-UI regeneration was performed.
-
-Two operational corrections were verified:
-
-- The orbital client's request suffix is now `/orbital`. Its HTTP helper already
-  prefixes `http://localhost:5218/api`, so the final POST matches
-  `OrbitalController` at `/api/orbital`. The controller's `HttpPost(Name =
-  "forecastfromnumber")` names the route; it does not add a URL suffix. A mocked
-  `fetch` check using the actual transpiled client and HTTP helper verified the
-  final URL, method, JSON body, abort signal and response handling. The live
-  endpoint was not tested because the server still fails compilation.
-- The existing `Similation` launch profile now uses `commandName: "Project"`
-  instead of an author-specific executable path. JSON structure was checked;
-  the desktop converter built successfully with `dotnet build --no-restore`
-  and .NET SDK 10.0.301. The desktop UI was not launched.
-
-`npm run build:orbital` again produced exactly the same 493 TypeScript diagnostic
-lines as the original baseline. The server build was repeated with `--no-restore`
-and still fails with the same CS1501 overload error. These known failures remain
-listed separately from the working reviewer checks; no broader application
-repairs or dependency updates were made.
-
-No browser, broker, SQL Server, historical model replay, deployment or full
-repository-wide build was attempted. Aspire AppHost scaffolds lack tracked
-entry points. Existing embedded runtime copies remain separate; unifying them,
-repairing legacy build failures and establishing an orbital replay harness are
-follow-up work. Trading replay requires the branch-specific fixes at the archived
-revision; see its experiment instructions rather than running archived scripts
-against the refactored tree.
+The orbital evidence added in `fb8fa694d2a2d3fbeeb1a061dbc0bd3e36469458`
+is checked separately. Its original `README.txt` is now `provenance.txt`, with
+contents preserved byte-for-byte. The four MHTML files are unchanged. The exact
+source build and a verified replay procedure for those runs remain unavailable.
+Trading replay requires the archived branch's data-query changes; follow the
+[historical instructions](../experiments/trading/README.md) in a separate checkout.
+No historical replay, SQL Server connection, deployment or repository-wide build
+was performed. The [paper notice](paper/README.md) identifies the historical draft
+and fixed code/evidence revisions; a submission manuscript remains to be supplied.

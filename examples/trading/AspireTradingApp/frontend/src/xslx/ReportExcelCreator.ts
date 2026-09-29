@@ -1,18 +1,4 @@
-import { Workbook, type Column } from 'exceljs';
-
-interface P 
-{
-    name: string
-    age : string
-    city : string
-}
-
-interface C 
-{
-    header: string
-    key : string
-}
-
+import { Workbook, type Column, type WorkbookModel } from 'exceljs';
 
 export class ReportExcelCreator {
 
@@ -25,10 +11,11 @@ export class ReportExcelCreator {
         this.dic = dic
     }
 
-    public async create(name: string, map: Map<string, any>[] | undefined) : Blob | undefined
+    public async create(_name: string, map: Map<string, any>[] | undefined) : Promise<Blob | undefined>
     {
         if (map === undefined) return undefined
-            const wb = new Workbook()
+    // ExcelJS 3 supports title at runtime; its Workbook declaration omits it.
+    const wb = new Workbook() as Workbook & Pick<WorkbookModel, 'title'>
     wb.title = 'Report - ' + Date.now().toLocaleString()
     const sheet = wb.addWorksheet('Report')
 
@@ -50,7 +37,6 @@ let i = 0
       let rowValue: any[] = []
       this.items.forEach((it : string )=>
       {
-          let tt = item.get(it)
           rowValue.push(item.get(it))
       })
       sheet.addRow(rowValue)

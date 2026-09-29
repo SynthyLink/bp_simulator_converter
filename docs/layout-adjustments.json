@@ -1,0 +1,97 @@
+{
+  "base": "e87e166024aa90854f3621b8bb741ddfbe1c57c1",
+  "retired": [
+    {
+      "path": "src/Web/aviationshuttle/",
+      "fileCount": 453,
+      "reason": "Legacy application removed by user cleanup commit 31f8c53c; do not restore it."
+    },
+    {
+      "path": "src/DynamicLinkLibraries/Chart/Chart.Objects/Chart.Objects.csproj.Backup.tmp",
+      "fileCount": 1,
+      "reason": "Unused generated build cache or temporary project/backup file."
+    },
+    {
+      "path": "src/ThirdParty/CircularGauge/CircularGauge/CircularGauge_o13vmdbo_wpftmp.csproj",
+      "fileCount": 1,
+      "reason": "Unused generated build cache or temporary project/backup file."
+    },
+    {
+      "path": "src/ThirdParty/CustomControlLibrary/CustomControlLibrary_w4qjmvfg_wpftmp.csproj",
+      "fileCount": 1,
+      "reason": "Unused generated build cache or temporary project/backup file."
+    },
+    {
+      "path": "src/TypeScript/TypeScriptBackup/tsconfig.tsbuildinfo",
+      "fileCount": 1,
+      "reason": "Unused generated build cache or temporary project/backup file."
+    },
+    {
+      "path": "src/TypeScript/TypeScriptLibrary/tsconfig.tsbuildinfo",
+      "fileCount": 1,
+      "reason": "Unused generated build cache or temporary project/backup file."
+    }
+  ],
+  "changed": [
+    {
+      "path": "src/converter/BP_Simulator/BP_Simulator.Light/BP_Simulator.Light/Properties/launchSettings.json",
+      "blob": "e5d0c5f1308aa05ea17f21a2273184dda9f72ffb",
+      "reason": "Portable project launch replaces machine-specific executable path."
+    },
+    {
+      "path": "examples/orbital/AspireOnlineConverter/frontend/README.md",
+      "blob": "20b80bb6d94bc5bfe747802352f717bfa870fae3",
+      "reason": "Replace generic frontend template documentation with verified application instructions."
+    },
+    {
+      "path": "examples/orbital/AspireOnlineConverter/frontend/src/App.tsx",
+      "blob": "d83efb73945232119253fe1873a5603fcacd2627",
+      "reason": "Remove unused values and guard optional inputs; retain current chart UI."
+    },
+    {
+      "path": "examples/trading/AspireTradingApp/frontend/src/App.tsx",
+      "blob": "ccbb6fb6b9ec9ebe4c02f480670c61c3d75c3e1f",
+      "reason": "Remove unused values and guard optional inputs; retain current chart UI."
+    },
+    {
+      "path": "examples/trading/AspireTradingApp/frontend/src/ExternalObjects/DataConsumerRuntimeTest.ts",
+      "blob": "e536ee7530a2fa280791c7b938970fc031d8d7c0",
+      "reason": "Remove unused debug helper and declare inherited property for strict TypeScript."
+    },
+    {
+      "path": "examples/trading/AspireTradingApp/frontend/src/ExternalObjects/Trading/Communication/TradingCommunication.ts",
+      "blob": "dcdb30d31a17ecd2f198a38616ba45256a8f8074",
+      "reason": "Type parsed server JSON as records rather than JavaScript Map instances."
+    },
+    {
+      "path": "examples/trading/AspireTradingApp/frontend/src/ExternalObjects/Trading/TradingPerformer.ts",
+      "blob": "7b7fb455894dd5ebac46d7e403b432d271ce914c",
+      "reason": "Type server records before conversion to runtime Maps; calculation unchanged."
+    },
+    {
+      "path": "examples/trading/AspireTradingApp/frontend/src/Library/Runtime/DataRuntimeConsumer.ts",
+      "blob": "32111c42b8ea6bc6ea60d83666504195ab547e1a",
+      "reason": "Remove unused type-only import."
+    },
+    {
+      "path": "examples/trading/AspireTradingApp/frontend/src/xslx/ReportExcelCreator.ts",
+      "blob": "0a9d82038229241eb99a3ccffc1ccd1229770fb5",
+      "reason": "Correct async return type and ExcelJS metadata typing; remove unused declarations."
+    },
+    {
+      "path": "examples/trading/AspireTradingApp/frontend/tsconfig.app.json",
+      "blob": "613c57b5bee3ff315762bafb86dda1747272202a",
+      "reason": "Exclude unimported, incomplete flight-model export from the trading application build."
+    },
+    {
+      "path": "examples/trading/AspireTradingApp/frontend/vite.config.ts",
+      "blob": "0aee5dd00c596efbb6b7d1a52ff7e15ac1f8b444",
+      "reason": "Align trading development proxy with HTTP launch-profile port 5565."
+    },
+    {
+      "path": "examples/orbital/OnlineGameConverter/onlinegameconverter.client/src/Algorithms/OrbitalForecastCalculation/OrbitalCommunication.ts",
+      "blob": "9cc866bcc0ad3787c5a9ecf6fe9d0676a853f654",
+      "reason": "Correct request suffix for existing /api base and /orbital controller."
+    }
+  ]
+}

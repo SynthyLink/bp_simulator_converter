@@ -8,7 +8,8 @@
     "build:orbital": "npm run build --workspace onlinegameconverter.client",
     "check:layout": "node scripts/check-layout.mjs",
     "check:orbital": "node experiments/orbital/check.mjs",
-    "check:trading": "node experiments/trading/check.mjs"
+    "check:trading": "node experiments/trading/check.mjs",
+    "check:frontend": "node --test scripts/check-frontend.mjs"
   },
   "dependencies": {
     "react": "19.1.0",

@@ -61,19 +61,19 @@ export class TradingCommunication extends HttpCommunication {
     }
 
     public async getAnalysisAsync(map: Map<string, any>, controller: AbortController):
-        Promise<Map<string, any>[] | undefined>
+        Promise<Record<string, any>[] | undefined>
 
  {
         let json = JSON.stringify(Object.fromEntries(map));
         let s = "";
         if (json !== undefined) s = json;
-        const result = await this.http_cancel<string, string>({
+        const result = await this.http_cancel<Record<string, any>[], string>({
             path: "/api/trading/tradinganalysis",
             method: "post",
             body: s,
         }, controller);
         if (result.ok && result.body) {
-            let mp = result.body as unknown as Map<string, any>[]
+            let mp = result.body
             return mp;
         }
         return []

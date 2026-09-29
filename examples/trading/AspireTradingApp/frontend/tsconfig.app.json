@@ -23,5 +23,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
   },
-  "include": ["src"]
+  "include": ["src"],
+  // Unused, incomplete flight-model export; not imported by the trading app.
+  "exclude": ["src/ExternalObjects/Trading/Algorithms/Immelman.ts"]
 }

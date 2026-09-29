@@ -99,12 +99,12 @@ type EChartsCombinedOption = ComposeOption<
 
 const App: React.FC = () => {
 
-  let createServerReport: MouseEventHandler = async (ev) => {
+  let createServerReport: MouseEventHandler = async () => {
           let data = await reportCreator.create("Server",communication.tPerformer.getServer())
           if (data === undefined) return
     setServerReportUrl(URL.createObjectURL(data))
 }
-  let createClientReport: MouseEventHandler = async (ev) => {
+  let createClientReport: MouseEventHandler = async () => {
           let data = await reportCreatorClient.create("Client",communication.tPerformer.getClient())
           if (data === undefined) return
     setClientReportUrl(URL.createObjectURL(data))
@@ -218,7 +218,7 @@ const App: React.FC = () => {
         map.set("d1", f[2])
         map.set("d2", f[3])
         let promises: Promise<void>[] = []
-        if (s !== undefined)
+        if (s !== undefined && p !== undefined)
         {
               promises.push(fillClient(s, p, b, e, f[0], f[1], f[2],
                     f[3]))
@@ -237,7 +237,7 @@ const App: React.FC = () => {
     const fillServer = async (map: Map<string, any>): Promise<void> => {
         if (globalAbort == undefined) return
         let h = await communication.getAnalysisAsync(map, globalAbort)
-        if (h?.length > 0) setServerReportEnabled(true)
+        if (h !== undefined && h.length > 0) setServerReportEnabled(true)
        communication.tPerformer.setServer(h)
     }
 

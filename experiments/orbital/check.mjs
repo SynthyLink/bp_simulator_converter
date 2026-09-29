@@ -2,11 +2,11 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 
-// Read saved evidence only. Expectations come from the author's unchanged README.
+// Read saved evidence only. Expectations come from the author's unchanged source note.
 const read = file => readFileSync(new URL(file, import.meta.url));
-const manifest = read('README.txt').toString('utf8');
+const manifest = read('provenance.txt').toString('utf8');
 const entries = [...manifest.matchAll(/^(orbital-run-[1-4]\.mhtml): original (.+); SHA-256 ([a-f0-9]{64})\r?$/gm)];
-assert.equal(entries.length, 4, 'Expected four archive hashes in README.txt');
+assert.equal(entries.length, 4, 'Expected four archive hashes in provenance.txt');
 assert.equal(new Set(entries.map(entry => entry[1])).size, 4);
 
 function savedTables(bytes) {

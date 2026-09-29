@@ -89,7 +89,7 @@ export class TradingPerformer implements IActionT2<any, string> {
 
   
 
-    convertMap(map: Map<string, any>): Map<string, any> {
+    convertMap(map: Record<string, any>): Map<string, any> {
         let m = new Map<string, any>()
         m.set("a", map.a)
         m.set("b", map.b)
@@ -125,7 +125,7 @@ export class TradingPerformer implements IActionT2<any, string> {
         return this.server
     }
 
-    public setServer(map: Map<string, any>[] | undefined): void {
+    public setServer(map: Record<string, any>[] | undefined): void {
         this.server = []
         if (map === undefined) return
         for (let x of map) {

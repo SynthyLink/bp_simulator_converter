@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 const serverTarget =
     process.env.SERVER_HTTPS ||
     process.env.SERVER_HTTP ||
-    'http://localhost:5409';
+    'http://localhost:5565';
 
 // https://vite.dev/config/
 export default defineConfig({
