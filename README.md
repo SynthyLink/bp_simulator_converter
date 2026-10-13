@@ -46,6 +46,9 @@ also have unresolved dependencies. See the verification report for exact limits.
 
 Read [architecture](docs/architecture.md), [generated code](docs/generated-code.md),
 [experiment instructions](experiments/README.md), and the
-[paper version notice](docs/paper/README.md). No new numerical results were produced.
+[paper version notice](docs/paper/README.md). The [fresh orbital replay](experiments/orbital/replay/README.md)
+records the corrected timing loop, four completed C#/browser comparisons, and reproducible evidence.
+After installing the maintained orbital frontend dependencies, run `npm run check:orbital-scheduler`
+to test the scheduler and inclusive endpoint against analytic reference cases.
 
 MIT — see [LICENSE](LICENSE).

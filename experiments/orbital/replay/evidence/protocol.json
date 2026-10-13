@@ -1,0 +1,53 @@
+{
+  "createdUTC": "2026-10-13T00:15:41.655Z",
+  "baseCommit": "1a20c74b0a981be765f73f6560d43bc9df3a75c6",
+  "stepSeconds": 1,
+  "intervalSeconds": 538404,
+  "positionToleranceKm": 0.000001,
+  "velocityToleranceKmPerSec": 1e-9,
+  "timeToleranceSeconds": 0,
+  "expectedEventsPerScenario": 91,
+  "timeConvention": "OLE Automation seconds; the displayed wall-clock values are interpreted consistently as UTC for numeric conversion",
+  "scenarios": [
+    {
+      "begin": 3991434306.449,
+      "end": 3991972710.449,
+      "x": -5448.34815324,
+      "y": -4463.93698421,
+      "z": 0,
+      "vx": -0.985394777432,
+      "vy": 1.21681893834,
+      "vz": 7.45047785592
+    },
+    {
+      "begin": 3991434306.449,
+      "end": 3991972710.449,
+      "x": -5458.34815324,
+      "y": -4463.93698421,
+      "z": 0,
+      "vx": -0.985394777432,
+      "vy": 1.21681893834,
+      "vz": 7.45047785592
+    },
+    {
+      "begin": 3991434306.449,
+      "end": 3991972710.449,
+      "x": -5458.34815324,
+      "y": -4453.93698421,
+      "z": 0,
+      "vx": -0.985394777432,
+      "vy": 1.21681893834,
+      "vz": 7.45047785592
+    },
+    {
+      "begin": 3991434306.449,
+      "end": 3991972710.449,
+      "x": -5458.34815324,
+      "y": -4453.93698421,
+      "z": 0,
+      "vx": -0.985394777432,
+      "vy": 1.21681893834,
+      "vz": 7.45057785592
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+--- a/examples/orbital/AspireOnlineConverter/frontend/src/Library/Measurements/PerformerMeasuremets.ts
++++ b/examples/orbital/AspireOnlineConverter/frontend/src/Library/Measurements/PerformerMeasuremets.ts
+@@ -130,18 +130,19 @@
+         runtime.setTimeProvider(tm);
+         runtime.startRuntime(start);
+         var st = start;
++        var previous = start;
+         for (var i = 0; i < steps; i++) {
+             if (stop.func()) return;
+             tm.setTime(st);
++            if (i > 0) {
++                runtime.stepRuntime(previous, st);
++            }
++            previous = st;
+             runtime.updateRuntime();
+             if (condition.func()) {
+                 act.action();
+             }
+-            let s = st + step;
+-            if (i > 0) {
+-                runtime.stepRuntime(st, s);
+-            }
+-            st = s;
++            st += step;
+         }
+     }
+ 
+--- a/src/runtimes/typescript/TypeScriptLibrary/src/Library/Measurements/PerformerMeasuremets.ts
++++ b/src/runtimes/typescript/TypeScriptLibrary/src/Library/Measurements/PerformerMeasuremets.ts
+@@ -139,18 +139,19 @@
+         runtime.setTimeProvider(tm);
+         runtime.startRuntime(start);
+         var st = start;
++        var previous = start;
+         for (var i = 0; i < steps; i++) {
+             if (stop.func()) return;
+             tm.setTime(st);
++            if (i > 0) {
++                runtime.stepRuntime(previous, st);
++            }
++            previous = st;
+             runtime.updateRuntime();
+             if (condition.func()) {
+                 act.action();
+             }
+-            let s = st + step;
+-            if (i > 0) {
+-                runtime.stepRuntime(st, s);
+-            }
+-            st = s;
++            st += step;
+         }
+     }
+ 
+--- a/examples/orbital/AspireOnlineConverter/frontend/src/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation.ts
++++ b/examples/orbital/AspireOnlineConverter/frontend/src/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation.ts
+@@ -112,7 +112,7 @@
+         let p = new PerformerMeasuremets();
+         this.stopWatch = new StopWatch();
+         this.stopWatch.start();
+-        var count = Math.floor(condition.end - condition.begin);
++        var count = Math.floor(condition.end - condition.begin) + 1;
+         p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, condition.begin, 1, count, this);
+         this.stopWatch.stop();
+         console.log(this.list)
+--- a/src/runtimes/typescript/TypeScriptLibrary/src/ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation.ts
++++ b/src/runtimes/typescript/TypeScriptLibrary/src/ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation.ts
+@@ -120,7 +120,7 @@
+         let p = new PerformerMeasuremets();
+         this.stopWatch = new StopWatch();
+         this.stopWatch.start();
+-        var count = Math.floor(condition.end - condition.begin);
++        var count = Math.floor(condition.end - condition.begin) + 1;
+         p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, condition.begin, 1, count, this);
+         this.stopWatch.stop();
+         return this.list;

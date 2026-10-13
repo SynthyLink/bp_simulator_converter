@@ -1,0 +1,12 @@
+{
+  "browserVersion": "154.0.8037.98",
+  "nodeVersion": "v24.12.0",
+  "headless": true,
+  "baseCommit": "1a20c74b0a981be765f73f6560d43bc9df3a75c6",
+  "sourceHashes": {
+    "src/Algorithms/OrbitalForecastCalculation/OrbitalForecast.ts": "8545336f2de1ab99ca9520c897e58904ae17ea95cb2615ab7e940ce2c34b20ce",
+    "src/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation.ts": "2a71acd03f917cdd061135013c7dee517ea6532640c17e05506d6c6defeb06d1",
+    "src/Library/Measurements/PerformerMeasuremets.ts": "6e433507a7cbba3d3e5be7e1c07a2093d3148e43bc76574bd734e21ac8f7ddeb",
+    "package-lock.json": "d0e29723e1636d47cc52cc33f33267aeaec6f7833bbfcafcad215119637452cd"
+  }
+}

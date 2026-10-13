@@ -2,6 +2,8 @@
 experiments/trading/historical/** -text
 experiments/orbital/*.mhtml -text
 experiments/orbital/provenance.txt -text
+experiments/orbital/replay/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
+experiments/orbital/replay/**/*.patch whitespace=-blank-at-eol,cr-at-eol
 docs/paper/** -text
 
 # Checked-in generator output (not the emitter implementation).

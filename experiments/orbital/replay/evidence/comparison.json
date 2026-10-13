@@ -1,0 +1,170 @@
+{
+  "protocol": {
+    "createdUTC": "2026-10-13T00:15:41.655Z",
+    "baseCommit": "1a20c74b0a981be765f73f6560d43bc9df3a75c6",
+    "stepSeconds": 1,
+    "intervalSeconds": 538404,
+    "positionToleranceKm": 0.000001,
+    "velocityToleranceKmPerSec": 1e-9,
+    "timeToleranceSeconds": 0,
+    "expectedEventsPerScenario": 91,
+    "timeConvention": "OLE Automation seconds; the displayed wall-clock values are interpreted consistently as UTC for numeric conversion",
+    "scenarios": [
+      {
+        "begin": 3991434306.449,
+        "end": 3991972710.449,
+        "x": -5448.34815324,
+        "y": -4463.93698421,
+        "z": 0,
+        "vx": -0.985394777432,
+        "vy": 1.21681893834,
+        "vz": 7.45047785592
+      },
+      {
+        "begin": 3991434306.449,
+        "end": 3991972710.449,
+        "x": -5458.34815324,
+        "y": -4463.93698421,
+        "z": 0,
+        "vx": -0.985394777432,
+        "vy": 1.21681893834,
+        "vz": 7.45047785592
+      },
+      {
+        "begin": 3991434306.449,
+        "end": 3991972710.449,
+        "x": -5458.34815324,
+        "y": -4453.93698421,
+        "z": 0,
+        "vx": -0.985394777432,
+        "vy": 1.21681893834,
+        "vz": 7.45047785592
+      },
+      {
+        "begin": 3991434306.449,
+        "end": 3991972710.449,
+        "x": -5458.34815324,
+        "y": -4453.93698421,
+        "z": 0,
+        "vx": -0.985394777432,
+        "vy": 1.21681893834,
+        "vz": 7.45057785592
+      }
+    ]
+  },
+  "results": [
+    {
+      "run": 1,
+      "events": 91,
+      "maxTimeDifferenceSeconds": 0,
+      "maxPositionDifferenceKm": 4.096482557619098e-7,
+      "meanPositionDifferenceKm": 1.5979654400630224e-7,
+      "maxVelocityDifferenceKmPerSec": 4.4216261549064995e-10,
+      "meanVelocityDifferenceKmPerSec": 1.7227359290755493e-10,
+      "firstPositionDifferenceKm": 0,
+      "lastPositionDifferenceKm": 4.096482557619098e-7,
+      "firstVelocityDifferenceKmPerSec": 0,
+      "lastVelocityDifferenceKmPerSec": 4.4216261549064995e-10,
+      "passes": true
+    },
+    {
+      "run": 2,
+      "events": 91,
+      "maxTimeDifferenceSeconds": 0,
+      "maxPositionDifferenceKm": 3.974199317739692e-7,
+      "meanPositionDifferenceKm": 8.997947016609456e-8,
+      "maxVelocityDifferenceKmPerSec": 4.2820897302636406e-10,
+      "meanVelocityDifferenceKmPerSec": 9.700613521803967e-11,
+      "firstPositionDifferenceKm": 0,
+      "lastPositionDifferenceKm": 3.974199317739692e-7,
+      "firstVelocityDifferenceKmPerSec": 0,
+      "lastVelocityDifferenceKmPerSec": 4.2820897302636406e-10,
+      "passes": true
+    },
+    {
+      "run": 3,
+      "events": 91,
+      "maxTimeDifferenceSeconds": 0,
+      "maxPositionDifferenceKm": 3.940893637003554e-7,
+      "meanPositionDifferenceKm": 1.5214920462039834e-7,
+      "maxVelocityDifferenceKmPerSec": 4.2524956422775135e-10,
+      "meanVelocityDifferenceKmPerSec": 1.6409467872949394e-10,
+      "firstPositionDifferenceKm": 0,
+      "lastPositionDifferenceKm": 3.940893637003554e-7,
+      "firstVelocityDifferenceKmPerSec": 9.155133597044475e-16,
+      "lastVelocityDifferenceKmPerSec": 4.2524956422775135e-10,
+      "passes": true
+    },
+    {
+      "run": 4,
+      "events": 91,
+      "maxTimeDifferenceSeconds": 0,
+      "maxPositionDifferenceKm": 1.4050415626781756e-7,
+      "meanPositionDifferenceKm": 4.045292572198029e-8,
+      "maxVelocityDifferenceKmPerSec": 1.518843653723379e-10,
+      "meanVelocityDifferenceKmPerSec": 4.376770739969629e-11,
+      "firstPositionDifferenceKm": 0,
+      "lastPositionDifferenceKm": 1.4050415626781756e-7,
+      "firstVelocityDifferenceKmPerSec": 0,
+      "lastVelocityDifferenceKmPerSec": 1.518843653723379e-10,
+      "passes": true
+    }
+  ],
+  "baselineRun1": {
+    "events": 91,
+    "maxTimeDifferenceSeconds": 1,
+    "maxPositionDifferenceKm": 4.096482557619098e-7,
+    "meanPositionDifferenceKm": 1.5979654400630224e-7,
+    "maxVelocityDifferenceKmPerSec": 4.4216261549064995e-10,
+    "meanVelocityDifferenceKmPerSec": 1.7227359290755493e-10,
+    "firstPositionDifferenceKm": 0,
+    "lastPositionDifferenceKm": 4.096482557619098e-7,
+    "firstVelocityDifferenceKmPerSec": 0,
+    "lastVelocityDifferenceKmPerSec": 4.4216261549064995e-10,
+    "passes": false
+  },
+  "baselineTimeOffsets": [
+    1
+  ],
+  "negativeControls": {
+    "positionTwoMm": {
+      "events": 91,
+      "maxTimeDifferenceSeconds": 0,
+      "maxPositionDifferenceKm": 0.00000199999976757681,
+      "meanPositionDifferenceKm": 1.8177456343022315e-7,
+      "maxVelocityDifferenceKmPerSec": 4.4216261549064995e-10,
+      "meanVelocityDifferenceKmPerSec": 1.7227359290755493e-10,
+      "firstPositionDifferenceKm": 0.00000199999976757681,
+      "lastPositionDifferenceKm": 4.096482557619098e-7,
+      "firstVelocityDifferenceKmPerSec": 0,
+      "lastVelocityDifferenceKmPerSec": 4.4216261549064995e-10,
+      "passes": false
+    },
+    "velocityTwoMicrometresPerSecond": {
+      "events": 91,
+      "maxTimeDifferenceSeconds": 0,
+      "maxPositionDifferenceKm": 4.096482557619098e-7,
+      "meanPositionDifferenceKm": 1.5979654400630224e-7,
+      "maxVelocityDifferenceKmPerSec": 1.9999999989472883e-9,
+      "meanVelocityDifferenceKmPerSec": 1.9425161487400872e-10,
+      "firstPositionDifferenceKm": 0,
+      "lastPositionDifferenceKm": 4.096482557619098e-7,
+      "firstVelocityDifferenceKmPerSec": 1.9999999989472883e-9,
+      "lastVelocityDifferenceKmPerSec": 4.4216261549064995e-10,
+      "passes": false
+    },
+    "timestampOneSecond": {
+      "events": 91,
+      "maxTimeDifferenceSeconds": 1,
+      "maxPositionDifferenceKm": 4.096482557619098e-7,
+      "meanPositionDifferenceKm": 1.5979654400630224e-7,
+      "maxVelocityDifferenceKmPerSec": 4.4216261549064995e-10,
+      "meanVelocityDifferenceKmPerSec": 1.7227359290755493e-10,
+      "firstPositionDifferenceKm": 0,
+      "lastPositionDifferenceKm": 4.096482557619098e-7,
+      "firstVelocityDifferenceKmPerSec": 0,
+      "lastVelocityDifferenceKmPerSec": 4.4216261549064995e-10,
+      "passes": false
+    }
+  }
+}

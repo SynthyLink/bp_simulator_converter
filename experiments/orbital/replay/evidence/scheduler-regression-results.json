@@ -1,0 +1,2194 @@
+{
+  "createdUtc": "2026-10-13T00:16:47.923Z",
+  "description": "Actual TypeScript modules transpiled to CommonJS in memory; exact analytic mock ODE integrals test scheduling independently of RK4 error.",
+  "nodeVersion": "v24.12.0",
+  "typescriptVersion": "5.9.3",
+  "sourceRoot": "C:\\Users\\Max\\.codex\\.chatgpt-projects\\g-p-6acd157754ac81919c2101dfd076307e\\output\\orbital-review\\pinned-source",
+  "sourceHashes": {
+    "scheduler": "6e433507a7cbba3d3e5be7e1c07a2093d3148e43bc76574bd734e21ac8f7ddeb",
+    "wrapper": "2a71acd03f917cdd061135013c7dee517ea6532640c17e05506d6c6defeb06d1",
+    "candidateScheduler": "e2fc1833d7388467e41387a9b103784db06caa092ccadb66cf0090ec65bd2a27",
+    "candidateWrapper": "47dbbb97a2c3c314d8dfad2c0828442294d6dfc2854083a0bfbc6af3546fa5ec"
+  },
+  "results": [
+    {
+      "mode": "baseline",
+      "scheduler": [
+        {
+          "name": "constant_velocity_initial_and_final_samples",
+          "passed": false,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 0
+            },
+            {
+              "time": 2,
+              "state": 7.5
+            },
+            {
+              "time": 3,
+              "state": 15
+            }
+          ],
+          "emitted": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 0
+            },
+            {
+              "time": 2,
+              "state": 7.5
+            },
+            {
+              "time": 3,
+              "state": 15
+            }
+          ],
+          "intervals": [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "failures": [
+            {
+              "check": "states at update time",
+              "actual": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 0
+                },
+                {
+                  "time": 2,
+                  "state": 7.5
+                },
+                {
+                  "time": 3,
+                  "state": 15
+                }
+              ],
+              "expected": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 7.5
+                },
+                {
+                  "time": 2,
+                  "state": 15
+                },
+                {
+                  "time": 3,
+                  "state": 22.5
+                }
+              ]
+            },
+            {
+              "check": "selected output samples",
+              "actual": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 0
+                },
+                {
+                  "time": 2,
+                  "state": 7.5
+                },
+                {
+                  "time": 3,
+                  "state": 15
+                }
+              ],
+              "expected": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 7.5
+                },
+                {
+                  "time": 2,
+                  "state": 15
+                },
+                {
+                  "time": 3,
+                  "state": 22.5
+                }
+              ]
+            },
+            {
+              "check": "integration intervals (no step after final observation)",
+              "actual": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ]
+              ],
+              "expected": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "time_dependent_derivative",
+          "passed": false,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 0
+            },
+            {
+              "time": 2,
+              "state": 1.5
+            },
+            {
+              "time": 3,
+              "state": 4
+            }
+          ],
+          "emitted": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 0
+            },
+            {
+              "time": 2,
+              "state": 1.5
+            },
+            {
+              "time": 3,
+              "state": 4
+            }
+          ],
+          "intervals": [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "failures": [
+            {
+              "check": "states at update time",
+              "actual": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 0
+                },
+                {
+                  "time": 2,
+                  "state": 1.5
+                },
+                {
+                  "time": 3,
+                  "state": 4
+                }
+              ],
+              "expected": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 0.5
+                },
+                {
+                  "time": 2,
+                  "state": 2
+                },
+                {
+                  "time": 3,
+                  "state": 4.5
+                }
+              ]
+            },
+            {
+              "check": "selected output samples",
+              "actual": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 0
+                },
+                {
+                  "time": 2,
+                  "state": 1.5
+                },
+                {
+                  "time": 3,
+                  "state": 4
+                }
+              ],
+              "expected": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 0.5
+                },
+                {
+                  "time": 2,
+                  "state": 2
+                },
+                {
+                  "time": 3,
+                  "state": 4.5
+                }
+              ]
+            },
+            {
+              "check": "integration intervals (no step after final observation)",
+              "actual": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ]
+              ],
+              "expected": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "nonzero_start_nonunit_step",
+          "passed": false,
+          "updates": [
+            {
+              "time": 10,
+              "state": 3
+            },
+            {
+              "time": 10.25,
+              "state": 3
+            },
+            {
+              "time": 10.5,
+              "state": 5.59375
+            },
+            {
+              "time": 10.75,
+              "state": 8.25
+            },
+            {
+              "time": 11,
+              "state": 10.96875
+            }
+          ],
+          "emitted": [
+            {
+              "time": 10,
+              "state": 3
+            },
+            {
+              "time": 10.25,
+              "state": 3
+            },
+            {
+              "time": 10.5,
+              "state": 5.59375
+            },
+            {
+              "time": 10.75,
+              "state": 8.25
+            },
+            {
+              "time": 11,
+              "state": 10.96875
+            }
+          ],
+          "intervals": [
+            [
+              10.25,
+              10.5
+            ],
+            [
+              10.5,
+              10.75
+            ],
+            [
+              10.75,
+              11
+            ],
+            [
+              11,
+              11.25
+            ]
+          ],
+          "failures": [
+            {
+              "check": "states at update time",
+              "actual": [
+                {
+                  "time": 10,
+                  "state": 3
+                },
+                {
+                  "time": 10.25,
+                  "state": 3
+                },
+                {
+                  "time": 10.5,
+                  "state": 5.59375
+                },
+                {
+                  "time": 10.75,
+                  "state": 8.25
+                },
+                {
+                  "time": 11,
+                  "state": 10.96875
+                }
+              ],
+              "expected": [
+                {
+                  "time": 10,
+                  "state": 3
+                },
+                {
+                  "time": 10.25,
+                  "state": 5.53125
+                },
+                {
+                  "time": 10.5,
+                  "state": 8.125
+                },
+                {
+                  "time": 10.75,
+                  "state": 10.78125
+                },
+                {
+                  "time": 11,
+                  "state": 13.5
+                }
+              ]
+            },
+            {
+              "check": "selected output samples",
+              "actual": [
+                {
+                  "time": 10,
+                  "state": 3
+                },
+                {
+                  "time": 10.25,
+                  "state": 3
+                },
+                {
+                  "time": 10.5,
+                  "state": 5.59375
+                },
+                {
+                  "time": 10.75,
+                  "state": 8.25
+                },
+                {
+                  "time": 11,
+                  "state": 10.96875
+                }
+              ],
+              "expected": [
+                {
+                  "time": 10,
+                  "state": 3
+                },
+                {
+                  "time": 10.25,
+                  "state": 5.53125
+                },
+                {
+                  "time": 10.5,
+                  "state": 8.125
+                },
+                {
+                  "time": 10.75,
+                  "state": 10.78125
+                },
+                {
+                  "time": 11,
+                  "state": 13.5
+                }
+              ]
+            },
+            {
+              "check": "integration intervals (no step after final observation)",
+              "actual": [
+                [
+                  10.25,
+                  10.5
+                ],
+                [
+                  10.5,
+                  10.75
+                ],
+                [
+                  10.75,
+                  11
+                ],
+                [
+                  11,
+                  11.25
+                ]
+              ],
+              "expected": [
+                [
+                  10,
+                  10.25
+                ],
+                [
+                  10.25,
+                  10.5
+                ],
+                [
+                  10.5,
+                  10.75
+                ],
+                [
+                  10.75,
+                  11
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "condition_uses_current_state",
+          "passed": false,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 0
+            },
+            {
+              "time": 2,
+              "state": 7.5
+            },
+            {
+              "time": 3,
+              "state": 15
+            },
+            {
+              "time": 4,
+              "state": 22.5
+            }
+          ],
+          "emitted": [
+            {
+              "time": 3,
+              "state": 15
+            },
+            {
+              "time": 4,
+              "state": 22.5
+            }
+          ],
+          "intervals": [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "failures": [
+            {
+              "check": "states at update time",
+              "actual": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 0
+                },
+                {
+                  "time": 2,
+                  "state": 7.5
+                },
+                {
+                  "time": 3,
+                  "state": 15
+                },
+                {
+                  "time": 4,
+                  "state": 22.5
+                }
+              ],
+              "expected": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 7.5
+                },
+                {
+                  "time": 2,
+                  "state": 15
+                },
+                {
+                  "time": 3,
+                  "state": 22.5
+                },
+                {
+                  "time": 4,
+                  "state": 30
+                }
+              ]
+            },
+            {
+              "check": "selected output samples",
+              "actual": [
+                {
+                  "time": 3,
+                  "state": 15
+                },
+                {
+                  "time": 4,
+                  "state": 22.5
+                }
+              ],
+              "expected": [
+                {
+                  "time": 2,
+                  "state": 15
+                },
+                {
+                  "time": 3,
+                  "state": 22.5
+                },
+                {
+                  "time": 4,
+                  "state": 30
+                }
+              ]
+            },
+            {
+              "check": "integration intervals (no step after final observation)",
+              "actual": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ]
+              ],
+              "expected": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "condition_uses_current_time",
+          "passed": false,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 0
+            },
+            {
+              "time": 2,
+              "state": 7.5
+            },
+            {
+              "time": 3,
+              "state": 15
+            },
+            {
+              "time": 4,
+              "state": 22.5
+            }
+          ],
+          "emitted": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 2,
+              "state": 7.5
+            },
+            {
+              "time": 4,
+              "state": 22.5
+            }
+          ],
+          "intervals": [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "failures": [
+            {
+              "check": "states at update time",
+              "actual": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 0
+                },
+                {
+                  "time": 2,
+                  "state": 7.5
+                },
+                {
+                  "time": 3,
+                  "state": 15
+                },
+                {
+                  "time": 4,
+                  "state": 22.5
+                }
+              ],
+              "expected": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 7.5
+                },
+                {
+                  "time": 2,
+                  "state": 15
+                },
+                {
+                  "time": 3,
+                  "state": 22.5
+                },
+                {
+                  "time": 4,
+                  "state": 30
+                }
+              ]
+            },
+            {
+              "check": "selected output samples",
+              "actual": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 2,
+                  "state": 7.5
+                },
+                {
+                  "time": 4,
+                  "state": 22.5
+                }
+              ],
+              "expected": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 2,
+                  "state": 15
+                },
+                {
+                  "time": 4,
+                  "state": 30
+                }
+              ]
+            },
+            {
+              "check": "integration intervals (no step after final observation)",
+              "actual": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ]
+              ],
+              "expected": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "condition_always_false_preserves_integration",
+          "passed": false,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 0
+            },
+            {
+              "time": 2,
+              "state": 7.5
+            },
+            {
+              "time": 3,
+              "state": 15
+            }
+          ],
+          "emitted": [],
+          "intervals": [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "failures": [
+            {
+              "check": "states at update time",
+              "actual": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 0
+                },
+                {
+                  "time": 2,
+                  "state": 7.5
+                },
+                {
+                  "time": 3,
+                  "state": 15
+                }
+              ],
+              "expected": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 7.5
+                },
+                {
+                  "time": 2,
+                  "state": 15
+                },
+                {
+                  "time": 3,
+                  "state": 22.5
+                }
+              ]
+            },
+            {
+              "check": "integration intervals (no step after final observation)",
+              "actual": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ]
+              ],
+              "expected": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "cancellation_stops_before_next_integration",
+          "passed": false,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 0
+            },
+            {
+              "time": 2,
+              "state": 7.5
+            }
+          ],
+          "emitted": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 0
+            },
+            {
+              "time": 2,
+              "state": 7.5
+            }
+          ],
+          "intervals": [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "failures": [
+            {
+              "check": "states at update time",
+              "actual": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 0
+                },
+                {
+                  "time": 2,
+                  "state": 7.5
+                }
+              ],
+              "expected": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 7.5
+                },
+                {
+                  "time": 2,
+                  "state": 15
+                }
+              ]
+            },
+            {
+              "check": "selected output samples",
+              "actual": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 0
+                },
+                {
+                  "time": 2,
+                  "state": 7.5
+                }
+              ],
+              "expected": [
+                {
+                  "time": 0,
+                  "state": 0
+                },
+                {
+                  "time": 1,
+                  "state": 7.5
+                },
+                {
+                  "time": 2,
+                  "state": 15
+                }
+              ]
+            },
+            {
+              "check": "integration intervals (no step after final observation)",
+              "actual": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ]
+              ],
+              "expected": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "initial_cancellation",
+          "passed": true,
+          "updates": [],
+          "emitted": [],
+          "intervals": [],
+          "failures": []
+        },
+        {
+          "name": "single_initial_sample",
+          "passed": true,
+          "updates": [
+            {
+              "time": 10,
+              "state": 3
+            }
+          ],
+          "emitted": [
+            {
+              "time": 10,
+              "state": 3
+            }
+          ],
+          "intervals": [],
+          "failures": []
+        },
+        {
+          "name": "zero_samples",
+          "passed": true,
+          "updates": [],
+          "emitted": [],
+          "intervals": [],
+          "failures": []
+        }
+      ],
+      "unaffectedUnconditionalReference": [
+        {
+          "name": "constant_velocity_initial_and_final_samples",
+          "passed": true,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 7.5
+            },
+            {
+              "time": 2,
+              "state": 15
+            },
+            {
+              "time": 3,
+              "state": 22.5
+            }
+          ],
+          "emitted": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 7.5
+            },
+            {
+              "time": 2,
+              "state": 15
+            },
+            {
+              "time": 3,
+              "state": 22.5
+            }
+          ],
+          "intervals": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "failures": []
+        },
+        {
+          "name": "time_dependent_derivative",
+          "passed": true,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 0.5
+            },
+            {
+              "time": 2,
+              "state": 2
+            },
+            {
+              "time": 3,
+              "state": 4.5
+            }
+          ],
+          "emitted": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 0.5
+            },
+            {
+              "time": 2,
+              "state": 2
+            },
+            {
+              "time": 3,
+              "state": 4.5
+            }
+          ],
+          "intervals": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "failures": []
+        },
+        {
+          "name": "nonzero_start_nonunit_step",
+          "passed": true,
+          "updates": [
+            {
+              "time": 10,
+              "state": 3
+            },
+            {
+              "time": 10.25,
+              "state": 5.53125
+            },
+            {
+              "time": 10.5,
+              "state": 8.125
+            },
+            {
+              "time": 10.75,
+              "state": 10.78125
+            },
+            {
+              "time": 11,
+              "state": 13.5
+            }
+          ],
+          "emitted": [
+            {
+              "time": 10,
+              "state": 3
+            },
+            {
+              "time": 10.25,
+              "state": 5.53125
+            },
+            {
+              "time": 10.5,
+              "state": 8.125
+            },
+            {
+              "time": 10.75,
+              "state": 10.78125
+            },
+            {
+              "time": 11,
+              "state": 13.5
+            }
+          ],
+          "intervals": [
+            [
+              10,
+              10.25
+            ],
+            [
+              10.25,
+              10.5
+            ],
+            [
+              10.5,
+              10.75
+            ],
+            [
+              10.75,
+              11
+            ]
+          ],
+          "failures": []
+        },
+        {
+          "name": "cancellation_stops_before_next_integration",
+          "passed": true,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 7.5
+            },
+            {
+              "time": 2,
+              "state": 15
+            }
+          ],
+          "emitted": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 7.5
+            },
+            {
+              "time": 2,
+              "state": 15
+            }
+          ],
+          "intervals": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "failures": []
+        },
+        {
+          "name": "initial_cancellation",
+          "passed": true,
+          "updates": [],
+          "emitted": [],
+          "intervals": [],
+          "failures": []
+        },
+        {
+          "name": "single_initial_sample",
+          "passed": true,
+          "updates": [
+            {
+              "time": 10,
+              "state": 3
+            }
+          ],
+          "emitted": [
+            {
+              "time": 10,
+              "state": 3
+            }
+          ],
+          "intervals": [],
+          "failures": []
+        },
+        {
+          "name": "zero_samples",
+          "passed": true,
+          "updates": [],
+          "emitted": [],
+          "intervals": [],
+          "failures": []
+        }
+      ],
+      "wrapper": [
+        {
+          "name": "wrapper_inclusive_grid_100_104",
+          "passed": false,
+          "actual": {
+            "start": 100,
+            "step": 1,
+            "samples": 4
+          },
+          "expected": {
+            "start": 100,
+            "step": 1,
+            "samples": 5
+          }
+        },
+        {
+          "name": "wrapper_inclusive_grid_100_100",
+          "passed": false,
+          "actual": {
+            "start": 100,
+            "step": 1,
+            "samples": 0
+          },
+          "expected": {
+            "start": 100,
+            "step": 1,
+            "samples": 1
+          }
+        },
+        {
+          "name": "wrapper_inclusive_grid_100_104.5",
+          "passed": false,
+          "actual": {
+            "start": 100,
+            "step": 1,
+            "samples": 4
+          },
+          "expected": {
+            "start": 100,
+            "step": 1,
+            "samples": 5
+          }
+        }
+      ],
+      "summary": {
+        "total": 20,
+        "passed": 10,
+        "failed": 10
+      }
+    },
+    {
+      "mode": "candidate",
+      "scheduler": [
+        {
+          "name": "constant_velocity_initial_and_final_samples",
+          "passed": true,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 7.5
+            },
+            {
+              "time": 2,
+              "state": 15
+            },
+            {
+              "time": 3,
+              "state": 22.5
+            }
+          ],
+          "emitted": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 7.5
+            },
+            {
+              "time": 2,
+              "state": 15
+            },
+            {
+              "time": 3,
+              "state": 22.5
+            }
+          ],
+          "intervals": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "failures": []
+        },
+        {
+          "name": "time_dependent_derivative",
+          "passed": true,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 0.5
+            },
+            {
+              "time": 2,
+              "state": 2
+            },
+            {
+              "time": 3,
+              "state": 4.5
+            }
+          ],
+          "emitted": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 0.5
+            },
+            {
+              "time": 2,
+              "state": 2
+            },
+            {
+              "time": 3,
+              "state": 4.5
+            }
+          ],
+          "intervals": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "failures": []
+        },
+        {
+          "name": "nonzero_start_nonunit_step",
+          "passed": true,
+          "updates": [
+            {
+              "time": 10,
+              "state": 3
+            },
+            {
+              "time": 10.25,
+              "state": 5.53125
+            },
+            {
+              "time": 10.5,
+              "state": 8.125
+            },
+            {
+              "time": 10.75,
+              "state": 10.78125
+            },
+            {
+              "time": 11,
+              "state": 13.5
+            }
+          ],
+          "emitted": [
+            {
+              "time": 10,
+              "state": 3
+            },
+            {
+              "time": 10.25,
+              "state": 5.53125
+            },
+            {
+              "time": 10.5,
+              "state": 8.125
+            },
+            {
+              "time": 10.75,
+              "state": 10.78125
+            },
+            {
+              "time": 11,
+              "state": 13.5
+            }
+          ],
+          "intervals": [
+            [
+              10,
+              10.25
+            ],
+            [
+              10.25,
+              10.5
+            ],
+            [
+              10.5,
+              10.75
+            ],
+            [
+              10.75,
+              11
+            ]
+          ],
+          "failures": []
+        },
+        {
+          "name": "condition_uses_current_state",
+          "passed": true,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 7.5
+            },
+            {
+              "time": 2,
+              "state": 15
+            },
+            {
+              "time": 3,
+              "state": 22.5
+            },
+            {
+              "time": 4,
+              "state": 30
+            }
+          ],
+          "emitted": [
+            {
+              "time": 2,
+              "state": 15
+            },
+            {
+              "time": 3,
+              "state": 22.5
+            },
+            {
+              "time": 4,
+              "state": 30
+            }
+          ],
+          "intervals": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "failures": []
+        },
+        {
+          "name": "condition_uses_current_time",
+          "passed": true,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 7.5
+            },
+            {
+              "time": 2,
+              "state": 15
+            },
+            {
+              "time": 3,
+              "state": 22.5
+            },
+            {
+              "time": 4,
+              "state": 30
+            }
+          ],
+          "emitted": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 2,
+              "state": 15
+            },
+            {
+              "time": 4,
+              "state": 30
+            }
+          ],
+          "intervals": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "failures": []
+        },
+        {
+          "name": "condition_always_false_preserves_integration",
+          "passed": true,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 7.5
+            },
+            {
+              "time": 2,
+              "state": 15
+            },
+            {
+              "time": 3,
+              "state": 22.5
+            }
+          ],
+          "emitted": [],
+          "intervals": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "failures": []
+        },
+        {
+          "name": "cancellation_stops_before_next_integration",
+          "passed": true,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 7.5
+            },
+            {
+              "time": 2,
+              "state": 15
+            }
+          ],
+          "emitted": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 7.5
+            },
+            {
+              "time": 2,
+              "state": 15
+            }
+          ],
+          "intervals": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "failures": []
+        },
+        {
+          "name": "initial_cancellation",
+          "passed": true,
+          "updates": [],
+          "emitted": [],
+          "intervals": [],
+          "failures": []
+        },
+        {
+          "name": "single_initial_sample",
+          "passed": true,
+          "updates": [
+            {
+              "time": 10,
+              "state": 3
+            }
+          ],
+          "emitted": [
+            {
+              "time": 10,
+              "state": 3
+            }
+          ],
+          "intervals": [],
+          "failures": []
+        },
+        {
+          "name": "zero_samples",
+          "passed": true,
+          "updates": [],
+          "emitted": [],
+          "intervals": [],
+          "failures": []
+        }
+      ],
+      "unaffectedUnconditionalReference": [
+        {
+          "name": "constant_velocity_initial_and_final_samples",
+          "passed": true,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 7.5
+            },
+            {
+              "time": 2,
+              "state": 15
+            },
+            {
+              "time": 3,
+              "state": 22.5
+            }
+          ],
+          "emitted": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 7.5
+            },
+            {
+              "time": 2,
+              "state": 15
+            },
+            {
+              "time": 3,
+              "state": 22.5
+            }
+          ],
+          "intervals": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "failures": []
+        },
+        {
+          "name": "time_dependent_derivative",
+          "passed": true,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 0.5
+            },
+            {
+              "time": 2,
+              "state": 2
+            },
+            {
+              "time": 3,
+              "state": 4.5
+            }
+          ],
+          "emitted": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 0.5
+            },
+            {
+              "time": 2,
+              "state": 2
+            },
+            {
+              "time": 3,
+              "state": 4.5
+            }
+          ],
+          "intervals": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "failures": []
+        },
+        {
+          "name": "nonzero_start_nonunit_step",
+          "passed": true,
+          "updates": [
+            {
+              "time": 10,
+              "state": 3
+            },
+            {
+              "time": 10.25,
+              "state": 5.53125
+            },
+            {
+              "time": 10.5,
+              "state": 8.125
+            },
+            {
+              "time": 10.75,
+              "state": 10.78125
+            },
+            {
+              "time": 11,
+              "state": 13.5
+            }
+          ],
+          "emitted": [
+            {
+              "time": 10,
+              "state": 3
+            },
+            {
+              "time": 10.25,
+              "state": 5.53125
+            },
+            {
+              "time": 10.5,
+              "state": 8.125
+            },
+            {
+              "time": 10.75,
+              "state": 10.78125
+            },
+            {
+              "time": 11,
+              "state": 13.5
+            }
+          ],
+          "intervals": [
+            [
+              10,
+              10.25
+            ],
+            [
+              10.25,
+              10.5
+            ],
+            [
+              10.5,
+              10.75
+            ],
+            [
+              10.75,
+              11
+            ]
+          ],
+          "failures": []
+        },
+        {
+          "name": "cancellation_stops_before_next_integration",
+          "passed": true,
+          "updates": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 7.5
+            },
+            {
+              "time": 2,
+              "state": 15
+            }
+          ],
+          "emitted": [
+            {
+              "time": 0,
+              "state": 0
+            },
+            {
+              "time": 1,
+              "state": 7.5
+            },
+            {
+              "time": 2,
+              "state": 15
+            }
+          ],
+          "intervals": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "failures": []
+        },
+        {
+          "name": "initial_cancellation",
+          "passed": true,
+          "updates": [],
+          "emitted": [],
+          "intervals": [],
+          "failures": []
+        },
+        {
+          "name": "single_initial_sample",
+          "passed": true,
+          "updates": [
+            {
+              "time": 10,
+              "state": 3
+            }
+          ],
+          "emitted": [
+            {
+              "time": 10,
+              "state": 3
+            }
+          ],
+          "intervals": [],
+          "failures": []
+        },
+        {
+          "name": "zero_samples",
+          "passed": true,
+          "updates": [],
+          "emitted": [],
+          "intervals": [],
+          "failures": []
+        }
+      ],
+      "wrapper": [
+        {
+          "name": "wrapper_inclusive_grid_100_104",
+          "passed": true,
+          "actual": {
+            "start": 100,
+            "step": 1,
+            "samples": 5
+          },
+          "expected": {
+            "start": 100,
+            "step": 1,
+            "samples": 5
+          }
+        },
+        {
+          "name": "wrapper_inclusive_grid_100_100",
+          "passed": true,
+          "actual": {
+            "start": 100,
+            "step": 1,
+            "samples": 1
+          },
+          "expected": {
+            "start": 100,
+            "step": 1,
+            "samples": 1
+          }
+        },
+        {
+          "name": "wrapper_inclusive_grid_100_104.5",
+          "passed": true,
+          "actual": {
+            "start": 100,
+            "step": 1,
+            "samples": 5
+          },
+          "expected": {
+            "start": 100,
+            "step": 1,
+            "samples": 5
+          }
+        }
+      ],
+      "summary": {
+        "total": 20,
+        "passed": 20,
+        "failed": 0
+      }
+    }
+  ]
+}
