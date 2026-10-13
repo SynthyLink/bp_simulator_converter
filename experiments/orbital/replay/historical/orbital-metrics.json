@@ -1,0 +1,2366 @@
+{
+  "publication": {
+    "articleTitle": "Backend-Frontend Converter: Component-Based Conversion of .NET Computational Models to TypeScript",
+    "journal": "SN Computer Science",
+    "authors": [
+      "Peter Ivankov",
+      "Max Shestov"
+    ],
+    "correspondingAuthor": "Max Shestov",
+    "affiliation": "Georgia Institute of Technology, Atlanta, GA, United States",
+    "email": "mshestov@gatech.edu"
+  },
+  "analysisDate": "2026-10-12",
+  "kind": "Independent recomputation from archived displayed numbers; no model rerun",
+  "originalSnapshotSaveDate": "2026-06-24",
+  "arithmetic": "JavaScript binary64; Euclidean norm via Math.hypot; arithmetic mean",
+  "scope": "Validates arithmetic and archive identity, not original execution provenance, physical accuracy, runtime correctness or a general conversion guarantee.",
+  "originalOrbitalBuild": "Not identified by archived records",
+  "formValuesCaveat": "Saved form values are observations, not independently verified run configuration.",
+  "tolerances": {
+    "positionKm": 1e-06,
+    "velocityKmPerSecond": 1e-09
+  },
+  "runs": [
+    {
+      "run": 1,
+      "file": "orbital-run-1.mhtml",
+      "sha256": "909fb98e3c4fcfd3cd78c46fcf73ad07cbb64f731d41566e525d4fd48cf966ee",
+      "hashMatchesSuppliedProvenance": true,
+      "displayedFormValues": {
+        "Begin": "2026-06-24T03:45:06.449",
+        "End": "2026-06-30T09:18:30.449",
+        "X": "-5448.34815324",
+        "Y": "-4463.93698421",
+        "Z": "0",
+        "Vx": "-0.985394777432",
+        "Vy": "1.21681893834",
+        "Vz": "7.45047785592"
+      },
+      "pairedEvents": 91,
+      "alignment": "Displayed Loop index; NOT identical timestamps",
+      "displayedClientOffsetSeconds": 1,
+      "serverInterEventSeconds": {
+        "minimum": 5882,
+        "maximum": 5883
+      },
+      "positionDifferenceKm": {
+        "maximum": 1.0200157694651329e-07,
+        "mean": 5.317173536107758e-08
+      },
+      "velocityDifferenceKmPerSecond": {
+        "maximum": 1.0948831765343193e-10,
+        "mean": 5.707026501951013e-11
+      },
+      "withinManuscriptTolerances": true,
+      "matchesManuscriptThreeSignificantFigures": true,
+      "lastEventDurationMilliseconds": {
+        "server": 166695,
+        "client": 51957
+      },
+      "differences": [
+        {
+          "loop": 1,
+          "positionDifferenceKm": 0,
+          "velocityDifferenceKmPerSecond": 0,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 2,
+          "positionDifferenceKm": 0,
+          "velocityDifferenceKmPerSecond": 0,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 3,
+          "positionDifferenceKm": 0,
+          "velocityDifferenceKmPerSecond": 4.440892098500626e-16,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 4,
+          "positionDifferenceKm": 9.159801266794515e-12,
+          "velocityDifferenceKmPerSecond": 1.009082189574917e-14,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 5,
+          "positionDifferenceKm": 7.624472336793876e-11,
+          "velocityDifferenceKmPerSecond": 5.3503715505811055e-14,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 6,
+          "positionDifferenceKm": 1.7780160319967248e-10,
+          "velocityDifferenceKmPerSecond": 1.915982804449046e-13,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 7,
+          "positionDifferenceKm": 1.896623179726665e-10,
+          "velocityDifferenceKmPerSecond": 2.503922885478911e-13,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 8,
+          "positionDifferenceKm": 3.013824560186505e-10,
+          "velocityDifferenceKmPerSecond": 2.1743317578728763e-13,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 9,
+          "positionDifferenceKm": 2.951199977218855e-10,
+          "velocityDifferenceKmPerSecond": 2.578064658486031e-13,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 10,
+          "positionDifferenceKm": 2.1980686946453894e-09,
+          "velocityDifferenceKmPerSecond": 2.2281332523434515e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 11,
+          "positionDifferenceKm": 5.2961659769586085e-09,
+          "velocityDifferenceKmPerSecond": 5.466374817921321e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 12,
+          "positionDifferenceKm": 8.515451802652519e-09,
+          "velocityDifferenceKmPerSecond": 8.883738180672512e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 13,
+          "positionDifferenceKm": 1.175515578413674e-08,
+          "velocityDifferenceKmPerSecond": 1.2394419135510832e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 14,
+          "positionDifferenceKm": 1.560586267920308e-08,
+          "velocityDifferenceKmPerSecond": 1.6490659302398028e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 15,
+          "positionDifferenceKm": 1.9464372617139028e-08,
+          "velocityDifferenceKmPerSecond": 2.0575244560080683e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 16,
+          "positionDifferenceKm": 2.3062440311954323e-08,
+          "velocityDifferenceKmPerSecond": 2.44318122029799e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 17,
+          "positionDifferenceKm": 2.6674890663171264e-08,
+          "velocityDifferenceKmPerSecond": 2.8362542382898955e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 18,
+          "positionDifferenceKm": 3.0039351218418633e-08,
+          "velocityDifferenceKmPerSecond": 3.201047108699162e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 19,
+          "positionDifferenceKm": 3.3806292753984134e-08,
+          "velocityDifferenceKmPerSecond": 3.6100863780355686e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 20,
+          "positionDifferenceKm": 3.6985085091280936e-08,
+          "velocityDifferenceKmPerSecond": 3.955010574005883e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 21,
+          "positionDifferenceKm": 4.0738175429881844e-08,
+          "velocityDifferenceKmPerSecond": 4.353769226263274e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 22,
+          "positionDifferenceKm": 4.3706020069562085e-08,
+          "velocityDifferenceKmPerSecond": 4.683159436845383e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 23,
+          "positionDifferenceKm": 4.755477222560538e-08,
+          "velocityDifferenceKmPerSecond": 5.100530652617252e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 24,
+          "positionDifferenceKm": 5.1313552075338043e-08,
+          "velocityDifferenceKmPerSecond": 5.504312128447867e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 25,
+          "positionDifferenceKm": 5.4499499486226605e-08,
+          "velocityDifferenceKmPerSecond": 5.845509474225746e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 26,
+          "positionDifferenceKm": 5.747106168477861e-08,
+          "velocityDifferenceKmPerSecond": 6.16483823546463e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 27,
+          "positionDifferenceKm": 5.972640414082113e-08,
+          "velocityDifferenceKmPerSecond": 6.411616167575648e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 28,
+          "positionDifferenceKm": 6.187079066614009e-08,
+          "velocityDifferenceKmPerSecond": 6.636876453318047e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 29,
+          "positionDifferenceKm": 6.416345655634596e-08,
+          "velocityDifferenceKmPerSecond": 6.882961246858202e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 30,
+          "positionDifferenceKm": 6.661915612759956e-08,
+          "velocityDifferenceKmPerSecond": 7.145423648921677e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 31,
+          "positionDifferenceKm": 6.898979628397963e-08,
+          "velocityDifferenceKmPerSecond": 7.397920947778268e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 32,
+          "positionDifferenceKm": 7.135126399153663e-08,
+          "velocityDifferenceKmPerSecond": 7.647902276318853e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 33,
+          "positionDifferenceKm": 7.355650699258317e-08,
+          "velocityDifferenceKmPerSecond": 7.881941105803363e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 34,
+          "positionDifferenceKm": 7.552651636671068e-08,
+          "velocityDifferenceKmPerSecond": 8.09634902575559e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 35,
+          "positionDifferenceKm": 7.84387481463668e-08,
+          "velocityDifferenceKmPerSecond": 8.407563687423474e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 36,
+          "positionDifferenceKm": 8.038388953053583e-08,
+          "velocityDifferenceKmPerSecond": 8.613067444463479e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 37,
+          "positionDifferenceKm": 8.122278784478637e-08,
+          "velocityDifferenceKmPerSecond": 8.711929347894568e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 38,
+          "positionDifferenceKm": 8.333358083758257e-08,
+          "velocityDifferenceKmPerSecond": 8.932818194487927e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 39,
+          "positionDifferenceKm": 8.55470314660229e-08,
+          "velocityDifferenceKmPerSecond": 9.173945445095313e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 40,
+          "positionDifferenceKm": 8.781607012906297e-08,
+          "velocityDifferenceKmPerSecond": 9.419904101845604e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 41,
+          "positionDifferenceKm": 8.939736562443284e-08,
+          "velocityDifferenceKmPerSecond": 9.59472820464321e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 42,
+          "positionDifferenceKm": 9.01696346391809e-08,
+          "velocityDifferenceKmPerSecond": 9.684937769152144e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 43,
+          "positionDifferenceKm": 9.076589895278016e-08,
+          "velocityDifferenceKmPerSecond": 9.752305243222027e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 44,
+          "positionDifferenceKm": 9.197271199676328e-08,
+          "velocityDifferenceKmPerSecond": 9.883801262986554e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 45,
+          "positionDifferenceKm": 9.381420454635227e-08,
+          "velocityDifferenceKmPerSecond": 1.0081337831673928e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 46,
+          "positionDifferenceKm": 9.595018795975053e-08,
+          "velocityDifferenceKmPerSecond": 1.0311394086343336e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 47,
+          "positionDifferenceKm": 9.805293223477546e-08,
+          "velocityDifferenceKmPerSecond": 1.0532829236049601e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 48,
+          "positionDifferenceKm": 9.991391774607937e-08,
+          "velocityDifferenceKmPerSecond": 1.0731581349601506e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 49,
+          "positionDifferenceKm": 1.0120697981858318e-07,
+          "velocityDifferenceKmPerSecond": 1.0870366090797285e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 50,
+          "positionDifferenceKm": 1.0177382195480397e-07,
+          "velocityDifferenceKmPerSecond": 1.0929956404523566e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 51,
+          "positionDifferenceKm": 1.0171736538659652e-07,
+          "velocityDifferenceKmPerSecond": 1.0924653277065641e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 52,
+          "positionDifferenceKm": 1.0200157694651329e-07,
+          "velocityDifferenceKmPerSecond": 1.0948831765343193e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 53,
+          "positionDifferenceKm": 1.0142806522319655e-07,
+          "velocityDifferenceKmPerSecond": 1.0888074059637678e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 54,
+          "positionDifferenceKm": 1.0098845957123598e-07,
+          "velocityDifferenceKmPerSecond": 1.0841355275191718e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 55,
+          "positionDifferenceKm": 1.0028496962067016e-07,
+          "velocityDifferenceKmPerSecond": 1.0756605112287057e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 56,
+          "positionDifferenceKm": 9.894928031149098e-08,
+          "velocityDifferenceKmPerSecond": 1.0613245852978002e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 57,
+          "positionDifferenceKm": 9.752435575011845e-08,
+          "velocityDifferenceKmPerSecond": 1.0469560852120773e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 58,
+          "positionDifferenceKm": 9.650701915030348e-08,
+          "velocityDifferenceKmPerSecond": 1.036015785298627e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 59,
+          "positionDifferenceKm": 9.430116947488002e-08,
+          "velocityDifferenceKmPerSecond": 1.0125495836839881e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 60,
+          "positionDifferenceKm": 9.207983015191093e-08,
+          "velocityDifferenceKmPerSecond": 9.882200661248726e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 61,
+          "positionDifferenceKm": 8.964149255694529e-08,
+          "velocityDifferenceKmPerSecond": 9.618138280403295e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 62,
+          "positionDifferenceKm": 8.658526509679288e-08,
+          "velocityDifferenceKmPerSecond": 9.296146180542972e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 63,
+          "positionDifferenceKm": 8.349166986631929e-08,
+          "velocityDifferenceKmPerSecond": 8.964108093810878e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 64,
+          "positionDifferenceKm": 7.978211035997501e-08,
+          "velocityDifferenceKmPerSecond": 8.570382699050715e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 65,
+          "positionDifferenceKm": 7.60724211339713e-08,
+          "velocityDifferenceKmPerSecond": 8.16530290999805e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 66,
+          "positionDifferenceKm": 7.222243294930105e-08,
+          "velocityDifferenceKmPerSecond": 7.757917487707658e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 67,
+          "positionDifferenceKm": 6.85675204833582e-08,
+          "velocityDifferenceKmPerSecond": 7.364649002546493e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 68,
+          "positionDifferenceKm": 6.417110306710787e-08,
+          "velocityDifferenceKmPerSecond": 6.897393502067716e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 69,
+          "positionDifferenceKm": 5.991855680500084e-08,
+          "velocityDifferenceKmPerSecond": 6.436071230769866e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 70,
+          "positionDifferenceKm": 5.450561702010737e-08,
+          "velocityDifferenceKmPerSecond": 5.852331520741656e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 71,
+          "positionDifferenceKm": 4.876074267855719e-08,
+          "velocityDifferenceKmPerSecond": 5.226582948024212e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 72,
+          "positionDifferenceKm": 4.3383682354528305e-08,
+          "velocityDifferenceKmPerSecond": 4.642588703533878e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 73,
+          "positionDifferenceKm": 3.7865343446544714e-08,
+          "velocityDifferenceKmPerSecond": 4.05368360501958e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 74,
+          "positionDifferenceKm": 3.247733116366476e-08,
+          "velocityDifferenceKmPerSecond": 3.4725244329794726e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 75,
+          "positionDifferenceKm": 2.752328490190709e-08,
+          "velocityDifferenceKmPerSecond": 2.943499329402884e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 76,
+          "positionDifferenceKm": 2.2956700727256902e-08,
+          "velocityDifferenceKmPerSecond": 2.453741731375813e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 77,
+          "positionDifferenceKm": 1.7564993622413458e-08,
+          "velocityDifferenceKmPerSecond": 1.8722144934236762e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 78,
+          "positionDifferenceKm": 1.1816977751395064e-08,
+          "velocityDifferenceKmPerSecond": 1.257975285315541e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 79,
+          "positionDifferenceKm": 5.997672945418813e-09,
+          "velocityDifferenceKmPerSecond": 6.352586895373138e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 80,
+          "positionDifferenceKm": 7.739789731358822e-10,
+          "velocityDifferenceKmPerSecond": 7.384612791379814e-13,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 81,
+          "positionDifferenceKm": 4.613447471453042e-09,
+          "velocityDifferenceKmPerSecond": 5.193079723578397e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 82,
+          "positionDifferenceKm": 1.1027408041498016e-08,
+          "velocityDifferenceKmPerSecond": 1.211512865508931e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 83,
+          "positionDifferenceKm": 1.7599357872119726e-08,
+          "velocityDifferenceKmPerSecond": 1.92072857482196e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 84,
+          "positionDifferenceKm": 2.3356512405080155e-08,
+          "velocityDifferenceKmPerSecond": 2.545261544580826e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 85,
+          "positionDifferenceKm": 3.000108475597852e-08,
+          "velocityDifferenceKmPerSecond": 3.2525608926462605e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 86,
+          "positionDifferenceKm": 3.516597865442244e-08,
+          "velocityDifferenceKmPerSecond": 3.808963807328511e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 87,
+          "positionDifferenceKm": 3.962472353685057e-08,
+          "velocityDifferenceKmPerSecond": 4.2895188588658866e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 88,
+          "positionDifferenceKm": 4.443096445773045e-08,
+          "velocityDifferenceKmPerSecond": 4.80906068542084e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 89,
+          "positionDifferenceKm": 4.95303350994548e-08,
+          "velocityDifferenceKmPerSecond": 5.3584770058202856e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 90,
+          "positionDifferenceKm": 5.397751996272015e-08,
+          "velocityDifferenceKmPerSecond": 5.841153906442311e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 91,
+          "positionDifferenceKm": 5.8140352092071955e-08,
+          "velocityDifferenceKmPerSecond": 6.285189709541665e-11,
+          "displayedClientOffsetSeconds": 1
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "file": "orbital-run-2.mhtml",
+      "sha256": "9d97d4a89928f48ddcece549b0b8e13d4901e522d95404d3fd063269c7bcf025",
+      "hashMatchesSuppliedProvenance": true,
+      "displayedFormValues": {
+        "Begin": "2026-06-24T03:45:06.449",
+        "End": "2026-06-30T09:18:30.449",
+        "X": "-5458.34815324",
+        "Y": "-4463.93698421",
+        "Z": "0",
+        "Vx": "-0.985394777432",
+        "Vy": "1.21681893834",
+        "Vz": "7.45047785592"
+      },
+      "pairedEvents": 91,
+      "alignment": "Displayed Loop index; NOT identical timestamps",
+      "displayedClientOffsetSeconds": 1,
+      "serverInterEventSeconds": {
+        "minimum": 5901,
+        "maximum": 5902
+      },
+      "positionDifferenceKm": {
+        "maximum": 3.1251949542734476e-07,
+        "mean": 1.0357931082714636e-07
+      },
+      "velocityDifferenceKmPerSecond": {
+        "maximum": 3.3653982860614305e-10,
+        "mean": 1.1162570146304781e-10
+      },
+      "withinManuscriptTolerances": true,
+      "matchesManuscriptThreeSignificantFigures": true,
+      "lastEventDurationMilliseconds": {
+        "server": 168715,
+        "client": 51923
+      },
+      "differences": [
+        {
+          "loop": 1,
+          "positionDifferenceKm": 0,
+          "velocityDifferenceKmPerSecond": 0,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 2,
+          "positionDifferenceKm": 0,
+          "velocityDifferenceKmPerSecond": 0,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 3,
+          "positionDifferenceKm": 0,
+          "velocityDifferenceKmPerSecond": 0,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 4,
+          "positionDifferenceKm": 1.928539302333344e-11,
+          "velocityDifferenceKmPerSecond": 5.837915406707819e-15,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 5,
+          "positionDifferenceKm": 1.2880101923901377e-10,
+          "velocityDifferenceKmPerSecond": 1.0494751275075804e-13,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 6,
+          "positionDifferenceKm": 7.228884137472693e-10,
+          "velocityDifferenceKmPerSecond": 7.09296849274863e-13,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 7,
+          "positionDifferenceKm": 1.0275471516183887e-09,
+          "velocityDifferenceKmPerSecond": 1.127546286169709e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 8,
+          "positionDifferenceKm": 1.2732153895646743e-09,
+          "velocityDifferenceKmPerSecond": 1.4283356244438925e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 9,
+          "positionDifferenceKm": 1.0037055529124286e-09,
+          "velocityDifferenceKmPerSecond": 1.129817108976431e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 10,
+          "positionDifferenceKm": 9.143794916194968e-10,
+          "velocityDifferenceKmPerSecond": 1.0690447903228429e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 11,
+          "positionDifferenceKm": 1.6415870775835268e-09,
+          "velocityDifferenceKmPerSecond": 1.8721400912284425e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 12,
+          "positionDifferenceKm": 2.8935127158362793e-09,
+          "velocityDifferenceKmPerSecond": 3.182503505942372e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 13,
+          "positionDifferenceKm": 4.593292130479927e-09,
+          "velocityDifferenceKmPerSecond": 4.973548630116261e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 14,
+          "positionDifferenceKm": 5.359722384879261e-09,
+          "velocityDifferenceKmPerSecond": 5.847917064154025e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 15,
+          "positionDifferenceKm": 6.718250230509299e-09,
+          "velocityDifferenceKmPerSecond": 7.238264875604069e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 16,
+          "positionDifferenceKm": 6.992127388503362e-09,
+          "velocityDifferenceKmPerSecond": 7.592582434810419e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 17,
+          "positionDifferenceKm": 7.008860764434804e-09,
+          "velocityDifferenceKmPerSecond": 7.672157421645978e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 18,
+          "positionDifferenceKm": 6.832647564180765e-09,
+          "velocityDifferenceKmPerSecond": 7.458482893515942e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 19,
+          "positionDifferenceKm": 7.3112218003771775e-09,
+          "velocityDifferenceKmPerSecond": 7.944815345257801e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 20,
+          "positionDifferenceKm": 7.900565802553971e-09,
+          "velocityDifferenceKmPerSecond": 8.594115751071146e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 21,
+          "positionDifferenceKm": 9.489386269434097e-09,
+          "velocityDifferenceKmPerSecond": 1.024659328884894e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 22,
+          "positionDifferenceKm": 1.0288546905074602e-08,
+          "velocityDifferenceKmPerSecond": 1.1178941688366994e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 23,
+          "positionDifferenceKm": 1.0961622351261578e-08,
+          "velocityDifferenceKmPerSecond": 1.1967820952111261e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 24,
+          "positionDifferenceKm": 1.1937624397829526e-08,
+          "velocityDifferenceKmPerSecond": 1.3113116651019681e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 25,
+          "positionDifferenceKm": 1.420736287985572e-08,
+          "velocityDifferenceKmPerSecond": 1.5549588020912556e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 26,
+          "positionDifferenceKm": 1.687184510853394e-08,
+          "velocityDifferenceKmPerSecond": 1.8388658476438266e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 27,
+          "positionDifferenceKm": 1.991883018596622e-08,
+          "velocityDifferenceKmPerSecond": 2.1694324772583794e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 28,
+          "positionDifferenceKm": 2.314552196226444e-08,
+          "velocityDifferenceKmPerSecond": 2.516396037145535e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 29,
+          "positionDifferenceKm": 2.6360669487091935e-08,
+          "velocityDifferenceKmPerSecond": 2.8624398690795913e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 30,
+          "positionDifferenceKm": 2.954296245519282e-08,
+          "velocityDifferenceKmPerSecond": 3.2038680420204294e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 31,
+          "positionDifferenceKm": 3.237392667416472e-08,
+          "velocityDifferenceKmPerSecond": 3.505670744692172e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 32,
+          "positionDifferenceKm": 3.5904444967759214e-08,
+          "velocityDifferenceKmPerSecond": 3.8812608217869246e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 33,
+          "positionDifferenceKm": 3.903957926500308e-08,
+          "velocityDifferenceKmPerSecond": 4.2191757031704636e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 34,
+          "positionDifferenceKm": 4.154000428292779e-08,
+          "velocityDifferenceKmPerSecond": 4.4922193970145486e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 35,
+          "positionDifferenceKm": 4.385083518902385e-08,
+          "velocityDifferenceKmPerSecond": 4.73769793892231e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 36,
+          "positionDifferenceKm": 4.54619428417592e-08,
+          "velocityDifferenceKmPerSecond": 4.9109020583292124e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 37,
+          "positionDifferenceKm": 4.685508212361795e-08,
+          "velocityDifferenceKmPerSecond": 5.062221712251255e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 38,
+          "positionDifferenceKm": 4.8247249247825414e-08,
+          "velocityDifferenceKmPerSecond": 5.218647013573319e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 39,
+          "positionDifferenceKm": 5.0187744163236726e-08,
+          "velocityDifferenceKmPerSecond": 5.423076462624816e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 40,
+          "positionDifferenceKm": 5.260636252412034e-08,
+          "velocityDifferenceKmPerSecond": 5.681367899313251e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 41,
+          "positionDifferenceKm": 5.491929751623857e-08,
+          "velocityDifferenceKmPerSecond": 5.932290622844303e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 42,
+          "positionDifferenceKm": 5.7754683128598367e-08,
+          "velocityDifferenceKmPerSecond": 6.238002282822529e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 43,
+          "positionDifferenceKm": 6.126632079688691e-08,
+          "velocityDifferenceKmPerSecond": 6.615200060571945e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 44,
+          "positionDifferenceKm": 6.462964169626293e-08,
+          "velocityDifferenceKmPerSecond": 6.978855885457872e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 45,
+          "positionDifferenceKm": 6.921603086698742e-08,
+          "velocityDifferenceKmPerSecond": 7.469294077010871e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 46,
+          "positionDifferenceKm": 7.421876553554024e-08,
+          "velocityDifferenceKmPerSecond": 7.999496090286444e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 47,
+          "positionDifferenceKm": 7.899588296584896e-08,
+          "velocityDifferenceKmPerSecond": 8.512952268531451e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 48,
+          "positionDifferenceKm": 8.38812051786523e-08,
+          "velocityDifferenceKmPerSecond": 9.039955637882336e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 49,
+          "positionDifferenceKm": 8.85667525822628e-08,
+          "velocityDifferenceKmPerSecond": 9.544492436568207e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 50,
+          "positionDifferenceKm": 9.420793699430552e-08,
+          "velocityDifferenceKmPerSecond": 1.0143438732722235e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 51,
+          "positionDifferenceKm": 1.0044612806761417e-07,
+          "velocityDifferenceKmPerSecond": 1.0817687964240065e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 52,
+          "positionDifferenceKm": 1.0677221299363069e-07,
+          "velocityDifferenceKmPerSecond": 1.1496681317871498e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 53,
+          "positionDifferenceKm": 1.1199305616208645e-07,
+          "velocityDifferenceKmPerSecond": 1.206114390595908e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 54,
+          "positionDifferenceKm": 1.1699715391435058e-07,
+          "velocityDifferenceKmPerSecond": 1.2598553119523647e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 55,
+          "positionDifferenceKm": 1.221365372330027e-07,
+          "velocityDifferenceKmPerSecond": 1.3152297681929677e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 56,
+          "positionDifferenceKm": 1.2803664833551691e-07,
+          "velocityDifferenceKmPerSecond": 1.3783977231428933e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 57,
+          "positionDifferenceKm": 1.3323027468396367e-07,
+          "velocityDifferenceKmPerSecond": 1.4340031694623627e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 58,
+          "positionDifferenceKm": 1.3821701176702832e-07,
+          "velocityDifferenceKmPerSecond": 1.488234207948156e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 59,
+          "positionDifferenceKm": 1.4267224599289955e-07,
+          "velocityDifferenceKmPerSecond": 1.5366795120134402e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 60,
+          "positionDifferenceKm": 1.4640777004950241e-07,
+          "velocityDifferenceKmPerSecond": 1.5776314818712344e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 61,
+          "positionDifferenceKm": 1.4990473634920382e-07,
+          "velocityDifferenceKmPerSecond": 1.6161394690960594e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 62,
+          "positionDifferenceKm": 1.5331592017884862e-07,
+          "velocityDifferenceKmPerSecond": 1.6529187431849694e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 63,
+          "positionDifferenceKm": 1.5623410880916315e-07,
+          "velocityDifferenceKmPerSecond": 1.6841086775042973e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 64,
+          "positionDifferenceKm": 1.591333166753903e-07,
+          "velocityDifferenceKmPerSecond": 1.714664527119798e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 65,
+          "positionDifferenceKm": 1.6205944232379835e-07,
+          "velocityDifferenceKmPerSecond": 1.7463360238490132e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 66,
+          "positionDifferenceKm": 1.656186978866181e-07,
+          "velocityDifferenceKmPerSecond": 1.7841343665143007e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 67,
+          "positionDifferenceKm": 1.6906327789117295e-07,
+          "velocityDifferenceKmPerSecond": 1.821609926717476e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 68,
+          "positionDifferenceKm": 1.7385488184213287e-07,
+          "velocityDifferenceKmPerSecond": 1.8731208664741594e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 69,
+          "positionDifferenceKm": 1.7883331848547358e-07,
+          "velocityDifferenceKmPerSecond": 1.9262885778991172e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 70,
+          "positionDifferenceKm": 1.8345964388093595e-07,
+          "velocityDifferenceKmPerSecond": 1.9764262399922691e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 71,
+          "positionDifferenceKm": 1.8773893178360262e-07,
+          "velocityDifferenceKmPerSecond": 2.0228982295955843e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 72,
+          "positionDifferenceKm": 1.926664885812289e-07,
+          "velocityDifferenceKmPerSecond": 2.0762296755154427e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 73,
+          "positionDifferenceKm": 1.982258836374647e-07,
+          "velocityDifferenceKmPerSecond": 2.1355837282715112e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 74,
+          "positionDifferenceKm": 2.0441287089296532e-07,
+          "velocityDifferenceKmPerSecond": 2.201334535013538e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 75,
+          "positionDifferenceKm": 2.0913122081975968e-07,
+          "velocityDifferenceKmPerSecond": 2.253030560835242e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 76,
+          "positionDifferenceKm": 2.1377814671492783e-07,
+          "velocityDifferenceKmPerSecond": 2.3030569483148238e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 77,
+          "positionDifferenceKm": 2.1841971805345644e-07,
+          "velocityDifferenceKmPerSecond": 2.353266001912023e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 78,
+          "positionDifferenceKm": 2.2343889949803155e-07,
+          "velocityDifferenceKmPerSecond": 2.4071751323693387e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 79,
+          "positionDifferenceKm": 2.2892273780600991e-07,
+          "velocityDifferenceKmPerSecond": 2.4660016914508375e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 80,
+          "positionDifferenceKm": 2.3363660376365736e-07,
+          "velocityDifferenceKmPerSecond": 2.5173205721531585e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 81,
+          "positionDifferenceKm": 2.388751468612011e-07,
+          "velocityDifferenceKmPerSecond": 2.573763678113218e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 82,
+          "positionDifferenceKm": 2.4465987663160695e-07,
+          "velocityDifferenceKmPerSecond": 2.6358220619659765e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 83,
+          "positionDifferenceKm": 2.516399661141438e-07,
+          "velocityDifferenceKmPerSecond": 2.7101478805593455e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 84,
+          "positionDifferenceKm": 2.5840105246034974e-07,
+          "velocityDifferenceKmPerSecond": 2.7825284743927963e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 85,
+          "positionDifferenceKm": 2.6566708031298044e-07,
+          "velocityDifferenceKmPerSecond": 2.860143722400583e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 86,
+          "positionDifferenceKm": 2.7310235118983775e-07,
+          "velocityDifferenceKmPerSecond": 2.9400118074127357e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 87,
+          "positionDifferenceKm": 2.810986521534004e-07,
+          "velocityDifferenceKmPerSecond": 3.026018213060328e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 88,
+          "positionDifferenceKm": 2.896366730686993e-07,
+          "velocityDifferenceKmPerSecond": 3.1181190995522607e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 89,
+          "positionDifferenceKm": 2.9758545874081337e-07,
+          "velocityDifferenceKmPerSecond": 3.2040037076350667e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 90,
+          "positionDifferenceKm": 3.0498397642191536e-07,
+          "velocityDifferenceKmPerSecond": 3.2844082540744085e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 91,
+          "positionDifferenceKm": 3.1251949542734476e-07,
+          "velocityDifferenceKmPerSecond": 3.3653982860614305e-10,
+          "displayedClientOffsetSeconds": 1
+        }
+      ]
+    },
+    {
+      "run": 3,
+      "file": "orbital-run-3.mhtml",
+      "sha256": "eb57d9fbc36054c6836a88749f5edb021ca707b41b3baa6d0d68220c361f5e76",
+      "hashMatchesSuppliedProvenance": true,
+      "displayedFormValues": {
+        "Begin": "2026-06-24T03:45:06.449",
+        "End": "2026-06-30T09:18:30.449",
+        "X": "-5458.34815324",
+        "Y": "-4453.93698421",
+        "Z": "0",
+        "Vx": "-0.985394777432",
+        "Vy": "1.21681893834",
+        "Vz": "7.45047785592"
+      },
+      "pairedEvents": 91,
+      "alignment": "Displayed Loop index; NOT identical timestamps",
+      "displayedClientOffsetSeconds": 1,
+      "serverInterEventSeconds": {
+        "minimum": 5886,
+        "maximum": 5887
+      },
+      "positionDifferenceKm": {
+        "maximum": 3.9684916085821593e-07,
+        "mean": 1.4792575205109909e-07
+      },
+      "velocityDifferenceKmPerSecond": {
+        "maximum": 4.278828153835952e-10,
+        "mean": 1.5940938935067862e-10
+      },
+      "withinManuscriptTolerances": true,
+      "matchesManuscriptThreeSignificantFigures": true,
+      "lastEventDurationMilliseconds": {
+        "server": 167332,
+        "client": 51500
+      },
+      "differences": [
+        {
+          "loop": 1,
+          "positionDifferenceKm": 0,
+          "velocityDifferenceKmPerSecond": 9.155133597044475e-16,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 2,
+          "positionDifferenceKm": 1.080501797890589e-10,
+          "velocityDifferenceKmPerSecond": 9.678833656223276e-14,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 3,
+          "positionDifferenceKm": 7.548974771712883e-11,
+          "velocityDifferenceKmPerSecond": 5.505150327094659e-14,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 4,
+          "positionDifferenceKm": 5.542405850668314e-11,
+          "velocityDifferenceKmPerSecond": 5.07235859174997e-14,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 5,
+          "positionDifferenceKm": 1.641338528440397e-10,
+          "velocityDifferenceKmPerSecond": 1.9515336813339893e-13,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 6,
+          "positionDifferenceKm": 8.070360052483863e-11,
+          "velocityDifferenceKmPerSecond": 5.814220066272792e-14,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 7,
+          "positionDifferenceKm": 5.427497978917682e-10,
+          "velocityDifferenceKmPerSecond": 5.465093334670238e-13,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 8,
+          "positionDifferenceKm": 1.8916812916483646e-09,
+          "velocityDifferenceKmPerSecond": 1.957579251156293e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 9,
+          "positionDifferenceKm": 2.8934571764711506e-09,
+          "velocityDifferenceKmPerSecond": 3.0196244079464767e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 10,
+          "positionDifferenceKm": 3.768796747612892e-09,
+          "velocityDifferenceKmPerSecond": 3.915197345398224e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 11,
+          "positionDifferenceKm": 4.660894249560548e-09,
+          "velocityDifferenceKmPerSecond": 4.898429942509308e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 12,
+          "positionDifferenceKm": 5.095211871839157e-09,
+          "velocityDifferenceKmPerSecond": 5.393680123309365e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 13,
+          "positionDifferenceKm": 5.8603378910762e-09,
+          "velocityDifferenceKmPerSecond": 6.190329285851976e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 14,
+          "positionDifferenceKm": 7.026286936887392e-09,
+          "velocityDifferenceKmPerSecond": 7.417752566052333e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 15,
+          "positionDifferenceKm": 8.561983515899648e-09,
+          "velocityDifferenceKmPerSecond": 9.09838535138177e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 16,
+          "positionDifferenceKm": 1.152224537314378e-08,
+          "velocityDifferenceKmPerSecond": 1.2293825804855872e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 17,
+          "positionDifferenceKm": 1.3964955463426094e-08,
+          "velocityDifferenceKmPerSecond": 1.4860908650806262e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 18,
+          "positionDifferenceKm": 1.566014932829952e-08,
+          "velocityDifferenceKmPerSecond": 1.66788329668754e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 19,
+          "positionDifferenceKm": 1.7517004473009332e-08,
+          "velocityDifferenceKmPerSecond": 1.864373714245017e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 20,
+          "positionDifferenceKm": 1.9234693529807887e-08,
+          "velocityDifferenceKmPerSecond": 2.0528781792616014e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 21,
+          "positionDifferenceKm": 2.1582521154457773e-08,
+          "velocityDifferenceKmPerSecond": 2.304575713652359e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 22,
+          "positionDifferenceKm": 2.3865118287886087e-08,
+          "velocityDifferenceKmPerSecond": 2.554075504148219e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 23,
+          "positionDifferenceKm": 2.6545113926198715e-08,
+          "velocityDifferenceKmPerSecond": 2.8390301266969387e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 24,
+          "positionDifferenceKm": 2.883020248676456e-08,
+          "velocityDifferenceKmPerSecond": 3.0877926247234746e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 25,
+          "positionDifferenceKm": 3.0864494144123506e-08,
+          "velocityDifferenceKmPerSecond": 3.3129009033545543e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 26,
+          "positionDifferenceKm": 3.290497595603751e-08,
+          "velocityDifferenceKmPerSecond": 3.532163726696937e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 27,
+          "positionDifferenceKm": 3.586811427166245e-08,
+          "velocityDifferenceKmPerSecond": 3.8443576944826234e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 28,
+          "positionDifferenceKm": 3.8276002761495986e-08,
+          "velocityDifferenceKmPerSecond": 4.1088847162599646e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 29,
+          "positionDifferenceKm": 4.1447441992284273e-08,
+          "velocityDifferenceKmPerSecond": 4.447212498866137e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 30,
+          "positionDifferenceKm": 4.530188154676663e-08,
+          "velocityDifferenceKmPerSecond": 4.860037976758357e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 31,
+          "positionDifferenceKm": 4.897698549012254e-08,
+          "velocityDifferenceKmPerSecond": 5.264985789688921e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 32,
+          "positionDifferenceKm": 5.389516493289301e-08,
+          "velocityDifferenceKmPerSecond": 5.797106054544259e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 33,
+          "positionDifferenceKm": 5.899043516663703e-08,
+          "velocityDifferenceKmPerSecond": 6.350168571278838e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 34,
+          "positionDifferenceKm": 6.472641536700633e-08,
+          "velocityDifferenceKmPerSecond": 6.968330905164268e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 35,
+          "positionDifferenceKm": 6.974866890660059e-08,
+          "velocityDifferenceKmPerSecond": 7.511001889708554e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 36,
+          "positionDifferenceKm": 7.418836167959711e-08,
+          "velocityDifferenceKmPerSecond": 7.999407817760583e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 37,
+          "positionDifferenceKm": 7.99297898100847e-08,
+          "velocityDifferenceKmPerSecond": 8.620159652959528e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 38,
+          "positionDifferenceKm": 8.621257749165542e-08,
+          "velocityDifferenceKmPerSecond": 9.30703903850398e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 39,
+          "positionDifferenceKm": 9.383281847730347e-08,
+          "velocityDifferenceKmPerSecond": 1.0126757065767385e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 40,
+          "positionDifferenceKm": 1.0174139275310218e-07,
+          "velocityDifferenceKmPerSecond": 1.0982192779784361e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 41,
+          "positionDifferenceKm": 1.1009877532795212e-07,
+          "velocityDifferenceKmPerSecond": 1.18749539309425e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 42,
+          "positionDifferenceKm": 1.1755007340906997e-07,
+          "velocityDifferenceKmPerSecond": 1.2680099648662368e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 43,
+          "positionDifferenceKm": 1.2544145315969916e-07,
+          "velocityDifferenceKmPerSecond": 1.3532789643770124e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 44,
+          "positionDifferenceKm": 1.3229752687475674e-07,
+          "velocityDifferenceKmPerSecond": 1.427481478632893e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 45,
+          "positionDifferenceKm": 1.388644193974108e-07,
+          "velocityDifferenceKmPerSecond": 1.4989733352880563e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 46,
+          "positionDifferenceKm": 1.4614118965263667e-07,
+          "velocityDifferenceKmPerSecond": 1.576649156939025e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 47,
+          "positionDifferenceKm": 1.5258344991446505e-07,
+          "velocityDifferenceKmPerSecond": 1.6460340687151498e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 48,
+          "positionDifferenceKm": 1.5845381104789593e-07,
+          "velocityDifferenceKmPerSecond": 1.708681376556173e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 49,
+          "positionDifferenceKm": 1.6369426507479422e-07,
+          "velocityDifferenceKmPerSecond": 1.7643463327649997e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 50,
+          "positionDifferenceKm": 1.6777176549135912e-07,
+          "velocityDifferenceKmPerSecond": 1.8086324271975186e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 51,
+          "positionDifferenceKm": 1.7312017980955528e-07,
+          "velocityDifferenceKmPerSecond": 1.8659075143847598e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 52,
+          "positionDifferenceKm": 1.7870001571414947e-07,
+          "velocityDifferenceKmPerSecond": 1.9254124486231587e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 53,
+          "positionDifferenceKm": 1.8393805260890201e-07,
+          "velocityDifferenceKmPerSecond": 1.9819162045126367e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 54,
+          "positionDifferenceKm": 1.889358591753034e-07,
+          "velocityDifferenceKmPerSecond": 2.0359786391281202e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 55,
+          "positionDifferenceKm": 1.928677061207747e-07,
+          "velocityDifferenceKmPerSecond": 2.0781641961942295e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 56,
+          "positionDifferenceKm": 1.9624949229541106e-07,
+          "velocityDifferenceKmPerSecond": 2.114893224080547e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 57,
+          "positionDifferenceKm": 2.00307016889684e-07,
+          "velocityDifferenceKmPerSecond": 2.1585831455617896e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 58,
+          "positionDifferenceKm": 2.0376538947717017e-07,
+          "velocityDifferenceKmPerSecond": 2.1961057948801532e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 59,
+          "positionDifferenceKm": 2.0689656596963664e-07,
+          "velocityDifferenceKmPerSecond": 2.2301907212465723e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 60,
+          "positionDifferenceKm": 2.0996469199618894e-07,
+          "velocityDifferenceKmPerSecond": 2.2624709894213565e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 61,
+          "positionDifferenceKm": 2.1284865575460974e-07,
+          "velocityDifferenceKmPerSecond": 2.2934958356964433e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 62,
+          "positionDifferenceKm": 2.154439685660548e-07,
+          "velocityDifferenceKmPerSecond": 2.3219769064784365e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 63,
+          "positionDifferenceKm": 2.1933811392481547e-07,
+          "velocityDifferenceKmPerSecond": 2.363070324680063e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 64,
+          "positionDifferenceKm": 2.2319366522820823e-07,
+          "velocityDifferenceKmPerSecond": 2.405258483196115e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 65,
+          "positionDifferenceKm": 2.2753317192041288e-07,
+          "velocityDifferenceKmPerSecond": 2.452196602510738e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 66,
+          "positionDifferenceKm": 2.314870164782635e-07,
+          "velocityDifferenceKmPerSecond": 2.4948062641399334e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 67,
+          "positionDifferenceKm": 2.3524506070517554e-07,
+          "velocityDifferenceKmPerSecond": 2.536391214759849e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 68,
+          "positionDifferenceKm": 2.396058555616912e-07,
+          "velocityDifferenceKmPerSecond": 2.5835709301360885e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 69,
+          "positionDifferenceKm": 2.4497101206029776e-07,
+          "velocityDifferenceKmPerSecond": 2.640524598081392e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 70,
+          "positionDifferenceKm": 2.494575171842288e-07,
+          "velocityDifferenceKmPerSecond": 2.6890969757374403e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 71,
+          "positionDifferenceKm": 2.532488666693615e-07,
+          "velocityDifferenceKmPerSecond": 2.729921301910345e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 72,
+          "positionDifferenceKm": 2.570383339872678e-07,
+          "velocityDifferenceKmPerSecond": 2.770680478282119e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 73,
+          "positionDifferenceKm": 2.6132615003748627e-07,
+          "velocityDifferenceKmPerSecond": 2.816738784978625e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 74,
+          "positionDifferenceKm": 2.6639663464862413e-07,
+          "velocityDifferenceKmPerSecond": 2.8712156308350336e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 75,
+          "positionDifferenceKm": 2.7157669675677887e-07,
+          "velocityDifferenceKmPerSecond": 2.927073021133504e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 76,
+          "positionDifferenceKm": 2.7792885594141124e-07,
+          "velocityDifferenceKmPerSecond": 2.995569891689405e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 77,
+          "positionDifferenceKm": 2.846326626712021e-07,
+          "velocityDifferenceKmPerSecond": 3.0683374885438817e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 78,
+          "positionDifferenceKm": 2.9208177056438247e-07,
+          "velocityDifferenceKmPerSecond": 3.1483634046272856e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 79,
+          "positionDifferenceKm": 2.998293069317334e-07,
+          "velocityDifferenceKmPerSecond": 3.2315022011722934e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 80,
+          "positionDifferenceKm": 3.067806708203306e-07,
+          "velocityDifferenceKmPerSecond": 3.306933519064262e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 81,
+          "positionDifferenceKm": 3.137596659779409e-07,
+          "velocityDifferenceKmPerSecond": 3.381946688116248e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 82,
+          "positionDifferenceKm": 3.2103164745068813e-07,
+          "velocityDifferenceKmPerSecond": 3.459957084394261e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 83,
+          "positionDifferenceKm": 3.2782200927830397e-07,
+          "velocityDifferenceKmPerSecond": 3.53315579478529e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 84,
+          "positionDifferenceKm": 3.3443733251123254e-07,
+          "velocityDifferenceKmPerSecond": 3.6042797324302236e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 85,
+          "positionDifferenceKm": 3.4119592367322056e-07,
+          "velocityDifferenceKmPerSecond": 3.677744539908346e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 86,
+          "positionDifferenceKm": 3.4887696021788993e-07,
+          "velocityDifferenceKmPerSecond": 3.760947662146057e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 87,
+          "positionDifferenceKm": 3.569455771942349e-07,
+          "velocityDifferenceKmPerSecond": 3.8476078968453893e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 88,
+          "positionDifferenceKm": 3.6575520773901903e-07,
+          "velocityDifferenceKmPerSecond": 3.942602985327128e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 89,
+          "positionDifferenceKm": 3.7526117831906e-07,
+          "velocityDifferenceKmPerSecond": 4.0451505602871403e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 90,
+          "positionDifferenceKm": 3.8529036192242694e-07,
+          "velocityDifferenceKmPerSecond": 4.1535723871177705e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 91,
+          "positionDifferenceKm": 3.9684916085821593e-07,
+          "velocityDifferenceKmPerSecond": 4.278828153835952e-10,
+          "displayedClientOffsetSeconds": 1
+        }
+      ]
+    },
+    {
+      "run": 4,
+      "file": "orbital-run-4.mhtml",
+      "sha256": "5c62c731f3f510a2ac8096c423ccca1d21f2948ceccbdb95c2ca386feb9ff2cb",
+      "hashMatchesSuppliedProvenance": true,
+      "displayedFormValues": {
+        "Begin": "2026-06-24T03:45:06.449",
+        "End": "2026-06-30T09:18:30.449",
+        "X": "-5458.34815324",
+        "Y": "-4453.93698421",
+        "Z": "0",
+        "Vx": "-0.985394777432",
+        "Vy": "1.21681893834",
+        "Vz": "7.45057785592"
+      },
+      "pairedEvents": 91,
+      "alignment": "Displayed Loop index; NOT identical timestamps",
+      "displayedClientOffsetSeconds": 1,
+      "serverInterEventSeconds": {
+        "minimum": 5886,
+        "maximum": 5887
+      },
+      "positionDifferenceKm": {
+        "maximum": 2.5144518008536766e-07,
+        "mean": 9.697021699819486e-08
+      },
+      "velocityDifferenceKmPerSecond": {
+        "maximum": 2.714492892713199e-10,
+        "mean": 1.0471747646847727e-10
+      },
+      "withinManuscriptTolerances": true,
+      "matchesManuscriptThreeSignificantFigures": true,
+      "lastEventDurationMilliseconds": {
+        "server": 164015,
+        "client": 51593
+      },
+      "differences": [
+        {
+          "loop": 1,
+          "positionDifferenceKm": 0,
+          "velocityDifferenceKmPerSecond": 0,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 2,
+          "positionDifferenceKm": 0,
+          "velocityDifferenceKmPerSecond": 0,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 3,
+          "positionDifferenceKm": 0,
+          "velocityDifferenceKmPerSecond": 0,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 4,
+          "positionDifferenceKm": 6.726806297165524e-12,
+          "velocityDifferenceKmPerSecond": 1.2570548917095224e-14,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 5,
+          "positionDifferenceKm": 2.4843362654101195e-10,
+          "velocityDifferenceKmPerSecond": 2.5746079122317856e-13,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 6,
+          "positionDifferenceKm": 1.3878799926440559e-09,
+          "velocityDifferenceKmPerSecond": 1.464721365110805e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 7,
+          "positionDifferenceKm": 2.883860239091684e-09,
+          "velocityDifferenceKmPerSecond": 3.0772792254056044e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 8,
+          "positionDifferenceKm": 3.8701034995585056e-09,
+          "velocityDifferenceKmPerSecond": 4.1741334213633554e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 9,
+          "positionDifferenceKm": 4.8140004188645796e-09,
+          "velocityDifferenceKmPerSecond": 5.265326467210157e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 10,
+          "positionDifferenceKm": 6.861411987238308e-09,
+          "velocityDifferenceKmPerSecond": 7.412753908428877e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 11,
+          "positionDifferenceKm": 9.131276808804775e-09,
+          "velocityDifferenceKmPerSecond": 9.825394815077254e-12,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 12,
+          "positionDifferenceKm": 1.0682244790807889e-08,
+          "velocityDifferenceKmPerSecond": 1.1555499744485326e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 13,
+          "positionDifferenceKm": 1.2908040636378477e-08,
+          "velocityDifferenceKmPerSecond": 1.397897942173599e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 14,
+          "positionDifferenceKm": 1.5227342212372046e-08,
+          "velocityDifferenceKmPerSecond": 1.652103091297116e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 15,
+          "positionDifferenceKm": 1.7569638547876923e-08,
+          "velocityDifferenceKmPerSecond": 1.9019510778915694e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 16,
+          "positionDifferenceKm": 1.836268937524561e-08,
+          "velocityDifferenceKmPerSecond": 1.9837738726100026e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 17,
+          "positionDifferenceKm": 2.009038204308586e-08,
+          "velocityDifferenceKmPerSecond": 2.1602523759366964e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 18,
+          "positionDifferenceKm": 2.226804271782067e-08,
+          "velocityDifferenceKmPerSecond": 2.4011968462028967e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 19,
+          "positionDifferenceKm": 2.4690863206256634e-08,
+          "velocityDifferenceKmPerSecond": 2.660259612380634e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 20,
+          "positionDifferenceKm": 2.6601823938448315e-08,
+          "velocityDifferenceKmPerSecond": 2.8673303672441654e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 21,
+          "positionDifferenceKm": 2.8052498628822273e-08,
+          "velocityDifferenceKmPerSecond": 3.03610187276755e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 22,
+          "positionDifferenceKm": 3.0259990533037534e-08,
+          "velocityDifferenceKmPerSecond": 3.269756203710242e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 23,
+          "positionDifferenceKm": 3.1943029977154026e-08,
+          "velocityDifferenceKmPerSecond": 3.4556321861123326e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 24,
+          "positionDifferenceKm": 3.388305816357443e-08,
+          "velocityDifferenceKmPerSecond": 3.667141293739958e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 25,
+          "positionDifferenceKm": 3.6669846088715446e-08,
+          "velocityDifferenceKmPerSecond": 3.9664506465619054e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 26,
+          "positionDifferenceKm": 3.937764899292484e-08,
+          "velocityDifferenceKmPerSecond": 4.265153684767537e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 27,
+          "positionDifferenceKm": 4.124149399117851e-08,
+          "velocityDifferenceKmPerSecond": 4.464552786168057e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 28,
+          "positionDifferenceKm": 4.202118002745756e-08,
+          "velocityDifferenceKmPerSecond": 4.549961957784506e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 29,
+          "positionDifferenceKm": 4.254764912098962e-08,
+          "velocityDifferenceKmPerSecond": 4.602099920066583e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 30,
+          "positionDifferenceKm": 4.1755048242535637e-08,
+          "velocityDifferenceKmPerSecond": 4.522459820538523e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 31,
+          "positionDifferenceKm": 4.112496068691532e-08,
+          "velocityDifferenceKmPerSecond": 4.4539209591876516e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 32,
+          "positionDifferenceKm": 4.0662188820498585e-08,
+          "velocityDifferenceKmPerSecond": 4.402220272333123e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 33,
+          "positionDifferenceKm": 4.054662934893329e-08,
+          "velocityDifferenceKmPerSecond": 4.386961251412877e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 34,
+          "positionDifferenceKm": 4.0960617929280355e-08,
+          "velocityDifferenceKmPerSecond": 4.425755013525728e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 35,
+          "positionDifferenceKm": 4.063356061136475e-08,
+          "velocityDifferenceKmPerSecond": 4.4021796912084314e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 36,
+          "positionDifferenceKm": 4.1294927629983296e-08,
+          "velocityDifferenceKmPerSecond": 4.473380347668437e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 37,
+          "positionDifferenceKm": 4.2333631799044235e-08,
+          "velocityDifferenceKmPerSecond": 4.584609701443997e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 38,
+          "positionDifferenceKm": 4.4592649613051284e-08,
+          "velocityDifferenceKmPerSecond": 4.8203497849611264e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 39,
+          "positionDifferenceKm": 4.6910121178596695e-08,
+          "velocityDifferenceKmPerSecond": 5.064837625659676e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 40,
+          "positionDifferenceKm": 4.877314231766698e-08,
+          "velocityDifferenceKmPerSecond": 5.270948187857177e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 41,
+          "positionDifferenceKm": 5.001560314681025e-08,
+          "velocityDifferenceKmPerSecond": 5.410370432787146e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 42,
+          "positionDifferenceKm": 5.1636002382816336e-08,
+          "velocityDifferenceKmPerSecond": 5.5943023013851414e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 43,
+          "positionDifferenceKm": 5.4361925952179495e-08,
+          "velocityDifferenceKmPerSecond": 5.897483656173586e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 44,
+          "positionDifferenceKm": 5.8080406902916963e-08,
+          "velocityDifferenceKmPerSecond": 6.299073990144354e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 45,
+          "positionDifferenceKm": 6.176658609833051e-08,
+          "velocityDifferenceKmPerSecond": 6.68933971013914e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 46,
+          "positionDifferenceKm": 6.443051375954654e-08,
+          "velocityDifferenceKmPerSecond": 6.974180665936e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 47,
+          "positionDifferenceKm": 6.75410669258956e-08,
+          "velocityDifferenceKmPerSecond": 7.30875241645126e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 48,
+          "positionDifferenceKm": 7.118298492785804e-08,
+          "velocityDifferenceKmPerSecond": 7.699146125315521e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 49,
+          "positionDifferenceKm": 7.605003776999052e-08,
+          "velocityDifferenceKmPerSecond": 8.213167277405092e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 50,
+          "positionDifferenceKm": 8.050696202237455e-08,
+          "velocityDifferenceKmPerSecond": 8.690604884321606e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 51,
+          "positionDifferenceKm": 8.481482707214613e-08,
+          "velocityDifferenceKmPerSecond": 9.159204274878503e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 52,
+          "positionDifferenceKm": 8.944903085530205e-08,
+          "velocityDifferenceKmPerSecond": 9.658316603066309e-11,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 53,
+          "positionDifferenceKm": 9.439123729437059e-08,
+          "velocityDifferenceKmPerSecond": 1.019195553573855e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 54,
+          "positionDifferenceKm": 9.90009090571897e-08,
+          "velocityDifferenceKmPerSecond": 1.0701139780014898e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 55,
+          "positionDifferenceKm": 1.0439091379174848e-07,
+          "velocityDifferenceKmPerSecond": 1.1273063794548108e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 56,
+          "positionDifferenceKm": 1.1010341950603976e-07,
+          "velocityDifferenceKmPerSecond": 1.1885631110305726e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 57,
+          "positionDifferenceKm": 1.1627025359300395e-07,
+          "velocityDifferenceKmPerSecond": 1.2550671501787885e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 58,
+          "positionDifferenceKm": 1.2200223743279124e-07,
+          "velocityDifferenceKmPerSecond": 1.3171014669808315e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 59,
+          "positionDifferenceKm": 1.2696161567878147e-07,
+          "velocityDifferenceKmPerSecond": 1.3705482138218874e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 60,
+          "positionDifferenceKm": 1.3117451403564708e-07,
+          "velocityDifferenceKmPerSecond": 1.4157770497773168e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 61,
+          "positionDifferenceKm": 1.3515543881831932e-07,
+          "velocityDifferenceKmPerSecond": 1.459175918232552e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 62,
+          "positionDifferenceKm": 1.3952106666643178e-07,
+          "velocityDifferenceKmPerSecond": 1.5055883132443577e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 63,
+          "positionDifferenceKm": 1.4362801238369008e-07,
+          "velocityDifferenceKmPerSecond": 1.5495945576158734e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 64,
+          "positionDifferenceKm": 1.477813260955559e-07,
+          "velocityDifferenceKmPerSecond": 1.5948996828914397e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 65,
+          "positionDifferenceKm": 1.5154443535609918e-07,
+          "velocityDifferenceKmPerSecond": 1.6357678321419928e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 66,
+          "positionDifferenceKm": 1.5423081304675123e-07,
+          "velocityDifferenceKmPerSecond": 1.6655828558829928e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 67,
+          "positionDifferenceKm": 1.5723286909520803e-07,
+          "velocityDifferenceKmPerSecond": 1.6979799503045838e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 68,
+          "positionDifferenceKm": 1.6068807123238993e-07,
+          "velocityDifferenceKmPerSecond": 1.7358444585708845e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 69,
+          "positionDifferenceKm": 1.644662223486344e-07,
+          "velocityDifferenceKmPerSecond": 1.7773046180315804e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 70,
+          "positionDifferenceKm": 1.6899170614804545e-07,
+          "velocityDifferenceKmPerSecond": 1.8259204807288206e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 71,
+          "positionDifferenceKm": 1.7415961671289072e-07,
+          "velocityDifferenceKmPerSecond": 1.8814534571182274e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 72,
+          "positionDifferenceKm": 1.7961039810284366e-07,
+          "velocityDifferenceKmPerSecond": 1.9399939880643531e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 73,
+          "positionDifferenceKm": 1.8550017373658438e-07,
+          "velocityDifferenceKmPerSecond": 2.0032340021374056e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 74,
+          "positionDifferenceKm": 1.9112467124757858e-07,
+          "velocityDifferenceKmPerSecond": 2.0633942042374135e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 75,
+          "positionDifferenceKm": 1.9621321379645035e-07,
+          "velocityDifferenceKmPerSecond": 2.118148442940906e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 76,
+          "positionDifferenceKm": 2.0089309494425676e-07,
+          "velocityDifferenceKmPerSecond": 2.168352751865101e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 77,
+          "positionDifferenceKm": 2.0624638843234275e-07,
+          "velocityDifferenceKmPerSecond": 2.2257645097159143e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 78,
+          "positionDifferenceKm": 2.1185241918027907e-07,
+          "velocityDifferenceKmPerSecond": 2.2861560408682827e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 79,
+          "positionDifferenceKm": 2.1620738501473437e-07,
+          "velocityDifferenceKmPerSecond": 2.333343865932549e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 80,
+          "positionDifferenceKm": 2.1930572904533073e-07,
+          "velocityDifferenceKmPerSecond": 2.3669346855248365e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 81,
+          "positionDifferenceKm": 2.2170589179107542e-07,
+          "velocityDifferenceKmPerSecond": 2.39263142083944e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 82,
+          "positionDifferenceKm": 2.2525035363139704e-07,
+          "velocityDifferenceKmPerSecond": 2.430272085761616e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 83,
+          "positionDifferenceKm": 2.2893146662755511e-07,
+          "velocityDifferenceKmPerSecond": 2.4695303198103916e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 84,
+          "positionDifferenceKm": 2.3134727259802161e-07,
+          "velocityDifferenceKmPerSecond": 2.496175824912814e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 85,
+          "positionDifferenceKm": 2.3450081714587433e-07,
+          "velocityDifferenceKmPerSecond": 2.529942673284416e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 86,
+          "positionDifferenceKm": 2.3814016575658706e-07,
+          "velocityDifferenceKmPerSecond": 2.569486411339753e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 87,
+          "positionDifferenceKm": 2.415906482279712e-07,
+          "velocityDifferenceKmPerSecond": 2.607347316695087e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 88,
+          "positionDifferenceKm": 2.441114631999667e-07,
+          "velocityDifferenceKmPerSecond": 2.6347844564155767e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 89,
+          "positionDifferenceKm": 2.4670830094511417e-07,
+          "velocityDifferenceKmPerSecond": 2.662786696581045e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 90,
+          "positionDifferenceKm": 2.488854526675876e-07,
+          "velocityDifferenceKmPerSecond": 2.686576493097593e-10,
+          "displayedClientOffsetSeconds": 1
+        },
+        {
+          "loop": 91,
+          "positionDifferenceKm": 2.5144518008536766e-07,
+          "velocityDifferenceKmPerSecond": 2.714492892713199e-10,
+          "displayedClientOffsetSeconds": 1
+        }
+      ]
+    }
+  ]
+}

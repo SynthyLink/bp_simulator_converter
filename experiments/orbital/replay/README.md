@@ -1,4 +1,4 @@
-# Orbital replay
+# Orbital experiment reproduction package
 
 The supplied `evidence/protocol.json` fixes the four initial conditions, interval, output-count expectation and comparison thresholds. Use it unchanged. The runner records numerical outputs; agreement, timestamps and deliberately altered controls are assessed separately by the analysis script. A completed execution alone is not a passing numerical comparison.
 
@@ -8,7 +8,7 @@ Requirements: Git, .NET SDK 10.0.301 (the repository's `global.json`), a support
 
 ## Prepare the checkout and output directory
 
-Run from the unpacked evidence package directory containing this README and the runner. Keep the new output separate from the distributed evidence.
+Run from `experiments/orbital/replay`, the package directory containing this README and the runner. Keep the new output separate from the distributed evidence.
 
 ```powershell
 $bundle = (Get-Location).Path
@@ -77,7 +77,7 @@ The distributed corrected browser results were produced by this portable runner.
 
 ## Recompute the table, plot, and diagnostic checks
 
-From this package directory:
+From this package directory (these commands regenerate derived summaries and figures):
 
 ```powershell
 node analyze-replay.cjs evidence
@@ -92,6 +92,6 @@ The scheduler test imports the actual TypeScript modules. On an unmodified check
 
 The short diagnostic evidence/atmosphere-clock-probe.json records actual graph intermediates and confirms that the tiny configured drag terms do not change the sampled binary64 accelerations. It is diagnostic evidence, not a physical model validation. The two language graphs share a duplicate velocity-to-vector binding; the configured graphs and parameters are retained unchanged.
 
-Historical snapshots remain in the parent experiments/orbital directory and are not the source of the manuscript's new orbital result table. The journal evidence package includes those unchanged historical files separately. SHA256SUMS.json covers the supplied files except itself.
+The `historical/` directory preserves the original snapshots and archive-analysis files for provenance. The reported orbital replay results are in `evidence/`. `SHA256SUMS.json` covers every distributed package file except itself. The package commit identifies this collection; the execution base and patch specified above identify the sources used for the recorded runs.
 
 Run the short probe with `node atmosphere-clock-probe.cjs PATH_TO_PATCHED_CHECKOUT`; it writes a new atmosphere-clock-probe.json beside the script.

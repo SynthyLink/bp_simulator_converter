@@ -1,4 +1,5 @@
 {
+  ".gitignore": "ecb8c3c5b9022488cd4aefd072adc61f452929d55ff54314bbebd846fc0c88ca",
   "analyze-replay.cjs": "b7ab38629e0187eabd3e6014c1dd9a10d16b2ef36898d1b32a2ac7bc3f7c5816",
   "atmosphere-clock-probe.cjs": "e7389fc6b59b549b26fe7aca74f4b934cefd644bbc13e0866d451bcd5dfd7436",
   "evidence/atmosphere-clock-probe.json": "de6c964a5c142dd1b1035f3030151799ea10fcf3a893f43697269b5bf2154635",
@@ -23,10 +24,19 @@
   "evidence/protocol.json": "09900ddd77e76f2f1c948440d896a7645d343d5b8fff5ba1e3248bda00011606",
   "evidence/scheduler-regression-actual.json": "05b108acb84d7087c24547c83a2c1e420660391590a4cd51369fa462543fdda6",
   "evidence/scheduler-regression-results.json": "67ddc55ef7778a5683a6d11e9429e8bbaee9ab98af138833123e80e2d6612d30",
+  "historical/experiments/orbital/orbital-run-1.mhtml": "909fb98e3c4fcfd3cd78c46fcf73ad07cbb64f731d41566e525d4fd48cf966ee",
+  "historical/experiments/orbital/orbital-run-2.mhtml": "9d97d4a89928f48ddcece549b0b8e13d4901e522d95404d3fd063269c7bcf025",
+  "historical/experiments/orbital/orbital-run-3.mhtml": "eb57d9fbc36054c6836a88749f5edb021ca707b41b3baa6d0d68220c361f5e76",
+  "historical/experiments/orbital/orbital-run-4.mhtml": "5c62c731f3f510a2ac8096c423ccca1d21f2948ceccbdb95c2ca386feb9ff2cb",
+  "historical/orbital-metrics.json": "085b98c280b793fdee1739b8bb503a77eb2c47936760d86b51ef1749dfc8b2c5",
+  "historical/original-provenance.txt": "61a4e8de91088dc0b0b054b06cba106eb6844262bc83ed13354091aad06d7a5c",
+  "historical/README.txt": "b05af285a6d6fc07e5a17362e7e8e391d7edf9c681eb44e88e46bedc7b91415f",
+  "historical/recompute-orbital-metrics.mjs": "020e90e6694436fe0d208a3fd013fabe69aba2f7064f2a73e855a0472a8c2811",
+  "historical/source-model-screenshot.png": "c5da3aad0dd38d338ee57b95cf8460403c4d3cfa7b408b8c9c4aff8fd1b38a15",
   "LICENSE": "c2d70310bb41cf76f433b03e62a84d6d13d8034e1d1e08bf7ae3d3009bac9551",
   "orbital-timing-fix.patch": "15422113732495a55bdbd407338ae99e452dbdc6e7e995b6c7a4878246b26843",
   "plot-residuals.py": "37115eade76796882e001348f34f109a28c67725a4d3b7edf086dc1b78529427",
-  "README.md": "aaaaf15627392de2d61f742b96bc882cede04945092278181b13d26087510482",
+  "README.md": "90d3b04531021a3ec5ac67302067ea6d07254c9005acef92576c9e9711ac9ce6",
   "replay-portable.cjs": "2d91ed513dc3a658063023c7956d88295629e4c2240eb36fd959e3e12abc1027",
   "scheduler-regression.cjs": "96290b79216af019c80bb2e79c2ddcb268f9babd50904faba3a62f43a5a05c5a"
 }

@@ -1,14 +1,13 @@
-# Orbital evidence and validation
+# Historical orbital evidence
+
+For the recorded C#/browser replay, protocol, scripts and full reproduction
+package, use [replay/README.md](replay/README.md). This page documents the original
+saved web-page snapshots only.
 
 Four historical MHTML snapshots were added in commit
 [`fb8fa694d2a2d3fbeeb1a061dbc0bd3e36469458`](https://github.com/SynthyLink/bp_simulator_converter/commit/fb8fa694d2a2d3fbeeb1a061dbc0bd3e36469458).
-The supplied [provenance note](provenance.txt) identifies them as the original outputs used
-for Table 5 of the main paper, and records original filenames and SHA-256 hashes.
-The supplement is titled **Online Resource 2: Archived orbital forecasting
-outputs**, for *Backend-Frontend Converter: Component-Based Conversion of .NET
-Computational Models to TypeScript* (Software and Systems Modeling), by Peter
-Ivankov and Max Shestov. The supplied corresponding author is Max Shestov,
-Georgia Institute of Technology, Atlanta, United States (`mshestov@gatech.edu`).
+The supplied [provenance note](provenance.txt) records the original filenames,
+SHA-256 hashes and manuscript metadata associated with those snapshots.
 
 That commit identifies when the evidence entered this repository, **not** the
 source build that produced the runs. The snapshots' save-date headers are June 24,
@@ -50,11 +49,11 @@ checks both sets of 91 records, Loop alignment, finite state/duration fields and
 the displayed one-second offset. It does not run either model, write results,
 reconstruct Table 5 or impose a new numerical acceptance tolerance.
 
-**Replay limitations:** saved C#/TypeScript output pairs are available, but the
+**Original snapshot provenance:** saved C#/TypeScript output pairs are available, but the
 exact original source build and a verified replay procedure remain unavailable.
 No pinned replay harness accompanies these records. Saved form values are not a verified
 execution configuration. These are historical outputs, not a guarantee of exact
-replay with the current applications. No new numerical experiments were run.
+replay with the current applications. The separate [replay package](replay/README.md) provides the protocol and records of the pinned C#/browser experiment.
 
 Applications live in `examples/orbital/OnlineGameConverter/` and
 `examples/orbital/AspireOnlineConverter/`; `docs/paper/` contains a historical

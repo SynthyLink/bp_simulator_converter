@@ -9,7 +9,7 @@ targets, with orbital and trading examples in one repository.
 | `src/runtimes/` | .NET libraries, standalone TypeScript runtime, Python library |
 | `examples/orbital/` | Orbital applications and generated docking models |
 | `examples/trading/` | Trading applications and generated models |
-| `experiments/` | Historical outputs, provenance and read-only evidence checks |
+| `experiments/` | Reproduction package, recorded outputs, provenance and checks |
 | `docs/` | Architecture, generated-code inventory, verification and paper notice |
 
 ## Start with the checks
@@ -46,8 +46,8 @@ also have unresolved dependencies. See the verification report for exact limits.
 
 Read [architecture](docs/architecture.md), [generated code](docs/generated-code.md),
 [experiment instructions](experiments/README.md), and the
-[paper version notice](docs/paper/README.md). The [fresh orbital replay](experiments/orbital/replay/README.md)
-records the corrected timing loop, four completed C#/browser comparisons, and reproducible evidence.
+[paper version notice](docs/paper/README.md). The [orbital reproduction package](experiments/orbital/replay/README.md)
+contains the execution protocol, four completed C#/browser comparisons, raw records, analysis scripts and historical evidence.
 After installing the maintained orbital frontend dependencies, run `npm run check:orbital-scheduler`
 to test the scheduler and inclusive endpoint against analytic reference cases.
 
