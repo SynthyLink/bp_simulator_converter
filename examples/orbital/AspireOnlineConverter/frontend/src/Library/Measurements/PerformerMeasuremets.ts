@@ -130,18 +130,19 @@ export class PerformerMeasuremets {
         runtime.setTimeProvider(tm);
         runtime.startRuntime(start);
         var st = start;
+        var previous = start;
         for (var i = 0; i < steps; i++) {
             if (stop.func()) return;
             tm.setTime(st);
+            if (i > 0) {
+                runtime.stepRuntime(previous, st);
+            }
+            previous = st;
             runtime.updateRuntime();
             if (condition.func()) {
                 act.action();
             }
-            let s = st + step;
-            if (i > 0) {
-                runtime.stepRuntime(st, s);
-            }
-            st = s;
+            st += step;
         }
     }
 

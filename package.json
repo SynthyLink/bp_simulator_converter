@@ -9,7 +9,8 @@
     "check:layout": "node scripts/check-layout.mjs",
     "check:orbital": "node experiments/orbital/check.mjs",
     "check:trading": "node experiments/trading/check.mjs",
-    "check:frontend": "node --test scripts/check-frontend.mjs"
+    "check:frontend": "node --test scripts/check-frontend.mjs",
+    "check:orbital-scheduler": "node scripts/check-orbital-scheduler.cjs --verify-source"
   },
   "dependencies": {
     "react": "19.1.0",

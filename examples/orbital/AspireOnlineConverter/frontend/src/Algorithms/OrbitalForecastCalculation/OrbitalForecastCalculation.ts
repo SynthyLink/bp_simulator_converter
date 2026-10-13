@@ -112,7 +112,7 @@ export class OrbitalForecastCalculation extends OrbitalForecast implements IActi
         let p = new PerformerMeasuremets();
         this.stopWatch = new StopWatch();
         this.stopWatch.start();
-        var count = Math.floor(condition.end - condition.begin);
+        var count = Math.floor(condition.end - condition.begin) + 1;
         p.peformCondDCFixedStepCalculation(this.runtime, this.dc, "Recursive.y", this, condition.begin, 1, count, this);
         this.stopWatch.stop();
         console.log(this.list)

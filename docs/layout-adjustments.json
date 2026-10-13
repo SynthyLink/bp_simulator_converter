@@ -92,6 +92,26 @@
       "path": "examples/orbital/OnlineGameConverter/onlinegameconverter.client/src/Algorithms/OrbitalForecastCalculation/OrbitalCommunication.ts",
       "blob": "9cc866bcc0ad3787c5a9ecf6fe9d0676a853f654",
       "reason": "Correct request suffix for existing /api base and /orbital controller."
+    },
+    {
+      "path": "examples/orbital/AspireOnlineConverter/frontend/src/Library/Measurements/PerformerMeasuremets.ts",
+      "blob": "c37a1347acfbf8f9430e2dfbc380683e905e6a28",
+      "reason": "Correct conditional fixed-step scheduling and inclusive forecast endpoint; verified with analytic scheduler regressions and pinned orbital replay."
+    },
+    {
+      "path": "src/runtimes/typescript/TypeScriptLibrary/src/Library/Measurements/PerformerMeasuremets.ts",
+      "blob": "5c694f7b092d11a0ddc26789f17c7e0be083a9ed",
+      "reason": "Correct conditional fixed-step scheduling and inclusive forecast endpoint; verified with analytic scheduler regressions and pinned orbital replay."
+    },
+    {
+      "path": "examples/orbital/AspireOnlineConverter/frontend/src/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation.ts",
+      "blob": "8ef093ad041fe14700e25325056647891b5c26b9",
+      "reason": "Correct conditional fixed-step scheduling and inclusive forecast endpoint; verified with analytic scheduler regressions and pinned orbital replay."
+    },
+    {
+      "path": "src/runtimes/typescript/TypeScriptLibrary/src/ExternalObjects/Algorithms/OrbitalForecastCalculation/OrbitalForecastCalculation.ts",
+      "blob": "1b6855b897eaf7b0aba6ca7fe467f9c1233cb4a6",
+      "reason": "Correct conditional fixed-step scheduling and inclusive forecast endpoint; verified with analytic scheduler regressions and pinned orbital replay."
     }
   ]
 }
